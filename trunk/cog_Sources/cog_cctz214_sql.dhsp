@@ -1,0 +1,55 @@
+SetModuleInfo('$Id$')
+;>xdiva
+;*
+;*		Zoom natures d'immobilisation																											cctz214
+;*
+
+OverWrittenBy	"cog_ccuz214_SQL.dhop"
+
+hfileVersion	CCFDD.dhsd	CCFTAB
+
+;*
+;*		Déclarations
+;*
+
+;
+include	"cctcz000.dhsp"
+include  "cctc700.dhsp"
+
+;
+public	hfile			CCFDD.dhsd		CCFTAB		CCFTAB
+
+;
+public 	recordSQL	ccrstab.dhoq	NatImmo		NatImmo
+
+;
+public	record		CCFDD.dhsd		C3							; intitulé de compte
+public	record		CCFDD.dhsd		C5							; intitulé d'axe
+public	record		CCFDD.dhsd		I3							; plan d'unité d'oeuvre
+
+;
+define	Titre_Var	= right(NatImmo.Lib)
+
+;
+1	Dos	>CCFDD.DHSD		Dos										; dossier à lire
+
+  
+;*
+;*	  Surcharges Procédures	du zoom
+;*
+
+;*
+Public Procedure Cog_ZoomDebut
+;
+BeginP
+
+	If CZ.TabTyp(11) = 2
+
+		MessageBox("La table des natures d'immobilisation est paramétrée en table commune aux dossiers."\
+		&"|Ce paramétrage n'est pas compatible avec les spécifiques mis en place."\
+		&"|Veuillez modifier le paramétrage: dossier comptable 999 - shift + F7.","Alerte",MB_ICONERROR)
+		ProgramExit
+
+	EndIf
+
+EndP

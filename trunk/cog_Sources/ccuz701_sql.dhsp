@@ -1,0 +1,67 @@
+   OverWrite cctz701_sql.dhop
+
+;*
+;*	  Déclarations
+;*
+
+;
+Module "COG_CCTZ701_SQL.DHOP"
+Module "xzoom7.dhop"
+
+;
+Public Record	"ddsys.dhsd"		ZOOM
+
+;*
+;*		Procédures d'écriture
+;*
+
+;*
+Procedure ZoomAvantReWrite
+;
+BeginP
+
+	Cog_ZoomAvantReWrite
+
+	If Zoom.ok = 'O'
+	 	Standard.ZoomAvantRewrite
+	EndIf
+
+EndP
+
+;*
+;*
+;*
+
+;*
+Procedure ZoomArret
+;
+BeginP
+	Standard.ZoomArret
+	Cog_ZoomArret
+EndP
+
+;*
+Procedure ZoomAvantInput
+;
+BeginP
+	Standard.ZoomAvantInput
+	Cog_ZoomAvantInput
+EndP
+
+;*
+Procedure ZoomAvantConsult
+;
+BeginP
+	Standard.ZoomAvantConsult
+	Cog_ZoomAvantConsult
+EndP
+
+;*
+Procedure ZoomConsult
+;
+BeginP
+	Standard.ZoomConsult
+	Cog_ZoomConsult
+EndP
+
+

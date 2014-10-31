@@ -1,0 +1,1407 @@
+;>xwin4obj                              7.0       20140425151706      
+[masque]
+ libelle="Types de cotisations PDV"
+ utilisateur="UGIE"
+ date_modification="25/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=428
+ type_masque=2
+ dernier_id=109
+ dernier_id_page=11
+[defaut]
+ [aide_page]
+  aide=0
+[enregistrements]
+ "cogfdd.dhsd",,cog_ut104,cog_ut104,300,0
+ "cogfdd.dhsd",,cog_ut104,cog_ut104_zzdep,300,0
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "gtfdd.dhsd",,ets,ets,1500,0
+ "gtfdd.dhsd",,art,art,1700,0
+ "ccfdd.dhsd",,c5,c5,800,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=315,480
+  attache_lgx=oui
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=0
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=39,478
+  attache_lgx=oui
+  attache_lgy=oui
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=0
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Types de cotisations PDV à créer"
+ nb_lig=6
+ nb_col=55
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=16,3
+   taille=9,35
+   id=5
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=28,3
+   taille=9,56
+   id=7
+   wstyle="STD"
+  [texte]
+   texte="Type de cotisation PDV"
+ [obj_texte]
+  [presentation]
+   position=40,3
+   taille=9,27
+   id=9
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [champ]
+  [presentation]
+   position=40,148
+   taille=9,68
+   id=87
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=art,des,art
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=27,62
+   taille=9,37
+   id=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_ut104,cog_cotisation_pdv,cog_ut104
+  [param_saisie]
+   obligatoire=oui
+   defaut=" "
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=39,62
+   taille=9,83
+   id=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_ut104,ref,cog_ut104
+  [param_saisie]
+   obligatoire=oui
+   defaut=" "
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=9000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Ref_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=15,62
+   taille=9,14
+   id=6
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_ut104,etb,cog_ut104
+  [param_saisie]
+   obligatoire=oui
+   defaut=" "
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=9026
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Etb_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=16,79
+   taille=9,137
+   id=86
+   colonnes_saisie=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ets,nom,ets
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[page]
+ numero=3
+ libelle="Fiche zoom"
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ suiv=4
+ page_fond=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="CODE"
+   couleur_fond="STD"
+ [obj_texte]
+  [presentation]
+   position=26,11
+   taille=9,55
+   id=13
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=38,11
+   taille=9,55
+   id=15
+   wstyle="STD"
+  [texte]
+   texte="Type de cotisation PDV"
+ [obj_texte]
+  [presentation]
+   position=50,11
+   taille=9,55
+   id=17
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [obj_texte]
+  [presentation]
+   position=62,11
+   taille=9,55
+   id=19
+   wstyle="STD"
+  [texte]
+   texte="Periodicité facturation"
+ [obj_texte]
+  [presentation]
+   position=73,11
+   taille=9,55
+   id=23
+   wstyle="STD"
+  [texte]
+   texte="Duree Limitée"
+ [obj_texte]
+  [presentation]
+   position=85,11
+   taille=9,55
+   id=25
+   wstyle="STD"
+  [texte]
+   texte="Nombre de Cotisations"
+ [obj_texte]
+  [presentation]
+   position=98,11
+   taille=9,113
+   id=103
+   wstyle="STD"
+  [texte]
+   texte='Section analytique " Anael " (axe analytique 2)'
+ [champ]
+  [presentation]
+   position=26,100
+   taille=9,137
+   id=89
+   colonnes_saisie=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ets,nom,ets
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=25,73
+   taille=9,20
+   id=14
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,etb,cog_ut104
+   saisie=non
+  [param_saisie]
+   defaut=" "
+ [champ]
+  [presentation]
+   position=50,162
+   taille=9,284
+   id=88
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=art,des,art
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=37,73
+   taille=9,35
+   id=16
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,cog_cotisation_pdv,cog_ut104
+   saisie=non
+  [param_saisie]
+   defaut=" "
+ [champ]
+  [presentation]
+   position=49,73
+   taille=9,86
+   id=18
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ref,cog_ut104
+   saisie=non
+  [param_saisie]
+   defaut=" "
+ [multi_choix]
+  [presentation]
+   position=62,73
+   taille=9,45
+   id=107
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_ut104,cog_period,cog_ut104
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","PERIODICITE"
+ [case_a_cocher]
+  [presentation]
+   position=73,73
+   taille=9,6
+   id=91
+   wstyle="STD"
+  [description]
+   donnee=cog_ut104,cog_duree_limitee,cog_ut104
+  [param_case]
+   cadrage=droite
+   valeur="2","1"
+   notifier=oui
+  [traitements]
+   diva_apres="Champ_Cog_Duree_Limitee_1_Ap"
+ [champ]
+  [presentation]
+   position=84,73
+   taille=9,20
+   cadrage=gauche
+   id=26
+   wstyle="CHAMP_SAISI_COG"
+  [description]
+   donnee=cog_ut104,cog_nombre_cotisation,cog_ut104
+  [param_saisie]
+   defaut=" "
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cog_Nombre_Cotisation_1_Av"
+   diva_apres="Champ_Cog_Nombre_Cotisation_1_Ap"
+ [champ]
+  [presentation]
+   position=97,126
+   taille=9,33
+   id=104
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI_COG"
+  [description]
+   donnee=cog_ut104,cog_axeanael,cog_ut104
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=19012
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_AxeAnael_1_Ap"
+  [info_bulle]
+  texte='Section analytique " Anael " (axe analytique 2)'
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=98,165
+   taille=9,144
+   id=105
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=c5,lib,c5
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[page]
+ numero=4
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ prec=3
+ page_fond=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=21,12
+   taille=51,268
+   noms="cenote;cejoint;ce1;ce2;ce3;ce4;ce5;ce6;ce7;ce8;ce9;cea"
+   id=27
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Codes enregistrements"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=255,12
+   taille=38,127
+   noms="usercr;usercrdh"
+   id=28
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=255,152
+   taille=38,127
+   noms="usermo;usermodh"
+   id=29
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=39,140
+   taille=9,13
+   noms="cenote"
+   id=31
+   wstyle="STD"
+  [texte]
+   texte="Note"
+ [obj_texte]
+  [presentation]
+   position=271,16
+   taille=9,17
+   noms="usercr"
+   id=34
+   wstyle="STD"
+  [texte]
+   texte="par"
+ [obj_texte]
+  [presentation]
+   position=271,156
+   taille=9,17
+   noms="usermo"
+   id=35
+   wstyle="STD"
+  [texte]
+   texte="par"
+ [obj_texte]
+  [presentation]
+   position=282,16
+   taille=9,14
+   noms="usercrdh"
+   id=36
+   wstyle="STD"
+  [texte]
+   texte="le"
+ [obj_texte]
+  [presentation]
+   position=282,156
+   taille=9,14
+   noms="usermodh"
+   id=37
+   wstyle="STD"
+  [texte]
+   texte="le"
+ [champ]
+  [presentation]
+   position=39,28
+   taille=9,9
+   noms="ce1"
+   id=38
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce1,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,36
+   taille=9,9
+   id=39
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce2,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,52
+   taille=9,9
+   id=40
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce4,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,76
+   taille=9,9
+   id=41
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce7,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,92
+   taille=9,9
+   id=42
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce9,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,100
+   taille=9,9
+   id=43
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,cea,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,156
+   taille=9,9
+   id=44
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,cenote,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,164
+   taille=9,29
+   id=45
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,note,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=271,28
+   taille=9,74
+   id=46
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_ut104,usercr,cog_ut104
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=282,28
+   taille=9,56
+   id=47
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_ut104,usercrdh,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=271,168
+   taille=9,74
+   id=48
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_ut104,usermo,cog_ut104
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=282,168
+   taille=9,56
+   id=49
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_ut104,usermodh,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,44
+   taille=9,9
+   id=50
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce3,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,60
+   taille=9,9
+   id=51
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce5,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,68
+   taille=9,9
+   id=52
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce6,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,84
+   taille=9,9
+   id=53
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_ut104,ce8,cog_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+[page]
+ numero=5
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=5
+[page]
+ numero=6
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=6
+[page]
+ numero=7
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=7
+[page]
+ numero=8
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=8
+[page]
+ numero=9
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=9
+[page]
+ numero=10
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=10
+[page]
+ numero=11
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ page_fond=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=11
+ [tableau]
+  [presentation]
+   position=23,1
+   taille=290,477
+   attache_lgx=oui
+   attache_lgy=oui
+   id=62
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=5
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=4
+   separation=159
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=8,218
+    taille=7,4
+    id=76
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=cog_ut104,cenote,cog_ut104
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CENOTE_1"
+   [param_colonne]
+    titre="<hog><nv><imge>o<imga>c<imgf>tblnote<com>Indicateur de note"
+    fl_trait_col=non
+    largeur_col=6
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,218
+    taille=7,12
+    id=64
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,etb,cog_ut104
+    saisie=non
+   [param_saisie]
+    defaut=" "
+   [info_bulle]
+   texte="Etablissement"
+   [param_colonne]
+    titre="Etablissement"
+    fl_aff=oui
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,218
+    taille=7,28
+    id=65
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,cog_cotisation_pdv,cog_ut104
+    saisie=non
+   [param_saisie]
+    defaut=" "
+   [info_bulle]
+   texte="Type de cotisation PDV"
+   [param_colonne]
+    titre="Type de cotisation PDV"
+    fl_aff=oui
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,218
+    taille=7,83
+    id=66
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,ref,cog_ut104
+    saisie=non
+   [param_saisie]
+    defaut=" "
+   [info_bulle]
+   texte="Référence"
+   [param_colonne]
+    titre="Référence"
+    fl_aff=oui
+    largeur_col=83
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=81,73
+    taille=7,9
+    id=95
+    wstyle="STD"
+   [description]
+    donnee=cog_ut104,cog_duree_limitee,cog_ut104
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    cadrage=droite
+    valeur="2","1"
+    notifier=oui
+   [traitements]
+    diva_apres="Champ_Cog_Duree_Limitee_1_Ap"
+   [param_colonne]
+    titre="Duree Limitée"
+    fl_aff=oui
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=62,73
+    taille=9,45
+    id=109
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,cog_period,cog_ut104
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="cog_gtfdmc.dhfi","PERIODICITE"
+   [info_bulle]
+   texte="Periodicité facturation"
+   [param_colonne]
+    titre="Periodicité facturation"
+    fl_aff=non
+    largeur_col=45
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,218
+    taille=7,9
+    id=70
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,cog_nombre_cotisation,cog_ut104
+   [param_saisie]
+    defaut=" "
+    esp_si_zero=oui
+   [touches]
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Cog_Nombre_Cotisation_1_Av"
+    diva_apres="Champ_Cog_Nombre_Cotisation_1_Ap"
+   [info_bulle]
+   texte="Nombre de Cotisations"
+   [param_colonne]
+    titre="Nbre de Cotisations"
+    fl_aff=oui
+    largeur_col=58
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=69,129
+    taille=10,33
+    id=106
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,cog_axeanael,cog_ut104
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=19012
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Cog_AxeAnael_1_Ap"
+   [info_bulle]
+   texte='Section analytique " Anael " (axe analytique 2)'
+   [param_colonne]
+    titre="Axe anaël"
+    fl_aff=oui
+    largeur_col=42
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=8,218
+    taille=7,67
+    id=78
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,usercr,cog_ut104
+    saisie=non
+   [param_saisie]
+    defaut=" "
+   [info_bulle]
+   texte="Auteur de la création"
+   [param_colonne]
+    titre="Auteur de la création"
+    fl_aff=oui
+    largeur_col=69
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,218
+    taille=7,47
+    id=79
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,usercrdh,cog_ut104
+    saisie=non
+   [param_saisie]
+    defaut=" "
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [info_bulle]
+   texte="Utilisateur date et heure de création"
+   [param_colonne]
+    titre="Utilisateur date et heure de création"
+    fl_aff=oui
+    largeur_col=101
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,218
+    taille=7,67
+    id=80
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,usermo,cog_ut104
+    saisie=non
+   [param_saisie]
+    defaut=" "
+   [info_bulle]
+   texte="Auteur de la modification"
+   [param_colonne]
+    titre="Auteur de la modification"
+    fl_aff=non
+    largeur_col=74
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,218
+    taille=7,47
+    id=81
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_ut104,usermodh,cog_ut104
+    saisie=non
+   [param_saisie]
+    defaut=" "
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [info_bulle]
+   texte="Utilisateur date et heure de modification"
+   [param_colonne]
+    titre="Utilisateur date et heure de modification"
+    fl_aff=non
+    largeur_col=112
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=7,16
+   taille=9,80
+   id=99
+   wstyle="STD"
+  [texte]
+   texte="Filtre sur Type de cotisation PDV"
+ [champ]
+  [presentation]
+   position=6,99
+   taille=10,33
+   id=100
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_ut104,cog_cotisation_pdv,cog_ut104_zzdep
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPLEMENTS"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="NOTE"
+    wtexte="_Note\tShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [menu]
+  ident="ZOOMG"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="ZoomG"
+    wid_ressource="ZOOMG"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wetype_trait=arret
+    warret=8
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wetype_trait=arret
+    warret=9
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   nature=case
+   [param_bouton]
+    wnom="TRI"
+    wid_ressource="TRI"
+    wetype_trait=arret
+    warret=11
+   [info_bulle]
+   texte="Inverser le sens de lecture"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#ctrl_insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   nature=case
+   [param_bouton]
+    wnom="FICHE"
+    wid_ressource="FICHE"
+    wtrait_chaine="#shift_f4"
+   [info_bulle]
+   texte="Mode fiche ou mode liste <Shift+F4>"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__1"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    warret=6
+    wtrait_chaine="#ctrl_p"
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+Module GTTM000.dhop
+Module CCTM000.dhop
+
+public record	cogfdd.dhsd	COG_UT104
+Public Record "ddsys.dhsd" rowinfo zoomselection
+Public Record "ddsys.dhsd" genzoomident genzoomident
+Public Record "gtfdd.dhsd" ets ets
+Public Record "gtfdd.dhsd" art art
+Public Record "gtfdd.dhsd" t020 t020
+Public Record "ccfdd.dhsd" C5 C5
+
+;*
+Public Procedure Champ_Cog_AxeAnael_1_Ap				; après code axe
+1			axe			>CCFDD.dhsd	AXE					; pour éviter l'écrasement si code commence par '='
+BeginP
+   C5.Lib = ' '
+   If Cog_UT104.Cog_AxeAnael <> ' '
+		axe = Cog_UT104.Cog_AxeAnael
+		If Controle_Axe(2, axe, existence = true, conf = false, hsdt = today, axetyp = 1, etablissement = false) < 2
+		Else
+     		C5.Lib = system.esp
+		Endif
+   Endif
+Endp
+
+;*
+Public Procedure Champ_Cog_Duree_Limitee_1_Ap
+Beginp
+	If Cog_UT104.Cog_Duree_Limitee < 2
+		Cog_UT104.Cog_Nombre_Cotisation = system.esp
+	Endif
+Endp
+
+;*
+Public Procedure Champ_Cog_Nombre_Cotisation_1_Av
+Beginp
+	If Not Cog_UT104.Cog_Duree_Limitee = 2
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	Endif
+Endp
+
+;*
+Public Procedure Champ_Cog_Nombre_Cotisation_1_Ap
+Beginp
+	If Cog_UT104.Cog_Duree_Limitee = 2 And Cog_UT104.Cog_Nombre_Cotisation = system.esp
+ 		Harmony.Retour = XMENEXT_RESSAISIE
+	Endif
+Endp
+
+;*
+Procedure Champ_Etb_1_Ap	 ; controle établissement
+beginp
+	Controle_Ets (Cog_UT104.ETB,1400) 
+endp
+
+;*
+Procedure Champ_Ref_1_Ap			; Vérification de l'existence de la référence article
+Beginp
+	Controle_Article(COG_UT104.Ref,2100) 
+Endp
+
+;*
+;Procedure Champ_Op_1_Ap								; contrôle du code opération 
+;beginp
+;	Lectab(20,COG_UT104.COG_OP,1120)
+;endp
+[/diva]
+[diva_base]
+[/diva]

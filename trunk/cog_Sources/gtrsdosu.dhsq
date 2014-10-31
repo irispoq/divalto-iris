@@ -1,0 +1,52 @@
+<DictionarySql overwrite="gtrsdos.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFDOS
+;*
+
+;*
+;* 		Société
+;*
+
+<RecordSql Name=Dossier>
+<SELECT>
+	Soc.*,
+
+;*
+;* 		Dossier pour Production
+;*
+
+<RecordSql Name=Dos_Prod>
+<SELECT>
+	SocGP.*,
+
+;*
+;* 		Dossier pour le module CRM
+;*
+
+<RecordSql Name=Dos_RT>
+<SELECT>
+	SocCRM.*,
+
+;*
+;* 		Dossier pour le module Affaire
+;*
+
+<RecordSql Name=Dos_Aff>
+<SELECT>
+	SocAfr.*,
+
+;*
+;* 		Dossier pour Numérotation
+;*
+
+<RecordSql Name=Dos_Num>
+<SELECT>
+	SocNo.*,
+
+;*
+;* 		Etablissement
+;*
+
+<RecordSql Name=Etb>
+<SELECT>
+	Ets.*,

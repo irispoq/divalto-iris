@@ -1,0 +1,104 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL du CCFIMMO
+;*
+
+<DictionarySql defaultDictionary=ccfdd.dhsd DataBase=DCPT overwrittenby="cog_ccrsimmou.dhoq" ModuleInfo='$Id$'>
+
+;*
+;*		Plan Budgétaire	 SANS BIND
+;*
+
+<RecordSql Name=CogRs_IMMO Comment='Immobilisation'>
+	public	record	A5DD.dhsd	MZ		MZ
+	public 	record 	CCFDD.dhsd	CZ
+
+<Select>
+	I1.*
+
+<From Insert=Yes Update=Yes Delete=Yes>
+	I1 
+	
+<Where>
+	I1.Dos = MZ.Dos
+
+	case Zoom_Immo(int immo)
+		I1.Immo = immo
+		
+	case Zoom_A_partir_Immo(int immo)
+		I1.Immo >= immo
+		
+	case Zoom_ImmoComp(int immocomp)
+		I1.ImmoComp = immocomp
+		
+	case Zoom_A_partir_ImmoComp(int immocomp)
+		I1.ImmoComp >= immocomp
+		
+	case Zoom_Like_Cpt(char cpt)
+		I1.Cpt like cpt
+		
+	case Zoom_Like_Axe1(char axe)
+		I1.Axe(1) like axe
+		
+	case Zoom_Like_Axe2(char axe)
+		I1.Axe(2) like axe
+		
+	case Zoom_Like_Axe3(char axe)
+		I1.Axe(3) like axe
+		
+	case Zoom_Like_Axe4(char axe)
+		I1.Axe(4) like axe
+		
+	case Zoom_Like_Lib(char lib)
+		I1.Lib like lib
+		
+	case Zoom_Like_Local(char loc)
+		I1.Local like loc
+		
+	case Zoom_Like_Serie(char serie)
+		I1.Serie like serie
+		
+	case Zoom_Like_CptAux(char cptaux)
+		I1.CptAux like cptaux
+		
+	case Zoom_UoCode(char uocode)
+		I1.UoCode = uocode
+		
+	case Zoom_Like_UoCode(char uocode)
+		I1.UoCode like uocode
+		
+	case Zoom_Like_NatImmo(char natimmo)
+		I1.NatImmo like natimmo
+		
+	case Zoom_A_partir_AcqDt(date acqdt)
+		I1.AcqDt >= acqdt
+		
+	case Zoom_A_partir_SvcDt(date svcdt)
+		I1.SvcDt >= svcdt
+		
+	case Zoom_A_partir_ImmoDt(date immodt)
+		I1.ImmoDt >= immodt
+		
+	case Zoom_IndicateurEtat(int etat)
+		I1.Etat = etat
+		
+	case Zoom_IndicateurPosition(int position)
+		I1.Position = position
+		
+	case Zoom_IndicateurHistorique(char ce3)
+		I1.Ce3 = ce3
+		
+	case Zoom_Identifiant(char ce1)
+		I1.Ce1 <> ce1
+		
+	case Zoom_PK(int immo, int immocomp)
+		I1.Immo = immo and I1.ImmoComp = immocomp
+
+	case Exists(int immo, int immocomp)
+		I1.Immo = immo and I1.ImmoComp = immocomp
+
+	Case Equal_Enrno(int enrno)
+		I1.ENRNO = enrno
+
+	Case Max_Immo
+		I1.IMMO = (SELECT MAX(I1.IMMO) FROM I1 WHERE I1.CE3 = '1' AND I1.DOS = MZ.DOS)
+		 

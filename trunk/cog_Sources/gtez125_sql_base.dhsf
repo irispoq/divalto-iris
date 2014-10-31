@@ -1,0 +1,1602 @@
+;>xwin4obj                              7.0       20130513142034      
+[masque]
+ libelle="Taux de T.V.A."
+ utilisateur="SN"
+ date_modification="13/05/2013"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=86
+ type_masque=2
+ dernier_id=164
+ dernier_id_page=19
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="gtfaide"
+ [touches]
+  f7=135
+  shift_f6=10000
+[enregistrements]
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "gtrstab.dhoq",,tauxtvan,tauxtvan,1024,1
+ "gtrstab.dhoq",,tauxtvan,tt_sel,1024,1
+[onglet]
+ [presentation]
+  position=0,0
+  taille=225,320
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=36,320
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=1
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=25
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Code TVA à créer"
+ nb_lig=5
+ nb_col=60
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,50
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Code TVA Article"
+ [obj_texte]
+  [presentation]
+   position=18,5
+   taille=9,50
+   id=4
+   wstyle="STD"
+  [texte]
+   texte="Régime TVA Tiers"
+ [obj_texte]
+  [presentation]
+   position=28,5
+   taille=9,50
+   id=154
+   wstyle="STD"
+  [texte]
+   texte="Date d'effet"
+ [champ]
+  [presentation]
+   position=8,57
+   taille=9,32
+   id=5
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tauxtvan,tvaart,tauxtvan
+  [aide_page]
+   aide=2897
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f3=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=18,57
+   taille=9,32
+   noms="tiers"
+   id=6
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tauxtvan,tvatie,tauxtvan
+  [param_saisie]
+   obligatoire=oui
+   table_associee=oui
+  [aide_page]
+   aide=2897
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f3=1
+   f8=9126
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TvaT_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=18,91
+   taille=9,144
+   id=7
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,regtvatiers_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=28,57
+   taille=9,32
+   id=155
+   colonnes_saisie=10
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tauxtvan,effetdt,tauxtvan
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=3
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=40
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=12
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=38,159
+   attache_lgx=oui
+   id=156
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="ZOOM"
+ [tableau]
+  [presentation]
+   position=40,0
+   taille=185,159
+   attache_lgx=oui
+   attache_lgy=oui
+   id=111
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=4
+   hauteur_lig=10
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=3
+   separation=53
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=123,164
+    taille=19,26
+    id=101
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=tauxtvan,cenote,tauxtvan
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CENOTE_1"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Présence note"
+   [param_colonne]
+    titre="#tblnote"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=45,168
+    taille=8,6
+    id=102
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tauxtvan,tvaart,tauxtvan
+    saisie=non
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Code TVA Article"
+   [param_colonne]
+    titre="TVA Article"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=39,188
+    taille=8,6
+    id=103
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tauxtvan,tvatie,tauxtvan
+    saisie=non
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Régime TVA Tiers"
+   [param_colonne]
+    titre="TVA tiers"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=46,81
+    taille=9,50
+    id=164
+    colonnes_saisie=10
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tauxtvan,effetdt,tauxtvan
+    format="JJ/MM/AAAA"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Date d'effet"
+   [param_colonne]
+    titre="Date d'effet"
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=27,272
+    taille=10,49
+    id=104
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tauxtvan,tvatyp,tauxtvan
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","TVATYP"
+   [touches]
+    f1=1
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Fait générateur"
+   [param_colonne]
+    titre="Fait générateur"
+    fl_aff=oui
+    largeur_col=47
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=105,172
+    taille=8,22
+    id=105
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tauxtvan,tvap,tauxtvan,1
+   [param_saisie]
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="Taux 1"
+    fl_aff=oui
+    largeur_col=22
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=126,184
+    taille=8,35
+    id=106
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tauxtvan,tvacpt,tauxtvan,1
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f1=1
+    f7=135
+    f8=19030
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_CPT_1_Ap"
+   [info_bulle]
+   texte="Compte TVA collectée"
+   [param_colonne]
+    titre="TVA collectée"
+    fl_aff=oui
+    largeur_col=38
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=126,192
+    taille=8,35
+    id=107
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tauxtvan,tvacpt,tauxtvan,2
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f1=1
+    f7=135
+    f8=19030
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_CPT_1_Ap"
+   [info_bulle]
+   texte="Compte TVA récupérable"
+   [param_colonne]
+    titre="TVA récupérable"
+    fl_aff=oui
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=141,224
+    taille=8,35
+    id=108
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tauxtvan,tvaimmocpt,tauxtvan
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f1=1
+    f7=135
+    f8=19030
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_CPT_2_Ap"
+   [info_bulle]
+   texte="Compte TVA récupérable sur immobilisation"
+   [param_colonne]
+    titre="TVA immo"
+    fl_aff=oui
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=147,228
+    taille=8,35
+    id=110
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tauxtvan,escobtcpt,tauxtvan
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f1=1
+    f7=135
+    f8=19030
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_EscObtCpt_1_Ap"
+   [info_bulle]
+   texte="Compte escompte obtenu"
+   [param_colonne]
+    titre="Escompte obtenu"
+    fl_aff=oui
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=156,212
+    taille=8,35
+    id=109
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tauxtvan,escacccpt,tauxtvan
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f1=1
+    f7=135
+    f8=19030
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_EscAccCpt_1_Ap"
+   [info_bulle]
+   texte="Compte escompte accordé"
+   [param_colonne]
+    titre="Escompte accordé"
+    fl_aff=oui
+    largeur_col=28
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+ [obj_texte]
+  [presentation]
+   position=16,5
+   taille=9,43
+   id=157
+   wstyle="STD"
+  [texte]
+   texte="Tva article"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,43
+   id=158
+   wstyle="STD"
+  [texte]
+   texte="Tva tiers"
+ [champ]
+  [presentation]
+   position=16,50
+   taille=9,32
+   id=160
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvaart,tt_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=26,50
+   taille=9,32
+   noms="tiers"
+   id=161
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvatie,tt_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=16
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=15
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=14
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=18
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=13
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=19
+[page]
+ numero=11
+ libelle="Fiche zoom"
+ fond="STD"
+ titre="Zoom"
+ efface=partiel
+ nb_lig=25
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="DEFINITION"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=141,5
+   taille=48,310
+   id=151
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Autoliquidation"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,74
+   id=12
+   wstyle="STD"
+  [texte]
+   texte="Code TVA Article"
+ [obj_texte]
+  [presentation]
+   position=36,5
+   taille=9,74
+   id=13
+   wstyle="STD"
+  [texte]
+   texte="Régime TVA Tiers"
+ [obj_texte]
+  [presentation]
+   position=46,5
+   taille=9,74
+   id=152
+   wstyle="STD"
+  [texte]
+   texte="Date d'effet"
+ [obj_texte]
+  [presentation]
+   position=60,5
+   taille=9,74
+   id=14
+   wstyle="STD"
+  [texte]
+   texte="Fait Générateur"
+ [obj_texte]
+  [presentation]
+   position=70,5
+   taille=9,74
+   id=17
+   wstyle="STD"
+  [texte]
+   texte="Taux de TVA"
+ [obj_texte]
+  [presentation]
+   position=80,5
+   taille=9,74
+   id=18
+   wstyle="STD"
+  [texte]
+   texte="Tva collectée"
+ [obj_texte]
+  [presentation]
+   position=90,5
+   taille=9,74
+   id=19
+   wstyle="STD"
+  [texte]
+   texte="Tva récupérable"
+ [obj_texte]
+  [presentation]
+   position=100,5
+   taille=9,74
+   id=20
+   wstyle="STD"
+  [texte]
+   texte="Tva récup. sur immo."
+ [obj_texte]
+  [presentation]
+   position=110,5
+   taille=9,74
+   id=21
+   wstyle="STD"
+  [texte]
+   texte="Escomptes accordés"
+ [obj_texte]
+  [presentation]
+   position=120,5
+   taille=9,74
+   id=22
+   wstyle="STD"
+  [texte]
+   texte="Escomptes obtenus"
+ [obj_texte]
+  [presentation]
+   position=157,10
+   taille=9,69
+   id=77
+   wstyle="STD"
+  [texte]
+   texte="Taux de TVA"
+ [obj_texte]
+  [presentation]
+   position=167,10
+   taille=9,69
+   id=79
+   wstyle="STD"
+  [texte]
+   texte="Compte de débit"
+ [obj_texte]
+  [presentation]
+   position=177,10
+   taille=9,69
+   id=80
+   wstyle="STD"
+  [texte]
+   texte="Compte de crédit"
+ [obj_texte]
+  [presentation]
+   position=210,5
+   taille=9,74
+   id=23
+   wstyle="STD"
+  [texte]
+   texte="Compte vente associé (TPV)"
+ [champ]
+  [presentation]
+   position=26,81
+   taille=9,50
+   id=24
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tauxtvan,tvaart,tauxtvan
+   saisie=non
+ [champ]
+  [presentation]
+   position=36,81
+   taille=9,50
+   id=25
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tauxtvan,tvatie,tauxtvan
+   saisie=non
+ [champ]
+  [presentation]
+   position=46,81
+   taille=9,50
+   id=153
+   colonnes_saisie=10
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tauxtvan,effetdt,tauxtvan
+   format="JJ/MM/AAAA"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=60,81
+   taille=9,50
+   id=26
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvatyp,tauxtvan
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TVATYP"
+  [aide_page]
+   aide=2922
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=36,133
+   taille=9,144
+   id=27
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,regtvatiers_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=70,81
+   taille=9,50
+   id=29
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvap,tauxtvan
+  [param_saisie]
+   esp_si_zero=oui
+  [aide_page]
+   aide=3108
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=80,81
+   taille=9,50
+   id=30
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvacpt,tauxtvan,1
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=3094
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CPT_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=90,81
+   taille=9,50
+   id=38
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvacpt,tauxtvan,2
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=3095
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CPT_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=100,81
+   taille=9,50
+   id=39
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvaimmocpt,tauxtvan
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=3096
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CPT_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=110,81
+   taille=9,50
+   id=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,escacccpt,tauxtvan
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=2918
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_EscAccCpt_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=120,81
+   taille=9,50
+   id=44
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,escobtcpt,tauxtvan
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=2919
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_EscObtCpt_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=90,133
+   taille=9,144
+   id=149
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cpttvarecup_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=100,133
+   taille=9,144
+   id=147
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cpttvaimrec_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=157,81
+   taille=9,50
+   id=97
+   colonnes_saisie=6
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvaalp,tauxtvan,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=167,81
+   taille=9,50
+   id=90
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvaalcpt,tauxtvan,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f7=135
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptAL_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=177,81
+   taille=9,50
+   id=91
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvaalcpt,tauxtvan,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f7=135
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptAL_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=80,133
+   taille=9,144
+   id=31
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cpttvacol_lib,tauxtvan
+   saisie=non
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=110,133
+   taille=9,144
+   id=32
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cptescacc_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=167,133
+   taille=9,144
+   id=84
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cptdebal_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=120,133
+   taille=9,144
+   id=42
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cptescobt_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=177,133
+   taille=9,144
+   id=83
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cptcreal_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=210,133
+   taille=9,144
+   id=85
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,regtvatpv_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=210,81
+   taille=9,50
+   id=51
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,tvavencpt,tauxtvan
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=2904
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CPT_4_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=12
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=11
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=26,164
+   taille=38,151
+   id=52
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=38,151
+   id=53
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,18
+   id=57
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=42,169
+   taille=9,18
+   id=56
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=52,10
+   taille=9,18
+   id=59
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=52,169
+   taille=9,18
+   id=58
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=42,30
+   taille=9,74
+   id=60
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,usercr,tauxtvan
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=52,30
+   taille=9,56
+   id=61
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,usercrdh,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=42,189
+   taille=9,74
+   id=62
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,usermo,tauxtvan
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=52,189
+   taille=9,56
+   id=63
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,usermodh,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+[ressources]
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wetype_trait=arret
+    warret=8
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wetype_trait=arret
+    warret=9
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#ctrl_insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__1"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    warret=6
+    wtrait_chaine="#ctrl_p"
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+SetModuleInfo('$Id: gtez125_sql.dhsf 31549 2013-05-13 12:23:19Z sn $')
+;*
+;*      Zoom sur la table des taux de TVA
+;*
+
+Include	'GTTC000.dhsp'
+
+Module	'CCTM000.dhop'
+
+;*
+;*		Déclarations
+;*
+
+; TDF
+Public HFile		'GTFDD.dhsd'	GTFTAB	GTFTAB
+
+; Record	
+Public RecordSql	'GTRSTAB.dhoq'	TauxTvaN
+Public RecordSql	'GTRSTAB.dhoq' TauxTvaN	TT_Sel
+
+Public Record		'CCFDD.dhsd'	C3
+Public Record		'GTFDD.dhsd'	SOC
+Public Record		'A5DD.dhsd'		MZ
+Public Record		'DDSYS.dhsd'	ROWINFO	ZoomSelection
+Public Record  	'GTFDD.dhsd'	T086
+
+;*
+;*		Fonctions & Procédures
+;*
+
+;*
+Public Procedure Champ_CptAL_Ap		; Contrôle des comptes d'autoliquidation
+Beginp
+	Switch TRUE
+	Case Harmony.Dataind1 = 1	|	TauxTvaN.CptDebAl_Lib = ' '
+	Case Harmony.Dataind1 = 2	|	TauxTvaN.CptCreAl_Lib = ' '
+	EndSwitch
+
+	If Soc_Controle_Donnees_Comptables 
+		If TauxTvaN.TvaALCpt(Harmony.Dataind1) <> ' '
+			If Controle_Compte(TauxTvaN.TvaALCpt(Harmony.Dataind1), conf=FALSE) <= 1
+				Switch TRUE
+				Case Harmony.Dataind1 = 1	|	TauxTvaN.CptDebAl_Lib = C3.Lib
+				Case Harmony.Dataind1 = 2	|	TauxTvaN.CptCreAl_Lib = C3.Lib
+				EndSwitch
+			EndIf
+		EndIf
+	Else
+		Controle_Compte(TauxTvaN.TvaALCpt(Harmony.Dataind1), FALSE, existence=FALSE)  	; Alphanumérique + complétion
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_CPT_1_Ap		; Contrôle des comptes de TVA collectée et récupérable
+Beginp
+	Switch Harmony.Dataind1
+	Case Harmony.Dataind1 = 1	|	TauxTvaN.CptTvaCol_Lib		= ' '
+	Case Harmony.Dataind1 = 2	|	TauxTvaN.CptTvaRecup_Lib	= ' '
+	EndSwitch
+	
+	If Soc_Controle_Donnees_Comptables
+		If TauxTvaN.TvaCpt(Harmony.Dataind1) <> ' '
+			If Controle_Compte(TauxTvaN.TvaCpt(harmony.dataind1), conf=FALSE) <= 1
+				Switch Harmony.Dataind1
+				Case Harmony.Dataind1 = 1	|	TauxTvaN.CptTvaCol_Lib		= C3.Lib
+				Case Harmony.Dataind1 = 2	|	TauxTvaN.CptTvaRecup_Lib	= C3.Lib
+				EndSwitch
+			EndIf
+		EndIf
+	Else
+		Controle_Compte(TauxTvaN.TvaCpt(Harmony.Dataind1), FALSE, existence=FALSE)			; Alphanumérique + complétion
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_CPT_2_Ap		; Contrôle du compte de TVA récupérable sur immo
+Beginp
+	TauxTvaN.CptTvaImRec_Lib = ' '
+	If Soc_Controle_Donnees_Comptables
+		If TauxTvaN.TvaImmoCpt <> ' '
+			If Controle_Compte(TauxTvaN.TvaImmoCpt, conf=FALSE) <= 1
+				TauxTvaN.CptTvaImRec_Lib = C3.Lib
+			EndIf
+		EndIf
+	Else
+		Controle_Compte(TauxTvaN.TvaImmoCpt, FALSE, existence=FALSE)	; Alphanumérique + complétion
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_CPT_4_Ap			; Contrôle du compte point de vente
+Beginp
+	TauxTvaN.RegTvaTpv_Lib = ' '
+
+	If Soc_Controle_Donnees_Comptables 
+		If TauxTvaN.TvaVenCpt <> ' '
+			If Controle_Compte(TauxTvaN.TvaVenCpt, conf=FALSE) <= 1
+				TauxTvaN.RegTvaTpv_Lib = C3.Lib
+			EndIf
+		EndIf
+	Else
+		Controle_Compte(TauxTvaN.TvaVenCpt, FALSE, existence=FALSE)								; Alphanumérique + complétion
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_EscAccCpt_1_Ap	; Contrôle du compte d'escompte accepté
+Beginp
+	TauxTvaN.CptEscAcc_Lib = ' '
+	
+	If Soc_Controle_Donnees_Comptables
+		If TauxTvaN.EscAccCpt <> ' '
+			If Controle_Compte(TauxTvaN.EscAccCpt, conf=FALSE) <= 1
+				TauxTvaN.CptEscAcc_Lib = C3.Lib
+			EndIf
+		EndIf
+	Else
+		Controle_Compte(TauxTvaN.EscAccCpt, FALSE, existence=FALSE)							; Alphanumérique + complétion
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_EscObtCpt_1_Ap	; Contrôle du compte d'escompte obtenu
+Beginp
+	TauxTvaN.CptEscObt_Lib = ' '
+	
+	If Soc_Controle_Donnees_Comptables
+		If TauxTvaN.EscObtCpt <> ' '
+			If Controle_Compte(TauxTvaN.EscObtCpt, conf=FALSE) <= 1
+				TauxTvaN.CptEscObt_Lib = C3.Lib
+			EndIf
+		EndIf
+	Else
+		Controle_Compte(TauxTvaN.EscObtCpt, FALSE, existence=FALSE)							; Alphanumérique + complétion
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_TvaT_1_Ap			; Contrôle du code TVA tiers
+Beginp
+	TauxTvaN.RegTvaTiers_Lib = Condition(Lectab(86, TauxTvaN.TvaTie, err=1186) = 0, T086.Lib, ' ')
+Endp
+[/diva]
+[diva_base]
+[/diva]

@@ -1,0 +1,421 @@
+; >xdiva
+
+;*
+;*    Modèle de traitement du générateur de ZOOM
+
+overwrittenby "COUTZ_COLLECTIF.dhop"
+
+include "gttcz00.dhsp"
+
+define	nommenucontenantzoom = "a5F.dhfi"
+define	zoomnomapplication = "DAV"
+
+module	"xzoom.dhop"
+
+module	"YzoomGenerator.dhop"
+
+hfileversion   cogfdd.dhsd    COG_FCOLLECT
+
+; Table pour la saisie de la clé de départ
+public		record	cogfdd.dhsd	COG_COLLECT	COG_COLLECT_ZZDEP
+; Table principale du zoom ( Enregistrement correspondance collectif )
+public		record	cogfdd.dhsd	COG_COLLECT
+				Record	ddsys.dhsd				COLUMNINFO														; Informations colonne
+
+;*
+;* Fonctions et procédures
+;*
+
+
+
+
+;*
+;* Procedures
+;*
+
+;*
+Public Procedure MajTitreVar						; Met a jour les titres variables
+BeginP
+
+	ZOOM.TITREVAR = ' ' & COG_COLLECT.DOS & COG_COLLECT.TICOD & COG_COLLECT.COG_CDTYCLI
+
+EndP
+
+;*
+Procedure XgenZoomPreGarniCle(NumCle)						; Prégarni les champs de la clé à ne pas saisir
+
+1			NumCle		N
+BeginP
+
+
+EndP
+
+;*
+;* Cherche le libellé dans la table liée (Toujours en mode Fiche et d'après paramétrage en mode Liste) 
+;*
+
+;*
+Public Procedure	ChercheLibelleDansTableLiee
+BeginP
+EndP
+
+;*
+;* Raffraichit le libellé de la table liée au retour du Zoom 
+;*
+
+;*
+Public Procedure	GenZoomRefreshLibelle(Genzoom_Arret)
+1			Genzoom_Arret		N
+BeginP
+	switch Genzoom_Arret
+	EndSwitch
+
+EndP
+
+
+
+
+;*
+;* Procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomDebut																					; Initialisation du zoom
+BeginP																											; ZoomDebut
+	PingReceive( 'zechange', MZ )
+
+
+
+	
+	If ZOOM.SCEVALEUR <> ' '
+		COG_COLLECT.COG_CDTYCLI = ZOOM.SCEVALEUR
+		ZOOM.SCESAISIE = ZOOM_PAS_PREMIERE
+	Endif
+	ZOOM.TITREFIXE = `Enregistrement correspondance collectif`
+EndP
+
+;*
+Public Procedure ZoomAbandon																				; Abandon du zoom
+BeginP																											; ZoomAbandon
+	
+EndP																												; ZoomAbandon
+
+;*
+Public Procedure ZoomValidation																			; Validation du zoom
+BeginP																											; ZoomValidation
+	
+	ZOOM.VALRETOUR =  COG_COLLECT.COG_CDTYCLI
+EndP
+
+;*
+Public Procedure ZoomFin																					; Traitements finaux du zoom
+BeginP																											; ZoomFin
+	
+EndP																												; ZoomFin
+
+;*
+;* Procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation																				; Traitements avant l'entrée en création
+BeginP																											; ZoomCreation
+	
+	
+	COG_COLLECT = ' '
+	XgenZoomPreGarniCle(1)
+EndP
+
+;*
+Public Procedure ZoomDuplication																			; Traitements avant l'entrée en duplication
+BeginP																											; ZoomDuplication
+	
+	COG_COLLECT.USERCR		= ' '
+	COG_COLLECT.USERCRDH		= ' '
+	COG_COLLECT.USERMO		= ' '
+	COG_COLLECT.USERMODH		= ' '
+EndP
+
+;*
+Public Procedure ZoomApresCleCreation																	; Génération de la clé en création
+BeginP																											; ZoomApresCleCreation
+	ZOOM.CLE		= [ ZoomGetKeyByName("COG_TYPCLI") COG_COLLECT.DOS COG_COLLECT.TICOD COG_COLLECT.COG_CDTYCLI ]
+	ZOOM.RES	= 'cog_collectif' & COG_COLLECT.DOS & COG_COLLECT.TICOD & COG_COLLECT.COG_CDTYCLI
+	MajTitreVar
+EndP
+
+;*
+Public Procedure ZoomCreationRes																			; Réservation d'entités complémentaires en création
+BeginP																											; ZoomCreationRes
+
+	
+	
+EndP
+
+
+
+																											; ZoomCreationRes
+
+;*
+Public Procedure ZoomAvantWrite																			; Traitements avant écriture
+BeginP																											; ZoomAvantWrite
+	
+	cog_collect.Dos 			= mz.Dos
+	COG_COLLECT.USERCR		= SYSTEM.USER
+	COG_COLLECT.USERCRDH		= Time(7)
+EndP
+
+;*
+Public Procedure ZoomApresCreation																		; Compte-rendu de la création
+BeginP																											; ZoomApresCreation
+	
+	MajTitreVar
+EndP
+
+;*
+Public Procedure ZoomModification																		; Traitements avant l'entrée en modification
+
+BeginP																											; ZoomModification
+	
+	
+	ZOOM.RES	= 'cog_collectif' & COG_COLLECT.DOS & COG_COLLECT.TICOD & COG_COLLECT.COG_CDTYCLI
+EndP
+
+;*
+Public Procedure ZoomModificationRes																	; Réservation d'entités complémentaires en modification
+BeginP																											; ZoomModificationRes
+
+	
+EndP
+
+;*
+Public Procedure ZoomAvantRewrite																		; Traitements avant réécriture
+BeginP																											; ZoomAvantRewrite
+
+
+
+	COG_COLLECT.USERMO		= SYSTEM.USER
+	COG_COLLECT.USERMODH		= Time(7)
+	MajTitreVar
+EndP
+
+;*
+Public Procedure ZoomApresModification																	; Compte-rendu de la modification
+BeginP																											; ZoomApresModification
+	
+EndP																												; ZoomApresModification
+
+;*
+Public Procedure ZoomSuppression																			; Traitements avant l'entrée en suppression
+BeginP																											; ZoomSuppression
+
+
+	ZOOM.RES	= 'cog_collectif' & COG_COLLECT.DOS & COG_COLLECT.TICOD & COG_COLLECT.COG_CDTYCLI
+EndP
+
+;*
+Public Procedure ZoomSuppressionRes																		; Réservation d'entités complémentaires en suppression
+BeginP																											; ZoomSuppressionRes
+	
+EndP																												; ZoomSuppressionRes
+
+;*
+Public Procedure ZoomAvantDelete																			; Traitements avant suppression
+BeginP																											; ZoomAvantDelete
+
+	
+	
+EndP
+
+;*
+Public Procedure ZoomApresSuppression																	; Compte-rendu de la suppression
+BeginP																											; ZoomApresSuppression
+	
+EndP																												; ZoomApresSuppression
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsultFiche
+
+BeginP																											; ZoomAvantConsultFiche
+
+
+EndP
+
+
+;*
+Public Procedure ZoomAvantConsultListe
+
+BeginP																											; ZoomAvantConsultListe
+
+
+EndP
+
+;*
+Public Procedure ZoomConsultFiche																		; Traitement après consultation d'une fiche
+BeginP																											; ZoomConsultFiche
+
+		switch Harmony.Key
+		case 	K_F7
+			Zoom_Call()
+
+
+
+		endswitch
+	
+EndP
+
+;*
+Public Procedure ZoomConsultListe																		; Traitement après consultation des fiches en mode liste
+BeginP																											
+
+		switch Harmony.Key
+		case 	K_F7
+			Zoom_Call()
+
+
+
+		endswitch
+	
+EndP
+
+;*
+Public Procedure ZoomEnteteTableau
+BeginP
+	
+
+EndP
+
+;*
+Public Procedure ZoomAvantInput																			; Traitement avant entrée clavier
+BeginP																											
+	
+
+	If ZOOM.TYPEINPUT = ZOOM_S_DEPART
+		XgenZoomPreGarniCle(Zoom.NoCle)
+	endif
+
+EndP
+
+;*
+public procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+beginp
+
+	;on ne fait pas l'affectation dans g3xz ici car incompatible avec gestion code adresse
+												
+	switch Harmony.Key
+
+	
+	case K_F7
+		Zoom_Call()
+
+	case 	Harmony.DataArret = 8002
+		if Harmony.Sourisbout = Right_Button
+			Zoom_Call()
+		elsif Harmony.Sourisclic = Double_Click
+			Harmony.Retour = Xmenext_Simulation_Touche
+			Harmony.Cplretour = K_F8
+		endif
+
+;	case 	Harmony.DataArret in(9000..9999,11000..65000)				; Appel de zoom  en dernier
+	case 	vsw = K_F8 or Harmony.DataArret in(9000..9999,11000..65000)				; Appel de zoom  en dernier
+		Zoom_Call(harmony.arret)
+
+	endswitch
+
+EndP																												; ZoomArret
+
+;*
+Public Procedure ZoomFiltreAvantValeur																	; Traitement avant la saisie d'une valeur dans la grille des filtres
+BeginP																											; ZoomFiltreAvantValeur
+	
+EndP																												; ZoomFiltreAvantValeur
+
+;*
+Public Procedure ZoomFiltreApresValeur																	; Traitement après la saisie d'une valeur dans la grille des filtres
+BeginP																											; ZoomFiltreApresValeur
+	
+EndP																												; ZoomFiltreApresValeur
+
+;*
+;* Procedures liées à la lecture du fichier
+;*
+
+;*
+;*
+Public Procedure ZoomApresCle1					; Génération de la clé 1
+BeginP													; ZoomApresCle1
+	
+	
+	ZOOM.CLE			= [ ZoomGetKeyByName("COG_TYPCLI") mz.DOS COG_COLLECT_ZZDEP.TICOD COG_COLLECT_ZZDEP.COG_CDTYCLI ]
+	ZOOM.CLEMIN		= [ ZoomGetKeyByName("COG_TYPCLI") mz.DOS COG_COLLECT_ZZDEP.TICOD ]
+	ZOOM.CLEMAX		= [ ZoomGetKeyByName("COG_TYPCLI") mz.DOS COG_COLLECT_ZZDEP.TICOD $FF ]
+ 
+endp
+
+
+
+;*
+;*
+Public Procedure ZoomApresRead					; Traitement général après lecture
+BeginP													; ZoomApresRead
+
+	MajTitreVar
+	ChercheLibelleDansTableLiee
+ 
+endp
+
+;*
+Public Procedure ZoomApresRead1					; Traitement après lecture clé 1
+BeginP													; ZoomApresRead1
+	
+	
+ 
+endp
+
+
+
+
+;*
+;* Procedures d'impression
+;*
+
+;*
+Public Procedure ZoomDebutListe																			; Traitement avant l'impression
+BeginP																											; ZoomDebutListe
+	
+EndP																												; ZoomDebutListe
+
+;*
+Public Procedure ZoomAvantDetail																			; Traitement avant l'impression d'un bloc détail en mode liste
+BeginP																											; ZoomAvantDetail
+	
+EndP																												; ZoomAvantDetail
+
+;*
+Public Procedure ZoomApresDetail																			; Traitement après l'impression d'un bloc détail en mode liste
+BeginP																											; ZoomApresDetail
+	
+EndP																												; ZoomApresDetail
+
+;*
+Public Procedure ZoomAvantBlocFin																		; Traitement avant l'impression du bloc de fin en mode liste
+BeginP																											; ZoomAvantBlocFin
+	
+EndP																												; ZoomAvantBlocFin
+
+;*
+Public Procedure ZoomApresBlocFin																		; Traitement après l'impression du bloc de fin en mode liste
+BeginP																											; ZoomApresBlocFin
+	
+EndP																												; ZoomApresBlocFin
+
+;*
+Public Procedure ZoomFinListe																				; Traitement après l'impression
+BeginP																											; ZoomFinListe
+	
+EndP																												; ZoomFinListe
+

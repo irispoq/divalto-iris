@@ -1,0 +1,111 @@
+;*
+;*    Active la hiérarchie et les evènements
+;*
+
+;*    Log    version   nPmodif      date     modifications
+;*    TR       6.3a      01        05.2011 	 Initial
+
+Include 			"GTQC000.dhsp"
+
+Module	GRPM000.dhop
+Module	GRPMFIC.dhop
+Module	GRTM000.dhop
+
+HfileVersion 	Cogfdd.dhsd 	COGGRF_TAB
+
+Hfile 	Cogfdd.dhsd 	COGGRF_TAB	COGGRF_TAB
+Hfile		Grfdd.dhsd		GRFEVT 		GRFEVT
+HFile		GTFDD.DHSD		GTFPROJ		GTFPROJ			; Projet Affaire
+
+Record 	Cogfdd.dhsd 	COG_GRTEVT						; Code événement
+Record 	grfdd.dhsd 		EVTTIERS							; Evénement
+Record 	grfdd.dhsd  	GRTEVT							; Code événement
+Record 	GTFDD.dhsd 		SOCCRM							; Dossier CRM
+
+Record	GTFDD.DHSD	PRJAP		PRJAP						; Projet apres vente
+
+; Variables globales
+1	g_Dossier	>GTFDD.DHSD	Dos
+1	g_Affaire	>GTFDD.DHSD	Affaire
+
+;*
+;*		Procédures et fonctions
+;*
+
+;*
+Public Function int Verifier_Affaire(temp_Dos, temp_Affaire)
+; Fonction qui charge l'enregistrement	PRJAP
+; Renvoi 0 si OK
+; 			1 si KO
+1	temp_Dos			>GTFDD.DHSD	Dos
+1	temp_Affaire	>GTFDD.DHSD	Affaire
+1	x_st0	X
+BeginF
+	GTFPROJ.Key = "A" & temp_Dos & temp_Affaire
+	x_st0 = HRead(GTFPROJ, PRJAP)
+	If x_st0 = 0 And PRJAP.Dos = temp_Dos And PRJAP.Affaire = temp_Affaire
+		FReturn(0)
+	Else
+		FReturn(1)
+	EndIf 
+EndF
+
+;*
+Public Procedure Active_Affaire
+1		x_st0				X
+1		Liste				L
+1		date				8
+1		note				8,0
+BeginP
+	g_Dossier = MZ.DOS
+	if SOCCRM.TABCRMTYP(3) = 2
+		g_Dossier = 999
+	EndIf
+	COGGRF_TAB.Key = 'A' & g_Dossier & PRJAP.Affaire & PRJAP.AfrClas
+	Loop Hread(COGGRF_TAB,COG_GRTEVT) = 0 And COG_GRTEVT.Dos = g_Dossier And COG_GRTEVT.Affaire = PRJAP.Affaire And COG_GRTEVT.AfrClas = PRJAP.AfrClas
+		Hdelete(COGGRF_TAB,COG_GRTEVT)
+	EndLoop
+	Liste = ListCreate
+	COGGRF_TAB.Key = 'A' & g_Dossier & '        ' & PRJAP.AfrClas
+	Loop Hread(COGGRF_TAB,COG_GRTEVT) = 0 And COG_GRTEVT.Dos = g_Dossier And COG_GRTEVT.Affaire = system.esp And COG_GRTEVT.AfrClas = PRJAP.AfrClas
+		If COG_GRTEVT.HSDT = ' ' Or (COG_GRTEVT.HSDT <> ' ' and COG_GRTEVT.HSDT > Today) | ListAddEnd(Liste,COG_GRTEVT) | Endif
+	EndLoop
+	Listbegin(Liste)
+	Loop Listnext(Liste,COG_GRTEVT) > 0
+		COG_GRTEVT.Dos 	 = MZ.DOS
+		COG_GRTEVT.Affaire = PRJAP.Affaire
+		COG_GRTEVT.USERCR 	= SYSTEM.USER
+		COG_GRTEVT.USERCRDH 	= time(7)
+		COG_GRTEVT.USERMO 	= SYSTEM.ESP
+		COG_GRTEVT.USERMODH 	= SYSTEM.ESP
+		Hwrite(COGGRF_TAB,COG_GRTEVT)
+	EndLoop
+	ListDestroy(Liste)
+EndP
+
+;*
+;*	Main
+;*
+
+;* 
+Main
+
+If PingReceiveAndDelete("ZECHANGE", MZ) = 0 And PingReceiveAndDelete("NumAffaire",g_Affaire) = 0
+	; Chargement de l'environnement
+	Seek_Soc(MZ.DOS)
+	g_Dossier = MZ.Dos
+	; Verification de l'affaire
+	If	Hseek(GTFDOS,SOCCRM,['D' MZ.DOS ]) = 0 And Verifier_Affaire(g_Dossier, g_Affaire) = 0
+	 	; Traitement
+		If PRJAP.AfrClas <> system.esp 
+			If PRJAP.Cog_Hierarchie < 2 | Active_Affaire | Endif
+			Pong('RETOUR',0)
+		Else
+			Pong('RETOUR',1)
+		Endif
+	Else
+		Pong('RETOUR',2)
+	EndIf
+EndIf
+
+ProgramExit

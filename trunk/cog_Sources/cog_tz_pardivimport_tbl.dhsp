@@ -1,0 +1,496 @@
+; >xdiva
+
+;*
+;*    Modèle de traitement du générateur de ZOOM
+
+HFileVersion	cog_echange.dhsd	Cog_ParDivEch
+
+Include	Cog_Tc_DivImport.dhsp
+Module	Cog_Gdiva.dhop
+Module	XZoom.dhop
+Include "GTTCZ00.dhsp"						; Déclarations communes
+
+Hfile		cog_echange.dhsd				Cog_ParDivEch		Cog_ParDivEch
+
+Record	ddsys.dhsd						COLUMNINFO														; Informations colonne
+;Public	Record	ddsys.dhsd			Zoom
+Public	Record	ddsys.dhsd			Zoom					ZOOML
+Public	Record	cog_echange.dhsd	cog_paratables
+
+1	lIdMNEMO		L
+1	lIdENREG		L
+1	lIdCHAMP		L
+1	lTicDico		L
+1	aENRLST		100
+1  aReponse		8096
+1	aDico_Nom	32
+1	aNIVEAUDICO	4,0
+1	aOldLib		>cog_echange.dhsd		IdLib = " "
+
+;*
+;* Fonctions et procédures
+;*
+
+;*
+Procedure COG_PRUN_PARZONES
+1	aPARRUN	140
+Beginp
+	aPARRUN = "<DICO>" & left(cog_paratables.dico) & "<MNEMO>" & left(cog_paratables.mnemo) & "<ENREG>" & left(cog_paratables.enreg) & \
+				 "<FORMAT>" & nospaces(cog_paratables.MODECHANG) & "<IDNUM>" & nospaces(cog_paratables.idnum) & "<IDLIB>" & left(cog_paratables.idlib)
+	Ping("COG_RUN_PZ", aPARRUN)
+	;Zoom4(ZoomL,'Cog_ParDivEch.dhfi','cog_parazones','cog_ez_pardivimport_zon.dhoe','cog_tz_pardivimport_zon.dhop', ZOOM_PRIVILEGE_SUPPRESSION)
+	Zoom_Call(61001)
+Endp
+
+
+;*
+Public Procedure COG_PRECH_ENREG
+Beginp
+	ListErase(lIdENREG)
+	If DDInterface(DD_FILEFIND, lTicDico, cog_paratables.MNEMO , aREPONSE) = 0
+		If DDInterface(DD_TABLEBEGIN, lTicDico, , aREPONSE) = 0
+			aENRLST = HmpSeek(aREPONSE, "Nom")
+			If aENRLST <> " "
+				aENRLST = left(aENRLST) & ";" & aENRLST
+				ListInsert(lIdENREG, aENRLST)
+			EndIf
+			Loop DDInterface(DD_TABLENEXT, lTicDico, , aREPONSE) = 0 
+				aENRLST = HmpSeek(aREPONSE, "Nom")
+				If aENRLST <> " "
+					aENRLST = left(aENRLST) & ";" & aENRLST
+					ListInsert(lIdENREG, aENRLST)
+				EndIf
+			EndLoop
+		EndIf
+	EndIf
+Endp
+
+;*
+Public Procedure COG_PRECH_MNEMO(aDICO)
+1	aDICO		32
+Beginp
+	ListErase(lIdMNEMO)
+	If DDInterface(DD_OPEN, lTicDico, aDICO, aReponse) <> 0
+    	DDInterface(DD_GETERROR,lTicDico, " ", aREPONSE, aNIVEAUDICO) 
+		MessageBox("Impossible d'ouvrir le Dictionnaire|" & left(aREPONSE), 'Abandon')
+		zoom.OK = 'A'
+	ElsIf DDInterface(DD_FILEBEGIN, lTicDico, , aREPONSE) = 0
+		aENRLST = HmpSeek(aREPONSE, "Nom")
+		If aENRLST <> " "
+			aENRLST = left(aENRLST) & ";" & aENRLST
+			ListInsert(lIdMNEMO, aENRLST)
+		EndIf
+		Loop DDInterface(DD_FILENEXT, lTicDico, , aREPONSE) = 0 
+			aENRLST = HmpSeek(aREPONSE, "Nom")
+			If aENRLST <> " "
+				aENRLST = left(aENRLST) & ";" & aENRLST
+				ListInsert(lIdMNEMO, aENRLST)
+			EndIf
+		EndLoop
+	EndIf
+Endp
+
+;*
+Procedure COG_PRECH_INDEXPRIMAIRE
+1	xSt		X = 1
+1	nNbCrit	4,0
+Beginp
+	If (xSt := DDInterface(DD_KEYBEGIN, lTicDico, , aREPONSE, 2)) = 0
+		If not HmpSeek(aREPONSE, "FlagClePrimaire") = True
+			Repeat
+				xSt = DDInterface(DD_KEYNEXT, lTicDico, , aREPONSE)
+			Until (xSt = 0 and HmpSeek(aREPONSE, "FlagClePrimaire") = True) Or xSt <> 0
+		EndIf
+	EndIf
+	If xSt = 0
+		cog_paratables.indexprim = "  <LNKEY>" & HmpSeek(aReponse, "CleOuNomDeCle")
+		If DDInterface(DD_DATAKEYBEGIN, lTicDico, , aREPONSE) = 0
+			nNbCrit = 1
+			cog_paratables.indexprim &= "<KCrit_" & nospaces(nNbCrit) & ">" & HmpSeek(aReponse, "Nom")
+			Loop DDInterface(DD_DATAKEYNEXT, lTicDico, , aREPONSE) = 0
+				nNbCrit++
+				cog_paratables.indexprim &= "<KCrit_" & nospaces(nNbCrit) & ">" & HmpSeek(aReponse, "Nom")
+			EndLoop
+			cog_paratables.indexprim &= "<KNbCrit>" & nospaces(nNbCrit)
+		EndIf
+	EndIf
+	
+Endp
+
+;*
+Public Procedure	COG_PRECH_INFO_ENREG
+Beginp
+	If DDInterface(DD_FileFIND, lTicDico, cog_paratables.mnemo, aREPONSE) = 0
+		cog_paratables.FicMnemo = HmpSeek(aREPONSE, "NomFichier")
+		If DDInterface(DD_TABLEFIND, lTicDico, cog_paratables.enreg, aREPONSE) = 0
+			cog_paratables.lib	= HmpSeek(aREPONSE, "Libelle")
+			cog_paratables.lgtbl	= HmpSeek(aReponse, "LgTable")
+			COG_PRECH_INDEXPRIMAIRE
+		EndIf
+	EndIf
+Endp
+
+;*
+Public Procedure Cog_Ctrl_Saisie_SepCsv
+Beginp
+	If cog_paratables.modechang = cFormatCsv
+		XmeSetAttribut("cog_sepcsv", AN_VISIBILITE, AV_VISIBLE)
+	Else
+		XmeSetAttribut("cog_sepcsv", AN_VISIBILITE, AV_CACHE)
+	EndIf
+Endp
+
+;*
+;* Procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomDebut																					; Initialisation du zoom
+BeginP																											; ZoomDebut
+	zoom.Titrefixe = "Divalto : Paramétrage des tables à importer"
+
+	; Charge dico
+	Cog_DivImp_Load_Dico
+	cog_paratables.dico = cDAVDIC
+
+	; Charge mnémo
+	lIdMNEMO = ListGetId("COG_MNEMO")
+	COG_PRECH_MNEMO(cDAVDIC)
+
+	; Tables
+	lIdENREG = ListGetId("COG_ENREG")
+	ListErase(lIdENREG)
+
+	; Zones
+	lIdCHAMP = ListGetId("COG_CHAMP")
+	ListErase(lIdCHAMP)
+
+	cog_paratables.typech = 1
+EndP																												; ZoomDebut
+
+;*
+Public Procedure ZoomAbandon																				; Abandon du zoom
+BeginP																											; ZoomAbandon
+	
+EndP																												; ZoomAbandon
+
+;*
+Public Procedure ZoomValidation																			; Validation du zoom
+BeginP																											; ZoomValidation
+	
+EndP																												; ZoomValidation
+
+;*
+Public Procedure ZoomFin																					; Traitements finaux du zoom
+BeginP
+	ListDestroy(lIdMNEMO)
+	ListDestroy(lIdDICO)
+	
+EndP																												; ZoomFin
+
+;*
+;* Procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation																				; Traitements avant l'entrée en création
+1	nIdNum	>cog_echange.dhsd		IdNum
+BeginP																											; ZoomCreation
+
+	If IPRead(Cog_ParDivEch, cog_paratables, 'E', 99999) = 0 and cog_paratables.idnum <> " "
+		nIdNum	= cog_paratables.idnum + 1
+	Else
+		nIdNum = 1
+	EndIf
+
+	cog_paratables					= " "
+	cog_paratables.dico			= cDAVDIC
+	cog_paratables.modimp		= 3
+	cog_paratables.typech		= 1
+	cog_paratables.modechang	= 1
+	cog_paratables.IdNum			= nIdNum
+EndP																												; ZoomCreation
+
+;*
+Public Procedure ZoomDuplication																			; Traitements avant l'entrée en duplication
+BeginP																											; ZoomDuplication
+	
+EndP																												; ZoomDuplication
+
+;*
+Public Procedure ZoomApresCleCreation																	; Génération de la clé en création
+BeginP																											; ZoomApresCleCreation
+EndP																												; ZoomApresCleCreation
+
+;*
+Public Procedure ZoomCreationRes																			; Réservation d'entités complémentaires en création
+BeginP																											; ZoomCreationRes	
+	
+EndP	
+																								; ZoomCreationRes
+
+;*
+Public Procedure ZoomAvantWrite																			; Traitements avant écriture
+BeginP																											; ZoomAvantWrite
+	cog_paratables.ce1		= "2"
+	cog_paratables.UserCr	= system.User
+	cog_paratables.UserCrDh= Time(7)
+EndP																												; ZoomAvantWrite
+
+;*
+Public Procedure ZoomApresCreation																		; Compte-rendu de la création
+BeginP																											; ZoomApresCreation
+	
+EndP																												; ZoomApresCreation
+
+;*
+Public Procedure ZoomModification																		; Traitements avant l'entrée en modification
+
+BeginP																											; ZoomModification
+	
+	aOldLib = cog_paratables.idLib
+
+EndP																												; ZoomModification
+
+;*
+Public Procedure ZoomModificationRes																	; Réservation d'entités complémentaires en modification
+BeginP																											; ZoomModificationRes
+EndP																												; ZoomModificationRes
+
+;*
+Public Procedure ZoomAvantRewrite																		; Traitements avant réécriture
+BeginP																											; ZoomAvantRewrite
+
+	cog_paratables.UserMo	= system.User
+	cog_paratables.UserMoDh= Time(7)
+
+EndP																												; ZoomAvantRewrite
+
+;*
+Public Procedure ZoomApresModification																	; Compte-rendu de la modification
+Record	cog_echange.dhsd	cog_parazones
+BeginP
+																											; ZoomApresModification
+	If zoom.ok = 'O' and aOldLib <> cog_paratables.idLib
+		SetHourGlassCurSor
+		Cog_ParDivEch.KeyValue = cog_paratables.IdNum
+		Loop Iread(Cog_ParDivEch, cog_parazones, "F") = 0 and cog_parazones.idnum = cog_paratables.IdNum
+			cog_parazones.idLib = cog_paratables.idLib
+			IRewrite(Cog_ParDivEch, cog_parazones)
+		EndLoop
+		SetNormalCurSor
+	EndiF
+EndP																												; ZoomApresModification
+
+;*
+Public Procedure ZoomSuppression																			; Traitements avant l'entrée en suppression
+BeginP																											; ZoomSuppression
+
+EndP																												; ZoomSuppression
+
+;*
+Public Procedure ZoomSuppressionRes																		; Réservation d'entités complémentaires en suppression
+BeginP																											; ZoomSuppressionRes
+	
+EndP																												; ZoomSuppressionRes
+
+;*
+Public Procedure ZoomAvantDelete																			; Traitements avant suppression
+BeginP																											; ZoomAvantDelete
+	
+EndP																												; ZoomAvantDelete
+
+;*
+Public Procedure ZoomApresSuppression																	; Compte-rendu de la suppression
+Record	cog_echange.dhsd	cog_parazones
+BeginP																											; ZoomApresSuppression
+
+	If zoom.Ok = 'O'
+		SetHourGlassCurSor
+		Cog_ParDivEch.KeyValue = cog_paratables.IdNum
+		Loop Iread(Cog_ParDivEch, cog_parazones, "F") = 0 and cog_parazones.idnum = cog_paratables.IdNum
+			IDelete(Cog_ParDivEch, cog_parazones)
+		EndLoop
+		SetNormalCurSor
+	EndIf
+EndP																												; ZoomApresSuppression
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsultFiche
+
+BeginP																											; ZoomAvantConsultFiche
+
+	Cog_Ctrl_Saisie_SepCsv
+
+EndP																												; ZoomAvantConsultFiche
+
+
+;*
+Public Procedure ZoomAvantConsultListe
+
+BeginP																											; ZoomAvantConsultListe
+
+
+EndP																												; ZoomAvantConsultListe
+
+;*
+Public Procedure ZoomConsultFiche																		; Traitement après consultation d'une fiche
+BeginP																											; ZoomConsultFiche
+
+		switch Harmony.Key
+			Case K_F6
+				Switch2 cog_paratables.typech
+					Case 1
+						COG_PRUN_PARZONES
+					Case 2
+				EndSwitch
+
+		endswitch
+
+	
+EndP																												; ZoomConsultFiche
+
+;*
+Public Procedure ZoomConsultListe																		; Traitement après consultation des fiches en mode liste
+BeginP																											
+
+		switch Harmony.Key
+			Case K_F6
+				Switch2 cog_paratables.typech
+					Case 1
+						COG_PRUN_PARZONES
+					Case 2
+				EndSwitch
+
+		endswitch
+	
+		Switch2 harmony.DataArret
+		EndSwitch
+EndP																												
+
+;*
+Public Procedure ZoomEnteteTableau
+BeginP
+	
+
+EndP
+
+;*
+Public Procedure ZoomAvantInput																			; Traitement avant entrée clavier
+BeginP																											
+	
+
+EndP																												
+
+;*
+public procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+beginp
+
+	;on ne fait pas l'affectation dans g3xz ici car incompatible avec gestion code adresse
+												
+	switch Harmony.Key
+	
+	case 	Harmony.DataArret = 8002
+		if Harmony.Sourisbout = Right_Button
+		elsif Harmony.Sourisclic = Double_Click
+			Harmony.Retour = Xmenext_Simulation_Touche
+			Harmony.Cplretour = K_F8
+		endif
+
+;	case 	Harmony.DataArret in(9000..9999,11000..65000)				; Appel de zoom  en dernier
+	case 	vsw = K_F8 or Harmony.DataArret in(9000..9999,11000..65000)				; Appel de zoom  en dernier
+
+	endswitch
+
+EndP																												; ZoomArret
+
+;*
+Public Procedure ZoomFiltreAvantValeur																	; Traitement avant la saisie d'une valeur dans la grille des filtres
+BeginP																											; ZoomFiltreAvantValeur
+	
+EndP																												; ZoomFiltreAvantValeur
+
+;*
+Public Procedure ZoomFiltreApresValeur																	; Traitement après la saisie d'une valeur dans la grille des filtres
+BeginP																											; ZoomFiltreApresValeur
+	
+EndP																												; ZoomFiltreApresValeur
+
+;*
+;* Procedures liées à la lecture du fichier
+;*
+
+;*
+Public Procedure ZoomApresCle1																			; Génération de la clé i
+BeginP																											; ZoomApresCle1
+   zoom.Cle 	= [ 'D' cog_paratables.DICO cog_paratables.typech]
+   zoom.Clemin = [ 'D' cog_paratables.DICO cog_paratables.typech $00]
+   zoom.Clemax = [ 'D' cog_paratables.DICO cog_paratables.typech $FF]	
+EndP																												; ZoomApresCle1
+
+;*
+Public Procedure ZoomApresRead1																			; Traitement après lecture clé i
+BeginP																											; ZoomApresRead1
+	
+	
+EndP																												; ZoomApresRead1
+
+;*
+Public Procedure ZoomApresCle2																			; Génération de la clé i
+BeginP																											; ZoomApresCle1
+   zoom.Cle 	= [ 'E' cog_paratables.idnum]
+   zoom.Clemin = [ 'E' $00]
+   zoom.Clemax = [ 'E' $FF]	
+EndP																												; ZoomApresCle1
+
+;*
+Public Procedure ZoomApresRead2																			; Traitement après lecture clé i
+BeginP																											; ZoomApresRead1
+	
+	
+EndP																												; ZoomApresRead1
+
+;*
+;* Procedures d'impression
+;*
+
+;*
+Public Procedure ZoomDebutListe																			; Traitement avant l'impression
+BeginP																											; ZoomDebutListe
+	
+EndP																												; ZoomDebutListe
+
+;*
+Public Procedure ZoomAvantDetail																			; Traitement avant l'impression d'un bloc détail en mode liste
+BeginP																											; ZoomAvantDetail
+	
+EndP																												; ZoomAvantDetail
+
+;*
+Public Procedure ZoomApresDetail																			; Traitement après l'impression d'un bloc détail en mode liste
+BeginP																											; ZoomApresDetail
+	
+EndP																												; ZoomApresDetail
+
+;*
+Public Procedure ZoomAvantBlocFin																		; Traitement avant l'impression du bloc de fin en mode liste
+BeginP																											; ZoomAvantBlocFin
+	
+EndP																												; ZoomAvantBlocFin
+
+;*
+Public Procedure ZoomApresBlocFin																		; Traitement après l'impression du bloc de fin en mode liste
+BeginP																											; ZoomApresBlocFin
+	
+EndP																												; ZoomApresBlocFin
+
+;*
+Public Procedure ZoomFinListe																				; Traitement après l'impression
+BeginP																											; ZoomFinListe
+	
+EndP																												; ZoomFinListe
+

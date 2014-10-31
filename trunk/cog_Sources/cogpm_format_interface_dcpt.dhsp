@@ -1,0 +1,50 @@
+;*
+;*	Module avec les fonctions de formatage pour les zones des tables concernant Divalto compta
+;*
+;06/2011	VR
+
+Module CCTM000.dhop
+Module LcTm000.Dhop
+
+;*
+; Fonction de formatage de zone c3.cpt
+public function char Cog_Format_Cpt(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	8
+beginf
+	Chretour = left(ZoneRec)
+	if length(ZoneRec) < 8		
+		ChRetour = fstring('0',Chretour)
+	endif
+	freturn(Chretour)
+endf
+
+;*
+; Fonction de formatage de zone c5.axeno uniquement si = A
+public function char Cog_Format_Axeno(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	1,0
+beginf
+	Switch ZoneRec
+		Case "A"
+			ChRetour = 1
+		Case "Y"
+			ChRetour = 2
+		Default
+			Chretour = left(ZoneRec)
+	EndSwitch
+	freturn(Chretour)
+endf
+
+;*
+;	Fonction d'initialisation de la zone NomAbr en fonction de la donnée en entrée
+public function char Cog_Format_NomAbr(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	8
+beginf
+	If ZoneRec <> " "
+		ChRetour = Nom_Abrege(ZoneRec)
+	EndIf
+	freturn(ChRetour)
+endf
+

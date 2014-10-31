@@ -1,0 +1,27 @@
+OverWrite gttz400_sql.dhop
+
+include "GTTCZ00.dhsp"			;déclarations communes
+
+Public Hfile	cogfdd.dhsd	Cog_FDirCliente	Cog_FDirCliente_01			
+
+Public Record "cogfdd.dhsd" Cog_DirCliente	Cog_DirCliente_01
+Public Record	GTFDD.dhsd	ENT								; En-tête
+
+;*
+;* procedures 
+;*
+
+;*
+Procedure rechercher_libelle_Fiche
+1	x_st_01	x
+1	t_key_01	255
+beginp
+	Standard.rechercher_libelle_Fiche
+	Cog_FDirCliente_01.Key = GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente") & MZ.DOS & MZ.Etb & ENT.Cog_DirCliente
+	t_key_01 = MZ.DOS & MZ.Etb & ENT.Cog_DirCliente
+	x_st_01 = IRead(Cog_FDirCliente_01,Cog_DirCliente_01,GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente"),t_key_01)
+	If x_st_01 = 0 And Cog_DirCliente_01.Dos = MZ.Dos And Cog_DirCliente_01.Etb = MZ.Etb And Cog_DirCliente_01.Cog_DirClienteCod = ENT.Cog_DirCliente
+	Else
+		Cog_DirCliente_01 = " "
+	Endif	
+endp

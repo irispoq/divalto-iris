@@ -1,0 +1,55 @@
+;*
+;*      Zoom sur code des classes d'Affaire			 Enregistrement T064 de GTFTAB                    
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		TR			6.3a						05.2011	Version initiale en Diva 
+
+OverWrite gttz104_sql.dhop
+
+Include GTTCZ00.dhsp									;déclarations communes de GA
+
+Public RecordSql "gtrstab.dhoq" classeaffaire clasaffaire
+Public RecordSql "gtrstab.dhoq" classeaffaire clasaffaire_sel
+
+Public Record 	gtfdd.dhsd 	T064 					; Table des classes d'affaire
+Public Record	grfdd.dhsd	XZ			GRXZ		; Enregistrement de communication avec le module RT
+
+;*
+;* fonctions et procedures
+;*
+
+;*
+Procedure ZoomCreation
+Beginp
+	Standard.ZoomCreation
+	; YATO 21/08/2014 FE002_CLASSEAFFAIRE : le champ Cog_CotisationMagActive n'est plus dans T064 mais dans COG_UT120
+	;T064.Cog_CotisationMagActive = 1
+Endp		
+
+;*
+procedure ZoomArret 		; à utiliser si note
+beginp
+	Switch Harmony.Key
+	Case K_F11
+		GRXZ.EvtFam = clasaffaire.AfrClas
+		Ping("grxz" , grxz)
+		Zoom_Call(65010,false)
+	Endswitch
+	Standard.ZoomArret
+Endp
+
+;*
+procedure ZoomConsult 	; à utiliser si note
+beginp
+	Switch Harmony.Key
+	Case K_F11
+		GRXZ.EvtFam = clasaffaire.AfrClas
+		Ping("grxz" , grxz)
+		Zoom_Call(65010,false)
+	Endswitch
+	Standard.ZoomConsult
+Endp
+
+

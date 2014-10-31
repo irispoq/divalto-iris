@@ -1,0 +1,48 @@
+<DictionarySql OverWrite='gtrspppce.dhoq' ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL lies à la pièce
+;*
+
+;*
+;*		EntetePiece
+;*
+
+<RecordSql Name=EntetePiece>
+<SELECT>
+	ENT.*
+			
+;* 
+;*   Mouvements		MOUV
+;*
+
+<RecordSql Name=Mouvement>
+<SELECT>
+	MOUV.*
+<WHERE>
+	Case Equal_Ce2(char ce2)
+		MOUV.CE2 = ce2
+	Case FNP_FAE_Non_Traite
+		MOUV.COG_ECRFLAG <> 2
+<ORDERBY>
+	Case Ordre_FNP_FAE
+		MOUV.DOS,
+		MOUV.SENS,
+		MOUV.OP,
+		MOUV.REF,
+		MOUV.TIERS,
+		MOUV.AXE(1),
+		MOUV.AXE(2),
+		MOUV.AXE(3),
+		MOUV.AXE(4),
+		MOUV.BLNO
+	
+;* 
+;*   Ventilations		MVTL
+;*
+
+<RecordSql Name=Ventilation>
+<SELECT>
+	MVTL.* 
+<WHERE>
+	Case Qte_Sup1
+		MVTL.QTE > 1

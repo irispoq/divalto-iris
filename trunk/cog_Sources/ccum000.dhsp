@@ -1,0 +1,174 @@
+SetModuleInfo('$Id: cctm000.dhsp 9150 2010-06-04 08:21:13Z ms $')
+;>xdiva
+;*
+;*		Module fonctions et procédures externes de C3																				cctm000.dhsp
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		mjv		4.1						10.1998	Version initiale en Diva
+;*		hc			5.1						06.2000
+;*		hc						1762		10.08.2001	correction remplace_jockers
+;*		hc			5.3		2386			09.2002	contrôle du type de journal
+;*		hc			5.5		2839		02.02.2004	correction mise à jour plan comptable
+;*		hc			5.6		3226		29.06.2005	ajout fonction mise à jour d'un code axe
+;*		hc			5.6		3227		29.06.2005	interdiction de modifier le code devise par la fonction mise à jour plan comptable
+;*		fh			5.6c		3689		18.07.2006	ajout fonctions contrôle et recherche d'un tableau de gestion
+;*		jlsi		5.6c		3731		11.09.2006	Maj gestion confidentialité axes
+
+OverWrite	cctm000.dhop
+
+
+;*
+;*		Déclarations
+;*
+
+extern	hfile		CCFDD.dhsd	CCFECR	CCFECR		OpenOnUse	; écritures
+extern	hfile		CCFDD.dhsd	CCFJCA	CCFJCA		OpenOnUse	; intitulés journal compte axe
+extern	hfile		CCFDD.dhsd	CCFTAB	CCFTAB		OpenOnUse	; tables
+extern	hfile		CCFDD.dhsd	CCFTG		CCFTG			OpenOnUse	; tableaux de gestion
+extern	hfile		CCFDD.dhsd	CCFDOS	CCFDOS		OpenOnUse	; dossiers
+
+extern	record	A5DD.dhsd		MUSER					; utilisateur
+public	record	A5DD.dhsd		MZ						; communication entre programmes
+
+extern	record	CCFDD.dhsd	C3						; intitulé de compte
+extern	record	CCFDD.dhsd	C4						; paramètres de journal
+extern	record	CCFDD.dhsd	C5						; intitulé d'axe
+extern	record	CCFDD.dhsd	CA						; dossier, paramètres généraux
+extern	record	CCFDD.dhsd	CB						; dossier, dates de clôture
+extern	record	CCFDD.dhsd	CZ						; enregistrement expert
+extern	record	CCFDD.dhsd	CETS					; établissement
+extern	record	CCFDD.dhsd	C3ETS					; relation compte/établissement
+extern	record	CCFDD.dhsd	C5ETS					; relation axe/établissement
+extern	record	CCFDD.dhsd	CTGENT				; en-tête tableau de gestion
+
+extern	record	CCFDD.dhsd	H1						; comptes abrégés
+extern	record	CCFDD.dhsd	H2						; libellés abrégés
+extern	record	CCFDD.dhsd	H3						; clés de répartition
+extern	record	CCFDD.dhsd	H3E					; entete clés de répartition
+extern	record	CCFDD.dhsd	H4						; abonnements
+extern	record	CCFDD.dhsd	H5						; Libéllé des codes natures d'abonnements
+extern	record	CCFDD.dhsd	H6						; méthodes de calcul dates de banque
+extern	record	CCFDD.dhsd	H7						; modèles
+extern	record	CCFDD.dhsd	H8						; types de règlement
+extern	record	CCFDD.dhsd	H9						; textes de relevé
+extern	record	CCFDD.dhsd	HC						; Natures de paiement
+
+extern	record	CCFDD.dhsd	XL			C3XL		; sélections xql
+extern	record	CCFDD.dhsd	XQ			C3XQ		; paramètres job queue
+extern	record	CCFDD.dhsd	XZ			C3XZ		; parametre zoom diva
+extern	record	CCFDD.dhsd	XT			C3XT		; identifiants
+extern	record	CCFDD.dhsd	XE			C3XE		; gestion du filtre établissement
+
+extern	record	GTFDD.dhsd	T007					; table des libellés devises
+
+
+module	a5pm000.dhop										; gestion des notes
+module	a5pmfiltre.dhop									; gestion des filtres
+module	ccpm000.dhop										; fonctions de base
+module	ccpmfic.dhop										; fonctions sur les bases
+module	gttm000.dhop										; fonctions publiques
+
+;*
+;*		Define
+;*
+
+; Listes des établissements utilisés par les programmes
+Define idLstEtb	= C3XT.IDTABLEAU(40)					; identifiant de la liste des établissements non confidentiels du programme
+Define idLstEtbC	= C3XT.IDTABLEAU(41)					; identifiant de la liste des établissements confidentiels du programme
+
+;*
+;*		Constantes locales
+;*
+
+const	nom_liste_EtablissementA	=	"Liste_Etb"					; nom de la liste qui contient les établissement autorisés
+const	nom_liste_EtablissementC	=	"Liste_Etbc"				; nom de la liste qui contient les établissement confidentiels
+const	nom_liste_CleRepartition	=	"Liste_CleRepartition"	; nom de la liste des clés de répartition pour detection reférence circulaire
+
+;*
+Function int MAJ_Axe_Analytique(axeno, axe, ori, lib, test)
+
+; Mise à jour d'un plan analytique :
+; - Si aucun paramètre n'est fourni, utilise le contenu de l'enregistrement C5 courant.
+; - La fonction peut créer ou modifier un intitulé d'axe, réservé pendant la mise à jour.
+
+; Le code axe est supposé correct au niveau de sa syntaxe (aucun contrôle n'est effectué)
+
+; 0		ok
+; 1		code axe réservé
+; 2		erreur de cohérence dans l'enregistrement C5 fourni
+; 3		fichier plein
+
+1			axeno		>ccfdd.dhsd	axeno		= ' '		; numéro d'axe
+1			axe		>ccfdd.dhsd	axe		= ' '		; code axe
+1			ori		>CCFDD.dhsd	USERCRORI			; identifiant programme d'origine
+1			lib		>CCFDD.dhsd	LIB		= ' '		; libellé
+1			test						1,0		= false	; = true pour uniquement tester la mise à jour sans la faire (utilisé par le programme d'intégration)
+
+			record	CCFDD.dhsd	C5			newC5		; axe à mettre à jour
+
+1			i							2,0					; indice sur pertb
+1			j							2,0					; indice sur pertb
+1			r							2,0		= 0		; retour des fonctions write_c5 et rewrite_c5
+1			w							1,0					; flag write ou rewrite pour copie_newc5				;2839
+
+beginf	; maj_axe_analytique
+	
+	if axeno <> ' ' or axe <> ' ' or lib <> ' '
+		newC5 = ' '
+	else
+		if C5 = ' '	|	freturn(2)				|	endif
+		newC5 = C5
+	endif
+
+	if axeno = ' '	|	axeno = newC5.axeno	|	endif
+	if axeno = ' '	|	freturn(2)				|	endif
+
+	if axe = ' '	|	axe = newC5.AXE		|	endif
+	if axe = ' '	|	freturn(2)				|	endif
+
+	newC5.dos	= MZ.DOS
+	newC5.axeno	= axeno
+	newC5.axe	= axe
+	newC5.EtbSais = 3
+
+	if lib <> ' '	|	newC5.lib = lib		|	endif
+
+	if not test and SRes_Axe(axeno, axe, 0)	|	freturn(1)	|	endif
+
+	if hseek(CCFJCA, C5, [ 'G' MZ.DOS axeno axe ], 'F')	; le code axe n'existe pas encore
+
+		C5.AXETYP	= 1
+		C5.NOTE		= 0
+		C5.CENOTE	= 1
+
+		for i = 1 to index(C3.PERTB(), 1)
+		for j = 1 to index(C3.PERTB(), 2)
+			C5.PERTB(i, j) = newC5.pertb(i, j)
+		next
+		next
+
+		Copie_NewC5(newC5)
+		if not test
+			r = Write_C5(ori, false)
+			Lib_Axe(axeno, axe)
+		endif
+		freturn(r)
+
+	else															; mise à jour d'un compte existant
+
+		Copie_NewC5(newC5)
+		if not test
+			r = Rewrite_C5(mod = ori)
+			Lib_Axe(axeno, axe)
+		endif
+		freturn(r)
+
+	endif
+
+
+label	Copie_NewC5
+return
+
+endf		; maj_axe_analytique

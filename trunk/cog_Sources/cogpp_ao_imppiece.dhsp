@@ -1,0 +1,1303 @@
+;*
+;* Intégration de pièce
+;*
+
+Include	"gttc000.dhsp"
+Module	"yoffice.dhop"
+Module	"cctm000.dhop"
+Module	"gtpmpce.dhop"
+Module	"gttmpce.dhop"
+
+			HTmpFile	"gtfdd.dhsd"	gtfi		gtfi		DeleteOnExit
+Public	HFile		"gtfdd.dhsd"	gtfdos	gtfdos
+Public	HFile		"gtfdd.dhsd"	gtfpcf	gtfpcf
+Public	HFile		"gtfdd.dhsd"	gtfat		gtfat
+Public	HFile		"gtfdd.dhsd"	gtfent	gtfent
+
+hfile						a5dd.dhsd   a5flog	a5flog
+
+Public	Record	"a5dd.dhsd"		mz			mz
+Public	Record	"ccfdd.dhsd"	ca			ca
+Public	Record	"gtfdd.dhsd"	ets		ets_test
+Public	Record	"gtfdd.dhsd"	cli		cli_test
+Public	Record	"gtfdd.dhsd"	vrp		vrp_test
+Public	Record	"gtfdd.dhsd"	art		art_test
+Public	Record	"gtfdd.dhsd"	sart		sart_test
+Public	Record   "gtfdd.dhsd"	ent		ent_test
+Public	Record	"gtfdd.dhsd"	soc		soc
+Public	Record	"gtfdd.dhsd"	ipar		ipar
+Public	Record   "gtfdd.dhsd"	mouv		mouv
+Public	Record   "gtfdd.dhsd"	mvtl		mvtl
+Public	Record   "gtfdd.dhsd"	ent		ent
+Public	Record	"gtfdd.dhsd"	itxt		itxt
+Public	Record	"gtfdd.dhsd"	xz			g3xz
+Public	Record	"gtfdd.dhsd"	xq			g3xq
+Public	Record   "gtfdd.dhsd"	ent		xlent
+Public	Record   "gtfdd.dhsd"	ent		xlent_prec
+Public	Record   "gtfdd.dhsd"	mouv		xlmouv
+Public	Record   "gtfdd.dhsd"	mouv		xlmouv_prec
+Public	Record   "gtfdd.dhsd"	mvtl		xlmvtl
+Public	Record	"gtfdd.dhsd"	g7			g7
+Public	Record	"Gtfdd.Dhsd"	Art		Art
+
+Const		C_Prix_Auto					= 1							; Recherche complète
+Const		C_Prix_Promotion_Saisi	= 2							; Code promo saisi
+Const		C_Prix_Standard_Saisi	= 3							; Code standard saisi
+Const		C_Prix_Manuel				= 4							; Prix manuel
+
+Const		C_Rem_Auto					= 1							; Recherche complète
+Const		C_Rem_Promotion_Saisi	= 2							; Code promo saisi
+Const		C_Rem_Standard_Saisi		= 3							; Code standard saisi
+Const		C_Rem_Manuelle				= 4							; Remise manuel
+
+Const		C_Com_Auto					= 1
+Const		C_Com_Manuelle				= 2
+
+Const		MaxLgEnt						= 20
+
+1	IdToolBar		L
+1	ww					1000
+	2	wwNote		>gtfdd.dhsd	Texte
+1	Fini				B
+1	Classeur			256
+1	Feuille			256
+1	Erreur			B
+1	Ligne				1000												; 215
+1	TexteLigne		20000
+1	PiedMt			12*3
+1	iTab				228
+	2	iFaCe2		4,0
+	2	iTiers		4,0
+	2	iAdrTiersBL	4,0
+	2	iPiRef		4,0
+	2	iPiNoTiers	4,0
+	2	iPiNo			4,0
+	2	iPiDt			4,0
+	2	iOp			4,0
+	2	iDev			4,0
+	2	iMarche		4,0
+	2	iProjet		4,0
+	2	iSalcod		4,0
+	2	iNote			4,0
+	2	iDelDemDt	4,0
+	2	iDelAccDt	4,0
+	2	iDelRepDt	4,0
+	2	iDepo			4,0
+	2	iEtb			4,0
+	2	iRef			4,0
+	2	iSRef1		4,0
+	2	iSRef2		4,0
+	2	iDes			4,0
+	2  iQte			4,0
+	2	iPub			4,0
+	2	iRem1			4,0
+	2	iRem2			4,0
+	2	iRem3			4,0
+	2	iCom1			4,0
+	2	iCom2			4,0
+	2	iCom3			4,0
+	2	iPCod1		4,0
+	2	iPCod2		4,0
+	2	iPCod3		4,0
+	2	iPCod4		4,0
+	2	iPCod5		4,0
+	2	iMvCod		4,0
+	2	iSerie		4,0
+	2	iTiersStock	4,0
+	2	iStDt			4,0
+	2	iNSt			4,0
+	2	iLieu			4,0
+	2	iRemPied		4,0
+	2	iEscompte	4,0
+	2	iDeeePu		4,0
+	2	iPiedMt		4,0*3
+	2	iRepr1		4,0
+	2	iRepr2		4,0
+	2	iRepr3		4,0
+	2	iAxe			4,0*4
+	2	iTxtLig		4,0
+	2	iVenun		4,0
+	2	iErreur		4,0
+
+1	nCptPce			8,0 = 0
+1	bClose			B = False
+
+Define	C_Page_Trace		= 2
+Define	C_Page_Selection	= 3
+Define	C_Page_Traitement	= 4
+
+;*	; YATO 15/09/2014 : FE006_CdeRenouvellement
+procedure Cog_GenererDecomposition(grref,qte)
+record		*					htdf		gtfi_p
+1	grref		>	gtfdd.dhsd	grref
+1	qte		>	gtfdd.dhsd	cdqte
+
+hfile			gtfdd.dhsd	gtfat				gtfat_loc
+
+record		gtfdd.dhsd	dar			dar_loc
+record		gtfdd.dhsd	mouv			imouv
+
+1	cdslg		>	gtfdd.dhsd	cdslg	= 0
+
+beginp
+
+	gtfat_loc.KeyValue	= mz.Dos & GrRef
+	loop not iread(gtfat_loc,dar_loc,"N") and gtfat_loc.KeyValue <= mz.Dos & GrRef & $FF
+
+		cdslg++
+
+		mouv					= ""
+		mouv.Ce1				= "C"
+		mouv.Ce2				= "1"
+		mouv.GrRef 			= dar_loc.GrRefCo
+		If dar_loc.QteTyp = 2							; Fixe
+			Switch mz.PiCod
+				Case 1
+					mouv.DvQte = dar_loc.Qte
+				Case 2
+					mouv.CdQte = dar_loc.Qte
+				Case VSw In (3,4)
+					mouv.BlQte = dar_loc.Qte
+				 	mouv.FaQte = dar_loc.Qte
+			EndSwitch
+		Else
+			Switch mz.PiCod								; Proportionnel
+				Case 1
+					mouv.DvQte = qte * dar_loc.Qte
+				Case 2
+					mouv.CdQte = qte * dar_loc.Qte
+				Case VSw In (3,4)
+					mouv.BlQte = qte * dar_loc.Qte
+				 	mouv.FaQte = qte * dar_loc.Qte
+			EndSwitch
+		EndIf
+		mouv.DecCod	= 1
+		mouv.MvCod	= dar_loc.MvCod
+		mouv.QteTyp	= dar_loc.QteTyp
+
+		PingLocal("Cog_Art",Art)
+		If Seek_Art(dar_loc.Ref) = 0
+			if art.LgTyp = 2			; Décomposition liée, il faut donner un numéro de sous-ligne
+				mouv.CdSlg	= cdslg
+			endif
+
+			If Art.PvCod = 1			; Option "Recherche le prix de vente pour l'article composé" à Oui -> Pas de prix sur les composants
+				Mouv.Pub = 0
+				mouv.Pcod(1) = 4
+			Else
+				mouv.Pcod(1) = 1		; Option "Recherche le prix de vente pour l'article composé" à Non -> Prix sur les composants
+			EndIf
+
+		EndIf
+		PingLocalReceiveAndDelete("Cog_Art",Art)
+	
+		mouv.Pcod(2)	= 1
+		mouv.Pcod(3)	= 1
+		mouv.Pcod(4)	= 1
+		mouv.Pcod(5)	= 1
+		mouv.Axe(1) 	= xlmouv.Axe(1)
+		mouv.Axe(2) 	= xlmouv.Axe(2)
+		mouv.Axe(3) 	= xlmouv.Axe(3)
+		mouv.Axe(4) 	= xlmouv.Axe(4)
+
+		hwrite(gtfi,mouv)
+	
+	endloop
+
+endp
+
+;* Ecriture dans le livre de bord
+procedure Cog_EcritureLivreDeBord(txt,prg,applic,nivalerte,dos)
+; Procédure permettant d'écrire direcetment dans le livre de bord de Divalto
+; In = Texte à écrire puis optionnel : prog, application, niveau d'alerte et dossier
+
+1	txt			>	a5dd.dhsd		logtxt
+1	prg			>	a5dd.dhsd		prg			= ""
+1	applic		>	a5dd.dhsd		applic		= "DAV"
+1	nivalerte	>	a5dd.dhsd		nivalerte	= 2
+1	dos			>	a5dd.dhsd		dos			= ""
+
+record	a5dd.dhsd	m8									; livre de bord
+
+beginp
+
+	if dos = ""
+		dos	= mz.dos
+	endif
+
+	if prg = ""
+		prg	= system.znomprog
+	endif
+	
+	m8 				= ""
+	m8.applic		= applic
+	m8.nivalerte	= nivalerte
+	m8.logdh			= time(7)
+	m8.user			= system.user
+	m8.tache			= system.tache
+	m8.prg			= prg
+	m8.dos			= dos
+	m8.logtxt		= txt
+	iwrite(a5flog,m8)
+
+endp
+;*
+Procedure Lecture_Cellule(Lig,Col,&Valeur)
+	1	Lig		6,0
+	1	Col		3,0
+	1	Valeur	A
+BeginP
+	If Col = 0 Or Lig = 0
+		Valeur = " "
+	Else
+		Office_Read(Lig,Col,Valeur)
+	EndIf
+EndP
+
+;*
+Procedure EcrireErreur(Lig,Col,ValeurA)
+	1	Lig			6,0
+	1	Col			3,0
+	1	ValeurA		60
+	1	ValeurCell	8192
+BeginP
+	Lecture_Cellule(Lig,Col,ValeurCell)
+	If ValeurCell <> " "
+		ValeurCell = ValeurCell && " || " &  Left(ValeurA)
+	Else
+		ValeurCell = ValeurA
+	EndIf
+	Office_WriteFormat(Lig,Col,ValeurCell,"Texte")
+	Erreur = True
+EndP
+
+;*
+Procedure Creation_Texte(TxtTyp,Texte)
+	1	TxtTyp	>gtfdd.dhsd	TxtTyp
+	1	Texte		>gtfdd.dhsd	Texte
+BeginP
+	itxt = " "
+	itxt.Ce1 = "T"
+	itxt.TxtNat = "1"		; Texte
+	itxt.TxtTyp = TxtTyp
+	itxt.TxtTrait = "1"	; Nouveau
+	itxt.Texte = Texte
+	HWrite(gtfi,itxt)
+EndP
+
+;*
+Function Int Creation_Entete
+BeginF
+	ipar = " "
+	ipar.Ce1 = "I"
+	ipar.Trait = "C"
+	ipar.Dos = mz.Dos
+	ipar.Etb = xlent.Etb
+ 	ipar.PiCod = mz.PiCod
+	ipar.TiCod = mz.TiCod
+	ipar.PiNo = xlmouv.FaNo
+	HWrite(gtfi,ipar)
+	Init ent = " "
+	ent.Ce1 = "A"
+	
+	; YATO 15/09/2014 : FE006_CdeRenouvellement
+	If g7.Choix(3) = 2
+		Ent.Ce4 = "7"		; Status provisoire
+	Else
+		ent.Ce4 = "1"
+	EndIf
+
+	If mz.PiCod = 4 ; Facture
+		ent.Ce2 = xlent.Ce2
+	EndIf
+	ent.Dos = mz.Dos
+	ent.Etb = xlent.Etb
+	ent.Op = xlmouv.Op
+	ent.PiDt = xlmouv.FaDt
+	If ent.PiDt = " "
+		ent.PiDt = Today
+	EndIf
+	ent.Tiers = xlmouv.Tiers
+	ent.AdrTiers(3) = xlent.AdrTiers(3)
+	ent.Dev = xlent.Dev
+	ent.PiNo = xlmouv.FaNo
+	ent.Depo = xlmouv.Depo
+	ent.PiRef = xlent.PiRef
+	ent.PiNoTiers = xlent.PiNoTiers
+	ent.DelDemDt = xlent.DelDemDt
+	ent.DelAccDt = xlent.DelAccDt
+	ent.DelRepDt = xlent.DelRepDt
+	ent.Rem1 = xlent.Rem1
+	ent.RemTyp1 = 1
+	ent.Repr(1) = xlmouv.Repr(1)
+	ent.ComP(1) = xlmouv.ComP(1)
+	ent.Repr(2) = xlmouv.Repr(2)
+	ent.ComP(2) = xlmouv.ComP(2)
+	ent.Repr(3) = xlmouv.Repr(3)
+	ent.ComP(3) = xlmouv.ComP(3)
+	ent.EscP = xlent.EscP
+	ent.PorCod = xlent.PorCod
+	ent.PorFrFl = xlent.PorFrFl
+	ent.PiedMt(1) = xlent.PiedMt(1)
+	ent.PiedMt(2) = xlent.PiedMt(2)
+	ent.PiedMt(3) = xlent.PiedMt(3)
+
+	; Ajout YLEF spé U GIE
+	ENT.Projet	=	xlmouv.Projet
+	ENT.Marche	=	xlmouv.Marche
+	ENT.SalCod	=	xlent.SalCod
+
+	HWrite(gtfi,ent) 					
+	If wwNote <> " "
+		Creation_Texte("1",wwNote)
+	EndIf
+	FReturn(1)
+EndF
+																	  
+;*
+Procedure Creation_Texte_Ligne(Texte)
+	1			Texte		20000
+	1			Longueur	L
+BeginP
+	If Mid(Texte,1,1) = '"'
+		Texte = Mid(Texte,2)
+	EndIf
+	If Mid(Texte,Length(Texte),1) = '"'
+		Texte = Left(Texte,Length(Texte) - 1)
+	EndIf
+	Longueur = DataSize(itxt.Texte)
+	Loop Texte <> " "
+		itxt = " "
+		itxt.Ce1 = "T"
+		itxt.TxtNat = "1"		; Texte
+		itxt.TxtTyp = "5"
+		itxt.TxtTrait = "1"	; Nouveau
+		Loop Mid(Texte,Longueur,1) <> " " And Longueur > 0
+			Longueur--
+		EndLoop
+		If Longueur = 0
+			Longueur = DataSize(itxt.Texte)
+			itxt.Texte = Mid(Texte,1,Longueur)
+		Else
+			itxt.Texte = Mid(Texte,1,Longueur - 1)
+		EndIf
+		Texte = Mid(Texte,Longueur + 1)
+		HWrite(gtfi,itxt)
+	EndLoop
+EndP
+
+;*
+Procedure Creation_Ligne(Texte)
+	1	Texte		20000
+BeginP
+  	;* mouv
+	mouv = " "
+	mouv.Ce1 = "C"
+	mouv.Ce2 = 1
+	mouv.Depo = xlmouv.Depo
+	mouv.Op = xlmouv.Op
+	mouv.Ref = xlmouv.Ref
+	mouv.SRef1 = xlmouv.SRef1
+	mouv.SRef2 = xlmouv.SRef2
+	mouv.Des = xlmouv.Des
+	mouv.Pub = xlmouv.Pub
+	mouv.Rem(1) = xlmouv.Rem(1)
+	mouv.Rem(2) = xlmouv.Rem(2)
+	mouv.Rem(3) = xlmouv.Rem(3)
+	mouv.ComP(1) = xlmouv.ComP(1)
+	mouv.PCod(1) = xlmouv.PCod(1)
+	mouv.PCod(2) = xlmouv.PCod(2)
+	mouv.PCod(3) = xlmouv.PCod(3)
+	mouv.PCod(4) = xlmouv.PCod(4)
+	mouv.PCod(5) = xlmouv.PCod(5)
+	mouv.DeeePu = xlmouv.DeeePu
+	mouv.Repr(1) = xlmouv.Repr(1)
+	mouv.ComP(1) = xlmouv.ComP(1)
+	mouv.Repr(2) = xlmouv.Repr(2)
+	mouv.ComP(2) = xlmouv.ComP(2)
+	mouv.Repr(3) = xlmouv.Repr(3)
+	mouv.ComP(3) = xlmouv.ComP(3)
+	Switch mz.PiCod
+		Case 1
+			mouv.DvQte = xlmouv.FaQte
+			mouv.DvDt = xlmouv.FaDt
+		Case 2
+			mouv.CdQte = xlmouv.FaQte
+			mouv.CdDt = xlmouv.FaDt
+		Case VSw In (3,4)
+			mouv.BlQte = xlmouv.FaQte
+			mouv.BlDt = xlmouv.FaDt
+			mouv.FaQte = xlmouv.FaQte
+			mouv.FaDt = xlmouv.FaDt
+	EndSwitch
+	mouv.MvCod = xlmouv.MvCod
+	mouv.Axe(1) = xlmouv.Axe(1)
+	mouv.Axe(2) = xlmouv.Axe(2)
+	mouv.Axe(3) = xlmouv.Axe(3)
+	mouv.Axe(4) = xlmouv.Axe(4)
+
+	; Ajout YLEF spé U GIE
+	mouv.Projet = xlmouv.Projet
+	mouv.Marche = xlmouv.Marche
+
+	HWrite(gtfi,mouv)
+	If Texte <> " "
+		Creation_Texte_Ligne(Texte)
+	EndIf
+	If xlmvtl.Serie <> " " Or xlmvtl.Lieu <> " " Or IsDate(xlmvtl.StDt) Or xlmvtl.TiersStock <> " "
+		mvtl = " "
+		mvtl.Ce1 = "V"
+		mvtl.Serie = xlmvtl.Serie
+		mvtl.TiersStock = xlmvtl.TiersStock
+		mvtl.Cr = xlmouv.Pub
+		mvtl.Qte = xlmouv.FaQte
+		mvtl.Lieu = xlmvtl.Lieu
+		mvtl.StDt = xlmvtl.StDt
+		HWrite (gtfi,mvtl)
+	EndIf
+
+	; YATO 15/09/2014 : FE006_CdeRenouvellement	
+	Cog_GenererDecomposition(XlMouv.GrRef,XlMouv.FaQte)
+	
+EndP
+
+;*							
+Procedure Integration_GTFI
+Record	A5dd.dhsd	M2
+
+1	ResultatHMP			S
+1	param					S
+1	valeur				S
+1	nPino					>Gtfdd.dhsd	Pino
+BeginP
+	Tunnel_Integration_Piece(gtfi.Name, True, Desactiver_MAJWMS=TRUE)
+	If PongReceive('Resultat', ResultatHMP) = 0
+		loop HmpRead(ResultatHMP, param, valeur) = 0 		
+			If param = "PIECE"
+				nPino = HmpSeek(valeur, "PINO")
+				Cog_EcritureLivreDeBord("  Pièce n° " & nospaces(nPino) & " générée (Ticod = " & mz.TiCod & " Picod = " & mz.PiCod & ")")
+				nCptPce++
+			EndIf
+		endloop
+	EndIf
+EndP
+
+;*
+Function Int Recherche_Mot_Cle_Piece
+	1	Col		4,0
+	1	LgEnt		9,0
+BeginF
+	Col = 1
+	LgEnt = 1
+	Ligne = " "
+	Repeat
+		LgEnt++
+		Lecture_Cellule(LgEnt,Col,Ligne)
+	Until LgEnt >= MaxLgEnt Or Ligne <> " "
+	If LgEnt >= MaxLgEnt And Ligne = " "
+		LgEnt  = 0
+		MessageBox("Entêtes de colonnes non trouvées |dans les " & ToString(MaxLgEnt) & " premières lignes !","Alerte",MB_ICONSTOP)
+	Else
+		Init iTab = " "
+		For Col = 1 To 100
+			Lecture_Cellule(LgEnt,Col,Ligne)
+			Ligne = FString("U",Ligne)
+			Switch Ligne
+				Case "DEPO"			| iDepo			= Col
+				Case "ETB"			| iEtb			= Col
+				Case "TIERS"		| iTiers			= Col
+				Case "ADRTIERSBL"	| iAdrTiersBL	= Col
+				Case "PIDT"			| iPiDt			= Col
+				Case "PIREF"		| iPiRef			= Col
+				Case "OP"			| iOp				= Col
+				Case "PINO"			| iPiNo			= Col
+				Case "FACE2"		| iFaCe2			= Col
+				Case "REF"			| iRef			= Col
+				Case "SREF1"		| iSRef1			= Col
+				Case "SREF2"		| iSRef2			= Col
+				Case "DES"			| iDes			= Col
+				Case "MVCOD"		| iMvCod			= Col
+				Case "QTE"			| iQte			= Col
+				Case "PUB"			| iPub			= Col
+				Case "REM1"			| iRem1			= Col
+				Case "REM2"			| iRem2			= Col
+				Case "REM3"			| iRem3			= Col
+				Case "PCOD1"		| iPCod1			= Col
+				Case "PCOD2"		| iPCod2			= Col
+				Case "PCOD3"		| iPCod3			= Col
+				Case "PCOD4"		| iPCod4			= Col
+				Case "PCOD5"		| iPCod5			= Col
+				Case "COM1"			| iCom1			= Col
+				Case "COM2"			| iCom2			= Col
+				Case "COM3"			| iCom3			= Col
+				Case "REPR1"		| iRepr1			= Col
+				Case "REPR2"		| iRepr2			= Col
+				Case "REPR3"		| iRepr3			= Col
+				Case "NOTE"			| iNote			= Col
+				Case "DELDEMDT"	| iDelDemDt		= Col
+				Case "DELACCDT"	| iDelAccDt		= Col
+				Case "DELREPDT"	| iDelRepDt		= Col
+				Case "SERIE"		| iSerie			= Col
+				Case "TIERSSTOCK"	| iTiersStock	= Col
+				Case "NST"			| iNSt			= Col
+				Case "STDT"			| iStDt			= Col
+				Case "LIEU"			| iLieu			= Col
+				Case "PINOTIERS"	| iPiNoTiers	= Col
+				Case "DEV"			| iDev			= Col
+				Case "REMPIED"		| iRemPied		= Col
+				Case "ESCOMPTE"	| iEscompte		= Col
+				Case "DEEEPU"		| iDeeePu		= Col
+				Case "PIEDMT1"		| iPiedMt(1)	= Col
+				Case "PIEDMT2"		| iPiedMt(2)	= Col
+				Case "PIEDMT3"		| iPiedMt(3)	= Col
+				Case "AXE1"			| iAxe(1)		= Col
+				Case "AXE2"			| iAxe(2)		= Col
+				Case "AXE3"			| iAxe(3)		= Col
+				Case "AXE4"			| iAxe(4)		= Col
+				Case "TXTLIG"		| iTxtLig		= Col
+				Case "VENUN"		| iVenun			= Col
+				Case "ERREUR"		| iErreur		= Col
+
+				; Ajout YLEF spé UGIE
+				Case "PROJET"		| iProjet		= Col
+				Case "MARCHE"		| iMarche		= Col
+				Case "SALCOD"		| iSalcod		= Col
+
+				Default
+					If Ligne <> " "
+						MessageBox("Entête de colonne " & Left(Ligne) & " inconnue !","Alerte",MB_ICONSTOP)
+						LgEnt = 0
+					EndIf
+			EndSwitch
+			If LgEnt = 0
+				ExitFor
+			EndIf
+		Next
+	EndIf
+	FReturn(LgEnt)
+EndF
+
+;*
+Function Int PieceRupture(NbLg)
+	1	NbLg			>gtfdd.dhsd	FaLg
+BeginF
+	If ToString(xlmouv.FaNo) <> ToString(xlmouv_prec.FaNo)
+		FReturn(True)
+	EndIf
+	If xlmouv.FaNo = 0 And NbLg > 990
+		FReturn(True)
+	EndIf
+	If xlmouv.Tiers <> xlmouv_prec.Tiers
+		FReturn(True)
+	EndIf
+	FReturn(False)
+EndF
+
+;*
+Procedure Traitement
+	1	Flag_Entete					1,0 = 0
+	1	i								2,0
+	1	NbLg			>gtfdd.dhsd	FaLg
+	1	Blanc							X
+	1	Lig							6,0
+	1	Integ							1,0
+BeginP
+	If g7.Choix(1) = Non
+		Cog_EcritureLivreDeBord("Début génération de pièce commerciale par Tableur pour la société " & nospaces(mz.Dos))
+	EndIf
+	Erreur = False
+ 	Integ = 0
+	If bClose = True
+		Fopen(Gtfi, 'P')
+	EndIf
+	HErase(gtfi)
+	XmeDispv(mz.MeCle,1,0)
+	If (Lig := Recherche_Mot_Cle_Piece) = 0
+		PReturn
+	EndIf
+	Init xlmouv_prec = " "
+	Init xlmouv_prec.FaNo = $FF
+	Blanc = 0
+	OpenTrace(C_Page_Trace,C_Page_Selection,C_Page_Traitement)
+	Loop Not Fini
+		Lig++
+		NbLg++
+
+		Init xlent	= " "
+		Init xlmouv	= " "
+		Init xlmvtl	= " "
+		Init ww		= " "
+
+		xlent.Op			= mz.Op
+		xlent.Dev		= soc.Dev
+		xlmouv.Dos		= mz.Dos
+		xlmouv.Depo		= mz.Depo
+		xlmouv.PCod(1)	= C_Prix_Auto
+		xlmouv.PCod(2)	= C_Rem_Auto
+		xlmouv.PCod(3)	= C_Com_Auto
+		xlmouv.PCod(4)	= C_Com_Auto
+		xlmouv.PCod(5)	= C_Com_Auto
+
+		Lecture_Cellule(Lig,iPiNo,Ligne) | xlmouv.FaNo = Ligne
+		If xlmouv.FaNo <> 0 And ISeek(gtfent,ent_test,"I",mz.Dos & mz.TiCod & mz.PiCod & xlmouv.FaNo) = 0
+			EcrireErreur(Lig,iErreur,"Pièce n° " & ToString(xlmouv.FaNo) & " déjà existante.")
+		EndIf
+		Lecture_Cellule(Lig,iRef,Ligne) | xlmouv.Ref = Ligne
+		g7.PiNo = xlmouv.FaNo
+		g7.Lib(1) = xlmouv.Ref
+		g7.Ticket = Lig
+	   Afficher_Selection
+		If xlmouv.Ref = " "
+			Blanc++
+			If Blanc > 3
+				ExitLoop
+			Else
+				RedoLoop
+			EndIf
+		ElsIf ISeek(gtfat,art_test,"A",xlmouv.Dos & xlmouv.Ref) <> 0
+			EcrireErreur(Lig,iErreur,"Article " & Left(xlmouv.Ref) & " inexistant.")
+		EndIf
+		Lecture_Cellule(Lig,iDepo,Ligne) | xlmouv.Depo = Ligne
+		If xlmouv.Depo = " " | xlmouv.Depo = mz.Depo | EndIf
+		If xlmouv.Depo <> " " And Lectab(17,xlmouv.Depo) <> 0
+			EcrireErreur(Lig,iErreur,"Dépot '" & Left(xlmouv.Depo) & "' inconnu.")
+		EndIf
+		If mz.PiCod = 4 And iFaCe2 <> 0
+			Lecture_Cellule(Lig,iFaCe2,Ligne)
+			If Ligne Not In (" ","1","2")
+				EcrireErreur(Lig,iErreur,"Valeur ENTC2 = '" & Left(Ligne) & "' incorrecte.")
+			Else
+				xlent.Ce2 = Ligne
+			EndIf
+		EndIf
+		Lecture_Cellule(Lig,iSRef1,Ligne) | xlmouv.SRef1 = Ligne
+		Lecture_Cellule(Lig,iSRef2,Ligne) | xlmouv.SRef2 = Ligne
+		If ISeek(gtfat,sart_test,"H",xlmouv.Dos & xlmouv.Ref & xlmouv.SRef1 & xlmouv.SRef2) <> 0
+			EcrireErreur(Lig,iErreur,"Sous-Réference '" & Left(xlmouv.SRef1) & "/" & Left(xlmouv.SRef2) & "' inconnue pour '" & xlmouv.Ref & "'.")
+		EndIf
+		Lecture_Cellule(Lig,iDes,Ligne) | xlmouv.Des = Ligne
+		Lecture_Cellule(Lig,iTiers,Ligne) | xlmouv.Tiers = Ligne
+		If ISeek(gtfpcf,cli_test,"A",xlmouv.Dos & xlmouv.Tiers) <> 0
+			EcrireErreur(Lig,iErreur,"Tiers '" & Left(xlmouv.Tiers) & "' inconnu.")
+		EndIf
+		Lecture_Cellule(Lig,iAdrTiersBL,Ligne) | xlent.AdrTiers(3) = Ligne
+		If xlent.AdrTiers(3) <> " " And ISeek(gtfpcf,cli_test,"A",xlmouv.Dos & xlent.AdrTiers(3)) <> 0
+			EcrireErreur(Lig,iErreur,"ADRTIERBL '" & Left(xlent.AdrTiers(3)) & "' inconnu.")
+		EndIf
+		Lecture_Cellule(Lig,iPiDt,Ligne) | xlmouv.FaDt = Ligne
+		If xlmouv.FaDt <> " " And IsDate(xlmouv.FaDt) = 0
+			EcrireErreur(Lig,iErreur,"Format de date PIDT incorrect.")
+		EndIf
+		If iOp <> 0 | Lecture_Cellule(Lig,iOp,Ligne) | xlmouv.Op = Ligne | EndIf
+		If xlmouv.Op <> " " And Lectab(20,xlmouv.Op) <> 0
+			EcrireErreur(Lig,iErreur,"Code opération '" & Left(xlmouv.Op) & "' inconnu.")
+		EndIf
+		Lecture_Cellule(Lig,iRemPied,Ligne) | xlent.Rem1 = Ligne
+		Lecture_Cellule(Lig,iEscompte,Ligne) | xlent.EscP = Ligne
+
+		; YLEF spé U GIE
+		Lecture_Cellule(Lig,iMarche,Ligne) | xlmouv.Marche = Ligne
+		If xlmouv.Marche <> ' ' AND Lectab(34,[MZ.TiCod xlmouv.TIERS xlmouv.MARCHE], 0) <> 0
+			EcrireErreur(Lig,iErreur,"Code marché " & left(xlmouv.Marche) & " inconnu.")
+		EndIf
+
+		Lecture_Cellule(Lig,iProjet,Ligne) | xlmouv.Projet = Ligne
+		If xlmouv.Projet <> ' ' AND MZ.PiCod > 1 AND Controle_Affaire(xlmouv.Projet, 0, xlmouv.TIERS, conf=false,niv=1) <> 0
+			EcrireErreur(Lig,iErreur,"Code projet " & left(xlmouv.Projet) & " inconnu.")
+		ElsIf MZ.PiCod = 1 
+			xlmouv.Projet = " " ; non géré en devis
+		EndIf
+
+		Lecture_Cellule(Lig,iSalcod,Ligne) | xlent.SalCod  = Ligne
+		If xlent.SalCod <> ' ' AND Lectab(37 , xlENT.SALCOD , 0) <> 0
+			EcrireErreur(Lig,iErreur,"Code ADV " & left(xlent.SalCod) & " inconnu.")
+		EndIf
+		; Fin ajout spé U GIE
+
+		For i = 1 To 3
+			Lecture_Cellule(Lig,iPiedMt(i),PiedMt(i))
+			If PiedMt(i) <> " "
+				xlent.PiedMt(i) = PiedMt(i)
+				If mz.TiCod = "C"
+					If Recherche_Pied(soc.PiedNo(i)) = 0
+						xlent.PiedNo(i) = soc.PiedNo(i)
+						If xlent.PiedNo(i) = soc.PiedPcInd
+							xlent.PorCod = 1
+							xlent.PorFrFl = 1
+						EndIf
+					Else
+						EcrireErreur(Lig,iErreur,"Pied de pièce client " & ToString(i) & " non paramétré.")
+					EndIf
+				ElsIf mz.TiCod = "F"
+					If Recherche_Pied(soc.PiedNoFTb(i)) = 0
+						xlent.PiedNo(i) = soc.PiedNoFTb(i)
+						If xlent.PiedNo(i) = soc.PiedPfind
+							xlent.PorCod = 1
+							xlent.PorFrFl = 1
+						EndIf
+					Else
+						EcrireErreur(Lig,iErreur,"Pied de pièce fournisseur " & ToString(i) & " non paramétré.")
+					EndIf
+				ElsIf mz.TiCod = "I"
+					If Recherche_Pied(soc.PiedNoITb(i)) = 0
+						xlent.PiedNo(i) = soc.PiedNoITb(i)
+					Else
+						EcrireErreur(Lig,iErreur,"Pied de pièce interne " & ToString(i) & " non paramétré.")
+					EndIf
+				EndIf
+			Else
+				xlent.PiedNo(i) = 0
+			EndIf
+		Next
+
+		Lecture_Cellule(Lig,iQte,Ligne) | xlmouv.FaQte = Ligne
+		If iMvCod <> 0
+			Lecture_Cellule(Lig,iMvCod,Ligne) | xlmouv.MvCod = Ligne
+			If Ligne <> " " And xlmouv.MvCod Not In (1,2)
+				EcrireErreur(Lig,iErreur,"Valeur MVCOD = '" & Left(xlmouv.MvCod) & "' incorrecte.")
+			EndIf
+		EndIf
+
+		Lecture_Cellule(Lig,iPub,Ligne) | xlmouv.Pub = Ligne
+		If iPCod1 <> 0 | Lecture_Cellule(Lig,iPCod1,Ligne) | xlmouv.PCod(1) = Ligne | EndIf
+		If xlmouv.Pub <> 0 | xlmouv.PCod(1) = C_Prix_Manuel |EndIf
+
+		Lecture_Cellule(Lig,iRem1,Ligne) | xlmouv.Rem(1) = Ligne
+		Lecture_Cellule(Lig,iRem2,Ligne) | xlmouv.Rem(2) = Ligne
+		Lecture_Cellule(Lig,iRem3,Ligne) | xlmouv.Rem(3) = Ligne
+		If iPCod2 <> 0 | Lecture_Cellule(Lig,iPCod2,Ligne) | xlmouv.PCod(2) = Ligne | EndIf
+		If xlmouv.Rem(1) <> 0 Or xlmouv.Rem(2) <> 0 Or xlmouv.Rem(3) <> 0 | xlmouv.PCod(2) = C_Rem_Manuelle | EndIf
+
+		Lecture_Cellule(Lig,iCom1,Ligne) | xlmouv.ComP(1) = Ligne
+		If iPCod3 <> 0 | Lecture_Cellule(Lig,iPCod3,Ligne) | xlmouv.PCod(3) = Ligne | EndIf
+		If xlmouv.ComP(1) <> 0 | xlmouv.PCod(3) = 2 | Else | xlmouv.PCod(3) = C_Com_Manuelle | EndIf
+
+		Lecture_Cellule(Lig,iCom2,Ligne) | xlmouv.ComP(2) = Ligne
+		If iPCod4 <> 0 | Lecture_Cellule(Lig,iPCod4,Ligne) | xlmouv.PCod(4) = Ligne | EndIf
+		If xlmouv.ComP(2) <> 0 | xlmouv.PCod(4) = 2 | Else | xlmouv.PCod(4) = C_Com_Manuelle | EndIf
+		
+		Lecture_Cellule(Lig,iCom3,Ligne) | xlmouv.ComP(3) = Ligne
+		If iPCod5 <> 0 | Lecture_Cellule(Lig,iPCod5,Ligne) | xlmouv.PCod(5) = Ligne | EndIf
+		If xlmouv.ComP(3) <> 0 | xlmouv.PCod(5) = 2 | Else | xlmouv.PCod(5) = C_Com_Manuelle | EndIf
+		
+		For i = 1 to 4
+			If iAxe(i) <> 0 And ca.AxeLib(i) <> " "
+				Lecture_Cellule(Lig,iAxe(i),Ligne) | xlmouv.Axe(i) = Ligne
+				If ca.AxeLib(i) <> " " And soc.AxeSais(1,i) = 3 and xlmouv.Axe(i) = " "
+					EcrireErreur(Lig,iErreur,"Axe analytique " & ToString(i) & " obligatoire.")
+				ElsIf xlmouv.Axe(i) <> " " And Recherche_Axe(i,xlmouv.Axe(i),False) <> 0
+					EcrireErreur(Lig,iErreur,"Axe analytique " & Left(xlmouv.Axe(i)) & " inconnu.")
+				EndIf
+			EndIf
+		Next
+		Lecture_Cellule(Lig,iDeeePu,Ligne) | xlmouv.DeeePu = Ligne
+		Lecture_Cellule(Lig,iPiRef,Ligne) | xlent.PiRef = Ligne
+		Lecture_Cellule(Lig,iEtb,Ligne) | xlent.Etb = Ligne
+		If xlent.Etb <> " " And ISeek(gtfdos,ets_test,"C",mz.Dos & xlent.Etb) <> 0
+			EcrireErreur(Lig,iErreur,"Etablissement '" & Left(xlent.Etb) & "' inconnu.")
+		EndIf
+		Lecture_Cellule(Lig,iPiNoTiers,Ligne) | xlent.PiNoTiers = Ligne
+		If iDev <> 0 | Lecture_Cellule(Lig,iDev,Ligne) | xlent.Dev = Ligne | EndIf
+		If xlent.Dev <> " " And Lectab(7,xlent.Dev) <> 0
+			EcrireErreur(Lig,iErreur,"Devise '" & Left(xlent.Dev) & "' inconnue.")
+		EndIf
+		Lecture_Cellule(Lig,iNote,Ligne) | wwNote = Ligne
+		Lecture_Cellule(Lig,iDelDemDt,Ligne) | xlent.DelDemDt = Ligne
+		If xlent.DelDemDt <> " " And IsDate(xlent.DelDemDt) = 0
+			EcrireErreur(Lig,iErreur,"Format de date DELDEMDT incorrect.")
+		EndIf
+		Lecture_Cellule(Lig,iDelAccDt,Ligne) | xlent.DelAccDt = Ligne
+		If xlent.DelAccDt <> " " And IsDate(xlent.DelAccDt) = 0
+			EcrireErreur(Lig,iErreur,"Format de date DELACCDT incorrect.")
+		EndIf
+		Lecture_Cellule(Lig,iDelRepDt,Ligne) | xlent.DelRepDt = Ligne
+		If xlent.DelRepDt <> " " And IsDate(xlent.DelRepDt) = 0
+			EcrireErreur(Lig,iErreur,"Format de date DELREPDT incorrect.")
+		EndIf
+		Lecture_Cellule(Lig,iRepr1,Ligne) | xlmouv.Repr(1) = Ligne
+		If xlmouv.Repr(1) <> " " And ISeek(gtfpcf,vrp_test,"C",xlmouv.Dos & "5" & xlmouv.Repr(1)) <> 0
+			EcrireErreur(Lig,iErreur,"Représentant 1 '" & Left(xlmouv.Repr(1)) & "' inconnu.")
+		EndIf
+		Lecture_Cellule(Lig,iRepr2,Ligne) | xlmouv.Repr(2) = Ligne
+		If xlmouv.Repr(2) <> " " And ISeek(gtfpcf,vrp_test,"C",xlmouv.Dos & "5" & xlmouv.Repr(2)) <> 0
+			EcrireErreur(Lig,iErreur,"Représentant 2 '" & Left(xlmouv.Repr(2)) & "' inconnu.")
+		EndIf
+		Lecture_Cellule(Lig,iRepr3,Ligne) | xlmouv.Repr(3) = Ligne
+		If xlmouv.Repr(3) <> " " And ISeek(gtfpcf,vrp_test,"C",xlmouv.Dos & "5" & xlmouv.Repr(3)) <> 0
+			EcrireErreur(Lig,iErreur,"Représentant 3 '" & Left(xlmouv.Repr(3)) & "' inconnu.")
+		EndIf
+		Lecture_Cellule(Lig,iSerie,Ligne) | xlmvtl.Serie = Ligne
+		Lecture_Cellule(Lig,iTiersStock,Ligne) | xlmvtl.TiersStock = Ligne
+		Lecture_Cellule(Lig,iStDt,Ligne) | xlmvtl.StDt = Ligne
+		If xlmvtl.StDt <> " " And IsDate(xlmvtl.StDt) = 0
+			EcrireErreur(Lig,iErreur,"Format de date STDT incorrect.")
+		EndIf
+		Lecture_Cellule(Lig,iNSt,Ligne) | xlmvtl.NSt = Ligne
+		If xlmvtl.NSt <> " " And Lectab(25,xlmvtl.NSt) <> 0
+			EcrireErreur(Lig,iErreur,"Nature de stock '" & Left(xlent.Dev) & "' inconnue.")
+		EndIf
+		Lecture_Cellule(Lig,iLieu,Ligne) | xlmvtl.Lieu = Ligne
+		If xlmvtl.Lieu <> " " And Lectab(18,xlmouv.Depo & xlmvtl.Lieu) <> 0
+			EcrireErreur(Lig,iErreur,"Emplacement '" & Left(xlmvtl.Lieu) & "' inconnue pour le dépôt '" & Left(xlmouv.Depo) & "'.")
+		EndIf
+		Lecture_Cellule(Lig,iTxtLig,TexteLigne)
+		If PieceRupture(NbLg)
+			NbLg = 0
+			Integ = Creation_Entete
+			xlmouv_prec = xlmouv
+			xlent_prec = xlent
+		EndIf
+		Lecture_Cellule(Lig,iVenun,Ligne) | xlmouv.Venun = Ligne
+		If xlmouv.Venun = " " 
+			Switch mz.TiCod
+				Case 'C'
+					xlmouv.Venun = art_test.VenUn
+				Case 'F'
+					xlmouv.Venun = art_test.AchUn
+				Case 'I'
+					xlmouv.Venun = art_test.StUn
+			EndSwitch
+		EndIf
+		If xlmouv.VenUn <> " " And Lectab_Unite(xlmouv.Ref, xlmouv.Sref1, xlmouv.Sref2, xlmouv.VenUn) <> 0
+			EcrireErreur(Lig,iErreur,"Unité '" & Left(xlmouv.VenUn) & "' inconnue.")
+		EndIf
+		Creation_Ligne(TexteLigne)
+		g7.PiNo = xlmouv.FaNo
+		g7.Lib(1) = xlmouv.Ref
+		g7.Ticket = Lig
+	   Afficher_Traitement
+	EndLoop
+	CloseTrace
+	FClose(gtfi)
+	bClose = True
+	If Integ = 1 And Not Erreur
+		If g7.Choix(1) = Non
+			Integration_GTFI
+			MessageBox("Intégration terminée.|" & nospaces(nCptPce) & " pièces générées|Veuillez consulter le livre de bord.","Information",MB_ICONINFORMATION)
+		Else
+			MessageBox("Simulation effectuée.|Veuillez consulter la colonne ERREUR du fichier Tableur.","Message",MB_ICONINFORMATION)
+		EndIf
+	ElsIf Erreur
+		MessageBox("Intégration non effectuée.|Veuillez consulter la colonne ERREUR du fichier Tableur.","Message",MB_ICONEXCLAMATION)
+	ElsIf Integ = 0
+		MessageBox("Aucune ligne à intégrer.","Message",MB_ICONEXCLAMATION)
+	EndIf
+	If g7.Choix(1) = Non
+		Cog_EcritureLivreDeBord("Fin génération de pièce commerciale par Tableur pour la société " & nospaces(mz.Dos))
+	EndIf
+EndP
+
+;*
+Function Int Feuille_Integration_Info_Valide(MessErr)
+	1	MessErr	B = True
+BeginF
+	; Dossier
+	Lecture_Cellule(1,1,Ligne)
+	If FString("U",Ligne) <> "DOSSIER"
+		If MessErr
+			MessageBox('La cellule "A1" doit contenir le mot clé "Dossier".',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	Lecture_Cellule(1,2,Ligne)
+	mz.Dos = Ligne
+	If	ISeek(gtfdos,soc,"A",mz.Dos) = 0
+		Seek_SOC(mz.Dos)
+		G3_Seek_CA
+	Else
+		If MessErr
+			MessageBox('Dossier inconnue (Cellule "B1").',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	; Type de tiers
+	Lecture_Cellule(1,3,Ligne)
+	If FString("U",Ligne) <> "TYPETIERS"
+		If MessErr
+			MessageBox('La cellule "C1" doit contenir le mot clé "TypeTiers".',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	Lecture_Cellule(1,4,Ligne)
+	mz.TiCod = Ligne
+	If mz.TiCod Not In ("C","F","I")
+		If MessErr
+			MessageBox('Le type de tiers doit être C,F ou I (Cellule "D1").',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	; Type de pièce
+	Lecture_Cellule(1,5,Ligne)
+	If FString("U",Ligne) <> "TYPEPIECE"
+		If MessErr
+			MessageBox('La cellule "E1" doit contenir le mot clé "TypePiece".',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	Lecture_Cellule(1,6,Ligne)
+	mz.PiCod = Ligne
+	If mz.PiCod Not In (1,2,3,4)
+		If MessErr
+			MessageBox('Le type de piece doit être 1,2,3 ou 4 (Cellule "F1").',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	; Simulation
+	Lecture_Cellule(1,7,Ligne)
+	If FString("U",Ligne) <> "SIMULATION"
+		If MessErr
+			MessageBox('La cellule "G1" doit contenir le mot clé "Simulation".',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	Lecture_Cellule(1,8,Ligne)
+	If FString("U",Ligne) Not In("NON","OUI")
+		If MessErr
+			MessageBox('Le mode simulation doit être OUI ou NON (Cellule "H1").',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	Else
+		If FString("U",Ligne) = "NON"
+			g7.Choix(1) = Non
+		Else
+			g7.Choix(1) = Oui
+		EndIf
+	EndIf
+
+	; Provisoire   YATO 15/09/2014 : FE006_CdeRenouvellement
+	Lecture_Cellule(1,9,Ligne)
+	If FString("U",Ligne) <> "PROVISOIRE"
+		If MessErr
+			MessageBox('La cellule "I1" doit contenir le mot clé "Provisoire".',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	Lecture_Cellule(1,10,Ligne)
+	If FString("U",Ligne) Not In("NON","OUI")
+		If MessErr
+			MessageBox('Provisoire doit être OUI ou NON (Cellule "J1").',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	Else
+		If FString("U",Ligne) = "NON"
+			g7.Choix(3) = Non
+		Else
+			g7.Choix(3) = Oui
+		EndIf
+	EndIf
+
+	FReturn(True)
+EndF
+;*
+Procedure Imprimer_Mot_Cle(MotCle,Description)
+	1	MotCle		A
+	1	Description	A
+BeginP
+	If MotCle <> " "
+		g3xq.Lib(1) = MotCle
+		g3xq.Lib(2) = "="
+	Else
+		g3xq.Lib(1) = " "
+		g3xq.Lib(2) = " "
+	EndIf
+	g3xq.WinTiTre = Description
+	XmiPrint(mz.MiCle,2)
+EndP
+
+;*
+Procedure Impression_Entetes_Colonnes
+	1	FlgPreview X
+BeginP
+	FlgPreview = xHarviewReadPreviewFlag
+	xHarviewWritePreviewFlag(1)
+	PrintBegin
+	XmiPrint(mz.MiCle,1)
+
+	Imprimer_Mot_Cle('Dossier'		,'Numéro de dossier Achat/Vente sur lequel les pièces sont intégrées.')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('TypeTiers'	,'Type de Tiers :')
+	Imprimer_Mot_Cle(' '				,'- "C" pour les pièces clients,')
+	Imprimer_Mot_Cle(' '				,'- "F" pour les pièces fournisseurs,')
+	Imprimer_Mot_Cle(' '				,'- "I" pour les pièces internes.')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('TypePiece'	,'Type de pièce :')
+	Imprimer_Mot_Cle(' '				,'- "1" pour les devis,')
+	Imprimer_Mot_Cle(' '				,'- "2" pour les commandes,')
+	Imprimer_Mot_Cle(' '				,'- "3" pour les bons de livraisons,')
+	Imprimer_Mot_Cle(' '				,'- "4" pour les factures.')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('Simulation'	,'Mode simulation :')
+	Imprimer_Mot_Cle(' '				,'- "OUI" : Vérification des données du fichier Tableur sans intégration,')
+	Imprimer_Mot_Cle(' '				,'- "NON" : Vérification des données et intégration des pièces.')
+	Imprimer_Mot_Cle(' '				,'Une erreur provoque le rejet complet du fichier Tableur')
+	Imprimer_Mot_Cle(' '				,' ')
+	
+	; YATO 15/09/2014 : FE006_CdeRenouvellement
+	Imprimer_Mot_Cle('PROVISOIRE'		,"Intégrer les pièces en status provisoire oui/non")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('OP'			,'Code opération de la pièce')
+ 	Imprimer_Mot_Cle(' '				,'Par défaut le code opération paramétré au menu est utilisé. 	 	')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('ETB'			,'Code établissement de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('DEPO'			,'Code dépôt de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PINO'			,'Numéro de la pièce')
+	Imprimer_Mot_Cle(' '				,"Laisser cette zone à vide pour effectuer une numérotation automatique.")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PIDT'			,'Date de la pièce')
+	Imprimer_Mot_Cle(' '				,'Le format de la date doit être AAAAMMJJ.')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PINOTIERS'	,'Zone "Votre pièce" de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+	
+	Imprimer_Mot_Cle('PIREF'		,'Zone "Votre référence" de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	; spé U GIE
+	Imprimer_Mot_Cle('PROJET'		,'Zone "Projet/Affaire" de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+	Imprimer_Mot_Cle('MARCHE'		,'Zone "Marché" de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+	Imprimer_Mot_Cle('SALCOD'		,'Zone "Code ADV" de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+	; fin spé U GIE
+
+	Imprimer_Mot_Cle('FACE2'		,'Zone concernant les factures')
+	Imprimer_Mot_Cle(' '				,'Valeur : ')
+	Imprimer_Mot_Cle(' '				,"- Vide : Facture considéré intégrée et traite imprimée,")
+	Imprimer_Mot_Cle(' '				,'- "1" : Facture à intégrer,')
+	Imprimer_Mot_Cle(' '				,'- "2" : Facture considéré intégrée et traite non imprimée.')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('DEV'			,'Code devise de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+	
+	Imprimer_Mot_Cle('TIERS'		,'Code tiers de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('ADRTIERSBL'	,'Code tiers adresse de livraison de la pièce')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('DELDEMDT'	,"Delai demandé de la pièce")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('DELACCDT'	,"Delai accepté de la pièce")
+	Imprimer_Mot_Cle(' '				,' ')
+	
+	Imprimer_Mot_Cle('DELREPDT'	,"Delai reporté de la pièce")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('NOTE'			,"Texte de la note de la pièce")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PIEDMT1'		,'Montant pied de pièce 1')
+	Imprimer_Mot_Cle('PIEDMT2'		,'Montant pied de pièce 2')
+	Imprimer_Mot_Cle('PIEDMT3'		,'Montant pied de pièce 3')
+	Imprimer_Mot_Cle(' '				,"Cas particulier : lorsque le port est pré-calculé, laisser la zone à vide pour que le calcul automatique de DIVALTO")
+	Imprimer_Mot_Cle(' '				,"s'effectue.")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('ESCOMPTE'	,"% d'escompte de la pièce")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('REMPIED'		,"% de remise de la pièce")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('REF'			,"Référence article de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('SREF1'		,"Sous-référence 1 article de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('SREF2'		,"Sous-référence 2 article de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('DES'			,"Désignation article")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('MVCOD'		,"Mettre à jour le stock pour la ligne")
+	Imprimer_Mot_Cle(' '				,'Valeur : ')
+	Imprimer_Mot_Cle(' '				,"- Vide : Reprise du paramétrage de l'article,")
+	Imprimer_Mot_Cle(' '				,'- "1" : Pas de mise à jour des stock,')
+	Imprimer_Mot_Cle(' '				,'- "2" : Mise à jour des stock.')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('QTE'			,"Quantité de ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PUB'			,"Prix unitaire brut de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('REM1'			,"% de remise 1 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('REM2'			,"% de remise 2 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('REM3'			,"% de remise 3 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PCOD1'		,"Mode de recherche du tarif de la ligne")
+	Imprimer_Mot_Cle(' '				,'Valeur ("1" par défaut) : ')
+	Imprimer_Mot_Cle(' '				,'- "1" : Recherche de tarif normale à partir des familles,')
+	Imprimer_Mot_Cle(' '				,'- "2" : Recherche tarif promo à partir du code promo car code tarif promo modifié,')
+	Imprimer_Mot_Cle(' '				,'- "3" : Recherche tarif à partir du code tarif car code tarif modifié')
+	Imprimer_Mot_Cle(' '				,'- "4" : Prix manuel')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PCOD2'		,"Mode de recherche des remises de la ligne")
+	Imprimer_Mot_Cle(' '				,'Valeur ("1" par défaut) : ')
+	Imprimer_Mot_Cle(' '				,'- "1" : Recherche de remise normale à partir des classes,')
+	Imprimer_Mot_Cle(' '				,'- "2" : Recherche remise promo à partir du code promo car code remise promo modifié,')
+	Imprimer_Mot_Cle(' '				,'- "3" : Recherche remise à partir du code remise car code remise modifié')
+	Imprimer_Mot_Cle(' '				,'- "4" : Remise manuelle')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PCOD3'		,"Mode de recherche de la commission représentant 1 de la ligne")
+	Imprimer_Mot_Cle(' '				,'Valeur ("1" par défaut) : ')
+	Imprimer_Mot_Cle(' '				,'- "1" : Recherche commission normale,')
+	Imprimer_Mot_Cle(' '				,'- "2" : Commission manuelle,')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PCOD4'		,"Mode de recherche de la commission représentant 2 de la ligne")
+	Imprimer_Mot_Cle(' '				,'Valeur ("1" par défaut) : ')
+	Imprimer_Mot_Cle(' '				,'- "1" : Recherche commission normale,')
+	Imprimer_Mot_Cle(' '				,'- "2" : Commission manuelle,')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('PCOD5'		,"Mode de recherche de la commission représentant 3 de la ligne")
+	Imprimer_Mot_Cle(' '				,'Valeur ("1" par défaut) : ')
+	Imprimer_Mot_Cle(' '				,'- "1" : Recherche commission normale,')
+	Imprimer_Mot_Cle(' '				,'- "2" : Commission manuelle,')
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('REPR1'		,"Code représentant représentant 1 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('COM1'			,"% de commission représentant 1 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('REPR2'		,"Code représentant représentant 2 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('COM2'			,"% de commission représentant 2 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('REPR3'		,"Code représentant représentant 3 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('COM3'			,"% de commission représentant 3 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('SERIE'		,"Numéro de série de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('TIERSSTOCK'	,"Tiers stock de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('NST'			,"Nature de stock de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('STDT'			,"Date de stockage de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('LIEU'			,"Emplacement de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+	
+	Imprimer_Mot_Cle('AXE1'			,"Axe analytique 1 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('AXE2'			,"Axe analytique 2 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('AXE3'			,"Axe analytique 3 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('AXE4'			,"Axe analytique 4 de la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('TXTLIG'		,"Texte lié à la ligne")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('VENUN'		,"Unité de vente (vente, achat ou stock suivant type d'import)")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	Imprimer_Mot_Cle('ERREUR'		,"Message d'erreur constatée sur la ligne Tableur")
+	Imprimer_Mot_Cle(' '				,' ')
+
+	PrintEnd
+	xHarviewWritePreviewFlag(FlgPreview)
+EndP
+
+;*
+;Programme principal
+;*
+Main
+	If PingReceive("zechange",mz) <> 0
+		MessageBox ("Le programme doit être lancé à partir d'un menu !","Alerte",MB_ICONSTOP)
+		ProgramExit
+	EndIf
+	mz.MeCle = "cogee_ao_imppiece.dhof"
+	mz.MiCle = "cogii_ao_imppiece.dhoi"
+	XmiLoad(mz.MiCle)
+	g7.Choix(2) = Condition(mz.Param like "*CALC*", 2, 1)
+	Office_SetInterfaceCalc(g7.Choix(2))
+	If Office_Begin <> 0
+		MessageBox("Dialogue avec le tableur impossible !","Erreur",MB_ICONSTOP)
+		ProgramExit
+	EndIf
+	If IsOffice_OpenCalc <> 0
+		MessageBox("Tableur non ouvert !","Erreur",MB_ICONSTOP)
+		Office_Stop
+		Office_EndCalc
+		ProgramExit
+	EndIf
+	If Not Office_GetActiveSheetAndWorkbookName(Classeur,Feuille)
+		MessageBox("Aucun feuille/classeur Tableur ouvert !","Erreur",MB_ICONSTOP)
+		Office_Stop
+		Office_EndCalc
+		ProgramExit
+	EndIf
+	mz.Dos = 0
+	mz.TiCod = " "
+	mz.PiCod = 0
+	g7.Choix(1) = 0
+	g7.Choix(3) = 2
+	Feuille_Integration_Info_Valide(False)
+	XmeLoad(mz.MeCle)
+	IdToolBar = XmeToolbarGetId(mz.MeCle,"MAIN")
+	XmeToolbarSetWindow(IdToolBar,mz.MeCle,1)
+	XmeInfoPage(mz.MeCle,1)
+	XmeSetWindowSize(mz.MeCle,1,harmony.Opara3,harmony.Opara4)
+	XmeTitle(mz.Titre2)
+	Fini = False
+	XmeDispV(mz.MeCle,1,XME_MODE_GOSUB)
+	Repeat
+		XmeConsult(mz.MeCle,1,XME_MODE_GOTO)
+		Switch harmony.Key 
+			Case K_F10
+				If Feuille_Integration_Info_Valide()
+					If MessageBox("Confirmation du traitement ?","Confirmation",MB_ICONQUESTION + MB_YESNO) = IDYES
+						Traitement
+					EndIf
+				EndIf
+			Case K_F9
+				Fini = True
+			Case K_CTRL_P
+				Impression_Entetes_Colonnes
+		Endswitch
+	Until Fini = True
+	XmeRet
+	Office_Stop
+	Office_EndCalc
+ProgramExit

@@ -1,0 +1,27 @@
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_dirclientu.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du cog_FPeriodicite
+;*
+
+;*
+;* 		Périodicité
+;*
+
+<RecordSQL	Name=CogRs_Period	Comment='Périodicité'>
+Public Record "a5dd.dhsd"		MZ
+<SELECT>
+	Cog_Periodicite.*
+<FROm insert=YES update=YES delete=YES>
+	Cog_Periodicite
+<WHERE>
+	Cog_Periodicite.DOS = MZ.DOS
+	Case Equal_Etb(char etb)
+		Cog_Periodicite.ETB = etb
+	Case Equal_Period(int code)	
+		Cog_Periodicite.Cog_Period = code
+	Case Like_Lib(char lib)
+		Cog_Periodicite.LIB LIKE lib
+	Case Zoom_PK(char etb, int code, int codU)
+		Cog_Periodicite.ETB = etb AND 	Cog_Periodicite.Cog_Period = code AND 	Cog_Periodicite.Cog_PeriodU = codU
+	Case Exists(char etb, int code, int codU)
+		Cog_Periodicite.ETB = etb AND 	Cog_Periodicite.Cog_Period = code AND 	Cog_Periodicite.Cog_PeriodU = codU

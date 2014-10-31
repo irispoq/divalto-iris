@@ -1,0 +1,38 @@
+;*
+;*		Dictionnaire des définitions des surcharges des RecordSQL du CCFIMMO
+;*
+
+<DictionarySql overwrite="ccrsimmo.dhoq" ModuleInfo='$Id$'>
+
+;*
+;*		Plan Budgétaire
+;*
+
+<RecordSql Name=IMMO>
+<Select>
+	I1.*,
+	CPTCES.LIB,
+	CPTCESAMO.LIB,
+	CptCesVal.LIB
+<LEFTJOIN>
+	C3 as CptCes
+	on CptCes.Dos = I1.Dos and CptCes.Cpt = I1.Cog_CptCes and CptCes.Ce1 = '3'
+<LEFTJOIN>
+	C3 as CptCesAmo
+	on CptCesAmo.Dos = I1.Dos and CptCesAmo.Cpt = I1.Cog_CptCesAmo and CptCesAmo.Ce1 = '3'
+<LEFTJOIN>
+	C3 as CptCesVal
+	on CptCesVal.Dos = I1.Dos and CptCesVal.Cpt = I1.COG_CptCesVal and CptCesVal.Ce1 = '3'
+<WHERE>
+	Case Equal_Enrno(int enrno)
+		I1.ENRNO = enrno
+	Case Max_Immo
+		I1.IMMO = (SELECT MAX(I1.IMMO) FROM I1 WHERE I1.CE3 = '1' AND I1.DOS = MZ.DOS)
+	Case Equal_Etat(int etat)
+		I1.ETAT = etat
+	Case Fourchette_Acquisition(date acqDDt, date acqFDt)
+		I1.ACQDT >= acqDDt AND I1.ACQDT <= acqFDt
+ 	Case Ecr_Cession_Non_Generees
+		I1.COG_CESECRFLAG <> 2
+	Case Fourchette_Etat(int etatD, int etatF)
+		I1.ETAT >= etatD AND I1.ETAT <= etatF

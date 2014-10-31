@@ -1,0 +1,7531 @@
+;>xwin4obj                              7.0       20130227140720      
+[masque]
+ utilisateur="MS"
+ date_modification="27/02/2013"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=486
+ type_masque=2
+ dernier_id=1306
+ dernier_id_page=30
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="CCIMAIDE"
+ [touches]
+  f1=1
+[enregistrements]
+ "ccfdd.dhsd",,x1,x1,1752,0
+ "ccfdd.dhsd",,cd,cd,400,0
+ "ccfdd.dhsd",,ca,ca,1350,0
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "ccrsimmo.dhoq",,immo,immobilisation,1024,1
+ "ccfdd.dhsd",,i1,i1_sel,1900,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=54,479
+  attache_lgx=oui
+  id=1
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=314,320
+  attache_lgx=oui
+  attache_lgy=oui
+  id=2
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Bien à créer"
+ nb_lig=10
+ nb_col=28
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=48,5
+   taille=9,63
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Bien"
+ [obj_texte]
+  [presentation]
+   position=60,5
+   taille=9,63
+   noms="ifrs"
+   id=4
+   wstyle="STD"
+  [texte]
+   texte="N° composant"
+ [obj_texte]
+  [presentation]
+   position=72,5
+   taille=9,63
+   noms="etbc3"
+   id=958
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [groupe_radio]
+  [presentation]
+   position=8,5
+   taille=32,97
+   noms="ifrs;kchoix"
+   id=5
+   wstyle="STD"
+  [description]
+   donnee=x1,choix,x1,5
+   minmaj=majuscules
+  [param_groupe]
+   titre="Type"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=17,10
+    taille=9,88
+    noms="ifrs"
+    id=6
+    wstyle="STD"
+   [param_radio]
+    texte="Bien"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=27,10
+    taille=9,88
+    noms="ifrs"
+    id=7
+    wstyle="STD"
+   [param_radio]
+    texte="Composant"
+    cadrage=droite
+    valeur="2"
+  [aide_page]
+   aide=734
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   diva_apres="Champ_Choix_0_Ap"
+ [champ]
+  [presentation]
+   position=48,70
+   taille=9,31
+   noms="kbien"
+   id=8
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=immo,immo,immobilisation
+  [param_saisie]
+   obligatoire=oui
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=734
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=60,70
+   taille=9,19
+   noms="ifrs;kcomposant"
+   id=9
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=immo,immocomp,immobilisation
+  [param_saisie]
+   obligatoire=oui
+   defaut="0"
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=734
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+ [champ]
+  [presentation]
+   position=72,70
+   taille=9,19
+   noms="etbc3;kbien_etbc3"
+   id=959
+   colonnes_saisie=3
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=immo,etb,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=734
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   f8=19004
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Etb_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=3
+ fond="STD"
+ efface=partiel
+ nb_lig=33
+ nb_col=50
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=22
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=118,200
+   attache_lgx=oui
+   id=1304
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="ZOOM"
+ [tableau]
+  [presentation]
+   position=120,0
+   taille=177,200
+   attache_lgx=oui
+   attache_lgy=oui
+   id=1271
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=7
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=6
+   separation=66
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=75,15
+    taille=11,16
+    id=1204
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=immo,cenote,immobilisation
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CENOTE_2"
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="présence d'une note"
+   [param_colonne]
+    titre="#tblnote"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=48,98
+    taille=20,32
+    id=1205
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=immo,cejoint,immobilisation
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CEJOINT"
+   [touches]
+    f1=1
+   [info_bulle]
+   texte="présence de fichiers joints"
+   [param_colonne]
+    titre="#tblficjoin"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=67,255
+    taille=8,65
+    id=1206
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=immo,position,immobilisation
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","POSITION_1"
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Indicateur bien amorti"
+   [param_colonne]
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=72,255
+    taille=8,65
+    id=1207
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=immo,etat,immobilisation
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ETAT_3"
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Etat du bien"
+   [param_colonne]
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,10
+    taille=8,27
+    id=1208
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,immo,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Code du bien"
+   [param_colonne]
+    titre="Bien"
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=57,56
+    taille=10,20
+    noms="ifrs"
+    id=1209
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,immocomp,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Numéro de composant"
+   [param_colonne]
+    titre="Composant"
+    fl_aff=oui
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=89,241
+    taille=8,31
+    id=1210
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,natimmo,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f1=1
+    f8=19714
+    ctrl_f6=10300
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_NatImmo_1_Ap"
+   [info_bulle]
+   texte="Code nature d'immobilisation"
+   [param_colonne]
+    titre="Nature"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=77,40
+    taille=8,142
+    id=1211
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,lib,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Intitulé du bien"
+   [param_colonne]
+    titre="Libellé"
+    fl_aff=oui
+    largeur_col=125
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=45,232
+    taille=8,13
+    noms="etbc3"
+    id=1212
+    colonnes_saisie=3
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,etb,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19004
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Etb_2_Ap"
+   [info_bulle]
+   texte="Etablissement"
+   [param_colonne]
+    titre="Etablissement"
+    fl_aff=oui
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=97,160
+    taille=8,163
+    id=1213
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,local,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Localisation du bien"
+   [param_colonne]
+    titre="Localisation"
+    fl_aff=non
+    largeur_col=58
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=117,160
+    taille=8,163
+    id=1214
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,serie,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Numéro de série du bien"
+   [param_colonne]
+    titre="Numéro de série"
+    fl_aff=non
+    largeur_col=58
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=152,280
+    taille=8,35
+    id=1215
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,cpt,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Compte d'immobilisation du bien"
+   [param_colonne]
+    titre="Compte"
+    fl_aff=oui
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=99,80
+    taille=8,31
+    id=1216
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,cptaux,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Compte fournisseur"
+   [param_colonne]
+    titre="Fournisseur"
+    fl_aff=non
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=90,108
+    taille=8,31
+    noms="axe1"
+    id=1217
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,axe,immobilisation,1
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Code #axe1"
+   [param_colonne]
+    titre="#axe1"
+    fl_aff=non
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=90,108
+    taille=8,31
+    noms="axe2"
+    id=1218
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,axe,immobilisation,2
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Code #axe2"
+   [param_colonne]
+    titre="#axe2"
+    fl_aff=non
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=90,108
+    taille=8,31
+    noms="axe3"
+    id=1219
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,axe,immobilisation,3
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Code #axe3"
+   [param_colonne]
+    titre="#axe3"
+    fl_aff=non
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=90,108
+    taille=8,31
+    noms="axe4"
+    id=1220
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,axe,immobilisation,4
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Code #axe4"
+   [param_colonne]
+    titre="#axe4"
+    fl_aff=non
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=177,260
+    taille=8,40
+    id=1221
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,acqdt,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Date d'acquisition du bien"
+   [param_colonne]
+    titre="Acquisition"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=142,275
+    taille=10,45
+    id=1222
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,svcdt,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=766
+    fichier="CCIMAIDE"
+   [touches]
+    f6=10002
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Date de mise en service du bien"
+   [param_colonne]
+    titre="Mise en service"
+    fl_aff=non
+    largeur_col=47
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=97,245
+    taille=10,58
+    id=1223
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,cr,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    defaut="            0,0000000000"
+    esp_si_zero=oui
+   [aide_page]
+    aide=766
+    fichier="CCIMAIDE"
+   [touches]
+    f6=10002
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Coût de revient du bien"
+   [param_colonne]
+    titre="Coût de revient"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=147,200
+    taille=10,58
+    id=1224
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,btpmt,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="base taxe professionnelle"
+   [param_colonne]
+    titre="Taxe professionnelle"
+    fl_aff=non
+    largeur_col=62
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=165,8
+    taille=10,65
+    id=1225
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,etat,immobilisation
+    minmaj=majuscules
+   [param_saisie]
+    defaut="            0,0000000000"
+   [param_multi]
+    choix="ccfdmc.dhfi","ETAT"
+    notifier=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Etat_1_Av"
+    diva_apres="Champ_Etat_1_Ap"
+   [info_bulle]
+   texte="état du bien"
+   [param_colonne]
+    titre="Etat du bien"
+    fl_aff=non
+    largeur_col=59
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=121,273
+    taille=8,34
+    id=1226
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,cesdt,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Date de cession"
+   [param_colonne]
+    titre="Cession"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=53,172
+    taille=8,51
+    id=1227
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,cesmt,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Prix de cession"
+   [param_colonne]
+    titre="Prix de cession"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=85,261
+    taille=8,34
+    id=1228
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,exopdt,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Date début du premier exercice d'amortissement"
+   [param_colonne]
+    titre="1er exercice"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=24,160
+    taille=10,37
+    id=1229
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cd,exoddt,cd
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="date de début de l'exercice courant"
+   [param_colonne]
+    titre="Début exercice courant"
+    fl_aff=non
+    largeur_col=69
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=24,208
+    taille=10,37
+    id=1230
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cd,exofdt,cd
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="date de fin de l'exercice courant"
+   [param_colonne]
+    titre="Fin exercice courant"
+    fl_aff=non
+    largeur_col=60
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=66,268
+    taille=8,51
+    id=1231
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,ecobas,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Base amortissement économique"
+   [param_colonne]
+    titre="Base"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=116,236
+    taille=8,30
+    id=1232
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,ecotyp,immobilisation
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ECOTYP"
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Méthode d'amortissement économique"
+   [param_colonne]
+    titre="Méthode"
+    fl_aff=non
+    largeur_col=32
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=73,241
+    taille=8,51
+    id=1233
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,doteco,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Montant de la dotation manuelle économique"
+   [param_colonne]
+    titre="Dotation"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=127,289
+    taille=8,19
+    id=1234
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,ecodur,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Durée de vie économique"
+   [param_colonne]
+    titre="Durée"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=121,293
+    taille=8,13
+    id=1235
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,ecocoe,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Coefficient de dégressivité économique"
+   [param_colonne]
+    titre="Coef"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=113,292
+    taille=8,19
+    id=1236
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,ecotau,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="taux d'amortissement économique"
+   [param_colonne]
+    titre="Taux"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=105,208
+    taille=10,37
+    id=1237
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,exoddt,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_ExoDDt_1_Av"
+   [info_bulle]
+   texte="date début de l'exercice"
+   [param_colonne]
+    titre="Exercice début"
+    fl_aff=non
+    largeur_col=45
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=105,260
+    taille=10,37
+    id=1238
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,exofdt,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_ExoFDt_1_Av"
+    diva_apres="Champ_ExoFDt_1_Ap"
+   [info_bulle]
+   texte="date fin de l'exercice"
+   [param_colonne]
+    titre="Exercice fin"
+    fl_aff=non
+    largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=120,160
+    taille=10,37
+    id=1239
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,ecoddt,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EcoDDt_1_Av"
+    diva_apres="Champ_EcoDDt_1_Ap"
+   [info_bulle]
+   texte="début période économique"
+   [param_colonne]
+    titre="Période début"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=120,208
+    taille=10,37
+    id=1240
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,ecofdt,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EcoFDt_1_Av"
+    diva_apres="Champ_EcoFDt_1_Ap"
+   [info_bulle]
+   texte="Fin période économique"
+   [param_colonne]
+    titre="Période fin"
+    fl_aff=non
+    largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=129,208
+    taille=10,25
+    id=1241
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,ecojournb,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EcoJourNb_1_Av"
+   [info_bulle]
+   texte="Nombre de jours de la période économique"
+   [param_colonne]
+    titre="Nbre jours"
+    fl_aff=non
+    largeur_col=32
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=138,172
+    taille=10,61
+    id=1242
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,ecolinmt,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EcoLinMt_1_Av"
+    diva_apres="Champ_EcoLinMt_1_Ap"
+   [info_bulle]
+   texte="Total de l'amortissement linéaire de la période économique"
+   [param_colonne]
+    titre="Total amort. linéaire"
+    fl_aff=non
+    largeur_col=64
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=147,172
+    taille=10,61
+    id=1243
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,ecodegmt,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EcoDegMt_1_Av"
+    diva_apres="Champ_EcoDegMt_1_Ap"
+   [info_bulle]
+   texte="Total de l'amortissement dégressif de la période économique"
+   [param_colonne]
+    titre="Total amort. dégressif"
+    fl_aff=non
+    largeur_col=66
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=156,172
+    taille=10,61
+    id=1244
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,ecomanmt,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EcoManMt_1_Av"
+    diva_apres="Champ_EcoManMt_1_Ap"
+   [info_bulle]
+   texte="Total de l'amortissement manuel de la période économique"
+   [param_colonne]
+    titre="Total amort. manuel"
+    fl_aff=non
+    largeur_col=64
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=95,261
+    taille=8,51
+    id=1245
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,ecototmt,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Cumul des amortissements économiques"
+   [param_colonne]
+    titre="Amortissements"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=92,205
+    taille=8,56
+    id=1246
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,ecoresmt,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Valeur résiduelle économique"
+   [param_colonne]
+    titre="Valeur résiduelle"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=80,194
+    taille=8,51
+    id=1247
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,fisbas,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Base amortissement fiscal"
+   [param_colonne]
+    titre="Base"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=92,277
+    taille=8,30
+    id=1248
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,fistyp,immobilisation
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","FISTYP"
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Méthode d'amortissement fiscal"
+   [param_colonne]
+    titre="Méthode"
+    fl_aff=non
+    largeur_col=32
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=94,240
+    taille=8,51
+    id=1249
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,dotfis,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Montant de la dotation manuelle fiscale"
+   [param_colonne]
+    titre="Dotation"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=77,293
+    taille=8,19
+    id=1250
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,fisdur,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Durée de vie fiscale"
+   [param_colonne]
+    titre="Durée"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=84,299
+    taille=8,13
+    id=1251
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,fiscoe,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Coefficient de dégressivité fiscale"
+   [param_colonne]
+    titre="Coef"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=104,252
+    taille=8,19
+    id=1252
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,fistau,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Taux d'amortissement fiscal"
+   [param_colonne]
+    titre="Taux"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=120,260
+    taille=10,37
+    id=1253
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,fisddt,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_FisDDt_1_Av"
+    diva_apres="Champ_FisDDt_1_Ap"
+   [info_bulle]
+   texte="début période fiscale"
+   [param_colonne]
+    titre="Période début"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=120,308
+    taille=10,37
+    id=1254
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,fisfdt,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_FisFDt_1_Av"
+    diva_apres="Champ_FisFDt_1_Ap"
+   [info_bulle]
+   texte="fin période fiscale"
+   [param_colonne]
+    titre="Période fin"
+    fl_aff=non
+    largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=129,308
+    taille=10,25
+    id=1255
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,fisjournb,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_FisJourNb_1_Av"
+   [info_bulle]
+   texte="Nombre de jours de la période fiscale"
+   [param_colonne]
+    titre="Nbre jours"
+    fl_aff=non
+    largeur_col=32
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=138,272
+    taille=10,61
+    id=1256
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,fislinmt,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_FisLinMt_1_Av"
+    diva_apres="Champ_FisLinMt_1_Ap"
+   [info_bulle]
+   texte="Total de l'amortissement linéaire de la période fiscale"
+   [param_colonne]
+    titre="Total amort. linéaire"
+    fl_aff=non
+    largeur_col=64
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=147,272
+    taille=10,61
+    id=1257
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,fisdegmt,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_FisDegMt_1_Av"
+    diva_apres="Champ_FisDegMt_1_Ap"
+   [info_bulle]
+   texte="Total de l'amortissement dégressif de la période fiscale"
+   [param_colonne]
+    titre="Total amort. dégressif"
+    fl_aff=non
+    largeur_col=66
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=156,272
+    taille=10,61
+    id=1258
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=immo,fismanmt,immobilisation
+    format="\formatmille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=709
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_FisManMt_1_Av"
+    diva_apres="Champ_FisManMt_1_Ap"
+   [info_bulle]
+   texte="Total de l'amortissement manuel de la période fiscale"
+   [param_colonne]
+    titre="Total amort. manuel"
+    fl_aff=non
+    largeur_col=64
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=102,211
+    taille=8,51
+    id=1259
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,fistotmt,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Cumul des amortissements fiscaux"
+   [param_colonne]
+    titre="Amortissements"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=80,217
+    taille=8,51
+    id=1260
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,fisresmt,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Valeur résiduelle fiscale"
+   [param_colonne]
+    titre="Valeur résiduelle"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=79,140
+    taille=8,51
+    id=1261
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,derog,immobilisation
+    format="\formatmille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Solde des amortissements dérogatoires"
+   [param_colonne]
+    titre="Dérogatoire"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=41,20
+    taille=10,19
+    id=1262
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,usercr,immobilisation
+    format="1"
+    saisie=non
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Utilisateur qui a créé la fiche"
+   [param_colonne]
+    titre="Créé par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=41,48
+    taille=10,36
+    id=1263
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,usercrdh,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Créé le"
+   [param_colonne]
+    titre="Créé le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=50,8
+    taille=10,111
+    id=1264
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,usercrori,immobilisation
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Origine de la création"
+   [param_colonne]
+    titre="Origine de la création"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=41,136
+    taille=10,19
+    id=1265
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,usermo,immobilisation
+    format="1"
+    saisie=non
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Utilisateur qui a modifié la fiche"
+   [param_colonne]
+    titre="Modifié par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=41,164
+    taille=10,36
+    id=1266
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,usermodh,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Modifié le"
+   [param_colonne]
+    titre="Modifié le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=50,124
+    taille=10,111
+    id=1267
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,usermoori,immobilisation
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Origine de la modification"
+   [param_colonne]
+    titre="Origine de la modification"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=41,252
+    taille=10,19
+    id=1268
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,userdop,immobilisation
+    format="1"
+    saisie=non
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Utilisateur qui a effectué la dernière opération"
+   [param_colonne]
+    titre="Dernière opération par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=41,280
+    taille=10,36
+    id=1269
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,userdopdh,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Dernière opération le"
+   [param_colonne]
+    titre="Dernière opération le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=50,240
+    taille=10,111
+    id=1270
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=immo,userdopori,immobilisation
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    ctrl_f6=10300
+   [info_bulle]
+   texte="Origine de la dernière opération"
+   [param_colonne]
+    titre="Origine de la dernière opération"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=16,5
+   taille=9,73
+   id=1272
+   wstyle="STD"
+  [texte]
+   texte="Numéro du bien"
+ [obj_texte]
+  [presentation]
+   position=16,121
+   taille=9,35
+   noms="ifrs"
+   id=1273
+   wstyle="STD"
+  [texte]
+   texte="Composant"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,73
+   id=1274
+   wstyle="STD"
+  [texte]
+   texte="Etat du bien"
+ [obj_texte]
+  [presentation]
+   position=36,5
+   taille=9,73
+   id=1275
+   wstyle="STD"
+  [texte]
+   texte="Position"
+ [obj_texte]
+  [presentation]
+   position=46,5
+   taille=9,42
+   id=1282
+   wstyle="STD"
+  [texte]
+   texte="Compte"
+ [obj_texte]
+  [presentation]
+   position=46,121
+   taille=9,35
+   id=1302
+   wstyle="STD"
+  [texte]
+   texte="Nature"
+ [obj_texte]
+  [presentation]
+   position=56,5
+   taille=9,14
+   id=1284
+   wstyle="STD"
+  [texte]
+   texte="Axe"
+ [obj_texte]
+  [presentation]
+   position=56,121
+   taille=9,35
+   noms="ifrs"
+   id=1300
+   wstyle="STD"
+  [texte]
+   texte="Plan UO"
+ [obj_texte]
+  [presentation]
+   position=66,5
+   taille=9,30
+   id=1296
+   wstyle="STD"
+  [texte]
+   texte="Date"
+ [obj_texte]
+  [presentation]
+   position=76,5
+   taille=9,73
+   id=1288
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=86,5
+   taille=9,73
+   id=1290
+   wstyle="STD"
+  [texte]
+   texte="Localisation"
+ [obj_texte]
+  [presentation]
+   position=96,5
+   taille=9,73
+   id=1292
+   wstyle="STD"
+  [texte]
+   texte="Numéro de série"
+ [obj_texte]
+  [presentation]
+   position=106,5
+   taille=9,73
+   noms="etbc3"
+   id=1276
+   wstyle="STD"
+  [texte]
+   texte="Filtre établissement"
+ [champ]
+  [presentation]
+   position=16,80
+   taille=9,35
+   noms="pilotage_bien;pilotage_planuo"
+   id=1277
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,immo,i1_sel
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=16,158
+   taille=9,19
+   noms="ifrs;pilotage_bien_ifrs;pilotage_planuo_ifrs"
+   id=1278
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,immocomp,i1_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+ [multi_choix]
+  [presentation]
+   position=26,80
+   taille=9,52
+   noms="pilotage_bien;pilotage_planuo"
+   id=1279
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,choix,x1,3
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ETAT_5"
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=36,80
+   taille=9,52
+   noms="pilotage_bien;pilotage_planuo"
+   id=1280
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,choix,x1,4
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","POSITION_2"
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=46,26
+   taille=9,53
+   noms="pilotage_bien;pilotage_planuo"
+   id=1305
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,choix,x1,8
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","CPTTYP_INTERRO2"
+  [touches]
+   f7=8000
+ [champ]
+  [presentation]
+   position=46,80
+   taille=9,35
+   noms="pilotage_bien;pilotage_planuo"
+   id=1283
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,cpt,i1_sel
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=46,158
+   taille=9,35
+   noms="pilotage_bien;pilotage_planuo"
+   id=1303
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,natimmo,i1_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f8=19714
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=56,20
+   taille=9,59
+   noms="pilotage_bien;pilotage_planuo"
+   id=1286
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,axeno,x1
+   sequence=1
+   minmaj=majuscules
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","AXENO"
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=56,80
+   taille=9,35
+   noms="pilotage_bien;pilotage_planuo"
+   id=1287
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,axe,x1
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   ctrl_f6=10300
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_2_Av"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=56,158
+   taille=9,35
+   noms="ifrs;pilotage_bien_ifrs;pilotage_planuo_ifrs"
+   id=1301
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,uocode,i1_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+ [multi_choix]
+  [presentation]
+   position=66,20
+   taille=9,59
+   noms="pilotage_bien;pilotage_planuo"
+   id=1306
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,choix,x1,9
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","DATETYP_INTERRO2"
+  [touches]
+   f7=8000
+ [champ]
+  [presentation]
+   position=66,80
+   taille=9,35
+   noms="pilotage_bien;pilotage_planuo"
+   id=1297
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,acqdt,i1_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=76,80
+   taille=9,113
+   noms="pilotage_bien;pilotage_planuo"
+   id=1289
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,lib,i1_sel
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=86,80
+   taille=9,113
+   noms="pilotage_bien;pilotage_planuo"
+   id=1291
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,local,i1_sel
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=96,80
+   taille=9,113
+   noms="pilotage_bien;pilotage_planuo"
+   id=1293
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=i1,serie,i1_sel
+  [aide_page]
+   aide=709
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=106,80
+   taille=9,113
+   noms="ConfModifEtbC3;etbc3;pilotage_bien_etbc3;pilotage_planuo_etbc3"
+   id=1281
+   colonnes_saisie=100
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,filtreetb,x1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f7=8000
+   f8=19004
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FiltreEtb_1_Av"
+   diva_apres="Champ_FiltreEtb_1_Ap"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=29
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=28
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=27
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=26
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=25
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=24
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=23
+[page]
+ numero=11
+ libelle="Bien"
+ fond="STD"
+ nature=double
+ titre="Bien"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ attache_x=oui
+ attache_lgy=oui
+ diva_apres="Page_Bien_Ap"
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="GENERALITES"
+   ordre=1
+   couleur_fond="STD"
+ [aide_page]
+  aide=725
+  fichier="CCIMAIDE"
+ [groupbox]
+  [presentation]
+   position=216,5
+   taille=66,310
+   id=1001
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Axes"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=166,5
+   taille=42,310
+   id=998
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Comptes"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=104,5
+   taille=54,151
+   id=10
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Statut du bien"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=104,164
+   taille=54,151
+   id=1005
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dates"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,59
+   id=17
+   wstyle="STD"
+  [texte]
+   texte="Bien"
+ [obj_texte]
+  [presentation]
+   position=26,110
+   taille=9,47
+   noms="ifrs"
+   id=18
+   wstyle="STD"
+  [texte]
+   texte="N° Composant"
+ [obj_texte]
+  [presentation]
+   position=26,232
+   taille=9,43
+   id=20
+   wstyle="STD"
+  [texte]
+   texte="Date d'effet"
+ [obj_texte]
+  [presentation]
+   position=38,5
+   taille=9,59
+   noms="etbc3"
+   id=962
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=52,5
+   taille=9,59
+   id=1023
+   wstyle="STD"
+  [texte]
+   texte="Nature"
+ [obj_texte]
+  [presentation]
+   position=64,5
+   taille=9,59
+   id=21
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=76,5
+   taille=9,59
+   id=22
+   wstyle="STD"
+  [texte]
+   texte="Localisation"
+ [obj_texte]
+  [presentation]
+   position=88,5
+   taille=9,59
+   id=23
+   wstyle="STD"
+  [texte]
+   texte="Numéro de série"
+ [obj_texte]
+  [presentation]
+   position=120,169
+   taille=9,74
+   id=26
+   wstyle="STD"
+  [texte]
+   texte="Acquisition"
+ [obj_texte]
+  [presentation]
+   position=132,11
+   taille=9,73
+   id=19
+   wstyle="STD"
+  [texte]
+   texte="Prix de cession"
+ [obj_texte]
+  [presentation]
+   position=132,169
+   taille=9,74
+   id=27
+   wstyle="STD"
+  [texte]
+   texte="Mise en service"
+ [obj_texte]
+  [presentation]
+   position=144,169
+   taille=9,74
+   id=28
+   wstyle="STD"
+  [texte]
+   texte="Début d'Amortissement"
+ [obj_texte]
+  [presentation]
+   position=182,10
+   taille=9,74
+   id=32
+   wstyle="STD_AFF"
+  [texte]
+   texte="Compte d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=194,10
+   taille=9,74
+   id=33
+   wstyle="STD_AFF"
+  [texte]
+   texte="Compte fournisseur"
+ [champ]
+  [presentation]
+   position=26,66
+   taille=9,35
+   id=34
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,immo,immobilisation
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=52,102
+   taille=9,212
+   id=1024
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,9
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [multi_choix]
+  [presentation]
+   position=26,185
+   taille=9,40
+   id=42
+   wstyle="ETAT"
+  [description]
+   donnee=immo,position,immobilisation
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","POSITION"
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=52,66
+   taille=9,35
+   id=1022
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,natimmo,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=724
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   f8=19714
+   ctrl_f6=10300
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_NatImmo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=64,66
+   taille=9,160
+   id=47
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,lib,immobilisation
+  [aide_page]
+   aide=724
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=76,66
+   taille=9,160
+   id=51
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,local,immobilisation
+  [aide_page]
+   aide=724
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=88,66
+   taille=9,160
+   id=52
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,serie,immobilisation
+  [aide_page]
+   aide=724
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=120,10
+   taille=9,52
+   noms="creation"
+   id=48
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,etat,immobilisation
+   sequence=20
+   minmaj=majuscules
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","ETAT"
+  [aide_page]
+   aide=738
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Etat_1_Av"
+   diva_apres="Champ_Etat_1_Ap"
+ [champ]
+  [presentation]
+   position=120,86
+   taille=9,36
+   noms="datecession"
+   id=49
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cesdt,immobilisation
+   sequence=10
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=769
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_CesDt_1_Av"
+   diva_apres="Champ_CesDt_1_Ap"
+ [champ]
+  [presentation]
+   position=132,86
+   taille=9,58
+   noms="prixcession"
+   id=50
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cesmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=769
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_CesMt_1_Av"
+   diva_apres="Champ_CesMt_1_Ap"
+ [champ]
+  [presentation]
+   position=38,66
+   taille=9,15
+   noms="etbc3"
+   id=963
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,etb,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f7=8000
+   f8=19004
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Etb_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=38,82
+   taille=9,232
+   noms="etbc3"
+   id=964
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,8
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=26,159
+   taille=9,19
+   noms="ifrs"
+   id=84
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,immocomp,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=26,277
+   taille=9,34
+   id=85
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,immodt,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=232,123
+   taille=9,190
+   noms="axe1"
+   id=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,3
+   saisie=non
+ [champ]
+  [presentation]
+   position=244,123
+   taille=9,190
+   noms="axe2"
+   id=39
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,4
+   saisie=non
+ [champ]
+  [presentation]
+   position=120,245
+   taille=9,36
+   noms="parametre"
+   id=73
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,acqdt,immobilisation
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AcqDt_1_Av"
+   diva_apres="Champ_AcqDt_1_Ap"
+ [champ]
+  [presentation]
+   position=132,245
+   taille=9,36
+   noms="parametre"
+   id=74
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,svcdt,immobilisation
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_SvcDt_1_Av"
+   diva_apres="Champ_SvcDt_1_Ap"
+ [champ]
+  [presentation]
+   position=144,245
+   taille=9,36
+   noms="parametre"
+   id=75
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecoamdt,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_EcoAmDt_1_Av"
+   diva_apres="Champ_EcoAmDt_1_Ap"
+ [champ]
+  [presentation]
+   position=256,123
+   taille=9,190
+   noms="axe3"
+   id=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,5
+   saisie=non
+ [champ]
+  [presentation]
+   position=268,123
+   taille=9,190
+   noms="axe4"
+   id=41
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,6
+   saisie=non
+ [champ]
+  [presentation]
+   position=232,10
+   taille=9,74
+   noms="axe1"
+   id=43
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,1
+   saisie=non
+ [champ]
+  [presentation]
+   position=244,10
+   taille=9,74
+   noms="axe2"
+   id=44
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,2
+   saisie=non
+ [champ]
+  [presentation]
+   position=256,10
+   taille=9,74
+   noms="axe3"
+   id=45
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,3
+   saisie=non
+ [champ]
+  [presentation]
+   position=268,10
+   taille=9,74
+   noms="axe4"
+   id=46
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,4
+   saisie=non
+ [champ]
+  [presentation]
+   position=182,123
+   taille=9,190
+   id=36
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,1
+   saisie=non
+ [champ]
+  [presentation]
+   position=194,123
+   taille=9,190
+   id=37
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,2
+   saisie=non
+ [champ]
+  [presentation]
+   position=182,86
+   taille=9,36
+   id=78
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cpt,immobilisation
+  [param_saisie]
+   obligatoire=oui
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=194,86
+   taille=9,36
+   id=79
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptaux,immobilisation
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptAux_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=232,86
+   taille=9,36
+   noms="axe1"
+   id=80
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,axe,immobilisation,1
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=244,86
+   taille=9,36
+   noms="axe2"
+   id=81
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,axe,immobilisation,2
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=256,86
+   taille=9,36
+   noms="axe3"
+   id=82
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,axe,immobilisation,3
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=268,86
+   taille=9,36
+   noms="axe4"
+   id=83
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,axe,immobilisation,4
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=12
+ libelle="Elements financiers"
+ fond="STD"
+ titre="Bien"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=11
+ suiv=13
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=30
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="ELEMENTS FINANCIERS"
+   ordre=2
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=76,5
+   taille=128,310
+   id=13
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Composition de la valeur d'entrée"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=42,310
+   id=1002
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Coûts"
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=192,6
+   taille=11,71
+   id=1197
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="GROUPE"
+   wnom_couleurfond="GROUPE_TITRE"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,74
+   id=29
+   wstyle="STD"
+  [texte]
+   texte="Coût de revient"
+ [obj_texte]
+  [presentation]
+   position=54,10
+   taille=9,74
+   id=30
+   wstyle="STD"
+  [texte]
+   texte="Base taxe professionnelle"
+ [champ]
+  [presentation]
+   position=193,10
+   taille=9,63
+   id=35
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=x1,mtcr,x1
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=42,86
+   taille=9,58
+   noms="parametre"
+   id=76
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cr,immobilisation
+   format="\formatmille"
+   sequence=30
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cr_1_Av"
+   diva_apres="Champ_Cr_1_Ap"
+ [champ]
+  [presentation]
+   position=54,86
+   taille=9,58
+   id=77
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,btpmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=92,10
+   taille=9,63
+   noms="parametre"
+   id=53
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,1
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=92,78
+   taille=9,230
+   noms="parametre"
+   id=54
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=102,10
+   taille=9,63
+   noms="parametre"
+   id=55
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,2
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=102,78
+   taille=9,230
+   noms="parametre"
+   id=56
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=112,10
+   taille=9,63
+   noms="parametre"
+   id=57
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,3
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=112,78
+   taille=9,230
+   noms="parametre"
+   id=58
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=122,10
+   taille=9,63
+   noms="parametre"
+   id=59
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,4
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=122,78
+   taille=9,230
+   noms="parametre"
+   id=60
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=132,10
+   taille=9,63
+   noms="parametre"
+   id=61
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,5
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=132,78
+   taille=9,230
+   noms="parametre"
+   id=62
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=142,10
+   taille=9,63
+   noms="parametre"
+   id=63
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,6
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=142,78
+   taille=9,230
+   noms="parametre"
+   id=64
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,6
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=152,10
+   taille=9,63
+   noms="parametre"
+   id=65
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,7
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=152,78
+   taille=9,230
+   noms="parametre"
+   id=66
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,7
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=162,10
+   taille=9,63
+   noms="parametre"
+   id=67
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,8
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=162,78
+   taille=9,230
+   noms="parametre"
+   id=68
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,8
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=172,10
+   taille=9,63
+   noms="parametre"
+   id=69
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,9
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=172,78
+   taille=9,230
+   noms="parametre"
+   id=70
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,9
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+ [champ]
+  [presentation]
+   position=182,10
+   taille=9,63
+   noms="parametre"
+   id=71
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltmt,immobilisation,10
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTMt_1_Av"
+   diva_apres="Champ_CrelTMt_1_Ap"
+ [champ]
+  [presentation]
+   position=182,78
+   taille=9,230
+   noms="parametre"
+   id=72
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,creltlib,immobilisation,10
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_CrelTLib_1_Av"
+[page]
+ numero=13
+ libelle="Parametres amortissements"
+ fond="STD"
+ titre="Bien"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=12
+ suiv=15
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="AMORTISSEMENTS"
+   ordre=3
+   couleur_fond="STD"
+ [aide_page]
+  aide=726
+  fichier="CCIMAIDE"
+ [groupbox]
+  [presentation]
+   position=158,5
+   taille=136,139
+   id=1192
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte=" "
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=50,5
+   taille=104,139
+   id=1187
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte=" "
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=158,232
+   taille=136,86
+   id=1203
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Fiscal"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=158,145
+   taille=136,86
+   id=1202
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Economique"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=50,232
+   taille=104,86
+   id=1200
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Fiscal"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=50,145
+   taille=104,86
+   id=1199
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Economique"
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=185,232
+   taille=95,86
+   id=1180
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="XTRACOMPTA_3D"
+ [cadre]
+  [presentation]
+   position=185,145
+   taille=95,86
+   id=1178
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="COMPTABLE_3D"
+ [cadre]
+  [presentation]
+   position=63,232
+   taille=65,86
+   id=1176
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="XTRACOMPTA_3D"
+ [cadre]
+  [presentation]
+   position=63,145
+   taille=65,86
+   id=1174
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="COMPTABLE_3D"
+ [cadre]
+  [presentation]
+   position=129,145
+   taille=25,173
+   id=1014
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="BUDGET_3D"
+ [cadre]
+  [presentation]
+   position=171,145
+   taille=13,173
+   id=1018
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="BUDGET_3D"
+ [cadre]
+  [presentation]
+   position=281,145
+   taille=13,173
+   id=1021
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="BUDGET_3D"
+ [bitmap_constante]
+  [presentation]
+   position=188,132
+   taille=9,10
+   noms="calcul"
+   id=87
+  [param_bitmapc]
+   wnom="TBAATT"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,148
+   id=95
+   wstyle="STD"
+  [texte]
+   texte="Début du premier exercice d'amortissement"
+ [obj_texte]
+  [presentation]
+   position=36,5
+   taille=9,148
+   id=96
+   wstyle="STD"
+  [texte]
+   texte="Exercice courant"
+ [obj_texte]
+  [presentation]
+   position=36,193
+   taille=9,29
+   cadrage=centre
+   id=97
+   wstyle="STD"
+  [texte]
+   texte="au"
+ [obj_texte]
+  [presentation]
+   position=63,5
+   taille=91,14
+   angle=90
+   cadrage=centre
+   id=1188
+   wstyle="STD_TITREGROUPE"
+  [texte]
+   texte="Paramètres"
+ [obj_texte]
+  [presentation]
+   position=66,21
+   taille=9,121
+   id=101
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Base d'amortissement"
+ [obj_texte]
+  [presentation]
+   position=76,21
+   taille=9,121
+   id=102
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Méthode d'amortissement"
+ [obj_texte]
+  [presentation]
+   position=86,21
+   taille=9,121
+   id=103
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Montant de la dotation manuelle pour un exercice"
+ [obj_texte]
+  [presentation]
+   position=96,21
+   taille=9,121
+   id=104
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Durée du plan d'amortissement en années"
+ [obj_texte]
+  [presentation]
+   position=106,21
+   taille=9,121
+   id=105
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Coefficient de dégressivité"
+ [obj_texte]
+  [presentation]
+   position=116,21
+   taille=9,121
+   id=106
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Taux d'amortissement"
+ [obj_texte]
+  [presentation]
+   position=132,21
+   taille=9,121
+   noms="ifrs"
+   id=107
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Plan d'unités d'oeuvre"
+ [obj_texte]
+  [presentation]
+   position=142,21
+   taille=9,121
+   noms="ifrs"
+   id=108
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Valeur résiduelle attendue"
+ [obj_texte]
+  [presentation]
+   position=171,5
+   taille=123,14
+   angle=90
+   cadrage=centre
+   id=1191
+   wstyle="STD_TITREGROUPE"
+  [texte]
+   texte="Cumuls"
+ [obj_texte]
+  [presentation]
+   position=173,208
+   taille=9,47
+   cadrage=centre
+   id=111
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="au"
+ [obj_texte]
+  [presentation]
+   position=174,21
+   taille=9,121
+   id=110
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Exercices"
+ [obj_texte]
+  [presentation]
+   position=188,21
+   taille=9,108
+   id=114
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Périodes"
+ [obj_texte]
+  [presentation]
+   position=188,183
+   taille=9,10
+   cadrage=centre
+   id=115
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="au"
+ [obj_texte]
+  [presentation]
+   position=188,270
+   taille=9,10
+   cadrage=centre
+   id=116
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="au"
+ [obj_texte]
+  [presentation]
+   position=198,21
+   taille=9,121
+   id=117
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Nombre de jours"
+ [obj_texte]
+  [presentation]
+   position=208,21
+   taille=9,121
+   id=118
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Total des amortissements linéaires"
+ [obj_texte]
+  [presentation]
+   position=218,21
+   taille=9,121
+   id=119
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Total des amortissements dégressifs"
+ [obj_texte]
+  [presentation]
+   position=228,21
+   taille=9,121
+   id=120
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Total des amortissements manuels"
+ [obj_texte]
+  [presentation]
+   position=238,21
+   taille=9,121
+   noms="ifrs"
+   id=121
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Total des amortissements plan d'unités d'oeuvre"
+ [obj_texte]
+  [presentation]
+   position=248,21
+   taille=9,121
+   id=122
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Cumul des amortissements"
+ [obj_texte]
+  [presentation]
+   position=258,21
+   taille=9,121
+   id=123
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Valeur résiduelle"
+ [obj_texte]
+  [presentation]
+   position=268,21
+   taille=9,121
+   noms="ifrs"
+   id=124
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Cumul des Dépréciations"
+ [obj_texte]
+  [presentation]
+   position=283,21
+   taille=9,121
+   id=125
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Solde des amortissements dérogatoires"
+ [champ]
+  [presentation]
+   position=26,155
+   taille=9,36
+   id=126
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,exopdt,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=36,155
+   taille=9,36
+   id=127
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cd,exoddt,cd
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=36,224
+   taille=9,36
+   id=128
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cd,exofdt,cd
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=66,155
+   taille=9,67
+   noms="parametre"
+   id=129
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecobas,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoBas_1_Av"
+   diva_apres="Champ_EcoBas_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=76,155
+   taille=9,67
+   id=130
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecotyp,immobilisation
+   sequence=20
+   minmaj=majuscules
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","ECOTYP"
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoTyp_1_Av"
+   diva_apres="Champ_EcoTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=86,155
+   taille=9,67
+   noms="dotatione"
+   id=131
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,doteco,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_DotEco_1_Av"
+ [champ]
+  [presentation]
+   position=96,155
+   taille=9,27
+   noms="dureee"
+   id=132
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecodur,immobilisation
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoDur_1_Av"
+   diva_apres="Champ_EcoDur_1_Ap"
+ [champ]
+  [presentation]
+   position=132,155
+   taille=9,33
+   noms="ifrs;planuo"
+   id=133
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,uocode,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   f8=19704
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_UoCode_1_Av"
+   diva_apres="Champ_UoCode_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=142,155
+   taille=9,67
+   noms="ifrs"
+   id=135
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,resfinmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_ResFinMt_1_Av"
+   diva_apres="Champ_ResFinMt_1_Ap"
+ [champ]
+  [presentation]
+   position=66,242
+   taille=9,67
+   noms="parametre"
+   id=136
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fisbas,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisBas_1_Av"
+   diva_apres="Champ_FisBas_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=76,242
+   taille=9,67
+   noms="parametre"
+   id=137
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fistyp,immobilisation
+   minmaj=majuscules
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","FISTYP"
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisTyp_1_Av"
+   diva_apres="Champ_FisTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=86,242
+   taille=9,67
+   noms="dotationf;parametre"
+   id=138
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,dotfis,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_DotFis_1_Av"
+ [champ]
+  [presentation]
+   position=96,242
+   taille=9,27
+   noms="dureef;parametre"
+   id=139
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fisdur,immobilisation
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisDur_1_Av"
+   diva_apres="Champ_FisDur_1_Ap"
+ [champ]
+  [presentation]
+   position=173,170
+   taille=9,36
+   noms="cumul"
+   id=140
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,exoddt,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_ExoDDt_1_Av"
+ [champ]
+  [presentation]
+   position=188,148
+   taille=9,34
+   noms="cumul"
+   id=142
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecoddt,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoDDt_1_Av"
+   diva_apres="Champ_EcoDDt_1_Ap"
+ [champ]
+  [presentation]
+   position=188,194
+   taille=9,34
+   noms="cumul"
+   id=143
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecofdt,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoFDt_1_Av"
+   diva_apres="Champ_EcoFDt_1_Ap"
+ [champ]
+  [presentation]
+   position=198,155
+   taille=9,27
+   noms="cumul"
+   id=144
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecojournb,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoJourNb_1_Av"
+ [champ]
+  [presentation]
+   position=208,155
+   taille=9,67
+   noms="cumul"
+   id=145
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecolinmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoLinMt_1_Av"
+   diva_apres="Champ_EcoLinMt_1_Ap"
+ [champ]
+  [presentation]
+   position=218,155
+   taille=9,67
+   noms="cumul"
+   id=146
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecodegmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoDegMt_1_Av"
+   diva_apres="Champ_EcoDegMt_1_Ap"
+ [champ]
+  [presentation]
+   position=228,155
+   taille=9,67
+   noms="cumul"
+   id=147
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecomanmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoManMt_1_Av"
+   diva_apres="Champ_EcoManMt_1_Ap"
+ [champ]
+  [presentation]
+   position=238,155
+   taille=9,67
+   noms="cumul;ifrs"
+   id=148
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecopuomt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=11001
+  [traitements]
+   diva_avant="Champ_EcoPuoMt_1_Av"
+   diva_apres="Champ_EcoPuoMt_1_Ap"
+ [champ]
+  [presentation]
+   position=173,257
+   taille=9,36
+   noms="cumul"
+   id=141
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,exofdt,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_ExoFDt_1_Av"
+   diva_apres="Champ_ExoFDt_1_Ap"
+ [champ]
+  [presentation]
+   position=268,155
+   taille=9,67
+   noms="ifrs"
+   id=149
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,cumdprec,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=188,235
+   taille=9,34
+   noms="cumul"
+   id=154
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fisddt,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisDDt_1_Av"
+   diva_apres="Champ_FisDDt_1_Ap"
+ [champ]
+  [presentation]
+   position=188,281
+   taille=9,34
+   noms="cumul"
+   id=155
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fisfdt,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisFDt_1_Av"
+   diva_apres="Champ_FisFDt_1_Ap"
+ [champ]
+  [presentation]
+   position=198,242
+   taille=9,27
+   noms="cumul"
+   id=156
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fisjournb,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisJourNb_1_Av"
+ [champ]
+  [presentation]
+   position=208,242
+   taille=9,67
+   noms="cumul"
+   id=157
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fislinmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisLinMt_1_Av"
+   diva_apres="Champ_FisLinMt_1_Ap"
+ [champ]
+  [presentation]
+   position=218,242
+   taille=9,67
+   noms="cumul"
+   id=158
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fisdegmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisDegMt_1_Av"
+   diva_apres="Champ_FisDegMt_1_Ap"
+ [champ]
+  [presentation]
+   position=228,242
+   taille=9,67
+   noms="cumul"
+   id=159
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,fismanmt,immobilisation
+   format="\formatmille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=728
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisManMt_1_Av"
+   diva_apres="Champ_FisManMt_1_Ap"
+ [champ]
+  [presentation]
+   position=248,155
+   taille=9,67
+   id=160
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,ecototmt,immobilisation
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=258,155
+   taille=9,67
+   id=161
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,ecoresmt,immobilisation
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=248,242
+   taille=9,67
+   id=162
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,fistotmt,immobilisation
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=258,242
+   taille=9,67
+   id=163
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,fisresmt,immobilisation
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=283,155
+   taille=9,67
+   id=164
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,derog,immobilisation
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=132,189
+   taille=9,119
+   noms="ifrs;parametres;planuo"
+   id=134
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=x1,lib,x1,7
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=106,155
+   taille=9,27
+   id=150
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,ecocoe,immobilisation
+   format="0V000"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=116,155
+   taille=9,27
+   id=151
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,ecotau,immobilisation
+   format="000V000"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=106,242
+   taille=9,27
+   id=152
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,fiscoe,immobilisation
+   format="0V000"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=116,242
+   taille=9,27
+   id=153
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,fistau,immobilisation
+   format="000V000"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   ctrl_f6=10300
+[page]
+ numero=14
+ fond="STD"
+ titre="Bien"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=15
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=5
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANT"
+   ordre=5
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=88,4
+   taille=54,152
+   id=174
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière opération"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,164
+   taille=54,151
+   id=175
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=54,151
+   id=176
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,13
+   id=171
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=42,169
+   taille=9,13
+   id=170
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=54,10
+   taille=9,13
+   id=173
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=54,169
+   taille=9,13
+   id=172
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=104,9
+   taille=9,13
+   id=166
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=116,9
+   taille=9,13
+   id=167
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=104,24
+   taille=9,129
+   id=177
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,userdop,immobilisation
+   format="1"
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,25
+   taille=9,128
+   id=178
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,usercr,immobilisation
+   format="1"
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,184
+   taille=9,128
+   id=179
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,usermo,immobilisation
+   format="1"
+   saisie=non
+ [champ]
+  [presentation]
+   position=54,25
+   taille=9,128
+   id=180
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,usercrdh,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+ [champ]
+  [presentation]
+   position=54,184
+   taille=9,128
+   id=181
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,usermodh,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+ [champ]
+  [presentation]
+   position=116,24
+   taille=9,129
+   id=182
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,userdopdh,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+ [multi_choix]
+  [presentation]
+   position=66,10
+   taille=9,143
+   id=183
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,usercrori,immobilisation
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+ [multi_choix]
+  [presentation]
+   position=66,169
+   taille=9,143
+   id=184
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,usermoori,immobilisation
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+ [multi_choix]
+  [presentation]
+   position=128,9
+   taille=9,145
+   id=185
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,userdopori,immobilisation
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+[page]
+ numero=15
+ libelle="Paramétrage Comptes d'immobilisation"
+ fond="STD"
+ titre="Bien - paramètres compte"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=13
+ suiv=14
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=6
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="COMPTABILISATION"
+   ordre=4
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=157,5
+   taille=54,310
+   noms="ifrs"
+   id=917
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dépréciation"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=100,5
+   taille=52,310
+   id=916
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dérogatoire"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=62,5
+   taille=33,310
+   id=915
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dotation"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=31,310
+   id=914
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Amortissement"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=43,10
+   taille=9,121
+   id=920
+   wstyle="STD"
+  [texte]
+   texte="Amortissement des immobilisations"
+ [obj_texte]
+  [presentation]
+   position=79,10
+   taille=9,121
+   id=923
+   wstyle="STD"
+  [texte]
+   texte="Dotation aux amortissements"
+ [obj_texte]
+  [presentation]
+   position=116,10
+   taille=9,121
+   id=926
+   wstyle="STD"
+  [texte]
+   texte="Provision pour amortissement dérogatoire"
+ [obj_texte]
+  [presentation]
+   position=128,10
+   taille=9,121
+   id=927
+   wstyle="STD"
+  [texte]
+   texte="Dotation aux amortissements dérogatoires"
+ [obj_texte]
+  [presentation]
+   position=140,10
+   taille=9,121
+   id=928
+   wstyle="STD"
+  [texte]
+   texte="Reprise sur amortissement dérogatoire"
+ [obj_texte]
+  [presentation]
+   position=174,10
+   taille=9,121
+   noms="ifrs"
+   id=930
+   wstyle="STD"
+  [texte]
+   texte="Provision pour dépréciation des immobilisations"
+ [obj_texte]
+  [presentation]
+   position=186,10
+   taille=9,121
+   noms="ifrs"
+   id=932
+   wstyle="STD"
+  [texte]
+   texte="Dotation pour dépréciation"
+ [obj_texte]
+  [presentation]
+   position=198,10
+   taille=9,121
+   noms="ifrs"
+   id=933
+   wstyle="STD"
+  [texte]
+   texte="Reprise de dépréciation"
+ [champ]
+  [presentation]
+   position=43,133
+   taille=9,36
+   id=934
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptamo,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19032
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptAmo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=43,170
+   taille=9,140
+   id=935
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=79,170
+   taille=9,140
+   id=938
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=79,133
+   taille=9,36
+   id=940
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptdotamo,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotAmo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=116,170
+   taille=9,140
+   id=941
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=128,170
+   taille=9,140
+   id=943
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,4
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=140,170
+   taille=9,140
+   id=944
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,5
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=174,170
+   taille=9,140
+   noms="ifrs"
+   id=945
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,6
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=116,133
+   taille=9,36
+   id=946
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptprodro,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptProDro_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=128,133
+   taille=9,36
+   id=948
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptdotdro,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotDro_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=186,170
+   taille=9,140
+   noms="ifrs"
+   id=949
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,7
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=140,133
+   taille=9,36
+   id=950
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptrepdro,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptRepDro_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=198,170
+   taille=9,140
+   noms="ifrs"
+   id=951
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,8
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=174,133
+   taille=9,36
+   noms="ifrs"
+   id=952
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptprodep,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptProDep_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=186,133
+   taille=9,36
+   noms="ifrs"
+   id=954
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptdotdep,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotDep_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=198,133
+   taille=9,36
+   noms="ifrs"
+   id=955
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptdotrep,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotRep_1_Ap"
+  [boutons]
+   "zoom"
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPLEMENTS"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="NOTE"
+    wtexte="_Note\tShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="FICJOINT"
+    wtexte="_Fichiers joint\tCtrl+F6"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP11"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Historique"
+    wid_ressource="HISTO"
+    wetype_trait=arret
+    warret=5100
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wtrait_chaine="#home"
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wtrait_chaine="#end"
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    wetype_trait=arret
+    warret=5
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP10"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Historique"
+    wid_ressource="HISTO"
+    wetype_trait=arret
+    warret=5100
+   [info_bulle]
+   texte="Historique des biens immobilisés"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   [param_bouton]
+    wnom="FICJOINT"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+   [info_bulle]
+   texte="Fichiers joints <Ctrl+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_4"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_5"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=4000
+   [info_bulle]
+   texte="Imprimer"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Générique"
+    wid_ressource="ZOOMCREATION1"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+SetModuleInfo('$Id: ccez701_sql.dhsf 29928 2013-02-27 13:04:42Z ms $')
+;>xdiva
+;*
+;*		zoom sur les biens																													cctez701.dhsp
+;*
+
+;*		log	 version	  n°modif		date		modifications
+;*
+;*		pb 		4.1						04.1999	version initiale en Diva
+;*		hc						1698		04.01.2001	modification taux de degressivité
+;*		hc			5.2a		2329			06.2002
+;*		jlsi		5.6		3229			11.2005	Modifications IFRS
+;*		jlsi		5.6a		3383		12.01.2006	Amélioration ergonomie
+;*		jlsi		5.6c		3585			05.2006	Rajout paramétrage comptes d'immobilisation
+;*		jlsi		5.6c		3596			05.2006	Prise en compte etat 'en construction'
+;*		jlsi		5.6c		3789		26.09.2006	Autoriser l'imputation sur un axe confidentiel
+
+
+;*
+;*		déclarations
+;*
+
+; includes
+include	"cctc000.dhsp"
+include	"cctc700.dhsp"
+
+; modules
+module	ccpm700.dhop
+module	cctm700.dhop
+module	cctz701_sql.dhop
+
+; record SQL
+public	recordSQL	'CCRSIMMO.dhoq'		IMMO			IMMOBILISATION
+
+; enregistrements
+public	record		CCFDD.dhsd		CA										; dossier, paramètres généraux
+public	record		CCFDD.dhsd		CD										; dossier, paramètres immobilisations
+public	record		CCFDD.dhsd		C3										; intitulé de compte
+public	record		CCFDD.dhsd		C5										; intitulé d'axe
+public	record		CCFDD.dhsd		CETS									; établissement
+public	record		CCFDD.dhsd		I1			I1_SEL					; immobilisation (sélection)
+public	record		CCFDD.dhsd		X1										; work zoom
+public	record		CCFDD.dhsd		I3										; plan d'unité d'oeuvre
+public	record		CCFDD.dhsd		HD										; natures d'immobilisation
+
+public	record		DDSYS.dhsd		ZOOM									; variables de contrôle du zoom
+public	record		DDSYS.dhsd 		ROWINFO	ZOOMSELECTION
+
+
+; variables
+1			ETAT		>CCFDD.dhsd	ETAT											; copie i1.Etat avant modification
+1			AMOTYP	>CCFDD.dhsd	AMOTYP										; copie i1.EcoTyp ou i1.FisTyp avant modification
+
+
+;*
+;*		fonctions et procédures locales
+;*
+
+;*
+procedure RAZ_Cumuls
+
+; initialise à ' ' (ou 0), les zones de cumuls
+
+beginp	; RAZ_Cumuls
+	
+	IMMOBILISATION.ExoDDt			= ' '
+	IMMOBILISATION.ExoFDt			= ' '
+	; zones cumuls economiques
+	IMMOBILISATION.EcoLinTau		= ' '
+	IMMOBILISATION.EcoDDt			= ' '
+	IMMOBILISATION.EcoFDt			= ' '
+	IMMOBILISATION.EcoJourNb		= ' '
+	IMMOBILISATION.EcoMoisNb		= ' '
+	IMMOBILISATION.EcoLinMt			= ' '
+	IMMOBILISATION.EcoDegMt			= ' '
+	IMMOBILISATION.EcoManMt			= ' '
+	IMMOBILISATION.EcoExcMt			= ' '
+	IMMOBILISATION.EcoPuoMt			= ' '
+	IMMOBILISATION.EcoTotMt			= ' '
+	IMMOBILISATION.CumReval			= ' '
+	IMMOBILISATION.CumDprec			= ' '
+	IMMOBILISATION.EcoResMt			= IMMOBILISATION.EcoBas
+	;zones cumuls fiscaux
+	IMMOBILISATION.FisLinTau		= ' '
+	IMMOBILISATION.FisDDt			= ' '
+	IMMOBILISATION.FisFDt			= ' '
+	IMMOBILISATION.FisJourNb		= ' '
+	IMMOBILISATION.FisMoisNb		= ' '
+	IMMOBILISATION.FisLinMt			= ' '
+	IMMOBILISATION.FisDegMt			= ' '
+	IMMOBILISATION.FisManMt			= ' '
+	IMMOBILISATION.FisExcMt			= ' '
+	IMMOBILISATION.FisTotMt			= ' '
+	IMMOBILISATION.FisResMt			= IMMOBILISATION.FisBas
+
+endp		; RAZ_Cumuls
+
+
+;*
+public function int Calcul_Possible
+
+; vérifie que tous les paramètres nécessaires au calcul des cumuls sont renseignés
+; et que l'on a le droit de saisir ou modifier les cumuls
+
+; true	tous les paramètres sont renseignés
+; false	il manque des paramètres
+
+beginf	; calcul_possible
+
+;	if not X1.Choix(1)							|	freturn(false)	|	endif
+	if (not X1.Choix(1))																		\
+	and (IMMOBILISATION.EcoTyp <> 4 or IMMOBILISATION.SvcDt >= CD.ExoDDt)	\
+	and (IMMOBILISATION.FisTyp <> 4 or IMMOBILISATION.SvcDt >= CD.ExoDDt)
+		freturn(false)
+	endif
+	if IMMOBILISATION.EcoTyp < 1				|	freturn(false)	|	endif
+	if IMMOBILISATION.FisTyp < 1				|	freturn(false)	|	endif
+	if IMMOBILISATION.AcqDt  = ' '			|	freturn(false)	|	endif
+	if IMMOBILISATION.EcoTyp = 3				|	freturn(false)	|	endif
+	if IMMOBILISATION.FisTyp = 3				|	freturn(false)	|	endif
+
+	if IMMOBILISATION.EcoTyp <> 4
+		if IMMOBILISATION.EcoBas = 0			|	freturn(false)	|	endif
+		if IMMOBILISATION.EcoDur = 0			|	freturn(false)	|	endif
+		switch IMMOBILISATION.EcoTyp
+		case 1
+			if IMMOBILISATION.SvcDt = ' '		|	freturn(false)	|	endif
+		case 2
+			if IMMOBILISATION.EcoCoe = 0		|	freturn(false)	|	endif
+		case 3
+			if IMMOBILISATION.SvcDt  = ' '	|	freturn(false)	|	endif
+			if IMMOBILISATION.DotEco = 0		|	freturn(false)	|	endif
+		case 5
+			if IMMOBILISATION.UoCode = ' '	|	freturn(false)	|	endif
+		endswitch
+	endif
+
+	if IMMOBILISATION.FisTyp <> 4
+		if IMMOBILISATION.FisBas = 0			|	freturn(false)	|	endif
+		if IMMOBILISATION.FisDur = 0			|	freturn(false)	|	endif
+		switch IMMOBILISATION.FisTyp
+		case 1
+			if IMMOBILISATION.SvcDt = ' '		|	freturn(false)	|	endif
+		case 2
+			if IMMOBILISATION.FisCoe = 0		|	freturn(false)	|	endif
+		case 3
+			if IMMOBILISATION.SvcDt  = ' '	|	freturn(false)	|	endif
+			if IMMOBILISATION.DotFis = 0		|	freturn(false)	|	endif
+		endswitch
+	endif
+
+	freturn(true)
+
+endf		; calcul_possible
+
+
+;*
+;*		procédures sur les données du masque
+;*
+
+;*
+public procedure Champ_Choix_0_Ap
+
+; bouton radio choix de la creation : Bien ou Composant
+
+beginp	; Champ_Choix_0_Ap
+
+	if Zoom.Action = ZOOM_DUPLICATION
+		if X1.Choix(5) = 2
+			Regler_creation('DC')
+		else
+			Regler_creation('DB')
+		endif
+	else
+		if X1.Choix(5) = 2
+			Regler_creation('CC')
+		else
+			Regler_creation(' ')
+		endif
+	endif
+
+endp		; Champ_Choix_0_Ap
+
+
+;*
+public procedure Champ_Cpt_1_Ap
+
+; après compte d'immobilisation
+
+beginp	; Champ_Cpt_1_Ap
+
+	X1.Lib(1) = ' '
+	if Controle_Compte(IMMOBILISATION.CPT, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+		X1.Lib(1) = C3.Lib
+	endif
+
+endp		; Champ_Cpt_1_Ap
+
+
+;*
+public procedure Champ_CptAux_1_Ap
+
+; après compte auxiliaire fournisseur
+
+beginp	; Champ_CptAux_1_Ap
+
+	X1.Lib(2) = ' '
+	if IMMOBILISATION.CPTAUX <> ' '
+		if Controle_Compte(IMMOBILISATION.CPTAUX, cptnat = 4, conf = false, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			X1.Lib(2) = C3.Lib
+		endif
+	endif
+
+endp		; Champ_CptAux_1_Ap
+
+
+;*
+public procedure Champ_Axe_1_Av
+
+; avant code axe
+
+beginp	; Champ_Axe_1_Av
+
+	if CA.AxeLib(Harmony.DataInd1) = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+	C3XZ.AxeNo = Harmony.DataInd1
+
+endp		; Champ_Axe_1_Av
+
+
+;*
+public procedure Champ_Axe_1_Ap
+
+; après code axe
+
+beginp	; Champ_Axe_1_Ap
+
+	X1.Lib(Harmony.DataInd1 + 2) = ' '
+	if IMMOBILISATION.Axe(Harmony.DataInd1) <> ' '
+		Controle_Axe(Harmony.DataInd1, IMMOBILISATION.Axe(Harmony.DataInd1), conf = false, axetyp = 1, etablissement = true, etb = IMMOBILISATION.Etb)
+		X1.Lib(Harmony.DataInd1 + 2) = C5.Lib
+	endif
+
+endp		; Champ_Axe_1_Ap
+
+
+;*
+public procedure Champ_AcqDt_1_Av
+
+; avant date d'acquisition
+
+beginp	; Champ_AcqDt_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_AcqDt_1_Av
+
+
+;*
+public procedure Champ_AcqDt_1_Ap
+
+; après date d'acquisition
+
+beginp	; Champ_AcqDt_1_Ap
+
+	if not Harmony.DataModif			|	preturn	|	endif
+	if IMMOBILISATION.AcqDt = ' '		|	preturn	|	endif
+
+	IMMOBILISATION.ExoPDt = Debut_Exercice(IMMOBILISATION.AcqDt)
+
+	if ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION or IMMOBILISATION.SvcDt < IMMOBILISATION.AcqDt
+		if Verifier_Bien_Amortissable
+			IMMOBILISATION.SvcDt 	= IMMOBILISATION.AcqDt
+			IMMOBILISATION.EcoAmDt  = IMMOBILISATION.AcqDt
+		else
+			; le bien n'est pas amortissable ('en construction' par exemple)
+			IMMOBILISATION.SvcDt 	= hdate('99991231')
+			IMMOBILISATION.EcoAmDt  = IMMOBILISATION.SvcDt
+		endif
+	endif
+
+	Regler_Acces_Cumuls
+
+	RAZ_Cumuls
+
+	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
+	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
+	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_AcqDt_1_Ap
+
+
+;*
+public procedure Champ_SvcDt_1_Av
+
+; avant date de mise en service
+
+beginp	; Champ_SvcDt_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_SvcDt_1_Av
+
+
+;*
+public procedure Champ_SvcDt_1_Ap
+
+; après date de mise en service
+
+beginp	; Champ_SvcDt_1_Ap
+
+	if IMMOBILISATION.SvcDt < IMMOBILISATION.AcqDt
+		Mes_Alert(19710)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if IMMOBILISATION.SvcDt < CD.ExoFDt \
+		and Verifier_Bien_Amortissable = false
+		;"Le bien n'est pas amortissable, il ne peut pas être mis en service durant l'exercice courant"
+		Mes_Alert(19727)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	if ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION or IMMOBILISATION.EcoAmDt < IMMOBILISATION.SvcDt
+		IMMOBILISATION.EcoAmDt = IMMOBILISATION.SvcDt
+	endif
+
+	Regler_Acces_Cumuls
+
+	RAZ_Cumuls
+
+	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
+	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
+	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_SvcDt_1_Ap
+
+
+;*
+public procedure Champ_EcoAmDt_1_Av
+
+; avant date de debut d'amortissement
+
+beginp	; Champ_EcoAmDt_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_EcoAmDt_1_Av
+
+
+;*
+public procedure Champ_EcoAmDt_1_Ap
+
+; après date de debut d'amortissement
+
+beginp	; Champ_EcoAmDt_1_Ap
+
+	if IMMOBILISATION.EcoAmDt < IMMOBILISATION.SvcDt
+		Mes_Alert(19718)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+endp		; Champ_EcoAmDt_1_Ap
+
+
+;*
+public procedure Champ_CrelTMt_1_Av
+
+; avant composition valeur initiale
+
+beginp	; Champ_CrelTMt_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_CrelTMt_1_Av
+
+
+;*
+public procedure Champ_CrelTMt_1_Ap
+
+; apres composition valeur initiale
+beginp	; Champ_CrelTMt_1_Ap
+
+	X1.MtCr = Calcul_valeur_entree_initiale(I1)
+
+	if ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION or (ZOOM.ACTION = ZOOM_MODIFICATION and IMMOBILISATION.Cr = 0)
+		IMMOBILISATION.Cr = X1.MtCr
+	endif
+
+	; Si aucune valeur saisie on va saisir le coût de revient
+ 	if IMMOBILISATION.CrelTMt(Harmony.DataInd1) = ' '
+		Harmony.Retour 	= XMENEXT_POINT_SEQUENCE
+		Harmony.CplRetour = 30
+	endif
+
+
+endp		; Champ_CrelTMt_1_Ap
+
+;*
+public procedure Champ_CrelTLib_1_Av
+
+;	avant saisie libellé valeur initiale
+
+beginp	; Champ_CrelTLib_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_CrelTLib_1_Av
+
+
+;*
+public procedure Champ_Cr_1_Av
+
+; avant coût de revient
+
+beginp	; Champ_Cr_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Cr_1_Av
+
+
+;*
+public procedure Champ_Cr_1_Ap
+
+; après coût de revient
+
+beginp	; Champ_Cr_1_Ap
+
+	if IMMOBILISATION.Cr < 0
+		Mes_Alert(19711)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if IMMOBILISATION.Cr > 0 and (ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION)
+		IMMOBILISATION.BtpMt		= IMMOBILISATION.Cr
+		IMMOBILISATION.EcoBas	= IMMOBILISATION.Cr
+		IMMOBILISATION.EcoResMt	= IMMOBILISATION.Cr
+		IMMOBILISATION.FisBas	= IMMOBILISATION.Cr
+		IMMOBILISATION.FisResMt	= IMMOBILISATION.Cr
+		IMMOBILISATION.Position = Position_Bien(IMMOBILISATION.Position, IMMOBILISATION.EcoResMt, IMMOBILISATION.ResFinMt)
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	if Calcul_Possible
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_Cr_1_Ap
+
+
+;*
+public procedure Champ_Etat_1_Av
+
+; avant état
+
+beginp	; Champ_Etat_1_Av
+
+	if ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION
+		if IMMOBILISATION.Etat not in (1,4)
+			IMMOBILISATION.Etat = 1
+			preturn
+		endif
+	endif
+
+	if X1.Choix(5)																	; flag modification état première fois
+		X1.Choix(5)	= false
+		ETAT			= IMMOBILISATION.Etat
+	endif
+
+endp		; Champ_Etat_1_Av
+
+
+;*
+public procedure Champ_Etat_1_Ap
+
+; après état
+
+record	CCFDD.dhsd	I1		i1p												; bien 'père'
+1		rpere						1,0												; résultat recherche père
+
+beginp	; Champ_Etat_1_Ap
+
+	if Harmony.DataModif
+
+		; controle de l'état en création
+		if ZOOM.ACTION = ZOOM_CREATION
+			if IMMOBILISATION.Etat not in (1,4)								; seuls les état 'en-cours'(1) ou 'en construction' sont autorisés
+				IMMOBILISATION.Etat = 1
+				Harmony.Retour = XmeNext_Traitement_Avant
+				preturn
+			endif
+		endif
+
+		; Mise 'en construction' d'un bien : seulement si aucun amortissement
+		if IMMOBILISATION.Etat <> ETAT and IMMOBILISATION.Etat = 4
+			if IMMOBILISATION.EcoTotMt > 0 or IMMOBILISATION.FisTotMt > 0
+				;"Le bien a déjà des amortissements, mise 'en construction' interdite"
+				Mes_Alert(19728)
+				Harmony.Retour = XmeNext_Traitement_Avant
+				preturn
+			endif
+		endif
+
+		; Mise 'en cours' (ou vente/rebut) d'un bien composant
+		if IMMOBILISATION.Etat <> ETAT and IMMOBILISATION.Etat in (1,2,3)
+			; test pour un composant
+			if Controler_Bien_Structure(IMMOBILISATION.Immo, IMMOBILISATION.ImmoComp) = 2		; il s'agit d'un composant
+				if (rpere := Rechercher_BienPere(IMMOBILISATION.Immo, IMMOBILISATION.ImmoComp, i1p)) = 1
+					if i1p.Etat <> 1
+						;"Le bien composé père n'est pas 'en cours' | Changement d'état du composant interdit"
+						Mes_Alert(19729)
+						Harmony.Retour = XmeNext_Traitement_Avant
+						preturn
+					endif
+				else
+					if rpere = -1
+						;"Bien composé 'père' impossible à lire "
+						Mes_Alert(19730)
+						Harmony.Retour = XmeNext_Traitement_Avant
+						preturn
+					endif
+				endif
+			endif
+		endif
+
+		; Cession ou mise au rebut
+		if IMMOBILISATION.Etat <> ETAT and IMMOBILISATION.Etat in (2,3)
+			; Pour un bien composé : controler la cession (ou mise au rebut) de tous les composants
+			if Controler_Bien_CessionCompose(I1) <> 0
+				; au moins un composant est actif
+				Harmony.Retour = XmeNext_Traitement_Avant
+				preturn
+			endif
+		endif
+
+		; Réactivation d'un bien cédé ou mis au rebut
+		if IMMOBILISATION.Etat <> ETAT and IMMOBILISATION.Etat not in (2,3) and ETAT in (2,3)
+			; Pour un bien composant : controler si son composé 'père' est actif
+			if Controler_Bien_Reactiver(I1) <> 0
+				; le composé 'père' est inactif
+				Harmony.Retour = XmeNext_Traitement_Avant
+				preturn
+			endif
+		endif
+		
+		switch IMMOBILISATION.Etat
+		case vsw in (1,4)									
+			; en cours (1) ou en construction(4)
+			XmeSetAttribut("DateCession", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("PrixCession", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("DateCession", AN_STYLE, "CHAMP_NON_SAISI")
+			XmeSetAttribut("PrixCession", AN_STYLE, "CHAMP_NON_SAISI")
+		case 2
+			; vendu
+			XmeResetAttribut("DateCession", AN_TOUS_ATTRIBUTS)
+			XmeResetAttribut("PrixCession", AN_TOUS_ATTRIBUTS)
+		case 3
+			; au rebut
+			XmeResetAttribut("DateCession", AN_TOUS_ATTRIBUTS)
+			XmeSetAttribut("PrixCession", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("PrixCession", AN_STYLE, "CHAMP_NON_SAISI")
+		endswitch
+
+	endif
+
+	X1.Choix(5) = true
+	if ETAT = IMMOBILISATION.Etat	|	preturn	|	endif
+
+	if IMMOBILISATION.Etat = 1																	; l'état avant modification était une cession
+		IMMOBILISATION.CesDt = ' '
+		IMMOBILISATION.CesMt	= ' '
+	elsif IMMOBILISATION.Etat = 3																; l'état après modification est une mise au rebut
+		IMMOBILISATION.CesMt = ' '
+	endif
+		
+	if	Calcul_Possible
+		Dotations_Cumuls
+	endif
+
+	Harmony.Retour = XMENEXT_DONNEE_SUIVANTE
+
+endp		; Champ_Etat_1_Ap
+
+
+;*
+public procedure Champ_CesDt_1_Av
+
+; avant date de cession
+
+beginp	; Champ_CesDt_1_Av
+
+	if IMMOBILISATION.Etat = 1
+		IMMOBILISATION.CesDt = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_CesDt_1_Av
+
+
+;*
+public procedure Champ_CesDt_1_Ap
+
+; après date de cession
+
+beginp	; Champ_CesDt_1_Ap
+
+	if IMMOBILISATION.CesDt < IMMOBILISATION.SvcDt
+		Mes_Alert(19712)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	if	Calcul_Possible
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_CesDt_1_Ap
+
+
+;*
+public procedure Champ_CesMt_1_Av
+
+; avant prix de cession
+
+beginp	; Champ_CesMt_1_Av
+
+	if IMMOBILISATION.Etat <> 2
+		IMMOBILISATION.CesMt = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_CesMt_1_Av
+
+
+;*
+public procedure Champ_CesMt_1_Ap
+
+; après prix de cession
+
+beginp	; Champ_CesMt_1_Ap
+
+	if IMMOBILISATION.CesMt < 0
+		Mes_Alert(19713)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	endif
+
+endp		; Champ_CesMt_1_Ap
+
+
+;*
+public procedure Champ_EcoBas_1_Av
+
+; avant base d'amortissement économique
+
+beginp	; Champ_EcoBas_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_EcoBas_1_Av
+
+
+;*
+public procedure Champ_EcoBas_1_Ap
+
+; après base d'amortissement économique
+
+beginp	; Champ_EcoBas_1_Ap
+
+	if IMMOBILISATION.EcoBas < 0
+		Mes_Alert(19717)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	if	Calcul_Possible
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_EcoBas_1_Ap
+
+
+;*
+public procedure Champ_EcoTyp_1_Av
+
+; avant méthode d'amortissement économique
+
+beginp	; Champ_EcoTyp_1_Av
+
+	if X1.Choix(6)																	; flag modification type première fois
+		X1.Choix(6)	= false
+		AMOTYP		= IMMOBILISATION.EcoTyp
+	endif
+
+endp		; Champ_EcoTyp_1_Av
+
+
+;*
+public procedure Champ_EcoTyp_1_Ap
+
+; après méthode d'amortissement économique
+
+beginp	; Champ_EcoTyp_1_Ap
+
+	if Harmony.DataModif
+
+		if I1.EcoTyp = 5 and CD.IfrsFl = 1
+			Mes_Alert(7137)
+			Harmony.Retour = XMENEXT_DEBUT_DONNEE
+			preturn
+		endif
+
+		Regler_Acces_Ecotyp
+
+		Regler_Acces_Cumuls
+
+		if Harmony.DataNotif
+			Harmony.Retour = XMENEXT_DEBUT_DONNEE
+			preturn
+		endif
+	endif
+
+	X1.Choix(6) = true
+	if AMOTYP = IMMOBILISATION.EcoTyp	|	preturn	|	endif
+
+	if IMMOBILISATION.EcoTyp <> 3	|	IMMOBILISATION.DotEco = ' '	|	endif
+	if IMMOBILISATION.EcoTyp = 4	|	IMMOBILISATION.EcoDur = ' '	|	endif
+	if IMMOBILISATION.EcoTyp = 5	|	X1.Lib(7) = ' '					|	endif
+
+	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)	\
+	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_EcoTyp_1_Ap
+
+
+;*
+public procedure Champ_DotEco_1_Av
+
+; avant dotation manuelle économique
+
+beginp	; Champ_DotEco_1_Av
+
+	if IMMOBILISATION.EcoTyp <> 3
+		IMMOBILISATION.DotEco = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_DotEco_1_Av
+
+
+;*
+public procedure Champ_EcoDur_1_Av
+
+; avant durée de vie économique
+
+beginp	; Champ_EcoDur_1_Av
+
+	if IMMOBILISATION.EcoTyp = 4															; sans amortissement
+		IMMOBILISATION.EcoDur = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_EcoDur_1_Av
+
+
+;*
+public procedure Champ_EcoDur_1_Ap
+
+; après durée de vie économique
+
+beginp	; Champ_EcoDur_1_Ap
+
+	if IMMOBILISATION.EcoDur = 0
+		Mes_Alert(19714)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if IMMOBILISATION.EcoDur < 0
+		Mes_Alert(19715)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if IMMOBILISATION.EcoTyp = 2 and IMMOBILISATION.EcoDur < 3
+		Mes_Alert(19716)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
+	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_EcoDur_1_Ap
+
+
+;*
+public procedure Champ_UoCode_1_Av
+
+; avant saisie plan d'unité d'oeuvre
+
+beginp	; Champ_UoCode_1_Av
+	
+	if IMMOBILISATION.EcoTyp <> 5															; pas un plan UO
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_UoCode_1_Av
+
+
+;*
+public procedure Champ_UoCode_1_Ap
+
+; apres saisie plan d'unité d'oeuvre
+
+beginp	; Champ_UoCode_1_Ap
+
+	if Rechercher_PlanUO(Harmony.DataVal) <> 0
+		X1.Lib(7) = ' '
+		Mes_Alert(19719, Harmony.DataVal)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+	X1.Lib(7) = I3.Lib
+
+	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)	\
+	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+
+endp		; Champ_UoCode_1_Ap
+
+
+;*
+public procedure Champ_ResFinMt_1_Av
+
+; avant saisie valeur residuelle attendue
+
+beginp	; Champ_ResFinMt_1_Av
+	
+endp		; Champ_ResFinMt_1_Av
+
+
+;*
+public procedure Champ_ResFinMt_1_Ap
+
+; apres saisie valeur residuelle attendue
+
+beginp	; Champ_ResFinMt_1_Ap
+
+	if IMMOBILISATION.ResFinMt < 0
+		; 'La valeur doit être positive ou nulle'
+		Mes_Alert(19722)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not Harmony.DataModif AND not X1.Choix(2) and not X1.Choix(1)	
+		Harmony.Retour 	= XMENEXT_POINT_SEQUENCE
+		Harmony.CplRetour = 20													; retour sur saisie ecotyp
+		preturn	
+	endif
+
+	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
+	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+	if not X1.Choix(2) and not X1.Choix(1)									; saisie paramètres et cumuls interdits
+		Harmony.Retour 	= XMENEXT_POINT_SEQUENCE
+		Harmony.CplRetour = 20													; retour sur saisie ecotyp
+		preturn
+	endif
+
+endp		; Champ_ResFinMt_1_Ap
+
+
+;*
+public procedure Champ_FisBas_1_Av
+
+; avant base d'amortissement fiscale
+
+beginp	; Champ_FisBas_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_FisBas_1_Av
+
+
+;*
+public procedure Champ_FisBas_1_Ap
+
+; après base d'amortissement fiscale
+
+beginp	; Champ_FisBas_1_Ap
+
+	if IMMOBILISATION.FisBas < 0
+		Mes_Alert(19717)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	if	Calcul_Possible
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_FisBas_1_Ap
+
+
+;*
+public procedure Champ_FisTyp_1_Av
+
+; avant méthode d'amortissement fisclae
+
+beginp	; Champ_FisTyp_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+	if X1.Choix(7)																	; flag modification type première fois
+		X1.Choix(7)	= false
+		AMOTYP		= IMMOBILISATION.FisTyp
+	endif
+
+endp		; Champ_FisTyp_1_Av
+
+
+;*
+public procedure Champ_FisTyp_1_Ap
+
+; après méthode d'amortissement fiscale
+
+beginp	; Champ_FisTyp_1_Ap
+
+	if Harmony.DataModif
+
+		if IMMOBILISATION.FisTyp = 5 and CD.IfrsFl = 1
+			Mes_Alert(7137)
+			Harmony.Retour = XMENEXT_DEBUT_DONNEE
+			preturn
+		endif
+
+		Regler_Acces_Fistyp
+
+		Regler_Acces_Cumuls
+
+		if Harmony.DataNotif
+			Harmony.Retour = XMENEXT_DEBUT_DONNEE
+			preturn
+		endif
+	endif
+
+	X1.Choix(7) = true
+	if AMOTYP = IMMOBILISATION.FisTyp	|	preturn								|	endif
+
+	if IMMOBILISATION.FisTyp <> 3			|	IMMOBILISATION.DotFis = ' '	|	endif
+	if IMMOBILISATION.FisTyp = 4			|	IMMOBILISATION.FisDur = ' '	|	endif
+
+	if	Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
+	and IMMOBILISATION.FisBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+	if Harmony.Key = K_TAB \													; Tabulation
+		and IMMOBILISATION.FisTyp = 4											; 	et fistyp='sans', on boucle sur le 1er champ
+		Harmony.Retour = XMENEXT_PREMIERE_DONNEE
+	endif
+
+endp		; Champ_FisTyp_1_Ap
+
+
+;*
+public procedure Champ_DotFis_1_Av
+
+; avant dotation manuelle fiscale
+
+beginp	; Champ_DotFis_1_Av
+
+	if IMMOBILISATION.FisTyp <> 3
+		IMMOBILISATION.DotFis = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_DotFis_1_Av
+
+
+;*
+public procedure Champ_FisDur_1_Av
+
+; avant durée de vie fiscale
+
+beginp	; Champ_FisDur_1_Av
+
+	if not X1.Choix(2)															; saisie des paramètres interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	elsif IMMOBILISATION.FisTyp = 4											; sans amortissement
+		IMMOBILISATION.FisDur = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_FisDur_1_Av
+
+
+;*
+public procedure Champ_FisDur_1_Ap
+
+; après durée de vie fiscale
+
+beginp	; Champ_FisDur_1_Ap
+
+	if IMMOBILISATION.FisDur = 0
+		Mes_Alert(19714)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if IMMOBILISATION.FisDur < 0
+		Mes_Alert(19715)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if IMMOBILISATION.FisTyp = 2 and IMMOBILISATION.FisDur < 3
+		Mes_Alert(19716)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	if	Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
+	and IMMOBILISATION.FisBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_FisDur_1_Ap
+
+
+;*
+public procedure Champ_ExoDDt_1_Av
+
+; avant date début exercice
+
+beginp	; Champ_ExoDDt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_ExoDDt_1_Av
+
+
+;*
+public procedure Champ_ExoFDt_1_Av
+
+; avant date fin exercice
+
+beginp	; Champ_ExoFDt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_ExoFDt_1_Av
+
+
+;*
+public procedure Champ_ExoFDt_1_Ap
+
+; après date fin exercice
+
+beginp	; Champ_ExoFDt_1_Ap
+
+	if IMMOBILISATION.ExoFDt < IMMOBILISATION.ExoDDt
+		Mes_Alert(3004)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	endif
+
+endp		; Champ_ExoFDt_1_Ap
+
+
+;*
+public procedure Champ_EcoDDt_1_Av
+
+; avant date début période économique
+
+beginp	; Champ_EcoDDt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_EcoDDt_1_Av
+
+
+;*
+public procedure Champ_EcoDDt_1_Ap
+
+; après date début période économique
+
+beginp	; Champ_EcoDDt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.EcoJourNb = dtsub(IMMOBILISATION.EcoDDt, IMMOBILISATION.EcoFDt)
+
+endp		; Champ_EcoDDt_1_Ap
+
+
+;*
+public procedure Champ_EcoFDt_1_Av
+
+; avant date fin période économique
+
+beginp	; Champ_EcoFDt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_EcoFDt_1_Av
+
+
+;*
+public procedure Champ_EcoFDt_1_Ap
+
+; après date fin période économique
+
+beginp	; Champ_EcoFDt_1_Ap
+
+	if IMMOBILISATION.EcoFDt < IMMOBILISATION.EcoDDt
+		Mes_Alert(3004)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.EcoJourNb = dtsub(IMMOBILISATION.EcoDDt, IMMOBILISATION.EcoFDt)
+
+endp		; Champ_EcoFDt_1_Ap
+
+
+;*
+public procedure Champ_EcoJourNb_1_Av
+
+; avant nombre de jours période économique
+
+beginp	; Champ_EcoJourNb_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_EcoJourNb_1_Av
+
+
+;*
+public procedure Champ_EcoLinMt_1_Av
+
+; avant total des dotations linéaires économiques
+
+beginp	; Champ_EcoLinMt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+endp		; Champ_EcoLinMt_1_Av
+
+
+;*
+public procedure Champ_EcoLinMt_1_Ap
+
+; après total des dotations linéaires économiques
+
+beginp	; Champ_EcoLinMt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.EcoTotMt = IMMOBILISATION.EcoLinMt + IMMOBILISATION.EcoDegMt + IMMOBILISATION.EcoManMt + IMMOBILISATION.EcoPuoMt + IMMOBILISATION.EcoExcMt
+	IMMOBILISATION.EcoResMt = IMMOBILISATION.EcoBas - IMMOBILISATION.EcoTotMt
+	if IMMOBILISATION.EcoTyp <> 4 and IMMOBILISATION.FisTyp <> 4
+		IMMOBILISATION.Derog	= IMMOBILISATION.FisTotMt - IMMOBILISATION.EcoTotMt
+	endif
+	IMMOBILISATION.Position = Position_Bien(IMMOBILISATION.Position, IMMOBILISATION.EcoResMt, IMMOBILISATION.ResFinMt)
+
+endp		; Champ_EcoLinMt_1_Ap
+
+
+;*
+public procedure Champ_EcoDegMt_1_Av
+
+; avant total des dotations dégressives économiques
+
+beginp	; Champ_EcoDegMt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+endp		; Champ_EcoDegMt_1_Av
+
+
+;*
+public procedure Champ_EcoDegMt_1_Ap
+
+; après total des dotations dégressives économiques
+
+beginp	; Champ_EcoDegMt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.EcoTotMt = IMMOBILISATION.EcoLinMt + IMMOBILISATION.EcoDegMt + IMMOBILISATION.EcoManMt + IMMOBILISATION.EcoPuoMt + IMMOBILISATION.EcoExcMt
+	IMMOBILISATION.EcoResMt = IMMOBILISATION.EcoBas - IMMOBILISATION.EcoTotMt
+	if IMMOBILISATION.EcoTyp <> 4 and IMMOBILISATION.FisTyp <> 4
+		IMMOBILISATION.Derog	= IMMOBILISATION.FisTotMt - IMMOBILISATION.EcoTotMt
+	endif
+	IMMOBILISATION.Position = Position_Bien(IMMOBILISATION.Position, IMMOBILISATION.EcoResMt, IMMOBILISATION.ResFinMt)
+
+endp		; Champ_EcoDegMt_1_Ap
+
+
+;*
+public procedure Champ_EcoManMt_1_Av
+
+; avant total des dotations manuelles économiques
+
+beginp	; Champ_EcoManMt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+endp		; Champ_EcoManMt_1_Av
+
+
+;*
+public procedure Champ_EcoManMt_1_Ap
+
+; après total des dotations manuelles économiques
+
+beginp	; Champ_EcoManMt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.EcoTotMt = IMMOBILISATION.EcoLinMt + IMMOBILISATION.EcoDegMt + IMMOBILISATION.EcoManMt + IMMOBILISATION.EcoPuoMt + IMMOBILISATION.EcoExcMt
+	IMMOBILISATION.EcoResMt = IMMOBILISATION.EcoBas - IMMOBILISATION.EcoTotMt
+	if IMMOBILISATION.EcoTyp <> 4 and IMMOBILISATION.FisTyp <> 4
+		IMMOBILISATION.Derog	= IMMOBILISATION.FisTotMt - IMMOBILISATION.EcoTotMt
+	endif
+	IMMOBILISATION.Position = Position_Bien(IMMOBILISATION.Position, IMMOBILISATION.EcoResMt, IMMOBILISATION.ResFinMt)
+
+endp		; Champ_EcoManMt_1_Ap
+
+
+;*
+public procedure Champ_EcoPuoMt_1_Av
+
+; avant total des dotations plan UO économiques
+
+beginp	; Champ_EcoPuoMt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+endp		; Champ_EcoPuoMt_1_Av
+
+
+;*
+public procedure Champ_EcoPuoMt_1_Ap
+
+; après total des dotations plan UO économiques
+
+beginp	; Champ_EcoPuoMt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.EcoTotMt = IMMOBILISATION.EcoLinMt + IMMOBILISATION.EcoDegMt + IMMOBILISATION.EcoManMt + IMMOBILISATION.EcoPuoMt + IMMOBILISATION.EcoExcMt
+	IMMOBILISATION.EcoResMt = IMMOBILISATION.EcoBas - IMMOBILISATION.EcoTotMt
+	if IMMOBILISATION.EcoTyp <> 4 and IMMOBILISATION.FisTyp <> 4
+		IMMOBILISATION.Derog	= IMMOBILISATION.FisTotMt - IMMOBILISATION.EcoTotMt
+	endif
+	IMMOBILISATION.Position = Position_Bien(IMMOBILISATION.Position, IMMOBILISATION.EcoResMt, IMMOBILISATION.ResFinMt)
+
+endp		; Champ_EcoPuoMt_1_Ap
+
+
+;*
+public procedure Champ_FisDDt_1_Av
+
+; avant date début période fisnomique
+
+beginp	; Champ_FisDDt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_FisDDt_1_Av
+
+
+;*
+public procedure Champ_FisDDt_1_Ap
+
+; après date début période fiscale
+
+beginp	; Champ_FisDDt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.FisJourNb = dtsub(IMMOBILISATION.FisDDt, IMMOBILISATION.FisFDt)
+
+endp		; Champ_FisDDt_1_Ap
+
+
+;*
+public procedure Champ_FisFDt_1_Av
+
+; avant date fin période fisnomique
+
+beginp	; Champ_FisFDt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_FisFDt_1_Av
+
+
+;*
+public procedure Champ_FisFDt_1_Ap
+
+; après date fin période fisnomique
+
+beginp	; Champ_FisFDt_1_Ap
+
+	if IMMOBILISATION.FisFDt < IMMOBILISATION.FisDDt
+		Mes_Alert(3004)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	endif
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.FisJourNb = dtsub(IMMOBILISATION.FisDDt, IMMOBILISATION.FisFDt)
+
+endp		; Champ_FisFDt_1_Ap
+
+
+;*
+public procedure Champ_FisJourNb_1_Av
+
+; avant nombre de jours période fisnomique
+
+beginp	; Champ_FisJourNb_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_FisJourNb_1_Av
+
+
+;*
+public procedure Champ_FisLinMt_1_Av
+
+; avant total des dotations linéaires fiscales
+
+beginp	; Champ_FisLinMt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+endp		; Champ_FisLinMt_1_Av
+
+
+;*
+public procedure Champ_FisLinMt_1_Ap
+
+; après total des dotations linéaires fiscales
+
+beginp	; Champ_FisLinMt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.FisTotMt = IMMOBILISATION.FisLinMt + IMMOBILISATION.FisDegMt + IMMOBILISATION.FisManMt + IMMOBILISATION.FisExcMt
+	IMMOBILISATION.FisResMt = IMMOBILISATION.FisBas - IMMOBILISATION.FisTotMt
+	if IMMOBILISATION.EcoTyp <> 4 and IMMOBILISATION.FisTyp <> 4
+		IMMOBILISATION.Derog	= IMMOBILISATION.FisTotMt - IMMOBILISATION.EcoTotMt
+	endif
+
+endp		; Champ_FisLinMt_1_Ap
+
+
+;*
+public procedure Champ_FisDegMt_1_Av
+
+; avant total des dotations dégressives fiscales
+
+beginp	; Champ_FisDegMt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+endp		; Champ_FisDegMt_1_Av
+
+
+;*
+public procedure Champ_FisDegMt_1_Ap
+
+; après total des dotations dégressives fiscales
+
+beginp	; Champ_FisDegMt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.FisTotMt = IMMOBILISATION.FisLinMt + IMMOBILISATION.FisDegMt + IMMOBILISATION.FisManMt + IMMOBILISATION.FisExcMt
+	IMMOBILISATION.FisResMt = IMMOBILISATION.FisBas - IMMOBILISATION.FisTotMt
+	if IMMOBILISATION.EcoTyp <> 4 and IMMOBILISATION.FisTyp <> 4
+		IMMOBILISATION.Derog	= IMMOBILISATION.FisTotMt - IMMOBILISATION.EcoTotMt
+	endif
+
+endp		; Champ_FisDegMt_1_Ap
+
+
+;*
+public procedure Champ_FisManMt_1_Av
+
+; avant total des dotations manuelles fiscales
+
+beginp	; Champ_FisManMt_1_Av
+
+	if not X1.Choix(1)															; saisie des cumuls interdite
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+endp		; Champ_FisManMt_1_Av
+
+
+;*
+public procedure Champ_FisManMt_1_Ap
+
+; après total des dotations manuelles fiscales
+
+beginp	; Champ_FisManMt_1_Ap
+
+	if not Harmony.DataModif	|	preturn	|	endif
+
+	IMMOBILISATION.FisTotMt = IMMOBILISATION.FisLinMt + IMMOBILISATION.FisDegMt + IMMOBILISATION.FisManMt + IMMOBILISATION.FisExcMt
+	IMMOBILISATION.FisResMt = IMMOBILISATION.FisBas - IMMOBILISATION.FisTotMt
+	if IMMOBILISATION.EcoTyp <> 4 and IMMOBILISATION.FisTyp <> 4
+		IMMOBILISATION.Derog	= IMMOBILISATION.FisTotMt - IMMOBILISATION.EcoTotMt
+	endif
+
+endp		; Champ_FisManMt_1_Ap
+
+
+;*
+public procedure Champ_CptAmo_1_Ap
+
+;	Après saisie compte d'amortissement
+
+beginp	; Champ_CptAmo_1_Ap
+
+	X1.CplLib(1) = ' '
+	if Harmony.DataVal <> ' '
+		if Controle_Compte(IMMOBILISATION.CptAmo, creation = true, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			X1.CplLib(1) = C3.Lib
+		endif
+	endif
+
+endp		; Champ_CptAmo_1_Ap
+
+
+;*
+public procedure Champ_CptDotAmo_1_Ap
+
+;	Après saisie compte de dotation aux amortissements
+
+beginp	; Champ_CptDotAmo_1_Ap
+
+	X1.CplLib(2) = ' '
+	if Harmony.DataVal <> ' '
+		if Controle_Compte(IMMOBILISATION.CptDotAmo, creation = true, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			X1.CplLib(2) = C3.Lib
+		endif
+	endif
+
+endp		; Champ_CptDotAmo_1_Ap
+
+
+;*
+public procedure Champ_CptProDro_1_Ap
+
+;	Après saisie compte de provision pour amortissement dérogatoire
+
+beginp	; Champ_CptProDro_1_Ap
+
+	X1.CplLib(3) = ' '
+	if Harmony.DataVal <> ' '
+		if Controle_Compte(IMMOBILISATION.CptProDro, creation = true, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			X1.CplLib(3) = C3.Lib
+		endif
+	endif
+
+endp		; Champ_CptProDro_1_Ap
+
+
+;*
+public procedure Champ_CptDotDro_1_Ap
+
+;	Après saisie compte de dotation aux amortissements dérogatoires
+
+beginp	; Champ_CptDotDro_1_Ap
+
+	X1.CplLib(4) = ' '
+	if Harmony.DataVal <> ' '
+		if Controle_Compte(IMMOBILISATION.CptDotDro, creation = true, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			X1.CplLib(4) = C3.Lib
+		endif
+	endif
+
+endp		; Champ_CptDotDro_1_Ap
+
+
+;*
+public procedure Champ_CptRepDro_1_Ap
+
+;	Après saisie compte de reprise sur amortissement dérogatoire
+
+1		wcpt		>CCFDD.dhsd	CPT
+
+beginp	; Champ_CptRepDro_1_Ap
+
+	X1.CplLib(5) = ' '
+	if Harmony.DataVal <> ' ' and (wcpt := NoSpaces(Harmony.DataVal)) <> '0'
+		if Controle_Compte(wcpt, creation = true, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			IMMOBILISATION.CptRepDro = wcpt
+			X1.CplLib(5) 				 = C3.Lib
+		else
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endif
+	endif
+
+endp		; Champ_CptRepDro_1_Ap
+
+
+;*
+public procedure Champ_CptProDep_1_Ap
+
+;	Après saisie compte de provision pour dépréciation des immo.
+
+1		wcpt		>CCFDD.dhsd	CPT
+
+beginp	; Champ_CptProDep_1_Ap
+
+	X1.CplLib(6) = ' '
+	if Harmony.DataVal <> ' ' and (wcpt := NoSpaces(Harmony.DataVal)) <> '0'
+		if Controle_Compte(wcpt, creation = true, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			IMMOBILISATION.CptProDep = wcpt
+			X1.CplLib(6) 				 = C3.Lib
+		endif
+	endif
+
+endp		; Champ_CptProDep_1_Ap
+
+
+;*
+public procedure Champ_CptDotDep_1_Ap
+
+;	Après saisie compte de dotation pour dépréciation
+
+1		wcpt		>CCFDD.dhsd	CPT
+
+beginp	; Champ_CptDotDep_1_Ap
+
+	X1.CplLib(7) = ' '
+	if Harmony.DataVal <> ' ' and (wcpt := NoSpaces(Harmony.DataVal)) <> '0'
+		if Controle_Compte(wcpt, creation = true, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			IMMOBILISATION.CptDotDep = wcpt
+			X1.CplLib(7) 				 = C3.Lib
+		else
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endif
+	endif
+
+endp		; Champ_CptDotDep_1_Ap
+
+
+;*
+public procedure Champ_CptDotRep_1_Ap
+
+;	Après saisie compte de reprise de dépréciation
+
+1		wcpt		>CCFDD.dhsd	CPT
+
+beginp	; Champ_CptDotRep_1_Ap
+	
+	if Harmony.Key = K_TAB
+		Harmony.Retour = XMENEXT_PREMIERE_DONNEE
+	endif
+
+	X1.CplLib(8) = ' '
+	if Harmony.DataVal <> ' ' and (wcpt := NoSpaces(Harmony.DataVal)) <> '0'
+		if Controle_Compte(wcpt, creation = true, etablissement = true, etb = IMMOBILISATION.Etb) < 2
+			IMMOBILISATION.CptDotRep = wcpt
+			X1.CplLib(8) 				 = C3.Lib
+		else
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endif
+	endif
+
+endp		; Champ_CptDotRep_1_Ap
+
+
+;*
+Public Procedure Champ_Axe_2_Av
+
+Beginp	; Champ_Axe_2_Av
+
+	C3XZ.AxeNo = X1.AxeNo
+
+Endp		; Champ_Axe_2_Av
+
+
+;*
+Public Procedure Champ_Etb_1_Ap
+
+; Après saisie de l'établissement dans la fenêtre de création/duplication
+
+Beginp	; Champ_Etb_1_Ap
+	
+	Controler_Etablissement(IMMOBILISATION.Etb, err = true, nonvide = true)
+
+Endp		; Champ_Etb_1_Ap
+
+
+;*
+Public Procedure Champ_Etb_2_Ap
+
+; après code établissement
+
+beginp	; Champ_Etb_2_Ap
+
+	X1.Lib(8) = ' '
+	if Controler_Etablissement(IMMOBILISATION.Etb, err = true, nonvide = true) = 0
+		X1.Lib(8) = CETS.Nom
+	endif
+
+endp		; Champ_Etb_2_Ap
+
+
+;*
+Public Procedure Champ_FiltreEtb_1_Av
+
+; Avant saisie du filtre établissement
+
+Beginp	; Champ_FiltreEtb_1_Av
+
+	C3XZ.Pong = true				; demande de reception d'une selection	sur zoom établissements
+
+Endp		; Champ_FiltreEtb_1_Av
+
+
+;*
+Public Procedure Champ_FiltreEtb_1_Ap
+
+; après saisie du filtre établissements
+
+Beginp	; Champ_FiltreEtb_1_Ap
+
+	if	Harmony.Key	= K_CTRL_S
+	 	Receptionner_Selection_ZoomEtablissement(X1.FiltreEtb)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	else
+		if Filtre_Verifier_Syntaxe(X1.FiltreEtb) <> 0
+			Mes_Alert(3033)
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endif
+	endif
+
+Endp		; Champ_FiltreEtb_1_Ap
+
+
+;*
+Public Procedure Champ_NatImmo_1_Ap
+
+; Après saisie de la nature d'immobilisation
+
+1			i							2,0
+
+Beginp	; Champ_NatImmo_1_Ap
+
+	if not Harmony.DataModif					|	preturn	|	endif
+	if IMMOBILISATION.NatImmo = ' '			|	preturn	|	endif
+
+	Lectab_HD(IMMOBILISATION.NatImmo, 9163)
+	X1.Lib(9) 				 = HD.Lib
+
+	IMMOBILISATION.EcoTyp = HD.EcoTyp
+	IMMOBILISATION.EcoDur = HD.EcoDur
+	IMMOBILISATION.FisTyp = HD.FisTyp
+	IMMOBILISATION.FisDur = HD.FisDur
+
+	IMMOBILISATION.Cpt	 = HD.Cpt
+	Recherche_Compte(IMMOBILISATION.Cpt)
+	X1.Lib(1) 			 	 = C3.Lib
+	
+	IMMOBILISATION.CptAux = HD.CptAux
+	Recherche_Compte(IMMOBILISATION.CptAux, Conf = condition(CA.ConfEnr(1) <> 2 , false, true))
+	X1.Lib(2) 				 = C3.Lib
+
+	IMMOBILISATION.UoCode = HD.UoCode
+	Rechercher_planUO(IMMOBILISATION.UoCode)
+	X1.Lib(7) 				 = I3.Lib
+
+	IMMOBILISATION.AxeTb(*) = HD.AxeTb(*)
+	for i = 1 to index(IMMOBILISATION.Axe(), 1)
+		Recherche_Axe(i, IMMOBILISATION.Axe(i), Conf = condition(CA.ConfEnr2(i) <> 2 , false, true))
+		X1.Lib(2 + i) = C5.Lib
+	next
+
+	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
+	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
+	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls
+	endif
+
+Endp		; Champ_NatImmo_1_Ap
+
+
+;*
+Public Procedure Page_Bien_Ap
+
+Beginp	; Page_Bien_Ap
+
+	; Controle des qtés du plan UO / durée d'amortissement
+	if IMMOBILISATION.EcoTyp = C_Amortissement_PlanUO
+		Controler_Qte_PUO(I3.UoQteTB(), 19755, IMMOBILISATION.EcoDur)
+	endif
+
+Endp		; Page_Bien_Ap
+
+[/diva]
+[diva_base]
+[/diva]

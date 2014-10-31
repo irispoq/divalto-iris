@@ -1,0 +1,286 @@
+SetModuleInfo('$Id$')
+;*
+;*		Saisie des pièces 6.3
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		MJV		4.1						12.1999	Version initiale en Diva     
+OverWrite gtttpce000.dhop
+
+;*
+;*	  Déclarations
+;*
+
+;
+Module COG_GTTTPCE000.DHOP
+
+;
+Public Record	GTFDD.dhsd	ENT
+
+;
+1		retour		1
+
+;*
+;*		Fonctions liées aux envois de Flash
+;*
+
+
+;*
+Procedure A5_Flash_Destinataire_Ap
+;
+BeginP
+	Cog_A5_Flash_Destinataire_Ap
+EndP
+
+
+;*
+Procedure A5_Flash_Creation_Message_Av
+beginp
+
+	Cog_A5_Flash_Creation_Message_Av
+
+endp
+
+;*
+;*		Surcharges des Procédures et fonctions	standards
+;*
+
+;*
+function char Menu_Maj_Boutons_Ap
+;
+beginf
+	Cog_Menu_Maj_Boutons_Ap
+	freturn(Standard.Menu_Maj_Boutons_Ap)
+endf
+
+;*
+function char  Piece_Masquer_Champs_specifiques
+;
+beginf
+	Cog_Piece_Masquer_Champs_specifiques
+	FReturn (Standard.Piece_Masquer_Champs_specifiques)
+endf
+
+;*
+Procedure U_Traitement
+;
+Beginp
+	Cog_U_Traitement
+Endp
+
+;*
+Function char Piece_Impression_Avec_Parametre_origine
+; FRI 20/12/2013 Rajout procédure
+; retourner 'O' si l'impression doit se faire avec les paramètres d'origine ou 'N' sinon
+; avant de passer en suppression
+Beginf
+
+	FReturn(Cog_Piece_Impression_Avec_Parametre_origine)
+
+endf
+
+;*
+;*		TRaitements liés à l'entête
+;*
+
+;*
+procedure Ent_Init_Final
+; Initialisation des competurs, taux...
+
+1		wContact		>gtfdd.dhsd		contact
+
+beginp
+
+	; #BUG DIVALTO --> en validation de pièce le contact est recalculé
+	wContact = ENT.Contact
+	
+	Standard.Ent_Init_Final
+
+	If wContact <> ' ' 
+		ENT.Contact = wContact
+	EndIf
+
+endp
+
+;*
+Procedure ENT_Creation_Init
+;					
+Beginp
+	Standard.ENT_Creation_Init	
+	COG_ENT_CREATION_INIT
+Endp
+
+;*
+Procedure Ent_Duplication_Avoir_Init
+;
+BeginP
+	Standard.Ent_Duplication_Avoir_Init
+	Cog_Ent_Duplication_Avoir_Init
+EndP
+
+;*
+Function char ENT_Creation_Av		 
+; avant de passer en création
+Beginf
+
+	If (retour := Cog_ENT_Creation_Av) = 'O'
+		Freturn(Standard.ENT_Creation_Av)
+	Else
+		FReturn(retour)
+	EndIf
+
+Endf
+
+;*
+Procedure Charger_Lib_EntBis
+;
+BeginP
+	Standard.Charger_Lib_EntBis
+	Cog_Charger_Lib_EntBis
+EndP
+
+;*
+Procedure ENT_Chargement_Ap
+;
+BeginP
+	Standard.ENT_Chargement_Ap
+	Cog_ENT_Chargement_Ap
+EndP
+
+;*
+Function char ENT_Modification_Av	 	
+; avant de passer en modification
+Beginf
+	If (retour := Cog_ENT_Modification_Av) = 'O'
+		Freturn(Standard.ENT_Modification_Av)
+	Else
+		FReturn(retour)
+	EndIf
+Endf
+
+;*
+Procedure ENT_Write_Av
+;
+BeginP
+
+	Standard.ENT_Write_Av
+	Cog_ENT_Write_Av
+
+EndP
+
+;*
+Procedure ENT_Principale_Rewrite_Av
+;
+BeginP
+
+	Standard.ENT_Principale_Rewrite_Av
+	Cog_ENT_Principale_Rewrite_Av
+
+EndP
+
+;*
+Function char ENT_Suppression_Av
+;
+BeginF
+
+	If (retour:= Standard.ENT_Suppression_Av) = 'O'	 
+		retour = Cog_Ent_Suppression_Av	
+	EndIf
+
+	FReturn(retour)
+
+EndF
+
+
+;*
+Function char ENT_Controle_Fin	  	
+;		Controle les erreurs bloquantes qui n'ont pas été corrigées au moment de la validation
+Beginf
+
+	If (retour := Cog_ENT_Controle_Fin) = 'O'
+		Freturn(Standard.ENT_Controle_Fin)
+	Else
+		FReturn(retour)
+	EndIf
+
+EndF
+
+;*
+Procedure ENT_Liberation_Av	
+;
+BeginP
+	Standard.ENT_Liberation_Av
+	Cog_ENT_Liberation_Av
+EndP
+
+;*
+Function char ENT_Read_Ap
+;
+BeginF
+	If standard.ENT_Read_Ap = 'I'
+		freturn('I')
+	Else
+		FReturn(Cog_ENT_Read_Ap)
+	EndIf
+EndF
+
+;*
+Function char ENT_PRead_Ap
+;
+BeginF
+	If standard.ENT_PRead_Ap = 'I'
+		freturn('I')
+	Else
+		FReturn(Cog_ENT_PRead_Ap)
+	EndIf
+EndF
+
+;*
+;*		Traitements lignes
+;*
+
+;*
+Procedure G1T1_Creation_Init
+;	pour initialiser une ligne de pièce lors de la création
+;	appel après la saisie de la référence	
+Beginp
+	Standard.G1T1_Creation_Init
+	COG_G1T1_Creation_Init
+EndP
+
+;*
+Procedure MOUV_Write_Av
+;
+BeginP
+	Standard.MOUV_Write_Av
+	Cog_MOUV_Write_Av
+EndP
+
+;*
+Procedure MOUV_ReWrite_Av
+;
+BeginP
+	Standard.MOUV_ReWrite_Av
+	Cog_MOUV_ReWrite_Av
+EndP
+
+;*
+Procedure MVTL_Write_Av
+; avant écriture de la ventilation
+BeginP
+
+	standard.MVTL_Write_Av
+	Cog_MVTL_Write_Av
+
+EndP
+
+;*
+Procedure MVTL_Rewrite_Av
+; avant réécriture de la ventilation
+BeginP
+
+	standard.MVTL_Rewrite_Av
+	Cog_MVTL_Rewrite_Av
+
+EndP

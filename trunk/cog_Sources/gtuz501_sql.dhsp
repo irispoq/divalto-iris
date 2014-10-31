@@ -1,0 +1,131 @@
+OverWrite gttz501_sql.dhop
+
+Include "GTTCZ00.dhsp"			;déclarations communes
+
+Module "A5PMNoteJoint.dhop"
+Module "A5PMRUB.dhop"
+Module "GAPM000.dhop"
+Module "GATM000.dhop"
+Module "GRPM000.dhop"
+Module "XZOOM7.dhop"
+
+; TDF
+HFileVersion 	GTFDD.dhsd 	GTFPROJ
+
+; Enregistrements
+Public Record 		"GTFDD.dhsd"		SOCCRM								; Dossier CRM
+Public Record 		"GTFDD.dhsd" 		ETS									; Etablissement
+Public RecordSQL 	"GTRSPROJ.dhoq" 	Projet	 	Projet			; Projet Avant-Vente
+Public Record 		"GTFDD.dhsd" 		PRJAV				Prjav_sel		; Projet Avant-Vente (sélection)
+Public Record 		"GTFDD.dhsd" 		PRJAV				Prjav				; Projet Avant-Vente (lecture lors du pilotage)
+
+Public Record 		"GTFDD.dhsd" 		PRJAP									; Projet Après-Vente
+
+Public Record 		"GTFDD.dhsd"		PCFIDX								; Tiers index
+Public Record 		"GTFDD.dhsd" 		CLI									; Client
+Public Record 		"GTFDD.dhsd"		PRO									; Prospect
+Public Record 		"GTFDD.dhsd" 		VRP									; Commercial
+Public Record 		"GTFDD.dhsd" 		T2										; Contact
+																					
+Public Record 		"GTFDD.dhsd" 		T037									; Collaborateur
+Public Record 		"GTFDD.dhsd" 		T059									; Motif
+
+Public Record 		"GRFDD.dhsd"		XZ					GRXZ				; Echange zoom
+Public Record 		"A5DD.dhsd"			MDOS									; Dossier commun
+public record 		"gtfdd.dhsd"		SocAfr
+
+1		TiersAnc			>gtfdd.dhsd TIERS						; sauvegarde du tiers
+1		TiersPilote		>gtfdd.dhsd	TIERS						; si mode piloté sauvegarde du tiers passé en ping
+1		ReprPilote		>gtfdd.dhsd	REPR						; si mode piloté sauvegarde du représentant passé en ping
+1		rep				1
+1		PresenceCRM		1,0
+1		ProjetCe4Anc	1											; sauvegarde de ce4 avant passage en modification, suppression
+1		ModePapillon	1,0
+1		NbSel				4,0
+
+; Constantes
+Const	C_Pilote_ParTiers	= 1
+Const	C_Pilote_ParRepr	= 2
+Const	C_Pilote_Modif    = 3
+Const C_Pilote_Creation = 4
+Const C_Pilote_UnProjet = 5
+
+Const C_Page_CodeProjet = 13
+
+;*
+Procedure Transformer_Projet
+1	WProjet				>GTFDD.dhsd PROJET
+1 	RetourWizard 		1
+1 	ChainagePoints		1
+
+BeginP
+	If (Projet.EstLie_Client = 2)
+		WProjet = Projet.Projet
+		If (Res_Prj (WProjet) = 0)
+			; on reseeke le projet avant vente
+			If (Seek_PRJAV(WProjet) = 0) And (Recherche_Tiers(Projet.Tiers) = 0) 
+				; on recherche le projet après vente
+				If (Seek_PRJAP(WProjet) <> 0)
+					; ok il n'existe pas on transforme
+					PRJAP 			= ' '
+					PRJAP.Ce1		= 'A'
+					PRJAP.Ce2		= '1'			 ; Spécifique '2'->'1'
+					PRJAP.Ce3		= '1'
+					PRJAP.Dos		= Projet.Dos
+					PRJAP.Etb		= Projet.Etb
+					PRJAP.Affaire	= Projet.Projet
+					PRJAP.UserCr	= SYSTEM.User
+					PRJAP.UserMo 	= ' '
+					PRJAP.Conf		= Projet.Conf
+					PRJAP.Tiers		= Projet.Tiers
+					PRJAP.Lib80		= Projet.Lib80
+					PRJAP.LibAbr	= Projet.LibAbr
+					PRJAP.DelDt		= Projet.DelDt
+					PRJAP.SalCod	= Projet.SalCod
+					PRJAP.Contact	= Projet.Contact
+					PRJAP.Repr		= Projet.Repr
+					PRJAP.UPrjAp	= Projet.UPrjAv
+					PRJAP.UserCrDh	= Time(7)
+					PRJAP.UserMoDh	= ' '
+					PRJAP.DopDh		= ' '
+					PRJAP.CeNote	= 1
+					PRJAP.Note		= 0
+					PRJAP.HtMt		= Projet.CaMt
+					PrjAp.AfrClas = Condition(Ets.AfrClas = ' ', SocAfr.AfrClas, Ets.AfrClas)
+					
+					PRJAP.SAISAUTTYP(1) = 2		  ;  SPECIF SYSTEMU CAR AFFAIRE NON AUTORISEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+					PRJAP.SAISAUTTYP(2) = 2
+					PRJAP.SAISAUTTYP(3) = 2
+
+					Write_PRJAP
+					Lib_Prj(WProjet)
+
+					Maj_PCFIDX_Affaireactif(' ', ' ', PrjAp.Tiers, PrjAp.Ce2)
+
+					; On propose la création d'un arbre de points 
+					If GA_Mes_Alert (1082, PRJAP.Affaire, Bouton = MB_YESNO + MB_ICONQUESTION) = IDYES	
+						Tunnel_Points_Wizard(PRJAP.affaire)
+						PongReceiveAndDelete("RetourWizard",  RetourWizard) 
+						PongReceiveAndDelete("ChainagePoints",  ChainagePoints) 
+						if (RetourWizard = "1")
+							ZoomReactualiserPage()
+						endif 	
+						if (ChainagePoints = "1")
+							Tunnel_Points(PRJAP.Affaire)					
+						endif 
+					EndIf				
+				Else
+					; un projet après vente existe déjà					
+					Mes_Alert(5011, WProjet)
+					Lib_Prj(WProjet)
+				Endif
+			Else
+				; on ne le retrouve plus ou il n'est plus bon
+				; supprimé entre temps
+				Lib_Prj(WProjet)
+			Endif
+		Else
+			; il est réservé on arrête
+		Endif	
+	Endif
+EndP

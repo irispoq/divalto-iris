@@ -1,0 +1,15 @@
+setmoduleinfo("$Id$")
+
+OverWrite gttt420.dhop
+
+Public		Record	GTFDD.dhsd		ENT																; Entêtes
+Public		Record	a5dd.dhsd		MZ																	; Enreg paramètre
+
+
+;*
+Function Char ENT_Critere
+BeginF																									
+	If not ENT.ETB = MZ.ETB | Freturn('N') 
+	Else | Freturn(Standard.ENT_Critere)
+	Endif
+EndF																											

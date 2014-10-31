@@ -1,0 +1,927 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=6,,,20141027134118,UGIE_YLF            
+Nom=gtfdd.dhsd,gtfdd1.dhsd,1
+[CHAMP]
+Version=1,20131006064734,SYSTEMNEW           ,20131006064734,SYSTEMNEW           
+Nom=Cog_Affaire,Sauvegarde pour tri en facturation différée,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110816131438,ROOT                ,20110816131442,ROOT                
+Nom=Cog_AffectationBudgetaire,Affectation Budgétaire,1
+Gel=1
+Nature=4,0
+NomOdbc=Cog_AffectationBudgetaire
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110818092932,ROOT                ,20110818092943,ROOT                
+Nom=Cog_Anael_Corr,Correspondance Anäel,1
+Gel=1
+Nature=2
+NomOdbc=Cog_Anael_Corr
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110720091505,ROOT                ,20110822110729,ROOT                
+Nom=Cog_ArtemisCh,Chemin Intégration Artemis,1
+DateM=EFCA91EBAA60CC01
+Gel=1
+Nature=10
+NomOdbc=ArtemisChemin
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110822110751,ROOT                ,20110822110802,ROOT                
+Nom=Cog_ArtemisChW,Chemin Windows Intégration Artemis,1
+Gel=1
+Nature=10
+NomOdbc=ArtemisCheminWindows
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110720091536,ROOT                ,20110720091544,ROOT                
+Nom=Cog_ArtemisFlash,No de flash rapport intégration Artémis,1
+Gel=1
+Nature=4,0
+NomOdbc=ArtemisFlashNo
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110720091813,ROOT                ,20110720091818,ROOT                
+Nom=Cog_ArtemisFormat,Format du fichier à intégrer,1
+Gel=1
+Nature=15
+NomOdbc=ArtemisFormat
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110522001347,SYSTEMU             ,20110524191718,SYSTEMU             
+Nom=Cog_Asset,Numéro d'Asset,1
+Gel=1
+Nature=20
+NomOdbc=Cog_Asset
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110606150452,SYSTEMU_VR          ,20110606150456,SYSTEMU_VR          
+Nom=Cog_AxeAnael,Axe anaël,1
+Gel=1
+Nature=8
+NomOdbc=Cog_AxeAnael
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110520062141,SYSTEMU             ,20110524191904,SYSTEMU             
+Nom=Cog_Bilan_Au,Bilan au,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Bilan_Au
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110920140246,ROOT                ,20110920140258,ROOT                
+Nom=Cog_BL_Moteur,Pièce issue du moteur de facturation,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_BL_Moteur
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141008091535,UGIE                ,20141008091542,UGIE                
+Nom=Cog_BwId,N° ID Basware,1
+Gel=1
+Nature=40
+NomOdbc=Cog_BwId
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110524145239,SYSTEMU_VR          ,20110524145243,SYSTEMU_VR          
+Nom=Cog_Cdtycli,Type de tiers (base associé),1
+Gel=1
+Nature=2
+NomOdbc=Cog_Cdtycli
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110525144041,SYSTEMU_VR          ,20110525144045,SYSTEMU_VR          
+Nom=Cog_Centrale,Code centrale base associés,1
+Gel=1
+Nature=2
+NomOdbc=Cog_Centrale
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617163221,SYSTEMU             ,20110617163224,SYSTEMU             
+Nom=Cog_Cotisation_PDV,Type de cotisation PDV,1
+Gel=1
+Nature=8
+NomOdbc=Cog_Cotisation_PDV
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110531155150,SYSTEMU_VR          ,20110531155155,SYSTEMU_VR          
+Nom=Cog_CptAnael,Compte Anael,1
+Gel=1
+Nature=8
+NomOdbc=Cog_CptAnael
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141007120417,UGIE                ,20141007120424,UGIE                
+Nom=Cog_CptIA,Compte d'achat immobilisation,1
+Gel=1
+Nature=8
+NomOdbc=Cog_CptIA
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141007120503,UGIE                ,20141007120509,UGIE                
+Nom=Cog_CptIS,Compte de stock immobilisation,1
+Gel=1
+Nature=8
+NomOdbc=Cog_CptIS
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110522001235,SYSTEMU             ,20110524191705,SYSTEMU             
+Nom=Cog_Date_Debut,Date début,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Date_Debut
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110522001309,SYSTEMU             ,20110524191711,SYSTEMU             
+Nom=Cog_Date_Fin,Date fin,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Date_Fin
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110520223251,SYSTEMU             ,20110524191800,SYSTEMU             
+Nom=Cog_Delai_Validite,Délai de validité en devis,1
+Gel=1
+Nature=3,0
+NomOdbc=Cog_Delai_Validite
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100628222539,INFOU               ,20110524191754,SYSTEMU             
+Nom=Cog_Dimanche,Afficher les dimanches dans le GANTT,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Dimanche
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110816131359,ROOT                ,20110816131451,ROOT                
+Nom=Cog_DirCliente,Direction cliente,1
+DateM=B4C9CDB7055CCC01
+Gel=1
+Nature=4,0
+NomOdbc=Cog_DirCliente
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141027134107,UGIE_YLF            ,20141027134116,UGIE_YLF            
+Nom=Cog_EcrFlag,Ecritures FAE ou FNP générées,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_EcrFlag
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120307230215,LOGIN               ,20120307230221,LOGIN               
+Nom=Cog_EditionCplt,Complement Edition,1
+Gel=1
+Nature=80
+NomOdbc=Cog_EditionCplt
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110525152017,SYSTEMU_VR          ,20110705154645,ROOT                
+Nom=Cog_EdiTyp_1,Code masque impression 1,1
+DateM=7BB314F1193BCC01
+Gel=1
+Nature=2
+NomOdbc=Cog_EdiTyp_1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110705154706,ROOT                ,20110705154712,ROOT                
+Nom=Cog_EdiTyp_2,Code masque impression 2,1
+Gel=1
+Nature=2
+NomOdbc=Cog_EdiTyp_2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110705154727,ROOT                ,20110705154730,ROOT                
+Nom=Cog_EdiTyp_3,Code masque impression 3,1
+Gel=1
+Nature=2
+NomOdbc=Cog_EdiTyp_3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110705154742,ROOT                ,20110705154746,ROOT                
+Nom=Cog_EdiTyp_4,Code masque impression 4,1
+Gel=1
+Nature=2
+NomOdbc=Cog_EdiTyp_4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110811091539,JDT_UGIEIRIS        ,20110811091550,JDT_UGIEIRIS        
+Nom=Cog_ETLDateImport,ETL - Date de la dernière importation,1
+Gel=1
+Nature=14,0
+NomOdbc=Cog_ETLDateImport
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110626144620,SYSTEMU             ,20110626144621,SYSTEMU             
+Nom=Cog_Facturation,Autorisation facturation,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Facturation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110624074113,SYSTEMU             ,20110624074115,SYSTEMU             
+Nom=Cog_Facturation_Compte,Facturation Compte,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Facturation_Compte
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110601173755,SYSTEMU_VR          ,20110601173759,SYSTEMU_VR          
+Nom=Cog_Facture,Emission de facture (O/N),1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Facture
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141022160028,UGIE_YLF            ,20141022160046,UGIE_YLF            
+Nom=Cog_FaeFlag,Générer les écriture FAE,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_FaeFlag
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110825093425,ROOT                ,20110825093436,ROOT                
+Nom=Cog_Flash_CdeF_Valid,No de flash pour les validations de commandes fournisseurs,1
+Gel=1
+Nature=4,0
+NomOdbc=FlashValidationFournisseurs
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110524220523,SYSTEMU             ,20110525094734,SYSTEMU             
+Nom=Cog_Flash_Devis,No de flash pour les devis provisoires,1
+Gel=1
+Nature=4,0
+NomOdbc=Cog_Flash_Devis
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110525094722,SYSTEMU             ,20110525094801,SYSTEMU             
+Nom=Cog_Flash_Devis_Retour,No de flash de retour pour les devis provisoires,1
+Gel=1
+Nature=4,0
+NomOdbc=Cog_Flash_Devis_Retour
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141022155954,UGIE_YLF            ,20141022160005,UGIE_YLF            
+Nom=Cog_FnpFlag,Générer les écritures FNP,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_FnpFlag
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110811111435,SYSTEMU             ,20110811111501,SYSTEMU             
+Nom=Cog_Hierarchie,Génération de la hiérarchie d'évènements,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Hierarchie
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130514173925,ROOT                ,20130514173932,ROOT                
+Nom=Cog_Id_Enveloppe,Enveloppe budgétaire,1
+Gel=1
+Nature=5,0
+NomOdbc=Cog_Id_Enveloppe
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141007175408,UGIE                ,20141007175414,UGIE                
+Nom=Cog_ImoFlag,Immo O/N,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_ImoFlag
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110926113338,JDT_UGIEIRIS        ,20110926113345,JDT_UGIEIRIS        
+Nom=Cog_ImpDetail,Impression du détail,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_ImpDetail
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110627141627,ROOT                ,20110705155647,ROOT                
+Nom=Cog_implogo_1,Impression par défaut avec logo 1,1
+DateM=B3A08C611B3BCC01
+Gel=1
+Nature=1,0
+NomOdbc=cog_implogo_1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110705155735,ROOT                ,20110705155745,ROOT                
+Nom=Cog_implogo_2,Impression par défaut avec logo 2,1
+Gel=1
+Nature=1,0
+NomOdbc=cog_implogo_2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110705161002,ROOT                ,20110705161015,ROOT                
+Nom=Cog_implogo_3,Impression par défaut avec logo 3,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_implogo_3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110705161036,ROOT                ,20110705161739,ROOT                
+Nom=Cog_implogo_4,Impression par défaut avec logo 4,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_implogo_4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110618001915,SYSTEMU             ,20110810145857,JDT_SYSTEMU         
+Nom=Cog_Lib_Affaire_Mere,Libellé Affaire Mère/Père,1
+DateM=E69A83325D57CC01
+Gel=1
+Nature=50
+NomOdbc=Cog_Lib_Affaire_Mere
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110618001833,SYSTEMU             ,20110618001837,SYSTEMU             
+Nom=Cog_Lib_Affaire_Principale,Libellé Affaire Principale,1
+Gel=1
+Nature=50
+NomOdbc=Cog_Lib_Affaire_Principale
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110520073850,SYSTEMU             ,20110524191954,SYSTEMU             
+Nom=Cog_Majinterface,Maj interface,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Majinterface
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110520074230,SYSTEMU             ,20110524192001,SYSTEMU             
+Nom=Cog_Modreganael,Mode règlement Anael,1
+Gel=1
+Nature=2
+NomOdbc=Cog_Modreganael
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110520073624,SYSTEMU             ,20110524191948,SYSTEMU             
+Nom=Cog_Modregext,Mode règlement externe,1
+Gel=1
+Nature=15
+NomOdbc=Cog_Modregext
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130521140454,ROOT                ,20130521140502,ROOT                
+Nom=Cog_Numero,Numéro de commande ou de devis GIE ,1
+Gel=1
+Nature=15
+NomOdbc=Cog_Numero
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617154324,SYSTEMU             ,20110617154350,SYSTEMU             
+Nom=Cog_OP,Code opération,1
+DateM=AED84397F42CCC01
+Gel=1
+Nature=3
+NomOdbc=Cog_Code_Operation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110520062115,SYSTEMU             ,20110607102253,SYSTEMU             
+Nom=Cog_Part_Ca,% dépendance éco,1
+DateM=7857E218EC24CC01
+Gel=1
+Nature=10,2
+NomOdbc=Cog_Part_Ca
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617163439,SYSTEMU             ,20110822115925,JDT_UGIEIRIS        
+Nom=Cog_Periodicite,Periodicité facturation,1
+DateM=D71DBE2CB260CC01
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Periodicite
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110601173823,SYSTEMU_VR          ,20110601173826,SYSTEMU_VR          
+Nom=Cog_Prj_Chapeau,Projet chapeau (O/N),1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Prj_Chapeau
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110601173937,SYSTEMU_VR          ,20110601173942,SYSTEMU_VR          
+Nom=Cog_Prj_Status,Status,1
+Gel=1
+Nature=25
+NomOdbc=Cog_Prj_Status
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110623143034,SYSTEMU_VR          ,20110623143039,SYSTEMU_VR          
+Nom=Cog_RefModele,Code article de référence pour création article /axe,1
+Gel=1
+Nature=25
+NomOdbc=Cog_RefModele
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110622161626,JDT_SYSTEMU         ,20110622161633,JDT_SYSTEMU         
+Nom=Cog_RefUn,Unité de référence Article,1
+Gel=1
+Nature=4
+NomOdbc=Cog_RefUn
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110524140802,SYSTEMU_VR          ,20110524140807,SYSTEMU_VR          
+Nom=Cog_Regl,Mode de règlement client par défaut,1
+Gel=1
+Nature=4
+NomOdbc=Cog_Regl
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111013145627,SYSTEMU             ,20111013145640,SYSTEMU             
+Nom=Cog_Regroupe_Direction,Regroupement par Direction Cliente,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Regroupe_Direction
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120209121317,ROOT                ,20120209121327,ROOT                
+Nom=Cog_Responsable,Responsable,1
+DateM=DE7E69D71BE7CC01
+Gel=1
+Nature=60
+NomOdbc=Cog_Responsable
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110521214100,SYSTEMU             ,20110524192018,SYSTEMU             
+Nom=Cog_SalGrp,Groupe de responsables,1
+Gel=1
+Nature=8
+NomOdbc=Cog_SalGrp
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100628222518,INFOU               ,20110524191748,SYSTEMU             
+Nom=Cog_Samedi,Afficher les samedis dans le GANTT,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Samedi
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110520062704,SYSTEMU             ,20110524191922,SYSTEMU             
+Nom=Cog_Superficie,Superficie,1
+Gel=1
+Nature=5,0
+NomOdbc=Cog_Superficie
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617151945,SYSTEMU             ,20110622094704,SYSTEMU             
+Nom=Cog_Taux,Taux ,1
+DateM=30324C94B030CC01
+Gel=1
+Nature=5,0
+NomOdbc=Cog_Taux
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110520062230,SYSTEMU             ,20110524191909,SYSTEMU             
+Nom=Cog_Traitedt,Date de traitement,1
+DateM=85968ABFA516CC01
+Gel=1
+Nature=DH
+NomOdbc=Cog_Traitedt
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140821135725,UGIE                ,20140821135725,UGIE                
+Nom=Cog_TypMotFac,Type moteur de facturation,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110920140212,ROOT                ,20110920140215,ROOT                
+Nom=Cog_Validite,Date Validité des devis,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Validite
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050105170143,HC
+Nom=CptCol,Compte collectif,1
+DateM=D8D6AEC51A99C601
+Gel=1
+Nature=8
+NomOdbc=CompteCollectif
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080615183227,ADAMELEC            ,20080615183227,ADAMELEC            
+Nom=n12d2,Numeriques,1
+Gel=1
+Nature=12,D2*20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080615183342,ADAMELEC            ,20080615183342,ADAMELEC            
+Nom=n12d3,Numerique,1
+Gel=1
+Nature=12,3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080615183138,ADAMELEC            ,20080615183138,ADAMELEC            
+Nom=n16d5,Numeriques,1
+Gel=1
+Nature=16,5*20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100627225309,INFOU               ,20100627225309,INFOU               
+Nom=n1d0,Numeriques,1
+Gel=1
+Nature=1,0*30
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080615183420,ADAMELEC            ,20080615183420,ADAMELEC            
+Nom=n6d1,Numerique,1
+Gel=1
+Nature=6,D1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080615183203,ADAMELEC            ,20080615183203,ADAMELEC            
+Nom=n8d0,Numeriques,1
+Gel=1
+Nature=8,0*10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080615183255,ADAMELEC            ,20080615183255,ADAMELEC            
+Nom=n8d1,Numeriques,1
+Gel=1
+Nature=8,D1*20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100818155837,MS                  ,20100818155837,MS                  
+Nom=NatImmo,Code nature d'immobilisation,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140724110058,ROOT                ,20140724110133,ROOT                
+Nom=SU_DatActivCom,Date activation commande,1
+Gel=1
+Nature=DH
+NomOdbc=SU_DatActivCom
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140912102003,UGIE                ,20140912104722,UGIE                
+Nom=SU_DEMANDEUR,Demandeur,1
+DateM=368C022B66CECF01
+Gel=1
+Nature=50
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140912102018,UGIE                ,20140912104730,UGIE                
+Nom=SU_DESTINATAIRE,Destinataire,1
+DateM=7F193B3066CECF01
+Gel=1
+Nature=50
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140912101644,UGIE                ,20140912101644,UGIE                
+Nom=SU_DT_INSTA_PREVIS,Date installation prévisionnelle,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140912101552,UGIE                ,20140912101657,UGIE                
+Nom=SU_DT_PREPA_CIBLE,Datet préparation cible,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140724110324,ROOT                ,20140724110332,ROOT                
+Nom=SU_IDT_REQ_IWS,Identifiant REQ Isilog,1
+Gel=1
+Nature=30
+NomOdbc=SU_IDT_REQ_IWS
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140724110519,ROOT                ,20140724110526,ROOT                
+Nom=SU_IS_PARC,Présence dans parc ?,1
+Gel=1
+Nature=1,0
+NomOdbc=SU_IS_PARC
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140912101505,UGIE                ,20140912101704,UGIE                
+Nom=SU_NATURE,Nature,1
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20061113170218,MARIE JO            
+Nom=TvaRa,Code TVA achat,1
+DateM=B69484183D07C701
+Gel=1
+Nature=1,0
+NomOdbc=TvaAchat
+Flags=o,1,n,n,n,n,n,n
+[CHAMPR]
+nom=n16d5
+[CHAMPL]
+Nom=Filler,1,0,2,N,1
+Nom=n12d3,3,0,0,N,1
+[/CHAMPL]
+nom=n8d1
+[CHAMPL]
+Nom=Filler,1,0,2,N,1
+Nom=n6d1,3,0,0,N,1
+[/CHAMPL]
+nom=UArt
+[CHAMPL]
+Nom=SU_IS_PARC,1,0,0,N,1
+Nom=NatImmo,2,0,0,N,1
+Nom=Cog_CptIA,10,0,0,N,1
+Nom=Cog_CptIS,18,0,0,N,1
+[/CHAMPL]
+nom=UCli
+[CHAMPL]
+Nom=Cog_Centrale,1,0,0,N,1
+Nom=Cog_EdiTyp_1,3,0,0,N,1
+Nom=Cog_EdiTyp_2,5,0,0,N,1
+Nom=Cog_EdiTyp_3,7,0,0,N,1
+Nom=Cog_EdiTyp_4,9,0,0,N,1
+Nom=Cog_Modregext,11,0,0,N,1
+Nom=Cog_Cdtycli,26,0,0,N,1
+Nom=Cog_Facturation,28,0,0,N,1
+Nom=Cog_implogo_1,29,0,0,N,1
+Nom=Cog_implogo_2,30,0,0,N,1
+Nom=Cog_implogo_3,31,0,0,N,1
+Nom=Cog_implogo_4,32,0,0,N,1
+Nom=Prenom,33,0,0,N,1
+Nom=Cog_ETLDateImport,53,0,0,N,1
+Nom=Cog_Facturation_Compte,67,0,0,N,1
+Nom=Cog_ImpDetail,68,0,0,N,1
+Nom=Cog_OP,69,0,0,N,1
+Nom=Cog_Responsable,72,0,0,N,1
+Nom=Cog_EditionCplt,132,0,0,N,1
+[/CHAMPL]
+nom=UEnt
+[CHAMPL]
+Nom=Cog_Validite,1,0,0,N,1
+Nom=Cog_Facturation_Compte,9,0,0,N,1
+Nom=Cog_BL_Moteur,10,0,0,N,1
+Nom=Cog_ImpDetail,11,0,0,N,1
+Nom=Cog_implogo_1,12,0,0,N,1
+Nom=Cog_implogo_2,13,0,0,N,1
+Nom=Cog_implogo_3,14,0,0,N,1
+Nom=Cog_implogo_4,15,0,0,N,1
+Nom=Cog_DirCliente,16,0,0,N,1
+Nom=Cog_Regroupe_Direction,20,0,0,N,1
+Nom=SU_DatActivCom,21,0,0,N,1
+Nom=SU_IDT_REQ_IWS,35,0,0,N,1
+Nom=SU_NATURE,65,0,0,N,1
+Nom=SU_DT_PREPA_CIBLE,85,0,0,N,1
+Nom=SU_DT_INSTA_PREVIS,93,0,0,N,1
+Nom=SU_DEMANDEUR,101,0,0,N,1
+Nom=SU_DESTINATAIRE,151,0,0,N,1
+Nom=Cog_BwId,201,0,0,N,1
+[/CHAMPL]
+nom=UFou
+[CHAMPL]
+Nom=Cog_Part_Ca,1,0,0,N,1
+Nom=Cog_Bilan_Au,11,0,0,N,1
+Nom=Cog_Traitedt,19,0,0,N,1
+Nom=CptCol,33,0,0,N,1
+Nom=Cog_Modregext,41,0,0,N,1
+Nom=Cog_CptAnael,56,0,0,N,1
+Nom=Cog_ETLDateImport,64,0,0,N,1
+[/CHAMPL]
+nom=UGtPceExp
+[CHAMPL]
+Nom=Cog_ImoFlag,1,0,0,N,1
+[/CHAMPL]
+nom=UMouv
+[CHAMPL]
+Nom=Cog_Date_Debut,1,0,0,N,1
+Nom=Cog_Date_Fin,9,0,0,N,1
+Nom=Cog_Asset,17,0,0,N,1
+Nom=Cog_Numero,37,0,0,N,1
+Nom=Cog_Id_Enveloppe,52,0,0,N,1
+Nom=Cog_Affaire,57,0,0,N,1
+Nom=Cog_ImoFlag,65,0,0,N,1
+Nom=Cog_EcrFlag,66,0,0,N,1
+[/CHAMPL]
+nom=UPrjAp
+[CHAMPL]
+Nom=Cog_Facture,1,0,0,N,1
+Nom=Cog_Prj_Chapeau,2,0,0,N,1
+Nom=Cog_Prj_Status,3,0,0,N,1
+Nom=Cog_AxeAnael,28,0,0,N,1
+Nom=Cog_Taux,36,0,0,N,1
+Nom=Cog_Periodicite,41,0,0,N,1
+Nom=Cog_Cotisation_PDV,42,0,0,N,1
+Nom=Cog_Lib_Affaire_Principale,50,0,0,N,1
+Nom=Cog_Lib_Affaire_Mere,100,0,0,N,1
+Nom=Cog_ETLDateImport,150,0,0,N,1
+Nom=Cog_Hierarchie,164,0,0,N,1
+Nom=Cog_DirCliente,165,0,0,N,1
+Nom=Cog_AffectationBudgetaire,169,0,0,N,1
+Nom=Cog_ImpDetail,173,0,0,N,1
+Nom=Cog_Id_Enveloppe,174,0,0,N,1
+Nom=Cog_TypMotFac,179,0,0,N,1
+[/CHAMPL]
+nom=USoc
+[CHAMPL]
+Nom=Cog_Samedi,1,0,0,N,1
+Nom=Cog_Dimanche,2,0,0,N,1
+Nom=Cog_Delai_Validite,3,0,0,N,1
+Nom=Cog_Regl,6,0,0,N,1
+Nom=Cog_Flash_Devis,10,0,0,N,1
+Nom=Cog_Flash_Devis_Retour,14,0,0,N,1
+Nom=Cog_RefUn,18,0,0,N,1
+Nom=Cog_RefModele,22,0,0,N,1
+Nom=Cog_implogo_1,47,0,0,N,1
+Nom=Cog_implogo_2,48,0,0,N,1
+Nom=Cog_implogo_3,49,0,0,N,1
+Nom=Cog_implogo_4,50,0,0,N,1
+Nom=Cog_ArtemisCh,51,0,0,N,1
+Nom=Cog_ArtemisChW,61,0,0,N,1
+Nom=Cog_ArtemisFormat,71,0,0,N,1
+Nom=Cog_ArtemisFlash,86,0,0,N,1
+Nom=TvaR,90,0,0,N,1
+Nom=TvaRa,91,0,0,N,1
+Nom=Cog_Flash_CdeF_Valid,92,0,0,N,1
+[/CHAMPL]
+nom=UT006
+[CHAMPL]
+Nom=Cog_Modregext,1,0,0,N,1
+Nom=Cog_Majinterface,16,0,0,N,1
+Nom=Cog_Modreganael,17,0,0,N,1
+[/CHAMPL]
+nom=UT020
+[CHAMPL]
+Nom=Cog_FnpFlag,1,0,0,N,1
+Nom=Cog_FaeFlag,2,0,0,N,1
+[/CHAMPL]
+nom=UT029
+[CHAMPL]
+Nom=CptMsk,1,0,0,N,1
+Nom=Cog_Facturation_Compte,9,0,0,N,1
+[/CHAMPL]
+nom=UT051
+[CHAMPL]
+Nom=Cog_SalGrp,1,0,0,N,1
+[/CHAMPL]
+nom=UT085
+[CHAMPL]
+Nom=Cog_Anael_Corr,1,0,0,N,1
+[/CHAMPL]
+nom=UT1
+[CHAMPL]
+Nom=Cog_Superficie,1,0,0,N,1
+Nom=Cog_ETLDateImport,6,0,0,N,1
+[/CHAMPL]
+[/CHAMPR]
+[TABLEU]
+Version=1,1989 1230000,MJV ,20120926162043,LK                  
+Nom=Art,Article,1
+DateM=05F79F794FEECD01
+[TABLEU]
+Version=1,1989 1240000,MJV ,20100706100928,SN                  
+Nom=Cli,Client,1
+DateM=E94A06DD86EACD01
+[TABLEU]
+Version=1,1989 1230000,MJV ,20120926162127,LK                  
+Nom=Ent,En-tête de pièce,1
+DateM=7F193B3066CECF01
+[CHAMPS]
+[ZoneVirtuelle]
+[/ZoneVirtuelle]
+[/CHAMPS]
+[TABLEU]
+Version=1,1989 1240000,MJV ,20121023114731,SN                  
+Nom=Fou,Fournisseur,1
+DateM=E94A06DD86EACD01
+[TABLEU]
+Version=1,20100913114526,SN                  ,20100913142014,SN                  
+Nom=GtPceExp,Explorateur de pièces,1
+DateM=270B45C043EECD01
+[TABLEU]
+Version=1,1989 1230000,MJV ,20120926162139,LK                  
+Nom=Mouv,Mouvement,1
+DateM=ACB8F443F29BCD01
+[CHAMPS]
+[ZoneVirtuelle]
+[/ZoneVirtuelle]
+[/CHAMPS]
+[PROPLOC]
+Nom=Cog_EcrFlag
+[/PROPLOC]
+[TABLEU]
+Version=1,2000 1250000,MJV ,20100706104944,SN                  
+Nom=Mvtl,Ventilation,1
+DateM=3A572C31E81CCB01
+[CHAMPS]
+[ZoneVirtuelle]
+[/ZoneVirtuelle]
+[/CHAMPS]
+[TABLEU]
+Version=1,2000 5130000,MJV ,20100706102757,SN                  
+Nom=PrjAp,Projet après-vente,1
+DateM=9E998A64253ECB01
+[TABLEU]
+Version=1,1989 1250000,MJV ,20100706084417,SN                  
+Nom=Soc,Société,1
+DateM=12CF48F448A2CD01
+[TABLEU]
+Version=1,1999 4280000,MJV ,20050107085538,MARIE JO            
+Nom=T006,Mode de règlement,1
+DateM=4D1C5FFBE61CCB01
+[TABLEU]
+Version=1,1999 4280000,MJV ,20050106171940,MARIE JO            
+Nom=T020,Code opération,1
+DateM=C0FB282DE71CCB01
+[TABLEU]
+Version=1,1999 4280000,MJV ,20050106172036,MARIE JO            
+Nom=T029,Code statistique tiers,1
+DateM=55AA2049E71CCB01
+[TABLEU]
+Version=1,2000 6270000,MJV ,20050107085622,MARIE JO            
+Nom=T051,Service,1
+DateM=F6BAE794E71CCB01
+[TABLEU]
+Version=1,20121212095349,SN                  ,20121212095418,SN                  
+Nom=T085,Table des taux de TVA,1
+DateM=7596E2684FD8CD01
+[TABLEU]
+Version=1,1999 8 60000,MJV ,20100706102553,SN                  
+Nom=T1,Adresse,1
+DateM=C261D55BE61CCB01
+[TABLE]
+Version=1,20080615181434,ADAMELEC            ,20080615181434,ADAMELEC            
+Nom=Wgnum,Numeriques divers,1
+DateM=C0234FF504CFC801
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+Nom=n16d5,1,2,N,0,0,N,1
+Nom=n8d0,321,2,N,0,0,N,1
+Nom=n12d2,401,2,N,0,0,N,1
+Nom=n8d1,641,2,N,0,0,N,1
+Nom=n1d0,801,2,N,0,0,N,1
+[/CHAMPS]
+[BASEU]
+Version=1,1989 1240000,PB  ,20120312162613,DEMO                
+Nom=GtfPcf,Tiers,1
+DateM=3736A2756400CD01
+DateMIndex=4E2D5367EA62CF01
+[TABLES]
+[/TABLES]
+[INDEX]
+Version=1,20090422173745,MR_INFO_U           ,20110520064410,SYSTEMU             
+Nom=Cog_AdrCod,Par code adresse,1
+DateM=56BFC48FA816CC01
+CLE=GtfPcf, ,Ce1,2,7,n,1,n
+Alias=COG_ADRCOD
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=AdrCod,4,0,
+Nom=Tiers,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20140428160135,UGIE                ,20140428160135,UGIE                
+Nom=Cog_HstdSite,Par date de validaité,1
+DateM=A1923A5EEA62CF01
+CLE=GtfPcf, ,Ce1,2,7,n,1,n
+Alias=COG_HSDTSITE
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=HsDt,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20090423093311,MR_INFO_U           ,20090424154625,MR_INFO_U           
+Nom=Cog_NomSite,Par nom de site,1
+DateM=DF43970FE3C4C901
+CLE=GtfPcf,z,Ce1,2,7,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Nom,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20090423093427,MR_INFO_U           ,20090424154738,MR_INFO_U           
+Nom=Cog_TelSite,Par téléphone,1
+DateM=C36EE93AE3C4C901
+CLE=GtfPcf, ,Ce1,2,7,n,1,n
+Alias=COG_TELSITE
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Tel,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110525155708,SYSTEMU_VR          ,20110525155708,SYSTEMU_VR          
+Nom=Cog_ParCogCentrale,Par code centrale associé,1
+DateM=08D773A3E31ACC01
+CLE=GtfPcf, ,Ce1,2,3,n,1,n
+Alias=Cog_ParCogCent
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Cog_Centrale,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEXL]
+Nom=GtfPcf,T1,Cog_AdrCod,0
+Nom=GtfPcf,T1,Cog_HstdSite,0
+Nom=GtfPcf,T1,Cog_NomSite,0
+Nom=GtfPcf,T1,Cog_TelSite,0
+Nom=GtfPcf,Cli,Cog_ParCogCentrale,0
+[/INDEXL]

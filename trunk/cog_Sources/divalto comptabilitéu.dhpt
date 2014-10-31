@@ -1,0 +1,57 @@
+xwin-s-projet      2.0
+[general]
+nom="divalto comptabilité"
+progexec="divalto.dhop"
+date="20141024297513560199"
+util="UGIE_YLF"
+filtres="??pp*;??pc*;??pm*;??pz*;??p9*"
+flagrelatif=1
+cheminbases="/../../../../divalto/&div72a_cd205a/sources"
+modeweb=3
+f5compile=1
+typetransport=3
+[profildefaut]
+[profil]
+nom="ugie_205"
+repobjet="/cd205a/objets"
+debug=0
+browse=0
+implicites="ugie.txt"
+repbrowse="/cd205a/objets"
+repobjetsurcharge="/ugie/cog_objets"
+repbrowsesurcharge="/ugie/cog_browse"
+versioncible="7.2a"
+repcouverture="/ugie/cog_ccode"
+[profil]
+nom="yohann_205a"
+repobjet="/cd205a/objets"
+browse=0
+implicites="ugie_ylf.txt"
+repbrowse="/cd205a/objets"
+repobjetsurcharge="/svnwork/ylef/&ugieiris/cog_objets"
+repbrowsesurcharge="/svnwork/ylef/&ugieiris/cog_browse"
+versioncible="7.2a"
+repcouverture="/svnwork/ylef/&ugieiris/cog_ccode"
+[communs]
+nom="cog_cc_recordsql"
+fic="ccrsdosu.dhsq"," "
+fic="ccrsecru.dhsq"," "
+fic="ccrsimmou.dhsq"," "
+fic="ccrsjcau.dhsq"," "
+fic="ccrstabu.dhsq"," "
+fic="cog_ccrsdos.dhsq"," "
+fic="cog_ccrsimmo.dhsq"," "
+fic="cog_ccrsjca.dhsq"," "
+[sousprojets]
+fic="cog - fe120 - facturation cen export.dhps"," "
+fic="cog - fe120 - facturation cen génération.dhps"," "
+fic="cog - fe120 - facturation pv export.dhps"," "
+fic="cog - fe120 - facturation pv génération.dhps"," "
+fic="cog - fe120 - facturation pv reddition exp.dhps"," "
+fic="cog - fe120 - facturation pv reddition imp.dhps"," "
+fic="cog - fe120 - facturation pv reddition zooms.dhps"," "
+fic="cog_cc cession génération écriture.dhps"," "
+fic="cogeser-integrationcomptableecriture-v03.dhps"," "
+[projetsfusion]
+[fabricationmere]
+[autres]

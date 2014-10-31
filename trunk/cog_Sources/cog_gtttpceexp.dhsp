@@ -1,0 +1,170 @@
+SetModuleInfo('$Id$')
+;*
+;*		Surcharges de l'Explorateur de pièces																GTTTPCEEXP.dhsp
+;*
+
+overWrittenBy	'COG_GTUTPCEEXP.dhop'
+
+;*
+;*		Déclaration
+;*
+
+;
+Include	'GTTCPCE000.dhsp'											; Define Gestion de pièces
+
+;
+Module	'GTTMPCE001.dhop'											; Navigation de pièces
+
+; Enregistrement
+Public Record 'GTFDD.dhsd'		GTPCE								; Echange pièce
+Public Record 'GTFDD.dhsd' 	XQ 		G3XQ					; Fichier échange DAV
+Public Record 'GTFDD.dhsd' 	XT 		G3XT					; Identifiant menus et barres d'outils
+Public Record 'GTFDD.dhsd'		MOUV
+
+Public Record 'DDSYS.dhsd'		ROWINFO	RiEntite				; Ligne de contrôle
+Public Record 'GTFDD.dhsd'		GTPCEEXP							; Enregistrement ligne
+
+Public Record 'GTFDD.dhsd' 	GTSEL 	GTSEL_Debut			; Critères début 
+Public Record 'GTFDD.dhsd' 	GTSEL 	GTSEL_Fin			;     "    fin
+Public Record 'GTFDD.dhsd'	 	GTSEL 	GTSEL_Msk			;     "    masque
+
+; Menu
+Define IdMenuPrincipal			= G3XT.IdMenu(1)				; Identifiant menu principal
+Define IdMenuImpression			= G3XT.IdMenu(2)				; Identifiant menu impression
+Define IdMenuFiltre				= G3XT.IdMenu(3)				; Identifiant menu filtre
+Define IdMenuSimple				= G3XT.IdMenu(4)				; Identifiant menu simple
+Define IdMenuPopTraitement		= G3XT.IdMenu(5)				; Identifiant menu popup traitement de pièce
+Define IdMenuFiche				= G3XT.IdMenu(6)				; Identifiant menu mode fiche
+
+; Barre d'outils
+Define IdBoutonFiltre			= G3XT.IdBarre(2)				; Identifiant toolbar filtre
+Define IdBoutonSimple			= G3XT.IdBarre(3)				; Identifiant toolbar F9+F10
+Define IdBoutonImpression		= G3XT.IdBarre(4)				; Identifiant toolbar impression
+Define IdBoutonFiche				= G3XT.IdBarre(5)				; Identifiant toolbar mode fiche
+
+; Listes
+Define IdLstEntitesXme			= G3XT.IdTableau(1)				; Liste des en-têtes, lignes et ventilations de pièces
+Define IdLstLigVtl				= G3XT.IdTableau(2)				; Liste des lignes et ventilations avant insertion dans liste principale
+Define IdTblLiaison				= G3XT.IdTableau(3)				; Liste des liaisons numéro de pièce <-> ligne de tableau
+Define IdLstAffElem				= G3XT.IdTableau(4)				; Liste des éléments affichés de l'arbre
+
+;*
+;*		Fonctions & Procédures
+;*
+
+;*
+Public Procedure Cog_Programme_Debut
+; Début de programme
+Beginp
+Endp
+
+;*
+Public Procedure Cog_Programme_Init
+; Initialisation
+Beginp
+	
+Endp
+
+;*
+Public Procedure Cog_Programme_Fin
+; Fin de programme
+Beginp
+Endp
+
+;*
+Public Procedure Cog_Menu_Chargement_Ap
+; Après chargement du menu
+Beginp
+Endp
+
+;*
+Public Procedure Cog_Toolbar_Chargement_Ap
+; Après chargement des barres d'outils
+Beginp
+Endp
+
+;*
+Public Procedure Cog_MenuEtBarreOutils_Maj_Av
+; Avant la mise à jour des barres d'outils et des menus
+Beginp
+Endp
+
+;*
+Public Procedure Cog_MenuEtBarreOutils_Maj_Ap
+; Après la mise à jour des barres d'outils et des menus
+Beginp
+Endp
+
+;*
+Public Procedure Cog_Initialiser_CleDepart
+; Initialise la clé de départ du parcours
+; Reçoit la clé initiale
+
+Beginp
+Endp
+
+;*
+Public Procedure Cog_Maj_Attributs_Masque
+; Après la sauvegarde des critères utilisateur saisis
+Beginp
+Endp
+
+;*
+Public Function Char Cog_Conserver_MasqueStandard
+; Permet de changer l'appel de la saisie de pièce
+; Renvoie :	'N' pour prendre en compte les modifications,
+;				'O' sinon (par défaut).
+Beginf
+	FReturn('O')
+Endf
+	  
+;*
+;*		Gestion des lignes
+;*
+
+;*
+Public Procedure Cog_GTPCEEXP_ENT_Chargement_Av
+; Avant chargement d'une ligne d'en-tête de pièce
+Beginp
+Endp
+
+;*
+Public Procedure Cog_GTPCEEXP_MOUV_Chargement_Av
+; Avant chargement d'une ligne de mouvement
+Beginp
+	GTPCEEXP.Cog_ImoFlag = MOUV.Cog_ImoFlag
+Endp
+
+;*
+Public Procedure Cog_GTPCEEXP_MVTL_Chargement_Av
+; Avant chargement d'une ligne de ventilation
+Beginp
+Endp
+
+;*
+Public Procedure Cog_GTPCEEXP_Chargement_Av
+; Avant chargement d'une ligne d'un autre type que les précédentes
+; RiEntite, GTPCEEXP sont en ligne
+Beginp
+Endp
+
+;*
+Public Function Char Cog_GTPCEEXP_Compare_Critere
+; Comparaison des Criteres spécifiques éventuelles
+; Retour 'N' force la chargement des Criteres
+Beginf
+	Freturn('O')
+Endf				
+
+;*
+Public Procedure Cog_ModeFiche_Av
+; Avant affichage du mode fiche
+Beginp
+Endp
+
+;*
+Public Procedure Cog_Popup_Execution_Av
+; Avant ouverture du menu popup du tableau principal
+Beginp
+Endp
+	 

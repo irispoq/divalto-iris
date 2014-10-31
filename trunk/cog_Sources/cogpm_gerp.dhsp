@@ -1,0 +1,153 @@
+;*
+;* Module système général Cogeser pour les développements Divalto 
+;*
+
+
+;*
+;* Déclarations
+;*
+
+OverWrittenBy	"Cogpm_GErpU.dhop"
+
+Module	GTTM000.Dhop
+
+Public	Record		Gtfdd.dhsd		T020
+
+;* 
+public procedure Cog_GErp_EcritureLivreDeBord(txt,prg,applic,nivalerte,dos)
+
+; Ecriture dans le livre de bord
+
+1	txt			>	a5dd.dhsd		logtxt								; Texte à tracer
+1	prg			>	a5dd.dhsd		prg			= ""					; Programme appelant (par défaut znomprog)
+1	applic		>	a5dd.dhsd		applic		= "DAV"				; Code application (par défaut DAV)
+1	nivalerte	>	a5dd.dhsd		nivalerte	= 2					; Niveau d'alerte (par défaut 2)
+1	dos			>	a5dd.dhsd		dos			= ""					; N° de société (par défaut mz.Dos)
+
+RecordSql	cogrs_GErp.dhoq		CogRS_GERP_LivreDeBord		LivreDeBord
+
+beginp
+
+	if dos = ""
+		dos	= mz.dos
+	endif
+
+	if prg = ""
+		prg	= system.znomprog
+	endif
+	
+	LivreDeBord.init()
+	LivreDeBord.applic		= applic
+	LivreDeBord.nivalerte	= nivalerte
+	LivreDeBord.logdh			= time(7)
+	LivreDeBord.user			= system.user
+	LivreDeBord.tache			= system.tache
+	LivreDeBord.prg			= prg
+	LivreDeBord.dos			= dos
+	LivreDeBord.logtxt		= txt
+	LivreDeBord.insert()
+
+endp
+
+;* 
+public function char Cog_GERP_EstUneFacture(op)
+
+; Recherche si la pièce est un avoir ou une facture : renvoie "" en cas d'erreur, A pour avoir, F pour facture
+
+1	op			>	gtfdd.dhsd		op			; Code opération à tester
+
+beginf
+
+	if not lectab(20,op)
+
+		switch t020.ticod
+
+		case "C"
+
+			freturn(condition(t020.sens=1,"A","F"))
+
+		case "F"
+
+			freturn(condition(t020.sens=1,"F","A"))
+
+		default
+
+			freturn("")
+
+		endswitch
+
+	endif
+
+	freturn("")
+
+endf
+
+;*
+Public Function int Cog_GERP_Lectab(cebin,cle1,cle2,cle3,cle4,cle5,cle6,cle7,cle8,cle9, berr, dt)
+
+; Lecture d'une table spécifique à partir de son numéro et de sa clé	(9 critères maximum)
+; En cas d'erreur, si "err" est fourni, affiche le message d'erreur et provoque le retour en saisie.
+; 0		ok
+; 1		fin validité atteinte
+; 2		enregistrement non trouvé
+
+1		cebin >gtfdd.dhsd	CEBIN				; numéro de la table en binaire à rechercher
+1		cle1				U						; clé de la table attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		cle2				U			= ''		; clé de la table	attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		cle3				U			= ''		; clé de la table	attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		cle4				U			= ''		; clé de la table	attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		cle5				U			= ''		; clé de la table	attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		cle6				U			= ''		; clé de la table	attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		cle7				U			= ''		; clé de la table	attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		cle8				U			= ''		; clé de la table	attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		cle9				U			= ''		; clé de la table	attention il faut penser à caster la clé dans le ZoomPk en fonction de la nature de la zone
+1		berr				B 			= False	; True pour afficher l'erreur, false pour gestion interne
+1		dt		>gtfdd.dhsd	PIDT	=' '		; tester la fin de validité si DT <> espace
+
+recordSQL cogrs_tab.dhoq	TableParametre	;Table des paramètres
+recordSQL cogrs_tab.dhoq	TableTest		;Table test
+
+1		dos			>gtfdd.dhsd	DOS				; dossier
+
+beginf
+
+	;recherche du cog_t000
+	TableParametre.init()
+	TableParametre.where.Zoom_PK()
+	if TableParametre.select() = 0
+		messagebox("Table paramètres inaccessible","Alerte",mb_iconexclamation)
+		programexit
+	endif
+
+	if cle1 = ' '
+		switch cebin
+			case	1
+				TableTest.init()
+		endswitch
+		freturn(0)
+	endif
+
+	if Cog_T000.tabtyp(cebin) = 1
+		dos = mz.dos
+	else
+		dos = 999
+	endif
+
+	switch cebin
+
+		case	1
+			TableTest.where.Zoom_PK(str(cle1))
+			if TableTest.select() = 0
+				if berr <> 0
+					messagebox(Translate("Code test inexistant"),"Alerte",mb_iconexclamation)
+					Harmony.Retour = Xmenext_Traitement_Avant
+				endif
+				Cog_T001	= ""
+				freturn(2)
+			endif
+
+	endswitch
+
+	freturn(0)
+
+endf

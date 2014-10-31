@@ -1,0 +1,445 @@
+;>xdiva
+;*
+;*		Objet : Zoom sur EntêtesReddition
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	KIT104				01		12/2011		version initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		Maj_Menu_Boutons						Mise à jour des boutons (grisés, cachés, ...)
+;*		RechercherLibelle						Recherche des libellés complémentaires
+;*
+
+overwrittenby "coguz_red_ent.dhop"
+
+
+;* déclarations communes
+Include	"gttcz00.dhsp"
+
+Module	"xzoom.dhop"
+;Module	"a5pm000.dhop"
+Module	A5PMNoteJoint.dhop
+
+HFileVersion   cogfdd.dhsd    Cog_FReddition
+
+;*
+;	déclaration des fichiers et enregistrements
+;*
+
+public record	a5dd.dhsd	xz			a5xz		;communication zoom
+public record	cogfdd.dhsd	Cog_Red_Ent
+
+1	nbsel							4,0					; Nombre de lignes sélectionnées
+
+;*
+;	procedures complémentaires
+;*
+
+;*	Mise à jour des boutons (affichage, grisés, ...)
+Public Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+
+	Switch ZOOM.ACTION
+
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		XmeMenuEnableItem(Zoom.Idmenu,"JOINT",True)
+		
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", "<BITMAP>NOTE_N")
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", "<BITMAP>FICJOINT_N")
+		XmeToolbarEnableButton(idOutilZoom,"JOINT",True)
+
+	Case ZOOM_MODIFICATION
+		; en modification
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		XmeMenuEnableItem(Zoom.Idmenu,"JOINT",True)
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(Cog_Red_Ent.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(Cog_Red_Ent.CEJOINT = 2, "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+		XmeToolbarEnableButton(idOutilZoom,"JOINT",True)
+
+
+	Case 	ZOOM_AFFICHAGE
+		switch Zoom.TypeInput
+
+		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(Cog_Red_Ent.CENOTE = 2, True, False))
+			XmeMenuEnableItem(Zoom.Idmenu,"JOINT",Condition(Cog_Red_Ent.CEJOINT = 2, True, False))
+
+		endswitch
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(Cog_Red_Ent.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		xmetoolbarenablebutton(idOutilZoom,"NOTE", Condition(Cog_Red_Ent.CENOTE = 2, True, False))
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(Cog_Red_Ent.CEJOINT = 2, "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+		xmetoolbarenablebutton(idOutilZoom,"JOINT", Condition(Cog_Red_Ent.CEJOINT = 2, True, False))
+
+	EndSwitch
+
+EndP
+
+;*	Recherches complémentaires
+public procedure RechercherLibelle
+beginp
+
+endp
+
+;*
+public procedure Traiter_Selection
+beginp	; Traiter_Selection
+
+	nbsel ++
+	Pong("Cog_Red_Ent_" & nbsel,Cog_Red_Ent.Cog_RedNo)
+
+endp		; Traiter_Selection
+
+
+;*
+public procedure Envoyer_Selections
+beginp	; Envoyer_Selections
+
+	nbsel	= 0
+	ZoomTraiterSelection("cogtz_red_ent.dhop","Traiter_Selection")			
+	Pong("Cog_Red_Ent_nbre",nbsel)
+
+endp		; Envoyer_Selections
+
+;*	envoie l'élément courant si il n'y a pas eu de sélection multiple précédemment
+public procedure Envoyer_Courant
+beginp
+
+	if nbsel = 0
+
+		nbsel	= 1
+		Pong("Cog_Red_Ent_" & nbsel,Cog_Red_Ent.Cog_RedNo)
+		Pong("Cog_Red_Ent_nbre",nbsel)
+	
+	endif
+
+endp
+
+
+;*
+;	procedures d'initialisation et fin de zoom
+;*
+
+;*
+public procedure ZoomDebut
+beginp
+
+	init_zoom(FicheNoBloc = 0)
+
+	seek_soc(mz.dos)			; recherche du dossier et t000
+	Zoom.TitreFixe	= Translate("Reddition")&" - " & Soc.Nom 
+
+	note_Debut 				; init de la gestion des notes
+	joint_Debut				; init de la gestion des fichiers joints
+	
+	; sauvegarde du mode d'appel
+	g7.pong		= g3xz.pong
+	g3xz.pong 	= false
+
+endp
+
+;*
+public procedure ZoomAbandon		; sortie du zoom par f9
+beginp
+endp
+
+;*
+public procedure ZoomVAlidation ; validation du zoom
+beginp
+
+	zoom.valretour	= Cog_Red_Ent.Cog_RedNo
+	if g7.pong = true
+		Envoyer_Courant
+	endif
+
+endp
+
+;*
+public procedure ZoomFin			; à la sortie du zoom
+beginp
+endp
+
+
+;*
+;	procedures création, duplication, modification et suppression
+;*
+
+;*
+public procedure ZoomCreation
+beginp
+	zoom.Ok	= "N"
+endp
+
+;*
+public procedure ZoomDuplication
+beginp
+endp
+
+;*
+public procedure ZoomApresCleCreation ; après saisie de la clé
+beginp
+endp
+
+;*
+public procedure ZoomCreationRes		; apres réservation en création
+beginp
+endp
+
+;*
+public procedure ZoomAvantWrite
+beginp
+endp
+
+
+;*
+public procedure ZoomApresCreation ; compte-rendu de création
+beginp
+endp
+
+
+;*
+public procedure ZoomModification ; avant entrée en modif
+beginp
+	zoom.Ok	= "N"
+endp
+
+
+;*
+public procedure ZoomModificationRes		; apres réservation enmodif
+beginp
+
+	note_chargement_ (0,Cog_Red_Ent.note)
+	joint_chargement_(0,Cog_Red_Ent.joint)
+
+endp
+
+
+;*
+public procedure ZoomAvantRewrite
+beginp
+
+	Cog_Red_Ent.usermo		= system.user
+   Cog_Red_Ent.usermodh		= time(7)
+	Cog_Red_Ent.note 			= note_modification_(0,Cog_Red_Ent.note,noteobj="Cog_Red_Ent")
+	Cog_Red_Ent.joint 		= joint_modification_(0,Cog_Red_Ent.joint,"Cog_Red_Ent")
+	Cog_Red_Ent.cenote		= condition(Cog_Red_Ent.note<>0,2,1)
+	Cog_Red_Ent.cejoint		= condition(Cog_Red_Ent.joint<>0,2,1)
+
+endp
+
+
+;*
+public procedure ZoomApresModification ; compte rendu de modification
+beginp
+endp
+
+
+;*
+public procedure ZoomSuppression ; avant entrée en suppression
+beginp
+	zoom.Ok	= "N"
+endp
+
+
+;*
+public procedure ZoomSuppressionRes
+beginp
+endp
+
+
+;*
+public procedure ZoomAvantDelete
+beginp
+
+	note_suppression_ (0,Cog_Red_Ent.note)
+	joint_suppression_ (0,Cog_Red_Ent.joint)
+
+endp
+
+;*
+public procedure ZoomApresSuppression ; compte rendu de suppression
+beginp
+endp
+
+
+
+;*
+;	Actions
+;*
+
+;*
+public procedure ZoomEnteteTableau 
+beginp
+
+	XmeList_ScanColumn(Zoom.IdTableau)
+
+endp
+
+;*
+public procedure ZoomAvantConsultFiche
+beginp
+
+	Maj_Menu_Boutons
+
+endp	
+
+
+;*
+public procedure ZoomAvantConsultListe
+beginp
+
+	Maj_Menu_Boutons
+
+endp
+
+
+;*
+public procedure ZoomConsultFiche 	; à utiliser si note
+beginp
+
+	switch Harmony.Key
+
+		case k_f6
+			g3xz.PiNo	= Cog_Red_Ent.Cog_RedNo
+			ping("g3xz",g3xz)
+			zoom_call(63402)
+		
+		case k_f7
+			zoom_call()
+		
+		case k_sf6
+			note_consultation_(0,Cog_Red_Ent.note)
+		
+		case k_ctrl_f6
+			joint_consultation_(0,Cog_Red_Ent.joint)
+
+	endswitch 
+
+endp
+
+;*
+public procedure ZoomConsultListe ; à utiliser si note
+beginp
+
+	switch Harmony.Key
+
+		case k_f6
+			g3xz.PiNo	= Cog_Red_Ent.Cog_RedNo
+			ping("g3xz",g3xz)
+			zoom_call(63402)
+	
+		case k_f7
+			zoom_call()
+		
+		case k_sf6
+			note_consultation_(0,Cog_Red_Ent.note)
+		
+		case k_ctrl_f6
+			joint_consultation_(0,Cog_Red_Ent.joint)
+	
+		case k_f12
+			if g7.pong = true
+				Envoyer_Selections
+			endif
+
+	endswitch 
+
+endp
+
+
+;*
+public procedure ZoomAvantInput			; permet de griser les boutons et les choix
+beginp
+
+	Maj_Menu_Boutons
+
+endp
+
+;*
+public procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+beginp											; pour appel d'un zoom
+
+	switch Harmony.Key
+
+	case K_SF6											; Saisie d'une note
+		Note_Saisie_(C_Applic_DAV, Cog_Red_Ent.Note, 'Cog_Red_Ent')
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(Not Note_Empty_(C_Applic_DAV), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+
+	case K_Ctrl_F6
+		Joint_Saisie_ (C_Applic_DAV, Cog_Red_Ent.Note, 'Cog_Red_Ent')				; Fichier joint
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(Not Joint_Empty_(C_Applic_DAV), "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+
+	case Harmony.DataArret = 8002
+		if Harmony.Sourisbout = Right_Button
+			Zoom_Call()
+		elsif Harmony.Sourisclic = Double_Click
+			Harmony.Retour = Xmenext_Simulation_Touche
+			Harmony.Cplretour = K_F8
+		endif
+
+	case K_F7
+		Zoom_Call()
+
+	case K_F8 or Harmony.Arret in (9000..9999,11000..65000)				; Appel de zoom
+		ping ("A5xz" , A5xz)
+		Zoom_Call(harmony.arret)
+
+	endswitch
+
+endp
+
+;*
+public procedure ZoomFiltreAvantValeur
+beginp
+endp
+
+;*
+public procedure ZoomFiltreApresValeur
+beginp
+endp
+
+
+;*
+;	procedures liées à la lecture du ficher
+;*
+
+
+;* génération de la clé sur
+public procedure ZoomApresCle1
+beginp
+
+	zoom.cle 	= "E" & mz.Dos & Cog_Red_Ent.Cog_RedNo
+	zoom.clemin = "E" & mz.Dos
+	zoom.clemax = "E" & mz.Dos & $FF
+
+endp
+
+;* après lecture clé sur 
+public procedure ZoomApresRead1
+beginp
+
+	RechercherLibelle
+
+endp
+
+
+;*
+;*   Séquences de gestion de fichier
+;*
+
+
+;*
+
+

@@ -1,0 +1,61 @@
+;>xdiva
+;*
+;*		Intégration comptable																												cctt029.dhsp
+;*
+
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		pb			4.1						12.1998	Version initiale en Diva
+;*		hc			4.1b		1693		12.12.2000	Correction conversion MT si C0.dev <> ca.dev
+;*		hc			5.1						02.2001
+;*		hc						1779		17.08.2001	Mise en place critère
+;*		YLEF		P205a						10.2014	Programme_Debut: test du ping SIMUL
+
+
+overwrite	cctt029.dhop
+
+
+;*
+;*		Déclarations
+;*
+
+
+include	"cctc000.dhsp"
+
+; enregistrements
+
+public		record	CCFDD.dhsd		C3									; intitulé de compte
+public		record	CCFDD.dhsd		C4									; intitulé de journal
+public		record	CCFDD.dhsd		C5									; intitulé d'axe
+public		record	CCFDD.dhsd		C8									; ligne d'écriture
+public		record	CCFDD.dhsd		CP									; ligne de ventilation pièce
+public		record	CCFDD.dhsd		CX									; ligne de ventilation axe
+public		record	CCFDD.dhsd		H2									; libellés abrégés
+public		record	CCFDD.dhsd		C4ETS								; compte de liaison
+public		record	CCFDD.dhsd		C8T1								; ligne d'écriture
+
+;;*
+;procedure CX_Write_Av
+;; avant écriture ligne ventilation axe
+;
+;beginp	; cx_write_av
+;	if abs(cx.Mt)=245.04
+;					;messagebox(cx.cog_Sens,"sens av")
+;				endif
+;	standard.cx_write_av
+;	if abs(cx.Mt)=245.04
+;					;messagebox(cx.Sens,"sens ap")
+;				endif
+;					
+;endp		; cx_write_av
+
+;*
+procedure Programme_Debut
+; avant les initialisations, permet par exemple de régler MZ.PARAM qui contient le niveau de contrôle
+; permet également de régler c3xq.fic qui est le nom du fichier contenant les lignes à intégrer
+1		ret	1,0
+beginp
+	Standard.Programme_Debut
+	If PingReceiveAndDelete('SIMUL',ret) = 0 And ret = 1 | MZ.Param = ret | Endif
+endp

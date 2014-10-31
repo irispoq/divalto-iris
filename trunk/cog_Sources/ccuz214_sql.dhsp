@@ -1,0 +1,22 @@
+;*
+;*
+;*
+
+OverWrite cctz214_sql.dhop
+
+;
+Module "COG_CCTZ214_SQL.DHOP"
+
+;*
+;*
+;*
+
+;*
+Procedure ZoomDebut
+;
+BeginP
+
+	Standard.ZoomDebut
+	Cog_ZoomDebut
+
+EndP

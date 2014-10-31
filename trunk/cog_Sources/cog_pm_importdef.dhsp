@@ -1,0 +1,735 @@
+;*
+;*	Moteur générique d'importation Divalto
+;*
+;_06/2011		VR		02		Trace complétée
+;_10/2010		SR		01		Initial
+
+;*
+;* Déclarations
+;*
+
+Hfile		cog_echange.dhsd				Cog_ParDivEch		Cog_ParDivEch
+
+Public	Record	cog_echange.dhsd	cog_paratables
+Public	Record	cog_echange.dhsd	cog_parazones
+Public	Record	Ddsys.dhsd			Zoom
+
+Module	XZoom.dhop
+
+1	lIdFicATraiter			L																		; Liste mémoire des fichier à traiter pour la table à importer courante
+1	lIdZonesAImporter		L																		; Liste mémoire des zones à importer
+1	aFIC						>cog_echange.dhsd		FIC										; Fichier à traiter
+1	aEnregEchange			5000																	; Enreg générique à importer
+1	aLec						5000
+1	aAdrFxTriZAIMP			16																		; @ de la fx de tri de la liste des zones à importer
+1	aEntiteResa				230																	; Entite de réservation construite en lisant les zones
+1	aEntiteResaZones		220																	; Entite de réservation construite en lisant les zones
+1	lIdLogMajData			L																		; Id liste mémoire du log modif
+1	nCptEcr					8,0																	; Cpt écriture
+1	nCptMaj					8,0																	; Cpt maj
+1	aKEYINIT					239																	; Index courant
+1	lIdLogCtrlData			L																		; Id liste mémoire du log ctrl
+1	lPosCsvDecryptLig		L																		; Position courante pour split 
+1	lIdLstCsv				L																		; Liste mémoire du split
+1	aAdrFxEnd				16																		; @ de fx fin trt table
+1	aAdrFxUpdate			16																		; @ de fx après update 
+;****VR****
+1	numlig					7,0																	;n° ligne lue						
+
+
+Structure Bufdir 400 ; zone réceptrice 
+ 1 Attributs L 
+ 1 HeureCreation 8 
+ 1 HeureAcces 8 
+ 1 HeureEcriture 8 
+ 1 TaillePoidsForts L 
+ 1 TaillePoidsFaibles L 
+ 1 f1 L 
+ 1 f2 L 
+ 1 Nom 260 
+ 1 NomCourt 14 
+EndStructure
+
+Structure LogDataMaj 584
+	1	Table	32
+	1	Zone	32
+	1	VAlAp	256
+	1	Posit	4,0
+	1	Longu	4,0
+	1	ValAv	256
+EndStructure
+
+Structure LogDataCtrl 565
+	1	Table	32
+	1	Zone	32
+;****VR****
+	1	Res	1	
+	1	Cle	239
+	1	Mess	254
+;****VR****
+	1	Ligne	7,0
+EndStructure
+
+RecordDiva	BufDir			Bufd
+RecordDiva	LogDataMaj		LogDt
+RecordDiva	LogDataCtrl		LogCtrl
+
+Record	*	Htdf	aFichier
+
+Module	Cog_Gdiva.dhop
+Module	coge_journal.dhop
+
+Const		cPrefFicLog = "/divalto/DivaltoLog/Cog_Import_"
+Const		cTypLgFixe	= 1
+Const		cTypCsv		= 2
+Const		cActWrite	= 1
+Const		cActReWrite	= 2
+
+;fri 12/02/2013
+public 	Hfile		gtfdd.dhsd				gtfpcf		Cog_gtfpcf
+Public	Record	gtfdd.dhsd		fou
+
+1	ddate						>gtfdd.dhsd		hsdt										; date de fermeture
+
+
+;*
+;* Proc & Fx
+;*
+
+;*
+Procedure Cog_PLogDataBeg
+Beginp
+	lIdLogMajData = ListGetId("Lst_LogMajData")
+	ListErase(lIdLogMajData)
+	p_ouvjournal([cPrefFicLog left(cog_paratables.enreg) ".log"], "O")
+	lIdLogCtrlData = ListGetId("Lst_LogCtrlData")
+	ListErase(lIdLogCtrlData)
+Endp
+
+;*
+Procedure Cog_PLogMajDataLoad(sValAp, sValAv)
+
+; Enregistre les maj ds une  liste mémoire pour écriture log
+;*	VR 08/2011	changement du type de paramètre en U au lieu de S
+1	sValAp		U				; Valeur zone après
+1	sValAv		U				; Valeur zone avant
+
+Beginp
+	If cog_paratables.tracmod = 2
+		;fri 11/02/2013
+		if cog_parazones.champ="HSDT" and svalav<>" "
+			;pas d'écriture dans le log
+		else
+			LogDt.Table	= cog_paratables.enreg
+			LogDt.Zone	= cog_parazones.champ
+			LogDt.VAlAp	= sValAp
+			logdt.Posit	= cog_parazones.position
+			logdt.Longu	= cog_parazones.longueur
+			logdt.ValAv = sValAv
+			ListInsert(lIdLogMajData, LogDt)
+		endif
+	EndIf
+Endp
+
+;*
+Procedure COG_PEpureListeMaj(aEnrMaj)
+
+; Epure la trace de maj pour éviter de remonter des faux positifs dus à la fx de ctrl maj
+
+1	aEnrMAJ		5000		; Enreg rendu par fx ctrl update
+
+BeginP
+    If ListBegin(lIdLogMajData) = 0
+		Loop ListNext(lIdLogMajData, logdt) not in(0, -1)
+			If mid(aEnrMaj, logdt.Posit, logdt.Longu) = logdt.ValAv
+				ListDeleteAndPrevious(lIdLogMajData)
+			EndIf
+		EndLoop
+	 EndIf
+EndP
+
+
+
+;*
+Procedure Cog_PLogMAJDataWrite
+
+; Ecrit un fichier HMP pour trace des maj
+
+
+1	sChainLog	S				; Chaine pour écrire le log
+Beginp
+	If cog_paratables.tracmod = 2 and ListBegin(lIdLogMajData) = 0
+		Loop ListNext(lIdLogMajData, logdt) not in(0, -1)
+			If mid(aLec, logdt.Posit, logdt.Longu) <> logdt.VAlAp
+				; fri	11/02/2013
+				if logdt.Zone="HSDT" 
+					if ddate<>" "
+						ddate=ddate
+					endif
+				endif
+				sChainLog = "<TABLE_MAJ>" & LogDt.Table && "<ZONE>" & LogDt.Zone
+				sChainLog &="<AVANT>" & mid(aLec, logdt.Posit, logdt.Longu)
+				sChainLog &="<APRES>" & logdt.VAlAp
+				sChainLog &="<INDEX>" & left(aKEYINIT)
+				p_ecrjourn(sChainLog)
+			EndIf
+		EndLoop
+		ListErase(lIdLogMajData)
+	EndIf
+Endp
+
+
+;*	01 | 02
+Procedure Cog_PLogCtrlDataLoad(sMess, aMode, aVal)
+
+; Enregistre les maj ds une  liste mémoire pour écriture log
+
+1	sMess		S = " "				; Message à tracer ou message générique constuit si esp
+1	aMode		1						; Valeur de aCtrlResult N ou I
+1	aVal		A = " "				; Valeur transmise
+
+Beginp
+	If sMESS = " "
+		If aMode = "N"
+			sMess = "Enregistrement rejeté. Zone " & left(cog_parazones.champ) & " incorrecte. Valeur recue " & left(aVal)
+		Else
+			sMess = "Zone non intégrée car valeur " & left(cog_parazones.champ) & " incorrecte. Valeur recue " & left(aVal)
+		Endif
+	EndIf
+	LogCtrl.Res = aMode
+	LogCtrl.Table	= cog_paratables.enreg
+	LogCtrl.Zone	= cog_parazones.champ
+	LogCtrl.Mess	= sMess
+	LogCtrl.Ligne	= NumLig
+	ListInsert(lIdLogCtrlData, LogCtrl)
+Endp
+
+;*	01 | 02
+Procedure Cog_PLogCtrlDataWrite
+
+; Ecrit les erreurs de contrôle dans le log
+
+1	sChainLog	S				; Chaine pour écrire le log
+Beginp
+	If ListBegin(lIdLogCtrlData) = 0
+		Loop ListNext(lIdLogCtrlData, LogCtrl) not in(0, -1)
+			if LogCtrl.Res = "N"
+				sChainLog = "<TABLE_ERROR_REJ>" & LogCtrl.Table	&& "<ZONE>" & LogCtrl.Zone && "<LIGNE>" & LogCtrl.Ligne
+			else
+				sChainLog = "<TABLE_ERROR>" & LogCtrl.Table	&& "<ZONE>" & LogCtrl.Zone	&& "<LIGNE>" & LogCtrl.Ligne
+			endif
+			sChainLog &="<MESSAGE_CTRL>" & LogCtrl.Mess
+			sChainLog &="<INDEX>" & left(aKEYINIT)
+			p_ecrjourn(sChainLog)
+		EndLoop
+		ListErase(lIdLogCtrlData)
+	Endif
+Endp
+
+;*
+Procedure Cog_PLogDataEnd
+Beginp
+	p_ecrjourn("<TABLE_REPORT>" & left(cog_paratables.enreg) & "<NB_CREATION>" & nospaces(nCptEcr) & "<NB_MODIFICATION>" & nospaces(nCptMaj))
+	p_clojournal
+	ListDestroy(lIdLogMajData)
+	ListDestroy(lIdLogCtrlData)
+Endp
+
+
+;* Parcours du répertoire
+procedure Cog_ParcoursDirectorie_MemFicATrt(nombase)
+1	nombase	A
+1	hdir		L
+beginp
+	; lecture du premier fichier 
+   hdir = WinFindFirstFile(nombase, BufD) 
+   if hdir = -1 
+      preturn 
+   endif 
+
+	; si répertoire, appel récursif 
+	; sinon affichage du nom 
+   Repeat 
+      If left(BufD.Nom) like cog_paratables.fic
+			ListInsert(lIdFicATraiter, BufD.Nom)
+		Endif
+      if band(BufD.Attributs, FILE_ATTRIBUTE_DIRECTORY) \ 
+         and BufD.Nom <> "." and BufD.Nom <> ".." 
+         Cog_ParcoursDirectorie_MemFicATrt(left(nombase, length(nombase)-2) \  
+                    & "/" & left(BufD.Nom) & "/*") 
+      endif 
+   Until WinFindNextFile(hdir, BufD) = FALSE 
+   ; fermeture du répertoire  
+   WinFindClose(hdir) 
+endp
+
+;*	Lecture windows des lignes du fichier
+function char Cog_FReadLigne(fic)
+1	fic		L				;pointeur sur le fichier d'import
+
+1	lig		1000	= ""	;ligne récupérée
+1	car		1				;caractère lu
+1	nblus		L 				;nombre de caractères lus
+1	i			8,0	= 1	;compteur
+
+beginf
+
+	loop winreadfile(fic,car,1,nblus) and nblus > 0
+		if car = $0A
+			exitloop
+		elsif car <> $0D
+			mid(lig,i,1)	= car
+			i++
+		endif
+	endloop
+	freturn(lig)
+
+endf
+
+;* 
+Function Char Cog_FTrans_LgFixes(&aEnregDest, sLig, aEnregLu, nMode)
+
+; Transfère enreg lu ds enreg conteneur suivant lg fixes 
+
+1	aEnregDest	5000		; Enreg destination
+1	slig			S			; Ligne lue
+1	aEnregLu		5000		; Enreg lu pour ReWrite
+1	nMode			1,0		; 0 sans log (1° passe), 1 avec log (seconde passe = av rewrite ou write)
+
+1	date			8			;date à formater
+1	mot			S			;mot à lire dans la ligne traitée
+1	aAdrFxForm	16			; @ fx de formatage
+1	aAdrFxCtrl	16			; @ fx de controle
+1	sChainCtrl	S				; Chaine retour du contrôle
+1	aCtrlResult 1			; Réponse du contrôle O (ok), I (Erreur non bloquante) ou N (Erreur bloquante). En majuscule pour trace avec message, en minuscule si pas de message
+1	aCtrlMess	254		; Message du ctrl
+1	bUpdate		B = True	; Update de la zone ou pas
+1	aDtComp		8			; Date pour comparaison mode rewrite
+1	aTimComp		6			; Heure pour comparaison mode rewrite
+1	aDHComp		14			; Date+Heure pour comparaison mode rewrite
+Beginf
+	;fri 11/02/2013
+	ddate=" "
+
+	If cog_parazones.constant = " "
+		Switch2 cog_paratables.modechang
+			Case cTypLgFixe
+				mot = mid(sLig, cog_parazones.position2, cog_parazones.longueur2)
+			Case cTypCsv
+				If cog_parazones.numchamp <> " "
+					ListIndex(lIdLstCsv, mot, cog_parazones.numchamp) 
+				Else
+					mot = " "
+				EndIf
+		EndSwitch
+		If cog_parazones.fxform <> " " and Mot <> " "
+			If GetAdressFunction(cog_paratables.moduleform, cog_parazones.fxform , aAdrFxForm) = 0
+				mot = FunctionCall(aAdrFxForm, Mot)
+				if cog_parazones.champ="HSDT"	and mot<>" "
+					ddate=mot
+				endif
+			EndIf
+		EndIf
+	Else
+		mot = cog_parazones.constant
+	EndIf
+	If cog_parazones.fxcrtl <> " " and cog_paratables.modulectrl <> " " \
+		and GetAdressFunction(cog_paratables.modulectrl, cog_parazones.fxcrtl , aAdrFxCtrl) = 0
+		sChainCtrl	= FunctionCall(aAdrFxCtrl, mot)
+		aCtrlResult	= HmpSeek(sChainCtrl, "RESULTAT", "O")
+		aCtrlMess	= HmpSeek(sChainCtrl, "MESSAGE", " ")
+	Else
+		aCtrlResult = "O"
+	EndIf
+
+	switch cog_parazones.natur
+
+		case 1	; Numérique avec décimales variables 
+			If aCtrlResult not in ("I", "i")
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( nmid(aEnregLu, cog_parazones.position, cog_parazones.longueur,system.Zdec(cog_parazones.vdec+1)) = " " and mot <> " " )
+					nmid(aEnregDest, cog_parazones.position, cog_parazones.longueur,system.Zdec(cog_parazones.vdec+1))	= val(mot)
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+
+			If cog_paratables.CHRESA <> " " and cog_parazones.NumResa <> " "
+				aEntiteResaZones &= val(mot)
+			EndIf
+	
+		case 2	; Numérique
+			If aCtrlResult not in ("I", "i")
+				If aEnregLu = " " or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( nmid(aEnregLu, cog_parazones.position, cog_parazones.longueur,cog_parazones.vdec) = " " and mot <> " ")
+					nmid(aEnregDest, cog_parazones.position, cog_parazones.longueur,cog_parazones.vdec)	= val(mot)
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+			If cog_paratables.CHRESA <> " " and cog_parazones.NumResa <> " "
+				aEntiteResaZones &= val(mot)
+			EndIf
+	
+		case vsw in(3,5)	;Alphanumérique et 1 caractère
+			If aCtrlResult not in ("I", "i")
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( mid(aEnregLu, cog_parazones.position, cog_parazones.longueur) = " " and mot <> " ")
+					mid(aEnregDest, cog_parazones.position, cog_parazones.longueur)	= mot
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+			If cog_paratables.CHRESA <> " " and cog_parazones.NumResa <> " "
+				aEntiteResaZones &= mot
+			EndIf
+	
+		case 4	;Date (aaaammjj)
+			If aCtrlResult not in ("I", "i")
+				fdate(aDtComp, mid(aEnregDest, cog_parazones.position, cog_parazones.longueur))
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( aDtComp = " " and mot <> " ")
+					if isdate(mot) > 8
+						fdate(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),mot)
+					else
+						mid(aEnregDest, cog_parazones.position, cog_parazones.longueur)	= mot
+					endif
+				Else
+					bUpdate = False
+				EndIf
+			Endif
+			If cog_paratables.CHRESA <> " " and cog_parazones.NumResa <> " "
+				aEntiteResaZones &= mot
+			EndIf
+	
+		case vsw in(6,8)	;Type B et Binaire
+			If aCtrlResult not in ("I", "i")
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( bmid(mid(aEnregDest,cog_parazones.position, cog_parazones.longueur),1) = " " and mot <> " ")
+					bmid(mid(aEnregDest,cog_parazones.position, cog_parazones.longueur),1)	= Hexabin(mot)
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+		
+		case 7	;Type X
+			If aCtrlResult not in ("I", "i")
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( xmid(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),1) = " " and mot <> " ")
+					xmid(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),1)	= ToHexa(mot)
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+		
+		case 9	;Type L
+			If aCtrlResult not in ("I", "i")
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( lmid(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),1) = " " and mot <> " ")
+					lmid(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),1)	= ToHexa(mot)
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+		
+		case 10	;Heure (hhmmss)
+			If aCtrlResult not in ("I", "i")
+				ftime(aTimComp, mid(aEnregDest, cog_parazones.position, cog_parazones.longueur))
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( aTimComp = " " and mot <> " ")
+					ftime(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),mot)
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+	
+		case 11	;Date mensuelle (aaaamm)
+			fdate(date,mot)
+			If aCtrlResult not in ("I", "i")
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( mid(aEnregDest, cog_parazones.position, cog_parazones.longueur) = " " and mot <> " ")
+					mid(aEnregDest, cog_parazones.position, cog_parazones.longueur)	= left(date,6)
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+		
+		case 12	;date + heure (aaaammjjhhmmss)
+			If aCtrlResult not in ("I", "i")
+				fdatedh(aDHComp, mid(aEnregDest, cog_parazones.position, cog_parazones.longueur))
+				If aEnregLu = " " Or cog_paratables.deleteav = 2 Or cog_parazones.majsys = 2 Or \
+					( aDHComp = " " and mot <> " ")
+					fdatedh(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),mot)
+				Else
+					bUpdate = False
+				EndIf
+			EndIf
+	
+	endswitch
+	
+	;Logs
+	If aCtrlResult = "O"
+		If nMode = 1 and bUpdate = True
+			Cog_PLogMajDataLoad(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur), mid(aEnregLu, cog_parazones.position, cog_parazones.longueur))
+		Endif
+	ElsIf nMode = 0 and aCtrlResult = Fstring('U', aCtrlResult)
+		Cog_PLogCtrlDataLoad(aCtrlMess, aCtrlResult, mot)
+	EndIf
+
+	Freturn(aCtrlResult)
+	
+Endf
+
+;* Charge la clé primaire
+Function Char	Cog_FConstKey(aEnregL, aFicL)
+1	aEnregL	5000
+1	aFicL		Har_Max_Path
+1	aKey		254
+1	aLKey		1
+1	aMOT		10
+1	nI			4,0 = 1
+1	aVAL		32
+1	mot		S
+1	aAdrFxForm	16		; @ fx de formatage
+1	nDernPosKey	4,0 = 1
+1	nLongMotKey	4,0 = 0
+Beginf
+	If (aKey := HmpSeek(cog_paratables.indexprim, "LNKEY")) <> " "
+		aLKey = GetKeyByName(aFichier, aKey)
+		aMOT = "KCrit_1"
+		Loop (aVal := HmpSeek(cog_paratables.indexprim, aMOT)) <> " "
+			If Hseek(Cog_ParDivEch, cog_parazones, "A" & cog_paratables.dico & cog_paratables.mnemo & cog_paratables.enreg & aVAL) = 0
+				mot = mid(aEnregL, cog_parazones.position, cog_parazones.longueur)
+				nLongMotKey	= cog_parazones.longueur
+				If cog_parazones.fxform <> " " and Mot <> " "
+					If GetAdressFunction(cog_paratables.moduleform, cog_parazones.fxform , aAdrFxForm) = 0
+						mot = FunctionCall(aAdrFxForm, Mot)
+					EndIf
+				EndIf
+				Mid(aKey, nDernPosKey, nLongMotKey) = mot
+				nDernPosKey	+= nLongMotKey
+			EndIf
+			nI++
+			aMOT = "KCrit_" & nospaces(nI)
+		EndLoop
+		aKey = aLKey && aKey
+	Else
+		freturn(" ")
+	Endif
+	Freturn(aKey)
+Endf
+
+;*
+Function Long Cog_FTriLstZAImport(P1, P2)
+Record	cog_echange.dhsd	cog_parazones	P1
+Record	cog_echange.dhsd	cog_parazones	P2
+Beginf
+	Freturn(SortCompare(p1.NumResa, p2.NumResa))
+Endf
+
+;* Lecture de la table paramètre table
+;* 01 | 02
+Public Procedure	COG_PIMP_TRTIMPORT(aCOG_PARATABLES)
+Record	cog_echange.dhsd	cog_paratables		aCOG_PARATABLES
+1	slig							S		;ligne du fichier d'import à traiter
+1	lFIC							L		; Pointeur du fichier ouvert
+1	aRetCtrlBcle				1		; Résultat controle zone pour sortie ou non de la bcle
+1	aRetCtrl						1		; Résultat controle zone
+1	aAdrFxCtrlTble				16		; @ fx de controle de la table
+1	aCtrlPRResult				1		; Retour fx ctrl de tri
+1	sRetCtrlPreRequis			S		; Chaine retour du controle pré requis
+1	aCtrlPRMess					254	; Message ctrl pré requis
+1	aFxRechercheDirectory	32
+1	aAdrFxDirectory			16
+1	nActionCourante			1,0	; Action Write ou ReWrite
+1	bError						B		; Erreurs détectées pour transmission à la fx d'uodate
+1	aEnrMAJ						5000	; Enreg maj par fx ctrl update
+Record	cog_echange.dhsd	cog_parazones	cog_parazones_Pack
+Record	cog_echange.dhsd	cog_parazones	cog_parazones_DePack
+Record	Gtfdd.Dhsd			Cli		Cli_Loc
+Record	Gtfdd.Dhsd			Fou		Fou_Loc
+Record	Ccfdd.Dhsd			C3			C3_Loc
+Beginp
+	Cog_PLogDataBeg
+	; Appel fx fin trt ligne d'import
+	If cog_paratables.fxcrtl <> " " and cog_paratables.modulectrl <> " " \
+		and GetAdressFunction(cog_paratables.modulectrl, cog_paratables.fxcrtl , aAdrFxCtrlTble) = 0
+		sRetCtrlPreRequis = FunctionCall(aAdrFxCtrlTble, cog_paratables.enreg)
+		aCtrlPRResult	= HmpSeek(sRetCtrlPreRequis, "RESULTAT", "O")
+		aCtrlPRMess		= HmpSeek(sRetCtrlPreRequis, "MESSAGE", " ")
+		If aCtrlPRResult in ("n", "N")
+			If aCtrlPRResult = "N"
+				p_ecrjourn("<TABLE_ERROR_PR>" & cog_paratables.enreg && "<MESSAGE_CTRL_PR>" & aCtrlPRMess)
+			EndIf
+			Cog_PLogDataEnd
+			Preturn
+		EndIf
+	EndIf
+	cog_paratables	= aCOG_PARATABLES
+	lIdFicATraiter	= ListGetId("COG_LST_FICATRT")
+	ListErase(lIdFicATraiter)
+	lIdZonesAImporter = ListGetId("COG_LST_ZONATRT")
+	ListErase(lIdZonesAImporter)
+	GetAdressFunction(" ", "Cog_FTriLstZAImport", aAdrFxTriZAIMP)
+	ListMode(lIdZonesAImporter, "1", aAdrFxTriZAIMP)
+	; Cherche le répertoire à traiter
+	If (aFxRechercheDirectory := HmpSeek(cog_paratables.repert, "RECHERCHE_FIC_REP", " ")) <> " "
+		If cog_paratables.modulectrl <> " " \
+			and GetAdressFunction(cog_paratables.modulectrl, aFxRechercheDirectory, aAdrFxDirectory) = 0
+			cog_paratables.repert = FunctionCall(aAdrFxDirectory, HmpSeek(cog_paratables.repert, "RECHERCHE_FIC_PAR", " ")) 
+		EndIf
+	EndIf
+	; Soit le fichier comporte un * dans ce cas on ets en mode filtre de fichiers à traiter
+	If string("*", cog_paratables.fic) <> 0
+		Cog_ParcoursDirectorie_MemFicATrt(cog_paratables.repert) 
+	; Soit le fichier ne comporte pas d'* ét là on traite le fichier précisé
+	Else
+		ListInsert(lIdFicATraiter, cog_paratables.fic)
+	EndIf
+	; Trt
+	If ListCount(lIdFicATraiter) > 0
+		; Place les zones à importer dans une liste mem pour optimisation
+		ListErase(lIdZonesAImporter)
+		Cog_ParDivEch.Key = "F" & cog_paratables.idnum 
+		Loop Hread(Cog_ParDivEch, cog_parazones) = 0 and cog_parazones.idnum = cog_paratables.idnum
+			If cog_parazones.actif = 2
+				Listinsert(lIdZonesAImporter, cog_parazones)
+			EndIf
+		EndLoop
+		; Trt de chaque fichier
+		If ListCount(lIdZonesAImporter) > 0 and Listbegin(lIdFicATraiter) = 0
+			Loop ListNext(lIdFicATraiter, aFIC) not in(0, -1)
+				nCptEcr = 0 | nCptMaj = 0
+				If (lFIC := WinCreateFile(left(cog_paratables.repert)&"\"&left(aFIC),generic_read,0,0,open_existing,0,0)) = -1
+					; Log
+				Else
+					numlig = 0
+					Loop (sLIG := Cog_FReadLigne(lFIC)) <> ""
+						numlig++
+						aEnregEchange = " "
+						If ListBegin(lIdZonesAImporter) = 0
+							If cog_paratables.modechang = cTypCsv
+								lIdLstCsv = SplitList(sLig, , , Condition(cog_paratables.separ = " ", ";", cog_paratables.separ), 2)
+							EndIf
+							Loop ListNext(lIdZonesAImporter, cog_parazones) not in(0, -1)
+								; On remplit l'enreg
+								If aRetCtrl := Cog_FTrans_LgFixes(aEnregEchange, sLig, ' ', 0) not in("O", "o")
+									aRetCtrlBcle = Condition(aRetCtrl in('N','n'), aRetCtrl, aRetCtrlBcle)
+								Else
+									aRetCtrlBcle = aRetCtrl
+								EndIf
+								If aRetCtrlBcle in ('n', 'N')
+									Cog_PLogCtrlDataWrite
+									ExitLoop			; optimisation mais on a du coup pas le détail jusqu'au bout, à commenter si souhaité
+								EndIf
+							EndLoop
+							;*VR	08/2011	initialisation du flag bError
+							bError = false
+							If aRetCtrlBcle in ('n', 'N')
+								bError = True
+								RedoLoop
+							ElsIf aRetCtrlBcle in ('i', 'I')
+								bError = True
+							EndIf
+
+							aFichier.Name = cog_paratables.ficmnemo
+							; On met en place la réservation d'entité si paramétrée
+							; On teste l'existence de l'ocurence pour création ou maj
+							If Fopen(aFichier, 'P') = 0 and (aKEYINIT := Cog_FConstKey(aEnregEchange, aFichier.Name)) <> " "
+								aFichier.Key = aKEYINIT
+								If cog_paratables.CHRESA <> " "
+									aEntiteResa = cog_paratables.CHRESA & aEntiteResaZones
+									Hshare(aFichier, aEntiteResa, 'R')
+								EndIf
+								If Hseek(Cog_ParDivEch, cog_parazones_Pack, "A" & cog_paratables.dico & cog_paratables.mnemo & cog_paratables.enreg & "PACK") = 0 \
+									and Hseek(Cog_ParDivEch, cog_parazones_DePack, "A" & cog_paratables.dico & cog_paratables.mnemo & cog_paratables.enreg & "DEPACK") = 0
+									;MIGRATION V6->V7
+									;pack mid(aEnregEchange, cog_parazones_Pack.position, cog_parazones_Pack.longueur) = mid(aEnregEchange, cog_parazones_DePack.position, cog_parazones_DePack.longueur) 
+								EndIf
+								
+								If Hseek(aFichier, aLec, aFichier.Key) = 0
+									If cog_paratables.deleteav = 2
+										HDelete(aFichier, mid(aLec,1 , cog_paratables.lgtbl))
+										Hwrite(aFichier, mid(aEnregEchange,1 , cog_paratables.lgtbl))
+									Else
+										; On re remplit l'enreg en comparant les zones de l'enreg déjà existant si updtae forcé ou nouvelle valeur
+										ListBegin(lIdZonesAImporter)
+										aEnregEchange = mid(aLec, 1, cog_paratables.lgtbl)
+										If cog_parazones_Pack.position in (1..99999)								 
+											Depack mid(aLec, cog_parazones_DePack.position, cog_parazones_DePack.longueur) = mid(aLec, cog_parazones_Pack.position, cog_parazones_Pack.longueur) 
+										EndIf
+										ListErase(lIdLogMajData)
+										Loop ListNext(lIdZonesAImporter, cog_parazones) not in(0, -1)
+				
+											Cog_FTrans_LgFixes(aEnregEchange, sLig, mid(aLec, 1, (cog_paratables.lgtbl+ cog_parazones_DePack.longueur)), 1)
+											; fri 12/02/2013
+											;test si existence date 
+											if cog_parazones.champ="HSDT"	and cog_parazones.mnemo="GTFPCF" and cog_parazones.enreg="FOU"
+												if ddate<>" "
+													if hseek(cog_gtfpcf,fou,"A"&mid(alec,11,3)&mid(alec,14,8))=0
+														if fou.HsDt<>" "
+															mid(aEnregechange, 652, 8)	= fou.HsDt	; Migration V6->V7 2479 devient 652
+														endif
+													endif
+												endif
+											endif
+										Endloop
+										;*VR	08/2011	ajout du pack avant le rewrite
+										;*FRI 05/2013 ajout test sur type variable
+										
+										; Migration V6->V7 : pas de pack
+										;if left(aEnregEchange,1)<>"A"
+										;	pack mid(aEnregEchange, cog_parazones_Pack.position, cog_parazones_Pack.longueur) = mid(aEnregEchange, cog_parazones_DePack.position, cog_parazones_DePack.longueur)
+										;endif
+										
+										HReWrite(aFichier, mid(aEnregEchange,1 , cog_paratables.lgtbl))
+									EndIf
+									nActionCourante	= cActRewrite
+									nCptMaj++
+								Else
+									ListBegin(lIdZonesAImporter)
+									Loop ListNext(lIdZonesAImporter, cog_parazones) not in(0, -1)
+										Cog_FTrans_LgFixes(aEnregEchange, sLig, ' ', 1)
+									Endloop
+									Hwrite(aFichier, mid(aEnregEchange,1 , cog_paratables.lgtbl))
+									nActionCourante	= cActWrite
+									nCptEcr++
+								Endif
+								; Appel fx fin trt ligne d'import
+								If cog_paratables.fxApUpdate <> " " and cog_paratables.modulectrl <> " " \
+									and GetAdressFunction(cog_paratables.modulectrl, cog_paratables.fxApUpdate , aAdrFxUpdate) = 0
+									If (aEnrMAJ:= FunctionCall(aAdrFxUpdate, cog_paratables.enreg, aKEYINIT, nActionCourante, bError)) <> " "
+										COG_PEpureListeMaj(aEnrMAJ)
+									Endif
+								EndIf
+								; logs
+								If nActionCourante	= cActRewrite
+									Cog_PLogMAJDataWrite
+								EndIf
+								Cog_PLogCtrlDataWrite
+								If aEntiteResa <> " "
+									Hshare(aFichier, aEntiteResa, 'L')
+								EndIf
+								Fclose(aFichier)
+							Endif
+							ListDestroy(lIdLstCsv)
+						EndIf
+					EndLoop
+					WinCloseHandle(lFIC)
+					; Appel fx de fin trt table
+					If cog_paratables.fxTracExp <> " " and cog_paratables.modulectrl <> " " \
+						and GetAdressFunction(cog_paratables.modulectrl, cog_paratables.fxTracExp , aAdrFxEnd) = 0
+						FunctionCall(aAdrFxEnd, cog_paratables.enreg, cog_paratables.zonelib)
+					EndIf
+				EndIf
+			EndLoop
+		Else
+			; Pas de zones à traiter
+		EndIf
+	Else
+		; Pas de fichiers à traiter
+	EndIf
+	ListDestroy(lIdFicATraiter)
+	ListDestroy(lIdZonesAImporter)
+	Cog_PLogDataEnd
+Endp

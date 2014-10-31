@@ -1,0 +1,65 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL du CCFJCA
+;*
+
+<DictionarySql overwrite="ccrsjca.dhoq" overwrittenby="cog_ccrsjca.dhoq" ModuleInfo='$Id: ccrsjcau.dhsq 1861 2013-04-10 06:32:43Z m.nussard $'>
+
+;*
+;*		Journaux
+;*
+
+<RecordSql Name=Journal>
+<Select>
+	C4.*
+
+;*
+;*		Journaux	Infos Etablissement
+;*
+
+<RecordSql Name=JnlEtb>
+<Select>
+	C4ETS.*
+
+;*
+;*		Axe de Ventilation
+;*
+
+<RecordSql Name=Axe>
+<Select>
+	C5.*
+
+;*
+;*		Axe Infos Etablissement
+;*
+
+<RecordSql Name=AxeEtb>
+<Select>
+	C5ETS.*
+
+;*
+;*		Compte
+;*
+		
+<RecordSql Name=Compte>
+<Select>
+	C3.*
+
+
+;*
+;*		Compte Infos Etablissement
+;*
+
+<RecordSql Name=CptEtb>
+<Select>
+	C3ETS.*
+	 		
+
+
+;*
+;*		Compte Revision
+;*
+
+<RecordSql Name=CptRev>
+<Select>
+	C3REV.*
+

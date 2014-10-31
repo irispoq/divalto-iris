@@ -1,0 +1,126 @@
+;*
+;*    Active la hiérarchie et les evènements
+;*
+
+;*    Log    version   nPmodif      date     modifications
+;*    TR       6.3a      01        05.2011 	 Initial
+
+Include 			"GTQC000.dhsp"
+
+
+Module	GRPM000.dhop
+Module	GRPMFIC.dhop
+Module	GRTM000.dhop
+Module	A5PMCAL.dhop
+
+
+HfileVersion 	Cogfdd.dhsd 	COGGRF_TAB
+
+Hfile 	Cogfdd.dhsd 	COGGRF_TAB	COGGRF_TAB
+Hfile		Grfdd.dhsd		GRFEVT 		GRFEVT
+HFile		GTFDD.DHSD		GTFPROJ		GTFPROJ			; Projet Affaire
+
+Record 	Cogfdd.dhsd 	COG_GRTEVT						; Code événement
+Record 	grfdd.dhsd 		EVTTIERS							; Evénement
+Public	Record grfdd.dhsd GRTEVT						; Code événement
+Public	Record GTFDD.dhsd SOCCRM						; Dossier CRM
+
+Record	GTFDD.DHSD	PRJAP		PRJAP						; Projet apres vente
+
+; Variables globales
+1	g_Dossier	>GTFDD.DHSD	Dos
+1	g_Affaire	>GTFDD.DHSD	Affaire
+
+;*
+;*		Procédures et fonctions
+;*
+
+;*
+Public Function int Verifier_Affaire(temp_Dos, temp_Affaire)
+; Fonction qui charge l'enregistrement	PRJAP
+; Renvoi 0 si OK
+; 			1 si KO
+1	temp_Dos			>GTFDD.DHSD	Dos
+1	temp_Affaire	>GTFDD.DHSD	Affaire
+1	x_st0	X
+BeginF
+	GTFPROJ.Key = "A" & temp_Dos & temp_Affaire
+	x_st0 = HRead(GTFPROJ, PRJAP)
+	If x_st0 = 0 And PRJAP.Dos = temp_Dos And PRJAP.Affaire = temp_Affaire
+		FReturn(0)
+	Else
+		FReturn(1)
+	EndIf 
+EndF		 
+
+;*
+Public Procedure Active_Affaire
+1		x_st0				X
+1		Liste				L		 
+1		date				8
+1		date_debut		16
+1		date_fin			16
+1		IdListe			L
+1		note				8,0
+BeginP
+	Liste = ListCreate
+	COGGRF_TAB.Key = 'A' & MZ.DOS & g_Affaire & PRJAP.AfrClas
+	Loop Hread(COGGRF_TAB,COG_GRTEVT) = 0 And COG_GRTEVT.Dos = MZ.DOS And COG_GRTEVT.Affaire = g_Affaire And COG_GRTEVT.AfrClas = PRJAP.AfrClas
+		If COG_GRTEVT.HSDT = ' ' Or (COG_GRTEVT.HSDT <> ' ' and COG_GRTEVT.HSDT > Today) | ListAddEnd(Liste,COG_GRTEVT) | Endif
+	EndLoop
+	date = Today
+	If PingReceiveAndDelete("DateDebutProjet",G7.DatD) = 0 | date = G7.DatD | Endif
+	date_debut = date & "080000"
+	Listbegin(Liste)
+	Loop Listnext(Liste,COG_GRTEVT) > 0
+		If Not COG_GRTEVT.Evenement = system.esp And Seek_GRTEVT(COG_GRTEVT.Evenement) = 0 ;And GRTEVT.HsDt = system.esp
+			IdListe = 0
+			If Calendrier_Calculer_Date_Fin (SOC.CldCod,date_debut,True,GRTEVT.Cog_Delai,2,date_fin,IdListe,Generer=False,MajDateDebut=True) = 0
+				note = Generer_evenement_Tiers(COG_GRTEVT.Evenement,PRJAP.Tiers,"3",' ',PRJAP.Lib80,,,,,,date_debut,,1,date_fin,,date_fin)
+				;Generer_evenement_Tiers (Evenement, Tiers, CE2, User, Lib, Manif, Contact, IdContact, IdCol, IdFic, EvtDh, NoteSt, RealiseSt, EvtFinDH, Duree, OutlookSt, EvtEchDH)
+				GrfEvt.key = 'A' & mz.dos & note
+				If Hseek(GrfEvt,EvtTiers,GrfEvt.key) = 0
+					EvtTiers.Ce4	 	= '1'
+					EvtTiers.Ce5	 	= '1'
+					EvtTiers.Projet 	= PRJAP.Affaire
+					EvtTiers.Affaire 	= PRJAP.Affaire
+					EvtTiers.EvtEchDH = EvtTiers.EvtFinDH
+					EvtTiers.RealDt 	= system.Esp
+					EVTTIERS.RealiseOk = 1
+					;EvtTiers.CalDt		= tostring(99999999 - val(fstring("0",date)))
+					;EvtTiers.CalHe		= tostring(999999 - 1800)
+					Hrewrite(GrfEvt,EvtTiers)
+				Endif
+				date_debut = date_fin
+			Endif
+		Endif
+	EndLoop
+	ListDestroy(Liste)								
+EndP
+
+;*
+;*	Main
+;*
+
+;* 
+Main
+
+If PingReceiveAndDelete("ZECHANGE", MZ) = 0 And PingReceiveAndDelete("NumAffaire",g_Affaire) = 0
+	; Chargement de l'environnement
+	Seek_Soc(MZ.DOS)
+	g_Dossier = MZ.Dos
+	; Verification de l'affaire
+	If	Verifier_Affaire(g_Dossier, g_Affaire) = 0
+	 	; Traitement
+		If PRJAP.AfrClas <> system.esp
+			Active_Affaire
+			Pong('RETOUR',0)
+		Else
+			Pong('RETOUR',1)
+		Endif
+	Else
+		Pong('RETOUR',2)
+	EndIf
+EndIf
+
+ProgramExit

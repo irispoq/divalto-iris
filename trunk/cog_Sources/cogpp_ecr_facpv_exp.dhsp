@@ -1,0 +1,299 @@
+;>xdiva
+;*
+;*		Objet : Export des écritures liées aux points de vente - Programme Cogpp_ecr_facpv_exp.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	kit104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		Cog_ExporterEcritures			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+
+include	gttcz00.dhsp						;déclarations communes
+
+module	Cogtm_000.dhop						;module de fonctions communes
+module	ccpmfic.dhop
+module	cogtm_ecr_exp.dhop
+
+
+public hfile	ccfdd.dhsd	ccfecr	ccfecr	openonuse
+
+
+public record	gtfdd.dhsd	xq			xq_cog		;enregistrement de travail
+
+public record	ccfdd.dhsd	ca
+public record	ccfdd.dhsd	c4
+public record	ccfdd.dhsd	c8
+
+
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+
+1	fic						L
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+function int Cog_InitialiserVariables
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+beginf
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		if iseek(a5fdos_loc,muser_loc,"B",system.user)
+
+			if not tunnel
+				messagebox("Utilisateur "&left(system.user)&" non défini dans la base Divalto","Alerte",mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= muser_loc.dos
+			mz.etb		= muser_loc.etb
+			mz.depo		= muser_loc.depo
+			mz.mecle		= "Cogee_ecr_facpv_exp.dhof"
+			mz.mtcle		= "Cogtt_ecr_facpv_exp.dhop"
+			mz.titre2	= "Export des écritures liées aux points de vente"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment("Export des écritures liées aux points de vente")
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+	Seek_CA(mz.Dos)
+
+	if ca.Cog_Exp_Ch = "" or Seek_C4(ca.Cog_ExpPV_Jnl) <> 0
+		if not tunnel
+			messagebox("Dossier ou journal mal paramétré pour l'export vers Anaël","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Dossier ou journal mal paramétré pour l'export vers Anaël",applic="DCPT")
+		freturn(false)
+	endif
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	windowshow(sw_maximize)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	freturn(true)
+
+endf
+
+;*
+procedure Cog_FinProgramme
+beginp
+
+	Cog_EcritureLivreDeBord("<-- Export des écritures liées aux points de vente",applic="DCPT")
+	winclosehandle(fic)
+	programexit
+
+endp
+
+;*
+procedure Cog_AfficherTraitement
+beginp
+
+	;test d'abandon du programme en cours de traitement
+	if getchar()=$E8 and messagebox("Abandon du traitement en cours ?","Confirmation",mb_iconquestion+mb_yesno)=idyes
+		Cog_EcritureLivreDeBord("Abandon utilisateur",applic="DCPT")
+		Cog_FinProgramme
+	endif
+
+	xmedispv mz.mecle 3 xme_mode_gosub
+	xmeret
+	xmedispv mz.mecle 4 xme_mode_gosub
+	xmeret
+
+endp
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Traitements
+;*
+
+;*
+procedure Cog_ExporterEcritures
+1	datd	>	gtfdd.dhsd	datd
+1	datf	>	gtfdd.dhsd	datf
+
+1	nomfic					256
+1	ligne						5000
+1	nbecr						L
+
+beginp
+
+	nomfic	=  modify("/","\",xq_cog.Fic && "\" & "Ecr_PV_"&time(7)&&".txt")
+	loop (fic := WinCreateFile(nomfic,generic_write,0,0,create_new,file_attribute_normal,0)) = -1
+		sleep(1000)
+		nomfic	= modify("/","\",xq_cog.Fic && "\" & "Ecr_PV_"&time(7)&&".txt")
+	endloop
+	
+	datd	= hdate(xq_cog.DatD,"p")
+	datf	= xq_cog.DatD
+
+	Cog_EcritureLivreDeBord("--> Export des écritures liées aux points de vente",applic="DCPT")
+
+	;affichage de la page de traitement
+	xmedispv mz.mecle 2 2
+
+	xq_cog.Lib(1)	= "Export des écritures"
+	Cog_AfficherTraitement
+
+	ccfecr.Key	= "C" & mz.Dos & ca.Cog_ExpPV_Jnl & datd
+	loop not hread(ccfecr,c8) and ccfecr.Key <= "C" & mz.Dos & ca.Cog_ExpPV_Jnl & datf & $FF
+
+		if Cog_FiltresOk
+
+			xq_cog.Lib(2)	= sdate(c8.EcrDt) & " - " & c8.EcrNo
+			Cog_AfficherTraitement
+
+			;on exporte l'écriture comptable
+			Cog_GenererLigne(ligne,";",chr(13)&chr(10),true,c8,"",3)
+			winwritefile(fic,left(ligne),nbecr)
+
+		endif
+
+	endloop
+
+	xmeret
+
+	winclosehandle(fic)
+	
+	if xq_cog.Choix(1) = 2	;Impression de la Reddition
+		init	xq_cog.TiersF	= "z"
+		ping("xq_cog",xq_cog)
+		programcall("cogpp_ecr_facpv_red_imp.dhop")
+	endif
+
+	if xq_cog.Choix(2) = 2	;Export de la Reddition
+		ping("xq_cog",xq_cog)
+		programcall("cogpp_ecr_facpv_red_exp.dhop")
+	endif
+
+	Cog_EcritureLivreDeBord("<-- Export des écritures liées aux points de vente",applic="DCPT")
+
+endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+public procedure Cog_SaisiePage1
+1 fin		1,0	= 0
+
+beginp
+
+	xmeinput(mz.mecle,1,0,xme_mode_goto)
+
+	do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+	
+			case harmony.dataarret = 1000	;ouverture de sélection de répertoire
+				WinSHBrowseForFolder(0,xq_cog.Fic,"Export Anaël","Sélectionnez le répertoire d'export",BIF_STATUSTEXT+BIF_EDITBOX,xq_cog.Fic)
+	
+			case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
+				endif
+			
+			case k_f7                ;zoom généralisé
+				Zoom_Call()
+			
+			case k_f8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			case k_f9                ;abandon
+				fin = 1
+		
+			case vsw in (k_f10,k_tab,k_return,k_down)
+				if messagebox("Export des écritures liées aux points de vente ?","Confirmation",mb_yesno+mb_iconquestion)=idyes
+					
+					Cog_ExporterEcritures
+		
+					if erreur
+						messagebox("Des erreurs ont été détectées.|Consultez le livre de bord","Alerte",mb_iconexclamation)
+					endif
+		
+					fin=1
+		
+				endif
+
+		endswitch
+
+	while fin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
+
+
+;*
+;	Programme principal
+;*
+main
+	
+	if pingreceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	endif
+
+	if Cog_InitialiserVariables
+
+		if not tunnel
+	
+			GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+			procedurecall(AdrProc)
+			Cog_SaisiePage1
+	
+		else	;programme piloté
+	
+			Cog_ExporterEcritures
+	
+		endif
+
+	endif

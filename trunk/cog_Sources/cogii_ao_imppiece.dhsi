@@ -1,0 +1,162 @@
+;>xwin4obj     imprimante               6.0       20120327161021      
+[masque]
+ utilisateur="ROOT"
+ date_modification="27/03/2012"
+ feuille_style="fstyleimp.dhfi"
+ id_traitements=1
+ taille_ligne=9
+ taille_page=calcule
+ taille_colonne=4
+ nombre_lignes=70
+ mode_fixe=1
+ mode_fixe1=600
+ mode_fixe2=600
+ mode_fixe3=4960
+ mode_fixe4=7015
+ mode_fixe5=210
+ mode_fixe6=297
+ num_page_sur_n=1
+ etat=1,6,1,4,2,0,0,0,0,0,1,1,1,1,30,1,1,1,1,1
+ dernier_id=310
+ dernier_id_page=7
+ [adresses]
+  type_ad1=rien
+  type_ad2=rien
+  type_ad3=rien
+[defaut]
+[enregistrements]
+ "gtfdd.dhsd",,xq,g3xq,7200
+[bloc]
+ numero=1
+ taille=1
+ type_bloc=fond
+ debut=1
+ fin=70
+ bloc_fond=2
+ position_fond=9
+ ident_unique=1
+ [cadre]
+  [presentation]
+   position=53,8
+   taille=17,304
+   id=238
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRAIT_SIMPLE"
+   wnom_couleurfond="TITRE_ENCADRE_FOND"
+ [cadre]
+  [presentation]
+   position=53,8
+   taille=17,304
+   id=156
+  [param_cadre]
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=53,8
+   taille=564,304
+   id=157
+  [param_cadre]
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=43,267
+   taille=9,45
+   cadrage=droite
+   id=309
+   wstyle="STD"
+  [texte]
+   texte="Page $1/nbpages$"
+ [obj_texte]
+  [presentation]
+   position=13,0
+   taille=13,320
+   cadrage=centre
+   id=306
+   wstyle="TRES_GRAND_GRAS"
+  [texte]
+   texte="Intégration de pièces par EXCEL"
+ [obj_texte]
+  [presentation]
+   position=57,12
+   taille=9,25
+   id=245
+   wstyle="STD"
+  [texte]
+   texte="Mot clé"
+ [obj_texte]
+  [presentation]
+   position=57,68
+   taille=9,29
+   id=246
+   wstyle="STD"
+  [texte]
+   texte="Description"
+ [obj_texte]
+  [presentation]
+   position=28,0
+   taille=13,320
+   cadrage=centre
+   id=226
+   wstyle="TRES_GRAND_GRAS"
+  [texte]
+   texte="Liste des entêtes de colonnes"
+[bloc]
+ numero=2
+ taille=1
+ type_bloc=mobile
+ debut=9
+ fin=68
+ debordement=3
+ ident_unique=2
+ [champ]
+  [presentation]
+   position=1,11
+   taille=8,48
+   id=307
+   colonnes_saisie=40
+   wstyle="PETIT"
+  [description]
+   donnee=xq,lib,g3xq,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=1,59
+   taille=8,8
+   cadrage=centre
+   id=310
+   colonnes_saisie=40
+   wstyle="PETIT"
+  [description]
+   donnee=xq,lib,g3xq,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=1,68
+   taille=8,241
+   id=308
+   colonnes_saisie=120
+   wstyle="PETIT"
+  [description]
+   donnee=xq,wintitre,g3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[bloc]
+ numero=3
+ saut_fin=oui
+ taille=1
+ debut=69
+ fin=69
+ chainage=1
+ bloc_fond=2
+ position_fond=2
+ ident_unique=3
+[diva]
+Public Record "gtfdd.dhsd" xq g3xq
+[/diva]
+[diva_base]
+[/diva]

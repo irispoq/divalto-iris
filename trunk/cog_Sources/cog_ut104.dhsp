@@ -1,0 +1,457 @@
+;*
+;*    Modèle de traitement du générateur de ZOOM
+
+
+Module	"Xzoom.dhop"
+;Module	"A5PM000.dhop"
+Module 	"CCTM000.dhop"
+Module	"CCPMFIC.dhop"
+Module A5PMNoteJoint.dhop
+
+Include "GTTCZ00.dhsp"						; Déclarations communes
+
+Hfileversion   cogfdd.dhsd    COGGTF_TAB
+
+public hfile   cogfdd.dhsd    COGGTF_TAB	COGGTF_TAB		noopen
+
+; Table pour la saisie de la clé de départ
+public		record	cogfdd.dhsd	COG_UT104	COG_UT104_ZZDEP
+
+; Table principale du zoom ( Types de cotisations PDV )
+public		record	cogfdd.dhsd	COG_UT104
+public		record	gtfdd.dhsd	T020
+public		record	gtfdd.dhsd	ART
+public		record	gtfdd.dhsd	ETS
+public		record	ccfdd.dhsd	C5
+
+Define C_NOTE_NO = 0
+
+include "CogGt_Controle_Fichier.dhsp"
+
+;*
+;* Procedures
+;*
+
+;*
+Public Procedure MajTitreVar						; Met a jour les titres variables
+BeginP
+	ZOOM.TITREVAR = COG_UT104.COG_COTISATION_PDV & ' ' & COG_UT104.REF
+EndP
+
+;*
+Procedure XgenZoomPreGarniCle(NumCle)						; Prégarni les champs de la clé à ne pas saisir
+1			NumCle		N
+BeginP
+	COG_UT104.DOS = MZ.DOS
+	COG_UT104.ETB = MZ.Etb
+EndP
+
+;*
+;* Cherche le libellé dans la table liée (Toujours en mode Fiche et d'après paramétrage en mode Liste) 
+;*
+
+;*
+Public Procedure	ChercheLibelleDansTableLiee
+BeginP
+	;If Lectab(20,Cog_UT104.COG_OP) <> 0		  
+	;	T020.Lib = 'Inconnu !'
+	;Endif
+	If Seek_Art(Cog_UT104.Ref) <> 0		  
+		Art.Des = 'Inconnu !'
+	Endif
+	If Seek_Ets(Cog_UT104.Etb) <> 0
+		ETS.Nom = 'Inconnu !'
+	Endif
+   C5.Lib = ' '
+   If Cog_UT104.Cog_AxeAnael <> ' '
+		If Not Recherche_Axe(2,Cog_UT104.Cog_AxeAnael,false) = 0
+     		C5.Lib = system.esp
+		Endif
+   Endif
+EndP
+
+;*
+;* Raffraichit le libellé de la table liée au retour du Zoom 
+;*
+
+;*
+Public Procedure	GenZoomRefreshLibelle(Genzoom_Arret)
+1			Genzoom_Arret		N
+BeginP
+	switch Genzoom_Arret
+	EndSwitch
+EndP
+
+;*
+Public Procedure     Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+	Switch ZOOM.ACTION
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+
+		XmeMenuEnableItem(Zoom.Idmenu,'NOTE',True)
+
+		XmeToolBarSetButtonInfo(Zoom.idtoolbar, "NOTE", "<BITMAP>NOTE_N")
+		xmetoolbarenablebutton(Zoom.idtoolbar,'NOTE',True)
+
+
+	Case ZOOM_MODIFICATION
+		
+			; en modification
+		XmeMenuEnableItem(Zoom.Idmenu,'NOTE',True)
+
+		XmeToolBarSetButtonInfo(Zoom.idtoolbar, "NOTE", Condition(COG_UT104.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		xmetoolbarenablebutton(Zoom.idtoolbar,'NOTE',True)
+
+
+	Case 	ZOOM_AFFICHAGE
+		switch Zoom.TypeInput
+	
+		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			XmeMenuEnableItem(Zoom.Idmenu,'NOTE',Condition(COG_UT104.CENOTE = 2, True, False))
+
+		endswitch
+
+		XmeToolBarSetButtonInfo(Zoom.idtoolbar, "NOTE", Condition(COG_UT104.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		xmetoolbarenablebutton(Zoom.idtoolbar,'NOTE', Condition(COG_UT104.CENOTE = 2, True, False))
+
+	EndSwitch
+EndP
+
+;*
+;* Procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomDebut																					; Initialisation du zoom
+BeginP																											; ZoomDebut
+	Controle_Fichier
+	Init_Zoom(FicheNoBloc=0)
+	Seek_Soc(MZ.DOS)
+	Seek_CA(mz.Dos)
+	G7.Projet = G3XZ.Projet
+	G3XZ.Projet = system.esp
+
+	Note_Debut   				;init de la gestion des notes
+
+	ZOOM.TITREFIXE = `UT104 - Types de cotisations PDV`
+EndP
+
+;*
+Public Procedure ZoomAbandon																				; Abandon du zoom
+BeginP																											; ZoomAbandon
+	
+EndP																												; ZoomAbandon
+
+;*
+Public Procedure ZoomValidation																			; Validation du zoom
+BeginP																											; ZoomValidation
+	ZOOM.VALRETOUR =  COG_UT104.Cog_Cotisation_PDV
+EndP
+
+;*
+Public Procedure ZoomFin																					; Traitements finaux du zoom
+BeginP																											; ZoomFin
+	
+EndP																												; ZoomFin
+
+;*
+;* Procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation																				; Traitements avant l'entrée en création
+BeginP																											; ZoomCreation
+	COG_UT104 = ' '
+	XgenZoomPreGarniCle(1)
+	COG_UT104.CE1 = '4'
+	COG_UT104.Cog_Period = 1
+EndP
+
+;*
+Public Procedure ZoomDuplication																			; Traitements avant l'entrée en duplication
+BeginP																											; ZoomDuplication
+	COG_UT104.USERCR		= ' '
+	COG_UT104.USERCRDH	= ' '
+	COG_UT104.USERMO		= ' '
+	COG_UT104.USERMODH	= ' '
+	COG_UT104.NOTE			= 0
+	COG_UT104.CENOTE		= 1
+EndP
+
+;*
+Public Procedure ZoomApresCleCreation																	; Génération de la clé en création
+BeginP																											; ZoomApresCleCreation
+	ZOOM.CLE		= [ 'E' COG_UT104.DOS COG_UT104.ETB COG_UT104.COG_COTISATION_PDV COG_UT104.REF ]
+	ZOOM.RES	= 'GIE' & COG_UT104.DOS & COG_UT104.ETB & COG_UT104.COG_COTISATION_PDV & COG_UT104.REF
+	MajTitreVar
+EndP
+
+;*
+Public Procedure ZoomCreationRes																			; Réservation d'entités complémentaires en création
+BeginP																											; ZoomCreationRes
+	Note_Chargement_  ( C_NOTE_NO  , 0 )
+EndP
+
+;*
+Public Procedure ZoomAvantWrite																			; Traitements avant écriture
+BeginP																											; ZoomAvantWrite
+	COG_UT104.NOTE		= Note_Creation_(C_NOTE_NO,NoteObj='COG_UT104')
+	COG_UT104.CE1 = '4'
+	COG_UT104.USERCR		= SYSTEM.USER
+	COG_UT104.USERCRDH	= Time(7)
+	if COG_UT104.NOTE <> 0
+		COG_UT104.CENOTE = 2
+	else
+		COG_UT104.CENOTE = 1
+	endif
+	If Zoom.Ok = 'O'
+		If Cog_UT104.Cog_Duree_Limitee = 2 And Cog_UT104.Cog_Nombre_Cotisation = system.esp
+ 			Zoom.Ok = 'S'
+		ElsIf Cog_UT104.Cog_Duree_Limitee < 2
+			Cog_UT104.Cog_Nombre_Cotisation = system.esp
+		Endif
+	Endif
+EndP
+
+;*
+Public Procedure ZoomApresCreation																		; Compte-rendu de la création
+BeginP																											; ZoomApresCreation
+	MajTitreVar
+EndP
+
+;*
+Public Procedure ZoomModification																		; Traitements avant l'entrée en modification
+BeginP																											; ZoomModification
+	ZOOM.RES	= 'GIE' & COG_UT104.DOS & COG_UT104.ETB & COG_UT104.COG_COTISATION_PDV & COG_UT104.REF
+EndP
+
+;*
+Public Procedure ZoomModificationRes																	; Réservation d'entités complémentaires en modification
+BeginP																											; ZoomModificationRes
+	Note_Chargement_  (C_NOTE_NO ,  COG_UT104.NOTE )
+EndP
+
+;*
+Public Procedure ZoomAvantRewrite																		; Traitements avant réécriture
+BeginP																											; ZoomAvantRewrite
+	COG_UT104.NOTE		= Note_Modification_(C_NOTE_NO, COG_UT104.Note, NoteObj='COG_UT104')
+	COG_UT104.USERMO		= SYSTEM.USER
+	COG_UT104.USERMODH		= Time(7)
+	if COG_UT104.NOTE <> 0
+		COG_UT104.CENOTE = 2
+	else
+		COG_UT104.CENOTE = 1
+	endif
+	MajTitreVar
+	If Zoom.Ok = 'O'
+		If Cog_UT104.Cog_Duree_Limitee = 2 And Cog_UT104.Cog_Nombre_Cotisation = system.esp
+ 			Zoom.Ok = 'S'
+		ElsIf Cog_UT104.Cog_Duree_Limitee < 2
+			Cog_UT104.Cog_Nombre_Cotisation = system.esp
+		Endif
+	Endif
+EndP
+
+;*
+Public Procedure ZoomApresModification																	; Compte-rendu de la modification
+BeginP																											; ZoomApresModification
+	
+EndP																												; ZoomApresModification
+
+;*
+Public Procedure ZoomSuppression																			; Traitements avant l'entrée en suppression
+BeginP																											; ZoomSuppression
+	ZOOM.RES	= 'GIE' & COG_UT104.DOS & COG_UT104.ETB & COG_UT104.COG_COTISATION_PDV & COG_UT104.REF
+EndP
+
+;*
+Public Procedure ZoomSuppressionRes																		; Réservation d'entités complémentaires en suppression
+BeginP																											; ZoomSuppressionRes
+	
+EndP																												; ZoomSuppressionRes
+
+;*
+Public Procedure ZoomAvantDelete																			; Traitements avant suppression
+BeginP																											; ZoomAvantDelete
+	Note_Suppression_  (C_NOTE_NO ,  COG_UT104.NOTE )
+EndP
+
+;*
+Public Procedure ZoomApresSuppression																	; Compte-rendu de la suppression
+BeginP																											; ZoomApresSuppression
+	
+EndP																												; ZoomApresSuppression
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsultFiche
+BeginP																											; ZoomAvantConsultFiche
+	Maj_Menu_Boutons
+EndP
+
+;*
+Public Procedure ZoomAvantConsultListe
+BeginP																											; ZoomAvantConsultListe
+	Maj_Menu_Boutons
+EndP
+
+;*
+Public Procedure ZoomConsultFiche																		; Traitement après consultation d'une fiche
+BeginP																											; ZoomConsultFiche
+		switch Harmony.Key
+		case 	K_F7
+			Zoom_Call()
+
+		case 	K_SF6
+			Note_Consultation_ (C_NOTE_NO , COG_UT104.NOTE )
+
+		endswitch
+EndP
+
+;*
+Public Procedure ZoomConsultListe																		; Traitement après consultation des fiches en mode liste
+BeginP																											
+		switch Harmony.Key
+		case 	K_F7
+			Zoom_Call()
+
+		case 	K_SF6
+			Note_Consultation_ (C_NOTE_NO , COG_UT104.NOTE )
+
+		endswitch
+EndP
+
+;*
+Public Procedure ZoomEnteteTableau
+BeginP
+	
+EndP
+
+;*
+Public Procedure ZoomAvantInput																			; Traitement avant entrée clavier
+BeginP																											
+	Maj_Menu_Boutons
+	If ZOOM.TYPEINPUT = ZOOM_S_DEPART
+		XgenZoomPreGarniCle(Zoom.NoCle)
+	endif
+
+EndP
+
+;*
+public procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+beginp
+
+	;on ne fait pas l'affectation dans g3xz ici car incompatible avec gestion code adresse
+												
+	switch Harmony.Key
+	case 	K_SF6												; Saisie d'une note
+		Note_Saisie_(C_Applic_DAV, COG_ut104.Note, 'COG_UT104')		
+		XmeToolBarSetButtonInfo(Zoom.idtoolbar, "NOTE", Condition(Not Note_Empty_(C_Applic_DAV), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+
+	
+	case K_F7
+		Zoom_Call()
+
+	case 	Harmony.DataArret = 8002
+		if Harmony.Sourisbout = Right_Button
+			Zoom_Call()
+		elsif Harmony.Sourisclic = Double_Click
+			Harmony.Retour = Xmenext_Simulation_Touche
+			Harmony.Cplretour = K_F8
+		endif
+
+;	case 	Harmony.DataArret in(9000..9999,11000..65000)				; Appel de zoom  en dernier
+	case 	vsw = K_F8 or Harmony.DataArret in(9000..9999,11000..65000)				; Appel de zoom  en dernier
+		Zoom_Call(harmony.arret)
+
+	endswitch
+
+EndP																												; ZoomArret
+
+;*
+Public Procedure ZoomFiltreAvantValeur																	; Traitement avant la saisie d'une valeur dans la grille des filtres
+BeginP																											; ZoomFiltreAvantValeur
+	
+EndP																												; ZoomFiltreAvantValeur
+
+;*
+Public Procedure ZoomFiltreApresValeur																	; Traitement après la saisie d'une valeur dans la grille des filtres
+BeginP																											; ZoomFiltreApresValeur
+	
+EndP																												; ZoomFiltreApresValeur
+
+;*
+;* Procedures liées à la lecture du fichier
+;*
+
+;*
+;*
+Public Procedure ZoomApresCle1					; Génération de la clé 1
+BeginP													; ZoomApresCle1
+	ZOOM.CLE			= [ 'E' MZ.DOS ]
+	ZOOM.CLEMIN		= [ 'E' MZ.DOS ]
+	ZOOM.CLEMAX		= [ 'E' MZ.DOS $FF ]
+endp
+
+;*
+;*
+Public Procedure ZoomApresRead					; Traitement général après lecture
+BeginP													; ZoomApresRead
+	If COG_UT104_ZZDEP.Cog_Cotisation_PDV <> system.esp And Count(nospaces(COG_UT104_ZZDEP.Cog_Cotisation_PDV),COG_UT104.Cog_Cotisation_PDV) = system.esp
+		Zoom.Ok = 'I'
+		PReturn
+	Endif
+	MajTitreVar
+	ChercheLibelleDansTableLiee
+endp
+
+;*
+;Public Procedure ZoomApresRead1					; Traitement après lecture clé 1
+;BeginP													; ZoomApresRead1
+;	Zoom.FILTRE = "COG_COTISATION_PDV LIKE '%" & Left(Fstring("U",COG_UT104_ZZDEP.Cog_Cotisation_PDV)) & "%'" 
+;endp
+
+;*
+;* Procedures d'impression
+;*
+
+;*
+Public Procedure ZoomDebutListe																			; Traitement avant l'impression
+BeginP																											; ZoomDebutListe
+	
+EndP																												; ZoomDebutListe
+
+;*
+Public Procedure ZoomAvantDetail																			; Traitement avant l'impression d'un bloc détail en mode liste
+BeginP																											; ZoomAvantDetail
+	
+EndP																												; ZoomAvantDetail
+
+;*
+Public Procedure ZoomApresDetail																			; Traitement après l'impression d'un bloc détail en mode liste
+BeginP																											; ZoomApresDetail
+	
+EndP																												; ZoomApresDetail
+
+;*
+Public Procedure ZoomAvantBlocFin																		; Traitement avant l'impression du bloc de fin en mode liste
+BeginP																											; ZoomAvantBlocFin
+	
+EndP																												; ZoomAvantBlocFin
+
+;*
+Public Procedure ZoomApresBlocFin																		; Traitement après l'impression du bloc de fin en mode liste
+BeginP																											; ZoomApresBlocFin
+	
+EndP																												; ZoomApresBlocFin
+
+;*
+Public Procedure ZoomFinListe																				; Traitement après l'impression
+BeginP																											; ZoomFinListe
+	
+EndP																												; ZoomFinListe
+

@@ -1,0 +1,26 @@
+<DictionarySql overwrite="gtrsinvsaisi.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFINVSAISI
+;*
+
+
+;*
+;* 		Détail de saisie d inventaire
+;*
+<RecordSql Name=DetInvS>
+<SELECT>
+	INVDETSAISI.*
+
+;*
+;* 		Entête de saisie d inventaire
+;*
+<RecordSql Name=EntInvS>
+<SELECT>
+	INVENTSAISI.*
+
+;*
+;* 		Entête de saisie d inventaire
+;*
+<RecordSql Name=VtlInvS>
+<SELECT>
+	INVVTLSAISI.*

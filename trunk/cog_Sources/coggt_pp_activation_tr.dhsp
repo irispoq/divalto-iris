@@ -1,0 +1,216 @@
+;*
+;*	Péremption des pièces
+;*
+
+Include	"gttcz00.dhsp"
+
+Module	"gtpmstoc.dhop"
+
+			HFile		"gtfdd.dhsd"	gtfent	gtfent
+			HFile 	"gtfdd.dhsd" 	gtfam		gtfam
+			HFile 	"gtfdd.dhsd" 	gtfvtl	gtfvtl
+			HFile 	"gtfdd.dhsd" 	gtfres	gtfres
+			HFile		"gtfdd.dhsd"	gtfent	gtfent_tmp
+			HFile		"gtfdd.dhsd"	gtfent	gtfent_loc
+			HFile 	"gtfdd.dhsd" 	gtfam		gtfam_tmp
+Public	Record	"a5dd.dhsd"		mz			mz
+Public	Record	"gtfdd.dhsd"	soc		soc
+Public 	Record	"gtfdd.dhsd"	xq			g3xq
+Public 	Record	"gtfdd.dhsd"	t017		t017
+Public 	Record	"gtfdd.dhsd"	art		art
+			Record	"gtfdd.dhsd"	ent		ent
+			Record	"gtfdd.dhsd"	mouv		mouv
+			Record	"gtfdd.dhsd"	mvtl		mvtl
+			Record	"gtfdd.dhsd"	mres		mres
+
+1		IdToolbar			L
+1		Cpt					5,0
+1		Buffer				1024
+
+Const	C_Page_Trace						= 2
+Const	C_Page_Selection					= 3
+Const	C_Page_Traitement					= 4
+
+
+;*
+Function Int cog_Historique_Piece(pDos,pTiCod,pPiCod,pPiNo)
+; 0 --> pas de résultat
+; 1 --> au moins 1 mouvement est à l'etat BL ou Facture - bloquant
+	1			pDos				>gtfdd.dhsd	Dos
+	1			pTiCod			>gtfdd.dhsd	TiCod
+	1			pPiCod			>gtfdd.dhsd	PiCod
+	1			pPiNo				>gtfdd.dhsd	PiNo
+	1			Ret								B
+	Record	"gtfdd.dhsd"	ent			ent_tmp
+	Record	"gtfdd.dhsd"	ent			ent_loc
+	Record	"gtfdd.dhsd"	mouv			mouv_tmp
+BeginF
+	Ret = False
+	If ISeek(gtfent_tmp,ent_tmp,"I",pDos & pTiCod & pPiCod & pPiNo) = 0
+		gtfam_tmp.KeyValue = ent_tmp.Dos & ent_tmp.TiCod & ent_tmp.PiNo
+		Loop IRead(gtfam_tmp,mouv_tmp,"I") = 0 And mouv_tmp.Dos = ent_tmp.Dos And mouv_tmp.TiCod = ent_tmp.TiCod And mouv_tmp.CdNo = ent_tmp.PiNo And Not Ret
+			If mouv_tmp.BlNo <> 0 And ISeek(gtfent_loc,ent_loc,"I",mouv_tmp.Dos & mouv_tmp.TiCod & "3" & mouv_tmp.BlNo) = 0
+				Ret = True
+			ElsIf mouv_tmp.FaNo <> 0 And ISeek(gtfent_loc,ent_loc,"I",mouv_tmp.Dos & mouv_tmp.TiCod & "4" & mouv_tmp.FaNo) = 0
+				Ret = True
+			EndIf
+		EndLoop
+	EndIf
+	FReturn(Ret)
+EndF
+
+
+;*
+Function Int Init_Reservation
+;	Initialise l'indicateur réservation
+BeginF
+	If soc.EntCod(10) = Non Or soc.EntCod(5) = Non
+		FReturn(Non)
+	EndIf
+	If Lectab(17,mouv.Depo) <> 0
+		FReturn(Non)
+	EndIf
+	If t017.StRes = Non
+		FReturn(Non)
+	EndIf
+	If Seek_ART(mouv.Ref) <> 0
+		FReturn(Non)
+	EndIf
+	If art.StRes = Non Or art.StCod <> 2
+		FReturn(Non)
+	EndIf
+	If ent.StRes = Non
+		FReturn(Non)
+	EndIf
+	If mouv.Sens = 1
+		FReturn(Non)
+	EndIf
+	FReturn(Oui)
+EndF
+					
+;*
+Main
+
+	If PingReceive("zechange",mz) <> 0
+		Programexit
+	Else
+		Seek_SOC(mz.Dos)
+		mz.MeCle = "coggt_ee_activation_tr.dhof"
+		g3xq.TiCod = mz.TiCod
+		Do While True
+			XmeLoad(mz.MeCle)
+			XmeInfoPage(mz.MeCle,1)
+			XmeSetWindowSize(mz.MeCle,1,harmony.Opara3,harmony.Opara4)
+			IdToolbar = XmeToolbarGetId(mz.MeCle,"MAIN")
+			XmeToolbarSetWindow(IdToolbar,mz.MeCle,1)
+			XmeTitle("Divalto - " & Left(soc.Nom) & " - " & mz.Titre2)
+			If g3xq.TiCod = "F"
+				g3xq.Choix(1) = 2
+			ElsIf g3xq.TiCod = "C"
+				g3xq.Choix(1) = 1
+			Endif
+			g3xq.Choix(2) = 1
+			g3xq.DatD = HDate(Today,"P","-1")					; On prend le dernier jour du mois précédent	
+			g3xq.DatF = HDate(Today,"D","-1")	
+			g3xq.PiNoD = " "
+			g3xq.PiNoF = " "
+			g3xq.TiersD = " "
+			Init g3xq.TiersF = "z"
+			G3_Saisie_Selections(mz.MeCle,1)
+			Cpt = 0
+			OpenTrace(C_Page_Trace,C_Page_Selection,C_Page_Traitement)
+			If g3xq.Choix(1) = 2   ; Fournisseurs
+				gtfent.Key = "I" & mz.Dos & "F2" & g3xq.PiNoD
+				Loop HRead(gtfent,ent) = 0 And ent.Dos = mz.Dos And ent.TiCod = "F" And ent.PiCod = 2 And ent.PiNo <= g3xq.PiNoF
+					g3xq.Lib(1) = ToString(ent.PiNo)
+					Afficher_Selection
+					If ent.PiDt Not In (g3xq.DatD..g3xq.DatF) | RedoLoop | EndIf
+					If ent.Tiers Not In (g3xq.TiersD..g3xq.TiersF) | RedoLoop | EndIf
+					;If cog_Historique_Piece(ent.Dos,ent.TiCod,ent.PiCod,ent.PiNo) | RedoLoop | EndIf  #YLEF 06/2014 instruction exécutée 2 fois
+					If ent.Ce4 <> 8 | RedoLoop | EndIf
+					If cog_Historique_Piece(ent.Dos,ent.TiCod,ent.PiCod,ent.PiNo) | RedoLoop | EndIf
+					Loop Res_ENT(ent.TiCod,ent.PiCod,ent.PiNo) <> 0
+					   Messagebox("Commande fournisseur n° " & ToString(ent.PiNo) & " réservée par un autre utilisateur, veuillez valider ou abandonner la saisie sur l'autre poste.","Attention",MB_OK)
+					Endloop	
+					gtfam.Key = "I" & ent.Dos & ent.TiCod & ent.PiNo
+					Loop HRead(gtfam,mouv) = 0 And mouv.Dos = ent.Dos And mouv.TiCod = ent.TiCod And mouv.CdNo = ent.PiNo
+						mouv.CdCe4 = "1"
+						mouv.StRes = Init_Reservation
+					   gtfvtl.Key = "A" & mz.Dos & mouv.EnrNo
+					   Loop HRead(gtfvtl,mvtl) = 0 And mvtl.Dos = mouv.Dos And mvtl.EnrNo = mouv.EnrNo
+							mvtl.Ce3			= "1"
+							mvtl.Ce4			= "1"
+							mvtl.Ce5			= " "
+							mvtl.StRes		= Init_Reservation
+							mvtl.ResQte		= 0
+							mvtl.TicketRes	= " "
+							If mvtl.Sens = 2
+								Stock_Reservation_Traiter_NonAffecte(mvtl,True,0)
+							EndIf
+							HRewrite(gtfvtl,mvtl)
+						EndLoop
+						HRewrite(gtfam,mouv)
+					EndLoop
+					ent.Ce4 = "1"
+					HRewrite(gtfent,ent)
+					Lib_ENT(ent.TiCod,ent.PiCod,ent.PiNo)
+					Cpt++
+					g3xq.Lib(2) = ToString(ent.PiNo)
+					Afficher_Traitement
+				Endloop
+			Endif
+			If g3xq.Choix(1) = 1	 ; Clients
+				gtfent.Key = "I" & mz.Dos & "C2"	& g3xq.PiNoD
+				Loop HRead(gtfent,ent) = 0 and ent.Dos = mz.Dos and ent.TiCod = "C" And ent.PiCod = 2 And ent.PiNo <= g3xq.PiNoF
+					g3xq.Lib(1) = ToString(ent.PiNo)
+					Afficher_Selection
+					If ent.PiDt Not In (g3xq.DatD..g3xq.DatF) | RedoLoop | EndIf
+					If ent.Tiers Not In (g3xq.TiersD..g3xq.TiersF) | RedoLoop | EndIf
+					If ent.Ce4 <> 8 | RedoLoop | EndIf
+					If cog_Historique_Piece(ent.Dos,ent.TiCod,ent.PiCod,ent.PiNo) | RedoLoop | EndIf
+					Loop Res_ENT(ent.TiCod,ent.PiCod,ent.PiNo) <> 0
+					   Messagebox("Commande client n°" & ToString(ent.PiNo) & " réservée par un autre utilisateur, veuillez valider ou abandonner la saisie sur l'autre poste.",'Attention',MB_OK)
+					Endloop	
+					gtfam.Key = "I" & ent.Dos & ent.TiCod & ent.PiNo
+					Loop HRead(gtfam,mouv) = 0 And mouv.Dos = ent.Dos And mouv.TiCod = ent.TiCod And mouv.CdNo = ent.PiNo
+						mouv.CdCe4 = "1"
+						mouv.StRes = Init_Reservation
+					   gtfvtl.Key = "A" & mz.Dos & mouv.EnrNo
+					   Loop HRead(gtfvtl,mvtl) = 0 And mvtl.Dos = mouv.Dos And mvtl.EnrNo = mouv.EnrNo
+							mvtl.Ce3			= "1"
+							mvtl.Ce4			= "1"
+							mvtl.Ce5			= " "
+							mvtl.StRes		= Init_Reservation
+							mvtl.ResQte		= 0
+							mvtl.TicketRes	= " "
+							If mvtl.Sens = 2
+								Stock_Reservation_Traiter_NonAffecte(mvtl,True,0)
+							EndIf
+							HRewrite(gtfvtl,mvtl)
+					   EndLoop
+						HRewrite(gtfam,mouv)
+					EndLoop
+					ent.Ce4 = "1"
+					HRewrite(gtfent,ent)
+					Lib_ENT(ent.ticod,ent.picod,ent.pino)
+					Cpt++
+					g3xq.Lib(2) = ToString(ent.PiNo)
+					Afficher_Traitement
+				Endloop
+			Endif
+			CloseTrace
+			If Cpt > 0
+				MessageBox("Activation de " & ToString(Cpt) & " Commande(s) terminée.","Rapport",MB_ICONINFORMATION)
+			Else
+				MessageBox("Aucune commande activée.","Rapport",MB_ICONINFORMATION)
+			EndIf
+			ExitDo
+		Wend
+	Endif
+
+ProgramExit
+	
+	
+	
+	
+	

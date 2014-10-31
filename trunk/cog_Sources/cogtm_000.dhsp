@@ -1,0 +1,276 @@
+;>xdiva
+;*
+;*		Objet : Module de fonctions et procédures externes de Divalto 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	KIT201		ROBL01		02/2012		Version initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		Cog_GenererEan13						Génération d'un code EAN13
+;*		Cog_EstUneFacture						Fonction de recherche de type d'une pièce (facture ou avoir)
+;*		Cog_EcritureLivreDeBord				Procedure d'écriture dans le livre de bord
+;*		Cog_RecuperationValeurConstante	Récupération des valeurs dans le fichier des constantes
+;*		Cog_Lectab								Lecture des tables Cogeser
+;*
+
+
+overwrittenby "Cogum_000.dhop"							
+
+include	Cogtc_000.dhsp		;fichiers constantes
+
+module	Gttm000.dhop
+
+
+public record	gtfdd.dhsd	T020			;code opérations
+
+public record	a5dd.dhsd	mz				;zone échange
+
+
+;*
+; 		Masquage
+;*
+
+;*
+Public procedure Cog_ApplicationMasque(&cpt,cptmsk)
+;
+1	cpt		>	ccfdd.dhsd	cpt
+1	cptmsk	>	gtfdd.dhsd	cptmsk
+
+1	i								2,0
+beginp
+	for i = 1 to 8
+		if mid(cptmsk,i,1) in (0..9)
+			mid(cpt,i,1) = mid(cptmsk,i,1)
+		endif
+	next
+endp
+
+;*
+;		Génération d'un code Ean 13
+;*
+
+;* 
+public function Char Cog_GenererEan13(pays,cnuf,reference)
+1 pays			2,0
+1 cnuf 			5
+1 reference		5
+
+1 code			12
+1 ean 			13
+1 valeur			5,0
+1 cle				1,0
+1 i				2,0
+
+beginf
+
+	ean	= ""
+	code	= nospaces(pays) & nospaces(cnuf) & nospaces(reference)
+
+	;vérifier qu'il y a 12 caractères numériques pour constituer le code en EAN13
+	if length(code) = 12 and isnum(code)
+
+		;calcul de la clé de contrôle  
+		for i = 2 to 12 step 2
+			valeur = valeur + Nmid (code , i , 1 , 0)
+		next
+		valeur = valeur * pays
+		for i = 1 to 11 step 2
+			valeur = valeur + Nmid (code , i , 1 , 0)
+		next
+	  	
+		cle = modulo((10 - modulo(valeur,10)),10)
+
+		ean = code	& fstring("L",format("<9>",cle))
+	
+	endif
+
+	freturn(ean)
+
+endf
+
+;*
+;		Recherche du type de pièce
+;*
+
+;* Recherche si la pièce est un avoir ou une facture : renvoie "" en cas d'erreur
+public function char Cog_EstUneFacture(op)
+1	op			>	gtfdd.dhsd		op
+
+beginf
+
+	if not lectab(20,op)
+
+		switch t020.ticod
+
+		case "C"
+
+			freturn(condition(t020.sens=1,"A","F"))
+
+		case "F"
+
+			freturn(condition(t020.sens=1,"F","A"))
+
+		default
+
+			freturn("")
+
+		endswitch
+
+	endif
+
+	freturn("")
+
+endf
+
+
+;*
+;		Livre de bord
+;*
+
+;* Ecriture dans le livre de bord
+public procedure Cog_EcritureLivreDeBord(txt,prg,applic,nivalerte,dos)
+1	txt			>	a5dd.dhsd		logtxt
+1	prg			>	a5dd.dhsd		prg			= ""
+1	applic		>	a5dd.dhsd		applic		= "DAV"
+1	nivalerte	>	a5dd.dhsd		nivalerte	= 2
+1	dos			>	a5dd.dhsd		dos			= ""
+
+RecordSql	cogrs_000.dhoq		CogRS_LivreDeBord		LivreDeBord
+
+beginp
+
+	if dos = ""
+		dos	= mz.dos
+	endif
+
+	if prg = ""
+		prg	= system.znomprog
+	endif
+	
+	LivreDeBord.init()
+	LivreDeBord.applic		= applic
+	LivreDeBord.nivalerte	= nivalerte
+	LivreDeBord.logdh			= time(7)
+	LivreDeBord.user			= system.user
+	LivreDeBord.tache			= system.tache
+	LivreDeBord.prg			= prg
+	LivreDeBord.dos			= dos
+	LivreDeBord.logtxt		= txt
+	LivreDeBord.insert()
+
+endp
+
+
+;*
+;		Récupération de constantes
+;*
+
+;*
+public function char Cog_RecuperationValeurConstante(param)
+1	param			A									;paramètre à rechercher dans la chaine hmp
+
+1	chainehmp	S		= ""						;chaine hmp
+1	car			60000								;caractères pour lecture du fichier des constantes
+record			*		htdf		ficcst		;fichier des constantes
+
+beginf
+
+	ficcst.name	= nospaces(cog_fichier_constantes)
+	if not fopen(ficcst,"P")
+
+		;construction de la chaine HMP
+		loop not freadst(ficcst,car)
+
+			chainehmp	&= left(car,ficcst.sizelast)
+
+		endloop
+
+		fclose(ficcst)
+
+		chainehmp	= modify($0D,"",chainehmp)
+		chainehmp	= modify($0A,"",chainehmp)
+
+		;recherche du paramètre
+		freturn(hmpseek(chainehmp,param,""))
+
+	endif
+
+	freturn("")
+
+endf
+
+
+;*
+;	Fonctions de gestion des tables
+;*
+
+;*	lecture des tables
+Public Function int Cog_Lectab(instanceSql, p1, p2, p3, p4, p5, p6, p7, p8, p9, err, dt)
+; En cas d'erreur, si "err" est fourni, affiche le message et provoque le retour en saisie.
+; Renvoie :	0	ok,
+;				1	fin validité atteinte,
+;				2	enregistrement non trouvé.
+
+RecordSqlPtr		instanceSql
+1		p1				U									; paramètre 1
+1		p2				U = ' '							; paramètre 2
+1		p3				U = ' '							; paramètre 3
+1		p4				U = ' '							; paramètre 4
+1		p5				U = ' '							; paramètre 5
+1		p6				U = ' '							; paramètre 6
+1		p7				U = ' '							; paramètre 7
+1		p8				U = ' '							; paramètre 8
+1		p9				U = ' '							; paramètre 9
+1		err			5,0 = 0							; <> 0 pour traiter l'erreur en interne
+1		dt				>GTFDD.dhsd PiDt	=' '		; tester la fin de validité si DT <> espace
+
+recordSQL cogrs_tab.dhoq	TableParametre		;Table des paramètres
+
+1		retour		1,0 = 0							; Retour du seek
+1		nomTable		S									; Nom diva de la table contenu dans le FROM du record
+1		cebin			>GTFDD.dhsd CeBin
+
+beginf
+
+;	;recherche du cog_t000
+;	TableParametre.init()
+;	TableParametre.where.Zoom_PK()
+;	if TableParametre.select() = 0
+;		messagebox("Table paramètres inaccessible","Alerte",mb_iconexclamation)
+;		programexit
+;	endif
+;
+;	instanceSql.GetInfo(RSQL_TABLE_NAME, nomTable)
+;	cebin = Val(Mid(nomtable, 9))
+;
+;	If p1 = ' '											; RAZ si clé à espace (p1 = ' ')
+;		instanceSql.Init()	|	FReturn(0)	
+;	EndIf
+;
+;	Switch CeBin
+;
+;		Case	1
+;			instanceSql.Where.Exists(p1)
+;			if instanceSql.Select() = 0
+;				if err <> 0
+;					messagebox(translate("Code test inexistant"),translate("Alerte"),mb_iconexclamation)
+;					Harmony.Retour = Xmenext_Traitement_Avant
+;				endif
+;				instanceSql.init()
+;				freturn(2)
+;			endif
+;
+;	endswitch
+
+	freturn(0)
+
+endf
+
+;*
+

@@ -1,0 +1,45 @@
+<DictionarySql overwrite="gtrsproj.dhoq" ModuleInfo='$Id: gtrsproju.dhsq 1414 2013-02-25 00:14:45Z s.renaudineau $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFPROJ
+;*		Surcharge des enregistrements pour faire apparaître les nouvelles zones
+;*
+
+;*
+<RecordSql Name=Affaire>
+<SELECT>
+	PRJAP.*,
+<WHERE>
+   ;Surcharge SU
+	;On ne récupère que les Affaires dont le code est supérieur ou égal à la sélection
+	Case SupEgalAffaire(char affaire)
+		UPPER(PRJAP.affaire) >= UPPER(affaire)
+	;On ne prend pas en compte la casse
+	Case Zoom_Su_Like_Affaire	(char Affaire)
+		UPPER(PRJAP.Affaire) LIKE UPPER(Affaire)
+	;
+	;
+
+;*
+<RecordSql Name=Affaire_Domaine>
+<SELECT>
+	PRJDOM.*,
+
+;*
+<RecordSql Name=Affaire_Col_Act>
+<SELECT>
+	PRJSALACT.*,
+
+;*
+<RecordSql Name=Affaire_Collab>
+<SELECT>
+	PRJSAL.*,
+
+;*
+<RecordSql Name=Avenant>
+<SELECT>
+	PRJAVT.*,
+
+;*
+<RecordSql Name=Projet>
+<SELECT>
+	PRJAV.*,

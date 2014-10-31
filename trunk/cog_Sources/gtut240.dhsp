@@ -1,0 +1,299 @@
+;*
+;*		Facturation différée des bls clients																	gttt240
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		MJV		4.1						12.1999	Version initiale en Diva 
+
+
+OverWrite	"GTTT240.dhop"
+
+include "GTTC000.dhsp"	
+									
+Module	CCPMFIC.dhop									  
+
+public hfile	ccfdd.dhsd	CCFJCA 		CCFJCA			; Fichier dossier de C3
+Public HFile	GTFDD.DHSD	GTFPCF		GTFPCF_DEV_01			; Tiers
+Public HFile	GTFDD.DHSD	GTFENT		GTFENT
+Public HFile	GTFDD.DHSD	GTFAM			GTFAM
+
+public record	a5dd.dhsd	MZ
+public record	gtfdd.dhsd	ENT								; En-tête
+public record	gtfdd.dhsd	ENT			W1ENT				; En-tête origine bl
+Public Record  CCFDD.dhsd	C4
+Public Record	GTFDD.dhsd	ENT			W9ENT				; En-tête origine
+Public Record	GTFDD.dhsd	MOUV			RMOUV				; Renumérotation des mouvements
+Public Record	GTFDD.dhsd  PRJAP
+
+public record	gtfdd.dhsd	SOC				 				; Dossier
+public record	gtfdd.dhsd	CLI				 				; Client
+public record	gtfdd.dhsd 	GTENT									; Enregistrement de travail
+Public Record  GTFDD.dhsd 	T020								; table des codes opération
+
+Public Record	gtfdd.dhsd 	XQ 			G3XQ				; Enregistrement sélection
+Public Record	GTFDD.dhsd	XT				G3XT				; Enregistrement identifiants tableaux
+
+public record	gtfdd.dhsd  G1T1								; Enregistrement gestion tableau lignes
+Public Record	gtfdd.dhsd  G1T6								; Liste des en-têtes à facturer	
+Public Record	gtfdd.dhsd	G1T6			W1G1T6			; élément de la liste précédent
+Public Record	GTFDD.DHSD	CLI		CLI_DEV_01					; Client
+
+Public Record "gtfdd.dhsd" g6 g6
+
+1		werr			5,0
+1		Id_Factures	L
+1		Id_Lignes	L
+1		 PtrFoncPDV 16	
+
+;*
+;* Séquences début de programme
+;*
+
+;*
+Function Long Tri_LIG (&A ,&B)
+; Tri la liste
+Record	GTFDD.dhsd		G1T1		A						
+Record	GTFDD.dhsd		G1T1		B
+1	ZoneA	23						
+1	ZoneB	23						
+BeginF	
+	ZoneA	= A.Cog_Id_Enveloppe & A.Cog_Affaire & A.Falg & A.FaCe4 & A.FaSlg																							
+	ZoneB	= B.Cog_Id_Enveloppe & B.Cog_Affaire & B.Falg & B.FaCe4 & B.FaSlg																							
+	FReturn(SortCompare(ZoneA,ZoneB))
+EndF																											
+
+;*
+;*		Fonctions sur les en-têtes
+;*
+
+;*
+Procedure Programme_Debut
+; en début de programme après l'ouvertue des fichiers et avant la lecture du dossier
+BeginP
+	werr = system.esp
+	Id_Factures = ListGetId("Liste_Factures")
+	ListErase(Id_Factures)
+	Id_Lignes 	= ListGetId("Liste_Lignes")
+	GetAdressFunction (' ' , "Tri_LIG" , PtrFoncPDV)
+	ListMode (Id_Lignes, 1 , PtrFoncPDV)
+
+EndP
+
+;*
+Procedure Programme_Fin
+; en fin de programme
+1		i		X
+BeginP
+	Sethourglasscursor
+	If ListCount(Id_Factures) > 0
+		g3_OpenTrace(2,3,4,false)
+		ListBegin(Id_Factures)
+		Loop ListNext(Id_Factures,Ent) > 0
+			g3_Afficher_selection(3,false)
+			G1T6 = Ent
+			g3_Afficher_Traitement(4,false)
+			Loop Res_ENT(Ent.Ticod,Ent.Picod,Ent.Pino) <> 0
+				Messagebox("Facture No " & nospaces(Ent.Pino) & " réservée par un autre utilisateur, veuillez valider ou abandonner la saisie sur l'autre poste.",'Attention',MB_OK)
+			Endloop
+			ListErase(Id_Lignes)
+			Gtfam.Key = "K" & MZ.Dos & "C" & Ent.PiNo
+			Loop Hread(Gtfam,Rmouv) = 0 And Rmouv.Dos = MZ.Dos And Rmouv.TiCod = "C" And Rmouv.FaNo = Ent.PiNo
+				G1T1 = Rmouv
+				If G1T1.Ce2N = 1 | G1T1.Cog_Affaire = G1T1.Projet | Endif
+				If G1T1.Ce2N = 2 And G1T1.Cog_Affaire = system.esp
+					i = 1
+					Loop i < 9
+ 						If Mid(G1T1.Des,i,1) = '-' | Exitloop
+						Else | Mid(G1T1.Cog_Affaire,i,1) = Mid(G1T1.Des,i,1) | i++
+						Endif
+					Endloop
+				Endif
+				If Not G1T1.Cog_Affaire = system.esp And Seek_PrjAp(G1T1.Cog_Affaire) = 0 And PrjAp.Cog_Id_Enveloppe > 0 | G1T1.Cog_Id_Enveloppe = PrjAp.Cog_Id_Enveloppe | Endif
+				ListInsert(Id_Lignes,G1T1)			
+			Endloop
+			If ListCount(Id_Lignes) > 0
+				i = 1
+				ListBegin(Id_Lignes)
+				Loop ListNext(Id_Lignes,Rmouv) > 0
+					If Hseek(Gtfam,G1T1,"M" & MZ.Dos & Rmouv.EnrNo) = 0
+						Rmouv.Falg = i | i++
+						Hrewrite(Gtfam,Rmouv)
+					Else
+						G3_Log_Ano (9009 , 'Ligne non retrouvée No ' & Rmouv.Falg, ' Facture No ' & ENT.PINO) | werr++
+					Endif
+				Endloop
+				Hpclose(Gtfam)
+			Endif
+			Lib_ENT(Ent.Ticod,Ent.Picod,Ent.Pino)
+		Endloop
+ 	Endif
+	ListDestroy(Id_Factures)
+	ListDestroy(Id_Lignes)
+	Setnormalcursor
+	g3_closeTrace
+	If werr > system.esp
+		Messagebox("Des erreurs ont été constatées lors de la facturation.||Veuillez consulter le livre de bord.",'Erreur')
+	Endif
+EndP
+
+;*
+Procedure Menu_Chargement_Ap
+; après chargement du menu
+; permet de rajouter des choix
+BeginP
+	Standard.Menu_Chargement_Ap
+	XmeMenuCheckItem(G3XT.IDMENU(1),"Imp",False)
+	XmeMenuCheckItem(G3XT.IDMENU(1),"Blpointe",True)
+EndP
+
+;*
+Function char ENT_Accepter
+; après la lecture d'une en-tête et des tests standard d'exclusion
+; renvoyer 	'O' pour traiter la pièce
+;				'N' pour ignorer la pièce
+BeginF
+	If not ENT.ETB = MZ.ETB | Freturn('N') 
+	ElsIf ENT.PROJET < G3XQ.PROJETD Or ENT.PROJET > G3XQ.PROJETF
+		Freturn('N') 
+	ElsIf G3XQ.CHOIX(20) = 1 And ENT.Cog_BL_Moteur < 2
+		Freturn('N') 
+	Else
+		Freturn(Standard.ENT_Accepter)
+	Endif
+EndF
+
+;*
+Procedure ENT_Cumuler
+;  l'en-tête de Bl est chargé dans W1ENT, l'en-tête de facture dans ENT
+Beginp
+	Standard.ENT_Cumuler
+	If Not (ENT.Cog_Regroupe_Direction = 2 And W1ENT.Cog_Regroupe_Direction = 2 And ENT.Cog_DirCliente = W1ENT.Cog_DirCliente)
+		ENT.Cog_Regroupe_Direction = 1
+		ENT.Cog_DirCliente = system.esp
+	Endif
+Endp
+
+;*
+Procedure ENT_Creation_Init
+1		i		X						
+1	t_Ce1_01				>CCFDD.DHSD	Ce1
+1	t_Key_01				255
+1	x_st_01				X
+Beginp
+	Standard.ENT_Creation_Init
+	If Lectab(20,ENT.OP) = 0
+		Lib_Ent(ENT.TiCod,ENT.PiCod,ENT.Pino)
+		W9ENT = ENT
+		Loop Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'R') = H_RESERVED 
+			Messagebox('Journal comptable des compteurs réservé par un autre utilisateur ou par la facturation, veuillez recommencer SVP.','Attention',MB_OK)
+		Endloop			
+		If Seek_C4(T020.Jnl) = 0 And C4.PieceSais = 4 And C4.PieceCod = 3				
+			For i = 1 to 50
+				C4.Piece++
+				If Res_Ent(W9ENT.TiCod,W9ENT.PiCod,C4.Piece) = 0
+					If Not Seek_Ent(W9ENT.TiCod,W9ENT.PiCod,C4.Piece) = 0 | ExitFor 
+					Else  | Lib_Ent(W9ENT.TiCod,W9ENT.PiCod,C4.Piece)
+					Endif
+				Endif
+			Next
+			ENT = W9ENT
+			If i < 50
+				Ent.Pino  = C4.Piece
+				Ccfjca.key = "D" & Mz.Dos & '4' & T020.Jnl 
+				If Hseek(Ccfjca,C4,Ccfjca.key,"R") = 0
+					C4.Piece = Ent.Pino 
+					Hrewrite(Ccfjca,C4)
+					Hpclose(Ccfjca)
+				Else				; cas qui ne devrait pas se produire
+					Hpclose(Ccfjca)
+					Lib_Ent(W9ENT.TiCod,W9ENT.PiCod,C4.Piece)
+					G3_Log_Ano (9009 , 'Journal non retrouvé, la numérotation des factures est fausse', ' Facture No ' & ENT.PINO) | werr++
+				Endif				 
+			Else
+				G3_Log_Ano (9009 , 'Numéro inconnu, la numérotation des factures est fausse', ' Facture No ' & ENT.PINO) | werr++
+			Endif
+		Else
+			G3_Log_Ano (9009 , 'Journal comptable des compteurs inconnu, la numérotation des factures est fausse', ' Facture No ' & ENT.PINO) | werr++
+		Endif
+		Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'L')
+	Endif
+	;If G3XQ.CHOIX(20) = 1 | ENT.PIDT = Hdate(W1ENT.PIDT,"d") | Endif
+	;If ENT.Cog_Regroupe_Direction = 1 |	ENT.Cog_DirCliente = system.esp | Endif
+	; Vérification du client et de son code OP
+		Init CLI_DEV_01 = " "
+		t_Ce1_01 = "3"
+		GTFPCF_DEV_01.Key = "C" & ENT.Dos & t_Ce1_01 & ENT.Tiers
+		t_Key_01 = ENT.Dos & t_Ce1_01 & ENT.Tiers
+		x_st_01 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_01)
+		If x_st_01 = 0 And CLI_DEV_01.Dos = ENT.Dos And CLI_DEV_01.Ce1 = t_Ce1_01 And CLI_DEV_01.Tiers = ENT.Tiers
+			ENT.Cog_ImpLogo_1 = CLI.Cog_implogo_1
+			ENT.Cog_ImpLogo_2 = CLI.Cog_implogo_2
+			ENT.Cog_ImpLogo_3 = CLI.Cog_implogo_3
+			ENT.Cog_ImpLogo_4 = CLI.Cog_implogo_4
+		Else
+			ENT.Cog_ImpLogo_1 = SOC.Cog_implogo_1
+			ENT.Cog_ImpLogo_2 = SOC.Cog_implogo_2
+			ENT.Cog_ImpLogo_3 = SOC.Cog_implogo_3
+			ENT.Cog_ImpLogo_4 = SOC.Cog_implogo_4
+		EndIf
+		If Not G6.Salcod = system.esp
+			ENT.Salcod = G6.Salcod
+		Endif
+Endp
+
+;*
+Procedure ENT_Finale_Write_Av
+; avant réécriture de l'en-tête de facture, sert dans un export sans attendre que l'impression de la facture soit faite (sinon ech = esp)
+BeginP
+	Standard.ENT_Finale_Write_Av
+	if GTENT.SENS = 2
+		ENT.ECHDT = Calcul_Echeance(ENT.REGL, ENT.PIDT, ENT.ECHDT,' ')	
+	endif
+	If ENT.TiCod = "C" And ENT.Cog_BL_Moteur = 2 And ENT.TpvBl = 3 | ListAddAfter(Id_Factures,ENT) | Endif	; facturation des projets spécifiques : tri des lignes
+EndP
+
+;*
+Function long Tri_Liste_Ent(&a,&b)		
+; tri la liste des en-têtes de BL
+record	gtfdd.dhsd	G1T6	A	
+record	gtfdd.dhsd	G1T6	B	
+1			ZoneA			500		
+1			ZoneB			500
+beginf	
+		; tri par tiers - famod - GIE SYSTEMU 											- dev - regl - escp - period - op - tvat - tpft - adrtyp - adrtiersf - adrcod(4) - ribcod - encasscod - piedno - cdno - pino 
+
+		;ZoneA = [ A.TIERS A.FAMOD A.Cog_DirCliente A.Cog_Regroupe_Direction A.DEV A.HTCOD A.REGL A.ESCP A.PERIOD A.OP A.TVAT A.TPFT A.ADRTYP(4) A.ADRTIERSF A.ADRCOD(4) A.RIBCOD A.ENCASSCOD A.PIEDNO() A.CDNO A.PINO]
+		;ZoneB = [ B.TIERS B.FAMOD B.Cog_DirCliente B.Cog_Regroupe_Direction B.DEV B.HTCOD B.REGL B.ESCP B.PERIOD B.OP B.TVAT B.TPFT B.ADRTYP(4) B.ADRTIERSF B.ADRCOD(4) B.RIBCOD B.ENCASSCOD B.PIEDNO() B.CDNO B.PINO] 
+		ZoneA = [ A.TIERS A.Cog_DirCliente A.Cog_Regroupe_Direction A.DEV A.HTCOD A.REGL A.ESCP A.PERIOD A.OP A.TvaTie A.TPFT A.ADRTYP(4) A.ADRTIERSF A.ADRCOD(4) A.RIBCOD A.ENCASSCOD A.PIEDNO() ]
+		ZoneB = [ B.TIERS B.Cog_DirCliente B.Cog_Regroupe_Direction B.DEV B.HTCOD B.REGL B.ESCP B.PERIOD B.OP B.TvaTie B.TPFT B.ADRTYP(4) B.ADRTIERSF B.ADRCOD(4) B.RIBCOD B.ENCASSCOD B.PIEDNO() ] 
+		if ZoneA = ZoneB 
+			Freturn(2)
+		else
+			freturn(ZoneA < ZoneB)
+		endif
+endf	
+
+;*
+Function char Regrouper_Bl
+; teste la rupture en cas de regroupement de BL
+; renvoie 	'O' si regroupement autorisé
+;				'N' sinon
+1		flag			1			
+Beginf
+	flag = Standard.Regrouper_Bl	
+	If  flag = 'O' And G1T6.Cog_DirCliente = system.esp
+ 		Freturn(flag)
+	ElsIf flag = 'O' And G1T6.Cog_Regroupe_Direction = 1 And W1G1T6.Cog_Regroupe_Direction = 1
+ 		Freturn(flag)
+	ElsIf flag = 'O' And G1T6.Cog_DirCliente = W1G1T6.Cog_DirCliente And G1T6.Cog_Regroupe_Direction = 2 And W1G1T6.Cog_Regroupe_Direction = 1
+ 		flag = 'N'
+	ElsIf flag = 'O' And Not G1T6.Cog_DirCliente = W1G1T6.Cog_DirCliente And G1T6.Cog_Regroupe_Direction = 2 And W1G1T6.Cog_Regroupe_Direction = 1
+ 		flag = 'N'
+	ElsIf flag = 'O' And Not G1T6.Cog_DirCliente = W1G1T6.Cog_DirCliente And G1T6.Cog_Regroupe_Direction = 1 And W1G1T6.Cog_Regroupe_Direction = 2
+ 		flag = 'N'
+	ElsIf flag = 'O' And Not G1T6.Cog_DirCliente = W1G1T6.Cog_DirCliente And G1T6.Cog_Regroupe_Direction = 2 And W1G1T6.Cog_Regroupe_Direction = 2
+ 		flag = 'N'
+	Endif
+	Freturn(flag)
+Endf

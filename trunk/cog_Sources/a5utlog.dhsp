@@ -1,0 +1,25 @@
+SetModuleInfo('$Id: a5ttlog.dhsp 5419 2009-11-28 09:44:45Z als $')
+; >xdiva
+;*
+;*    effacement du livre de bord                                                  a5ttlog
+;*
+
+;*    log    version   n°modif      date     modifications
+;*
+;*    lm       4.1                  01.2001  version initiale en diva
+
+OverWrite "A5TTLOG.dhop"
+Public Record a5dd.dhsd  M8																		; Livre de bord
+
+;*
+Function Char Selection_OK
+
+; O pour traiter
+; I pour ignorer
+; N pour abandonner
+
+BeginF
+	Freturn('I')
+EndF
+
+;*

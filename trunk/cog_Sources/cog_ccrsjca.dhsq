@@ -1,0 +1,67 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL du CCFJCA  --> sans les BONDS du standard
+;*
+
+<DictionarySql defaultDictionary=ccfdd.dhsd DataBase=DCPT overwrittenby="cog_ccrsjcau.dhoq" ModuleInfo='$Id$'>
+
+;*
+;*		Compte
+;*
+		
+<RecordSql Name=CogRs_C3 Comment='Plan Comptable'>
+public	record	A5DD.dhsd	MZ		MZ	
+public 	record 	GTFDD.dhsd	T000
+
+
+<Select>
+	C3.*		 		
+
+<From Insert=Yes Update=Yes Delete=Yes>
+	C3 
+
+
+<Where>
+	C3.Dos = MZ.Dos
+
+	case Exists(char Cpt)
+		C3.Cpt = Cpt
+
+	Case Equal_Cpt(char cpt)
+		C3.Cpt = Cpt			
+
+	case Zoom_Like_Compte(char Cpt)
+		C3.Cpt Like Cpt
+
+	case Zoom_Like_NomAbr(char NomAbr)
+		C3.NomAbr Like NomAbr
+
+	case Zoom_Like_CptCol(char CptCol)
+		C3.Cptcol Like CptCol
+
+	case Zoom_Compte_Valide(date Hsdt)
+		C3.HsDt is null or C3.HsDt > Hsdt
+
+	case Zoom_Compte_Ferme(date Hsdt)
+		C3.HsDt is not null and C3.HsDt < Hsdt
+  
+	; methode de pointage : PointCod : =1 si aucune , =2 si manuelle
+	case Zoom_Compte_Pointable "Compte pointable"
+		C3.PointCod <> 1
+
+<OrderBy>
+	case Par_Compte "Par compte"
+		C3.Dos,
+		C3.Ce1,
+		C3.Cpt
+
+	case Par_Nom_Abrege "Par nom abrégé"
+		C3.Dos,
+		C3.Ce1,
+		C3.NomAbr
+
+	case Par_CompteCollectif	"Par compte collectif"
+		C3.Dos,
+		C3.CptCol,
+		C3.Cpt
+
+							

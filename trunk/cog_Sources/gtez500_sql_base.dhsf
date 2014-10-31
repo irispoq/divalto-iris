@@ -1,0 +1,4279 @@
+;>xwin4obj                              7.0       20131227150954      
+[masque]
+ libelle="affaire"
+ utilisateur="TP"
+ date_modification="27/12/2013"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=666
+ type_masque=2
+ dernier_id=561
+ dernier_id_page=20
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="gtfaide"
+ [touches]
+  f5=5001
+  f6=5005
+  f7=135
+  ctrl_f6=10300
+  shift_f6=10000
+[enregistrements]
+ "gtfdd.dhsd",,g7,g7,4510,0
+ "gtfdd.dhsd",,soc,soc,2800,0
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "gafdd.dhsd",,gachc,gachc,450,0
+ "gtrsproj.dhoq",,affaire,affaire,1024,1
+ "gtfdd.dhsd",,prjap,prjap_sel,1000,0
+ "gtfdd.dhsd",,t064,t064_sel,300,0
+ "gtfdd.dhsd",,cli,cli_sel,2450,0
+ "gafdd.dhsd",,gabmp,gabmp,1600,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=315,240
+  attache_x=oui
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=68,480
+  attache_lgx=oui
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Affaire à créer"
+ nb_lig=3
+ nb_col=50
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [aide_page]
+  aide=2407
+  fichier="gtfaide"
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,20
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Code"
+ [champ]
+  [presentation]
+   position=8,26
+   taille=9,75
+   id=4
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=soc,affairelib,soc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=8,102
+   taille=9,35
+   id=5
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=affaire,affaire,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=3
+ libelle="Fiche zoom"
+ fond="STD"
+ titre="Zoom"
+ efface=partiel
+ nb_lig=35
+ nb_col=60
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=3
+ [aide_page]
+  aide=2407
+  fichier="gtfaide"
+ [groupbox]
+  [presentation]
+   position=1,1
+   taille=83,238
+   attache_lgx=oui
+   id=508
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="GROUPE_FOND"
+ [tableau]
+  [presentation]
+   position=86,0
+   taille=228,239
+   attache_lgx=oui
+   attache_lgy=oui
+   id=541
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=5
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=4
+   separation=79
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=147,168
+    taille=19,26
+    id=516
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=affaire,cenote,affaire
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CENOTE_1"
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Présence d'une note"
+   [param_colonne]
+    titre="#tblnote"
+    fl_aff=oui
+    fl_trait_col=non
+    largeur_col=13
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=129,120
+    taille=20,28
+    id=517
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=affaire,cejoint,affaire
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CEJOINT"
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Présence fichiers joints"
+   [param_colonne]
+    titre="#tblficjoin"
+    fl_aff=oui
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=108,104
+    taille=11,16
+    id=518
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=g7,affcetb,g7,1
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","AFFLOT"
+    obligatoire=non
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Affaire rattachée à une affaire principale?"
+   [param_colonne]
+    titre="#tblfils"
+    fl_aff=oui
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=100,45
+    taille=18,36
+    id=559
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=g7,affcetb,g7,2
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CENOM"
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Présence d'une arborescence de points"
+   [param_colonne]
+    titre="#tblNom"
+    fl_trait_col=non
+    largeur_col=13
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=18,56
+    taille=9,36
+    noms="prj_col"
+    id=519
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,affaire,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="#Affaire"
+   [param_colonne]
+    titre="#Affaire"
+    largeur_col=45
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=173,336
+    taille=9,28
+    noms="affaire"
+    id=520
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,bitmap,affaire
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","BITMAP"
+    obligatoire=non
+   [touches]
+    f6=5005
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Image de l'affaire"
+   [param_colonne]
+    fl_aff=oui
+    largeur_col=18
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=21,68
+    taille=10,165
+    noms="prj_col"
+    id=521
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,lib80,affaire
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Libellé du affaire"
+   [param_colonne]
+    titre="Libellé"
+    largeur_col=168
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=153,68
+    taille=10,57
+    id=522
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,htmt,affaire
+    format="\FormatMille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Montant du affaire"
+   [param_colonne]
+    titre="Montant"
+    fl_aff=oui
+    largeur_col=52
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=36,68
+    taille=10,41
+    noms="cli_col"
+    id=552
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,tiers,affaire
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    f8=9021
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Tiers_1_Ap"
+   [info_bulle]
+   texte="Tiers"
+   [param_colonne]
+    titre="Tiers"
+    largeur_col=39
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=36,112
+    taille=8,163
+    noms="cli_col"
+    id=553
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,cli_pri_nom,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Nom du tiers"
+   [param_colonne]
+    titre="Nom du tiers"
+    fl_aff=oui
+    largeur_col=166
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=57,68
+    taille=10,41
+    id=523
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,deldt,affaire
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Date de livraison"
+   [param_colonne]
+    titre="Date de livraison"
+    fl_aff=oui
+    largeur_col=51
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=75,68
+    taille=10,41
+    id=524
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,rcpprevdt,affaire
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Date de réception prévue"
+   [param_colonne]
+    titre="Réception prévue"
+    fl_aff=oui
+    largeur_col=55
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=75,208
+    taille=10,41
+    id=525
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,rcpdt,affaire
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Date de réception réelle"
+   [param_colonne]
+    titre="Réception réelle"
+    fl_aff=oui
+    largeur_col=49
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=96,68
+    taille=10,41
+    id=526
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,repr,affaire
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    f8=9024
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Repr_1_Ap"
+   [info_bulle]
+   texte="Commercial"
+   [param_colonne]
+    titre="Commercial"
+    fl_aff=oui
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=96,112
+    taille=8,163
+    id=527
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,vrp_nom,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Nom du commercial"
+   [param_colonne]
+    titre="Nom du commercial"
+    fl_aff=oui
+    largeur_col=94
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=114,68
+    taille=10,41
+    id=528
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,salcod,affaire
+    format="1"
+    minmaj=majuscules
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    f8=9077
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Salcod_1_Ap"
+   [info_bulle]
+   texte="Chef de projet interne"
+   [param_colonne]
+    titre="Chef de projet interne"
+    fl_aff=oui
+    largeur_col=76
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=114,112
+    taille=8,163
+    id=529
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,t037_nom,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Nom du chef de projet interne"
+   [param_colonne]
+    titre="Nom du chef de projet interne"
+    fl_aff=oui
+    largeur_col=99
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=129,68
+    taille=10,41
+    id=530
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,contact,affaire
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    f8=9029
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Contact_1_Av"
+    diva_apres="Champ_Contact_1_Ap"
+   [info_bulle]
+   texte="Chef de projet client"
+   [param_colonne]
+    titre="Chef de projet client"
+    fl_aff=oui
+    largeur_col=72
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=129,112
+    taille=8,163
+    id=531
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,t2_nom,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Nom du chef de projet client"
+   [param_colonne]
+    titre="Nom du chef de projet client"
+    fl_aff=oui
+    largeur_col=117
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=102,296
+    taille=7,65
+    id=532
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=g7,choix,g7,6
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CE2_PRJAP"
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Ce2_1_Av"
+    diva_apres="Champ_Ce2_1_Ap"
+   [info_bulle]
+   texte="Etat du affaire"
+   [param_colonne]
+    titre="Etat"
+    fl_aff=oui
+    largeur_col=52
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=192,68
+    taille=10,33
+    noms="afr_col"
+    id=533
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,afrclas,affaire
+    sequence=2
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f6=5005
+    f7=135
+    f8=9104
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_AfrClas_1_Av"
+    diva_apres="Champ_AfrClas_1_Ap"
+   [info_bulle]
+   texte="Classe d'affaire"
+   [param_colonne]
+    titre="Classe d'affaire"
+    largeur_col=46
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=192,112
+    taille=8,143
+    noms="afr_col"
+    id=534
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,t064_lib80,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Libellé de la classe d'affaire"
+   [param_colonne]
+    titre="Libellé de la classe d'affaire"
+    fl_aff=oui
+    largeur_col=146
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=171,68
+    taille=10,13
+    id=535
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=affaire,conf,affaire
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    f8=11010
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Conf_1_Ap"
+   [info_bulle]
+   texte="Confidentialité"
+   [param_colonne]
+    titre="Conf"
+    fl_aff=oui
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=189,20
+    taille=8,54
+    id=536
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,dopdh,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f5=5001
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Dernière opération"
+   [param_colonne]
+    titre="Dernière opération"
+    fl_aff=oui
+    largeur_col=57
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=238,24
+    taille=8,73
+    id=537
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,usercr,affaire
+    format="1"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Créé par"
+   [param_colonne]
+    titre="Créé par"
+    fl_aff=oui
+    largeur_col=76
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=111,296
+    taille=10,59
+    id=538
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,usercrdh,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Créé le"
+   [param_colonne]
+    titre="Créé le"
+    fl_aff=oui
+    largeur_col=62
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=238,156
+    taille=8,73
+    id=539
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,usermo,affaire
+    format="1"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Modifié par"
+   [param_colonne]
+    titre="Modifié par"
+    fl_aff=oui
+    largeur_col=76
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=247,156
+    taille=8,54
+    id=540
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=affaire,usermodh,affaire
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Modifié le"
+   [param_colonne]
+    titre="Modifié le"
+    fl_aff=oui
+    largeur_col=57
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=17,4
+   taille=9,45
+   id=545
+   wstyle="STD"
+  [texte]
+   texte="Code affaire"
+ [obj_texte]
+  [presentation]
+   position=28,4
+   taille=9,45
+   id=550
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=39,4
+   taille=9,45
+   id=542
+   wstyle="STD"
+  [texte]
+   texte="Classe d'affaire"
+ [obj_texte]
+  [presentation]
+   position=50,4
+   taille=9,45
+   id=547
+   wstyle="STD"
+  [texte]
+   texte="Client"
+ [obj_texte]
+  [presentation]
+   position=71,4
+   taille=9,45
+   noms="etb"
+   id=555
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [champ]
+  [presentation]
+   position=17,50
+   taille=9,35
+   noms="prj_sel"
+   id=546
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=prjap,affaire,prjap_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f6=5002
+   f7=135
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=28,50
+   taille=9,92
+   id=561
+   colonnes_saisie=25
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=prjap,libabr,prjap_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,50
+   taille=9,35
+   noms="AFR_SEL"
+   id=543
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=t064,afrclas,t064_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9104
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AfrClas_2_Av"
+   diva_apres="Champ_AfrClas_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=50,50
+   taille=9,35
+   noms="tierspilote"
+   id=548
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cli,tiers,cli_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f3=1
+   f7=135
+   f8=9021
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Tiers_2_Av"
+   diva_apres="Champ_Tiers_2_Ap"
+  [boutons]
+   "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=61,50
+   taille=9,115
+   id=554
+   wstyle="STD"
+  [description]
+   donnee=g7,choix,g7,7
+   minmaj=majuscules
+  [param_case]
+   texte="Uniquement les affaires principales"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f3=1
+   f6=5002
+   f7=135
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=71,50
+   taille=9,15
+   noms="etb"
+   id=556
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=prjap,etb,prjap_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   insert=1
+  [traitements]
+   diva_avant="Champ_Etb_1_Av"
+   diva_apres="Champ_Etb_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=16,175
+   taille=9,53
+   attache_x=oui
+   id=509
+   wstyle="STD"
+  [description]
+   donnee=g7,choix,g7,1
+   minmaj=majuscules
+  [param_case]
+   texte="En préparation"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f3=1
+   f6=5002
+   f7=135
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=50,86
+   taille=9,82
+   attache_lgx=oui
+   id=549
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,nom,cli_sel
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5002
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=39,86
+   taille=9,80
+   attache_lgx=oui
+   id=544
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=t064,lib80,t064_sel
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5002
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=26,175
+   taille=9,54
+   attache_x=oui
+   id=510
+   wstyle="STD"
+  [description]
+   donnee=g7,choix,g7,2
+   minmaj=majuscules
+  [param_case]
+   texte="Confirmée"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f3=1
+   f6=5002
+   f7=135
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=36,175
+   taille=9,56
+   attache_x=oui
+   id=511
+   wstyle="STD"
+  [description]
+   donnee=g7,choix,g7,3
+   minmaj=majuscules
+  [param_case]
+   texte="Démarrée"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f3=1
+   f6=5002
+   f7=135
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=46,175
+   taille=9,54
+   attache_x=oui
+   id=512
+   wstyle="STD"
+  [description]
+   donnee=g7,choix,g7,4
+   minmaj=majuscules
+  [param_case]
+   texte="Terminée"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f3=1
+   f6=5002
+   f7=135
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=56,175
+   taille=9,55
+   attache_x=oui
+   id=513
+   wstyle="STD"
+  [description]
+   donnee=g7,choix,g7,5
+   minmaj=majuscules
+  [param_case]
+   texte="Archivée"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f3=1
+   f6=5002
+   f7=135
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=4
+ fond="STD"
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ prec=3
+ suiv=5
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=4
+ [aide_page]
+  aide=2407
+  fichier="gtfaide"
+[page]
+ numero=5
+ fond="STD"
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ prec=4
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=5
+ [aide_page]
+  aide=1021
+  fichier="gtfaide"
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=6
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=7
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=8
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=9
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=10
+[page]
+ numero=11
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=35
+ nb_col=60
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=11
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="DEFINITION"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=186,4
+   taille=126,232
+   id=290
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Chiffres clés"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=154,172
+   taille=28,63
+   id=291
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Montant"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=22,5
+   taille=9,20
+   id=292
+   wstyle="STD"
+  [texte]
+   texte="Code"
+ [obj_texte]
+  [presentation]
+   position=34,4
+   taille=9,59
+   id=293
+   wstyle="STD"
+  [texte]
+   texte="Libellé abrégé"
+ [obj_texte]
+  [presentation]
+   position=44,4
+   taille=9,59
+   id=294
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=64,4
+   taille=9,59
+   id=295
+   wstyle="STD"
+  [texte]
+   texte="Client"
+ [obj_texte]
+  [presentation]
+   position=74,4
+   taille=9,59
+   id=296
+   wstyle="STD"
+  [texte]
+   texte="Chef de projet client"
+ [obj_texte]
+  [presentation]
+   position=84,4
+   taille=9,59
+   id=297
+   wstyle="STD"
+  [texte]
+   texte="Commercial"
+ [obj_texte]
+  [presentation]
+   position=94,4
+   taille=9,59
+   id=298
+   wstyle="STD"
+  [texte]
+   texte="Chef de projet interne"
+ [obj_texte]
+  [presentation]
+   position=114,4
+   taille=9,59
+   id=299
+   wstyle="STD"
+  [texte]
+   texte="Date de livraison"
+ [obj_texte]
+  [presentation]
+   position=119,151
+   taille=9,48
+   id=300
+   wstyle="STD"
+  [texte]
+   texte="Changement d'état"
+ [obj_texte]
+  [presentation]
+   position=124,4
+   taille=9,64
+   id=301
+   wstyle="STD"
+  [texte]
+   texte="Date de réception prévue"
+ [obj_texte]
+  [presentation]
+   position=134,4
+   taille=9,59
+   id=302
+   wstyle="STD"
+  [texte]
+   texte="Date de réception réelle"
+ [obj_texte]
+  [presentation]
+   position=134,161
+   taille=9,73
+   noms="affaire"
+   id=303
+   wstyle="STD"
+  [texte]
+   texte="Image"
+ [obj_texte]
+  [presentation]
+   position=147,4
+   taille=9,59
+   id=304
+   wstyle="STD"
+  [texte]
+   texte="Questionnaire"
+ [obj_texte]
+  [presentation]
+   position=162,4
+   taille=9,59
+   id=305
+   wstyle="STD"
+  [texte]
+   texte="Classe d'affaire"
+ [obj_texte]
+  [presentation]
+   position=201,6
+   taille=9,65
+   id=306
+   wstyle="STD_AFF"
+  [texte]
+   texte="Calcul arrêté au"
+ [champ]
+  [presentation]
+   position=22,20
+   taille=9,46
+   id=307
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=soc,affairelib,soc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=22,70
+   taille=9,35
+   id=308
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,affaire,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=34,70
+   taille=9,92
+   id=309
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,libabr,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f6=5005
+   f7=135
+   shift_f6=10000
+  [traitements]
+   diva_avant="Champ_LibAbr_1_Av"
+   diva_apres="Champ_LibAbr_1_Ap"
+  [info_bulle]
+  texte="Libellé abrégé"
+ [champ]
+  [presentation]
+   position=44,70
+   taille=9,157
+   id=310
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,lib80,affaire
+   sequence=1
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2408
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Lib_1_Av"
+   diva_apres="Champ_Lib_1_Ap"
+ [champ]
+  [presentation]
+   position=64,69
+   taille=9,35
+   noms="tierspilote"
+   id=311
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,tiers,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2413
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   f8=9021
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Tiers_1_Av"
+   diva_apres="Champ_Tiers_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=74,69
+   taille=9,35
+   id=312
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,contact,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2403
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   f8=9029
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Contact_1_Av"
+   diva_apres="Champ_Contact_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=84,69
+   taille=9,35
+   id=313
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,repr,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2412
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   f8=9024
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Repr_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=119,201
+   taille=9,32
+   id=314
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,projetetatdt,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2419
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=94,69
+   taille=9,75
+   id=315
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,salcod,affaire
+   format="1"
+   minmaj=majuscules
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2417
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   f8=9077
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Salcod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=114,69
+   taille=9,35
+   id=316
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,deldt,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2404
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=124,69
+   taille=9,35
+   id=317
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,rcpprevdt,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2406
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=134,69
+   taille=9,35
+   id=318
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,rcpdt,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2405
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=147,69
+   taille=9,85
+   id=319
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,question,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   f8=18996
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Question_1_Av"
+   diva_apres="Champ_Question_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=162,69
+   taille=9,35
+   noms="classe;classepilote"
+   id=320
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,afrclas,affaire
+   sequence=2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2421
+   fichier="gtfaide"
+  [touches]
+   f6=5005
+   f7=135
+   f8=9104
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AfrClas_1_Av"
+   diva_apres="Champ_AfrClas_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=54,171
+   taille=62,61
+   id=321
+   wstyle="STD"
+  [description]
+   donnee=affaire,ce2,affaire
+   minmaj=majuscules
+  [param_groupe]
+   titre="Statut"
+  [radio_bouton]
+   [presentation]
+    position=63,177
+    taille=9,52
+    id=350
+    wstyle="STD"
+   [param_radio]
+    texte="En préparation"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=73,177
+    taille=9,51
+    id=351
+    wstyle="STD"
+   [param_radio]
+    texte="Confirmé"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=83,177
+    taille=9,54
+    id=352
+    wstyle="STD"
+   [param_radio]
+    texte="Démarré"
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=93,177
+    taille=9,54
+    id=353
+    wstyle="STD"
+   [param_radio]
+    texte="Terminé"
+    cadrage=droite
+    valeur="4"
+  [radio_bouton]
+   [presentation]
+    position=103,177
+    taille=9,54
+    id=354
+    wstyle="STD"
+   [param_radio]
+    texte="Archivé"
+    cadrage=droite
+    valeur="5"
+  [aide_page]
+   aide=2418
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Etat_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=134,199
+   taille=10,35
+   noms="affaire"
+   id=322
+   wstyle="CHAMP_NON_SAISI"
+   wcouleur=192,192,192,0,0,0
+  [description]
+   donnee=affaire,bitmap,affaire
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","BITMAP"
+   obligatoire=non
+  [aide_page]
+   aide=2420
+   fichier="gtfaide"
+  [touches]
+   f6=5005
+   f7=135
+   shift_f6=10000
+  [info_bulle]
+  texte="Image de l'affaire"
+ [champ]
+  [presentation]
+   position=170,181
+   taille=9,46
+   id=323
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,htmt,affaire
+   format="\FormatMille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=64,103
+   taille=9,66
+   id=324
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,cli_pri_nom,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=84,103
+   taille=9,66
+   id=325
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,vrp_nom,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=103,69
+   taille=9,100
+   id=326
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,t037_nom,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=74,103
+   taille=9,65
+   id=327
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,t2_nom,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=171,69
+   taille=9,102
+   id=328
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,t064_lib80,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=201,175
+   taille=9,32
+   id=329
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,arretdt,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=211,6
+   taille=9,143
+   id=330
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=211,157
+   taille=9,50
+   noms="chcle1"
+   id=331
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=271,6
+   taille=9,145
+   id=332
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,7
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=221,6
+   taille=9,144
+   id=333
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=221,157
+   taille=9,50
+   noms="chcle2"
+   id=334
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=281,6
+   taille=9,145
+   id=335
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,8
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=231,6
+   taille=9,143
+   id=336
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=291,6
+   taille=9,145
+   id=337
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,9
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=241,6
+   taille=9,144
+   id=338
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,4
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=231,157
+   taille=9,50
+   noms="chcle3"
+   id=339
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=301,6
+   taille=9,145
+   id=340
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,10
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=251,6
+   taille=9,143
+   id=341
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,5
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=241,157
+   taille=9,50
+   noms="chcle4"
+   id=342
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,4
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=251,157
+   taille=9,50
+   noms="chcle5"
+   id=343
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,5
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=261,157
+   taille=9,50
+   noms="chcle6"
+   id=344
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,6
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=271,157
+   taille=9,50
+   noms="chcle7"
+   id=345
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,7
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=281,157
+   taille=9,50
+   noms="chcle8"
+   id=346
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,8
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=291,157
+   taille=9,50
+   noms="chcle9"
+   id=347
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,9
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=301,157
+   taille=9,50
+   noms="chcle10"
+   id=348
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,chiffrecle,affaire,10
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2422
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=261,6
+   taille=9,145
+   id=349
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gachc,chifclelib,gachc,6
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=12
+ fond="STD"
+ efface=partiel
+ nb_lig=35
+ nb_col=60
+ offset_lig=1
+ offset_col=1
+ prec=11
+ suiv=13
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=12
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="ADRESSE"
+   couleur_fond="STD"
+ [obj_texte]
+  [presentation]
+   position=24,5
+   taille=9,54
+   id=368
+   wstyle="STD"
+  [texte]
+   texte="Adresse du tiers"
+ [obj_texte]
+  [presentation]
+   position=47,5
+   taille=9,54
+   id=369
+   wstyle="STD"
+  [texte]
+   texte="Code adresse"
+ [champ]
+  [presentation]
+   position=24,57
+   taille=9,35
+   noms="tiers"
+   id=370
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,adrtiers,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2423
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   f8=9021
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Tiers_3_Av"
+   diva_apres="Champ_Tiers_3_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=69,57
+   taille=9,137
+   id=371
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,adrcpl1,g7,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=59,57
+   taille=9,137
+   id=372
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,nom,g7,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f6=10300
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=79,57
+   taille=9,137
+   id=373
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,adrcpl2,g7,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=89,57
+   taille=9,137
+   id=374
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,rue,g7,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=99,57
+   taille=9,137
+   id=375
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,loc,g7,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=119,57
+   taille=9,15
+   id=376
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,pay,g7,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=109,89
+   taille=9,137
+   id=377
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,vil,g7,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f6=10300
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=47,57
+   taille=9,35
+   noms="tiers"
+   id=378
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,adrcod,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2423
+   fichier="gtfaide"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   f8=9027
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adrcod_1_Av"
+   diva_apres="Champ_Adrcod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=35,57
+   taille=9,144
+   id=379
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,lib,g7,6
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=109,57
+   taille=9,32
+   id=380
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,cpostal,g7
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=13
+ fond="STD"
+ efface=partiel
+ nb_lig=35
+ nb_col=60
+ offset_lig=1
+ offset_col=1
+ prec=12
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=13
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=128,4
+   taille=38,231
+   id=414
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Codes enregistrements"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=22,117
+   taille=48,118
+   id=389
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Autorisation de saisie"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=22,4
+   taille=48,109
+   id=381
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Protection"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=78,117
+   taille=38,118
+   id=390
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière opération"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=171,117
+   taille=38,118
+   id=437
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=78,4
+   taille=38,109
+   id=382
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Liens"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=171,4
+   taille=38,108
+   id=432
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=38,9
+   taille=9,50
+   id=383
+   wstyle="STD"
+  [texte]
+   texte="Confidentialité"
+ [obj_texte]
+  [presentation]
+   position=94,9
+   taille=9,50
+   id=384
+   wstyle="STD"
+  [texte]
+   texte="Affaire père"
+ [obj_texte]
+  [presentation]
+   position=94,122
+   taille=9,18
+   id=391
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=104,9
+   taille=9,50
+   id=385
+   wstyle="STD"
+  [texte]
+   texte="Affaire principale"
+ [obj_texte]
+  [presentation]
+   position=143,144
+   taille=9,24
+   id=426
+   wstyle="STD"
+  [texte]
+   texte="Note"
+ [obj_texte]
+  [presentation]
+   position=144,9
+   taille=9,18
+   id=415
+   wstyle="STD"
+  [texte]
+   texte="CE"
+ [obj_texte]
+  [presentation]
+   position=153,144
+   taille=9,24
+   id=427
+   wstyle="STD"
+  [texte]
+   texte="Joint"
+ [obj_texte]
+  [presentation]
+   position=187,9
+   taille=9,18
+   id=433
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=187,123
+   taille=9,18
+   id=438
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=197,9
+   taille=9,18
+   id=434
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=197,123
+   taille=9,18
+   id=439
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=94,60
+   taille=9,35
+   id=386
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,affairepere,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=94,142
+   taille=9,56
+   id=392
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,dopdh,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f6=10300
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=5002
+ [champ]
+  [presentation]
+   position=104,60
+   taille=9,35
+   id=387
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,affaireprinc,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=38,60
+   taille=9,20
+   id=388
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,conf,affaire
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   f8=11011
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Conf_1_Ap"
+  [boutons]
+   "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=38,122
+   taille=9,110
+   id=393
+   wstyle="STD"
+  [description]
+   donnee=affaire,saisauttyp,affaire,1
+   minmaj=majuscules
+  [param_case]
+   texte="Pièces de Divalto Achat-Vente"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=48,122
+   taille=9,110
+   id=394
+   wstyle="STD"
+  [description]
+   donnee=affaire,saisauttyp,affaire,2
+   minmaj=majuscules
+  [param_case]
+   texte="Temps passés de Divalto Affaire"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=58,122
+   taille=9,110
+   id=395
+   wstyle="STD"
+  [description]
+   donnee=affaire,saisauttyp,affaire,3
+   minmaj=majuscules
+  [param_case]
+   texte="Evénements de la C.R.M."
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,29
+   taille=9,8
+   id=416
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce1,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,37
+   taille=9,8
+   id=417
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce2,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,45
+   taille=9,8
+   id=418
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce3,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,53
+   taille=9,8
+   id=419
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce4,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,61
+   taille=9,8
+   id=420
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce5,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,77
+   taille=9,8
+   id=421
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce7,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,85
+   taille=9,8
+   id=422
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce8,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,93
+   taille=9,8
+   id=423
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce9,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,101
+   taille=9,8
+   id=424
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,cea,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=144,69
+   taille=9,8
+   id=425
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,ce6,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=143,164
+   taille=9,8
+   id=428
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,cenote,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=143,172
+   taille=9,35
+   id=429
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,note,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=153,164
+   taille=9,8
+   id=430
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,cejoint,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=153,172
+   taille=9,35
+   id=431
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=affaire,joint,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=187,29
+   taille=9,75
+   id=435
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,usercr,affaire
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=187,143
+   taille=9,80
+   id=440
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,usermo,affaire
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=197,143
+   taille=9,56
+   id=441
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,usermodh,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=197,29
+   taille=9,56
+   id=436
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,usercrdh,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+[page]
+ numero=14
+ fond="STD"
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=14
+ [aide_page]
+  aide=2407
+  fichier="gtfaide"
+[page]
+ numero=15
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=15
+[page]
+ numero=16
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=16
+[page]
+ numero=17
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=18
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=18
+[page]
+ numero=19
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=19
+[page]
+ numero=20
+ fond="STD"
+ type=fenetre
+ titre="Introduisez un code affaire"
+ efface=partiel
+ nb_lig=3
+ nb_col=50
+ offset_lig=8
+ offset_col=20
+ ident_unique=20
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,15
+   id=286
+   wstyle="STD"
+  [texte]
+   texte="Code"
+ [champ]
+  [presentation]
+   position=8,21
+   taille=9,75
+   id=287
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=soc,affairelib,soc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=8,97
+   taille=9,35
+   id=288
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,affaire,affaire
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9500
+   shift_f1=1
+  [traitements]
+   microbol_click=8002
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPL"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="NOTE"
+    wtexte="_Note \TShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="FICJOINT"
+    wtexte="_Fichiers joints \TCtrl+F6"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Rubriques"
+    wid_ressource="RUBRIQUE"
+    wetype_trait=arret
+    warret=10400
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Questionnaires"
+    wid_ressource="QUESTION"
+    wetype_trait=arret
+    warret=5007
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Interrogations"
+    wid_ressource="INTERRO"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Mouvements\TF5"
+    wid_ressource="DEVIS"
+    warret=5001
+    wtrait_chaine="#f5"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Evénements"
+    wid_ressource="EVT"
+    wetype_trait=arret
+    warret=30993
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="ATIERS"
+    wtexte="Fiche Tiers"
+    wid_ressource="TIERS"
+    wetype_trait=arret
+    warret=5002
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Lots"
+    wid_ressource="LOT"
+    wetype_trait=arret
+    warret=5004
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Suivi budgétaire\TF6"
+    wid_ressource="SUIVI"
+    warret=5005
+    wtrait_chaine="#f6"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Avenants"
+    wid_ressource="AVENANT"
+    wetype_trait=arret
+    warret=5003
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Collaborateurs"
+    wid_ressource="PRJSAL"
+    wetype_trait=arret
+    warret=5006
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Arbre des points"
+    wid_ressource="AFRPOINT"
+    wetype_trait=arret
+    warret=5009
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="FENETRE"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wetype_trait=arret
+    warret=8
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wetype_trait=arret
+    warret=9
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#ctrl_insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Rubriques"
+    wid_ressource="RUBRIQUE"
+    wetype_trait=arret
+    warret=10400
+   [info_bulle]
+   texte="Rubriques"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Questionnaires"
+    wid_ressource="QUESTION"
+    wetype_trait=arret
+    warret=5007
+   [info_bulle]
+   texte="Questionnaires"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_4"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   [param_bouton]
+    wnom="FICJOINT"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+   [info_bulle]
+   texte="Fichiers joints <Ctrl+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__1"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    warret=6
+    wtrait_chaine="#ctrl_p"
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMBIS"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Tiers"
+    wid_ressource="TIERS"
+    wetype_trait=arret
+    warret=5002
+   [info_bulle]
+   texte="Fiche du tiers"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Avenants"
+    wid_ressource="AVENANT"
+    wetype_trait=arret
+    warret=5003
+   [info_bulle]
+   texte="Consulter les avenants"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Collaborateurs"
+    wid_ressource="PRJSAL"
+    wetype_trait=arret
+    warret=5006
+   [info_bulle]
+   texte="Consulter les collaborateurs rattachés à l'affaire"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_5"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Evénements"
+    wid_ressource="EVT"
+    wetype_trait=arret
+    warret=30993
+   [info_bulle]
+   texte="Consulter les événements"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Mouvements"
+    wid_ressource="MVT"
+    wtrait_chaine="#f5"
+   [info_bulle]
+   texte="Consulter les lignes de mouvement liées à l'affaire <F5>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Lots"
+    wid_ressource="LOT"
+    wetype_trait=arret
+    warret=5004
+   [info_bulle]
+   texte="Consulter les lots"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Suivi budgétaire"
+    wid_ressource="SUIVI"
+    warret=5005
+    wtrait_chaine="#f6"
+   [info_bulle]
+   texte="Consulter le suivi budgétaire de l'affaire <F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Points"
+    wid_ressource="AFRPOINT"
+    wetype_trait=arret
+    warret=5009
+   [info_bulle]
+   texte="Consulter l'arbre de points de l'affaire"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+;>xdiva
+;*
+;*      Zoom sur Projet		  Enregistrement PrjAp de GTFPROJ
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		mjv		4.1						01.1999	Version initiale en Diva 
+;*		tp			7.0						12.2011	Migration Zoom SQL
+
+
+SetModuleInfo('$Id: gtez500_sql.dhsf 36603 2014-01-06 13:44:55Z tp $')
+
+
+include 'GTTC000.dhsp'
+
+Module A5TM000.dhop
+
+public hfile	gtfdd.dhsd	GTFTAB	GTFTAB
+public hfile	gtfdd.dhsd	GTFPCF	GTFPCF	
+public hfile 	gtfdd.dhsd	GTFDOS	GTFDOS
+
+public record	gtfdd.dhsd	SocAfr
+public record	gtfdd.dhsd	CLI
+public record	gtfdd.dhsd	PRO
+public record 	gtfdd.dhsd 	VRP
+public record 	gtfdd.dhsd	T1
+public record	gtfdd.dhsd	T2
+
+public record	gtfdd.dhsd	T037
+public record	gtfdd.dhsd	T064									; classe d'affaire
+
+public record 	gtfdd.dhsd	G7
+public record  gtfdd.dhsd 	XZ	G3XZ
+public record	gtfdd.dhsd	SOC
+public record	gtfdd.dhsd	ETS
+
+public record	a5dd.dhsd		MZ
+
+public record  a5dd.dhsd		XZ		A5XZ
+Public Record "ddsys.dhsd" rowinfo zoomselection
+Public Record "gafdd.dhsd" gachc gachc
+Public RecordSql "gtrsproj.dhoq" Affaire affaire
+Public Record "gtfdd.dhsd" prjap prjap_sel
+Public Record "gtfdd.dhsd" t064 t064_sel
+Public Record "gtfdd.dhsd" cli cli_sel
+Public Record "gafdd.dhsd" gabmp gabmp
+
+Const	C_Pilote_ParTiers	= 1
+Const C_Pilote_ParClasse = 2
+Const	C_Pilote_Modif    = 3
+Const C_Pilote_Creation = 4
+Const C_Pilote_UnProjet = 5
+
+
+;*
+;* séquences liées au masque
+;*
+
+;*
+public procedure Champ_Adrcod_1_Av				;initialise g3xz.tiers pour appel du zoom
+beginp
+	if affaire.AdrTiers = ' '
+		G3XZ.Tiers = Affaire.Tiers
+	else
+ 		G3XZ.Tiers = Affaire.AdrTiers
+	endif
+	if G3XZ.Tiers = ' '
+		; pas de tiers saisie impossible
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp
+
+;*
+public procedure Champ_Adrcod_1_Ap			;controle code adresse
+beginp
+	G7.Adr(1)= ' '
+	if affaire.AdrTiers = ' '
+		G3XZ.Tiers = affaire.Tiers
+		Recherche_Adresse(affaire.Tiers,affaire.AdrCod,2008)
+		G7.Adr(1)= T1.Adr
+	else
+ 		G3XZ.Tiers = affaire.AdrTiers
+		Recherche_Adresse(affaire.AdrTiers,affaire.AdrCod,2008)
+		G7.Adr(1)= T1.Adr
+	endif
+endp
+
+
+;*
+public procedure Champ_AfrClas_1_Av	 ; avant classe
+beginp
+ 
+	if G7.ZoomPar = C_Pilote_ParClasse 	; pilotage par classe
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+	if affaire.AffairePrinc <> ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+EndP
+
+
+;*
+Public Procedure Champ_AfrClas_1_Ap	  ; Controle la classe affaire
+Beginp
+
+	affaire.T064_LIB80 = ' '
+
+	if affaire.AfrClas = ' '
+		; si non renseignée
+		affaire.AfrClas =  Condition(Ets.AfrClas = ' ', SocAfr.AfrClas, Ets.AfrClas)	
+	elsif (Harmony.DataModif = True)
+		if (Mes_Alert(5014, affaire.Affaire, affaire.AfrClas) <> IDYES)
+			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
+			preturn
+		endif
+	endif
+
+	if LecTab(64, affaire.AfrClas, 1164, today) = 0
+		affaire.T064_LIB80 = T064.Lib80
+	endif
+
+Endp
+
+;*
+public procedure Champ_AfrClas_2_Av	 ; avant classe  clé
+beginp
+
+	if G7.ZoomPar = C_Pilote_ParClasse 	; pilotage par classe
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp
+
+;*
+Public Procedure Champ_AfrClas_2_Ap	  		; Controle la classe affaire  clé
+Beginp
+
+	if LecTab(64, T064_sel.AfrClas, 1164) = 0
+		T064_sel = T064
+	else
+		T064_sel.Lib80 = ' '
+	endif
+
+EndP
+
+;*
+public procedure Champ_Ce2_1_Av				; initialise choix(2) en fonction de ce2 car saisie ds une donnée numérique
+BeginP
+	G7.Choix(6) = affaire.Ce2	
+EndP
+
+;*
+public procedure Champ_Ce2_1_Ap				; initialise ce2 en fonction de choix(2)
+BeginP
+	affaire.Ce2	= ToString(G7.Choix(6))
+EndP
+
+;*
+public procedure Champ_Conf_1_Ap				; contrôle code de confidentialité
+beginp
+	Controler_Confidentialite(affaire.Conf , 4000)
+endp
+
+;*
+public procedure Champ_Contact_1_Av	 		; avant contact client interdire saisie si code client non renseigné
+beginp
+	if affaire.Tiers = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	else
+		G3XZ.Tiers = affaire.Tiers
+		G3XZ.TiCod = 'C'
+	endif
+EndP
+
+;*
+public procedure Champ_Contact_1_Ap	 		; controle  contact client
+beginp
+	affaire.T2_NOM = ' '
+	if Controle_Contact(affaire.Tiers, affaire.Contact, 2016) = 0
+		affaire.T2_NOM = T2.Nom
+	endif
+endp
+
+;*
+public procedure Champ_Etat_1_Ap				; initialisation en fonction de l'état
+BeginP
+	if Harmony.DataModif
+		affaire.ProjetEtatDt = Today
+	endif
+EndP
+
+;*
+public procedure Champ_Etb_1_Av ; avant établissement
+beginp
+	if G7.ZoomPar = C_Pilote_ParTiers 	; pilotage par tiers
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+	if SOC.EntCodN(22)= 1
+		prjap_sel.Etb = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif		 
+endp
+
+;*
+public procedure Champ_Etb_1_Ap	 ; controle établissement
+beginp
+	if Controle_Ets (prjap_sel.Etb,1400) = 0
+		if prjap_sel.Etb <> ' '
+			MZ.Etb = prjap_sel.Etb
+		endif
+	endif
+endp
+
+;*
+Public Procedure Champ_Lib_1_Av			; maj du libellé abrégé / libelle
+1	LibAbr	>gtfdd.dhsd	LibAbr
+Beginp
+	LibAbr = Convertir_Nom_Nomabr(affaire.Lib80,true)
+	if LibAbr = affaire.LibAbr
+		affaire.LibAbr = ' '
+	endif 
+Endp
+
+
+;*
+Public Procedure Champ_Lib_1_Ap			; maj du libelle abrégé / libelle
+Beginp
+	if affaire.LibAbr = ' '
+		affaire.LibAbr = Convertir_Nom_Nomabr(affaire.Lib80)
+	endif	
+Endp
+
+;*
+public procedure Champ_LibAbr_1_Av			; en création le libellé abrége n'est pas en saisie
+beginp
+	if G7.ModifFlg = 0
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif	
+	G7.ModifFlg = 1
+endp
+
+
+;*
+Public Procedure Champ_LibAbr_1_Ap			;après libelle abrégé si non renseigné
+Beginp
+	if affaire.LibAbr = ' ' 
+		affaire.LibAbr = Convertir_Nom_Nomabr(affaire.Lib80)
+	endif	
+	affaire.LibAbr = Convertir_Nom_Nomabr(affaire.LibAbr)
+Endp
+
+
+;*
+public procedure Champ_Question_1_Av	; Initialisation pour pilotage du zoom
+beginp
+	A5XZ.Entite = C_Entite_PrjAp
+endp
+
+;*
+public procedure Champ_Question_1_Ap	; Contrôle le code questionnaire s'il est renseigné
+beginp
+	Controler_questionnaire (affaire.Question, 3000, entite = C_Entite_PrjAp) 
+endp
+
+;*
+public procedure Champ_Repr_1_Ap	 		; controle  représentant
+beginp
+	affaire.VRP_NOM = ' '
+	if Controle_Vrp(affaire.Repr,1700) = 0
+		affaire.VRP_NOM = VRP.Nom
+	endif
+endp
+
+;*
+public procedure Champ_Salcod_1_Ap	 		; controle  salarié chef de projet
+beginp
+	affaire.T037_NOM = ' '
+	if Lectab(37, affaire.SalCod, 1137) = 0
+		affaire.T037_NOM = T037.Nom
+	endif
+endp
+
+;*
+public procedure Champ_Tiers_1_Av	 ; avant tiers
+beginp
+	if G7.ZoomPar = C_Pilote_ParTiers 	; pilotage par tiers
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+EndP
+
+;*
+public procedure Champ_Tiers_1_Ap	 ; controle tiers
+beginp
+	affaire.CLI_PRI_NOM = ' '
+
+	if affaire.Tiers = ' '
+		; pas de gestion d'adresse
+		affaire.AdrTiers = ' '
+		affaire.AdrCod	= ' '
+		G7.Adr(1) = ' '
+		affaire.CLI_ADR_NOM = ' '
+		XmeSetAttribut("tiers", AN_STYLE, "CHAMP_NON_SAISI")
+	elsif Controle_Client(affaire.Tiers, 2000, ctrvisa = false)  = 0	; on accepte client uniquement
+		affaire.CLI_PRI_NOM = CLI.Nom
+		if affaire.Repr = ' '
+			affaire.Repr = CLI.Repr(1)
+			Recherche_Vrp(affaire.Repr)
+			affaire.VRP_NOM = VRP.Nom
+		endif
+		XmeResetAttribut("tiers", AN_TOUS_ATTRIBUTS)
+	endif
+endp
+
+;*
+public procedure Champ_Tiers_2_Av	 ; avant tiers	clé 
+beginp
+	if G7.ZoomPar = C_Pilote_ParTiers 	; pilotage par tiers
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+EndP
+
+;*
+public procedure Champ_Tiers_2_Ap	 ; controle tiers clé
+beginp
+	if Controle_Client(cli_sel.Tiers, 2000, ctrvisa = false)  = 0	; on accepte client uniquement
+		cli_sel = CLI
+	else
+		cli_sel.Nom = ' '
+	endif
+endp
+
+;*
+public procedure Champ_Tiers_3_Av			; avant tiers adresse
+beginp
+	if affaire.Tiers = ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+endp
+
+
+;*
+public procedure Champ_Tiers_3_Ap			; controle tiers adresse
+1	tiers		>gtfdd.dhsd tiers
+beginp
+	affaire.CLI_ADR_NOM = ' '
+
+	if (Controle_Client(affaire.AdrTiers, 2000, 0)  <> 0)
+		preturn
+	endif
+
+	affaire.CLI_ADR_NOM = CLI.Nom
+
+	G7.Adr(1) = ' '
+	if affaire.AdrTiers = ' '
+		tiers = affaire.Tiers
+	else
+		tiers = affaire.AdrTiers
+	endif
+
+	if Recherche_Adresse(tiers, affaire.AdrCod, 2008) <> 0
+		affaire.AdrCod = ' '
+		preturn
+	endif
+
+	G7.Adr(1) = T1.Adr
+
+endp
+
+;*
+
+[/diva]
+[diva_base]
+[/diva]

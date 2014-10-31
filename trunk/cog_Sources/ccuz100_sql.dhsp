@@ -1,0 +1,45 @@
+
+;*
+;*		Zoom des écritures comptables
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		JDT		6.3			01			06.2011	Version initiale : Interface d"exportation des écritures comptables
+;*
+
+OverWrite	"ccpz100_Sql.dhop"
+
+module "xzoom.dhop"
+public record  ddsys.dhsd zoom 
+public record  a5dd.dhsd		MZ
+
+public	hfile		CCFDD.dhsd	CCFECR	CCFECR	; intitulés et écritures
+public	record	CCFDD.dhsd	C8						; ligne d'écriture
+
+1	g_Ce1	>CCFDD.DHSD	Ce1
+
+;*	01
+Procedure ZoomDebut 
+BeginP
+	Standard.ZoomDebut
+	g_Ce1 = "8"
+EndP
+
+;* 01
+Procedure ZoomValidation ; validation du zoom
+BeginP
+	If Zoom.NoCle = 14
+		Zoom.ValRetour = C8.COG_CHRONO
+	EndIf
+EndP
+
+;*	01
+Private Procedure ZoomApresCle14
+; par numéro de chrono d'exportation
+BeginP	; ZoomApresCle14
+	ZOOM.CLE		= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1 & C8.COG_CHRONO
+	ZOOM.CLEMIN	= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1
+	ZOOM.CLEMAX	= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1 & $FF
+EndP		; ZoomApresCle14
+

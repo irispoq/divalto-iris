@@ -1,0 +1,489 @@
+OverWrite gttz500_sql.dhop
+
+Module	GRPMFIC.dhop
+Module	GRTM000.dhop
+;Module	Cog_Gdiva.dhop
+
+include "GTTCZ00.dhsp"			;déclarations communes
+public RecordSQL 	"gtrsproj.dhoq" 	Affaire 	Affaire		; Affaire (Enregistrement principal)
+;
+;Surcharge SU
+public RecordSQL 	"gtrsppproj.dhoq" Affaire 	su_sel		; Affaire (Enregistrement principal)
+;
+;
+HfileVersion 	Cogfdd.dhsd 	COGGTF_TAB
+
+Public Hfile 	Cogfdd.dhsd 	COGGTF_TAB	COGGTF_TAB	 noopen
+Public Hfile 	Cogfdd.dhsd 	COGGRF_TAB	COGGRF_TAB	
+Public Hfile	cogfdd.dhsd	Cog_FAffectBudget	Cog_FAffectBudget_01
+Public Hfile	cogfdd.dhsd	Cog_FDirCliente	Cog_FDirCliente_01
+Public hfile	"ccfdd.dhsd"	ccfjca	ccfjca_dev_01
+
+Public record 	Cogfdd.dhsd 	COG_GRTEVT				; Code événement
+Public record 	grfdd.dhsd 		EVTTIERS					; Evénement
+Public Record	grfdd.dhsd		XZ				GRXZ		; Enregistrement de communication avec le module RT
+Public record 	Cogfdd.dhsd 	COG_UT101
+Public record 	Cogfdd.dhsd 	COG_UT103
+Public record 	Cogfdd.dhsd 	COG_UT105
+Public record 	Cogfdd.dhsd 	COG_UT106
+Public record 	Cogfdd.dhsd 	COG_UT107
+Public record 	Cogfdd.dhsd 	COG_UT108
+Public record 	Cogfdd.dhsd 	COG_UT109
+Public record 	Cogfdd.dhsd 	COG_UT110
+Public Record 	gtfdd.dhsd 		T012
+Public Record 	gtfdd.dhsd 		T064
+Public record 	gtfdd.dhsd 		SOCCRM					; Dossier CRM
+Public Record "cogfdd.dhsd" Cog_AffectationBudgetaire	Cog_AffectationBudgetaire_01
+Public Record "cogfdd.dhsd" Cog_DirCliente	Cog_DirCliente_01
+Public Record	"ccfdd.dhsd"	C5		C5_DEV_01
+public record 		"gtfdd.dhsd" 		PrjAp		PrjAp_sel	; Affaire (sélection)
+public record "gtfdd.dhsd" CLI 		CLI_sel
+public record "gtfdd.dhsd" T064		T064_sel					; classe d'affaire (sélection)
+Public Record "Cogfdd.Dhsd"	Cog_Ut120
+
+define IdMenuZoomBis		= G3XT.IDBARRE(3)	
+
+1		Sauve_Classe		8
+1		Liste					L
+1		wafrclas				8
+1		wcotpdv				8
+1		whierarchie			1,0
+
+1	g_Dossier	>GTFDD.DHSD	Dos
+
+include "CogGt_Controle_Fichier.dhsp"
+
+;*
+;* fonctions et procedures
+;*
+
+;*
+Procedure Construire_condition_Selection(nom)
+;
+1	Nom					A
+1 	Valeur_Condition	S
+1  Param					S
+Beginp
+
+	Affaire.where.RemoveCondition(Nom)
+
+	if prjap_sel.etb <> ' '
+		Param = banaliser_condition(prjap_sel.etb)
+		Affaire.where.Zoom_Pour_Etb(Param)
+		Ajouter_condition(Valeur_Condition,'Zoom_Pour_Etb')
+	endif
+
+	;
+	;Surcharge SU
+	if prjap_sel.affaire <> ' '
+	   if (zoom.scevaleur <> ' ') and (mid (zoom.scevaleur,1,1) = '-')
+			Param = banaliser_condition(prjap_sel.affaire, false)
+		else
+			Param = banaliser_condition(prjap_sel.affaire, true)
+		endif
+		;Appel à la fonction permettant de ne pas prendre en compte la casse
+		Affaire.where.Zoom_Su_Like_Affaire(Param)
+		Ajouter_condition(Valeur_Condition,'Zoom_Su_Like_Affaire')
+	endif
+	;
+	;Surcharge SU
+	if su_sel.affaire <> ' '
+	   if (zoom.scevaleur <> ' ') and (mid (zoom.scevaleur,1,1) = '-')
+			Param = banaliser_condition(su_sel.affaire, false)
+		else
+			Param = banaliser_condition(su_sel.affaire, true)
+		endif
+		;Lancement de la fonction de récupération des Affaires avec un code >= à la sélection
+		Affaire.Where.SupEgalAffaire(su_sel.affaire)
+		Ajouter_Condition(Valeur_Condition,'SupEgalAffaire')
+	endif
+	;
+	;
+	if prjap_sel.LibAbr <> ' '
+		Param = banaliser_condition(prjap_sel.LibAbr, true)	 		
+		Affaire.where.Zoom_Like_LibAbr(Param)
+		Ajouter_condition(Valeur_Condition,'Zoom_Like_LibAbr')
+	endif
+	
+	if t064_sel.AfrClas <> ' '
+		Param = banaliser_condition(T064_sel.AfrClas)
+		Affaire.where.Zoom_Like_AfrClas(Param)
+		Ajouter_condition(Valeur_Condition,'Zoom_Like_AfrClas')
+	endif
+
+	if cli_sel.tiers <> ' '
+		Param = banaliser_condition(cli_sel.Tiers)
+		Affaire.where.Zoom_Like_Tiers(Param)
+		Ajouter_condition(Valeur_Condition,'Zoom_Like_Tiers')
+	endif
+	
+	if Valeur_Condition <> ' '
+		Affaire.where.AddCondition(Nom, Valeur_Condition)
+	endif
+
+Endp
+
+
+
+
+
+Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+	Standard.Maj_Menu_Boutons
+	Switch ZOOM.ACTION
+
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION, ZOOM_MODIFICATION)
+			XmeToolBarEnableButton(IdMenuZoomBis,'COTISATION',False)
+			XmeToolBarEnableButton(IdMenuZoomBis,'REGUL',False)
+			XmeToolBarEnableButton(IdMenuZoomBis,'PDV',False)
+			XmeToolBarEnableButton(IdMenuZoomBis,'MONTANT',False)
+			XmeToolBarEnableButton(IdMenuZoomBis,'EVENEMENTS',False)
+			XmeToolBarEnableButton(IdMenuZoomBis,'SECTION',False)
+			XmeToolBarEnableButton(IdMenuZoomBis,'REGULARISATION',False)
+	Case 	ZOOM_AFFICHAGE
+			switch Zoom.TypeInput
+			case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+					XmeToolBarEnableButton(IdMenuZoomBis,'COTISATION',True)
+					XmeToolBarEnableButton(IdMenuZoomBis,'REGUL',True)
+					XmeToolBarEnableButton(IdMenuZoomBis,'PDV',True)
+					XmeToolBarEnableButton(IdMenuZoomBis,'MONTANT',True)
+					XmeToolBarEnableButton(IdMenuZoomBis,'EVENEMENTS',True)
+					XmeToolBarEnableButton(IdMenuZoomBis,'SECTION',True)
+					XmeToolBarEnableButton(IdMenuZoomBis,'REGULARISATION',True)
+			case ZOOM_S_DEPART		; avant clé de départ
+					XmeToolBarEnableButton(IdMenuZoomBis,'COTISATION',False)
+					XmeToolBarEnableButton(IdMenuZoomBis,'REGUL',False)
+					XmeToolBarEnableButton(IdMenuZoomBis,'PDV',False)
+					XmeToolBarEnableButton(IdMenuZoomBis,'MONTANT',False)
+					XmeToolBarEnableButton(IdMenuZoomBis,'EVENEMENTS',False)
+					XmeToolBarEnableButton(IdMenuZoomBis,'SECTION',False)
+					XmeToolBarEnableButton(IdMenuZoomBis,'REGULARISATION',False)
+			endswitch
+	EndSwitch
+EndP
+
+;*																	 
+Function int Controle_Hierarchie(waffaire)
+1	waffaire	>gtfdd.dhsd	AFFAIRE
+Beginf
+	g_Dossier = MZ.DOS
+	if SOCCRM.TABCRMTYP(3) = 2
+		g_Dossier = 999
+	EndIf
+	CogGrf_Tab.Key = [ 'A' g_Dossier waffaire affaire.AfrClas ]
+	If Hread(CogGrf_Tab,Cog_GrtEvt,CogGrf_Tab.Key) = 0 And Cog_GrtEvt.Dos = g_Dossier And Cog_GrtEvt.Affaire = waffaire And Cog_GrtEvt.AfrClas = affaire.AfrClas
+		Freturn(0)
+	Else
+		Freturn(1)
+	Endif	
+Endf
+
+;*
+Procedure ZoomDebut 
+Beginp
+	Controle_Fichier
+	Standard.ZoomDebut
+	;XmeSetAttribut ("efface", AN_VISIBILITE, AV_CACHE)
+	Affaire.OrderBy.Par_Affaire()
+Endp
+
+;*
+Function int Verification
+1		i		X
+Beginf	
+	If PongreceiveAndDelete('RETOUR',i) = 0 
+		Freturn(i)
+	Else
+		Freturn(3)
+	Endif
+Endf
+
+;*
+procedure ZoomAvantWrite 
+1		i		1,0
+beginp 
+	Standard.ZoomAvantWrite
+	If	affaire.Cog_ImpDetail = " "
+		affaire.Cog_ImpDetail = 1
+	EndIf
+	If Zoom.Ok = 'O'
+		; YATO 21/08/2014 FE002_CLASSEAFFAIRE Remplacement de la recherche de Cog_Cotisation dans Cog_UT120 à la place de T064
+		If affaire.AfrClas <> system.esp And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  = 0 And Cog_UT120.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
+		;If affaire.AfrClas <> system.esp And LecTab(64,affaire.AfrClas,,today) = 0 And T064.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
+			MessageBox ("Veuillez saisir le type de cotisation PDV.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+			Harmony.Retour = Xmenext_Point_Sequence
+			Harmony.CplRetour = 1000
+		ElsIf affaire.AfrClas <> system.esp And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  = 0 And Cog_UT120.Cog_CotisationMagActive = 2 And affaire.Tiers = system.esp
+		;ElsIf affaire.AfrClas <> system.esp And LecTab(64,affaire.AfrClas,,today) = 0 And T064.Cog_CotisationMagActive = 2 And affaire.Tiers = system.esp
+			MessageBox ("Veuillez saisir le code client.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+			Harmony.Retour = Xmenext_Point_Sequence
+			Harmony.CplRetour = 1001
+		Endif
+	Endif
+	affaire.Cog_Hierarchie = 1
+Endp
+
+;*
+procedure ZoomApresCreation  
+1		i		1,0
+beginp 
+	Standard.ZoomApresCreation 
+	If Zoom.Ok = 'O'
+		SetHourGlassCursor
+		If affaire.Cog_Cotisation_PDV <> system.esp
+			Ping("ZECHANGE", MZ)
+			Ping("NumAffaire",affaire.Affaire)
+			Programcall("Coggt_pp_active_cotisation_pdv.dhop",SW_HIDE)
+			If (i:=Verification) > system.esp
+				G3_Log_Ano (9009 , 'Erreur création des cotisations PDV numéro ' & i, ' Affaire ' & affaire.Affaire)
+				Messagebox("Des erreurs ont été constatées lors de la génération.||Veuillez consulter le livre de bord.",'Erreur')
+			Endif
+		Endif
+		If affaire.AfrClas <> system.esp And Controle_Hierarchie(system.esp) = 0
+			Ping("ZECHANGE", MZ)
+			Ping("NumAffaire",affaire.Affaire)
+			Programcall("Coggt_pp_active_hierarchie_evenement.dhop",SW_HIDE)
+			If (i:=Verification) > system.esp
+				G3_Log_Ano (9009 , 'Erreur création des hiérarchies numéro ' & i, ' Affaire ' & affaire.Affaire)
+				Messagebox("Des erreurs ont été constatées lors de la génération.||Veuillez consulter le livre de bord.",'Erreur')
+			ElsIf affaire.Cog_Hierarchie = 2
+				G7.DatD = Today
+				G3_Saisie_Page(zoom.Msqecran,19)
+				Ping("ZECHANGE", MZ)
+				Ping("NumAffaire",affaire.Affaire)
+				Ping("DateDebutProjet",G7.DatD)
+				Programcall("Coggt_pp_valide_hierarchie_evenement.dhop",SW_HIDE)
+				If (i:=Verification) > system.esp
+					G3_Log_Ano (9009 , 'Erreur création des évènements numéro ' & i, ' Affaire ' & affaire.Affaire)
+					Messagebox("Des erreurs ont été constatées lors de la génération.||Veuillez consulter le livre de bord.",'Erreur')
+				Endif
+			Endif
+		Endif
+		SetNormalCursor
+	Endif
+Endp
+
+;*
+Procedure ZoomModificationRes		; apres réservation en modif
+beginp
+	Standard.ZoomModificationRes
+	wafrclas 	= affaire.AfrClas
+ 	wcotpdv  	= affaire.Cog_Cotisation_PDV
+	whierarchie = affaire.Cog_Hierarchie
+endp
+
+;*
+procedure ZoomAvantReWrite 
+beginp 
+	Standard.ZoomAvantReWrite
+	If Zoom.Ok = 'O'
+		; YATO 21/08/2014 FE002_CLASSEAFFAIRE Remplacement de la recherche de Cog_Cotisation dans Cog_UT120 à la place de T064
+		If affaire.Cog_TypMotFac <> system.esp And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  = 0 And Cog_UT120.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
+		;If affaire.AfrClas <> system.esp And LecTab(64,affaire.AfrClas,,today) = 0 And T064.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
+			MessageBox ("Veuillez saisir le type de cotisation PDV.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+			Harmony.Retour = Xmenext_Point_Sequence
+			Harmony.CplRetour = 1000
+		ElsIf affaire.Cog_TypMotFac <> system.esp And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  = 0 And Cog_UT120.Cog_CotisationMagActive = 2 And affaire.Tiers = system.esp
+		;ElsIf affaire.AfrClas <> system.esp And LecTab(64,affaire.AfrClas,,today) = 0 And T064.Cog_CotisationMagActive = 2 And affaire.Tiers = system.esp
+			MessageBox ("Veuillez saisir le code client.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+			Harmony.Retour = Xmenext_Point_Sequence
+			Harmony.CplRetour = 1001
+		Endif
+	Endif
+Endp
+
+;*
+Procedure ZoomApresModification
+1		i		1,0
+beginp
+	Standard.ZoomApresModification
+	If Zoom.Ok = 'O'
+		SetHourGlassCursor
+		If wcotpdv = system.esp And affaire.Cog_Cotisation_PDV <> system.esp
+			Ping("ZECHANGE", MZ)
+			Ping("NumAffaire",affaire.Affaire)
+			Programcall("Coggt_pp_active_cotisation_pdv.dhop",SW_HIDE)
+			If (i:=Verification) > system.esp
+				G3_Log_Ano (9009 , 'Erreur création des cotisations PDV numéro ' & i, ' Affaire ' & affaire.Affaire)
+				Messagebox("Des erreurs ont été constatées lors de la génération.||Veuillez consulter le livre de bord.",'Erreur')
+			Endif
+		Endif
+		If wafrclas = system.esp And affaire.AfrClas <> system.esp	And Controle_Hierarchie(system.esp) = 0
+			Ping("ZECHANGE", MZ)
+			Ping("NumAffaire",affaire.Affaire)
+			Programcall("Coggt_pp_active_hierarchie_evenement.dhop",SW_HIDE)
+			If (i:=Verification) > system.esp
+				G3_Log_Ano (9009 , 'Erreur création des hiérarchies numéro ' & i, ' Affaire ' & affaire.Affaire)
+				Messagebox("Des erreurs ont été constatées lors de la génération.||Veuillez consulter le livre de bord.",'Erreur')
+			Endif
+		Endif
+		SetNormalCursor
+		If whierarchie < 2 And affaire.Cog_Hierarchie = 2
+			G7.DatD = Today
+			G3_Saisie_Page(zoom.Msqecran,19)
+			SetHourGlassCursor
+			Ping("ZECHANGE", MZ)
+			Ping("NumAffaire",affaire.Affaire)
+			Ping("DateDebutProjet",G7.DatD)
+			Programcall("Coggt_pp_valide_hierarchie_evenement.dhop",SW_HIDE)
+			If (i:=Verification) > system.esp
+				G3_Log_Ano (9009 , 'Erreur création des évènements numéro ' & i, ' Affaire ' & affaire.Affaire)
+				Messagebox("Des erreurs ont été constatées lors de la génération.||Veuillez consulter le livre de bord.",'Erreur')
+			Endif
+			SetNormalCursor
+		Endif
+	Endif
+endp
+
+;*
+Procedure ZoomApresSuppression ; compte rendu de suppression
+Beginp
+	Standard.ZoomApresSuppression
+	If Zoom.Ok = 'O'
+		COGGTF_TAB.Key = 'B' & affaire.Dos	& affaire.Etb	& affaire.Affaire
+		Loop Hread(COGGTF_TAB,COG_UT101) = 0 And COG_UT101.Dos = affaire.Dos And COG_UT101.Etb = affaire.Etb And COG_UT101.Affaire = affaire.Affaire 
+			Hdelete(COGGTF_TAB,COG_UT101)
+		EndLoop
+		COGGTF_TAB.Key = 'F' & affaire.Dos	& affaire.Etb	& affaire.Affaire
+		Loop Hread(COGGTF_TAB,COG_UT105) = 0 And COG_UT105.Dos = affaire.Dos And COG_UT105.Etb = affaire.Etb And COG_UT105.Affaire = affaire.Affaire 
+			Hdelete(COGGTF_TAB,COG_UT105)
+		EndLoop
+		COGGTF_TAB.Key = 'G' & affaire.Dos	& affaire.Etb	& affaire.Affaire
+		Loop Hread(COGGTF_TAB,COG_UT106) = 0 And COG_UT106.Dos = affaire.Dos And COG_UT106.Etb = affaire.Etb And COG_UT106.Affaire = affaire.Affaire 
+			Hdelete(COGGTF_TAB,COG_UT106)
+		EndLoop
+		COGGTF_TAB.Key = 'H' & affaire.Dos	& affaire.Etb	& affaire.Affaire
+		Loop Hread(COGGTF_TAB,COG_UT107) = 0 And COG_UT107.Dos = affaire.Dos And COG_UT107.Etb = affaire.Etb And COG_UT107.Affaire = affaire.Affaire 
+			Hdelete(COGGTF_TAB,COG_UT107)
+		EndLoop
+		COGGTF_TAB.Key = 'I' & affaire.Dos	& affaire.Etb	& affaire.Affaire
+		Loop Hread(COGGTF_TAB,COG_UT108) = 0 And COG_UT108.Dos = affaire.Dos And COG_UT108.Etb = affaire.Etb And COG_UT108.Affaire = affaire.Affaire 
+			Hdelete(COGGTF_TAB,COG_UT108)
+		EndLoop
+		COGGTF_TAB.Key = 'J' & affaire.Dos	& affaire.Etb	& affaire.Affaire
+		Loop Hread(COGGTF_TAB,COG_UT109) = 0 And COG_UT109.Dos = affaire.Dos And COG_UT109.Etb = affaire.Etb And COG_UT109.Affaire = affaire.Affaire 
+			Hdelete(COGGTF_TAB,COG_UT109)
+		EndLoop
+	Endif
+Endp
+
+;*
+procedure ZoomConsult
+beginp
+	Switch Harmony.Key
+	Case K_F11
+		GRXZ.EvtFam  = affaire.AfrClas
+		GRXZ.Affaire = affaire.Affaire
+		Ping("grxz" , grxz)
+		Zoom_Call(65010,false)
+	Endswitch
+	Standard.ZoomConsult
+	switch Harmony.Key
+	case 	Harmony.DataArret = 65005
+		G3XZ.Projet	= affaire.Affaire
+		Ping( 'zechange', MZ )
+		Zoom_Call(64001)
+	case 	Harmony.DataArret = 65006				
+		G3XZ.Projet	= affaire.Affaire
+		Ping( 'zechange', MZ )
+		Zoom_Call(64005)
+	case 	Harmony.DataArret = 65007				
+		G3XZ.Projet	= affaire.Affaire
+		g3xz.pino=affaire.cog_id_enveloppe
+		Ping( 'zechange', MZ )
+		Zoom_Call(64009)
+	case 	Harmony.DataArret = 65008
+		G3XZ.Projet	= affaire.Affaire
+		Ping( 'zechange', MZ )
+		Zoom_Call(64008)
+	case 	Harmony.DataArret = 65009
+		G3XZ.Projet	= affaire.Affaire
+		Ping( 'zechange', MZ )
+		Zoom_Call(64006)
+	case 	Harmony.DataArret = 65010
+		G3XZ.Projet	= affaire.Affaire
+		Ping( 'zechange', MZ )
+		Zoom_Call(64007)
+	endswitch 
+Endp
+
+;*
+Procedure ZoomCreation
+;
+BeginP
+
+	Standard.ZoomCreation
+	Init G7.Lib() = " "
+
+EndP
+
+;*
+Procedure ZoomDuplication 
+BeginP
+	Standard.ZoomDuplication
+	affaire.LibAbr					= " "
+	affaire.Cog_Cotisation_PDV	= " "
+	affaire.Cog_Hierarchie = 1
+	affaire.Cog_Facture 	= 1
+EndP
+
+;* après lecture clé sur  code
+Procedure ZoomApresRead
+1 	i 		L
+1	famno	>gtfdd.dhsd	FAMNO
+1	x_st_01	x
+1	t_key_01	255
+1	t_AxeNo		>CCFDD.DHSD	AxeNo
+beginp
+	Standard.ZoomApresRead
+
+	If affaire.Cog_Taux > system.esp And Hseek(Coggtf_Tab, Cog_UT103, [ 'D' MZ.DOS MZ.ETB affaire.Cog_Taux ])  = 0
+	Else
+		Cog_UT103 = system.esp
+	Endif
+;	famno = 2
+;	If affaire.Cog_AxeAnael <> system.esp And Lectab(12 , [famno affaire.Cog_AxeAnael ]) = 0
+;		G7.Lib(35) = T012.Lib
+;	Else
+;		G7.Lib(35) = system.esp
+;	Endif
+	t_AxeNo = 2
+	CCFJCA_DEV_01.Key = "G" & MZ.DOS & t_AxeNo & affaire.Cog_AxeAnael
+	t_key_01 = MZ.DOS & t_AxeNo & affaire.Cog_AxeAnael
+	x_st_01 = IRead(CCFJCA_DEV_01,C5_DEV_01,"G",t_key_01)
+	If x_st_01 = 0 And C5_DEV_01.Dos = MZ.Dos And C5_DEV_01.AxeNo = t_AxeNo And C5_DEV_01.Axe = affaire.Cog_AxeAnael
+		G7.Lib(35) = Left(C5_DEV_01.Lib)
+	Else
+		G7.Lib(35) = " "
+	Endif
+	Cog_FDirCliente_01.Key = GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente") & MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
+	t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
+	x_st_01 = IRead(Cog_FDirCliente_01,Cog_DirCliente_01,GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente"),t_key_01)
+	If x_st_01 = 0 And Cog_DirCliente_01.Dos = MZ.Dos And Cog_DirCliente_01.Etb = MZ.Etb And Cog_DirCliente_01.Cog_DirClienteCod = affaire.Cog_DirCliente
+		G7.Lib(33) = Cog_DirCliente_01.lib
+	Else
+		G7.Lib(33) = " "
+	Endif	
+	Cog_FAffectBudget_01.Key = GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire") & MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
+	t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
+	x_st_01 = IRead(Cog_FAffectBudget_01,Cog_AffectationBudgetaire_01,GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire"),t_key_01)
+	If x_st_01 = 0 And Cog_AffectationBudgetaire_01.Dos = MZ.Dos And Cog_AffectationBudgetaire_01.Etb = MZ.Etb And Cog_AffectationBudgetaire_01.Cog_AffBCod = affaire.Cog_AffectationBudgetaire
+		G7.Lib(34) = Cog_AffectationBudgetaire_01.lib
+	Else
+		G7.Lib(34) = " "
+	Endif
+	if Hseek(Coggtf_Tab, Cog_UT110, [ 'K' MZ.DOS MZ.ETB affaire.Cog_Id_Enveloppe ]) = 0
+		G7.Lib(32) = Cog_ut110.Cog_Lib_Env
+	else
+		G7.Lib(32) = " "
+	Endif
+
+	; YATO 21/08/2014 : FE002_CLASSEAFFAIRE
+	If Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  <> 0
+		G7.Lib(31) = ' '
+	Else
+		G7.Lib(31) = Cog_UT120.Lib80
+	EndIf
+EndP
+	

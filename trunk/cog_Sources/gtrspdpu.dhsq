@@ -1,0 +1,42 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFPDP
+;*
+
+<DictionarySql overwrite="gtrspdp.dhoq" ModuleInfo='$Id$'>
+
+;
+; Prévision de vente PDP
+;
+<RecordSql Name=PrevPDP>
+<Select>
+	PDPPREV.*,
+
+;
+; Paramètre de calcul PDP
+;
+
+<RecordSql Name=CalculPDP>
+<Select>
+	PDPCAL.*,
+
+;
+; Entête de calcul PDP
+;
+<RecordSql Name=EntetePDP>
+<Select>
+	PDPENT.*,
+
+;
+; Ligne de résultat de calcul PDP
+;
+<RecordSql Name=ResulPDP>
+<Select>
+	PDPLG.*,
+
+;
+; Proposition de calcul PDP
+;
+<RecordSql Name=PropPDP>
+<Select>
+	PDPPROP.*,
+

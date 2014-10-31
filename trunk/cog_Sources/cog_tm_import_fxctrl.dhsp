@@ -1,0 +1,18 @@
+
+;* 
+Public Function String Cog_Import_FxCtrl_ATRef(aMOT)
+
+; Test ctrl ref
+
+1	aMOT			S					; Ref reçue
+
+1	sChainRet	S					; Chaine de retour
+Beginf
+	If aMOT <> "TEST"
+		sChainRet = "<RESULTAT>I<MESSAGE>Test message fx controle ref"
+	Else
+		sChainRet = "<RESULTAT>O"
+	EndIf
+	Freturn("<RESULTAT>O")
+Endf
+

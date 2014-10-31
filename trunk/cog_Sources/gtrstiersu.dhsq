@@ -1,0 +1,89 @@
+<DictionarySql overwrite="gtrstiers.dhoq" ModuleInfo='$Id: gtrstiersu.dhsq 1414 2013-02-25 00:14:45Z s.renaudineau $'>
+
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFPCF
+;*
+;_08/2012		SRE		001		Initial Modele Projet 202 : Surcharge faisant apparaître toute nouvelle zone déclarée dans GTFPCF
+
+;*
+;*		Client							CLI
+;*
+
+<RecordSql Name=client>
+<SELECT>
+	CLI.*
+
+;*
+;*		Fournisseur							FOU
+;*
+
+<RecordSql Name=Fournisseur>
+<SELECT>
+	FOU.*
+
+;*
+;*		Prospect							PRO
+;*
+
+<RecordSql Name=Prospect>
+<SELECT>
+	PRO.*
+
+;*
+;*		Commercial						VRP
+;*
+
+<RecordSql Name=Commercial>
+<SELECT>
+	VRP.*
+
+;*
+;*		Autre tiers						TIA
+;*
+
+<RecordSql Name=Autre_Tiers>
+<SELECT>
+	TIA.*
+
+;*
+;*		Tiers
+;*
+
+<RecordSql Name=Tiers>
+<SELECT>
+	TIERS_VIEW.*
+
+;*
+;*		Adresse							T1
+;*
+
+<RecordSql Name=Adresse>
+<SELECT>
+	T1.*
+<WHERE>
+	case Zoom_Like_Site(char AdrCod)
+		T1.Adrcod LIKE AdrCod
+	case Zoom_Par_Nom (char Nom)
+		T1.Nom LIKE Nom
+	Case Zoom_Par_Tel (char Tel)
+		T1.Tel LIKE Tel
+	Case Zoom_Active(Date Hsdt) 
+		T1.hsdt is null or T1.hsdt > Hsdt
+	Case Zoom_Pour_Site(char Ardcod)
+		T1.AdrCod = Adrcod
+
+;*
+;*		Contact							T2
+;*
+
+<RecordSql Name=Contact>
+<SELECT>
+	T2.*
+
+;*
+;*		RIB								T3
+;*
+
+<RecordSql Name=Rib>
+<SELECT>
+	T3.*

@@ -1,0 +1,39 @@
+;*
+;*		Explorateur de pièces																GTTTPCEEXP.dhsp
+;*
+  
+OverWrite gtttpceexp.dhop
+
+;*
+;*		Déclaration
+;*
+
+Include	"GTTCPCE000.dhsp"											; Define Gestion de pièces
+
+Module	"GTTMPCE001.dhop"											; Navigation de pièces
+Module 	"COG_GTTTPCEEXP.DHOP"
+Module 	"COG_GTTTPCE000.DHOP"
+
+Public Record 'GTFDD.dhsd'		GTPCEEXP
+
+;*
+;*		Gestion des lignes
+;*
+
+;*
+Procedure DefProcInterro_Charger_Dynamique_Fin_Init_Ap
+; Après le chargement de tous les éléments
+Beginp
+
+	Standard.DefProcInterro_Charger_Dynamique_Fin_Init_Ap
+	Cog_Afficher_Champs(GTPCEEXP.TiCod, GTPCEEXP.PiCod)
+
+Endp
+
+;*
+Procedure GTPCEEXP_MOUV_Chargement_Av
+; Avant chargement d'une ligne de mouvement
+Beginp
+	Standard.GTPCEEXP_MOUV_Chargement_Av
+	Cog_GTPCEEXP_MOUV_Chargement_Av
+Endp

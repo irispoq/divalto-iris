@@ -1,0 +1,2254 @@
+;>xwin4obj                              7.0       20141007161419      
+[masque]
+ libelle="ZOOM DES ZOOMS"
+ utilisateur="UGIE"
+ date_modification="07/10/2014"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=52
+ type_masque=2
+ dernier_id=1000028
+ surcharge=oui
+ date_modif_base="20121029183211"
+ dernier_id_page=100003
+ niveau_surcharge=1
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="CCIMAIDE"
+ [touches]
+  f7=8000
+  shift_f6=10000
+[enregistrements]
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "ccfdd.dhsd",,x1,x1,1752,0
+ "ccfdd.dhsd",,ca,ca,1350,0
+ "ccrstab.dhoq",,natimmo,natimmo,1024,1
+[onglet]
+ [presentation]
+  position=0,0
+  taille=225,280
+  attache_lgx=oui
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=36,320
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=1
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=25
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Nature d'immobilisation à créer"
+ nb_lig=3
+ nb_col=30
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,64
+   id=52
+   wstyle="STD"
+  [texte]
+   texte="Nature d'immobilisation"
+ [champ]
+  [presentation]
+   position=8,71
+   taille=9,32
+   id=60
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,natimmo,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=3
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=50
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=19
+ [tableau]
+  [presentation]
+   position=0,0
+   taille=225,200
+   attache_lgx=oui
+   attache_lgy=oui
+   id=162
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=2
+   hauteur_lig=10
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=1
+   separation=66
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   saisie=non
+  [champ_tableau]
+   [presentation]
+    position=31,217
+    taille=8,31
+    id=150
+    colonnes_saisie=8
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=natimmo,natimmo,natimmo
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=8000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Code nature d'immobilisation"
+   [param_colonne]
+    titre="Nature"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=54,32
+    taille=8,143
+    id=151
+    colonnes_saisie=40
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,lib,natimmo
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=8000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Libellé"
+   [param_colonne]
+    titre="Libellé"
+    fl_aff=oui
+    largeur_col=122
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=20,166
+    taille=8,31
+    id=152
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,cpt,natimmo
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=767
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    f8=19030
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Cpt_1_Ap"
+   [info_bulle]
+   texte="Compte d'immobilisation par défaut"
+   [param_colonne]
+    titre="Compte"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=18,198
+    taille=8,31
+    id=153
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,cptaux,natimmo
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=767
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    f8=19030
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_CptAux_1_Ap"
+   [info_bulle]
+   texte="Compte fournisseur par défaut"
+   [param_colonne]
+    titre="Fournisseur"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=22,250
+    taille=8,31
+    noms="axe1"
+    id=154
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,axe,natimmo,1
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=767
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    f8=19010
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Axe_1_Av"
+    diva_apres="Champ_Axe_1_Ap"
+   [info_bulle]
+   texte="Code #axe1"
+   [param_colonne]
+    titre="#axe1"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=14,270
+    taille=8,31
+    noms="axe2"
+    id=155
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,axe,natimmo,2
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=767
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    f8=19010
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Axe_1_Av"
+    diva_apres="Champ_Axe_1_Ap"
+   [info_bulle]
+   texte="Code #axe2"
+   [param_colonne]
+    titre="#axe2"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=16,300
+    taille=8,31
+    noms="axe3"
+    id=156
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,axe,natimmo,3
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=767
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    f8=19010
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Axe_1_Av"
+    diva_apres="Champ_Axe_1_Ap"
+   [info_bulle]
+   texte="Code #axe3"
+   [param_colonne]
+    titre="#axe3"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=12,329
+    taille=8,31
+    noms="axe4"
+    id=157
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,axe,natimmo,4
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=767
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    f8=19010
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Axe_1_Av"
+    diva_apres="Champ_Axe_1_Ap"
+   [info_bulle]
+   texte="Code #axe4"
+   [param_colonne]
+    titre="#axe4"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=20,332
+    taille=8,58
+    id=158
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,ecotyp,natimmo
+    sequence=20
+   [param_saisie]
+    defaut="0"
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ECOTYP"
+   [aide_page]
+    aide=768
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_EcoTyp_1_Ap"
+   [info_bulle]
+   texte="Méthode d'amortissement économique"
+   [param_colonne]
+    titre="Méthode"
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=43,125
+    taille=8,20
+    id=159
+    colonnes_saisie=6
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,ecodur,natimmo
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=768
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EcoDur_1_Av"
+    diva_apres="Champ_EcoDur_1_Ap"
+   [info_bulle]
+   texte="Durée de vie économique"
+   [param_colonne]
+    titre="Durée"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=41,305
+    taille=8,32
+    id=160
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,fistyp,natimmo
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","FISTYP"
+   [aide_page]
+    aide=768
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_FisTyp_1_Ap"
+   [info_bulle]
+   texte="Méthode d'amortissement fiscal"
+   [param_colonne]
+    titre="Méthode"
+    fl_aff=non
+    largeur_col=39
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=61,119
+    taille=8,20
+    id=161
+    colonnes_saisie=6
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=natimmo,fisdur,natimmo
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=768
+    fichier="CCIMAIDE"
+   [touches]
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_FisDur_1_Av"
+    diva_apres="Champ_FisDur_1_Ap"
+   [info_bulle]
+   texte="Durée de vie fiscale"
+   [param_colonne]
+    titre="Durée"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=18
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=16
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=15
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=14
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=13
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=12
+[page]
+ numero=11
+ libelle="Fiche zoom"
+ fond="STD"
+ nature=double
+ titre="Nature d'immobilisation"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="GENERALITES"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=106,5
+   taille=66,270
+   id=64
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Axes"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=56,5
+   taille=42,270
+   id=63
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Comptes"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,64
+   id=54
+   wstyle="STD"
+  [texte]
+   texte="Nature d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=40,5
+   taille=9,64
+   id=8
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=72,11
+   taille=9,70
+   id=66
+   wstyle="STD_AFF"
+  [texte]
+   texte="Compte d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=83,11
+   taille=9,70
+   id=85
+   wstyle="STD_AFF"
+  [texte]
+   texte="Compte fournisseur"
+ [champ]
+  [presentation]
+   position=26,71
+   taille=9,32
+   id=61
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=natimmo,natimmo,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+ [champ]
+  [presentation]
+   position=40,71
+   taille=9,160
+   id=56
+   colonnes_saisie=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,lib,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=72,120
+   taille=9,154
+   id=69
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,1
+   saisie=non
+ [champ]
+  [presentation]
+   position=122,120
+   taille=9,154
+   noms="axe1"
+   id=71
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,3
+   saisie=non
+ [champ]
+  [presentation]
+   position=134,120
+   taille=9,154
+   noms="axe2"
+   id=72
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,4
+   saisie=non
+ [champ]
+  [presentation]
+   position=146,120
+   taille=9,154
+   noms="axe3"
+   id=73
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,5
+   saisie=non
+ [champ]
+  [presentation]
+   position=158,120
+   taille=9,154
+   noms="axe4"
+   id=74
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,6
+   saisie=non
+ [champ]
+  [presentation]
+   position=122,11
+   taille=9,70
+   noms="axe1"
+   id=75
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,1
+   saisie=non
+ [champ]
+  [presentation]
+   position=134,11
+   taille=9,70
+   noms="axe2"
+   id=76
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,2
+   saisie=non
+ [champ]
+  [presentation]
+   position=146,11
+   taille=9,70
+   noms="axe3"
+   id=77
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,3
+   saisie=non
+ [champ]
+  [presentation]
+   position=158,11
+   taille=9,70
+   noms="axe4"
+   id=78
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,4
+   saisie=non
+ [champ]
+  [presentation]
+   position=72,83
+   taille=9,36
+   id=79
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cpt,natimmo
+  [param_saisie]
+   obligatoire=oui
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=84,83
+   taille=9,36
+   id=87
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptaux,natimmo
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptAux_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=122,83
+   taille=9,36
+   noms="axe1"
+   id=81
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,axe,natimmo,1
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=134,83
+   taille=9,36
+   noms="axe2"
+   id=82
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,axe,natimmo,2
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=146,83
+   taille=9,36
+   noms="axe3"
+   id=83
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,axe,natimmo,3
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=158,83
+   taille=9,36
+   noms="axe4"
+   id=84
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,axe,natimmo,4
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=84,120
+   taille=9,154
+   id=86
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,2
+   saisie=non
+[page]
+ numero=12
+ fond="STD"
+ nature=double
+ titre="Nature de paiement"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ prec=11
+ suiv=16
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="AMORTISSEMENTS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=58,121
+   id=133
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Paramètres"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,127
+   taille=58,74
+   id=148
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Economique"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,202
+   taille=58,74
+   id=149
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Fiscal"
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=67,127
+   taille=17,149
+   id=91
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="BUDGET_3D"
+ [cadre]
+  [presentation]
+   position=39,127
+   taille=27,74
+   id=141
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="COMPTABLE_3D"
+ [cadre]
+  [presentation]
+   position=39,202
+   taille=27,74
+   id=142
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="XTRACOMPTA_3D"
+ [obj_texte]
+  [presentation]
+   position=42,8
+   taille=9,115
+   id=97
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Méthode d'amortissement"
+ [obj_texte]
+  [presentation]
+   position=53,8
+   taille=9,115
+   id=99
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Durée du plan d'amortissement en années"
+ [obj_texte]
+  [presentation]
+   position=71,8
+   taille=9,115
+   noms="ifrs"
+   id=102
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Plan d'unités d'oeuvre"
+ [multi_choix]
+  [presentation]
+   position=42,131
+   taille=9,67
+   id=105
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,ecotyp,natimmo
+   sequence=20
+   minmaj=majuscules
+  [param_saisie]
+   defaut="0"
+  [param_multi]
+   choix="ccfdmc.dhfi","ECOTYP"
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_EcoTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=54,131
+   taille=9,33
+   noms="dureee"
+   id=107
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,ecodur,natimmo
+  [param_saisie]
+   defaut="0"
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoDur_1_Av"
+   diva_apres="Champ_EcoDur_1_Ap"
+ [champ]
+  [presentation]
+   position=71,131
+   taille=9,33
+   noms="ifrs;planuo"
+   id=108
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,uocode,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   f8=19704
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_UoCode_1_Av"
+   diva_apres="Champ_UoCode_1_Ap"
+ [champ]
+  [presentation]
+   position=71,165
+   taille=9,108
+   noms="ifrs;planuo"
+   id=109
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=x1,lib,x1,7
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [multi_choix]
+  [presentation]
+   position=42,205
+   taille=9,67
+   id=112
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,fistyp,natimmo
+   minmaj=majuscules
+  [param_saisie]
+   defaut="0"
+  [param_multi]
+   choix="ccfdmc.dhfi","FISTYP"
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_FisTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=54,205
+   taille=9,33
+   noms="dureef"
+   id=114
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=natimmo,fisdur,natimmo
+  [param_saisie]
+   defaut="0"
+   esp_si_zero=oui
+  [aide_page]
+   aide=768
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FisDur_1_Av"
+   diva_apres="Champ_FisDur_1_Ap"
+[page]
+ numero=13
+ fond="STD"
+ nature=double
+ titre="Nature de paiement"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ prec=16
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=5
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANT"
+   ordre=1
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=26,144
+   taille=54,131
+   id=27
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=54,131
+   id=26
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,13
+   id=22
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=42,149
+   taille=9,13
+   id=23
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=54,10
+   taille=9,13
+   id=24
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=54,149
+   taille=9,13
+   id=25
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=42,25
+   taille=9,109
+   id=28
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=natimmo,usercr,natimmo
+   format="1"
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,164
+   taille=9,109
+   id=29
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=natimmo,usermo,natimmo
+   format="1"
+   saisie=non
+ [champ]
+  [presentation]
+   position=54,25
+   taille=9,109
+   id=30
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=natimmo,usercrdh,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+ [champ]
+  [presentation]
+   position=54,164
+   taille=9,109
+   id=31
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=natimmo,usermodh,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+ [multi_choix]
+  [presentation]
+   position=66,10
+   taille=9,123
+   id=32
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=natimmo,usercrori,natimmo
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+ [multi_choix]
+  [presentation]
+   position=66,149
+   taille=9,123
+   id=33
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=natimmo,usermoori,natimmo
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+[page]
+ numero=14
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=100001
+[page]
+ numero=15
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=100002
+[page]
+ numero=16
+ fond="STD"
+ titre="Comptabilisation"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ prec=12
+ suiv=13
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=100003
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="COMPTABILISATION"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=157,5
+   taille=54,271
+   id=1000001
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dépréciation"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=100,5
+   taille=52,271
+   id=1000002
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dérogatoire"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=62,5
+   taille=33,271
+   id=1000003
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dotation"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=31,271
+   id=1000004
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Amortissement"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=43,10
+   taille=9,107
+   id=1000021
+   wstyle="STD"
+  [texte]
+   texte="Amortissement des immobilisations"
+ [obj_texte]
+  [presentation]
+   position=79,10
+   taille=9,107
+   id=1000022
+   wstyle="STD"
+  [texte]
+   texte="Dotation aux amortissements"
+ [obj_texte]
+  [presentation]
+   position=116,10
+   taille=9,107
+   id=1000023
+   wstyle="STD"
+  [texte]
+   texte="Provision pour amortissement dérogatoire"
+ [obj_texte]
+  [presentation]
+   position=128,10
+   taille=9,107
+   id=1000024
+   wstyle="STD"
+  [texte]
+   texte="Dotation aux amortissements dérogatoires"
+ [obj_texte]
+  [presentation]
+   position=140,10
+   taille=9,107
+   id=1000025
+   wstyle="STD"
+  [texte]
+   texte="Reprise sur amortissement dérogatoire"
+ [obj_texte]
+  [presentation]
+   position=174,10
+   taille=9,107
+   id=1000026
+   wstyle="STD"
+  [texte]
+   texte="Provision pour dépréciation des immo"
+ [obj_texte]
+  [presentation]
+   position=186,10
+   taille=9,107
+   id=1000027
+   wstyle="STD"
+  [texte]
+   texte="Dotation pour dépréciation"
+ [obj_texte]
+  [presentation]
+   position=198,10
+   taille=9,107
+   id=1000028
+   wstyle="STD"
+  [texte]
+   texte="Reprise de dépréciation"
+ [champ]
+  [presentation]
+   position=43,122
+   taille=9,32
+   id=1000005
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptamo,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptAmo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=43,155
+   taille=9,121
+   id=1000006
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptamo_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=79,122
+   taille=9,32
+   id=1000007
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptdotamo,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotAmo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=79,155
+   taille=9,121
+   id=1000008
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptdotamo_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=128,155
+   taille=9,121
+   id=1000009
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptdotamoderog_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=116,122
+   taille=9,32
+   id=1000017
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptprodro,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptProDro_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=128,122
+   taille=9,32
+   id=1000012
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptdotdro,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotDro_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=140,122
+   taille=9,32
+   id=1000020
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptrepdro,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptRepDro_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=174,122
+   taille=9,32
+   id=1000015
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptprodep,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptProDep_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=186,122
+   taille=9,32
+   id=1000010
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptdotdep,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotDep_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=186,154
+   taille=9,121
+   id=1000011
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptdotdeprec_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=198,122
+   taille=9,32
+   id=1000013
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptdotrep,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotRep_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=116,155
+   taille=9,121
+   id=1000014
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptproamoderog_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=174,155
+   taille=9,121
+   id=1000016
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptprodeprec_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=140,155
+   taille=9,121
+   id=1000018
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptrepamoderog_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=198,154
+   taille=9,121
+   id=1000019
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptrepdeprec_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+[ressources]
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wtrait_chaine="#home"
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wtrait_chaine="#end"
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    wetype_trait=arret
+    warret=5
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_4"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_5"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=6
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Générique"
+    wid_ressource="ZOOMCREATION2"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+;*
+;*		Zoom natures d'immobilisation	surcharges des controles écran											ccez214_sqlu
+;*
+
+;*
+;*		Déclarations
+;*
+
+;
+Include	"cctc000.dhsp"
+
+;
+Public RecordSql "ccrstab.dhoq" natimmo natimmo
+
+;
+Public Record "ddsys.dhsd" rowinfo 	zoomselection
+Public Record "ccfdd.dhsd" x1 		x1
+Public Record "ccfdd.dhsd" ca 		ca
+Public Record "ccfdd.dhsd" C3			C3
+
+
+;*
+;*
+;*
+
+;*
+Procedure Cog_Controle_Compte(&wCpt, &wLib)
+;
+
+1		wCpt		>ccfdd.dhsd		CPT
+1		wLib		>ccfdd.dhsd		LIB
+
+BeginP
+
+	wLib = ' '
+	if Harmony.DataVal <> ' '
+		if Controle_Compte(wCpt, err=9118) < 2
+			wLib = C3.Lib
+		endif
+	endif
+
+EndP
+
+;*
+;*	AMORTISSEMENT 
+
+;*
+Private Procedure Champ_CptAmo_1_Ap
+;
+Beginp
+	Cog_Controle_Compte(natimmo.CptAmo, natimmo.CptAmo_Lib)
+Endp
+
+;*
+;*	DOTATION
+
+;*
+Private Procedure Champ_CptDotAmo_1_Ap
+;
+Beginp
+	Cog_Controle_Compte(natimmo.CptDotAmo, natimmo.CptDotAmo_Lib)
+Endp
+
+;*
+;*	DEROGATOIRE
+
+
+;*
+Private Procedure Champ_CptProDro_1_Ap
+;
+Beginp
+ 	Cog_Controle_Compte(natimmo.CptProDro, natimmo.CptProAmoDerog_Lib)
+Endp
+
+;*
+Private Procedure Champ_CptDotDro_1_Ap
+;
+Beginp
+ 	Cog_Controle_Compte(natimmo.CptDotDro, natimmo.CptDotAmoDerog_Lib)
+Endp
+
+;*	Reprise sur amortissement dérogatoire
+Private Procedure Champ_CptRepDro_1_Ap
+;
+Beginp
+	Cog_Controle_Compte(natimmo.CptRepDro, natimmo.CptRepAmoDerog_Lib)
+Endp
+
+
+;*
+;*	DEPRECIATION
+
+;*	 provision pour dépréciation
+Private Procedure Champ_CptProDep_1_Ap
+;
+Beginp
+  	Cog_Controle_Compte(natimmo.CptProDep, natimmo.CptProDeprec_Lib)
+Endp
+
+;*	 dotation pour dépréciation
+Private Procedure Champ_CptDotDep_1_Ap
+;
+Beginp
+ 	Cog_Controle_Compte(natimmo.CptDotDep, natimmo.CptDotDeprec_Lib)
+Endp
+
+;*	 reprise de dépréciation
+Private Procedure Champ_CptDotRep_1_Ap
+;
+Beginp
+  	Cog_Controle_Compte(natimmo.CptDotRep, natimmo.CptRepDeprec_Lib)
+Endp
+[/diva]
+[diva_base]
+SetModuleInfo('$Id: ccez214_sql.dhsf 26704 2012-10-29 17:43:00Z ms $')
+;>xdiva
+;*
+;*		Zoom natures d'immobilisation																											ccez214
+;*
+
+include	"cctc000.dhsp"
+include  "cctc700.dhsp"
+
+module	"cctm700.dhop"
+module	"cctz214_sql.dhop"
+
+public 	record 		ddsys.dhsd	 	rowinfo 	zoomselection
+
+public	record		CCFDD.dhsd		CA										; dossier, paramètres généraux
+public	record		CCFDD.dhsd		CD										; dossier, paramètres immobilisations
+public	record		CCFDD.dhsd		C3										; intitulé de compte
+public	record		CCFDD.dhsd		C5										; intitulé d'axe			
+public	record		CCFDD.dhsd		X1										; work zoom
+public	record		CCFDD.dhsd		I3										; plan d'unité d'oeuvre
+Public 	RecordSql 	ccrstab.dhoq	NatImmo	NatImmo	 			  	; natures d'immobilisation
+
+
+;*
+Public procedure Champ_Axe_1_Ap
+
+; après code axe
+
+beginp	; Champ_Axe_1_Ap
+
+	X1.Lib(Harmony.DataInd1 + 2) = ' '
+	if NatImmo.Axe(Harmony.DataInd1) <> ' '
+		Controle_Axe(Harmony.DataInd1, NatImmo.Axe(Harmony.DataInd1), conf = false, axetyp = 1, etablissement = false)
+		X1.Lib(Harmony.DataInd1 + 2) = C5.Lib
+	endif
+
+endp		; Champ_Axe_1_Ap
+
+
+;*
+Public procedure Champ_Axe_1_Av
+
+; avant code axe
+
+beginp	; Champ_Axe_1_Av
+
+	if CA.AxeLib(Harmony.DataInd1) = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+	C3XZ.AxeNo = Harmony.DataInd1
+
+endp		; Champ_Axe_1_Av
+
+
+;*
+Public procedure Champ_CptAux_1_Ap
+
+; après compte auxiliaire fournisseur
+
+beginp	; Champ_CptAux_1_Ap
+
+	X1.Lib(2) = ' '
+	if NatImmo.CptAux <> ' '
+		if Controle_Compte(NatImmo.CptAux, cptnat = 4, conf = false, etablissement = false) < 2
+			X1.Lib(2) = C3.Lib
+		endif
+	endif
+
+endp		; Champ_CptAux_1_Ap
+
+
+;*
+Public procedure Champ_Cpt_1_Ap
+
+; après compte d'immobilisation
+
+beginp	; Champ_Cpt_1_Ap
+
+	X1.Lib(1) = ' '
+	if Controle_Compte(NatImmo.Cpt, etablissement = false) < 2
+		X1.Lib(1) = C3.Lib
+	endif
+
+endp		; Champ_Cpt_1_Ap
+
+
+;*
+Public procedure Champ_EcoDur_1_Ap
+
+; après durée de vie économique
+
+beginp	; Champ_EcoDur_1_Ap
+
+	if NatImmo.EcoDur = 0
+		Mes_Alert(19714)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if NatImmo.EcoDur < 0
+		Mes_Alert(19715)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if NatImmo.EcoTyp = 2 and NatImmo.EcoDur < 3
+		Mes_Alert(19716)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+endp		; Champ_EcoDur_1_Ap
+
+
+;*
+Public procedure Champ_EcoDur_1_Av
+
+; avant durée de vie économique
+
+beginp	; Champ_EcoDur_1_Av
+
+	if NatImmo.EcoTyp = 4															; sans amortissement
+		NatImmo.EcoDur = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_EcoDur_1_Av
+
+
+;*
+Public procedure Champ_EcoTyp_1_Ap
+
+; après méthode d'amortissement économique
+
+beginp	; Champ_EcoTyp_1_Ap
+
+	if Harmony.DataModif
+
+		if NatImmo.EcoTyp = 5 and CD.IFRSFL = 1
+			Mes_Alert(7137)
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+
+		Regler_Acces_Ecotyp
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+	endif
+
+	if NatImmo.EcoTyp = 4	|	NatImmo.EcoDur = ' '	|	endif
+	if NatImmo.EcoTyp = 5	|	X1.Lib(7) = ' '		|	endif
+
+endp		; Champ_EcoTyp_1_Ap
+
+
+;*
+Public procedure Champ_FisDur_1_Ap
+
+; après durée de vie fiscale
+
+1		bidon		>CCFDD.dhsd	AMOMANMT
+
+beginp	; Champ_FisDur_1_Ap
+
+	if NatImmo.FisDur = 0
+		Mes_Alert(19714)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if NatImmo.FisDur < 0
+		Mes_Alert(19715)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if NatImmo.FisTyp = 2 and NatImmo.FisDur < 3
+		Mes_Alert(19716)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+endp		; Champ_FisDur_1_Ap
+
+
+;*
+Public procedure Champ_FisDur_1_Av
+
+; avant durée de vie fiscale
+
+beginp	; Champ_FisDur_1_Av
+
+	if NatImmo.FisTyp = 4															; sans amortissement
+		NatImmo.FisDur = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_FisDur_1_Av
+
+
+;*
+Public procedure Champ_FisTyp_1_Ap
+
+; après méthode d'amortissement fiscale
+
+beginp	; Champ_FisTyp_1_Ap
+
+	if Harmony.DataModif
+
+		if NatImmo.FisTyp = 5 and CD.IFRSFL = 1
+			Mes_Alert(7137)
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+
+		if NatImmo.FisTyp <> NatImmo.EcoTyp and NatImmo.EcoTyp <> 2
+			NatImmo.FisTyp = NatImmo.EcoTyp
+			Mes_Alert(7139)
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+
+		Regler_Acces_Fistyp
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+	endif
+
+	if NatImmo.FisTyp = 4	|	NatImmo.FisDur = ' '	|	endif
+
+	if Harmony.Key = K_TAB and NatImmo.FisTyp = 4				; Tabulation et fistyp = 'sans', on boucle sur le 1er champ
+		Harmony.Retour = XmeNext_Premiere_Donnee
+	endif
+
+endp		; Champ_FisTyp_1_Ap
+
+
+;*
+Public procedure Champ_UoCode_1_Ap
+
+; apres saisie plan d'unité d'oeuvre
+
+beginp	; Champ_UoCode_1_Ap
+
+	if Rechercher_PlanUO(Harmony.DataVal) <> 0
+		X1.Lib(7) = ' '
+		Mes_Alert(19719, Harmony.DataVal)
+		Harmony.Retour = XmeNext_Traitement_Avant
+		preturn
+	endif
+	X1.Lib(7) = I3.Lib
+
+endp		; Champ_UoCode_1_Ap
+
+
+;*
+Public procedure Champ_UoCode_1_Av
+
+; avant saisie plan d'unité d'oeuvre
+
+beginp	; Champ_UoCode_1_Av
+	
+	if NatImmo.EcoTyp <> 5															; pas un plan UO
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_UoCode_1_Av
+[/diva]

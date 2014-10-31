@@ -1,0 +1,80 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL lies à la saisie préparation
+;*
+
+<DictionarySql overwrite="gtrsppslr.dhoq" ModuleInfo='$Id$'>
+
+;*
+;*		Saisie Livraison Réception Ligne
+;*
+
+<RecordSql Name=LivRecLigne >
+<Select>
+	LRLigne.* 
+;
+;;*
+;;*		Saisie Livraison Réception Détail
+;;*
+;
+;<RecordSql Name=LivRecDetail Comment='Saisie livraison réception ( détail )'>
+;Public Record A5dd.dhsd		Mz
+;<Select>
+;	LRDetail.*,
+;<From Insert=Yes Update=Yes Delete=Yes>
+;	LRDetail
+;<Where>
+;	LRDetail.Dos = Mz.Dos 
+;	Case Detail_Pour_PrepaNo ( Char TiCod, Int Preparation) 
+;		LRDetail.Ticod = Ticod And LRDetail.PrepaNo = Preparation
+;	Case Detail_Pour_VtlNo	( Int Ventilation) 
+;		LRDetail.VtlNo = Ventilation
+;	Case Detail_PK	( Char TiCod, Int Preparation, Int NoLigne)																		
+;		LRDetail.Ticod = Ticod And LRDetail.PrepaNo = Preparation And LRDetail.Lilg = NoLigne
+;	Case Exists ( Char TiCod, Int Preparation, Int NoLigne)	
+;		LRDetail.Ticod = Ticod And  LRDetail.PrepaNo = Preparation And LRDetail.Lilg = NoLigne
+;<OrderBy>
+;	Case Par_Preparation "Par No de préparation"
+;		LRDetail.Dos, 
+;		LRDetail.Ticod, 
+;		LRDetail.PrepaNo,
+;		LRDetail.Lilg,
+;	Case Par_Ventilation	"Par No de ventilation"
+;		LRDetail.Dos,
+;		LRDetail.VtlNo,
+;
+;;*
+;;*		Saisie Livraison Réception Colis
+;;*
+;
+;<RecordSql Name=LivRecColis Comment='Saisie livraison réception ( colis )'>
+;Public Record A5dd.dhsd		Mz
+;<Select>
+;	LRColis.*,
+;<From Insert=Yes Update=Yes Delete=Yes>
+;	LRColis
+;<Where>
+;	LRColis.Dos = Mz.Dos	
+;	Case Colis_Pour_PrepaNo ( Char TiCod, Int Preparation) 
+;		LRColis.Ticod = Ticod And LRColis.PrepaNo = Preparation
+;	Case Colis_Pour_Lilg	( Char TiCod, Int preparation, Int NoLigne ) 
+;		LRColis.Ticod = Ticod And LRColis.PrepaNo = Preparation	And LRColis.LiLg = NoLigne
+;	Case Colis_Pour_Serie ( Char TiCod, Char Serie ) 
+;		LRColis.Ticod = Ticod And LRColis.Serie = Serie
+;	Case Colis_PK ( Char TiCod, Int Preparation, Int NoLigne, Char Serie, Char NoColis)																		
+;		LRColis.Ticod = Ticod And LRColis.PrepaNo = Preparation And LRColis.Lilg = NoLigne	And LRColis.Serie = Serie And LRColis.Colino = NoColis
+;	Case Exists ( Char TiCod, Int Preparation, Int NoLigne, Char Serie, Char NoColis)																		
+;		LRColis.Ticod = Ticod And LRColis.PrepaNo = Preparation And LRColis.Lilg = NoLigne	And LRColis.Serie = Serie And LRColis.Colino = NoColis
+;<OrderBy>
+;	Case Par_Preparation "Par No de préparation"
+;		LRColis.Dos, 
+;		LRColis.Ticod, 
+;		LRColis.PrepaNo,
+;		LRColis.Lilg,
+;		LRColis.Serie,
+;		LRColis.Colino,
+;	Case Par_NoSerie		"Par No de série"
+; 		LRColis.Dos, 
+;		LRColis.Ticod, 
+;		LRColis.Serie,
+;		LRColis.Colino,
+;

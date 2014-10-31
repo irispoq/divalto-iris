@@ -1,0 +1,24 @@
+;*
+;*    Impression des traites                                             gtpp430
+;*
+
+;*    Log    version   nPmodif      date     modifications
+;*
+;*    Lm       5.1                  03.2001  version initiale en diva
+
+OverWrite "GTTT430.dhop"
+
+Public		Record	GTFDD.dhsd		ENT																; Entêtes
+Public		Record	a5dd.dhsd		MZ																	; Enreg paramètre
+
+;*
+;*   Séquences appelées par gtpp430.dhop
+;*
+
+;*
+Function Char ENT_Critere
+BeginF																									
+	If not ENT.ETB = MZ.ETB | Freturn('N') 
+	Else | Freturn(Standard.ENT_Critere)
+	Endif	
+EndF																											

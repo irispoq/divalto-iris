@@ -1,0 +1,685 @@
+;>xdiva
+;*
+;*		Objet : Intégration des temps Artémis - Programme Cogpp_inttps.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	KIT104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		IntegrerTempsArtemis			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+
+include	gttcz00.dhsp						;déclarations communes
+include	zmapi.dhsp
+
+module	Cogtm_000.dhop						;module de fonctions communes
+module	ccpmfic.dhop
+module	a5pmflash.dhop
+
+
+htmpfile			gtfdd.dhsd	gtfi		gtfi_tps		deleteonexit
+
+public record	gtfdd.dhsd	xq			xq_cog		;enregistrement de travail
+public record	gtfdd.dhsd	xq			xq_cogw		;enregistrement de travail
+public record	gtfdd.dhsd	xq			g3xq			;enregistrement de travail
+
+		 record	ddsys.dhsd	opdir		op				;répertoire
+		 record	ddsys.dhsd	eltdir	el				;élément du répertoire
+
+
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+
+1	list_tps		L
+1	fonc_tps		16
+
+structure	Temps
+	1	tiers	>	gtfdd.dhsd	tiers
+	1	ref	>	gtfdd.dhsd	ref
+	1	des	>	gtfdd.dhsd	des
+	1	axe	>	gtfdd.dhsd	axe
+	1	blqte	>	gtfdd.dhsd	blqte
+	1	pub	>	gtfdd.dhsd	pub
+	1	fadt	>	gtfdd.dhsd	fadt
+	1	dos	>	gtfdd.dhsd	dos
+	1	etb	>	gtfdd.dhsd	etb
+	1	lig						8,0
+endstructure
+
+recorddiva	Temps		Tps
+
+1	list_err		L
+1	err			200
+
+1	fic			L
+1	nblus			L
+1	finfic		L
+1	ligne			5000
+1	sep			1		= ";"
+1	lig			8,0	= 0
+
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+function int Cog_InitialiserVariables
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+beginf
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		if iseek(a5fdos_loc,muser_loc,"B",system.user)
+
+			if not tunnel
+				messagebox("Utilisateur "&left(system.user)&" non défini dans la base Divalto","Alerte",mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= muser_loc.dos
+			mz.etb		= muser_loc.etb
+			mz.depo		= muser_loc.depo
+			mz.mecle		= "Cogee_inttps.dhof"
+			mz.micle		= "Cogii_inttps.dhoi"
+			mz.mtcle		= "Cogtt_inttps.dhop"
+			mz.titre2	= "Intégration des Temps Artémis"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment("Intégration des Temps Artémis")
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	windowshow(sw_maximize)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	;chargement du masque d'impression
+	xmiload mz.micle
+
+	;création des listes
+	if (list_tps := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur système lors de la création de la liste des temps à importer","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur système lors de la création de la liste des temps à importer")
+		freturn(false)
+	endif
+	GetAdressFunction("","CompareTps",fonc_tps)
+	ListMode (list_tps,1,fonc_tps) 
+	if (list_err := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur système lors de la création de la liste des erreurs en importation","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur système lors de la création de la liste des erreurs en importation")
+		freturn(false)
+	endif
+  
+	freturn(true)
+
+endf
+
+;*
+procedure Cog_FinProgramme
+beginp
+
+	Cog_EcritureLivreDeBord("<-- Intégration des Temps Artémis")
+	listdestroy(list_tps)
+	listdestroy(list_err)
+	winclosehandle(fic)
+	programexit
+
+endp
+
+;*
+procedure Cog_AfficherTraitement
+beginp
+
+	;test d'abandon du programme en cours de traitement
+	if getchar()=$E8 and messagebox("Abandon du traitement en cours ?","Confirmation",mb_iconquestion+mb_yesno)=idyes
+		Cog_EcritureLivreDeBord("Abandon utilisateur")
+		Cog_FinProgramme
+	endif
+
+	xmedispv mz.mecle 3 xme_mode_gosub
+	xmeret
+	xmedispv mz.mecle 4 xme_mode_gosub
+	xmeret
+
+endp
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Fonctions de tri
+;*
+
+;*
+Function Long CompareTps(&elem1,&elem2)
+recorddiva	temps		elem1
+recorddiva	temps		elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	= elem1.tiers & elem1.ref
+	cle2	= elem2.tiers & elem2.ref
+
+   freturn(sortcompare(cle1,cle2))
+
+Endf 
+
+
+
+;*
+;	Traitements
+;*
+
+;*	Intégration du gtfi
+function int Cog_IntegrerGtfi
+record	gtfdd.dhsd	xz		xz_loc
+
+beginf
+
+	hclose(gtfi_tps)
+;	xz_loc.fic		= gtfi_tps.name
+;	xz_loc.motcle	= 'UTIINT'
+;	Ping("Status",1)
+;	Ping("g3xz",xz_loc)
+;	Ping("zechange",mz)
+;	ProgramCall("gtpp150.dhop",sw_hide,call_wait)
+	Tunnel_Integration_Piece(gtfi_tps.Name)
+	pongreceive("g3xz",xz_loc)
+	hopen(gtfi_tps,"R")
+
+	freturn(xz_loc.PiNo)
+
+endf
+
+;*
+function int Cog_LigneCoherente
+beginf
+
+	if seek_fou(tps.tiers) <> 0
+		err	= "Fichier "&left(el.Nom)&" - Ligne "&right(tps.lig)&" : Fournisseur "&left(tps.tiers)&" inexistant"
+		Cog_EcritureLivreDeBord(err)
+		listaddend(list_err,err)
+		erreur	= true
+		freturn(false)
+	endif
+
+	if seek_art(tps.ref) <> 0
+		err	= "Fichier "&left(el.Nom)&" - Ligne "&right(tps.lig)&" : Article "&left(tps.ref)&" inexistant"
+		Cog_EcritureLivreDeBord(err)
+		listaddend(list_err,err)
+		erreur	= true
+		freturn(false)
+	endif
+
+	if Seek_C5(1,tps.axe) <> 0
+		err	= "Fichier "&left(el.Nom)&" - Ligne "&right(tps.lig)&" : Axe "&left(tps.axe)&" inexistant"
+		Cog_EcritureLivreDeBord(err)
+		listaddend(list_err,err)
+		erreur	= true
+		freturn(false)
+	endif
+
+	if tps.blqte <= 0
+		err	= "Fichier "&left(el.Nom)&" - Ligne "&right(tps.lig)&" : La quantité doit être supérieure à 0"
+		Cog_EcritureLivreDeBord(err)
+		listaddend(list_err,err)
+		erreur	= true
+		freturn(false)
+	endif
+
+	if tps.pub < 0
+		err	= "Fichier "&left(el.Nom)&" - Ligne "&right(tps.lig)&" : Le prix unitaire ne peut pas être négatif"
+		Cog_EcritureLivreDeBord(err)
+		listaddend(list_err,err)
+		erreur	= true
+		freturn(false)
+	endif
+
+	if Seek_Soc(tps.dos,,,0) <> 0
+		err	= "Fichier "&left(el.Nom)&" - Ligne "&right(tps.lig)&" : Dossier "&left(tps.dos)&" inexistant"
+		Cog_EcritureLivreDeBord(err)
+		listaddend(list_err,err)
+		erreur	= true
+		freturn(false)
+	endif
+
+	if tps.etb <> "" and Seek_Ets(tps.etb) <> 0
+		err	= "Fichier "&left(el.Nom)&" - Ligne "&right(tps.lig)&" : Etablissement "&left(tps.etb)&" inexistant"
+		Cog_EcritureLivreDeBord(err)
+		listaddend(list_err,err)
+		erreur	= true
+		freturn(false)
+	endif
+
+	freturn(true)
+
+endf
+
+;*
+procedure Cog_ValiderEnBl(&pino,mouv_p)
+1	pino	>	gtfdd.dhsd	pino	= 0
+record		gtfdd.dhsd	mouv		mouv_p
+
+record	gtfdd.dhsd	ipar
+record	gtfdd.dhsd	mouv	imouv
+
+beginp
+
+	;entête du fichier pour validation partielle
+	ipar			= ""
+	ipar.Ce1		= "I"
+	ipar.Trait	= "V"
+	ipar.Dos		= tps.dos
+	ipar.Etb		= tps.etb
+	ipar.TiCod	= "F"
+	ipar.PiCod	= 2
+	ipar.PiCodF	= 3
+	ipar.PiNo	= mouv_p.CdNo
+	ipar.PiNoF	= pino
+	hwrite(gtfi_tps,ipar)
+
+	imouv				= mouv_p
+	imouv.Pcod(1)	= 4
+	imouv.BlQte		= tps.blqte
+	imouv.Axe(1)	= tps.axe
+	imouv.Des		= tps.des
+	imouv.Pub		= tps.pub
+	hwrite(gtfi_tps,imouv)
+
+	pino	= Cog_IntegrerGtfi
+
+endp
+
+;*
+procedure Cog_GenererGtfi
+hfile		gtfdd.dhsd	gtfam		gtfam_loc
+record	gtfdd.dhsd	mouv		mouv_loc
+
+1	pino	>	gtfdd.dhsd	pino	= 0
+1	tiers	>	gtfdd.dhsd	tiers	= ""
+
+beginp
+
+	xq_cog.Lib(1)	= "Préparation du passage en bl"
+	Cog_AfficherTraitement
+	
+	listbegin(list_tps)
+	loop listnext(list_tps,Tps)
+
+		xq_cog.Lib(2)	= tps.tiers & " - " & tps.ref
+		Cog_AfficherTraitement
+	
+		if tiers <> tps.tiers
+			pino	= 0
+			tiers	= tps.tiers
+		endif
+
+		;on contrôle la cohérence de la ligne
+		if Cog_LigneCoherente
+
+			;on recherche si une ligne de mouvement peut être livrée
+			gtfam_loc.Key	= "F" & tps.dos & "F" & tps.tiers & tps.ref
+			loop not hread(gtfam_loc,mouv_loc) and gtfam_loc.Key <= "F" & tps.dos & "F" & tps.tiers & tps.ref & $FF
+				if mouv_loc.CdCe4 = "1" and mouv_loc.CdQte >= tps.blqte and mouv_loc.Axe(1) = tps.axe 
+					If mouv_loc.Cog_Date_Debut = " "
+						mouv_loc.Cog_Date_Debut = "19900101"
+					EndIf
+					If mouv_loc.Cog_Date_Fin = " "
+						mouv_loc.Cog_Date_Fin = "99991231"
+					EndIf
+					If tps.fadt in(mouv_loc.Cog_Date_Debut..mouv_loc.Cog_Date_Fin)
+						Cog_ValiderEnBL(pino,mouv_loc)
+						listdeleteandprevious(list_tps)
+						exitloop
+					EndIf
+				endif
+			endloop
+
+		else
+			listdeleteandprevious(list_tps)
+		endif
+		
+	endloop
+
+endp
+
+;*
+procedure Cog_AttribuerDonnee(donnee,valeur)
+1	donnee	4,0
+1	valeur	2000
+
+beginp
+
+	switch donnee
+		case 1
+			tps.ref	= left(valeur)
+		case 2
+			tps.des	= left(valeur)
+		case 3
+			tps.tiers	= left(valeur)
+		case 4
+			tps.axe	= left(valeur)
+		case 5
+			tps.blqte	= valeur
+		case 6
+			tps.pub	= valeur
+		case 7
+			;fdate(tps.fadt,valeur)
+			tps.fadt	= valeur
+		case 8
+			tps.dos	= valeur
+		case 9
+			tps.etb	= left(valeur)
+	endswitch
+
+endp
+
+;*
+procedure Cog_TraiterLigne
+1	car		1				;caractère lu
+1	i			4,0	= 1	;compteur
+1	j			4,0	= 1	;compteur
+1	donnee	4,0	= 1	;donnée à mettre à jour
+1	valeur	2000	= ""
+
+beginp
+
+	tps	= ""
+	loop i <= length(ligne)
+
+		if (car := ansitooem(mid(ligne,i,1))) = sep
+
+			Cog_AttribuerDonnee(donnee,valeur)
+			valeur	= ""
+			j			= 1
+			donnee++
+
+		else	;remplissage d'un champ
+
+			mid(valeur,j,1)	= car
+			j++
+
+		endif
+
+		i++
+
+	endloop
+
+	if valeur <> ""
+		Cog_AttribuerDonnee(donnee,valeur)
+	endif
+
+	if tps <> ""
+		if tps.dos = ""	|	tps.dos	= mz.Dos	|	endif
+		if tps.etb = ""	|	tps.etb	= mz.Etb	|	endif
+		tps.lig	= lig
+		listinsert(list_tps,tps)
+	endif
+
+endp
+
+;*
+procedure IntegrerTempsArtemis
+1	fic_xhar			256
+1	fic_pdf			256
+;1	Chemin_Harmony	256
+;1	Chemin_Windows	256
+beginp
+
+	if xq_cog.Fic = "" or xq_cogw.Fic = ""
+		Cog_EcritureLivreDeBord("Pas de chemin paramétré pour l'intégration des Temps Artémis")
+		erreur	= true
+		preturn
+	endif
+
+	Cog_EcritureLivreDeBord("--> Intégration des Temps Artémis")
+
+	;affichage de la page de traitement
+	xmedispv mz.mecle 2 2
+
+	;lecture du répertoire pour récupérer les fichiers à traiter
+	;Chemin_Harmony = "//u3recw18/divalto/divalto-gir01/cog_echanges/versdivalto"
+	;Chemin_Windows = "\\U3RECW18\DivaltoEchanges\versDIVALTO"
+
+	op				= ""
+	op.racine	= xq_cog.Fic
+	op.prefixe	= soc.Cog_ArtemisFormat
+	op.tri		= 1
+
+	if not DirOpen(op)
+		loop DirRead(op,el) = 0
+		   ;on vérifie que ce n'est pas un répertoire
+		   if not el.flagdir
+
+				if (fic := wincreatefile(xq_cogw.Fic&&"\"&left(el.nom),generic_read,0,0,open_existing,file_attribute_normal,0)) = -1
+					err	= "Erreur : " & wingettexterror(WinGetLastError)
+   				Cog_EcritureLivreDeBord(left(err))
+					listaddend(list_err,err)
+					erreur	= true
+				else
+
+					xq_cog.Lib(1)	= "Traitement du fichier " & el.Nom
+					Cog_AfficherTraitement
+	
+					listerase(list_tps)
+					lig	= 0
+					loop winreadfilerecord(fic,ligne,nblus,finfic,0) and finfic = false
+				
+						if Cog_FiltresOk
+				
+							xq_cog.Lib(2)	= ligne
+							Cog_AfficherTraitement
+
+							lig++
+							Cog_TraiterLigne
+				
+						endif
+				
+					endloop
+					winclosehandle(fic)
+					wincreatedirectory(xq_cogw.Fic&&"\save")
+					winmovefile(xq_cogw.Fic&&"\"&left(el.nom),xq_cogw.Fic&&"\save\"&left(el.nom))
+
+					Cog_GenererGtfi
+
+					;on regarde si des lignes n'ont pas pu être validées en BL
+					listbegin(list_tps)
+					loop listnext(list_tps,tps)
+						err	= "Fichier "&left(el.Nom)&" - Ligne "&right(tps.lig)&" : Quantité insuffisante en commande pour effectuer la livraison"
+						Cog_EcritureLivreDeBord(err)
+						listaddend(list_err,err)
+						erreur	= true
+					endloop
+	
+				endif
+
+			endif
+		endloop
+		dirclose(op)
+	endif
+
+	if listcount(list_err) > 0		;impression des anomalies
+
+		XharviewNoRunXharview
+		printbegin
+
+		g3xq.LogDh		= time(7)
+		g3xq.WinTitre	= "Anomalies en intégration des temps Artémis"
+		seek_soc(mz.Dos)
+		xmiprint(mz.MiCle,1)
+
+		listbegin(list_err)
+		loop listnext(list_err,err)
+			g3xq.Fic	= err
+			xmiprint(mz.MiCle,2)
+		endloop
+
+		printend
+		XharviewRunXharview
+		XharviewGetFileXharview(g3xq.Fic)
+
+	 	fic_xhar = xq_cogw.Fic && "\" & filenamelastsegment(g3xq.Fic)
+		if winmovefile(left(g3xq.Fic),fic_xhar) = false
+			err	= "Erreur en édition de la liste des erreurs : " & WinGetTextError(wingetlasterror)
+			if not tunnel
+				messagebox(left(err),"Alerte",mb_iconexclamation)
+			endif
+			Cog_EcritureLivreDeBord(left(err))
+		else
+			;on transforme en pdf
+			if MapiOpen = 0 	
+				if MapiTestSiConvertPDF <> 0
+					wincreatedirectory(xq_cogw.Fic&&"\rapports")
+					fic_pdf	= xq_cogw.Fic && "\rapports\rapport_" & time(7) && ".pdf"
+					if MapiConvertPDF(fic_xhar,fic_pdf) = 0
+						;xq_cogw.Fic	= fic_pdf
+						a5_flash_envoi(soc.Cog_ArtemisFlash,mz.Etb,"",0)
+					endif
+				endif
+				MapiClose
+			endif
+		endif
+		windeletefile(fic_xhar)
+
+	endif
+	
+	xmeret
+
+	listdestroy(list_tps)
+	listdestroy(list_err)
+	Cog_EcritureLivreDeBord("<-- Intégration des Temps Artémis")
+
+endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+procedure Cog_SaisiePage1
+1 fin		1,0	= 0
+
+beginp
+
+	xmedispv(mz.mecle,1,xme_mode_goto)
+
+;	xmeinput(mz.mecle,1,0,xme_mode_goto)
+;
+;	do
+;	                                
+;		switch harmony.key            ;tests des causes de l'interruption
+;	
+;		case harmony.dataarret = 1000	;ouverture de sélection de répertoire
+;			WinSHBrowseForFolder(0,xq_cog.Fic,"Import Artémis","Sélectionnez le répertoire d'import",BIF_STATUSTEXT+BIF_EDITBOX,xq_cog.Fic)
+;	
+;		case harmony.dataarret = 8002
+;			if Harmony.Sourisbout = Right_Button
+;				Zoom_Call()
+;			elsif Harmony.Sourisclic = Double_Click
+;				Harmony.Retour = Xmenext_Simulation_Touche
+;				Harmony.Cplretour = k_f8
+;			endif
+;		
+;		case k_f7                ;zoom généralisé
+;			Zoom_Call()
+;		
+;		case k_f8                ;zooms
+;			Zoom_Call(harmony.arret)
+;	
+;		case k_f9                ;abandon
+;			fin = 1
+;	
+;		case vsw in (k_f10,k_tab,k_return,k_down)
+			if messagebox("Intégration des Temps Artémis ?","Confirmation",mb_yesno+mb_iconquestion)=idyes
+				
+				IntegrerTempsArtemis
+	
+				if erreur
+					messagebox("Des erreurs ont été détectées.|Consultez le livre de bord","Alerte",mb_iconexclamation)
+				endif
+	
+				fin=1
+	
+			endif
+
+;		endswitch
+;
+;	while fin = 0         ;suite de la saisie
+;		xmenext(harmony.retour,harmony.cplretour)
+;	wend
+		
+endp
+
+
+;*
+;	Programme principal
+;*
+main
+	
+	if pingreceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	endif
+
+	if Cog_InitialiserVariables
+
+		if not tunnel
+	
+			GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+			procedurecall(AdrProc)
+			Cog_SaisiePage1
+	
+		else	;programme piloté
+	
+			IntegrerTempsArtemis
+	
+		endif
+
+	endif

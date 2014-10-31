@@ -1,0 +1,726 @@
+; >xdiva
+
+;*
+;*    Modèle de traitement du générateur de ZOOM
+
+HFileVersion	cog_echange.dhsd	Cog_ParDivEch
+
+Hfile		cog_echange.dhsd				Cog_ParDivEch		Cog_ParDivEch
+
+Record	ddsys.dhsd						COLUMNINFO														; Informations colonne
+Public	Record	ddsys.dhsd			Zoom
+Public	Record	cog_echange.dhsd	cog_parazones
+Record	cog_echange.dhsd	cog_parazones	GeneTblSaveParZone
+
+1	lIdMNEMO		L
+1	lIdENREG		L
+1	lIdCHAMP		L
+1	lTicDico		L
+1	aENRLST		100
+1  aReponse		8096
+1	aDico_Nom	32
+1	aNIVEAUDICO	4,0
+1	bPilot		B = False
+1	aDICO			32
+1	aMNEMO		32
+1	aENREG		32
+1	nTypFormat	2,0
+1	nIdNum		>cog_echange.dhsd		IdNum
+1	aIdLib		>cog_echange.dhsd		IdLib
+
+Include	Cog_Tc_DivImport.dhsp
+
+Module	Cog_Gdiva.dhop
+Module	XZoom.dhop
+
+;*
+;* Fonctions et procédures
+;*
+
+
+
+
+;*
+;* Procedures 
+;*
+
+;*
+Public Procedure COG_PRECH_ENREG
+Beginp
+	ListErase(lIdENREG)
+	If DDInterface(DD_FILEFIND, lTicDico, cog_parazones.MNEMO , aREPONSE) = 0
+		If DDInterface(DD_TABLEBEGIN, lTicDico, , aREPONSE) = 0
+			aENRLST = HmpSeek(aREPONSE, "Nom")
+			If aENRLST <> " "
+				aENRLST = left(aENRLST) & ";" & aENRLST
+				ListInsert(lIdENREG, aENRLST)
+			EndIf
+			Loop DDInterface(DD_TABLENEXT, lTicDico, , aREPONSE) = 0 
+				aENRLST = HmpSeek(aREPONSE, "Nom")
+				If aENRLST <> " "
+					aENRLST = left(aENRLST) & ";" & aENRLST
+					ListInsert(lIdENREG, aENRLST)
+				EndIf
+			EndLoop
+		EndIf
+	EndIf
+Endp
+
+;*
+Procedure	Cog_PGest_ZoneTableau(Nom_Donnee, Position, nMode, NbDimensions)
+1	Position				6,0		;Position de la donnée
+1	Nom_Donnee			32			;Nom de la donnée
+1	aNomDonneeFinal	32
+1	nMode					1,0 = 1	; Mode 1 = chargement multi choix, 2 = chargement table ou info zones
+
+1	NbDimensions		2,0	;nombre de dimensions
+1	Dico_Dimensions	4,0*4	;Dimensions
+1	Dico_Enjambees		6,0*4	;Enjambées
+
+1	i		4,0	;Dimension 1  
+1	j		4,0	;Dimension 2  
+1	k		4,0	;Dimension 3  
+1	l		4,0	;Dimension 4  
+Beginp 
+	Dico_Dimensions(1) = HmpSeek(aREPONSE,"Dimensions1")
+	Dico_Dimensions(2) = HmpSeek(aREPONSE,"Dimensions2")
+	Dico_Dimensions(3) = HmpSeek(aREPONSE,"Dimensions3")
+	Dico_Dimensions(4) = HmpSeek(aREPONSE,"Dimensions4")
+	Dico_Enjambees(1)  = HmpSeek(aREPONSE,"Enjambees1")
+	Dico_Enjambees(2)  = HmpSeek(aREPONSE,"Enjambees2")
+	Dico_Enjambees(3)  = HmpSeek(aREPONSE,"Enjambees3")
+	Dico_Enjambees(4)  = HmpSeek(aREPONSE,"Enjambees4")
+
+	switch2 NbDimensions
+	case 1
+		for i = 1 to Dico_Dimensions(1)
+			cog_parazones.position	= Position + (i-1) * Dico_Enjambees(1)
+			aNomDonneeFinal			= left(Nom_Donnee) & "(" & right(i) & ")"
+			cog_parazones.champ 		= aNomDonneeFinal
+			If nMode = 1
+				aENRLST = left(aNomDonneeFinal) & ";" & aNomDonneeFinal
+				listinsert(lIdCHAMP,aENRLST)
+			Elsif nMode = 2
+				HWrite(Cog_ParDivEch, cog_parazones)
+			EndIf
+		next
+	
+	case 2
+		for i = 1 to Dico_Dimensions(1)
+			for j = 1 to Dico_Dimensions(2)
+				cog_parazones.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2)
+				aNomDonneeFinal			= left(Nom_Donnee) & "(" & right(i) & "," & right(j) & ")"
+				cog_parazones.champ 		= aNomDonneeFinal
+				If nMode = 1
+					aENRLST = left(aNomDonneeFinal) & ";" & aNomDonneeFinal
+					listinsert(lIdCHAMP,aENRLST)
+				Elsif nMode = 2
+					HWrite(Cog_ParDivEch, cog_parazones)
+				EndIf
+			next
+		next
+	
+	case 3
+		for i = 1 to Dico_Dimensions(1)
+			for j = 1 to Dico_Dimensions(2)
+				for k = 1 to Dico_Dimensions(3)
+					cog_parazones.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2) + (k-1) * Dico_Enjambees(3)
+					aNomDonneeFinal			= left(Nom_Donnee) & "(" & right(i) & "," & right(j) & "," & right(k) & ")"
+					cog_parazones.champ 		= aNomDonneeFinal
+					If nMode = 1
+						aENRLST = left(aNomDonneeFinal) & ";" & aNomDonneeFinal
+						listinsert(lIdCHAMP,aENRLST)
+					Elsif nMode = 2
+						HWrite(Cog_ParDivEch, cog_parazones)
+					EndIf
+				next
+			next
+		next
+	
+	case 4
+		for i = 1 to Dico_Dimensions(1)
+			for j = 1 to Dico_Dimensions(2)
+				for k = 1 to Dico_Dimensions(3)
+					for l = 1 to Dico_Dimensions(4)
+						cog_parazones.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2) + (k-1) * Dico_Enjambees(3) + (l-1) * Dico_Enjambees(4)
+						aNomDonneeFinal			= left(Nom_Donnee) & "(" & right(i) & "," & right(j) & "," & right(k) & "," & right(l) & ")"
+						cog_parazones.champ 		= aNomDonneeFinal
+						If nMode = 1
+							aENRLST = left(aNomDonneeFinal) & ";" & aNomDonneeFinal
+							listinsert(lIdCHAMP,aENRLST)
+						Elsif nMode = 2
+							HWrite(Cog_ParDivEch, cog_parazones)
+						EndIf
+					next
+				next
+			next
+		next
+	
+	endswitch
+Endp
+
+;*
+Public Procedure COG_PRECH_ZONES
+1	nNbDimensions		2,0	;nombre de dimensions
+1	nPosit				4,0	; position
+Beginp
+	ListErase(lIdCHAMP)
+	If DDInterface(DD_TABLEFIND, lTicDico, cog_parazones.ENREG , aREPONSE) = 0
+		If DDInterface(DD_DATABEGIN, lTicDico, , aREPONSE) = 0
+			aENRLST = HmpSeek(aREPONSE, "Nom")
+			nPosit  = HmpSeek(aREPONSE, "Position")
+			If aENRLST <> " "
+				If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+					Cog_PGest_ZoneTableau(aENRLST, nPosit, 1, nNbDimensions)
+				Else
+					aENRLST = left(aENRLST) & ";" & aENRLST
+					ListInsert(lIdCHAMP, aENRLST)
+				EndIf
+			EndIf
+			Loop DDInterface(DD_DATANEXT, lTicDico, , aREPONSE) = 0 
+				aENRLST = HmpSeek(aREPONSE, "Nom")
+				nPosit  = HmpSeek(aREPONSE, "Position")
+				If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+					Cog_PGest_ZoneTableau(aENRLST, nPosit, 1, nNbDimensions)
+				Else
+					If aENRLST <> " "
+						aENRLST = left(aENRLST) & ";" & aENRLST
+						ListInsert(lIdCHAMP, aENRLST)
+					EndIf
+				EndIf
+			EndLoop
+		EndIf
+	EndIf
+Endp
+
+;*
+Public Procedure COG_PRECH_INFOZONES
+1	nNiveau	1,0
+1	nNbDimensions		2,0	;nombre de dimensions
+1	nPosL					2,0
+1	nLgL					2,0
+1	nNbDimPar			2,0
+Beginp
+	If DDInterface(DD_TABLEFIND, lTicDico, cog_parazones.ENREG , aREPONSE) = 0
+		If (nPosL := String("(", cog_parazones.champ)) > 0
+			nLgl	= String(")", cog_parazones.champ)
+			nLgl = Max(1, nLgl - nPosL)
+			nNbDimPar = nMid(cog_parazones.champ, (nPosL+1), nLgl, 0)
+			cog_parazones.CHAMP = Mid(cog_parazones.CHAMP, 1, (nPosL-1))
+		Else
+			nPosL = Length(cog_parazones.CHAMP)
+			nNbDimPar = 0
+		EndIf
+		If DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP, aREPONSE) = 0
+			cog_parazones.Lib		= HmpSeek(aREPONSE, "Libelle")
+			cog_parazones.natur	= HmpSeek(aREPONSE, "Nature")
+			cog_parazones.vdec	= HmpSeek(aREPONSE, "NbDecimales")
+			nNiveau 					= HmpSeek(aREPONSE, "Niveau")
+			If nNiveau = 1
+				cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
+				If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0 Or nNbDimPar > 0
+					Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+				ENdIf
+				cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
+			Else
+				DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP, aREPONSE, 2)
+				cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
+				If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0  Or nNbDimPar > 0
+					Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+				EndIf
+				cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
+			EndIf
+		EndIf
+	EndIf
+Endp
+
+;*
+Public Procedure COG_PRECH_MNEMO(aDICO)
+1	aDICO		32
+Beginp
+	ListErase(lIdMNEMO)
+	If DDInterface(DD_OPEN, lTicDico, aDICO, aReponse) <> 0
+    	DDInterface(DD_GETERROR,lTicDico, " ", aREPONSE, aNIVEAUDICO) 
+		MessageBox("Impossible d'ouvrir le Dictionnaire|" & left(aREPONSE), 'Abandon')
+		zoom.OK = 'A'
+	ElsIf DDInterface(DD_FILEBEGIN, lTicDico, , aREPONSE) = 0
+		aENRLST = HmpSeek(aREPONSE, "Nom")
+		If aENRLST <> " "
+			aENRLST = left(aENRLST) & ";" & aENRLST
+			ListInsert(lIdMNEMO, aENRLST)
+		EndIf
+		Loop DDInterface(DD_FILENEXT, lTicDico, , aREPONSE) = 0 
+			aENRLST = HmpSeek(aREPONSE, "Nom")
+			If aENRLST <> " "
+				aENRLST = left(aENRLST) & ";" & aENRLST
+				ListInsert(lIdMNEMO, aENRLST)
+			EndIf
+		EndLoop
+	EndIf
+Endp
+
+;*
+Public Procedure COG_Genere_Table
+Record	cog_echange.dhsd	cog_parazones	cog_parazonesL
+1	nNiveau				1,0
+1	nNbDimensions		2,0	;nombre de dimensions
+Beginp
+	If DDInterface(DD_TABLEFIND, lTicDico, cog_parazones.ENREG , aREPONSE) = 0
+		If DDInterface(DD_DATABEGIN, lTicDico, , aREPONSE) = 0
+			cog_parazonesl				= cog_parazones
+			cog_parazonesl.champ 	= HmpSeek(aREPONSE, "Nom")
+			If Hseek(Cog_ParDivEch, cog_parazones, "B" & nIdNum & cog_parazonesl.dico & cog_parazonesl.champ)
+				cog_parazones.ce1			= "1"
+				cog_parazones.idnum		= nIdNum
+				cog_parazones.idlib		= aIdLib
+				cog_parazones.dico		= cog_parazonesl.dico
+				cog_parazones.enreg		= cog_parazonesl.enreg
+				cog_parazones.mnemo		= cog_parazonesl.mnemo
+				cog_parazones.UserCr		= system.User
+				cog_parazones.UserCrDh	= Time(7)
+				cog_parazones.champ		= cog_parazonesl.champ		
+				cog_parazones.Lib			= HmpSeek(aREPONSE, "Libelle")
+				cog_parazones.natur		= HmpSeek(aREPONSE, "Nature")
+				cog_parazones.vdec		= HmpSeek(aREPONSE, "NbDecimales")
+				nNiveau = HmpSeek(aREPONSE, "Niveau")
+				If nNiveau = 1
+					cog_parazones.POSITION	= HmpSeek(aREPONSE, "Position")
+					cog_parazones.LONGUEUR	= HmpSeek(aREPONSE, "LONGUEUR")
+					If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+						Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+					ENdIf
+				Else
+					DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP , aREPONSE, 2)
+					cog_parazones.LONGUEUR	= HmpSeek(aREPONSE, "LONGUEUR")
+					cog_parazones.POSITION	= HmpSeek(aREPONSE, "Position")
+					If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+						Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+					ENdIf
+				EndIf
+				If nNbDimensions = 0
+					HWrite(Cog_ParDivEch, cog_parazones)
+				EndIf
+			EndIf
+			Loop DDInterface(DD_DATANEXT, lTicDico, , aREPONSE) = 0 
+				cog_parazonesl.champ 			= HmpSeek(aREPONSE, "Nom")
+				If Hseek(Cog_ParDivEch, cog_parazones, "B" & nIdNum & cog_parazonesl.dico & cog_parazonesl.champ)
+					cog_parazones.ce1			= "1"
+					cog_parazones.idnum		= nIdNum
+					cog_parazones.idlib		= aIdLib
+					cog_parazones.dico		= cog_parazonesl.dico
+					cog_parazones.enreg		= cog_parazonesl.enreg
+					cog_parazones.mnemo		= cog_parazonesl.mnemo
+					cog_parazones.UserCr		= system.User
+					cog_parazones.UserCrDh	= Time(7)
+					cog_parazones.champ		= cog_parazonesl.champ		
+					cog_parazones.Lib			= HmpSeek(aREPONSE, "Libelle")
+					cog_parazones.natur		= HmpSeek(aREPONSE, "Nature")
+					cog_parazones.vdec		= HmpSeek(aREPONSE, "NbDecimales")
+					nNiveau = HmpSeek(aREPONSE, "Niveau")
+					If nNiveau = 1
+						cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
+						cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
+						If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+							Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+						ENdIf
+					Else
+						DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP , aREPONSE, 2)
+						cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
+						cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
+						If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+							Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+						ENdIf
+					EndIf
+					If nNbDimensions = 0
+						HWrite(Cog_ParDivEch, cog_parazones)
+					EndIf
+				EndIf
+			EndLoop
+			cog_parazones				= cog_parazonesl
+		EndIf
+	EndIf
+Endp
+
+;* Pt arret 200 : génération table
+Procedure COG_P200_GT
+1	sPARRUN	S
+Beginp
+	If nIdNum = " "
+		MessageBox("Vous devez associer le paramétrage de zone à une table identifiée pour celà appelez ce zoom depuis le paramétrage des tables", "Info")
+		Preturn
+	EndIf
+
+	XmeSetAttribut("COG_AD_ZONE", AN_VISIBILITE, AV_CACHE)
+	If bPilot = True
+		cog_parazones = GeneTblSaveParZone
+	EndIf
+	If Cog_XmeInput(zoom.Msqecran, 2, , "ZOOMCREATION") = 0
+		COG_Genere_Table
+		ZoomReactualiserListe
+	EndIf
+	Xmeret
+Endp
+
+;*
+;* Procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomDebut																					; Initialisation du zoom
+1	aPARRUN	88 = " "
+BeginP																											; ZoomDebut
+	zoom.Titrefixe = "Divalto : Paramétrage des zones à importer"
+
+	; Charge dico
+	Cog_DivImp_Load_Dico
+	cog_parazones.dico = cDAVDIC
+
+	; Charge mnémo
+	lIdMNEMO = ListGetId("COG_MNEMO")
+	COG_PRECH_MNEMO(cDAVDIC)
+
+	; Tables
+	lIdENREG = ListGetId("COG_ENREG")
+	ListErase(lIdENREG)
+
+	; Zones
+	lIdCHAMP = ListGetId("COG_CHAMP")
+	ListErase(lIdCHAMP)
+
+	If PingReceiveAndDelete("COG_RUN_PZ", aPARRUN) = 0
+		cog_parazones.dico		= HmpSeek(aPARRUN, "DICO")	| aDICO = cog_parazones.dico
+		cog_parazones.mnemo	= HmpSeek(aPARRUN, "MNEMO") | aMNEMO = cog_parazones.mnemo	
+		cog_parazones.enreg	= HmpSeek(aPARRUN, "ENREG") | aENREG = cog_parazones.enreg
+		nTypFormat				= HmpSeek(aPARRUN, "FORMAT")
+		cog_parazones.idnum	= HmpSeek(aPARRUN, "IDNUM") | nIdNum = cog_parazones.idnum
+		cog_parazones.IdLib	= HmpSeek(aPARRUN, "IDLIB") | aIdLib = cog_parazones.IdLib
+		bPilot = True
+		GeneTblSaveParZone = cog_parazones
+	EndIf
+
+EndP																												; ZoomDebut
+
+;*
+Public Procedure ZoomAbandon																				; Abandon du zoom
+BeginP																											; ZoomAbandon
+	
+EndP																												; ZoomAbandon
+
+;*
+Public Procedure ZoomValidation																			; Validation du zoom
+BeginP																											; ZoomValidation
+	
+EndP																												; ZoomValidation
+
+;*
+Public Procedure ZoomFin																					; Traitements finaux du zoom
+BeginP
+	ListDestroy(lIdMNEMO)
+	ListDestroy(lIdDICO)
+	
+EndP																												; ZoomFin
+
+;*
+;* Procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation																				; Traitements avant l'entrée en création
+BeginP																											; ZoomCreation
+
+	XmeSetAttribut("COG_AD_ZONE", AN_VISIBILITE, AV_VISIBLE)	
+	
+	cog_parazones.ce1		= "1"
+	cog_parazones.UserCr	= system.User
+	cog_parazones.UserCrDh= Time(7)
+	cog_parazones.actif	= 2
+	
+	If (cog_parazones.idnum := nIdNum) = " "
+		MessageBox("Vous devez associer le paramétrage de zone à une table identifiée pour celà appelez ce zoom depuis le paramétrage des tables", "Info")
+		zoom.Ok = "I"
+	EndIf
+
+EndP																												; ZoomCreation
+
+;*
+Public Procedure ZoomDuplication																			; Traitements avant l'entrée en duplication
+BeginP																											; ZoomDuplication
+	
+EndP																												; ZoomDuplication
+
+;*
+Public Procedure ZoomApresCleCreation																	; Génération de la clé en création
+BeginP																											; ZoomApresCleCreation
+EndP																												; ZoomApresCleCreation
+
+;*
+Public Procedure ZoomCreationRes																			; Réservation d'entités complémentaires en création
+BeginP																											; ZoomCreationRes	
+	
+EndP	
+																								; ZoomCreationRes
+
+;*
+Public Procedure ZoomAvantWrite																			; Traitements avant écriture
+BeginP																											; ZoomAvantWrite
+	If string("(", cog_parazones.champ) <> 0
+		zoom.Ok = 'I'
+		ZoomReactualiserListe
+	EndIf
+EndP																												; ZoomAvantWrite
+
+;*
+Public Procedure ZoomApresCreation																		; Compte-rendu de la création
+BeginP																											; ZoomApresCreation
+	
+EndP																												; ZoomApresCreation
+
+;*
+Public Procedure ZoomModification																		; Traitements avant l'entrée en modification
+
+BeginP																											; ZoomModification
+	
+	
+EndP																												; ZoomModification
+
+;*
+Public Procedure ZoomModificationRes																	; Réservation d'entités complémentaires en modification
+BeginP																											; ZoomModificationRes
+EndP																												; ZoomModificationRes
+
+;*
+Public Procedure ZoomAvantRewrite																		; Traitements avant réécriture
+BeginP																											; ZoomAvantRewrite
+
+	cog_parazones.UserMo	= system.User
+	cog_parazones.UserMoDh= Time(7)
+
+EndP																												; ZoomAvantRewrite
+
+;*
+Public Procedure ZoomApresModification																	; Compte-rendu de la modification
+BeginP																											; ZoomApresModification
+	
+EndP																												; ZoomApresModification
+
+;*
+Public Procedure ZoomSuppression																			; Traitements avant l'entrée en suppression
+BeginP																											; ZoomSuppression
+
+
+EndP																												; ZoomSuppression
+
+;*
+Public Procedure ZoomSuppressionRes																		; Réservation d'entités complémentaires en suppression
+BeginP																											; ZoomSuppressionRes
+	
+EndP																												; ZoomSuppressionRes
+
+;*
+Public Procedure ZoomAvantDelete																			; Traitements avant suppression
+BeginP																											; ZoomAvantDelete
+	
+EndP																												; ZoomAvantDelete
+
+;*
+Public Procedure ZoomApresSuppression																	; Compte-rendu de la suppression
+BeginP																											; ZoomApresSuppression
+	
+EndP																												; ZoomApresSuppression
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsultFiche
+
+BeginP																											; ZoomAvantConsultFiche
+
+	If nTypFormat <> cFormatCsv
+		XmeSetAttribut("Cog_FCsv", An_Visibilite, Av_Grise)
+	Else
+		XmeSetAttribut("Cog_FCsv", An_Visibilite, Av_Visible)
+	Endif
+	If nTypFormat <> cFormatFixe
+		XmeSetAttribut("Cog_FFixe", An_Visibilite, Av_Grise)
+	Else
+		XmeSetAttribut("Cog_FFixe", An_Visibilite, Av_Visible)
+	Endif
+
+
+EndP																												; ZoomAvantConsultFiche
+
+
+;*
+Public Procedure ZoomAvantConsultListe
+
+BeginP																											; ZoomAvantConsultListe
+
+
+EndP																												; ZoomAvantConsultListe
+
+;*
+Public Procedure ZoomConsultFiche																		; Traitement après consultation d'une fiche
+BeginP																											; ZoomConsultFiche
+
+		switch Harmony.Key
+
+		endswitch
+
+		Switch2 harmony.DataArret
+			Case 200					; Générer une table
+				COG_P200_GT
+		EndSwitch
+	
+EndP																												; ZoomConsultFiche
+
+;*
+Public Procedure ZoomConsultListe																		; Traitement après consultation des fiches en mode liste
+BeginP																											
+
+		switch Harmony.Key
+
+		endswitch
+	
+		Switch2 harmony.DataArret
+			Case 200					; Générer une table
+				COG_P200_GT
+		EndSwitch
+EndP																												
+
+;*
+Public Procedure ZoomEnteteTableau
+BeginP
+	
+
+EndP
+
+;*
+Public Procedure ZoomAvantInput																			; Traitement avant entrée clavier
+BeginP																											
+	
+
+EndP																												
+
+;*
+public procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+beginp
+
+	;on ne fait pas l'affectation dans g3xz ici car incompatible avec gestion code adresse
+												
+	switch Harmony.Key
+	
+
+	case 	Harmony.DataArret = 8002
+		if Harmony.Sourisbout = Right_Button
+		elsif Harmony.Sourisclic = Double_Click
+			Harmony.Retour = Xmenext_Simulation_Touche
+			Harmony.Cplretour = K_F8
+		endif
+
+;	case 	Harmony.DataArret in(9000..9999,11000..65000)				; Appel de zoom  en dernier
+	case 	vsw = K_F8 or Harmony.DataArret in(9000..9999,11000..65000)				; Appel de zoom  en dernier
+
+	endswitch
+
+EndP																												; ZoomArret
+
+;*
+Public Procedure ZoomFiltreAvantValeur																	; Traitement avant la saisie d'une valeur dans la grille des filtres
+BeginP																											; ZoomFiltreAvantValeur
+	
+EndP																												; ZoomFiltreAvantValeur
+
+;*
+Public Procedure ZoomFiltreApresValeur																	; Traitement après la saisie d'une valeur dans la grille des filtres
+BeginP																											; ZoomFiltreApresValeur
+	
+EndP																												; ZoomFiltreApresValeur
+
+;*
+;* Procedures liées à la lecture du fichier
+;*
+
+;*
+Public Procedure ZoomApresCle1																			; Génération de la clé i
+BeginP																											; ZoomApresCle1
+   If bPilot = False
+		zoom.Cle 	= [ 'C' cog_parazones.DICO]
+	   zoom.Clemin = [ 'C' cog_parazones.DICO $00]
+	   zoom.Clemax = [ 'C' cog_parazones.DICO $FF]	
+	Else
+		zoom.Cle 	= [ 'F' nIdNum ]
+	   zoom.Clemin = [ 'F' nIdNum $00]
+	   zoom.Clemax = [ 'F' nIdNum $FF]	
+	EndIf
+EndP																												; ZoomApresCle1
+
+;*
+Public Procedure ZoomApresRead1																			; Traitement après lecture clé i
+BeginP																											; ZoomApresRead1
+	
+	
+EndP																												; ZoomApresRead1
+
+;*
+Public Procedure ZoomApresCle2																			; Génération de la clé i
+BeginP																											; ZoomApresCle1
+   If bPilot = False
+	   zoom.Cle 	= [ 'B' ]
+	   zoom.Clemin = [ 'B' $00]
+	   zoom.Clemax = [ 'B' $FF]	
+	Else
+		zoom.Cle 	= [ 'B' nIdNum aENREG cog_parazones.CHAMP]
+	   zoom.Clemin = [ 'B' nIdNum aENREG cog_parazones.CHAMP $00]
+	   zoom.Clemax = [ 'B' nIdNum aENREG $FF]	
+	EndIf
+EndP																												; ZoomApresCle1
+
+;*
+Public Procedure ZoomApresRead2																			; Traitement après lecture clé i
+BeginP																											; ZoomApresRead1
+	
+	
+EndP																												; ZoomApresRead1
+
+;*
+;* Procedures d'impression
+;*
+
+;*
+Public Procedure ZoomDebutListe																			; Traitement avant l'impression
+BeginP																											; ZoomDebutListe
+	
+EndP																												; ZoomDebutListe
+
+;*
+Public Procedure ZoomAvantDetail																			; Traitement avant l'impression d'un bloc détail en mode liste
+BeginP																											; ZoomAvantDetail
+	
+EndP																												; ZoomAvantDetail
+
+;*
+Public Procedure ZoomApresDetail																			; Traitement après l'impression d'un bloc détail en mode liste
+BeginP																											; ZoomApresDetail
+	
+EndP																												; ZoomApresDetail
+
+;*
+Public Procedure ZoomAvantBlocFin																		; Traitement avant l'impression du bloc de fin en mode liste
+BeginP																											; ZoomAvantBlocFin
+	
+EndP																												; ZoomAvantBlocFin
+
+;*
+Public Procedure ZoomApresBlocFin																		; Traitement après l'impression du bloc de fin en mode liste
+BeginP																											; ZoomApresBlocFin
+	
+EndP																												; ZoomApresBlocFin
+
+;*
+Public Procedure ZoomFinListe																				; Traitement après l'impression
+BeginP																											; ZoomFinListe
+	
+EndP																												; ZoomFinListe
+

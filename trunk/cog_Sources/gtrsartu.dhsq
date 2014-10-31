@@ -1,0 +1,123 @@
+<DictionarySql overwrite="gtrsart.dhoq" ModuleInfo='$Id: gtrsartu.dhsq 53 2012-08-06 08:21:23Z s.renaudineau $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFAT
+;*		Surcharge des enregistrements pour faire apparaître les nouvelles zones
+;*
+
+;*
+;*		Article						ART
+;*
+
+<RecordSql Name=Article>
+Public 	Record 	CCFDD.dhsd	CZ
+<SELECT>
+	ART.*,
+	NATI.LIB,
+	CompteImmoAch.LIB,
+	CompteImmoSt.LIB
+<LEFTJOIN Name='Zoom' DataBase=DCPT>
+	CCFDD.DHSD HD AS NATI
+	ON ( NATI.Dos = CASE WHEN CZ.TabTyp(11) = 2 THEN 999 ELSE MZ.Dos END) and NATI.NatImmo = ART.NatImmo and NATI.Ce1 = 'D'
+<LEFTJOIN name='Zoom' DataBase=DCPT>
+	CCFDD.dhsd C3 as CompteImmoAch
+	ON CompteImmoAch.Dos = ART.Dos AND CompteImmoAch.Cpt = ART.Cog_CptIA AND CompteImmoAch.CE1 = '3'
+<LEFTJOIN name='Zoom' DataBase=DCPT>
+	CCFDD.dhsd C3 as CompteImmoSt
+	ON CompteImmoSt.Dos = ART.Dos AND CompteImmoSt.Cpt = ART.Cog_CptIS AND CompteImmoSt.CE1 = '3'
+
+;*
+;*		Informations dépôt						ARTDEPO
+;*
+
+<RecordSql Name=InfoDepo>
+<SELECT>
+	ARTDEPO.*,
+
+;*
+;*		Informations liées au stock			ARTSTOC
+;*
+
+<RecordSql Name=InfoStock>
+<SELECT>
+	ARTSTOC.*,
+
+;*
+;*		Informations internet					ARTWEB
+;*
+
+<RecordSql Name=InfoWeb>
+<SELECT>
+	ARTWEB.*,
+
+;*
+;*		Décomposition								DAR
+;*
+
+<RecordSql Name=Decomposition>
+<SELECT>
+	DAR.*,
+
+;*
+;*		Libellé complémentaire					LART
+;*
+
+<RecordSql Name=LibCompl>
+<SELECT>
+	LART.*,
+
+;*
+;*		Référencement client						RCL
+;*
+
+<RecordSql Name=RefClient>
+<SELECT>
+	RCL.*,
+
+;*
+;*		Conditions de réapprovisionnement fournisseur		RFO
+;*
+
+<RecordSql Name=ReapproFour>
+<SELECT>
+	RFO.*,
+
+;*
+;*		Articles de réapprovisionnement	RSO
+;*
+
+<RecordSql Name=ArtReappro>
+<SELECT>
+	RSO.*,
+
+;*
+;*		Sous-références							SART
+;*
+
+<RecordSql Name=SousReference>
+<SELECT>
+	SART.*,
+
+;*
+;*		Coût standard encours					SARTCSTD
+;*
+
+<RecordSql Name=CoutStdEncours>
+<SELECT>
+	SARTCSTD.*,
+
+
+;*
+;*		Historique des coûts standards		SARTHCSTD
+;*
+
+<RecordSql Name=HistoCoutStd>
+<SELECT>
+	SARTHCSTD.*,
+
+;*
+;*		Articles externes fournisseur			EART
+;*
+
+<RecordSql Name=ArtExterne>
+<SELECT>
+	EART.*,

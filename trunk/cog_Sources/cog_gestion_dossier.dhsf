@@ -1,0 +1,438 @@
+;>xwin4obj                              7.0       20140425160121      
+[masque]
+ libelle="Gestion des dossiers"
+ utilisateur="UGIE"
+ date_modification="25/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ dernier_id=61
+ dernier_id_page=1
+[defaut]
+ [aide_page]
+  aide=0
+[enregistrements]
+ "gtfdd.dhsd",,xq,g3xq,8000,0
+[page]
+ numero=1
+ libelle="Gestion des dossiers"
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ diva_avant="Page_DOSSIER_Av"
+ ident_unique=1
+ [cadre]
+  [presentation]
+   position=153,15
+   taille=59,329
+   id=34
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="STD"
+ [cadre]
+  [presentation]
+   position=93,15
+   taille=43,335
+   id=25
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="STD"
+ [groupbox]
+  [presentation]
+   position=15,15
+   taille=16,329
+   id=61
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Gestion des dossiers"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=50,30
+   taille=9,34
+   id=5
+   wstyle="STD"
+  [texte]
+   texte="Dossier"
+ [obj_texte]
+  [presentation]
+   position=70,30
+   taille=9,34
+   id=6
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=92,20
+   taille=9,149
+   id=26
+   wstyle="STD"
+  [texte]
+   texte="Duplication des chemins : en création de dossier uniquement"
+ [obj_texte]
+  [presentation]
+   position=105,30
+   taille=9,49
+   id=30
+   wstyle="STD"
+  [texte]
+   texte="Dossier origine"
+ [obj_texte]
+  [presentation]
+   position=120,30
+   taille=9,49
+   id=27
+   wstyle="STD"
+  [texte]
+   texte="Dossier destination"
+ [obj_texte]
+  [presentation]
+   position=153,20
+   taille=9,149
+   id=35
+   wstyle="STD"
+  [texte]
+   texte="Duplication de la base de production en base de test"
+ [obj_texte]
+  [presentation]
+   position=166,30
+   taille=9,164
+   id=54
+   wstyle="STD"
+  [texte]
+   texte="Nom du fichier implicite AVANT (ex. : nom de la base de production)"
+ [obj_texte]
+  [presentation]
+   position=181,30
+   taille=9,164
+   id=47
+   wstyle="STD"
+  [texte]
+   texte="Nom du fichier implicite APRES (ex. : nom de la base de test)"
+ [champ]
+  [presentation]
+   position=105,110
+   taille=9,155
+   id=45
+   colonnes_saisie=40
+   wstyle="STD"
+  [description]
+   donnee=xq,lib,g3xq,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=120,110
+   taille=9,155
+   id=44
+   colonnes_saisie=40
+   wstyle="STD"
+  [description]
+   donnee=xq,lib,g3xq,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=120,84
+   taille=9,20
+   cadrage=gauche
+   id=43
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,dosd,g3xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=70,95
+   taille=9,250
+   id=42
+   colonnes_saisie=40
+   wstyle="STD"
+  [description]
+   donnee=xq,lib,g3xq,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=50,95
+   taille=9,250
+   id=39
+   colonnes_saisie=40
+   wstyle="STD"
+  [description]
+   donnee=xq,lib,g3xq,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=105,84
+   taille=9,20
+   cadrage=gauche
+   id=46
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,dosf,g3xq
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+   table_associee=oui
+  [touches]
+   f8=9020
+  [traitements]
+   diva_apres="Champ_DosF_1_Ap"
+ [champ]
+  [presentation]
+   position=166,195
+   taille=9,145
+   id=57
+   colonnes_saisie=87
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,filtrecode,g3xq,1
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [traitements]
+   diva_apres="Champ_FiltreCode_1_Ap"
+ [champ]
+  [presentation]
+   position=50,70
+   taille=9,20
+   cadrage=gauche
+   id=37
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,dosd,g3xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=70,70
+   taille=9,20
+   id=41
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,etb,g3xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=181,195
+   taille=9,145
+   id=58
+   colonnes_saisie=87
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,filtrecode,g3xq,2
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [traitements]
+   diva_apres="Champ_FiltreCode_2_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=196,30
+   taille=9,154
+   id=49
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,g3xq,1
+  [param_case]
+   texte="Suffixer les noms des dossiers et des établissements avec :"
+   cadrage=droite
+   valeur="2","1"
+   choix="a5fdmc.dhfi","NONOUI"
+  [traitements]
+   diva_apres="Champ_Choix_1_Ap"
+ [champ]
+  [presentation]
+   position=196,195
+   taille=9,60
+   id=51
+   colonnes_saisie=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,lib,g3xq,6
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [bouton_graphique]
+  [presentation]
+   position=110,270
+   taille=14,69
+   id=52
+   wstyle="STD"
+  [param_bouton]
+   wnom=".BOUTON"
+   wtexte="Duplication des chemins"
+   wetype_trait=arret
+   warret=1001
+  [info_bulle]
+  texte="Duplication des chemins"
+ [bouton_graphique]
+  [presentation]
+   position=196,270
+   taille=14,69
+   id=53
+   wstyle="STD"
+  [param_bouton]
+   wnom=".BOUTON"
+   wtexte="Duplication vers BDD test"
+   wdans_ordre=1
+   wetype_trait=arret
+   warret=1002
+  [info_bulle]
+  texte="Duplication vers BDD test"
+[ressources]
+ [menu]
+  ident="MAIN"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Fichier"
+    wid_ressource="FICHIER"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="ABANDON"
+    wtexte="_Quitter\tEchap"
+    wid_ressource="QUIT"
+    wtrait_chaine="#Escape"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="MAIN"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="QUIT"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+
+;*
+;*	COGESER - Gestion des dossiers
+;*
+
+;*		Log	 Version	  N°modIf		Date		Modifications
+;*
+;*		JDT		6.3		01				03/2011	Version initiale : initilisation des chemins en création et en duplication
+
+OverWrittenBy "COGuGESTION_DOSSIER.DHOF"
+
+; Fichiers
+Public HFile	GTFDD.DHSD	GTFDOS		GTFDOS_DEV_01		; Dossier établissement
+; Enregistrements
+Public Record	GTFDD.DHSD	SOC			SOC_DEV_01			; Société
+Public Record	GTFDD.DHSD	XQ				G3XQ
+Public Record "a5dd.dhsd" mjoint mjoint
+
+Define cog_Masque = "COG_GESTION_DOSSIER.DHOF"
+1 idTB_Main			L		; Identifiant barre d'outils MAIN
+1 idME_Main			L		; Identifiant du menu MAIN 
+
+;*
+Public Procedure Champ_Choix_1_Ap
+;
+Beginp
+	If G3XQ.Choix(1) <> 2
+		G3XQ.Lib(6) = " "
+	Else
+		G3XQ.Lib(6) = " - TEST"
+	EndIf
+Endp
+
+
+;*
+Public Procedure Champ_DosF_1_Ap
+;
+1	x_st_01	X
+1	t_Key_01	254
+Beginp
+	GTFDOS_DEV_01.Key	= "A" & Left(G3XQ.DosF)
+	t_Key_01 = Left(G3XQ.DosF)
+	x_st_01 = IRead(GTFDOS_DEV_01, SOC_DEV_01, "A", t_Key_01)
+	If x_st_01 = 0	And SOC_DEV_01.Dos = Left(G3XQ.DosF)
+		G3XQ.lib(3) = Left(SOC_DEV_01.Nom)
+	Else
+		G3XQ.lib(3) = " "
+		G3XQ.DosF = " "
+		Harmony.Retour = XMeNext_Ressaisie
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_FiltreCode_1_Ap
+;
+Beginp
+	G3XQ.FiltreCode(1) = FString("BU",Left(G3XQ.FiltreCode(1)))
+Endp
+
+
+;*
+Public Procedure Champ_FiltreCode_2_Ap
+;
+Beginp
+	G3XQ.FiltreCode(2) = FString("BU",Left(G3XQ.FiltreCode(2)))
+Endp
+
+;*
+Public Procedure Page_DOSSIER_Av
+;
+Beginp
+	; Chargement en mémoire d'une barre d'outils 
+	idTB_Main = XMeToolBarGetID(cog_Masque, "MAIN")
+	; Chargement en mémoire d’un menu classique ou surgissant
+	idME_Main = XmeMenuGetId(cog_Masque, "MAIN")
+Endp
+[/diva]
+[diva_base]
+[/diva]

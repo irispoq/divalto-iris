@@ -1,0 +1,33 @@
+;>xdiva
+;*
+;*		Objet : Export de la reddition - Traitement associé au programme : cogpp_ecr_facpv_red_exp.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	kit104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ChargementAvant						Avant chargement du masque pour initialisation des variables
+;*
+
+overwrittenby "cogut_ecr_facpv_red_exp.dhop"
+
+public record	gtfdd.dhsd	xq					xq_cog		;enregistrement de travail
+
+
+;*	Avant chargement du masque pour initialisation des variables
+public procedure ChargementAvant
+beginp
+
+	xq_cog					= ""
+	xq_cog.PiNoF			= 99999999
+	init xq_cog.TiersF	= "z"
+ 
+endp
+
+;*

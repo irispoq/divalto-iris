@@ -1,0 +1,94 @@
+;>xdiva
+SetModuleInfo('$Id$')   
+;*
+;* Interrogation des tiers                                	sgtt300
+;*
+
+;*		Log	 version	  nPmodif		date		modifications
+;*
+;*		YLEF 		P205Z						10/2014	Ajout champs spécifiques
+
+OverWrite gttt300.dhop
+
+;*
+;*		Déclarations
+;*
+
+;
+Module "COG_GTTTPCE000.DHOP"
+
+;
+Public		Record	GTFDD.dhsd		ENT
+Public		Record	GTFDD.dhsd		G5																	; sélections
+
+;
+1		Picod		>gtfdd.dhsd		Picod
+1		Pino		>gtfdd.dhsd		PiNo
+1		Premier	1,0
+
+;*
+;*	  Procédures et fonction
+;*
+
+;*
+Procedure Maj_Menu_ap
+;
+Beginp
+	Standard.Maj_Menu_ap
+	Cog_Afficher_Champs(Condition(G5.choix(1)=1, 'P', Condition(G5.choix(1)=2,'C',Condition(G5.choix(1)=3,'F','I'))),\
+	wPicod=G5.Choix(5))																									
+EndP
+
+;*
+Function Char ENT_Filtre_Ligne
+;
+
+1		retour		1
+
+BeginF
+
+	If (retour := Standard.ENT_Filtre_Ligne) = 'O' AND Pino > 0 
+
+		If ENT.PiNo <> PiNo
+			Retour = 'N'
+		EndIf
+
+	EndIf
+
+	FReturn(retour)
+
+EndF
+
+;*
+Function char ENT_Filtre_Init
+;
+BeginF
+
+	If premier
+		premier = FALSE
+	Else
+		pino = 0
+	EndIf
+
+	FReturn(Standard.ENT_Filtre_Init)
+
+EndF
+
+;*
+Procedure PROGRAMME_INIT
+;
+BeginP
+
+	Standard.PROGRAMME_INIT
+
+	If PingReceiveAndDelete("COG_GTPP300_PICOD", Picod) = 0
+		G5.Choix(5) = Picod
+	EndIf
+
+	If PingReceiveAndDelete("COG_GTPP300_PINO", Pino) <> 0
+		Pino = 0
+	EndIf
+
+	premier = TRUE
+
+EndP

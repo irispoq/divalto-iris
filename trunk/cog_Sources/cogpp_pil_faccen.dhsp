@@ -1,0 +1,31 @@
+;>xdiva
+;*
+;*		Objet : Pilotage des écritures des centrales - Programme Cogpp_pil_faccen.hsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	KIT104				01		08/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*
+
+
+public record	gtfdd.dhsd	xq			xq_cog		;enregistrement de travail
+
+;*
+;	Programme principal
+;*
+main
+	
+	xq_cog				= ""
+	xq_cog.DatD			= hdate(,"d",-1)
+	xq_cog.Choix(1)	= 2
+	xq_cog.Fic			= ""
+	ping("xq_cog",xq_cog)
+	programcall("cogpp_ecr_faccen.dhop")
+

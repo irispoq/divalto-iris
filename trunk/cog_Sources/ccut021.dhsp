@@ -1,0 +1,298 @@
+SetModuleInfo('$Id: ccut021.dhsp 11550 2010-10-18 13:20:25Z ms $')
+;>xdiva
+;*
+;*		Module principal de la saisie des écritures																						cctt021
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		hc			4.1						12.1998	Version initiale en Diva
+;*		hc			5.1						08.2000
+;*		hc						1760		10.08.2001	propagation du libellé sur les écritures générées par modèle
+;*		hc			5.2		2020		10.12.2001	report du numéro de pièce entre les lignes de ventilation si obligatoire et R3
+;*		hc			5.4		2363			07.2002	traitement des nouveaux paramètres du journal
+;*		jlsi		5.6c		3712		04.09.2006	Affichage des dates de saisie autorisée
+;*		hc/jlsi	5.6c		3666		20.09.2006	Remplacement Convertir_MtDev_MtBis par Convertir_Mt_MtBis
+;*		jlsi		6.0		3668		17/11/2006	Mise en ressource des menus
+;*		jlsi		6.1		3952		19.02.2007	Report des numéros dans table dossier numérotation CN
+
+
+OverWrite	cctt021.dhop
+
+
+;*
+;*		Déclarations
+;*
+
+
+;include	"cctc000.dhsp"
+;
+;
+;module	a5pm000.dhop
+;module	ccpmecr.dhop
+;module	cctmecr.dhop
+;module	gtpm000.dhop
+;module	gtpmfic.dhop
+;module	gttm000.dhop
+;module	rctm000.dhop
+;
+;
+;; constantes pour les bitmaps
+;
+;const		C_Bitmap_NoteAbsente				= "NOTE_N"	; nom de la bitmap pour le bouton note lorsqu'il n'y a pas de note
+;const		C_Bitmap_NotePresente			= "NOTE"		; nom de la bitmap pour le bouton note lorsqu'il y a une note
+;
+;; constantes pour mode : fonctions globales sur une écriture
+;
+;const		C_Mode_Initialisation			= 0		; initialisation du programme
+;const		C_Mode_Consultation				= 1		; consultation d'une écriture
+;const		C_Mode_Modification				= 2		; modification d'une écriture
+;const		C_Mode_Creation					= 3		; création d'une écriture
+;const		C_Mode_Chargement					= 6		; chargement d'une écriture
+;const		C_Mode_Sortie						= 99		; fin du programme
+;
+;; constantes pour phase : fonctions locales sur une ligne quand l'écriture est en cours de traitement
+;
+;const		C_Phase_Entete						= 1		; saisie de l'entête
+;const		C_Phase_Generation_Debut		= 2		; génération des lignes avant saisie
+;const		C_Phase_Generation_Fin			= 4		; génération des lignes après saisie
+;const		C_Phase_Arrondis					= 5		; ajustement des arrondis
+;const		C_Phase_Modification				= 6		; modification d'une ligne
+;const		C_Phase_Ajout						= 7		; ajout d'une ligne
+;const		C_Phase_Suppression				= 9		; suppression d'une ligne
+;const		C_Phase_Generation_Ligne		= 10		; génération ligne à ligne
+;
+;; constantes pour pages de soldes
+;
+;const		C_Page_Solde_Aucun				= 4		; page pour effacement des soldes
+;const		C_Page_Solde_Ecriture			= 5		; page pour affichage soldes écriture
+;const		C_Page_Solde_Compte				= 6		; page pour affichage soldes compte
+;const		C_Page_Solde_Axe1					= 7		; page pour affichage soldes axe 1
+;const		C_Page_Solde_Axe2					= 8		; page pour affichage soldes axe 2
+;const		C_Page_Solde_Axe3					= 9		; page pour affichage soldes axe 3
+;const		C_Page_Solde_Axe4					= 10		; page pour affichage soldes axe 4
+;const		C_Page_Solde_Initial				= 11		; page pour affichage solde initial journal
+;const		C_Page_Solde_Courant				= 12		; page pour affichage solde courant journal
+;
+;; constantes pour les montants de C8PIED
+;
+;const		C_iMin								= 1		; premier indice pour devise
+;const		C_iDEV								= 1		; indice pour montants en devise
+;const		C_iCADEV								= 2		; indice pour montants en devise principale
+;const		C_iCADEVBIS							= 3		; indice pour montants en devise secondaire
+;const		C_iMax								= 3		; dernier indice pour devise
+;
+;const		C_jMin								= 1		; premier indice pour signe
+;const		C_jDB									= 1		; indice pour montants si débit
+;const		C_jCR									= 2		; indice pour montants si crédit
+;const		C_jAlg								= 3		; indice pour montants signés
+;const		C_jAbs								= 4		; indice pour montants non signés
+;const		C_jMax								= 4		; dernier indice pour signe
+;
+;const		C_kMin								= 1		; premier indice pour nature
+;const		C_kTotal								= 1		; indice pour totaux montants ventilés
+;const		C_kReste								= 2		; indice pour restes montants ventilés
+;const		C_kMax								= 2		; dernier indice pour nature
+;
+;define	D_Ecr(i, j)			= C8PIED.MT( 1 + (80 * ((i) - 1)) + ((j) - 1))													; soldes écriture
+;define	D_Cpt(i, j)			= C8PIED.MT( 9 + (80 * ((i) - 1)) + ((j) - 1))													; soldes compte de la ligne
+;define	D_Ini(i, j)			= C8PIED.MT(13 + (80 * ((i) - 1)) + ((j) - 1))													; soldes initiaux compte de génération
+;define	D_Gen(i, j)			= C8PIED.MT(17 + (80 * ((i) - 1)) + ((j) - 1))													; soldes finaux compte de génération
+;define	D_Axe(a, i, j)		= C8PIED.MT(21 + (4 * ((a) - 1)) + (80 * ((i) - 1)) + ((j) - 1))							; soldes axes
+;define	D_Vtl(i, j, k)		= C8PIED.MT(37 + (80 * ((i) - 1)) + ((j) - 1) + (4 * ((k) - 1)))							; ventilations pièce / échéance
+;define	D_Imp(a, i, j, k)	= C8PIED.MT(45 + (4 * ((a) - 1)) + (80 * ((i) - 1)) + ((j) - 1) + (16 * ((k) - 1)))	; imputations axes
+;
+;define	D_EcrOld(i, j)			= C8PIEDOLD.MT( 1 + (80 * ((i) - 1)) + ((j) - 1))													; soldes écriture
+;define	D_CptOld(i, j)			= C8PIEDOLD.MT( 9 + (80 * ((i) - 1)) + ((j) - 1))													; soldes compte de la ligne
+;define	D_IniOld(i, j)			= C8PIEDOLD.MT(13 + (80 * ((i) - 1)) + ((j) - 1))													; soldes initiaux compte de génération
+;define	D_GenOld(i, j)			= C8PIEDOLD.MT(17 + (80 * ((i) - 1)) + ((j) - 1))													; soldes finaux compte de génération
+;define	D_AxeOld(a, i, j)		= C8PIEDOLD.MT(21 + (4 * ((a) - 1)) + (80 * ((i) - 1)) + ((j) - 1))							; soldes axes
+;define	D_VtlOld(i, j, k)		= C8PIEDOLD.MT(37 + (80 * ((i) - 1)) + ((j) - 1) + (4 * ((k) - 1)))							; ventilations pièce / échéance
+;define	D_ImpOld(a, i, j, k)	= C8PIEDOLD.MT(45 + (4 * ((a) - 1)) + (80 * ((i) - 1)) + ((j) - 1) + (16 * ((k) - 1)))	; imputations axes
+;
+;; defines pour tableau : cette liste doit être reportée dans tous les programmes utilisant ccpmecr
+;
+;define	D_idC8T1_XME	= C3XT.IDTABLEAU(1)		; identifiant tableau des lignes C8
+;define	D_idCPT1_XME	= C3XT.IDTABLEAU(2)		; identifiant tableau des lignes CP
+;define	D_idCXT1_XME	= C3XT.IDTABLEAU(3)		; identifiant tableau des lignes CX
+;define	D_idR2AV			= C3XT.IDTABLEAU(4)		; identifiant tableau des effets avant modification de l'écriture
+;define	D_idR2AP			= C3XT.IDTABLEAU(5)		; identifiant tableau des effets après modification de l'écriture
+;define	D_idR2NOW		= C3XT.IDTABLEAU(6)		; identifiant tableau des effets tels qu'ils devraient être
+;
+;; defines pour tableaux propres à la saisie des écritures
+;
+;define	D_idTVA1_XME	= C3XT.IDTABLEAU(7)		; identifiant tableau des lignes ttc lors du contrôle de tva
+;define	D_idTVA2_XME	= C3XT.IDTABLEAU(8)		; identifiant tableau des lignes ht lors du contrôle de tva
+;define	D_idTVA3_XME	= C3XT.IDTABLEAU(9)		; identifiant tableau des lignes tva lors du contrôle de tva
+;
+;; defines pour barre d'outils : cette liste doit être reportée dans tous les programmes utilisant ccpmecr
+;
+;define	D_idBarreC8T1	= C3XT.IDBARRE(1)			; identifiant toolbar de la fenêtre "mode fiche" d'une ligne d'écriture
+;define	D_idBarreCPT1	= C3XT.IDBARRE(2)			; identifiant toolbar de la fenêtre des ventilations
+;define	D_idBarreCXT1	= C3XT.IDBARRE(3)			; identifiant toolbar de la fenêtre des imputations
+;define	D_idBarreR3		= C3XT.IDBARRE(4)			; identifiant toolbar de la fenêtre de prise de décision pour r3
+;
+;; defines pour barres d'outils propres à la saisie des écritures
+;
+;define	D_idBarreMain	= C3XT.IDBARRE(5)			; identifiant toolbar principale
+;define	D_idBarreTva	= C3XT.IDBARRE(6)			; identifiant toolbar de la fenêtre du contrôle de tva
+;define	D_idBarreDivers= C3XT.IDBARRE(7)			; identifiant toolbar des fenêtres de messages
+;
+;; defines pour menus propres à la saisie des écritures
+;
+;define 	D_IdMenuMain		= C3XT.IDMENU(5)		; identifiant menu principal							
+;define 	D_IdPopupSldCon	= C3XT.IDMENU(6)		; identifiant popup Soldes en consultation			
+;define	D_IdPopupSldMod	= C3XT.IDMENU(7)		; identifiant popup Soldes en modification			
+;
+;
+;; fichiers
+;
+;public	hfile		CCFDD.dhsd	CCFJCA	CCFJCA					; intitulés
+;public	hfile		CCFDD.dhsd	CCFECR	CCFECR					; écritures
+;public	hfile		CCFDD.dhsd	CCFDOS	CCFDOS					; dossiers
+;public	hfile		CCFDD.dhsd	CCFTAB	CCFTAB					; tables de C3
+;public	hfile		RCFDD.dhsd	RCFTAB	RCFTAB	OpenOnUse	; tables de R3
+;
+;
+;; enregistrements
+;
+;public	record	CCFDD.dhsd	C3						; intitulé de compte
+;public	record	CCFDD.dhsd	C3ETS					; relation compte/établissement
+;public	record	CCFDD.dhsd	C4						; paramètres de journal
+;public	record	CCFDD.dhsd	C4ETS					; compte de liaison
+;public	record	CCFDD.dhsd	C5						; intitulé d'axe
+;public	record	CCFDD.dhsd	C5ETS					; relation axe/établissement
+;public	record	CCFDD.dhsd	C8						; ligne d'écriture
+;public	record	CCFDD.dhsd	C8PIED				; pied de l'écriture
+;public	record	CCFDD.dhsd	C8PIED	C8PIEDOLD; pied de l'écriture précédent
+;public	record	CCFDD.dhsd	C8T1					; élément du tableau C8
+;public	record	CCFDD.dhsd	C8T1		C8COMMUN	; informations communes à toutes les écritures
+;public	record	CCFDD.dhsd	C8T1		C8ENTETE	; entête de l'écriture
+;public	record	CCFDD.dhsd	C8T1		C8T1NEW	; élément du tableau C8 précédant la ligne ajoutée
+;public	record	CCFDD.dhsd	C8T1		C8T1OLD	; élément du tableau C8 avant modification
+;public	record	CCFDD.dhsd	CA						; dossier, paramètres généraux
+;public	record	CCFDD.dhsd	CN						; dossier, numérotation										;3952
+;public	record	CCFDD.dhsd	CB						; dossier, dates de clôture
+;public	record	CCFDD.dhsd	CC						; dossier, règlements
+;public	record	CCFDD.dhsd	CPT1					; ligne de ventilation pièce et échéance pour tableau
+;public	record	CCFDD.dhsd	CXT1					; élément du tableau CX
+;public	record	CCFDD.dhsd	H7						; modèles
+;public	record	CCFDD.dhsd	HA						; lignes d'un modèle
+;public	record	CCFDD.dhsd	SW						; saisie : work
+;public	record	CCFDD.dhsd	XT			C3XT		; identifiants des tableaux
+;public	record	CCFDD.dhsd	CETS					; dossier, établissements
+;
+;public	record	GTFDD.dhsd	CLI					; client
+;public	record	GTFDD.dhsd	T006					; table des modes de règlement
+;public	record	GTFDD.dhsd	T007					; table des libellés devises
+;
+;public	record 	RCFDD.dhsd	R1						; facture
+;public	record 	RCFDD.dhsd	R2						; effet
+;public	record 	RCFDD.dhsd	RA						; état
+;
+;
+;; variables
+;
+;1			KHA						256					; clé de lecture des lignes d'un modèle
+;1			HADOS		>CCFDD.dhsd	DOS					; dossier de la table des modèles
+;1			HAETB		>CCFDD.dhsd	Etb					; établissement de la table des modèles
+;1			ECRLG		>CCFDD.dhsd	ECRLG		= 0		; pour génération ligne à ligne
+;1			AXESLDVIS1				1,0*4					; = true si le solde axe est visible
+;1			AXESLDVIS2				1,0*4					; = true si le solde axe est visible
+
+
+; table des libellés de C8T1, C8COMMUN et C8ENTETE :
+;
+;	1		ligne écriture
+;	2		journal
+;	3		compte principal (compte de génération sur c8commun)
+;	4		compte de contrepartie
+;	5		type de règlement
+;	6		code axe 1
+;	7		code axe 2
+;	8		code axe 3
+;	9		code axe 4
+; 10		libellé de l'entête avant évaluation (ligne générée sur c8commun)
+
+; tables des montants de C8T1, C8COMMUN et C8ENTETE (mtdev, mt et mtbis) :
+;
+;	1		montant si débit
+;	2		montant si crédit
+;	3		montant signé
+;	4		montant non signé
+;
+; en cours de modification, les indices 5 à 8 servent de sauvegarde dans C8T1 :
+;
+;	5		sauvegarde montant si débit
+;	6		sauvegarde montant si crédit
+;	7		sauvegarde montant signé
+;	8		sauvegarde montant non signé
+
+; C8T1.FLAG(1) : 1 si aucune imputation axe, 2 sinon
+; C8T1.FLAG(2) : 1 si aucune ventilation pièce/échéance, 2 sinon
+; C8T1.FLAG(3) : true si le code devise et la date ne peuvent plus être modifiés, false sinon
+; C8T1.FLAG(4) : true si la date d'échéance ne peut plus être calculée automatiquement, false sinon
+; C8T1.FLAG(5) : true si les imputations axes ne peuvent plus être calculées automatiquement, false sinon
+; C8T1.FLAG(6) : 1 la ligne n'est ni lettrée ni pointée, 2 la ligne est lettrée, 3 la ligne est partiellement lettrée, 4 la ligne est marquée, 5 la ligne est pointée
+; C8T1.FLAG(7) : 1 la ligne n'est ni centralisée, ni une ligne de centralisation, 2 la ligne est une ligne de centralisation, 3 la ligne est une ligne détail de centralisation
+
+; C8T1.VTLCOD(1) : 1 = aucun axe, 2 = un seul code axe, 3 = plusieurs codes axes 1
+; C8T1.VTLCOD(2) : 1 = aucun axe, 2 = un seul code axe, 3 = plusieurs codes axes 2
+; C8T1.VTLCOD(3) : 1 = aucun axe, 2 = un seul code axe, 3 = plusieurs codes axes 3
+; C8T1.VTLCOD(4) : 1 = aucun axe, 2 = un seul code axe, 3 = plusieurs codes axes 4
+
+; C8T1.VTLCOD(5) : 1 = aucune pièce, 2 = une seule pièce, 3 = plusieurs pièces
+; C8T1.VTLCOD(6) : 1 = aucune échéance, 2 = une seule échéance, 3 = plusieurs échéances
+
+; table des montants de C8PIED
+;											montant si débit	montant si crédit	montant signé	montant non signé
+; solde écriture								 1						 2						 3						 4
+; solde compte ligne courante				 9						10						11						12
+; solde initial compte génération		13						14						15						16
+; solde courant compte génération		17						18						19						20
+; solde axe 1 ligne courante				21						22						23						24
+; solde axe 2 ligne courante				25						26						27						28
+; solde axe 3 ligne courante				29						30						31						32
+; solde axe 4 ligne courante				33						34						35						36
+; total ventilation pièce / échéance	37						38						39						40
+; reste ventilation pièce / échéance	41						42						43						44
+; total ventilation axe 1					45						46						47						48
+; total ventilation axe 2					49						50						51						52
+; total ventilation axe 3					53						54						55						56
+; total ventilation axe 4					57						58						59						60
+; reste ventilation axe 1					61						62						63						64
+; reste ventilation axe 2					65						66						67						68
+; reste ventilation axe 3					69						70						71						72
+; reste ventilation axe 4					73						74						75						76
+;
+; offsets à ajouter en fonction de la devise :
+;
+; en devise										+0
+; en devise principale du dossier		+80
+; en devise secondaire du dossier		+160
+
+
+;*
+;*	Déclarations Cogeser
+;*
+
+module	"Cogtm_ecr_exp.dhop"
+
+
+;*
+;*		traitements
+;*
+
+;*
+procedure C8_Delete_Av
+
+; avant suppression d'une ligne d'écriture
+
+beginp	; c8_delete_av
+
+	Cog_SupprimerReddition
+
+endp		; c8_delete_av
+
+
+;*

@@ -1,0 +1,25 @@
+;*
+;*    Déverrouillage des pièces                                                             gtte100
+;*
+
+;*    Log    version   nPmodif      date     modifications
+;*
+;*    Lm       5.1                  05.2001  version initiale en diva
+
+OverWrite "GTTT100.dhop"
+
+Public		Record	A5DD.dhsd		MZ
+Public		Record	GTFDD.dhsd		ENT				
+
+;*
+;*   Séquences appelées par gtpp100.dhop
+;*
+
+;*
+Function Char ENT_Read_Ap
+BeginF																					
+	If not ENT.ETB = MZ.ETB | Freturn('N') 
+	Else | Freturn(Standard.ENT_Read_Ap)
+	Endif
+EndF																								
+

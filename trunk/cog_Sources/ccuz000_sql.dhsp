@@ -1,0 +1,67 @@
+SetModuleInfo('$Id: cctz000_sql.dhsp 27838 2012-12-11 08:20:23Z vj $')
+;>xdiva
+;*
+;*		Zoom dossiers 																															cctz000.dhsp
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		pb 		4.1						04.1999	Version initiale en Diva
+;*		hc			5.1						07.2000
+;*		jsm					2356		12.07.2002	Mise en place de nouveaux champs d'enreg (USERCR, USERCRDH, USERCRORI, USERMO, USERMODH, USERMOORI)
+;*		jps		5.6		3155			02.2005	Supression de l'enregistrement et des boutons propres à CE
+;*		jlsi		5.6c		3669		26.06.2006	Mise à 'blanc' des compteurs lors de la dupplication
+;*		jlsi		6.0		3899			12.2006	Migration version 6
+
+OverWrite	"cctz000_sql.dhop"
+
+hfileVersion	CCFDD.dhsd	CCFDOS
+
+Include cctc000.Dhsp
+
+;*
+;*		Déclarations
+;*
+
+; includes
+
+; fichiers
+
+; record SQL
+public	recordSQL	'CCRSDOS.dhoq'		DOSCPT			DOSSIER
+
+; enregistrements
+public	record	CCFDD.dhsd	CN						; dossier numérotation
+public	record	CCFDD.dhsd	CA			CA_SEL	; dossier (sélection)
+
+public	record	CCFDD.dhsd	XT			C3XT		; identifiants des tableaux de menu et boutons					
+public	record	CCFDD.dhsd	XDecoupage			; work pour découpage champ
+
+; defines
+define	Titre_Var = [ right(DOSSIER.Dos) ' ' left(DOSSIER.Nom) ]
+
+; variables
+1	NbSel		4,0											; nombre de dossier selectionnés
+
+; modules
+module	xzoom7.dhop
+
+
+;*
+;*		Fonctions et procédures locales
+;*
+
+;*
+Procedure ZoomConsult
+beginp	; zoomconsult
+
+	standard.ZoomConsult
+
+	switch harmony.Key
+
+		case harmony.Dataarret = 1000
+			c3_zoom_call(63400,false)
+
+	endswitch
+
+endp		; zoomconsultliste

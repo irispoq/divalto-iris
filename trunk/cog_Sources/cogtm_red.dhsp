@@ -1,0 +1,79 @@
+;*
+;*	Module commun à la gestion des redditions
+;*
+;*	Créé le 15.12.2011 par ROBL
+;*
+
+module	"a5pm000.dhop"
+module	"a5tm000.dhop"
+module	"a5pmwin.dhop"
+Module A5PMNoteJoint.dhop
+
+public record "a5dd.dhsd"	mchemin
+public record "a5dd.dhsd"	mjointT1
+public record "a5dd.dhsd"	mz
+
+
+;*
+public procedure Cog_MajFichierJoint(redno,nomfic,lib,mode)
+1	redno		>	cogfdd.dhsd		cog_redno
+1	nomfic							A
+1	lib								A
+1	mode								1,0		;1 = impression / 2 = export Excel
+
+hfile		cogfdd.dhsd	cog_freddition	cog_freddition_loc	openonuse
+record	cogfdd.dhsd	Cog_red_ent		Cog_red_ent_loc
+
+1	idJoint							L
+1	nomrep					256
+1	nomdav					256
+
+beginp
+
+	if not hseek(cog_freddition_loc,Cog_red_ent_loc,"E"&mz.Dos&redno)
+
+		xmeload('a5ee200.dhof') ; chargement du masque des fichiers joints	(le masque n'est pas affiché, uniquement pour récup de l'identifiant)
+		idJoint = XmeListGetId ('a5ee200.dhof',1,'A5ee200_mjointT1',mjointT1)	; récupération de l'identifiant de la liste
+
+		mjointT1 			= ' '
+		mjointT1.joint 	= Cog_red_ent_loc.joint
+		mjointT1.fic 		= nomfic 					; nom du fichier	à joindre
+		mjointT1.JointObj = 'COG_RED_ENT'
+		mjointT1.lib80 	= lib
+		mjointT1.UserCr 	= system.User
+		mjointT1.UserCrDh = time(7)
+		mjointT1.supori 	= 1			; Suppression fichier origine	NON
+		xmeListAddEnd (idJoint,mjointT1)	; remplissage liste fichier joint
+		
+		if Cog_red_ent_loc.joint = 0
+			Cog_red_ent_loc.JOINT = Joint_Creation_(0,'COG_RED_ENT')
+		else
+			Cog_red_ent_loc.JOINT = Joint_Modification_(0 ,Cog_red_ent_loc.JOINT,'COG_RED_ENT')
+		endif
+
+		if Cog_red_ent_loc.JOINT = 0
+			Cog_red_ent_loc.CEJOINT = 1
+		else
+	      Cog_red_ent_loc.CEJOINT = 2
+		endif
+
+		if mode = 1
+			Cog_red_ent_loc.Cog_FicPdf	= nomfic
+		else
+			Cog_red_ent_loc.Cog_FicExcel	= nomfic
+		endif
+		
+		hrewrite(cog_freddition_loc,Cog_red_ent_loc)
+		
+		xmeListErase(idJoint)
+
+		Rechercher_Chemin (mz.Dos, mz.Etb, "JOINT_DAV")
+		nomrep	= condition(mchemin.CheminTyp<3,Win_ConvertirEnNomWindows(mChemin.Chemin),mchemin.Chemin)
+		nomdav	= Win_Chemin(nomrep,FileNameLastSegment(nomfic))
+		wincopyfile(nomfic,nomdav,false)
+
+	endif
+
+endp
+
+;*

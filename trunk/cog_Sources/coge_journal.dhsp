@@ -1,0 +1,87 @@
+;>xmic3
+;============================================================
+;    Nom : coher_recup_agam_adh.dhsp
+;    Application : recup des Adhérents mode texte AGAM
+;    Nom du masque Ecran : 
+;    Date : 29/08/02
+;    Auteur : ft
+;============================================================
+
+;module	coge_fonct.dhop
+;---------------------------------------------------------------------------------------------- 
+;Gestion du journal de traitement
+;	si § rajoute saut de ligne avant
+;	si	| remplace par tab		
+;---------------------------------------------------------------------------------------------- 
+record * htdf listferr = ' '
+
+public procedure p_ecrjourn(mess)
+1 	mess		S
+1	zon	S
+beginp
+	mess = oemtoansi(mess)
+	mess = modify('|',$09,mess)
+ 	if string('§',mess)
+		zon = modify('§',$0a0d,mess)
+	else
+		zon = mess
+	endif
+	hwrite(listferr,zon)
+endp
+;---------------------------------------------------------------------------------------------- 
+;Gestion du journal ouverture		
+;---------------------------------------------------------------------------------------------- 
+public procedure p_ouvjourn
+beginp
+	listferr.name = '/harmony/sys/journal.txt'
+	if hopen(listferr,'P')
+		HCreateFile(listferr.name,'U',0,true)
+		hopen(listferr,'P')
+	else
+		herase(listferr)
+	endif
+endp
+;---------------------------------------------------------------------------------------------- 
+;Gestion du journal ouverture		
+;---------------------------------------------------------------------------------------------- 
+public procedure p_ouvjournal(fic,era)
+1	fic	a
+1	era	a=' '
+beginp
+	listferr.name = fic
+	if fopen(listferr,'P')
+		CreateDirectory(filenamebase(fic))
+		HCreateFile(listferr.name,'U',0,true)
+		hopen(listferr,'P')
+	elsif era <> 'N'
+		herase(listferr)
+	endif
+	p_ecrjourn("=> Début journal:" & SdateDh(time(7)))
+endp
+;---------------------------------------------------------------------------------------------- 
+;Gestion du journal fermeture		
+;---------------------------------------------------------------------------------------------- 
+public procedure p_clojournal(mess)
+1	mess	A=' '
+beginp
+	p_ecrjourn("<= Fin journal:" & SdateDh(time(7)) &">" & left(mess))
+	hclose(listferr)
+endp
+
+;---------------------------------------------------------------------------------------------- 
+;Gestion du journal fermeture		
+;---------------------------------------------------------------------------------------------- 
+public procedure p_clojourn
+1 	oui	x=0
+1	mess	10	
+beginp
+	hclose(listferr)
+	hopen(listferr,'P')
+	if hread(listferr,mess) = 0
+		oui = 1
+	endif
+	if oui
+		exec('write.exe',GetSystemFileName(listferr) ,EXEC_GOSUB_WAIT)
+	endif
+	hclose(listferr)
+endp

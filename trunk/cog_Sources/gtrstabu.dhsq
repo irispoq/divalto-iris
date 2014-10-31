@@ -1,0 +1,660 @@
+<DictionarySql overwrite="gtrstab.dhoq" ModuleInfo='$Id$'>
+
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFTAB
+;*
+;_08/2012		SRE		001		Initial Modele Projet 202 : Surcharge faisant apparaître toute nouvelle zone déclarée dans GTFTAB
+
+;*
+;* 		Libellé famille de tarification
+;*
+
+;<RecordSql Name=LibelleFamilleTarif>
+;<SELECT>
+;	T001.*
+;
+;;*
+;;*			Libellé classe de remise
+;;*
+;<RecordSql Name=LibelleClasseRemise>
+;<SELECT>
+;	T002.*
+;
+
+
+;
+;;*
+;;*			Taxe Parafiscale
+;;*
+;
+;<RecordSql Name=TauxTPF>
+;<SELECT>
+;	T004.*
+;
+;;*
+;;*			Unité
+;;*
+;
+;<RecordSql Name=Unite>
+;<SELECT>
+;	T005.*
+;
+;*
+;*			Mode de règlement
+;*
+
+<RecordSql Name=ModeReglement>
+<SELECT>
+	T006.*
+;
+;;*					  
+;;*			Devises
+;;*
+;
+;<RecordSql Name=Devise>
+;<SELECT>
+;	T007.*
+;
+;;*
+;;*			Famille de tarification
+;;*
+;
+;<RecordSql Name=FamilleTarif>
+;<SELECT>
+;	T008.*
+;
+;;*
+;;*			Classe de remise
+;;*
+;
+;<RecordSql Name=ClasseRemise>
+;<SELECT>
+;	T009.*
+;
+;;*
+;;*			Coefficient coût revient
+;;*
+;
+;<RecordSql Name=CoefficientCR>
+;<SELECT>
+;	T010.*
+;
+;;*
+;;*			Montant coût revient
+;;*
+;
+;<RecordSql Name=MontantCR>
+;<SELECT>
+;	T011.*
+;
+;;*
+;;*			Famille statistique article
+;;*
+;
+;<RecordSql Name=FamilleStatistiqueArticle>
+;<SELECT>
+;	T012.*
+;
+;;*
+;;*			Pays
+;;*
+;
+;<RecordSql Name=Pays>
+;<SELECT>
+;	T013.*
+;
+;;*
+;;*			Code tarif
+;;*
+;
+;<RecordSql Name=LibelleCodeTarif>
+;<SELECT>
+;	T014.*
+;
+;
+;;*
+;;*			Classe commission
+;;*
+;
+;<RecordSql Name=LibelleClasseCommission>
+;<SELECT>
+;	T015.*
+;
+;;*
+;;*			Code Langue
+;;*
+;
+;<RecordSql Name=Langue>
+;<SELECT>
+;	T016.*
+;
+;;*
+;;*			Dépôt	 T017
+;;*
+;
+;<RecordSql Name=Depot>
+;<SELECT>
+;	T017.*
+;
+;;*
+;;*			Emplacement	 T018
+;;*
+;
+;<RecordSql Name=Emplacement>
+;<SELECT>
+;	T018.*
+;
+;;*		
+;;*			Sous-référence
+;;*
+;
+;<RecordSql Name=LibelleSousReference>
+;<SELECT>
+;	T019.*
+;
+;*
+;*			Code OP	
+;*
+
+<RecordSql Name=CodeOperation>
+<SELECT>
+	T020.*
+
+;;*		
+;;*			Taux de change
+;;*
+;
+;<RecordSql Name=TauxChange>
+;<SELECT>
+;	T021.*
+;
+;;*		
+;;*			Famille de réapprovisionnement
+;;*
+;
+;<RecordSql Name=FamilleReapprovisionnement>
+;<SELECT>
+;	T022.*
+;
+;;*		
+;;*			Libellé unité
+;;*
+;
+;<RecordSql Name=LibelleUnite>
+;<SELECT>
+;	T023.*		
+;
+;;*
+;;*			Pied de pièce
+;;*
+;
+;<RecordSql Name=PiedPiece>
+;<SELECT>
+;	T024.*
+;
+;;*
+;;*			Nature de stock
+;;*
+;
+;<RecordSql Name=NatureStock>
+;<SELECT>
+;	T025.*
+;
+;;*
+;;*			Mode de transport
+;;*
+;
+;<RecordSql Name=ModeTransport>
+;<SELECT>
+;	T026.*
+;
+;;*		
+;;*			Grille transporteur
+;;*
+;
+;<RecordSql Name=GrilleTransport>
+;<SELECT>
+;	T027.*
+;
+;;*
+;;*			Echéance multiple
+;;*
+;
+;<RecordSql Name=EcheancesMultiples>
+;<SELECT>
+;	T028.*
+;
+;*
+;*			Code Statistique Tiers
+;*
+
+<RecordSql Name=CodeStatistiqueTiers>
+<SELECT>
+	T029.*
+;
+;;;*  
+;;;*			Régime TVA
+;;;*
+;;
+;;<RecordSql Name=RegimeTvaTiers>
+;;<SELECT>
+;;	T030.*
+;
+;;*
+;;*			Grille sous-référence
+;;*
+;
+;<RecordSql Name=GrilleSousReference>
+;<SELECT>
+;	T031.*
+;
+;;*
+;;*			Libellé des emballages
+;;*
+;
+;<RecordSql Name=LibelleEmballage>
+;<SELECT>
+;	T032.*
+;
+;;*
+;;*			Coefficient emballage
+;;*
+;
+;<RecordSql Name=CoeffEmballage>
+;<SELECT>
+;	T033.*
+;
+;;*
+;;*			Marché
+;;*
+;
+;<RecordSql Name=Marche>
+;<SELECT>
+;	T034.*
+;
+;;*
+;;*			Libellé code remise
+;;*
+;
+;<RecordSql Name=LibelleCodeRemise>
+;<SELECT>
+;	T035.*
+;
+;;*
+;;*			Nature produit
+;;*
+;
+;<RecordSql Name=NatureProduit>
+;<SELECT>
+;	T036.*
+;
+;;*
+;;*			Collaborateur
+;;*
+;
+;<RecordSql Name=Collaborateur>
+;<SELECT>
+;	T037.*
+;
+;;*
+;;*			Formulaire GPAO
+;;*
+;
+;<RecordSql Name=FormulaireGPAO>
+;<SELECT>
+;	T038.*
+;
+;;*
+;;*			Activité d'un collaborateur
+;;*
+;
+;<RecordSql Name=ActiviteCollaborateur>
+;<SELECT>
+;	T039.*
+;
+;;*
+;;*			Code NAF
+;;*
+;
+;<RecordSql Name=CodeNaf>
+;<SELECT>
+;	T040.*
+;
+;;*
+;;*			Textes pré enregistrés
+;;*
+;
+;<RecordSql Name=TextesPreEnregistres>
+;<SELECT>
+;	T041.*
+;
+;;*
+;;*			Origine du tiers
+;;*
+;
+;<RecordSql Name=OrigineTiers>
+;<SELECT>
+;	T042.*
+;
+;;*
+;;* 		Famille de relance
+;;*
+;
+;<RecordSql Name=FamilleRelance>
+;<SELECT>
+;	T043.*
+;
+;;*
+;;*			Famille OF
+;;*
+;
+;<RecordSql Name=FamilleOF>
+;<SELECT>
+;	T044.*
+;
+;;*
+;;*			Libellé attestation
+;;*
+;
+;<RecordSql Name=LibelleAttestation>
+;<SELECT>
+;	T045.*
+;
+;;*
+;;*			Attestation article tiers
+;;*
+;
+;<RecordSql Name=AttestationArticleTiers>
+;<SELECT>
+;	T046.*
+;
+;;*
+;;*			Famille de production
+;;*
+;
+;<RecordSql Name=FamilleProduction>
+;<SELECT>
+;	T047.*
+;
+;;*
+;;* 		Raison Sociale
+;;*
+;
+;<RecordSql Name=TitreRaisonSociale>
+;<SELECT>
+;	T048.*
+;
+;*
+;*			Service
+;*
+
+<RecordSql Name=Service>
+<SELECT>
+	T051.*
+	;COG_GROUPE.*
+<LEFTJOIN>
+	GTFDD.DHSD T054 AS COG_GROUPE 
+	ON COG_GROUPE.DOS = CASE WHEN T000.TabTyp(54) = 2 THEN 999 ELSE MZ.Dos END AND COG_GROUPE.SALGRP = T051.COG_SALGRP  
+
+;*
+;*			Cause de rebut
+;*
+;
+;<RecordSql Name=CauseRebut>
+;<SELECT>
+;	T052.*
+;
+;;*
+;;*			Code formule
+;;*
+;
+;<RecordSql Name=CodeFormule>
+;<SELECT>
+;	T053.*
+;
+;;*
+;;*			Groupe de collaborateurs
+;;*
+;
+;<RecordSql Name=Groupe>
+;<SELECT>
+;	T054.*
+;
+;;*
+;;*			Groupe de collaborateur détail
+;;*
+;
+;<RecordSql Name=GroupeCollab>
+;<SELECT>
+;	T055.*
+;
+;;*
+;;* 		Domaine d'activité stratégique DAS
+;;*
+;
+;<RecordSql Name=DomaineActiviteStrategique>
+;<SELECT>
+;	T056.*  
+;
+;;*
+;;*			Code Postal
+;;*
+;
+;<RecordSql Name=CodePostal>
+;<SELECT>
+;	T057.*
+;
+;;*
+;;*			Motif
+;;*
+;
+;<RecordSql Name=Motif>
+;<SELECT>
+;	T059.*
+;
+;;*
+;;*			Famille d'inventaire
+;;*
+;
+;<RecordSql Name=FamilleInventaire>
+;<SELECT>
+;	T060.*
+;
+;;*
+;;*			Règle de gestion CBN par dêpot
+;;*
+;
+;<RecordSql Name=RegleGestionCbnParDepot>
+;<SELECT>
+;	T062.*
+;
+;;*
+;;*			Règle de gestion CBN	pour transfert
+;;*
+;
+;<RecordSql Name=RegleGestionCbnPourTransfert>
+;<SELECT>
+;	T063.*
+;
+;*
+;*    	Classe Affaire
+;*
+
+<RecordSql Name=ClasseAffaire>
+<SELECT>
+	T064.*
+
+;;*
+;;*   Famille d'activité
+;;*
+;
+;<RecordSql Name=FamilleActivite>
+;<SELECT>
+;	T065.*
+;
+;;*
+;;*   Famille de coût
+;;*
+;
+;<RecordSql Name=FamilleCout>
+;<SELECT>
+;	T066.*
+;
+;;*
+;;*   Coûts horaire par collaborateur
+;;*
+;
+;<RecordSql Name=CoutHoraireParCollaborateur>
+;<SELECT>
+;	T067.*		  
+;
+;;*
+;;*   Coefficient daté
+;;*
+;
+;<RecordSql Name=CoefficientDate>
+;<SELECT>
+;	T068.*	
+;
+;;*
+;;*   		Fonction
+;;*
+;
+;<RecordSql Name=Fonction>
+;<SELECT>
+;	T069.*
+;
+;;*
+;;*			Region administrative
+;;*
+;
+;<RecordSql Name=RegionAdministrative>
+;<SELECT>
+;	T070.*
+;
+;;*
+;;*		Prestation de service
+;;*
+;
+;<RecordSql Name=PrestationService>
+;<SELECT>
+;	T071.*
+;
+;;*
+;;*			Libellé des promotions
+;;*
+;
+;<RecordSql Name=LibelleCodePromotion>
+;<SELECT>
+;	T072.*
+;
+;;*
+;;*			Compétence
+;;*
+;
+;<RecordSql Name=Competence>
+;<SELECT>
+;	T073.*
+;
+;;*
+;;*			Domaine de compétence
+;;*
+;
+;<RecordSql Name=DomaineCompetence>
+;<SELECT>
+;	T074.*
+;
+;;*
+;;*	  		Famille de tarification achat
+;;*
+;
+;<RecordSql Name=FamilleTarificationAchat>
+;<SELECT>
+;	T075.*
+;
+;;*
+;;*	 		Classe de remise achat
+;;*
+;
+;<RecordSql Name=ClasseRemiseAchat>
+;<SELECT>
+;	T076.*
+;
+;;*
+;;*	 		Libellé Regroupement
+;;*
+;
+;<RecordSql Name=LibelleBonRegroupement>
+;<SELECT>
+;	T077.*
+;
+;;*
+;;*	 		Libellé des profils de pièce
+;;*
+;
+;<RecordSql Name=LibelleProfilsPiece>
+;<SELECT>
+;	T078.*
+;
+;;*
+;;*	 		Titre de pièce
+;;*
+;<RecordSql Name=TitrePiece>
+;<SELECT>
+;	T079.*
+;
+;;*
+;;*  		Libellé des familles de codes opération
+;;*
+;
+;<RecordSql Name=LibelleFamilleCodesOperation>
+;<SELECT>
+;	T080.*
+;
+;;*
+;;*  		Famille de codes	opération
+;;*
+;
+;<RecordSql Name=FamilleCodesOperation>
+;<SELECT>
+;	T081.*
+;
+;;*
+;;*  		Cout maintenance
+;;*
+;
+;<RecordSql Name=CoutMaintenance>
+;<SELECT>
+;	T082.*,
+;
+;;*
+;;*  		Catégorie (classe) ABC
+;;*
+;
+;<RecordSql Name=CtgrABC>
+;<SELECT>
+;	T083.*,
+;
+;;*
+;;*			Taux d'escompte
+;;*
+;
+;<RecordSql Name=CodeEscompte>
+;<SELECT>
+;	T084.*
+
+;*
+;*			Taux de TVA
+;*
+
+<RecordSql Name=TauxTvaN>
+<SELECT>
+	T085.*
+
+;;*  
+;;*			Régime TVA tiers
+;;*
+;
+;<RecordSql Name=RegimeTvaTiersN>
+;<SELECT>
+;	T086.*

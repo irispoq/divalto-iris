@@ -1,0 +1,332 @@
+
+;*
+;*	COGESER - Gestion des dossiers
+;*
+
+;*		Log	 Version	  N°modIf		Date		Modifications
+;*
+;*		JDT		6.3		01				03/2011	Version initiale : initilisation des chemins en création et en duplication
+
+OverWrittenBy "COGuGESTION_DOSSIER.DHOP"
+
+Include	"GTTCZ00.dhsp"				;déclarations communes
+
+; Fichiers
+Public HFile	GTFDD.DHSD	GTFDOS		GTFDOS_DEV_01		; Dossier établissement
+Public HFile	GTFDD.DHSD	GTFDOS		GTFDOS_DEV_02		; Dossier établissement
+Public HFile	CCFDD.DHSD	CCFDOS		CCFDOS_DEV_01		; Dossier établissement
+Public HFile 	A5DD.DHSD	A5FTAB		A5FTAB_DEV_01
+Public HFile 	A5DD.DHSD	A5FTAB		A5FTAB_DEV_02
+Public HFile 	A5DD.DHSD	A5FDOS		A5FDOS_DEV_01
+
+
+; Enregistrements
+Public Record	GTFDD.DHSD	SOC			SOC_DEV_01			; Société
+Public Record	GTFDD.DHSD	SOC			SOC_DEV_02			; Société
+Public Record	GTFDD.DHSD	ETS			ETS					; Etablissement
+Public Record	GTFDD.DHSD	ETS			ETS_DEV_01			; Etablissement
+Public Record	GTFDD.DHSD	ETS			ETS_DEV_02			; Etablissement
+Public Record	CCFDD.DHSD	CA				CA_DEV_01			; Société
+Public Record	CCFDD.DHSD	CETS			CETS_DEV_01			; Etablissement
+Public Record	A5DD.DHSD	MCHEMIN		MCHEMIN_DEV_01
+Public Record	A5DD.DHSD	MCHEMIN		MCHEMIN_DEV_02
+Public Record	A5DD.DHSD	MDOS			MDOS_DEV_01
+; Enregistrement de travail
+Public Record	GTFDD.DHSD	XQ				G3XQ			; Jobqueue
+
+public record "a5dd.dhsd"	mjoint
+public record "a5dd.dhsd"	mjoint	mjoint_b
+
+record * htdf	ficjoint
+
+Define cog_Masque = "COG_GESTION_DOSSIER.dhof"
+1 idTB_Main			L					; IdentIfiant barre d'outils MAIN
+1 idME_Main			L					; IdentIfiant du menu MAIN 
+
+1	b_FIN				B = False 		; Variable de fin de saisie du masque
+1	etb				3
+
+;*
+Function char COGF_InitDuplication
+; Fonction qui lance la duplication de la base de données de production en base de test : renomer les dossiers et établisements, modification des chemins
+; Retourne :
+; 		" " : si pas d'erreur
+; 		une chaine explicative en cas d'erreur
+1 x_st0				X
+1 s_message			250
+1 i					L
+
+1	x_st_01	X
+1	x_st_02	X
+1	t_Key_01	254
+1	t_Key_02	254
+1	t_BaseAVANT		250
+1	t_BaseAPRES		250
+1	t_Dos				>GTFDD.DHSD	Dos
+1	t_Chemin			>A5DD.DHSD	Chemin
+
+1	s_datetrait	S
+1	d_datetrait	>GTFDD.DHSD UserCrDh
+
+BeginF
+	
+	; Trace Début
+	d_datetrait = Time(7)																															 
+	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+	s_datetrait = Fstring("0", s_datetrait)
+	G3_LOG_ANO(90013,"Duplication de la base de données","Fin du traitement : ",s_datetrait,,,,,,"COG_FMSG.DHFI",,)
+
+	t_Dos = G3XQ.DosD
+
+	; Renommage des dossiers et des établissements
+	If G3XQ.choix(1) = 2
+		; DAV - Dossiers
+		GTFDOS_DEV_01.Key	= "A"
+		Do
+			x_st_01 = IRead(GTFDOS_DEV_01, SOC_DEV_01, "A")
+		While x_st_01 = 0
+			SOC_DEV_01.Nom = Left(SOC_DEV_01.Nom) & Left(G3XQ.Lib(6))
+			x_st_02 = IReWrite(GTFDOS_DEV_01, SOC_DEV_01)
+		Wend
+		; DAV - Etablissements
+		GTFDOS_DEV_01.Key	= "C"
+		Do
+			x_st_01 = IRead(GTFDOS_DEV_01, ETS_DEV_01, "C")
+		While x_st_01 = 0
+			ETS_DEV_01.Nom = Left(ETS_DEV_01.Nom) & Left(G3XQ.Lib(6))
+			x_st_02 = IReWrite(GTFDOS_DEV_01, ETS_DEV_01)
+		Wend
+		; DCPT - Dossiers
+		CCFDOS_DEV_01.Key	= "A"
+		Do
+			x_st_01 = IRead(CCFDOS_DEV_01, CA_DEV_01, "A")
+		While x_st_01 = 0
+			CA_DEV_01.Nom = Left(CA_DEV_01.Nom) & Left(G3XQ.Lib(6))
+			x_st_02 = IReWrite(CCFDOS_DEV_01, CA_DEV_01)
+		Wend
+		; DCPT - Etablissements
+		CCFDOS_DEV_01.Key	= "I"
+		Do
+			x_st_01 = IRead(CCFDOS_DEV_01, CETS_DEV_01, "I")
+		While x_st_01 = 0
+			CETS_DEV_01.Nom = Left(CETS_DEV_01.Nom) & Left(G3XQ.Lib(6))
+			x_st_02 = IReWrite(CCFDOS_DEV_01, CETS_DEV_01)
+		Wend
+	EndIf
+
+	; Remomer les chemins
+	A5FTAB_DEV_01.Key	= "J" & t_Dos
+	t_Key_01 = t_Dos
+	Do
+		x_st_01 = IRead(A5FTAB_DEV_01, MCHEMIN_DEV_01, "J")
+	While x_st_01 = 0 And MCHEMIN_DEV_01.Dos = t_Dos
+		t_Chemin = FString("BU",Left(MCHEMIN_DEV_01.Chemin))
+		MCHEMIN_DEV_01.Chemin = Left(Modify(Left(G3XQ.FiltreCode(1)),Left(G3XQ.FiltreCode(2)),FString("BU",MCHEMIN_DEV_01.Chemin)))
+		If t_Chemin <> MCHEMIN_DEV_01.Chemin
+			x_st_02 = IReWrite(A5FTAB_DEV_01, MCHEMIN_DEV_01)
+		EndIf
+	Wend
+
+	sethourglasscursor
+	ficjoint.Name = "gtfjoint.dhfi"
+	hopen(ficjoint,'R')
+	ficjoint.Key = 'A'
+	loop hread(ficjoint,mjoint_b) = 0
+		;FRI 01/02/2013
+		mjoint_b.Chemin = Left(Modify(Left(G3XQ.FiltreCode(1)),Left(G3XQ.FiltreCode(2)),FString("BU",Mjoint_b.Chemin)))  ;		left(mjoint.Chemin)
+		hrewrite(ficjoint,mjoint_b)
+	endloop
+	setnormalcursor
+
+	; Trace Fin
+	d_datetrait = Time(7)																															 
+	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+	s_datetrait = Fstring("0", s_datetrait)
+	G3_LOG_ANO(90013,"Duplication de la base de données","Fin du traitement : ",s_datetrait,,,,,,"COG_FMSG.DHFI",,)
+	MessageBox("Traitement terminé","Duplication de la base de données",MB_OK+MB_ICONINFORMATION)
+
+	FReturn(" ")
+	
+EndF
+
+;*
+Function char COGF_InitChemin
+; Fonction qui lance la création des chemins à partir de la duplication des données sur un dossier de démonstration
+; Retourne :
+; 		" " : si pas d'erreur
+; 		une chaine explicative en cas d'erreur
+1 x_st0				X
+1 s_message			250
+1 i					L
+
+1	x_st_01	X
+1	x_st_02	X
+1	t_Key_01	254
+1	t_Key_02	254
+1	t_Dos_01					>GTFDD.DHSD	Dos
+1	t_Dos_02					>GTFDD.DHSD	Dos
+
+1	s_datetrait	S
+1	d_datetrait	>GTFDD.DHSD UserCrDh
+
+BeginF
+	
+	; Trace Début
+	d_datetrait = Time(7)																															 
+	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+	s_datetrait = Fstring("0", s_datetrait)
+	G3_LOG_ANO(90013,"Creation des chemins","Début du traitement : ",s_datetrait,,,,,,"COG_FMSG.DHFI",,)
+
+	t_Dos_01	= G3XQ.DosF	; Dossier origine
+	t_Dos_02	= G3XQ.DosD	; Dossier destination
+	
+	; Copie de la liste des chemins du dossier 1 vers le dossier 2
+	A5FTAB_DEV_01.Key	= "J" & t_Dos_01
+	t_Key_01 = t_Dos_01
+	Do
+		x_st_01 = IRead(A5FTAB_DEV_01, MCHEMIN_DEV_01, "J")
+	While x_st_01 = 0 And MCHEMIN_DEV_01.Dos = t_Dos_01
+		Init MCHEMIN_DEV_02 = " "
+		MCHEMIN_DEV_02.Dos = t_Dos_02
+		Init MCHEMIN_DEV_02.Etb = " "
+		MCHEMIN_DEV_02.CheminCod = MCHEMIN_DEV_01.CheminCod
+		A5FTAB_DEV_02.Key	= "J" & t_Dos_02
+		t_Key_02 = MCHEMIN_DEV_02.Dos & MCHEMIN_DEV_02.Etb & MCHEMIN_DEV_02.CheminCod
+		x_st_02 = IRead(A5FTAB_DEV_02, MCHEMIN_DEV_02, "J", t_Key_02)
+		If x_st_02 = 0 And MCHEMIN_DEV_02.Dos = t_Dos_02 And MCHEMIN_DEV_02.CheminCod = MCHEMIN_DEV_01.CheminCod
+			; Chemin déja existant => Mise à Jour
+			Init MCHEMIN_DEV_02 = " "
+			MCHEMIN_DEV_02 = MCHEMIN_DEV_01
+			x_st_02 = IReWrite(A5FTAB_DEV_02, MCHEMIN_DEV_02)
+		Else
+			; Chemin non existant => Création
+			Init MCHEMIN_DEV_02 = " "
+			MCHEMIN_DEV_02 = MCHEMIN_DEV_01
+			MCHEMIN_DEV_02.Dos = t_Dos_02
+			Init MCHEMIN_DEV_02.Etb = " "
+			x_st_02 = IWrite(A5FTAB_DEV_02, MCHEMIN_DEV_02)
+		EndIf
+	Wend
+
+	; Trace Fin
+	d_datetrait = Time(7)																															 
+	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+	s_datetrait = Fstring("0", s_datetrait)
+	G3_LOG_ANO(90013,"Creation des chemins","Fin du traitement : ",s_datetrait,,,,,,"COG_FMSG.DHFI",,)
+
+	FReturn(" ")
+	
+EndF
+
+;*
+Main
+	
+; Initialisation
+If PingReceive("ZEchange",MZ) <> 0
+	ProgramExit
+EndIf
+
+; Initialisation des variables
+Seek_Soc(MZ.Dos)		; Contrôle du dossier
+
+; Chargement d'un fichier masque
+XMeLoad(cog_Masque)
+
+;Titre fenêtre
+XMeTitle("DIVALTO Administration \ Gestion des dossiers")
+
+; Renseigne dans des variables systèmes les paramètres de la pages 1
+XMeInfoPage(cog_Masque, 1)
+
+; Chargement en mémoire d'une barre d'outils 
+idTB_Main = XMeToolBarGetID(cog_Masque, "MAIN")
+; Attachement d'une barre d'outils à une page de masque, pour préparer son affichage
+XMeToolBarSetWindow(idTB_Main, cog_Masque, 1)
+; Chargement en mémoire d’un menu classique ou surgissant
+idME_Main = XmeMenuGetId(cog_Masque, "MAIN")
+; Attachement d’un menu classique à une page de masque, pour préparer son affichage
+XmeMenuSetWindow(idME_Main,cog_Masque,1)
+
+;*****VR mise en commentaire pour conversion
+;;;DEB FRI 04/01/2013 recherche chemin fichiers joints
+;;if hseek(a5fdos_dev_01,mdos_dev_01,"A"&mz.dos)=0
+;;	etb=" "
+;;	if hseek(a5ftab_dev_01,mchemin_dev_01,"J"&mz.dos&etb&mdos_dev_01.jointchemincod(1))=0
+;;		mjoint.chemin=mchemin_dev_01.chemin
+;;	endif
+;;endif
+
+
+
+; Initialisation des variables
+Init G3XQ = " "
+	; Dossier
+G3XQ.DosD = SOC.Dos
+G3XQ.Lib(1) = Left(Soc.Nom)
+G3XQ.DosF = "998"
+G3XQ.Lib(3) = "Papyrus (Jeu d'essai)"
+	; Etablissement
+Seek_Ets(MZ.ETB)
+G3XQ.Etb = ETS.Etb
+G3XQ.Lib(2) = Left(ETS.Nom)
+	; Zones pour la duplication
+G3XQ.FiltreCode(1) = "BASE_PRODUCTION"
+G3XQ.FiltreCode(2) = "BASE_TEST"
+G3XQ.Choix(1) = 2
+G3XQ.Lib(6) = " - TEST"
+
+; Lancement de la saisie d'un masque
+Xmeinput(cog_Masque, 1,0, XMe_Mode_Goto)
+
+; Boucle sur la saisie	
+Do
+	Switch Harmony.Arret
+		Case STATIN_F9  ;Abandon
+			b_FIN = True
+		
+		Case Harmony.Arret = 1001
+			; 
+			If MessageBox("Vous allez lancer la création des chemins suite à la création d'un nouveau dossier.|Voulez vous continuer ?", "Confirmation d'éxécution", MB_YESNO + MB_ICONQUESTION) = IDYES
+				COGF_InitChemin
+			EndIf
+			; Reprise de la saisie du masque
+			System.Statin = 0
+			Harmony.Arret = 0
+
+		Case Harmony.Arret = 1002
+			; 
+			If MessageBox("Vous allez lancer la modification des données de paramétrage suite à un rechargement des données.|Voulez vous continuer ?", "Confirmation d'éxécution", MB_YESNO + MB_ICONQUESTION) = IDYES
+				COGF_InitDuplication
+			EndIf
+			; Reprise de la saisie du masque
+			System.Statin = 0
+			Harmony.Arret = 0
+
+		Case Statin_F8						; Appel de zoom
+			Zoom_Call(Harmony.Arret)
+
+		Case Statin_F7
+			Zoom_Call()
+
+		Case Harmony.DataArret = 8002
+			If Harmony.Sourisbout = Right_Button
+				Zoom_Call()
+			ElsIf Harmony.Sourisclic = Double_Click
+				Harmony.Retour = Xmenext_Simulation_Touche
+				Harmony.Cplretour = C_F8
+			EndIf
+
+		Default
+			
+		EndSwitch
+While b_FIN = False
+	; Reprise de la saisie du masque
+	XmeNext(Harmony.RETOUR, Harmony.CPLRETOUR)
+Wend
+
+If b_FIN = TRUE
+	; Fin
+EndIf
+
+ProgramExit
+
