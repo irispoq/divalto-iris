@@ -1,0 +1,216 @@
+
+;*
+;*		COGESER  Interface d"exportation des écritures comptables
+;*
+
+;*		Log	 Version	  NPmodIf		Date		ModIfications
+;*
+;*		JDT		6.1			01			06.2009	Version initiale
+;*
+
+OverWrittenBy "COGuCC_EXPORT01.dhop"
+
+Module COG_CC_EXPORT_ECR.DHOP
+
+Include "GTTC000.DHSP"				; Déclarations communes
+module	"ccpmfic.dhop"
+module	"a5tm000.dhop"
+module	"a5pmwin.dhop"
+
+; Fichiers
+Public HFile	GTFDD.DHSD	GTFDOS		GTFDOS		; Dossier établissement
+
+; Enregistrements
+Public Record	GTFDD.DHSD	SOC			SOC			; Société
+Public Record	GTFDD.DHSD	Ets			Ets			; Etablissement
+; Enregistrement de travail
+Public Record	A5DD.DHSD	MZ				MZ				; Echanges
+Public Record	GTFDD.DHSD	XQ				XQ				; Jobqueue
+Public Record	DDSYS.DHSD	Implicite	Implicite	; Implicite
+Public Record	ccfdd.dhsd	ca				ca				; dossiers comptables
+public record	a5dd.dhsd	mchemin		mchemin
+
+Define cog_Masque = "cog_cc_export01.dhof"
+1 idTB_Main			L					; IdentIfiant barre d'outils MAIN
+1 idME_Main			L					; IdentIfiant du menu MAIN 
+1 idME_POPChemin	L					; IdentIfiant du menu POP CHEMIN
+
+1	b_FIN				B = False 		; Variable de fin de saisie du masque
+
+1	t_SeparateurC		8						; Séparateur champ
+1	t_SeparateurL		8						; Séparateur ligne
+1	FicNom01				255 = " "
+1	auto					1,0	= false
+
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+;*
+Main
+	
+; Initialisation
+If PingReceive("ZEchange",MZ) <> 0
+	
+	auto	= true
+	;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+	if iseek(a5fdos_loc,muser_loc,"B",system.user)
+
+		programexit
+
+	else
+
+		mz.dos		= muser_loc.dos
+		mz.etb		= muser_loc.etb
+		mz.depo		= muser_loc.depo
+		mz.mecle		= "cog_cc_export01.dhof"
+
+	endif
+
+EndIf
+
+; Initialisation des variables
+Seek_Soc(MZ.Dos)		; Contrôle du dossier
+Seek_CA(mz.Dos)
+
+; Chargement d'un fichier masque
+XMeLoad(cog_Masque)
+
+;Titre fenêtre
+XMeTitle("DIVALTO Comptabilité \ Exportation des écritures comptables")
+
+; Renseigne dans des variables systèmes les paramètres de la pages 1
+XMeInfoPage(cog_Masque, 1)
+
+; Chargement en mémoire d'une barre d'outils 
+idTB_Main = XMeToolBarGetID(cog_Masque, "MAIN")
+; Attachement d'une barre d'outils à une page de masque, pour préparer son affichage
+XMeToolBarSetWindow(idTB_Main, cog_Masque, 1)
+; Chargement en mémoire d’un menu classique ou surgissant
+idME_Main = XmeMenuGetId(cog_Masque, "MAIN")
+; Attachement d’un menu classique à une page de masque, pour préparer son affichage
+XmeMenuSetWindow(idME_Main,cog_Masque,1)
+; Chargement en mémoire d’un menu classique ou surgissant
+idME_POPChemin = XmeMenuGetId(cog_Masque,"POP_CHEMIN")
+									 
+; Initialisation des variables
+	; Dossier
+XQ.DOS = SOC.Dos
+XQ.Lib(1) = Left(Soc.Nom)
+	; Etablissement
+Seek_Ets(MZ.ETB)
+XQ.Etb = ETS.Etb
+XQ.Lib(2) = Left(ETS.Nom)
+	; Mode d'exportation
+XQ.Choix(1) = 1
+XQ.PiNoD = "10000000"
+XQ.PiNoF = "99999999"
+XMeSetAttribut("cog_chrono", AN_VISIBILITE, AV_GRISE)
+	; Séparateur de champs
+XQ.Choix(2) = 1
+t_SeparateurC = ";"
+	; Séparateur de lignes
+XQ.Choix(3) = 3
+t_SeparateurL = " " & Chr(13)	& Chr(10)
+	;Longueur Fixe
+XQ.Choix(4)	= 2
+	; Fichier
+Rechercher_Chemin (mz.Dos, mz.Etb, "EXPORT_VERSANAEL_H");ca.Cog_Exp_Ch)
+XQ.Fic = condition(mchemin.CheminTyp<3,Win_ConvertirEnNomWindows(mChemin.Chemin),mchemin.Chemin)
+
+if not auto
+
+	; Lancement de la saisie d'un masque
+	Xmeinput(cog_Masque, 1,0, XMe_Mode_Goto)
+	
+	; Boucle sur la saisie	
+	Do
+		Switch Harmony.Key
+			Case k_f9  ;Abandon
+				b_FIN = True
+			
+			Case Harmony.Arret = 1000
+				; Chemin Harmony
+				XQ.Fic = Harmony.DataVal
+				If (XQ.Fic:=Win_Dialogue_Repertoire_Ouvrir(XQ.Fic, XQ.Fic)) <> ' '
+					XmeLoadCurrentData(XQ.Fic)
+					XQ.Fic = Left(XQ.Fic)
+				EndIf
+	
+			Case Harmony.Arret = 1001
+	         If Harmony.SourisBout = RIGHT_BUTTON
+	            Harmony.PopupMenu = idME_POPChemin      ; prépare l’appel du menu popup (affichage au prochain XmeNext)
+	            Harmony.Retour = XMENEXT_POPUP_MENU
+	         EndIf
+	
+			Case vsw in (k_f10,k_tab,k_down)
+				; 
+				If MessageBox("Vous allez lancer l'exportation des écritures comptables.|Voulez vous continuer ?", "Exportation des Ecritures Comptables", MB_YESNO + MB_ICONQUESTION) = IDYES
+					; Initialisation des paramètres
+						; Séparateur de champs
+					Switch XQ.Choix(2)
+						Case 1 
+							t_SeparateurC = ";"
+						Case 2
+							t_SeparateurC = ","
+						Case 3
+							t_SeparateurC = "|"
+						Case 4
+							t_SeparateurC = Chr(9)
+						Default
+							t_SeparateurC = ";"
+					EndSwitch
+						; Séparateur de lignes
+					Switch XQ.Choix(3)
+						Case 1 
+							t_SeparateurL = " " & Chr(13)
+						Case 2
+							t_SeparateurL = " " & Chr(10) 
+						Case 3
+							t_SeparateurL = " " & Chr(13)	& Chr(10) 
+						Default
+							t_SeparateurL = " " & Chr(13)
+					EndSwitch
+					; Exécution du programme
+					FicNom01 = " "
+					FicNom01 = COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL)
+					If Left(FicNom01) <> " "
+						XQ.Echange = "L'exportation des écritures comptables s'est bien déroulée.|Le fichier suivant a été crée avec succés :|'" & Left(FicNom01) & "'"
+						MessageBox(Left(XQ.Echange),"Exportation des Ecritures Comptables",MB_OK+MB_ICONINFORMATION)
+						b_FIN = TRUE
+					Else
+						b_FIN = False
+					EndIf
+				EndIf
+	
+			Case k_f8						; Appel de zoom
+				Zoom_Call(Harmony.Arret)
+	
+			Case k_f7
+				Zoom_Call()
+	
+			Case Harmony.DataArret = 8002
+				If Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				ElsIf Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = C_F8
+				EndIf
+	
+			Default
+				
+			EndSwitch
+	While b_FIN = False
+		; Reprise de la saisie du masque
+		XmeNext(Harmony.RETOUR, Harmony.CPLRETOUR)
+	Wend
+	
+	If b_FIN = TRUE
+		; Suppression ou message livre de bord
+	EndIf
+
+else
+	FicNom01 = COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL)
+endif
+
+ProgramExit
+

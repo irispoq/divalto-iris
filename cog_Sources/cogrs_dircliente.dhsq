@@ -1,0 +1,27 @@
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_dirclientu.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du cog_FDirCliente
+;*
+
+;*
+;* 		Direction cliente
+;*
+
+<RecordSQL	Name=CogRs_DirCli	Comment='irection cliente'>
+Public Record "a5dd.dhsd"		MZ
+<SELECT>
+	Cog_DirCliente.*
+<FROm insert=YES update=YES delete=YES>
+	Cog_DirCliente
+<WHERE>
+	Cog_DirCliente.DOS = MZ.DOS
+	Case Equal_Etb(char etb)
+		Cog_DirCliente.ETB = etb
+	Case Zoom_Like_Lib(char lib)
+	 	Cog_DirCliente.LIB LIKE lib
+	Case Equal_CodeDir(int code)	
+		Cog_DirCliente.COG_DIRCLIENTECOD = code
+	Case Zoom_PK(char etb, int code)
+		Cog_DirCliente.ETB = etb AND 	Cog_DirCliente.COG_DIRCLIENTECOD = code
+	Case Exists(char etb, int code)
+		Cog_DirCliente.ETB = etb AND 	Cog_DirCliente.COG_DIRCLIENTECOD = code

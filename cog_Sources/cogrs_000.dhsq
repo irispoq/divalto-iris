@@ -1,0 +1,15 @@
+<DictionarySql defaultDictionary=A5DD.dhsd DataBase=DAV overwrittenby="cogrs_000u.dhoq" ModuleInfo='$Id: cogrs_000.dhsq 53 2012-08-06 08:21:23Z s.renaudineau $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du module commun
+;*
+
+;*
+;* 		Libellé Table Paramètre
+;*
+
+<RecordSql Name=CogRS_LivreDeBord Comment='Livre de Bord'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	M8.*
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	M8 

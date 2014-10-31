@@ -1,0 +1,42 @@
+Hfile		cog_echange.dhsd				Cog_ParDivEch		Cog_ParDivEch
+Hfile		cog_echange.dhsd				Cog_ParDivEch		Cog_ParDivEchL
+Hfile		cog_echange.dhsd				Cog_ParDivEch		Cog_ParDivEchZ
+
+Record	cog_echange.dhsd	cog_parazones
+Record	cog_echange.dhsd	cog_paratables
+Record	cog_echange.dhsd	cog_paratables		cog_paratablesL
+
+MAIN
+
+	If MessageBox("Confirmez vous l'initialisation par rapprochement des nouveaux Id poir le paramétrage de DIVIMPORT ?", "Choix", MB_YesNo+Mb_IconQuestion) = IdYes
+;		Cog_ParDivEch.KeyValue = " "
+;		Loop Iread(Cog_ParDivEch, cog_paratables , 'D') = 0
+;			cog_paratables.idnum = " "
+;			IRewrite(Cog_ParDivEch, cog_paratables)
+;		EndLoop
+;		Cog_ParDivEchZ.KeyValue = " "
+;		Loop Iread(Cog_ParDivEchZ, cog_parazones, "A") = 0 
+;			cog_parazones.idnum = " "
+;			IRewrite(Cog_ParDivEchZ, cog_parazones)
+;		EndLoop
+		PrintBegin
+		Cog_ParDivEch.KeyValue = " "
+		Loop Iread(Cog_ParDivEch, cog_paratables , 'D') = 0
+			If cog_paratables.Idnum = " "
+				If IPRead(Cog_ParDivEchL, cog_paratablesL, 'E', 99999) = 0 and cog_paratablesl.idnum <> " "
+					cog_paratables.idnum	= cog_paratablesL.idnum + 1
+				Else
+					cog_paratables.idnum = 1
+				EndIf
+				Print["Table : " & cog_paratables.idnum & cog_paratables.enreg]
+				IRewrite(Cog_ParDivEch, cog_paratables)
+				Cog_ParDivEchZ.KeyValue = cog_paratables.dico & cog_paratables.mnemo & cog_paratables.enreg
+				Loop Iread(Cog_ParDivEchZ, cog_parazones, "A") = 0 and cog_parazones.dico = cog_paratables.dico and cog_parazones.mnemo = cog_paratables.mnemo and cog_parazones.enreg = cog_paratables.enreg
+					cog_parazones.idnum = cog_paratables.idnum
+					IRewrite(Cog_ParDivEchZ, cog_parazones)
+					Print["Zone : " & cog_parazones.idnum & " " & cog_parazones.champ ]
+				EndLoop
+			EndIf
+		EndLoop
+		PrintEnd
+	Endif

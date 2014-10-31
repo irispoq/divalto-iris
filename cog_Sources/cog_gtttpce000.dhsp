@@ -1,0 +1,1530 @@
+SetModuleInfo('$Id$')
+;*
+;*		Saisie des pièces 7.2
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		
+
+OverWrittenBy	"COG_GTUTPCE000.dhop"
+
+Include	'GTTCZ00.dhsp'
+Include	'GTTCPCE000.dhsp'
+
+;Module	'CCTM000.dhop'
+Module 	'CCTM000.DHOP'
+Module	'CCPMFIC.DHOP'
+;Module	'GTPMPCE.dhop'
+Module	'GTPMPCE000.dhop'
+;Module	'GTPMPCEAFFICHAGE.dhop'
+;Module 	'GTPMFICSQL.dhop'
+;Module	'GTPMSTOC.dhop'
+Module	'GTPPPCE000.dhop'
+Module	'GTTMPCE.dhop'
+;Module 	'RCTM000.dhop'
+Module 	'A5PMFIC.dhop'
+Module 	'A5PMFLASH.dhop'
+Module	'COGTM_VALID_CDE.DHOP'
+
+; Fichiers
+			Hfile	a5dd.dhsd	A5FFLASH				A5FFLASH
+		 	Hfile	a5dd.dhsd	A5FDOS				A5FDOS
+;Public 	Hfile	cogfdd.dhsd	Cog_FDirCliente	Cog_FDirCliente_01
+Public 	HFile	CCFDD.DHSD	CCFJCA				CCFJCA_DEV_01			; Plan comptable
+		 	HFile	a5dd.dhsd	a5fdos				pw_a5fdos
+public 	hfile	gtfdd.dhsd	GTFAT					GTFAT				; Fichier des articles
+public 	hfile	gtfdd.dhsd	GTFENT				GTFENT
+public 	hfile	gtfdd.dhsd	GTFAM					GTFAM	
+public 	hfile	gtfdd.dhsd	GTFVTL				GTFVTL
+public 	hfile	gtfdd.dhsd	GTFPCF				GTFPCF			; Fichier des tiers
+public 	hfile	gtfdd.dhsd	GTFPROJ				GTFPROJ			; Fichier des projets
+;public hfile	gtfdd.dhsd	GTFRF					GTFRF				; fichier référence externe 
+public 	hfile	ccfdd.dhsd	CCFDOS				CCFDOS	noopen; Fichier dossier de C3
+public 	hfile	ccfdd.dhsd	CCFJCA 				CCFJCA	noopen; Fichier dossier de C3
+
+;public recordsql "gtrsppslr.dhoq" LivRecLigne
+
+; Enregistrements
+;Public Record	DDSYS.dhsd 	ROWINFO 							; Enregistrement de contrôle du tableau
+;Public Record	A5DD.dhsd	MZ
+;
+;Public Record	GTFDD.dhsd	SOC								; société
+Public Record	GTFDD.dhsd	ETS								; Etablissement
+Public Record	GTFDD.dhsd	CLI								; Client
+;Public Record	GTFDD.dhsd	PRO								; Prospect
+Public Record	GTFDD.dhsd	FOU								; Fournisseur
+;Public Record	GTFDD.dhsd	TIA								; Tiers interne
+Public Record	GTFDD.dhsd	CLI		TIERS
+Public Record 	a5dd.dhsd 	MUSER
+Public Record 	a5dd.dhsd 	MUSER		TRMUSER
+Public Record  a5dd.dhsd	MFLASH
+;
+;Public Record	GTFDD.dhsd	RFO								; Référencement fournisseur
+;
+;Public Record	GTFDD.dhsd	VRP								; Représentant
+Public Record	GTFDD.dhsd 	T1
+;Public Record	GTFDD.dhsd 	T2									; Contact
+;Public Record	GTFDD.dhsd 	T3
+;
+Public Record	GTFDD.dhsd 	ART								; Articles
+
+;
+;Public Record GTFDD.dhsd 	G4
+;Public Record GTFDD.dhsd 	XZ				G3XZ
+;
+Public Record	GTFDD.dhsd	ENT								; En-tête
+Public Record	GTFDD.dhsd	ENT	ENTOri					; En-tête origine en duplication
+Public Record	GTFDD.dhsd	ENT	W1ENT						; En-tête
+Public Record  GTFDD.dhsd 	T020								; table des codes opération
+Public Record  GTFDD.dhsd 	T037								; table des salariés
+Public Record  GTFDD.dhsd 	T051
+Public Record  GTFDD.dhsd 	T055								; 
+
+Public Record	GTFDD.dhsd	PRJAP								; Affaire
+Public Record	GTFDD.dhsd	PRJAV								; Projet
+
+Public Record	GTFDD.dhsd 	GTPCE								; Enregistrement de travail
+Public Record	GTFDD.dhsd 	GTENT								; Enregistrement de travail
+Public Record	GTFDD.dhsd 	G1T1								; Enregistrement gestion tableau lignes
+Public Record	GTFDD.dhsd	G1T2								; Enregistrement gestion tableau ventilations
+Public Record	GTFDD.dhsd 	MOUV								; Mouvement en suppression de pièce
+Public Record	GTFDD.dhsd	MVTL								; ventilation
+
+Public Record  CCFDD.dhsd	C4
+
+Public Record CCFDD.dhsd	CZ
+Public Record CCFDD.dhsd	CD									; dossier, paramètres immobilisations
+Public Record CCFDD.dhsd	HD			HD
+public record a5dd.dhsd		A1
+public record gtfdd.dhsd	xq						xqmes
+Public Record CCFDD.DHSD	C3						C3_DEV_01; Plan comptable
+Public Record a5dd.dhsd		mconfuser
+		 Record a5dd.dhsd		mconfdet				confdet
+
+Public Record cogfdd.dhsd 	Cog_DirCliente		Cog_DirCliente_01
+
+;	Var
+1		SavCE4			>gtfdd.dhsd		Ce4
+1		flagInit			1,0
+1		lId_ListImmo	L
+1		txtMSB			S
+1		adrFunct			16
+
+; Constantes pour les Pcod(1) et Pcod(2)
+Const C_Prix_Auto					= 1							; Recherche complète
+Const C_Prix_Promotion_Saisi	= 2							; Code promo saisi
+Const C_Prix_Standard_Saisi	= 3							; Code standard saisi
+Const C_Prix_Manuel				= 4							; Prix manuel
+
+; Constantes pour les Ce4 de ENT
+Const C_STATUT_PROVISOIRE			= '7'
+
+
+;*
+;*	  Traitements liés à l'envoi de mails / flash
+;*
+
+;*
+Public Procedure Cog_A5_Flash_Destinataire_Ap
+;
+BeginP
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'	  ; DEVIS CLIENT
+			Pinglocal("muser",muser)
+			; Ajout dans le flash du destinataire
+			If ENT.CE4 = '7'
+				If Not T051.Cog_SalGrp = system.esp And Lectab(54,T051.Cog_SalGrp) = 0
+					GTFTAB.Key = ' '
+					Do While Next_table(55, T051.Cog_SalGrp, GTFTAB.Key) = 0
+						If Seek_Muser(T055.salcod) = 0 and muser.email <> system.esp | A5_Flash_Ajouter_Destinataire_Internet_Spe(Muser.Email) | Endif
+					Wend
+				Endif
+			Endif
+			Pinglocalreceiveanddelete("muser",muser)
+
+		Case 'F2'		; COMMANDES FOURNISSEURS
+			A5_Flash_Ajouter_Destinataire_Internet_Spe(xqmes.UXQ)
+
+	EndSwitch
+
+EndP
+
+
+;*
+Public Procedure Cog_A5_Flash_Creation_Message_Av
+;
+beginp
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'F2'		; COMMANDES FOURNISSEURS
+			A1.MsgObj	= xqmes.WinTitre
+			A1.MsgTxt	= xqmes.Sel
+
+	EndSwitch
+
+endp
+
+
+;*
+Procedure Change_Destinataire
+;
+BeginP
+	Pinglocal("muser",muser)
+	; Ajout dans le flash du destinataire
+	If ENT.CE4 = '1'
+		If Seek_Muser(ENT.SALCOD) = 0 and Muser.Email <> system.esp
+		   If Hseek(A5fdos,TRmuser,"B" & Mflash.SalCod(1)) = 0                       
+		      TRmuser.email = Muser.Email
+		      Hrewrite(A5fdos,TRmuser)
+		   Endif
+		Endif
+	Else
+		If Lectab(37,ENT.SALCOD) = 0 and Lectab(51,T037.SERVCOD) = 0
+			If Seek_Muser(T051.salcod) = 0 and muser.email <> system.esp
+			   If Hseek(A5fdos,TRmuser,"B" & Mflash.SalCod(1)) = 0                       
+			      TRmuser.email = Muser.Email
+			      Hrewrite(A5fdos,TRmuser)
+			   Endif
+			Endif
+		Endif
+	Endif
+	Pinglocalreceiveanddelete("muser",muser)
+EndP
+
+;*
+;*	  Fonctions / procédures spécifiques
+;*
+
+;*
+Function Long Cog_Tri_Immo(&A, &B)
+;
+1		A		>ccfdd.dhsd		Immo
+1		B		>ccfdd.dhsd		Immo
+BeginF
+	FReturn(SortCompare(A, B))
+EndF
+
+;*
+Function int Cog_Seek_I1Enrno(wEnrno, wDelete)
+; 0 --> pas de résultat
+; 1 --> I1 trouvé pour Enrno
+RecordSQL	"CCRSIMMO.DHOQ"		IMMO		wRs_IMMO
+1		wEnrno		>gtfdd.dhsd		EnrNo
+1		wDelete		1,0	= FALSE								; pour effacement
+BeginF
+
+	wRs_IMMO.Init()
+	wRs_IMMO.Where.Equal_Enrno(wEnrno)
+	If wRs_IMMO.GetCount() > 0
+		If wDelete
+			FReturn(wRs_IMMO.DeleteWhere())
+		Else
+			FReturn(1)
+		EndIf
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Cog_Insert_I1(wMVTL, wQte)
+; initialisation des champs de IMMO et insert()
+; 0 --> erreur
+; 1 --> enreg créé
+RecordSQL	"COG_CCRSIMMO.DHOQ"	CogRs_IMMO		wRs_IMMO
+RecordSQL	"COG_CCRSIMMO.DHOQ"	CogRs_IMMO		wRs_CPT
+Record		"GTFDD.dhsd"			MVTL				wMVTL
+1				wResaOK					1,0
+1				wErr						1,0		= FALSE
+1				wQte						8,0		= 1
+1				wCout						16,D0	
+BeginF
+
+	wRs_IMMO.Init()
+	wRs_IMMO.Dos			= MZ.Dos
+	wRs_IMMO.Ce1			= '1'									; enregistrement immobilisation
+	wRs_IMMO.Ce3			= '1'									; bien actif
+	wRs_IMMO.ExoDDt		= CD.ExoDDt							; date début exercice
+	wRs_IMMO.ExoFDt		= CD.ExoFDt							; date fin exercice
+	wRs_IMMO.Etat			= 1									; état en cours
+	wRs_IMMO.Position		= 1									; position non amorti
+	wRs_IMMO.Calcul		= 2									; à recalculer
+	wRs_IMMO.Etb			= MZ.EtbC3
+	wRs_IMMO.ImmoDt		= CD.ExoDDt							; date d'effet=debut exercice courant
+	wRs_IMMO.Etat			= 1
+	wRs_IMMO.Position		= 1
+	wRs_IMMO.Calcul		= 2
+	wRs_IMMO.ImmoComp 	= 0									; le bien n'est pas un composant
+	wRs_IMMO.CeNote		= 1
+	wRs_IMMO.Note			= 0
+	wRs_IMMO.CeJoint		= 1
+	wRs_IMMO.Joint			= 0
+	if wRs_IMMO.ExoPDt	= ' '
+		wRs_IMMO.ExoPDt	= CD.ExoDDt
+	endif
+
+	; spécifique
+	wCout = G1T1.PuStat*wQte
+	If wQte = G1T1.BlQte
+		;G1T1.Mont
+		wMVTL.Serie = Condition(wMVTL.Serie <> ' ', wMVTL.Serie, G1T1.Serie)
+;	Else
+;		wCout = G1T1.Mont/ G1T1.BlQte		; BLqte > 0 controlé sur l'activation du bouton
+	EndIf
+
+	wRs_IMMO.NatImmo		= Art.NatImmo
+	wRs_IMMO.BlNo			= G1t1.BlNo
+	wRs_IMMO.AcqDt			= G1T1.BlDt
+	wRs_IMMO.SvcDt			= G1T1.BlDt
+	wRs_IMMO.Lib			= G1T1.Ref
+	wRs_IMMO.EcoBas		= wCout
+	wRs_IMMO.FisBas		= wCout
+	wRs_IMMO.Cr				= wCout
+	wRs_IMMO.BtpMt			= wCout
+	wRs_IMMO.CrelTMt(1)	= wCout
+	wRs_IMMO.CrelTLib(1) = "Valeur d'entrée initiale"
+	wRs_IMMO.Serie			= wMVTL.Serie
+	wRs_IMMO.Axe(1)		= G1t1.Axe(1)
+	wRs_IMMO.Axe(2)		= G1t1.Axe(2)
+	wRs_IMMO.CptAux		= G1T1.Tiers
+	wRs_IMMO.Cpt			= ART.Cog_CptIA
+	wRs_IMMO.EnrNo			= G1T1.EnrNo
+	wRs_IMMO.Cog_AmoFlag = 1
+	wRs_IMMO.Cog_BwId		= ENT.Cog_BwId
+	; onglet COMPTABILISATION
+	wRs_IMMO.CptAmo		= HD.CptAmo
+	wRs_IMMO.CptDotAmo	= HD.CptDotAmo
+	wRs_IMMO.CptProDro	= HD.CptProDro
+	wRs_IMMO.CptDotDro	= HD.CptDotDro
+	wRs_IMMO.CptRepDro	= HD.CptRepDro
+	wRs_IMMO.CptProDep	= HD.CptProDep
+	wRs_IMMO.CptDotDep	= HD.CptDotDep
+	wRs_IMMO.CptDotRep	= HD.CptDotRep
+	; onglet AMORTISSEMENT
+	wRs_IMMO.EcoTyp		= Condition(HD.EcoTyp <> 0, HD.EcoTyp, 1)	; mode économique = 1:linéaire par défaut
+	wRs_IMMO.EcoDur		= HD.EcoDur
+	wRs_IMMO.FisTyp		= Condition(HD.FisTyp <> 0, HD.FisTyp, 1)	; mode fiscal = 1:linéaire
+	wRs_IMMO.FisDur		= HD.FisDur
+	wRs_IMMO.UoCode		= HD.UoCode									
+									
+	wRs_IMMO.UserCr	 	= SYSTEM.User
+	wRs_IMMO.UserCrDh	 	= time(7)
+	wRs_IMMO.UserCrOri 	= 14					; multichoix 14 = IMMOBILISATION
+							 	
+	wRs_IMMO.Ce7			= condition(wRs_IMMO.Axe(1) <> ' ', '1', ' ')
+	wRs_IMMO.Ce8		 	= condition(wRs_IMMO.Axe(2) <> ' ', '1', ' ')
+	wRs_IMMO.Ce9		 	= condition(wRs_IMMO.Axe(3) <> ' ', '1', ' ')
+	wRs_IMMO.CeA			= condition(wRs_IMMO.Axe(4) <> ' ', '1', ' ')
+
+	; compteur
+	wRs_CPT.Init()
+	wRs_CPT.Where.Max_Immo()
+	If wRs_CPT.Select() > 0
+		wRs_IMMO.Immo = wRs_CPT.Immo 
+	Else
+	  	wRs_IMMO.Immo = 0
+	EndIf
+
+	wResaOK = FALSE
+	Do While not wResaOK	AND not wErr
+		wRs_IMMO.Immo++
+		wRs_CPT.Where.Zoom_PK(wRs_IMMO.Immo, wRs_IMMO.ImmoComp)
+
+		If wRs_CPT.Select() = 0 
+			If wRs_IMMO.FShare([ Formater_Res("C3I1") MZ.Dos wRs_IMMO.Immo ], 'R') = 0
+				wResaOK = TRUE
+			EndIf
+		EndIf
+
+		If not wResaOK AND wRs_IMMO.Immo = 99999999
+			If MessageBox("Le compteur des fiches bien est saturé.|Reprendre la numérotation à 1? Le premier numéro libre sera attribué.","Erreur", \
+				MB_ICONERROR+MB_YESNO) = IDYES
+				wRs_IMMO.Immo = 0
+			Else
+				wErr = TRUE
+			EndIf
+		EndIF
+
+	WEnd
+
+	wRs_IMMO.Insert()
+	wRs_IMMO.FShare([ Formater_Res("C3I1") MZ.Dos wRs_IMMO.Immo ], 'L')
+	Trace_SOX_SQL(wRs_IMMO, MZ.Applic, 1)
+
+	ListInsert(lId_ListImmo, wRs_IMMO.Immo)
+
+	FReturn(1)
+
+EndF
+
+
+;*
+Procedure Cog_Generer_I1(wPicod, wPino)
+; Génération des fiches de bien
+
+RecordSQL	"GTRSPPPCE.DHOQ"	Ventilation		wRs_MVTL
+Record		"gtfdd.dhsd"		G1t1				G1t1_Loc
+Record		"gtfdd.dhsd"		G1t2				G1t2_Loc
+1		wPicod		1,0
+1		wPino			>gtfdd.dhsd		Pino
+1		wAdrCur1		L
+1		wAdrCur2		L
+1		wCreaOK		1,0 = TRUE
+1		nQTE_nI1		1,0 = FALSE
+1		wBoucle		1,0 = TRUE
+1		i				8,0
+1		j				8,0
+1		wRead			L
+1		wCptI1		6,0
+1		wErr			1,0
+1		wImmo			>ccfdd.dhsd		Immo
+1		wImmoD		>ccfdd.dhsd		Immo
+1		wImmoF		>ccfdd.dhsd		Immo
+
+BeginP
+
+	;
+	;	CONTROLES
+	;
+
+	; Réservation de la pièce
+	Do While	Res_ENT('F', wPicod, wPino) <> 0
+		If MessageBox("La pièce est réservée par un autre utilisateur, réessayer?", "Question", MB_ICONQUESTION+MB_YESNO) = IDNO
+			PReturn
+		EndIf
+	WEnd
+
+	;
+	If CZ.Dos = " " AND Seek_CZ(application=1) <> 0
+		CZ = " "
+		MessageBox("Dossier paramètres communs comptabilité non trouvé.","Erreur", MB_ICONERROR)
+		PReturn
+	EndIf
+
+	; recherche du dossier paramètres
+	If CD = " "
+		If Seek_CD() <> 0
+			CD = " "
+			MessageBox("Dossier paramètres du module immobilisations non trouvé.","Erreur", MB_ICONERROR)
+			PReturn
+		Else
+
+			if CD.ExoDDt = ' ' or CD.ExoFDt = ' '
+				Mes_Alert(19706)
+				CD = " "
+				PReturn
+			endif
+
+		EndIf
+	EndIf
+
+	; lecture nature immobilisation
+	If ART.NatImmo <> ' ' AND (HD.Dos <> ART.Dos OR HD.NatImmo <> ART.NatImmo)
+		If Lectab_HD(ART.NatImmo) <> 0
+			MessageBox("Nature d'immobilisation " & left(ART.NatImmo) & " non trouvée.","Erreur", MB_ICONERROR)
+			PReturn
+		EndIf
+	EndIf
+
+	;	contrôle compte imo
+	If Seek_ART(G1T1.Ref) <> 0	 ; rechargement systématique en cas de modif de la fiche
+		MessageBox("Article " & left(G1T1.Ref) & " non trouvé.","Erreur", MB_ICONERROR)
+		PReturn
+	Else
+		ART.Cog_CptIA = 	Condition(ART.Cog_CptIA <> ' ', ART.Cog_CptIA, \
+								Condition(HD.Cpt <> ' ', HD.Cpt, \
+								Condition(CD.CptAmoInc <> ' ',CD.CptAmoInc ,ART.Cog_CptIA)))
+		If ART.Cog_CptIA = ' '
+			MessageBox("Le compte d'achat immobilisation n'est pas renseigné sur la fiche article ref " & left(G1T1.Ref),"Erreur", MB_ICONERROR)
+			PReturn
+		EndIf
+	EndIf
+
+	; controle piece HT
+	If ENT.HtCod = 2
+		MessageBox("La pièce est en type de prix TTC, le programme ne traite que les pièces exprimées en prix HT.","Erreur", MB_ICONERROR)
+		PReturn
+	EndIf
+
+	;
+	; Traitement
+	;
+
+	lId_ListImmo 	= ListGetId("COG_LIST_IMMO")
+	ListErase(lId_ListImmo)
+	GetAdressFunction(' ', "Cog_Tri_Immo", AdrFunct)
+	ListMode(lId_ListImmo, 1, adrFunct)
+
+	If Cog_Seek_I1Enrno(G1T1.EnrNo) 
+		MessageBox(Translate("Il existe déjà des fiches de bien pour cette ligne."), Translate("Alerte"), MB_ICONINFORMATION)
+		wCreaOK = FALSE
+	EndIf
+
+	If wCreaOK
+
+		; quel mode de création? n QTe - 1 fiche ou n QTe - Fiches
+		nQTE_nI1 	= FALSE
+		wRs_MVTL.Init()
+		wRs_MVTL.Join.Deactivate("$All")
+		wRs_MVTL.Where.Equal_EnrNo(G1T1.EnrNo)
+		wRs_MVTL.Where.AddCondition("Equal_EnrNo")
+
+		If wRs_MVTL.GetCount() <> G1T1.BlQte
+			If MessageBox("La ligne d'article possède une quantité > 1 mais pas autant de ventilations par n° de série.",\
+				& "|Par défaut dans ce cas le traitement créé 1 seule fiche de bien."\
+				& "|Changer ce mode et créer autant de fiches que de quantité réceptionnée?"\
+				"Question", MB_ICONQUESTION+MB_YESNO)  = IDYES
+				nQTE_nI1 = TRUE
+			EndIf
+		Else
+			nQTE_nI1 = TRUE
+		EndIf
+
+		;
+		wRs_MVTL.Init()
+		wRs_MVTL.Where.RemoveCondition("")
+		wRead = wRs_MVTL.ReaderOpen()
+		wRs_MVTL.Where.Equal_EnrNo(G1T1.EnrNo)
+		wRs_MVTL.ReaderSelect(wRead)
+		wErr 		= FALSE
+		wBoucle 	= TRUE
+		wCptI1 = 0
+
+		Do While wRs_MVTL.ReaderNext(wRead) > 0  AND not wErr AND wBoucle
+
+			If not nQTE_nI1
+				wBoucle = FALSE ; 1 seule lecture
+				j = 1
+				wRs_MVTL.Qte = G1T1.BlQte
+			Else
+				j = wRs_MVTL.Qte
+				wRs_MVTL.Qte = 1
+			EndIF
+		
+			For i = 1 to j
+				If Cog_Insert_I1(wRs_MVTL.MVTL, wQte=wRs_MVTL.Qte)
+					wCptI1++
+				Else
+					wErr = TRUE
+					i = j
+				EndIf
+			Next
+
+		WEnd
+
+		wRs_MVTL.ReaderClose(wRead)
+
+		; Erreurs?
+		If wErr 
+			; des fiches I1 ont déjà été créées
+			If wCptI1 > 0
+				Cog_Seek_I1Enrno(G1T1.EnrNo, wDelete=TRUE)
+			EndIf
+			MessageBox("Les fiches de bien n'ont pas été créées!","Erreur", MB_ICONERROR)
+		Else
+			txtMSB = "Traitement terminé.|" & nospaces(wCptI1) & " fiche(s) de Bien créée(s)."
+			ListBegin(lId_ListImmo)
+			ListNext(lId_ListImmo, wImmo)
+			wImmoD = wImmo
+			ListEnd(lId_ListImmo)
+			ListPrevious(lId_ListImmo, wImmo)
+			wImmoF = wImmo						  				; fourchette demandée par U GIE IRIS --> potentiellement erroné si un numéro était déjà occupé
+
+			txtMSB &= "|Numéro(s) " & nospaces(wImmod) & " à " & nospaces(wImmoF) & "." 
+			MessageBox(txtMSB,"Information", MB_ICONEXCLAMATION)
+		EndIf
+
+	EndIf
+
+	;
+	;	Fin Traitement
+	;
+
+	Lib_ENT('F', wPicod, wPino)	 ; Libération Pièce
+
+EndP
+
+;*
+Public Function char Cog_Controle_Responsable
+;
+1		trouve		1,0
+Beginf
+
+ 	If Lectab(37,ENT.SALCOD) = 0 and Lectab(51,T037.SERVCOD) = 0 
+		If Lectab(37,T051.SALCOD) = 0 and T037.Salcod = System.user	| Freturn('O') | Endif
+		If Not T051.Cog_SalGrp = system.esp And Lectab(54,T051.Cog_SalGrp) = 0
+			trouve = False
+			GTFTAB.Key = ' '
+			Do While Next_table(55, T051.Cog_SalGrp, GTFTAB.Key) = 0
+				If T055.Salcod = System.user	| trouve = True | Exitdo | Endif
+			Wend
+			If trouve = True And Lectab(37,T055.SALCOD) = 0 | Freturn('O') | Endif
+		Endif
+	Endif
+	Freturn('N')
+
+Endf
+
+;*
+Public Function Int Cog_User_Get_Conf(pConf)
+;
+1	pConf				>a5dd.dhsd	Conf
+	1	Interdiction					B
+	1	i									X
+BeginF
+	If pConf = " "
+		Interdiction = 0
+	Else																					 
+		Interdiction = G3_Protection(pConf) 
+;		PingLocal("mconfuser",mconfuser)
+;		If Seek_MCONFUSER(system.User, pConf) = 0		 
+;			i = 1
+;			Loop i <= 1000 And Interdiction = 2
+;				Switch mconfuser.ConfTyp(i)
+;					Case 1 ; Conf
+;						If mconfuser.Conf(i) = pConf
+;							Interdiction = 0
+;						EndIf
+;					Case 2 ; Groupe
+;						pw_a5fdos.Key = "F" & mconfuser.Conf(i)
+;						Loop HRead(pw_a5fdos,confdet) = 0 And confdet.ConfGrp = mconfuser.Conf(i) And Interdiction = 2
+;							If confdet.Conf = pConf
+;								Interdiction = 0
+;							EndIf
+;						EndLoop
+;					Default ; Plus rien
+;						Interdiction = 1
+;				EndSwitch
+;				i++
+;			EndLoop
+;		EndIf
+;		PingLocalReceiveAndDelete("mconfuser",mconfuser)
+	EndIf
+	FReturn(Interdiction)
+EndF
+
+;*
+Procedure Cog_MajI1
+; Mise à jour des fiches de bien lors d'une écriture / réécriture de facture fournisseur
+RecordSQL	"COG_CCRSIMMO.DHOQ"	CogRs_IMMO		wRs_IMMO
+Record		"GTFDD.DHSD"			G1T1				wG1t1
+Record		"GTFDD.DHSD"			G1T1				wG1t1_Save
+1		wAdrCur	L
+BeginP
+
+	;
+	If ENT.Cog_BwId = ' '
+		PReturn
+	EndIf
+
+	;	Sauvegarde contexte
+	wAdrCur 		= XmeListGetAdressCurrent(G3XT.IdTableau(1))
+	wG1t1_Save	= G1T1
+
+	;
+ 	XmeListBegin(G3XT.IdTableau(1))
+	Do While XmeListNext(G3XT.IdTableau(1), wG1t1) not in (-1, 0)
+
+		If wG1t1.Cog_ImoFlag = 2 AND wG1t1.EnrNo  > 0
+			wRs_IMMO.Init()	
+			wRs_IMMO.Where.Equal_Enrno(wG1t1.EnrNo)
+			wRs_IMMO.InitForUpdateWhere()
+			wRs_IMMO.Cog_BwId = 	ENT.Cog_BwId
+			wRs_IMMO.UpdateWhere()	
+		EndIf
+
+	WEnd
+
+	; restau contexte
+	XmeListSetAdressCurrent(G3XT.IdTableau(1), wAdrCur)
+	G1T1 = wG1t1_Save
+
+EndP
+
+;*
+Procedure Cog_Maj_Journal_Comptable
+;
+1		i 		3,0
+
+BeginP
+
+	If (LireProgrammeMode IN (C_Mode_Creation, C_Mode_Duplication)) 
+
+		Messagebox("N° pièce "&ent.pino,"Création de pièce")
+
+		If Lectab(20,ENT.OP) = 0	
+			Lib_Ent(ENT.TiCod,ENT.PiCod,ENT.Pino)
+			W1ENT = ENT
+			Loop Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'R') = H_RESERVED 
+				Messagebox('Journal comptable des compteurs réservé par un autre utilisateur ou par la facturation, veuillez recommencer SVP.','Attention',MB_OK)
+			Endloop			
+			If Seek_C4(T020.Jnl) = 0 And C4.PieceSais = 4 And C4.PieceCod = 3	
+			
+				Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'L')
+				For i = 1 to 50
+					C4.Piece++
+					If Res_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece) = 0
+						If ENT.Pino = C4.Piece | ExitFor | Endif
+						If Not Seek_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece) = 0 | ExitFor
+						Else  | Lib_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece)
+						Endif
+					Endif
+				Next
+
+				If i < 50
+					Gtfent.key = 'G' & W1ENT.Dos & W1ENT.TiCod & W1ENT.PiCod & W1ENT.PINO			 
+					If Hseek(Gtfent,Ent,Gtfent.Key) = 0 
+						Loop Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'R') = H_RESERVED 
+							Messagebox('Journal comptable des compteurs réservé par un autre utilisateur, veuillez recommencer SVP.','Attention',MB_OK)
+						Endloop			
+						Ent.Pino  = C4.Piece
+						Ccfjca.key = "D" & Mz.Dos & '4' & T020.Jnl 
+						If Hseek(Ccfjca,C4,Ccfjca.key,"R") = 0
+							C4.Piece = Ent.Pino 
+							Hrewrite(CCFJCA,C4)
+							Hpclose(CCFJCA)
+							Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'L')
+
+						   Gtfam.Key = 'K' & Ent.Dos & Ent.TiCod & W1Ent.Pino
+						   Loop hread(GTFAM,MOUV) = 0 and Mouv.DOS = Ent.Dos and Mouv.Ticod = Ent.Ticod and Mouv.Fano = W1Ent.Pino
+								 Mouv.Fano  = Ent.Pino
+							    Hrewrite(Gtfam,Mouv)					 
+							    Gtfvtl.Key = 'A' & Mouv.Dos & Mouv.Enrno
+							    Loop Hread(GTFVTL,MVTL) = 0 and Mvtl.DOS = Mouv.DOS and Mvtl.ENRNO = Mouv.ENRNO
+								    Mvtl.Pino  = Ent.Pino
+								    Hrewrite(Gtfvtl,Mvtl)
+							    EndLoop				 
+						   Endloop
+
+							Hrewrite(Gtfent,Ent)
+
+							If Not W1ENT.PiNo = Ent.Pino
+								Loop Hshare (Gtfdos ,Formater_Res('G3ET') & MZ.Dos & MZ.Etb,'R') = H_RESERVED 
+									Messagebox('Enregistrement des compteurs réservé par un autre utilisateur, veuillez recommencer SVP.','Attention',MB_OK)
+								Endloop
+								If Hseek(Gtfdos,Ets,['C' MZ.Dos MZ.Etb],'R') = 0
+									Ets.Fanoc = Ent.Pino
+									Hrewrite(Gtfdos,Ets)
+									Hpclose(Gtfdos)
+									Hshare(Gtfdos,Formater_Res('G3ET') & MZ.Dos & MZ.Etb ,"L") 
+								Else
+									Hshare(Gtfdos,Formater_Res('G3ET') & MZ.Dos & MZ.Etb,"L")
+									Messagebox('Erreur lecture des compteurs de Divalto, la numérotation des factures est fausse.','Attention',MB_OK)
+								Endif
+							Endif
+						Else			  ; cas qui ne devrait pas se produire
+							Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'L')
+							Hpclose(Ccfjca)
+							ENT = W1ENT
+							Lib_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece)
+							Messagebox('Journal non retrouvé, la numérotation des factures est fausse.','Attention',MB_OK)
+						Endif				 
+					Endif
+				Else
+					Messagebox('Numéro inconnu, la numérotation des factures est fausse.','Attention',MB_OK)
+				Endif
+			Else
+				Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'L')
+				Messagebox('Journal comptable des compteurs inconnu, la numérotation des factures est fausse.','Attention',MB_OK)
+			Endif
+		Endif
+	Endif
+
+EndP
+
+;*
+Procedure Cog_Init_Projet
+;
+
+1	wProjet	>gtfdd.dhsd		Projet
+
+BeginP
+
+	WProjet = ENT.PROJET
+	If Res_Prj (WProjet) = 0
+		; on reseeke le projet avant vente
+		If Seek_PRJAV(WProjet) = 0 And Recherche_Tiers(PRJAV.TIERS) = 0 And CLI.CE1 = '3'
+			; on recherche le projet après vente
+			If Seek_PRJAP(WProjet) <> 0 And Messagebox("L'affaire " & ENT.PROJET & " n'existe pas, voulez-vous la créer maintenant ?",'Attention',mb_yesno) = idyes
+				; ok il n'existe pas on transforme
+				PRJAP 			= ' '
+				PRJAP.CE1		= 'A'
+				PRJAP.CE2		= '1'
+				PRJAP.CE3		= '1'
+				PRJAP.DOS		= PRJAV.DOS
+				PRJAP.ETB		= PRJAV.ETB
+				PRJAP.AFFAIRE	= PRJAV.PROJET
+				PRJAP.USERCR	= SYSTEM.USER
+				PRJAP.USERMO 	= ' '
+				PRJAP.CONF		= PRJAV.CONF
+				PRJAP.TIERS		= PRJAV.TIERS
+				PRJAP.LIB80		= PRJAV.LIB80
+				PRJAP.LIBABR 	= PRJAV.LIBABR 
+				PRJAP.DELDT		= PRJAV.DELDT
+				PRJAP.SALCOD	= PRJAV.SALCOD
+				PRJAP.CONTACT	= PRJAV.CONTACT
+				PRJAP.REPR		= PRJAV.REPR
+				PRJAP.USERCRDH	= Time(7)
+				PRJAP.USERMODH	= ' '
+				PRJAP.DOPDH		= ' '
+				PRJAP.CENOTE	= 1
+				PRJAP.NOTE		= 0
+				PRJAP.HTMT		= PRJAV.CAMT
+				Prjap.SaisAutTyp(1) = 2
+				Prjap.SaisAutTyp(2) = 2
+				Prjap.SaisAutTyp(3) = 2
+				Write_PRJAP
+				Lib_Prj(WProjet)
+			Else
+				; un projet après vente existe déjà					
+				;Mes_Alert(5011, WProjet)
+				Lib_Prj(WProjet)
+			Endif
+			If Recherche_Affaire(ENT.PROJET) = 0
+				GTENT.LIB(4) = PRJAP.LIB80
+			Endif		
+		Else
+			; on ne le retrouve plus ou il n'est plus bon ou supprimé entre temps
+			Lib_Prj(WProjet)
+		Endif
+	Endif
+
+EndP
+
+;*
+Procedure Cog_Init_Adresse
+;
+
+1		i		3,0
+
+BeginP
+
+	If Not GTPCE.TiersD = system.esp	AND LireProgrammeMode not in (C_Mode_Duplication)
+		G3XZ.TIERS = ENT.TIERS
+		ENT.ADRCOD(1) = GTPCE.TiersD
+		ENT.ADRCOD(2) = GTPCE.TiersD
+		If ENT.ADRCOD(3) = system.esp | ENT.ADRCOD(3) = GTPCE.TiersD | Endif
+		If ENT.ADRCOD(4) = system.esp | ENT.ADRCOD(4) = GTPCE.TiersD | Endif
+		For i = 1 to 4
+			if	Recherche_Adresse(ENT.TIERS,ENT.ADRCOD(i),2008,ENT.PIDT,i) =0
+				GTENT.ADR(i)= T1.ADR		; recherche du code adresse 
+				if i = 3 
+					if T1.TOUR <> ' '
+						ENT.TOUR = T1.TOUR
+					else
+						ENT.TOUR	= CLI.TOUR
+					endif
+					if T1.TOURRG <> ' '
+						ENT.TOURRG = T1.TOURRG
+					else
+						ENT.TOURRG = CLI.TOURRG
+					endif
+					if T1.TRANSJRNB <> 0
+						ENT.TRANSJRNB= T1.TRANSJRNB
+					else
+						ENT.TRANSJRNB= CLI.TRANSJRNB
+					endif
+				endif
+			endif
+		Next
+	Endif
+
+EndP
+
+;*
+;*	 Procédures et fonctions surchargées
+;*
+
+;*
+Public Procedure Cog_Afficher_Champs(wTiCod, wPicod)
+;
+1	i			2,0
+1	wTicod	>gtfdd.dhsd		TiCOd
+1	wPicod	>gtfdd.dhsd		PiCod
+
+BeginP
+
+	for i = 0 to 9
+		xmesetattribut("cog_p"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_c"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_f"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_v"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_a"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_i"&right(i),an_visibilite,av_cache)
+	next
+
+	xmesetattribut("cog_"&wTiCod&"0",an_visibilite,av_visible)					;champs visibles pour tous les types de pièces
+	xmesetattribut("cog_"&wTiCod&wPicod,an_visibilite,av_visible)		;champs visibles uniquement pour le type de pièce traité
+	xmesetattribut("cog_not"&wTiCod&"0",an_visibilite,av_cache)					;champs cachés pour tous les types de pièces
+	xmesetattribut("cog_not"&wTiCod&wPicod,an_visibilite,av_cache)	;champs cachés uniquement pour le type de pièce traité
+
+
+	; autres modifications d'attributs par type de pièce
+	Switch wTiCod & wPicod
+		Case 'C1'
+			Xmesetattribut('salcod',an_visibilite,AV_GRISE)
+
+	EndSwitch
+
+EndP
+
+;*
+Public Function char Cog_Piece_Masquer_Champs_specifiques
+;
+BeginF
+
+	Cog_Afficher_Champs(GTPCE.TicodDst, GTPCE.PicodDst)
+
+	FReturn('O')
+
+EndF
+
+;*
+Public Function char Cog_Menu_Maj_Boutons_Ap
+;
+
+1		wPhase		X
+1		wMode			X
+
+BeginF
+
+	;
+	wMode = LireProgrammeMode
+	wPhase= LireProgrammePhase
+
+	; Désactivation des boutons spé
+	XmeToolbarValidateButton(IdBoutonMain, "U_envoiflash", FALSE)
+	XmeToolbarValidateButton(IdBoutonMain, "Cog_Valideur", FALSE)
+	XmeToolbarValidateButton(IdBoutonMain, "Cog_btnbien", FALSE)
+	XmeToolbarValidateButton(IdBoutonMain, "Cog_sepabien", FALSE)
+
+	; grisage ou dégrisage
+	XmeToolbarEnableButton(IdBoutonMain, "Cog_btnbien", FALSE) 
+
+	; Par type de pièce - tiers
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'
+			If Left(MZ.PARAM) = 'CmdA' 	;	ajout v7 --> le bouton est inactif sans ce paramètre, inutile de l'afficher
+				;XmeMenuCheckItem(IdMenuMain, "Aff_Etat_Pr", TRUE)
+				XmeToolbarValidateButton(IdBoutonMain, "U_envoiflash", TRUE, aff=TRUE)
+			EndIf
+
+		Case 'F2'
+			XmeToolbarValidateButton(IdBoutonMain, "Cog_Valideur", TRUE, aff=TRUE)
+
+		Case 'F3'
+			XmeToolbarValidateButton(IdBoutonMain, "Cog_sepabien", FALSE, aff=FALSE)
+			XmeToolbarValidateButton(IdBoutonMain, "Cog_btnbien", TRUE, aff=TRUE)
+			If (wMode = C_Mode_Interrogation) AND (wphase = C_Phase_Ligne) AND G1T1.Ce2 = '1' AND G1T1.Cog_ImoFlag = 2	\
+				AND G1T1.BlCe4 = '1'	AND G1T1.BlQte > 0 
+			 	XmeToolbarEnableButton(IdBoutonMain, "Cog_btnbien", TRUE) 
+			EndIf
+
+		Case 'F4'
+			XmeToolbarValidateButton(IdBoutonMain, "Cog_sepabien", FALSE, aff=FALSE)
+			XmeToolbarValidateButton(IdBoutonMain, "Cog_btnbien", TRUE, aff=TRUE)
+			If (wMode = C_Mode_Interrogation) AND (wphase = C_Phase_Ligne) AND G1T1.Ce2 = '1' AND G1T1.Cog_ImoFlag = 2	\
+				AND G1T1.FaCe4 = '1'	AND G1T1.BlQte > 0 
+			 	XmeToolbarEnableButton(IdBoutonMain, "Cog_btnbien", TRUE) 
+			EndIf
+
+
+	EndSwitch
+													
+
+	;If ENT.CE4 = '1' or ENT.CE4 = '2' | XmeMenuEnableItem(IdMenuMain, "Mod_etat_pr", True) | Endif		 ;#FLAG MIGRATION --> mod_etat_pr?
+
+	FReturn('O')
+
+EndF
+
+
+;*
+;*	Traitements liés à l'en-tête
+;*
+
+;*
+Public Procedure COG_ENT_CREATION_INIT
+;
+1		i		3,0
+
+BeginP
+
+	Cog_Afficher_Champs(GTPCE.TIcodDst, GTPCE.PicodDst)
+
+	; Traitement spécifiques par ticod-Picod
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'
+			If Lectab(37 , SYSTEM.USER) = 0
+				ENT.SALCOD = SYSTEM.USER
+				GTENT.LIB(2) = T037.NOM		  
+			Endif
+		   If 	Left(MZ.PARAM) = 'CmdA'
+				ENT.CE4 = C_STATUT_PROVISOIRE	
+			Endif
+			ENT.Cog_Validite  = Dtadd(Today,SOC.Cog_Delai_Validite)
+
+		Case 'C2'
+			;Etat = Provisoire = 7
+			ENT.Ce4 = C_STATUT_PROVISOIRE
+			GTPCE.Ce4 = C_STATUT_PROVISOIRE
+			ENT.DelDemDt = HDate(ENT.PiDt, 10)
+			GTPCE.DelDemDt = HDate(ENT.PiDt, 10)
+	EndSwitch
+
+	; Traitements communs
+	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case vsw IN ('C1C1', 'C2C2')
+			Cog_Init_Adresse
+
+		Case 'C1C2'
+			If CLI.CE1 = '3'
+				Cog_Init_Projet
+			Endif 
+
+	EndSwitch
+
+
+	; Traitements par type de tiers
+	Switch ENT.TiCod
+		Case "C"
+			ENT.Cog_Facturation_Compte = CLI.Cog_Facturation_Compte
+			ENT.Cog_BL_Moteur = 1
+			ENT.Cog_ImpDetail	= 2 ;PRJAP.Cog_ImpDetail
+			ENT.Cog_implogo_1	= CLI.Cog_implogo_1
+			ENT.Cog_implogo_2	= CLI.Cog_implogo_2
+			ENT.Cog_implogo_3	= CLI.Cog_implogo_3
+			ENT.Cog_implogo_4	= CLI.Cog_implogo_4
+			Tiers.EnAc(*)	=	CLI.EnAc(*)
+			Tiers.EnMax(*)	=	CLI.EnMax(*)
+				
+			;PS 27/06/2011
+			If CLI.Cog_implogo_2 in (1,2)
+				ENT.Cog_implogo_2 = CLI.Cog_implogo_2
+			Else
+				ENT.Cog_implogo_2 = SOC.Cog_implogo_2
+			EndIf
+
+			If CLI.Cog_implogo_3 in (1,2)
+				ENT.Cog_implogo_3 = CLI.Cog_implogo_3
+			Else
+				ENT.Cog_implogo_3 = SOC.Cog_implogo_3
+			Endif
+
+			If CLI.Cog_implogo_4  in (1,2)
+				ENT.Cog_implogo_4 = CLI.Cog_implogo_4
+			Else
+				ENT.Cog_implogo_4 = SOC.Cog_implogo_4
+			EndIf
+
+			GTPCE.EditCod = Condition(Mz.MiCle <> " ", 2, 1)
+
+		Case "P"
+;			ENT.Cog_Facturation_Compte = PRO.Cog_Facturation_Compte
+
+		Case 'F'
+			Tiers.EnAc(*)	=	FOU.EnAc(*)
+			Tiers.EnMax(*)	=	FOU.EnMax(*)
+
+		Default
+
+	EndSwitch
+
+EndP
+
+;*
+Public Procedure Cog_Ent_Duplication_Avoir_Init
+;
+BeginP
+
+;	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+;		Case 'C4'		; FACTURES CLIENTS
+;			ENT.Pino = ENT.PiNo 		; ???? 	#FLAG MIGRATION --> code inutile
+;
+;	EndSwitch
+
+EndP
+
+;*
+Public Procedure Cog_Charger_Lib_EntBis
+; Lit les tables complémentaires liées au complément d'en-tête et charge les libellés pour affichage
+; GTENT.LIB contient également des libellés de la page principale pas d'initialisation globale du tableau
+RecordSQL	"COGRS_DIRCLIENTE.DHOQ"		CogRs_DirCli		wRs_DirCli
+
+1	x_st_01		X
+1	t_key_01		255
+
+BeginP
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case vsw IN ('C3', 'C4')		; 	BL et FACTURES CLIENTS
+;			Cog_FDirCliente_01.Key = GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente") & MZ.DOS & MZ.Etb & ENT.Cog_DirCliente
+;			t_key_01 = MZ.DOS & MZ.Etb & ENT.Cog_DirCliente
+;			x_st_01 = IRead(Cog_FDirCliente_01,Cog_DirCliente_01,GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente"),t_key_01)
+;			If x_st_01 = 0 And Cog_DirCliente_01.Dos = MZ.Dos And Cog_DirCliente_01.Etb = MZ.Etb And Cog_DirCliente_01.Cog_DirCliente = ENT.Cog_DirCliente
+;			Else
+;				Cog_DirCliente_01 = " "
+;			Endif	
+			Cog_DirCliente_01 = " "
+			wRs_DirCli.Init()
+			wRs_DirCli.Where.RemoveCondition("")
+			wRs_DirCli.Where.Equal_CodeDir(ENT.Cog_DirCliente)
+			wRs_DirCli.Where.AddCondition("Equal_CodeDir")
+			wRs_DirCli.Where.Equal_Etb(MZ.Etb)
+			wRs_DirCli.Where.AddCondition("Equal_Etb")
+			If wRs_DirCli.Select()
+				Cog_DirCliente_01 = wRs_DirCli.Cog_DirCliente
+			EndIf
+
+
+	EndSwitch
+
+	
+
+EndP
+
+;*
+Public Procedure Cog_ENT_Chargement_Ap
+;
+Beginp
+	
+	SavCe4 = ENT.CE4	 
+	If Recherche_Projet(ENT.PROJET) = 0
+		GTENT.LIB(4) = PRJAV.LIB80
+	Endif
+
+	If Lectab(37 , ENT.SALCOD) = 0
+		GTENT.LIB(2) = T037.NOM
+	Endif
+
+	; Traitement par type de tiers
+	Switch GTPCE.TiCodDst
+		Case 'C'
+			Tiers.EnAc(*)	=	CLI.EnAc(*)
+			Tiers.EnMax(*)	=	CLI.EnMax(*)
+
+		Case 'F'
+			Tiers.EnAc(*)	=	FOU.EnAc(*)
+			Tiers.EnMax(*)	=	FOU.EnMax(*)
+
+	EndSwitch
+
+EndP
+
+;*
+Public Function char Cog_ENT_Creation_Av		 
+; avant de passer en création
+Beginf
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'
+
+			If Lectab(37 , SYSTEM.USER) <> 0 | MessageBox(SYSTEM.USER && ' inconnu dans la table des collaborateurs.','Attention',MB_OK) | Freturn('N') | Endif
+			If Left(MZ.PARAM) = 'Tunnel' 
+				If Cog_Controle_Responsable = 'N'
+					MZ.PARAM = 'CmdA'
+				Else
+					MZ.PARAM = 'ValA'
+				Endif
+			Endif
+
+	EndSwitch
+
+	FReturn('O')
+
+Endf
+
+;*
+Public Function char Cog_ENT_Modification_Av	 	
+; avant de passer en modification
+1		flag			1		= 'O'					; flag retour
+1		wAdr			16
+Beginf
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'
+
+			If Not Lectab(37, SYSTEM.USER, 1137) = 0 | flag = 'N' | Endif
+			If flag = 'O' And ENT.Ce4 = 1
+				If Cog_Controle_Responsable = 'N'
+					MessageBox('Seul le responsable de service peut modifier ce devis, veuillez abandonner.','Attention',MB_OK)
+					flag = 'N'
+				Endif
+			Endif
+
+	EndSwitch
+
+	Freturn(flag)
+Endf
+
+;*
+Public function char Cog_Ent_Suppression_Av
+;
+BeginF
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C4'		; FACTURES CLIENTS
+			If Cog_User_Get_Conf('G***') <> 0
+				MessageBox("Vous n'avez pas les droits suffisants pour supprimer une facture","Interdiction",mb_iconstop)
+				FReturn('N')
+			Else
+				G3_LOG_ANO(90013,"Suppression de la facture client numéro ", Left(ENT.PiNo), " par ", Left(SYSTEM.User), " le ", Time(7),".",,"COG_FMSG.DHFI",,)
+			EndIf
+
+	EndSwitch
+
+	FReturn('O')
+
+EndF
+
+;*
+Public Procedure Cog_ENT_Write_Av
+;
+BeginP
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+
+		Case 'F2'
+			Cog_ValidCde_Ent_Write_Av
+
+		Case 'F4'
+			Cog_MajI1
+
+	EndSwitch
+
+	; validation de pièces
+	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1C2'		
+			ENT.Ce4 = C_STATUT_PROVISOIRE	 		; le statut est forcé à actif en standard
+
+	EndSwitch
+
+
+EndP
+
+;*
+Public Procedure Cog_ENT_Principale_Rewrite_Av
+;
+BeginP
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+
+		Case 'F2'
+			Cog_ValidCde_ENT_Principale_Rewrite_Av
+
+		Case 'F4'
+			Cog_MajI1
+
+	EndSwitch
+
+EndP
+
+
+;*
+Public Function char Cog_ENT_Controle_Fin	  	
+;		Controle les erreurs bloquantes qui n'ont pas été corrigées au moment de la validation
+Beginf
+	
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'
+			If Not Lectab(37, SYSTEM.USER, 1137) = 0 | Freturn('N') | Endif
+			If Left(MZ.PARAM) = 'ValA' 
+				If Cog_Controle_Responsable = 'O'
+					If Not Isdate(ENT.Cog_Validite)
+						ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+					Endif
+				Else
+					MessageBox('Seul le responsable de service peut modifier ce devis, veuillez abandonner.','Attention',MB_OK)
+					Freturn('N')
+				Endif
+			Endif
+
+		Case 'F2'
+			FReturn(Cog_ValidCde_ENT_Controle_Fin)
+
+	EndSwitch
+	
+	Freturn('O')
+Endf
+
+
+;*
+Public Procedure Cog_ENT_Liberation_Av	
+; appel de la procédure après traitement de la pièce et avant la libération de l'en-tête
+BeginP
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'	 ; DEVIS CLIENT
+			If LireProgrammeMode = C_Mode_Modification And SavCe4 = '7' And ENT.CE4 = '1'
+				Lib_ENT(MZ.TICOD, MZ.PICOD, ENT.PINO)
+				a5fflash.key = 'A' & mz.dos & Soc.Cog_Flash_Devis_Retour
+				If Hseek(a5fflash,mflash,a5fflash.key) = 0								 
+					Change_Destinataire
+					A5_Flash_envoi(Soc.Cog_Flash_Devis_Retour,MZ.ETB,' ',3)
+				Endif
+			Endif
+
+		Case 'C2'	 ; COMMANDES CLIENTS	  (En saisie et en validation)
+			Lib_ENT(MZ.TICOD, MZ.PICOD, ENT.PINO)
+			If LireProgrammeMode = C_Mode_Creation 
+				If Res_Prj (ENT.PROJET) = 0
+					If Seek_PRJAV(ENT.PROJET) = 0 
+						PRJAV.CE4 = '3'
+						Hrewrite(GTFPROJ,PRJAV)
+					Endif
+					If Seek_PRJAP(ENT.PROJET) = 0 
+						If PRJAP.AfrClas = system.esp
+							Messagebox("N'oubliez pas de positionner la classe d'affaire sur l'affaire " & ENT.PROJET & ", afin de créer les évènements associés.",'Attention',mb_ok)
+							G3XZ.TIERS 	= ENT.TIERS
+							G3XZ.TICOD 	= 'C'
+							G3XZ.ETB 	= MZ.ETB
+							Zoom_Call(9868,false)
+						Endif
+					Endif
+					Lib_Prj(ENT.PROJET)
+				
+				Endif
+			Endif
+
+		Case 'C4'	;FACTURES CLIENT	
+			Cog_Maj_Journal_Comptable
+
+	EndSwitch
+
+EndP
+
+;*
+Public Function char Cog_ENT_Read_Ap		 
+;	après read de l'en-tête lors du défilement , permet d'ignorer une pièce lors du défilement	
+Beginf
+	
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'
+		   If Left(MZ.PARAM) = 'CmdA'
+				If ENT.CE4 = 7
+					freturn('O')
+				Else
+					freturn('I')
+				EndIf
+			endif
+
+	EndSwitch
+
+	FReturn('O')
+
+Endf
+
+;*
+Public Function char Cog_ENT_PRead_Ap		
+;	après Pread de l'en-tête lors du défilement 	, permet d'ignorer une pièce lors du défilement
+Beginf
+	
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'
+		   if left(MZ.PARAM) = 'CmdA'
+				if ENT.CE4 = 7
+					freturn('O')
+				else
+					freturn('I')
+				endif
+			endif
+	EndSwitch
+
+	FReturn('O')
+
+Endf
+
+
+;*
+;*	Traitements liés aux lignes
+;*
+
+;*
+Public Procedure COG_G1T1_Creation_Init
+;
+1	t_key_01	255
+1	x_st_01	x
+1	t_Ce1		>CCFDD.DHSD	Ce1
+1	t_Cpt		>CCFDD.DHSD	Cpt
+BeginP
+	If G1T1.TiCod in ("P","C","F")
+		Switch G1T1.TiCod
+			Case "F"
+				t_Cpt = ART.CptA
+			Case "C"
+				t_Cpt = ART.CptV
+			Case "P"
+				t_Cpt = ART.CptV
+			Case "I"
+				t_Cpt = ART.CptS
+			Default
+					t_Cpt = ART.CptV 
+		EndSwitch
+		; lecture du compte comptable de l'article
+		t_Ce1 = 3
+		CCFJCA_DEV_01.Key = "A" & ART.Dos &	t_Ce1 & t_Cpt
+		t_key_01	= ART.Dos &	t_Ce1 & t_Cpt
+		x_st_01 = IRead(CCFJCA_DEV_01, C3_DEV_01, "A")
+		If x_st_01 = 0	And C3_DEV_01.Dos = ART.Dos And C3_DEV_01.Ce1 = t_Ce1 And C3_DEV_01.Cpt = t_Cpt
+			G1T1.Axe(3) = C3_DEV_01.Axe(3)
+			G1T1.Axe(4) = C3_DEV_01.Axe(4)
+		EndIf
+	EndIf
+
+EndP
+
+;*
+;*		Traitements lignes
+;*
+
+;*
+Public Procedure Cog_MOUV_Write_Av		
+; avant écriture du mouvement
+BeginP
+
+	; par type de pièce
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1'
+			If MOUV.CE2 = '1' And Not MOUV.PROJET = system.esp | MOUV.CE3 = '1' | Endif
+
+		Case 'F2'
+			Cog_ValidCde_Mouv_Write_Av
+
+	EndSwitch
+
+	; validation de pièce
+	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1C2'	 AND MOUV.Ce6 = 1
+			MOUV.CdCe4 = ENT.Ce4	 
+
+	EndSwitch
+
+EndP
+
+;*
+Public Procedure Cog_MOUV_ReWrite_Av		
+; avant réécriture du mouvement
+BeginP
+
+	;
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'F2'
+			Cog_ValidCde_Mouv_Rewrite_Av	
+
+	EndSwitch
+
+	; validation de pièce
+	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1C2'	AND MOUV.Ce6 = 1
+			MOUV.CdCe4 = ENT.Ce4	
+
+	EndSwitch
+
+EndP
+
+;*
+Public Procedure Cog_MVTL_Write_Av
+; avant écriture de la ventilation
+BeginP
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'F2'
+			Cog_ValidCde_MVTL_Write_Av
+	EndSwitch
+
+	; validation de pièce
+	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1C2'	 AND MVTL.PiCod = 2
+			MVTL.Ce4 = ENT.Ce4
+
+	EndSwitch
+
+EndP
+
+;*
+Public Procedure Cog_MVTL_Rewrite_Av
+; avant réécriture de la ventilation
+BeginP
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'F2'
+			Cog_ValidCde_MVTL_Rewrite_Av
+	EndSwitch
+
+	; validation de pièce
+	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C1C2'	 AND MVTL.PiCod = 2
+			MVTL.Ce4 = ENT.Ce4
+
+	EndSwitch
+
+EndP
+
+;*
+;*
+;*
+
+
+;*
+Public Procedure Cog_U_Traitement
+;
+Beginp
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'F2'
+			Cog_ValidCde_U_Traitement
+
+	EndSwitch
+
+	; pour les autres boutons, le type de tiers/pièce est testé en amont
+	Switch Harmony.DataArret
+		Case 1101
+			If LireProgrammeMode = C_Mode_Interrogation And ENT.Pino > system.esp	And Left(MZ.PARAM) = 'CmdA'
+				a5fflash.key = 'A' & mz.dos & Soc.cog_flash_devis
+				If Hseek(a5fflash,mflash,a5fflash.key) = 0								 
+					Change_Destinataire
+					If A5_Flash_envoi(Soc.cog_flash_devis,MZ.ETB,' ',3) = 0
+						Messagebox('La demande de validation a été envoyée.','Information',MB_ICONINFORMATION)
+					Else
+						Messagebox("Erreur à l'envoi du mail.",'Erreur',MB_ICONERROR)
+					EndIf
+				Endif
+			Endif
+
+		Case 1200
+			Cog_Generer_I1(ENT.PiCod, ENT.PiNo)
+
+	Endswitch
+
+Endp
+
+;*
+Public Procedure Cog_Programme_Debut							
+; en début de programme après l'ouvertue des fichiers et avant la lecture du dossier
+BeginP
+	
+	flagInit = TRUE
+	CD			= " "
+	
+EndP
+
+;*
+Public function char Cog_Piece_Impression_Avec_Parametre_origine
+; FRI 20/12/2013 Rajout procédure
+; retourner 'O' si l'impression doit se faire avec les paramètres d'origine ou 'N' sinon
+; avant de passer en suppression
+BeginF
+
+	FReturn('N')
+
+EndF
+
+
+
+
+
+
+

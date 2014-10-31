@@ -1,0 +1,38 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=6,20021023,RR  ,20140417165643,UGIE                
+Nom=grfdd.dhsd,grfdd.dhsd,1
+[CHAMP]
+Version=1,20090511181806,MR_INFO_U           ,20110524191448,SYSTEMU             
+Nom=Cog_CltAff,Clôturer affaire,1
+Gel=1
+Nature=1
+NomOdbc=Cog_CltAff
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20090511181746,MR_INFO_U           ,20110524191433,SYSTEMU             
+Nom=Cog_CrePrj,Création projet,1
+Gel=1
+Nature=1
+NomOdbc=Cog_CrePrj
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100615230959,INFOU               ,20110811120020,SYSTEMU             
+Nom=Cog_Delai,Délai moyen de l'évènement,1
+DateM=BC35EA7A0D58CC01
+Gel=1
+Nature=5,0
+NomOdbc=Cog_Delai
+Flags=n,1,n,n,n,n,n,n
+[CHAMPR]
+nom=UGrtEvt
+[CHAMPL]
+Nom=Cog_CrePrj,1,0,0,N,1
+Nom=Cog_CltAff,2,0,0,N,1
+Nom=Cog_Delai,3,0,0,N,1
+[/CHAMPL]
+[/CHAMPR]
+[TABLEU]
+Version=1,20021023210643,RR  ,20121214150556,SN                  
+Nom=GrtEvt,Code événement,1
+DateM=934F9A2704DACD01

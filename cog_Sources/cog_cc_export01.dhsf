@@ -1,0 +1,533 @@
+;>xwin4obj                              7.0       20140423171213      
+[masque]
+ libelle="Exportation des Ecritures"
+ utilisateur="UGIE"
+ date_modification="23/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ dernier_id=81
+ dernier_id_page=1
+[defaut]
+ [aide_page]
+  aide=0
+[enregistrements]
+ "gtfdd.dhsd",,xq,xq,8000,0
+[page]
+ numero=1
+ libelle="Exportation des Ecritures Comptables"
+ fond="STD"
+ titre="Exportation des Ecritures Comptables"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ diva_avant="Page_ExportationDesEcrituresComptables_Av"
+ ident_unique=1
+ [groupbox]
+  [presentation]
+   position=15,15
+   taille=19,329
+   id=81
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Exportation des écritures comptables"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=40,22
+   taille=9,53
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Dossier"
+ [obj_texte]
+  [presentation]
+   position=54,22
+   taille=9,53
+   id=4
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=108,66
+   taille=9,9
+   noms="cog_chrono"
+   id=79
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=151,22
+   taille=9,53
+   id=13
+   wstyle="STD"
+  [texte]
+   texte="Chemin harmony"
+ [champ]
+  [presentation]
+   position=54,95
+   taille=9,247
+   attache_lgx=oui
+   id=14
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=xq,lib,xq,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [groupe_radio]
+  [presentation]
+   position=75,15
+   taille=59,99
+   id=60
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,xq,1
+  [param_groupe]
+   titre="Mode d'exportation"
+   choix="cog_gtfdmc.dhfi","COG_EXPORT"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=85,25
+    taille=9,74
+    id=62
+    wstyle="STD"
+   [param_radio]
+    texte="Exportation"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=96,25
+    taille=9,83
+    id=63
+    wstyle="STD"
+   [param_radio]
+    texte="Ré-exportation de"
+    cadrage=droite
+    valeur="2"
+  [traitements]
+   diva_apres="Champ_Choix_1_Ap"
+ [champ]
+  [presentation]
+   position=108,34
+   taille=9,30
+   noms="cog_chrono"
+   id=77
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,pinod,xq
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f8=19120
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=108,78
+   taille=9,30
+   noms="cog_chrono"
+   id=78
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,pinof,xq
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f8=19120
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_PiNoF_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=75,130
+   taille=59,99
+   id=64
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,xq,2
+  [param_groupe]
+   titre="Séparateur de champs"
+   choix="cog_gtfdmc.dhfi","COG_SEPARATEURC"
+  [radio_bouton]
+   [presentation]
+    position=85,140
+    taille=9,74
+    id=65
+    wstyle="STD"
+   [param_radio]
+    texte='Séparateur : ";"'
+    cadrage=droite
+    valeur="1"
+   [info_bulle]
+   texte="Point virgule"
+  [radio_bouton]
+   [presentation]
+    position=96,140
+    taille=9,74
+    id=66
+    wstyle="STD"
+   [param_radio]
+    texte='Séparateur : ","'
+    cadrage=droite
+    valeur="2"
+   [info_bulle]
+   texte="Virgule"
+  [radio_bouton]
+   [presentation]
+    position=107,140
+    taille=9,74
+    id=67
+    wstyle="STD"
+   [param_radio]
+    texte='Séparateur : "/"'
+    cadrage=droite
+    valeur="3"
+   [info_bulle]
+   texte="Pipe"
+  [radio_bouton]
+   [presentation]
+    position=118,140
+    taille=9,74
+    id=68
+    wstyle="STD"
+   [param_radio]
+    texte='Séparateur : "     "'
+    cadrage=droite
+    valeur="4"
+   [info_bulle]
+   texte="Tabulation"
+ [groupe_radio]
+  [presentation]
+   position=75,245
+   taille=59,99
+   id=69
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,xq,3
+  [param_groupe]
+   titre="Séparateur de lignes"
+   choix="cog_gtfdmc.dhfi","COG_SEPARATEURL"
+  [radio_bouton]
+   [presentation]
+    position=85,255
+    taille=9,74
+    id=73
+    wstyle="STD"
+   [param_radio]
+    texte="Retour charriot (CR)"
+    cadrage=droite
+    valeur="1"
+   [info_bulle]
+   texte="Retour charriot (CR, carriage return)"
+  [radio_bouton]
+   [presentation]
+    position=101,255
+    taille=9,74
+    id=75
+    wstyle="STD"
+   [param_radio]
+    texte="Saut de ligne (LF)"
+    cadrage=droite
+    valeur="2"
+   [info_bulle]
+   texte="Saut de ligne (LF, line feed)"
+  [radio_bouton]
+   [presentation]
+    position=117,255
+    taille=9,74
+    id=74
+    wstyle="STD"
+   [param_radio]
+    texte="CRLF"
+    cadrage=droite
+    valeur="3"
+   [info_bulle]
+   texte="Carriage Return Line Feed"
+ [case_a_cocher]
+  [presentation]
+   position=122,25
+   taille=9,43
+   id=80
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,xq,4
+  [param_case]
+   texte="Longueur Fixe"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=151,77
+   taille=9,263
+   attache_lgx=oui
+   id=21
+   colonnes_saisie=256
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,fic,xq
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [traitements]
+   microbol_click=1001
+   diva_apres="Champ_Fic_1_Ap"
+  [boutons]
+   "parcourir"
+ [champ]
+  [presentation]
+   position=40,77
+   taille=9,15
+   cadrage=gauche
+   id=25
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,dos,xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=54,77
+   taille=9,15
+   id=26
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,etb,xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=40,95
+   taille=9,247
+   id=27
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=xq,lib,xq,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[ressources]
+ [menu]
+  ident="MAIN"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Fichier"
+    wid_ressource="FICHIER"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="PARCOURIR"
+    wtexte="Parcourir"
+    wid_ressource="PARCOURIR"
+    wetype_trait=arret
+    warret=1000
+    wnom_sel="parcourir"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="MAIN2"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="OK"
+    wtexte="Valider\tEntrée"
+    wid_ressource="OK__1"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="ABANDON"
+    wtexte="_Quitter\tEchap"
+    wid_ressource="QUIT"
+    wtrait_chaine="#Escape"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [menu]
+  ident="POP_CHEMIN"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="Init"
+    wid_ressource="INIT"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Choisir un répertoire"
+    wid_ressource="FICHIER"
+    wetype_trait=arret
+    warret=1000
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom généralisé"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="MAIN"
+  [item]
+   [param_bouton]
+    wnom="PARCOURIR"
+    wid_ressource="PARCOURIR"
+    wetype_trait=arret
+    warret=1000
+    wnom_sel="parcourir"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__2"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="QUIT"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+;*
+;*		COGESER  Interface d'exportation des écritures
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		JDT		6.3			01			06.2011	Version Initiale
+
+OverWrittenBy "COGuCC_EXPORT01.dhof"
+
+Include "GTTC000.DHSP"
+Module COG_CC_EXPORT_ECR.DHOP
+
+; Enregistrements
+Public Record	GTFDD.DHSD	XQ				XQ				; Jobqueue
+Public Record	A5DD.DHSD	MZ				MZ
+
+Define cog_Masque = "cog_cc_export01.dhof"
+1 idTB_Main			L		; Identifiant barre d'outils MAIN
+1 idME_Main			L		; Identifiant du menu MAIN 
+1 idME_POPChemin	L		; Identifiant du menu POP CHEMIN
+
+;*
+Public Procedure Champ_Choix_1_Ap
+;
+Beginp
+	Switch XQ.Choix(1)
+		Case 1	; Export
+			XMeSetAttribut("cog_chrono", AN_VISIBILITE, AV_GRISE)
+		Case 2	; Réexportation
+			XMeSetAttribut("cog_chrono", AN_VISIBILITE, AV_VISIBLE)
+		Default
+			XQ.Choix(1) = 1
+			XMeSetAttribut("cog_chrono", AN_VISIBILITE, AV_GRISE)
+	EndSwitch
+Endp
+
+;*
+Public Procedure Champ_Fic_1_Ap
+;
+1	t_FicNom	255 = " "
+Beginp
+
+	; Vérification de la zone saisie
+	If XQ.Fic = ""
+		t_FicNom = COGF_CheminImplicites( Mid( XQ.Fic, StringR("/", XQ.Fic)))
+		If FString("U",XQ.Fic) <> FString("U",t_FicNom)
+			XQ.Fic = COGF_CheminImplicites(MZ.Param)
+			HARMONY.RETOUR = XMENEXT_TRAITEMENT_AVANT
+		EndIf
+	EndIf
+
+Endp
+
+;*
+Public Procedure Champ_PiNoF_1_Ap
+;
+Beginp
+	Controle_DonneeFin(XQ.PINOD, XQ.PINOF, 2, 7953)
+Endp
+
+;*
+Public Procedure Page_ExportationDesEcrituresComptables_Av
+;
+Beginp
+	; Chargement en mémoire d'une barre d'outils 
+	idTB_Main = XMeToolBarGetID(cog_Masque, "MAIN")
+	; Chargement en mémoire d’un menu classique ou surgissant
+	idME_Main = XmeMenuGetId(cog_Masque, "MAIN")
+Endp
+[/diva]
+[diva_base]
+[/diva]

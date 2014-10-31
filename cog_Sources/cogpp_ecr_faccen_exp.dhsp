@@ -1,0 +1,478 @@
+;>xdiva
+;*
+;*		Objet : Export des écritures liées aux centrales - Programme Cogpp_ecr_faccen_exp.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	kit104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		Cog_ExporterEcritures			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+
+include	gttcz00.dhsp						;déclarations communes
+
+module	Cogtm_000.dhop						;module de fonctions communes
+module	ccpmfic.dhop
+module	cogtm_ecr_exp.dhop
+													  
+
+public hfile	ccfdd.dhsd	ccfecr	ccfecr	openonuse
+public hfile	ccfdd.dhsd	ccfvtl	ccfvtl	openonuse
+
+
+public record	gtfdd.dhsd	xq			xq_cog		;enregistrement de travail
+
+public record	ccfdd.dhsd	ca
+public record	ccfdd.dhsd	c4
+public record	ccfdd.dhsd	c8
+public record	ccfdd.dhsd	cx
+
+
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+
+1	fic						L
+
+structure Ventilation
+	1	Axe1		>	gtfdd.dhsd	axe
+	1	Axe2		>	gtfdd.dhsd	axe
+	1	Axe3		>	gtfdd.dhsd	axe
+	1	Axe4		>	gtfdd.dhsd	axe
+	1	Mt			>	ccfdd.dhsd	mt
+	1	Sens		>	ccfdd.dhsd	sens
+	1	Jnl		>	ccfdd.dhsd	jnl
+	1	Ecrno		>	ccfdd.dhsd	ecrno
+	1	Ecrlg		>	ccfdd.dhsd	ecrlg
+endstructure
+
+1	list_EcrVtl			L
+1	fonc_EcrVtl			16
+
+RecordDiva	Ventilation	Vtl
+
+1	lig_VTL_Mt			>	ccfdd.dhsd	mt
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+function int Cog_InitialiserVariables
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+beginf
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		if iseek(a5fdos_loc,muser_loc,"B",system.user)
+
+			if not tunnel
+				messagebox("Utilisateur "&left(system.user)&" non défini dans la base Divalto","Alerte",mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= muser_loc.dos
+			mz.etb		= muser_loc.etb
+			mz.depo		= muser_loc.depo
+			mz.mecle		= "Cogee_ecr_faccen_exp.dhof"
+			mz.mtcle		= "Cogtt_ecr_faccen_exp.dhop"
+			mz.titre2	= "Export des écritures liées aux centrales"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment("Export des écritures liées aux centrales")
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+	Seek_CA(mz.Dos)
+
+	if ca.Cog_Exp_Ch = "" or Seek_C4(ca.Cog_ExpCen_Jnl) <> 0
+		if not tunnel
+			messagebox("Dossier ou journal mal paramétré pour l'export vers Anaël","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Dossier ou journal mal paramétré pour l'export vers Anaël",applic="DCPT")
+		freturn(false)
+	endif
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	windowshow(sw_maximize)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	;initialisation des listes
+	if (list_EcrVtl := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur lors de la création de la liste des écritures analytiques à exporter","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur lors de la création de la liste des écritures analytiques à exporter",applic="DCPT")
+		freturn(false)
+	endif
+	GetAdressFunction("","CompareEcrVtl",fonc_EcrVtl)
+	ListMode(list_EcrVtl,1,fonc_EcrVtl) 
+
+	freturn(true)
+
+endf
+
+;*
+procedure Cog_FinProgramme
+beginp
+
+	Cog_EcritureLivreDeBord("<-- Export des écritures liées aux centrales",applic="DCPT")
+	listdestroy(list_EcrVtl)
+	winclosehandle(fic)
+	programexit
+
+endp
+
+;*
+procedure Cog_AfficherTraitement
+beginp
+
+	;test d'abandon du programme en cours de traitement
+	if getchar()=$E8 and messagebox("Abandon du traitement en cours ?","Confirmation",mb_iconquestion+mb_yesno)=idyes
+		Cog_EcritureLivreDeBord("Abandon utilisateur",applic="DCPT")
+		Cog_FinProgramme
+	endif
+
+	xmedispv mz.mecle 3 xme_mode_gosub
+	xmeret
+	xmedispv mz.mecle 4 xme_mode_gosub
+	xmeret
+
+endp
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Fonctions de Tri
+;*
+
+;*
+Function Long CompareEcrVtl(&elem1,&elem2)
+recorddiva	Ventilation	elem1
+recorddiva	ventilation	elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	=	elem1.Axe1 & elem1.Axe2 & elem1.Axe3 & elem1.Axe4
+	cle2	=	elem2.Axe1 & elem2.Axe2 & elem2.Axe3 & elem2.Axe4
+
+   freturn(sortcompare(cle1,cle2))
+
+Endf 
+
+
+;*
+;	Traitements
+;*
+
+;*
+procedure Cog_ExporterEcritures
+1	datd	>	gtfdd.dhsd	datd
+1	datf	>	gtfdd.dhsd	datf
+
+recorddiva	Ventilation Vtl_rec
+
+1	nomfic					256
+1	ligne						5000
+1	nbecr						L
+1	first						1,0	= true
+1	lilg						4,0	= 0
+1	ecrno	>	ccfdd.dhsd	ecrno	= 0
+
+beginp
+
+	nomfic	= modify("/","\",xq_cog.Fic && "\" & "Ecr_Centrales_"&time(7)&&".txt")
+	loop (fic := WinCreateFile(nomfic,generic_write,0,0,create_new,file_attribute_normal,0)) = -1
+		sleep(1000)
+		nomfic	= modify("/","\",xq_cog.Fic && "\" & "Ecr_Centrales_"&time(7)&&".txt")
+		Cog_EcritureLivreDeBord("Erreur : " & wingettexterror(WinGetLastError),applic="DCPT")
+	endloop
+	
+	datd	= hdate(xq_cog.DatD,"p")
+	datf	= xq_cog.DatD
+
+	Cog_EcritureLivreDeBord("--> Export des écritures liées aux centrales",applic="DCPT")
+
+	;affichage de la page de traitement
+	xmedispv mz.mecle 2 2
+
+	xq_cog.Lib(1)	= "Export des écritures"
+	Cog_AfficherTraitement
+
+	ccfecr.Key	= "C" & mz.Dos & ca.Cog_ExpCen_Jnl & datd
+	loop not hread(ccfecr,c8) and ccfecr.Key <= "C" & mz.Dos & ca.Cog_ExpCen_Jnl & datf & $FF
+
+		if Cog_FiltresOk
+		
+			xq_cog.Lib(2)	= sdate(c8.EcrDt) & " - " & c8.EcrNo
+			Cog_AfficherTraitement
+
+			;on prépare le cumul des ventilations analytiques
+			ccfvtl.Key	= "G2" & mz.Dos & c8.EcrNo & c8.EcrLg
+			loop not hread(ccfvtl,cx) and ccfvtl.Key <= "G2" & mz.Dos & c8.EcrNo & c8.EcrLg & $FF
+
+				if first
+					first	= false
+					ecrno	= cx.EcrNo
+					lilg	= 1
+				endif
+				
+				Vtl_rec			= ""
+				Vtl_rec.Axe1	= cx.Axe(1)
+				Vtl_rec.Axe2	= cx.Axe(2)
+				Vtl_rec.Axe3	= cx.Axe(3)
+				Vtl_rec.Axe4	= cx.Axe(4)
+				Vtl_rec.Jnl		= cx.Jnl
+				Vtl_rec.Ecrno	= EcrNo
+				Vtl_rec.Ecrlg	= lilg
+				
+				if listseek(list_EcrVtl,Vtl_rec,Vtl)
+					;Vtl.Mt	+= condition(cx.Sens=2,cx.Mt,-cx.Mt)
+					cx.mtbis=abs(cx.mt)
+					Vtl.Mt	+= condition(cx.cog_sens=2,cx.Mtbis,-cx.Mtbis)
+					;fri 18/04/2013
+					if vtl.mt<0
+						vtl.sens=1
+					else
+						vtl.sens=2
+					endif
+					lig_vtl_mt=vtl.mt
+					listmodify(list_EcrVtl,Vtl)
+				else
+					Vtl		= Vtl_rec
+					;Vtl.Mt	= condition(cx.Sens=2,cx.Mt,-cx.Mt)
+					
+					cx.mtbis=abs(cx.mt)
+					Vtl.Mt	= condition(cx.cog_sens=2,cx.Mtbis,-cx.Mtbis)
+					
+					;Vtl.Sens	= cx.Sens
+					;Vtl.Sens	= cx.cog_sens
+					;fri 18/04/2013
+					if vtl.mt<0
+						vtl.sens=1
+					else
+						vtl.sens=2
+					endif
+					lig_vtl_mt=vtl.mt
+					listinsert(list_EcrVtl,Vtl)
+					lilg++
+				endif
+
+				;mise à jour du cumul sur les axes 999999
+ 				Vtl_rec			= ""
+				Vtl_rec.Axe1	= "999999"
+				Vtl_rec.Axe2	= "999999"
+				Vtl_rec.Axe3	= cx.Axe(3)
+				Vtl_rec.Axe4	= cx.Axe(4)
+				Vtl_rec.Jnl		= cx.Jnl
+				Vtl_rec.Ecrno	= EcrNo
+				Vtl_rec.Ecrlg	= lilg
+				if listseek(list_EcrVtl,Vtl_rec,Vtl)
+					Vtl.Mt	+= condition(cx.Sens=2,cx.Mt,-cx.Mt)
+					;fri 28022013
+					;Vtl.Mt	+= condition(cx.cog_Sens=2,cx.Mt,-cx.Mt)
+					;fri 18/04/2013
+					if vtl.mt<0
+						vtl.sens=2
+					else
+						vtl.sens=1
+					endif
+					listmodify(list_EcrVtl,Vtl)
+				else
+					Vtl		= Vtl_rec
+					Vtl.Mt	= condition(cx.Sens=2,cx.Mt,-cx.Mt)
+					;Vtl.Mt	= condition(cx.cog_Sens=2,cx.Mt,-cx.Mt)
+					;fri 17/04/2013 
+					;Vtl.Sens	= 3 - cx.Sens
+					;Vtl.Sens	= 3 - cx.cog_Sens
+					;fri 18/04/2013
+					if vtl.mt<0
+						vtl.sens=2
+					else
+						vtl.sens=1
+					endif
+					listinsert(list_EcrVtl,Vtl)
+					lilg++
+				endif
+			endloop
+
+			;on exporte l'écriture comptable
+			;FRI 15/11/2013 rajout test ne pas exporter les lignes à zéro
+			if xq_cog.Choix(1) = 2   
+				Cog_GenererLigne(ligne,";",chr(13)&chr(10),true,c8,"",1)
+				winwritefile(fic,left(ligne),nbecr)
+			endif
+
+		endif
+
+	endloop
+
+	;Export de l'analytique
+	xq_cog.Lib(1)	= "Export des écritures analytiques"
+	Cog_AfficherTraitement
+
+	listbegin(list_EcrVtl)
+	loop listnext(list_EcrVtl,Vtl)
+
+		xq_cog.Lib(2)	= vtl.Axe1 & " - " & vtl.Axe2 & " - " & vtl.Axe3 & " - " & vtl.Axe4
+		Cog_AfficherTraitement
+
+		cx				= ""
+		cx.Axe(1)	= Vtl.Axe1
+		cx.Axe(2)	= Vtl.Axe2
+		cx.Axe(3)	= Vtl.Axe3
+		cx.Axe(4)	= Vtl.Axe4
+		if vtl.mt<0
+		;	if vtl.sens=2
+		;		vtl.sens=1
+		;	else
+		;		vtl.sens=2
+		;	endif
+			vtl.mt=abs(vtl.mt)
+		endif
+		cx.Mt			= Vtl.Mt
+		cx.Sens		= Vtl.Sens
+		cx.Jnl		= Vtl.Jnl
+		cx.Ecrno		= Vtl.EcrNo
+		cx.Ecrlg		= Vtl.EcrLg
+		
+		Cog_GenererLigne(ligne,";",chr(13)&chr(10),true,"",cx,2)
+		if val(mid(ligne,124,16))	<> 0
+			winwritefile(fic,left(ligne),nbecr)
+		endif
+
+	endloop
+
+	xmeret
+
+	winclosehandle(fic)
+	listdestroy(list_EcrVtl)
+	
+	Cog_EcritureLivreDeBord("<-- Export des écritures liées aux centrales",applic="DCPT")
+
+endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+public procedure Cog_SaisiePage1
+1 fin		1,0	= 0
+
+beginp
+
+	xmeinput(mz.mecle,1,0,xme_mode_goto)
+
+	do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+	
+			case harmony.dataarret = 1000	;ouverture de sélection de répertoire
+				WinSHBrowseForFolder(0,xq_cog.Fic,"Export Anaël","Sélectionnez le répertoire d'export",BIF_STATUSTEXT+BIF_EDITBOX,xq_cog.Fic)
+	
+			case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
+				endif
+			
+			case k_f7                ;zoom généralisé
+				Zoom_Call()
+			
+			case k_f8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			case k_f9                ;abandon
+				fin = 1
+		
+			case vsw in (k_f10,k_tab,k_return,k_down)
+				if messagebox("Export des écritures liées aux centrales ?","Confirmation",mb_yesno+mb_iconquestion)=idyes
+					
+					Cog_ExporterEcritures
+		
+					if erreur
+						messagebox("Des erreurs ont été détectées.|Consultez le livre de bord","Alerte",mb_iconexclamation)
+					endif
+		
+					fin=1
+		
+				endif
+
+		endswitch
+
+	while fin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
+
+
+;*
+;	Programme principal
+;*
+main
+	
+	if pingreceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	endif
+
+	if Cog_InitialiserVariables
+
+		if not tunnel
+	
+			GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+			procedurecall(AdrProc)
+			Cog_SaisiePage1
+	
+		else	;programme piloté
+	
+			Cog_ExporterEcritures
+	
+		endif
+
+	endif

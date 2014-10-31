@@ -1,0 +1,49 @@
+;*
+;* Include DivImport
+;*
+;_06/2011		SR		01		Initial
+
+;*
+;* Déclarations
+;*
+
+1	lIdDICO			L
+1	aEnrLstDico		254
+1	aNomDico			32
+1	aLibDico			60
+
+Record	*	Htdf	aFicLstDico
+
+const	cDAVDIC = "gtfdd.dhsd"
+const	cDCPTDIC = "Ccfdd.dhsd"
+const	cDREGDIC = "Rcfdd.dhsd"
+const	cDRTDIC = "Grfdd.dhsd"
+const cDCOGDIC = "cogfdd.dhsd"
+const	cNomFLstDico	= "Cog_etl_lstdico.txt"
+Const cFormatFixe		= 1
+const	cFormatCsv		= 2
+
+;*
+;* Proc et fx
+;*
+
+;*
+Procedure Cog_DivImp_Load_Dico
+Beginp
+	lIdDICO = ListGetId("COG_DICO")
+	ListErase(lIdDICO)
+	ListInsert(lIdDICO, ["Divalto Achat Vente (Gtfdd)" &";"& left(cDAVDIC)])
+	ListInsert(lIdDICO, ["Divalto Comptabilité (ccfdd)" &";"& left(cDCPTDIC)])
+	ListInsert(lIdDICO, ["Divalto Règlement (Rcfdd)" &";"& left(cDREGDIC)])
+	ListInsert(lIdDICO, ["Divalto Relation Tiers (Grfdd)" &";"& left(cDRTDIC)])
+	ListInsert(lIdDICO, ["Divalto Spécifiques (cogfdd)" &";"& left(cDCOGDIC)])
+	aFicLstDico.Name = cNomFLstDico
+	If Fopen(aFicLstDico, 'P') = 0
+		Loop Fread(aFicLstDico, aEnrLstDico) = 0
+			If (aNomDico := HmpSeek(aEnrLstDico, "DICO", " ")) <> " "
+				aLibDico	= HmpSeek(aEnrLstDico, "LIBELLE", ["Dictionnaire " left(aNomDico)])
+				ListInsert(lIdDICO, [aLibDico &";"& left(aNomDico)])
+			Endif
+		EndLoop
+	EndIf
+Endp

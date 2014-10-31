@@ -1,0 +1,236 @@
+;*
+;* Module système général Cogeser pour les développements Divalto 
+;*
+
+
+;*
+;* Déclarations
+;*
+
+OverWrittenBy	"Cogpm_GDivaU.dhop"
+
+Public Record		a5dd.dhsd			MZ
+
+Module	GTPM000.DHOP
+
+Const	Cog_MessInfo			= 1
+Const	Cog_MessAlerte			= 2
+Const	Cog_MessQuestion		= 3
+Const Cog_MessStop			= 4
+Const	Cog_MessTxtInfo		= "Message"
+Const	Cog_MessTxtAlerte		= "Alerte"
+Const	Cog_MessTxtQuestion	= "Confirmation"
+Const Cog_MessTxtStop		= "Attention"
+
+
+;*
+;* Procédures et fonctions locales
+;*
+
+;*
+;* Procédures et fonctions publiques surchargeables
+;*
+
+;* 
+Public Function Int	Cog_GDIVA_MESS(aTexte, nMode, nDefBouton, bTunnel)
+
+; MessageBox simplifié, permet de juste passer en paramètre le texte
+
+1	aTexte		S								; Texte du message
+1	nMode			1,0	= 1					; Icone et titre de la fenêtre : 1 = Info (défaut), 2 = Alerte, 3 = Question, 4 = Question
+1	nDefBouton	1,0	= 1					; Bouton par défaut 1 = premier, 2 = Second
+1	bTunnel 		B		= False				; Appel par tunnel ou batch, false par défaut. Si true : n'affiche pas le message retourne alors Id_Yes
+
+1	aTitre	60
+1	lIcone	L
+Beginf
+	If bTunnel <> True
+		Switch2 nMode
+			Case Cog_MessAlerte
+				aTitre	= Cog_MessTxtAlerte
+				lIcone	= MB_ICONEXCLAMATION
+			Case Cog_MessQuestion
+				aTitre	= Cog_MessTxtQuestion
+				lIcone	= MB_ICONQUESTION+MB_YESNO+Condition(nDefBouton = 1, MB_DEFBUTTON1, MB_DEFBUTTON2)
+			Case Cog_MessStop
+				aTitre	= Cog_MessTxtStop
+				lIcone	= MB_ICONSTOP
+			Default
+				aTitre	= Cog_MessTxtInfo
+				lIcone = MB_ICONINFORMATION
+		EndSwitch
+		Freturn(MessageBox(aTexte, aTitre, lIcone))
+	EndIf
+	Freturn(IdYes)
+Endf
+
+;*
+Public Function  int Cog_GDIVA_ITOOLBAR(aMSQ, aNTB, nPAG)
+
+; Initialise une toolbar 
+; Retour 0 si ok, 1 si toolbar non trouvée ou msq non chargé
+
+1	aMSQ		32		= " "				; Masque (dhoe, si non précisé prend mz.Mecle si chargé sinon harmony.Masque)
+1	aNTB		32		= "MAIN"			; Nom de la toolbar à associer (MAIN par défaut)
+1	nPAG		3,0	= 1				; Numéro de la page ou doit être associé la toolbar (1 par défaut)
+
+1	lIDTB		L 							; Id Liste de la toolbar
+Beginf
+	If aMSQ = " " and mz.MECLE <> " "
+		aMSQ = mz.MECLE
+	Elsif aMSQ = " " and mz.MECLE = " "
+		aMSQ = harmony.MASQUE
+	EndIf
+	If (lIDTB := XmeToolbarGetId (aMSQ, aNTB, False)) <> 0
+		XmeToolbarSetWindow (lIDTB, aMSQ, nPAG)
+	Else
+		freturn(1)
+	EndIf
+	Freturn(0)
+Endf
+
+;*
+Public Function  int Cog_GDIVA_IMSQMENU(aMSQ, aNMENU, nPAG)
+
+; Initialise un menu 
+; Retour 0 si ok, 1 si menu non trouvé ou msq non chargé
+
+1	aMSQ		32		= " "				; Masque (dhoe, si non précisé prend mz.Mecle si chargé sinon harmony.Masque)
+1	aNMENU	32		= "MAIN"			; Nom du menu à associer (MAIN par défaut)
+1	nPAG		3,0	= 1				; Numéro de la page ou doit être associé le menu (1 par défaut)
+
+1	lIDTB		L 							; Id Liste du menu
+Beginf
+	If aMSQ = " " and mz.MECLE <> " "
+		aMSQ = mz.MECLE
+	Elsif aMSQ = " " and mz.MECLE = " "
+		aMSQ = harmony.MASQUE
+	EndIf
+	If (lIDTB := XmeMenuGetId (aMSQ, aNMENU, False)) <> 0
+		XmeMenuSetWindow (lIDTB, aMSQ, nPAG)
+	Else
+		freturn(1)
+	EndIf
+	Freturn(0)
+Endf
+
+;*
+Public Function int Cog_GDIVA_XmeInput(aMSQ, nPAG, aNMENU, aNTB, aADRFX)
+
+; Saisie d'une page écran
+; retour  1 si abandon, 0 si validation, 9 si erreur
+
+1	aMSQ		32		= " "			; Nom du masque, si esp = mz.Mecle
+1	nPAG		3,0	= 1			; Numéro de la page à saisir (1 par défaut)
+1	aNMENU	32		= " "			; Nom du menu, si espace = pas de menu
+1	aNTB		32		= " "			; Nom de la toolbar, si espace = pas de toolbar
+1	aADRFX	16		= " "			; Nom de la fx de personalisation du module appelant, si esp = pas de fx
+
+1	bFINI		B		= False
+1	nRet		1,0   = 0
+Beginf
+	If aMSQ = " "
+		aMSQ = mz.mecle
+	EndIf
+	XmeInfoPage(aMSQ, nPag)						;lire la taille de la page
+	XmeSetWindowSize(aMSQ, nPag,Harmony.Opara3,Harmony.Opara4)
+	; Inits du menu de base et toolbar de base si demandé
+	If aNMENU <> " "
+		Cog_GDIVA_IMSQMENU(aMSQ, aNMENU, nPAG)
+	EndIf
+	If aNTB <> " "
+		Cog_GDIVA_ITOOLBAR(aMSQ, aNTB, nPAG)
+	EndIf
+	XmeInput(aMSQ, nPAG, 0, 2)
+	Do
+		Switch Harmony.Arret 
+			case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					G3_Zoom_Call()
+				endif
+	      Case Harmony.Key = K_F9											; Abandon :
+	         If MessageBox ("Confirmez-vous l'abandon ?","Message", MB_YESNO) = IDYES
+	            nRet = 1
+					bFINI = True
+	         EndIf
+	      Case Harmony.Key in (K_F10,k_tab,k_return,k_down)		; Validation
+            nRet = 0
+				bFINI = True
+			Case Harmony.Key = K_SF7										; Zoom généralisé
+				G3_Zoom_Call()
+			Case Harmony.Key = K_F8											; Zoom
+				G3_Zoom_Call(harmony.Dataarret)			
+			Case Harmony.Key = K_F1											; A propos de
+				MessageBox("Programme: " & Fstring("1", system.Znomprog) & \
+							  "|Ecran				: " & Fstring("1", harmony.Masque) & \
+							  "|Edition			  : " & Fstring("1", harmony.Imasque), "A propos de", MB_ICONINFORMATION+MB_OK)
+			Default																; On gère les autres évets dans une fx codé dans e source appelant
+				If aADRFX <> " "
+					FunctionCall(aADRFX)
+				EndIf
+		EndSwitch
+	While bFINI = False
+		Xmenext(harmony.RETOUR, harmony.CPLRETOUR)
+	Wend
+	Xmeret
+	Freturn(nRet)
+Endf
+
+;*
+public function char Cog_GDIVA_NomServ
+
+; Retourne le nom du serveur de log
+
+record ddsys.dhsd implicite serv	;répertoire harmony de harmony sur le serveur
+beginf
+	serv.path = WinReadProfileString("System","ServeurXlogf","divalto.ini")
+	if serv.path = ' '
+		serv.path = '/divalto'
+	else
+		serv.path = '//' & left(serv.path) & '/divalto'
+	endif
+	freturn(left(serv.path))
+endf
+
+;* 
+public function Char Cog_GDIVA_GenererCleEan13(pays,cnuf,reference)
+
+; Génère en retour la clé de contrôle d'un code ean 13
+
+1 pays			2,0					; code pays
+1 cnuf 			5						; Cnuf
+1 reference		5						; 5 derniers chiffres du code Ean
+
+1 code			12
+1 ean 			13
+1 valeur			5,0
+1 cle				1,0
+1 i				2,0
+
+beginf
+
+	ean	= ""
+	code	= nospaces(pays) & nospaces(cnuf) & nospaces(reference)
+
+	;vérifier qu'il y a 12 caractères numériques pour constituer le code en EAN13
+	if length(code) = 12 and isnum(code)
+
+		;calcul de la clé de contrôle  
+		for i = 2 to 12 step 2
+			valeur = valeur + Nmid (code , i , 1 , 0)
+		next
+		valeur = valeur * pays
+		for i = 1 to 11 step 2
+			valeur = valeur + Nmid (code , i , 1 , 0)
+		next
+	  	
+		cle = modulo((10 - modulo(valeur,10)),10)
+
+		ean = code	& fstring("L",format("<9>",cle))
+	
+	endif
+
+	freturn(ean)
+
+endf
+

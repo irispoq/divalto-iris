@@ -1,0 +1,14 @@
+<DictionarySql overwrite="gtrsoftrc.dhoq" ModuleInfo='$Id: gtrsoftrcu.dhsq 1414 2013-02-25 00:14:45Z s.renaudineau $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFOFTRC
+;*		Surcharge des enregistrements pour faire apparaître les nouvelles zones
+;*
+
+;
+; Ligne de traçabilité
+;
+
+<RecordSql Name=TracabLigne>
+<Select>
+	BU.*,
+

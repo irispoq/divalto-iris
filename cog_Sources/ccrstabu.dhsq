@@ -1,0 +1,159 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL du CCFTAB
+;*
+
+<DictionarySql overwrite="ccrstab.dhoq" ModuleInfo='$Id$'>
+
+;*
+;*		Compte abrégés
+;*
+		
+<RecordSql Name=CptAbrege>
+<Select>
+	H1.*	 		
+  
+
+;*
+;*		Libellés abrégés
+;*
+		
+<RecordSql Name=LibAbrege>
+
+<Select>
+	H2.*	 		
+ 
+;*
+;*		Clé de répartition
+;*
+
+<RecordSql Name=CleRepart>
+
+<Select>
+	H3E.*	 		
+ 
+
+;*
+;*		Abonnements
+;*
+
+<RecordSql Name=Abonnement>
+<Select>
+	H4.*	 		
+
+		
+;*
+;*		Libellé Nature Abonnement
+;*
+		
+<RecordSql Name=LibNatAbo >
+<Select>
+	H5.*	 		
+
+;*
+;*		Dates de banque
+;*
+	
+<RecordSql Name=DateBqe>
+<Select>
+	H6.*
+
+
+;*
+;*		Modèles
+;*
+		
+<RecordSql Name=Modele>
+
+<Select>
+	H7.*
+  
+
+;*
+;*		Lignes de modèles
+;*
+		
+<RecordSql Name=LigModele>
+
+<Select>
+	HA.*
+
+
+;*
+;*		Type de Règlement
+;*
+		
+<RecordSql Name=TypeRegl>
+	
+<Select>
+	H8.*
+	
+
+;*
+;*		Texte de Relevé
+;*
+		
+<RecordSql Name=TxtReleve >
+
+<Select>
+	H9.*
+	  
+
+;*
+;*		Nature de paiement
+;*
+		
+<RecordSql Name=NatPai >
+
+<Select>
+	HC.*
+ 
+
+
+;*
+;*		Nature d'immobilisation
+;*
+;*		!!! Les jointures avec C3 imposent que HD ne soit pas paramétrée table commune !!!
+		
+<RecordSql Name=NatImmo>
+
+<Select>
+	HD.*,
+	CptAmo.Lib,
+	CptDotAmo.Lib,
+	CptProAmoDerog.Lib,
+	CptDotAmoDerog.Lib,
+	CptRepAmoDerog.Lib,
+	CptProDeprec.Lib,
+	CptDotDeprec.Lib,
+	CptRepDeprec.Lib
+<LeftJoin>
+	C3 as CptAmo
+	on CptAmo.Dos = HD.Dos and CptAmo.Cpt = HD.CptAmo and CptAmo.Ce1 = '3'
+
+<LeftJoin>
+	C3 as CptDotAmo
+	on CptDotAmo.Dos = HD.Dos and CptDotAmo.Cpt = HD.CptDotAmo and CptDotAmo.Ce1 = '3'
+
+<LeftJoin>
+	C3 as CptProAmoDerog
+	on CptProAmoDerog.Dos = HD.Dos and CptProAmoDerog.Cpt = HD.CptProDro and CptProAmoDerog.Ce1 = '3'
+
+<LeftJoin>
+	C3 as CptDotAmoDerog
+	on CptDotAmoDerog.Dos = HD.Dos and CptDotAmoDerog.Cpt = HD.CptDotDro and CptDotAmoDerog.Ce1 = '3'
+
+<LeftJoin>
+	C3 as CptRepAmoDerog
+	on CptRepAmoDerog.Dos = HD.Dos and CptRepAmoDerog.Cpt = HD.CptRepDro and CptRepAmoDerog.Ce1 = '3'
+
+<LeftJoin>
+	C3 as CptProDeprec
+	on CptProDeprec.Dos = HD.Dos and CptProDeprec.Cpt = HD.CptProDep and CptProDeprec.Ce1 = '3'
+
+<LeftJoin>
+	C3 as CptDotDeprec
+	on CptDotDeprec.Dos = HD.Dos and CptDotDeprec.Cpt = HD.CptDotDep and CptDotDeprec.Ce1 = '3'
+
+<LeftJoin>
+	C3 as CptRepDeprec
+	on CptRepDeprec.Dos = HD.Dos and CptRepDeprec.Cpt = HD.CptDotRep and CptRepDeprec.Ce1 = '3'

@@ -1,0 +1,38 @@
+<DictionarySql overwrite="gtrsbp.dhoq" ModuleInfo='$Id: gtrsbpu.dhsq 53 2012-08-06 08:21:23Z s.renaudineau $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFBP
+;*		Surcharge des enregistrements pour faire apparaître les nouvelles zones
+;*
+
+;*
+;* 		Colis
+;*
+
+<RecordSql Name=Colis_desc>
+<SELECT>
+	BPCol.*
+
+;*
+;* 		Palette
+;*
+
+<RecordSql Name=Palette_desc>
+<SELECT>
+	BPPal.*
+
+;*
+;* 		Bon de préparation en-tête
+;*
+
+<RecordSql Name=BP_Entete>
+<SELECT>
+	BPEnt.*
+
+;*
+;* 	Bon de préparation détail
+;*
+
+<RecordSql Name=BP_Detail>
+<SELECT>
+	BPDet.*
+

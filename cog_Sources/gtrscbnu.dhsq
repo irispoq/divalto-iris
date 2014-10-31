@@ -1,0 +1,13 @@
+<DictionarySql overwrite="gtrscbn.dhoq" ModuleInfo='$Id: gtrscbnu.dhsq 1414 2013-02-25 00:14:45Z s.renaudineau $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFCBN
+;*		Surcharge des enregistrements pour faire apparaître les nouvelles zones
+;*
+
+;
+; Paramètre de calcul CBN
+;
+
+<RecordSql Name=CBN_Params>
+<Select>
+	BNPAR.*,

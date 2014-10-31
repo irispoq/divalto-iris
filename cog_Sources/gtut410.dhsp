@@ -1,0 +1,78 @@
+;*
+;*   intégration comptable                                                   gttt410
+;*
+;*    log    version   nPmodif      date     modifications
+;*
+;*    ch       5.1                  01.2001  version initiale en diva
+
+OverWrite "GTTT410.dhop"
+
+Module 	'GTPMFIC.dhop'
+Module 	'CCPMFIC.DHOP'
+Module	'CCTM000.DHOP'
+
+Public Record a5dd.dhsd MZ																		; Communications entre programme
+
+Public Record gtfdd.dhsd ENT																	; En-têtes
+Public Record gtfdd.dhsd MOUV																	; mouvements
+Public Record gtfdd.dhsd ETS
+Public Record gtfdd.dhsd XQ 	G3XQ															; sélections
+
+Public Record gtfdd.dhsd ART																		; Articles
+
+Public Record ccfdd.dhsd CA
+Public Record ccfdd.dhsd CD																		; dossier immo
+Public Record ccfdd.dhsd C8																		; écriture
+Public Record ccfdd.dhsd HD
+
+;*
+;*			Procedures liées aux accès fichiers
+;*
+
+;*
+Function char ENT_Chargement_Ap
+; après contrôle de l'en-tête et lecture du Tiers
+; retourne 'O' pour traiter la pièce
+BeginF
+	If not ENT.ETB = MZ.ETB | Freturn('N') 
+	Else | Freturn(standard.ENT_Chargement_Ap)
+	Endif
+EndF
+
+;*
+;*		Masquages
+;*
+
+;*
+Procedure Compte_Article_Masquage_Av
+; Avant masquage d'un compte article
+BeginP
+
+	Standard.Compte_Article_Masquage_Av
+
+	If MOUV.Cog_ImoFlag = 2
+
+		C8.Cpt = Condition(ART.Cog_CptIA <> ' ', ART.Cog_CptIA, \
+					Condition(Lectab_HD(ART.NatImmo)=0 AND HD.Cpt <> ' ', HD.Cpt, \
+					Condition(CD.CptAmoInc <> ' ',CD.CptAmoInc ,C8.Cpt)))
+
+	EndIf
+
+EndP
+
+;*
+;*		Init
+;*
+
+;*
+Procedure Programme_Debut
+;
+BeginP
+	
+	Standard.Programme_Debut
+	If Seek_CA(MZ.Dos, application=TRUE, conf=FALSE, table=FALSE, cloture=FALSE) = 0
+		Seek_CD()
+	EndIf
+																		
+EndP
+

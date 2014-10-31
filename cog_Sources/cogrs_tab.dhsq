@@ -1,0 +1,55 @@
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_tabu.dhoq" ModuleInfo='$Id: cogrs_tab.dhsq 53 2012-08-06 08:21:23Z s.renaudineau $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du COGF_TAB
+;*
+
+;*
+;* 		Libellé Table Paramètre
+;*
+
+<RecordSql Name=TableParametre Comment='Table Paramètres'>
+Public Record A5DD.dhsd		MZ
+Bind COG_T000
+<SELECT>
+	COG_T000.*
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_T000 
+<WHERE>
+	COG_T000.Dos = 999
+	Case Zoom_PK
+		COG_T000.CeBin = 0
+	Case Exists
+		COG_T000.CeBin = 0
+<ORDERBY>
+	Case Par_Cebin		"Par cebin"
+		COG_T000.CeBin
+
+;*
+;* 		Libellé Table Test
+;*
+
+<RecordSql Name=TableTest Comment='Table Test'>
+Public Record A5DD.dhsd		MZ
+Public Record COGFDD.dhsd	COG_T000
+Bind	Cog_T001
+<SELECT>
+	COG_T001.*
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_T001 
+<WHERE>
+	( COG_T000.TabTyp(1) = 2 And COG_T001.Dos = 999 ) Or ( COG_T000.TabTyp(1) <> 2 And COG_T001.Dos = MZ.Dos )
+	Case Zoom_Like_TestCode(char TestCode)
+		COG_T001.TestCode LIKE TestCode		
+	Case Zoom_Like_Lib(char Lib)
+		COG_T001.Lib LIKE Lib		
+	Case Zoom_PK(char TestCode)
+		COG_T001.TestCode = TestCode
+	Case Exists(char TestCode)
+		COG_T001.TestCode = TestCode
+<ORDERBY>
+	Case Par_Code		"Par Code Test"
+		COG_T001.TestCode
+	Case Par_Libelle	"Par Libellé Test"
+		COG_T001.Lib
+
+;*

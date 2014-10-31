@@ -1,0 +1,566 @@
+;*
+;*	Module commun à l'export des écritures
+;*
+;*	Créé le 19/07/2011 par ROBL
+;*
+
+
+module	"ccpmfic.dhop"
+module	"gtpmfic.dhop"
+module	"gttm000.dhop"
+
+public record	ccfdd.dhsd	ca
+public record	ccfdd.dhsd	c3
+public record	ccfdd.dhsd	c4
+public record	ccfdd.dhsd	c8
+public record	gtfdd.dhsd	ent
+public record	gtfdd.dhsd	cli
+public record	gtfdd.dhsd	t085
+public record	gtfdd.dhsd	t006
+
+
+;*
+public procedure Cog_GenererLigne(&ligne,sep_c,sep_l,fixe,c8_loc,cx_loc,OrigineAppel)
+1	ligne							A
+1	sep_c							A
+1	sep_l							A
+1	fixe							1,0
+record	ccfdd.dhsd	c8		c8_loc
+record	ccfdd.dhsd	cx		cx_loc
+1	OrigineAppel 2,0 = 1 ; Origine de l'appel : 1 = Ecritures Générales Centrales / 2 = Ecritures Analytiques Centrales / 3 = Ecritures PDV / 4 = Autre
+
+hfile		ccfdd.dhsd	ccfecr	ccfecr_rec
+record	ccfdd.dhsd	c8			c8_rec
+
+1	ttcmt			14,0
+1	mtdev			14,0
+1	ticod			1		= ""
+1	sens			1,0
+1	t_PiNo		>GTFDD.DHSD	PiNo = 0
+1	pinoa			6
+ 2		anneea	4,0
+ 2		moisa		2,0
+  3	moisaa	2
+
+beginp
+
+	if cx_loc <> ""
+		Seek_C8(cx_loc.EcrNo,cx_loc.EcrLg)
+		c8_loc	= c8
+	endif
+
+	sens	= condition(c8_loc.Sens>0,c8_loc.Sens,cx_loc.Sens)
+	if OrigineAppel = 2
+		sens	= cx_loc.Sens
+	endif
+
+	Seek_C3(c8_loc.Cpt)
+	Seek_C4(c8_loc.Jnl)
+
+	if c4.JnlTyp = 1
+		ticod	= "F"
+	elsif c4.JnlTyp = 2
+		ticod	= "C"
+	endif
+	Seek_Ent(ticod,4,c8_loc.Piece)
+
+	ttcmt	= 100 * condition(cx_loc<>"",cx_loc.Mt,c8_loc.Mt)
+	mtdev	= 100 * condition(cx_loc<>"",cx_loc.Mt,c8_loc.Mt)
+
+	lectab(6,ent.Regl)
+
+	if not fixe
+
+		ligne = "C" & Left(sep_c)
+		ligne = Left(ligne) & Left(ca.Cog_Dos_Anael) & Left(sep_c)
+		ligne = Left(ligne) & Left(c8_loc.Etb) & Left(sep_c)
+		ligne = Left(ligne) & condition(cx_loc="",condition(left(c8_loc.Cpt,1) in ("C","F"),Left(condition(c8_loc.CptCol<>"",c8_loc.CptCol,c3.CptCol)),left(c8_loc.Cpt)),"") & Left(sep_c)
+		if c3.TvaCod <> "" and lectab(85,c3.TvaCod) = 0
+			ligne = Left(ligne) & condition(cx_loc="",left(t085.Cog_Anael_Corr),"") & Left(sep_c)
+		else
+			ligne = Left(ligne) & condition(cx_loc="",condition(left(c8_loc.Cpt,1) in ("C","F"),Right(c8_loc.Cpt,5),""),"") & Left(sep_c)
+		endif
+		ligne = Left(ligne) & val(year(c8_loc.EcrDt)) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & val(year(ent.PiDt)) & Left(sep_c)
+		ligne = Left(ligne) & val(month(ent.PiDt)) & Left(sep_c)
+		ligne = Left(ligne) & val(day(ent.PiDt)) & Left(sep_c)
+		ligne = Left(ligne) & "6"&Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & val(year(ent.PiDt)) & Left(sep_c)
+		ligne = Left(ligne) & val(month(ent.PiDt)) & Left(sep_c)
+		ligne = Left(ligne) & val(day(ent.PiDt)) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(c8_loc.Jnl) & Left(sep_c)
+		ligne = Left(ligne) & right(ent.PiNo) & Left(sep_c)
+		ligne = Left(ligne) & "DI" & Left(sep_c)
+		ligne = Left(ligne) & left(c8_loc.Lib) & Left(sep_c)
+		ligne = Left(ligne) & right(ttcmt) & Left(sep_c)
+		ligne = Left(ligne) & condition(Sens = 2,"0,010","-0,010") & Left(sep_c)
+		ligne = Left(ligne) & right(mtdev) & Left(sep_c)
+		ligne = Left(ligne) & val(year(ent.EchDt)) & Left(sep_c)
+		ligne = Left(ligne) & val(month(ent.EchDt)) & Left(sep_c)
+		ligne = Left(ligne) & val(day(ent.EchDt)) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & "1,00000" & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & left(ent.Regl) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		if left(c8_loc.Cpt,1) in("6","7")
+			ligne = Left(ligne) & condition(cx_loc="",condition(left(c8_loc.Cpt,1) not in ("C","F") and  left(c8_loc.Cpt,3) <> "445","999999",""),left(cx_loc.Axe(1))) & Left(sep_c)
+			ligne = Left(ligne) & condition(cx_loc="",left(c3.Axe(4)),left(cx_loc.Axe(4))) & Left(sep_c)
+			ligne = Left(ligne) & left(c8_loc.Cpt) & Left(sep_c)
+		else
+			ligne = Left(ligne) & Left(sep_c)
+			ligne = Left(ligne) & Left(sep_c)
+			ligne = Left(ligne) & Left(sep_c)
+		endif
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		if left(c8_loc.Cpt,1) in("6","7")
+			ligne = Left(ligne) & condition(cx_loc="",condition(left(c8_loc.Cpt,1) not in ("C","F") and  left(c8_loc.Cpt,3) <> "445","999999",""),left(cx_loc.Axe(2))) & Left(sep_c)
+			ligne = Left(ligne) & condition(cx_loc="",left(c3.Axe(4)),left(cx_loc.Axe(4))) & Left(sep_c)
+			ligne = Left(ligne) & left(c8_loc.Cpt) & Left(sep_c)
+		else
+			ligne = Left(ligne) & Left(sep_c)
+			ligne = Left(ligne) & Left(sep_c)
+			ligne = Left(ligne) & Left(sep_c)
+		endif
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_c)
+		ligne = Left(ligne) & Left(sep_l)
+
+	else
+
+		ligne	= ""
+		mid(ligne,1,1)			= "C"
+		mid(ligne,2,6)			= nospaces(ca.Cog_Dos_Anael)
+		mid(ligne,2,6)			= fstring("R",mid(ligne,2,6))
+		if cx_loc = ""
+			mid(ligne,11,6)	= condition(left(c8_loc.Cpt,1) in ("C","F"),condition(c8_loc.CptCol<>"",c8_loc.CptCol,c3.CptCol),c8_loc.Cpt)
+			if left(mid(ligne,11,6),2) = "41"
+				ccfecr_rec.Key	= "H" & c8_loc.Dos & c8_loc.EcrNo
+				loop not hread(ccfecr_rec,c8_rec) and ccfecr_rec.Key <= "H" & c8_loc.Dos & c8_loc.EcrNo & $FF
+					if left(c8_rec.Cpt,1) in ("C","F")
+						pinglocal("cog_c3",c3)
+						if Seek_C3(c8_rec.Cpt) = 0
+							mid(ligne,17,8)	= c3.Cog_CptAnael
+						endif
+						PingLocalReceiveAndDelete("cog_c3",c3)
+						exitloop
+					endif
+				endloop
+			elsif left(mid(ligne,11,6),1) = "7" and c3.TvaCod not in("","*") and lectab(85,c3.TvaCod) = 0
+				mid(ligne,17,8)	= t085.Cog_Anael_Corr
+			elsif left(mid(ligne,11,6),4) in ("4458","4678")
+				ccfecr_rec.Key	= "H" & c8_loc.Dos & c8_loc.EcrNo
+				loop not hread(ccfecr_rec,c8_rec) and ccfecr_rec.Key <= "H" & c8_loc.Dos & c8_loc.EcrNo & $FF
+					if left(c8_rec.Cpt,1) in ("C","F")
+						if Seek_CLI(c8_rec.Cpt) = 0 and cli.TiersGrp <> ""
+							mid(ligne,17,8)	= Right(cli.TiersGrp,5)
+						else
+							mid(ligne,17,8)	= Right(c8_rec.Cpt,5)
+						endif
+						exitloop
+					endif
+				endloop
+			else
+				mid(ligne,17,8)	= condition(left(c8_loc.Cpt,1) in ("C","F"),Right(c8_loc.Cpt,5),"")
+			endif
+			mid(ligne,17,8)	= fstring("R",mid(ligne,17,8))
+		endif
+		mid(ligne,26,5)		= val(year(c8_loc.EcrDt)) & "0"
+		if OrigineAppel = 2
+			mid(ligne,26,5)		= val(year(today)) & "0"
+		endif
+		mid(ligne,33,2)		= fstring("0",val(month(today)))
+		mid(ligne,37,2)		= fstring("0",val(month(today)))
+		mid(ligne,41,2)		= fstring("0",val(month(today)))
+		mid(ligne,45,4)		= val(year(ent.PiDt))
+		mid(ligne,51,2)		= fstring("0",val(month(ent.PiDt)))
+		mid(ligne,55,2)		= fstring("0",val(day(ent.PiDt)))
+		if OrigineAppel = 2
+			mid(ligne,45,4)		= val(year(today))
+			mid(ligne,51,2)		= fstring("0",val(month(today)))
+			mid(ligne,55,2)		= fstring("0",val(day(today)))
+			mid(ligne,57,1)		= "7"
+		endif
+		mid(ligne,60,4)		= val(year(today))
+		; JDT DEEBUT 14/09/2011
+		if OrigineAppel <> 2
+			If CX_LOC <> " "
+				mid(ligne,57,1)		= "7"
+			Else
+				mid(ligne,57,1)		= "6"
+			EndIf
+		endif
+		; avant : mid(ligne,57,1)		= "6"
+		; JDT FIN 14/09/2011
+		mid(ligne,66,4)		= val(year(ent.PiDt))
+		mid(ligne,72,2)		= fstring("0",val(month(ent.PiDt)))
+		mid(ligne,76,2)		= fstring("0",val(day(ent.PiDt)))
+		mid(ligne,78,8)		= c8_loc.EcrNo
+		if OrigineAppel = 2
+			mid(ligne,78,8)		= " "
+		endif
+		mid(ligne,86,3)		= c8_loc.Jnl
+		if OrigineAppel = 2
+			mid(ligne,66,4)		= val(year(today))
+			mid(ligne,72,2)		= fstring("0",val(month(today)))
+			mid(ligne,76,2)		= fstring("0",val(day(today)))
+			mid(ligne,86,3)		= cx_loc.Jnl
+		endif
+		if OrigineAppel = 3
+			mid(ligne,45,4)		= val(year(c8_loc.EcrDt))
+			mid(ligne,51,2)		= fstring("0",val(month(c8_loc.EcrDt)))
+			mid(ligne,55,2)		= fstring("0",val(day(c8_loc.EcrDt)))
+			mid(ligne,66,4)		= val(year(c8_loc.EcrDt))
+			mid(ligne,72,2)		= fstring("0",val(month(c8_loc.EcrDt)))
+			mid(ligne,76,2)		= fstring("0",val(day(c8_loc.EcrDt)))
+		endif
+		; JDT DEEBUT 14/09/2011
+		Switch OrigineAppel
+			Case 1
+				t_PiNo = c8_loc.EcrNo
+			Case 2
+				anneea	= year(today)
+				moisa		= month(today)
+				pinoa		= fstring("0",pinoa)
+				t_PiNo	= val(pinoa)
+			Case 3
+				t_PiNo = c8_loc.Cog_RedNo
+			Case 4
+				t_PiNo = C8.COG_CHRONO
+			Default
+				t_PiNo = ENT.PiNo
+		EndSwitch
+		If t_PiNo = 0
+			mid(ligne,89,8) = Ent.PiNo
+		Else
+			mid(ligne,89,8) = t_PiNo
+		EndIf
+		; avant : mid(ligne,89,8)		= ent.PiNo
+		; JDT FIN 14/09/2011
+		mid(ligne,97,2)		= "DI"
+		mid(ligne,99,25)		= Modify("Facture","F.",c8_loc.Lib)
+		if OrigineAppel = 2
+			mid(ligne,99,25)		= "Ecr ana Centrales " & moisaa & right(val(year(today)),2)
+		elsif OrigineAppel = 3
+			mid(ligne,99,25)		= "Redd.N " & right(c8_loc.Cog_RedNo) & " de " & Right("00" & fstring("0",val(month(c8_loc.EcrDt))),2) & "/" & right(val(year(c8_loc.EcrDt)),2)
+		endif
+		mid(ligne,124,16)		= ttcmt
+		mid(ligne,124,16)		= fstring("R",mid(ligne,124,16))
+		if OrigineAppel = 3
+			mid(ligne,141,5)		= condition(Sens = 2,"0,010","-,010")
+		else
+			mid(ligne,141,5)		= condition(Sens = 1,"0,010","-,010")
+		endif
+		mid(ligne,146,16)		= mtdev
+		mid(ligne,146,16)		= fstring("R",mid(ligne,146,16))
+		mid(ligne,164,4)		= val(year(ent.EchDt))
+		mid(ligne,170,2)		= fstring("0",val(month(ent.EchDt)))
+		mid(ligne,174,2)		= fstring("0",val(day(ent.EchDt)))
+		mid(ligne,183,1)		= "0"
+		mid(ligne,187,1)		= "0"
+		mid(ligne,191,1)		= "0"
+		; JDT DEBUT 02/12/2011
+		If left(c8_loc.Cpt,1) in ("A".."Z") And Recherche_Client(c8_loc.Cpt,False) = 0 and OrigineAppel <> 2
+			Mid(ligne,194,3) = Left(CLI.Stat(2),3)
+		EndIf
+		; JDT FIN 02/12/2011
+		if OrigineAppel = 1
+			lectab(85,c3.TvaCod)
+			mid(ligne,197,1)	= t085.Cog_Anael_Corr
+		endif
+		mid(ligne,207,1)		= "0"
+		mid(ligne,215,1)		= "0"
+		mid(ligne,223,1)		= "0"
+		mid(ligne,239,1)		= "0"
+		mid(ligne,254,7)		= "1,00000"
+		mid(ligne,239,1)		= "0"
+		mid(ligne,264,1)		= "0"
+		mid(ligne,270,3)		= "INT"
+		mid(ligne,275,14)		= condition(cx_loc="",(90000000000000+c8_loc.EcrNo),(90000000000000+cx_loc.EcrNo))
+		mid(ligne,289,6)		= condition(cx_loc="",c8_loc.EcrLg,cx_loc.EcrLg)
+		mid(ligne,289,6)		= fstring("R",mid(ligne,289,6))
+		if OrigineAppel in(1,3,4) And left(c8_loc.Cpt,1) in ("A".."Z")
+			lectab(6,c8_loc.Reg)
+			mid(ligne,295,2)	= t006.Cog_Modreganael
+		endif
+		mid(ligne,324,3)		= condition(cx_loc="",c8_loc.Dev,"EUR")
+		mid(ligne,330,1)		= "0"
+		mid(ligne,348,4)		= val(year(today))
+		mid(ligne,354,2)		= fstring("0",val(month(today)))
+		mid(ligne,358,2)		= fstring("0",val(day(today)))
+		mid(ligne,364,1)		= "0"
+		mid(ligne,370,1)		= "0"
+		mid(ligne,374,1)		= "0"
+		mid(ligne,378,1)		= "0"
+		mid(ligne,388,1)		= "0"
+		mid(ligne,398,1)		= "0"
+		mid(ligne,408,1)		= "0"
+		mid(ligne,412,1)		= "0"
+		mid(ligne,418,1)		= "0"
+
+		mid(ligne,502,6)		= ",00000"
+		mid(ligne,519,6)		= ",00000"
+		mid(ligne,534,1)		= "0"
+		mid(ligne,552,1)		= "0"
+		mid(ligne,562,1)		= "0"
+		mid(ligne,568,1)		= "0"
+		mid(ligne,684,1)		= "0"
+		mid(ligne,690,1)		= "0"
+		mid(ligne,705,1)		= "0"
+		mid(ligne,711,1)		= "0"
+		mid(ligne,715,1)		= "0"
+		mid(ligne,719,1)		= "0"
+		mid(ligne,723,1)		= "0"
+		mid(ligne,729,1)		= "0"
+		mid(ligne,733,1)		= "0"
+		mid(ligne,737,1)		= "0"
+		mid(ligne,741,1)		= "0"
+		mid(ligne,995,1)		= "0"
+		mid(ligne,1011,1)		= "0"
+		mid(ligne,1040,1)		= "0"
+		mid(ligne,1055,1)		= "0"
+		mid(ligne,1070,1)		= "0"
+		mid(ligne,1085,1)		= "0"
+		mid(ligne,1100,1)		= "0"
+		mid(ligne,1115,1)		= "0"
+		mid(ligne,1130,1)		= "0"
+		mid(ligne,1136,1)		= "0"
+		mid(ligne,1388,1)		= "0"
+		mid(ligne,1391,4)		= ",000"
+		mid(ligne,1398,6)		= ",00000"
+		
+		;mid(ligne,1405,5)		= "0,010"
+		if OrigineAppel = 3
+			mid(ligne,1405,5)		= condition(Sens = 2,"0,010","-,010")
+		else
+			mid(ligne,1405,5)		= condition(Sens = 1,"0,010","-,010")
+		endif
+
+		mid(ligne,1422,1)		= "0"
+		mid(ligne,1434,1)		= "0"
+		mid(ligne,1446,1)		= "0"
+		mid(ligne,1452,1)		= "0"
+		mid(ligne,1456,1)		= "0"
+		mid(ligne,1460,1)		= "0"
+
+		switch OrigineAppel
+			case 1
+				if left(c8_loc.Cpt,1) in ("6","7")
+					mid(ligne,455,6)		= "999999"
+					mid(ligne,461,2)		= c3.Axe(4)
+					mid(ligne,464,6)		= c3.Axe(3)
+					mid(ligne,1012,6)		= "999999"
+					mid(ligne,1018,2)		= c3.Axe(4)
+					mid(ligne,1020,6)		= c3.Axe(3)
+				endif
+			case 2
+				mid(ligne,455,6)		= cx_loc.Axe(1)
+				mid(ligne,461,2)		= cx_loc.Axe(4)
+				mid(ligne,464,6)		= cx_loc.Axe(3)
+				mid(ligne,1012,6)		= cx_loc.Axe(2)
+				mid(ligne,1018,2)		= cx_loc.Axe(4)
+				mid(ligne,1020,6)		= cx_loc.Axe(3)
+			default
+				if left(c8_loc.Cpt,1) in ("6","7")
+					mid(ligne,455,6)		= condition(cx_loc="",condition(left(c8_loc.Cpt,1) not in ("C","F") and  left(c8_loc.Cpt,3) <> "445","999999",""),cx_loc.Axe(1))
+					mid(ligne,461,2)		= condition(cx_loc="",c3.Axe(4),cx_loc.Axe(4))
+					mid(ligne,464,6)		= c8_loc.Cpt
+					mid(ligne,1012,6)		= condition(cx_loc="",condition(left(c8_loc.Cpt,1) not in ("C","F") and  left(c8_loc.Cpt,3) <> "445","999999",""),cx_loc.Axe(2))
+					mid(ligne,1018,2)		= condition(cx_loc="",c3.Axe(4),cx_loc.Axe(4))
+					mid(ligne,1020,6)		= c8_loc.Cpt
+				endif
+		endswitch
+
+		ligne					= modify("°"," ",ligne)
+		mid(ligne,1550)	= $0D&$0A
+
+	endif
+	
+endp
+
+;*
+public procedure Cog_SupprimerReddition
+hfile		cogfdd.dhsd	cog_freddition	cog_freddition_loc	openonuse
+
+record	cogfdd.dhsd	cog_red_ent		cog_red_ent_loc
+record	cogfdd.dhsd	cog_red_lig		cog_red_lig_loc
+
+beginp
+
+	if c8.Jnl = ca.Cog_ExpPV_Jnl
+
+		if not hseek(cog_freddition_loc,cog_red_ent_loc,"E"&c8.Dos&c8.Cog_RedNo)
+
+			hdelete(cog_freddition_loc,cog_red_ent_loc)
+
+			cog_freddition_loc.Key	= "L" & c8.Dos & c8.Cog_RedNo
+			loop not hread(cog_freddition_loc,cog_red_lig_loc) and cog_freddition_loc.Key <= "L" & c8.Dos & c8.Cog_RedNo & $FF
+				hdelete(cog_freddition_loc,cog_red_lig_loc)
+			endloop
+
+		endif
+
+	endif
+
+endp
+
+;*

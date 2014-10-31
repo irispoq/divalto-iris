@@ -1,0 +1,1154 @@
+;>xwin4obj                              7.0       20140429152402      
+[masque]
+ utilisateur="UGIE"
+ date_modification="29/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=77
+ type_masque=2
+ dernier_id=87
+ dernier_id_page=12
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="gtfaide"
+ [touches]
+  f7=135
+  shift_f6=10000
+[enregistrements]
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "cogfdd.dhsd",,cog_valid_part,cog_valid_part,500,0
+ "cogfdd.dhsd",,cog_valid_pmt,cog_valid_pmt,500,0
+ "ccfdd.dhsd",,c3,c3,1000,0
+ "ccfdd.dhsd",,c5,c5,800,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=297,480
+  attache_lgx=oui
+  attache_lgy=oui
+  id=17
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=0
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=40,480
+  attache_lgx=oui
+  id=18
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=0
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=33
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="à créer"
+ nb_lig=9
+ nb_col=60
+ offset_lig=8
+ offset_col=8
+ diva_apres="Page_SaisieCleCreation_Ap"
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=10,13
+   taille=9,46
+   id=37
+   wstyle="STD"
+  [texte]
+   texte="Section Analytique"
+ [obj_texte]
+  [presentation]
+   position=21,13
+   taille=9,65
+   id=38
+   wstyle="STD"
+  [texte]
+   texte="Compte général de l'article"
+ [obj_texte]
+  [presentation]
+   position=40,13
+   taille=9,19
+   id=45
+   wstyle="STD"
+  [texte]
+   texte="Groupe"
+ [obj_texte]
+  [presentation]
+   position=51,13
+   taille=9,15
+   id=46
+   wstyle="STD"
+  [texte]
+   texte="Type"
+ [obj_texte]
+  [presentation]
+   position=62,13
+   taille=9,25
+   id=47
+   wstyle="STD"
+  [texte]
+   texte="Code"
+ [champ]
+  [presentation]
+   position=22,120
+   taille=9,114
+   id=43
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=c3,lib,c3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=10,84
+   taille=9,32
+   id=40
+   colonnes_saisie=8
+   wstyle="ZOOM_NON_SAISI"
+  [description]
+   donnee=cog_valid_part,axe,cog_valid_part
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=19011
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=11,120
+   taille=9,113
+   id=44
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=c5,lib,c5
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=21,84
+   taille=9,32
+   id=42
+   colonnes_saisie=8
+   wstyle="ZOOM_NON_SAISI"
+  [description]
+   donnee=cog_valid_part,cptv,cog_valid_part
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=19030
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=40,84
+   taille=10,60
+   id=49
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=cog_valid_pmt,cog_typev,cog_valid_pmt
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","COG_VALIDGRP"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=51,84
+   taille=10,60
+   id=50
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=cog_valid_pmt,cog_typeu,cog_valid_pmt
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","COG_VALIDTYP"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=62,84
+   taille=10,76
+   id=51
+   colonnes_saisie=20
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=cog_valid_pmt,user,cog_valid_pmt
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_User_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=3
+ libelle="Fiche zoom"
+ fond="STD"
+ nature=double
+ titre="Zoom"
+ efface=partiel
+ nb_lig=33
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ suiv=4
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="PARAMETRES"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=21,4
+   taille=137,470
+   attache_lgx=oui
+   attache_lgy=oui
+   id=1
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Paramètres"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,15
+   taille=9,46
+   id=52
+   wstyle="STD"
+  [texte]
+   texte="Section Analytique"
+ [obj_texte]
+  [presentation]
+   position=53,15
+   taille=9,65
+   id=53
+   wstyle="STD"
+  [texte]
+   texte="Compte général de l'article"
+ [obj_texte]
+  [presentation]
+   position=72,15
+   taille=9,19
+   id=54
+   wstyle="STD"
+  [texte]
+   texte="Groupe"
+ [obj_texte]
+  [presentation]
+   position=83,15
+   taille=9,15
+   id=55
+   wstyle="STD"
+  [texte]
+   texte="Type"
+ [obj_texte]
+  [presentation]
+   position=94,15
+   taille=9,25
+   id=56
+   wstyle="STD"
+  [texte]
+   texte="Code"
+ [obj_texte]
+  [presentation]
+   position=115,15
+   taille=9,45
+   id=64
+   wstyle="STD"
+  [texte]
+   texte="Montant Maximum"
+ [champ]
+  [presentation]
+   position=54,122
+   taille=9,144
+   id=57
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=c3,lib,c3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=42,86
+   taille=9,33
+   id=58
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_valid_part,axe,cog_valid_part
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=19011
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=43,122
+   taille=9,144
+   id=59
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=c5,lib,c5
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=53,86
+   taille=9,33
+   id=60
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_valid_part,cptv,cog_valid_part
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=19030
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=72,86
+   taille=9,39
+   id=61
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_valid_pmt,cog_typev,cog_valid_pmt
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","COG_VALIDGRP"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=83,86
+   taille=9,61
+   id=62
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_valid_pmt,cog_typeu,cog_valid_pmt
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","COG_VALIDTYP"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=94,86
+   taille=9,75
+   id=63
+   colonnes_saisie=20
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_valid_pmt,user,cog_valid_pmt
+   saisie=non
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_User_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=114,86
+   taille=9,34
+   id=65
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_valid_pmt,cog_mtmax,cog_valid_pmt
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cog_MtMax_1_Av"
+   diva_apres="Champ_Cog_MtMax_1_Ap"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ prec=3
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=29,9
+   taille=36,127
+   id=21
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=72,8
+   taille=36,127
+   id=3
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=45,12
+   taille=7,17
+   id=6
+   wnom_police="STD"
+  [texte]
+   texte="par"
+ [obj_texte]
+  [presentation]
+   position=54,12
+   taille=7,14
+   id=7
+   wnom_police="STD"
+  [texte]
+   texte="le"
+ [obj_texte]
+  [presentation]
+   position=88,11
+   taille=7,17
+   id=9
+   wnom_police="STD"
+  [texte]
+   texte="par"
+ [obj_texte]
+  [presentation]
+   position=97,11
+   taille=7,14
+   id=10
+   wnom_police="STD"
+  [texte]
+   texte="le"
+ [champ]
+  [presentation]
+   position=45,26
+   taille=10,73
+   id=66
+   colonnes_saisie=20
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_valid_pmt,usercr,cog_valid_pmt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=54,26
+   taille=11,63
+   id=68
+   colonnes_saisie=19
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_valid_pmt,usercrdh,cog_valid_pmt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=88,26
+   taille=8,73
+   id=67
+   colonnes_saisie=20
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_valid_pmt,usermo,cog_valid_pmt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=97,26
+   taille=9,61
+   id=69
+   colonnes_saisie=19
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_valid_pmt,usermodh,cog_valid_pmt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=5
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=6
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=7
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=8
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=9
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=10
+[page]
+ numero=11
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=33
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=11
+ [tableau]
+  [presentation]
+   position=40,0
+   taille=255,480
+   attache_lgx=oui
+   attache_lgy=oui
+   id=11
+   wnom_couleur="TABLEAU"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   hauteur_lig=10
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   separation=160
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=66,86
+    taille=10,40
+    id=84
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=cog_valid_pmt,cog_typev,cog_valid_pmt
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="cog_gtfdmc.dhfi","COG_VALIDGRP"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Type de Valideur/Vérificateur"
+   [param_colonne]
+    titre="Groupe"
+    fl_trait_col=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=77,86
+    taille=10,62
+    id=85
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=cog_valid_pmt,cog_typeu,cog_valid_pmt
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="cog_gtfdmc.dhfi","COG_VALIDTYP"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Type User/Groupe User"
+   [param_colonne]
+    titre="Type"
+    fl_trait_col=non
+    largeur_col=64
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=88,86
+    taille=10,75
+    id=86
+    colonnes_saisie=20
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_valid_pmt,user,cog_valid_pmt
+    saisie=non
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_User_1_Ap"
+   [info_bulle]
+   texte="Utilisateur / Groupe d'utilisateurs"
+   [param_colonne]
+    titre="Code"
+    largeur_col=77
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=108,86
+    taille=10,34
+    id=87
+    colonnes_saisie=10
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_valid_pmt,cog_mtmax,cog_valid_pmt
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Cog_MtMax_1_Av"
+    diva_apres="Champ_Cog_MtMax_1_Ap"
+   [info_bulle]
+   texte="Montant Maximum"
+   [param_colonne]
+    titre="Montant Maximum"
+    fl_aff=oui
+    largeur_col=57
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=8,23
+   taille=9,46
+   id=70
+   wstyle="STD"
+  [texte]
+   texte="Section Analytique"
+ [obj_texte]
+  [presentation]
+   position=19,23
+   taille=9,65
+   id=71
+   wstyle="STD"
+  [texte]
+   texte="Compte général de l'article"
+ [champ]
+  [presentation]
+   position=20,130
+   taille=9,144
+   id=72
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=c3,lib,c3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=8,94
+   taille=9,33
+   id=73
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_valid_part,axe,cog_valid_part
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=19011
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=9,130
+   taille=9,144
+   id=74
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=c5,lib,c5
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=19,94
+   taille=9,33
+   id=75
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_valid_part,cptv,cog_valid_part
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=19030
+  [traitements]
+   microbol_click=8002
+[ressources]
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    warret=8
+    wtrait_chaine="#home"
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    warret=9
+    wtrait_chaine="#end"
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#ctrl_insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   nature=case
+   [param_bouton]
+    wnom="FICHE"
+    wid_ressource="FICHE"
+    wtrait_chaine="#shift_f4"
+   [info_bulle]
+   texte="Mode fiche ou mode liste <Shift+F4>"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   [param_bouton]
+    wnom="FICJOINT"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+   [info_bulle]
+   texte="Fichiers joints <Ctrl+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+Include	"gttc000.dhsp"
+
+Public Record "cogfdd.dhsd" cog_valid_part cog_valid_part
+Public Record "cogfdd.dhsd" cog_valid_pmt cog_valid_pmt
+Public Record "ccfdd.dhsd" c3 c3
+Public Record "ccfdd.dhsd" c5 c5
+
+;*
+Public Procedure Champ_Cog_MtMax_1_Ap
+;
+Beginp
+
+	if cog_valid_pmt.Cog_MtMax <= 0
+		messagebox("Le montant doit être supérieur à 0","Alerte",mb_iconexclamation)
+		harmony.Retour	= xmenext_ressaisie
+	endif
+
+Endp
+
+
+;*
+Public Procedure Champ_Cog_MtMax_1_Av
+;
+Beginp
+
+	if cog_valid_pmt.Cog_TypeV = 1	;pas de saisie de montant pour les vérificateurs
+		harmony.Retour	= xmenext_saut_donnee
+	endif
+	
+Endp
+
+
+;*
+procedure Cog_ControlerUtilisateur
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc
+
+record	a5dd.dhsd	muser		muser_loc
+record	a5dd.dhsd	musergrp	musergrp_loc
+
+beginp
+
+	if (cog_valid_pmt.Cog_TypeU = 1 and hseek(a5fdos_loc,muser_loc,"B"&cog_valid_pmt.User)) or \
+	(cog_valid_pmt.Cog_TypeU = 2 and hseek(a5fdos_loc,musergrp_loc,"K"&cog_valid_pmt.User))
+
+		messagebox("Utilisateur ou Groupe d'utilisateurs inexistant","Alerte",mb_iconexclamation)
+		harmony.Retour	= xmenext_traitement_avant
+
+	endif
+	
+endp
+
+
+;*
+Public Procedure Champ_User_1_Ap
+;
+Beginp
+
+	if harmony.Key = K_F8
+
+		if cog_valid_pmt.Cog_TypeU = 1
+			Zoom_Call(11009)
+		else
+			Zoom_Call(11015)
+		endif
+
+	elsif cog_valid_pmt.User = ""
+
+		harmony.Retour	= xmenext_ressaisie
+
+	else
+		
+		Cog_ControlerUtilisateur
+
+	endif
+		
+Endp
+
+
+;*
+Public Procedure Page_SaisieCleCreation_Ap
+;
+Beginp
+
+	Cog_ControlerUtilisateur
+
+Endp
+[/diva]
+[diva_base]
+[/diva]

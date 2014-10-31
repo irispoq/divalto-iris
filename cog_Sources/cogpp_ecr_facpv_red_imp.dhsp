@@ -1,0 +1,454 @@
+;>xdiva
+;*
+;*		Objet : Edition de la Reddition - Programme Cogpp_ecr_facpv_red_imp.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	kit104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		CogImprimerRedition			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+
+include	gttcz00.dhsp						;déclarations communes
+include	zmapi.dhsp
+
+;module	a5pm000.dhop
+module	a5tm000.dhop
+module	a5pmwin.dhop
+module	cogtm_000.dhop						;module de fonctions communes
+module	ccpmfic.dhop
+module	cogtm_ecr_exp.dhop
+module	cogtm_red.dhop
+Module A5PMNoteJoint.dhop
+
+
+public hfile	cogfdd.dhsd	cog_freddition	cog_freddition	openonuse
+
+public record	cogfdd.dhsd	Cog_red_param
+public record	cogfdd.dhsd	Cog_red_ent
+public record	cogfdd.dhsd	Cog_red_lig
+
+public record	gtfdd.dhsd	xq			xq_cog		;enregistrement de travail
+public record	gtfdd.dhsd	xq			xq_imp		;enregistrement de travail
+public record	gtfdd.dhsd	t041						;textes préenregistrés
+
+public record	ccfdd.dhsd	ca
+public record	ccfdd.dhsd	c4
+
+public record	a5dd.dhsd	mchemin
+
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+
+1	list_red		L
+
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+function int Cog_InitialiserVariables
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+1	fonc_red		16
+
+beginf
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		if iseek(a5fdos_loc,muser_loc,"B",system.user)
+
+			if not tunnel
+				messagebox("Utilisateur "&left(system.user)&" non défini dans la base Divalto","Alerte",mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= muser_loc.dos
+			mz.etb		= muser_loc.etb
+			mz.depo		= muser_loc.depo
+			mz.mecle		= "Cogee_ecr_facpv_red_imp.dhof"
+			mz.micle		= "Cogii_ecr_facpv_red_imp.dhoi"
+			mz.mtcle		= "Cogtt_ecr_facpv_red_imp.dhop"
+			mz.titre2	= "Edition de la Reddition"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment("Edition de la Reddition")
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+	Seek_CA(mz.Dos)
+
+	if ca.Cog_Exp_Ch = "" or Seek_C4(ca.Cog_ExpPV_Jnl)
+		if not tunnel
+			messagebox("Dossier ou journal mal paramétré pour l'export vers Anaël","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Dossier ou journal mal paramétré pour l'export vers Anaël",applic="DCPT")
+		freturn(false)
+	endif
+
+	if hseek(cog_freddition,Cog_red_param,"P"&mz.Dos) or Cog_red_param.Cog_RedCh = ""
+		if not tunnel
+			messagebox("Paramètres Reddition inaccessibles","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Paramètres Reddition inaccessibles",applic="DCPT")
+		freturn(false)
+	endif
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	windowshow(sw_maximize)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	;chargement du masque d'impression
+	xmiload(mz.MiCle)
+
+	;initialisation des listes
+	if (list_red := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur système lors de la création de la liste de reddition","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur système lors de la création de la liste de reddition",applic="DCPT")
+		freturn(false)
+	endif
+	GetAdressFunction("","CompareReddition",fonc_red)
+	ListMode(list_red,1,fonc_red) 
+  
+	freturn(true)
+
+endf
+
+;*
+procedure Cog_FinProgramme
+beginp
+
+	Cog_EcritureLivreDeBord("<-- Edition de la Reddition",applic="DCPT")
+	listdestroy(list_red)
+	programexit
+
+endp
+
+;*
+procedure Cog_AfficherTraitement
+beginp
+
+	;test d'abandon du programme en cours de traitement
+	if getchar()=$E8 and messagebox("Abandon du traitement en cours ?","Confirmation",mb_iconquestion+mb_yesno)=idyes
+		Cog_EcritureLivreDeBord("Abandon utilisateur",applic="DCPT")
+		Cog_FinProgramme
+	endif
+
+	xmedispv mz.mecle 3 xme_mode_gosub
+	xmeret
+	xmedispv mz.mecle 4 xme_mode_gosub
+	xmeret
+
+endp
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	if Cog_red_lig.Tiers not in(xq_cog.TiersD..xq_cog.TiersF) or G3_Masquage(Cog_red_lig.Tiers,xq_cog.TiersMsk) <> 0
+		freturn(false)
+	endif
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Tri des listes
+;*
+
+;*
+Function Long CompareReddition(&elem1,&elem2)
+record	cogfdd.dhsd	Cog_red_lig	elem1
+record	cogfdd.dhsd	Cog_red_lig	elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	= elem1.TiersGrp & elem1.TvaTx
+	cle2	= elem2.TiersGrp & elem2.TvaTx
+
+   freturn(sortcompare(cle1,cle2)) 
+
+Endf 
+
+
+
+;*
+;	Traitements
+;*
+
+;*
+procedure CogImprimerRedition
+record	cogfdd.dhsd	Cog_red_lig	Cog_red_lig_rec
+
+1	htmt	>	gtfdd.dhsd	htmt
+1	tvamt	>	gtfdd.dhsd	htmt
+1	ttcmt	>	gtfdd.dhsd	TtcMt
+
+1	fic						L
+1	nom_fic					256
+1	nom_hvw					256
+1	nom_rep					256
+
+1	svcle						S
+1	first						1,0
+
+beginp
+
+	Rechercher_Chemin (mz.Dos, mz.Etb, Cog_red_param.Cog_RedCh)
+	nom_rep	= condition(mchemin.CheminTyp<3,Win_ConvertirEnNomWindows(mChemin.Chemin),mchemin.Chemin)
+
+	Cog_EcritureLivreDeBord("--> Edition de la Reddition",applic="DCPT")
+
+	;affichage de la page de traitement
+	xmedispv mz.mecle 2 2
+
+	xq_cog.Lib(1)	= "Edition de la Reddition"
+	Cog_AfficherTraitement
+
+	cog_freddition.Key	= "E" & mz.Dos & xq_cog.PiNoD
+	loop not hread(cog_freddition,Cog_red_ent) and cog_freddition.Key <= "E" & mz.Dos & xq_cog.PiNoF & $FF
+
+		svcle	= isavekey(cog_freddition)
+		
+		if Cog_FiltresOk
+
+			nom_fic	= Win_Chemin(nom_rep,"reddition_"&right(Cog_red_ent.Cog_RedNo)&"_"&Cog_red_ent.TiersGrp&&".pdf")
+			nom_fic	= modify("/","\",nom_fic)
+			if (fic := WinCreateFile(nom_fic,generic_read,0,0,open_existing,file_attribute_normal,0)) = -1	;le fichier n'existe pas
+
+				listerase(list_red)
+				
+				cog_freddition.Key	= "L" & mz.Dos & Cog_red_ent.Cog_RedNo
+				loop not hread(cog_freddition,Cog_red_lig) and cog_freddition.Key <= "L" & mz.Dos & Cog_red_ent.Cog_RedNo & $FF
+			
+					xq_cog.Lib(2)	= sdate(Cog_red_lig.PiDt) & " - " & Cog_red_lig.Tiers & " - " & Cog_red_lig.GrRef
+					Cog_AfficherTraitement
+		
+					if listseek(list_red,Cog_red_lig,Cog_red_lig_rec)
+						Cog_red_lig_rec.HtMt		+= Cog_red_lig.HtMt
+						Cog_red_lig_rec.TvaMt	+= Cog_red_lig.TvaMt
+						Cog_red_lig_rec.TtcMt	+= Cog_red_lig.TtcMt
+						listmodify(list_red,Cog_red_lig_rec)
+					else
+						listinsert(list_red,Cog_red_lig)
+					endif
+						
+				endloop
+	
+				xq_imp.LogDh	= time(7)
+				xmisetattribut("cog_reddition",an_titre,"REDDITION N° "&right(Cog_red_ent.Cog_RedNo))
+				xmisetattribut("cog_periode",an_titre,"Reddition de cotisations facturées pour votre compte selon le détail joint et pour la période du  "&sdate(Cog_red_ent.Cog_PerDDt)&" au "&sdate(Cog_red_ent.Cog_PerFDt))
+				htmt	= 0
+				tvamt	= 0
+				ttcmt = 0
+				first	= true
+				XharviewNoRunXharview
+				printbegin
+			
+				listbegin(list_red)
+				loop listnext(list_red,Cog_red_lig)
+
+					if first
+						Seek_CLI(Cog_red_lig.TiersGrp)
+						xmiprint(mz.MiCle,1)			
+						first	= false
+					endif
+
+					xq_cog.Lib(2)	= sdate(Cog_red_lig.PiDt) & " - " & Cog_red_lig.Tiers & " - " & Cog_red_lig.TvaTx
+					Cog_AfficherTraitement
+			
+					xq_imp.Qte1	= Cog_red_lig.TvaTx
+					xq_imp.HtMt	= Cog_red_lig.HtMt
+					xq_imp.Qte2	= Cog_red_lig.TvaMt
+					xq_imp.PPar	= Cog_red_lig.TtcMt
+					xmiprint(mz.MiCle,2)
+			
+					htmt	+= Cog_red_lig.HtMt
+					tvamt	+= Cog_red_lig.TvaMt
+					ttcmt	+= Cog_red_lig.TtcMt
+			
+				endloop
+	
+				if Cog_red_param.Cog_RedTxt <> "" and lectab(41,Cog_red_param.Cog_RedTxt) = 0
+					Note_Chargement_(0,t041.Note)
+					xmiprint(mz.MiCle,5)
+				endif
+			
+				xq_imp.HtMt	= htmt
+				xq_imp.Qte2	= tvamt
+				xq_imp.PPar	= ttcmt
+				xmiprint(mz.MiCle,4)
+				printend
+				XharviewRunXharview
+
+				XharviewGetFileXharview(nom_hvw)
+
+				;on transforme en pdf
+				if MapiOpen = 0
+					
+					if MapiTestSiConvertPDF <> 0 and MapiConvertPDF(nom_hvw,nom_fic) = 0
+ 						
+						Cog_MajFichierJoint(cog_red_ent.Cog_RedNo,nom_fic,"Impression Reddition n°"&cog_red_ent.Cog_RedNo,1)
+
+						;on supprime le fichier initial
+						windeletefile(nom_hvw)
+						winshellexecute("open",nom_fic)
+
+					else
+	
+						if not tunnel
+							messagebox("Erreur système lors de l'impression en pdf de la reddition n° "&right(Cog_red_ent.Cog_RedNo),"Erreur",mb_iconstop)
+						endif
+						Cog_EcritureLivreDeBord("Erreur système lors de l'impression en pdf de la reddition n° "&right(Cog_red_ent.Cog_RedNo),applic="DCPT")
+
+					endif
+					MapiClose
+
+				else
+
+					if not tunnel
+						messagebox("Erreur système lors de l'impression en pdf de la reddition n° "&right(Cog_red_ent.Cog_RedNo),"Erreur",mb_iconstop)
+					endif
+					Cog_EcritureLivreDeBord("Erreur système lors de l'impression en pdf de la reddition n° "&right(Cog_red_ent.Cog_RedNo),applic="DCPT")
+
+				endif
+
+			else
+
+				winclosehandle(fic)
+				winshellexecute("open",nom_fic)
+
+			endif
+
+		endif
+
+		irestorekey(cog_freddition,svcle)
+
+	endloop
+
+	xmeret
+
+	listdestroy(list_red)
+	Cog_EcritureLivreDeBord("<-- Edition de la Reddition",applic="DCPT")
+
+endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+public procedure Cog_SaisiePage1
+1 fin		1,0	= 0
+
+beginp
+
+	xmeinput(mz.mecle,1,0,xme_mode_goto)
+
+	do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+	
+		case harmony.dataarret = 8002
+			if Harmony.Sourisbout = Right_Button
+				Zoom_Call()
+			elsif Harmony.Sourisclic = Double_Click
+				Harmony.Retour = Xmenext_Simulation_Touche
+				Harmony.Cplretour = k_f8
+			endif
+		
+		case k_f7                ;zoom généralisé
+			Zoom_Call()
+		
+		case k_f8                ;zooms
+			Zoom_Call(harmony.arret)
+	
+		case k_f9                ;abandon
+			fin = 1
+	
+		case vsw in (k_f10,k_tab,k_return,k_down)
+			if messagebox("Edition de la Reddition ?","Confirmation",mb_yesno+mb_iconquestion)=idyes
+				
+				CogImprimerRedition
+	
+				if erreur
+					messagebox("Des erreurs ont été détectées.|Consultez le livre de bord","Alerte",mb_iconexclamation)
+				endif
+	
+				fin=1
+	
+			endif
+
+		endswitch
+
+	while fin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
+
+
+;*
+;	Programme principal
+;*
+main
+	
+	if pingreceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	endif
+
+	if Cog_InitialiserVariables
+
+		if not tunnel
+	
+			GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+			procedurecall(AdrProc)
+			Cog_SaisiePage1
+	
+		else	;programme piloté
+	
+			CogImprimerRedition
+	
+		endif
+
+	endif

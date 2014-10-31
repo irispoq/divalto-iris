@@ -1,0 +1,763 @@
+;>xdiva
+;*
+;*		Génération des écritures de facturation aux points de vente - Programme Cogpp_ecr_facpv_gen.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	kit104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		Cog_GenererEcrituresPV			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+
+include	gttcz00.dhsp						;déclarations communes
+
+module	Cogtm_000.dhop						;module de fonctions communes
+module	ccpmfic.dhop
+module	gttmpce.dhop
+Module	gtpmpce.dhop
+
+Define IdLstMontantsTva	= G3XT.IdTableau(45)
+
+htmpfile			ccfdd.dhsd	ccfm		ccfmpv	deleteonexit
+
+public hfile	ccfdd.dhsd	ccfecr	ccfecr	openonuse
+public hfile	ccfdd.dhsd	ccfvtl	ccfvtl	openonuse
+public hfile	ccfdd.dhsd	ccfjca	ccfjca	openonuse
+
+
+public record	gtfdd.dhsd	cli
+public record	gtfdd.dhsd	Art
+public record	gtfdd.dhsd	cli		cli_ori
+public record	gtfdd.dhsd	ent
+public record	gtfdd.dhsd	t020
+public record	gtfdd.dhsd	xq			xq_cog		;enregistrement de travail
+public record	gtfdd.dhsd	xq			xq_tmp		;enregistrement de travail
+public record	gtfdd.dhsd	g7							;enregistrement de travail
+public record	gtfdd.dhsd	g4							;enregistrement de travail
+Public	Record		"Gtfdd.Dhsd"		Mouv		g4Mouv
+Public	Record		"Gtfdd.Dhsd"		Art		G4ART
+public record	ccfdd.dhsd	ca
+public record	ccfdd.dhsd	c3
+public record	ccfdd.dhsd	c4
+public record	ccfdd.dhsd	c8
+Public Record	"gtfdd.dhsd"   GTENT
+Public Record	"gtfdd.dhsd"   GTpce
+Public record	gtfdd.dhsd	G4		G4AL
+
+
+public record	cogfdd.dhsd	cog_red_param
+
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+1	lig			4,0	= 0
+
+structure EcriturePV
+	1	TiersGrp	>	gtfdd.dhsd	tiersgrp
+	1	Cpt		>	ccfdd.dhsd	cpt
+	1	Axe3		>	gtfdd.dhsd	axe
+	1	Axe4		>	gtfdd.dhsd	axe
+	1	CptAux	>	ccfdd.dhsd	cog_CptAnael
+	1	Mt			>	ccfdd.dhsd	mt
+	1	ecrno		>	ccfdd.dhsd	ecrno
+	1	piece		>	ccfdd.dhsd	piece
+	1	redno		>	ccfdd.dhsd	cog_redno
+endstructure
+
+1	list_EcrPV			L
+1	list_EcrC8			L
+
+1	fonc_EcrPV			16
+
+RecordDiva	EcriturePV	EcrPV
+
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+function int Cog_InitialiserVariables
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+beginf
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		if iseek(a5fdos_loc,muser_loc,"B",system.user)
+
+			if not tunnel
+				messagebox("Utilisateur "&left(system.user)&" non défini dans la base Divalto","Alerte",mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= muser_loc.dos
+			mz.etb		= muser_loc.etb
+			mz.depo		= muser_loc.depo
+			mz.mecle		= "Cogee_ecr_facpv_gen.dhof"
+			mz.mtcle		= "Cogtt_ecr_facpv_gen.dhop"
+			mz.titre2	= "Génération des écritures de facturations aux points de vente"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment("Génération des écritures de facturations aux points de vente")
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+	Seek_CA(mz.Dos)
+
+	if ca.Cog_Exp_Ch = "" or Seek_C4(ca.Cog_ExpPV_Jnl) <> 0
+		if not tunnel
+			messagebox("Dossier mal paramétré pour l'export vers Anaël","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Dossier mal paramétré pour l'export vers Anaël",applic="DCPT")
+		freturn(false)
+	endif
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	windowshow(sw_maximize)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	;création des listes
+	if (list_EcrC8 := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur lors de la création de la liste des écritures à traiter","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur lors de la création de la liste des écritures à traiter",applic="DCPT")
+		freturn(false)
+	endif
+	if (list_EcrPV := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur lors de la création de la liste des écritures à exporter","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur lors de la création de la liste des écritures à exporter",applic="DCPT")
+		freturn(false)
+	endif
+	GetAdressFunction("","CompareEcrPV",fonc_EcrPV)
+	ListMode(list_EcrPV,1,fonc_EcrPV) 
+
+	freturn(true)
+
+endf
+
+;*
+procedure Cog_FinProgramme
+beginp
+
+	Cog_EcritureLivreDeBord("<-- Génération des écritures de facturations aux points de vente",applic="DCPT")
+	listdestroy(list_EcrC8)
+	listdestroy(list_EcrPV)
+	programexit
+
+endp
+
+;*
+procedure Cog_AfficherTraitement
+beginp
+
+	;test d'abandon du programme en cours de traitement
+	if getchar()=$E8 and messagebox("Abandon du traitement en cours ?","Confirmation",mb_iconquestion+mb_yesno)=idyes
+		Cog_EcritureLivreDeBord("Abandon utilisateur",applic="DCPT")
+		Cog_FinProgramme
+	endif
+
+	xmedispv mz.mecle 3 xme_mode_gosub
+	xmeret
+	xmedispv mz.mecle 4 xme_mode_gosub
+	xmeret
+
+endp
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	;test si le journal est exporté vers Anaël
+	if c4.Cog_ExportAnael <> 2
+		freturn(false)
+	endif
+
+	;test si le journal est de type vente
+	if c4.JnlTyp <> 2
+		freturn(false)
+	endif
+	
+	;test si le journal fait partie des journaux des écritures de point de vente
+	if c4.Cog_JnlPDV <> 2
+		freturn(false)
+	endif
+	
+	freturn(true)
+
+endf
+
+
+;*
+;	Fonctions de Tri
+;*
+
+;*
+Function Long CompareEcrPV(&elem1,&elem2)
+recorddiva	EcriturePV	elem1
+recorddiva	EcriturePV	elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	=	elem1.TiersGrp & elem1.Cpt & elem1.Axe3 & elem1.Axe4
+	cle2	=	elem2.TiersGrp & elem2.Cpt & elem2.Axe3 & elem2.Axe4
+
+   freturn(sortcompare(cle1,cle2))
+
+Endf 
+
+;*
+Function Long CompareEcrVtl(&elem1,&elem2)
+record	ccfdd.dhsd	cx	elem1
+record	ccfdd.dhsd	cx	elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	=	elem1.EcrNo & elem1.Cpt
+	cle2	=	elem2.EcrNo & elem2.Cpt
+
+   freturn(sortcompare(cle1,cle2))
+
+Endf 
+
+  
+;*
+;	Traitements
+;*
+
+;*
+procedure Cog_IntegrerCcfm
+record	ccfdd.dhsd	xz		xz_lox
+beginp
+
+	hclose(ccfmpv)
+	xz_lox.fic		= ccfmpv.name
+	xz_lox.action	= 0
+	xz_lox.motcle	= "INTEGRE"
+
+	ping("status",1)
+	ping("c3xz",xz_lox)
+	ping("zechange",mz)
+	programcall("ccpp029.dhop",sw_hide,call_wait)
+
+endp
+
+;*
+procedure Cog_CreerReddition(type,grref,des,tx,redno)
+1	type		>	cogfdd.dhsd	type
+1	grref		>	cogfdd.dhsd	grref
+1	des		>	cogfdd.dhsd	des
+1	tx								N
+1	redno		>	ccfdd.dhsd	cog_redno
+
+hfile		cogfdd.dhsd	cog_freddition	cog_freddition_loc	openonuse
+record	cogfdd.dhsd	cog_red_lig		cog_red_lig_loc
+
+1	i			2,0
+1	coef		2,0
+
+RecordDiva GTPM000.stMontantTva sMTVA_Loc
+
+beginp
+
+	if ent.TiCod = "C"
+		coef	= condition(g7.Sens=1,-1,1)
+	else
+		coef	= condition(g7.Sens=2,-1,1)
+	endif
+
+	for i = 1 to 10
+		if g4.Tab(1,i) <> 0		 ; 26/09/2014 G4.tab deviens g4tauxtab
+
+			lig++
+			cog_red_lig_loc					= ""
+			cog_red_lig_loc.Ce1				= "L"
+			cog_red_lig_loc.Dos				= ent.Dos
+			cog_red_lig_loc.Cog_RedNo		= redno
+			cog_red_lig_loc.Cog_RedNoLg	= lig
+			cog_red_lig_loc.TiersGrp		= condition(cli_ori.TiersGrp<>"",cli_ori.TiersGrp,cli_ori.Tiers)
+			cog_red_lig_loc.Tiers			= cli_ori.Tiers
+			cog_red_lig_loc.Adr				= cli_ori.Adr
+			cog_red_lig_loc.PiNo				= ent.PiNo
+			cog_red_lig_loc.PiDt				= ent.PiDt
+			cog_red_lig_loc.EchDt			= ent.EchDt
+			cog_red_lig_loc.GrRef			= grref
+			cog_red_lig_loc.Des				= des
+			cog_red_lig_loc.HtMt				= coef * condition(tx<>0,g4.Tab(1,i)/tx,g4.Tab(1,i))
+			;cog_red_lig_loc.TvaMt			= coef * cog_red_lig_loc.HtMt * g4.TauxTab(1,i) / 100 ; correction RB le 08/03/2012
+			cog_red_lig_loc.TvaMt			= cog_red_lig_loc.HtMt * g4.TauxTab(1,i) / 100 ; correction YATO le 30/05/2012
+			cog_red_lig_loc.TtcMt			= cog_red_lig_loc.HtMt + cog_red_lig_loc.TvaMt
+			cog_red_lig_loc.TvaTx			= g4.TauxTab(1,i)
+			cog_red_lig_loc.Type				= type
+			cog_red_lig_loc.UserCr			= system.User
+			cog_red_lig_loc.UserCrDh		= time(7)
+			cog_red_lig_loc.CeNote			= 1
+			cog_red_lig_loc.Note				= 0
+			cog_red_lig_loc.CeJoint			= 1
+			cog_red_lig_loc.Joint			= 0
+			hwrite(cog_freddition_loc,cog_red_lig_loc)
+
+		endif
+	next
+	
+endp
+
+;*
+procedure Cog_TraiterReddition(c8_par,redno)
+record		ccfdd.dhsd	c8				c8_par
+1	redno	>	ccfdd.dhsd	cog_redno
+
+hfile		gtfdd.dhsd	gtfam				gtfam_loc
+hfile		cogfdd.dhsd	cog_freddition	cog_freddition_loc
+
+record	cogfdd.dhsd	cog_red_ent		cog_red_ent_loc
+record	gtfdd.dhsd	mouv				mouv_loc
+
+1	errimp	1,0
+RecordDiva GTPM000.stMontantTva sMTVA_Loc
+1	i	2,0
+beginp
+
+	PingLocal("CLI_COG", CLI)
+	if c4.JnlTyp in(1,2) and Seek_Ent(condition(c4.JnlTyp=1,"F","C"),4,c8_par.Piece) = 0
+
+		G4 = ' '
+
+		Seek_Cli(Ent.Tiers)
+		Piece_TTC_Init(Ent.TiCod, Ent.PiCod)
+
+		gtpce.TiCodDst = ent.TiCod
+		gtpce.PiCodDst	= ent.PiCod
+		lectab(20,ent.Op)
+		g7.Sens	= t020.Sens
+		GTENT.SENS = T020.Sens
+
+		;*
+
+		Piece_TTC_Init(Ent.TiCod, Ent.PiCod, True)
+		Piece_Recap_Init(0,ent.TiCod,ent.PiCod, true)
+		Transferer_TvaVersTab		  ; 26/09/2014 : Transferer_TvaVersTab
+
+		gtfam_loc.Key	= "K" & ent.Dos & ent.TiCod & ent.PiNo
+		loop not hread(gtfam_loc,mouv_loc) and gtfam_loc.Key <= "K" & ent.Dos & ent.TiCod & ent.PiNo & $FF
+			if mouv_loc.Ce2 = 1
+				
+				; YATO 29/09/2014 : obligé de faire à présent le piece_recap_init 
+				Piece_Recap_Init(0,ent.TiCod,ent.PiCod, true)
+	  
+				Seek_ART(mouv_loc.Ref)
+				g4Mouv = mouv_loc
+				g4art = Art
+		
+				G4.Sens = Mouv_Loc.sens
+				;Piece_TTC_Ligne(mouv_loc,ent.TiCod,ent.PiCod,art.TvaArt, art.TpfR())
+				Piece_Recap_Cumul(mouv_loc,true,ent.TiCod,ent.PiCod)
+		
+				i = 0
+				ListBegin(IdLstMontantsTva)
+				Loop ListNext(IdLstMontantsTva, sMTVA_Loc) not in (-1, 0)
+			
+					If ( ++i > 10 )									
+						ExitLoop
+					EndIf
+			
+					G4.Tab(1, i) = sMTVA_Loc.Tab(1)
+				EndLoop
+
+				Cog_CreerReddition("L",mouv_loc.GrRef,mouv_loc.Des,c8_par.DevP,redno)
+		
+			endif
+		endloop
+	 
+		Piece_Imp_TTC_Pied
+		Piece_Recap_Fin(0, ent.TiCod,ent.PiCod)
+
+		;on met à jour les dates de l'entête de reddition
+		if not hseek(cog_freddition_loc,cog_red_ent_loc,"E"&mz.Dos&redno)
+			cog_red_ent_loc.Cog_EcrDebDt	= condition(c8_par.EcrDt < cog_red_ent_loc.Cog_EcrDebDt,c8_par.EcrDt,cog_red_ent_loc.Cog_EcrDebDt)
+			cog_red_ent_loc.Cog_EcrFinDt	= condition(c8_par.EcrDt > cog_red_ent_loc.Cog_EcrFinDt,c8_par.EcrDt,cog_red_ent_loc.Cog_EcrFinDt)
+			hrewrite(cog_freddition_loc,cog_red_ent_loc)
+		endif
+
+		; YATO 29/09/2014 : suppression des pieds de facture sur demande UGIE
+		;Cog_CreerReddition("P","Pied de facture","Frais Complémentaires",c8_par.DevP,redno)
+		
+		PingLocalReceiveAndDelete("CLI_COG", CLI)
+	endif
+
+endp
+
+;*
+procedure Cog_TraiterEcriture(ecrno)
+1	ecrno	>	ccfdd.dhsd	ecrno
+
+hfile		cogfdd.dhsd	cog_freddition	cog_freddition_loc
+hfile		ccfdd.dhsd	ccfecr			ccfecr_loc
+
+record	cogfdd.dhsd	cog_red_ent		cog_red_ent_loc
+record	ccfdd.dhsd	c8		c8_loc
+
+recorddiva	EcriturePV	EcrPV_rec
+
+1	first								1,0		= true
+1	redno			>	ccfdd.dhsd	cog_redno
+1	ecrno_maj	>	ccfdd.dhsd	ecrno
+
+beginp
+
+	;on sauvegarde le n° d'écriture pour la mise à jour
+	ecrno_maj	= ecrno
+
+	;on récupère le numéro d'écriture centralisé
+	EcrPV_rec				= ""
+	EcrPV_rec.TiersGrp	= cli.Tiers
+	if listsearch(list_EcrPV,EcrPV_rec,EcrPV) and EcrPV.TiersGrp = cli.Tiers
+		ecrno	= EcrPV.ecrno
+		redno	= EcrPV.redno
+	else
+		;il faut attribuer un n° de reddition
+		loop hshare(cog_freddition_loc,"COG_RED"&mz.Dos,"R")
+		endloop
+	
+		if not hseek(cog_freddition_loc,cog_red_param,"P"&mz.Dos)
+			cog_red_param.Cog_RedNo++
+			hrewrite(cog_freddition_loc,cog_red_param)
+			hshare(cog_freddition_loc,"COG_RED"&mz.Dos,"L")
+
+			;on crée l'entête de la reddition
+			cog_red_ent_loc					= ""
+			cog_red_ent_loc.Ce1				= "E"
+			cog_red_ent_loc.Dos				= mz.Dos
+			cog_red_ent_loc.Etb				= mz.Etb
+			cog_red_ent_loc.Cog_RedNo		= cog_red_param.Cog_RedNo
+			cog_red_ent_loc.TiersGrp		= cli.Tiers
+			cog_red_ent_loc.Cog_PerDDt		= hdate(c8.EcrDt,"p")
+			cog_red_ent_loc.Cog_PerFDt		= hdate(c8.EcrDt,"d")
+			cog_red_ent_loc.Cog_EcrDebDt	= c8.EcrDt
+			cog_red_ent_loc.Cog_EcrFinDt	= c8.EcrDt
+			cog_red_ent_loc.Note				= 0
+			cog_red_ent_loc.CeNote			= 1
+			cog_red_ent_loc.Joint			= 0
+			cog_red_ent_loc.CeJoint			= 1
+			cog_red_ent_loc.UserCr			= system.User
+			cog_red_ent_loc.UserCrDh		= time(7)
+			hwrite(cog_freddition_loc,cog_red_ent_loc)
+
+			if xq_cog.PiNoD = ""
+				xq_cog.PiNoD	= cog_red_param.Cog_RedNo
+			endif
+			xq_cog.PiNoF	= cog_red_param.Cog_RedNo
+		else
+			if not tunnel
+				messagebox("Impossible d'accéder au paramétrage de la reddition","Alerte",mb_iconexclamation)
+			endif
+			Cog_EcritureLivreDeBord("Impossible d'accéder au paramétrage de la reddition",applic="DCPT")
+			hshare(cog_freddition_loc,"COG_RED"&mz.Dos,"L")
+			Cog_FinProgramme
+		endif
+		redno	= cog_red_param.Cog_RedNo
+	endif
+
+	;on met à jour le n° de reddition
+	if not hshare(ccfecr_loc,"C3C8"&mz.Dos&ecrno_maj,"R")
+		ccfecr_loc.Key	= "H" & mz.Dos & ecrno_maj
+		loop not hread(ccfecr_loc,c8_loc) and ccfecr_loc.Key <= "H" & mz.Dos & ecrno_maj & $FF
+			c8_loc.Cog_RedNo	= redno
+			hrewrite(ccfecr_loc,c8_loc)
+		endloop
+		hshare(ccfecr_loc,"C3C8"&mz.Dos&ecrno,"L")
+	else
+		Cog_EcritureLivreDeBord("Ecriture "&right(ecrno_maj)&" réservée. Mise à jour impossible",applic="DCPT")
+		erreur	= true
+	endif
+
+	;on centralise les écritures
+	listbegin(list_EcrC8)
+	loop listnext(list_EcrC8,c8_loc)
+
+		Seek_C3(c8_loc.Cpt)
+
+		EcrPV_rec				= ""
+		EcrPV_rec.TiersGrp	= cli.Tiers
+		EcrPV_rec.Cpt			= c3.Cpt
+		EcrPV_rec.Axe3			= c3.Axe(3)
+		EcrPV_rec.Axe4			= c3.Axe(4)
+		if listseek(list_EcrPV,EcrPV_rec,EcrPV)
+			EcrPV.Mt	+= condition(c8_loc.Sens=2,c8_loc.Mt,-c8_loc.Mt)
+			listmodify(list_EcrPV,EcrPV)
+		else
+			EcrPV				= EcrPV_rec
+			EcrPV.CptAux	= c3.Cog_CptAnael
+			EcrPV.ecrno		= ecrno
+			EcrPV.Mt			= condition(c8_loc.Sens=2,c8_loc.Mt,-c8_loc.Mt)
+			EcrPV.piece		= c8_loc.Piece
+			EcrPV.redno		= redno
+			listinsert(list_EcrPV,EcrPV)
+		endif
+
+		if first
+			Cog_TraiterReddition(c8_loc,redno)
+			first	= false
+		endif
+
+	endloop
+	
+endp
+
+;*
+procedure Cog_GenererCcfm
+beginp
+
+	xq_cog.Lib(1)	= "Génération des écritures"
+	listbegin(list_EcrPV)
+	loop listnext(list_EcrPV,EcrPV)
+
+		xq_cog.Lib(2)	= EcrPV.TiersGrp & " - " & EcrPV.Cpt
+		Cog_AfficherTraitement
+
+		;écriture principale
+		c8					= ""
+		c8.Ce1			= "8"
+		c8.Dos			= mz.Dos
+		c8.Etb			= ca.Etb
+		c8.Jnl			= ca.Cog_ExpPV_Jnl
+		c8.Cpt			= EcrPV.Cpt
+		c8.EcrDt			= xq_cog.DatD
+		c8.Lib			= "Fact. PDV/"&left(EcrPV.TiersGrp)
+		c8.Mt				= abs(EcrPV.Mt)
+		c8.Sens			= condition(EcrPV.Mt < 0,1,2)
+		c8.EcrValNo		= EcrPV.ecrno
+		c8.Piece			= EcrPV.piece
+		c8.Cog_RedNo	= EcrPV.redno
+		hwrite(ccfmpv,c8)
+
+	endloop
+	
+endp
+
+;*
+procedure Cog_GenererEcrituresPV
+1	datd	>	gtfdd.dhsd	datd
+1	datf	>	gtfdd.dhsd	datf
+
+1	ecrno	>	ccfdd.dhsd	ecrno	= 0
+
+1	svcle		S
+
+beginp
+
+	Cog_EcritureLivreDeBord("--> Génération des écritures de facturations aux points de vente",applic="DCPT")
+	Cog_EcritureLivreDeBord("Ecritures générées pour le mois : "&format("<99>",val(month(xq_cog.DatD)))&"/"&val(year(xq_cog.DatD)),applic="DCPT")
+
+	;on contrôle qu'aucune écriture n'existe sur le mois traité dans le journal d'OD
+	datd	=	hdate(xq_cog.DatD,"p")
+	datf	=	xq_cog.DatD
+
+	if not hread(ccfecr,c8,"C"&mz.Dos&ca.Cog_ExpPV_Jnl&datd) and c8.Dos=mz.Dos and c8.Jnl=ca.Cog_ExpPV_Jnl and c8.EcrDt <= datf
+		if not tunnel
+			messagebox("Des écritures existent déjà pour ce mois sur le journal "&left(ca.Cog_ExpPV_Jnl)&".|Traitement impossible","Alerte",mb_iconexclamation)
+		endif
+		Cog_EcritureLivreDeBord("Des écritures existent déjà pour ce mois sur le journal "&left(ca.Cog_ExpPV_Jnl)&". Traitement impossible",applic="DCPT")
+		Cog_FinProgramme
+	endif
+
+	;affichage de la page de traitement
+	xmedispv mz.mecle 2 2
+
+	ccfjca.Key	= "D" & mz.Dos & "4"
+	loop not hread(ccfjca,c4) and ccfjca.Key <= "D" & mz.Dos & "4" & $FF
+
+		xq_cog.Lib(1)	= c4.Jnl & " " & c4.Lib
+		Cog_AfficherTraitement
+
+		svcle	= isavekey(ccfjca)
+		
+		if Cog_FiltresOk
+
+			ccfecr.Key	= "C" & mz.Dos & c4.Jnl & datd
+			loop not hread(ccfecr,c8) and ccfecr.Key <= "C" & mz.Dos & c4.Jnl & datf & $FF
+
+				xq_cog.Lib(2)	= sdate(c8.EcrDt) & " - " & c8.Cpt
+				Cog_AfficherTraitement
+
+				if ecrno <> c8.EcrNo
+					if ecrno <> 0
+						Cog_TraiterEcriture(ecrno)
+					endif
+					listerase(list_EcrC8)
+					ecrno	= c8.EcrNo
+					cli	= ""
+					c3		= ""
+				endif
+
+				if Seek_CLI(c8.Cpt) = 0
+					cli_ori	= cli
+					if cli.TiersGrp <> ""
+						Seek_CLI(cli.TiersGrp)
+					endif
+					c8.Cpt	= condition(cli.Cpt<>"",cli.Cpt,c8.Cpt)
+				endif
+				listinsert(list_EcrC8,c8)
+
+			endloop
+
+			if ecrno <> 0
+				Cog_TraiterEcriture(ecrno)
+				ecrno	= 0
+			endif
+
+		endif
+
+		irestorekey(ccfjca,svcle)
+
+	endloop
+
+	Cog_GenererCcfm
+
+	xmeret
+
+	Cog_IntegrerCcfm
+
+	listdestroy(list_EcrC8)
+	listdestroy(list_EcrPV)
+
+	if xq_cog.Choix(1) = 2	;Export des écritures
+		xq_cog.Choix(2)	= 2
+		ping("xq_cog",xq_cog)
+		programcall("cogpp_ecr_facpv_exp.dhop")
+	endif
+
+	Cog_EcritureLivreDeBord("<-- Génération des écritures de facturations aux points de vente",applic="DCPT")
+
+endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+public procedure Cog_SaisiePage1
+1 fin		1,0	= 0
+
+beginp
+
+	xmeinput(mz.mecle,1,0,xme_mode_goto)
+
+	do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+
+			case harmony.dataarret = 1000	;ouverture de sélection de répertoire
+				WinSHBrowseForFolder(0,xq_cog.Fic,"Export Anaël","Sélectionnez le répertoire d'export",BIF_STATUSTEXT+BIF_EDITBOX,xq_cog.Fic)
+	
+			case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
+				endif
+			
+			case k_f7                ;zoom généralisé
+				Zoom_Call()
+			
+			case k_f8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			case k_f9                ;abandon
+				fin = 1
+		
+			case vsw in (k_f10,k_tab,k_return,k_down)
+				if messagebox("Génération des écritures de facturations aux points de vente ?","Confirmation",mb_yesno+mb_iconquestion)=idyes
+					
+					Cog_GenererEcrituresPV
+		
+					if erreur
+						messagebox("Des erreurs ont été détectées.|Consultez le livre de bord","Alerte",mb_iconexclamation)
+					endif
+		
+					fin=1
+		
+				endif
+
+		endswitch
+
+	while fin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
+
+
+;*
+;	Programme principal
+;*
+main
+	
+	if pingreceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	endif
+
+	if Cog_InitialiserVariables
+
+		if not tunnel
+	
+			GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+			procedurecall(AdrProc)
+			Cog_SaisiePage1
+	
+		else	;programme piloté
+	
+			if xq_cog.Fic = ""
+				xq_tmp	= xq_cog
+				GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+				procedurecall(AdrProc)
+				swap(xq_tmp.Fic,xq_cog.Fic)
+				xq_cog	= xq_tmp
+			endif
+
+			Cog_GenererEcrituresPV
+	
+		endif
+
+	endif

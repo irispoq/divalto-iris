@@ -1,0 +1,294 @@
+;*
+;*		Module fonctions et procédures externes de gestion de pièces										sGTTMPCE.dhop
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		mjv			5.1					04.1999	Version initiale en Diva
+;*		fal			5.1					11.2002	Remise montant ligne = remise total ligne 
+;*																+ remise montant affecté apres remise %
+SetModuleInfo('$Id$')
+
+include "GTTCZ00.dhsp"
+
+OverWrite "GTTMPCE.dhop"
+
+
+;
+Module 	"A5TM000.dhop"
+Module	"GTPMPCE.DHOP"
+;
+;extern hfile		gtfdd.dhsd	GTFAT		GTFAT			openonuse; fichier des articles
+;
+;public record 	a5dd.dhsd 	MZ 								; zone échange
+public record	A5DD.DHSD	MUSER									; Utilisateur
+;
+;;extern record	GTFDD.dhsd 	SOC								; société
+;extern record	GTFDD.dhsd	ETS								; établissement
+;
+extern record	GTFDD.dhsd	ENT								; en-tête
+;extern record	gtfdd.dhsd	EEC								; échéances multiples
+;extern record	GTFDD.dhsd 	MOUV								; mouvement
+;extern record	GTFDD.dhsd	MVTL								; ventilation
+;
+;extern record	GTFDD.dhsd	CLI								; client
+;extern record	GTFDD.dhsd	FOU								; fournisseur
+;public record	gtfdd.dhsd 	TIA
+;public record	gtfdd.dhsd 	T1
+;
+;extern record	GTFDD.dhsd	ART								; article
+;extern record	GTFDD.dhsd	ART		G4ART					; article
+;extern record 	GTFDD.dhsd	SART								; sous-référence
+;extern record	GTFDD.dhsd	TAR								; tarif de vente
+;extern record	GTFDD.dhsd	TRE								; remise de vente
+;extern record 	GTFDD.dhsd 	TFO								; tarif d'achat
+;extern record	GTFDD.dhsd 	RFO								; conditions fournisseur
+;extern record	GTFDD.dhsd 	RCL								; référencement client
+;extern record	gtfdd.dhsd	T003								; tva
+;extern record	gtfdd.dhsd	T005								; coefficient unité
+;extern record	gtfdd.dhsd  T006								; mode de règlement
+;extern record	gtfdd.dhsd	T010								; coefficient
+;public record	gtfdd.dhsd 	T013
+;extern record	gtfdd.dhsd 	T024								; table pied de pièce
+public record	gtfdd.dhsd 	T037
+;public record	gtfdd.dhsd 	T061
+;public record	gtfdd.dhsd 	T062
+;public record	gtfdd.dhsd	G4	G4TRI							; Montant pour le tri des lignes
+;public record	gtfdd.dhsd 	G7	G7IMP
+;	
+;extern record	GTFDD.dhsd 	GTENT									; enregistrement de travail lié à l'en-tête de pièce
+;extern record	gtfdd.dhsd	G4									; enregistrement de travail TTC et impression de pièces
+;extern record	GTFDD.dhsd	G1T1								; enregistrment tableau ligne de pièce		
+;extern record	GTFDD.dhsd	G1T2								; enregistrment tableau ligne de ventilation
+;extern record	gtfdd.dhsd	MOUV	G4MOUV					; mouvement pour impression
+;record			gtfdd.dhsd	G1T1	savG1T1
+;
+;;extern record 	GTFDD.dhsd	XT		G3XT						; identifiant des listes
+;public record	gtfdd.dhsd 	G7
+;public record	gtfdd.dhsd 	T017
+;
+;public record gtfdd.dhsd gTENT cog_g1
+;
+;define IdTableauImpVtl 	= G3XT.IDTABLEAU(50)
+;define IdTableauImpT045	= G3XT.IDTABLEAU(49)
+;
+;const C_Bloc_Nomencl 		= 32
+;const	C_Mode_Modification	= 2
+;const	C_Mode_Creation		= 3
+;const	C_Mode_Duplication	= 4
+;const C_Phase_LigneCreat 	= 4
+;
+;1		 idsav	L
+;1		 savadr	L
+;1		 idtri	L
+;1		 adrtri	16
+;1		 i			X
+;1		 j			X
+;1		 k			X
+;1		 l			X
+;1		 m			X
+1		 n			X
+;1		 nblig	X
+;1		 nolig	4,0
+;1		 triok	1
+;
+;1	OldProDnat	2
+
+1	bXharV		B = False
+1	ModApXharV	X
+
+;* PS 27/06/2011
+Procedure Piece_Imp_Document_Av
+; avant debut document - correspond à la réservation de l'imprimante
+1	t_Test	1,0 = 1
+BeginP
+	Standard.Piece_Imp_Document_Av
+
+	Switch ENT.PiCod
+		Case 1
+			if ENT.Cog_ImpLogo_1 = 2 
+				t_Test = 2
+			else
+				t_Test = 1
+			endif
+		Case 2
+			if ENT.Cog_ImpLogo_2 = 2 
+				t_Test = 2
+			else
+				t_Test = 1
+			endif
+		Case 3
+			if ENT.Cog_ImpLogo_3 = 2 
+				t_Test = 2
+			else
+				t_Test = 1
+			endif
+		Case 4
+			if ENT.Cog_ImpLogo_4 = 2 
+				t_Test = 2
+			else
+				t_Test = 1
+			endif
+		Default
+			t_Test = 1
+	EndSwitch
+
+
+	if t_Test = 2 
+		xmisetattribut('logo',an_visibilite,av_visible)
+		xmisetattribut('Pied',an_visibilite,av_visible)
+	else
+		xmisetattribut('logo',an_visibilite,av_cache)
+		xmisetattribut('Pied',an_visibilite,av_cache)
+	endif
+
+EndP 
+
+;*
+Procedure Piece_Imp_Entete_Av(ticod,picod)
+; appel avant l'impression de l'en-tête de pièce
+1	ticod		>gtfdd.dhsd	TICOD = ' '			; ticod
+1	picod		>gtfdd.dhsd	PICOD = 	0			; picod
+1	i			X
+1	t_txt		255
+1	t_Test	1,0 = 1
+BeginP
+	Standard.Piece_Imp_Entete_Av									  
+	if ticod = ' ' 
+		ticod = MZ.TICOD
+	endif
+	if picod = 0
+		picod = MZ.PICOD
+	endif
+;	For i = 28 to 35
+;		G4.LIB(I) = ""
+;	next
+;	G4.LIB(29) = nospaces(SOC.RUE) & " - "& nospaces(SOC.ADRCPL1)
+;	G4.LIB(30) = " - " & nospaces(SOC.CPOSTAL) & " " & nospaces(SOC.VIL)
+;	G4.LIB(31) = "Tél : " & nospaces(SOC.TEL)
+;	G4.LIB(32) = " - Fax : " & nospaces(SOC.FAX)
+;	G4.LIB(33) = "RCS Montpellier	" & nospaces(SOC.RC)
+;	G4.LIB(34) = "Siret " & nospaces(SOC.SIRET) & " - APE NAF " & nospaces(SOC.NAF)
+;	G4.LIB(35) = "N° identification TVA " & nospaces(SOC.TVANO)
+	If ENT.TICOD = 'C'
+		switch ENT.PICOD
+		case	1
+			if ENT.CE4 = 7
+				G7.GrRef		= "Ce devis n'est pas valide."
+				G7.Serie		= 'Devis non valide'
+			else
+				G7.GrRef		= system.esp
+				G7.serie		= system.esp
+				G7.Lieu		= system.esp
+			endif
+		endswitch
+		if Lectab(37,ENT.SALCOD) <> 0
+			T037 = system.esp
+		endif
+		If rechercher_utilisateur(' ',ENT.SALCOD) = 0
+			n = String(system.esp,muser.nom)
+			If n = 0 | muser.umuser = system.esp
+			Else | muser.umuser = mid(muser.nom,n)
+					 muser.nom = left(muser.nom,n-1)
+			Endif
+		Endif
+	Endif 
+;	If ENT.TICOD = 'F'
+;		switch ENT.PICOD
+;		case	2
+;			if ENT.CE4 = 7
+;				G7IMP.WINCHNC	= "Cette commande n'a pas été validée et est nulle et non avenue."
+;				G7IMP.Lieu		= 'Spécimen'
+;			else
+;				G7IMP.WINCHNC	= system.esp
+;				G7IMP.Lieu		= system.esp
+;			endif
+;			if ENT.AdrTiers(3) = system.esp And Lectab(17,ENT.DEPO,) = 0
+;				if Seek_TIA (T017.TIERS) = 0
+;					G4.NOM(3) = TIA.NOM
+;					G4.RUE(3) = TIA.RUE
+;					G4.LOC(3) = TIA.LOC
+;					G4.ADRCPL1(3) = TIA.ADRCPL1
+;					G4.ADRCPL2(3) = TIA.ADRCPL2
+;					G4.CPOSTAL(3) = TIA.CPOSTAL
+;					G4.VIL(3) = TIA.VIL
+;				Endif
+;			Endif
+;		endswitch
+;		if Lectab(37,ENT.SALCOD) <> 0
+;			T037 = system.esp
+;		endif
+;	Endif 
+;
+;	If ENT.TICOD = 'I'
+;		If ENT.PICOD = 3 and ENT.OP = "IO"
+;			if	Lectab(17,ENT.DEPO,) = 0
+;				if Seek_TIA (T017.TIERS) = 0
+;					G4.NOM(2) = TIA.NOM
+;					G4.RUE(2) = TIA.RUE
+;					G4.LOC(2) = TIA.LOC
+;					G4.ADRCPL1(2) = TIA.ADRCPL1
+;					G4.ADRCPL2(2) = TIA.ADRCPL2
+;					G4.CPOSTAL(2) = TIA.CPOSTAL
+;					G4.VIL(2) = TIA.VIL
+;				Endif
+;			Endif
+;		Endif
+;	Endif
+
+
+	; JDT 08/08/2011
+	Switch ENT.PiCod
+		Case 1
+			if ENT.Cog_ImpLogo_1 = 2 
+				t_Test = 2
+			else
+				t_Test = 1
+			endif
+		Case 2
+			if ENT.Cog_ImpLogo_2 = 2 
+				t_Test = 2
+			else
+				t_Test = 1
+			endif
+		Case 3
+			if ENT.Cog_ImpLogo_3 = 2 
+				t_Test = 2
+			else
+				t_Test = 1
+			endif
+		Case 4
+			if ENT.Cog_ImpLogo_4 = 2 
+				t_Test = 2
+			else
+				t_Test = 1
+			endif
+		Default
+			t_Test = 1
+	EndSwitch
+
+	If t_Test = 2
+		t_txt = Left(SOC.Rue) & " - " & Left(SOC.AdrCpl1) & " - " & Left(SOC.AdrCpl2) & " - " & Left(SOC.Cpostal) & " " & Left(SOC.Vil)
+		XMiSetAttribut("piedadr1",AN_TITRE,Left(t_txt))
+		t_txt = "Tél. : " & Left(SOC.Tel) & " - Télécopie : " & Left(SOC.Fax)
+		XMiSetAttribut("piedadr2",AN_TITRE,Left(t_txt))
+		t_txt = "RCS " & Left(SOC.RC) & " - n°Siret " & Left(SOC.Siret) & " - APE " & Left(SOC.NAF)
+		XMiSetAttribut("piedadr3",AN_TITRE,Left(t_txt))
+		t_txt = "N° d'identification TVA : " & Left(SOC.TvaNo)
+		XMiSetAttribut("piedadr4",AN_TITRE,Left(t_txt))
+	EndIf
+	; JDT 08/08/2011
+
+EndP
+
+;*
+Function char Piece_Impression_Avec_Parametre_origine
+; FRI 20/12/2013 Rajout procédure
+; retourner 'O' si l'impression doit se faire avec les paramètres d'origine ou 'N' sinon
+; avant de passer en suppression
+1	car	1
+Beginf
+	car = "N"
+	Freturn(car)
+endf
+

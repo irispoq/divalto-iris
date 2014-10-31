@@ -1,0 +1,666 @@
+;*
+;*	Module avec les fonctions de contrôle pour les zones des tables concernant Divalto Comptabilité
+;*
+;06/2011	VR
+
+include gttc000.dhsp
+include	"zmapi.dhsp"
+module	"a5pmflash.dhop"
+Module CCTM000.dhop
+Module CCPM000.dhop
+Module A5TM000.dhop
+Module LcTm000.Dhop
+
+hfile	"ccfdd.dhsd"	ccfdos	ccfdos
+hfile	"ccfdd.dhsd"	ccfjca		ccfjca
+hfile	"a5dd.dhsd"		a5fdos	a5fdos
+hfile	"gtfdd.dhsd"	gtfat		gtfat
+hfile	"gtfdd.dhsd"	gtftab	gtftab
+
+public record "ccfdd.dhsd"	ca
+public record "a5dd.dhsd"	mz
+public record cogfdd.dhsd	cog_impRap
+public record "a5dd.dhsd"	muser
+public record "ccfdd.dhsd"	c5
+public record "ccfdd.dhsd"	c3
+public record "gtfdd.dhsd"	xq	g3xq
+Public	Record	cog_echange.dhsd	cog_paratables
+public record "gtfdd.dhsd"	t012
+public record "gtfdd.dhsd"	art
+public record "gtfdd.dhsd"	sart
+public record "gtfdd.dhsd"	t000
+public record "gtfdd.dhsd"	soc
+
+
+
+
+Const		cPrefFicLog = "/divalto/DivaltoLog/Cog_Import_"
+
+record * htdf	ficerr
+1	lstcree	L
+1	lstmodif	L
+1	lsterr	L
+1	lstRej	L
+1  cog_ficImp	256
+1	EmplFic		256
+1	fic_Exp		256
+
+;*
+;	Fonction de ctrl d'une zone obligatoire bloquant
+;	Retour N si cette dernière n'est pas renseigné - Bloquant
+public function char Cog_Ctrl_Bloquant(ZoneRec)
+1	ZoneRec	a = " "
+1	ChRetour	500
+beginf
+	init ChRetour = " "
+	if ZoneRec = " "
+ 		ChRetour = "<RESULTAT>N"
+	else
+		Chretour = "<RESULTAT>O"
+	endif
+	freturn(ChRetour)
+endf
+
+
+;*
+;	Fonction de ctrl d'une zone obligatoire non bloquant
+;	Retour I si cette dernière n'est pas renseignée - non Bloquant
+public function char Cog_Ctrl_NonBloquant(ZoneRec)
+1	ZoneRec	a = " "
+1	ChRetour	500
+beginf
+	init ChRetour = " "
+	if ZoneRec = " "
+ 		ChRetour = "<RESULTAT>I"
+	else
+		Chretour = "<RESULTAT>O"
+	endif
+	freturn(ChRetour)
+endf
+
+;*
+;	Fonction de ctrl sur la zone dossier doit exister
+;	Retour N si cette dernière n'est pas renseigné - Bloquant
+public function char Cog_Ctrl_Dos(ZoneRec)
+1	ZoneRec	a = " "
+1	ChRetour	500
+1	wdos	> ccfdd.dhsd	dos
+beginf
+	init ChRetour = " "
+	if ZoneRec = " "
+ 		ChRetour = "<RESULTAT>N"
+	else
+		wdos = ZoneRec
+		if hseek(ccfdos,ca,"A" & wdos & "1") <> 0
+			ChRetour = "<RESULTAT>N"
+		else
+			Chretour = "<RESULTAT>O"
+			mz.Dos = wdos
+		endif
+	endif
+	freturn(ChRetour)
+endf
+
+;*
+;	Fonction de ctrl sur la zone Axe3
+;	Retour I si ce code axe n'existe pas
+public function char Cog_Ctrl_Axe3(ZoneRec)
+1	ZoneRec	a = " "
+1	ChRetour	500
+1	axe	> ccfdd.dhsd	axe
+beginf
+	init ChRetour = " "
+	if ZoneRec = " "
+ 		ChRetour = "<RESULTAT>O"
+	else
+		axe = ZoneRec
+		if Controle_Axe(3, axe, nonvide = false, syntaxe = false, creation = false, conf = false, axetyp = 1,err = 0, etablissement = false) < 2
+     		Chretour = "<RESULTAT>O"
+		else
+			ChRetour = "<RESULTAT>I"
+		endif
+	endif
+	freturn(ChRetour)
+endf
+
+;*
+;	Fonction de ctrl sur la zone Axe4
+;	Retour I si ce code axe n'existe pas
+public function char Cog_Ctrl_Axe4(ZoneRec)
+1	ZoneRec	a = " "
+1	ChRetour	500
+1	axe	> ccfdd.dhsd	axe
+beginf
+	init ChRetour = " "
+	if ZoneRec = " "
+ 		ChRetour = "<RESULTAT>O"
+	else
+		axe = ZoneRec
+		if Controle_Axe(4, axe, nonvide = false, syntaxe = false, creation = false, conf = false, axetyp = 1,err = 0, etablissement = false) < 2
+     		Chretour = "<RESULTAT>O"
+		else
+			ChRetour = "<RESULTAT>I"
+		endif
+	endif
+	freturn(ChRetour)
+endf
+
+
+;*
+;	Fonction de ctrl sur la zone axeno. Gestion uniquement de ka variable A
+;	Retour N si cette dernière n'est pas renseigné ou différent de A - Bloquant
+public function char Cog_Ctrl_Axeno(ZoneRec)
+1	ZoneRec	a = " "
+1	ChRetour	500
+1	wdos	> ccfdd.dhsd	dos
+beginf
+	init ChRetour = " "
+	if ZoneRec = " " or ZoneRec not in ("1","2","3","4")
+ 		ChRetour = "<RESULTAT>N"
+	else
+		Chretour = "<RESULTAT>O"
+	endif
+	freturn(ChRetour)
+endf
+
+;*
+;	Fonction après le update avant libération de l'enreg C5 créé ou modifié
+public function char Cog_Maj_Zones_C5_3(TableRec,IndexRec,Action,Erreur)
+1	TableRec	a =" "	
+1	IndexRec	a =" "
+1	action	n 
+1	Erreur	1,0
+1	wdos	> gtfdd.dhsd dos
+1	wcebin	> gtfdd.dhsd cebin
+1	i		1,0
+beginf
+	ccfjca.Key = IndexRec
+	if hseek(ccfjca,c5,ccfjca.Key) = 0
+		seek_soc(c5.Dos)
+		c5.AxeTyp = 1
+		C5.EtbSais = 3
+		if C5.NOMABR	 = ' '
+			C5.NOMABR	 = Nom_Abrege(C5.LIB)
+		endif
+		if action = 1
+			c5.UserCr = system.User
+			c5.UserCrDh = time(7)
+			C5.CeNote = 1
+			lstcree = listgetid("Lstcree")
+			init cog_impRap = " "
+			cog_impRap.Cog_ZoneCle = c5.Axe & " " & c5.Lib
+			cog_impRap.Cog_Message = "  Axe " & C5.AxeNo & " avec le code " & c5.Axe & " créé "
+	 		listaddend(lstcree,cog_impRap)
+		elsif action = 2
+			;c5.UserMo = system.User
+			;c5.UserMoDh = time(7)
+		endif
+		C5.Cog_ETLDateImport = Time(7)
+		hrewrite(ccfjca,c5)
+		;*Création de la famille 2 si n'existe pas
+		if lectab(12, '3' & c5.Axe) <> 0
+			init t012 = " "
+			t012.CeBin = 12
+			switch t000.TabTyp(12) 
+				case 1
+					t012.Dos = c5.Dos
+				case 2
+					t012.Dos = 999
+			endswitch
+			t012.TabNo = 12
+			t012.FamNo = 3
+			t012.Fam = c5.Axe
+			t012.UserCr = system.User
+			t012.UserCrDh = time(7)
+			t012.CeNote = 1
+			t012.Lib = c5.Lib
+			hwrite(gtftab,t012)
+		endif	
+	endif
+	freturn(C5)
+endf
+
+;*
+;	Fonction après le update avant libération de l'enreg C5 créé ou modifié
+public function char Cog_Maj_Zones_C5_4(TableRec,IndexRec,Action,Erreur)
+1	TableRec	a =" "	
+1	IndexRec	a =" "
+1	action	n 
+1	Erreur	1,0
+1	wdos	> gtfdd.dhsd dos
+1	wcebin	> gtfdd.dhsd cebin
+1	i		1,0
+beginf
+	ccfjca.Key = IndexRec
+	if hseek(ccfjca,c5,ccfjca.Key) = 0	
+		seek_soc(c5.Dos)
+		c5.AxeTyp = 1
+		C5.EtbSais = 3
+		if C5.NOMABR	 = ' '
+			C5.NOMABR	 = Nom_Abrege(C5.LIB)
+		endif
+		if action = 1
+			c5.UserCr = system.User
+			c5.UserCrDh = time(7)
+			C5.CeNote = 1
+			lstcree = listgetid("Lstcree")
+			init cog_impRap = " "
+			cog_impRap.Cog_ZoneCle = c5.Axe & " " & c5.Lib
+			cog_impRap.Cog_Message = "  Axe 4 avec le code " & c5.Axe & " créé "
+	 		listaddend(lstcree,cog_impRap)
+		elsif action = 2
+			;c5.UserMo = system.User
+			;c5.UserMoDh = time(7)
+		endif
+		C5.Cog_ETLDateImport = Time(7)
+		hrewrite(ccfjca,c5)
+	endif
+	freturn(C5)
+endf
+
+;*
+;	Fonction après le update avant libération de l'enreg C5 créé ou modifié
+public function char Cog_Maj_Zones_C5_1(TableRec,IndexRec,Action,Erreur)
+1	TableRec	a =" "	
+1	IndexRec	a =" "
+1	action	n 
+1	Erreur	1,0
+1	wdos	> gtfdd.dhsd dos
+1	wcebin	> gtfdd.dhsd cebin
+1	i		1,0
+beginf
+	ccfjca.Key = IndexRec
+	if hseek(ccfjca,c5,ccfjca.Key) = 0
+		seek_soc(c5.Dos)
+		c5.AxeTyp = 1
+		C5.EtbSais = 3
+		if C5.NOMABR	 = ' '
+			C5.NOMABR	 = Nom_Abrege(C5.LIB)
+		endif
+		if action = 1
+			c5.UserCr = system.User
+			c5.UserCrDh = time(7)
+			c5.CeNote = 1
+			lstcree = listgetid("Lstcree")
+			init cog_impRap = " "
+			cog_impRap.Cog_ZoneCle = c5.Axe & " " & c5.Lib
+			cog_impRap.Cog_Message = "  Axe " & C5.AxeNo & " avec le code " & c5.Axe & " créé "
+	 		listaddend(lstcree,cog_impRap)
+		elsif action = 2
+			;c5.UserMo = system.User
+			;c5.UserMoDh = time(7)
+		endif
+		C5.Cog_ETLDateImport = Time(7)
+		hrewrite(ccfjca,c5)
+		;*Création de la famille 2 si n'existe pas
+		if lectab(12, '2' & c5.Axe) <> 0
+			init t012 = " "
+			t012.CeBin = 12
+			switch t000.TabTyp(12) 
+				case 1
+					t012.Dos = c5.Dos
+				case 2
+					t012.Dos = 999
+			endswitch
+			t012.TabNo = 12
+			t012.FamNo = 2
+			t012.Fam = c5.Axe
+			t012.UserCr = system.User
+			t012.UserCrDh = time(7)
+			t012.CeNote = 1
+			t012.Lib = c5.Lib
+			hwrite(gtftab,t012)
+		endif	
+		;*Création de l'article si n'existe pas
+		if hseek(gtfat,art,"A" & c5.Dos & c5.Axe)  <> 0
+			if hseek(gtfat,art,"A" & c5.Dos & soc.Cog_RefModele) = 0
+				art.Ref = c5.Axe
+				art.DesAbr = Convertir_Nom_Nomabr(c5.Lib)
+				art.Des = c5.Lib
+				art.Fam(2) = c5.Axe
+				Art.Conf = " "
+				Art.OpSais(1) = 2
+				Art.OpSais(2) = 2
+				Art.OpSais(3) = 2
+				Art.HsDt = " "
+				If Lectab(12, '3' & c5.Axe) = 0
+					art.Fam(3) = c5.Axe
+				EndIf
+				art.HsDt = c5.HsDt
+				hwrite(gtfat,art)
+				; Création sous-réf.
+				If hseek(gtfat,sart,"H" & c5.Dos & soc.Cog_RefModele) = 0
+					sart.Ref = c5.Axe
+					hwrite(gtfat,sart)
+				EndIf
+			endif
+		endif
+	endif
+	freturn(C5)
+endf
+
+
+;*
+;	Fonction après le update avant libération de l'enreg C3 créé ou modifié
+public function char Cog_Maj_Zones_C3(TableRec,IndexRec,Action,Erreur)
+1	TableRec	a =" "	
+1	IndexRec	a =" "
+1	action	n 
+1	Erreur	1,0
+1	wdos	> gtfdd.dhsd dos
+1	wcebin	> gtfdd.dhsd cebin
+1	i		1,0
+hfile	ccfdd.dhsd	ccfjca	fjca
+record ccfdd.dhsd	c3		c3_mod
+record ccfdd.dhsd	c3		wc3
+beginf
+	ccfjca.Key = IndexRec
+	if hseek(ccfjca,c3,ccfjca.Key) = 0	
+		seek_soc(c3.Dos)
+		fjca.Key = ccfjca.Key
+		if hpread(fjca,c3_mod,fjca.Key) <> 0 or c3_mod.Ce1 <> "3" or c3_mod.Dos <> c3.Dos or c3_mod.Classe <> c3.Classe
+			fjca.Key = ccfjca.Key
+			if hread(fjca,c3_mod,fjca.Key) <> 0 or c3_mod.Ce1 <> "3" or c3_mod.Dos <> c3.Dos or c3_mod.Classe <> c3.Classe
+				c3_mod = " "
+			endif
+		endif
+		if c3_mod.Cpt <> " "
+			wc3 = c3
+			c3 = c3_mod
+			c3.Cpt = wc3.Cpt
+			c3.Lib = wc3.Lib
+			;C3.NomAbr = Nom_Abrege(c3.Lib)
+			c3.HsDt = wc3.HsDt
+			c3.Axe(4) = wc3.Axe(4)
+			c3.Axe(3) = wc3.Axe(3)
+			if action = 1
+				c3.UserCr = system.User
+				c3.UserCrDh = time(7)
+				C3.CeNote = 1
+				c3.UserMo = " "
+				c3.UserMoDh = " "
+				lstcree = listgetid("Lstcree")
+				init cog_impRap = " "
+				cog_impRap.Cog_ZoneCle = c3.Cpt & " " & c3.Lib
+				cog_impRap.Cog_Message = "  Compte comptable " & c3.Cpt & " créé "
+		 		listaddend(lstcree,cog_impRap)
+			elsif action = 2
+				;c3.UserMo = system.User
+				;c3.UserMoDh = time(7)
+			endif
+			C3.Cog_ETLDateImport = Time(7)
+			hrewrite(ccfjca,c3)
+		endif
+	endif
+	freturn(C3)
+endf
+
+;*
+public procedure A5_Flash_Envoi_Av
+
+beginp
+	A5_Flash_Ajouter_Fichier_Joint_Spe(fic_exp)
+endp
+
+;*
+public function char Cog_Gestion_Rapport_C5(TableRec,ZoneRec)
+1	TableRec	a =" "	
+1	ZoneRec	a =" "
+1	ChaineHmp	1500
+1	Wtable	500
+1	ret		3,0
+beginf
+	lstcree = listgetid("Lstcree")
+	lstmodif = listgetid("LstModif")
+	lsterr = listgetid("LstErr")
+	lstRej = listgetid("LstRej")
+	if listfirst(lstcree,cog_ImpRap) in (-1,0) and listfirst(lstmodif,cog_ImpRap) in (-1,0) and listfirst(lsterr,cog_ImpRap) in (-1,0)
+		hseek(a5fdos,muser,"B" & system.User)
+		seek_soc(muser.Dos)
+		mz.Dos = muser.Dos
+		mz.Depo = muser.Depo
+		mz.Etb = muser.Etb
+	endif
+	mz.MiCle = "cogii_rapport_import.dhoi"
+	mz.MtCle = "cogpm_ctrl_interface_dcpt.dhop"
+	xmiload(mz.MiCle)
+	ficerr.Name = cPrefFicLog & nospaces(TableRec) & ".log"
+	if hopen(ficerr,"P") = 0
+		loop hread(ficerr,ChaineHmp) = 0
+			ccfjca.Key = hmpseek(ChaineHmp,"INDEX") 
+			hseek(ccfjca,c5,ccfjca.Key)
+			wtable = " "
+			;* Gestion de la création d'enreg
+			;* Gestion de la modification
+			wtable = hmpseek(ChaineHmp,"TABLE_MAJ")
+			if wtable <> " "
+				init cog_impRap = " "
+				cog_impRap.Cog_CodZone = hmpseek(ChaineHmp,"ZONE")
+				cog_impRap.Cog_ValZoneD = "  Valeur avant mise à jour : " & hmpseek(ChaineHmp,"AVANT")
+				cog_impRap.Cog_ValZoneF = "  Valeur après mise à jour : " & hmpseek(ChaineHmp,"APRES")
+				cog_impRap.Cog_ZoneCle = c5.Axe
+				;cog_impRap.Cog_Message = hmpseek(ChaineHmp,"MESSAGE_CTRL")
+				listaddend(lstmodif,cog_imprap)
+			endif
+			;* Gestion des erreurs
+			wtable = hmpseek(ChaineHmp,"TABLE_ERROR")
+			if wtable <> " "
+				init cog_impRap = " "
+				cog_impRap.Cog_CodZone = hmpseek(ChaineHmp,"ZONE")
+				cog_impRap.Cog_Message = "  " & hmpseek(ChaineHmp,"MESSAGE_CTRL")
+				cog_impRap.Cog_ZoneCle = c5.Axe
+				listaddend(lsterr,cog_imprap)
+			endif
+			;* Gestion des rejets
+			wtable = hmpseek(ChaineHmp,"TABLE_ERROR_REJ")
+			if wtable <> " "
+				init cog_impRap = " "
+				cog_impRap.Cog_CodZone = hmpseek(ChaineHmp,"ZONE")
+				cog_impRap.Cog_Message = "  " & hmpseek(ChaineHmp,"MESSAGE_CTRL")
+				cog_impRap.Cog_ZoneCle = hmpseek(ChaineHmp,"LIGNE")
+				listaddend(lstRej,cog_imprap)
+			endif
+		endloop
+	endif
+	g3xq.LogDh = time(7)
+	XharviewNoRunXharview
+	printbegin
+	g3xq.WinTitre = "Compte rendu de l'import de la table " & nospaces(TableRec) & " du " & formatd("JJ/MM/AAAA",time(1))  
+	xmiprint(mz.MiCle,1)
+	if listfirst(lstcree,cog_ImpRap) not in (-1,0)
+		xmisetattribut("debut_lst",an_titre,"Les axes créés")
+		xmiprint(mz.MiCle,4)
+		listbegin(lstcree)
+		loop listnext(lstcree,cog_ImpRap) not in (-1,0)
+			xmiprint(mz.MiCle,5)
+		endloop
+	endif
+	if listfirst(lstmodif,cog_ImpRap) not in (-1,0)
+		xmisetattribut("debut_lst",an_titre,"Les axes modifiés")
+		xmiprint(mz.MiCle,4)
+		listbegin(lstmodif)
+		loop listnext(lstmodif,cog_ImpRap) not in (-1,0)
+			xmiprint(mz.MiCle,2)
+		endloop
+	endif
+	if listfirst(lsterr,cog_ImpRap) not in (-1,0)
+		xmisetattribut("debut_lst",an_titre,"Les axes intégrés avec des erreurs")
+		xmiprint(mz.MiCle,4)
+		listbegin(lsterr)
+		loop listnext(lsterr,cog_ImpRap) not in (-1,0)
+			xmiprint(mz.MiCle,5)
+		endloop
+	endif
+	if listfirst(lstRej,cog_ImpRap) not in (-1,0)
+		xmisetattribut("debut_lst",an_titre,"Les axes rejetés")
+		xmiprint(mz.MiCle,4)
+		listbegin(lstRej)
+		loop listnext(lstRej,cog_ImpRap) not in (-1,0)
+			xmiprint(mz.MiCle,5)
+		endloop
+	endif
+	printend	
+	XharviewRunXharview
+	XharviewGetFileXharview(Cog_FicImp)
+;	EmplFic = left(getharmonydirectory)  & "\" & filenamelastsegment(cog_FicImp)
+	EmplFic = left(cog_paratables.repert) & "\" & filenamelastsegment(cog_ficimp)
+	if winmovefile(left(Cog_FicImp),EmplFic) = false
+		messagebox("Erreur " & WinGetTextError(wingetlasterror),'Erreur')
+	else
+		;on transforme en pdf
+		if MapiOpen = 0 	
+			if MapiTestSiConvertPDF <> 0
+;				fic_exp	= left(getharmonydirectory) & "\Rapport_Interface_" & nospaces(TableRec) & "_" & time(7) & ".pdf"
+				fic_exp	= left(cog_paratables.repert) & "\Rapport_Interface_" & nospaces(TableRec) & "_" & time(7) & ".pdf"
+				if MapiConvertPDF(EmplFic,fic_exp) = 0
+					ret = a5_flash_envoi(ZoneRec," "," ",0)
+					;on supprime le fichier initial
+					windeletefile(EmplFic)
+					If ret = 0
+						windeletefile(fic_exp)
+					EndIf
+					MapiClose
+				endif
+			endif
+		endif
+	endif
+	listerase(lstcree)
+	listerase(lstmodif)
+	listerase(lsterr)
+	listerase(lstRej)
+	freturn('O')
+	
+endf
+
+;*
+public function char Cog_Gestion_Rapport_C3(TableRec,ZoneRec)
+1	TableRec	a =" "	
+1	ZoneRec	a =" "
+1	ChaineHmp	1500
+1	Wtable	500
+1	ret		3,0
+beginf
+	lstcree = listgetid("Lstcree")
+	lstmodif = listgetid("LstModif")
+	lsterr = listgetid("LstErr")
+	lstRej = listgetid("LstRej")
+	if listfirst(lstcree,cog_ImpRap) in (-1,0) and listfirst(lstmodif,cog_ImpRap) in (-1,0) and listfirst(lsterr,cog_ImpRap) in (-1,0)
+		hseek(a5fdos,muser,"B" & system.User)
+		seek_soc(muser.Dos)
+		mz.Dos = muser.Dos
+		mz.Depo = muser.Depo
+		mz.Etb = muser.Etb
+	endif
+	mz.MiCle = "cogii_rapport_import.dhoi"
+	mz.MtCle = "cogpm_ctrl_interface_dcpt.dhop"
+	xmiload(mz.MiCle)
+	ficerr.Name = cPrefFicLog & nospaces(TableRec) & ".log"
+	if hopen(ficerr,"P") = 0
+		loop hread(ficerr,ChaineHmp) = 0
+			ccfjca.Key = hmpseek(ChaineHmp,"INDEX") 
+			hseek(ccfjca,c3,ccfjca.Key)
+			wtable = " "
+			;* Gestion de la création d'enreg
+			;* Gestion de la modification
+			wtable = hmpseek(ChaineHmp,"TABLE_MAJ")
+			if wtable <> " "
+				init cog_impRap = " "
+				cog_impRap.Cog_CodZone = hmpseek(ChaineHmp,"ZONE")
+				cog_impRap.Cog_ValZoneD = "  Valeur avant mise à jour : " & hmpseek(ChaineHmp,"AVANT")
+				cog_impRap.Cog_ValZoneF = "  Valeur après mise à jour : " & hmpseek(ChaineHmp,"APRES")
+				cog_impRap.Cog_ZoneCle = c5.Axe
+				;cog_impRap.Cog_Message = hmpseek(ChaineHmp,"MESSAGE_CTRL")
+				listaddend(lstmodif,cog_imprap)
+			endif
+			;* Gestion des erreurs
+			wtable = hmpseek(ChaineHmp,"TABLE_ERROR")
+			if wtable <> " "
+				init cog_impRap = " "
+				cog_impRap.Cog_CodZone = hmpseek(ChaineHmp,"ZONE")
+				cog_impRap.Cog_Message = "  " & hmpseek(ChaineHmp,"MESSAGE_CTRL")
+				cog_impRap.Cog_ZoneCle = c5.Axe
+				listaddend(lsterr,cog_imprap)
+			endif
+			;* Gestion des rejets
+			wtable = hmpseek(ChaineHmp,"TABLE_ERROR_REJ")
+			if wtable <> " "
+				init cog_impRap = " "
+				cog_impRap.Cog_CodZone = hmpseek(ChaineHmp,"ZONE")
+				cog_impRap.Cog_Message = "  " & hmpseek(ChaineHmp,"MESSAGE_CTRL")
+				cog_impRap.Cog_ZoneCle = hmpseek(ChaineHmp,"LIGNE")
+				listaddend(lstRej,cog_imprap)
+			endif
+		endloop
+	endif
+	g3xq.LogDh = time(7)
+	XharviewNoRunXharview
+	printbegin
+	g3xq.WinTitre = "Compte rendu de l'import de la table " & nospaces(TableRec) & " du " & formatd("JJ/MM/AAAA",time(1))  
+	xmiprint(mz.MiCle,1)
+	if listfirst(lstcree,cog_ImpRap) not in (-1,0)
+		xmisetattribut("debut_lst",an_titre,"Les comptes comptables créés")
+		xmiprint(mz.MiCle,4)
+		listbegin(lstcree)
+		loop listnext(lstcree,cog_ImpRap) not in (-1,0)
+			xmiprint(mz.MiCle,5)
+		endloop
+	endif
+	if listfirst(lstmodif,cog_ImpRap) not in (-1,0)
+		xmisetattribut("debut_lst",an_titre,"Les comptes comptables modifiés")
+		xmiprint(mz.MiCle,4)
+		listbegin(lstmodif)
+		loop listnext(lstmodif,cog_ImpRap) not in (-1,0)
+			xmiprint(mz.MiCle,2)
+		endloop
+	endif
+	if listfirst(lsterr,cog_ImpRap) not in (-1,0)
+		xmisetattribut("debut_lst",an_titre,"Les comptes comptables intégrés avec des erreurs")
+		xmiprint(mz.MiCle,4)
+		listbegin(lsterr)
+		loop listnext(lsterr,cog_ImpRap) not in (-1,0)
+			xmiprint(mz.MiCle,5)
+		endloop
+	endif
+	if listfirst(lstRej,cog_ImpRap) not in (-1,0)
+		xmisetattribut("debut_lst",an_titre,"Les comptes comptables rejetés")
+		xmiprint(mz.MiCle,4)
+		listbegin(lstRej)
+		loop listnext(lstRej,cog_ImpRap) not in (-1,0)
+			xmiprint(mz.MiCle,5)
+		endloop
+	endif
+	printend	
+	XharviewRunXharview
+	XharviewGetFileXharview(Cog_FicImp)
+;	EmplFic = left(getharmonydirectory)  & "\" & filenamelastsegment(cog_FicImp)
+	EmplFic = left(cog_paratables.repert) & "\" & filenamelastsegment(cog_ficimp)
+	if winmovefile(left(Cog_FicImp),EmplFic) = false
+		messagebox("Erreur " & WinGetTextError(wingetlasterror),'Erreur')
+	else
+		;on transforme en pdf
+		if MapiOpen = 0 	
+			if MapiTestSiConvertPDF <> 0
+;				fic_exp	= left(getharmonydirectory) & "\Rapport_Interface_" & nospaces(TableRec) & "_" & time(7) & ".pdf"
+				fic_exp	= left(cog_paratables.repert) & "\Rapport_Interface_" & nospaces(TableRec) & "_" & time(7) & ".pdf"
+				if MapiConvertPDF(EmplFic,fic_exp) = 0
+					ret = a5_flash_envoi(ZoneRec," "," ",0)
+					;on supprime le fichier initial
+					windeletefile(EmplFic)
+					If ret = 0
+						windeletefile(fic_exp)
+					EndIf
+					MapiClose
+				endif
+			endif
+		endif
+	endif
+	listerase(lstcree)
+	listerase(lstmodif)
+	listerase(lsterr)
+	listerase(lstRej)
+	freturn('O')
+	
+endf
+
+
+

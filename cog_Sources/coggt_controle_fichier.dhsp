@@ -1,0 +1,28 @@
+;*
+;*    Controle l'ouverture du fichier
+;*
+
+;*    Log    version   nPmodif      date     modifications
+;*    TR       6.3a      01        06.2011 	 Initial
+
+
+;*
+Public Procedure Controle_Fichier
+Record * htdf 		tdf
+1      st       	X
+BeginP
+	tdf.Name = 'CogGtf_Tab.Dhfi'
+	st = Fopen(tdf, "P")
+	Switch st
+	Case 0				; ok -> on ne fait rien (sauf refermer le fichier)
+		Fclose(tdf)
+		Hopen(coggtf_tab,"P")
+	Case $14				; absent -> on bloque 
+		Mes_Alert(1113, left(tdf.Name), fichier = "CogGtf_Tab.Dhfi") 																			 | Programexit
+	Case H_RESERVED	; réservé -> on sort
+		Messagebox ("Le fichier des tables est réservé par un autre poste pour la Facturation.", "Erreur",MB_ICONEXCLAMATION) | Programexit
+	Default				; autre erreur -> on bloque
+		Mes_Alert(1114, binhexa(stx(st)), left(tdf.Name), fichier = "CogGtf_Tab.Dhfi") 													 | Programexit
+	Endswitch
+EndP
+

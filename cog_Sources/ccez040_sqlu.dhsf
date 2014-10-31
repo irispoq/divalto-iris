@@ -1,0 +1,3773 @@
+;>xwin4obj                              7.0       20140418140653      
+[masque]
+ libelle="journaux"
+ utilisateur="UGIE"
+ date_modification="18/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=108
+ type_masque=2
+ dernier_id=1000008
+ surcharge=oui
+ date_modif_base="20130213090335"
+ dernier_id_page=100000
+ niveau_surcharge=1
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="CCFAID"
+ [touches]
+  f1=1
+  f7=8000
+[enregistrements]
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "ccrsjca.dhoq",,journal,journal,1024,1
+[onglet]
+ [presentation]
+  position=0,0
+  taille=297,320
+  attache_lgx=oui
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=18,480
+  attache_lgx=oui
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Journal à créer"
+ nb_lig=3
+ nb_col=30
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,41
+   id=7
+   wstyle="STD"
+  [texte]
+   texte="Journal"
+ [champ]
+  [presentation]
+   position=8,48
+   taille=9,15
+   id=8
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=journal,jnl,journal
+  [param_saisie]
+   obligatoire=oui
+  [aide_page]
+   aide=130
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=3
+ fond="STD"
+ efface=partiel
+ nb_lig=33
+ nb_col=50
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=16
+ [tableau]
+  [presentation]
+   position=0,0
+   taille=297,200
+   attache_lgx=oui
+   attache_lgy=oui
+   id=308
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=3
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=2
+   separation=66
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=86,23
+    taille=10,14
+    id=266
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=journal,cenote,journal
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CENOTE_2"
+   [touches]
+    shift_f6=10000
+   [info_bulle]
+   texte="présence d'une note"
+   [param_colonne]
+    titre="#tblnote"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=97,50
+    taille=8,13
+    id=267
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,jnl,journal
+    saisie=non
+   [touches]
+    shift_f6=10000
+   [info_bulle]
+   texte="code du journal"
+   [param_colonne]
+    titre="Code"
+    largeur_col=31
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=41,51
+    taille=10,145
+    id=268
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,lib,journal
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=131
+    fichier="CCFAID"
+   [touches]
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="intitulé du journal"
+   [param_colonne]
+    titre="Nom"
+    largeur_col=148
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=37,271
+    taille=8,53
+    id=1000006
+    wstyle="CHAMP_SAISI_COG"
+   [description]
+    donnee=journal,cog_exportanael,journal
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="Export vers Anaël"
+    cadrage=droite
+    valeur="2","1"
+    choix="cog_gtfdmc.dhfi","NONOUI"
+   [touches]
+    f7=8000
+    shift_f6=10010
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="Export vers Anaël"
+    fl_aff=oui
+    largeur_col=57
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=48,271
+    taille=8,73
+    id=1000007
+    wstyle="CHAMP_SAISI_COG"
+   [description]
+    donnee=journal,cog_jnlpdv,journal
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="Journal d'écritures de P.V."
+    cadrage=droite
+    valeur="2","1"
+    choix="cog_gtfdmc.dhfi","NONOUI"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10010
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="Journal d'écritures de P.V."
+    fl_aff=oui
+    largeur_col=77
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=59,271
+    taille=8,92
+    id=1000008
+    wstyle="CHAMP_SAISI_COG"
+   [description]
+    donnee=journal,cog_jnlcen,journal
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="Journal d'écritures des Centrales"
+    cadrage=droite
+    valeur="2","1"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10010
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="Journal d'écritures des Centrales"
+    fl_aff=oui
+    largeur_col=96
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=34,193
+    taille=8,63
+    id=269
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,jnltyp,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","JNLTYP"
+   [aide_page]
+    aide=132
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_JnlTyp_1_Av"
+    diva_apres="Champ_JnlTyp_1_Ap"
+   [info_bulle]
+   texte="type de journal"
+   [param_colonne]
+    titre="Type"
+    fl_aff=oui
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=45,270
+    taille=10,37
+    id=270
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,protddt,journal
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=172
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="date début de la période de saisie autorisée"
+   [param_colonne]
+    titre="Début"
+    fl_aff=non
+    largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=87,298
+    taille=10,37
+    id=271
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,protfdt,journal
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=172
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_ProtFDt_1_Ap"
+   [info_bulle]
+   texte="date fin de la période de saisie autorisée"
+   [param_colonne]
+    titre="Fin"
+    fl_aff=non
+    largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=62,365
+    taille=8,55
+    id=272
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,preload,journal
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","PRELOAD"
+   [aide_page]
+    aide=129
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_PreLoad_1_Av"
+    diva_apres="Champ_PreLoad_1_Ap"
+   [info_bulle]
+   texte="Pré-chargement des écritures"
+   [param_colonne]
+    titre="Pré-chargement des écritures"
+    fl_aff=non
+    largeur_col=88
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=77,291
+    taille=8,27
+    id=273
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,preloadnb,journal
+    format="00000000"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=171
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_PreLoadNb_1_Av"
+    diva_apres="Champ_PreLoadNb_1_Ap"
+   [info_bulle]
+   texte="Nombre d'écritures à pré-charger"
+   [param_colonne]
+    titre="Nombre d'écritures à pré-charger"
+    fl_aff=non
+    largeur_col=62
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=70,325
+    taille=10,33
+    id=274
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,modele,journal
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=149
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19207
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Modele_1_Ap"
+   [info_bulle]
+   texte="nom du modèle de saisie des écritures"
+   [param_colonne]
+    titre="Modèle"
+    fl_aff=non
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=41,15
+    taille=10,145
+    id=275
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,libecr,journal
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="libellé par défaut des lignes d'écriture"
+   [param_colonne]
+    titre="Libellé des lignes"
+    fl_aff=non
+    largeur_col=90
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=42,38
+    taille=8,50
+    id=276
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,maskno,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","MASKNO"
+   [aide_page]
+    aide=133
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="présentation de l'écran de saisie"
+   [param_colonne]
+    titre="Masque"
+    fl_aff=non
+    largeur_col=55
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=54,34
+    taille=8,68
+    id=277
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,ecrfincod,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ECRFINCOD"
+   [aide_page]
+    aide=145
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="déclenchement de la fin d'une écriture"
+   [param_colonne]
+    titre="Fin d'écriture"
+    fl_aff=non
+    largeur_col=69
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=81,69
+    taille=8,78
+    id=278
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,lettappel,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","LETTAPPEL"
+   [aide_page]
+    aide=147
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="déclenchement du lettrage"
+   [param_colonne]
+    titre="Appel du lettrage"
+    fl_aff=non
+    largeur_col=84
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=66,55
+    taille=8,18
+    id=279
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,centcod,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CENTCOD"
+   [aide_page]
+    aide=134
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="centralisation des écritures lors de la validation en journal"
+   [param_colonne]
+    titre="Centralisation"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=44,34
+    taille=8,18
+    id=280
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,r3cod,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","R3COD"
+   [aide_page]
+    aide=596
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_R3cod_1_Av"
+   [info_bulle]
+   texte="lien avec Divalto Règlement"
+   [param_colonne]
+    titre="Liaison DReg"
+    fl_aff=non
+    largeur_col=39
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=50,28
+    taille=8,18
+    id=281
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,maskeffcod,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","MASKEFFCOD"
+   [aide_page]
+    aide=146
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="effacement de l'écran avant de commencer la saisie d'une nouvelle écriture"
+   [param_colonne]
+    titre="Effacer l'écran"
+    fl_aff=non
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=89,60
+    taille=8,18
+    id=282
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,rcrea,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","RCREA"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="rester en création"
+   [param_colonne]
+    titre="RCréa"
+    fl_aff=non
+    largeur_col=26
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=80,28
+    taille=8,18
+    id=283
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,rmodif,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","RMODIF"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="rester en modification"
+   [param_colonne]
+    titre="RModif"
+    fl_aff=non
+    largeur_col=26
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=58,53
+    taille=10,12
+    id=284
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,conf,journal
+   [aide_page]
+    aide=173
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Conf_1_Ap"
+   [info_bulle]
+   texte="code de confidentialité"
+   [param_colonne]
+    titre="Confidentialité"
+    fl_aff=non
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=44,22
+    taille=8,50
+    id=285
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,cpgencod,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CPGENCOD"
+   [aide_page]
+    aide=136
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_CpGenCod_1_Ap"
+   [info_bulle]
+   texte="génération automatique de la ligne de contrepartie"
+   [param_colonne]
+    titre="Génération CP"
+    fl_aff=non
+    largeur_col=49
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=58,45
+    taille=10,33
+    id=286
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,cptgen,journal
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=137
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19030
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Cpt_1_Av"
+    diva_apres="Champ_Cpt_1_Ap"
+   [info_bulle]
+   texte="compte de la ligne de contrepartie générée automatiquement"
+   [param_colonne]
+    titre="Compte"
+    fl_aff=non
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=47,24
+    taille=10,145
+    id=287
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,libgen,journal
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_LibGen_1_Av"
+   [info_bulle]
+   texte="libellé par défaut de la ligne de contrepartie générée automatiquement"
+   [param_colonne]
+    titre="Libellé de la ligne générée"
+    fl_aff=non
+    largeur_col=90
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=53,14
+    taille=8,37
+    id=288
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,piecesais,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","PIECESAIS"
+   [aide_page]
+    aide=139
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_PieceSais_1_Ap"
+   [info_bulle]
+   texte="saisie d'un numéro de pièce"
+   [param_colonne]
+    titre="Pièce"
+    fl_aff=non
+    largeur_col=51
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=56,35
+    taille=8,60
+    id=289
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,piececod,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","PIECECOD"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_PieceCod_1_Av"
+    diva_apres="Champ_PieceCod_1_Ap"
+   [info_bulle]
+   texte="emplacement de recherche du numéro en cas de numérotation automatique des pièces"
+   [param_colonne]
+    titre="Numéro automatique"
+    fl_aff=non
+    largeur_col=127
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=43,11
+    taille=10,29
+    id=290
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,piece,journal
+    format="00000000"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="dernier numéro de pièce dans le journal (en cas de numérotation automatique niveau journal)"
+   [param_colonne]
+    titre="Numéro"
+    fl_aff=non
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=44,22
+    taille=8,35
+    id=291
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,cpsais,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CPSAIS"
+   [aide_page]
+    aide=138
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_CpSais_1_Ap"
+   [info_bulle]
+   texte="origine de l'information 'compte de contrepartie' sur les lignes"
+   [param_colonne]
+    titre="CP"
+    fl_aff=non
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=52,17
+    taille=8,30
+    id=292
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,echsais,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ECHSAIS"
+   [aide_page]
+    aide=140
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="origine de l'information 'date d'échéance' sur les lignes"
+   [param_colonne]
+    titre="Echéance"
+    fl_aff=non
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=96,49
+    taille=8,30
+    id=293
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,bqedtsais,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","BQEDTSAIS"
+   [aide_page]
+    aide=144
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="origine de l'information 'Date prévue banque' sur les lignes"
+   [param_colonne]
+    titre="Date banque"
+    fl_aff=non
+    largeur_col=39
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=57,18
+    taille=8,18
+    id=294
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,devcod,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","DEVCOD"
+   [aide_page]
+    aide=135
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="saisie d'un code devise"
+   [param_colonne]
+    titre="Devise"
+    fl_aff=non
+    largeur_col=24
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=36,66
+    taille=8,18
+    id=295
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,mt2sais,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","MT2SAIS"
+   [aide_page]
+    aide=141
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="saisie d'un montant 2"
+   [param_colonne]
+    titre="Mt 2"
+    fl_aff=non
+    largeur_col=24
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=63,82
+    taille=8,18
+    id=296
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,lotsais,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","LOTSAIS"
+   [aide_page]
+    aide=142
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="saisie d'un code lot"
+   [param_colonne]
+    titre="Lot"
+    fl_aff=non
+    largeur_col=24
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=52,21
+    taille=8,18
+    id=297
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,chqsais,journal
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CHQSAIS"
+   [aide_page]
+    aide=143
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="saisie d'un numéro de chèque"
+   [param_colonne]
+    titre="Chèque"
+    fl_aff=non
+    largeur_col=27
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=63,123
+    taille=8,90
+    id=298
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,nomabr,journal
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_NomAbr_1_Ap"
+   [info_bulle]
+   texte="nom abrégé"
+   [param_colonne]
+    titre="Nom abrégé"
+    fl_aff=non
+    largeur_col=94
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=56,18
+    taille=8,17
+    id=299
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,usercr,journal
+    format="1"
+    saisie=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a créé la fiche"
+   [param_colonne]
+    titre="Créé par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=51,32
+    taille=8,35
+    id=300
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,usercrdh,journal
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Créé le"
+   [param_colonne]
+    titre="Créé le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=47,69
+    taille=8,100
+    id=301
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,usercrori,journal
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Origine de la création"
+   [param_colonne]
+    titre="Origine de la création"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=64,20
+    taille=8,17
+    id=302
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,usermo,journal
+    format="1"
+    saisie=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a modifié la fiche"
+   [param_colonne]
+    titre="Modifié par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=39,90
+    taille=8,35
+    id=303
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,usermodh,journal
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Modifié le"
+   [param_colonne]
+    titre="Modifié le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=71,14
+    taille=8,100
+    id=304
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,usermoori,journal
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Origine de la modification"
+   [param_colonne]
+    titre="Origine de la modification"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=33,10
+    taille=8,17
+    id=305
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,userdop,journal
+    format="1"
+    saisie=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a effectué la dernière la dernière opération"
+   [param_colonne]
+    titre="Dernière opération par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=54,137
+    taille=8,35
+    id=306
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,userdopdh,journal
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="date de dernière opération"
+   [param_colonne]
+    titre="Dernière opération le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=72,43
+    taille=8,100
+    id=307
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=journal,userdopori,journal
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Origine de la dernière opération"
+   [param_colonne]
+    titre="Origine de la dernière opération"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=15
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=14
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=19
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=18
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=20
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=13
+[page]
+ numero=11
+ libelle="Fiche zoom"
+ fond="STD"
+ titre="Journal"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="GENERALITES"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=186,5
+   taille=60,310
+   id=9
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Contrepartie"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=254,5
+   taille=38,310
+   id=11
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Codification"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=24,5
+   taille=9,48
+   id=13
+   wstyle="STD"
+  [texte]
+   texte="Journal"
+ [obj_texte]
+  [presentation]
+   position=36,5
+   taille=9,48
+   id=16
+   wstyle="STD"
+  [texte]
+   texte="Nom abrégé"
+ [obj_texte]
+  [presentation]
+   position=46,5
+   taille=9,48
+   id=14
+   wstyle="STD"
+  [texte]
+   texte="Intitulé"
+ [obj_texte]
+  [presentation]
+   position=133,189
+   taille=9,84
+   id=208
+   wstyle="STD"
+  [texte]
+   texte="Nombre d'écritures pré-chargées"
+ [obj_texte]
+  [presentation]
+   position=151,5
+   taille=9,103
+   id=17
+   wstyle="STD"
+  [texte]
+   texte="Période de saisie autorisée du"
+ [obj_texte]
+  [presentation]
+   position=151,148
+   taille=9,29
+   cadrage=centre
+   id=18
+   wstyle="STD"
+  [texte]
+   texte="au"
+ [obj_texte]
+  [presentation]
+   position=161,5
+   taille=9,103
+   id=19
+   wstyle="STD"
+  [texte]
+   texte="Modèle de saisie des écritures"
+ [obj_texte]
+  [presentation]
+   position=171,5
+   taille=9,103
+   id=20
+   wstyle="STD"
+  [texte]
+   texte="Libellé par défaut des lignes d'écriture"
+ [obj_texte]
+  [presentation]
+   position=221,103
+   taille=9,99
+   id=24
+   wstyle="STD"
+  [texte]
+   texte="Compte de génération"
+ [obj_texte]
+  [presentation]
+   position=231,103
+   taille=9,99
+   id=26
+   wstyle="STD"
+  [texte]
+   texte="Libellé par défaut de la ligne générée"
+ [champ]
+  [presentation]
+   position=24,55
+   taille=9,15
+   id=27
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=journal,jnl,journal
+   saisie=non
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=36,55
+   taille=9,171
+   id=37
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,nomabr,journal
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=504
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_NomAbr_1_Ap"
+ [champ]
+  [presentation]
+   position=46,55
+   taille=9,171
+   id=28
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,lib,journal
+   sequence=1
+  [param_saisie]
+   obligatoire=oui
+  [aide_page]
+   aide=131
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Lib_1_Av"
+   diva_apres="Champ_Lib_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=59,5
+   taille=87,80
+   id=29
+   wstyle="STD"
+  [description]
+   donnee=journal,jnltyp,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Type de journal"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=68,10
+    taille=9,72
+    id=30
+    wstyle="STD"
+   [param_radio]
+    texte="Achat"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=78,10
+    taille=9,72
+    id=31
+    wstyle="STD"
+   [param_radio]
+    texte="Vente"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=88,10
+    taille=9,72
+    id=32
+    wstyle="STD"
+   [param_radio]
+    texte="Trésorerie"
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=98,10
+    taille=9,72
+    id=33
+    wstyle="STD"
+   [param_radio]
+    texte="Opération diverse"
+    cadrage=droite
+    valeur="4"
+  [radio_bouton]
+   [presentation]
+    position=108,10
+    taille=9,72
+    noms="version_izy"
+    id=34
+    wstyle="STD"
+   [param_radio]
+    texte="Budget"
+    cadrage=droite
+    valeur="8"
+  [radio_bouton]
+   [presentation]
+    position=118,10
+    taille=9,72
+    id=35
+    wstyle="STD"
+   [param_radio]
+    texte="Extra-comptable"
+    cadrage=droite
+    valeur="9"
+  [radio_bouton]
+   [presentation]
+    position=128,10
+    taille=9,72
+    id=36
+    wstyle="STD"
+   [param_radio]
+    texte="Réservé centralisation"
+    cadrage=droite
+    valeur="6"
+  [aide_page]
+   aide=132
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_JnlTyp_1_Av"
+   diva_apres="Champ_JnlTyp_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=59,95
+   taille=42,90
+   id=42
+   wstyle="STD"
+  [description]
+   donnee=journal,maskno,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Masque de saisie"
+  [radio_bouton]
+   [presentation]
+    position=68,100
+    taille=9,83
+    id=43
+    wstyle="STD"
+   [param_radio]
+    texte="Opération diverse"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=78,100
+    taille=9,83
+    id=44
+    wstyle="STD"
+   [param_radio]
+    texte="Trésorerie"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=88,100
+    taille=9,83
+    id=45
+    wstyle="STD"
+   [param_radio]
+    texte="Facture"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=133
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=104,95
+   taille=42,90
+   id=46
+   wstyle="STD"
+  [description]
+   donnee=journal,preload,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Pré-chargement des écritures"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=113,99
+    taille=9,84
+    noms="maskeffcod"
+    id=47
+    wstyle="STD"
+   [param_radio]
+    texte="Aucun pré-chargement"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=123,99
+    taille=9,84
+    noms="maskeffcod"
+    id=48
+    wstyle="STD"
+   [param_radio]
+    texte="Le dernier mois"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=133,99
+    taille=9,84
+    noms="maskeffcod"
+    id=49
+    wstyle="STD"
+   [param_radio]
+    texte="Les n dernières écritures"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=129
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_PreLoad_1_Av"
+   diva_apres="Champ_PreLoad_1_Ap"
+ [champ]
+  [presentation]
+   position=133,278
+   taille=9,23
+   noms="maskeffcod;preload"
+   id=50
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,preloadnb,journal
+   format="00000000"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=171
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_PreLoadNb_1_Av"
+   diva_apres="Champ_PreLoadNb_1_Ap"
+ [champ]
+  [presentation]
+   position=151,110
+   taille=9,36
+   id=38
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,protddt,journal
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=172
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=151,179
+   taille=9,36
+   id=39
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,protfdt,journal
+   sequence=2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=172
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_ProtFDt_1_Ap"
+ [champ]
+  [presentation]
+   position=161,110
+   taille=9,36
+   id=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,modele,journal
+   sequence=3
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=149
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19207
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Modele_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=171,110
+   taille=9,152
+   id=41
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,libecr,journal
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=202,10
+   taille=42,88
+   id=54
+   wstyle="STD"
+  [description]
+   donnee=journal,cpgencod,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Type de génération"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=211,16
+    taille=9,81
+    id=55
+    wstyle="STD"
+   [param_radio]
+    texte="Aucun automatisme"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=221,16
+    taille=9,81
+    id=56
+    wstyle="STD"
+   [param_radio]
+    texte="Après chaque ligne saisie"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=231,16
+    taille=9,81
+    id=57
+    wstyle="STD"
+   [param_radio]
+    texte="A la fin d'une écriture"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=136
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CpGenCod_1_Ap"
+ [champ]
+  [presentation]
+   position=221,204
+   taille=9,36
+   noms="cpgencod"
+   id=58
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,cptgen,journal
+   sequence=4
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=137
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cpt_1_Av"
+   diva_apres="Champ_Cpt_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=231,204
+   taille=9,105
+   noms="cpgencod"
+   id=59
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,libgen,journal
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=505
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_LibGen_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=270,10
+   taille=9,302
+   id=51
+   wstyle="STD"
+  [description]
+   donnee=journal,centcod,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Journal centralisable"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=134
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=280,10
+   taille=9,302
+   noms="r3cod"
+   id=52
+   wstyle="STD"
+  [description]
+   donnee=journal,r3cod,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Lié à Divalto Règlement"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=596
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_R3cod_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=61,200
+   taille=9,52
+   id=1000001
+   wstyle="STD"
+  [description]
+   donnee=journal,cog_exportanael,journal
+  [param_case]
+   texte="Export vers Anaël"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f7=8000
+   shift_f6=10010
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=72,200
+   taille=9,72
+   id=1000002
+   wstyle="STD"
+  [description]
+   donnee=journal,cog_jnlpdv,journal
+  [param_case]
+   texte="Journal d'écritures de P.V."
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10010
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=83,200
+   taille=9,91
+   id=1000003
+   wstyle="STD"
+  [description]
+   donnee=journal,cog_jnlcen,journal
+  [param_case]
+   texte="Journal d'écritures des Centrales"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10010
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=12
+ fond="STD"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=11
+ suiv=13
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="OPTIONS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=183,5
+   taille=110,310
+   id=60
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Méthodes"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=92,5
+   taille=83,310
+   id=61
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Numérotation"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=24,5
+   taille=60,310
+   id=211
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Options de saisie"
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=39,159
+   taille=42,1
+   id=309
+   wstyle="STD"
+  [param_cadre]
+   nature=vertical_d
+   wnom_couleurcadre="TRAIT_SIMPLE"
+   wnom_couleurfond="STD"
+ [obj_texte]
+  [presentation]
+   position=163,11
+   taille=9,67
+   id=1000004
+   wstyle="STD"
+  [texte]
+   texte="N° de pièce initial"
+ [obj_texte]
+  [presentation]
+   position=163,125
+   taille=9,92
+   id=66
+   wstyle="STD"
+  [texte]
+   texte="Dernier numéro de pièce"
+ [case_a_cocher]
+  [presentation]
+   position=40,10
+   taille=9,146
+   id=97
+   wstyle="STD"
+  [description]
+   donnee=journal,devcod,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Saisie en devise autorisée"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=135
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=50,10
+   taille=9,146
+   id=98
+   wstyle="STD"
+  [description]
+   donnee=journal,mt2sais,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Saisir un montant2"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=141
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=60,10
+   taille=9,146
+   id=99
+   wstyle="STD"
+  [description]
+   donnee=journal,lotsais,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Saisir un numéro de lot"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=142
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=70,10
+   taille=9,146
+   id=100
+   wstyle="STD"
+  [description]
+   donnee=journal,chqsais,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Saisir un numéro de chèque"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=143
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=40,166
+   taille=9,146
+   id=101
+   wstyle="STD"
+  [description]
+   donnee=journal,maskeffcod,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Effacer l'écran en début d'écriture"
+   cadrage=droite
+   valeur="2","1"
+   notifier=oui
+  [aide_page]
+   aide=146
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_MaskEffCod_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=50,166
+   taille=9,146
+   id=102
+   wstyle="STD"
+  [description]
+   donnee=journal,rcrea,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Rester en création"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=506
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=60,166
+   taille=9,146
+   id=103
+   wstyle="STD"
+  [description]
+   donnee=journal,rmodif,journal
+   minmaj=majuscules
+  [param_case]
+   texte="Rester en modification"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=507
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=108,10
+   taille=52,95
+   id=68
+   wstyle="STD"
+  [description]
+   donnee=journal,piecesais,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Numéro de pièce"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=117,15
+    taille=9,87
+    id=69
+    wstyle="STD"
+   [param_radio]
+    texte="Non renseigné"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=127,15
+    taille=9,87
+    id=70
+    wstyle="STD"
+   [param_radio]
+    texte="Obligatoire"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=137,15
+    taille=9,87
+    id=71
+    wstyle="STD"
+   [param_radio]
+    texte="Facultatif"
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=147,15
+    taille=9,87
+    id=72
+    wstyle="STD"
+   [param_radio]
+    texte="Automatique"
+    cadrage=droite
+    valeur="4"
+  [aide_page]
+   aide=139
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_PieceSais_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=108,112
+   taille=52,196
+   noms="piecesais"
+   id=73
+   wstyle="STD"
+  [description]
+   donnee=journal,piececod,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Numérotation automatique à partir de"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=117,117
+    taille=9,188
+    id=74
+    wstyle="STD"
+   [param_radio]
+    texte="Numéro de facture dans Divalto Achat - Vente"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=127,117
+    taille=9,188
+    id=75
+    wstyle="STD"
+   [param_radio]
+    texte="Numéro de pièce dans le dossier comptable"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=137,117
+    taille=9,188
+    noms="etbc3"
+    id=207
+    wstyle="STD"
+   [param_radio]
+    texte="Numéro de pièce dans l'établissement"
+    cadrage=droite
+    valeur="4"
+  [radio_bouton]
+   [presentation]
+    position=147,117
+    taille=9,188
+    id=76
+    wstyle="STD"
+   [param_radio]
+    texte="Numéro de pièce dans le journal"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=508
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_PieceCod_1_Av"
+   diva_apres="Champ_PieceCod_1_Ap"
+ [champ]
+  [presentation]
+   position=163,219
+   taille=9,29
+   noms="piececod;piecesais"
+   id=77
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,piece,journal
+   format="00000000"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=509
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Piece_1_Av"
+ [groupe_radio]
+  [presentation]
+   position=246,112
+   taille=42,95
+   id=81
+   wstyle="STD"
+  [description]
+   donnee=journal,lettappel,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Appel du lettrage"
+  [radio_bouton]
+   [presentation]
+    position=255,117
+    taille=9,87
+    id=82
+    wstyle="STD"
+   [param_radio]
+    texte="Manuel"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=265,117
+    taille=9,87
+    id=83
+    wstyle="STD"
+   [param_radio]
+    texte="Après validation de l'en-tête"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=275,117
+    taille=9,87
+    id=84
+    wstyle="STD"
+   [param_radio]
+    texte="Après validation de la ligne"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=147
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=246,10
+   taille=42,95
+   id=78
+   wstyle="STD"
+  [description]
+   donnee=journal,ecrfincod,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Fin d'écriture"
+  [radio_bouton]
+   [presentation]
+    position=255,15
+    taille=9,87
+    id=79
+    wstyle="STD"
+   [param_radio]
+    texte="A la demande"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=265,15
+    taille=9,87
+    id=80
+    wstyle="STD"
+   [param_radio]
+    texte="Lorsque le solde est nul"
+    cadrage=droite
+    valeur="2"
+  [aide_page]
+   aide=145
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=199,10
+   taille=42,95
+   id=85
+   wstyle="STD"
+  [description]
+   donnee=journal,cpsais,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Contrepartie"
+  [radio_bouton]
+   [presentation]
+    position=208,15
+    taille=9,87
+    id=86
+    wstyle="STD"
+   [param_radio]
+    texte="Calculée"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=218,15
+    taille=9,87
+    id=87
+    wstyle="STD"
+   [param_radio]
+    texte="Saisie"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=228,15
+    taille=9,87
+    id=88
+    wstyle="STD"
+   [param_radio]
+    texte="Non gérée"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=138
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CpSais_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=199,214
+   taille=42,95
+   id=93
+   wstyle="STD"
+  [description]
+   donnee=journal,bqedtsais,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Date prévue banque"
+  [radio_bouton]
+   [presentation]
+    position=208,219
+    taille=9,87
+    id=94
+    wstyle="STD"
+   [param_radio]
+    texte="Calculée"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=218,219
+    taille=9,87
+    id=95
+    wstyle="STD"
+   [param_radio]
+    texte="Saisie"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=228,219
+    taille=9,87
+    id=96
+    wstyle="STD"
+   [param_radio]
+    texte="Non gérée"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=144
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=199,112
+   taille=42,95
+   id=89
+   wstyle="STD"
+  [description]
+   donnee=journal,echsais,journal
+   minmaj=majuscules
+  [param_groupe]
+   titre="Echéance"
+  [radio_bouton]
+   [presentation]
+    position=208,117
+    taille=9,87
+    id=90
+    wstyle="STD"
+   [param_radio]
+    texte="Calculée"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=218,117
+    taille=9,87
+    id=91
+    wstyle="STD"
+   [param_radio]
+    texte="Saisie"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=228,117
+    taille=9,87
+    id=92
+    wstyle="STD"
+   [param_radio]
+    texte="Non gérée"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=140
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=163,56
+   taille=9,30
+   id=1000005
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI_COG"
+  [description]
+   donnee=journal,cog_pieced,journal
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10010
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=13
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=12
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=5
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANT"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=24,5
+   taille=30,310
+   id=210
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Protection"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=62,164
+   taille=54,151
+   id=114
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=62,5
+   taille=54,151
+   id=113
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=124,5
+   taille=54,151
+   id=115
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière opération"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=40,10
+   taille=9,68
+   id=25
+   wstyle="STD_AFF"
+  [texte]
+   texte="Code de confidentialité"
+ [obj_texte]
+  [presentation]
+   position=78,10
+   taille=9,13
+   id=107
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=78,169
+   taille=9,13
+   id=108
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=90,10
+   taille=9,13
+   id=110
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=90,169
+   taille=9,13
+   id=111
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=140,10
+   taille=9,13
+   id=109
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=152,10
+   taille=9,13
+   id=112
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=140,25
+   taille=9,128
+   id=116
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,userdop,journal
+   format="1"
+   saisie=non
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=78,25
+   taille=9,128
+   id=117
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,usercr,journal
+   format="1"
+   saisie=non
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=78,184
+   taille=9,128
+   id=118
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,usermo,journal
+   format="1"
+   saisie=non
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=90,25
+   taille=9,128
+   id=119
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,usercrdh,journal
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=90,184
+   taille=9,128
+   id=120
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,usermodh,journal
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=152,25
+   taille=9,128
+   id=121
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,userdopdh,journal
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=102,10
+   taille=9,143
+   id=122
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,usercrori,journal
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=102,169
+   taille=9,143
+   id=123
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,usermoori,journal
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=164,10
+   taille=9,143
+   id=124
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=journal,userdopori,journal
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=40,80
+   taille=9,18
+   id=53
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=journal,conf,journal
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=173
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=11010
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Conf_1_Ap"
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPLEMENTS"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="NOTE"
+    wtexte="_Note\tShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Zoom Ecritures\tShift+F12"
+    wid_ressource="ZOOMECR"
+    wtrait_chaine="#shift_f12"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Interrogation Comptable\tF5"
+    wid_ressource="INTERRO"
+    wtrait_chaine="#f5"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Impression _Brouillard\tF6"
+    wid_ressource="IMPBR"
+    wtrait_chaine="#f6"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Impression _Journal\tShift+F10"
+    wid_ressource="IMPJNL"
+    wtrait_chaine="#shift_f10"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Infos _établissement journal\tShift+F8"
+    wid_ressource="ETB_JOURNAL"
+    wtrait_chaine="#shift_f8"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wtrait_chaine="#home"
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wtrait_chaine="#end"
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    wetype_trait=arret
+    warret=5
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Comptes inter-établissement"
+    wid_ressource="ETB_JOURNAL"
+    wtrait_chaine="#shift_f8"
+   [info_bulle]
+   texte="Infos établissement du journal <Shift+F8>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_4"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_5"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=6
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6__1"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Ecritures"
+    wid_ressource="ZOOMECR"
+    wtrait_chaine="#shift_f12"
+   [info_bulle]
+   texte="Consulter les écritures <Shift+F12>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Interro."
+    wid_ressource="INTERRO"
+    wtrait_chaine="#f5"
+   [info_bulle]
+   texte="Interrogation du journal <F5>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Brouillard"
+    wid_ressource="IMPBR"
+    wtrait_chaine="#f6"
+   [info_bulle]
+   texte="Imprimer le brouillard <F6>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Réimpression"
+    wid_ressource="IMPJNL"
+    wtrait_chaine="#shift_f10"
+   [info_bulle]
+   texte="Réimprimer le journal <Shift+F10>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Générique"
+    wid_ressource="ZOOMCREATION2"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+Public Record "ddsys.dhsd" rowinfo zoomselection
+Public RecordSql "ccrsjca.dhoq" journal journal
+[/diva]
+[diva_base]
+SetModuleInfo('$Id: ccez040_sql.dhsf 35434 2013-11-15 11:53:57Z jf $')
+;>xdiva
+;*
+;*		Zoom journaux																															cctez040.dhsp
+;*
+
+;*
+;*		déclarations
+;*
+
+
+include	"cctc000.dhsp"
+
+
+public	hfile		CCFDD.dhsd	CCFJCA	CCFJCA	; intitulés
+public	hfile		CCFDD.dhsd	CCFECR	CCFECR	; écritures
+
+Public RecordSql ccrsjca.dhoq Journal Journal
+Public RecordSql ccrsjca.dhoq Journal Journal_sav
+
+public	record	CCFDD.dhsd	C8						; ligne d'écriture
+
+public	record	ddsys.dhsd	ZOOM					; variables de contrôle du zoom
+Public 	Record 	ddsys.dhsd  rowinfo zoomselection
+
+
+module "a5tm000.dhop"
+
+
+1			JNLTYP	>CCFDD.dhsd	JNLTYP				; sauvegarde type de journal
+
+
+;*
+;*		fonctions et procédures locales
+;*
+
+
+;*
+function int Existe_Ecriture
+
+; contrôle la présence d'une écriture sur le journal
+
+; false	aucune écriture
+; true	au moins une écriture
+
+beginf	; existe_ecriture
+
+	if hread(CCFECR, C8, [ 'C' MZ.Dos Journal.Jnl ], 'F') = 0 and C8.Dos = Journal.Dos and C8.Jnl = Journal.Jnl		;2361
+		freturn(true)
+	endif
+
+	freturn(false)
+
+endf		; existe_ecriture
+
+
+;*
+;*		traitements sur les données du masque
+;*
+
+
+;*
+public procedure Champ_CpGenCod_1_Ap
+
+; après génération automatique de la ligne de contrepartie
+
+beginp	; Champ_CpGenCod_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+		if Journal.CpGenCod = 1	|	XmeSetAttribut("cpgencod", AN_VISIBILITE, AV_GRISE)
+										XmeSetAttribut("cpgencod", AN_STYLE, "Champ_Non_Saisi")
+		else						|	XmeResetAttribut("cpgencod", AN_TOUS_ATTRIBUTS)
+		endif
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+	endif
+
+	if Journal.CpGenCod = 1									; pas de génération automatique de la ligne de contrepartie demandée
+		Journal.CptGen = ' '									; pas de compte de génération
+		Journal.LibGen = ' '									; pas de libellé de la ligne générée
+	elsif Journal.CptGen = ' '								; génération automatique mais pas de compte de génération précisé
+		Journal.CpSais = 2										; il faut saisir la contrepartie
+	endif
+
+endp		; Champ_CpGenCod_1_Ap
+
+
+;*
+public procedure Champ_CpSais_1_Ap
+
+; après saisie contrepartie
+
+beginp	; Champ_CpSais_1_Ap
+
+	if Journal.CpGenCod <> 1	\								; génération automatique de la ligne de contrepartie demandée
+	and Journal.CptGen = ' '									; mais pas de compte de génération précisé
+		Journal.CpSais = 2										; il faut saisir la contrepartie
+	endif
+
+endp		; Champ_CpSais_1_Ap
+
+
+;*
+public procedure Champ_Cpt_1_Av
+
+; avant compte de contrepartie automatique
+
+beginp	; Champ_Cpt_1_Av
+
+	if Journal.CpGenCod < 2									; pas de saisie si pas de génération automatique
+		Journal.CptGen = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_Cpt_1_Av
+
+
+;*
+public procedure Champ_Cpt_1_Ap
+
+; après compte de contrepartie automatique
+
+beginp	; Champ_Cpt_1_Ap
+
+	if string("%%", Journal.CptGen)							; jocker TVA interdit
+		Mes_Alert(19041)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	else
+		Controle_Compte(Journal.CptGen, nonvide = false, syntaxe = 2, creation = true, conf = false, etablissement = false)
+	endif
+
+endp		; Champ_Cpt_1_Ap
+
+
+;*
+public procedure Champ_JnlTyp_1_Av
+
+; avant type de journal
+
+beginp	; Champ_JnlTyp_1_Av
+endp		; Champ_JnlTyp_1_Av
+
+
+;*
+public procedure Champ_JnlTyp_1_Ap
+
+; après type de journal
+
+beginp	; Champ_JnlTyp_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+		if ZOOM.Action <> ZOOM_CREATION and ZOOM.Action <> ZOOM_DUPLICATION
+			if (Journal_sav.JnlTyp < 5 and Journal.JnlTyp >=5)		\			; passage comptable à extra, budget interdit
+				or (Journal_sav.JnlTyp >= 5 and Journal.JnlTyp < 5)	\			; passage extra/budget à comptable
+				or (Journal_sav.JnlTyp = 8 and Journal.JnlTyp = 6)	\			; passage budget à extra
+				or (Journal_sav.JnlTyp = 6 and Journal.JnlTyp = 8)				; passage extra à budget
+				if Existe_Ecriture										; s'il y a des écritures
+					Mes_Alert(19042)										; 	passage de comptable à extracomptable (ou inversement) interdit
+					Journal.JnlTyp = Journal_sav.JnlTyp
+					Harmony.Retour = XmeNext_Traitement_Avant
+					preturn
+				endif
+			endif
+		endif
+	endif
+
+	if Journal.JnlTyp > 2										; pas un journal d'achat ni un journal de vente
+;		Journal.R3Cod = 1										; pas de lien avec r3
+		if Journal.PieceSais = 4	\							; si numérotation automatique
+		and Journal.PieceCod < 2								; et pas d'instruction de numérotation ou numérotation à partir de g3
+			Journal.PieceCod = 2								; numérotation à partir du dossier
+		endif
+	endif
+
+	JNLTYP = 0
+
+	if Harmony.DataModif or Harmony.DataNotif
+		if Journal.JnlTyp not in (1, 2, 4)	|	XmeSetAttribut("r3cod", AN_VISIBILITE, AV_GRISE)
+													XmeSetAttribut("r3cod", AN_STYLE, C_Champ_NSaisi)
+		else									|	XmeResetAttribut("r3cod", AN_TOUS_ATTRIBUTS)
+		endif
+
+	endif
+
+endp		; Champ_JnlTyp_1_Ap
+
+
+;*
+public procedure Champ_LibGen_1_Av
+
+; avant libellé de la ligne de contrepartie générée en automatique
+
+beginp	; Champ_LibGen_1_Av
+
+	if Journal.CpGenCod < 2									; pas de saisie si pas de génération automatique
+		Journal.LibGen =  ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_LibGen_1_Av
+
+
+;*
+public procedure Champ_MaskEffCod_1_Ap
+
+; après effacer l'écran au début d'une nouvelle écriture
+
+beginp	; Champ_MaskEffCod_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+		if Journal.MaskEffCod = 2	|	XmeSetAttribut("maskeffcod", AN_VISIBILITE, AV_GRISE)
+										XmeSetAttribut("maskeffcod", AN_STYLE, C_Champ_NSaisi)
+		else						|	XmeResetAttribut("maskeffcod", AN_TOUS_ATTRIBUTS)
+		endif
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+	endif
+
+	if Journal.MaskEffCod = 2
+		Journal.PreLoad	  = 1
+		Journal.PreLoadNb  = ' '
+	endif
+
+endp		; Champ_MaskEffCod_1_Ap
+
+
+;*
+public procedure Champ_Modele_1_Ap
+
+; après modèle
+
+beginp	; Champ_Modele_1_Ap
+
+	Controler_Presence_Modele(Journal.Modele, 9107)
+
+endp		; Champ_Modele_1_Ap
+
+
+;*
+public procedure Champ_NomAbr_1_Ap
+
+; après nom abrégé
+
+beginp	; Champ_NomAbr_1_Ap
+
+	if Journal.NomAbr = ' '
+		Journal.NomAbr = Convertir_Nom_Nomabr(Journal.Lib)
+	else
+		Journal.NomAbr = Convertir_Nom_Nomabr(Journal.NomAbr)
+	endif
+
+endp		; Champ_NomAbr_1_Ap
+
+
+;*
+public procedure Champ_Piece_1_Av
+
+; avant dernier numéro de pièce
+
+beginp	; Champ_Piece_1_Av
+
+	if Journal.PieceCod <> 3
+		Journal.Piece = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_Piece_1_Av
+
+
+;*
+public procedure Champ_PieceCod_1_Av
+
+; avant méthode de numérotation automatique
+
+beginp	; Champ_PieceCod_1_Av
+
+	if Journal.PieceSais < 4									; pas de numérotation automatique demandée
+		Journal.PieceCod = 0									; pas d'instructions pour la numérotation
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_PieceCod_1_Av
+
+
+;*
+public procedure Champ_PieceCod_1_Ap
+
+; après méthode de numérotation automatique
+
+beginp	; Champ_PieceCod_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+		switch Journal.PieceCod
+		
+		case 3
+			XmeResetAttribut("piececod", AN_TOUS_ATTRIBUTS)
+			Journal.Piece = ' '
+		default
+			;XmeSetAttribut("piececod", AN_VISIBILITE, AV_CACHE)
+			XmeSetAttribut("piececod", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("piececod", AN_STYLE, C_Champ_NSaisi)
+			Journal.Piece = ' '
+
+			if Harmony.DataNotif
+				Harmony.Retour = XmeNext_Debut_Donnee
+			endif
+		endswitch
+	endif
+
+
+endp		; Champ_PieceCod_1_Ap
+
+
+;*
+public procedure Champ_PieceSais_1_Ap
+
+; après saisie pièce
+
+beginp	; Champ_PieceSais_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+		if Journal.PieceSais < 4
+			XmeSetAttribut("piecesais", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("piecesais", AN_STYLE, C_Champ_NSaisi)
+			Journal.PieceCod = 0
+			Journal.Piece		= ' '
+		else
+			XmeResetAttribut("piecesais", AN_TOUS_ATTRIBUTS)
+			Journal.PieceCod = 2
+		endif
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+	endif
+
+endp		; Champ_PieceSais_1_Ap
+
+
+;*
+public procedure Champ_PreLoad_1_Av
+
+; avant pré-chargement
+
+beginp	; Champ_PreLoad_1_Av
+
+	if Journal.MaskEffCod	= 2
+		Journal.PreLoad		= 1
+		Journal.PreLoadNb	= ' '
+		Harmony.Retour	= XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_PreLoad_1_Av
+
+
+;*
+public procedure Champ_PreLoad_1_Ap
+
+; après pré-chargement
+
+beginp	; Champ_PreLoad_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+		switch Journal.PreLoad
+		
+		case 3
+			XmeResetAttribut("preload", AN_TOUS_ATTRIBUTS)
+			Journal.PreLoadNb = 1
+		default
+			XmeSetAttribut("preload", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("preload", AN_STYLE, C_Champ_NSaisi)
+			Journal.PreLoadNb = ' '
+
+			if Harmony.DataNotif
+				Harmony.Retour = XmeNext_Debut_Donnee
+			endif
+		endswitch
+	endif
+
+endp		; Champ_PreLoad_1_Ap
+
+
+;*
+public procedure Champ_PreLoadNb_1_Av
+
+; avant nombre d'écritures en pré-chargement
+
+beginp	; Champ_PreLoadNb_1_Av
+
+	if Journal.MaskEffCod = 2	\
+	or Journal.PreLoad <> 3
+		Journal.PreLoadNb = ' '
+		Harmony.Retour	= XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_PreLoadNb_1_Av
+
+
+;*
+public procedure Champ_PreLoadNb_1_Ap
+
+; après nombre d'écritures en pré-chargement
+
+beginp	; Champ_PreLoadNb_1_Ap
+
+	if Journal.PreLoadNb <= 0
+		Journal.PreLoadNb = 1
+	endif
+
+endp		; Champ_PreLoadNb_1_Ap
+
+
+;*
+public procedure Champ_ProtFDt_1_Ap
+
+; après saisie date de protection fin
+
+beginp	; Champ_ProtFDt_1_Ap
+
+	if Journal.ProtFDt = ' '
+		if Journal.ProtDDt = ' '	|	Journal.ProtFDt = "99991231"
+		else						|	Journal.ProtFDt = hdate(Journal.ProtDDt, 'd')
+		endif
+	endif
+
+	if Journal.ProtFDt < Journal.ProtDDt
+		Mes_Alert(3026)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	endif
+
+endp		; Champ_ProtFDt_1_Ap
+
+
+;*
+public procedure Champ_R3cod_1_Av
+
+; avant lien vers r3
+
+beginp	; Champ_R3cod_1_Av
+
+	; on test le type de journal pour savoir si on peut modifier le paramètre "lié à DREG"
+	if Journal.JnlTyp not in (1, 2, 4)
+		Journal.R3Cod = 1										; pas de lien avec r3
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_R3cod_1_Av
+
+
+;*
+public procedure Champ_Conf_1_Ap
+
+;contrôle de validité du code confidentialité
+
+beginp 	;Champ_Conf_1_Ap
+
+	Controler_Confidentialite(Journal.Conf, 4000)		
+
+endp		;Champ_Conf_1_Ap
+
+
+;*
+Public Procedure Champ_Lib_1_Av
+
+;
+
+1	nomabr	>CCFDD.dhsd	nomabr
+
+Beginp	; Champ_Lib_1_Av
+
+	nomabr = Convertir_Nom_Nomabr(Journal.Lib)
+	If nomabr = Journal.NomAbr
+		Journal.NomAbr = ' '
+	Endif
+
+Endp		; Champ_Lib_1_Av
+
+
+;*
+Public Procedure Champ_Lib_1_Ap
+
+;
+
+Beginp	; Champ_Lib_1_Ap
+
+ 	if Journal.NomAbr = ' '
+		Journal.NomAbr = Convertir_Nom_Nomabr(Journal.Lib)
+	endif
+
+Endp		; Champ_Lib_1_Ap
+
+[/diva]

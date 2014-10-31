@@ -1,0 +1,351 @@
+;>xwin4obj                              7.0       20140429175229      
+[masque]
+ libelle="Intégratrion CCFM"
+ utilisateur="UGIE"
+ date_modification="29/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ dernier_id=23
+ dernier_id_page=1
+[defaut]
+ [aide_page]
+  aide=0
+[enregistrements]
+ "ccfdd.dhsd",,xq,c3xq,4400,0
+ "gtfdd.dhsd",,soc,soc,2800,0
+ "gtfdd.dhsd",,ets,ets,1500,0
+[page]
+ numero=1
+ libelle="Intégration des écritures comptables et/ou du plan comptable depuis Excel"
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ diva_avant="Page_CCFM_Av"
+ ident_unique=1
+ [groupbox]
+  [presentation]
+   position=15,15
+   taille=16,329
+   id=23
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Intégration des écritures comptables et/ou du plan comptable depuis Excel"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=50,30
+   taille=9,34
+   id=5
+   wstyle="STD"
+  [texte]
+   texte="Dossier"
+ [obj_texte]
+  [presentation]
+   position=75,30
+   taille=9,48
+   id=6
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=100,30
+   taille=9,34
+   id=15
+   wstyle="STD"
+  [texte]
+   texte="Connexion"
+ [champ]
+  [presentation]
+   position=50,70
+   taille=9,20
+   cadrage=gauche
+   id=8
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,dos,c3xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=75,70
+   taille=9,20
+   cadrage=gauche
+   id=9
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,etb,c3xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=50,95
+   taille=9,250
+   id=20
+   colonnes_saisie=38
+   wstyle="STD"
+  [description]
+   donnee=soc,nom,soc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=75,95
+   taille=9,250
+   id=21
+   colonnes_saisie=38
+   wstyle="STD"
+  [description]
+   donnee=ets,nom,ets
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=100,70
+   taille=9,240
+   id=14
+   colonnes_saisie=256
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,fic,c3xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [bouton_graphique]
+  [presentation]
+   position=100,320
+   taille=14,14
+   id=18
+  [param_bouton]
+   wnom="REFRESH2"
+   wtexte="Rafraîchir"
+   wid_ressource="RAFRAICHIR"
+   wdans_ordre=1
+   wlocal=1
+   wetype_trait=arret
+   warret=1001
+   wtrait_chaine="#shift_f11"
+  [touches]
+   f5=1001
+  [info_bulle]
+  texte="Rafraîchir <F5>"
+ [bouton_graphique]
+  [presentation]
+   position=100,340
+   taille=14,14
+   id=19
+  [param_bouton]
+   wnom="OK"
+   wtexte="Valider"
+   wid_ressource="OK"
+   wdans_ordre=1
+   wlocal=1
+   wetype_trait=arret
+   warret=1002
+   wtrait_chaine="#Return"
+  [touches]
+   return=1002
+  [info_bulle]
+  texte="Valider <Entrée>"
+[ressources]
+ [menu]
+  ident="MAIN"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Fichier"
+    wid_ressource="FICHIER"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="REFRESH2"
+    wtexte="_Rafraîchir\tF5"
+    wid_ressource="RAFRAICHIR"
+    wetype_trait=arret
+    warret=1001
+    wtrait_chaine="#f5"
+   [info_bulle]
+   texte="Rafraîchir <F5>"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="MAIN2__1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Ecritures"
+    wid_ressource="ECRITURES"
+    wetype_trait=arret
+    warret=19106
+   [info_bulle]
+   texte="Zoom vers les écritures"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Livre de Bord"
+    wid_ressource="LIVREDEBORDCPT"
+    wetype_trait=arret
+    warret=19997
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="MAIN2"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="OK"
+    wtexte="_Valider\tEntrée"
+    wid_ressource="OK__1"
+    wetype_trait=arret
+    warret=1002
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="ABANDON"
+    wtexte="_Quitter\tEchap"
+    wid_ressource="QUIT"
+    wtrait_chaine="#Escape"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="MAIN"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="REFRESH2"
+    wid_ressource="RAFRAICHIR"
+    wetype_trait=arret
+    warret=1001
+    wtrait_chaine="#shift_f11"
+   [info_bulle]
+   texte="Rafraîchir <F5>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__2"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="_Ecritures"
+    wid_ressource="ECRITURES"
+    wetype_trait=arret
+    warret=19106
+   [info_bulle]
+   texte="Zoom vers les écritures"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="_Livre de Bord"
+    wid_ressource="LIVREBORDCPT"
+    wetype_trait=arret
+    warret=19997
+   [info_bulle]
+   texte="Livre de Bord"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__3"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="QUIT"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wetype_trait=arret
+    warret=1002
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+
+;*
+;*	COGESER - Intégration des écritures comptables et/ou du plan comptable depuis Excel
+;*
+
+;*		Log	 Version	  N°modIf		Date		Modifications
+;*
+;*		JDT		6.3		01				03/2010	Version initiale : traitement des lignes d'écritures, des lignes de ventilations et/ou du plan comptable
+
+OverWrittenBy "COGuCC_EE_IMPORT_ECRITURES.DHOF"
+
+include	CCTC000.DHSP
+
+; Fichiers
+Public HFile	GTFDD.DHSD	GTFDOS			GTFDOS		; Dossier établissement
+
+; Enregistrements
+Public Record	GTFDD.DHSD		Soc			Soc			; Société
+Public Record	GTFDD.DHSD		Ets			Ets			; Etablissement
+
+Define cog_Masque = "COG_CC_EE_IMPORT_ECRITURES.DHOF"
+1 idTB_Main			L		; Identifiant barre d'outils MAIN
+1 idME_Main			L		; Identifiant du menu MAIN 
+
+;*	01
+Public Procedure Page_CCFM_Av
+;
+BeginP
+	; Chargement en mémoire d'une barre d'outils 
+	idTB_Main = XMeToolBarGetID(cog_Masque, "MAIN")
+	; Chargement en mémoire d’un menu classique ou surgissant
+	idME_Main = XmeMenuGetId(cog_Masque, "MAIN")
+EndP
+[/diva]
+[diva_base]
+[/diva]

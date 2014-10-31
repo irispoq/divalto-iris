@@ -1,0 +1,57 @@
+SetModuleInfo('$Id: ccut023.dhsp 5417 2009-11-28 07:51:51Z als $')
+;>xdiva
+;*
+;*		suppression de brouillard																											cctt023.dhsp
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		pb			4.1						11.1998	Version initiale en Diva
+;*		hc			5.1						03.2001
+;*		hc			5.3						11.2002	mode tableau
+
+
+OverWrite	cctt023.dhop
+
+
+;*
+;*		déclarations
+;*
+
+
+;include	"cctc000.dhsp"
+
+
+; enregistrements
+
+;public	record	CCFDD.dhsd	C8						; ligne d'écriture
+;public	record	CCFDD.dhsd	CA						; dossier, paramètres généraux
+;public	record	CCFDD.dhsd	CP						; ventilation pièce
+;public	record	CCFDD.dhsd	CX						; ventilation axe
+
+
+;*
+;*	Déclarations Cogeser
+;*
+
+module	"Cogtm_ecr_exp.dhop"
+
+
+;*
+;*		traitements
+;*
+
+;*
+procedure C8_Delete_Av
+
+; avant suppression d'une ligne d'écriture
+
+beginp	; c8_delete_av
+
+	standard.C8_Delete_Av
+	Cog_SupprimerReddition
+
+endp		; c8_delete_av
+
+
+;*

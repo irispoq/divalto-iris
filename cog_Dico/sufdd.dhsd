@@ -1,0 +1,66 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=6,20140724152928,ROOT                ,20140724155028,ROOT                
+Nom=sufdd.dhsd,sufdd.dhsd,1
+[CHAMP]
+Version=1,1989 1230000,CO  ,20100817180617,SN                  
+Nom=Dos,Dossier,1
+Gel=1
+Nature=3,0
+NomOdbc=Dossier
+Flags=o,1,n,n,n,n,o,n
+[CHAMP]
+Version=1,20140724153808,ROOT                ,20140724153816,ROOT                
+Nom=Lib,Libellé,1
+Gel=1
+Nature=30
+NomOdbc=Libelle
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20100727153802,SN                  
+Nom=Ref,Référence,1
+Gel=1
+Nature=25
+Attribut=PARAM
+NomOdbc=Reference
+Flags=o,1,n,n,n,n,n,n
+[CHAMPR]
+[/CHAMPR]
+[TABLE]
+Version=1,20140724153632,ROOT                ,20140724153632,ROOT                
+Nom=Su_Art,Table complémentaire article,1
+DateM=B5F9EF4744A7CF01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+Nom=Dos,1,2,N,0,0,N,1
+Nom=Ref,4,2,N,0,0,N,1
+Nom=Lib,29,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Nom=Lib
+[/PROPLOC]
+[BASE]
+Version=1,20140724153303,ROOT                ,20140724153346,ROOT                
+Nom=SuFAt,Fichier Articles,1
+DateM=283918E543A7CF01
+Fichier=I,0,SuFAt.dhfi
+Versionbase=7.2
+DateMIndex=6E4FD23446A7CF01
+[TABLES]
+Nom=Su_Art,0
+[/TABLES]
+[INDEX]
+Version=1,20140724154506,ROOT                ,20140724154515,ROOT                
+Nom=Su_Art_PK,Clé primaire,1
+DateM=24E8078045A7CF01
+CLE=SuFAt, ,,1,032,o,1,n
+Alias=Sur_Art_PK
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Ref,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEXL]
+Nom=SuFAt,Su_Art,Su_Art_PK,0
+[/INDEXL]

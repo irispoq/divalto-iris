@@ -1,0 +1,483 @@
+;>xdiva
+;*
+;*		Objet : Zoom sur valideurs
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	kit104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		Maj_Menu_Boutons						Mise à jour des boutons (grisés, cachés, ...)
+;*		RechercherLibelle						Recherche des libellés complémentaires
+;*
+
+overwrittenby "coguz_valid_pmt.dhop"
+
+
+;* déclarations communes
+Include	"gttcz00.dhsp"
+
+Module	"xzoom.dhop"
+;Module	"a5pm000.dhop"
+Module	"ccpmfic.dhop"
+Module A5PMNoteJoint.dhop
+
+HFileVersion   cogfdd.dhsd    Cog_fValid_Cde
+
+;*
+;	déclaration des fichiers et enregistrements
+;*
+
+public record	a5dd.dhsd	xz			a5xz		;communication zoom
+public record	cogfdd.dhsd	Cog_Valid_PMt
+public record	cogfdd.dhsd	Cog_Valid_PArt
+public record	ccfdd.dhsd	C3
+public record	ccfdd.dhsd	C5
+
+1	nbsel							4,0					; Nombre de lignes sélectionnées
+
+;*
+;	procedures complémentaires
+;*
+
+;*	Mise à jour des boutons (affichage, grisés, ...)
+Public Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+
+	Switch ZOOM.ACTION
+
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		XmeMenuEnableItem(Zoom.Idmenu,"JOINT",True)
+		
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", "<BITMAP>NOTE_N")
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", "<BITMAP>FICJOINT_N")
+		XmeToolbarEnableButton(idOutilZoom,"JOINT",True)
+
+	Case ZOOM_MODIFICATION
+		; en modification
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		XmeMenuEnableItem(Zoom.Idmenu,"JOINT",True)
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(Cog_Valid_PMt.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(Cog_Valid_PMt.CEJOINT = 2, "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+		XmeToolbarEnableButton(idOutilZoom,"JOINT",True)
+
+
+	Case 	ZOOM_AFFICHAGE
+		switch Zoom.TypeInput
+
+		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(Cog_Valid_PMt.CENOTE = 2, True, False))
+			XmeMenuEnableItem(Zoom.Idmenu,"JOINT",Condition(Cog_Valid_PMt.CEJOINT = 2, True, False))
+
+		endswitch
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(Cog_Valid_PMt.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		xmetoolbarenablebutton(idOutilZoom,"NOTE", Condition(Cog_Valid_PMt.CENOTE = 2, True, False))
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(Cog_Valid_PMt.CEJOINT = 2, "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+		xmetoolbarenablebutton(idOutilZoom,"JOINT", Condition(Cog_Valid_PMt.CEJOINT = 2, True, False))
+
+	EndSwitch
+
+EndP
+
+;*	Recherches complémentaires
+public procedure RechercherLibelle
+beginp
+
+endp
+
+;*
+public procedure Traiter_Selection
+beginp	; Traiter_Selection
+
+	nbsel ++
+	Pong("Cog_Valid_PMt_" & nbsel,Cog_Valid_PMt.Cog_TypeV & Cog_Valid_PMt.Cog_TypeU & Cog_Valid_PMt.User)
+
+endp		; Traiter_Selection
+
+
+;*
+public procedure Envoyer_Selections
+beginp	; Envoyer_Selections
+
+	nbsel	= 0
+	ZoomTraiterSelection("cogtz_valid_pmt.dhop","Traiter_Selection")			
+	Pong("Cog_Valid_PMt_nbre",nbsel)
+
+endp		; Envoyer_Selections
+
+;*	envoie l'élément courant si il n'y a pas eu de sélection multiple précédemment
+public procedure Envoyer_Courant
+beginp
+
+	if nbsel = 0
+
+		nbsel	= 1
+		Pong("Cog_Valid_PMt_" & nbsel,Cog_Valid_PMt.Cog_TypeV & Cog_Valid_PMt.Cog_TypeU & Cog_Valid_PMt.User)
+		Pong("Cog_Valid_PMt_nbre",nbsel)
+	
+	endif
+
+endp
+
+
+;*
+;	procedures d'initialisation et fin de zoom
+;*
+
+;*
+public procedure ZoomDebut
+beginp
+
+	init_zoom(FicheNoBloc = 0)
+
+	seek_soc(mz.dos)			; recherche du dossier et t000
+	Zoom.TitreFixe	= Translate("Liste des valideurs")&" - " & Soc.Nom 
+
+	note_Debut				; init de la gestion des notes
+	joint_DEbut				; init de la gestion des fichiers joints
+	
+	if PingReceiveAndDelete("Cog_Valid_PArt",Cog_Valid_PArt) <> 0
+		zoom.Ok	= "N"
+	endif
+
+	seek_c3(Cog_Valid_PArt.CptV)
+	seek_c5(1,Cog_Valid_PArt.Axe)
+
+	; sauvegarde du mode d'appel
+	g7.pong		= g3xz.pong
+	g3xz.pong 	= false
+
+endp
+
+;*
+public procedure ZoomAbandon		; sortie du zoom par f9
+beginp
+endp
+
+;*
+public procedure ZoomVAlidation ; validation du zoom
+beginp
+
+	zoom.valretour	= Cog_Valid_PMt.Cog_TypeV & Cog_Valid_PMt.Cog_TypeU & Cog_Valid_PMt.User
+	if g7.pong = true
+		Envoyer_Courant
+	endif
+
+endp
+
+;*
+public procedure ZoomFin			; à la sortie du zoom
+beginp
+endp
+
+
+;*
+;	procedures création, duplication, modification et suppression
+;*
+
+;*
+public procedure ZoomCreation
+beginp
+
+	Cog_Valid_PMt				= ""
+	Cog_Valid_PMt.Axe			= Cog_Valid_PArt.Axe
+	Cog_Valid_PMt.CptV		= Cog_Valid_PArt.CptV
+	Cog_Valid_PMt.Cog_TypeU	= 1
+	Cog_Valid_PMt.Cog_TypeV	= 1
+	init	g7.Lib()				= ""
+
+endp
+
+;*
+public procedure ZoomDuplication
+beginp
+
+	Cog_Valid_PMt.usermodh	= ""
+	Cog_Valid_PMt.usermo		= ""
+	Cog_Valid_PMt.cenote		= 1
+	Cog_Valid_PMt.note		= 0
+	Cog_Valid_PMt.cejoint	= 1
+	Cog_Valid_PMt.joint		= 0
+
+endp
+
+;*
+public procedure ZoomApresCleCreation ; après saisie de la clé
+beginp
+
+   zoom.cle			= "M" & mz.dos & Cog_Valid_PArt.Axe & Cog_Valid_PArt.CptV & Cog_Valid_PMt.Cog_TypeV & Cog_Valid_PMt.Cog_TypeU & Cog_Valid_PMt.User
+   zoom.res			= "g3Cog_Valid_PMt" & mz.dos & Cog_Valid_PArt.Axe & Cog_Valid_PArt.CptV & Cog_Valid_PMt.Cog_TypeV & Cog_Valid_PMt.Cog_TypeU & Cog_Valid_PMt.User
+
+endp
+
+;*
+public procedure ZoomCreationRes		; apres réservation en création
+beginp
+
+	note_chargement_(0,0)
+	joint_chargement_(0,0)
+
+endp
+
+;*
+public procedure ZoomAvantWrite
+beginp
+
+   Cog_Valid_PMt.Ce1			= "M"
+   Cog_Valid_PMt.dos			= mz.dos
+	Cog_Valid_PMt.usercr 	= system.user
+	Cog_Valid_PMt.usercrdh 	= time(7)
+	Cog_Valid_PMt.note 		= note_creation_(0,noteobj="Cog_Valid_PMt")
+	Cog_Valid_PMt.joint 		= joint_creation_(0,"Cog_Valid_PMt")
+	Cog_Valid_PMt.cenote		= condition(Cog_Valid_PMt.note<>0,2,1)
+	Cog_Valid_PMt.cejoint	= condition(Cog_Valid_PMt.joint<>0,2,1)
+
+endp
+
+
+;*
+public procedure ZoomApresCreation ; compte-rendu de création
+beginp
+endp
+
+
+;*
+public procedure ZoomModification ; avant entrée en modif
+beginp
+
+   zoom.res			= "g3Cog_Valid_PMt" & mz.dos & Cog_Valid_PArt.Axe & Cog_Valid_PArt.CptV & Cog_Valid_PMt.Cog_TypeV & Cog_Valid_PMt.Cog_TypeU & Cog_Valid_PMt.User
+
+endp
+
+
+;*
+public procedure ZoomModificationRes		; apres réservation enmodif
+beginp
+
+	note_chargement_(0,Cog_Valid_PMt.note)
+	joint_chargement_(0,Cog_Valid_PMt.joint)
+
+endp
+
+
+;*
+public procedure ZoomAvantRewrite
+beginp
+
+	Cog_Valid_PMt.usermo		= system.user
+   Cog_Valid_PMt.usermodh	= time(7)
+	Cog_Valid_PMt.note 		= note_modification_(0,Cog_Valid_PMt.note,noteobj="Cog_Valid_PMt")
+	Cog_Valid_PMt.joint 		= joint_modification_(0,Cog_Valid_PMt.joint,"Cog_Valid_PMt")
+	Cog_Valid_PMt.cenote		= condition(Cog_Valid_PMt.note<>0,2,1)
+	Cog_Valid_PMt.cejoint	= condition(Cog_Valid_PMt.joint<>0,2,1)
+
+endp
+
+
+;*
+public procedure ZoomApresModification ; compte rendu de modification
+beginp
+endp
+
+
+;*
+public procedure ZoomSuppression ; avant entrée en suppression
+beginp
+
+   zoom.res			= "g3Cog_Valid_PMt" & mz.dos & Cog_Valid_PArt.Axe & Cog_Valid_PArt.CptV & Cog_Valid_PMt.Cog_TypeV & Cog_Valid_PMt.Cog_TypeU & Cog_Valid_PMt.User
+
+endp
+
+
+;*
+public procedure ZoomSuppressionRes
+beginp
+endp
+
+
+;*
+public procedure ZoomAvantDelete
+beginp
+
+	note_suppression_ (0,Cog_Valid_PMt.note)
+	joint_suppression_ (0,Cog_Valid_PMt.joint)
+
+endp
+
+;*
+public procedure ZoomApresSuppression ; compte rendu de suppression
+beginp
+endp
+
+
+
+;*
+;	Actions
+;*
+
+;*
+public procedure ZoomEnteteTableau 
+beginp
+
+	XmeList_ScanColumn(Zoom.IdTableau)
+
+endp
+
+;*
+public procedure ZoomAvantConsultFiche
+beginp
+
+	Maj_Menu_Boutons
+
+endp	
+
+
+;*
+public procedure ZoomAvantConsultListe
+beginp
+
+	Maj_Menu_Boutons
+
+endp
+
+
+;*
+public procedure ZoomConsultFiche 	; à utiliser si note
+beginp
+
+	switch Harmony.Key
+
+	case k_f7
+		zoom_call()
+	
+	case k_sf6
+		note_consultation_(0,Cog_Valid_PMt.note)
+	
+	case k_ctrl_f6
+		joint_consultation_(0,Cog_Valid_PMt.joint)
+
+	endswitch 
+
+endp
+
+;*
+public procedure ZoomConsultListe ; à utiliser si note
+beginp
+
+	switch Harmony.Key
+
+	case k_f7
+		zoom_call()
+	
+	case k_sf6
+		note_consultation_(0,Cog_Valid_PMt.note)
+	
+	case k_ctrl_f6
+		joint_consultation_(0,Cog_Valid_PMt.joint)
+
+	case k_f12
+		if g7.pong = true
+			Envoyer_Selections
+		endif
+
+	endswitch 
+
+endp
+
+
+;*
+public procedure ZoomAvantInput			; permet de griser les boutons et les choix
+beginp
+
+	Maj_Menu_Boutons
+
+endp
+
+;*
+public procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+beginp											; pour appel d'un zoom
+
+	switch Harmony.Key
+
+	case K_SF6											; Saisie d'une note
+		Note_Saisie_(C_Applic_DAV, Cog_Valid_PMt.Note, 'COG_VALID_PMT')
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(Not Note_Empty_(C_Applic_DAV), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+
+	case K_Ctrl_F6
+		Joint_Saisie_ (C_Applic_DAV, Cog_Valid_PMt.Joint, 'COG_VALID_PMT')				; Fichier joint
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(Not Joint_Empty_(C_Applic_DAV), "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+
+	case Harmony.DataArret = 8002
+		if Harmony.Sourisbout = Right_Button
+			Zoom_Call()
+		elsif Harmony.Sourisclic = Double_Click
+			Harmony.Retour = Xmenext_Simulation_Touche
+			Harmony.Cplretour = K_F8
+		endif
+
+	case K_F7
+		Zoom_Call()
+
+	case K_F8 or Harmony.Arret in (9000..9999,11000..65000)				; Appel de zoom
+		ping ("A5xz" , A5xz)
+		Zoom_Call(harmony.arret)
+
+	endswitch
+
+endp
+
+;*
+public procedure ZoomFiltreAvantValeur
+beginp
+endp
+
+;*
+public procedure ZoomFiltreApresValeur
+beginp
+endp
+
+
+;*
+;	procedures liées à la lecture du ficher
+;*
+
+
+;* génération de la clé sur
+public procedure ZoomApresCle1
+beginp
+
+	zoom.cle 	= "N" & mz.dos & Cog_Valid_PArt.Axe & Cog_Valid_PArt.CptV
+	zoom.clemin = "N" & mz.dos & Cog_Valid_PArt.Axe & Cog_Valid_PArt.CptV
+	zoom.clemax = "N" & mz.dos & Cog_Valid_PArt.Axe & Cog_Valid_PArt.CptV & $FF
+
+endp
+
+;* après lecture clé sur 
+public procedure ZoomApresRead1
+beginp
+
+	RechercherLibelle
+
+endp
+
+
+;*
+;*   Séquences de gestion de fichier
+;*
+
+
+;*
+
+

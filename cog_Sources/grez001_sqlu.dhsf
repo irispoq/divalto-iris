@@ -1,0 +1,2108 @@
+;>xwin4obj                              7.0       20140424120343      
+[masque]
+ libelle="Rubrique"
+ utilisateur="UGIE"
+ date_modification="24/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=67
+ type_masque=2
+ dernier_id=1000010
+ surcharge=oui
+ date_modif_base="20121224164146"
+ dernier_id_page=100000
+ niveau_surcharge=1
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="grfaide"
+ [touches]
+  f7=135
+  shift_f6=10000
+[enregistrements]
+ "grrstab.dhoq",,codeevt,codeevt,1024,1
+ "grfdd.dhsd",,grtevt,tbl_codeevt_sel,350,0
+ "grfdd.dhsd",,gr1,gr1,12000,0
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=225,260
+  attache_x=oui
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=36,320
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=1
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=25
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Code événement à créer"
+ nb_lig=3
+ nb_col=50
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,50
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Code événement"
+ [champ]
+  [presentation]
+   position=8,57
+   taille=9,32
+   id=4
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=codeevt,evenement,codeevt
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=1
+   fichier="grfaide"
+  [touches]
+   f1=1
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=3
+ libelle="Mode liste"
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=55
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=19
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=38,220
+   attache_lgx=oui
+   id=84
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="ZOOM"
+ [tableau]
+  [presentation]
+   position=40,0
+   taille=185,220
+   attache_lgx=oui
+   attache_lgy=oui
+   adapterfond=oui
+   id=42
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=2
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=9
+   var_controle=oui
+   separation=73
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=48,16
+    taille=20,28
+    id=44
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=codeevt,cenote,codeevt
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="grfdmc.dhfi","NOTE_1"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Note"
+   [param_colonne]
+    titre="#tblnote"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=66,52
+    taille=11,17
+    id=43
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,bitmap,codeevt
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="grfdmc.dhfi","BITMAP"
+   [aide_page]
+    aide=4
+    fichier="grfaide"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Image rattachée à l'événement"
+   [param_colonne]
+    fl_aff=oui
+    largeur_col=24
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=21,52
+    taille=10,33
+    noms="tabcouleur"
+    id=45
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,evenement,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Evénement"
+   [param_colonne]
+    titre="Evénement"
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=36,52
+    taille=10,145
+    noms="tabcouleur"
+    id=46
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,lib,codeevt
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=2
+    fichier="grfaide"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Libellé événement"
+   [param_colonne]
+    titre="Libellé événement"
+    largeur_col=64
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=21,260
+    taille=8,31
+    id=47
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,evtfam,codeevt
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=5
+    fichier="grfaide"
+   [touches]
+    f7=135
+    f8=30008
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_EvtFam_1_Ap"
+   [info_bulle]
+   texte="Famille d'événement"
+   [param_colonne]
+    titre="Famille"
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=71,56
+    taille=10,14
+    id=1000008
+    colonnes_saisie=3
+    wstyle="CHAMP_SAISI_COG"
+   [description]
+    donnee=codeevt,cog_delai,codeevt
+   [param_saisie]
+    obligatoire=oui
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10030
+   [info_bulle]
+   texte="Délai moyen de l'évènement"
+   [param_colonne]
+    titre="Délai moyen de l'évènement"
+    largeur_col=46
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=27,273
+    taille=11,46
+    id=1000009
+    wstyle="STD"
+    wnom_couleur="BLANC"
+   [description]
+    donnee=codeevt,cog_creprj,codeevt
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="Création projet"
+    cadrage=droite
+    valeur="2","1"
+    choix="gtf_dmc.dhfi",""
+    notifier=oui
+   [touches]
+    f7=135
+    shift_f6=10030
+   [traitements]
+    diva_apres="Champ_CrePrj_Ap"
+   [info_bulle]
+   texte="Création projet"
+   [param_colonne]
+    titre="Création projet"
+    fl_aff=oui
+    largeur_col=46
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=38,273
+    taille=11,46
+    id=1000010
+    wstyle="STD"
+    wnom_couleur="BLANC"
+   [description]
+    donnee=codeevt,cog_cltaff,codeevt
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="Clôturer affaire"
+    cadrage=droite
+    valeur="2","1"
+    choix="gtf_dmc.dhfi",""
+    notifier=oui
+   [touches]
+    f7=135
+    shift_f6=10030
+   [traitements]
+    diva_apres="Champ_CltAff_Ap"
+   [info_bulle]
+   texte="Clôturer affaire"
+   [param_colonne]
+    titre="Clôturer affaire"
+    fl_aff=oui
+    largeur_col=46
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=69,272
+    taille=8,143
+    id=48
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,famevt_lib,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=2
+    fichier="grfaide"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Libellé famille"
+   [param_colonne]
+    titre="Libellé famille"
+    fl_aff=oui
+    largeur_col=103
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=54,52
+    taille=9,74
+    id=91
+    colonnes_saisie=20
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,naturejointcod,codeevt
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    f8=18974
+    shift_f6=10000
+   [traitements]
+    diva_apres="Champ_NatureJointCod_1_Ap"
+   [info_bulle]
+   texte="Nature"
+   [param_colonne]
+    titre="Nature"
+    fl_aff=non
+    largeur_col=74
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=54,128
+    taille=9,127
+    id=92
+    colonnes_saisie=50
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,jnature_lib,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Libellé"
+   [param_colonne]
+    titre="Libellé Nature"
+    fl_aff=non
+    largeur_col=127
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=51,52
+    taille=10,26
+    noms="tabcouleur"
+    id=49
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,couleur,codeevt
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="grfdmc.dhfi","COULEUR"
+   [aide_page]
+    aide=3
+    fichier="grfaide"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Couleur d'affichage de l'événement"
+   [param_colonne]
+    titre="Couleur"
+    fl_aff=non
+    largeur_col=48
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=64,57
+    taille=9,55
+    noms="couleurfond"
+    id=90
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,couleurfond,codeevt
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="grfdmc.dhfi","COULEURFOND"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Couleur de fond d'affichage d'événement"
+   [param_colonne]
+    titre="Couleur de fond"
+    fl_aff=non
+    largeur_col=55
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=97,52
+    taille=10,43
+    id=50
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,texcod,codeevt
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=6
+    fichier="grfaide"
+   [touches]
+    f7=135
+    f8=9081
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_TexCod_1_Ap"
+   [info_bulle]
+   texte="Formulaire"
+   [param_colonne]
+    titre="Formulaire"
+    fl_aff=non
+    largeur_col=46
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=111,51
+    taille=10,17
+    id=51
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,actioncod,codeevt
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=7
+    fichier="grfaide"
+   [touches]
+    f7=135
+    f8=18976
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_ActionCod_1_Ap"
+   [info_bulle]
+   texte="Code action"
+   [param_colonne]
+    titre="Code action"
+    fl_aff=non
+    largeur_col=76
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=112,68
+    taille=8,357
+    id=52
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,action_lib40,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Sujet du message"
+   [param_colonne]
+    titre="Sujet du message"
+    fl_aff=non
+    largeur_col=360
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=57,172
+    taille=8,115
+    id=53
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,question,codeevt
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=8
+    fichier="grfaide"
+   [touches]
+    f7=135
+    f8=18996
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Question_1_Ap"
+   [param_colonne]
+    titre="Questionnaire"
+    fl_aff=non
+    largeur_col=118
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=69,192
+    taille=8,143
+    id=54
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,questionnaire_lib40,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Libellé questionnaire"
+   [param_colonne]
+    titre="Libellé questionnaire"
+    fl_aff=non
+    largeur_col=146
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=141,51
+    taille=10,33
+    id=55
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,actcod,codeevt
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=376
+    fichier="grfaide"
+   [touches]
+    f7=135
+    f8=9079
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_ActCod_1_Ap"
+   [info_bulle]
+   texte="Activité"
+   [param_colonne]
+    titre="Activité"
+    fl_aff=non
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=142,84
+    taille=8,143
+    id=56
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,activite_lib,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="Libellé"
+    fl_aff=non
+    largeur_col=146
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=155,51
+    taille=10,42
+    id=57
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,duree,codeevt
+    format="h:m"
+   [param_saisie]
+    type_date=h:m:s
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Durée"
+   [param_colonne]
+    titre="Durée"
+    fl_aff=non
+    largeur_col=45
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=75,84
+    taille=8,17
+    id=58
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,rubst,codeevt
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="grfdmc.dhfi","NONOUI"
+   [aide_page]
+    aide=55
+    fichier="grfaide"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Saisie des rubriques"
+   [param_colonne]
+    titre="Saisie des rubriques"
+    fl_aff=non
+    largeur_col=60
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=180,56
+    taille=9,79
+    id=75
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,webst,codeevt
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="grfdmc.dhfi","NONOUI"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Statut utilisation dans l'application Web"
+   [param_colonne]
+    titre="Visible dans l'application Web"
+    fl_aff=non
+    largeur_col=86
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=184,56
+    taille=10,68
+    id=69
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,evttyp,codeevt
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="grfdmc.dhfi","EVT_TYPE"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Type d'événement"
+   [param_colonne]
+    titre="Type d'événement"
+    fl_aff=non
+    largeur_col=78
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=198,264
+    taille=10,19
+    id=83
+    colonnes_saisie=4
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=codeevt,conf,codeevt
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=11010
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Conf_1_Ap"
+   [info_bulle]
+   texte="Code confidentiel"
+   [param_colonne]
+    titre="Code confidentiel"
+    fl_aff=non
+    largeur_col=58
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=54,236
+    taille=8,73
+    id=59
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,usercr,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Créé par"
+   [param_colonne]
+    titre="Créé par"
+    fl_aff=non
+    largeur_col=76
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=60,352
+    taille=8,57
+    id=60
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,usercrdh,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Créé le"
+   [param_colonne]
+    titre="Créé le"
+    fl_aff=non
+    largeur_col=60
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=48,180
+    taille=8,73
+    id=61
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,usermo,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Modifié par"
+   [param_colonne]
+    titre="Modifié par"
+    fl_aff=non
+    largeur_col=76
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=108,356
+    taille=8,57
+    id=62
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=codeevt,usermodh,codeevt
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Modifié le"
+   [param_colonne]
+    titre="Modifié le"
+    fl_aff=non
+    largeur_col=60
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=16,5
+   taille=9,53
+   id=63
+   wstyle="STD"
+  [texte]
+   texte="Code événement"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,53
+   id=85
+   wstyle="STD"
+  [texte]
+   texte="Libellé événement"
+ [champ]
+  [presentation]
+   position=16,60
+   taille=9,32
+   id=64
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=grtevt,evenement,tbl_codeevt_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=5159
+   fichier="grfaide"
+  [touches]
+   f1=1
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=16,100
+   taille=9,119
+   id=80
+   wstyle="STD"
+  [description]
+   donnee=gr1,choix,gr1,1
+  [param_case]
+   texte="Uniquement les codes événements valides"
+   cadrage=droite
+   valeur="2","1"
+   choix="grfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=26,60
+   taille=9,144
+   id=86
+   colonnes_saisie=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=grtevt,lib,tbl_codeevt_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=18
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=16
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=15
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=14
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=13
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=12
+[page]
+ numero=11
+ libelle="Fiche zoom"
+ fond="STD"
+ titre="Zoom"
+ efface=partiel
+ nb_lig=25
+ nb_col=65
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ page_fond=1
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="GENERALITES"
+   couleur_fond="STD"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,50
+   noms="couleuraff"
+   id=5
+   wstyle="STD"
+  [texte]
+   texte="Code événement"
+ [obj_texte]
+  [presentation]
+   position=40,5
+   taille=9,50
+   noms="couleuraff"
+   id=6
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=52,5
+   taille=9,50
+   noms="couleuraff"
+   id=7
+   wstyle="STD"
+  [texte]
+   texte="Couleur"
+ [obj_texte]
+  [presentation]
+   position=64,5
+   taille=9,50
+   noms="couleuraff"
+   id=87
+   wstyle="STD"
+  [texte]
+   texte="Couleur de fond"
+ [obj_texte]
+  [presentation]
+   position=73,5
+   taille=9,50
+   id=8
+   wstyle="STD"
+  [texte]
+   texte="Image"
+ [obj_texte]
+  [presentation]
+   position=87,5
+   taille=9,98
+   id=1000003
+   wstyle="STD"
+  [texte]
+   texte="Délai Moyen                                 Heures"
+ [obj_texte]
+  [presentation]
+   position=100,5
+   taille=9,50
+   id=9
+   wstyle="STD"
+  [texte]
+   texte="Famille"
+ [obj_texte]
+  [presentation]
+   position=110,5
+   taille=9,50
+   id=93
+   wstyle="STD"
+  [texte]
+   texte="Nature"
+ [obj_texte]
+  [presentation]
+   position=120,5
+   taille=9,50
+   id=10
+   wstyle="STD"
+  [texte]
+   texte="Formulaire"
+ [obj_texte]
+  [presentation]
+   position=131,5
+   taille=9,50
+   id=11
+   wstyle="STD"
+  [texte]
+   texte="Action"
+ [obj_texte]
+  [presentation]
+   position=140,5
+   taille=9,50
+   id=12
+   wstyle="STD"
+  [texte]
+   texte="Questionnaire"
+ [obj_texte]
+  [presentation]
+   position=152,5
+   taille=9,50
+   id=13
+   wstyle="STD"
+  [texte]
+   texte="Activité"
+ [obj_texte]
+  [presentation]
+   position=164,5
+   taille=9,50
+   id=14
+   wstyle="STD"
+  [texte]
+   texte="Durée"
+ [obj_texte]
+  [presentation]
+   position=200,5
+   taille=9,50
+   id=65
+   wstyle="STD"
+  [texte]
+   texte="Type d'événement"
+ [champ]
+  [presentation]
+   position=110,132
+   taille=9,123
+   id=95
+   colonnes_saisie=50
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,jnature_lib,codeevt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=100,113
+   taille=9,142
+   id=15
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,famevt_lib,codeevt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=131,132
+   taille=9,123
+   id=16
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,action_lib40,codeevt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=26,57
+   taille=9,55
+   noms="couleur"
+   id=17
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=codeevt,evenement,codeevt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=40,57
+   taille=9,144
+   noms="couleur"
+   id=18
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,lib,codeevt
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=2
+   fichier="grfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=52,57
+   taille=9,55
+   noms="couleur"
+   id=19
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,couleur,codeevt
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="grfdmc.dhfi","COULEUR"
+  [aide_page]
+   aide=3
+   fichier="grfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Couleur_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=64,57
+   taille=9,55
+   noms="couleurfond"
+   id=88
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,couleurfond,codeevt
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="grfdmc.dhfi","COULEURFOND"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=73,57
+   taille=10,55
+   id=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,bitmap,codeevt
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="grfdmc.dhfi","BITMAP"
+  [aide_page]
+   aide=4
+   fichier="grfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Couleur_1_Ap"
+ [champ]
+  [presentation]
+   position=100,57
+   taille=9,55
+   id=21
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,evtfam,codeevt
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=5
+   fichier="grfaide"
+  [touches]
+   f7=135
+   f8=30008
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_EvtFam_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=110,57
+   taille=9,74
+   id=94
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,naturejointcod,codeevt
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=18974
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_NatureJointCod_1_Ap"
+ [champ]
+  [presentation]
+   position=120,57
+   taille=9,55
+   id=22
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,texcod,codeevt
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=6
+   fichier="grfaide"
+  [touches]
+   f7=135
+   f8=9081
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TexCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=131,57
+   taille=9,74
+   id=23
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,actioncod,codeevt
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=7
+   fichier="grfaide"
+  [touches]
+   f7=135
+   f8=18975
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_ActionCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=140,57
+   taille=9,116
+   id=24
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,question,codeevt
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=8
+   fichier="grfaide"
+  [touches]
+   f7=135
+   f8=18996
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Question_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=140,174
+   taille=9,81
+   id=25
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,questionnaire_lib40,codeevt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=152,57
+   taille=9,55
+   id=26
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,actcod,codeevt
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=376
+   fichier="grfaide"
+  [touches]
+   f7=135
+   f8=9079
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_ActCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=152,113
+   taille=9,142
+   id=27
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,activite_lib,codeevt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=164,57
+   taille=9,55
+   cadrage=droite
+   id=28
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,duree,codeevt
+   format="h:m"
+  [param_saisie]
+   type_date=h:m:s
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=176,57
+   taille=9,198
+   id=29
+   wstyle="STD"
+  [description]
+   donnee=codeevt,rubst,codeevt
+   minmaj=majuscules
+  [param_case]
+   texte="Saisie des rubriques en création d'événement"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=55
+   fichier="grfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=188,57
+   taille=9,198
+   id=73
+   wstyle="STD"
+  [description]
+   donnee=codeevt,webst,codeevt
+  [param_case]
+   texte="Non visible dans l'application Web"
+   cadrage=droite
+   valeur="2","1"
+   choix="grfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=200,57
+   taille=9,78
+   id=67
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,evttyp,codeevt
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="grfdmc.dhfi","EVT_TYPE"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=28,206
+   taille=10,49
+   id=1000001
+   wstyle="STD"
+   wnom_couleur="BLANC"
+  [description]
+   donnee=codeevt,cog_creprj,codeevt
+  [param_case]
+   texte="Création projet"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtf_dmc.dhfi",""
+   notifier=oui
+  [touches]
+   f7=135
+   shift_f6=10030
+  [traitements]
+   diva_apres="Champ_CrePrj_Ap"
+  [info_bulle]
+  texte="Création projet"
+ [case_a_cocher]
+  [presentation]
+   position=40,206
+   taille=10,49
+   id=1000002
+   wstyle="STD"
+   wnom_couleur="BLANC"
+  [description]
+   donnee=codeevt,cog_cltaff,codeevt
+  [param_case]
+   texte="Clôturer affaire"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtf_dmc.dhfi",""
+   notifier=oui
+  [touches]
+   f7=135
+   shift_f6=10030
+  [traitements]
+   diva_apres="Champ_CltAff_Ap"
+  [info_bulle]
+  texte="Clôturer affaire"
+ [champ]
+  [presentation]
+   position=86,57
+   taille=9,24
+   id=1000004
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI_COG"
+  [description]
+   donnee=codeevt,cog_delai,codeevt
+  [param_saisie]
+   obligatoire=oui
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f6=10030
+  [info_bulle]
+  texte="Délai moyen"
+[page]
+ numero=12
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=65
+ offset_lig=1
+ offset_col=1
+ prec=11
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=40,250
+   id=77
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Protection"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=74,5
+   taille=40,121
+   id=36
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=74,134
+   taille=40,121
+   id=37
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,58
+   id=76
+   wstyle="STD"
+  [texte]
+   texte="Date de fermeture"
+ [obj_texte]
+  [presentation]
+   position=52,10
+   taille=9,58
+   id=82
+   wstyle="STD"
+  [texte]
+   texte="Code confidentiel"
+ [obj_texte]
+  [presentation]
+   position=90,10
+   taille=9,18
+   id=32
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=90,139
+   taille=9,18
+   id=33
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=100,10
+   taille=9,18
+   id=34
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=100,139
+   taille=9,18
+   id=35
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=90,30
+   taille=9,93
+   id=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,usercr,codeevt
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=100,30
+   taille=9,93
+   id=39
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,usercrdh,codeevt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=90,159
+   taille=9,93
+   id=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,usermo,codeevt
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=100,159
+   taille=9,93
+   id=41
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeevt,usermodh,codeevt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=42,70
+   taille=9,36
+   id=79
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,hsdt,codeevt
+   format="JJ/MM/AAAA"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10050
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=52,70
+   taille=9,36
+   id=81
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=codeevt,conf,codeevt
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11010
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Conf_1_Ap"
+  [boutons]
+   "zoom"
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPL"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Note \TShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wtrait_chaine="#home"
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wtrait_chaine="#end"
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   nature=case
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#Ctrl_Insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#Insert"
+   [info_bulle]
+   texte="Créer <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#Delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR1__1"
+  [item]
+   nature=case
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR3"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <10>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR4"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=6
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+Include 'GRTC000.dhsp'
+
+Module 'A5TM000.dhop'
+Module 'GTTM000.dhop'
+Module 'A5PM000.dhop'
+Module 'A5PMFIC.DHOP'
+
+Public RecordSql 	'GRRSTAB.dhoq' CodeEvt
+
+Public Record 	'A5DD.dhsd' 	MACTION
+Public Record 	'A5DD.dhsd' 	MQST
+Public Record 	'A5DD.dhsd' 	MUSER
+Public Record	'A5DD.dhsd'		XZ			A5XZ
+Public Record 	'DDSYS.dhsd' 	ROWINFO	ZoomSelection
+Public Record 	'GRFDD.dhsd' 	GR1
+Public Record 	'GRFDD.dhsd' 	GRTEFA
+Public Record 	'GTFDD.dhsd' 	T039
+Public Record	"A5DD.DHSD"		mjointnature	mjointnature
+
+;*
+Private Procedure Champ_CltAff_Ap
+Beginp
+	If codeevt.Cog_CltAff = 2 | codeevt.Cog_CrePrj = 1 | Endif
+Endp
+
+
+;*
+Private Procedure Champ_CrePrj_Ap
+Beginp
+	If codeevt.Cog_CrePrj = 2 | codeevt.Cog_CltAff = 1 | Endif
+Endp
+[/diva]
+[diva_base]
+SetModuleInfo('$Id: grez001_sql.dhsf 28066 2012-12-24 16:24:12Z als $')
+;*
+;*      Zoom sur Table événement  Enregistrement CodeEvt de GRRSTAB.dhoq
+;*
+
+Include 'GRTC000.dhsp'
+
+Module 'A5TM000.dhop'
+Module 'GTTM000.dhop'
+Module 'A5PM000.dhop'
+Module 'A5PMFIC.DHOP'
+
+Public RecordSql 	'GRRSTAB.dhoq' CodeEvt
+
+Public Record 	'A5DD.dhsd' 	MACTION
+Public Record 	'A5DD.dhsd' 	MQST
+Public Record 	'A5DD.dhsd' 	MUSER
+Public Record	'A5DD.dhsd'		XZ			A5XZ
+Public Record 	'DDSYS.dhsd' 	ROWINFO	ZoomSelection
+Public Record 	'GRFDD.dhsd' 	GR1
+Public Record 	'GRFDD.dhsd' 	GRTEFA
+Public Record 	'GTFDD.dhsd' 	T039
+Public Record	"A5DD.DHSD"		mjointnature	mjointnature
+
+
+;*
+;* séquences liées au masque
+;*
+
+;*
+Public Procedure Champ_Couleur_1_Ap		 ; Mise à jour de l'attribut couleur
+1		style			32		
+Beginp
+	If CodeEvt.Couleur <> 0
+		style = Left([ 'DATA_SAISI_' ToString(CodeEvt.Couleur) ])
+		XmeSetAttribut('COULEUR', AN_STYLE, style)
+	Else
+		XmeResetAttribut('COULEUR', AN_STYLE)
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_TexCod_1_Ap		;contrôle texte préenregistré
+Beginp
+	Lectab(41, CodeEvt.TexCod, 1141)
+Endp
+
+;*
+Public Procedure Champ_ActionCod_1_Ap		; Contrôle du code action
+Beginp
+	If CodeEvt.ActionCod <> ' '
+		If Rechercher_Action(MZ.Applic, CodeEvt.ActionCod) <> 0
+			Mes_Alert(3007, MZ.Applic, CodeEvt.ActionCod)
+			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
+		Else
+			CodeEvt.Action_Lib40 = MACTION.Lib40
+		EndIf
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_EvtFam_1_Ap		
+; Vérification de l'existence de la famille
+Beginp
+	If Seek_GRTEFA(CodeEvt.EvtFam) <> 0
+		Mes_Alert(3011, CodeEvt.EvtFam)
+		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
+	Else
+		CodeEvt.FamEvt_Lib = GRTEFA.Lib
+		If CodeEvt.NatureJointCod = ' ' and GRTEFA.NatureJointCod <> ' '
+			If seek_mjointnature(MZ.Applic, GRTEFA.NatureJointCod) = 0
+				CodeEvt.NatureJointCod = GRTEFA.NatureJointCod
+				CodeEvt.JNature_Lib = mjointnature.Lib
+			EndIf
+		Else
+			CodeEvt.JNature_Lib = ' '
+		EndIf
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Question_1_Ap	
+; Vérification de l'existence du questionnaire
+Beginp
+	If CodeEvt.Question <> ' '
+		Controler_Questionnaire(CodeEvt.Question, 3000, Today, TRUE, 11)
+		CodeEvt.Questionnaire_Lib40 = MQST.Lib40
+	Else
+		CodeEvt.Questionnaire_Lib40 = ' '
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_ActCod_1_Ap
+; Vérification de l'existence du code activité
+Beginp
+	If Harmony.Datamodif
+		CodeEvt.Activite_Lib = Condition(Lectab(39, CodeEvt.ActCod, 1139) = 0, T039.Lib, ' ')
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Conf_1_Ap
+; Contrôle confidentialité
+Beginp
+	Controler_Confidentialite(CodeEvt.Conf, 4000)
+Endp
+
+
+;*
+Public Procedure Champ_NatureJointCod_1_Ap
+;
+Beginp
+	If CodeEvt.NatureJointCod <> ' '
+		If seek_mjointnature(MZ.Applic, CodeEvt.NatureJointCod) <> 0
+			A5_Mes_Alert(3501,CodeEvt.NatureJointCod)
+			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
+		Else
+			CodeEvt.JNature_Lib = mjointnature.Lib
+		EndIf
+	Else
+		CodeEvt.JNature_Lib = ' '
+	EndIf
+Endp
+[/diva]

@@ -1,0 +1,50 @@
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_validcdeu.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du cog_FValidCde
+;*
+
+;*
+;* 		Ligne valideur
+;*
+
+<RecordSQL	Name=CogRs_VCde	Comment='Valideur commande'>
+Public Record "a5dd.dhsd"		MZ
+<SELECT>
+	Cog_Valid_Cde.*
+<FROm insert=YES update=YES delete=YES>
+	Cog_Valid_Cde
+<WHERE>
+	Cog_Valid_Cde.DOS = MZ.DOS
+	Case Valideur_Precedent(char ticod, int picod, int pino, int mtInfOuEgalA, int validNonEgalA, char userNonEgalA)
+		Cog_Valid_Cde.TICOD = ticod
+		AND Cog_Valid_Cde.PICOD = picod
+		AND Cog_Valid_Cde.PINO  = pino
+		AND Cog_Valid_Cde.COG_MTMAX	 <= mtInfOuEgalA
+		AND Cog_Valid_Cde.COG_VALIDATION <> validNonEgalA
+		AND Cog_Valid_CDE.USERX <> userNonEgalA
+
+	Case Valideur_Suivant(char ticod, int picod, int pino, int mtSupOuEgalA, int validEgalA, char userNonEgalA)
+		Cog_Valid_Cde.TICOD = ticod
+		AND Cog_Valid_Cde.PICOD = picod
+		AND Cog_Valid_Cde.PINO  = pino
+		AND Cog_Valid_Cde.COG_MTMAX	 >= mtSupOuEgalA
+		AND Cog_Valid_Cde.COG_VALIDATION = validEgalA
+		AND Cog_Valid_CDE.USERX <> userNonEgalA
+
+	Case Mail_Suivant(char ticod, int picod, int pino, int mtSupOuEgalA, int validNonEgalA, char userNonEgalA)
+		Cog_Valid_Cde.TICOD = ticod
+		AND Cog_Valid_Cde.PICOD = picod
+		AND Cog_Valid_Cde.PINO  = pino
+		AND Cog_Valid_Cde.COG_MTMAX	 >= mtSupOuEgalA
+		AND Cog_Valid_Cde.COG_VALIDATION <> validNonEgalA
+		AND Cog_Valid_CDE.USERX <> userNonEgalA
+
+<ORDERBY>
+	Case COG_INDEX_W
+		Cog_Valid_CDE.DOS,
+		Cog_Valid_CDE.TICOD,
+		Cog_Valid_CDE.PINO,
+		Cog_Valid_CDE.COG_MTMAX,
+		Cog_Valid_CDE.COG_TYPEV,
+		Cog_Valid_CDE.COG_TYPEU,
+		Cog_Valid_CDE.USERX

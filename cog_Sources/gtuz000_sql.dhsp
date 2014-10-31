@@ -1,0 +1,44 @@
+SetModuleInfo('$Id: gttz000_sql.dhsp 35561 2013-11-19 14:55:28Z lk $')
+;*
+;*      Zoom sur Article						Record SQL Article de GTRSART.dhoq
+;*
+
+OverWrite "GTTZ000_SQL.dhop"
+
+Module "COG_GTTZ000_SQL.DHOP"
+
+;*
+;*		Surcharges des procédures standards
+;*
+
+;* 01
+procedure ZoomModification	; avant entrée en modif
+beginp
+	Cog_ZoomModification
+	Standard.ZoomModification
+endp
+
+;*	01
+procedure ZoomAvantRewrite
+;
+BeginP
+	Cog_ZoomAvantRewrite
+	Standard.ZoomAvantRewrite
+EndP
+
+;*
+Procedure ZoomCreation
+;
+Beginp
+	Standard.ZoomCreation
+	Cog_ZoomCreation
+EndP
+
+;*
+Procedure ZoomDebut
+;
+Beginp
+	Standard.ZoomDebut
+	Cog_ZoomDebut
+EndP
+

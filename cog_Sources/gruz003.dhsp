@@ -1,0 +1,289 @@
+;*
+;*      Zoom sur Evenements		Enregistrement EVTTIERS de GRFEVT
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		TR 		6.1						09.2004	Version initiale en Diva 
+
+OverWrite "GRPZ003.dhop"
+
+Module GTPMFIC.dhop
+
+;Include	'GTTCZ00.dhsp'
+
+include "GRTC000.dhsp"					;déclarations communes
+
+Module GTPM000.dhop
+Module GTTM000.dhop
+Module A5PM000.dhop
+Module	'A5TM000.dhop'
+
+HfileVersion 	Cogfdd.dhsd COGGRF_TAB
+
+public hfile	grfdd.dhsd	GRFEVT 		COG_GRFEVT
+public hfile	gtfdd.dhsd	GTFPROJ 		GTFPROJ
+public hfile	gtfdd.dhsd	GTFDOS 		GTFDOS
+Public Hfile 	Cogfdd.dhsd  COGGRF_TAB	COGGRF_TAB
+Public Hfile 	Cogfdd.dhsd  COGGTF_TAB	COGGTF_TAB		noopen
+
+Public record 	Cogfdd.dhsd COG_GRTEVT				; Code événement
+Public record	cogfdd.dhsd	COG_UT108
+
+public record	gtfdd.dhsd	SOCNO
+public record 	grfdd.dhsd 	EVTTIERS								 
+public record 	grfdd.dhsd 	EVTTIERS		COG_EVTTIERS								 
+public record 	grfdd.dhsd 	GRTEVT
+public record 	ddsys.dhsd 	ZOOM
+public record 	gtfdd.dhsd 	PRJAP
+public record 	gtfdd.dhsd 	PRJAV
+public record	gtfdd.dhsd	ETS								; établissement
+public record	grfdd.dhsd	GR1 
+public record	gtfdd.dhsd	CLI
+							
+include "CogGt_Controle_Fichier.dhsp"
+
+;*
+;* procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure Maj_Nbre_Cotisations						; Met a jour le nbre de cotisations restantes
+1		i			X
+1		wdate		8
+BeginP
+	If Dtsub(COG_UT108.Cog_Date_Debut,COG_UT108.Cog_Date_Fin) < 7300
+		wdate = 	COG_UT108.Cog_Date_Debut
+		For i = 1 to 240
+			wdate = Hdate(wdate,,1)
+			If Left(wdate,6) > Left(COG_UT108.Cog_Date_Fin,6) | Exitfor | Endif
+		Next
+	 	Switch COG_UT108.Cog_Period
+			Case 1  ; Mensuelle
+				COG_UT108.Cog_Nombre_Cotisation_Restantes = i 
+			Case 2  ; Bimestrielle
+				COG_UT108.Cog_Nombre_Cotisation_Restantes = i / 2
+			Case 3  ; Trimestrielle
+				COG_UT108.Cog_Nombre_Cotisation_Restantes = i / 3
+			Case 4  ; Semestrielle
+				COG_UT108.Cog_Nombre_Cotisation_Restantes = i / 6
+			Case 5  ; Annuelle
+				COG_UT108.Cog_Nombre_Cotisation_Restantes = i / 12
+		EndSwitch
+	Endif
+EndP
+
+;*
+procedure Controle_Hierarchie_Suivant 
+beginp 
+	If Not EVTTIERS.Affaire = system.esp And Seek_PRJAP(EVTTIERS.Affaire) = 0 And Not PRJAP.AfrClas = system.esp
+		COGGRF_TAB.Key = 'A' & MZ.DOS & PRJAP.Affaire & PRJAP.AfrClas
+		Loop Hread(COGGRF_TAB,COG_GRTEVT) = 0 And COG_GRTEVT.Dos = MZ.DOS And COG_GRTEVT.Affaire = PRJAP.Affaire And COG_GRTEVT.AfrClas = PRJAP.AfrClas
+			If COG_GRTEVT.EVENEMENT = EVTTIERS.EVENEMENT
+				If Hread(COGGRF_TAB,COG_GRTEVT) = 0 And COG_GRTEVT.Dos = MZ.DOS And COG_GRTEVT.Affaire = PRJAP.Affaire And COG_GRTEVT.AfrClas = PRJAP.AfrClas
+					COG_GRFEVT.Key = 'i'	& MZ.DOS & MZ.ETB & PRJAP.Affaire
+					Loop Hread(COG_GRFEVT,COG_EVTTIERS) = 0 And COG_EVTTIERS.Dos = MZ.DOS And COG_EVTTIERS.Etb = MZ.ETB And COG_EVTTIERS.Affaire = PRJAP.Affaire 
+						If COG_GRTEVT.EVENEMENT = COG_EVTTIERS.EVENEMENT | ExitLoop | Endif
+					EndLoop
+					If	COG_EVTTIERS.Dos = MZ.DOS And COG_EVTTIERS.Etb = MZ.ETB And COG_EVTTIERS.Affaire = PRJAP.Affaire And COG_GRTEVT.EVENEMENT = COG_EVTTIERS.EVENEMENT
+						If COG_EVTTIERS.EVENEMENT = EVTTIERS.EVENEMENT
+								MessageBox ("Vous avez déjà saisi cet évènement.","Attention",MB_OK + MB_ICONEXCLAMATION) | Zoom.Ok = 'S'
+						ElsIf Isdate(COG_EVTTIERS.EvtEchDt)
+							If COG_EVTTIERS.REALISEOK = 2 And Isdate(COG_EVTTIERS.RealDt)
+								MessageBox ("Evènement suivant (" & nospaces(COG_GRTEVT.EVENEMENT) & ") déjà réalisé.","Attention",MB_OK + MB_ICONEXCLAMATION) | Zoom.Ok = 'S'
+							Endif
+						Endif
+					Else
+						MessageBox ("Evènement suivant (" & nospaces(COG_GRTEVT.EVENEMENT) & ") absent.","Attention",MB_OK + MB_ICONEXCLAMATION) | Zoom.Ok = 'S'
+					Endif
+				Endif
+				ExitLoop
+			Endif			
+		EndLoop
+	Endif
+endp
+
+;*
+procedure Controle_Hierarchie_Precedent 
+beginp 
+	If Not EVTTIERS.Affaire = system.esp And Seek_PRJAP(EVTTIERS.Affaire) = 0 And Not PRJAP.AfrClas = system.esp
+		COGGRF_TAB.Key = 'A' & MZ.DOS & PRJAP.Affaire & PRJAP.AfrClas
+		Loop Hread(COGGRF_TAB,COG_GRTEVT) = 0 And COG_GRTEVT.Dos = MZ.DOS And COG_GRTEVT.Affaire = PRJAP.Affaire And COG_GRTEVT.AfrClas = PRJAP.AfrClas
+			If COG_GRTEVT.EVENEMENT = EVTTIERS.EVENEMENT
+				If Hpread(COGGRF_TAB,COG_GRTEVT) = 0 And COG_GRTEVT.Dos = MZ.DOS And COG_GRTEVT.Affaire = PRJAP.Affaire And COG_GRTEVT.AfrClas = PRJAP.AfrClas
+					COG_GRFEVT.Key = 'i'	& MZ.DOS & MZ.ETB & PRJAP.Affaire
+					Loop Hread(COG_GRFEVT,COG_EVTTIERS) = 0 And COG_EVTTIERS.Dos = MZ.DOS And COG_EVTTIERS.Etb = MZ.ETB And COG_EVTTIERS.Affaire = PRJAP.Affaire 
+						If COG_GRTEVT.EVENEMENT = COG_EVTTIERS.EVENEMENT | ExitLoop | Endif
+					EndLoop
+					If	COG_EVTTIERS.Dos = MZ.DOS And COG_EVTTIERS.Etb = MZ.ETB And COG_EVTTIERS.Affaire = PRJAP.Affaire And COG_GRTEVT.EVENEMENT = COG_EVTTIERS.EVENEMENT
+						If COG_EVTTIERS.EVENEMENT = EVTTIERS.EVENEMENT
+								MessageBox ("Vous avez déjà saisi cet évènement.","Attention",MB_OK + MB_ICONEXCLAMATION) | Zoom.Ok = 'S'
+						ElsIf Isdate(COG_EVTTIERS.EvtEchDt)
+							If Not Isdate(COG_EVTTIERS.RealDt)
+								MessageBox ("Evènement précédent (" & nospaces(COG_GRTEVT.EVENEMENT) & ") non réalisé.","Attention",MB_OK + MB_ICONEXCLAMATION) | Zoom.Ok = 'S'
+							Endif
+						Endif
+					Else
+						MessageBox ("Evènement précédent (" & nospaces(COG_GRTEVT.EVENEMENT) & ") absent.","Attention",MB_OK + MB_ICONEXCLAMATION) | Zoom.Ok = 'S'
+					Endif
+				Endif
+				ExitLoop
+			Endif			
+		EndLoop
+	Endif
+endp
+
+;*
+Procedure ZoomDebut 
+Beginp
+	Controle_Fichier
+	Standard.ZoomDebut
+Endp
+
+;*
+procedure ZoomAvantWrite 
+beginp 
+	Standard.ZoomAvantWrite
+	If Zoom.Ok = 'O'
+		If controler_evenement(EVTTIERS.EVENEMENT)=0 and GRTEVT.Cog_CltAff = 2 and EVTTIERS.Affaire = system.esp
+			MessageBox ("Veuillez saisir le No Affaire, cet évènement est paramétré pour la clotûrer.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+		ElsIf controler_evenement(EVTTIERS.EVENEMENT)=0 and GRTEVT.Cog_CltAff = 2 
+			If GR1.Choix(10) in (2,4) And Isdate(EVTTIERS.RealDt) | Controle_Hierarchie_Precedent | Endif
+		ElsIf controler_evenement(EVTTIERS.EVENEMENT)=0 and GRTEVT.Cog_Creprj = 2 
+		ElsIf EVTTIERS.Affaire = system.esp
+			MessageBox ("Veuillez saisir le No Affaire, celui-ci est obligatoire.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+		Endif
+		If GR1.Choix(10) in (1,3) | Controle_Hierarchie_Suivant | Endif
+		If GR1.Choix(10) in (2,4) And Isdate(EVTTIERS.RealDt) | Controle_Hierarchie_Precedent | Endif
+		If GR1.Choix(10) in (1,3) And (EVTTIERS.EvtEchDt < EVTTIERS.EvtDt Or EVTTIERS.EvtEchDt > EVTTIERS.EvtFinDt)
+			MessageBox ("La date de réalisation n'est pas dans l'intervalle dates Début/Fin.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+		Endif
+		If GR1.Choix(10) in (2,4) And (EVTTIERS.RealDt < EVTTIERS.EvtDt Or EVTTIERS.RealDt > EVTTIERS.EvtFinDt)
+			MessageBox ("La date réalisée n'est pas dans l'intervalle dates Début/Fin.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+		Endif
+	Endif
+Endp
+
+;*
+procedure ZoomAvantReWrite 
+beginp 
+	Standard.ZoomAvantReWrite
+	If Zoom.Ok = 'O'
+		If controler_evenement(EVTTIERS.EVENEMENT)=0 and GRTEVT.Cog_CltAff = 2 and EVTTIERS.Affaire = system.esp
+			MessageBox ("Veuillez saisir le No Affaire, cet évènement est lié à sa clotûre déjà faite.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+		ElsIf controler_evenement(EVTTIERS.EVENEMENT)=0 and GRTEVT.Cog_CltAff = 2 
+			If GR1.Choix(10) in (2,4) And Isdate(EVTTIERS.RealDt) 
+				Controle_Hierarchie_Precedent
+				If Zoom.Ok = 'O' And Seek_PRJAP(EVTTIERS.Affaire) = 0
+					PRJAP.Cog_Prj_Status = 'Terminé'
+					PRJAP.PROJETETATDT = Today
+					Hrewrite(GTFPROJ,PRJAP)
+				Endif
+			Endif
+		ElsIf controler_evenement(EVTTIERS.EVENEMENT)=0 and GRTEVT.Cog_Creprj = 2 
+		ElsIf EVTTIERS.Affaire = system.esp
+			MessageBox ("Veuillez saisir le No Affaire, celui-ci est obligatoire.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+		Endif
+		If GR1.Choix(10) in (1,3) | Controle_Hierarchie_Suivant | Endif
+		If GR1.Choix(10) in (2,4) And Isdate(EVTTIERS.RealDt) | Controle_Hierarchie_Precedent | Endif
+		If GR1.Choix(10) in (1,3) And (EVTTIERS.EvtEchDt < EVTTIERS.EvtDt Or EVTTIERS.EvtEchDt > EVTTIERS.EvtFinDt)
+			MessageBox ("La date de réalisation n'est pas dans l'intervalle dates Début/Fin.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+		Endif
+		If controler_evenement(EVTTIERS.EVENEMENT)=0 And Not (GRTEVT.Cog_Creprj = 2 Or GRTEVT.Cog_CltAff = 2) And \
+		 	GR1.Choix(10) in (2,4) And (EVTTIERS.RealDt < EVTTIERS.EvtDt Or EVTTIERS.RealDt > EVTTIERS.EvtFinDt)
+			MessageBox ("La date réalisée n'est pas dans l'intervalle dates Début/Fin.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
+		Endif
+	Endif
+Endp
+
+;*
+Procedure ZoomApresCreation 			; compte-rendu de création
+1	projet			8,0
+ 2 projet_alpha 	8
+1		i				X
+1		wdate			8
+1		zdate			8
+Beginp
+	Standard.ZoomApresCreation
+	If zoom.ok ='O' and controler_evenement(EVTTIERS.EVENEMENT)=0 and GRTEVT.Cog_CrePrj = 2
+		Loop Hshare (Gtfdos ,Formater_Res('G3SO') & SocNo.Dos,'R') = H_RESERVED 
+			Messagebox('Enregistrement des compteurs réservé par un autre utilisateur.','Attention',MB_OK)
+		Endloop
+		If Hseek(Gtfdos,Socno,['H' Socno.dos],'R') = 0
+			projet = Socno.Projet
+			projet ++
+			projet_alpha = Fstring("0",projet)
+			Socno.Projet = projet_alpha
+			Hrewrite(Gtfdos,Socno)
+			Hshare(Gtfdos,Formater_Res('G3SO') & SocNo.Dos ,"L") 
+			If Seek_PRJAV(projet_alpha) <> 0
+				PRJAV 			= ' '
+				PRJAV.CE1		= 'B'
+				PRJAV.CE2		= 'Z'
+				PRJAV.CE4		= '1'
+				PRJAV.DOS		= MZ.DOS
+				PRJAV.ETB		= MZ.ETB
+				PRJAV.PROJET 	 = projet
+				PRJAV.PROJETETAPE = 1
+				PRJAV.PRIOCOD	= 5
+				PRJAV.USERCR	= SYSTEM.USER
+				PRJAV.USERMO 	= ' '
+				PRJAV.TIERS		= EVTTIERS.TIERS
+				PRJAV.LIB80		= EVTTIERS.LIB80
+				If Not PRJAV.LIB80 = ' ' | PrjAv.LibAbr = Convertir_Nom_Nomabr(PrjAv.Lib80) | Endif	
+				PRJAV.USERCRDH	= Time(7)
+				PRJAV.USERMODH	= ' '
+				PRJAV.DOPDH		= ' '
+				PRJAV.CENOTE	= 1
+				PRJAV.NOTE		= 0
+				Hwrite(GTFPROJ,PRJAV)
+				If Hseek(COG_GRFEVT,EVTTIERS,'A' & MZ.Dos & EVTTIERS.EVTNO) = 0
+					EVTTIERS.Projet  = projet
+					EVTTIERS.Affaire = projet
+					Hrewrite(COG_GRFEVT,EVTTIERS)
+				Endif
+			Else 
+				Messagebox('Erreur de création de Projet No ' & projet & ', dèjà existant.','Attention',MB_OK)
+			Endif		
+		Else
+			Libr(Gtfdos,"R")
+			Hshare(Gtfdos,Formater_Res('G3SO') & SocNo.Dos,"L")
+			Messagebox('Erreur lecture des compteurs de Divalto, Projet non créé.','Attention',MB_OK)
+		Endif
+	ElsIf zoom.ok ='O' and controler_evenement(EVTTIERS.EVENEMENT)=0 and GRTEVT.Cog_CltAff = 2
+;		If Seek_PRJAP(EVTTIERS.Affaire) = 0
+;			PRJAP.Cog_Prj_Status = 'Terminé'
+;			PRJAP.PROJETETATDT = Today
+;			Hrewrite(GTFPROJ,PRJAP)
+;			zdate = Hdate(PRJAP.ProjetEtatDt,"P",1)
+;			COGGTF_TAB.Key = 'I' & PRJAP.DOS & PRJAP.ETB & PRJAP.Affaire
+;			Loop Hread(COGGTF_TAB,COG_UT108) = 0 And COG_UT108.Dos = PRJAP.DOS And COG_UT108.Etb = PRJAP.ETB And COG_UT108.Affaire = PRJAP.Affaire
+;				COG_UT108.Cog_Date_Debut = zdate
+;				If Cog_UT108.Cog_Duree_Limitee = 2 And Cog_UT108.Cog_Nombre_Cotisation > system.esp
+;					wdate = Hdate(Today,"P")
+;				 	Switch COG_UT108.Cog_Periodicite
+;						Case 1  ; Mensuelle
+;							COG_UT108.Cog_Date_Fin = Hdate(wdate,,COG_UT108.Cog_Nombre_Cotisation)
+;						Case 2  ; Bimestrielle
+;							COG_UT108.Cog_Date_Fin = Hdate(wdate,,COG_UT108.Cog_Nombre_Cotisation * 2)
+;						Case 3  ; Trimestrielle
+;							COG_UT108.Cog_Date_Fin = Hdate(wdate,,COG_UT108.Cog_Nombre_Cotisation * 3)
+;						Case 4  ; Semestrielle
+;							COG_UT108.Cog_Date_Fin = Hdate(wdate,,COG_UT108.Cog_Nombre_Cotisation * 6)
+;						Case 5  ; Annuelle
+;							COG_UT108.Cog_Date_Fin = Hdate(wdate,,COG_UT108.Cog_Nombre_Cotisation * 12)
+;					EndSwitch
+;					COG_UT108.Cog_Nombre_Cotisation_Restantes = Cog_UT108.Cog_Nombre_Cotisation
+;			 	Else
+;					COG_UT108.Cog_Date_Fin = '99991231'
+;					Maj_Nbre_Cotisations
+;				Endif				
+;				COG_UT108.UserMo = system.user
+;				COG_UT108.UserMoDh = Time(7)
+;				Hrewrite(COGGTF_TAB,COG_UT108)
+;			EndLoop
+;		Else 
+;			Messagebox("Erreur l'Affaire No " & EVTTIERS.Affaire & ', est inconnue.','Attention',MB_OK)
+;		Endif		
+	Endif
+Endp

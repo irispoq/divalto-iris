@@ -1,0 +1,28 @@
+SetModuleInfo('$Id: a5tzlog.dhsp 5419 2009-11-28 09:44:45Z als $')
+;>xdiva
+;*
+;*		Module principal du zoom sur le livre de bord																					scctylog
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		pb 		4.1						04.1999	Version initiale en Diva
+;*		hc			5.1						07.2000
+
+
+OverWrite	"A5TZlog_sql.dhop"
+
+include	"A5TCZ000.dhsp"
+
+HfileVersion	A5dd.dhsd 	A5FLOG
+
+public 	record 	gtfdd.dhsd 	SOC
+public	record	a5dd.dhsd	M8							; message d'erreur
+public 	record 	a5dd.dhsd 	M4 						; paramètres zoom
+
+;*
+procedure ZoomAvantDelete
+; Avant suppression de l'enregistrement
+beginp
+	Zoom.Ok = "N"
+endp	

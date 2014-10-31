@@ -1,0 +1,666 @@
+;*
+;*		COGESER  Interface d'exportation des écritures comptables à partir de DIVALTO Comptabilité
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		JDT		6.1			01			06.2009	Version initiale
+;*		RB			6.3			02			08.2011	Format U GIE IRIS
+
+OverWrittenBy "COGuCC_EXPORT_ECR.dhop"
+
+Include	gtTC000.DHSP
+Module	CCPMFIC.DHOP
+Module	Cogtm_ecr_exp.dhop
+
+; Fichiers
+Public HFile	GTFDD.DHSD	GTFDOS		GTFDOS_DEV_01			; Dossier Etablissement
+Public HFile	GTFDD.DHSD	GTFENT		GTFENT_DEV_01			; En tête de pièce
+Public HFile	GTFDD.DHSD	GTFPCF		GTFPCF_DEV_01			; Tiers
+Public HFile	CCFDD.DHSD	CCFECR		CCFECR_DEV_01			; Ecritures
+Public HFile	CCFDD.DHSD	CCFJCA		CCFJCA_DEV_01			; Intitulés
+Public HFile	CCFDD.DHSD	CCFVTL		CCFVTL_DEV_01			; Imputations et ventilations
+
+; Enregistrements
+Public Record	GTFDD.DHSD	SOC		SOC_DEV01					; Société
+Public Record	GTFDD.DHSD	SOC		SOC							; Société
+Public Record	GTFDD.DHSD	ETS		ETS_DEV01					; Etablissement
+Public Record	GTFDD.DHSD	ETS		ETS							; Etablissement
+Public Record	GTFDD.DHSD	ENT		ENT_DEV_01					; En tête de pièce
+Public Record	GTFDD.DHSD	CLI		CLI_DEV_01					; Client
+Public Record	GTFDD.DHSD	FOU		FOU_DEV_01					; Fournisseur
+Public Record	CCFDD.DHSD	C3			C3_DEV_01					; Plan comptable
+Public Record	CCFDD.DHSD	C4			C4_DEV_01					; Journaux
+Public Record	CCFDD.DHSD	C8			C8_DEV_01					; Ecritures
+Public Record	CCFDD.DHSD	CX			CX_DEV_01					; Ventilation sur les axes
+Public Record	CCFDD.DHSD	CP			CP_DEV_01					; Ventilation sur les pièces et les échéances
+public record  ccfdd.dhsd	ca			CA
+
+Public Record	GTFDD.DHSD	XZ			G3XZ
+Public Record	GTFDD.DHSD	XQ			XQ							; Jobqueue
+Public Record	A5DD.DHSD	MZ			MZ
+Public Record	DDSYS.DHSD	Implicite Implicite
+Public Record	* HTDF		TDF_01							; table définition fichier
+Public Record	* HTDF		TDF_02							; table définition fichier
+ 		
+1	Dossier		>GTFDD.DHSD	DOS = " "
+1	Etb			>GTFDD.DHSD	Etb = " "
+1	FicNom01		255 = " "
+1	FicNom02		255 = " "
+1	g_FichierTxt	B = false
+1	Texte			255 = " "
+1	s_datetrait	S
+1	d_datetrait	>GTFDD.DHSD UserCrDh
+1	x_user		>GTFDD.DHSD UserCr
+1	x_st_00		X
+
+1 Ligne	1000
+
+;*
+Public Function char COGF_CheminImplicites(s_implicite)
+; Variables
+1 s_implicite	>DDSYS.DHSD		Path	; Chemin implicte recherché
+
+1 l_Impl L			; liste pour les implicites
+
+1 l_st0	l
+1 l_st1	l
+
+BeginF
+	l_Impl = ListImplicitesGet	; Récupération des chemins implicites
+	ListBegin(l_Impl)				; Début de implicites
+	; Recherche de l'implicite contenant le mot passé en paramétre
+	Do
+		l_st0 = ListNext(l_Impl, Implicite)
+	While	l_st0 not in (0,-1)
+		l_st1 = String(FString("U",s_implicite) , FString("U",Implicite.Path))
+		If l_st1	>0
+			; Recherche du fichier contenant le préfixe passé en paramètre
+			l_st1 = l_st1-1
+			s_implicite = FString("U",Mid(Implicite.Path,1,l_st1)) & FString("U",Left(s_implicite)) ;& "/"
+			FReturn(s_implicite)
+		EndIf
+	Wend
+	l_Impl = ListImplicitesGet	; Récupération des chemins implicites
+	ListBegin(l_Impl)				; Début de implicites
+	l_st0 = ListNext(l_Impl, Implicite)
+	FReturn(FString("U",Implicite.Path))
+EndF
+
+;*	01
+Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL)
+
+1	t_CheminFichier	255
+1	t_NomFichier		255
+1	t_NomFichier_SAUV	255
+1	t_Dos					>GTFDD.DHSD	Dos
+1	t_Export				1,0					; 1 : Exportation, 2 : Réexportation
+1	t_ChronoD			>CCFDD.DHSD	COG_CHRONO
+1	t_ChronoF			>CCFDD.DHSD	COG_CHRONO
+1	t_SeparateurC		8						; Séparateur champ
+1	t_SeparateurL		8						; Séparateur ligne
+
+1	t_Ce1_01				>CCFDD.DHSD	Ce1
+1	t_Key_01				255
+1	x_st_01				X
+1	t_Ce1_02				>CCFDD.DHSD	Ce1
+1	t_Key_02				255
+1	x_st_02				X
+
+1	t_Chrono				>CCFDD.DHSD	COG_CHRONO
+1	t_TiCod				>GTFDD.DHSD	TiCod
+1	t_Ligne				2000
+
+1	a_numfic				1
+
+BeginF
+
+;*
+; Initialisation
+;*
+If s_datetrait = " " 
+	d_datetrait = Time(7)																															 
+	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+	s_datetrait = Fstring("0", s_datetrait)
+EndIf
+
+;*
+; Création du fichier TXT
+;*
+	; Le chemin du fichier est passé en paramètre dans la variable t_CheminFichier
+	t_NomFichier = Left(t_CheminFichier) & "/COMPTA-" & Left(d_datetrait) & ".TXT"
+	t_NomFichier_SAUV = Left(t_CheminFichier) & "/SAUV/COMPTA-" & Left(d_datetrait) & ".TXT"
+	; 1° test de l'existance du fichier.
+	TDF_01.Name = t_NomFichier
+	TDF_02.Name = t_NomFichier_SAUV
+	If FOpen(TDF_01) = 0 
+		FClose(TDF_01)
+		; Déplacement du fichier dans le répertoire sauvegarde
+		TDF_02.Name = Left(TDF_02.Name) & ".OLD"
+		x_st_01 = HCopyFile(TDF_01.Name, TDF_02.Name,,,,a_numfic)
+		If x_st_01 <> 0
+			t_ligne = "  - ERREUR : le fichier " & Left(t_NomFichier) & " existe déjà. -  "
+			G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+			Display Left(t_ligne)
+			t_ligne = "  - Fin de programme -  "
+			G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+			Display Left(t_ligne)
+			FReturn(" ")
+		EndIf
+		; Suppression de l'original
+		x_st_01 = HDeleteFile(t_NomFichier,x_st_01,,FALSE)
+		If x_st_01 <> 0
+			t_ligne = "  - ERREUR : le fichier " & Left(t_NomFichier) & " existe déjà. -  "
+			G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+			Display Left(t_ligne)
+			t_ligne = "  - Fin de programme -  "
+			G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+			Display Left(t_ligne)
+			FReturn(" ")
+		EndIf
+	EndIf
+	; 2° Création du fichier
+	x_st_01 = HCreateFile(Left(TDF_01.Name),"U",,False)
+	If x_st_01 <> 0
+		t_ligne = "  - ERREUR : le fichier " & Left(t_NomFichier) & " n'a pas pu être initialisé. -  "
+		G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+		Display Left(t_ligne)
+		t_ligne = "  - Fin de programme -  "
+		G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+		Display Left(t_ligne)
+		FReturn(" ")
+	EndIf
+	; La fonction Hopen permet d'ouvrir un fichier "à la main".
+	HOpen(TDF_01,"R")
+	; Herase efface le contenu du fichier.
+	HErase(TDF_01)
+
+	 	
+;*
+; Recherche du dernier numéro d'exportation
+;*
+
+seek_ca(t_dos)
+t_Ce1_01 = "8" 
+CCFECR_DEV_01.Key = GetKeyByName(CCFECR_DEV_01, "Index_COG_z_C8") & t_Dos & t_Ce1_01
+t_Key_01 = t_Dos & t_Ce1_01 & $FF
+x_st_01 = IPRead(CCFECR_DEV_01, C8_DEV_01, GetKeyByName(CCFECR_DEV_01, "Index_COG_z_C8"), t_Key_01)
+If x_st_01 = 0 And C8_DEV_01.Dos = t_Dos And C8_DEV_01.Ce1 = t_Ce1_01 And C8_DEV_01.COG_CHRONO <> " "
+	t_Chrono = C8_DEV_01.COG_CHRONO + 1
+Else
+	t_Chrono = "10000000"
+EndIf
+
+;*
+; Boucle sur les écritures
+;*
+t_Ce1_01 = "8" 
+CCFECR_DEV_01.Key = GetKeyByName(CCFECR_DEV_01, "Index_COG_z_C8") & t_Dos & t_Ce1_01
+t_Key_01 = t_Dos & t_Ce1_01
+Do
+	x_st_01 = IRead(CCFECR_DEV_01, C8_DEV_01, GetKeyByName(CCFECR_DEV_01, "Index_COG_z_C8"))
+While x_st_01 = 0 And C8_DEV_01.Dos = t_Dos And C8_DEV_01.Ce1 = t_Ce1_01
+	If (t_Export = 1 And C8_DEV_01.COG_CHRONO = " ") Or (t_Export = 2 And C8_DEV_01.COG_CHRONO in (t_ChronoD..t_ChronoF))
+		
+		;*
+		; Lecture des autres tables
+		;*
+		; Compte comptable
+		t_Ce1_02 = "3" 
+		if hseek(ccfjca_dev_01,c3_dev_01,"A"&C8_DEV_01.Dos&t_Ce1_02&C8_DEV_01.Cpt)
+			C3_DEV_01	= ""
+		endif
+
+		; Journaux
+		t_Ce1_02 = "4" 
+		if hseek(ccfjca_dev_01,C4_DEV_01,"D"&C8_DEV_01.Dos&t_Ce1_02&C8_DEV_01.Jnl)
+			C4_DEV_01	= ""
+		endif
+		; Recherche du type de tiers
+		Switch C4_DEV_01.JnlTyp
+			Case 1 ; Achat
+				t_TiCod = "F"
+			Case 2 ; Vente
+				t_TiCod = "C"
+			Default
+				t_TiCod = " "
+		EndSwitch
+
+		; En-tête de pièce
+		GTFENT_DEV_01.Key = "I" & C8_DEV_01.Dos & t_TiCod & "4" & C8_DEV_01.Piece
+		t_Key_02 = C8_DEV_01.Dos & t_TiCod & "4" & C8_DEV_01.Piece
+		x_st_02 = IRead(GTFENT_DEV_01, ENT_DEV_01, "I", t_Key_02)
+		If x_st_02 = 0 And ENT_DEV_01.Dos = C8_DEV_01.Dos And ENT_DEV_01.TiCod = t_TiCod And ENT_DEV_01.PiCod = "4" And ENT_DEV_01.PiNo = C8_DEV_01.Piece
+			ENT_DEV_01
+		Else
+			Init ENT_DEV_01 = " "
+		EndIf
+
+		; Tiers (client ou fournisseur)
+		Switch t_TiCod
+			Case "C" ; Client
+				t_Ce1_02 = "3"
+				GTFPCF_DEV_01.Key = "C" & C8_DEV_01.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
+				t_Key_02 = C8_DEV_01.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
+				x_st_02 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_02)
+				If x_st_02 = 0 And CLI_DEV_01.Dos = C8_DEV_01.Dos And CLI_DEV_01.Ce1 = t_Ce1_02 And CLI_DEV_01.Tiers = ENT_DEV_01.Tiers
+					CLI_DEV_01	
+				Else
+					Init CLI_DEV_01 = " "	 
+				EndIf
+			Case "F" ; Fournisseur
+				t_Ce1_02 = "4" 
+				GTFPCF_DEV_01.Key = "C" & C8_DEV_01.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
+				t_Key_02 = C8_DEV_01.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
+				x_st_02 = IRead(GTFPCF_DEV_01, FOU_DEV_01, "C", t_Key_02)
+				If x_st_02 = 0 And FOU_DEV_01.Dos = C8_DEV_01.Dos And FOU_DEV_01.Ce1 = t_Ce1_02 And FOU_DEV_01.Tiers = ENT_DEV_01.Tiers
+					FOU_DEV_01	
+				Else
+					Init FOU_DEV_01 = " "	 
+				EndIf
+			Default
+				Init CLI_DEV_01 = " "
+				Init FOU_DEV_01 = " "
+		EndSwitch
+
+		;*
+		;	Filtres
+		;*
+		if c4_dev_01.JnlTyp = 2 and c4_dev_01.Cog_ExportAnael = 2
+
+			;*
+			; Alimentation de la ligne à exporter
+			;*
+;			t_ligne = " " & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(ca.Cog_Dos_Anael) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(c8_dev_01.Etb) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(condition(c8_dev_01.CptCol<>"",c8_dev_01.CptCol,c3_dev_01.CptCol)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(C8_DEV_01.Cpt) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(year(C8_DEV_01.EcrDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(year(ENT_DEV_01.PiDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(month(ENT_DEV_01.PiDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(day(ENT_DEV_01.PiDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(year(ENT_DEV_01.PiDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(month(ENT_DEV_01.PiDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(day(ENT_DEV_01.PiDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(C8_DEV_01.Jnl) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & right(ENT_DEV_01.PiNo) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & "DI" & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & left(C8_DEV_01.Lib) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & right(ttcmt) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & condition(C8_DEV_01.Sens = 2,"0,010","-0,010") & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & right(ENT_DEV_01.TtcMt) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(year(ENT_DEV_01.EchDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(month(ENT_DEV_01.EchDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & val(day(ENT_DEV_01.EchDt)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & "1,00000" & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & left(ENT_DEV_01.Regl) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+; 			t_ligne = Left(t_ligne) & "999999" & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & left(C3_DEV_01.Axe(4)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & left(C8_DEV_01.Cpt) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;  			t_ligne = Left(t_ligne) & "999999" & Left(t_SeparateurC)
+; 			t_ligne = Left(t_ligne) & left(C3_DEV_01.Axe(4)) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & left(C8_DEV_01.Cpt) & Left(t_SeparateurC)
+; 			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurC)
+;			t_ligne = Left(t_ligne) & Left(t_SeparateurL)
+
+			
+			;*
+			; Enregistrement du numéro chrono uniquement en cas de nouvel export
+			;*
+			If t_Export = 1 And C8_DEV_01.COG_CHRONO = " "
+				C8_DEV_01.COG_CHRONO = t_Chrono
+				C8_Dev_01.Cog_ExpDt	= today
+				x_st_02 = IReWrite(CCFECR_DEV_01, C8_DEV_01)
+				If x_st_02 <> 0
+					t_ligne = "  - ERREUR : l'enregistrement du numéro chrono " & Left(t_Chrono) & " sur l'écriture comptable numéro " & Left(C8_DEV_01.EcrNo) & " a échoué.  -  "
+					G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+					Display Left(t_ligne)
+				EndIf
+			EndIf
+
+			; Ecriture dans le fichier
+			Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false),C8_DEV_01,"",4)
+			x_st_02 = FWritSt(TDF_01, Left(t_ligne))
+	
+;			;*
+;			; CX - Ventilation sur les axes
+;			;*
+;			t_Ce1_02 = "2" 
+;			CCFVTL_DEV_01.Key = "G" & t_Ce1_02 & C8_DEV_01.Dos & C8_DEV_01.EcrNo & C8_DEV_01.EcrLg
+;			t_Key_02 = t_Ce1_02 & C8_DEV_01.Dos & C8_DEV_01.EcrNo & C8_DEV_01.EcrLg
+;			Do
+;				x_st_02 = IRead(CCFVTL_DEV_01, CX_DEV_01, "G")
+;			While x_st_02 = 0 And CX_DEV_01.Ce1 = t_Ce1_02 And CX_DEV_01.Dos = C8_DEV_01.Dos And CX_DEV_01.EcrNo = C8_DEV_01.EcrNo And CX_DEV_01.EcrLg = C8_DEV_01.EcrLg
+;				t_ligne = "CX" & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Dos) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(ENT_DEV_01.Etb) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.EcrNo) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.EcrLg) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.MaskLg) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Axe(1)) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Axe(2)) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Axe(3)) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Axe(4)) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Cpt) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Jnl) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.EcrTyp) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.EcrDt) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Dev) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.UserCr) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.UserMo) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.UserCrDh) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.UserMoDh) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.UserCrOri) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.UserMoOri) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Mt) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.Sens) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.MtDev) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CX_DEV_01.MtBis) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(t_Chrono) & Left(t_SeparateurL)
+;				; Ecriture dans le fichier
+;				x_st_02 = FWritSt(TDF_01, Left(t_ligne))
+;	
+;			Wend
+;			;*
+;			; CP - Ventilation sur les pièces et les échéances
+;			;*
+;			t_Ce1_02 = "1" 
+;			CCFVTL_DEV_01.Key = "G" & t_Ce1_02 & C8_DEV_01.Dos & C8_DEV_01.EcrNo & C8_DEV_01.EcrLg
+;			t_Key_02 = t_Ce1_02 & C8_DEV_01.Dos & C8_DEV_01.EcrNo & C8_DEV_01.EcrLg
+;			Do
+;				x_st_02 = IRead(CCFVTL_DEV_01, CP_DEV_01, "G")
+;			While x_st_02 = 0 And CP_DEV_01.Ce1 = t_Ce1_02 And CP_DEV_01.Dos = C8_DEV_01.Dos And CP_DEV_01.EcrNo = C8_DEV_01.EcrNo And CP_DEV_01.EcrLg = C8_DEV_01.EcrLg
+;				t_ligne = "CP" & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.Dos) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(ENT_DEV_01.Etb) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.EcrNo) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.EcrLg) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.MaskLg) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.Cpt) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.Piece) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.EchDt) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.Lett) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.EcrTyp) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.Reg) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.Dev) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserCr) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserMo) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserLt) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserCrDh) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserMoDh) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserLtDh) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserCrOri) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserMoOri) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.UserLtOri) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.Mt) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.Sens) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.LettDt) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.MtDev) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(CP_DEV_01.MtBis) & Left(t_SeparateurC)
+;				t_ligne = Left(t_ligne) & Left(t_Chrono) & Left(t_SeparateurL)
+;				; Ecriture dans le fichier
+;				x_st_02 = FWritSt(TDF_01, Left(t_ligne))
+;
+;			Wend
+
+		endif
+	EndIf
+Wend
+
+;*
+; Fermeture du fichier TXT
+;*
+HClose(TDF_01)
+;; Sauvegarde du fichier
+;x_st_01 = HCopyFile(TDF_01.Name, TDF_02.Name,,,,a_numfic)
+;If x_st_01 <> 0
+;	t_ligne = "  - ERREUR : la sauvegarde du fichier " & Left(t_NomFichier) & " a échouée. -  "
+;	G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+;	Display Left(t_ligne)
+;EndIf
+
+FReturn(TDF_01.Name)
+
+EndF
+
+;*
+;* Programme Principal
+;*
+MAIN
+
+Dossier = 0
+Display  "*************************************************************"
+Display  "*** U GIE IRIS - Exportation des ecritures comptables       ***"
+Display  "*************************************************************"
+Display  " " 
+
+If PingReceive("ZEchange",MZ) = 0
+	; Initialisation des variables
+	Dossier = MZ.Dos
+	Seek_Soc(Dossier)
+	Etb = MZ.Etb
+	Seek_Ets(Etb)
+	x_user = SYSTEM.User
+Else
+	; Dossier
+	Input "0 - Taper le code dossier de DIVALTO : " Dossier
+	GTFDOS_DEV_01.KEY = "A" & Dossier
+	x_st_00	= HRead(GTFDOS_DEV_01, SOC_DEV01)
+	If x_st_00 <> 0 And SOC_DEV01.Dos <> Dossier
+		Input "ERREUR : Dossier invalide !" Dossier
+		ProgramExit
+	Else
+		Seek_Soc(Dossier)
+		MZ.DOS = Dossier
+	EndIf
+	; Etablissement
+	Input "1 - Taper le code etablissement de DIVALTO : " Etb
+	GTFDOS_DEV_01.KEY = "C" & Dossier & Etb
+	x_st_00	= HRead(GTFDOS_DEV_01, ETS_DEV01)
+	If x_st_00 <> 0 And ETS_DEV01.Dos <> Dossier And ETS_DEV01.Etb <> Etb
+		Input "ERREUR : Etablissement invalide !" Etb
+		ProgramExit
+	Else
+		Seek_Ets(Etb)
+		MZ.Etb = Etb
+	EndIf
+EndIf
+	
+Display  " " 
+; Début de l'importation
+Display  "*************************************************************"
+Display  "*** Début de l exportation des ecritures comptables       ***"
+d_datetrait = Time(7)																															 
+s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+s_datetrait = Fstring("0", s_datetrait)
+Display  s_datetrait
+G3_LOG_ANO(10011,s_datetrait,,,,,,,,"COG_FMSG.DHFI",,)
+;
+COGF_ExportationEcritures(COGF_CheminImplicites("COMPTA"), Dossier, 1, " ", " ", ";", " " & Chr(13) & Chr(10))
+;
+d_datetrait = Time(7)																															 
+s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+s_datetrait = Fstring("0", s_datetrait)
+G3_LOG_ANO(10012,s_datetrait,,,,,,,,"COG_FMSG.DHFI",,)
+Display  "*** Fin                                                   ***"
+Display  s_datetrait
+Display  "*************************************************************"
+Display  " " 
+
+; Restauration de l'environnement d'appel
+MZ.Dos = Dossier
+Seek_Soc(Dossier)
+MZ.Etb = Etb
+Seek_Ets(Etb)
+
+; Fin 
+Display "Fin du programme."
+Display  " "
+
+ProgramExit

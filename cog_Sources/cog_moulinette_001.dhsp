@@ -1,0 +1,16 @@
+;*
+Procedure Copie
+;
+1 t_origine			254
+1 t_destination	254
+BeginP
+	t_origine 		= "F:\tmp\2\ENT_105_F_2_10000001.dhvw"
+	t_destination	= "\\u3antw413\Divaltoficjoints\105\f\f3290801\2\ENT_105_F_2_10000001.dhvw"
+	if not wincopyfile(t_origine, t_destination,false)
+		display binhexa(stxl(wingetlasterror))
+	endif
+EndP
+
+;*
+main
+	Copie

@@ -1,0 +1,200 @@
+;*
+;*	Module avec les fonctions de formatage pour les zones des tables concernant DAV
+;*
+;05/2011	VR
+
+include gttc000.dhsp
+Module A5TM000.dhop
+
+Public Hfile	"cogfdd.dhsd"	Cog_FPeriodicite	Cog_FPeriodicite_01
+Public Record	"cogfdd.dhsd"	Cog_Periodicite	Cog_Periodicite_01
+;Public Hfile	"ccfdd.dhsd"	CCFJCA				CCFJCA_01
+;Public Record	"ccfdd.dhsd"	C5						C5_01
+
+Public Record "A5dd.dhsd"  mz																		
+
+;;*
+;; Fonction de formatage de zone cli.tiers
+;public function char Cog_Ctrl_Cog_AxeAnael(ZoneRec)
+;1	ZoneRec	a
+;1	ChRetour 8
+;1	x_st_01	x
+;1	t_key_01	256
+;1	t_AxeNo	>CCFDD.DHSD	AxeNo
+;beginf
+;	t_AxeNo = 1
+;	CCFJCA_01.Key = "G" & MZ.DOS & t_AxeNo & ZoneRec
+;	t_key_01 = MZ.DOS & t_AxeNo & ZoneRec
+;	x_st_01 = IRead(CCFJCA_01,C5_01,"G",t_key_01)
+;	If x_st_01 = 0 And C5_01.Dos = MZ.Dos And C5_01.AxeNo = t_AxeNo And C5_01.Axe = ZoneRec
+;		ChRetour = C5_01.Axe
+;	Else
+;		ChRetour = " "
+;	Endif
+;	freturn(ChRetour)	
+;endf
+
+;*
+; Fonction de formatage de zone cli.tiers
+public function char Cog_Format_CodeTiers(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	8
+beginf
+	if length(ZoneRec) < 8
+		ChRetour = Mid("C0000000",1,8-length(ZoneRec)) & left(ZoneRec)
+	else
+		Chretour = left(ZoneRec)
+	endif
+	freturn(Chretour)
+endf
+
+;*
+;	Fonction d'initialisation de la zone NomAbr en fonction de la donnée en entrée
+public function char Cog_Format_NomAbr(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	8
+beginf
+	If ZoneRec <> " "
+		ChRetour = Convertir_Nom_Nomabr(ZoneRec)
+	EndIf
+	freturn(ChRetour)
+endf
+
+;*
+;	Fonction d'initialisation de la zone CPTCOL en fonction de la donnée en entrée
+public function char Cog_Format_CPTCOL(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	8
+beginf
+	If ZoneRec <> " "
+		ChRetour = Left(Left(ZoneRec) & "00000000",8)
+	EndIf
+	freturn(ChRetour)
+endf
+
+;*
+;	Fonction d'initialisation de la zone TVAT en fonction de la donnée en entrée
+public function char Cog_Format_TVAT(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	1,0
+beginf
+	Switch ZoneRec
+		Case "A"	; Régime Normal
+			Chretour = 0
+		Case "C"	; Régime Corse
+			Chretour = 1
+		Case "D"	; Régime DOM
+			Chretour = 2
+		Case "T"	; Régime TOM
+			Chretour = 3
+		Case ZoneRec in ("E","N")	; Régime export
+			Chretour = 9
+		Default
+			Chretour = 0
+	EndSwitch
+	freturn(ChRetour)
+endf
+
+;*
+;	Fonction d'initialisation de la zone COG_CENTRALE en fonction de la donnée en entrée
+public function char Cog_Format_COG_CENTRALE(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	256
+beginf
+	Switch ZoneRec
+		Case "1"	; C0010000
+			Chretour = ZoneRec
+		Case "2"	; C0020000
+			Chretour = ZoneRec
+		Case "3"	; C0030000
+			Chretour = ZoneRec
+		Case "5"	; C0050000
+			Chretour = ZoneRec
+		Case "6"	; C0060000
+			Chretour = ZoneRec
+		Default
+			Chretour = ZoneRec
+	EndSwitch
+	freturn(Left(ChRetour))
+endf
+
+;*
+;	Fonction d'initialisation de la zone FEU en fonction de la donnée en entrée
+public function char Cog_Format_Feu(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	1
+beginf
+	Chretour = "1"
+	if ZoneRec = "NA"
+		; FRI 22/05/2013 mise à jour développement spécifique UGIE IRIS
+		; modification du traitement des pdv suspendu passage au feu rouge
+		; Chretour = "2"
+		Chretour = "3"
+	elsif ZoneRec = "RA"
+		ChRetour = "3"
+	endif
+	freturn(Chretour)
+endf
+
+;*
+; FRI 22/05/2013 mise à jour développement spécifique UGIE IRIS
+;	Fonction d'initialisation de la zone VISA en fonction de la donnée en entrée
+public function char Cog_Format_Visa(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	1
+beginf
+	Chretour = "2"
+	if ZoneRec = "NA"
+		Chretour = "1"
+		; on décoche le visa administratif si le pdv est suspendu
+	elsif ZoneRec = "RA"
+		ChRetour = "1"
+		; on décoche le visa administratif si le pdv est radié
+	endif
+	freturn(Chretour)
+endf
+
+;*
+; Fonction d'initialisation de la zone HSDT
+public function char Cog_Format_Hsdt(ZoneRec)
+1	ZoneRec	a
+1	ChRetour 8
+beginf
+	if ZoneRec = "0"
+		ChRetour = Today
+	else
+		ChRetour = " "
+	endif
+	freturn(ChRetour)	
+endf
+
+;*
+;Fonction de formatage des O en 2 et des N en 1
+Public function char Cog_Format_OuiNon(ZoneRec)
+1	ZoneRec	a
+1	ChRetour	8 
+beginf
+	if ZoneRec = "O"
+		ChRetour = "2"
+	elsif ZoneRec = "N"
+		ChRetour = "1"
+	endif
+	freturn(ChRetour)	
+endf
+
+;*
+; Fonction d'initialisation de la zone HSDT
+public function char Cog_Format_Cog_Periodicite(ZoneRec)
+1	ZoneRec	a
+1	ChRetour 1
+1	x_st_01	x
+beginf
+	Cog_FPeriodicite_01.Key = GetKeyByName(Cog_FPeriodicite_01,"Cog_Periodicite_UGIEIRIS") & MZ.DOS & MZ.Etb & ZoneRec
+	x_st_01 = IRead(Cog_FPeriodicite_01,Cog_Periodicite_01,GetKeyByName(Cog_FPeriodicite_01,"Cog_Periodicite_UGIEIRIS"))
+	If x_st_01 = 0 And Cog_Periodicite_01.Dos = MZ.Dos And Cog_Periodicite_01.Etb = MZ.Etb And Cog_Periodicite_01.Cog_PeriodU = ZoneRec
+		ChRetour = Cog_Periodicite_01.Cog_Period
+	Else
+		ChRetour = " "
+	Endif
+	freturn(ChRetour)	
+endf

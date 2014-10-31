@@ -1,0 +1,131 @@
+;>xwin4obj                              7.0       20140425160508      
+[masque]
+ utilisateur="UGIE"
+ date_modification="25/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ dernier_id=62
+ dernier_id_page=4
+[defaut]
+ [aide_page]
+  aide=0
+[enregistrements]
+ "gtfdd.dhsd",,xz,g3xz,1800,0
+[page]
+ numero=1
+ fond="STD"
+ titre="Calcul du % eco"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=1
+ [bitmap_constante]
+  [presentation]
+   position=34,24
+   taille=16,16
+   actionbitmap=reduire
+   id=33
+  [param_bitmapc]
+   wnom="INFOG"
+ [groupbox]
+  [presentation]
+   position=6,6
+   taille=213,346
+   attache_lgx=oui
+   attache_lgy=oui
+   id=31
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélections"
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=23,18
+   taille=40,321
+   id=32
+  [param_cadre]
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="STD"
+ [obj_texte]
+  [presentation]
+   position=34,51
+   taille=9,266
+   id=34
+   wstyle="STD"
+  [texte]
+   texte="Ce programme recalcule le % de dépendance éco des fournisseurs sélectionnés (date de bilan renseignée)."
+ [obj_texte]
+  [presentation]
+   position=47,51
+   taille=9,255
+   id=35
+   wstyle="STD"
+  [texte]
+   texte="Il se base sur la somme des factures actives sur 12 mois glissants par rapport à la date de bilan."
+[page]
+ numero=2
+ fond="STD"
+ nb_lig=1
+ nb_col=80
+ offset_lig=21
+ offset_col=6
+ ident_unique=4
+ [champ]
+  [presentation]
+   position=1,9
+   taille=8,308
+   id=26
+   colonnes_saisie=256
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=xz,fic,g3xz
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[ressources]
+ [toolbar]
+  ident="MAIN"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+include "GTTC000.dhsp"
+
+public hfile	gtfdd.dhsd 	GTFDOS 	GTFDOS
+
+Public Record "gtfdd.dhsd" ent ent
+Public Record "gtfdd.dhsd" xz g3xz
+Public Record "gtfdd.dhsd" ets ets
+Public record	A5DD.dhsd	MZ
+Public Record "gtfdd.dhsd" xq g3xq
+
+
+[/diva]
+[diva_base]
+[/diva]

@@ -1,0 +1,438 @@
+;*----------------------------------------------------------------------------
+;* Evènement répertoire avec paramétrage XBAL : SCRUTATEUR
+;* FT 2005 pour Cohérence
+;* MAJ SR 2005 pour Harmony / Divalto
+;*-----------------------------------------------------------------------------
+;_10/2006		SR		03		Migration 5.6
+;_10/2008		SR		04		Enrichissement commentaire sur exemple imothep neho pour diffusion
+
+
+;*
+;*	Working
+;*
+
+Module	"COGE_FONCT.dhop"
+Module	"YSYSTEMEX.dhop"
+
+Hfile		ddsys.dhsd	xbalf		xbalf		noopen	noversioncheck
+
+Record	ddsys.dhsd	action	action
+
+1	ticket	x*15					; Ticket
+1	dir		256*15				; Répertoire à traiter
+1	prg		32*15					; Programme à lancer
+1	filtre1	32*15					; Filtres possibles
+1	filtre2	32*15					; Filtres possibles
+1	st			x						; Status
+1	i			x						; Compteur pour borner le nb d'action possible (MAIN)
+
+DEFINE	LgMenu         = 300
+DEFINE	LgChoix        = 50
+DEFINE	LgChoixMoins10 = 40
+DEFINE	NbChoixPlus1   = 3
+
+;*
+;* Procédures & Fonctions
+;*
+
+;* Function qui test l'existance d'un chemin en mode windows
+;* retourne 0 = non trouvé, 1 = fichier, 2 = répertoire
+public function ptr f_winopendir(nombase)
+1  nombase  A			 ;chemin 
+1	pp			x
+1	hdir		L
+1	lg			x
+1	err		L
+1   Bufdir                400    ; zone réceptrice 
+ 3  Attributs               L
+ 3  HeureCreation           8
+ 3  HeureAcces              8
+ 3  HeureEcriture           8
+ 3  TaillePoidsForts        L
+ 3  TaillePoidsFaibles      L
+ 3  f1                      L
+ 3  f2                      L
+ 3  Nom                    260
+ 3  NomCourt               14
+record 'ddsys.dhsd'   OPDIR      OP
+record 'ddsys.dhsd'   ELTDIR     EL
+1	Mode	1,0
+beginf
+	Define reseau = 1
+	Define locale = 2
+	mode = locale
+	pp = 0
+	lg = length(nombase)
+	if mid(nombase,lg,1) = '\'
+		 lg = lg - 1
+	endif
+		 
+   hdir = WinFindFirstFile(mid(nombase,1,lg), Bufdir)    
+   if hdir = -1
+		op.racine = mid(nombase,1,lg)
+		op.prefixe = "*"
+		If DirOpen(op) = 0
+			Mode = Reseau
+		Else
+      	freturn(0)
+		EndIf
+   endif
+	Switch2 Mode
+		case locale
+		   Repeat
+				if left(nom,1) <> "." 
+				   if band(Attributs , FILE_ATTRIBUTE_DIRECTORY)
+						pp = 2
+					else
+						pp = 1
+					endif
+				endif
+			Until pp > 0 or WinFindNextFile(hdir, Bufdir) = FALSE
+		   WinFindClose(hdir)
+		Case reseau
+			loop DirRead(op,el) = 0
+				if left(el.nom,1) <> "." 
+				   if el.Flagdir = True
+						pp = 2
+					else
+						pp = 1
+					endif
+				endif
+			endloop
+			DirClose(op)
+	EndSwitch
+	freturn(pp)
+endf	    
+
+;* test un fichier en chemin windows ou harmony 
+;* 1 = le fichier existe, 0 = il n'existe pas
+public function int f_exist(fic,sys)
+1 fic A		  ;fichier à tester
+1 sys A='W'	  ;W = windows	 autre = harmony
+1 sy	1	 
+1 lon L
+Record * htdf sav		
+beginf
+	sy = fstring('U',sys)
+	if sy = 'W'
+		lon = WinCreateFile(left(fic),GENERIC_READ,0,0,OPEN_existing,0,0)   
+		if lon = -1
+		    freturn(0)
+		endif
+		winclosehandle(lon)
+	else
+		sav.name = fstring('F',fic)
+		if sav.name = ' ' or f_hopen(sav,'P')
+			 freturn(0)
+		endif
+		hclose(sav)
+	endif
+	freturn(1)
+endf
+
+;* Procedure pour ouvrir un fichier sur le rep
+procedure p_resrep(rep)
+1	rep	A
+ 1	wri	1
+ record * htdf arret	
+beginp
+	If f_exist(rep)= 1
+	 arret.name = '/divalto/' & left(system.zuser) & '/arret'
+	EndIf
+	If f_hopen(arret,'P') 
+		HCreateFile( arret.name,'U')
+	Else
+		hclose( arret)
+	EndIf
+endp
+
+
+;* Traitement des fichiers avec gestion de l'arret et gestion du non traitement
+;* Recopie des fichiers dans dir/sav
+function ptr EvFolderExecuteATraiter(dirimport,progcall,filt1,filt2, ticketp)
+1   dirimport 				A
+1	 progcall				A
+1	filt1						32 = ' '
+1	filt2						32 = ' '
+	
+1   Bufdir					400    
+ 2  Attributs           L
+ 2  HeureCreation       8
+ 2  HeureAcces          8
+ 2  HeureEcriture       8
+ 2  TaillePoidsForts    L
+ 2  TaillePoidsFaibles  L
+ 2  f1                  L
+ 2  f2                  L
+ 2  Nom                 260
+ 2  NomCourt            14
+
+1	 hdir						L
+1   hd						L
+1 	 st						L
+1 	 err						L
+1	 fic2						260
+1		Adrfct				16
+1	 fichier						260
+1	 fichier2						260
+1	adr						100
+1	objet						100
+1	b_Filtre					B
+1	a_DEST					256
+1	NID						9,0
+1	nI							1,0
+1	mode						1,0
+1	ticketp	x					; Ticket
+1	hd2						L
+beginf
+	;  lecture du premier fichier
+	hdir = WinFindFirstFile(HmpSeek(dirimport,'repertoire') && "\*" , Bufdir)
+	if hdir = -1 |  freturn  0 |   endif
+	Repeat
+		;sauf si c'est un sous repertoire ou un fichier qui ne répond pas aux ritères des filtres
+		b_FILTRE = False
+		FILT1 = HmpSeek(dirimport,'filtre1')
+		FILT2 = HmpSeek(dirimport,'filtre2')
+		FILT1 = Condition(FILT1 <> " ", '*' && FILT1 && '*', " ")
+		FILT2 = Condition(FILT2 <> " ", '*' && FILT2 && '*', " ")
+		b_FILTRE = True
+		If FILT1 <> ' ' 
+			If Nom like FILT1
+				b_FILTRE = True
+			Else
+				b_FILTRE = False
+			EndIf
+		EndIf
+		If FILT2 <> ' ' 
+			If Nom like FILT2
+				b_FILTRE = True
+			Else
+				b_FILTRE = False
+			EndIf
+		EndIf
+		; Vérifications d'usages sur le fichier à traiter + test filtre précédent
+	   if band(Attributs, FILE_ATTRIBUTE_DIRECTORY) = 0 and Nom <> "." and Nom <> ".." and b_FILTRE = True
+	      fichier = HmpSeek(dirimport,'repertoire') && "\" && Nom
+         ; Il faut d'abord voir si on peut l'ouvrir pour s'assurer que la copie est terminée ou non
+         hd = WinCreateFile( left(fichier), GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING,0,0)        
+         if hd = -1
+            ; s'il y a une erreur de partage , c'est que le programme n'a pas fini d'écrire le fichier
+            ; on demande alors d'être réveillé dans x secondes, 
+            ; on ne boucle pas sur l'ouverture de fichier afin de ne pas ralentir le serveur inutilement
+            ; les réveils sont fusionnées et optimisés : si on appelle 100 fois EvFolderWriteEvent
+            ; on ne reçoit pas 100 fois le réveil , le module est intelligent et il optimise pour n'envoyer que
+            ; 1 fois le dernier réveil et que si on n'a pas eu de réveil de la part du gestionnaire de fichiers
+            ; de windows durant le temps des xx secondes qu'on a demandé
+            EvFolderWriteEvent (ticketp,30)
+         else
+         	; on recupère la suite pour avoir le nom du fichier qui a provoqué le réveil
+            ; le fichier est présent et disponibles et ouverts
+            ; ne reste plus qu'à faire le traitement prévu
+            WinCloseHandle(hd)
+				fic2 = HmpSeek(dirimport,'repertoire') && "\" && left(Filenamelastsegment(fichier))
+				st = WinEndSessionLock($e8,0)													; Protection contre arret Win
+				WinFindClose(hdir)
+				If st 
+					freturn st
+				EndIf
+				If fstring('U',filenamelastsegment(fic2)) = 'ARRET'
+					windeletefile(left(fic2))
+					freturn(99) 																	; arret
+				EndIf
+				; Envois des paramètres au programme a executer
+				ping("ACTION_REP", left(dirimport))
+				ping("ACTION_REP_FIC", left(fic2))
+				; Lancement du programme
+				ProgramCall(progcall)															; Appel du programme
+				st = WinEndSessionUnlock														; Fin protection contre arret Win
+				If st 
+					freturn st
+				EndIf
+				If f_exist(fic2) = 1 															; le fichier n'a pas été traité ou on laisse le déplacement de celui-ci au scrutateur
+					windeletefile(FileNameBase(fic2) & '/sav/' & FileNameLastSegment(fic2))
+					If WinMoveFile(left(fic2), FileNameBase(fic2) & '/sav/' & FileNameLastSegment(fic2)) = 0
+						freturn(98)
+					EndIf
+				EndIf
+				; Stop car tache arrétée brutalement ou plantée
+				If WinEndSessionUnLock <> 0
+					WinSetTrayBar(0)
+					ProgramGoto "xquit"
+				EndIf
+				; Tempo
+				sleep(500)
+				hdir = WinFindFirstFile(HmpSeek(dirimport,'repertoire') && "\*" , Bufdir)
+	 			If hdir = -1 |  freturn  0 |   EndIf
+            WinDeleteFile(left(fichier))
+			endif 
+		endif 
+	until WinFindNextFile(hdir, Bufdir) = false                     
+   WinFindClose(hdir)
+	freturn 0
+endf
+
+;* Menu de l'icone en barre de tâche
+public function char   MenuTrayBar
+1     Menu      LgMenu                  ;LgChoix x NbChoixPlus1  doit être PAIRE et au plus égale à 254+10                                       
+  2   TabChoix  LgChoix * NbChoixPlus1  ;table des choix :
+    3 Libelle   LgChoixMoins10          ;libellé (254 maxi)
+    3 Type      B                       ;type
+    3 NatCoche  B                       ;nature du coche
+    3 EtatCoche B                       ;coché / non coché
+    3 EtatGrise B                       ;grisé / non grisé
+    3 NumChoix  X                       ;no identIfiant le choix
+    3 Touche    B                       ;touche à générer ou $00
+    3 Filler    3                       ;réservé usage ultérieur
+ 
+1     ChoixIdent  X                     ;choix sélectionné
+1     ChoixIndice X                     ;indice en table
+1     ChoixCoche  B                     ;valeur de la coche
+beginf
+	INIT Menu = $00                         
+	Libelle   (1) = "Arrêt du programme"
+	Type      (1) = Menu_Text
+	NatCoche  (1) = Menu_Manual
+	EtatCoche (1) = Menu_Unchecked
+	EtatGrise (1) = Menu_Enabled
+	NumChoix  (1) = 1003
+	Touche    (1) = 0
+	Libelle   (2) = "Ne pas arrêter le programme"
+	Type      (2) = Menu_Text
+	NatCoche  (2) = Menu_Manual
+	EtatCoche (2) = Menu_Unchecked
+	EtatGrise (2) = Menu_Enabled
+	NumChoix  (2) = 1004
+	Touche    (2) = 0
+	Type      (3) = Menu_End
+	ChoixIdent = MenuPopup (Menu, LgMenu, LgChoix, Menu_Task_Memory, ChoixIndice, ChoixCoche)
+	switch ( ChoixIdent ) 
+		case 1003 
+			freturn $E8
+	endswitch
+	freturn 0
+endf
+
+;* Fonction qui attend et traite les événements
+public function ptr EvFolderWait(nbdir)
+1  nbdir     n
+1  i         x
+1  fini      x
+1	car	    1 = ' '
+1	st			 x
+1  del		 5,0	
+beginf
+	;ouverture de la dll xhareventfolder
+	;on met le caractere $e0 dans le buffer
+	;on demande a etre réveillé au moins toutes les 15 minutes
+	del = val(f_readini('COGE_EVENT_DELAY','S')) 
+	If del = 0
+		del = 15
+	EndIf
+	del = 60 * del
+	If EvFolderOpen($e0,del)
+		;display "Impossible de charger la dll xhareventfolder.dll"
+		freturn 1
+	EndIf
+	; On crée un espion sur chaque répertoire et on regarde tout de suite s'il reste des fichiers non traité
+	For i = 1 to nbdir
+		If HmpSeek(dir(I),'repertoire') <> ' '
+			EvFolderExecuteATraiter(dir(I),prg(I),filtre1(i),filtre2(i), ticket(i))		;on vide le répertoire
+			ticket(i) = EvFolderStart( HmpSeek(dir(i),'repertoire'))							;evenement sur "répertoire"
+			If ticket(i) <> 0
+				EvFolderWriteEvent(ticket(i),10)														;on commence par lire les repertoires
+			EndIf
+		EndIf
+	Next
+	; Bcle de "scrutation"
+	fini = 0
+	do 
+	while fini = 0 
+		If servicemode	= 0
+ 			car = getbchar() 								 												; Attente d'un evenement
+		Else
+			cm(408,ptr(car))
+		EndIf 
+		If car = "F" or car = "f" or car = $e8 or car = f_f9									; F9
+			; On sort directement il ne faut pas regarder s'il y a des messages 
+			; car c'est peut être l'arret de la machine et on aura pas le temps 
+			; de traiter les messages + display "Fin du programme " 
+			fini = 1
+		ElsIf CAR= $F4																						; Simple appel a au menu
+			car = MenuTrayBar
+			If  car = $e8
+				fini = 1
+			EndIf
+		ElsIf car = $e0 																					; Gestion de l'evennement
+			do
+				i = EvFolderGet   																		; on lit l'evenement. A faire obligatoirement pour vider la pile des evenements
+				; si i = 0 alors plus de message
+			while i <> 0				
+				st = EvFolderExecuteATraiter(dir(I),prg(I),filtre1(i),filtre2(i), ticket(i))
+				If st
+					EvFolderClose
+				   freturn st
+				EndIf
+			wend
+		EndIf
+	wend
+
+	EvFolderClose
+	freturn 0
+endf
+
+;*
+;* Programme principal
+;*
+Main 
+	
+	; Mode lancement du programme
+	If servicemode	<> 0
+		WinSetTrayBar($F4,"xexec4.exe;20","Service Divalto Evènements Répertoires")
+	Else
+		WinEndSessionNoDialog
+		WinSetTrayBar($F4,"xexec4.exe;20","Divalto Evènements Répertoires")
+	EndIf
+	 
+	; On demande de ne pas afficher la boite de dialogue lorsqu'on sort de Divalto
+	WindowShow(SW_HIDE)
+
+	; Bcle de mémorisation des actions à effectuer 5 au maxi commençant par COGE_REP
+	xbalf.name = 'xbal.dhfi'
+	Hopen(xbalf,'P')
+	xbalf.key = 'ACOG_ECHANGE'
+	i = 1
+	Loop f_hread(xbalf,action)=0 and action.BALACTION like 'COG_ECHANGE*' and i <= 5
+		dir(i) = left(action.BALPARAM) 
+		
+		;If f_winopendir(HmpSeek(dir(i),'repertoire')) <> 2				; le répertoire doit exister
+		;	dir(i) = ' '														; REM BY SR cause ne fonctionne pas pour partage réseau à la racine d'un lecteur type H:
+		;Els
+
+		; Création d'un répertoire de sauvegarde = sous répertoire sav du répertoire de travail
+		; Vous pouvez déplacer les fichiers traiter par vos programmes ou laisser faire le scrutateur
+		If f_winopendir(HmpSeek(dir(i),'repertoire')&& '\sav') <> 2
+			If WinCreateDirectory (HmpSeek(dir(i),'repertoire')&& '\sav')	= 0
+			 	dir(i) = ' '														; Impossible de creer le sous répertoire de sauvegarde
+			EndIf
+		EndIf
+
+		; Mémorisation des programmes et paramètres dans un tabeau dc 5 maxi 
+		If dir(i) <> ' '
+			prg(I)		= fstring('U',action.PROGRAMME)
+			filtre1(I)	= HmpSeek(dir(i),'filtre1',' ')
+			filtre2(I)	= HmpSeek(dir(i),'filtre2',' ')
+			i++
+		EndIf
+	EndLoop
+	Hclose(xbalf)
+
+	; --- Le coeur de l'affaire --- :
+	; Attente évènnement pour traitements suivant actions précédemment mémorisées
+	If dir(*) <> ' '
+		st = EvFolderWait(index(dir(),1))
+	EndIf
+	
+
+	; Fin
+	WinSetTrayBar(0)
+	ProgramGoto "xquit"

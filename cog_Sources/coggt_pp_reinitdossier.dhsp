@@ -1,0 +1,1178 @@
+																					 
+;*
+;*	COGESER - Outil de ré-initialisation d'un dossier
+;*
+
+;*		Log	 Version	  N°modIf		Date		Modifications
+;*
+;*		**			6.3		01				09/2011	Version initiale
+
+OverWrittenBy "COGGTuPP_REINITDOSSIER.DHOP"
+
+include	"gttc000.dhsp"
+module	"cogtm_000.dhop"
+module	"ccpm000.dhop"
+
+
+hfile	ccfdd.dhsd	ccfdos			ccfdos				openonuse
+hfile	gtfdd.dhsd	gtfdos			gtfdos				openonuse
+
+hfile	gtfdd.dhsd	gtfat				gtfat					openonuse
+hfile	gtfdd.dhsd	gtfrf				gtfrf					openonuse
+
+hfile	gtfdd.dhsd	gtfpcf			gtfpcf				openonuse
+hfile	gtfdd.dhsd	gtfpcfindex		gtfpcfindex			openonuse
+
+hfile	gtfdd.dhsd	gtfnom			gtfnom				openonuse
+hfile	ggfdd.dhsd	ggfgam			ggfgam				openonuse
+
+hfile	gtfdd.dhsd	gtfof				gtfof					openonuse
+hfile	gtfdd.dhsd	gtfoftrc			gtfoftrc				openonuse
+hfile	ggfdd.dhsd	ggfof				ggfof					openonuse
+hfile	ggfdd.dhsd	ggfbr				ggfbr					openonuse
+hfile	ggfdd.dhsd	ggfsuivi			ggfsuivi				openonuse
+
+hfile	ggfdd.dhsd	ggfpro			ggfpro				openonuse
+
+hfile	gtfdd.dhsd	gtfproj			gtfproj				openonuse
+hfile	cogfdd.dhsd	coggtf_tab		coggtf_tab			openonuse
+
+hfile	gtfdd.dhsd	gtfent			gtfent				openonuse
+hfile gtfdd.dhsd	gtfam				gtfam					openonuse
+hfile	gtfdd.dhsd	gtfvtl			gtfvtl				openonuse
+hfile	gtfdd.dhsd	gtfres			gtfres				openonuse
+hfile	gtfdd.dhsd	gtfbp				gtfbp					openonuse
+hfile	gtfdd.dhsd	gtfcbn			gtfcbn				openonuse
+hfile	gtfdd.dhsd	gtfdes			gtfdes				openonuse
+hfile	gtfdd.dhsd	gtftva			gtftva				openonuse
+hfile	gtfdd.dhsd	gtfinv			gtfinv				openonuse
+hfile	gtfdd.dhsd	gtfpan			gtfpan				openonuse
+hfile	gtfdd.dhsd	gtfstat			gtfstat				openonuse
+hfile	cogfdd.dhsd	cog_fvalid_cde	cog_fvalid_cde		openonuse
+
+hfile ccfdd.dhsd	ccfecr			ccfecr				openonuse
+hfile	ccfdd.dhsd	ccfvtl			ccfvtl				openonuse
+hfile	ccfdd.dhsd	ccfjca			ccfjca				openonuse
+hfile	ccfdd.dhsd	ccftsc			ccftsc				openonuse
+hfile cogfdd.dhsd	cog_freddition	cog_freddition		openonuse
+
+hfile	cogfdd.dhsd	coggrf_tab		coggrf_tab			openonuse
+hfile	grfdd.dhsd	grfevt			grfevt				openonuse
+
+
+Public Record "ccfdd.dhsd" cn
+Public Record "gtfdd.dhsd" soc
+Public Record "gtfdd.dhsd" socno
+Public Record "gtfdd.dhsd" ets
+
+public record "a5dd.dhsd"	mz
+Public Record "gtfdd.dhsd" xq xq
+
+public record "gtfdd.dhsd"	art
+public record "gtfdd.dhsd" artdepo
+public record "gtfdd.dhsd" artstoc
+public record "gtfdd.dhsd" artweb
+public record "gtfdd.dhsd" dar
+public record "gtfdd.dhsd" lart
+public record "gtfdd.dhsd" rcl
+public record "gtfdd.dhsd" rfo
+public record "gtfdd.dhsd" rso
+public record "gtfdd.dhsd" sart
+public record "gtfdd.dhsd" sartCstd
+public record "gtfdd.dhsd" tar
+public record "gtfdd.dhsd" tarpromo
+public record "gtfdd.dhsd" tfo
+public record "gtfdd.dhsd" tfopromo
+public record "gtfdd.dhsd" tfore
+public record "gtfdd.dhsd" tforepromo
+public record "gtfdd.dhsd" tre
+public record "gtfdd.dhsd" trepromo
+public record "gtfdd.dhsd" eart
+
+public record "gtfdd.dhsd" cli
+public record "gtfdd.dhsd" fou
+public record "gtfdd.dhsd" pro
+public record "gtfdd.dhsd" vrp
+public record "gtfdd.dhsd" tia
+public record "gtfdd.dhsd" t1
+public record "gtfdd.dhsd" t2
+public record "gtfdd.dhsd" t3
+public record "gtfdd.dhsd" pcfidx
+
+public record "gtfdd.dhsd" ba
+public record "gtfdd.dhsd" bb
+public record "ggfdd.dhsd" bc
+public record "ggfdd.dhsd" bd
+public record "ggfdd.dhsd" be
+
+public record "gtfdd.dhsd" bf
+public record "gtfdd.dhsd" bg
+public record "gtfdd.dhsd" bk
+public record "gtfdd.dhsd" bt
+public record "gtfdd.dhsd" bu
+public record "ggfdd.dhsd" bh
+public record "ggfdd.dhsd" bi
+public record "ggfdd.dhsd" bj
+public record "ggfdd.dhsd" bp
+public record "ggfdd.dhsd" bq
+public record "ggfdd.dhsd" br
+public record "ggfdd.dhsd" bs
+public record "ggfdd.dhsd" bx
+public record "ggfdd.dhsd" brcomp
+public record "ggfdd.dhsd" brcompmouv
+public record "ggfdd.dhsd" brentete
+public record "ggfdd.dhsd" brliens
+public record "ggfdd.dhsd" brtemps
+public record "ggfdd.dhsd" brtpsbp
+
+public record "ggfdd.dhsd" b1
+public record "ggfdd.dhsd" b2
+public record "ggfdd.dhsd" b3
+public record "ggfdd.dhsd" b4
+public record "ggfdd.dhsd" b5
+public record "ggfdd.dhsd" b6
+public record "ggfdd.dhsd" b7
+public record "ggfdd.dhsd" b8
+public record "ggfdd.dhsd" b9
+
+public record "gtfdd.dhsd" prjap
+public record "gtfdd.dhsd" prjav
+public record "gtfdd.dhsd" prjavt
+public record "gtfdd.dhsd" prjsal
+public record "gtfdd.dhsd" prjsalact
+public record "cogfdd.dhsd" cog_ut105
+public record "cogfdd.dhsd" cog_ut106
+public record "cogfdd.dhsd" cog_ut107
+public record "cogfdd.dhsd" cog_ut108
+public record "cogfdd.dhsd" cog_ut109
+
+public record "gtfdd.dhsd" ent
+public record "gtfdd.dhsd" ead
+public record "gtfdd.dhsd" eec
+public record "gtfdd.dhsd" mouv
+public record "gtfdd.dhsd" mvtl
+public record "gtfdd.dhsd" mres
+public record "gtfdd.dhsd"	bpent
+public record "gtfdd.dhsd" bpdet
+public record "gtfdd.dhsd" bpcol
+public record "gtfdd.dhsd" bppal
+public record "gtfdd.dhsd" bncal
+public record "gtfdd.dhsd" bnori
+public record "gtfdd.dhsd" bnpar
+public record "gtfdd.dhsd" bnprop
+public record "gtfdd.dhsd" bnproplot
+public record "gtfdd.dhsd" bnpropvtl
+public record "gtfdd.dhsd" desDeclaration
+public record "gtfdd.dhsd" DesLigne
+public record "gtfdd.dhsd" tva
+public record "gtfdd.dhsd" invent
+public record "gtfdd.dhsd" invdet
+public record "gtfdd.dhsd" invvtl
+public record "gtfdd.dhsd" panADr
+public record "gtfdd.dhsd" PanEnt
+public record "gtfdd.dhsd" PanLig
+public record "gtfdd.dhsd" sta
+public record "gtfdd.dhsd" stb
+public record "gtfdd.dhsd" stc
+public record "gtfdd.dhsd" std
+public record "gtfdd.dhsd" ste
+public record "cogfdd.dhsd" cog_valid_cde
+
+public record "ccfdd.dhsd"	c3
+public record "ccfdd.dhsd"	c3ets
+
+public record "ccfdd.dhsd"	c5
+public record "ccfdd.dhsd"	c5ets
+
+public record "ccfdd.dhsd"	c8
+public record "ccfdd.dhsd"	cp
+public record "ccfdd.dhsd"	cx
+public record "ccfdd.dhsd"	c4
+public record "ccfdd.dhsd"	cs
+;public record "cogfdd.dhsd" cog_reddition
+
+public record "grfdd.dhsd" evtcol
+public record "grfdd.dhsd" evtcontact
+public record "grfdd.dhsd" evttiers
+public record "cogfdd.dhsd" cog_grtevt
+
+
+1	idtoolbar	L
+
+;*
+Procedure Cog_XReof(tdf,Op)
+record	*	htdf	tdf
+1	Op			1,0 = 2   	; 1 = régénération, 2 = réorganisation
+
+1	r			1,0
+
+BeginP
+
+;	fclose(tdf)
+	
+	Ping("XREOF_FICHIER",Left(tdf.Name))
+	Ping("XREOF_OPERATION",Op)
+	Ping("XREOF_MEMOIRE",4096)
+	Ping("XREOF_MESSAGES",0) ; 0 = sans messages, 1 = avec messages
+	ProgramCall("xreof.dhop")
+
+	If PongReceive("XREOF_STATUS",r) = 0
+		Switch r
+			Case 1   ; erreur dans appel xreof
+				MessageBox("Erreur sur l'appel de xreof.hop|Erreur 1 lors de la génération des clés de " & Left(tdf.Name),"Information",MB_ICONINFORMATION)
+				Pong("ERR",1)
+			Case 2   ; erreur lors de l'exécution
+				MessageBox("Erreur pendant l'exécution de xreof.hop|Erreur 2 lors de la génération des clés de " & left(tdf.Name),"Information",MB_ICONINFORMATION)
+				Pong("ERR", 2)
+			Case 3   ; abandon utilisateur
+				MessageBox("Abandon pendant l'exécution de xreof.hop|Erreur 3 lors de la génération des clés de " & left(tdf.Name),"Information",MB_ICONINFORMATION)
+				Pong("ERR", 3)
+		EndSwitch
+	EndIf
+EndP
+
+;*
+procedure Cog_Suppr_Gtfat
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des Articles"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation articles / tarifs" & xq.Dos)
+
+	gtfat.Key = "A" & xq.Dos
+ 	loop hread(gtfat,art) = 0 and art.Dos = xq.Dos
+		hdelete(gtfat,art)
+	endloop
+	gtfat.Key = "W" & xq.Dos
+	loop hread(gtfat,artdepo) = 0 and artdepo.Dos = xq.Dos
+		hdelete(gtfat,artdepo)
+	endloop
+	gtfat.Key = "X" & xq.Dos
+	loop hread(gtfat,artstoc) = 0 and artstoc.Dos = xq.Dos
+		hdelete(gtfat,artstoc)
+	endloop
+	gtfat.Key = "Y" & xq.Dos
+	loop hread(gtfat,artweb) = 0 and artweb.Dos = xq.Dos
+		hdelete(gtfat,artweb)
+	endloop
+	gtfat.Key = "N" & xq.Dos
+	loop hread(gtfat,dar) = 0 and dar.Dos = xq.Dos
+		hdelete(gtfat,dar)
+	endloop
+	gtfat.Key = "D" & xq.Dos
+	loop hread(gtfat,lart) = 0 and lart.Dos = xq.Dos
+		hdelete(gtfat,lart)
+	endloop
+	gtfat.Key = "U" & xq.Dos
+	loop hread(gtfat,rcl) = 0 and rcl.Dos = xq.Dos
+		hdelete(gtfat,rcl)
+	endloop
+	gtfat.Key = "O" & xq.Dos
+	loop hread(gtfat,rfo) = 0 and rfo.Dos = xq.Dos
+		hdelete(gtfat,rfo)
+	endloop
+	gtfat.Key = "C" & xq.Dos
+	loop hread(gtfat,rso) = 0 and rso.Dos = xq.Dos
+		hdelete(gtfat,rso)
+	endloop
+	gtfat.Key = "H" & xq.Dos
+	loop hread(gtfat,sart) = 0 and sart.Dos = xq.Dos
+		hdelete(gtfat,sart)
+	endloop
+	gtfat.Key = "g" & xq.Dos
+	loop hread(gtfat,sartcstd) = 0 and sartcstd.Dos = xq.Dos
+		hdelete(gtfat,sartcstd)
+	endloop
+	gtfat.Key = "E" & xq.Dos 
+	loop hread(gtfat,tar) = 0 and tar.Dos = xq.Dos
+		hdelete(gtfat,tar)
+	endloop
+	gtfat.Key = "e" & xq.Dos
+	loop hread(gtfat,tarpromo) = 0 and tarpromo.Dos = xq.Dos
+		hdelete(gtfat,tarpromo)
+	endloop
+	gtfat.Key = "Q" & xq.Dos
+	loop hread(gtfat,tfo) = 0 and tfo.Dos = xq.Dos
+		hdelete(gtfat,tfo)
+	endloop
+	gtfat.Key = "q" & xq.Dos
+	loop hread(gtfat,tfopromo) = 0 and tfopromo.Dos = xq.Dos
+		hdelete(gtfat,tfopromo)
+	endloop
+	gtfat.Key = "a" & xq.Dos
+	loop hread(gtfat,tfore) = 0 and tfore.Dos = xq.Dos
+		hdelete(gtfat,tfore)
+	endloop
+	gtfat.Key = "c" & xq.Dos
+	loop hread(gtfat,tforepromo) = 0 and tforepromo.Dos = xq.Dos
+		hdelete(gtfat,tforepromo)
+	endloop
+	gtfat.Key = "S" & xq.Dos
+	loop hread(gtfat,tre) = 0 and tre.Dos = xq.Dos
+		hdelete(gtfat,tre)
+	endloop
+	gtfat.Key = "s" & xq.Dos
+	loop hread(gtfat,trepromo) = 0 and trepromo.Dos = xq.Dos
+		hdelete(gtfat,trepromo)
+	endloop
+	gtfrf.Key = "A" & xq.Dos
+	loop hread(gtfrf,eart) = 0 and eart.Dos = xq.Dos
+		hdelete(gtfrf,eart)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(gtfat)
+		hclose(gtfrf)
+		Cog_XReof(gtfat)
+		Cog_XReof(gtfrf)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation articles / tarifs" & xq.Dos)
+
+endp
+
+;*
+procedure Cog_Suppr_Gtfpcf
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des Tiers"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation tiers" & xq.Dos)
+
+	gtfpcf.Key = "B" & mz.Dos & "2"
+	loop hread(gtfpcf,pro) = 0 and pro.Dos = mz.Dos and pro.Ce1 = "2"
+		hdelete(gtfpcf,pro)
+	endloop
+	gtfpcf.Key = "B" & mz.Dos & "3"
+	loop hread(gtfpcf,cli) = 0 and cli.Dos = mz.Dos and cli.Ce1 = "3"
+		hdelete(gtfpcf,cli)
+	endloop
+	gtfpcf.Key = "B" & mz.Dos & "4"
+	loop hread(gtfpcf,fou) = 0 and fou.Dos = mz.Dos and cli.Ce1 = "4"
+		hdelete(gtfpcf,fou)
+	endloop
+	gtfpcf.Key = "B" & mz.Dos & "5"
+	loop hread(gtfpcf,vrp) = 0 and vrp.Dos = mz.Dos and cli.Ce1 = "5"
+		hdelete(gtfpcf,vrp)
+	endloop
+	gtfpcf.Key = "B" & mz.Dos & "6"
+	loop hread(gtfpcf,tia) = 0 and tia.Dos = mz.Dos and cli.Ce1 = "6"
+		hdelete(gtfpcf,tia)
+	endloop
+	gtfpcf.Key = "Q" & mz.Dos
+	loop hread(gtfpcf,T1) = 0 and T1.Dos = mz.Dos
+		hdelete(gtfpcf,T1)
+	endloop
+ 	gtfpcf.Key = "R" & mz.Dos
+	loop hread(gtfpcf,T2) = 0 and T2.Dos = mz.Dos
+		hdelete(gtfpcf,T2)
+	endloop
+	gtfpcf.Key = "S" & mz.Dos
+	loop hread(gtfpcf,T3) = 0 and T3.Dos = mz.Dos
+		hdelete(gtfpcf,T3)
+	endloop
+	gtfpcfindex.Key = "A" & xq.Dos
+	loop hread(gtfpcfindex,pcfidx) = 0 and pcfidx.Dos = xq.Dos
+		hdelete(gtfpcfindex,pcfidx)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(gtfpcf)
+		hclose(gtfpcfindex)
+		Cog_XReof(gtfpcf)
+		Cog_XReof(gtfpcfindex)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation tiers" & xq.Dos)
+
+endp
+
+;*
+procedure Cog_Suppr_Gtfnom
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des Nomenclatures"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation nomenclatures / gammes" & xq.Dos)
+
+	gtfnom.Key = "A" & xq.Dos
+	loop hread(gtfnom,ba) = 0 and ba.Dos = xq.Dos
+		hdelete(gtfnom,ba)
+	endloop
+	gtfnom.Key = "D" & xq.Dos
+	loop hread(gtfnom,bb) = 0 and bb.Dos = xq.Dos
+		hdelete(gtfnom,bb)
+	endloop
+
+	ggfgam.Key = "A" & xq.Dos
+	loop hread(ggfgam,bc) = 0 and bc.Dos = xq.Dos
+		hdelete(ggfgam,bc)
+	endloop
+	ggfgam.Key = "E" & xq.Dos
+	loop hread(ggfgam,bd) = 0 and bd.Dos = xq.Dos
+		hdelete(ggfgam,bd)
+	endloop
+	ggfgam.Key = "G" & xq.Dos
+	loop hread(ggfgam,be) = 0 and be.Dos = xq.Dos
+		hdelete(ggfgam,be)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(gtfnom)
+		hclose(ggfgam)
+		Cog_XReof(gtfnom)
+		Cog_XReof(ggfgam)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation nomenclatures / gammes" & xq.Dos)
+
+endp
+
+;*
+procedure Cog_Suppr_Gtfof
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des OF"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation OF" & xq.Dos)
+
+	gtfof.Key = "A" & xq.Dos
+	loop hread(gtfof,bf) = 0 and bf.Dos = xq.Dos
+		hdelete(gtfof,bf)
+	endloop
+	gtfof.Key = "J" & xq.Dos
+	loop hread(gtfof,bg) = 0 and bg.Dos = xq.Dos
+		hdelete(gtfof,bg)
+	endloop
+	gtfof.Key = "L" & xq.Dos
+	loop hread(gtfof,bk) = 0 and bk.Dos = xq.Dos
+		hdelete(gtfof,bk)
+	endloop
+
+	gtfoftrc.Key = "A" & xq.Dos
+	loop hread(gtfoftrc,bt) = 0 and bt.Dos = xq.Dos
+		hdelete(gtfoftrc,bt)
+	endloop
+	gtfoftrc.Key = "B" & xq.Dos
+	loop hread(gtfoftrc,bu) = 0 and bu.Dos = xq.Dos
+		hdelete(gtfoftrc,bu)
+	endloop
+
+	ggfof.Key = "A" & xq.Dos
+	loop hread(ggfof,bh) = 0 and bh.Dos = xq.Dos
+		hdelete(ggfof,bh)
+	endloop
+	ggfof.Key = "E" & xq.Dos
+	loop hread(ggfof,bi) = 0 and bi.Dos = xq.Dos
+		hdelete(ggfof,bi)
+	endloop
+	ggfof.Key = "G" & xq.Dos
+	loop hread(ggfof,bj) = 0 and bj.Dos = xq.Dos
+		hdelete(ggfof,bj)
+	endloop
+
+	ggfsuivi.Key = "A" & xq.Dos
+	loop hread(ggfsuivi,bp) = 0 and bp.Dos = xq.Dos
+		hdelete(ggfsuivi,bp)
+	endloop
+	ggfsuivi.Key = "G" & xq.Dos
+	loop hread(ggfsuivi,bq) = 0 and bq.Dos = xq.Dos
+		hdelete(ggfsuivi,bq)
+	endloop
+	ggfsuivi.Key = "C" & xq.Dos
+	loop hread(ggfsuivi,br) = 0 and br.Dos = xq.Dos
+		hdelete(ggfsuivi,br)
+	endloop
+	ggfsuivi.Key = "E" & xq.Dos
+	loop hread(ggfsuivi,bs) = 0 and bs.Dos = xq.Dos
+		hdelete(ggfsuivi,bs)
+	endloop
+	ggfsuivi.Key = "L" & xq.Dos
+	loop hread(ggfsuivi,bx) = 0 and bx.Dos = xq.Dos
+		hdelete(ggfsuivi,bx)
+	endloop
+
+	ggfbr.Key = "D" & xq.Dos
+	loop hread(ggfbr,brcomp) = 0 and brcomp.Dos = xq.Dos
+		hdelete(ggfbr,brcomp)
+	endloop
+	ggfbr.Key = "H" & xq.Dos
+	loop hread(ggfbr,brcompmouv) = 0 and brcompmouv.Dos = xq.Dos
+		hdelete(ggfbr,brcompmouv)
+	endloop
+	ggfbr.Key = "A" & xq.Dos
+	loop hread(ggfbr,brentete) = 0 and brentete.Dos = xq.Dos
+		hdelete(ggfbr,brentete)
+	endloop
+	ggfbr.Key = "B" & xq.Dos
+	loop hread(ggfbr,brliens) = 0 and brliens.Dos = xq.Dos
+		hdelete(ggfbr,brliens)
+	endloop
+	ggfbr.Key = "F" & xq.Dos
+	loop hread(ggfbr,brtemps) = 0 and brtemps.Dos = xq.Dos
+		hdelete(ggfbr,brtemps)
+	endloop
+	ggfbr.Key = "J" & xq.Dos
+	loop hread(ggfbr,brtpsbp) = 0 and brtpsbp.Dos = xq.Dos
+		hdelete(ggfbr,brtpsbp)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(gtfof)
+		hclose(gtfoftrc)
+		hclose(ggfof)
+		hclose(ggfsuivi)
+		hclose(ggfbr)
+		Cog_XReof(gtfof)
+		Cog_XReof(gtfoftrc)
+		Cog_XReof(ggfof)
+		Cog_XReof(ggfsuivi)
+		Cog_XReof(ggfbr)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation OF" & xq.Dos)
+
+endp
+ 
+;*
+procedure Cog_Suppr_Ggfpro
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des Données techniques"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation Données techniques" & xq.Dos)
+
+ 	ggfpro.Key = "A" & xq.Dos
+	loop hread(ggfpro,b1) = 0 and b1.Dos = xq.Dos
+		hdelete(ggfpro,b1)
+	endloop
+ 	ggfpro.Key = "C" & xq.Dos
+	loop hread(ggfpro,b2) = 0 and b2.Dos = xq.Dos
+		hdelete(ggfpro,b2)
+	endloop
+ 	ggfpro.Key = "F" & xq.Dos
+	loop hread(ggfpro,b3) = 0 and b3.Dos = xq.Dos
+		hdelete(ggfpro,b3)
+	endloop
+ 	ggfpro.Key = "I" & xq.Dos
+	loop hread(ggfpro,b4) = 0 and b4.Dos = xq.Dos
+		hdelete(ggfpro,b4)
+	endloop
+ 	ggfpro.Key = "K" & xq.Dos
+	loop hread(ggfpro,b5) = 0 and b5.Dos = xq.Dos
+		hdelete(ggfpro,b5)
+	endloop
+ 	ggfpro.Key = "O" & xq.Dos
+	loop hread(ggfpro,b6) = 0 and b6.Dos = xq.Dos
+		hdelete(ggfpro,b6)
+	endloop
+ 	ggfpro.Key = "Q" & xq.Dos
+	loop hread(ggfpro,b7) = 0 and b7.Dos = xq.Dos
+		hdelete(ggfpro,b7)
+	endloop
+ 	ggfpro.Key = "S" & xq.Dos
+	loop hread(ggfpro,b8) = 0 and b8.Dos = xq.Dos
+		hdelete(ggfpro,b8)
+	endloop
+ 	ggfpro.Key = "T" & xq.Dos
+	loop hread(ggfpro,b9) = 0 and b9.Dos = xq.Dos
+		hdelete(ggfpro,b9)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(ggfpro)
+		Cog_XReof(ggfpro)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation Données techniques" & xq.Dos)
+
+endp
+ 
+;*
+procedure Cog_Suppr_Affaires
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des Affaires"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation Affaires" & xq.Dos)
+
+ 	gtfproj.Key = "A" & xq.Dos
+	loop hread(gtfproj,prjap) = 0 and prjap.Dos = xq.Dos
+		hdelete(gtfproj,prjap)
+	endloop
+ 	gtfproj.Key = "D" & xq.Dos
+	loop hread(gtfproj,prjav) = 0 and prjav.Dos = xq.Dos
+		hdelete(gtfproj,prjav)
+	endloop
+ 	gtfproj.Key = "P" & xq.Dos
+	loop hread(gtfproj,prjavt) = 0 and prjavt.Dos = xq.Dos
+		hdelete(gtfproj,prjavt)
+	endloop
+ 	gtfproj.Key = "R" & xq.Dos
+	loop hread(gtfproj,prjsal) = 0 and prjsal.Dos = xq.Dos
+		hdelete(gtfproj,prjsal)
+	endloop
+ 	gtfproj.Key = "S" & xq.Dos
+	loop hread(gtfproj,prjsalact) = 0 and prjsalact.Dos = xq.Dos
+		hdelete(gtfproj,prjsalact)
+	endloop
+
+ 	coggtf_tab.Key = "F" & xq.Dos
+	loop hread(coggtf_tab,cog_ut105) = 0 and cog_ut105.Dos = xq.Dos
+		hdelete(coggtf_tab,cog_ut105)
+	endloop
+ 	coggtf_tab.Key = "G" & xq.Dos
+	loop hread(coggtf_tab,cog_ut106) = 0 and cog_ut106.Dos = xq.Dos
+		hdelete(coggtf_tab,cog_ut106)
+	endloop
+ 	coggtf_tab.Key = "H" & xq.Dos
+	loop hread(coggtf_tab,cog_ut107) = 0 and cog_ut107.Dos = xq.Dos
+		hdelete(coggtf_tab,cog_ut107)
+	endloop
+ 	coggtf_tab.Key = "I" & xq.Dos
+	loop hread(coggtf_tab,cog_ut108) = 0 and cog_ut108.Dos = xq.Dos
+		hdelete(coggtf_tab,cog_ut108)
+	endloop
+ 	coggtf_tab.Key = "J" & xq.Dos
+	loop hread(coggtf_tab,cog_ut109) = 0 and cog_ut109.Dos = xq.Dos
+		hdelete(coggtf_tab,cog_ut109)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(gtfproj)
+		hclose(coggtf_tab)
+		Cog_XReof(gtfproj)
+		Cog_XReof(coggtf_tab)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation Affaires" & xq.Dos)
+
+endp
+ 
+;*
+procedure Cog_Suppr_Pieces
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des Pièces"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation Pièces" & xq.Dos)
+
+	if not hseek(gtfdos,socno,"H"&xq.Dos)
+		socno.BlNoC			= 0
+		socno.BlNoF			= 0
+		socno.BlNoI			= 0
+		socno.BpDetNo		= 0
+		socno.BpNo			= 0
+		socno.BpNoC			= 0
+		socno.BrNo			= 0
+		socno.CdNoC			= 0
+		socno.CdNoF			= 0
+		socno.CdNoI			= 0
+		socno.DvNoC			= 0
+		socno.DvNoF			= 0
+		socno.DvNoP			= 0
+		socno.EnrNo			= 0
+		socno.FaNoC			= 0
+		socno.FaNoF			= 0
+		socno.FaNoI			= 0
+		socno.RlvNo			= 0
+		socno.TicketRes	= 0
+		socno.TvaPiNo		= 0
+		socno.VtlNo			= 0
+		hrewrite(gtfdos,socno)
+	endif
+
+	gtfdos.Key	= "C" & xq.Dos
+	loop not hread(gtfdos,ets) and gtfdos.Key <= "C" & xq.Dos & $FF
+		ets.DvNoC	= ets.PiNo1(1)
+		ets.CdNoC	= ets.PiNo1(2)
+		ets.BpNoC	= ets.PiNo1(3)
+		ets.BlNoC	= ets.PiNo1(4)
+		ets.FaNoC	= ets.PiNo1(5)
+		ets.RlvNoc	= ets.PiNo1(6)
+		ets.DvNoF	= ets.PiNo1(7)
+		ets.CdNoF	= ets.PiNo1(8)
+		ets.BlNoF	= ets.PiNo1(9)
+		ets.FaNoF	= ets.PiNo1(10)
+		ets.CdNoI	= ets.PiNo1(11)
+		ets.BlNoI	= ets.PiNo1(12)
+		ets.FaNoI	= ets.PiNo1(14)
+		ets.DvNoP	= ets.PiNo1(13)
+		ets.PrNo		= ets.Tiers1(1)
+		ets.ClNo		= ets.Tiers1(2)
+		ets.FoNo		= ets.Tiers1(3)
+		hrewrite(gtfdos,ets)
+	endloop
+
+	gtfent.Key = "Q" & xq.Dos
+	loop hread(gtfent,ead) = 0 and ead.Dos = xq.Dos
+		hdelete(gtfent,ead)
+	endloop
+	gtfent.Key = "R" & xq.Dos
+	loop hread(gtfent,eec) = 0 and eec.Dos = xq.Dos
+		hdelete(gtfent,eec)
+	endloop
+	gtfent.Key = "A" & xq.Dos
+	loop hread(gtfent,ent) = 0 and ent.Dos = xq.Dos
+		hdelete(gtfent,ent)
+	endloop
+
+	gtfam.Key = "M" & xq.Dos
+	loop hread(gtfam,mouv) = 0 and mouv.Dos = xq.Dos
+		hdelete(gtfam,mouv)
+	endloop
+
+	gtfvtl.Key = "A" & xq.Dos
+	loop hread(gtfvtl,mvtl) = 0 and mvtl.Dos = xq.Dos
+		hdelete(gtfvtl,mvtl)
+	endloop
+
+	gtfres.Key = "A" & xq.Dos
+	loop hread(gtfres,mres) = 0 and mres.Dos = xq.Dos
+		hdelete(gtfres,mres)
+	endloop
+
+	gtfbp.Key = "I" & xq.Dos
+	loop hread(gtfbp,bpcol) = 0 and bpcol.Dos = xq.Dos
+		hdelete(gtfbp,bpcol)
+	endloop
+	gtfbp.Key = "D" & xq.Dos
+	loop hread(gtfbp,bpdet) = 0 and bpdet.Dos = xq.Dos
+		hdelete(gtfbp,bpdet)
+	endloop
+	gtfbp.Key = "A" & xq.Dos
+	loop hread(gtfbp,bpent) = 0 and bpent.Dos = xq.Dos
+		hdelete(gtfbp,bpent)
+	endloop
+	gtfbp.Key = "K" & xq.Dos
+	loop hread(gtfbp,bppal) = 0 and bppal.Dos = xq.Dos
+		hdelete(gtfbp,bppal)
+	endloop
+
+	gtfcbn.Key = "K" & xq.Dos
+	loop hread(gtfcbn,bncal) = 0 and bncal.Dos = xq.Dos
+		hdelete(gtfcbn,bncal)
+	endloop
+	gtfcbn.Key = "E" & xq.Dos
+	loop hread(gtfcbn,bnori) = 0 and bnori.Dos = xq.Dos
+		hdelete(gtfcbn,bnori)
+	endloop
+	gtfcbn.Key = "A" & xq.Dos
+	loop hread(gtfcbn,bnpar) = 0 and bnpar.Dos = xq.Dos
+		hdelete(gtfcbn,bnpar)
+	endloop
+	gtfcbn.Key = "a" & xq.Dos
+	loop hread(gtfcbn,bnprop) = 0 and bnprop.Dos = xq.Dos
+		hdelete(gtfcbn,bnprop)
+	endloop
+	gtfcbn.Key = "W" & xq.Dos
+	loop hread(gtfcbn,bnproplot) = 0 and bnproplot.Dos = xq.Dos
+		hdelete(gtfcbn,bnproplot)
+	endloop
+	gtfcbn.Key = "B" & xq.Dos
+	loop hread(gtfcbn,bnpropvtl) = 0 and bnpropvtl.Dos = xq.Dos
+		hdelete(gtfcbn,bnpropvtl)
+	endloop
+
+	gtfdes.Key = "A" & xq.Dos
+	loop hread(gtfdes,desdeclaration) = 0 and desdeclaration.Dos = xq.Dos
+		hdelete(gtfdes,desdeclaration)
+	endloop
+	gtfdes.Key = "B" & xq.Dos
+	loop hread(gtfdes,desligne) = 0 and desligne.Dos = xq.Dos
+		hdelete(gtfdes,desligne)
+	endloop
+
+	gtftva.Key = "A" & xq.Dos
+	loop hread(gtftva,tva) = 0 and tva.Dos = xq.Dos
+		hdelete(gtftva,tva)
+	endloop
+
+	gtfinv.Key = "C" & xq.Dos
+	loop hread(gtfinv,invdet) = 0 and invdet.Dos = xq.Dos
+		hdelete(gtfinv,invdet)
+	endloop
+	gtfinv.Key = "A" & xq.Dos
+	loop hread(gtfinv,invent) = 0 and invent.Dos = xq.Dos
+		hdelete(gtfinv,invent)
+	endloop
+	gtfinv.Key = "H" & xq.Dos
+	loop hread(gtfinv,invvtl) = 0 and invvtl.Dos = xq.Dos
+		hdelete(gtfinv,invvtl)
+	endloop
+
+	gtfpan.Key = "F" & xq.Dos
+	loop hread(gtfpan,panadr) = 0 and panadr.Dos = xq.Dos
+		hdelete(gtfpan,panadr)
+	endloop
+	gtfpan.Key = "A" & xq.Dos
+	loop hread(gtfpan,panent) = 0 and panent.Dos = xq.Dos
+		hdelete(gtfpan,panent)
+	endloop
+	gtfpan.Key = "D" & xq.Dos
+	loop hread(gtfpan,panlig) = 0 and panlig.Dos = xq.Dos
+		hdelete(gtfpan,panlig)
+	endloop
+
+	gtfstat.Key = "A" & xq.Dos
+	loop hread(gtfstat,sta) = 0 and sta.Dos = xq.Dos
+		hdelete(gtfstat,sta)
+	endloop
+	gtfstat.Key = "V" & xq.Dos
+	loop hread(gtfstat,stb) = 0 and stb.Dos = xq.Dos
+		hdelete(gtfstat,stb)
+	endloop
+	gtfstat.Key = "W" & xq.Dos
+	loop hread(gtfstat,stc) = 0 and stc.Dos = xq.Dos
+		hdelete(gtfstat,stc)
+	endloop
+	gtfstat.Key = "X" & xq.Dos
+	loop hread(gtfstat,std) = 0 and std.Dos = xq.Dos
+		hdelete(gtfstat,std)
+	endloop
+	gtfstat.Key = "Z" & xq.Dos
+	loop hread(gtfstat,ste) = 0 and ste.Dos = xq.Dos
+		hdelete(gtfstat,ste)
+	endloop
+
+	cog_fvalid_cde.Key = "V" & xq.Dos
+	loop hread(cog_fvalid_cde,cog_valid_cde) = 0 and cog_valid_cde.Dos = xq.Dos
+		hdelete(cog_fvalid_cde,cog_valid_cde)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(gtfent)
+		hclose(gtfam)
+		hclose(gtfvtl)
+		hclose(gtfres)
+		hclose(gtfbp)
+		hclose(gtfcbn)
+		hclose(gtfdes)
+		hclose(gtftva)
+		hclose(gtfinv)
+		hclose(gtfpan)
+		hclose(gtfstat)
+		hclose(cog_fvalid_cde)
+		Cog_XReof(gtfent)
+		Cog_XReof(gtfam)
+		Cog_XReof(gtfvtl)
+		Cog_XReof(gtfres)
+		Cog_XReof(gtfbp)
+		Cog_XReof(gtfcbn)
+		Cog_XReof(gtfdes)
+		Cog_XReof(gtftva)
+		Cog_XReof(gtfinv)
+		Cog_XReof(gtfpan)
+		Cog_XReof(gtfstat)
+		Cog_XReof(cog_fvalid_cde)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation Pièces" & xq.Dos)
+
+endp
+ 
+;*
+procedure Cog_Suppr_PlanComptable
+
+beginp
+
+	xq.Lib(35)	= "Initialisation du plan comptable"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation Plan Comptable" & xq.Dos)
+
+	ccfjca.Key = "A" & xq.Dos
+	loop hread(ccfjca,c3) = 0 and c3.Dos = xq.Dos
+		hdelete(ccfjca,c3)
+	endloop
+	ccfjca.Key = "H" & xq.Dos
+	loop hread(ccfjca,c3ets) = 0 and c3ets.Dos = xq.Dos
+		hdelete(ccfjca,c3ets)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(ccfjca)
+		Cog_XReof(ccfjca)
+		hopen(ccfjca,"P")		;il sert dans la suite des initialisations
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation Plan Comptable" & xq.Dos)
+
+endp
+ 
+;*
+procedure Cog_Suppr_AxesAnalytiques
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des axes analytiques"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation Axes Analytiques" & xq.Dos)
+
+	ccfjca.Key = "G" & xq.Dos
+	loop hread(ccfjca,c5) = 0 and c5.Dos = xq.Dos
+		hdelete(ccfjca,c5)
+	endloop
+	ccfjca.Key = "J" & xq.Dos
+	loop hread(ccfjca,c5ets) = 0 and c5ets.Dos = xq.Dos
+		hdelete(ccfjca,c5ets)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(ccfjca)
+		Cog_XReof(ccfjca)
+		hopen(ccfjca,"P")		;il sert dans la suite des initialisations
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation Axes Analytiques" & xq.Dos)
+
+endp
+ 
+;*
+procedure Cog_Suppr_Ecritures
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des Ecritures"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation Ecritures" & xq.Dos)
+
+	if not hseek(ccfdos,cn,"G"&xq.Dos&"6")
+		cn.EcrNo		= 0
+		cn.EcrValNo	= 0
+		cn.Piece		= ""
+		hrewrite(ccfdos,cn)
+	endif
+
+	ccfjca.Key	= "D" & xq.Dos & "4"
+	loop not hread(ccfjca,c4) and ccfjca.Key <= "D" & xq.Dos & "4" & $FF
+		c4.Piece	= c4.Cog_PieceD
+		hrewrite(ccfjca,c4)
+	endloop
+
+	ccfecr.Key = "A" & xq.Dos
+	loop hread(ccfecr,c8) = 0 and c8.Dos = xq.Dos
+		hdelete(ccfecr,c8)
+	endloop
+
+	ccfvtl.Key = "A" & xq.Dos
+	loop hread(ccfvtl,cp) = 0 and cp.Dos = xq.Dos
+		hdelete(ccfvtl,cp)
+	endloop
+	ccfvtl.Key = "F" & xq.Dos
+	loop hread(ccfvtl,cx) = 0 and cx.Dos = xq.Dos
+		hdelete(ccfvtl,cx)
+	endloop
+
+;	ccfjca.Key = "A" & xq.Dos
+;	loop hread(ccfjca,c3) = 0 and c3.Dos = xq.Dos
+;		hdelete(ccfjca,c3)
+;	endloop
+;	ccfjca.Key = "H" & xq.Dos
+;	loop hread(ccfjca,c3ets) = 0 and c3ets.Dos = xq.Dos
+;		hdelete(ccfjca,c3ets)
+;	endloop
+
+	ccftsc.Key = "A" & xq.Dos
+	loop hread(ccftsc,cs) = 0 and cs.Dos = xq.Dos
+		hdelete(ccftsc,cs)
+	endloop
+
+;	cog_freddition.Key = "A" & xq.Dos
+;	loop hread(cog_freddition,cog_reddition) = 0 and cog_reddition.Dos = xq.Dos
+;		hdelete(cog_freddition,cog_reddition)
+;	endloop
+
+	if xq.Choix(20) = 2
+		hclose(ccfecr)
+		hclose(ccfvtl)
+		hclose(ccfjca)
+		hclose(ccftsc)
+		hclose(cog_freddition)
+		Cog_XReof(ccfecr)
+		Cog_XReof(ccfvtl)
+		Cog_XReof(ccfjca)
+		Cog_XReof(ccftsc)
+		Cog_XReof(cog_freddition)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation Ecritures" & xq.Dos)
+
+endp
+ 
+;*
+procedure Cog_Suppr_Evenements
+
+beginp
+
+	xq.Lib(35)	= "Initialisation des Evènements"
+	xmedispv(mz.MeCle,2,xme_mode_goto)
+
+	Cog_EcritureLivreDeBord("   --> Réinitialisation Evènements" & xq.Dos)
+
+	grfevt.Key = "W" & xq.Dos
+	loop hread(grfevt,evtcol) = 0 and evtcol.Dos = xq.Dos
+		hdelete(grfevt,evtcol)
+	endloop
+	grfevt.Key = "Z" & xq.Dos
+	loop hread(grfevt,evtcontact) = 0 and evtcontact.Dos = xq.Dos
+		hdelete(grfevt,evtcontact)
+	endloop
+	grfevt.Key = "A" & xq.Dos
+	loop hread(grfevt,evttiers) = 0 and evttiers.Dos = xq.Dos
+		hdelete(grfevt,evttiers)
+	endloop
+
+	coggrf_tab.Key = "A" & xq.Dos
+	loop hread(coggrf_tab,cog_grtevt) = 0 and cog_grtevt.Dos = xq.Dos
+		hdelete(coggrf_tab,cog_grtevt)
+	endloop
+
+	if xq.Choix(20) = 2
+		hclose(grfevt)
+		hclose(coggrf_tab)
+		Cog_XReof(grfevt)
+		Cog_XReof(coggrf_tab)
+	endif
+
+	Cog_EcritureLivreDeBord("   <-- Réinitialisation Evènements" & xq.Dos)
+
+endp
+ 
+;* Saisie du masque page 1
+public procedure Cog_SaisiePage1
+1 fin		1,0	= 0
+
+beginp
+
+	xmeinput(mz.mecle,1,0,xme_mode_goto)
+
+	do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+	
+		case harmony.dataarret = 8002
+			if Harmony.Sourisbout = Right_Button
+				Zoom_Call()
+			elsif Harmony.Sourisclic = Double_Click
+				Harmony.Retour = Xmenext_Simulation_Touche
+				Harmony.Cplretour = k_f8
+			endif
+		
+		case k_f7                ;zoom généralisé
+			Zoom_Call()
+		
+		case k_f8                ;zooms
+			Zoom_Call(harmony.arret)
+	
+		case k_f9                ;abandon
+			fin = 1
+	
+		case vsw in (k_f10,k_tab,k_return,k_down)
+			if messagebox("Validation du traitement ?","Confirmation",mb_yesno+mb_iconquestion)=idyes
+
+				if Res_Soc(xq.Dos) = 0
+
+					if not hseek(gtfdos,soc,"A"&xq.Dos)
+
+						if Res_Dos(xq.Dos) = 0
+
+							SetHourGlassCursor
+							xq.Lib(35)	= "Traitement en cours"
+							xmedispv(mz.MeCle,2,xme_mode_gosub)
+	
+							Cog_EcritureLivreDeBord("--> Réinitialisation du dossier " & xq.Dos)
+							if xq.Choix(1) = 2
+								Cog_Suppr_Gtfat
+							endif
+							if xq.Choix(2) = 2
+								Cog_Suppr_gtfpcf
+							endif
+							if xq.Choix(3) = 2
+								Cog_Suppr_gtfnom
+							endif
+							if xq.Choix(4) = 2
+								Cog_Suppr_Gtfof
+							endif
+							if xq.Choix(5) = 2
+								Cog_Suppr_Ggfpro
+							endif
+							if xq.Choix(6) = 2
+								Cog_Suppr_Affaires
+							endif
+							if xq.Choix(7) = 2
+								Cog_Suppr_Pieces
+							endif
+							if xq.Choix(8) = 2
+								Cog_Suppr_PlanComptable
+							endif
+							if xq.Choix(9) = 2
+								Cog_Suppr_AxesAnalytiques
+							endif
+							if xq.Choix(10) = 2
+								Cog_Suppr_Ecritures
+							endif
+							if xq.Choix(11) = 2
+								Cog_Suppr_Evenements
+							endif
+							Cog_EcritureLivreDeBord("<-- Réinitialisation du dossier " & xq.Dos)
+							fin=1
+	
+							xmeret
+							SetNormalCursor
+
+							messagebox("Traitement terminé.|Veuillez vérifier la numérotation des fiches dossiers","Message",mb_iconinformation)
+
+						endif
+
+						Lib_Dos(xq.Dos)
+
+					else
+
+						messagebox("Dossier "&xq.Dos&" inexistant","Alerte",mb_iconexclamation)
+
+					endif
+
+					Lib_Soc(xq.Dos)
+
+				endif
+	
+			endif
+
+		endswitch
+
+	while fin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
+
+;*
+main
+	pingreceive("zechange",mz)
+	seek_soc(mz.Dos)
+	xq.Dos = mz.Dos
+	xq.Etb = mz.Etb
+	init xq.Choix()	= 1
+	xmeload(mz.MeCle)
+	idtoolbar = xmetoolbargetid(mz.MeCle,"MAIN")
+	xmetoolbarsetwindow(idtoolbar,mz.MeCle,1)
+	Cog_SaisiePage1
+
+

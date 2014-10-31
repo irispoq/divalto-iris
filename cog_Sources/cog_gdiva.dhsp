@@ -1,0 +1,372 @@
+;*
+;* Module général Cogeser pour les développements Divalto (remplace Coge_Fonct)
+;*
+;*		Date			Initiales	N° de modif		Pack Divalto	Objet
+;*		11/2009		SR				01					102a				Initial
+
+
+;*
+;* Déclarations
+;*
+
+OverWrittenBy	"Cog_GDivaU.dhop"
+
+Public Record		a5dd.dhsd			MZ
+
+Module	GTPM000.DHOP
+
+;*
+;* Procédures et fonctions locales
+;*
+
+;*
+;* Procédures et fonctions publiques surchargeables
+;*
+
+;* MessageBox
+Public Procedure	Cog_MESS(aTexte, aTitre, nIcone)
+; MessageBox simplifié, permet de juste passer en paramètre le texte
+
+1	aTitre	A		= "Information"	; titre de la fenêtre (Information par défaut)
+1	aTexte	S								; Texte du message
+1	nIcone	1,0	= 1					; Icone de la fenêtre : 1 = Info (défaut), 2 = Exclamation
+Beginp
+	MessageBox(aTexte, aTitre, Condition(nIcone = 1, MB_ICONINFORMATION, MB_ICONEXCLAMATION))
+Endp
+
+;* MessageBox avec paramètre pour ne pas afficher le message par exemple en pilotage programme
+Public Procedure	Cog_MESS3(aTexte, aTitre, nIcone, bAffMess)
+; MessageBox simplifié, permet de juste passer en paramètre le texte
+
+1	aTitre	A		= "Information"	; titre de la fenêtre (Information par défaut)
+1	aTexte	S								; Texte du message
+1	nIcone	1,0	= 1					; Icone de la fenêtre : 1 = Info (défaut), 2 = Exclamation
+1	bAffMess	B		= True				; Affiche ou non le messageBox à l'écran afin de ne pas casser un tunnel
+Beginp
+	If bAffMess = True
+		MessageBox(aTexte, aTitre, Condition(nIcone = 1, MB_ICONINFORMATION, MB_ICONEXCLAMATION))
+	EndIf
+Endp
+
+
+;* Messagebox : Oui / Non
+;* 01
+Public Function Int Cog_MYesNo(aTexte, aTitre, nBtDef)
+; MessageBox Question Oui / Non simplifié, permet de juste passer en paramètre le texte
+
+1	aTexte	S								; Texte du message
+1	aTitre	A		= "Choix"			; Titre de la fenêtre (Choix par défaut)
+1	nBtDef	1,0	= 1					; Bouton par défaut : 1 = Oui (défaut), 2 = Non
+Beginf
+	Freturn(MessageBox(aTexte, aTitre, MB_ICONQUESTION+Condition(nBtDef = 1, MB_DEFBUTTON1, MB_DEFBUTTON2)+MB_YESNO))
+Endf
+
+;* Permet d'initialiser une toolbar (par défaut harmony.masque, page 1 toolbar = main)
+;* Retour 0 si ok, 1 si toolbar non trouvée ou msq non chargé
+;* 01
+Public Function  int Cog_ITOOLBAR(aMSQ, aNTB, nPAG)
+; Initialise une toolbar 
+; Retour 0 si ok, 1 si toolbar non trouvée ou msq non chargé
+
+1	aMSQ		32		= " "				; Masque (dhoe, si non précisé prend mz.Mecle si chargé sinon harmony.Masque)
+1	aNTB		32		= "MAIN"			; Nom de la toolbar à associer (MAIN par défaut)
+1	nPAG		3,0	= 1				; Numéro de la page ou doit être associé la toolbar (1 par défaut)
+1	lIDTB		L 							; Id Liste de la toolbar
+Beginf
+	If aMSQ = " " and mz.MECLE <> " "
+		aMSQ = mz.MECLE
+	Elsif aMSQ = " " and mz.MECLE = " "
+		aMSQ = harmony.MASQUE
+	EndIf
+	If (lIDTB := XmeToolbarGetId (aMSQ, aNTB, False)) <> 0
+		XmeToolbarSetWindow (lIDTB, aMSQ, nPAG)
+	Else
+		freturn(1)
+	EndIf
+	Freturn(0)
+Endf
+
+;* Permet d'initialiser un MENU (par défaut harmony.masque, page 1 menu = main)
+;* Retour 0 si ok, 1 si toolbar non trouvée ou msq non chargé
+;* 01
+Public Function  int Cog_IMSQMENU(aMSQ, aNMENU, nPAG)
+; Initialise un menu 
+; Retour 0 si ok, 1 si menu non trouvé ou msq non chargé
+
+1	aMSQ		32		= " "				; Masque (dhoe, si non précisé prend mz.Mecle si chargé sinon harmony.Masque)
+1	aNMENU	32		= "MAIN"			; Nom du menu à associer (MAIN par défaut)
+1	nPAG		3,0	= 1				; Numéro de la page ou doit être associé le menu (1 par défaut)
+1	lIDTB		L 							; Id Liste du menu
+Beginf
+	If aMSQ = " " and mz.MECLE <> " "
+		aMSQ = mz.MECLE
+	Elsif aMSQ = " " and mz.MECLE = " "
+		aMSQ = harmony.MASQUE
+	EndIf
+	If (lIDTB := XmeMenuGetId (aMSQ, aNMENU, False)) <> 0
+		XmeMenuSetWindow (lIDTB, aMSQ, nPAG)
+	Else
+		freturn(1)
+	EndIf
+	Freturn(0)
+Endf
+
+;*	Saisie d'une page écran
+;* 01
+Public Function int Cog_XmeInput(aMSQ, nPAG, aNMENU, aNTB, aADRFX)
+; Saisie d'une page écran
+; retour  1 si abandon, 0 si validation, 9 si erreur
+
+1	aMSQ		32		= " "			; Nom du masque, si esp = hamony.MASQUE
+1	nPAG		3,0	= 1			; Numéro de la page à saisir (1 par défaut)
+1	aNMENU	32		= " "			; Nom du menu, si espace = pas de menu
+1	aNTB		32		= " "			; Nom de la toolbar, si espace = pas de toolbar
+1	aADRFX	16		= " "			; Nom de la fx de personalisation du module appelant, si esp = pas de fx
+1	bFINI		B		= False
+Beginf
+	; Inits du menu de base et toolbar de base si demandé
+	aMSQ	= Condition(aMSQ = " ", harmony.MASQUE, aMSQ)
+	If aNMENU <> " "
+		Cog_IMSQMENU(aMSQ, aNMENU, nPAG)
+	EndIf
+	If aNTB <> " "
+		Cog_ITOOLBAR(aMSQ, aNTB, nPAG)
+	EndIf
+	XmeInput(aMSQ, nPAG, 0, 2)
+	Do
+		Switch Harmony.Arret 
+	      Case Harmony.Key = K_F9											; Abandon :
+	         If MessageBox ("Confirmez-vous l'abandon ?","Message", MB_YESNO) = IDYES
+	            freturn(1)
+	         EndIf
+	      Case Harmony.Key = K_F10										; Validation
+            freturn(0)
+			Case Harmony.Key = K_SF7										; Zoom généralisé
+				G3_Zoom_Call()
+			Case 8002															; Dble clic souris sur zone = f8 pour zoom
+				harmony.RETOUR = XMENEXT_SIMULATION_TOUCHE
+				harmony.Cplretour = c_f8
+			Case Harmony.Key = K_F8											; Zoom
+				G3_Zoom_Call(harmony.Dataarret)			
+			Case Harmony.Key = K_F1											; A propos de
+				MessageBox("Programme: " & Fstring("1", system.Znomprog) & \
+							  "|Ecran				: " & Fstring("1", harmony.Masque) & \
+							  "|Edition			  : " & Fstring("1", harmony.Imasque), "A propos de", MB_ICONINFORMATION+MB_OK)
+			Case Harmony.Key in (K_UP, K_BTAB, K_DOWN)				; Touches spéciales : on fait rien
+			Default																; On gère les autres évets dans une fx codé dans e source appelant
+				If aADRFX <> " "
+					FunctionCall(aADRFX)
+				EndIf
+		EndSwitch
+	While bFINI = False
+		Xmenext(harmony.RETOUR, harmony.CPLRETOUR)
+	Wend
+	Freturn(9)
+Endf
+
+;* chemin serveur	
+public function char Cog_FServ
+; Retourne le nom du serveur de log
+
+record ddsys.dhsd implicite serv	;répertoire harmony de harmony sur le serveur
+beginf
+	serv.path = WinReadProfileString("System","ServeurXlogf","divalto.ini")
+	if serv.path = ' '
+		serv.path = '/divalto'
+	else
+		serv.path = '//' & left(serv.path) & '/divalto'
+	endif
+	freturn(left(serv.path))
+endf
+
+;* lecture des paramètres de coherence.ini ou cohérence_serveur.ini	
+;*retour	:	rien	non trouvé
+;*				autre trouvé
+public function char Cog_freadini(cle,par,Fichier)
+; Lecture d'un fichier paramètre (ini)
+
+1	cle		A  							; cle à rechercher
+1 	par   	A	= 'System' 				; paragraphe du .ini
+1	Fichier	A	= 'divalto.ini'		; fichier ini à traiter (par défaut divalto.ini)
+
+1	ENR_INIS	512
+record ddsys.dhsd implicite serv	; répertoire harmony de harmony sur le serveur
+record ddsys.dhsd implicite loca	; répertoire windows de harmony local
+record ddsys.dhsd implicite fich	; répertoire de travail
+RECORD	* 	htdf FIC_INI = ' '
+RECORD	* 	htdf FIC_INIS = ' '
+Beginf
+	FIC_INI.name = '/divalto/' & Fichier
+	serv.path = fstring('l',Cog_FServ)
+	FIC_INIS.name = left(serv.path) & '/' & left(Fichier) ;'//coge2000/harmony/udivaltoav.ini' 
+	If FIC_INI.name <> FIC_INIS.name
+		If fopen(FIC_INI,'P') <> 0
+			FIC_INI.name = '/divalto/' & Fichier
+			If HCreateFile(FIC_INI.name,'U',,False) <> 0
+				freturn(' ')
+			ElsIf fopen(FIC_INI,'P') <> 0
+				freturn(' ')
+			EndIf
+		EndIf
+		If fopen(FIC_INIS,'P') = 0
+			Herase(FIC_INI)
+			Loop hread(FIC_INIS,ENR_INIS) = 0
+				Hwrite(FIC_INI,ENR_INIS)
+			Endloop
+			Hclose(FIC_INIS)
+		EndIf
+		Hclose(FIC_INI)
+	EndIf
+	freturn(WinReadProfileString(left(par),left(cle),GetHarmonyDirectory & '\' & Fichier))
+Endf
+
+
+;*	Permet de créer un fichier d'intégration comptable Divalto type CCFM
+;* 01
+Public Function	Char	Cog_CreateCcfm(aNOMBASE)
+; Procédure permettant de créer le fichier Ccfm
+; IN = préfixe optionnel du fichier
+; Out = nom du fichier si ok, " " si erreur
+
+1	aNOMBASE			32	= ' '					; Préfixe du fichier à créer (sans chemin sans extention et sans suffixe), si espace : ccfmtmp_ + tache
+1	lIDIMPLICITES	L							; Liste chargement implicites
+1	lIDDICO			L							; Id Dictionnaire
+1  reponse 			8096						; Buffer lecture dico
+1	xST				X							; Status retour
+Record	ddsys.dhsd	Implicite	Imp	; Enreg description implicite
+Record	*				Htdf			aFIC	; TDF
+record 	ddsys.dhsd 	cles 					; Structure Dhfi
+Beginf
+	; Récup 1° implicite du path courant
+	lIDIMPLICITES = ListImplicitesGet
+	ListFirst(lIDIMPLICITES, imp)
+	ListDestroy(lIDIMPLICITES)
+	; Récupère paramètre clés du ccfm de ccfdd.dhsd
+	if DDInterface(DD_OPEN, lIDDICO, "ccfdd.dhsd", reponse) <> 0 
+		DDInterface(DD_GETERROR, lIDDICO, " ", reponse, 1) 
+		freturn(" ")	
+	endif
+	If DDInterface(DD_FILEFIND, lIDDICO, "CCFM", reponse)  = 0 and DDInterface(DD_HSIREAD, lIDDICO,, cles) = 0
+	Else
+		freturn(" ")
+	EndIf
+	DDInterface(DD_CLOSE, lIDDICO," ",reponse, 1)
+	; Création du fichier Ccfm temporaire
+	aFIC.name = left(imp.PATH) & Condition(aNOMBASE = " ", 'CcfmTmp_' & nospaces(system.TACHE), left(aNOMBASE) & nospaces(system.TACHE)) & '.dhfi'
+	If fopen(aFIC, 'R') = 0
+		Herase(aFIC)
+	ElsIf HSicreate(aFIC.name, " ", 'N', 0, cles, , xST, False) = 0
+		If fopen(aFIC, 'R') <> 0
+			MessageBox("Impossible d'ouvrir le fichier " & left(aFIC.name) & "|La création de ce fichier n'a pus se faire correctement", 'Alerte')
+			Freturn(" ")
+		EndIf
+	Else
+		MessageBox("Impossible de créer le fichier " & left(aFIC.name), "Alerte")
+		Freturn(" ")
+	EndIf
+	HClose(aFIC)
+	Freturn(aFIC.name)
+Endf
+
+;*	Permet de créer un fichier d'intégration règlement Divalto type RCFM
+;* 02
+Public Function	Char	Cog_CreateRcfm(aNOMBASE, nMode)
+; Procédure permettant de créer le fichier Rcfm
+; IN = préfixe optionnel du fichier, nMode = 1 pour fichier I (defaut), 2 pour fichier N
+; Out = nom du fichier si ok, " " si erreur
+
+1	aNOMBASE			32	= ' '					; Préfixe du fichier à créer (sans chemin sans extention et sans suffixe), si espace : ccfmtmp_ + tache
+1	nMode				1,0 = 1					; Type de fichier à créer : 1 = Indexé, 2 = Non indexé
+1	lIDIMPLICITES	L							; Liste chargement implicites
+1	lIDDICO			L							; Id Dictionnaire
+1  reponse 			8096						; Buffer lecture dico
+1	xST				X							; Status retour
+Record	ddsys.dhsd	Implicite	Imp	; Enreg description implicite
+Record	*				Htdf			aFIC	; TDF
+record 	ddsys.dhsd 	cles 					; Structure Dhfi
+Beginf
+	; Récup 1° implicite du path courant
+	lIDIMPLICITES = ListImplicitesGet
+	ListFirst(lIDIMPLICITES, imp)
+	ListDestroy(lIDIMPLICITES)
+	; Récupère paramètre clés du ccfm de ccfdd.dhsd
+	if DDInterface(DD_OPEN, lIDDICO, "rcfdd.dhsd", reponse) <> 0 
+		DDInterface(DD_GETERROR, lIDDICO, " ", reponse, 1) 
+		freturn(" ")	
+	endif
+	If DDInterface(DD_FILEFIND, lIDDICO, "RCFM", reponse)  = 0 and DDInterface(DD_HSIREAD, lIDDICO,, cles) = 0
+	Else
+		freturn(" ")
+	EndIf
+	DDInterface(DD_CLOSE, lIDDICO," ",reponse, 1)
+	; Création du fichier Ccfm temporaire
+	aFIC.name = left(imp.PATH) & Condition(aNOMBASE = " ", 'RcfmTmp_' & nospaces(system.TACHE), left(aNOMBASE) & nospaces(system.TACHE)) & '.dhfi'
+	If nMode = 2
+		aFIC.name = Modify("dhfi", "dhfd", Fstring("l", aFIC.name))
+	EndIf
+	If fopen(aFIC, 'R') = 0
+		Herase(aFIC)
+	Else
+		Switch2 nMode
+			Case 1
+				If HSicreate(aFIC.name, " ", 'N', 0, cles, , xST, False) = 0
+					If fopen(aFIC, 'R') <> 0
+						MessageBox("Impossible d'ouvrir le fichier " & left(aFIC.name) & "|La création de ce fichier n'a pus se faire correctement", 'Alerte')
+						Freturn(" ")
+					EndIf
+				Else
+					MessageBox("Impossible de créer le fichier " & left(aFIC.name), "Alerte")
+					Freturn(" ")
+				EndIf
+			Case 2
+				If HCreateFile(aFIC.name, 'N', abort=false) = 0
+					If fopen(aFIC, 'R') <> 0
+						MessageBox("Impossible d'ouvrir le fichier " & left(aFIC.name) & "|La création de ce fichier n'a pus se faire correctement", 'Alerte')
+						Freturn(" ")
+					EndIf
+				Else
+					MessageBox("Impossible de créer le fichier " & left(aFIC.name), "Alerte")
+					Freturn(" ")
+				EndIf
+		EndSwitch
+	EndIf
+	HClose(aFIC)
+	Freturn(aFIC.name)
+Endf
+
+;* Ecriture dans le livre de bord
+public procedure Cog_EcritureLivreDeBord(txt,prg,applic,nivalerte,dos)
+; Procédure permettant d'écrire direcetment dans le livre de bord de Divalto
+; In = Texte à écrire puis optionnel : prog, application, niveau d'alerte et dossier
+
+1	txt			>	a5dd.dhsd		logtxt
+1	prg			>	a5dd.dhsd		prg			= ""
+1	applic		>	a5dd.dhsd		applic		= "DAV"
+1	nivalerte	>	a5dd.dhsd		nivalerte	= 2
+1	dos			>	a5dd.dhsd		dos			= ""
+
+hfile		a5dd.dhsd   a5flog	a5flog
+record	a5dd.dhsd	m8									; livre de bord
+
+beginp
+
+	if dos = ""
+		dos	= mz.dos
+	endif
+
+	if prg = ""
+		prg	= system.znomprog
+	endif
+	
+	m8 				= ""
+	m8.applic		= applic
+	m8.nivalerte	= nivalerte
+	m8.logdh			= time(7)
+	m8.user			= system.user
+	m8.tache			= system.tache
+	m8.prg			= prg
+	m8.dos			= dos
+	m8.logtxt		= txt
+	iwrite(a5flog,m8)
+
+endp

@@ -1,0 +1,393 @@
+SetModuleInfo('$Id$')
+;*
+;*      Zoom sur affectation budgetaire
+;*
+
+OverWrittenBy "coguz_affectationbudgetaire.dhop"
+
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+Module	A5PMNoteJoint.dhop
+Module 	XZoom7.dhop
+
+; TDF
+HFileVersion 	GTFDD.dhsd GTFTAB
+
+; Record Sql 
+Public recordSQL  cogRs_affbudget.dhoq  cogRs_AffBudget		AB		; Table Affectation budgetaire (2 caractères --> contrainte longueur nom d'instance sur écran)
+Public recordSQL  cogRs_affbudget.dhoq  cogRs_AffBudget		Sl		; Table pour sélection
+
+; Variables
+1	nbsel							4,0			; Nombre de lignes sélectionnées
+
+
+;*
+;* procedures 
+;*
+
+;*	Mise à jour des boutons (affichage, grisés, ...)
+Public Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+
+	Switch ZOOM.ACTION
+
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+;		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+;		XmeMenuEnableItem(Zoom.Idmenu,"JOINT",True)
+;		
+;		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", "<BITMAP>NOTE_N")
+;		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+;		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", "<BITMAP>FICJOINT_N")
+;		XmeToolbarEnableButton(idOutilZoom,"JOINT",True)
+
+	Case ZOOM_MODIFICATION
+		; en modification
+;		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+;		XmeMenuEnableItem(Zoom.Idmenu,"JOINT",True)
+;
+;		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(AB.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+;		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+;		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(AB.CEJOINT = 2, "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+;		XmeToolbarEnableButton(idOutilZoom,"JOINT",True)
+
+
+	Case 	ZOOM_AFFICHAGE
+		switch Zoom.TypeInput
+
+		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			;XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(AB.CENOTE = 2, True, False))
+			;XmeMenuEnableItem(Zoom.Idmenu,"JOINT",Condition(AB.CEJOINT = 2, True, False))
+
+		endswitch
+
+	;XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(AB.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+	;	xmetoolbarenablebutton(idOutilZoom,"NOTE", Condition(AB.CENOTE = 2, True, False))
+
+	;	XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(AB.CEJOINT = 2, "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+	;	xmetoolbarenablebutton(idOutilZoom,"JOINT", Condition(AB.CEJOINT = 2, True, False))
+
+	EndSwitch
+
+EndP
+
+;*	Recherches complémentaires
+public procedure RechercherLibelle
+beginp
+
+endp
+
+;*
+public procedure Traiter_Selection
+beginp	; Traiter_Selection
+
+	nbsel ++
+	Pong("AB_" & nbsel,AB.Cog_AffBCod)
+
+endp		; Traiter_Selection
+
+
+;*
+public procedure Envoyer_Selections
+beginp	; Envoyer_Selections
+
+	nbsel	= 0
+	ZoomTraiterSelection("cogtz_affectationbudgetaire.dhop","Traiter_Selection")			
+	Pong("AB_nbre",nbsel)
+
+endp		; Envoyer_Selections
+
+;*	envoie l'élément courant si il n'y a pas eu de sélection multiple précédemment
+public procedure Envoyer_Courant
+beginp
+
+	if nbsel = 0
+
+		nbsel	= 1
+		Pong("AB_" & nbsel,AB.Cog_AffBCod)
+		Pong("AB_nbre",nbsel)
+	
+	endif
+
+endp
+
+;*
+;* procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomEnteteTableau 
+Beginp
+	XmeList_ScanColumn(Zoom.IdTableau)
+Endp
+
+;*
+Public Procedure Construire_Condition_Selection(nom, premier)
+1	Nom					A
+1	premier				1,0 = FALSE
+
+1 	Valeur_Condition	S
+1  Param					S
+
+Beginp
+	AB.where.RemoveCondition(Nom)
+
+;	if SL.Cog_AffBCod <> ' '
+;		Param = banaliser_condition(SL.Cog_AffBCod, premier)
+;		AB.where.Zoom_Like_AffB(Param)
+;		Ajouter_condition(Valeur_Condition,'Zoom_Like_Cog_AffBCod')
+;	endif
+																						 	
+	if SL.Lib <> ' '
+		Param = banaliser_condition(SL.Lib, premier)
+		AB.where.Zoom_Like_Lib(Param)
+		Ajouter_condition(Valeur_Condition,'Zoom_Like_Lib')
+	endif
+																						 	
+	if Valeur_Condition <> ' '
+		AB.where.AddCondition(Nom, Valeur_Condition)
+	endif
+Endp
+
+;*
+Public Procedure ZoomDebut 
+Beginp
+
+	Init_Zoom(FicheNoBloc = 0)
+	Seek_Soc(MZ.Dos)			; recherche du dossier et T000
+
+	Note_Debut 				;Init de la gestion des notes
+	Joint_Debut																; init de la gestion des fichiers joints
+
+	SL.Init()
+	;AB.Orderby.Par_Code()
+	If zoom.Scevaleur <> ' '
+		if left(zoom.Scevaleur,1) = "-"
+			SL.Lib = mid(zoom.Scevaleur,2)
+			;AB.Orderby.Par_Libelle()
+		else
+			SL.Cog_AffBCod = zoom.Scevaleur
+		endif
+ 	Endif
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE, TRUE)
+
+	; sauvegarde du mode d'appel
+	g7.pong		= g3xz.pong
+	g3xz.pong 	= false
+
+Endp
+
+;*
+Public Procedure ZoomAbandon		; sortie du zoom par f9
+Beginp
+Endp
+
+;*
+Public Procedure ZoomVAlidation ; validation du zoom
+Beginp
+
+	zoom.valretour	= AB.Cog_AffBCod
+	if g7.pong = true
+		Envoyer_Courant
+	endif
+
+Endp
+
+;*
+Public Procedure ZoomFin			; à la sortie du zoom
+Beginp
+Endp					
+
+;*
+;* procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation
+Beginp
+	; initialiser les données 
+	AB.init()
+	AB.dos = MZ.Dos
+	AB.etb = MZ.Etb
+	Zoom.Modelf 		= ZOOM_MODE_FICHE		; pour interdire la création en mode liste
+Endp	  
+
+;*
+Public Procedure ZoomDuplication 
+Beginp
+	AB.UserMoDh 	= ' '
+	AB.UserCrDh 	= ' '
+	;AB.Note 		= 0
+	;AB.CeNote 		= 1	
+	;AB.Joint 		= 0
+	;AB.CeJoint		= 1	
+Endp
+
+;*
+Public Procedure ZoomApresCleCreation ; après saisie de la clé 
+Beginp
+	AB.Where.Exists(AB.Etb, AB.Cog_AffBCod)
+	Zoom.Res			= [ 'cog_affectationbudgetaire' mz.Dos AB.etb AB.Cog_AffBCod ]
+	Zoom.Titrevar	= AB.Cog_AffBCod
+Endp
+
+;*
+Public Procedure ZoomCreationRes		; apres réservation en création 
+Beginp
+	Note_Reinit(C_Applic_DAV)
+	Joint_ReInit(C_Applic_DAV)
+Endp
+
+;*
+Public Procedure ZoomAvantWrite 
+Beginp
+	; initialisation des codes enregistrement et mise à jour date et user
+   AB.Dos 			= mz.Dos
+	AB.UserCr 		= SYSTEM.User
+	AB.UserCrDh 	= Time(7)
+	;AB.Note 		= Note_Creation_(C_Applic_DAV, 'AB')	
+	;AB.CeNote		= Condition(AB.Note = 0, 1, 2)
+	;AB.Joint 		= Joint_Creation_(C_Applic_DAV, 'AB')	
+	;AB.CeJoint		= Condition(AB.Joint = 0, 1, 2)
+Endp
+
+;*
+Public Procedure ZoomApresCreation ; compte-rendu de création
+Beginp
+	Zoom.Titrevar = [ AB.Cog_AffBCod *1 AB.Lib ]
+Endp				 
+
+;*
+Public Procedure ZoomModification ; avant entrée en modif
+Beginp
+	Zoom.Res			= [ 'cog_affectationbudgetaire' mz.Dos AB.etb AB.Cog_AffBCod ]
+Endp			  
+
+;*
+Public Procedure ZoomModificationRes		; apres réservation enmodif
+Beginp
+	;Note_Chargement_(C_Applic_DAV, AB.Note)
+	;Joint_Chargement_(C_Applic_DAV, AB.Note)
+Endp					
+
+;*
+Public Procedure ZoomAvantRewrite 
+Beginp
+   AB.UserMo		= SYSTEM.User
+   AB.UserMoDh 	= Time(7)
+	;AB.Note 		= Note_Modification_ (C_Applic_DAV, AB.Note, 'AB')
+	;AB.CeNote		= Condition(AB.Note = 0, 1, 2)
+	;AB.Joint 		= Joint_Modification_ (C_Applic_DAV, AB.Joint, 'AB')
+	;AB.CeJoint		= Condition(AB.Joint = 0, 1, 2)
+Endp														 
+
+;*
+Public Procedure ZoomApresModification ; compte rendu de modification
+Beginp
+	Zoom.Titrevar = [ AB.Cog_AffBCod *1 AB.Lib ]
+Endp				 
+
+;*
+Public Procedure ZoomSuppression ; avant entrée en suppression
+Beginp
+	Zoom.Res			= [ 'cog_affectationbudgetaire' mz.Dos AB.etb AB.Cog_AffBCod ]
+Endp													  
+
+;*
+Public Procedure ZoomSuppressionRes
+Beginp
+Endp
+														  
+;*
+Public Procedure ZoomAvantDelete 
+Beginp
+	;Note_Suppression_(C_Applic_DAV, AB.Note)
+	;Joint_Suppression_(C_Applic_DAV, AB.Joint)
+Endp
+
+;*
+Public Procedure ZoomApresSuppression ; compte rendu de suppression
+Beginp
+Endp						
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsult
+Beginp
+	Maj_Menu_Boutons
+Endp				  
+
+;*
+Public Procedure ZoomConsult 	; à utiliser si note
+Beginp
+	Switch Harmony.Key
+		Case K_F7		|	Zoom_Call()
+		;Case K_SF6		|	Note_Consultation_ (C_Applic_DAV, AB.Note)
+		;Case K_CTRL_F6	|	Joint_Consultation_	(C_Applic_DAV, AB.Joint)
+		case K_F12
+			if G7.PONG = True
+				Envoyer_Selections
+			endif
+	Endswitch 
+Endp
+
+;*
+Public Procedure ZoomAvantInput			; permet de griser les boutons et les choix
+Beginp
+	Maj_Menu_Boutons
+Endp
+
+;*
+Public Procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+Beginp											; pour appel d'un zoom 
+	Switch Harmony.Key
+	Case K_F7	|	Zoom_Call()
+	Case K_F8	|	Zoom_Call(Harmony.Arret)	; Appel de zoom
+	
+	Case K_SF6						; Saisie d'une note
+		;Note_Saisie_(C_Applic_DAV, AB.Note, 'AB')				
+		;XmeToolbarSetButtonInfo(IdOutilZoom,"NOTE", Condition(Not Note_Empty_(C_Applic_DAV), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		
+	Case 	K_Ctrl_F6												; Fichier joint
+		;Joint_Saisie_(C_Applic_DAV, AB.Joint, 'AB')
+		;XmeToolbarSetButtonInfo(IdOutilZoom, "JOINT", Condition(Not Joint_Empty_(C_Applic_DAV," "), "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+	
+	Case Harmony.Dataarret = 8002
+		If Harmony.Sourisbout = RIGHT_BUTTON
+			Zoom_Call()
+		Endif
+
+	Endswitch
+Endp
+
+;*
+Public Procedure ZoomFiltreAvantValeur
+Beginp
+Endp
+
+;*
+Public Procedure ZoomFiltreApresValeur 
+Beginp
+Endp	
+
+;*
+;* procedures liées à la lecture du ficher
+;*
+
+;*
+Public Procedure ZoomApresCle
+Beginp
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE)
+Endp															
+
+;*
+Public Procedure ZoomApresRead
+Beginp
+	Zoom.Titrevar = [ AB.Cog_AffBCod *1 AB.Lib ]
+Endp															
+
+
+

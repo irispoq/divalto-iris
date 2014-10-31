@@ -1,0 +1,361 @@
+SetModuleInfo('$Id: gttz027_sql.dhsp 25791 2012-10-02 12:58:54Z lk $')
+;*
+;*      Zoom sur Adresse		Enregistrement Adresse de GTRSTIERS
+;*
+
+OverWrite 'GTTZ027_SQL.dhop'
+
+Include 	'GTTCZ00.dhsp'											; Déclarations communes
+Include	'ZMAPI7.dhsp'
+
+Module 	'A5PMNOTEJOINT.dhop'									; Module de gestion de notes et fichiers joints
+Module 	'GRTM000.dhop'											; Géolocalisation
+Module	"xzoom7.dhop"
+
+; TDF
+HFileVersion		'GTFDD.dhsd' 		GTFPCF 	
+Public HFile 		'GTFDD.dhsd' 		GTFPCF 	GTFPCF	
+
+; Enregistrements
+Public RecordSql 	'GTRSTIERS.dhoq'	Adresse				; Adresse
+Public Record 		'GTFDD.dhsd' 		CLI					; Client
+
+public hfile  gtfdd.dhsd GTFPCF 	GTFPCF2	
+public record gtfdd.dhsd CLI
+public record gtfdd.dhsd T1
+public record gtfdd.dhsd T1 		WT1
+public record gtfdd.dhsd T1 		XT1
+public record gtfdd.dhsd T1 		T1_Ori
+public record grfdd.dhsd XZ 		GRXZ
+public record gtfdd.dhsd T023
+Public Record gtfdd.Dhsd	G7		G7
+public record gtfdd.dhsd T1	Adr_Sel			; Filtres
+
+;RecordSql 	'GTRSTIERS.dhoq'	Adresse	Adr_Rech			
+RecordSql 	'GTRSTIERS.dhoq'	Adresse	Adr_Ori	
+
+1	IdReaderAdr	L
+;*
+;*		Fonctions & procédures
+;*
+;*
+
+Procedure Construire_Condition_Selection(nom, premier)
+1	Nom						A
+1	premier					1,0 = FALSE		; Gestion de '*' en fin de champ
+
+1 	Valeur_Condition	S
+1  Param					S
+
+Beginp
+	Adresse.Where.RemoveCondition(Nom)
+
+	If G7.Tiers <> ' '						; Tiers
+		Param = Banaliser_Condition(G7.Tiers, premier)
+		If nom = ZOOM_SQL_CONDITION_PILOTEE
+			Adresse.Where.Zoom_Pour_Tiers(Param)
+			Ajouter_Condition(Valeur_Condition, 'Zoom_Pour_Tiers')
+		EndIf
+	EndIf
+	;VR ajout des critères de filtre FE030
+	if Adr_Sel.AdrCod <> ' '
+		Param = Banaliser_Condition(Adr_Sel.AdrCod, premier)
+		Adresse.Where.Zoom_Like_Site(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Like_Site')
+	endif
+
+	if Adr_Sel.Nom <> ' '
+		Param = Banaliser_Condition(Adr_Sel.Nom, premier)
+		Adresse.Where.Zoom_Par_Nom(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Par_Nom')
+	endif
+
+	if Adr_Sel.Tel <> ' '
+		Param = Banaliser_Condition(Adr_Sel.Tel, premier)
+		Adresse.Where.Zoom_Par_Tel(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Par_Tel')
+	endif
+
+	if Adr_Sel.Tiers <> ' ' and nom = ZOOM_SQL_CONDITION_NORMALE 
+		Param = Banaliser_Condition(Adr_Sel.Tiers, premier)
+		Adresse.Where.Zoom_Pour_Tiers(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Pour_Tiers')
+	endif
+
+	if g7.Choix(1) = 2 and nom = ZOOM_SQL_CONDITION_NORMALE
+		Adresse.Where.Zoom_Active(today)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Active')
+	endif
+
+	If Valeur_Condition <> ' '
+		Adresse.Where.AddCondition(Nom, Valeur_Condition)
+	EndIf
+Endp
+
+
+;*
+Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+	Standard.Maj_Menu_Boutons
+	Switch ZOOM.Action
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+		XmeMenuEnableItem(Zoom.Idmenu,'MVT',FALSE)
+		XmeToolbarEnableButton(IdOutilZoom,'MVT',FALSE)
+		XmeToolbarEnableButton(IdOutilZoom,'EVT',FALSE)
+	Case ZOOM_MODIFICATION
+		; en modification
+		XmeMenuEnableItem(Zoom.Idmenu,'MVT',TRUE)
+		XmeToolbarEnableButton(IdOutilZoom,'MVT',TRUE)
+		XmeToolbarEnableButton(IdOutilZoom,'EVT',TRUE)
+	Case 	ZOOM_AFFICHAGE
+		Switch Zoom.Typeinput
+		Case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			XmeMenuEnableItem(Zoom.Idmenu,'MVT',TRUE)
+			XmeToolbarEnableButton(IdOutilZoom,'EVT',TRUE)
+			XmeToolbarEnableButton(IdOutilZoom,'MVT',TRUE)
+		Case ZOOM_S_DEPART		; avant clé de départ
+			XmeToolbarEnableButton(IdOutilZoom,'MVT',FALSE)
+			XmeToolbarEnableButton(IdOutilZoom,'EVT',FALSE)
+		Endswitch
+	EndSwitch
+EndP
+
+;*
+Procedure Positionne_Indicateur
+Beginp
+	Standard.Positionne_Indicateur
+	If Lectab_Unite( ' ' ,' ',' ', SOC.SurfUn) = 0
+		G7.Lib(35) = T023.Lib
+	Else
+		G7.Lib(35) = system.esp
+	Endif
+Endp
+
+;* 
+Function int Maj_Affaires(old_Tiers,News_Tiers,Mode)		 ; Mise à jour du code tiers dans les affaires !
+hfile	gtfdd.dhsd	gtfproj	gtfprojt
+record	gtfdd.dhsd	prjav	projet
+record	gtfdd.dhsd	prjap	affaire
+1	Old_Tiers	>gtfdd.dhsd	Tiers
+1	News_Tiers	>gtfdd.dhsd	Tiers
+1	Mode	B	= False
+BeginF
+	If Old_tiers <> News_Tiers and News_tiers <> " " and Old_Tiers <> " "
+		gtfprojT.key = "F" & MZ.dos & old_tiers
+		Do while	hread(gtfprojT,projet,gtfprojT.key,) = 0 And Projet.dos = Mz.dos and Projet.Tiers =	Old_Tiers
+			Projet.Tiers		=	News_Tiers
+			Projet.usermo		=	system.user
+			Projet.usermodh 	=	time(14)
+			Hrewrite(gtfprojT,projet)
+		Wend
+		gtfprojT.key = "B" & MZ.dos & old_tiers
+		Do while	hread(gtfprojT,affaire,gtfprojT.key,) = 0	And Affaire.dos = Mz.dos and Affaire.Tiers =	old_tiers
+			Affaire.Tiers		=	News_Tiers
+			Affaire.usermo		=	system.user
+			Affaire.usermodh 	=	time(14)
+			Hrewrite(gtfprojT,Affaire)
+		Wend
+	Else
+		Freturn(1)
+	Endif
+	Freturn(0)
+Endf
+
+;* 
+Function int Maj_Tiers(old_Tiers,News_Tiers,Site)	  ; Mise à jour des du codes adresse dans les fiches tiers
+hfile	gtfdd.dhsd	gtfpcf	gtfpcfT1
+hfile	gtfdd.dhsd	gtfpcf	gtfpcfT2
+record	gtfdd.dhsd	cli	wcli1
+record	gtfdd.dhsd	cli	wcli2
+1	Old_Tiers	>gtfdd.dhsd	Tiers
+1	News_Tiers	>gtfdd.dhsd	Tiers
+1	Site			>gtfdd.dhsd	Adrcod
+1	i	X
+BeginF
+	if Hseek(gtfpcfT1,wCLI1,"A" & MZ.DOS & News_Tiers,) = 0
+		For i = 1 to 3
+;			If wcli1.ADRCOD(i) <> system.esp
+				wcli1.ADRCOD(i) = Site
+;			Endif
+		Next
+		For i = 4 to 5
+			wcli1.ADRCOD(i) = system.esp
+		Next
+		Hrewrite(gtfpcfT1,wcli1)
+		if Hseek(gtfpcfT2,wcli2,"A" & MZ.DOS & oLD_Tiers,) = 0
+			For i = 1 to 5
+				if wcli2.ADRCOD(i) <> system.esp
+					wcli2.ADRCOD(i) = system.esp
+				Endif
+			Next
+			Hrewrite(gtfpcfT2,wcli2)
+		Else
+			Freturn(2)
+		Endif
+	Else
+		Freturn(1)
+	Endif
+	Freturn(0)
+Endf
+
+;*	
+Function int Controle_Site_Existant			  ; Controler l'existance du site (attention l'ADRCOD peut exister sur le fournisseur)
+1	Trouve 1,0	=	False
+Beginf
+	GTFPCF2.KeyValue = MZ.DOS & T1.AdrCod 
+	trouve = False 
+	Do While Iread(GTFPCF2, XT1, "COG_ADRCOD",GTFPCF2.KeyValue)= 0 And MZ.DOS = XT1.DOS And T1.AdrCod  = XT1.AdrCod
+		If  ZOOM.ACTION = ZOOM_MODIFICATION And XT1 = T1_ORI | RedoDo | Endif
+		If T1.AdrCod  = XT1.AdrCod And XT1.Hsdt = system.esp 
+			trouve = true 
+			ExitDo
+		Endif
+	Wend
+	If XT1.Dos = MZ.dos And T1.AdrCod = XT1.AdrCod And XT1.Hsdt = system.esp and Trouve = TRUE
+		Freturn(1)
+	Endif  
+	Freturn(0)
+Endf
+
+;*
+public procedure rechercher_libelle
+1	statno	>gtfdd.dhsd	STATNO
+beginp
+	init G7.LIB() = ' '
+	If Recherche_Client (T1.TIERS) = 0
+   	G7.Lib(1) = CLI.Nom
+	Endif
+
+	If Lectab_Unite( ' ' ,' ',' ', SOC.SurfUn) = 0
+		G7.Lib(35) = T023.Lib
+	Else
+		G7.Lib(35) = system.esp
+	Endif
+Endp
+
+;*
+procedure ZoomDebut 
+1	i	X
+beginp
+
+	Init_Zoom(FicheNoBloc = 0)
+	Seek_Soc(MZ.Dos)								; Recherche du dossier et T000
+	G7.CHOIX(1) = 2			; uniquement les clients valides
+	Adr_Sel = ' '
+
+	Zoom.TitreFixe=Expanser_Texte(Translate("Site du tiers $1 $2"),G7.TIERS,CLI.NOM) & " - " & Soc.Nom
+	xmesetattribut("cog_tiers",an_visibilite,av_cache)
+	If G7.ZoomPar = 5 
+		Zoom.TitreFixe=Expanser_Texte("Site") & " - " & Soc.Nom
+		xmesetattribut("cog_tiers",an_visibilite,av_visible)
+		Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE)
+		xmesetattribut("sel_tiers",an_visibilite,av_visible)
+	Else
+		If ( G7.Tiers := G3XZ.Tiers ) = ' ' Or Recherche_Tiers(G7.Tiers) <> 0
+			Mes_Alert(1900, G7.Tiers)
+			ZOOM.Ok = 'N'
+			PReturn
+		EndIf
+		Zoom.TitreFixe = [ Expanser_Texte(Translate('Adresse du tiers $1 $2'), G7.Tiers, Left(CLI.Nom)) ' - ' Left(SOC.Nom) ]
+		Adr_Sel.Tiers = g7.Tiers
+		xmesetattribut("sel_tiers",an_visibilite,av_grise)
+		Construire_Condition_Selection(ZOOM_SQL_CONDITION_PILOTEE)
+	endif
+	Adresse.OrderBy.Par_Adresse()
+	Note_Debut										; Init. de la gestion des notes
+
+Endp
+
+;*
+procedure ZoomVAlidation 
+beginp
+	Standard.ZoomVAlidation
+	Pong('TIERS',adresse.Tiers)
+endp
+
+;*
+procedure ZoomModification ; avant entrée en modif
+Beginp
+	Standard.ZoomModification
+	T1_ORI = T1
+Endp
+
+;*
+procedure ZoomApresModification 
+Beginp
+	Standard.ZoomApresModification
+	If Not T1_ORI.Tiers = T1.Tiers
+		pinglocal("T1", T1)
+		T1_Ori.Hsdt 		= Today
+		T1_Ori.USERMO		= SYSTEM.USER
+   	T1_Ori.USERMODH 	= time(7)
+		Hwrite(GTFPCF2,T1_Ori)
+		ZoomReactualiserListe
+		pinglocalreceive("T1", T1)
+		Maj_Tiers(T1_ORI.tiers,T1.Tiers,T1.ADRCOD)
+		Maj_Affaires(adr_Ori.tiers,T1.Tiers,false)
+	Endif
+Endp
+
+;*
+procedure ZoomAvantWrite 
+beginp 
+;!	G7.Tiers = T1.Tiers		 migratrion V6->V7
+	Standard.ZoomAvantWrite
+	If Controle_Site_Existant = 1
+		MessageBox ("Site déjà existant !","Message",MB_OK + MB_ICONEXCLAMATION)
+	   Zoom.Ok = 'S'
+	Endif
+Endp
+
+;*
+procedure ZoomDuplication
+Beginp
+	Standard.ZoomDuplication
+	G7.AFFCETB(1) 	= 1
+Endp
+
+;*
+procedure ZoomAvantReWrite 
+beginp 
+	Standard.ZoomAvantReWrite
+	If Controle_Site_Existant = 1
+		MessageBox ("Site déjà existant !","Message",MB_OK + MB_ICONEXCLAMATION)
+	   Zoom.Ok = 'S'
+	Endif
+Endp
+
+;*
+procedure ZoomConsult
+beginp
+	G3XZ.TIERS = adresse.TIERS
+	GRXZ.TIERS = adresse.TIERS
+	G3XZ.TICOD = 'C'
+	switch Harmony.Key
+	case Harmony.DataArret = 1002						; événements
+			ping("GRxz",GRXZ)
+			Zoom_Call(30997,false)
+	case Harmony.DataArret = 1003						; mouvement 
+			G3XZ.CHOIX(1) = Non
+			G3XZ.CHOIX(2) = Non
+			G3XZ.CHOIX(3) = Non
+			G3XZ.CHOIX(4) = Oui
+			G3XZ.ETB		  = MZ.ETB
+			Zoom_Call(9857,false)
+	Endswitch
+	Standard.ZoomConsult
+Endp
+
+;* 
+procedure ZoomApresRead							 
+beginp
+	Standard.ZoomApresRead
+	If Zoom.ModeLF = ZOOM_MODE_FICHE	or Zoom.Action = ZOOM_IMPRESSION
+		rechercher_Libelle
+	endif
+endp
+
+
+
+

@@ -1,0 +1,22 @@
+
+;* Formate une zone en suprimant les esapces inutiles
+Public Function Char Cog_Import_FxForm_SupEspInut(aMOT)
+1	aMOT	S
+Beginf
+	Freturn(nospaces(aMOT))
+Endf
+
+
+;* Spécifif BACH
+;* Type articles : Prod.U " X " en pos4, PPX et BVU " X " en pos3 
+Public Function Char Cog_Import_FxForm_BachAUPC10(aMot)
+1	aMot	S
+Beginf
+	Switch string("X", aMOT)
+		Case 4
+			Freturn("PPRODU")
+		Case 3
+			Freturn("PPXBVU")
+	EndSwitch
+	Freturn(" ")
+Endf

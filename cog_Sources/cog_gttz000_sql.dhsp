@@ -1,0 +1,186 @@
+SetModuleInfo('$Id$')
+;*
+;*      Zoom sur Article						Record SQL Article de GTRSART.dhoq
+;*
+
+OverWrittenBy "COG_GTUZ000_SQL.dhop"
+
+Include	GTTCZ00.dhsp										; Déclarations communes
+
+Module 	XZoom7.dhop
+Module 	CCTM000.dhop
+Module 	CCPM000.dhop
+Module 	A5PMWIN.dhop
+module 	A5TM000.dhop
+Module 	GTTMPCE.dhop	
+Module	GGPMBAS.dhop
+Module 	A5PMRUB.dhop
+Module 	A5PMNOTEJOINT.dhop
+Module	WMPMFICSQL.dhop
+module	CCPMFIC.dhop
+
+module wmpm000.dhop
+
+; TDF
+HFileVersion  GTFDD.dhsd 	GTFAT
+
+Public HFile	GTFDD.dhsd 	GTFAT 	GTFAT
+Public HFile	GTFDD.dhsd 	GTFTARIF	GTFTARIF
+Public HFile	GTFDD.dhsd 	GTFPCF 	GTFPCF
+
+; Record SQL
+Public RecordSql 'GTRSART.dhoq'		Article
+
+; Enregistrements
+Public Record A5DD.dhsd		mChemin						; Enregistrement Chemin
+
+Public Record GTFDD.dhsd 	ART 		ART_Sel			; Article (sélection)
+Public Record GTFDD.dhsd 	ART 		ART_Save			; Article (sauvegarde)
+Public Record GTFDD.dhsd 	SART							; Sous-référence
+Public Record GTFDD.dhsd 	FOU							; Fournisseur
+Public Record GTFDD.dhsd 	CLI							; Client
+
+; 		Sous fiches
+Public Record GTFDD.dhsd 	TFO							; Tarif d'achat
+Public Record GTFDD.dhsd 	TFOPROMO						; Tarif d'achat promotion
+Public Record GTFDD.dhsd 	TFORE							; Remise d'achat 
+Public Record GTFDD.dhsd 	TFOREPROMO					; Remise d'achat promotion
+Public Record GTFDD.dhsd 	RCL							; Référencement client
+Public Record GTFDD.dhsd 	LART							; Libellé complémentaire
+Public Record GTFDD.dhsd 	RFO							; Conditionnement réappro. fournisseur
+Public Record GTFDD.dhsd 	RSO							; Article réappro.
+Public Record GTFDD.dhsd 	DAR							; Décomposition
+Public Record GTFDD.dhsd 	TAR							; Tarif de vente
+Public Record GTFDD.dhsd 	TARPROMO						; Tarif de vente promotion
+Public Record GTFDD.dhsd 	TRE							; Remise de vente
+Public Record GTFDD.dhsd 	TREPROMO						; Remise de vente promotion
+Public Record GTFDD.dhsd 	ARTDEPO						; Article info. dépôt
+Public Record GTFDD.dhsd 	ARTSTOC						; Article info. stock
+Public Record GTFDD.dhsd 	ARTWEB						; Article info. web
+
+Public Record GTFDD.dhsd 	STB							; Stat. cumulées Article
+
+Public Record GTFDD.dhsd 	T001							; Libellé famille de tarification
+Public Record GTFDD.dhsd 	T002							; Libellé classe remise
+Public Record GTFDD.dhsd 	T005							; Unité
+Public Record GTFDD.dhsd 	T012							; Famille stat. Article
+Public Record GTFDD.dhsd 	T023							; Libellé unité
+Public Record GTFDD.dhsd 	T031							; Grille sous-référence
+Public Record GTFDD.dhsd 	T033							; Coeff. emballage
+Public Record GTFDD.dhsd 	T036							; Nature produit
+Public Record GTFDD.dhsd 	T046							; Attestation Article tiers
+Public Record GTFDD.dhsd	T073							; Compétence
+
+Public Record GRFDD.dhsd 	XZ 		GRXZ				; Echange CRM
+Public Record A5DD.dhsd 	XZ 		A5XZ				; Echange commun
+Public Record A5DD.dhsd		MDOS							; Dossier commun
+Public Record A5DD.dhsd  	MW								; Notes commun
+Public Record CCFDD.dhsd 	C3								; Ecriture compta.
+public record	CCFDD.dhsd	C8								; ligne d'écriture
+Public Record CCFDD.dhsd 	CZ								; Tabe commmune compta
+
+; Variables
+1	PresenceCRM		1,0
+1	PresenceWMS		1,0
+1	wsrefcod			>GTFDD.dhsd 	SrefCod				; Sauvegarde mode gestion sous-référence
+1	wgricod			>GTFDD.dhsd 	GriCod				; Sauvegarde code grille
+1	TabTypTb			>GTFDD.dhsd		TabTyp*200			; Conditionne les tables communes ou pas
+1	CheminSoc		>A5DD.dhsd		Chemin				; Chemin dossier
+1	estPilote		1,0 = FALSE								; Indique si on est dans un zoom piloté (TRUE) ou non (FALSE)
+
+; Define
+Define IdMenuZoomBis				= G3XT.IdBarre(3)	
+Define IdOutilDuplication		= G3XT.IdBarre(4)
+Define C_Pilotage_ParArticle 	= 1
+
+; Pages
+Const C_Page_Fond					= 1
+Const C_Page_SaisieCode			= 22
+Const C_Page_InitDuplication	= 23
+
+;*
+;* procedures 
+;*
+
+1	g_srefcod		>gtfdd.dhsd SREFCOD			; sauvegarde mode gestion sous-référence
+1	g_gricod			>gtfdd.dhsd GRICOD			; sauvegarde code grille
+1	g_grisais		>gtfdd.dhsd GRISAIS			; sauvegarde saisir en grille
+1	g_StCod			>gtfdd.dhsd STCOD				; sauvegarde En stock ?
+1	g_GiCod			>gtfdd.dhsd GICOD				; sauvegarde mode de suivi
+1	g_RefUn			>gtfdd.dhsd RefUn				; sauvegarde unité de référence
+
+;*01
+Public function int cog_Article_Utilisation
+; valeur retour	=0 il existe des enregistrements liés à l'article qui utilisent les unités
+;						=1 pas d'utilisation
+beginf
+	if Zoom.Action = ZOOM_Modification
+		if G3_Controle_Utilisation_Gamme(ART.REF,err=false) = true
+			freturn(0)
+		elsif G3_Controle_Utilisation_Article(ART.REF,err=false) <> 0
+			freturn(0)
+		endif
+	endif
+	freturn(1)
+endf
+
+;* 01
+Public procedure Cog_ZoomModification	
+; avant entrée en modif
+beginp
+	g_srefcod	= ART.SREFCOD
+	g_gricod		= ART.GRICOD
+	g_grisais	= ART.GRISAIS
+	g_StCod		= ART.StCod
+	g_GiCod		= ART.GiCod
+	g_RefUn		= ART.RefUn
+
+endp
+
+;*	01
+Public procedure Cog_ZoomAvantRewrite
+;
+beginp
+
+	If g_srefcod <> ART.SREFCOD or g_gricod <> ART.GRICOD or g_StCod <> ART.StCod or g_GiCod <> ART.GiCod or g_RefUn <> ART.RefUn
+		; Si pas de mouvement de stock alors éxécution du standard
+		If	cog_Article_Utilisation = 1
+			; ZoomApresModification
+		Else	; sinon restauration des anciennes valeurs
+			ART.SREFCOD	= g_srefcod
+			ART.GRICOD	= g_gricod
+			ART.GRISAIS	= g_grisais
+			ART.StCod	= g_StCod
+			ART.GiCod	= g_GiCod
+			ART.RefUn	= g_RefUn
+		EndIf
+	endif
+
+endp
+
+;*
+Public Procedure Cog_ZoomCreation
+;
+Beginp
+
+	ART.RefUn		 	= SOC.Cog_RefUn
+	ART.AchUn 			= SOC.Cog_RefUn
+	ART.StUn 			= SOC.Cog_RefUn
+	ART.VenUn 			= SOC.Cog_RefUn
+	ART.TvaUn 			= SOC.Cog_RefUn
+	ART.TvaaRt			= SOC.TvaR
+	ART.TvaaRta			= SOC.TvaRa
+
+EndP
+
+;*
+Public Procedure Cog_ZoomDebut
+;
+BeginP
+
+	If Seek_CZ() <> 0
+		CZ.Dos = 0
+	EndIf
+
+EndP
+

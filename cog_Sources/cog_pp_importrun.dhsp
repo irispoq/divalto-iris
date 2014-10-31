@@ -1,0 +1,93 @@
+;*
+;*	Moteur générique d'importation Divalto
+;*
+;_10/2010		SR		01		Initial
+
+;*
+;* Déclarations
+;*
+
+Hfile		cog_echange.dhsd				Cog_ParDivEch		Cog_ParDivEch
+
+Public	Record	cog_echange.dhsd	cog_paratables
+
+1	aAdrProcImport		16
+
+Module	Cog_Gdiva.dhop
+Include	"GTTCZ00.dhsp"				;déclarations communes
+
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+;*
+;* Proc & Fx
+;*
+
+;* Lecture de la table paramètre table et appel de la procédure d'import
+Procedure	COG_PIMP_LOAD_PARAMTABLES
+1	slig		S		;ligne du fichier d'import à traiter
+1	lFIC		L		; Pointeur du fichier ouvert
+1	s_datetrait	S
+1	d_datetrait	>GTFDD.DHSD UserCrDh
+Beginp
+	Cog_ParDivEch. Key = "E"
+	Loop Hread(Cog_ParDivEch, COG_PARATABLES) = 0
+		If cog_paratables.actif = 2
+			If GetAdressProcedure(	Condition(cog_paratables.moduleImp <> " ", cog_paratables.moduleImp, "cog_pm_importdef.dhop"), \
+										Condition(cog_paratables.fxImp <> " ", cog_paratables.fxImp, "COG_PIMP_TRTIMPORT"), aAdrProcImport) = 0
+				; Livre de bord
+				d_datetrait = Time(7)																															 
+				s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+				s_datetrait = Fstring("0", s_datetrait)
+				G3_LOG_ANO(90013," ** ETL table ", Left(cog_paratables.enreg),Left(cog_paratables.lib)," début ", s_datetrait," **",,,"COG_FMSG.DHFI",,)
+				;
+				ProcedureCall(aAdrProcImport, COG_PARATABLES)
+				; Livre de bord
+				d_datetrait = Time(7)																															 
+				s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+				s_datetrait = Fstring("0", s_datetrait)
+				G3_LOG_ANO(90013," ** ETL table ", Left(cog_paratables.enreg),Left(cog_paratables.lib)," fin ", s_datetrait," **",,,"COG_FMSG.DHFI",,)
+				;
+			Else
+				; Log
+			EndIf
+		EndIf
+	EndLoop
+Endp
+
+;*
+;*	P.P.
+;*
+MAIN
+
+;	If PingReceiveAndDelete("ACTION_REP", aREP) <> 0
+;	EndIf
+;	If PingReceiveAndDelete("ACTION_REP_FIC", aFIC0) <> 0
+;	EndIf
+
+If PingReceive("ZEchange", MZ) <> 0
+	;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+	If iseek(a5fdos_loc,muser_loc,"B",system.user)
+		programexit
+	Else
+		mz.dos		= muser_loc.dos
+		mz.etb		= muser_loc.etb
+		mz.depo		= muser_loc.depo
+		mz.mecle		= "cog_cc_export01.dhof"
+	EndIf
+	; Initialisation
+	Seek_Soc(MZ.Dos)		; Contrôle du dossier
+	Seek_Ets(MZ.Etb)
+
+	COG_PIMP_LOAD_PARAMTABLES
+	
+ElsIf PingReceive("ZEchange", MZ) = 0
+	; Initialisation
+	Seek_Soc(MZ.Dos)		; Contrôle du dossier
+	Seek_Ets(MZ.Etb)
+
+	COG_PIMP_LOAD_PARAMTABLES
+EndIf
+
+ProgramExit
+ProgramGoto ' '

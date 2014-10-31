@@ -1,0 +1,18 @@
+Hfile		Gtfdd.Dhsd	GtfPcf	GtfPcf
+Record	Gtfdd.Dhsd	Cli
+
+Record	Gtfdd.Dhsd	Fou
+
+1	Dos 	>Gtfdd.Dhsd	Dos
+;
+Main
+	
+	dos = 105
+
+	If Hseek(GtfPcf,Cli,'A' & dos & 'C0010000') = 0
+	;	Hrewrite(GtfPcf,Cli)
+	EndIf
+
+	If Hseek(GtfPcf,Fou,'A' & dos & 'F0008101') = 0
+		Hrewrite(GtfPcf,Fou)
+	EndIf

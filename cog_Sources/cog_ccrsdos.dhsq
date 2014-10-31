@@ -1,0 +1,33 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL du CCFDOS
+;*
+
+<DictionarySql defaultDictionary=ccfdd.dhsd DataBase=DCPT overwrittenby="cog_ccrsdosu.dhoq" ModuleInfo='$Id$'>
+
+
+;*
+;*		Exercice
+;*
+
+<RecordSql Name=CogRs_CB Comment='Exercice Comptable'>
+Public Record	"a5dd.dhsd"		MZ
+<Select>
+	CB.*
+
+<From Insert=NO Update=NO Delete=NO>
+	CB
+
+<Where>
+	CB.DOS = MZ.DOS
+		
+	case Borne_Date(date dt)
+		CB.EXODDT <= dt AND CB.EXOFDT >= dt
+
+
+<OrderBy>
+
+	case Par_DateExercice "Par date de début d'exercice"
+		CB.Dos,
+		CB.ExoDDt
+
+			 

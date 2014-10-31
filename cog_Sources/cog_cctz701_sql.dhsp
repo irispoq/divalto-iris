@@ -1,0 +1,172 @@
+SetModuleInfo('$Id$')
+;>xdiva
+;*
+;*		zoom sur les biens																													cctz701.dhsp
+;*
+
+;*		log	 version	  n°modif		date		modifications	
+;*		YLEF		P205A						10/2014	Appel de l'interrogation tiers
+;*
+
+OverWrittenBy	"cog_ccuz701_sql.dhop"
+
+
+;*
+;*		déclarations
+;*
+
+; includes
+include	"cctcz000.dhsp"
+include	"cctc700.dhsp"
+
+; modules
+module	"ccpm700.dhop"
+module	"cctm700.dhop"
+module	"xzoom7.dhop"
+Module	"GTPM000.DHOP"
+Module	"GTPMFIC.DHOP"
+
+; record SQL
+public	recordSQL	'CCRSIMMO.dhoq'		IMMO			IMMOBILISATION
+
+; enregistrements
+public	record		A5DD.dhsd		M7						; description d'un masque d'impression
+
+public	record		CCFDD.dhsd		CA
+public	record		CCFDD.dhsd		CB						; dossier, dates de clôture
+public	record		CCFDD.dhsd		CD						; dossier, paramètres immobilisations
+public	record		CCFDD.dhsd		C3						; intitulé de compte
+public	record		CCFDD.dhsd		C5						; intitulé d'axe
+public	record		CCFDD.dhsd		CETS					; établissement
+public	record		CCFDD.dhsd		I1			I1_SEL	; immobilisation (sélection)
+public	record		CCFDD.dhsd		I2						; amortissement
+public	record		CCFDD.dhsd		I3						; plan d'unités d'oeuvre
+public	record		CCFDD.dhsd		HD						; natures d'immobilisation
+
+public	record		CCFDD.dhsd		XZ			wxz		; sav communication pg	
+public	record		CCFDD.dhsd		XDecoupage			; work pour découpage champ
+
+;*
+;*
+;*
+
+;*
+Procedure Cog_Maj_Menu_Boutons
+;
+BeginP
+	
+	XmeToolbarEnableButton(Zoom.Idtoolbar, "cog_btnint", Condition(IMMOBILISATION.BlNo > 0 AND IMMOBILISATION.CptAux <> ' ', TRUE, FALSE))
+
+EndP
+
+;*
+Public Procedure Cog_ZoomAvantConsult
+;
+BeginP
+	Cog_Maj_Menu_Boutons
+EndP
+
+;*
+Public Procedure Cog_ZoomAvantInput
+;
+BeginP
+ 	Cog_Maj_Menu_Boutons
+EndP
+
+;*
+Procedure Cog_Interro_Tiers
+;
+BeginP
+
+	If Seek_FOU(IMMOBILISATION.CptAux) = 0
+		
+		Ping("COG_GTPP300_PICOD", '3') 
+		Ping("COG_GTPP300_PINO", IMMOBILISATION.BlNo) 
+		Tunnel_Tiers_Interroger('F', IMMOBILISATION.CptAux)
+
+	Else
+		MessageBox("Fournisseur " & left(IMMOBILISATION.CptAux) & " non trouvé.","Erreur", MB_ICONERROR)
+	EndIf
+
+EndP
+
+;*
+Public Procedure Cog_ZoomArret
+;
+BeginP
+
+	Switch Harmony.Key
+		Case Harmony.Dataarret = 1000
+			Cog_Interro_Tiers
+	EndSwitch
+
+EndP
+
+;*
+Public Procedure Cog_ZoomConsult
+;
+BeginP
+
+	Switch Harmony.Key
+		Case Harmony.Dataarret = 1000
+			Cog_Interro_Tiers
+	EndSwitch
+
+EndP
+
+;*
+Public Procedure Cog_ZoomAvantReWrite
+;
+RecordSQL	"COG_CCRSIMMO.DHOQ"		CogRs_IMMO		wRs_IMMO
+RecordSQL	"COG_CCRSIMMO.DHOQ"		CogRs_IMMO		wRs_IMMO_new
+RecordSQL	"COG_CCRSDOS.DHOQ"		CogRs_CB			wRs_CB
+1 	txtMSB	S
+1	i			1,0
+BeginP
+
+	;
+	wRs_IMMO.Init()
+	wRs_IMMO.Where.Zoom_PK(IMMOBILISATION.Immo, IMMOBILISATION.ImmoComp)
+	If wRs_IMMO.Select()
+
+		If wRs_IMMO.EcoAmDt <> ' ' 
+
+			wRs_CB.Init()
+			wRs_CB.Where.Borne_Date(wRs_IMMO.EcoAmDt)
+			If wRs_CB.Select() > 0 AND wRs_CB.ClotCod = 2
+
+				; contrôle des champs non autorisés pour modif après clôture exercice
+				wRs_IMMO_new.I1 = IMMOBILISATION.I1
+
+				; pas de comparaison sur les axes
+				For i=1 to 4
+					wRs_IMMO.Axe(i)	  = ' '
+					wRs_IMMO_new.Axe(i) = ' '
+				Next
+
+				; pas de comparaison des user e date modif
+				wRs_IMMO.UserMo		= ' '
+				wRs_IMMO.UserMoDh		= ' '
+				wRs_IMMO.UserMoOri	= ' '
+
+				wRs_IMMO_new.UserMo		= ' '
+				wRs_IMMO_new.UserMoDh		= ' '
+				wRs_IMMO_new.UserMoOri	= ' '
+
+				;
+				If wRs_IMMO.I1 <> wRs_IMMO_new.I1
+					txtMSB	= "L'exercice de la date de mise en service est clôturé, seule la modification des axes est autorisée."
+					MessageBox(txtMSB, "Erreur", MB_ICONERROR)
+					Zoom.Ok = 'I'
+				EndIf
+
+			EndIf
+
+		EndIF
+
+	EndIf
+
+EndP
+
+
+		 

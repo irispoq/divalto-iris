@@ -1,0 +1,33 @@
+SetModuleInfo('$Id$')
+;>xdiva
+;*
+;*		Objet : Génération des écritures de cession - Traitement associé au programme : cogpp_ecr_cession.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF	P205a			Init			10/2014		DAVFIN_FE001
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ChargementAvant						Avant chargement du masque pour initialisation des variables
+;*
+
+overwrittenby "cogut_std.dhop"
+
+;
+public record	"ccfdd.dhsd"		XQ				;enregistrement de travail
+
+
+;*	Avant chargement du masque pour initialisation des variables
+public procedure ChargementAvant
+beginp
+
+	XQ	= ""
+	XQ.EchDt2 = "99991231"
+
+endp
+
+;*

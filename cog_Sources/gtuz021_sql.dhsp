@@ -1,0 +1,117 @@
+SetModuleInfo('$Id: gttz021_sql.dhsp 34913 2013-10-30 12:54:36Z als $')
+;*
+;*      Zoom sur client				Record SQL Client de GTRSTIERS
+;*
+
+OverWrite 'GTTZ021_SQL.dhop'
+
+Include 	'GTTCZ00.dhsp'				; Déclarations communes
+Include	'ZMAPI7.dhsp'
+
+Module 	'A5PMNoteJoint.dhop'		; Module de gestion de notes
+Module 	'CCTM000.dhop'
+Module	'A5TM000.dhop'
+Module 	'CCPM000.dhop'
+Module 	'RCPM000.dhop'
+Module 	'GRPM000.dhop'
+Module 	'GRTM000.dhop'				; Géolocalisation
+Module 	'A5PMRUB.dhop'
+Module 	'YCTI.dhop'
+Module 	'XZoom7.dhop'
+Module 	'GTTMPCE.dhop'
+module 	'RCTM000.dhop'
+Module 	'A5PMPORTAIL.dhop'
+Module	'GTPMFICSQL.dhop'
+
+; TDF
+HFileVersion 	GTFDD.dhsd 	GTFPCF
+Public HFile 	GTFDD.dhsd 	GTFPCF	GTFPCF
+Public HFile	GTFDD.dhsd 	GTFAT	 	GTFAT
+Public HFile	GTFDD.dhsd 	GTFTARIf GTFTARIF
+
+; Record SQL
+Public RecordSql 'GTRSTIERS.dhoq'	CLIENT
+
+; Enregistrements
+Public Record 	GTFDD.dhsd 	ETS							; Etablissement
+
+Public Record 	GTFDD.dhsd 	T1								; Adresse
+Public Record 	GTFDD.dhsd 	T2								; Contact
+Public Record 	GTFDD.dhsd 	T3								; RIB
+Public Record  GTFDD.dhsd	CLI		CLI_Sel			; Client sélection
+Public Record  GTFDD.dhsd	CLI		CLI_Save			; Client sauvegarde
+
+Public Record 	GTFDD.dhsd 	ART							; Article
+Public Record 	GTFDD.dhsd 	TAR							; TarIf de vente
+Public Record 	GTFDD.dhsd 	TARPROMO						; TarIf de vente promotion
+Public Record 	GTFDD.dhsd 	TRE							; Remise de vente
+Public Record 	GTFDD.dhsd 	TREPROMO						; Remise de vente promotion
+Public Record 	GTFDD.dhsd 	RCL							; Référencement client
+
+Public Record 	GTFDD.dhsd 	T014							; Libellé code tarif
+Public Record 	GTFDD.dhsd 	T017							; Dépôt
+Public Record 	GTFDD.dhsd 	T034							; Marché
+Public Record 	GTFDD.dhsd 	T035							; Code remise
+Public Record 	GTFDD.dhsd 	T072							; Libellé code promotion
+
+Public Record 	GTFDD.dhsd 	G1T1							; Tableau ligne
+Public Record 	GTFDD.dhsd 	G1T1		G1T1_1			; Tableau ligne 1
+Public Record 	GTFDD.dhsd 	G1T1		G1T1_2			; Tableau ligne 2
+Public Record 	GTFDD.dhsd 	G1T1		G1T1_sel			; Enreg. filtre
+
+Public Record 	GRFDD.dhsd 	XZ 		GRXZ				; Echange Zoom
+Public Record 	CCFDD.dhsd 	C3								; Plan comptable
+Public Record 	CCFDD.dhsd 	CA								; Dossier - Paramètres généraux compta.
+Public Record  A5DD.dhsd  	MW			CLI_MW
+Public Record 	A5DD.dhsd	MDOS							; Dossier commun
+
+; Variables
+1		rep				1
+1		PresenceCRM		1,0
+1		PresenceC3		1,0
+1		PresenceR3		1,0
+1		CtiOuvert		1,0 = FALSE
+1		CtiAppel			1,0 = FALSE
+1		estPilote		1,0 = FALSE
+
+; Define
+Define 	IdMenuZoomBis					= G3XT.IdBarre(3)	
+
+; Constantes
+Const 	C_Pilotage_ProspectAClient = 1						; Piloté par prospect
+Const 	C_Pilotage_ParTiers 			= 2						; Piloté par tiers
+
+; Constantes pour les Pcod(1) et Pcod(2)
+Const		C_Prix_Promotion_Saisi		= 2						; Code promo saisi
+Const		C_Prix_Standard_Saisi		= 3						; Code standard saisi
+
+; Pages
+Const		C_Page_Fond						= 1						; Page de fond
+Const		C_Page_SaisieCode				= 22						; Page de saisie du code client
+Const		C_Page_InitDuplication		= 23						; Page d'initialisation de la duplication
+Const		C_Page_RechercheTarif		= 24						; Page de la recherche de tarif client
+
+;*
+;* procedures 
+;*
+
+;*
+Procedure rechercher_libelle
+BeginP
+	Standard.rechercher_libelle
+	Lectab(20,CLI.COG_OP)
+EndP
+
+;*
+;PS 27/06/2011
+procedure ZoomCreation
+
+beginp
+	standard.ZoomCreation
+	;init cli.Cog_ImpLogo(*) = soc.Cog_ImpLogo(*)
+	init cli.Cog_implogo_1 = soc.Cog_implogo_1
+	init cli.Cog_implogo_2 = soc.Cog_implogo_2
+	init cli.Cog_implogo_3 = soc.Cog_implogo_3
+	init cli.Cog_implogo_4 = soc.Cog_implogo_4
+	init cli.Cog_Facturation_Compte = 1
+endp

@@ -1,0 +1,29 @@
+<DictionarySql overwrite="gtrsslr.dhoq" ModuleInfo='$Id: gtrsslru.dhsq 1414 2013-02-25 00:14:45Z s.renaudineau $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL lies à la saisie préparation
+;*		Surcharge des enregistrements pour faire apparaître les nouvelles zones
+;*
+
+;*
+;*		Saisie Livraison Réception Ligne
+;*
+
+<RecordSql Name=LivRecLigne>
+<Select>
+	LRLigne.*,
+
+;*
+;*		Saisie Livraison Réception Détail
+;*
+
+<RecordSql Name=LivRecDetail>
+<Select>
+	LRDetail.*,
+
+;*
+;*		Saisie Livraison Réception Colis
+;*
+
+<RecordSql Name=LivRecColis>
+<Select>
+	LRColis.*,

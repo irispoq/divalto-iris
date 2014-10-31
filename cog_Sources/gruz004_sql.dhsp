@@ -1,0 +1,148 @@
+SetModuleInfo('$Id: grtz004_sql.dhsp 27124 2012-11-13 08:52:03Z sn $')
+;*
+;*      Zoom sur collaborateurs d'un événement 				Enregistrement EvtCollabolabo de GRRSEVT
+;*
+
+OverWrite 'GRTZ004_SQL.dhop'
+
+Include 	'GRTCZ00.dhsp'														; Déclarations communes
+Include 	'ZMAPI7.dhsp'
+
+Module 	'A5PMFIC.dhop'
+Module 	'GTPMFIC.dhop'
+Module 	'XZOOM7.dhop'
+Module	'PPPMBAS000.dhop'
+Module	'GRPMFICSQL.dhop'
+Module	'GTTM000.DHOP'
+
+; TDF
+HfileVersion 	GRFDD.dhsd GRFEVT
+Public HFile 	GRFDD.dhsd GRFEVT GRFEVT
+
+; Enregistrement
+Public RecordSql  'GRRSEVT.dhoq' 	EvtCollabo						; Record SQL
+Public Record		'GRFDD.dhsd' 		EVTCOL 		EvtCollabo_Sel	; Record SQL (sélection)
+Public Record 		'GRFDD.dhsd' 		EVTTIERS
+Public Record  	'GRFDD.dhsd' 		GRTEVT
+Public Record  	'GRFDD.dhsd' 		GR1
+Public Record 		'A5DD.dhsd' 		MUSER	
+Public Record 		'A5DD.dhsd'  		XZ				A5XZ	
+Public Record		'DDSYS.dhsd'		ROWINFO 		ZOOMSELECTION
+   	 Record		'DDSYS.dhsd'		COLUMNINFO						; Informations colonne
+Public Record 		"gtfdd.dhsd" G7
+Public Record 	GTFDD.dhsd 	T055
+Public Record	Gtfdd.Dhsd	GTPCE
+		 Record  Ddsys.dhsd  Zoom Wzoom
+
+Public Record Gtfdd.Dhsd	Xz	G3XZ
+
+; Variables
+1		TypeMessage			1,0 = 0  										; 0 = Email / 1 = Fax
+1		NouveauMessage		L
+1		Trouve				B		 											; Indicateur de présence d'un numéro de Fax dans les destinataires du fax
+1		ModePapillon	1,0
+1		CeBin				B
+
+;*
+;* Procedures
+;*
+;*
+
+;*
+Public procedure Selection_Groupe
+; Procédure qui permet de traiter la sélection de plusieurs collaborateurs
+1		 	Create				1,0	=False								
+1			rz			L
+1			Dossier_Loc		>Gtfdd.Dhsd	Dos
+1	TabTypTb			>GTFDD.dhsd		TabTyp*200
+beginp	
+	Ping ("zechange" , mz )
+	Ping ("zoompar" , G7.zoompar )
+	Ping('ZECHANGE_GTPCE'	, GTPCE)	 ;	Migration V6->V7
+	Init Wzoom 	= system.esp
+	;Zoom4(Wzoom,'Gtftab.dhfi','T054','gtez094.dhoe','gttz094.dhop', Action = ZOOM_STANDARD, recup = TRUE)
+	ZoomSql(wZoom,'GrpCollabo','GTEZ094_sql.dhof','GTTZ094_sql.dhop',Action=ZOOM_STANDARD, Recup=TRUE)	;	Migration V6->V7
+		
+	if Wzoom.Status = E_ZOOM_OK And Not Wzoom.ValRetour = system.esp
+		TabTypTb(*)	= T000.TabTypTb(*)
+		CeBin			= 55
+		Dossier_loc = Condition(TabTypTb(CeBin) = 1, MZ.Dos, 999)
+
+		GTFTAB.Key = ['A' Dossier_loc CeBin Wzoom.ValRetour ]
+		Loop Hread(GtfTab,T055,GtfTab.Key) = 0 And T055.Dos = Dossier_Loc And T055.CeBin = CeBin And T055.SalGrp = Wzoom.ValRetour 
+	
+		;do while Next_table(CeBin,Wzoom.ValRetour, GTFTAB.Key) = 0			Migration V6->V7 le next_table ne fonctionne pas écrit de la sorte, transformation en loop gtftab
+			MUSER.USER = T055.Salcod
+			; réservation
+			if MUSER.USER <>' ' and res_evtcol(EVTTIERS.EVTNO,MUSER.USER)=0
+				; On vérifie l'existence du collaborateur
+				if seek_evtcol(EVTTIERS.EVTNO ,MUSER.USER) <>0
+					create= true
+					EVTCOL=' '
+					EVTCOL.CE1='2'			
+				   EVTCOL.DOS = MZ.DOS
+					; Modification remplacement de MZ.ETB par EVTTIERS.ETB
+					EVTCOL.ETB = EVTTIERS.ETB
+					EVTCOL.EVTNO = EVTTIERS.EVTNO
+					EVTCOL.CALDH = EVTTIERS.CALDH
+					EVTCOL.EVTFINDH = EVTTIERS.EVTFINDH
+					EVTCOL.USER =MUSER.USER
+					EVTCOL.USERCR = SYSTEM.USER
+					EVTCOL.USERCRDH = time(7)
+					if ModePapillon=1
+					;	Maj_XML_PS('EVTCOL',1)							 Migration V6->V7 Inconnu !!
+					endif
+					write_EVTCOL
+				endif
+				lib_evtcol(EVTTIERS.EVTNO,MUSER.USER)
+			endif
+		EndLoop	
+	
+		if create = True
+			; On met à jour le tableau
+			ZoomReactualiserListe
+		endif
+	endif
+endp	
+
+;*
+Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+	Standard.Maj_Menu_Boutons
+	Switch ZOOM.ACTION
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+			Xmetoolbarenablebutton(idOutilZoom,'GRP',False)
+			XmeMenuEnableItem(Zoom.Idmenu,'GRP',False)
+
+	Case ZOOM_MODIFICATION
+		
+			; en modification
+			Xmetoolbarenablebutton(idOutilZoom,'GRP',False)
+			XmeMenuEnableItem(Zoom.Idmenu,'GRP',False)
+
+	Case 	ZOOM_AFFICHAGE
+
+			if ZOOM.MODELF = ZOOM_MODE_LISTE
+				Xmetoolbarenablebutton(idOutilZoom,'GRP',True)
+				XmeMenuEnableItem(Zoom.Idmenu,'GRP',True)
+			else
+				Xmetoolbarenablebutton(idOutilZoom,'GRP',False)
+				XmeMenuEnableItem(Zoom.Idmenu,'GRP',False)
+			endif
+	EndSwitch
+EndP
+
+;*
+;* procedures d'initialisation et fin de zoom
+;*
+
+;*
+Procedure ZoomConsult
+beginp
+	Standard.ZoomConsult
+	switch Harmony.key
+		case Harmony.DataArret = 5009 ; Appel du zoom des collaborateurs pour sélection multiple
+		Selection_Groupe
+	endswitch
+endp

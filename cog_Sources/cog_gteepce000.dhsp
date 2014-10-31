@@ -1,0 +1,329 @@
+;>xdiva
+;*
+;*		Saisie des pièces traitements du masque															gteepce
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		YLEF		7.2a						04/2014	Version initiale migration V6 - V7
+
+SetModuleInfo('$Id$')
+
+;
+Include "GTTCZ00.dhsp"
+
+;
+Module "gttmpce.dhop"
+Module "COG_GTTTPCE000.DHOP""
+
+;
+Public HFile	"gtfdd.dhsd"	GTFPCF		GTFPCF
+
+;
+Public Record "gtfdd.dhsd" 	ent 		ent
+Public Record "gtfdd.dhsd" 	g1t1 		g1t1
+Public Record "gtfdd.dhsd" 	gtpce		GTPCE
+Public Record "gtfdd.dhsd" 	GTENT
+Public Record "gtfdd.dhsd" 	cli 		cli
+Public Record "gtfdd.dhsd" 	ets 		ets
+Public Record "gtfdd.dhsd" 	eec 		eec
+Public Record "gtfdd.dhsd" 	t020 		w2t020
+Public Record "ccfdd.dhsd" 	ca 		ca
+Public Record "gtfdd.dhsd" 	g1t2 		g1t2
+Public Record "ddsys.dhsd" 	rowinfo 	rowinfo
+Public Record "gtfdd.dhsd" 	g1t3 		g1t3
+Public Record "gtfdd.dhsd" 	soc 		soc
+Public Record "a5dd.dhsd"		mz
+Public Record "gtfdd.dhsd"		XT			G3XT
+Public Record "gtfdd.dhsd"		ART
+Public Record "gtfdd.dhsd"		T1
+
+public record "gtfdd.dhsd" 	T020
+public record "gtfdd.dhsd" 	T037								; table des salariés
+public record "gtfdd.dhsd" 	T051								; table services
+public record "gtfdd.dhsd" 	T055
+
+Public Record "cogfdd.dhsd" 	cog_dircliente 	COG_DirCliente_01
+
+;
+1	B_Affiche_Init 	B
+1	Sauve_OP				>gtfdd.dhsd	OP
+
+;
+define IdTableauLig_XME = G3XT.IDTABLEAU(1)
+
+
+
+;*
+;*	  Fonctions et procédures de surcharge 
+;*
+
+;*
+Public Procedure Cog_Champ_Cog_ImoFlag_1_Av
+;
+Beginp
+	
+	; TODO --> controle existence fiche bien? controle statut MOUV?
+
+Endp
+
+
+;*
+Public Procedure Cog_Champ_Cog_DirCliente_1_Ap
+;
+RecordSQL	"COGRS_DIRCLIENTE.DHOQ"		CogRs_DirCli		wRs_DirCli
+
+Beginp
+	Cog_DirCliente_01 = " "
+	wRs_DirCli.Init()
+	wRs_DirCli.Where.RemoveCondition("")
+	wRs_DirCli.Where.Equal_CodeDir(ENT.Cog_DirCliente)
+	wRs_DirCli.Where.AddCondition("Equal_CodeDir")
+	wRs_DirCli.Where.Equal_Etb(MZ.Etb)
+	wRs_DirCli.Where.AddCondition("Equal_Etb")
+	If wRs_DirCli.Select()
+		Cog_DirCliente_01 = wRs_DirCli.Cog_DirCliente
+	EndIf
+EndP
+
+
+;*
+Public Procedure Cog_Champ_Pidt_1_Ap
+Beginp
+	
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		; Devis client
+		Case 'C1'
+			If Left(MZ.PARAM) = 'ValA' And ENT.Cog_Validite = system.esp And ENT.CE4 = '1'
+				ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+			Endif
+
+	EndSwitch
+
+Endp
+
+;*
+Public Procedure Cog_Champ_Projet_1_Ap	
+;				
+beginp
+
+	If Harmony.DataModif
+		If XmeListCount(IdTableauLig_XME) > 0 
+			Messagebox('Pensez à affecter le code Projet sur les lignes par Modification globale.','Attention',MB_OK)
+		Endif
+	Endif
+
+;	If Left(MZ.PARAM) = 'ValA' And ENT.Cog_Validite = system.esp And ENT.CE4 = '1'	 #FLAG MIGRATION
+;		ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+;	Endif
+
+EndP
+
+;;*	  #FLAG MIGRATION --> redondance + point d'entrée à vérifier
+;Public Procedure Cog_Champ_PiRefNotiers_1_Ap
+;Beginp
+;
+;	If Left(MZ.PARAM) = 'ValA' And ENT.Cog_Validite = system.esp And ENT.CE4 = '1'
+;		ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+;	Endif
+;
+;Endp
+;
+;;*
+;Procedure Cog_Champ_Regl_1_Ap
+;Beginp
+;
+;	If Left(MZ.PARAM) = 'ValA' And ENT.Cog_Validite = system.esp And ENT.CE4 = '1'
+;		ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+;	Endif
+;
+;Endp
+;
+;;*
+;Procedure Cog_Champ_AcMt_1_Ap
+;Beginp
+;
+;	If Left(MZ.PARAM) = 'ValA' And ENT.Cog_Validite = system.esp And ENT.CE4 = '1'
+;		ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+;	Endif
+;Endp
+;
+;;*
+;Procedure Cog_Champ_Dev_1_Ap
+;Beginp
+;
+;	If Left(MZ.PARAM) = 'ValA' And ENT.Cog_Validite = system.esp And ENT.CE4 = '1'
+;		ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+;	Endif
+;
+;Endp
+;
+;;*
+;Procedure Cog_Champ_Depo_1_Ap
+;Beginp
+;	
+;	If Left(MZ.PARAM) = 'ValA' And ENT.Cog_Validite = system.esp And ENT.CE4 = '1'
+;		ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+;	Endif
+;
+;Endp
+
+;*
+Public Procedure Cog_Traitement_Initial
+;
+Beginp
+	B_Affiche_Init = True
+Endp
+
+;*
+Public Procedure Cog_Champ_Site_1_Av
+;
+Beginp
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case vsw IN ('C1','C2')
+			If GTPCE.TiersD = system.esp | T1 = system.esp | Endif
+
+	EndSwitch
+
+Endp
+
+;*
+Public Procedure Cog_Champ_Site_1_Ap
+;
+
+Record	"ddsys.dhsd"		Zoom		wZoom
+
+Beginp
+
+	Switch GTPCE.TiCodDst
+		Case 'C'
+
+			If PongReceiveAndDelete('TIERS',GTPCE.TiersF) = 0
+				If Hseek(GTFPCF,T1,'Q' & MZ.DOS & GTPCE.TiersF & GTPCE.TiersD) = 0
+					Recherche_client(GTPCE.TiersF)
+				Else | Harmony.Retour = XmeNext_Traitement_Avant
+				Endif
+			Elsif Harmony.Key = K_F8 or Harmony.Arret = 8002
+				Zoom_Call(65005)							
+			Elsif GTPCE.TiersD <> system.esp
+				GTFPCF.KeyValue = MZ.DOS & GTPCE.TiersD 
+				If Iread(GTFPCF, T1, "COG_ADRCOD",GTFPCF.KeyValue)= 0 And T1.DOS = Mz.DOS And T1.AdrCod = GTPCE.TiersD
+					GTPCE.TiersF = T1.Tiers 
+					Recherche_client(GTPCE.TiersF)
+
+					Harmony.Retour = XMENEXT_POINT_SEQUENCE 
+					Harmony.CplRetour = 5555
+				Else 
+					Harmony.Retour = XmeNext_Traitement_Avant
+				Endif
+			Endif
+
+	EndSwitch
+
+Endp
+
+;;*			 #FLAG MIGRATION --> point d'entrée à vérifier
+;Public Procedure Cog_uAffiche_prepare
+;; permet de rajouter des choix
+;1 	L_MenuID	L
+;1 	X_Status	X	
+;BeginP
+;	switch left(MZ.PARAM)
+;	  case 'CmdA'
+;			L_MenuId = XmeMenuGetId(mz.mecle,"MAIN")
+;
+;			If B_Affiche_Init = True
+;				B_Affiche_Init = False
+;				XmeMenuCheckRadioItem(L_MenuId,"AFF_ETAT_PR")
+;				XmeMenuValidateItem(L_MenuId,"AFF_ETAT_A", FALSE,FALSE)
+;				XmeMenuValidateItem(L_MenuId,"AFF_ETAT_S", FALSE,FALSE)
+;				XmeMenuValidateItem(L_MenuId,"AFF_ETAT_M", FALSE,FALSE)
+;				XmeMenuValidateItem(L_MenuId,"AFF_ETAT_TOUT", FALSE,TRUE)
+;				GTPCE.prginterro = 6
+;				GTPCE.CE4 = 7
+;			Endif
+;			XmeMenuValidateItem(L_MenuId, "MOD_ETAT", FALSE, TRUE)
+;	  case 'ValA'
+;			L_MenuId = XmeMenuGetId(mz.mecle,"MAIN")
+;			If B_Affiche_Init = True
+;				B_Affiche_Init = False
+;				XmeMenuCheckRadioItem(L_MenuId,"AFF_ETAT_PR")
+;				GTPCE.prginterro = 6
+;				GTPCE.CE4 = 7
+;			Endif
+;	endswitch
+;	
+;endp
+
+;*
+Public Procedure Cog_Champ_AdrCod_1_Ap			;controle code adresse
+1		i			X
+beginp
+
+	if Harmony.DataInd1 < 3 and Harmony.DataModif and ENT.ADRTIERS(Harmony.DataInd1) = ' ' and not ENT.ADRCOD(Harmony.DataInd1) = ' '
+		; adresse du tiers
+		for i = 1 to 3
+			ENT.ADRCOD(Harmony.DataInd1 + i) = ENT.ADRCOD(Harmony.DataInd1)
+			GTENT.ADR(Harmony.DataInd1 + i)		= GTENT.ADR(Harmony.DataInd1)
+		next
+		if T1.TOUR <> ' '
+			ENT.TOUR = T1.TOUR
+		else
+			ENT.TOUR	= CLI.TOUR
+		endif
+		if T1.TOURRG <> ' '
+			ENT.TOURRG = T1.TOURRG
+		else
+			ENT.TOURRG = CLI.TOURRG
+		endif
+		if T1.TRANSJRNB <> 0
+			ENT.TRANSJRNB = T1.TRANSJRNB
+		else
+			ENT.TRANSJRNB = CLI.TRANSJRNB
+		endif
+		Harmony.Retour = XMENEXT_POINT_SEQUENCE | Harmony.CplRetour = 5556
+	endif
+
+endp
+
+;*
+Public Procedure Cog_Champ_Cog_Validite_1_Av
+Beginp
+	If Cog_Controle_Responsable = 'N'
+		Harmony.Retour = XmeNext_Saut_Donnee
+	Endif
+Endp
+
+;*
+Public Procedure Cog_Champ_Cog_Validite_1_Ap
+;
+Beginp
+
+;	if Isdate(ENT.Cog_Validite) And ENT.Cog_Validite < TODAY
+;		Messagebox("La date de fin de validité ne peux être inférieure à la date du jour.","Erreur",MB_OK)
+;		Harmony.Retour = XmeNext_Traitement_Avant
+;	Endif
+
+	If ENT.Cog_Validite < ENT.PiDt
+		Messagebox("La date de fin de validité ne peut être inférieure à la date de la pièce.","Alerte",MB_ICONEXCLAMATION)
+		Harmony.Retour = XMENEXT_RESSAISIE
+	EndIf
+
+Endp
+
+
+;;*	  #FLAG MIGRATION --> point d'entrée à vérifier
+;Public Procedure Cog_Page_2_Av
+;;
+;Beginp
+;
+;	;PS 27/06/2011
+;	if cli.Cog_implogo_1 in (1,2)
+;		ent.Cog_implogo_1 = cli.Cog_implogo_1
+;	else
+;		ent.Cog_implogo_1 = soc.Cog_implogo_1
+;	endif
+;	GTPCE.EditCod = 2
+;
+;Endp

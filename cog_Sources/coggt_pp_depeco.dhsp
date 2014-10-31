@@ -1,0 +1,103 @@
+;*
+;*	Péremption des pièces
+
+Include "gttc000.dhsp"
+
+
+hfile		gtfdd.dhsd	gtfent		gtfent
+hfile 	gtfdd.dhsd 	gtfpcf  		gtfpcf
+
+Public	record		a5dd.dhsd	mz
+public	record		gtfdd.dhsd	soc
+public 	record 		gtfdd.dhsd 	t020
+public	record		gtfdd.dhsd	ent
+public 	record 		gtfdd.dhsd 	ETS
+public 	record 		gtfdd.dhsd 	FOU
+public 	record  		GTFDD.DHSD	XQ				G3XQ	
+public 	record  		GTFDD.DHSD	XZ				G3XZ
+
+record gtfdd.dhsd mouv
+record gtfdd.dhsd mvtl
+record gtfdd.dhsd mres
+
+1		idtoolbar			 L
+1		i						 X
+1		wok					 1
+1		cpt					 5,0
+1		cumul					 24,10
+
+1		enreg	160
+ 2		wce	2
+ 2		wno	6,0
+ 2R	wna	6
+ 2		wref	3
+ 2		wfa	2
+ 2		wcli	6
+ 2		wdev	3
+ 2		wdat	8
+  3	wzzz	1
+  3	wnuf	7
+ 2		wtie	15
+ 2		wdaf	8
+ 2		wech	8
+ 2		wreg	3
+ 2		wzer	131.15
+  3	wcpt	6.10,0
+ 2		wmon	146.15
+  3	wttc	6.10,0
+					
+;*
+;*	Programme Principal
+;* 01 | 02
+Main
+
+if pingreceive ("zechange" , mz ) <> 0
+	programexit
+else
+	seek_soc(mz.dos)
+	Do while True
+		xmeload("coggt_ee_depeco.dhof")
+		idtoolbar = xmetoolbargetid("coggt_ee_depeco.dhof","MAIN")
+		xmetoolbarsetwindow(idtoolbar,"coggt_ee_depeco.dhof",1)
+	
+		G3_Saisie_Selections("coggt_ee_depeco.dhof",1)
+		Sethourglasscursor
+		gtfpcf.key = 'C' & MZ.dos & '4'
+		Loop hread(gtfpcf,fou,gtfpcf.key) = 0 and fou.ce1 = '4'
+			If IsDate(Fou.Cog_Bilan_Au) And Fou.CaMt > system.esp
+				cumul = system.esp
+				gtfent.key = 'B' & MZ.dos & 'F4' & Fou.Tiers
+				Loop hread(gtfent,ent,gtfent.key) = 0 and ent.DOS = MZ.dos and ent.ticod = 'F' and ent.picod = 4 and ent.tiers = Fou.Tiers
+					If ENT.Pidt >= Dtadd(Fou.Cog_Bilan_Au,-365) And ENT.Pidt <= Fou.Cog_Bilan_Au And Lectab(20,Ent.Op) = 0
+						If T020.Sens = 1
+							cumul += Ent.HtPdtMt
+						Else
+							cumul -= Ent.HtPdtMt
+						Endif
+					Endif
+				Endloop
+				If cumul > system.esp 
+					Fou.Cog_Part_Ca = (cumul / Fou.caMt) * 100
+				Else
+					Fou.Cog_Part_Ca = system.esp
+				Endif
+				Fou.Cog_Traitedt = Time(7)
+				Hrewrite(gtfpcf,fou)
+				g3xz.fic = "Dossier : " & mz.DOS & " Tiers : " & fou.tiers & ' ' & fou.nom
+				XmeDispv ("coggt_ee_depeco.dhof",2,XME_MODE_GOTO) | XmeRet 
+				Cpt++
+			Endif
+		Endloop
+		Setnormalcursor
+		If Cpt > system.esp | MessageBox("Mise à jour de " & nospaces(Cpt) & ' fournisseurs terminée.','Rapport',MB_OK) | Endif
+		Exitdo
+	Wend
+Endif
+
+; fin
+programexit
+	
+	
+	
+	
+	

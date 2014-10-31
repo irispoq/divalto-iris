@@ -1,0 +1,7094 @@
+;>xwin4obj                              7.0       20140424094018      
+[masque]
+ libelle="plan comptable"
+ utilisateur="UGIE"
+ date_modification="24/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=323
+ type_masque=2
+ dernier_id=1000009
+ surcharge=oui
+ date_modif_base="20130213123018"
+ dernier_id_page=100000
+ niveau_surcharge=1
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="CCFAID"
+ [touches]
+  f1=1
+  f7=8000
+  shift_f6=10000
+[enregistrements]
+ "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,x1,x1,1752,0
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "ccrsjca.dhoq",,compte,compte,1024,1
+ "ccfdd.dhsd",,c3,compte_sel,1000,0
+ "ccfdd.dhsd",,c3,c3,1000,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=65,480
+  attache_lgx=oui
+  id=1
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=297,320
+  attache_lgx=oui
+  attache_lgy=oui
+  id=2
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=1
+[page]
+ numero=2
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Compte à créer"
+ nb_lig=3
+ nb_col=30
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,47
+   id=8
+   wstyle="STD"
+  [texte]
+   texte="Compte"
+ [champ]
+  [presentation]
+   position=8,54
+   taille=9,36
+   id=9
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=compte,cpt,compte
+  [aide_page]
+   aide=100
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cpt_1_Av"
+   diva_apres="Champ_Cpt_1_Ap"
+[page]
+ numero=3
+ fond="STD"
+ efface=partiel
+ nb_lig=33
+ nb_col=50
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=27
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=59,200
+   attache_lgx=oui
+   id=845
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="ZOOM"
+ [tableau]
+  [presentation]
+   position=61,0
+   taille=236,200
+   attache_lgx=oui
+   attache_lgy=oui
+   id=838
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=4
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=3
+   separation=66
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=77,12
+    taille=10,14
+    id=757
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=compte,cenote,compte
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CENOTE_2"
+   [touches]
+    f1=1
+    shift_f6=10000
+   [info_bulle]
+   texte="présence d'une note"
+   [param_colonne]
+    titre="#tblnote"
+    fl_trait_col=non
+    largeur_col=11
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=50,103
+    taille=20,28
+    id=758
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=x1,choix,x1,2
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","AFFCE3_3"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Présence d'une date de fermeture"
+   [param_colonne]
+    titre="#tblcadf"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=68,43
+    taille=8,31
+    id=759
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,cpt,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="code comptable"
+   [param_colonne]
+    titre="Compte"
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=75,55
+    taille=8,143
+    id=760
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,lib,compte
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=101
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="intitulé du compte"
+   [param_colonne]
+    titre="Intitulé"
+    largeur_col=146
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=88,201
+    taille=8,63
+    id=761
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,cptnat,compte
+    sequence=1
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CPTNAT"
+   [aide_page]
+    aide=102
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_CptNat_1_Av"
+    diva_apres="Champ_CptNat_1_Ap"
+   [info_bulle]
+   texte="nature du compte"
+   [param_colonne]
+    titre="Nature"
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=74,280
+    taille=8,31
+    id=762
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,cptcol,compte
+    sequence=2
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=107
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19030
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_CptCol_1_Av"
+    diva_apres="Champ_CptCol_1_Ap"
+   [info_bulle]
+   texte="compte collectif"
+   [param_colonne]
+    titre="Collectif"
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=95,165
+    taille=8,30
+    id=763
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,cpttyp,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CPTTYP"
+   [aide_page]
+    aide=103
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_CptTyp_1_Av"
+    diva_apres="Champ_CptTyp_1_Ap"
+   [info_bulle]
+   texte="type de compte"
+   [param_colonne]
+    titre="Type"
+    fl_aff=non
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=104,36
+    taille=8,35
+    id=764
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,sens,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","SENS"
+   [aide_page]
+    aide=104
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Sens_1_Av"
+   [info_bulle]
+   texte="sens implicite"
+   [param_colonne]
+    titre="Sens"
+    fl_aff=non
+    largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=114,148
+    taille=8,90
+    id=765
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,nomabr,compte
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_NomAbr_1_Ap"
+   [info_bulle]
+   texte="nom abrégé"
+   [param_colonne]
+    titre="Nom abrégé"
+    fl_aff=non
+    largeur_col=93
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=104,59
+    taille=8,6
+    id=766
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,tblno,compte
+    format="0"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=122
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_TblNo_1_Av"
+   [info_bulle]
+   texte="numéro de tableau d'affichage en interrogation comptable"
+   [param_colonne]
+    titre="Présentation"
+    fl_aff=non
+    largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,43
+    taille=8,10
+    id=767
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,conf,compte
+   [param_saisie]
+    table_associee=oui
+   [aide_page]
+    aide=121
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=11010
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Conf_1_Ap"
+   [info_bulle]
+   texte="code de confidentialité"
+   [param_colonne]
+    titre="Confidentialité"
+    fl_aff=non
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=80,65
+    taille=8,73
+    id=768
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,letttyp,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","LETTTYP"
+   [aide_page]
+    aide=106
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_LettTyp_1_Av"
+   [info_bulle]
+   texte="méthode de lettrage"
+   [param_colonne]
+    titre="Lettrage"
+    fl_aff=non
+    largeur_col=78
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=110,54
+    taille=8,10
+    id=769
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,lett,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="dernier code lettrage utilisé"
+   [param_colonne]
+    titre="Code L"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,135
+    taille=8,73
+    id=770
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userlt,compte
+    format="1"
+    saisie=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a lettré la fiche"
+   [param_colonne]
+    titre="Lettré par"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=65,58
+    taille=8,35
+    id=771
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userltdh,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Lettré le"
+   [param_colonne]
+    titre="Lettré le"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=86,52
+    taille=8,100
+    id=772
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userltori,compte
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Origine du lettrage"
+   [param_colonne]
+    titre="Origine du lettrage"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=79,53
+    taille=8,25
+    id=773
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,pointcod,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","POINTCOD"
+   [aide_page]
+    aide=108
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_PointCod_1_Av"
+   [info_bulle]
+   texte="méthode de pointage"
+   [param_colonne]
+    titre="Pointage"
+    fl_aff=non
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=86,92
+    taille=8,10
+    id=774
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,point,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="dernier code pointage utilisé"
+   [param_colonne]
+    titre="Code P"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=97,45
+    taille=8,17
+    id=775
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userpt,compte
+    format="1"
+    saisie=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a pointé la fiche"
+   [param_colonne]
+    titre="Pointé par"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=65,16
+    taille=8,35
+    id=776
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userptdh,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Pointé le"
+   [param_colonne]
+    titre="Pointé le"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=79,44
+    taille=8,100
+    id=777
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userptori,compte
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="origine dernier pointage"
+   [param_colonne]
+    titre="Origine du pointage"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=104,48
+    taille=8,38
+    id=778
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,devcod,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","DEVCOD_1"
+   [aide_page]
+    aide=114
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_DevCod_1_Av"
+    diva_apres="Champ_DevCod_1_Ap"
+   [info_bulle]
+   texte="méthode de gestion des devises"
+   [param_colonne]
+    titre="Gestion des devises"
+    fl_aff=non
+    largeur_col=59
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=74,38
+    taille=8,17
+    id=779
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,dev,compte
+    sequence=3
+   [param_saisie]
+    table_associee=oui
+   [aide_page]
+    aide=109
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=9047
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Dev_1_Av"
+    diva_apres="Champ_Dev_1_Ap"
+   [info_bulle]
+   texte="devise implicite du compte"
+   [param_colonne]
+    titre="Devise"
+    largeur_col=22
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=79,44
+    taille=8,50
+    id=780
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,devconv,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","DEVCONV"
+   [aide_page]
+    aide=110
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_DevConv_1_Av"
+   [info_bulle]
+   texte="conversion des écritures exprimées en devises"
+   [param_colonne]
+    titre="Conversion"
+    fl_aff=non
+    largeur_col=56
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=70,28
+    taille=8,25
+    id=781
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,centtyp,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CENTTYP"
+   [aide_page]
+    aide=105
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_CentTyp_1_Av"
+   [info_bulle]
+   texte="centralisation des écritures lors de la validation"
+   [param_colonne]
+    titre="Centralisation J"
+    fl_aff=non
+    largeur_col=47
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=97,45
+    taille=8,33
+    id=782
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,centedi,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CENTEDI"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_CentEdi_1_Av"
+   [info_bulle]
+   texte="centralisation des écritures à l'impression des extraits"
+   [param_colonne]
+    titre="Centralisation I"
+    fl_aff=non
+    largeur_col=47
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=63,34
+    taille=8,18
+    id=783
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,epucod,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","EPUCOD"
+   [aide_page]
+    aide=534
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EpuCod_1_Av"
+   [info_bulle]
+   texte="centralisation des écritures lors de l'épuration de fin d'exercice"
+   [param_colonne]
+    titre="Epuration"
+    fl_aff=non
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=78,45
+    taille=8,18
+    id=784
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,jnlsais,compte,2
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","JNLSAIS"
+   [aide_page]
+    aide=118
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_JnlSais_1_Av"
+   [info_bulle]
+   texte="autorisation de saisie sur un journal de vente"
+   [param_colonne]
+    titre="Vente"
+    fl_aff=non
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=78,45
+    taille=8,18
+    id=785
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,jnlsais,compte,1
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","JNLSAIS"
+   [aide_page]
+    aide=118
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_JnlSais_1_Av"
+   [info_bulle]
+   texte="autorisation de saisie sur un journal d'achat"
+   [param_colonne]
+    titre="Achat"
+    fl_aff=non
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=78,45
+    taille=8,18
+    id=786
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,jnlsais,compte,3
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","JNLSAIS"
+   [aide_page]
+    aide=118
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_JnlSais_1_Av"
+   [info_bulle]
+   texte="autorisation de saisie sur un journal de trésorerie"
+   [param_colonne]
+    titre="Trésorerie"
+    fl_aff=non
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=259,265
+    taille=38,118
+    noms="etbc3;etb_cpttyp2vgrise;etb_cpttyp3vgrise"
+    id=787
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,etbsais,compte
+    sequence=4000
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ETBSAIS"
+    notifier=oui
+   [aide_page]
+    aide=124
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_EtbSais_1_Ap"
+   [info_bulle]
+   texte="Etablissements autorisés"
+   [param_colonne]
+    titre="Etablissements autorisés"
+    largeur_col=123
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=267,351
+    taille=10,15
+    noms="etbc3;etb_cpttyp2vgrise;etb_cpttyp3vgrise"
+    id=788
+    colonnes_saisie=3
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,etb,compte
+    sequence=4002
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=126
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19004
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Etb_1_Av"
+    diva_apres="Champ_Etb_1_Ap"
+   [info_bulle]
+   texte="Etablissement"
+   [param_colonne]
+    titre="Etablissement"
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=74,42
+    taille=8,17
+    id=789
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,reg,compte
+    sequence=4
+   [param_saisie]
+    table_associee=oui
+   [aide_page]
+    aide=111
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=9046
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Reg_1_Av"
+    diva_apres="Champ_Reg_1_Ap"
+   [info_bulle]
+   texte="mode de règlement"
+   [param_colonne]
+    titre="Règlement"
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=100,68
+    taille=9,32
+    id=857
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,tvatie,compte
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=112
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=9126
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_TvaTie_1_Av"
+    diva_apres="Champ_TvaTie_1_Ap"
+   [info_bulle]
+   texte="Régime TVA Tiers"
+   [param_colonne]
+    titre="TVA Tiers"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=121,143
+    taille=9,32
+    id=858
+    colonnes_saisie=8
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,tvaart,compte
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=112
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=9125
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_TvaArt_1_Av"
+    diva_apres="Champ_TvaArt_1_Ap"
+   [info_bulle]
+   texte="Régime TVA Article"
+   [param_colonne]
+    titre="TVA Article"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=84,118
+    taille=9,5
+    id=852
+    colonnes_saisie=1
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,mt2nat,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=113
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Mt2Nat_1_Av"
+    diva_apres="Champ_Mt2Nat_1_Ap"
+   [info_bulle]
+   texte="Nature du montant 2"
+   [param_colonne]
+    titre="Nature montant 2"
+    largeur_col=58
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=70,9
+    taille=8,17
+    id=792
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,critere,compte
+   [aide_page]
+    aide=115
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="critère de sélection"
+   [param_colonne]
+    titre="Critère"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=79,65
+    taille=8,35
+    id=793
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,hsdt,compte
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=119
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="date de fin de validité"
+   [param_colonne]
+    titre="Fermeture"
+    fl_aff=non
+    largeur_col=38
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=99,23
+    taille=8,31
+    id=794
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,cptcent,compte
+    sequence=7
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=120
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19030
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_CptCent_1_Av"
+    diva_apres="Champ_CptCent_1_Ap"
+   [info_bulle]
+   texte="compte de centralisation"
+   [param_colonne]
+    titre="Centralisateur"
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=61,18
+    taille=8,18
+    id=795
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,grpcptcod,compte
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","GRPCPTCOD"
+   [aide_page]
+    aide=533
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_GrpCptCod_1_Av"
+   [info_bulle]
+   texte="compte inter-groupe"
+   [param_colonne]
+    titre="Inter-groupe"
+    fl_aff=non
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=74,47
+    taille=8,18
+    noms="axe1"
+    id=796
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,axesais,compte,1
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","AXESAIS"
+   [aide_page]
+    aide=116
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_AxeSais_1_Av"
+    diva_apres="Champ_AxeSais_1_Ap"
+   [info_bulle]
+   texte="saisir un code #axe1"
+   [param_colonne]
+    titre="Saisie #axe1"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=62,58
+    taille=8,31
+    noms="axe1"
+    id=797
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,axe,compte,1
+    sequence=8
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=117
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19010
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Axe_2_Av"
+    diva_apres="Champ_Axe_2_Ap"
+   [info_bulle]
+   texte="code #axe1 implicite"
+   [param_colonne]
+    titre="#axe1"
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=74,47
+    taille=8,18
+    noms="axe2"
+    id=798
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,axesais,compte,2
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","AXESAIS"
+   [aide_page]
+    aide=116
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_AxeSais_1_Av"
+    diva_apres="Champ_AxeSais_1_Ap"
+   [info_bulle]
+   texte="saisir un code #axe2"
+   [param_colonne]
+    titre="Saisie #axe2"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=62,58
+    taille=8,31
+    noms="axe2"
+    id=799
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,axe,compte,2
+    sequence=9
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=117
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19010
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Axe_2_Av"
+    diva_apres="Champ_Axe_2_Ap"
+   [info_bulle]
+   texte="code #axe2 implicite"
+   [param_colonne]
+    titre="#axe2"
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=74,47
+    taille=8,18
+    noms="axe3"
+    id=800
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,axesais,compte,3
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","AXESAIS"
+   [aide_page]
+    aide=116
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_AxeSais_1_Av"
+    diva_apres="Champ_AxeSais_1_Ap"
+   [info_bulle]
+   texte="saisir un code #axe3"
+   [param_colonne]
+    titre="Saisie #axe3"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=62,58
+    taille=8,31
+    noms="axe3"
+    id=801
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,axe,compte,3
+    sequence=10
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=117
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19010
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Axe_2_Av"
+    diva_apres="Champ_Axe_2_Ap"
+   [info_bulle]
+   texte="code #axe3 implicite"
+   [param_colonne]
+    titre="#axe3"
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=74,47
+    taille=8,18
+    noms="axe4"
+    id=802
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,axesais,compte,4
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","AXESAIS"
+   [aide_page]
+    aide=116
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_AxeSais_1_Av"
+    diva_apres="Champ_AxeSais_1_Ap"
+   [info_bulle]
+   texte="saisir un code #axe4"
+   [param_colonne]
+    titre="Saisie #axe4"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=62,58
+    taille=8,31
+    noms="axe4"
+    id=803
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=compte,axe,compte,4
+    sequence=11
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=117
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19010
+    shift_f6=10000
+    shift_f8=4001
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Axe_2_Av"
+    diva_apres="Champ_Axe_2_Ap"
+   [info_bulle]
+   texte="code #axe4 implicite"
+   [param_colonne]
+    titre="#axe4"
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=89,27
+    taille=8,51
+    id=804
+    wstyle="TABLEAU_CPT_COMPTABLE"
+   [description]
+    donnee=compte,cptsld,compte,1,1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde saisi comptable en #dev"
+   [param_colonne]
+    titre="Solde C en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=89,27
+    taille=8,51
+    noms="devbis"
+    id=805
+    wstyle="TABLEAU_CPT_COMPTABLE"
+   [description]
+    donnee=compte,cptsld,compte,2,1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde saisi comptable en #devbis"
+   [param_colonne]
+    titre="Solde C en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=86,65
+    taille=8,51
+    id=806
+    wstyle="TABLEAU_CPT_COMPTABLE"
+   [description]
+    donnee=compte,cptslddev,compte
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Solde saisi comptable en devise du compte"
+   [param_colonne]
+    titre="Solde C en devise"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=89,27
+    taille=8,51
+    id=807
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+   [description]
+    donnee=compte,cptsld,compte,1,2
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde saisi extracomptable en #dev"
+   [param_colonne]
+    titre="Solde E en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+  [champ_tableau]
+   [presentation]
+    position=89,27
+    taille=8,51
+    noms="devbis"
+    id=808
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+   [description]
+    donnee=compte,cptsld,compte,2,2
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde saisi extracomptable en #devbis"
+   [param_colonne]
+    titre="Solde E en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+  [champ_tableau]
+   [presentation]
+    position=89,27
+    taille=8,51
+    id=809
+    wstyle="TABLEAU_CPT_BUDGET"
+   [description]
+    donnee=compte,cptsld,compte,1,3
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde saisi budgetaire en #dev"
+   [param_colonne]
+    titre="Solde B en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_BUDGET"
+  [champ_tableau]
+   [presentation]
+    position=89,27
+    taille=8,51
+    noms="devbis"
+    id=810
+    wstyle="TABLEAU_CPT_BUDGET"
+   [description]
+    donnee=compte,cptsld,compte,2,3
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde saisi budgétaire en #devbis"
+   [param_colonne]
+    titre="Solde B en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_BUDGET"
+  [champ_tableau]
+   [presentation]
+    position=66,66
+    taille=8,51
+    id=811
+    wstyle="TABLEAU_CPT_COMPTABLE"
+   [description]
+    donnee=compte,persld,compte,1,1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde début balance courante comptable en #dev"
+   [param_colonne]
+    titre="Report C en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=83,34
+    taille=8,51
+    id=812
+    wstyle="TABLEAU_CPT_DB_COMPTABLE"
+   [description]
+    donnee=compte,perdb,compte,1,1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements débit balance courante comptable en #dev"
+   [param_colonne]
+    titre="Débit C en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=79,221
+    taille=8,51
+    id=813
+    wstyle="TABLEAU_CPT_CR_COMPTABLE"
+   [description]
+    donnee=compte,percr,compte,1,1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements crédit balance courante comptable en #dev"
+   [param_colonne]
+    titre="Crédit C en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=66,66
+    taille=8,51
+    noms="devbis"
+    id=814
+    wstyle="TABLEAU_CPT_COMPTABLE"
+   [description]
+    donnee=compte,persld,compte,2,1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde début balance courante comptable en #devbis"
+   [param_colonne]
+    titre="Report C en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=83,34
+    taille=8,51
+    noms="devbis"
+    id=815
+    wstyle="TABLEAU_CPT_DB_COMPTABLE"
+   [description]
+    donnee=compte,perdb,compte,2,1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements débit balance courante comptable en #devbis"
+   [param_colonne]
+    titre="Débit C en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=79,221
+    taille=8,51
+    noms="devbis"
+    id=816
+    wstyle="TABLEAU_CPT_CR_COMPTABLE"
+   [description]
+    donnee=compte,percr,compte,2,1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements crédit balance courante comptable en #devbis"
+   [param_colonne]
+    titre="Crédit C en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_COMPTABLE"
+  [champ_tableau]
+   [presentation]
+    position=66,66
+    taille=8,51
+    id=817
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+   [description]
+    donnee=compte,persld,compte,1,2
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde début balance courante extracomptable en #dev"
+   [param_colonne]
+    titre="Report E en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+  [champ_tableau]
+   [presentation]
+    position=83,34
+    taille=8,51
+    id=818
+    wstyle="TABLEAU_CPT_DB_XTRACOMPTA"
+   [description]
+    donnee=compte,perdb,compte,1,2
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements débit balance courante extracomptable en #dev"
+   [param_colonne]
+    titre="Débit E en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+  [champ_tableau]
+   [presentation]
+    position=79,221
+    taille=8,51
+    id=819
+    wstyle="TABLEAU_CPT_CR_XTRACOMPTA"
+   [description]
+    donnee=compte,percr,compte,1,2
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements crédit balance courante extracomptable en #dev"
+   [param_colonne]
+    titre="Crédit E en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+  [champ_tableau]
+   [presentation]
+    position=66,66
+    taille=8,51
+    noms="devbis"
+    id=820
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+   [description]
+    donnee=compte,persld,compte,2,2
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde début balance courante extracomptable en #devbis"
+   [param_colonne]
+    titre="Report E en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+  [champ_tableau]
+   [presentation]
+    position=83,34
+    taille=8,51
+    noms="devbis"
+    id=821
+    wstyle="TABLEAU_CPT_DB_XTRACOMPTA"
+   [description]
+    donnee=compte,perdb,compte,2,2
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements débit balance courante extracomptable en #devbis"
+   [param_colonne]
+    titre="Débit E en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+  [champ_tableau]
+   [presentation]
+    position=79,221
+    taille=8,51
+    noms="devbis"
+    id=822
+    wstyle="TABLEAU_CPT_CR_XTRACOMPTA"
+   [description]
+    donnee=compte,percr,compte,2,2
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements crédit balance courante extracomptable en #devbis"
+   [param_colonne]
+    titre="Crédit E en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_XTRACOMPTA"
+  [champ_tableau]
+   [presentation]
+    position=66,66
+    taille=8,51
+    id=823
+    wstyle="TABLEAU_CPT_BUDGET"
+   [description]
+    donnee=compte,persld,compte,1,3
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde début balance courante budétaire en #dev"
+   [param_colonne]
+    titre="Report B en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_BUDGET"
+  [champ_tableau]
+   [presentation]
+    position=83,34
+    taille=8,51
+    id=824
+    wstyle="TABLEAU_CPT_DB_BUDGET"
+   [description]
+    donnee=compte,perdb,compte,1,3
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements débit balance courante budgétaire en #dev"
+   [param_colonne]
+    titre="Débit B en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_BUDGET"
+  [champ_tableau]
+   [presentation]
+    position=79,221
+    taille=8,51
+    id=825
+    wstyle="TABLEAU_CPT_CR_BUDGET"
+   [description]
+    donnee=compte,percr,compte,1,3
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements crédit balance courante budgétaire en #dev"
+   [param_colonne]
+    titre="Crédit B en #dev"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_BUDGET"
+  [champ_tableau]
+   [presentation]
+    position=66,66
+    taille=8,51
+    noms="devbis"
+    id=826
+    wstyle="TABLEAU_CPT_BUDGET"
+   [description]
+    donnee=compte,persld,compte,2,3
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="solde début balance courante budgétaire en #devbis"
+   [param_colonne]
+    titre="Report B en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_BUDGET"
+  [champ_tableau]
+   [presentation]
+    position=83,34
+    taille=8,51
+    noms="devbis"
+    id=827
+    wstyle="TABLEAU_CPT_DB_BUDGET"
+   [description]
+    donnee=compte,perdb,compte,2,3
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements débit balance courante budgétaire en #devbis"
+   [param_colonne]
+    titre="Débit B en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_BUDGET"
+  [champ_tableau]
+   [presentation]
+    position=79,221
+    taille=8,51
+    noms="devbis"
+    id=828
+    wstyle="TABLEAU_CPT_CR_BUDGET"
+   [description]
+    donnee=compte,percr,compte,2,3
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="totaux mouvements crédit balance courante budgétaire en #devbis"
+   [param_colonne]
+    titre="Crédit B en #devbis"
+    fl_aff=non
+    largeur_col=54
+    wstyle="TABLEAU_CPT_BUDGET"
+  [champ_tableau]
+   [presentation]
+    position=83,46
+    taille=8,17
+    id=829
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,usercr,compte
+    format="1"
+    saisie=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a créé la fiche"
+   [param_colonne]
+    titre="Créé par"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=61,61
+    taille=8,35
+    id=830
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,usercrdh,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Créé le"
+   [param_colonne]
+    titre="Créé le"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=73,43
+    taille=8,100
+    id=831
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,usercrori,compte
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Origine de la création"
+   [param_colonne]
+    titre="Origine de la création"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=75,18
+    taille=8,17
+    id=832
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,usermo,compte
+    format="1"
+    saisie=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a modifié la fiche"
+   [param_colonne]
+    titre="Modifié par"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=75,105
+    taille=8,35
+    id=833
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,usermodh,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Modifié le"
+   [param_colonne]
+    titre="Modifié le"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=87,107
+    taille=8,100
+    id=834
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,usermoori,compte
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Origine de la modification"
+   [param_colonne]
+    titre="Origine de la modification"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=83,61
+    taille=8,17
+    id=835
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userdop,compte
+    format="1"
+    saisie=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a effectué la dernière opération"
+   [param_colonne]
+    titre="Dernière opération par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=67,69
+    taille=8,35
+    id=836
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userdopdh,compte
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Dernière opération le"
+   [param_colonne]
+    titre="Dernière opération le"
+    fl_aff=non
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=79,14
+    taille=8,100
+    id=837
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=compte,userdopori,compte
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Origine de la dernière opération"
+   [param_colonne]
+    titre="Origine de la dernière opération"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=136,56
+    taille=9,33
+    id=1000007
+    colonnes_saisie=8
+    wstyle="CHAMP_SAISI_COG"
+   [description]
+    donnee=c3,cog_cptanael,c3
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10010
+   [info_bulle]
+   texte="Compte Anael"
+   [param_colonne]
+    titre="Compte Anael"
+    fl_aff=non
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=172,183
+    taille=9,60
+    attache_y=oui
+    cadrage=gauche
+    id=1000009
+    colonnes_saisie=14
+    wstyle="CHAMP_NON_SAISI_COG"
+   [description]
+    donnee=c3,cog_etldateimport,c3
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10010
+   [info_bulle]
+   texte="ETL - Date de dernière importation"
+   [param_colonne]
+    titre="ETL - Date de la dernière importation"
+    fl_aff=non
+    largeur_col=60
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=20,5
+   taille=9,44
+   id=751
+   wstyle="STD"
+  [texte]
+   texte="Compte"
+ [obj_texte]
+  [presentation]
+   position=32,5
+   taille=9,44
+   id=839
+   wstyle="STD"
+  [texte]
+   texte="Nom abrégé"
+ [obj_texte]
+  [presentation]
+   position=44,5
+   taille=9,44
+   id=841
+   wstyle="STD"
+  [texte]
+   texte="Collectif"
+ [champ]
+  [presentation]
+   position=20,51
+   taille=9,36
+   id=752
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c3,cpt,compte_sel
+  [aide_page]
+   aide=125
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=15,131
+   taille=41,62
+   id=753
+   wstyle="STD"
+  [description]
+   donnee=x1,choix,x1,1
+   minmaj=majuscules
+  [param_groupe]
+   titre="Sélection des comptes"
+  [radio_bouton]
+   [presentation]
+    position=24,136
+    taille=9,53
+    id=754
+    wstyle="STD"
+   [param_radio]
+    texte="Valides"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=34,136
+    taille=9,53
+    id=755
+    wstyle="STD"
+   [param_radio]
+    texte="Fermés"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=44,136
+    taille=9,53
+    id=756
+    wstyle="STD"
+   [param_radio]
+    texte="Tous"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=123
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=32,51
+   taille=9,74
+   id=840
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c3,nomabr,compte_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=127
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_NomAbr_2_Ap"
+ [champ]
+  [presentation]
+   position=44,51
+   taille=9,36
+   id=843
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c3,cptcol,compte_sel
+  [aide_page]
+   aide=128
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptCol_2_Ap"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=29
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=28
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=31
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=30
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=32
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=26
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=25
+[page]
+ numero=11
+ libelle="fiche compte"
+ fond="STD"
+ titre="Compte"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ page_fond=1
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="GENERALITES"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=206,5
+   taille=84,310
+   id=664
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte=" "
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=150,5
+   taille=48,310
+   id=659
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte=" "
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=219,244
+   taille=35,71
+   noms="cpttyp3vcache"
+   id=648
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="BUDGET_3D"
+ [cadre]
+  [presentation]
+   position=219,172
+   taille=35,71
+   noms="cpttyp3vcache"
+   id=645
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="XTRACOMPTA_3D"
+ [cadre]
+  [presentation]
+   position=163,244
+   taille=35,71
+   noms="cpttyp3vcache"
+   id=650
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="BUDGET_3D"
+ [cadre]
+  [presentation]
+   position=163,172
+   taille=35,71
+   noms="cpttyp3vcache"
+   id=647
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="XTRACOMPTA_3D"
+ [cadre]
+  [presentation]
+   position=255,244
+   taille=35,71
+   noms="cpttyp3vcache;devbis"
+   id=649
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="BUDGET_3D"
+ [cadre]
+  [presentation]
+   position=255,172
+   taille=35,71
+   noms="cpttyp3vcache;devbis"
+   id=646
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="XTRACOMPTA_3D"
+ [cadre]
+  [presentation]
+   position=219,100
+   taille=35,71
+   noms="cpttyp3vcache"
+   id=643
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="COMPTABLE_3D"
+ [cadre]
+  [presentation]
+   position=163,100
+   taille=35,71
+   noms="cpttyp3vcache"
+   id=644
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="COMPTABLE_3D"
+ [cadre]
+  [presentation]
+   position=255,100
+   taille=35,71
+   noms="cpttyp3vcache;devbis"
+   id=642
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="COMPTABLE_3D"
+ [obj_texte]
+  [presentation]
+   position=24,5
+   taille=9,48
+   id=19
+   wstyle="STD"
+  [texte]
+   texte="Compte"
+ [obj_texte]
+  [presentation]
+   position=36,5
+   taille=9,48
+   id=21
+   wstyle="STD"
+  [texte]
+   texte="Nom abrégé"
+ [obj_texte]
+  [presentation]
+   position=46,5
+   taille=9,48
+   id=20
+   wstyle="STD"
+  [texte]
+   texte="Intitulé"
+ [obj_texte]
+  [presentation]
+   position=124,5
+   taille=9,48
+   id=29
+   wstyle="STD"
+  [texte]
+   texte="Compte collectif"
+ [obj_texte]
+  [presentation]
+   position=137,6
+   taille=9,48
+   id=1000001
+   wstyle="STD"
+  [texte]
+   texte="Compte Anael"
+ [obj_texte]
+  [presentation]
+   position=151,6
+   taille=9,93
+   cadrage=centre
+   id=660
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Solde saisi"
+ [obj_texte]
+  [presentation]
+   position=151,101
+   taille=9,68
+   cadrage=centre
+   id=661
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Comptable"
+ [obj_texte]
+  [presentation]
+   position=151,173
+   taille=9,68
+   cadrage=centre
+   id=662
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Extra-comptable"
+ [obj_texte]
+  [presentation]
+   position=151,245
+   taille=9,68
+   cadrage=centre
+   id=663
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Budget"
+ [obj_texte]
+  [presentation]
+   position=166,10
+   taille=9,74
+   noms="cpttyp3vcache"
+   id=125
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Devise principale"
+ [obj_texte]
+  [presentation]
+   position=176,10
+   taille=9,74
+   noms="cpttyp3vcache;devbis"
+   id=126
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Devise secondaire"
+ [obj_texte]
+  [presentation]
+   position=186,10
+   taille=9,74
+   noms="cpttyp3vcache;devcodvcache"
+   id=127
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Devise du compte"
+ [obj_texte]
+  [presentation]
+   position=207,6
+   taille=9,93
+   cadrage=centre
+   id=665
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Balance période courante"
+ [obj_texte]
+  [presentation]
+   position=207,101
+   taille=9,68
+   cadrage=centre
+   id=666
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Comptable"
+ [obj_texte]
+  [presentation]
+   position=207,173
+   taille=9,68
+   cadrage=centre
+   id=667
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Extra-comptable"
+ [obj_texte]
+  [presentation]
+   position=207,245
+   taille=9,68
+   cadrage=centre
+   id=668
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Budget"
+ [obj_texte]
+  [presentation]
+   position=222,24
+   taille=9,85
+   noms="cpttyp3vcache"
+   id=132
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Solde début période"
+ [obj_texte]
+  [presentation]
+   position=232,24
+   taille=9,85
+   noms="cpttyp3vcache"
+   id=133
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Débit période"
+ [obj_texte]
+  [presentation]
+   position=242,24
+   taille=9,85
+   noms="cpttyp3vcache"
+   id=134
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Crédit période"
+ [obj_texte]
+  [presentation]
+   position=258,24
+   taille=9,85
+   noms="cpttyp3vcache;devbis"
+   id=135
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Solde début période"
+ [obj_texte]
+  [presentation]
+   position=268,24
+   taille=9,85
+   noms="cpttyp3vcache;devbis"
+   id=136
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Débit période"
+ [obj_texte]
+  [presentation]
+   position=278,24
+   taille=9,85
+   noms="cpttyp3vcache;devbis"
+   id=137
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Crédit période"
+ [champ]
+  [presentation]
+   position=24,55
+   taille=9,36
+   id=42
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,cpt,compte
+   saisie=non
+  [touches]
+   f1=1
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=166,76
+   taille=9,18
+   noms="cpttyp3vcache"
+   id=138
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ca,dev,ca
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=166,111
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=139
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,cptsld,compte,1,1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=255,5
+   taille=35,14
+   angle=90
+   noms="cpttyp3vcache;devbis"
+   id=140
+   wstyle="CHAMP_TITREGROUPE"
+  [description]
+   donnee=ca,devbis,ca
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=219,5
+   taille=35,14
+   angle=90
+   noms="cpttyp3vcache"
+   id=141
+   wstyle="CHAMP_TITREGROUPE"
+  [description]
+   donnee=ca,dev,ca
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=176,76
+   taille=9,18
+   noms="cpttyp3vcache;devbis"
+   id=142
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ca,devbis,ca
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=176,111
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=143
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,cptsld,compte,2,1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=176,183
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=144
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,cptsld,compte,2,2
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=176,255
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=145
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,cptsld,compte,2,3
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=258,111
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=146
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,persld,compte,2,1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=258,183
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=147
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,persld,compte,2,2
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=258,255
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=148
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,persld,compte,2,3
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=268,111
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=149
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=compte,perdb,compte,2,1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=268,183
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=150
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=compte,perdb,compte,2,2
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=268,255
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=151
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=compte,perdb,compte,2,3
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=278,111
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=152
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=compte,percr,compte,2,1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=278,183
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=153
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=compte,percr,compte,2,2
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=278,255
+   taille=9,49
+   noms="cpttyp3vcache;devbis"
+   id=154
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=compte,percr,compte,2,3
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=166,183
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=155
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,cptsld,compte,1,2
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=166,255
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=156
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,cptsld,compte,1,3
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=222,111
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=157
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,persld,compte,1,1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=222,183
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=158
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,persld,compte,1,2
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=222,255
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=159
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,persld,compte,1,3
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=232,111
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=160
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=compte,perdb,compte,1,1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=232,183
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=161
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=compte,perdb,compte,1,2
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=232,255
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=162
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=compte,perdb,compte,1,3
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=242,111
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=163
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=compte,percr,compte,1,1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=242,183
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=164
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=compte,percr,compte,1,2
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=242,255
+   taille=9,49
+   noms="cpttyp3vcache"
+   id=165
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=compte,percr,compte,1,3
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=186,76
+   taille=9,18
+   noms="cpttyp3vcache;devcodvcache"
+   id=166
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,dev,compte
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=186,111
+   taille=9,49
+   noms="cpttyp3vcache;devcodvcache"
+   id=167
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,cptslddev,compte
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=36,55
+   taille=9,168
+   id=50
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,nomabr,compte
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=502
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_NomAbr_1_Ap"
+ [champ]
+  [presentation]
+   position=46,55
+   taille=9,168
+   id=49
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,lib,compte
+   sequence=10
+  [param_saisie]
+   obligatoire=oui
+  [aide_page]
+   aide=101
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Lib_1_Av"
+   diva_apres="Champ_Lib_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=58,55
+   taille=62,81
+   id=51
+   wstyle="STD"
+  [description]
+   donnee=compte,cptnat,compte
+   sequence=1
+   minmaj=majuscules
+  [param_groupe]
+   titre="Nature"
+  [radio_bouton]
+   [presentation]
+    position=67,62
+    taille=9,73
+    id=52
+    wstyle="STD"
+   [param_radio]
+    texte="Bilan"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=77,62
+    taille=9,73
+    id=53
+    wstyle="STD"
+   [param_radio]
+    texte="Gestion"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=87,62
+    taille=9,73
+    id=54
+    wstyle="STD"
+   [param_radio]
+    texte="Auxiliaire client"
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=97,62
+    taille=9,73
+    id=55
+    wstyle="STD"
+   [param_radio]
+    texte="Auxiliaire fournisseur"
+    cadrage=droite
+    valeur="4"
+  [radio_bouton]
+   [presentation]
+    position=107,62
+    taille=9,73
+    id=56
+    wstyle="STD"
+   [param_radio]
+    texte="Auxiliaire personnel"
+    cadrage=droite
+    valeur="5"
+  [aide_page]
+   aide=102
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_CptNat_1_Av"
+   diva_apres="Champ_CptNat_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=58,146
+   taille=42,77
+   id=58
+   wstyle="STD"
+  [description]
+   donnee=compte,cpttyp,compte
+   minmaj=majuscules
+  [param_groupe]
+   titre="Type"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=67,152
+    taille=9,70
+    id=59
+    wstyle="STD"
+   [param_radio]
+    texte="Normal"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=77,152
+    taille=9,70
+    id=60
+    wstyle="STD"
+   [param_radio]
+    texte="Collectif"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=87,152
+    taille=9,70
+    id=61
+    wstyle="STD"
+   [param_radio]
+    texte="Texte"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=103
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_CptTyp_1_Av"
+   diva_apres="Champ_CptTyp_1_Ap"
+ [groupe_radio]
+  [presentation]
+   position=58,233
+   taille=32,77
+   id=91
+   wstyle="STD"
+  [description]
+   donnee=compte,sens,compte
+   minmaj=majuscules
+  [param_groupe]
+   titre="Sens"
+  [radio_bouton]
+   [presentation]
+    position=67,239
+    taille=9,70
+    noms="cpttyp2vgrise;cpttyp3vgrise"
+    id=92
+    wstyle="STD"
+   [param_radio]
+    texte="Débit"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=77,239
+    taille=9,70
+    noms="cpttyp2vgrise;cpttyp3vgrise"
+    id=93
+    wstyle="STD"
+   [param_radio]
+    texte="Crédit"
+    cadrage=droite
+    valeur="2"
+  [aide_page]
+   aide=104
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Sens_1_Av"
+ [champ]
+  [presentation]
+   position=124,92
+   taille=9,221
+   id=847
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,cpt_collectif_lib,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=124,55
+   taille=9,36
+   noms="cptnat"
+   id=57
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,cptcol,compte
+   sequence=2
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=107
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_CptCol_1_Av"
+   diva_apres="Champ_CptCol_1_Ap"
+  [boutons]
+   "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=135,113
+   taille=9,109
+   noms="cpttyp3vgrise"
+   id=82
+   wstyle="STD"
+  [description]
+   donnee=compte,grpcptcod,compte
+   minmaj=majuscules
+  [param_case]
+   texte="Compte inter-groupe"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=533
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_GrpCptCod_1_Av"
+ [champ]
+  [presentation]
+   position=136,56
+   taille=9,33
+   id=1000002
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI_COG"
+  [description]
+   donnee=c3,cog_cptanael,c3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10010
+[page]
+ numero=12
+ libelle="Fiche compte"
+ fond="STD"
+ titre="Compte"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=11
+ suiv=13
+ page_fond=1
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=23
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="PARAMETRES"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=233,5
+   taille=58,310
+   id=16
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Axes"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=102,5
+   taille=83,190
+   id=14
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Informations complémentaires"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=24,5
+   taille=73,190
+   id=10
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Gestion des devises"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=190,5
+   taille=38,310
+   id=15
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Centralisation et épuration"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=24,203
+   taille=93,112
+   id=12
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Lettrage"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=122,203
+   taille=63,112
+   id=11
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Pointage"
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=205,159
+   taille=20,1
+   id=851
+   wstyle="STD"
+  [param_cadre]
+   nature=vertical_d
+   wnom_couleurcadre="TRAIT_SIMPLE"
+   wnom_couleurfond="STD"
+ [obj_texte]
+  [presentation]
+   position=85,13
+   taille=9,22
+   id=28
+   wstyle="STD"
+  [texte]
+   texte="Devise"
+ [obj_texte]
+  [presentation]
+   position=105,210
+   taille=9,81
+   id=26
+   wstyle="STD"
+  [texte]
+   texte="Dernier code lettrage utilisé"
+ [obj_texte]
+  [presentation]
+   position=118,10
+   taille=9,67
+   id=33
+   wstyle="STD"
+  [texte]
+   texte="Numéro de présentation"
+ [obj_texte]
+  [presentation]
+   position=129,10
+   taille=9,67
+   id=35
+   wstyle="STD"
+  [texte]
+   texte="Régime TVA Tiers"
+ [obj_texte]
+  [presentation]
+   position=140,10
+   taille=9,67
+   id=855
+   wstyle="STD"
+  [texte]
+   texte="Régime TVA Article"
+ [obj_texte]
+  [presentation]
+   position=151,10
+   taille=9,67
+   id=36
+   wstyle="STD"
+  [texte]
+   texte="Mode de règlement"
+ [obj_texte]
+  [presentation]
+   position=162,10
+   taille=9,67
+   id=37
+   wstyle="STD"
+  [texte]
+   texte="Nature montant2"
+ [obj_texte]
+  [presentation]
+   position=173,10
+   taille=9,67
+   id=39
+   wstyle="STD"
+  [texte]
+   texte="Critère"
+ [obj_texte]
+  [presentation]
+   position=173,210
+   taille=9,81
+   id=27
+   wstyle="STD"
+  [texte]
+   texte="Dernier code pointage utilisé"
+ [groupe_radio]
+  [presentation]
+   position=40,11
+   taille=42,85
+   noms="cpttyp3vgrise"
+   id=71
+   wstyle="STD"
+  [description]
+   donnee=compte,devcod,compte
+   minmaj=majuscules
+  [param_groupe]
+   titre="Méthode"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=49,16
+    taille=9,77
+    id=72
+    wstyle="STD"
+   [param_radio]
+    texte="Sans devise"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=59,16
+    taille=9,77
+    id=73
+    wstyle="STD"
+   [param_radio]
+    texte="Mono-devise"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=69,16
+    taille=9,77
+    id=74
+    wstyle="STD"
+   [param_radio]
+    texte="Multi-devise"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=114
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_DevCod_1_Av"
+   diva_apres="Champ_DevCod_1_Ap"
+ [champ]
+  [presentation]
+   position=85,57
+   taille=9,130
+   id=849
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,table_devise_lib,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=85,37
+   taille=9,18
+   noms="cpttyp3fstd;devcodfstd"
+   id=75
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,dev,compte
+   sequence=3
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=109
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=9047
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Dev_1_Av"
+   diva_apres="Champ_Dev_1_Ap"
+  [boutons]
+   "zoom"
+ [groupe_radio]
+  [presentation]
+   position=40,103
+   taille=32,84
+   noms="cpttyp3vgrise;devcodvgrise"
+   id=76
+   wstyle="STD"
+  [description]
+   donnee=compte,devconv,compte
+   minmaj=majuscules
+  [param_groupe]
+   titre="Conversion"
+  [radio_bouton]
+   [presentation]
+    position=49,108
+    taille=9,76
+    id=77
+    wstyle="STD"
+   [param_radio]
+    texte="A la saisie"
+    cadrage=droite
+  [radio_bouton]
+   [presentation]
+    position=59,108
+    taille=9,76
+    id=78
+    wstyle="STD"
+   [param_radio]
+    texte="En fin de période"
+    cadrage=droite
+  [aide_page]
+   aide=110
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_DevConv_1_Av"
+ [champ]
+  [presentation]
+   position=118,79
+   taille=9,20
+   noms="cpttyp2fstd;cpttyp3fstd"
+   id=83
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,tblno,compte
+   format="0"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=122
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_TblNo_1_Av"
+ [champ]
+  [presentation]
+   position=129,79
+   taille=9,37
+   noms="cpttyp2fstd;cpttyp3fstd"
+   id=853
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,tvatie,compte
+   sequence=5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=112
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   f8=9126
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_TvaTie_1_Av"
+   diva_apres="Champ_TvaTie_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=140,79
+   taille=9,37
+   noms="cpttyp2fstd;cpttyp3fstd"
+   id=854
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,tvaart,compte
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=112
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_TvaArt_1_Av"
+   diva_apres="Champ_TvaArt_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=151,79
+   taille=9,20
+   noms="cpttyp2fstd;cpttyp3fstd"
+   id=86
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,reg,compte
+   sequence=4
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=111
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=9046
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Reg_1_Av"
+   diva_apres="Champ_Reg_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=162,79
+   taille=9,20
+   noms="cpttyp2fstd;cpttyp3fstd"
+   id=87
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,mt2nat,compte
+   format="0"
+   sequence=6
+  [param_saisie]
+   defaut="            0,0000000000"
+  [aide_page]
+   aide=113
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Mt2Nat_1_Av"
+   diva_apres="Champ_Mt2Nat_1_Ap"
+ [champ]
+  [presentation]
+   position=173,79
+   taille=9,20
+   id=88
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,critere,compte
+  [aide_page]
+   aide=115
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=40,209
+   taille=62,99
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=62
+   wstyle="STD"
+  [description]
+   donnee=compte,letttyp,compte
+   minmaj=majuscules
+  [param_groupe]
+   titre="Méthode"
+  [radio_bouton]
+   [presentation]
+    position=49,214
+    taille=9,92
+    id=63
+    wstyle="STD"
+   [param_radio]
+    texte="Aucune"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=59,214
+    taille=9,92
+    id=64
+    wstyle="STD"
+   [param_radio]
+    texte="Par pièce"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=69,214
+    taille=9,92
+    id=65
+    wstyle="STD"
+   [param_radio]
+    texte="Par montant"
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=79,214
+    taille=9,92
+    id=66
+    wstyle="STD"
+   [param_radio]
+    texte="Par pièce puis par montant"
+    cadrage=droite
+    valeur="4"
+  [radio_bouton]
+   [presentation]
+    position=89,214
+    taille=9,92
+    id=67
+    wstyle="STD"
+   [param_radio]
+    texte="Manuelle"
+    cadrage=droite
+    valeur="5"
+  [aide_page]
+   aide=106
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_LettTyp_1_Av"
+ [groupe_radio]
+  [presentation]
+   position=138,209
+   taille=32,99
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=68
+   wstyle="STD"
+  [description]
+   donnee=compte,pointcod,compte
+   minmaj=majuscules
+  [param_groupe]
+   titre="Méthode"
+  [radio_bouton]
+   [presentation]
+    position=147,213
+    taille=9,93
+    id=69
+    wstyle="STD"
+   [param_radio]
+    texte="Aucune"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=157,213
+    taille=9,93
+    id=70
+    wstyle="STD"
+   [param_radio]
+    texte="Manuelle"
+    cadrage=droite
+    valeur="2"
+  [aide_page]
+   aide=108
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_PointCod_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=206,10
+   taille=9,146
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=79
+   wstyle="STD"
+  [description]
+   donnee=compte,centtyp,compte
+   minmaj=majuscules
+  [param_case]
+   texte="Compte centralisable à la validation des brouillards"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=105
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_CentTyp_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=216,10
+   taille=9,146
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=80
+   wstyle="STD"
+  [description]
+   donnee=compte,centedi,compte
+   minmaj=majuscules
+  [param_case]
+   texte="Compte centralisable à l'impression des extraits"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_CentEdi_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=206,165
+   taille=9,146
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=81
+   wstyle="STD"
+  [description]
+   donnee=compte,epucod,compte
+   minmaj=majuscules
+  [param_case]
+   texte="Compte épurable par l'épuration de fin d'exercice"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=534
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EpuCod_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=249,10
+   taille=9,67
+   noms="axe1;axenom1;cpttyp2vgrise;cpttyp3vgrise"
+   id=98
+   wstyle="STD"
+  [description]
+   donnee=compte,axesais,compte,1
+   minmaj=majuscules
+  [param_case]
+   texte="Saisie"
+   cadrage=droite
+   valeur="2","1"
+   notifier=oui
+  [aide_page]
+   aide=116
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AxeSais_1_Av"
+   diva_apres="Champ_AxeSais_1_Ap"
+ [champ]
+  [presentation]
+   position=249,79
+   taille=9,37
+   noms="axe1;axesais1;cpttyp2fstd;cpttyp3fstd"
+   id=99
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,axe,compte,1
+   sequence=8
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=117
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19010
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_2_Av"
+   diva_apres="Champ_Axe_2_Ap"
+  [boutons]
+   "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=259,10
+   taille=9,67
+   noms="axe2;axenom2;cpttyp2vgrise;cpttyp3vgrise"
+   id=100
+   wstyle="STD"
+  [description]
+   donnee=compte,axesais,compte,2
+   minmaj=majuscules
+  [param_case]
+   texte="Saisie"
+   cadrage=droite
+   valeur="2","1"
+   notifier=oui
+  [aide_page]
+   aide=116
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AxeSais_1_Av"
+   diva_apres="Champ_AxeSais_1_Ap"
+ [champ]
+  [presentation]
+   position=259,79
+   taille=9,37
+   noms="axe2;axesais2;cpttyp2fstd;cpttyp3fstd"
+   id=101
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,axe,compte,2
+   sequence=9
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=117
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19010
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_2_Av"
+   diva_apres="Champ_Axe_2_Ap"
+  [boutons]
+   "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=269,10
+   taille=9,67
+   noms="axe3;axenom3;cpttyp2vgrise;cpttyp3vgrise"
+   id=102
+   wstyle="STD"
+  [description]
+   donnee=compte,axesais,compte,3
+   minmaj=majuscules
+  [param_case]
+   texte="Saisie"
+   cadrage=droite
+   valeur="2","1"
+   notifier=oui
+  [aide_page]
+   aide=116
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AxeSais_1_Av"
+   diva_apres="Champ_AxeSais_1_Ap"
+ [champ]
+  [presentation]
+   position=269,79
+   taille=9,37
+   noms="axe3;axesais3;cpttyp2fstd;cpttyp3fstd"
+   id=103
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,axe,compte,3
+   sequence=10
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=117
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19010
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_2_Av"
+   diva_apres="Champ_Axe_2_Ap"
+  [boutons]
+   "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=279,10
+   taille=9,67
+   noms="axe4;axenom4;cpttyp2vgrise;cpttyp3vgrise"
+   id=104
+   wstyle="STD"
+  [description]
+   donnee=compte,axesais,compte,4
+   minmaj=majuscules
+  [param_case]
+   texte="Saisie"
+   cadrage=droite
+   valeur="2","1"
+   notifier=oui
+  [aide_page]
+   aide=116
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AxeSais_1_Av"
+   diva_apres="Champ_AxeSais_1_Ap"
+ [champ]
+  [presentation]
+   position=279,79
+   taille=9,37
+   noms="axe4;axesais4;cpttyp2fstd;cpttyp3fstd"
+   id=105
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,axe,compte,4
+   sequence=11
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=117
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19010
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_2_Av"
+   diva_apres="Champ_Axe_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=151,100
+   taille=9,91
+   id=850
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,table_mode_regl_lib,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=173,293
+   taille=9,15
+   id=47
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,point,compte
+   saisie=non
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=105,293
+   taille=9,15
+   id=48
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=compte,lett,compte
+   saisie=non
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=249,117
+   taille=9,195
+   noms="axe1"
+   id=94
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,3
+   saisie=non
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=259,117
+   taille=9,195
+   noms="axe2"
+   id=95
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,4
+   saisie=non
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=269,117
+   taille=9,195
+   noms="axe3"
+   id=96
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,5
+   saisie=non
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=279,117
+   taille=9,195
+   noms="axe4"
+   id=97
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,6
+   saisie=non
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=162,100
+   taille=9,39
+   id=43
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,mt2lib,x1
+   saisie=non
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=13
+ libelle="Fiche compte"
+ fond="STD"
+ titre="Compte"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=12
+ suiv=14
+ page_fond=1
+ attache_x=oui
+ attache_lgy=oui
+ diva_avant="Page_FicheCompte_Av"
+ ident_unique=24
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="AUTORISATION ET CONFIDENTIALITE"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=62,5
+   taille=104,310
+   id=17
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Protection"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=174,5
+   taille=62,310
+   noms="etbc3;version_izy"
+   id=505
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Gestion des établissements"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=24,5
+   taille=30,310
+   id=637
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Codification"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=128,10
+   taille=9,108
+   id=34
+   wstyle="STD"
+  [texte]
+   texte="Code de confidentialité"
+ [obj_texte]
+  [presentation]
+   position=140,10
+   taille=9,108
+   id=40
+   wstyle="STD"
+  [texte]
+   texte="Date de fermeture"
+ [obj_texte]
+  [presentation]
+   position=152,10
+   taille=9,108
+   id=41
+   wstyle="STD"
+  [texte]
+   texte="Compte centralisateur"
+ [obj_texte]
+  [presentation]
+   position=199,122
+   taille=9,60
+   noms="etbc3;version_izy"
+   id=502
+   wstyle="STD"
+  [texte]
+   texte="Etablissement autorisé"
+ [case_a_cocher]
+  [presentation]
+   position=78,10
+   taille=9,299
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=106
+   wstyle="STD"
+  [description]
+   donnee=compte,jnlsais,compte,2
+   minmaj=majuscules
+  [param_case]
+   texte="Autorisé sur un journal de vente"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=118
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_JnlSais_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=90,10
+   taille=9,299
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=107
+   wstyle="STD"
+  [description]
+   donnee=compte,jnlsais,compte,1
+   minmaj=majuscules
+  [param_case]
+   texte="Autorisé sur un journal d'achat"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=118
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_JnlSais_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=102,10
+   taille=9,299
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=108
+   wstyle="STD"
+  [description]
+   donnee=compte,jnlsais,compte,3
+   minmaj=majuscules
+  [param_case]
+   texte="Autorisé sur un journal de trésorerie"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=118
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_JnlSais_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=114,10
+   taille=9,299
+   noms="cpttyp2vgrise;cpttyp3vgrise"
+   id=463
+   wstyle="STD"
+  [description]
+   donnee=compte,jnlsais,compte,8
+   minmaj=majuscules
+  [param_case]
+   texte="Autorisé sur un journal budgétaire"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=118
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_JnlSais_1_Av"
+ [champ]
+  [presentation]
+   position=128,120
+   taille=9,36
+   id=84
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,conf,compte
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=121
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=11010
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Conf_1_Ap"
+ [champ]
+  [presentation]
+   position=140,120
+   taille=9,36
+   id=89
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,hsdt,compte
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=119
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=152,157
+   taille=9,155
+   id=848
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,cpt_centraliseur_lib,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=152,120
+   taille=9,36
+   noms="cpttyp2fstd;cpttyp3fstd"
+   id=90
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,cptcent,compte
+   sequence=7
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=120
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_CptCent_1_Av"
+   diva_apres="Champ_CptCent_1_Ap"
+  [boutons]
+   "zoom"
+ [groupe_radio]
+  [presentation]
+   position=190,10
+   taille=42,103
+   noms="etb_cpttyp2vgrise;etb_cpttyp3vgrise;etbc3;version_izy"
+   id=476
+   wstyle="STD"
+  [description]
+   donnee=compte,etbsais,compte
+   sequence=4000
+  [param_groupe]
+   titre="Compte autorisé pour"
+   choix="ccfdmc.dhfi","ETBSAIS"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=199,15
+    taille=9,96
+    noms="etb_cpttyp2vgrise;etb_cpttyp3vgrise;etbc3;version_izy"
+    id=477
+    wstyle="STD"
+   [param_radio]
+    texte="un seul établissement"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=209,15
+    taille=9,96
+    noms="etb_cpttyp2vgrise;etb_cpttyp3vgrise;etbc3;version_izy"
+    id=478
+    wstyle="STD"
+   [param_radio]
+    texte="sur une sélection d'établissements"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=219,15
+    taille=9,96
+    noms="etb_cpttyp2vgrise;etb_cpttyp3vgrise;etbc3;version_izy"
+    id=479
+    wstyle="STD"
+   [param_radio]
+    texte="sur tous les établissements"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=124
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_EtbSais_1_Ap"
+ [champ]
+  [presentation]
+   position=199,184
+   taille=9,15
+   noms="etb_cpttyp2vgrise;etb_cpttyp3vgrise;etbc3;etbunique;version_izy"
+   id=487
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=compte,etb,compte
+   sequence=4002
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=126
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   f8=19004
+   shift_f6=10000
+   shift_f8=4001
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Etb_1_Av"
+   diva_apres="Champ_Etb_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=199,200
+   taille=9,112
+   noms="etbc3;version_izy"
+   id=635
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,7
+   saisie=non
+  [touches]
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=40,10
+   taille=9,299
+   noms="r3cod"
+   id=640
+   wstyle="STD"
+  [description]
+   donnee=compte,r3cod,compte
+  [param_case]
+   texte="Lié à Divalto Règlement"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_R3cod_1_Av"
+[page]
+ numero=14
+ fond="STD"
+ titre="Compte"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=13
+ page_fond=1
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=5
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANT"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=148,5
+   taille=54,152
+   id=172
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière opération"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=86,164
+   taille=54,151
+   id=171
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=86,5
+   taille=54,151
+   id=170
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=24,5
+   taille=54,151
+   id=169
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Pointage"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=24,164
+   taille=54,151
+   id=168
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Lettrage"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=148,166
+   taille=53,149
+   attache_y=oui
+   id=1000003
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="ETL - Date de dernière importation"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=40,10
+   taille=9,13
+   id=177
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=40,169
+   taille=9,13
+   id=174
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=52,10
+   taille=9,13
+   id=178
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=52,169
+   taille=9,13
+   id=175
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=102,10
+   taille=9,13
+   id=182
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=102,169
+   taille=9,13
+   id=183
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=114,10
+   taille=9,13
+   id=185
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=114,169
+   taille=9,13
+   id=186
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=164,10
+   taille=9,13
+   id=184
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=172,172
+   taille=9,9
+   attache_y=oui
+   id=1000004
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=176,10
+   taille=9,13
+   id=187
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=102,25
+   taille=9,128
+   id=188
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,usercr,compte
+   format="1"
+   saisie=non
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=102,184
+   taille=9,128
+   id=189
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,usermo,compte
+   format="1"
+   saisie=non
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=114,25
+   taille=9,128
+   id=190
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,usercrdh,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=114,184
+   taille=9,128
+   id=191
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,usermodh,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=176,25
+   taille=9,128
+   id=192
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userdopdh,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=126,10
+   taille=9,143
+   id=193
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,usercrori,compte
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=126,169
+   taille=9,143
+   id=194
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,usermoori,compte
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=188,10
+   taille=9,143
+   id=195
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userdopori,compte
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=64,169
+   taille=9,142
+   id=196
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userltori,compte
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=52,184
+   taille=9,128
+   id=197
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userltdh,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=40,184
+   taille=9,128
+   id=198
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userlt,compte
+   format="1"
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=40,25
+   taille=9,127
+   id=199
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userpt,compte
+   format="1"
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=52,25
+   taille=9,127
+   id=200
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userptdh,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=64,10
+   taille=9,141
+   id=201
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userptori,compte
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=164,25
+   taille=9,128
+   id=202
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,userdop,compte
+   format="1"
+   saisie=non
+  [touches]
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=172,183
+   taille=9,60
+   attache_y=oui
+   cadrage=gauche
+   id=1000005
+   colonnes_saisie=14
+   wstyle="CHAMP_NON_SAISI_COG"
+  [description]
+   donnee=c3,cog_etldateimport,c3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10010
+  [info_bulle]
+  texte="ETL - Date de dernière importation"
+[page]
+ numero=15
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=14
+[page]
+ numero=16
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=15
+[page]
+ numero=17
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=16
+[page]
+ numero=18
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=34
+[page]
+ numero=19
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=20
+ libelle="Sélection"
+ fond="STD"
+ type=fenetre
+ titre="Sélection"
+ nb_lig=6
+ nb_col=48
+ offset_lig=4
+ offset_col=20
+ ident_unique=20
+ [bitmap_constante]
+  [presentation]
+   position=8,5
+   taille=16,16
+   actionbitmap=reduire
+   id=496
+  [param_bitmapc]
+   wnom="INFOG"
+ [obj_texte]
+  [presentation]
+   position=11,23
+   taille=9,168
+   id=497
+   wstyle="STD"
+  [texte]
+   texte="Sélectionnez les fiches à dupliquer"
+ [case_a_cocher]
+  [presentation]
+   position=38,24
+   taille=9,166
+   noms="etbc3"
+   id=498
+   wstyle="STD"
+  [description]
+   donnee=x1,choix,x1,4
+  [param_case]
+   texte="Etablissements du compte"
+   cadrage=droite
+   valeur="2","1"
+   choix="ccfdmc.dhfi",""
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=26,24
+   taille=9,166
+   id=499
+   wstyle="STD"
+  [description]
+   donnee=x1,choix,x1,3
+  [param_case]
+   texte="Notes"
+   cadrage=droite
+   valeur="2","1"
+   choix="ccfdmc.dhfi",""
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPLEMENTS"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="NOTE"
+    wtexte="_Note\tShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Interrogation comptable\tF5"
+    wid_ressource="INTERRO"
+    wtrait_chaine="#f5"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Zoom Ecritures\tShift+F12"
+    wid_ressource="ZOOMECR"
+    wtrait_chaine="#shift_f12"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Impression _Extrait\tF6"
+    wid_ressource="EXTRAIT"
+    wtrait_chaine="#f6"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Fiche _Tiers\tShift+F10"
+    wid_ressource="TIERSG3"
+    wtrait_chaine="#shift_f10"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Interrogation _Encours\tShift+F5"
+    wid_ressource="ENCOURS"
+    wtrait_chaine="#shift_f5"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Infos établissement _compte\tShift+F8"
+    wid_ressource="ETB_COMPTE"
+    wtrait_chaine="#shift_f8"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Révision de comptes"
+    wid_ressource="ZOOMAPPEND1"
+    wetype_trait=arret
+    warret=19034
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wtrait_chaine="#home"
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wtrait_chaine="#end"
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    wetype_trait=arret
+    warret=5
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Insert>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Infos établissement"
+    wid_ressource="ETB_COMPTE"
+    wtrait_chaine="#shift_f8"
+   [info_bulle]
+   texte="Infos établissement du compte <Shift+F8>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Générique"
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_4"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_5"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=4000
+   [info_bulle]
+   texte="Imprimer"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP1__1"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Ecritures"
+    wid_ressource="ZOOMECR"
+    wtrait_chaine="#shift_f12"
+   [info_bulle]
+   texte="Consulter les écritures <Shift+F12>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Interrogation comptable"
+    wid_ressource="INTERRO"
+    wtrait_chaine="#f5"
+   [info_bulle]
+   texte="Interrogation de compte <F5>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Extrait de compte"
+    wid_ressource="EXTRAIT"
+    wtrait_chaine="#f6"
+   [info_bulle]
+   texte="Impression d'un extrait de compte <F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP1"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Tiers"
+    wid_ressource="TIERSG3"
+    wtrait_chaine="#shift_f10"
+   [info_bulle]
+   texte="Tiers Divalto Commerce & Logistique <Shift+F10>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Encours"
+    wid_ressource="ENCOURS"
+    wtrait_chaine="#shift_f5"
+   [info_bulle]
+   texte="Encours Divalto Règlement <Shift+F5>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="FENETRE"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+Public Record "ccfdd.dhsd" ca ca
+Public Record "ccfdd.dhsd" x1 x1
+Public Record "ddsys.dhsd" rowinfo zoomselection
+Public RecordSql "ccrsjca.dhoq" compte compte
+Public Record "ccfdd.dhsd" c3 compte_sel
+Public Record "ccfdd.dhsd" c3 c3
+[/diva]
+[diva_base]
+SetModuleInfo('$Id: ccez030_sql.dhsf 29576 2013-02-13 11:32:50Z vj $')
+;>xdiva
+;*
+;*		Zoom plan comptable																													cctez030.dhsp
+;*
+
+;*
+;*		déclarations
+;*
+
+
+include	"cctc000.dhsp"
+
+public	hfile		CCFDD.dhsd		CCFJCA	CCFJCA		; intitulés
+public	hfile		CCFDD.dhsd		CCFECR	CCFECR		; écritures
+
+public	RecordSQL	ccrsjca.dhoq	Compte						; intitulé de compte
+
+public	record	CCFDD.dhsd		C3			Compte_Save			; intitulé de compte pour la duplication
+public	record	CCFDD.dhsd		C3			Compte_AvSaisie	; intitulé de compte pour la duplication
+public	record	CCFDD.dhsd		C3		  	Compte_sel			; pour la selection
+
+public	record	CCFDD.dhsd		C3							; intitulé de compte
+public	record	CCFDD.dhsd		C3			XXC3			; intitulé de compte pour recherches libellés
+public	record	CCFDD.dhsd		C5							; intitulé d'axe
+public	record	CCFDD.dhsd		C8							; ligne d'écriture
+public	record	CCFDD.dhsd		CA							; dossier, paramètres généraux
+public	record	CCFDD.dhsd		CEts						; Etablissement
+public	record	CCFDD.dhsd		X1							; work zoom
+
+
+public	record	GTFDD.dhsd 		T006						; modes de règlement
+public	record	GTFDD.dhsd		T007						; libellés devises
+public	record	GTFDD.dhsd		XZ			G3XZ
+
+public	record	ddsys.dhsd		ZOOM						; variables de contrôle du zoom
+public 	record 	"ddsys.dhsd" 	rowinfo	zoomselection
+
+
+
+module	"gttm000.dhop"
+module	"gtpm000.dhop"
+module 	"a5tm000.dhop"
+
+1			OLD_CPTCOL		>CCFDD.dhsd		CPTCOL
+
+
+;*
+;*		traitements sur les données du masque
+;*
+
+
+;*
+public procedure Champ_AxeSais_1_Av
+
+; avant autorisation axe
+
+beginp	; Champ_AxeSais_1_Av
+
+	if CA.AxeLib(Harmony.DataInd1)	= ' '	\
+	or Compte.CptTyp							<> 1
+
+		Compte.AxeSais(Harmony.DataInd1)	= 1
+		Compte.Axe(Harmony.DataInd1)		= ' '
+		X1.Lib(Harmony.DataInd1 + 2)	= ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+
+	endif
+
+endp		; Champ_AxeSais_1_Av
+
+
+;*
+public procedure Champ_AxeSais_1_Ap
+
+; après autorisation axe
+
+1			axeno			>CCFDD.dhsd	AXENO
+
+beginp	; Champ_AxeSais_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+		axeno = Harmony.DataInd1
+
+		if Compte.AxeSais(axeno) <> 2	|	XmeSetAttribut([ "axesais" axeno ], AN_STYLE, C_Champ_NSaisi)
+		else								|	XmeResetAttribut([ "axesais" axeno ], AN_TOUS_ATTRIBUTS)
+		endif
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+	endif
+
+	if Compte.AxeSais(Harmony.DataInd1)	<> 2
+		Compte.Axe(Harmony.DataInd1)		= ' '
+		X1.Lib(Harmony.DataInd1 + 2)	= ' '
+	endif
+
+endp		; Champ_AxeSais_1_Ap
+
+
+;*
+public procedure Champ_Axe_2_Av
+
+; avant code axe
+
+beginp	; Champ_Axe_2_Av
+
+	if CA.AxeLib(Harmony.DataInd1)	= ' '	\
+	or Compte.CptTyp							<> 1	\
+	or Compte.AxeSais(Harmony.DataInd1)	<> 2
+
+		Compte.Axe(Harmony.DataInd1)		= ' '
+		X1.Lib(Harmony.DataInd1 + 2)	= ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	
+	endif
+
+	C3XZ.AxeNo = Harmony.DataInd1
+
+endp		; Champ_Axe_2_Av
+
+
+;*
+public procedure Champ_Axe_2_Ap
+
+; après code axe
+
+1			axe			>CCFDD.dhsd	AXE					; pour éviter l'écrasement si code commence par '='
+
+beginp	; Champ_Axe_2_Ap
+
+   X1.Lib(Harmony.DataInd1 + 2) = ' '
+   if Compte.Axe(Harmony.DataInd1) <> ' '
+	
+		axe = Compte.Axe(Harmony.DataInd1)
+		if Controle_Axe(Harmony.DataInd1, axe, nonvide = false, syntaxe = false, creation = true, conf = false, axetyp = 1, etablissement = false) < 2
+     		X1.Lib(Harmony.DataInd1 + 2) = C5.Lib
+		endif
+
+   endif
+
+endp		; Champ_Axe_2_Ap
+
+
+;*
+public procedure Champ_CentEdi_1_Av
+
+; avant centralisation édition
+
+beginp	; Champ_CentEdi_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.CentEdi = 1
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_CentEdi_1_Av
+
+
+;*
+public procedure Champ_CentTyp_1_Av
+
+; avant centralisation journal
+
+beginp	; Champ_CentTyp_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.CentTyp = 1
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_CentTyp_1_Av
+
+
+;*
+public procedure Champ_Cpt_1_Av
+
+; avant le numéro de compte sur clé de création
+
+beginp	; Champ_Cpt_1_Av
+
+	if ZOOM.Action = ZOOM_DUPLICATION
+		Compte_AvSaisie = C3
+	endif
+
+endp		; Champ_Cpt_1_Av
+
+
+;*
+public procedure Champ_Cpt_1_Ap
+
+; après le numéro de compte sur clé de création
+
+beginp	; Champ_Cpt_1_Ap
+
+	if Controle_Compte(Compte.Cpt, nonvide = condition(ZOOM.Action = ZOOM_CREATION or ZOOM.Action = ZOOM_DUPLICATION, true, false), existence = false, etablissement = false) = 0	\
+	and ZOOM.Action = ZOOM_DUPLICATION	\
+;	and left(XXCompte.Cpt, 3) <> left(Compte.Cpt, 3)
+	and (left(Compte_AvSaisie.Cpt, 1) <> left(Compte.Cpt, 1) or (left(Compte_AvSaisie.Cpt, 1) in (1..9) and left(Compte_AvSaisie.Cpt, 3) <> left(Compte.Cpt, 3)))
+	
+		Mes_Alert(19035)									; la classe et le groupe doivent être identiques
+		Compte.Cpt = Compte_AvSaisie.Cpt
+		Harmony.Retour = XmeNext_Traitement_Avant
+	
+	endif
+	
+	Compte_AvSaisie.Cpt = Compte.Cpt
+	C3 = Compte_AvSaisie
+
+endp		; Champ_Cpt_1_Ap
+
+
+;*
+public procedure Champ_CptCent_1_Av
+
+; avant compte centralisateur
+
+beginp	; Champ_CptCent_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.CptCent = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_CptCent_1_Av
+
+
+;*
+public procedure Champ_CptCent_1_Ap
+
+; après compte centralisateur
+
+1			cpt			>CCFDD.dhsd	CPT
+1			cptcent		>CCFDD.dhsd	CPTCENT
+
+beginp	; Champ_CptCent_1_Ap
+
+	Compte.Cpt_Centraliseur_Lib = ' '
+	
+	if Compte.CptCent <> ' '
+
+		cpt		= Compte.Cpt
+		cptcent	= Compte.CptCent
+		PingLocal("CCTEZ030_Compte", C3)
+
+		if Controle_Compte(cptcent, creation = true, conf = false, cptnat = Compte.CptNat, etablissement = false) < 2
+			Compte.Cpt_Centraliseur_Lib = Compte.Lib
+			if Compte.CptNat < 3 and left(Compte.Cpt, 2) <> left(cpt, 2)
+				Mes_Alert(19036)							; compte pas de même groupe
+				Harmony.Retour = XmeNext_Traitement_Avant
+			endif
+		endif
+
+		PingLocalReceive("CCTEZ030_Compte", C3)
+		Compte.CptCent = cptcent
+
+	endif
+
+endp		; Champ_CptCent_1_Ap
+
+
+;*
+public procedure Champ_CptCol_1_Av
+
+; avant compte collectif
+
+beginp	; Champ_CptCol_1_Av
+
+	if Compte.CptNat < 3
+		Compte.CptCol = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+		preturn																			;1794
+	endif
+
+;	if  Zoom.Action = ZOOM_MODIFICATION									\		;1794
+;	and hread(CCFECR, C8, [ 'L' MZ.Dos Compte.Cpt ], 'F') = 0			\		;1794
+;	and C8.Dos = MZ.Dos														\		;1794
+;	and C8.Cpt = Compte.Cpt																;1794
+;		Harmony.Retour = XmeNext_Saut_Donnee									;1794
+;	endif																					;1794
+
+	OLD_CPTCOL = Compte.CptCol
+
+endp		; Champ_CptCol_1_Av
+
+
+;*
+public procedure Champ_CptCol_1_Ap
+
+; après compte collectif
+
+1			cptcol		>CCFDD.dhsd	CPTCOL
+
+beginp	; Champ_CptCol_1_Ap
+
+	PingLocal("CCTEZ030_Compte", C3)
+	cptcol 	 = Compte.CptCol
+	Compte.Cpt_Collectif_Lib = ' '
+
+	if Controle_Compte(cptcol, creation = true, conf = false, cptnat = 1, collectif = true, etablissement = false) < 2 and Compte.CptTyp <> 2
+		Mes_Alert(19034, cptcol)												; pas collectif
+		Harmony.Retour = XmeNext_Traitement_Avant
+	endif
+
+	Compte.Cpt_Collectif_Lib = Compte.Lib
+
+	PingLocalReceive("CCTEZ030_Compte", C3)
+
+	if  left(OLD_CPTCOL, 2) <> left(cptcol, 2)					\		; pas le même groupe (attention, on se limite volontairement à 2 caractères pour permettre le passage de "clients" à "clients douteux" par exemple)
+	and hread(CCFECR, C8, [ 'L' MZ.Dos Compte.Cpt ], 'F') = 0		\		; il y a déjà au moins une écriture sur ce compte
+	and C8.Dos = MZ.Dos													\
+	and C8.Cpt = Compte.Cpt
+		Mes_Alert(19801, OLD_CPTCOL, cptcol)								; modification interdite
+		Harmony.Retour = XmeNext_Traitement_Avant
+		Compte.CptCol = OLD_CPTCOL
+	else
+		Compte.CptCol = cptcol
+	endif
+
+endp		; Champ_CptCol_1_Ap
+
+
+;*
+public procedure Champ_CptCol_2_Ap
+
+; avant collectif sur onglet "à partir de"
+
+1			cpt			>CCFDD.dhsd	CPT																						;2145
+
+beginp	; Champ_CptCol_2_Ap
+
+	cpt = Compte_Sel.CptCol																											;2145
+	Controle_Compte(cpt, nonvide = false, syntaxe = false, existence = false, etablissement = false)						;2145
+	Compte_Sel.CptCol = cpt																											;2145
+
+endp		; Champ_CptCol_2_Ap
+
+
+;*
+public procedure Champ_CptNat_1_Av
+
+; avant nature de compte
+
+beginp	; Champ_CptNat_1_Av
+
+	if string(left(Compte.Cpt, 1), "012345")																				;2343
+		Compte.CptNat = 1
+		Compte.CptCol = ' '
+		XmeSetAttribut("cptnat", AN_STYLE, C_Champ_NSaisi)
+		Harmony.Retour = XmeNext_Saut_Donnee
+		preturn
+
+	elsif string(left(Compte.Cpt, 1), "6789")																				;2343
+		Compte.CptNat = 2
+		Compte.CptCol = ' '
+		XmeSetAttribut("cptnat", AN_STYLE, C_Champ_NSaisi)
+		Harmony.Retour = XmeNext_Saut_Donnee
+		preturn
+
+	endif
+
+	XmeResetAttribut("cptnat", AN_TOUS_ATTRIBUTS)
+
+endp		; Champ_CptNat_1_Av
+
+
+;*
+public procedure Champ_CptNat_1_Ap
+
+; après nature de compte
+
+beginp	; Champ_CptNat_1_Ap
+
+	if Compte.CptNat < 3
+
+		Mes_Alert(19032)									; nature interdite
+		Harmony.Retour = XmeNext_Traitement_Avant
+
+	elsif Compte.Cpt < CA.AuxCpt1(Compte.CptNat - 2) or Compte.Cpt > CA.AuxCpt2(Compte.CptNat - 2)
+
+		Mes_Alert(19033, CA.AuxCpt1(Compte.CptNat - 2), CA.AuxCpt2(Compte.CptNat - 2))
+		Harmony.Retour = XmeNext_Traitement_Avant
+
+	endif
+
+endp		; Champ_CptNat_1_Ap
+
+
+;*
+public procedure Champ_CptTyp_1_Av
+
+; avant type de compte
+
+beginp	; Champ_CptTyp_1_Av
+
+	if ZOOM.Action = ZOOM_MODIFICATION
+
+		if		Compte.CptTyp = 2														\	; compte collectif
+		and	hread(CCFJCA, XXC3, [ 'C' MZ.Dos Compte.Cpt ], 'F') = 0	\	; il y a un compte rattaché
+		and	Compte.Dos = MZ.Dos													\
+		and	Compte.Cpt = XXC3.CptCol
+
+			Harmony.Retour = XmeNext_Saut_Donnee
+
+		elsif Compte.CptTyp <> 2														\	; autre compte
+		and	hread(CCFECR, C8, [ 'L' MZ.Dos Compte.Cpt ], 'F') = 0		\	; il y a une écriture
+		and	C8.Dos = MZ.Dos													\
+		and	C8.Cpt = Compte.Cpt
+
+			Harmony.Retour = XmeNext_Saut_Donnee
+
+		endif
+
+	endif
+
+endp		; Champ_CptTyp_1_Av
+
+
+;*
+public procedure Champ_CptTyp_1_Ap
+
+; après type de compte
+
+1			axeno			>CCFDD.dhsd	AXENO
+
+beginp	; Champ_CptTyp_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+
+		XmeResetAttribut("cpttyp2fstd", AN_TOUS_ATTRIBUTS)
+		XmeResetAttribut("cpttyp2vgrise", AN_TOUS_ATTRIBUTS)
+		XmeResetAttribut("cpttyp2vcache", AN_TOUS_ATTRIBUTS)
+		XmeResetAttribut("cpttyp3fstd", AN_TOUS_ATTRIBUTS)
+		XmeResetAttribut("cpttyp3vgrise", AN_TOUS_ATTRIBUTS)
+		XmeResetAttribut("cpttyp3vcache", AN_TOUS_ATTRIBUTS)
+		if CA.EtbCod = 2			; gestion multi-établissements
+			XmeResetAttribut("etb_cpttyp2vgrise",	AN_TOUS_ATTRIBUTS)
+			XmeResetAttribut("etb_cpttyp3vgrise",	AN_TOUS_ATTRIBUTS)
+		endif
+
+		switch Compte.CptTyp
+		case 1
+		case 2
+			XmeSetAttribut("cpttyp2fstd", AN_STYLE, C_Champ_NSaisi)
+			XmeSetAttribut("cpttyp2vgrise", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("cpttyp2vcache", AN_VISIBILITE, AV_CACHE)
+			if CA.EtbCod = 2			; gestion multi-établissements
+				XmeSetAttribut("etb_cpttyp2vgrise",	AN_VISIBILITE, AV_GRISE)
+			endif
+		case 3
+			XmeSetAttribut("cpttyp3fstd", AN_STYLE, C_Champ_NSaisi)
+			XmeSetAttribut("cpttyp3vgrise", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("cpttyp3vcache", AN_VISIBILITE, AV_CACHE)
+			if CA.EtbCod = 2			; gestion multi-établissements
+				XmeSetAttribut("etb_cpttyp3vgrise",	AN_VISIBILITE, AV_GRISE)
+			endif
+		endswitch
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+	endif
+
+	if Compte.CptTyp <> 1
+
+		Compte.Sens							= 3
+		Compte.TblNo						= 0
+		Compte.LettTyp						= 1
+		Compte.PointCod					= 1
+		Compte.CentTyp						= 1
+		Compte.CentEdi						= 1
+		Compte.EpuCod						= 1
+		init	Compte.JnlSais()			= 1
+		Compte.Reg							= ' '
+		Compte.Table_Mode_Regl_Lib		= ' '
+		Compte.TvaTie						= ' '
+		Compte.TvaArt						= ' '
+		Compte.Mt2Nat						= 0
+		X1.Mt2Lib							= ' '
+		Compte.CptCent						= ' '
+		Compte.Cpt_Centraliseur_Lib	= ' '
+		init Compte.AxeSais()			= 1
+		Compte.AxeTb(*)					= ' '
+		X1.Lib(3)							= ' '
+		X1.Lib(4)							= ' '
+		X1.Lib(5)							= ' '
+		X1.Lib(6)							= ' '
+		Compte.EtbSais						= 3
+		Compte.Etb							= ' '
+		X1.Lib(7)							= ' '
+		Compte.Cpt_Collectif_Lib		= ' '
+
+		if Compte.CptTyp	= 3
+			Compte.DevCod	= 1
+			Compte.Dev		= ' '
+			Compte.Table_Devise_Lib	= ' '
+			Compte.DevConv	= 3
+			Compte.GrpCptCod= 1
+		endif
+	endif
+
+	if Compte.DevCod < 2	|	XmeSetAttribut("DevCodfstd", AN_STYLE, C_Champ_NSaisi)
+								XmeSetAttribut("DevCodvgrise", AN_VISIBILITE, AV_GRISE)
+								XmeSetAttribut("DevCodvcache", AN_VISIBILITE, AV_CACHE)
+	else					|	XmeResetAttribut("DevCodfstd", AN_TOUS_ATTRIBUTS)
+								XmeResetAttribut("DevCodvgrise", AN_TOUS_ATTRIBUTS)
+								XmeResetAttribut("DevCodvcache", AN_TOUS_ATTRIBUTS)
+	endif
+
+	if CA.EtbCod = 2			; gestion multi-établissements
+		if Compte.EtbSais	<>  1
+			XmeSetAttribut("etbunique",	AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("etbunique",	AN_STYLE, C_Champ_NSaisi)
+		endif
+	endif
+
+
+	for axeno = 1 to index(Compte.Axe(), 1)
+		if Compte.AxeSais(axeno) <> 2	|	XmeSetAttribut([ "axesais" axeno ], AN_STYLE, C_Champ_NSaisi)
+		else								|	XmeResetAttribut([ "axesais" axeno ], AN_TOUS_ATTRIBUTS)
+		endif
+	next
+
+endp		; Champ_CptTyp_1_Ap
+
+
+;*
+public procedure Champ_Dev_1_Av
+
+; avant code devise
+
+beginp	; Champ_Dev_1_Av
+
+	if Compte.DevCod < 2 or Compte.CptTyp = 3
+		Compte.Dev						= ' '
+		Compte.Table_Devise_Lib		= ' '
+		Harmony.Retour 				= XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_Dev_1_Ap
+
+
+;*
+public procedure Champ_Dev_1_Ap
+
+; après code devise
+
+beginp	; Champ_Dev_1_Ap
+
+	Compte.Table_Devise_Lib = ' '
+	if Compte.Dev = ' '					|	Compte.Dev = CA.Dev	|	endif
+	if Lectab(7, Compte.Dev, 1107)	|	Harmony.Retour = XmeNext_Traitement_Avant
+	else										|	Compte.Table_Devise_Lib = T007.Lib
+	endif
+
+endp		; Champ_Dev_1_Ap
+
+
+;*
+public procedure Champ_DevCod_1_Av
+
+; avant gestion devise
+
+beginp	; Champ_DevCod_1_Av
+
+	if Compte.CptTyp = 3
+		Compte.DevCod 					= 1
+		Compte.Dev	 					= ' '
+		Compte.Table_Devise_Lib 	= ' '
+		Compte.DevConv					= 3
+		Harmony.Retour 				= XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_DevCod_1_Av
+
+
+;*
+public procedure Champ_DevCod_1_Ap
+
+; après gestion devise
+
+beginp	; Champ_DevCod_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+
+		if Compte.DevCod < 2	|	XmeSetAttribut("DevCodfstd", AN_STYLE, C_Champ_NSaisi)
+									XmeSetAttribut("DevCodvgrise", AN_VISIBILITE, AV_GRISE)
+									XmeSetAttribut("DevCodvcache", AN_VISIBILITE, AV_CACHE)
+		else					|	XmeResetAttribut("DevCodfstd", AN_TOUS_ATTRIBUTS)
+									XmeResetAttribut("DevCodvgrise", AN_TOUS_ATTRIBUTS)
+									XmeResetAttribut("DevCodvcache", AN_TOUS_ATTRIBUTS)
+		endif
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+	endif
+
+	if Compte.DevCod	< 2
+		Compte.Dev						= ' '
+		Compte.Table_Devise_Lib		= ' '
+		Compte.DevConv					= 3
+	endif
+
+endp		; Champ_DevCod_1_Ap
+
+
+;*
+public procedure Champ_DevConv_1_Av
+
+; avant code conversion devise
+
+beginp	; Champ_DevConv_1_Av
+
+	if Compte.DevCod < 2 or Compte.CptTyp = 3
+		Compte.DevConv = 3
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_DevConv_1_Av
+
+
+;*
+public procedure Champ_EpuCod_1_Av
+
+; avant centralisation édition
+
+beginp	; Champ_EpuCod_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.EpuCod = 1
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_EpuCod_1_Av
+
+
+;*
+public procedure Champ_GrpCptCod_1_Av
+
+; avant code intergroupe
+
+beginp	; Champ_GrpCptCod_1_Av
+
+	if Compte.CptTyp = 3
+		Compte.GrpCptCod = 1
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_GrpCptCod_1_Av
+
+
+;*
+public procedure Champ_JnlSais_1_Av
+
+; avant autorisation journal
+
+beginp	; Champ_JnlSais_1_Av
+
+	if Compte.CptTyp	<> 1
+		Compte.JnlSais(Harmony.DataInd1)	= 1
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_JnlSais_1_Av
+
+
+;*
+public procedure Champ_LettTyp_1_Av
+
+; avant méthode de lettrage
+
+beginp	; Champ_LettTyp_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.LettTyp = 1
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_LettTyp_1_Av
+
+
+;*
+public procedure Champ_Mt2Nat_1_Av
+
+; avant nature montant2
+
+beginp	; Champ_Mt2Nat_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.Mt2Nat = 0
+		X1.Mt2Lib = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_Mt2Nat_1_Av
+
+
+;*
+public procedure Champ_Mt2Nat_1_Ap
+
+; après nature montant2
+
+beginp	; Champ_Mt2Nat_1_Ap
+
+	if Compte.Mt2Nat <> 0
+		if CA.Mt2Lib(Compte.Mt2Nat) = ' '
+			Mes_Alert(19037, right(Compte.Mt2Nat))		; nature montant 2 non paramétrée
+			Harmony.Retour = XmeNext_Traitement_Avant
+		else
+			X1.Mt2Lib = CA.Mt2Lib(Compte.Mt2Nat)
+		endif
+	else
+		X1.Mt2Lib = ' '
+	endif
+
+endp		; Champ_Mt2Nat_1_Ap
+
+
+;*
+public procedure Champ_NomAbr_1_Ap
+
+; après nom abrégé
+
+beginp	; Champ_NomAbr_1_Ap
+
+	if Compte.NomAbr = ' '
+		Compte.NomAbr = Convertir_Nom_Nomabr(Compte.Lib)
+	else
+		Compte.NomAbr = Convertir_Nom_Nomabr(Compte.NomAbr)
+	endif
+
+endp		; Champ_NomAbr_1_Ap
+
+
+;*
+public procedure Champ_NomAbr_2_Ap
+
+; après nom abrégé
+
+beginp	; Champ_NomAbr_2_Ap
+
+	Compte_Sel.NomAbr = Convertir_Nom_Nomabr(Compte_Sel.NomAbr, True)
+
+endp		; Champ_NomAbr_2_Ap
+
+
+;*
+public procedure Champ_PointCod_1_Av
+
+; avant méthode de pointage
+
+beginp	; Champ_PointCod_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.PointCod = 1
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_PointCod_1_Av
+
+
+;*
+public procedure Champ_Reg_1_Av
+
+; avant mode de règlement
+
+beginp	; Champ_Reg_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.Reg 							= ' '
+		Compte.Table_Mode_Regl_Lib 	= ' '
+		Harmony.Retour						= XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_Reg_1_Av
+
+
+;*
+public procedure Champ_Reg_1_Ap
+
+; contrôle mode de reglement
+
+beginp	; Champ_Reg_1_Ap
+
+	Compte.Table_Mode_Regl_Lib = ' '
+	if Compte.Reg <> ' '
+		Lectab(6, Compte.Reg, 1106)
+		Compte.Table_Mode_Regl_Lib = T006.Lib
+	endif
+
+endp		; Champ_Reg_1_Ap
+
+
+;*
+public procedure Champ_Sens_1_Av
+
+; avant sens implicite
+
+beginp	; Champ_Sens_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.Sens = 3
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_Sens_1_Av
+
+
+;*
+public procedure Champ_TblNo_1_Av
+
+; avant présentation
+
+beginp	; Champ_TblNo_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.TblNo = 0
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_TblNo_1_Av
+
+
+;*
+public procedure Champ_Conf_1_Ap
+
+;contrôle de validité du code confidentialité
+
+beginp 	;Champ_Conf_1_Ap
+
+	Controler_Confidentialite(Compte.Conf, 4000)		
+
+endp		;Champ_Conf_1_Ap
+
+
+;*
+Public Procedure Champ_Etb_1_Av
+
+; Etablissement unique autorisé
+
+Beginp	; Champ_Etb_1_Av
+
+	if Compte.EtbSais <> 1
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+Endp		; Champ_Etb_1_Av
+
+
+;*
+Public Procedure Champ_Etb_1_Ap
+
+; Etablissement unique autorisé
+
+Beginp	; Champ_Etb_1_Ap
+	
+	; Remarque : l'établissement peut être fermé.
+	Controler_Etablissement(Compte.Etb, 19039)
+	X1.Lib(7) = CEts.Nom
+
+Endp		; Champ_Etb_1_Ap
+
+
+;*
+Public Procedure Champ_EtbSais_1_Ap
+
+; Etablissements autorisés sur le compte (1, une sélection ou tous)
+
+Beginp	; Champ_EtbSais_1_Ap
+
+	if Harmony.DataModif	 or Harmony.DataNotif
+		switch Compte.EtbSais
+		case 1
+			XmeResetAttribut("etbunique", AN_TOUS_ATTRIBUTS)
+			Compte.Etb = MZ.EtbC3
+			Rechercher_Etablissement(Compte.Etb)
+			X1.Lib(7) = CETS.Nom
+		
+		default
+			XmeSetAttribut("etbunique", AN_VISIBILITE, AV_GRISE)
+			XmeSetAttribut("etbunique", AN_STYLE, C_Champ_NSaisi)
+			Compte.Etb = ' '
+			X1.Lib(7) = ' '
+			if Harmony.DataNotif
+				Harmony.Retour = XmeNext_Debut_Donnee
+			endif
+		endSwitch
+
+	endif	
+
+Endp		; Champ_EtbSais_1_Ap
+
+
+;*
+Public Procedure Champ_Lib_1_Av
+
+1	nomabr	>CCFDD.dhsd	nomabr
+
+Beginp	; Champ_Lib_1_Av
+
+	nomabr = Convertir_Nom_Nomabr(Compte.Lib)
+	If nomabr = Compte.NomAbr
+		Compte.NomAbr = ' '
+	Endif
+	
+Endp		; Champ_Lib_1_Av
+
+
+;*
+Public Procedure Champ_Lib_1_Ap
+
+Beginp	; Champ_Lib_1_Ap
+
+	if Compte.NomAbr = ' '
+		Compte.NomAbr = Convertir_Nom_Nomabr(Compte.Lib)
+	endif
+
+Endp		; Champ_Lib_1_Ap
+
+
+;*
+Public procedure Champ_R3cod_1_Av
+
+; avant lien vers r3
+
+beginp	; Champ_R3cod_1_Av
+endp		; Champ_R3cod_1_Av
+
+
+;*
+Public Procedure Champ_TvaArt_1_Ap
+
+; après régime tva article
+
+recordsql	'GTRSPPTAB.dhoq'	TauxTvaN	TvaArticle
+
+beginp	; Champ_TvaArt_1_Ap
+
+	if Compte.TvaTie <> ' ' and Compte.TvaTie <> '*' and Compte.TvaArt <> ' '
+		Lectab_(TvaArticle, Compte.TvaArt, Compte.TvaTie, err = 1185)
+	endif
+
+	if Harmony.Key = K_F8
+		G3XZ.TvaTie = Compte.TvaTie
+		ping('G3XZ', G3XZ)
+		Zoom_Call(9946)
+	endif
+
+endp		; Champ_TvaArt_1_Ap
+
+
+;*
+Public Procedure Champ_TvaArt_1_Av
+
+; avant régime tva article
+
+beginp	; Champ_TvaArt_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.TvaArt  = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_TvaArt_1_Av
+
+
+;*
+Public Procedure Champ_TvaTie_1_Ap
+
+; après régime tva article
+
+recordsql	'GTRSPPTAB.dhoq'	RegimeTvaTiersN	TvaTiers
+
+beginp	; Champ_TvaTie_1_Ap
+
+	if Compte.TvaTie <> ' ' and Compte.TvaTie <> '*'
+		Lectab_(TvaTiers, Compte.TvaTie, err = 1186)
+	endif
+
+endp		; Champ_TvaTie_1_Ap
+
+
+;*
+Public Procedure Champ_TvaTie_1_Av
+
+; avant régime tva tiers
+
+beginp	; Champ_TvaTie_1_Av
+
+	if Compte.CptTyp <> 1
+		Compte.TvaTie  = ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+
+endp		; Champ_TvaTie_1_Av
+
+
+;*
+Public Procedure Page_FicheCompte_Av
+;
+Beginp
+
+	if Compte.CptNat < 3
+		XmeSetAttribut('r3cod', AN_VISIBILITE, AV_GRISE)
+		XmeSetAttribut("r3cod", AN_STYLE, C_Champ_NSaisi)
+	else
+		XmeResetAttribut("r3cod", AN_TOUS_ATTRIBUTS)
+	endif
+
+Endp
+[/diva]

@@ -1,0 +1,477 @@
+;*
+;*      Zoom sur code événement Enregistrement GRTEVT de GRFTAB.dhfi
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		TR			6.3a						05.2011	Version initiale en Diva
+
+
+Include "GRTCZ00.dhsp"
+
+;Module "A5PM000.dhop"
+Module "A5TM000.dhop"
+Module "GTPMFIC.dhop"
+Module "GTTM000.dhop"
+Module "A5PMFLASH.dhop"
+Module  XZOOM.dhop
+Module A5PMNoteJoint.dhop
+
+HfileVersion 	Cogfdd.dhsd 		COGGRF_TAB
+
+Public record 	Cogfdd.dhsd 		COG_GRTEVT														; Code événement
+Public record  GRFDD.dhsd 			GRTEVT
+Public record 	GTFDD.dhsd 			SOCCRM															; Dossier CRM
+Public record 	GRFDD.dhsd 			GRTEFA															; Famille d'événement
+Public record 	A5DD.dhsd 			XZ			A5XZ													
+Public record 	A5DD.dhsd 			MFLASH															; Flash
+Public record 	GRFDD.dhsd 			GR1															
+
+Public record	ddsys.dhsd			ROWINFO	ZOOMSELECTION     								; Enreg de contrôle
+   	 Record	ddsys.dhsd			COLUMNINFO														; Informations colonne
+
+1			NBSEL				4,0								; Nombre de lignes sélectionnées
+1			Dossier			>a5dd.dhsd 	Dos
+1			Classe_Affaire	>gtfdd.dhsd AfrClas
+1			Encour_Affaire	>gtfdd.dhsd Affaire
+
+;*
+;* Procedures
+;*
+
+;*
+Public Procedure maj_couleur
+; Met à jour les attributs couleur
+1 style 32
+BeginP
+	If Zoom.Modelf=ZOOM_MODE_LISTE
+		ZOOMSELECTION.NOMLIGNE=COG_GRTEVT.COULEUR
+		If COG_GRTEVT.COULEUR<>0
+			style=left('TABLEAU_SAISI_' && Tostring(COG_GRTEVT.COULEUR) )
+		Else
+			style='TABLEAU_SAISI'
+		EndIf
+		XmelistSetAttribut (ZOOMSELECTION.NOMLIGNE,'TABCOULEUR', AN_STYLE,style) 
+	Else
+		If COG_GRTEVT.COULEUR<>0
+			style=left('CHAMP_SAISI_' && Tostring(COG_GRTEVT.COULEUR) )
+		Else
+			style='CHAMP_SAISI'
+		EndIf
+		XmeSetAttribut ('COULEUR', AN_STYLE,style) 
+		If COG_GRTEVT.COULEUR<>0
+			style=left('CHAMP_AFF_' && Tostring(COG_GRTEVT.COULEUR) )
+		Else
+			style='CHAMP_AFF'
+		EndIf
+		XmeSetAttribut ('COULEURAFF', AN_STYLE,style) 
+	EndIf
+EndP
+
+;*
+Public Procedure Maj_Menu_Boutons
+; Met à jour le menu et les boutons
+BeginP
+	Switch ZOOM.ACTION
+
+		Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+	
+			XmeMenuEnableItem(Zoom.Idmenu,'COMPL',True)
+			XmeMenuEnableItem(Zoom.Idmenu,'NOTE',True)
+
+			XmeToolbarSetButtonInfo(idOutilZoom, "NOTE", "<BITMAP>NOTE_N")
+			XmeToolbarEnableButton(idOutilZoom,'NOTE',True)
+	
+		Case ZOOM_MODIFICATION
+			
+			; en modification
+			XmeMenuEnableItem(Zoom.Idmenu,'COMPL',True)
+			XmeMenuEnableItem(Zoom.Idmenu,'NOTE',True)
+
+			XmeToolbarSetButtonInfo(idOutilZoom, "NOTE", Condition(COG_GRTEVT.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+			XmeToolbarEnableButton(idOutilZoom,'NOTE',True)
+	
+		Case 	ZOOM_AFFICHAGE
+			
+			Switch Zoom.TypeInput
+		
+				Case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+						XmeMenuEnableItem(Zoom.Idmenu,'COMPL',True)
+						XmeMenuEnableItem(Zoom.Idmenu,'NOTE',Condition(COG_GRTEVT.CENOTE = 2, True, False))
+	
+				Case ZOOM_S_DEPART		; avant clé de départ
+						XmeMenuEnableItem(Zoom.Idmenu,'COMPL',False)
+	
+			EndSwitch
+	
+			XmeToolbarSetButtonInfo(idOutilZoom, "NOTE", Condition(COG_GRTEVT.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+			XmeToolbarEnableButton(idOutilZoom,'NOTE', Condition(COG_GRTEVT.CENOTE = 2, True, False))
+		
+	EndSwitch
+EndP
+
+;*
+public procedure Traiter_Selection
+beginp	
+	NBSEL ++
+	Pong('COG_GRTEVT_' & NBSEL,COG_GRTEVT.EVENEMENT)
+endp		
+
+;*
+public procedure Envoyer_Selections
+beginp	; Envoyer_Selections
+	NBSEL=0
+	ZoomTraiterSelection('GRTZ001.dhop','Traiter_Selection')
+	Pong('COG_GRTEVT_NBRE',NBSEL)
+endp		; Envoyer_Selections
+
+;*
+public procedure Envoyer_Courant
+; 	envoie l'élément courant si il n'y a pas eu de sélection multiple précédemment
+beginp
+	if NBSEL = 0
+		NBSEL = 1
+		Pong('COG_GRTEVT_' & NBSEL,COG_GRTEVT.EVENEMENT)
+		Pong('COG_GRTEVT_NBRE',NBSEL)
+	endif
+endp
+
+;*
+;* Procedures d'initialisation et fin de zoom
+;*
+ 
+Public Procedure ZoomDebut
+BeginP
+
+	init_zoom()
+
+	If GRXZ.EVTFAM = ' '
+		Zoom.Ok = 'N'
+		Preturn					  
+	Else
+		Classe_Affaire	= GRXZ.EVTFAM
+		GRXZ.EVTFAM		= system.esp
+		Encour_Affaire = GRXZ.Affaire
+	Endif
+	
+	note_Debut				;init de la gestion des notes
+
+	; Lecture du dossier
+	seek_soc (MZ.DOS,app=5)
+
+	Dossier=MZ.DOS
+	if Encour_Affaire = system.esp And SOCCRM.TABCRMTYP(3)=2
+		Dossier=999
+		SOC.NOM="Dossier commun"
+	EndIf
+
+	charger_bitmap
+
+	if zoom.scevaleur <> ' ' 
+      COG_GRTEVT.EVENEMENT = mid (zoom.scevaleur,1,8)
+      zoom.scenocle  = 1
+      zoom.scesaisie =ZOOM_PAS_PREMIERE 
+	EndIf
+
+	GR1.PONG=GRXZ.PONG
+	GR1.CHOIX(1)=2	; uniquement les codes valides
+
+	Zoom.TitreFixe=translate("Codes événements")&" - "&left(SOC.NOM)
+
+EndP
+
+;*
+Public Procedure ZoomAbandon		; sortie du zoom par f9
+BeginP
+EndP
+
+;*
+Public Procedure ZoomValidation ; validation du zoom
+BeginP
+	Zoom.ValRetour = COG_GRTEVT.EVENEMENT
+	If GR1.PONG=True
+		Envoyer_courant
+	Endif
+EndP
+
+;*
+Public Procedure ZoomFin			; à la sortie du zoom
+BeginP
+EndP
+
+;*
+;* Procedures création, duplication, modification et suppression
+;*
+
+Public Procedure ZoomCreation
+BeginP
+	; initialiser les données
+	COG_GRTEVT = system.esp
+EndP
+
+;*
+Public Procedure ZoomDuplication
+BeginP
+	COG_GRTEVT.USERMODH 	= ' '
+	COG_GRTEVT.USERMO 	= ' '
+	COG_GRTEVT.NOTE 		= 0
+	COG_GRTEVT.CENOTE 	= 1	
+EndP
+
+;*
+Public Procedure ZoomApresCleCreation ; après saisie de la clé
+BeginP
+	if COG_GRTEVT = ' '
+		Zoom.ok    = 'C'
+	else
+		COG_GRTEVT 	= GRTEVT
+      Zoom.cle 	= 'A' & Dossier & Classe_Affaire 
+      Zoom.Res 	= 'GREV' & Dossier & COG_GRTEVT.EVENEMENT
+	EndIf
+	Zoom.TitreVar = COG_GRTEVT.EVENEMENT
+	maj_couleur
+EndP
+
+;*
+Public Procedure ZoomCreationRes		; apres réservation en création
+BeginP
+	note_Chargement_(30 , 0)
+EndP
+
+;*
+Public Procedure ZoomAvantWrite
+BeginP
+	If COG_GRTEVT.Classement = system.esp 
+		Zoom.Ok = 'S'
+	   Harmony.Retour = XMENEXT_POINT_SEQUENCE
+	   Harmony.CplRetour = 100
+ 	Endif
+	; initialisation des codes enregistrement et mise à jour date et user
+	COG_GRTEVT.CE1			= '1'
+   COG_GRTEVT.DOS 		= Dossier
+	COG_GRTEVT.USERCR 	= SYSTEM.USER
+	COG_GRTEVT.USERCRDH 	= time(7)
+	COG_GRTEVT.USERMO 	= SYSTEM.ESP
+	COG_GRTEVT.USERMODH 	= SYSTEM.ESP
+	If COG_GRTEVT.BITMAP	= ' '
+		COG_GRTEVT.BITMAP	= 'CRMBASE'
+	EndIf
+	COG_GRTEVT.AFRCLAS	= Classe_Affaire
+	COG_GRTEVT.Affaire	= Encour_Affaire 
+	COG_GRTEVT.NOTE 		= Note_Creation_(30 , 0 , 'COG_GRTEVT' )
+	COG_GRTEVT.CENOTE		= Condition(COG_GRTEVT.NOTE = 0,1,2)
+	Mid(COG_GRTEVT.Classement,1,3) = Fstring("000",COG_GRTEVT.Classement)
+EndP
+
+;*
+Public Procedure ZoomApresCreation ; compte-rendu de création
+BeginP
+	Zoom.TitreVar = COG_GRTEVT.EVENEMENT
+	ZoomReactualiserListe
+EndP
+
+;*
+Public Procedure ZoomModification ; avant entrée en modif
+BeginP
+	Zoom.Res = 'GREV' & Dossier & COG_GRTEVT.EVENEMENT
+EndP
+
+
+;*
+Public Procedure ZoomModificationRes		; apres réservation en modif
+BeginP
+	Note_Chargement_ (30 , COG_GRTEVT.NOTE)
+EndP
+
+;*
+Public Procedure ZoomAvantRewrite
+BeginP
+   COG_GRTEVT.USERMO 	= SYSTEM.USER
+   COG_GRTEVT.USERMODH 	= Time(7)
+	If COG_GRTEVT.BITMAP	= ' '
+		COG_GRTEVT.BITMAP	= 'CRMBASE'
+	EndIf
+	COG_GRTEVT.NOTE 		= Note_Modification_ (30 , COG_GRTEVT.NOTE , 0 , 'COG_GRTEVT')
+	COG_GRTEVT.CENOTE		= Condition(COG_GRTEVT.NOTE = 0,1,2)
+	Mid(COG_GRTEVT.Classement,1,3) = Fstring("000",COG_GRTEVT.Classement)
+EndP
+
+;*
+Public Procedure ZoomApresModification ; compte rendu de modification
+BeginP
+	Zoom.TitreVar = COG_GRTEVT.EVENEMENT 
+	ZoomReactualiserListe
+EndP
+
+;*
+Public Procedure ZoomSuppression ; avant entrée en suppression
+BeginP
+	Zoom.Res = 'GREV' & Dossier & COG_GRTEVT.EVENEMENT
+EndP
+
+;*
+Public Procedure ZoomSuppressionRes
+BeginP
+EndP
+
+;*
+Public Procedure ZoomAvantDelete
+BeginP
+	note_Suppression_ (30,COG_GRTEVT.NOTE)
+EndP
+
+;*
+Public Procedure ZoomApresSuppression ; compte rendu de suppression
+BeginP
+	ZoomReactualiserListe
+EndP
+
+;*
+;* Actions
+;*
+
+Public Procedure ZoomAvantConsultFiche
+BeginP 																							
+	Maj_Menu_Boutons
+EndP 																							
+
+;*
+Public Procedure ZoomAvantConsultListe
+BeginP 																						
+	Maj_Menu_Boutons
+EndP 																							
+
+;*
+Public Procedure ZoomConsultFiche 	; à utiliser si note
+BeginP
+	Switch Harmony.key
+		Case K_F7
+			Zoom_Call()
+		Case K_SF6
+			Note_Consultation_ (30 , COG_GRTEVT.NOTE )
+	EndSwitch
+EndP
+
+;*
+Public Procedure ZoomConsultListe ; à utiliser si note
+BeginP
+	Switch Harmony.key
+		Case K_F7
+			Zoom_Call()
+		Case K_SF6
+			Note_Consultation_ (30 , COG_GRTEVT.NOTE )
+		Case K_F12
+			if GR1.PONG = True
+				Envoyer_Selections
+			endif
+
+	EndSwitch
+EndP
+
+;*
+Public Procedure ZoomAvantInput			; permet de griser les boutons et les choix
+BeginP
+	If ZOOM.TYPEINPUT = ZOOM_S_CONSULT And ZOOM.MODELF = ZOOM_MODE_LISTE
+		; On met à jour les titres des colonnes (bitmaps)
+		; On ne passe pas par scancolumn car, on ne veut pas voir les # dans les colonnes
+		
+		XmeListGetColumn(HARMONY.TABIDENT, 1, COLUMNINFO)
+		If COLUMNINFO.BITMAP1 = ' '
+			COLUMNINFO.BITMAP1 = "tblbitmap"
+			XmeListSetColumn(HARMONY.TABIDENT, 1, COLUMNINFO)
+		EndIf
+		XmeListGetColumn(HARMONY.TABIDENT, 2, COLUMNINFO)
+		If COLUMNINFO.BITMAP1 = ' '
+			COLUMNINFO.BITMAP1 = "tblnote"
+			XmeListSetColumn(HARMONY.TABIDENT, 2, COLUMNINFO)
+		EndIf
+	EndIf
+	Maj_Menu_Boutons
+	maj_couleur
+EndP
+
+;*
+Public Procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+1 NumNote	5,0
+BeginP
+	A5XZ.FLASHCOD='EVT'
+	A5XZ.ENTITE=11										
+	Switch Harmony.key
+		Case K_F8						; Appel de zoom
+			Zoom_Call(harmony.DataArret)
+		Case K_SF6						; Saisie d'une note
+			NumNote	= HARMONY.DATAARRET - 10000
+			Note_Saisie_(C_Applic_DRT, COG_GRTEVT.Note, 'COG_GRTEVT')
+			XmeToolbarSetButtonInfo(idOutilZoom, "NOTE", Condition(Not Note_Empty_(C_Applic_DRT), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		Case K_F7
+			Zoom_Call()
+		Case Harmony.DataArret = 8002
+			if Harmony.Sourisbout = Right_Button
+				Zoom_Call()
+			elsif Harmony.Sourisclic = Double_Click
+				Harmony.Retour = Xmenext_Simulation_Touche
+				Harmony.Cplretour = K_F8
+			EndIf
+	EndSwitch
+EndP
+
+;*
+Public Procedure ZoomFiltreAvantValeur
+BeginP
+EndP
+
+;*
+Public Procedure ZoomFiltreApresValeur
+BeginP
+EndP
+
+;*
+;* Procedures liées à la lecture du ficher
+;*
+
+;* génération de la clé sur
+Public Procedure ZoomApresCle1
+BeginP
+   zoom.cle = 'A' & Dossier & Encour_Affaire & Classe_Affaire
+   zoom.clemin = 'A' & Dossier & Encour_Affaire & Classe_Affaire
+   zoom.clemax = 'A' & Dossier & Encour_Affaire & Classe_Affaire & $FF
+EndP
+
+;* après lecture clé sur
+Public Procedure ZoomApresRead1
+BeginP
+	Zoom.TitreVar = COG_GRTEVT.EVENEMENT
+	If GR1.CHOIX(1)=2 and COG_GRTEVT.HSDT<>' 'and Today > COG_GRTEVT.HSDT
+		Zoom.ok='I'
+		Preturn
+	Endif
+	maj_couleur
+	MFLASH=' '
+	If COG_GRTEVT.FLASH<>0
+		A5_Flash_Recherche_Flash (COG_GRTEVT.FLASH,MZ.ETB,MZ.DEPO)
+	EndIf
+	seek_grtefa(COG_GRTEVT.EVTFAM)
+	rechercher_questionnaire (COG_GRTEVT.QUESTION,11)
+	If COG_GRTEVT.EVTTYP not in (1..5)
+		COG_GRTEVT.EVTTYP=5
+	Endif
+	If COG_GRTEVT.WEBST=0
+		COG_GRTEVT.WEBST=1
+	Endif
+	If COG_GRTEVT.RUBST=0
+		COG_GRTEVT.RUBST=1
+	Endif
+	Lectab(39,COG_GRTEVT.ACTCOD) 
+EndP
+
+
+;*
+
+;*
+;*   Séquences de gestion de fichier
+;*
+
+
+;*
+
+

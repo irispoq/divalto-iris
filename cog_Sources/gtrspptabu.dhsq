@@ -1,0 +1,26 @@
+<DictionarySql overwrite="gtrspptab.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RECORDSQL du GTFTAB
+;*
+
+;*
+;*			Table commune - TableCommune
+;*
+
+<RECORDSQL Name=TableCommune>
+<SELECT>
+	T000.*
+
+;*
+;*			Codes opération T020
+;*
+<RECORDSQL Name=CodeOperation>
+<SELECT>
+	T020.*
+<WHERE>
+	Case Equal_FNP
+		T020.Cog_FNPFLAG = 2
+
+	Case Equal_FAE
+		T020.COG_FAEFLAG = 2
+

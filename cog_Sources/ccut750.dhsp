@@ -1,0 +1,53 @@
+SetModuleInfo('$Id$')
+;>xdiva
+;*
+;*		génération des écritures																											cctt750.dhsp
+;*
+
+;*		log	 version	  n°modif		date		modifications
+;*		YLEF		205a						08/2014	ETSA_FIN_FE003				Les fiches hors comptabilisation n'entre pas dans le traitement   
+;*
+
+OverWrite cctt750.dhop
+
+;*
+;*		Déclarations
+;*
+
+;
+include	"cctc000.dhsp"
+
+;
+public		record	CCFDD.dhsd		C3						; intitulé de compte
+public		record	CCFDD.dhsd		C4						; intitulé de journal
+public		record	CCFDD.dhsd		C8						; ligne d'écriture
+public		record	CCFDD.dhsd		CA						; dossier, paramètres généraux
+public		record	CCFDD.dhsd		CB						; dossier, dates de clôture
+public		record	CCFDD.dhsd		CD						; enregistrement "option immo" du dossier
+public		record	CCFDD.dhsd		CX						; ventilation axe
+public		record	CCFDD.dhsd		I1						; en-tête de bien
+public		record	CCFDD.dhsd		I2						; amortissement
+
+;*
+;*		procédures appelées par le programme principal
+;*
+
+;*
+Function char I1_Read_Ap
+; 'O'		bien à traiter
+; 'I'		bien à ignorer
+; 'N'		fin de fichier
+
+1		ret		1
+
+BeginF	; i1_read_ap
+
+	If (ret := Standard.I1_Read_Ap) = 'O'			
+		
+		ret = Condition(I1.Cog_AmoFlag = 2, ret, 'N')
+														
+	EndIf
+
+	FReturn(ret)
+
+EndF		; i1_read_ap

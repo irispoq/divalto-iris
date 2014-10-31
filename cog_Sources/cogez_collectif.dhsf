@@ -1,0 +1,864 @@
+;>xwin4obj                              7.0       20140424163210      
+[masque]
+ libelle="Enregistrement correspond"
+ utilisateur="UGIE"
+ date_modification="24/04/2014"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=428
+ type_masque=2
+ dernier_id=55
+ dernier_id_page=11
+[defaut]
+ [aide_page]
+  aide=0
+[enregistrements]
+ "cogfdd.dhsd",,cog_collect,cog_collect,500,0
+ "cogfdd.dhsd",,cog_collect,cog_collect_zzdep,500,0
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=314,480
+  attache_lgx=oui
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=0
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=39,478
+  attache_lgx=oui
+  attache_lgy=oui
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=0
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Corrrespondance collectif à créer"
+ nb_lig=6
+ nb_col=50
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=9,6
+   taille=9,55
+   id=51
+   wstyle="STD"
+  [texte]
+   texte="Type de tiers (Divalto)"
+ [obj_texte]
+  [presentation]
+   position=24,6
+   taille=9,69
+   id=10
+   wstyle="STD"
+  [texte]
+   texte="Type de tiers (base associé)"
+ [multi_choix]
+  [presentation]
+   position=9,80
+   taille=9,42
+   id=50
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_collect,ticod,cog_collect
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TICOD"
+ [champ]
+  [presentation]
+   position=23,80
+   taille=9,12
+   id=11
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_collect,cog_cdtycli,cog_collect
+  [param_saisie]
+   defaut=" "
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=3
+ libelle="Fiche zoom"
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ suiv=4
+ page_fond=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="DESCRIPTION"
+   couleur_fond="STD"
+ [obj_texte]
+  [presentation]
+   position=21,11
+   taille=9,55
+   id=52
+   wstyle="STD"
+  [texte]
+   texte="Type de tiers (Divalto)"
+ [obj_texte]
+  [presentation]
+   position=33,11
+   taille=9,69
+   id=53
+   wstyle="STD"
+  [texte]
+   texte="Type de tiers (base associé)"
+ [obj_texte]
+  [presentation]
+   position=53,11
+   taille=9,69
+   id=21
+   wstyle="STD"
+  [texte]
+   texte="Compte collectif"
+ [multi_choix]
+  [presentation]
+   position=21,85
+   taille=9,37
+   id=54
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_collect,ticod,cog_collect
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TICOD"
+ [champ]
+  [presentation]
+   position=32,85
+   taille=9,12
+   id=55
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cog_collect,cog_cdtycli,cog_collect
+   saisie=non
+  [param_saisie]
+   defaut=" "
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=52,85
+   taille=9,40
+   id=22
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_collect,cptcol,cog_collect
+  [param_saisie]
+   obligatoire=oui
+   defaut=" "
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptCol_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=4
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ prec=3
+ page_fond=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=255,152
+   taille=38,127
+   noms="usermo;usermodh"
+   id=23
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=255,12
+   taille=38,127
+   noms="usercr;usercrdh"
+   id=24
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=271,16
+   taille=9,17
+   noms="usercr"
+   id=27
+   wstyle="STD"
+  [texte]
+   texte="par"
+ [obj_texte]
+  [presentation]
+   position=271,156
+   taille=9,17
+   noms="usermo"
+   id=28
+   wstyle="STD"
+  [texte]
+   texte="par"
+ [obj_texte]
+  [presentation]
+   position=282,16
+   taille=9,14
+   noms="usercrdh"
+   id=29
+   wstyle="STD"
+  [texte]
+   texte="le"
+ [obj_texte]
+  [presentation]
+   position=282,156
+   taille=9,14
+   noms="usermodh"
+   id=30
+   wstyle="STD"
+  [texte]
+   texte="le"
+ [champ]
+  [presentation]
+   position=271,28
+   taille=9,74
+   id=31
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_collect,usercr,cog_collect
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=282,28
+   taille=9,56
+   id=32
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_collect,usercrdh,cog_collect
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=271,168
+   taille=9,74
+   id=33
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_collect,usermo,cog_collect
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=282,168
+   taille=9,56
+   id=34
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cog_collect,usermodh,cog_collect
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+[page]
+ numero=5
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=5
+[page]
+ numero=6
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=6
+[page]
+ numero=7
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=7
+[page]
+ numero=8
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=8
+[page]
+ numero=9
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=9
+[page]
+ numero=10
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=23
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ ident_unique=10
+[page]
+ numero=11
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ page_fond=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=11
+ [tableau]
+  [presentation]
+   position=43,1
+   taille=270,477
+   attache_lgx=oui
+   attache_lgy=oui
+   id=41
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=3
+   hauteur_lig=10
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=2
+   separation=159
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=8,206
+    taille=8,41
+    id=43
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=cog_collect,ticod,cog_collect
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","TICOD"
+   [param_colonne]
+    titre="Type de tiers"
+    fl_trait_col=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,206
+    taille=8,10
+    id=44
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_collect,cog_cdtycli,cog_collect
+    saisie=non
+   [param_saisie]
+    defaut=" "
+   [info_bulle]
+   texte="Type de tiers (base associé)"
+   [param_colonne]
+    titre="Type de tiers (base associé)"
+    fl_aff=oui
+    largeur_col=83
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,206
+    taille=8,31
+    id=45
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_collect,cptcol,cog_collect
+   [param_saisie]
+    obligatoire=oui
+    defaut=" "
+    table_associee=oui
+   [touches]
+    f7=8000
+    f8=19030
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_CptCol_1_Ap"
+   [info_bulle]
+   texte="Compte collectif"
+   [param_colonne]
+    titre="Compte collectif"
+    largeur_col=49
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=8,206
+    taille=8,73
+    id=46
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_collect,usercr,cog_collect
+    saisie=non
+   [param_saisie]
+    defaut=" "
+   [info_bulle]
+   texte="Auteur de la création"
+   [param_colonne]
+    titre="Auteur de la création"
+    fl_aff=oui
+    largeur_col=75
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,206
+    taille=8,52
+    id=47
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_collect,usercrdh,cog_collect
+    saisie=non
+   [param_saisie]
+    defaut=" "
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [info_bulle]
+   texte="Utilisateur date et heure de création"
+   [param_colonne]
+    titre="Utilisateur date et heure de création"
+    fl_aff=oui
+    largeur_col=106
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,206
+    taille=8,73
+    id=48
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_collect,usermo,cog_collect
+    saisie=non
+   [param_saisie]
+    defaut=" "
+   [info_bulle]
+   texte="Auteur de la modification"
+   [param_colonne]
+    titre="Auteur de la modification"
+    fl_aff=oui
+    largeur_col=75
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=8,206
+    taille=8,52
+    id=49
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cog_collect,usermodh,cog_collect
+    saisie=non
+   [param_saisie]
+    defaut=" "
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [info_bulle]
+   texte="Utilisateur date et heure de modification"
+   [param_colonne]
+    titre="Utilisateur date et heure de modification"
+    fl_aff=oui
+    largeur_col=118
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=8,10
+   taille=9,33
+   id=37
+   wstyle="STD"
+  [texte]
+   texte="Type de tiers"
+ [obj_texte]
+  [presentation]
+   position=24,9
+   taille=9,69
+   id=39
+   wstyle="STD"
+  [texte]
+   texte="Type de tiers (base associé)"
+ [multi_choix]
+  [presentation]
+   position=8,81
+   taille=9,42
+   id=38
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_collect,ticod,cog_collect_zzdep
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TICOD"
+ [champ]
+  [presentation]
+   position=24,81
+   taille=9,12
+   id=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_collect,cog_cdtycli,cog_collect_zzdep
+  [param_saisie]
+   defaut=" "
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+  [info_bulle]
+  texte="Type de tiers (base associé)"
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPLEMENTS"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wtrait_chaine="#home"
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wtrait_chaine="#end"
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   nature=case
+   [param_bouton]
+    wnom="TRI"
+    wid_ressource="TRI"
+    wetype_trait=arret
+    warret=11
+   [info_bulle]
+   texte="Inverser le sens de lecture"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    wetype_trait=arret
+    warret=5
+   [info_bulle]
+   texte="Dupliquer <Ctrl+F3>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <F3>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Shift+F3>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   nature=case
+   [param_bouton]
+    wnom="FICHE"
+    wid_ressource="FICHE"
+    wtrait_chaine="#shift_f4"
+   [info_bulle]
+   texte="Mode fiche ou mode liste <Shift+F4>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_4"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_5"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=6
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+Module "cogtz_collectif.DHOP"
+Module "cogfdd.DHOD"
+
+hfile	"ccfdd.dhsd"	ccfjca	ccfjca
+
+public		record	cogfdd.dhsd	COG_COLLECT
+Public Record "ddsys.dhsd" rowinfo zoomselection
+Public Record "ddsys.dhsd" genzoomident genzoomident
+public record "ccfdd.dhsd"	C3
+public record "a5dd.dhsd"	mz
+
+;*
+Public Procedure Champ_CptCol_1_Ap
+;
+Beginp
+	if hseek(ccfjca,c3,"A" & mz.Dos & "3" & cog_collect.CptCol) <> 0 
+		messagebox("Compte inexistant","Erreur")
+		harmony.Retour = xmenext_ressaisie
+	endif
+Endp
+[/diva]
+[diva_base]
+[/diva]

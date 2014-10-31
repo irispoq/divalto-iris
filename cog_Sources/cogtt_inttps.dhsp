@@ -1,0 +1,52 @@
+;>xdiva
+;*
+;*		Objet : Intégration des temps Artémis - Traitement associé au programme : cogpp_inttps.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	KIT104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ChargementAvant						Avant chargement du masque pour initialisation des variables
+;*
+
+overwrittenby "cogut_inttps.dhop"
+
+
+module	"a5tm000.dhop"
+module	"a5pmflash.dhop"
+
+public record	gtfdd.dhsd	xq		xq_cog		;enregistrement de travail
+public record	gtfdd.dhsd	xq		xq_cogw		;enregistrement de travail
+public record	gtfdd.dhsd	soc
+public record	a5dd.dhsd	mchemin
+public record	a5dd.dhsd	mz
+
+
+;*	Avant chargement du masque pour initialisation des variables
+public procedure ChargementAvant
+beginp
+
+	Rechercher_Chemin (mz.Dos, mz.Etb, soc.Cog_ArtemisCh)
+	xq_cog				= ""
+	xq_cog.Fic			= mchemin.Chemin
+
+	Rechercher_Chemin (mz.Dos, mz.Etb, soc.Cog_ArtemisChW)
+	xq_cogw				= ""
+	xq_cogw.Fic			= mchemin.Chemin
+
+endp
+
+;*
+public procedure A5_Flash_Envoi_Av
+
+beginp
+	A5_Flash_Ajouter_Fichier_Joint_Spe(xq_cog.Fic)
+endp
+
+;*

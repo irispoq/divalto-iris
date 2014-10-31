@@ -1,0 +1,2494 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=6,20110524144859,SYSTEMU_VR          ,20140822084002,UGIE                
+Nom=cogfdd.dhsd,cogfdd.dhsd,1
+[CHAMP]
+Version=1,20050429090616,RR                  ,20050429090616,RR                  
+Nom=ActCod,Code activité,1
+Gel=1
+Nature=8
+NomOdbc=Activite
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 6280000,MJV ,20030417141821,LM                  
+Nom=Adr,Adresse,1
+DateM=40576F49577BC201
+Gel=1
+Nature=239
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 4 80000,MJV ,20061107110048,MARIE JO            
+Nom=AdrCpl1,Adresse complément 1,1
+DateM=5C8268995302C701
+Gel=1
+Nature=38
+NomOdbc=AdrCpl1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4 80000,MJV ,20061107110052,MARIE JO            
+Nom=AdrCpl2,Adresse complément 2,1
+DateM=3C1A239C5302C701
+Gel=1
+Nature=38
+NomOdbc=AdrCpl2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021126004604,RR  ,20050111105421,RR                  
+Nom=Affaire,Affaire,1
+DateM=6041C7B0B41AC301
+Gel=1
+Nature=8
+NomOdbc=Affaire
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20040701145448,SC                  ,20050311105247,MARIE JO            
+Nom=AfrClas,Classe d'affaire,1
+DateM=00061FA3D87EC401
+Gel=1
+Nature=8
+NomOdbc=ClasseAffaire
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199710 30000,MJV ,20050106105123,MARIE JO            
+Nom=Axe,Axe analytique,1
+Gel=1
+Nature=8
+NomOdbc=Axe
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021125153845,RR  ,20071128092538,RR                  
+Nom=Bitmap,Nom de l'image,1
+Gel=1
+Nature=10
+Choix=grfdmc.dhfi
+NomChoix=BITMAP
+NomOdbc=Image
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050117110942,MARIE JO            
+Nom=Ce1,Ce1,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050118094125,MARIE JO            
+Nom=Ce2,Ce2,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20021210160150,MJV ,20040922154110,MARIE JO            
+Nom=Ce2N,Code enregistrement 2 en numérique,1
+Gel=1
+Nature=1,0
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050109093027,MARIE JO            
+Nom=Ce3,Ce3,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050109093029,MARIE JO            
+Nom=Ce4,Ce4,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20030403155422,MJV                 ,20050109093036,MARIE JO            
+Nom=Ce4N,Ce numérique,1
+Gel=1
+Nature=1,0
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050109093043,MARIE JO            
+Nom=Ce5,Ce5,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050109093045,MARIE JO            
+Nom=Ce6,Ce6,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050109093047,MARIE JO            
+Nom=Ce7,Ce7,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050109093051,MARIE JO            
+Nom=Ce8,Ce8,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050109093053,MARIE JO            
+Nom=Ce9,Ce9,1
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 3280000,MJV ,20061107111121,MARIE JO            
+Nom=CeA,CeA,1
+DateM=7C94D2125502C701
+Gel=1
+Nature=1
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4220000,MJV ,20061107111128,MARIE JO            
+Nom=CeBin,CE binaire,1
+DateM=FC7E41175502C701
+Gel=1
+Nature=B
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20030111152620,MJV ,20071127110103,MARIE JO            
+Nom=CeJoint,CE si fichier joint =2 si joint <> 0,1
+Gel=1
+Nature=1,0
+Choix=gtfdmc.dhfi
+NomChoix=CENOTE_1
+Flags=n,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2150000,MJV ,20071127110253,MARIE JO            
+Nom=CeNote,=2 si note<> 0,1
+DateM=5A03CE6394D2C601
+Gel=1
+Nature=1,0
+Choix=gtfdmc.dhfi
+NomChoix=CENOTE_1
+Flags=n,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20090903181000,INFOU               ,20110524192502,SYSTEMU             
+Nom=Classement,no d'ordre,1
+Gel=1
+Nature=3,0
+NomOdbc=Classement
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110816131438,ROOT                ,20140418115936,UGIE                
+Nom=Cog_AffBCod,Affectation Budgétaire,1
+DateM=772FD2E7EC5ACF01
+Gel=1
+Nature=4,0
+NomOdbc=Cog_AffectationBudgetaire
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110606150452,SYSTEMU_VR          ,20110606150456,SYSTEMU_VR          
+Nom=Cog_AxeAnael,Axe anaël,1
+Gel=1
+Nature=8
+NomOdbc=Cog_AxeAnael
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110524145239,SYSTEMU_VR          ,20110524145243,SYSTEMU_VR          
+Nom=Cog_Cdtycli,Type de tiers (base associé),1
+Gel=1
+Nature=2
+NomOdbc=Cog_Cdtycli
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20090511181806,INFO_U           ,20110524192308,SYSTEMU             
+Nom=Cog_CltAff,Clôturer affaire,1
+Gel=1
+Nature=1
+NomOdbc=Cog_CltAff
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110530100401,SYSTEMU_VR          ,20110530100405,SYSTEMU_VR          
+Nom=Cog_CodZone,Code de la zone,1
+Gel=1
+Nature=20
+NomOdbc=Cog_CodZone
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617163221,SYSTEMU             ,20110617163224,SYSTEMU             
+Nom=Cog_Cotisation_PDV,Type de cotisation PDV,1
+Gel=1
+Nature=8
+NomOdbc=Cog_Cotisation_PDV
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617155014,SYSTEMU             ,20110617155019,SYSTEMU             
+Nom=Cog_CotisationMagActive,Cotisation Magasin,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_CotisationMagActive
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20090511181746,INFO_U           ,20110524192301,SYSTEMU             
+Nom=Cog_CrePrj,Création projet,1
+Gel=1
+Nature=1
+NomOdbc=Cog_CrePrj
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120523113013,ROOT                ,20120523113019,ROOT                
+Nom=Cog_Date_Bascule,Date de bascule,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Date_Bascule
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617154420,SYSTEMU             ,20110617154423,SYSTEMU             
+Nom=Cog_Date_Debut,Date Début,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Date_Debut
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617154234,SYSTEMU             ,20110617154238,SYSTEMU             
+Nom=Cog_Date_Derniere_Facture,Date Derniere Facture,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Date_Derniere_Facture
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110621105208,SYSTEMU             ,20110621114041,SYSTEMU             
+Nom=Cog_Date_Facturation,Date de facturation au format MM/AAAA,1
+DateM=BC423A49F72FCC01
+Gel=1
+Nature=D8
+NomOdbc=Cog_Date_Facturation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617154444,SYSTEMU             ,20110617154445,SYSTEMU             
+Nom=Cog_Date_Fin,Date Fin,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Date_Fin
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617151129,SYSTEMU             ,20110617151150,SYSTEMU             
+Nom=Cog_Dateffet,Date d'effet,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_Dateffet
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110816131359,ROOT                ,20140417180254,UGIE                
+Nom=Cog_DirClienteCod,Direction cliente,1
+DateM=4AE6516E565ACF01
+Gel=1
+Nature=4,0
+NomOdbc=Cog_DirClienteCod
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617163543,SYSTEMU             ,20110617163545,SYSTEMU             
+Nom=Cog_Duree_Limitee,Duree Limitée,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Duree_Limitee
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120113143252,ROOT                ,20120113143306,ROOT                
+Nom=Cog_EcrDebDt,Date de début écriture,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_EcrDebDt
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120113143328,ROOT                ,20120113143338,ROOT                
+Nom=Cog_EcrFinDt,Date de fin écriture,1
+Gel=1
+Nature=D8
+NomOdbc=Cog_EcrFinDt
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110811091539,JDT_UGIEIRIS        ,20110811091550,JDT_UGIEIRIS        
+Nom=Cog_ETLDateImport,ETL - Date de la dernière importation,1
+Gel=1
+Nature=14,0
+NomOdbc=Cog_ETLDateImport
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110621105421,SYSTEMU             ,20110621105423,SYSTEMU             
+Nom=Cog_Facturation,Indicateur de facturation,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Facturation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111213140827,ROOT                ,20111213140834,ROOT                
+Nom=Cog_FicExcel,Nom du fichier Excel,1
+Gel=1
+Nature=256
+NomOdbc=RedditionFichierExcel
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111213140849,ROOT                ,20111213140856,ROOT                
+Nom=Cog_FicPdf,Nom du fichier PDF,1
+Gel=1
+Nature=256
+NomOdbc=RedditionFichierPdf
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617155414,SYSTEMU             ,20110617155416,SYSTEMU             
+Nom=Cog_Format_Facture,Format Facture Client,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Format_Facture
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130514113402,ROOT                ,20130514115339,ROOT                
+Nom=Cog_Id_Enveloppe,Enveloppes budgétaires,1
+Gel=1
+Nature=5,0
+NomOdbc=Cog_Id_Enveloppe
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110622094002,SYSTEMU             ,20130514113303,ROOT                
+Nom=Cog_Id_Refacturation,Identifiant Refacturation,1
+DateM=4C1D09088650CE01
+Gel=1
+Nature=5,0
+NomOdbc=Cog_Id_Refacturation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110621105533,SYSTEMU             ,20110621105535,SYSTEMU             
+Nom=Cog_Indicateur_Facture,Indicateur déjà facturé,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Indicateur_Facture
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130514115423,ROOT                ,20130514115435,ROOT                
+Nom=Cog_Lib_Env,Libellé,1
+Gel=1
+Nature=50
+NomOdbc=Cog_Lib_Env
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110712165148,ROOT                ,20110712165156,ROOT                
+Nom=Cog_MailDt,Date d'envoi du mail,1
+Gel=1
+Nature=DH
+NomOdbc=DateEnvoiMail
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110713091110,ROOT                ,20110713091117,ROOT                
+Nom=Cog_MailUser,Utilisateur d'envoi du mail,1
+Gel=1
+Nature=20
+NomOdbc=UtilisateurEnvoiMail
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110530100602,SYSTEMU_VR          ,20110530100606,SYSTEMU_VR          
+Nom=Cog_Message,Message du rapport,1
+Gel=1
+Nature=256
+NomOdbc=Cog_Message
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617154129,SYSTEMU             ,20110617234310,SYSTEMU             
+Nom=Cog_Montant,Montant,1
+DateM=0E2B798D372DCC01
+Gel=1
+Nature=11,2
+NomOdbc=Cog_Montant
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110621104956,SYSTEMU             ,20110621105006,SYSTEMU             
+Nom=Cog_Montant_Libelle,Libellé,1
+Gel=1
+Nature=50
+NomOdbc=Cog_Montant_Libelle
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110712094227,ROOT                ,20110712094234,ROOT                
+Nom=Cog_MtMax,Montant Maximum,1
+Gel=1
+Nature=10,2
+NomOdbc=MontantMaximum
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617163742,SYSTEMU             ,20110617163744,SYSTEMU             
+Nom=Cog_Nombre_Cotisation,Nombre de Cotisations,1
+Gel=1
+Nature=2,0
+NomOdbc=Cog_Nombre_Cotisation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111208063641,SYSTEMU             ,20111208063655,SYSTEMU             
+Nom=Cog_Nombre_Cotisation_Facturees,Nombre de Cotisations Facturées,1
+Gel=1
+Nature=2,0
+NomOdbc=Cog_Nombre_Cotisation_Facturees
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110618000226,SYSTEMU             ,20110618000235,SYSTEMU             
+Nom=Cog_Nombre_Cotisation_Restantes,Nombre de Cotisations Restantes,1
+Gel=1
+Nature=2,0
+NomOdbc=Cog_Nombre_Cotisation_Restantes
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130510111008,ROOT                ,20130510111021,ROOT                
+Nom=Cog_Numero,Numéro de commande ou de devis GIE ,1
+Gel=1
+Nature=15
+NomOdbc=Cog_Numero
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617154324,SYSTEMU             ,20111027183052,SYSTEMU             
+Nom=Cog_OP,Code opération Né + utilisé,1
+DateM=AED84397F42CCC01
+Gel=1
+Nature=3
+NomOdbc=Cog_Code_Inutilise
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111213141046,ROOT                ,20111213141054,ROOT                
+Nom=Cog_PerDDt,Date de début de période,1
+Gel=1
+Nature=D8
+NomOdbc=RedditionPeriodeDebut
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111213141107,ROOT                ,20111213141114,ROOT                
+Nom=Cog_PerFDt,Date de fin de période,1
+Gel=1
+Nature=D8
+NomOdbc=RedditionPeriodeFin
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617163439,SYSTEMU             ,20140418152854,UGIE                
+Nom=Cog_Period,Periodicité facturation,1
+DateM=0B3205250A5BCF01
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Periodicite
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110822120347,JDT_UGIEIRIS        ,20140418152645,UGIE                
+Nom=Cog_PeriodU,Valeur U GIE IRIS,1
+DateM=0F2CF0D7095BCF01
+Gel=1
+Nature=4,0
+NomOdbc=Cog_Periodicite_UGIEIRIS
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111213135814,ROOT                ,20111213135820,ROOT                
+Nom=Cog_RedCh,Chemin des fichiers Excel,1
+Gel=1
+Nature=20
+NomOdbc=RedditionChemin
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111213135624,ROOT                ,20111213135632,ROOT                
+Nom=Cog_RedNo,N° de Reddition,1
+Gel=1
+Nature=8,0
+NomOdbc=RedditionNo
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111213141257,ROOT                ,20111213141315,ROOT                
+Nom=Cog_RedNoLg,N° de ligne,1
+Gel=1
+Nature=4,0
+NomOdbc=RedditionLigneNo
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111213135858,ROOT                ,20111213135904,ROOT                
+Nom=Cog_RedTxt,Texte préenregistré,1
+Gel=1
+Nature=11
+NomOdbc=RedditionTexte
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20111013145627,SYSTEMU             ,20111013145640,SYSTEMU             
+Nom=Cog_Regroupe_Direction,Regroupement par Direction Cliente,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Regroupe_Direction
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617234130,SYSTEMU             ,20110617234133,SYSTEMU             
+Nom=Cog_Regul_Libelle,Libellé Régularisation,1
+Gel=1
+Nature=50
+NomOdbc=Cog_Regul_Libelle
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617151945,SYSTEMU             ,20110705180333,ROOT                
+Nom=Cog_Taux,Taux ,1
+DateM=C9F54A172D3BCC01
+Gel=1
+Nature=6,2
+NomOdbc=Cog_Taux
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110617151650,SYSTEMU             ,20110617160134,SYSTEMU             
+Nom=Cog_Type,Type de refacturation,1
+Gel=1
+Nature=50
+NomOdbc=Cog_Type_Refacturation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110712094103,ROOT                ,20110712094107,ROOT                
+Nom=Cog_TypeU,Type User/Groupe User,1
+Gel=1
+Nature=1,0
+NomOdbc=TypeUser
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110712094025,ROOT                ,20110712094039,ROOT                
+Nom=Cog_TypeV,Type de Valideur/Vérificateur,1
+Gel=1
+Nature=1,0
+NomOdbc=TypeValideur
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140821135725,UGIE                ,20140821135725,UGIE                
+Nom=Cog_TypMotFac,Type moteur de facturation,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110712165352,ROOT                ,20110712165356,ROOT                
+Nom=Cog_Validation,Validation,1
+Gel=1
+Nature=1,0
+NomOdbc=Validation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110530100520,SYSTEMU_VR          ,20110530100524,SYSTEMU_VR          
+Nom=Cog_ValZoneD,Valeur de la zone initiale (ou en création),1
+Gel=1
+Nature=256
+NomOdbc=Cog_ValZoneD
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110530100543,SYSTEMU_VR          ,20110530100549,SYSTEMU_VR          
+Nom=Cog_ValZoneF,Valeur de la zone finale (en modification),1
+Gel=1
+Nature=256
+NomOdbc=Cog_ValZoneF
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110530165651,SYSTEMU_VR          ,20110530165655,SYSTEMU_VR          
+Nom=Cog_ZoneCle,Zone clé (code tiers\v ref\v ...),1
+Gel=1
+Nature=50
+NomOdbc=Cog_ZoneCle
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 2 30000,MJV ,20040616120516,MARIE JO            
+Nom=Conf,Code confidentiel,1
+DateM=6032CE7832C1C201
+Gel=1
+Nature=4
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20021023210946,RR  ,20071128092527,RR                  
+Nom=Couleur,Couleur d'affichage de l'événement,1
+DateM=F0F97D53CB7AC201
+Gel=1
+Nature=2,0
+Choix=grfdmc.dhfi
+NomChoix=COULEUR
+Flags=n,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20021024141754,MJV ,20050105102839,MARIE JO            
+Nom=Cpostal,Code postal,1
+Gel=1
+Nature=8
+NomOdbc=CodePostal
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050105170143,HC
+Nom=CptCol,Compte collectif,1
+DateM=D8D6AEC51A99C601
+Gel=1
+Nature=8
+NomOdbc=CompteCollectif
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,CO  ,20050104165338,MARIE JO            
+Nom=CptV,Compte de vente,1
+DateM=D0F2808E75F2C401
+Gel=1
+Nature=8
+NomOdbc=CompteVente
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1991 4160000,MJV ,20050302152454,MARIE JO            
+Nom=Depar,Département,1
+Gel=1
+Nature=2
+NomOdbc=Departement
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20090623111935,CI                  
+Nom=Des,Désignation,1
+Gel=1
+Nature=80
+NomOdbc=Designation
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,CO  ,20041222111845,MARIE JO            
+Nom=Dos,Dossier,1
+Gel=1
+Nature=3,0
+NomOdbc=Dossier
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021023212614,RR  ,20050822152730,RR                  
+Nom=Duree,Durée,1
+DateM=5C26303F1DA7C501
+Gel=1
+Nature=T10
+NomOdbc=Duree
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20061113135902,MARIE JO            
+Nom=EchDt,Date d'échéance,1
+DateM=6E3B167E2307C701
+Gel=1
+Nature=D8
+NomOdbc=DateEcheance
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7300000,MJV ,20050105110103,MARIE JO            
+Nom=Etb,Etablissement,1
+Gel=1
+Nature=3
+NomOdbc=Etablissement
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021023210907,RR  ,20050111111842,RR                  
+Nom=Evenement,Evénement,1
+DateM=D078F326CB7AC201
+Gel=1
+Nature=8
+NomOdbc=CodeEvenement
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030407182725,RR                  ,20050111105226,RR                  
+Nom=EvtFam,Famille d'événement,1
+Gel=1
+Nature=8
+NomOdbc=FamilleEvenement
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070411154949,RR                  ,20071128092634,RR                  
+Nom=EvtTyp,Type d'événement ,1
+Gel=1
+Nature=1,0
+Choix=grfdmc.dhfi
+NomChoix=EVT_TYPE
+NomOdbc=EvtTyp
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20021209220414,RR  ,20050111105833,RR                  
+Nom=Flash,Numéro de flash,1
+DateM=A0DBB59AC69FC201
+Gel=1
+Nature=4,0
+NomOdbc=NoFlash
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,198910130000,MJV ,20061113152925,MARIE JO            
+Nom=GrRef,Référence sous-référence1 sous-référence2,1
+DateM=3E98871E3007C701
+Gel=1
+Nature=41
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050308141441,MARIE JO
+Nom=HsDt,Date de fin de validité,1
+DateM=0079C7C9E023C501
+Gel=1
+Nature=D8
+NomOdbc=DateFinValid
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1990 8270000,MJV ,20060914123430,MARIE JO            
+Nom=HtMt,Montant HT,1
+DateM=68C82F5CE9D7C601
+Gel=1
+Nature=13,D0
+Attribut=PARAM
+NomOdbc=HT
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1994 6150000,MJV ,20061113153028,MARIE JO            
+Nom=HtPdtMt,HT produit,1
+DateM=6EB10C443007C701
+Gel=1
+Nature=13,D0
+NomOdbc=HTProduit
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030111152542,MJV ,20041222172313,MARIE JO            
+Nom=Joint,Numéro fichier joint,1
+Gel=1
+Nature=8,0
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20021023210920,RR  ,20050816165515,RR                  
+Nom=Lib,Libellé,1
+DateM=90BCBC9083DAC301
+Gel=1
+Nature=40
+NomOdbc=Libelle_$R
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2002 2200000,MJV ,20101215154531,SN                  
+Nom=Lib80,Libellé sur 80 caractères,1
+Gel=1
+Nature=80
+NomOdbc=Libelle_$R
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050105102832,MARIE JO            
+Nom=Loc,Localité,1
+Gel=1
+Nature=38
+NomOdbc=Localite
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20090623111847,CI                  
+Nom=Nom,Nom,1
+Gel=1
+Nature=38
+NomOdbc=Nom_$R
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199710 60000,MJV ,1999 7210000,MJV
+Nom=Note,Numéro de note,1
+Gel=1
+Nature=8,0
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 5130000,MJV ,20060306182205,MARIE JO            
+Nom=Pay,Pays,1
+Gel=1
+Nature=3
+Attribut=PARAM
+NomOdbc=Pays
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1991 4260000,MJV ,20071127115806,MARIE JO            
+Nom=PiCod,Type de pièce,1
+DateM=76F4DBF33407C701
+Gel=1
+Nature=1,0
+Choix=gtfdmc.dhfi
+NomChoix=PICOD
+Attribut=PARAM
+NomOdbc=TypePiece
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1989 1230000,MJV ,20061113160412,MARIE JO            
+Nom=PiDt,Date de la pièce,1
+DateM=903A38FA3407C701
+Gel=1
+Nature=D8
+NomOdbc=DatePiece
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20061113160512,MARIE JO            
+Nom=PiNo,Pièce no,1
+DateM=92A1311E3507C701
+Gel=1
+Nature=8,0
+NomOdbc=PieceNo
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030128175707,RR                  ,20051019075110,RR                  
+Nom=Question,Questionnaire,1
+Gel=1
+Nature=32
+Attribut=PARAM
+NomOdbc=Question
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20041222093527,MARIE JO            
+Nom=Ref,Référence,1
+Gel=1
+Nature=25
+NomOdbc=Reference
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20040401094225,RR                  ,20071128092557,RR                  
+Nom=RubSt,Saisie des rubriques après création d'un événement,1
+Gel=1
+Nature=1,0
+Flags=n,1,o,n,n,n,n,n
+presentation=3
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050105102828,MARIE JO            
+Nom=Rue,Rue,1
+Gel=1
+Nature=38
+NomOdbc=Rue
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,198910130000,MJV ,20040616174929,MARIE JO            
+Nom=Sref,Sous-références 1 et 2,1
+Gel=1
+Nature=16
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050106160837,MARIE JO            
+Nom=Sref1,Sous-référence 1,1
+Gel=1
+Nature=8
+NomOdbc=Sreference1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20041222172407,MARIE JO            
+Nom=Sref2,Sous-référence 2,1
+Gel=1
+Nature=8
+NomOdbc=Sreference2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030411150447,DEMO                ,20030516134539,MJV                 
+Nom=T000Filler,Libre obligatoire pour SQL,1
+DateM=A0B167ACA01BC301
+Gel=1
+Nature=57
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4220000,MJV ,20090430173909,DEMO                
+Nom=TabNo,Numéro table de cogf_tab,1
+DateM=6326D6AA3B07C701
+Gel=1
+Nature=3,0
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,2001 1140000,MJV ,20061113165210,MARIE JO            
+Nom=TabTyp,Type de gestion table,1
+DateM=584129AE3B07C701
+Gel=1
+Nature=1,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4220000,MJV ,20120220114121,ROOT                
+Nom=TabTypTb,Type de gestion table,1
+DateM=A10AACB13B07C701
+Gel=1
+Nature=1,0*200
+Flags=o,1,n,o,n,n,n,n
+presentation=3
+[CHAMP]
+Version=1,1989 1240000,MJV ,20120220112213,ROOT                
+Nom=TestCode,Code Test,1
+DateM=13763F83B9EFCC01
+Gel=1
+Nature=8
+NomOdbc=Test
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021125153924,RR  ,20050111105827,RR                  
+Nom=TexCod,Formulaire,1
+Gel=1
+Nature=11
+NomOdbc=Formulaire
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 3280000,MJV ,20071127141201,MARIE JO            
+Nom=TiCod,Type de tiers,1
+DateM=AFAC32FD3B07C701
+Gel=1
+Nature=1
+Choix=gtfdmc.dhfi
+NomChoix=TICOD
+Attribut=PARAM
+NomOdbc=TypeTiers
+Flags=o,1,n,n,n,n,n,n
+presentation=4
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050106101751,MARIE JO            
+Nom=Tiers,Code tiers,1
+Gel=1
+Nature=8
+NomOdbc=Tiers
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1994 3250000,MJV ,20061113165431,MARIE JO            
+Nom=TiersGrp,Code groupement tiers,1
+DateM=41EED5013C07C701
+Gel=1
+Nature=8
+NomOdbc=Groupement
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1991 1140000,MJV ,20061113165745,MARIE JO            
+Nom=TtcMt,TTC de la pièce,1
+DateM=028452753C07C701
+Gel=1
+Nature=13,D0
+NomOdbc=TTC
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110804170356,ROOT                ,20110804170402,ROOT                
+Nom=TvaMt,Montant de TVA,1
+Gel=1
+Nature=13,D0
+NomOdbc=TVA
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110804170439,ROOT                ,20110804170444,ROOT                
+Nom=TvaTx,Taux de TVA,1
+Gel=1
+Nature=6,2
+NomOdbc=TauxTVA
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110804170504,ROOT                ,20110804170506,ROOT                
+Nom=Type,Type (Ligne ou Pied),1
+Gel=1
+Nature=1
+NomOdbc=Type
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030401141014,RR                  ,20051031085055,RR                  
+Nom=UGrtEvt,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20021023220947,RR  ,20050111112312,RR                  
+Nom=User,Utilisateur,1
+DateM=90F81126D07AC201
+Gel=1
+Nature=20
+NomOdbc=Utilisateur
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021015170131,LM  ,20041222171426,MARIE JO            
+Nom=UserCr,Auteur de la création,1
+Gel=1
+Nature=20
+NomOdbc=UtilisateurCreation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021017113748,MJV ,20041222171409,MARIE JO            
+Nom=UserCrDh,Utilisateur date et heure de création,1
+DateM=A0DF70E7C075C201
+Gel=1
+Nature=DH
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050106094720,MARIE JO            
+Nom=UserCrDt,Date de création,1
+DateM=400BE12A5C74C201
+Gel=1
+Nature=D8
+NomOdbc=DateCreation
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021015170117,LM  ,20041222171433,MARIE JO            
+Nom=UserMo,Auteur de la modification,1
+Gel=1
+Nature=20
+NomOdbc=UtilisateurModif
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021017113843,MJV ,20041222171402,MARIE JO            
+Nom=UserMoDh,Utilisateur date et heure de modification,1
+Gel=1
+Nature=DH
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20041222171349,MARIE JO            ,20050106094737,MARIE JO            
+Nom=UserMoDt,Date de modification,1
+Gel=1
+Nature=D8
+NomOdbc=DateModif
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021015174750,LM  ,20021016105758,LM
+Nom=UserTrace,Traçabilité utilisateur,1
+Gel=1
+Nature=28
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20031202092248,TL                  ,20050111104626,RR                  
+Nom=userx,User pour sql,1
+Gel=1
+Nature=20
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20050105102834,MARIE JO            
+Nom=Vil,Ville,1
+Gel=1
+Nature=38
+NomOdbc=Ville
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20060411152905,RR                  ,20071128092609,RR                  
+Nom=WebSt,Statut utilisation dans l'application Web,1
+Gel=1
+Nature=1,0
+NomOdbc=WebSt
+Flags=n,1,n,n,n,n,n,n
+presentation=3
+[CHAMPR]
+nom=Adr
+[CHAMPL]
+Nom=Nom,1,0,0,N,1
+Nom=AdrCpl1,39,0,0,N,1
+Nom=AdrCpl2,77,0,0,N,1
+Nom=Rue,115,0,0,N,1
+Nom=Loc,153,0,0,N,1
+Nom=Vil,191,0,0,N,1
+Nom=Pay,229,0,0,N,1
+Nom=Cpostal,232,0,0,N,1
+[/CHAMPL]
+nom=Ce2
+[CHAMPL]
+Nom=Ce2N,1,0,0,N,1
+[/CHAMPL]
+nom=Ce4
+[CHAMPL]
+Nom=Ce4N,1,0,0,N,1
+[/CHAMPL]
+nom=Cpostal
+[CHAMPL]
+Nom=Depar,1,0,0,N,1
+[/CHAMPL]
+nom=GrRef
+[CHAMPL]
+Nom=Ref,1,0,0,N,1
+Nom=Sref,26,0,0,N,1
+[/CHAMPL]
+nom=Sref
+[CHAMPL]
+Nom=Sref1,1,0,0,N,1
+Nom=Sref2,9,0,0,N,1
+[/CHAMPL]
+nom=TabTypTb
+[CHAMPL]
+Nom=TabTyp,1,0,0,N,1
+[/CHAMPL]
+nom=UGrtEvt
+[CHAMPL]
+Nom=Cog_CrePrj,1,0,0,N,1
+Nom=Cog_CltAff,2,0,0,N,1
+[/CHAMPL]
+nom=User
+[CHAMPL]
+Nom=userx,1,0,0,N,1
+[/CHAMPL]
+nom=UserCrDh
+[CHAMPL]
+Nom=UserCrDt,1,0,0,N,1
+[/CHAMPL]
+nom=UserMoDh
+[CHAMPL]
+Nom=UserMoDt,1,0,0,N,1
+[/CHAMPL]
+nom=UserTrace
+[CHAMPL]
+Nom=UserCrDh,1,0,0,N,1
+Nom=UserMoDh,15,0,0,N,1
+[/CHAMPL]
+[/CHAMPR]
+[TABLE]
+Version=1,20110816134657,ROOT                ,20110816135224,ROOT                
+Nom=Cog_AffectationBudgetaire,Table Affectation Budgétaire,1
+DateM=772FD2E7EC5ACF01
+NomOdbc=Cog_AffectationBudgetaire
+Taille=500,500
+Pack=0,0
+NumeroZoom=60002
+ZoomNomMasque=cogez_affectationbudgetaire.dhse
+ZoomNomTrt=cogtz_affectationbudgetaire.dhsp
+ZoomNomAppl=DAV
+ZoomRes=cog_affectationbudgetaire
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Cog_AffBCod,17,2,N,0,0,N,1
+Nom=Lib,21,2,N,0,0,N,1
+Nom=Filler,61,2,N,0,200,N,1
+Nom=UserCr,261,2,N,0,0,N,1
+Nom=UserMo,281,2,N,0,0,N,1
+Nom=UserTrace,301,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110524145128,SYSTEMU_VR          ,20110524171856,SYSTEMU_VR          
+Nom=Cog_Collect,Enregistrement correspondance collectif,1
+DateM=2663564C111ACC01
+Taille=500,500
+Pack=0,0
+NumeroZoom=60000
+ZoomNomMasque=cogez_collectif.dhse
+ZoomNomTrt=cogtz_collectif.dhsp
+ZoomNomAppl=DAV
+ZoomRes=cog_collectif
+[CHAMPS]
+Nom=Dos,1,2,N,0,0,N,1
+Nom=TiCod,4,2,N,0,0,N,1
+Nom=Cog_Cdtycli,5,2,N,0,0,N,1
+Nom=CptCol,7,2,N,0,0,N,1
+Nom=UserCr,15,2,N,0,0,N,1
+Nom=UserMo,35,2,N,0,0,N,1
+Nom=UserTrace,55,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110816132539,ROOT                ,20110816133205,ROOT                
+Nom=Cog_DirCliente,Table Direction Cliente,1
+DateM=4AE6516E565ACF01
+NomOdbc=Cog_DirCliente
+Taille=500,500
+Pack=0,0
+NumeroZoom=60001
+ZoomNomMasque=cogez_dircliente.dhse
+ZoomNomTrt=cogtz_dircliente.dhsp
+ZoomNomAppl=DAV
+ZoomRes=cog_dircliente
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Cog_DirClienteCod,17,2,N,0,0,N,1
+Nom=Lib,21,2,N,0,0,N,1
+Nom=Filler,61,2,N,0,200,N,1
+Nom=UserCr,261,2,N,0,0,N,1
+Nom=UserMo,281,2,N,0,0,N,1
+Nom=UserTrace,301,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20021023210643,RR  ,20090903145300,INFOU               
+Nom=Cog_GrtEvt,Code événement par classe affaire,1
+DateM=335BFC73BB2CCA01
+NomOdbc=Table_Code_Evenement_Par_Classe
+Taille=300,300
+Pack=0,0
+CE=Ce1,1
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Dos,6,2,N,0,0,N,1
+Nom=Evenement,9,2,N,0,0,N,1
+Nom=Lib,17,2,N,0,0,N,1
+Nom=Couleur,57,2,N,0,0,N,1
+Nom=Bitmap,59,2,N,0,0,N,1
+Nom=EvtFam,69,2,N,0,0,N,1
+Nom=TexCod,77,2,N,0,0,N,1
+Nom=Flash,88,2,N,0,0,N,1
+Nom=CeNote,92,2,N,0,0,N,1
+Nom=Note,93,2,N,0,0,N,1
+Nom=Question,101,2,N,0,0,N,1
+Nom=RubSt,133,2,N,0,0,N,1
+Nom=ActCod,134,2,N,0,0,N,1
+Nom=Duree,142,2,N,0,0,N,1
+Nom=WebSt,152,2,N,0,0,N,1
+Nom=EvtTyp,153,2,N,0,0,N,1
+Nom=HsDt,154,2,N,0,0,N,1
+Nom=Filler,162,2,N,0,2,N,1
+Nom=Affaire,164,2,N,0,0,N,1
+Nom=AfrClas,172,2,N,0,0,N,1
+Nom=Classement,180,2,N,0,0,N,1
+Nom=UserCr,183,2,N,0,0,N,1
+Nom=UserMo,203,2,N,0,0,N,1
+Nom=UserTrace,223,2,N,0,0,N,1
+Nom=UGrtEvt,251,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Flags=n,1,n,n,i,n,n,n
+Nom=ActCod
+[/PROPLOC]
+[TABLE]
+Version=1,20110530100012,SYSTEMU_VR          ,20110530100456,SYSTEMU_VR          
+Nom=Cog_ImpRap,Enregistrement W pour impression rapport,1
+DateM=198E6643A01ECC01
+Taille=1200,1200
+Pack=0,0
+[CHAMPS]
+Nom=Cog_CodZone,1,2,N,0,0,N,1
+Nom=Cog_ValZoneD,21,2,N,0,0,N,1
+Nom=Cog_ValZoneF,277,2,N,0,0,N,1
+Nom=Cog_Message,533,2,N,0,0,N,1
+Nom=Cog_ZoneCle,789,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110822100852,JDT_UGIEIRIS        ,20110822101007,JDT_UGIEIRIS        
+Nom=Cog_Periodicite,Table des Périodicités,1
+DateM=0B3205250A5BCF01
+NomOdbc=Cog_Periodicite
+Taille=500,500
+Pack=0,0
+NumeroZoom=60003
+ZoomNomMasque=cogez_periodicite.dhse
+ZoomNomTrt=cogtz_periodicite.dhsp
+ZoomNomAppl=DAV
+ZoomRes=Cog_Periodicite
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Cog_Period,17,2,N,0,0,N,1
+Nom=Cog_PeriodU,18,2,N,0,0,N,1
+Nom=Filler,22,2,N,0,20,N,1
+Nom=Lib,42,2,N,0,0,N,1
+Nom=Filler,82,2,N,0,199,N,1
+Nom=UserCr,281,2,N,0,0,N,1
+Nom=UserMo,301,2,N,0,0,N,1
+Nom=UserTrace,321,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20111213140124,ROOT                ,20111213140232,ROOT                
+Nom=Cog_Red_Ent,Entêtes Reddition,1
+DateM=C6E7DCC5F7D1CC01
+NomOdbc=RedditionEntetes
+Taille=1000,1000
+Pack=0,0
+CE=Ce1,E
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Filler,17,2,N,0,50,N,1
+Nom=Cog_RedNo,67,2,N,0,0,N,1
+Nom=TiersGrp,75,2,N,0,0,N,1
+Nom=Cog_EcrDebDt,83,2,N,0,0,N,1
+Nom=Cog_EcrFinDt,91,2,N,0,0,N,1
+Nom=Filler,99,2,N,0,26,N,1
+Nom=Cog_FicExcel,125,2,N,0,0,N,1
+Nom=Cog_FicPdf,381,2,N,0,0,N,1
+Nom=Cog_PerDDt,637,2,N,0,0,N,1
+Nom=Cog_PerFDt,645,2,N,0,0,N,1
+Nom=Filler,653,2,N,0,50,N,1
+Nom=UserCr,703,2,N,0,0,N,1
+Nom=UserMo,723,2,N,0,0,N,1
+Nom=UserTrace,743,2,N,0,0,N,1
+Nom=CeNote,771,2,N,0,0,N,1
+Nom=Note,772,2,N,0,0,N,1
+Nom=CeJoint,780,2,N,0,0,N,1
+Nom=Joint,781,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20111213140146,ROOT                ,20111213140244,ROOT                
+Nom=Cog_Red_Lig,Lignes reddition,1
+DateM=FC98296F9AB9CC01
+NomOdbc=RedditionLignes
+Taille=1000,1000
+Pack=0,0
+CE=Ce1,L
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Filler,17,2,N,0,50,N,1
+Nom=Cog_RedNo,67,2,N,0,0,N,1
+Nom=Cog_RedNoLg,75,2,N,0,0,N,1
+Nom=Filler,79,2,N,0,50,N,1
+Nom=TiersGrp,129,2,N,0,0,N,1
+Nom=Tiers,137,2,N,0,0,N,1
+Nom=Adr,145,2,N,0,0,N,1
+Nom=PiNo,384,2,N,0,0,N,1
+Nom=PiDt,392,2,N,0,0,N,1
+Nom=EchDt,400,2,N,0,0,N,1
+Nom=GrRef,408,2,N,0,0,N,1
+Nom=Des,449,2,N,0,0,N,1
+Nom=HtMt,529,2,N,0,0,N,1
+Nom=TvaMt,542,2,N,0,0,N,1
+Nom=TtcMt,555,2,N,0,0,N,1
+Nom=TvaTx,568,2,N,0,0,N,1
+Nom=Type,574,2,N,0,0,N,1
+Nom=Filler,575,2,N,0,50,N,1
+Nom=UserCr,625,2,N,0,0,N,1
+Nom=UserMo,645,2,N,0,0,N,1
+Nom=UserTrace,665,2,N,0,0,N,1
+Nom=CeNote,693,2,N,0,0,N,1
+Nom=Note,694,2,N,0,0,N,1
+Nom=CeJoint,702,2,N,0,0,N,1
+Nom=Joint,703,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20111213135344,ROOT                ,20111213140049,ROOT                
+Nom=Cog_Red_Param,Paramètres Reddition,1
+DateM=E989B13C97B9CC01
+NomOdbc=RedditionParametres
+Taille=1000,1000
+Pack=0,0
+CE=Ce1,P
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Filler,14,2,N,0,53,N,1
+Nom=Cog_RedNo,67,2,N,0,0,N,1
+Nom=Cog_RedCh,75,2,N,0,0,N,1
+Nom=Cog_RedTxt,95,2,N,0,0,N,1
+Nom=Filler,106,2,N,0,50,N,1
+Nom=UserCr,156,2,N,0,0,N,1
+Nom=UserMo,176,2,N,0,0,N,1
+Nom=UserTrace,196,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1999 4220000,MJV ,20120220114332,ROOT                
+Nom=Cog_T000,Table paramétrage commun,1
+DateM=B5257D7DBCEFCC01
+Taille=350,350
+Pack=0,0
+CE=CeBin, 
+[CHAMPS]
+Nom=CeBin,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=TabNo,5,2,N,0,0,N,1
+Nom=T000Filler,8,2,N,0,0,N,1
+Nom=UserCr,65,2,N,0,0,N,1
+Nom=UserMo,85,2,N,0,0,N,1
+Nom=UserTrace,105,2,N,0,0,N,1
+Nom=TabTypTb,133,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1999 4280000,MJV ,20090504105124,DEMO                
+Nom=Cog_T001,Table Test,1
+DateM=13763F83B9EFCC01
+NomOdbc=TableTest
+Taille=300,300
+Pack=0,0
+CE=CeBin,001
+[CHAMPS]
+Nom=CeBin,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=TabNo,5,2,N,0,0,N,1
+Nom=TestCode,8,2,N,0,0,N,1
+Nom=Filler,16,2,N,0,49,N,1
+Nom=UserCr,65,2,N,0,0,N,1
+Nom=UserMo,85,2,N,0,0,N,1
+Nom=UserTrace,105,2,N,0,0,N,1
+Nom=Note,133,2,N,0,0,N,1
+Nom=CeNote,141,2,N,0,0,N,1
+Nom=Joint,142,2,N,0,0,N,1
+Nom=CeJoint,150,2,N,0,0,N,1
+Nom=Lib,151,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617144614,SYSTEMU             ,20110618000639,SYSTEMU             
+Nom=Cog_UT100,Taux de refacturation centrale,1
+DateM=4C1D09088650CE01
+NomOdbc=Taux_de_refacturation_centrale
+Taille=300,300
+Pack=0,0
+CE=Ce1,0
+NumeroZoom=64000
+ZoomNomMasque=Cog_UT100.dhse
+ZoomNomTrt=Cog_UT100.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=10
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Cog_Dateffet,98,2,N,0,0,N,1
+Nom=Tiers,106,2,N,0,0,N,1
+Nom=Cog_Type,114,2,N,0,0,N,1
+Nom=Filler,164,2,N,0,5,N,1
+Nom=Cog_Id_Refacturation,169,2,N,0,0,N,1
+Nom=Cog_Taux,174,2,N,0,0,N,1
+Nom=Cog_Date_Fin,180,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617152629,SYSTEMU             ,20110618000648,SYSTEMU             
+Nom=Cog_UT101,Cotisations des centrales,1
+DateM=50C9A2DA3A2DCC01
+NomOdbc=Cotisations_des_centrales
+Taille=300,300
+Pack=0,0
+CE=Ce1,1
+NumeroZoom=64001
+ZoomNomMasque=Cog_UT101.dhse
+ZoomNomTrt=Cog_UT101.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=20
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Affaire,98,2,N,0,0,N,1
+Nom=Cog_Montant,106,2,N,0,0,N,1
+Nom=Cog_Date_Derniere_Facture,117,2,N,0,0,N,1
+Nom=Cog_OP,125,2,N,0,0,N,1
+Nom=Cog_Date_Debut,128,2,N,0,0,N,1
+Nom=Cog_Date_Fin,136,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617155204,SYSTEMU             ,20110618000657,SYSTEMU             
+Nom=Cog_UT102,Format des Factures,1
+DateM=4ECD0C453FBDCF01
+NomOdbc=Format_des_Factures
+Taille=300,300
+Pack=0,0
+CE=Ce1,2
+NumeroZoom=64002
+ZoomNomMasque=Cog_UT102.dhse
+ZoomNomTrt=Cog_UT102.dhsP
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=30
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Tiers,98,2,N,0,0,N,1
+Nom=Cog_TypMotFac,106,2,N,0,0,N,1
+Nom=Cog_Format_Facture,114,2,N,0,0,N,1
+Nom=Cog_Regroupe_Direction,115,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617160338,SYSTEMU             ,20110618000705,SYSTEMU             
+Nom=Cog_UT103,Types de Refacturation,1
+DateM=4C1D09088650CE01
+NomOdbc=Types_de_Refacturation
+Taille=300,300
+Pack=0,0
+CE=Ce1,3
+NumeroZoom=64003
+ZoomNomMasque=Cog_UT103.dhse
+ZoomNomTrt=Cog_UT103.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=40
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Cog_Id_Refacturation,98,2,N,0,0,N,1
+Nom=Cog_Type,103,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617162841,SYSTEMU             ,20110618000711,SYSTEMU             
+Nom=Cog_UT104,Types de cotisations PDV,1
+DateM=0B3205250A5BCF01
+NomOdbc=Types_de_cotisations_PDV
+Taille=300,300
+Pack=0,0
+CE=Ce1,4
+NumeroZoom=64004
+ZoomNomMasque=Cog_UT104.dhse
+ZoomNomTrt=Cog_UT104.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=50
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Cog_Cotisation_PDV,98,2,N,0,0,N,1
+Nom=Ref,106,2,N,0,0,N,1
+Nom=Cog_Period,131,2,N,0,0,N,1
+Nom=Cog_OP,132,2,N,0,0,N,1
+Nom=Cog_Duree_Limitee,135,2,N,0,0,N,1
+Nom=Cog_Nombre_Cotisation,136,2,N,0,0,N,1
+Nom=Cog_AxeAnael,138,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617233945,SYSTEMU             ,20110621105949,SYSTEMU             
+Nom=Cog_UT105,Régularisations,1
+DateM=38093693F12FCC01
+NomOdbc=Regularisations
+Taille=300,300
+Pack=0,0
+CE=Ce1,5
+NumeroZoom=64005
+ZoomNomMasque=Cog_UT105.dhse
+ZoomNomTrt=Cog_UT105.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=60
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Affaire,98,2,N,0,0,N,1
+Nom=Cog_Regul_Libelle,106,2,N,0,0,N,1
+Nom=Ref,156,2,N,0,0,N,1
+Nom=Cog_Date_Debut,181,2,N,0,0,N,1
+Nom=Cog_Date_Fin,189,2,N,0,0,N,1
+Nom=Cog_OP,197,2,N,0,0,N,1
+Nom=Cog_Montant,200,2,N,0,0,N,1
+Nom=Cog_Date_Derniere_Facture,211,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617234736,SYSTEMU             ,20110618000734,SYSTEMU             
+Nom=Cog_UT106,Répartitions par section pour cotisation,1
+DateM=C9F54A172D3BCC01
+NomOdbc=Repartitions_section_cotisation
+Taille=300,300
+Pack=0,0
+CE=Ce1,6
+NumeroZoom=64006
+ZoomNomMasque=Cog_UT106.dhse
+ZoomNomTrt=Cog_UT106.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=70
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Affaire,98,2,N,0,0,N,1
+Nom=Ref,106,2,N,0,0,N,1
+Nom=Cog_Date_Debut,131,2,N,0,0,N,1
+Nom=Cog_Date_Fin,139,2,N,0,0,N,1
+Nom=Cog_Taux,147,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617235252,SYSTEMU             ,20110618000740,SYSTEMU             
+Nom=Cog_UT107,Répartitions par section pour régularisation,1
+DateM=C9F54A172D3BCC01
+NomOdbc=Repartitions_section_regularisat
+Taille=300,300
+Pack=0,0
+CE=Ce1,7
+NumeroZoom=64007
+ZoomNomMasque=Cog_UT107.dhse
+ZoomNomTrt=Cog_UT107.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=80
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Affaire,98,2,N,0,0,N,1
+Nom=Ref,106,2,N,0,0,N,1
+Nom=Cog_Date_Debut,131,2,N,0,0,N,1
+Nom=Cog_Date_Fin,139,2,N,0,0,N,1
+Nom=Cog_Taux,147,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110617235943,SYSTEMU             ,20110618000746,SYSTEMU             
+Nom=Cog_UT108,Affectations des cotisations PDV,1
+DateM=0B3205250A5BCF01
+NomOdbc=Affectations_des_cotisations_PDV
+Taille=300,300
+Pack=0,0
+CE=Ce1,8
+NumeroZoom=64008
+ZoomNomMasque=Cog_UT108.dhse
+ZoomNomTrt=Cog_UT108.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=90
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Affaire,98,2,N,0,0,N,1
+Nom=Ref,106,2,N,0,0,N,1
+Nom=Cog_Date_Debut,131,2,N,0,0,N,1
+Nom=Cog_Date_Fin,139,2,N,0,0,N,1
+Nom=Cog_Montant,147,2,N,0,0,N,1
+Nom=Cog_Period,158,2,N,0,0,N,1
+Nom=Cog_OP,159,2,N,0,0,N,1
+Nom=Cog_Duree_Limitee,162,2,N,0,0,N,1
+Nom=Cog_Nombre_Cotisation,163,2,N,0,0,N,1
+Nom=Cog_Nombre_Cotisation_Restantes,165,2,N,0,0,N,1
+Nom=Cog_Date_Derniere_Facture,167,2,N,0,0,N,1
+Nom=Cog_AxeAnael,175,2,N,0,0,N,1
+Nom=Cog_Nombre_Cotisation_Facturees,183,2,N,0,0,N,1
+Nom=Cog_Date_Bascule,185,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110621104427,SYSTEMU             ,20110621105941,SYSTEMU             
+Nom=Cog_UT109,Montants consommés des Projets spécifiques,1
+DateM=4AE6516E565ACF01
+NomOdbc=Montants_Projets_Specifiques
+Taille=300,300
+Pack=0,0
+CE=Ce1,9
+NumeroZoom=64009
+ZoomNomMasque=Cog_UT109.dhse
+ZoomNomTrt=Cog_UT109.dhsp
+ZoomNomAppl=DAV
+ZoomNomRegr=TABLEGIE
+ZoomRes=GIE
+ZoomNumOrdre=100
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Affaire,98,2,N,0,0,N,1
+Nom=Cog_Montant_Libelle,106,2,N,0,0,N,1
+Nom=Ref,156,2,N,0,0,N,1
+Nom=Cog_Montant,181,2,N,0,0,N,1
+Nom=Cog_OP,192,2,N,0,0,N,1
+Nom=Cog_Date_Facturation,195,2,N,0,0,N,1
+Nom=Cog_Facturation,203,2,N,0,0,N,1
+Nom=Cog_Indicateur_Facture,204,2,N,0,0,N,1
+Nom=Cog_Date_Derniere_Facture,205,2,N,0,0,N,1
+Nom=Cog_ETLDateImport,213,2,N,0,0,N,1
+Nom=Cog_Numero,227,2,N,0,0,N,1
+Nom=Cog_Id_Enveloppe,242,2,N,0,0,N,1
+Nom=Cog_DirClienteCod,247,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130514112142,ROOT                ,20130514115559,ROOT                
+Nom=Cog_UT110,Enveloppes budgétaires,1
+DateM=5AE0BB238950CE01
+NomOdbc=Enveloppes_budgetaires
+Taille=300,300
+Pack=0,0
+CE=Ce1,A
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Cog_Id_Enveloppe,98,2,N,0,0,N,1
+Nom=Cog_Lib_Env,103,2,N,0,0,N,1
+Nom=Cog_ETLDateImport,153,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140821135549,UGIE                ,20140821140005,UGIE                
+Nom=Cog_UT120,Type moteur facturation,1
+DateM=58B3067237BDCF01
+NomOdbc=TypeMoteurFacturation
+Taille=300,300
+Pack=0,0
+CE=Ce1,B
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Conf,17,2,N,0,0,N,1
+Nom=UserCr,21,2,N,0,0,N,1
+Nom=UserMo,41,2,N,0,0,N,1
+Nom=UserTrace,61,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=Cog_TypMotFac,98,2,N,0,0,N,1
+Nom=Cog_CotisationMagActive,106,2,N,0,0,N,1
+Nom=HsDt,107,2,N,0,0,N,1
+Nom=Lib80,115,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110712091845,ROOT                ,20110712091900,ROOT                
+Nom=Cog_Valid_Cde,Validation de commandes,1
+DateM=BBEDB283A340CC01
+NomOdbc=ValidationsCommandes
+Taille=500,500
+Pack=0,0
+CE=Ce1,V
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=TiCod,5,2,N,0,0,N,1
+Nom=PiCod,6,2,N,0,0,N,1
+Nom=PiNo,7,2,N,0,0,N,1
+Nom=Cog_TypeV,15,2,N,0,0,N,1
+Nom=Cog_TypeU,16,2,N,0,0,N,1
+Nom=User,17,2,N,0,0,N,1
+Nom=Cog_MtMax,37,2,N,0,0,N,1
+Nom=HtPdtMt,47,2,N,0,0,N,1
+Nom=Cog_MailDt,60,2,N,0,0,N,1
+Nom=Cog_Validation,74,2,N,0,0,N,1
+Nom=UserTrace,75,2,N,0,0,N,1
+Nom=UserCr,103,2,N,0,0,N,1
+Nom=UserMo,123,2,N,0,0,N,1
+Nom=CeNote,143,2,N,0,0,N,1
+Nom=Note,144,2,N,0,0,N,1
+Nom=CeJoint,152,2,N,0,0,N,1
+Nom=Joint,153,2,N,0,0,N,1
+Nom=Cog_MailUser,161,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110712091655,ROOT                ,20110712091724,ROOT                
+Nom=Cog_Valid_PArt,Paramètres liés aux articles,1
+DateM=F13859956440CC01
+NomOdbc=ValidationsCdeParamArticles
+Taille=500,500
+Pack=0,0
+CE=Ce1,A
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Axe,5,2,N,0,0,N,1
+Nom=CptV,13,2,N,0,0,N,1
+Nom=UserTrace,21,2,N,0,0,N,1
+Nom=UserCr,49,2,N,0,0,N,1
+Nom=UserMo,69,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=CeJoint,98,2,N,0,0,N,1
+Nom=Joint,99,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20110712091756,ROOT                ,20110712091827,ROOT                
+Nom=Cog_Valid_PMt,Paramètres des montants seuils de validation,1
+DateM=891D11E56340CC01
+NomOdbc=ValidationsCdeParamMontants
+Taille=500,500
+Pack=0,0
+CE=Ce1,M
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Axe,5,2,N,0,0,N,1
+Nom=CptV,13,2,N,0,0,N,1
+Nom=UserTrace,21,2,N,0,0,N,1
+Nom=UserCr,49,2,N,0,0,N,1
+Nom=UserMo,69,2,N,0,0,N,1
+Nom=CeNote,89,2,N,0,0,N,1
+Nom=Note,90,2,N,0,0,N,1
+Nom=CeJoint,98,2,N,0,0,N,1
+Nom=Joint,99,2,N,0,0,N,1
+Nom=Cog_TypeV,107,2,N,0,0,N,1
+Nom=Cog_TypeU,108,2,N,0,0,N,1
+Nom=User,109,2,N,0,0,N,1
+Nom=Cog_MtMax,129,2,N,0,0,N,1
+[/CHAMPS]
+[BASE]
+Version=1,20110816132456,ROOT                ,20110816132459,ROOT                
+Nom=Cog_FAffectBudget,Fichier Affactation Budgétaire,1
+DateM=B4D13322075CCC01
+Fichier=I,0,Cog_FAffectBudget.dhfi
+Versionbase=6.3a
+DateMIndex=314C08B10A5CCC01
+[TABLES]
+Nom=Cog_AffectationBudgetaire,0
+[/TABLES]
+[BASE]
+Version=1,20110524144953,SYSTEMU_VR          ,20110524145107,SYSTEMU_VR          
+Nom=Cog_Fcollect,Fichier correspondance Collectif,1
+DateM=E6C18F3F111ACC01
+Fichier=I,0,cog_fcollect.dhfi
+Versionbase=6.3a
+DateMIndex=C61266C9111ACC01
+[TABLES]
+Nom=Cog_Collect,0
+[/TABLES]
+[BASE]
+Version=1,20110816132419,ROOT                ,20110816132419,ROOT                
+Nom=Cog_FDirCliente,Fichier Direction Cliente,1
+DateM=041E360A075CCC01
+Fichier=I,0,Cog_FDirCliente.dhfi
+Versionbase=6.3a
+DateMIndex=5E5A42AE085CCC01
+[TABLES]
+Nom=Cog_DirCliente,0
+[/TABLES]
+[BASE]
+Version=1,20110822100820,JDT_UGIEIRIS        ,20140721100922,UGIE                
+Nom=Cog_FPeriodicite,Fichier Periodicite,1
+DateM=5B0A5714BBA4CF01
+Fichier=I,0,Cog_FPeriodicite.dhfi
+Versionbase=6.3a
+DateMIndex=FF8103BBC460CC01
+[TABLES]
+Nom=Cog_Periodicite,0
+[/TABLES]
+[BASE]
+Version=1,20110804170017,ROOT                ,20120328112046,ROOT                
+Nom=Cog_FReddition,Fichier du détail des redditions,1
+DateM=6BE7E30EC40CCD01
+Fichier=I,0,cogf_reddition.dhfi
+Versionbase=6.3a
+DateMIndex=C61E173E36BACC01
+[TABLES]
+Nom=Cog_Red_Ent,0
+Nom=Cog_Red_Lig,0
+Nom=Cog_Red_Param,0
+[/TABLES]
+[BASE]
+Version=1,20110712091631,ROOT                ,20120328112053,ROOT                
+Nom=Cog_FValid_Cde,Validation des commandes fournisseurs,1
+DateM=6FD20113C40CCD01
+Fichier=I,0,cog_fvalid_cde.dhfi
+Versionbase=6.3a
+DateMIndex=163A11116341CC01
+[TABLES]
+Nom=Cog_Valid_Cde,0
+Nom=Cog_Valid_PArt,0
+Nom=Cog_Valid_PMt,0
+[/TABLES]
+[BASE]
+Version=1,20090430173404,DEMO                ,20120220113046,ROOT                
+Nom=cogf_tab,Tables,1
+DateM=71461FB5BAEFCC01
+Fichier=I,0,cogf_tab.dhfi
+Versionbase=7.1
+[TABLES]
+Nom=Cog_T000,0
+Nom=Cog_T001,0
+[/TABLES]
+[BASE]
+Version=1,20090903122300,INFOU               ,20110520142138,SYSTEMU             
+Nom=Coggrf_Tab,Tables complémentaires GRFTAB,1
+DateM=6C342609EB2CCC01
+Fichier=I,0,Coggrf_tab.dhfi
+Versionbase=6.3a
+[TABLES]
+Nom=Cog_GrtEvt,0
+[/TABLES]
+[BASE]
+Version=1,20110617144446,SYSTEMU             ,20110617144446,SYSTEMU             
+Nom=Coggtf_Tab,Tales complémentaires Facturation,1
+DateM=81B39056EC2CCC01
+Fichier=I,0,Coggtf_tab.dhfi
+Versionbase=6.3a
+DateMIndex=A54CED4C3FBDCF01
+[TABLES]
+Nom=Cog_UT100,0
+Nom=Cog_UT101,0
+Nom=Cog_UT102,0
+Nom=Cog_UT103,0
+Nom=Cog_UT104,0
+Nom=Cog_UT105,0
+Nom=Cog_UT106,0
+Nom=Cog_UT107,0
+Nom=Cog_UT108,0
+Nom=Cog_UT109,0
+Nom=Cog_UT110,0
+Nom=Cog_UT120,0
+[/TABLES]
+[INDEX]
+Version=1,20110816135005,ROOT                ,20110816135037,ROOT                
+Nom=Cog_AffectationBudgetaire,Par Affectation Budgétaire,1
+DateM=521D96A50A5CCC01
+CLE=Cog_FAffectBudget, ,,1,032,o,1,n
+Alias=Cog_AffectationBudgetaire
+ChampPrincipal=Cog_AffBCod,n,
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_AffBCod,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110524145444,SYSTEMU_VR          ,20110524172605,SYSTEMU_VR          
+Nom=Cog_TypCli,Par type de tiers divalto & associé,1
+DateM=DCAECDE5261ACC01
+CLE=Cog_Fcollect, ,,1,032,o,1,n
+Alias=Cog_TypCli
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=TiCod,4,0,
+Nom=Cog_Cdtycli,5,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110816133514,ROOT                ,20110816133618,ROOT                
+Nom=Cog_DirCliente,Par code direction cliente,1
+DateM=FA1455A1085CCC01
+CLE=Cog_FDirCliente, ,,1,032,o,1,n
+Alias=Cog_DirCliente
+ChampPrincipal=Cog_DirClienteCod,n,
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_DirClienteCod,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110822102315,JDT_UGIEIRIS        ,20110822141312,JDT_UGIEIRIS        
+Nom=Cog_Periodicite,Par Périodicité DIVALTO,1
+DateM=070F04DDC460CC01
+CLE=Cog_FPeriodicite, ,,1,032,n,1,n
+Alias=Cog_Periodicite
+ChampPrincipal=Cog_Period,n,
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_Period,7,0,
+Nom=Cog_PeriodU,8,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110822141149,JDT_UGIEIRIS        ,20110822141306,JDT_UGIEIRIS        
+Nom=Cog_Periodicite_UGIEIRIS,Par Périodicité U GIE IRIS,1
+DateM=3F5156D9C460CC01
+CLE=Cog_FPeriodicite, ,,1,032,o,1,n
+Alias=Cog_Periodicite_UGIEIRIS
+ChampPrincipal=Cog_Period,n,
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_PeriodU,7,0,
+Nom=Cog_Period,11,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20111213144816,ROOT                ,20111214085923,ROOT                
+Nom=Cog_P,Paramètres,1
+DateM=EFF9C34A36BACC01
+CLE=Cog_FReddition,P,Ce1,2,P,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20111213144846,ROOT                ,20111214085917,ROOT                
+Nom=Cog_L,Par Ligne,1
+DateM=43D8134736BACC01
+CLE=Cog_FReddition,L,Ce1,2,L,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Cog_RedNo,4,0,
+Nom=Cog_RedNoLg,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20111213144925,ROOT                ,20111214085928,ROOT                
+Nom=Cog_E,Par Numéro,1
+DateM=72FDB24D36BACC01
+CLE=Cog_FReddition,E,Ce1,2,E,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Cog_RedNo,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20111214085831,ROOT                ,20111214085831,ROOT                
+Nom=Cog_M,Par Article,1
+DateM=9612C32B36BACC01
+CLE=Cog_FReddition,M,Ce1,2,L,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Cog_RedNo,4,0,
+Nom=GrRef,12,0,
+Nom=Cog_RedNoLg,53,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110712094930,ROOT                ,20110712094933,ROOT                
+Nom=Cog_Ind_V,Par Utilisateur,1
+DateM=ED27413D6840CC01
+CLE=Cog_FValid_Cde,V,Ce1,2,V,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=TiCod,4,0,
+Nom=PiCod,5,0,
+Nom=PiNo,6,0,
+Nom=Cog_TypeV,14,0,
+Nom=Cog_TypeU,15,0,
+Nom=User,16,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110712094956,ROOT                ,20110712094956,ROOT                
+Nom=Cog_Ind_W,Par Montant,1
+DateM=CDCB094B6840CC01
+CLE=Cog_FValid_Cde,W,Ce1,2,V,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=TiCod,4,0,
+Nom=PiCod,5,0,
+Nom=PiNo,6,0,
+Nom=Cog_MtMax,14,0,
+Nom=Cog_TypeV,24,0,
+Nom=Cog_TypeU,25,0,
+Nom=User,26,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110712095339,ROOT                ,20110712095341,ROOT                
+Nom=Cog_Ind_A,Par Axe,1
+DateM=C986C9D06840CC01
+CLE=Cog_FValid_Cde,A,Ce1,2,A,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Axe,4,0,
+Nom=CptV,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110712095355,ROOT                ,20110712095355,ROOT                
+Nom=Cog_Ind_B,Par Compte de Vente,1
+DateM=35ED66D96840CC01
+CLE=Cog_FValid_Cde,B,Ce1,2,A,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=CptV,4,0,
+Nom=Axe,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110712095546,ROOT                ,20110712095548,ROOT                
+Nom=Cog_Ind_M,Par Utilisateur,1
+DateM=8134811C6940CC01
+CLE=Cog_FValid_Cde,M,Ce1,2,M,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Axe,4,0,
+Nom=CptV,12,0,
+Nom=Cog_TypeV,20,0,
+Nom=Cog_TypeU,21,0,
+Nom=User,22,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110712095601,ROOT                ,20110712095609,ROOT                
+Nom=Cog_Ind_N,Par Montant,1
+DateM=110EFC286940CC01
+CLE=Cog_FValid_Cde,N,Ce1,2,M,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Axe,4,0,
+Nom=CptV,12,0,
+Nom=Cog_MtMax,20,0,
+Nom=Cog_TypeV,30,0,
+Nom=Cog_TypeU,31,0,
+Nom=User,32,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20030127090119,LM  ,20040702174452,ROOT                
+Nom=Index_A_T000,Par code,1
+DateM=E059D0834B60C401
+CLE=cogf_tab,A,,1,032,o,5,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=CeBin,4,0,
+Nom=T000Filler,5,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20030127090304,LM  ,20051130114444,MARIE JO            
+Nom=Index_A_T001,Par code,1
+DateM=8CBC6E139BF5C501
+CLE=cogf_tab,A,,1,032,o,5,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=CeBin,4,0,
+Nom=TestCode,5,0,
+Nom=Filler,13,0,49
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20031120091603,RR                  ,20090903192839,INFOU               
+Nom=Index_A,Dossier Classe Affaire,1
+DateM=5070969AF051C401
+CLE=Coggrf_Tab,A,Ce1,2,1,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Affaire,4,0,
+Nom=AfrClas,12,0,
+Nom=Classement,20,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110617152503,SYSTEMU             ,20110617154611,SYSTEMU             
+Nom=Index_UT100,Clé Taux de refacturation centrale,1
+DateM=9FB51BEBF42CCC01
+CLE=Coggtf_Tab,A,Ce1,2,0,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_Id_Refacturation,7,0,
+Nom=Tiers,12,0,
+Nom=Cog_Dateffet,20,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110617154645,SYSTEMU             ,20110617154716,SYSTEMU             
+Nom=Index_UT101,Clé Cotisations des centrales,1
+DateM=833CAD00F52CCC01
+CLE=Coggtf_Tab,B,Ce1,2,1,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Affaire,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110617155726,SYSTEMU             ,20110617155728,SYSTEMU             
+Nom=Index_UT102,Clé Formats des factures clients,1
+DateM=12519A7EF62CCC01
+CLE=Coggtf_Tab,C,Ce1,2,2,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Tiers,7,0,
+Nom=Cog_TypMotFac,15,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110617160628,SYSTEMU             ,20110617160630,SYSTEMU             
+Nom=Index_UT103,Clé Types de Refacturation,1
+DateM=4C0A67C1F72CCC01
+CLE=Coggtf_Tab,D,Ce1,2,3,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_Id_Refacturation,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110617163825,SYSTEMU             ,20110617163826,SYSTEMU             
+Nom=Index_UT104,Clé Types de cotisations PDV,1
+DateM=1F16E237FC2CCC01
+CLE=Coggtf_Tab,E,Ce1,2,4,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_Cotisation_PDV,7,0,
+Nom=Ref,15,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110617234438,SYSTEMU             ,20110617234439,SYSTEMU             
+Nom=Index_UT105,Clé Régularisations,1
+DateM=FD8D93C2372DCC01
+CLE=Coggtf_Tab,F,Ce1,2,5,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Affaire,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110617235042,SYSTEMU             ,20110617235043,SYSTEMU             
+Nom=Index_UT106,Clé Répartitions par section pour cotisation,1
+DateM=A1BA869B382DCC01
+CLE=Coggtf_Tab,G,Ce1,2,6,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Affaire,7,0,
+Nom=Ref,15,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110617235531,SYSTEMU             ,20110617235532,SYSTEMU             
+Nom=Index_UT107,Clé Répartitions par section pour régularisation,1
+DateM=3E8F9647392DCC01
+CLE=Coggtf_Tab,H,Ce1,2,7,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Affaire,7,0,
+Nom=Ref,15,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110618000335,SYSTEMU             ,20110618000336,SYSTEMU             
+Nom=Index_UT108,Clé Affectations des cotisations PDV,1
+DateM=BCFD30683A2DCC01
+CLE=Coggtf_Tab,I,Ce1,2,8,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Affaire,7,0,
+Nom=Ref,15,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110621105807,SYSTEMU             ,20110621105814,SYSTEMU             
+Nom=Index_UT109,Clé Montants consommés des Projets spécifiques,1
+DateM=9283F45AF12FCC01
+CLE=Coggtf_Tab,J,Ce1,2,9,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Affaire,7,0,
+Nom=Cog_Numero,15,0,
+Nom=Ref,30,0,
+Nom=Cog_Date_Facturation,55,0,
+Nom=UserCrDh,63,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130514115750,ROOT                ,20130514115750,ROOT                
+Nom=Index_UT110,Clé enveloppe budgétaire,1
+DateM=B24E8E7E8950CE01
+CLE=Coggtf_Tab,K,Ce1,2,A,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_Id_Enveloppe,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20140821140237,UGIE                ,20140821140855,UGIE                
+Nom=Index_UT120,Clé type moteur facturation,1
+DateM=743D20AE38BDCF01
+CLE=Coggtf_Tab,L,Ce1,2,B,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Cog_TypMotFac,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEXL]
+Nom=Cog_FAffectBudget,Cog_AffectationBudgetaire,Cog_AffectationBudgetaire,0
+Nom=Cog_Fcollect,Cog_Collect,Cog_TypCli,0
+Nom=Cog_FDirCliente,Cog_DirCliente,Cog_DirCliente,0
+Nom=Cog_FPeriodicite,Cog_Periodicite,Cog_Periodicite,0
+Nom=Cog_FPeriodicite,Cog_Periodicite,Cog_Periodicite_UGIEIRIS,0
+Nom=Cog_FReddition,Cog_Red_Param,Cog_P,0
+Nom=Cog_FReddition,Cog_Red_Lig,Cog_L,0
+Nom=Cog_FReddition,Cog_Red_Ent,Cog_E,0
+Nom=Cog_FReddition,Cog_Red_Lig,Cog_M,0
+Nom=Cog_FValid_Cde,Cog_Valid_Cde,Cog_Ind_V,0
+Nom=Cog_FValid_Cde,Cog_Valid_Cde,Cog_Ind_W,0
+Nom=Cog_FValid_Cde,Cog_Valid_PArt,Cog_Ind_A,0
+Nom=Cog_FValid_Cde,Cog_Valid_PArt,Cog_Ind_B,0
+Nom=Cog_FValid_Cde,Cog_Valid_PMt,Cog_Ind_M,0
+Nom=Cog_FValid_Cde,Cog_Valid_PMt,Cog_Ind_N,0
+Nom=cogf_tab,Cog_T000,Index_A_T000,0
+Nom=cogf_tab,Cog_T001,Index_A_T001,0
+Nom=Coggrf_Tab,Cog_GrtEvt,Index_A,0
+Nom=Coggtf_Tab,Cog_UT100,Index_UT100,0
+Nom=Coggtf_Tab,Cog_UT101,Index_UT101,0
+Nom=Coggtf_Tab,Cog_UT102,Index_UT102,0
+Nom=Coggtf_Tab,Cog_UT103,Index_UT103,0
+Nom=Coggtf_Tab,Cog_UT104,Index_UT104,0
+Nom=Coggtf_Tab,Cog_UT105,Index_UT105,0
+Nom=Coggtf_Tab,Cog_UT106,Index_UT106,0
+Nom=Coggtf_Tab,Cog_UT107,Index_UT107,0
+Nom=Coggtf_Tab,Cog_UT108,Index_UT108,0
+Nom=Coggtf_Tab,Cog_UT109,Index_UT109,0
+Nom=Coggtf_Tab,Cog_UT110,Index_UT110,0
+Nom=Coggtf_Tab,Cog_UT120,Index_UT120,0
+[/INDEXL]

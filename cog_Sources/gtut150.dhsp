@@ -1,0 +1,30 @@
+;*
+;*		Intégration de pièces																	gttt150
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		MJV		4.1						12.1999	Version initiale en Diva 
+
+SetModuleInfo('$Id$')
+
+OverWrite	"GTTT150.dhop"
+
+public record	gtfdd.dhsd	ENT								; En-tête
+public record	gtfdd.dhsd 	G1T1								; Enregistrement gestion tableau lignes
+public record	gtfdd.dhsd 	G1T1	W3G1T1					; Mouvement de GTFI en validation
+
+;*
+Procedure G1T1_Validation_Affectation_Ap
+; après l'affectation d'une quantité à une ligne de la pièce origine en validation partielle
+BeginP
+	Standard.G1T1_Validation_Affectation_Ap
+	Switch ENT.PICOD
+		case	3
+			g1t1.Pub		= w3g1t1.Pub
+			g1t1.Axe(1)	= w3g1t1.Axe(1)
+			g1t1.Des		= w3g1t1.Des
+	Endswitch
+EndP
+
+;*

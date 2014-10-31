@@ -1,0 +1,61 @@
+<DictionarySql overwrite="ccrsdos.dhoq" overwrittenby ="ccrsdosuu.dhoq">
+;*
+;*		Surcharge Dictionnaire des définitions des RecordSQL du CCFDOS
+;*
+
+
+;*
+;*		Dossier
+;*
+
+
+
+;*
+;*	 PARAMETRES GENERAUX
+;*
+<RecordSql Name=DOSCPT>
+
+<SELECT>
+	CA.*,
+	FnpCpt.LIB,
+	FnpTvaCpt.LIB,
+	FaeCpt.LIB,
+	FaeTvaCpt.LIB
+
+<LEFTJOIN Name="Zoom">
+	C3 as FnpCpt
+	on FnpCpt.Dos = CA.Dos and FnpCpt.Cpt = CA.Cog_FnpCpt and FnpCpt.Ce1 = '3'
+<LEFTJOIN Name="Zoom">
+	C3 as FnpTvaCpt
+	on FnpTvaCpt.Dos = CA.Dos and FnpTvaCpt.Cpt = CA.Cog_FnpTvaCpt and FnpTvaCpt.Ce1 = '3'
+<LEFTJOIN Name="Zoom">
+	C3 as FaeCpt
+	on FaeCpt.Dos = CA.Dos and FaeCpt.Cpt = CA.Cog_FaeCpt and FaeCpt.Ce1 = '3'
+<LEFTJOIN Name="Zoom">
+	C3 as FaeTvaCpt
+	on FaeTvaCpt.Dos = CA.Dos and FaeTvaCpt.Cpt = CA.Cog_FaeTvaCpt and FaeTvaCpt.Ce1 = '3'
+
+
+;*
+;*		IMMOBILISATION (CD)
+;*
+<RecordSql Name=DOSIMMO>
+
+<SELECT>
+	CD.*,
+	C4.LIB		AS Libelle_CesJnl,
+	CPTCES.LIB,
+	CPTCESAMO.LIB,
+	CptCesVal.LIB
+<LEFTJOIN>
+	C4
+	ON C4.DOS = CD.DOS AND C4.JNL = CD.COG_CESJNL
+<LEFTJOIN Name="Zoom">
+	C3 as CptCes
+	on CptCes.Dos = CD.Dos and CptCes.Cpt = CD.Cog_CptCes and CptCes.Ce1 = '3'
+<LEFTJOIN Name="Zoom">
+	C3 as CptCesAmo
+	on CptCesAmo.Dos = CD.Dos and CptCesAmo.Cpt = CD.Cog_CptCesAmo and CptCesAmo.Ce1 = '3'
+<LEFTJOIN Name="Zoom">
+	C3 as CptCesVal
+	on CptCesVal.Dos = CD.Dos and CptCesVal.Cpt = CD.COG_CptCesVal and CptCesVal.Ce1 = '3'

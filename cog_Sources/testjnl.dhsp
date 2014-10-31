@@ -1,0 +1,26 @@
+public hfile	ccfdd.dhsd	ccfecr	ccfecr	openonuse
+
+public record	ccfdd.dhsd	c8
+
+1	Jnl	>Ccfdd.Dhsd	Jnl
+1	Dos	>Gtfdd.Dhsd	Dos
+1	Datd	>Gtfdd.Dhsd	Datd
+1	Datf	>Gtfdd.Dhsd	Datf
+1	Test	1
+
+;*
+Main
+
+	;ccfecr.Key	= "C" & mz.Dos & ca.Cog_ExpPV_Jnl & datd
+	;loop not hread(ccfecr,c8) and ccfecr.Key <= "C" & mz.Dos & ca.Cog_ExpPV_Jnl & datf & $FFn
+
+	Jnl  = 'T1'
+	Dos  = 998
+	Datd = '19000101'
+	Datf = '99991231'
+
+	ccfecr.Key	= "C" & Dos & jnl & datd
+	loop not hread(ccfecr,c8) and ccfecr.Key <= "C" & Dos & Jnl & Datf & $FF
+		test = test
+
+	EndLoop

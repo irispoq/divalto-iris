@@ -1,0 +1,22 @@
+OverWrite gttz091_sql.dhop
+
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+;
+Public RecordSql "gtrstab.dhoq" Service Service
+
+; Enregistrements
+Public Record GTFDD.dhsd T037			; Collaborateur
+Public Record GTFDD.dhsd T051			; Service
+Public Record GTFDD.dhsd T054
+
+Public Record GTFDD.DHSD XQ		XQ_COG
+
+;*
+Procedure ZoomApresRead
+Beginp
+	Standard.ZoomApresRead
+	Init XQ_COG.Lib() = ' '
+	;If Lectab(37,T051.SalCod) = 0	|	G7.Lib(1) = T037.Lib	|	Endif
+	If Lectab (54,Service.Cog_SalGrp,1154) = 0 | xq_cog.Lib(1) = T054.LIB	| Endif
+Endp	

@@ -1,0 +1,418 @@
+;*
+;*	Module de fonctions communes à la validation des commandes fournisseurs
+;*
+;*	Créé le 12/07/2011 par ROBL
+;*
+
+;include	"zmapi.dhsp"
+include	"gttc000.dhsp"
+module	"a5pmflash.dhop"
+Module	'GTPMPCE000.dhop'
+
+
+public record	gtfdd.dhsd	SOC								; Dossiers
+public record	gtfdd.dhsd	ENT								; En-tête
+public record	gtfdd.dhsd 	MOUV								; Mouvement en suppression de pièce
+public record	gtfdd.dhsd	MVTL								; ventilation
+
+public record	gtfdd.dhsd 	GTENT									; Enregistrement de travail
+public record	gtfdd.dhsd	XT		G3XT						; Tableau des lignes
+public record	gtfdd.dhsd	XQ		XQMES
+
+const	C_Mode_Modification  = 2
+const	C_Mode_Creation		= 3
+const	C_Mode_Duplication	= 4
+
+
+1	maj_valid	1,0	= false
+
+
+;*
+;	Envoi des mails de Validation
+;*
+
+;*
+procedure Cog_EnvoyerFlashDemandeApprobation(ent_p,user)
+record	gtfdd.dhsd		ent			ent_p
+1	user	>	gtfdd.dhsd	user
+
+hfile		a5dd.dhsd		a5fdos		a5fdos_loc
+hfile		a5dd.dhsd		a5fflash		a5fflash_loc
+
+record	a5dd.dhsd		muser			muser_loc
+record	a5dd.dhsd		mflash		mflash_loc
+
+beginp
+
+	if soc.Cog_Flash_CdeF_Valid > 0 
+		if not hseek(a5fflash_loc,mflash_loc,"A"&ent_p.Dos&soc.Cog_Flash_CdeF_Valid&ent_p.Etb&ent_p.Depo) \
+		or not hseek(a5fflash_loc,mflash_loc,"A"&ent_p.Dos&soc.Cog_Flash_CdeF_Valid&ent_p.Etb) \
+		or not hseek(a5fflash_loc,mflash_loc,"A"&ent_p.Dos&soc.Cog_Flash_CdeF_Valid)
+
+			if not hseek(a5fdos_loc,muser_loc,"B"&user) and muser_loc.email <> ""
+
+				xqmes.UXQ	= muser_loc.email	;on sauvegarde le mail du valideur/vérificateur
+				A5_Flash_Envoi(soc.Cog_Flash_CdeF_Valid,mflash_loc.Etb,mflash_loc.Depo,0)
+
+			endif
+
+		endif
+	endif
+
+endp
+
+;*
+public function int Cog_ValidCde_EnvoyerMail(Ent_p,Cog_Valid_Cde_p)
+;retour 0 si mail ok, 1 si une partie des mails envoyés, 2 si aucun mail envoyé
+record	gtfdd.dhsd	ent				ent_p
+record	cogfdd.dhsd	cog_valid_cde	cog_valid_cde_p
+
+hfile		a5dd.dhsd	a5fdos			a5fdos_loc
+
+record	a5dd.dhsd	muser				muser_loc
+record	a5dd.dhsd	musergrpdet		musergrpdet_loc
+
+1	retour		1,0
+1	t_Key_01		255
+beginf
+
+	;préparation du message
+	if Cog_Valid_Cde_p.Cog_TypeV = 1
+		xqmes.WinTitre	= "Vérification de la commande "&right(ent_p.PiNo)
+		xqmes.Sel		= "Bonjour,"&$0D0A&$0D0A&"Merci de bien vouloir vérifier la commande n° "&right(ent_p.PiNo)&" créée par "&ent_p.UserCr \
+		&&" concernant le fournisseur "&ent_p.Tiers&&"."&$0D0A&$0D0A&"Cordialement,"&$0D0A&$0D0A&"Le Service Divalto"
+	else
+		xqmes.WinTitre	= "Validation de la commande "&right(ent_p.PiNo)
+		xqmes.Sel		= "Bonjour,"&$0D0A&$0D0A&"Merci de bien vouloir valider la commande n° "&right(ent_p.PiNo)&" créée par "&ent_p.UserCr \
+		&&" concernant le fournisseur "&ent_p.Tiers&&"."&$0D0A&$0D0A&"Cordialement,"&$0D0A&$0D0A&"Le Service Divalto"
+	endif
+
+	;recherche de l'utilisateur
+	if hseek(a5fdos_loc,muser_loc,"B"&cog_valid_cde_p.User)
+		muser_loc	= ""
+	endif
+
+	;envoi des mails
+;	if mapiopen <> 0
+;		messagebox("Erreur : "&MapiErrorText&&"|Mail non envoyé aux utilisateurs "&cog_valid_cde_p.User,"Alerte",mb_iconexclamation)
+;		freturn(1)
+;	endif
+
+	retour	= 0
+	if cog_valid_cde_p.Cog_TypeU = 2
+		a5fdos_loc.Key	= "L" & cog_valid_cde_p.User
+		loop not hread(a5fdos_loc,musergrpdet_loc) and a5fdos_loc.Key <= "L" & cog_valid_cde_p.User & $FF
+			t_Key_01 = isavekey(a5fdos_loc)
+			if not hseek(a5fdos_loc,muser_loc,"B"&musergrpdet_loc.User)
+				Cog_EnvoyerFlashDemandeApprobation(ent_p,muser_loc.User)
+			endif
+			IRestoreKey(a5fdos_loc,t_Key_01)
+;			if MapiSend(mapi_mail,objet,texte,muser_loc.Email) <> 0
+;				messagebox("Erreur : "&MapiErrorText&&"|Mail non envoyé à l'utilisateur "&cog_valid_cde_p.User,"Alerte",mb_iconexclamation)
+;				retour	= condition(retour=0,2,condition(retour=3,1,retour))
+;			else
+;				retour	= condition(retour=0,3,condition(retour=2,1,retour))
+;			endif
+		endloop
+;		if retour = 3
+;			retour	= 0
+;		endif
+	elsif muser_loc <> ""
+		Cog_EnvoyerFlashDemandeApprobation(ent_p,muser_loc.User)
+;	elsif MapiSend(mapi_mail,objet,texte,muser_loc.Email) <> 0
+;		messagebox("Erreur : "&MapiErrorText&&"|Mail non envoyé à l'utilisateur "&cog_valid_cde_p.User,"Alerte",mb_iconexclamation)
+;		mapiclose
+;		freturn(2)
+	endif
+
+	if retour = 0
+		messagebox("Le mail vient d'être envoyé au(x) valideur(s) suivant(s)","Message",mb_iconinformation)
+	elsif retour = 1
+		messagebox("Le mail n'a pas pu être envoyé à tous les valideurs suivants","Message",mb_iconinformation)
+	else
+		messagebox("Aucun mail n'a pu être envoyé aux valideurs suivants","Message",mb_iconinformation)
+	endif
+
+;	mapiclose
+	freturn(retour)
+
+endf
+
+
+;*
+;	Procédure de contrôle
+;*
+
+;*
+Public Function char Cog_ValidCde_ENT_Controle_Fin
+hfile		cogfdd.dhsd	cog_fvalid_cde	cog_fvalid_cde_loc
+record	cogfdd.dhsd	cog_valid_cde	cog_valid_cde_loc
+
+beginf
+
+	if LireProgrammeMode = C_Mode_Modification
+
+		cog_fvalid_cde_loc.Key	= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo
+		if not hread(cog_fvalid_cde_loc,cog_valid_cde_loc) and cog_fvalid_cde_loc.Key <= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo & $FF \
+		and cog_valid_cde_loc.HtPdtMt <> ent.HtPdtMt
+	
+			if messagebox("Le montant HT Produit a été modifié. Le processus de validation doit être refait.|Confirmez-vous la mise à jour ?","Confirmation",mb_iconquestion+mb_yesno) = idyes
+				maj_valid	= true
+				freturn("O")
+			else
+				freturn("N")
+			endif
+	
+		endif
+
+	endif
+
+	freturn("O")
+
+endf
+
+;*
+function int Cog_ControleValidation
+hfile		cogfdd.dhsd	cog_fvalid_cde	cog_fvalid_cde_loc
+record	cogfdd.dhsd	cog_valid_cde	cog_valid_cde_loc
+
+1	validation		1,0	= true
+
+beginf
+
+	cog_fvalid_cde_loc.Key	= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo
+	loop not hread(cog_fvalid_cde_loc,cog_valid_cde_loc) and cog_fvalid_cde_loc.Key <= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo & $FF \
+	and validation = true
+		if cog_valid_cde_loc.Cog_Validation <> 2
+			validation	= false
+		endif
+	endloop
+
+	freturn(validation)
+
+endf
+
+;*
+procedure Cog_CreerValidations(axe,cptv)
+1	axe	>	cogfdd.dhsd	axe
+1	cptv	>	cogfdd.dhsd	cptv
+
+hfile		cogfdd.dhsd	cog_fvalid_cde	cog_fvalid_cde_loc
+
+record	cogfdd.dhsd	cog_valid_cde	cog_valid_cde_loc
+record	cogfdd.dhsd	cog_valid_pmt	cog_valid_pmt_loc
+
+1	svcle					S
+
+beginp
+
+	cog_fvalid_cde_loc.Key	= "N" & ent.Dos & axe & cptv
+	loop not hread(cog_fvalid_cde_loc,cog_valid_pmt_loc) and cog_fvalid_cde_loc.Key <= "N" & ent.Dos & axe & cptv & $FF
+
+		svcle	= isavekey(cog_fvalid_cde_loc)
+		if not hseek(cog_fvalid_cde_loc,cog_valid_cde_loc,"V"&ent.Dos&ent.TiCod&ent.PiCod&ent.PiNo&cog_valid_pmt_loc.Cog_TypeV&cog_valid_pmt_loc.Cog_TypeU&cog_valid_pmt_loc.User)
+			if cog_valid_cde_loc.Cog_MtMax < cog_valid_pmt_loc.Cog_MtMax
+				cog_valid_cde_loc.Cog_MtMax	= cog_valid_pmt_loc.Cog_MtMax	;on ne garde que le montant le plus haut pour un même utilisateur
+				hrewrite(cog_fvalid_cde_loc,cog_valid_cde_loc)
+			endif
+		else
+			cog_valid_cde_loc					= ""
+			cog_valid_cde_loc.Ce1			= "V"
+			cog_valid_cde_loc.Dos			= ent.Dos
+			cog_valid_cde_loc.TiCod			= ent.TiCod
+			cog_valid_cde_loc.PiCod			= ent.PiCod
+			cog_valid_cde_loc.PiNo			= ent.PiNo
+			cog_valid_cde_loc.Cog_TypeV	= cog_valid_pmt_loc.Cog_TypeV
+			cog_valid_cde_loc.Cog_TypeU	= cog_valid_pmt_loc.Cog_TypeU
+			cog_valid_cde_loc.User			= cog_valid_pmt_loc.User
+			cog_valid_cde_loc.Cog_MtMax	= cog_valid_pmt_loc.Cog_MtMax
+			cog_valid_cde_loc.HtPdtMt		= ent.HtPdtMt
+			cog_valid_cde_loc.UserCr		= system.User
+			cog_valid_cde_loc.UserCrDh		= time(7)
+			cog_valid_cde_loc.Note			= 0
+			cog_valid_cde_loc.CeNote		= 1
+			cog_valid_cde_loc.Joint			= 0
+			cog_valid_cde_loc.CeJoint		= 1
+			hwrite(cog_fvalid_cde_loc,cog_valid_cde_loc)
+		endif
+		irestorekey(cog_fvalid_cde_loc,svcle)
+
+		if cog_valid_pmt_loc.Cog_MtMax > ent.HtPdtMt
+			exitloop
+		endif
+
+	endloop
+	
+endp
+
+;*
+procedure Cog_PreparerValidations
+hfile		cogfdd.dhsd	cog_fvalid_cde	cog_fvalid_cde_loc
+hfile		gtfdd.dhsd	gtfat				gtfat_loc
+
+record	cogfdd.dhsd	cog_valid_cde	cog_valid_cde_loc
+record	gtfdd.dhsd	art				art_loc
+record	gtfdd.dhsd	g1t1				g1t1_loc
+
+1	pos					10
+
+beginp
+
+	;on commence par effacer l'ancienne validation (en cas de modification du ht produit)
+	cog_fvalid_cde_loc.Key	= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo
+	loop not hread(cog_fvalid_cde_loc,cog_valid_cde_loc) and cog_fvalid_cde_loc.Key <= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo & $FF
+		hdelete(cog_fvalid_cde_loc,cog_valid_cde_loc)
+	endloop
+
+	;on lit le tableau des lignes pour connaitre les vérificateurs / valideurs et faire la mise à jour
+	xmelistgetposition(g3xt.IdTableau(1),pos)
+	xmelistbegin(g3xt.IdTableau(1))
+	loop xmelistnext(g3xt.IdTableau(1),g1t1_loc)
+		if g1t1_loc.Ce2 = "1" and g1t1_loc.Ce7 = "" and g1t1_loc.Ce8 = "" ;on ne traite que les mouvements articles
+
+			if hseek(gtfat_loc,art_loc,"A"&ent.Dos&g1t1_loc.Ref)
+				art_loc	= ""
+			endif
+
+			;recherche par section et compte
+			Cog_CreerValidations(g1t1_loc.Axe(1),art_loc.CptA)
+
+			;recherche par compte
+			Cog_CreerValidations("",art_loc.CptA)
+
+			;recherche par section
+			Cog_CreerValidations(g1t1_loc.Axe(1),"")
+
+		endif
+	endloop
+	xmelistsetposition(g3xt.IdTableau(1),pos)
+
+	;on envoie le premier mail
+	if not hread(cog_fvalid_cde_loc,cog_valid_cde_loc,"W"&ent.Dos&ent.TiCod&ent.PiCod&ent.PiNo) and cog_valid_cde_loc.Dos = ent.Dos \
+	and cog_valid_cde_loc.TiCod = ent.TiCod and cog_valid_cde_loc.PiCod = ent.PiCod and cog_valid_cde_loc.PiNo = ent.PiNo
+		if Cog_ValidCde_EnvoyerMail(ent,cog_valid_cde_loc) < 2
+			cog_valid_cde_loc.Cog_MailDt		= time(7)
+			cog_valid_cde_loc.Cog_MailUser	= system.user
+			hrewrite(cog_fvalid_cde_loc,cog_valid_cde_loc)
+		endif
+	endif
+	
+endp
+
+
+;*
+;	Avant écriture des enregistrements
+;*
+
+;*
+public procedure Cog_ValidCde_Ent_Write_Av
+hfile		cogfdd.dhsd	cog_fvalid_cde	cog_fvalid_cde_loc
+record	cogfdd.dhsd	cog_valid_cde	cog_valid_cde_loc
+
+beginp
+	
+	if ent.Ce4 <> "4"	;on ne traite pas les commandes modèles
+	
+		Cog_PreparerValidations
+
+		;on vérifie s'il existe des valideurs / vérificateurs
+		cog_fvalid_cde_loc.Key	= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo
+		if not hread(cog_fvalid_cde_loc,cog_valid_cde_loc) and cog_fvalid_cde_loc.Key <= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo & $FF
+			ent.Ce4	= "7"
+		endif
+
+	endif
+
+endp
+
+;*
+public procedure Cog_ValidCde_ENT_Principale_Rewrite_Av
+hfile		cogfdd.dhsd	cog_fvalid_cde	cog_fvalid_cde_loc
+record	cogfdd.dhsd	cog_valid_cde	cog_valid_cde_loc
+
+beginp
+
+	if ent.Ce4 <> "4"	;on ne traite pas les commandes modèles
+	
+		if maj_valid
+			Cog_PreparerValidations
+		endif
+
+		;on vérifie s'il existe des valideurs / vérificateurs
+		cog_fvalid_cde_loc.Key	= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo
+		if not hread(cog_fvalid_cde_loc,cog_valid_cde_loc) and cog_fvalid_cde_loc.Key <= "V" & ent.Dos & ent.TiCod & ent.PiCod & ent.PiNo & $FF
+			ent.Ce4	= condition(Cog_ControleValidation,"1","7")
+		endif
+
+	endif
+
+endp
+
+;*
+public procedure Cog_ValidCde_Mouv_Write_Av
+beginp
+	
+	If mouv.CdCe4	in ("1","7")
+		mouv.CdCe4	= ent.Ce4
+	EndIf
+
+endp
+
+;*
+public procedure Cog_ValidCde_Mouv_Rewrite_Av
+beginp
+	
+	If mouv.CdCe4	in ("1","7")
+		mouv.CdCe4	= ent.Ce4
+	EndIf
+
+endp
+
+;*
+public procedure Cog_ValidCde_Mvtl_Write_Av
+hfile		gtfdd.dhsd	gtfam		gtfam_loc
+record	gtfdd.dhsd	mouv		mouv_loc
+
+beginp
+
+	If not hseek(gtfam_loc,mouv_loc,"M"&mvtl.Dos&mvtl.EnrNo) and mouv_loc.CdCe4 in ("1","7")
+		mvtl.Ce4	= ent.Ce4
+	EndIf
+
+endp
+
+;*
+public procedure Cog_ValidCde_Mvtl_Rewrite_Av
+hfile		gtfdd.dhsd	gtfam		gtfam_loc
+record	gtfdd.dhsd	mouv		mouv_loc
+
+beginp
+
+	If not hseek(gtfam_loc,mouv_loc,"M"&mvtl.Dos&mvtl.EnrNo) and mouv_loc.CdCe4 in ("1","7")
+		mvtl.Ce4	= ent.Ce4
+	EndIf
+
+endp
+
+
+;*
+;	Traitements / Points d'arrêts
+;*
+
+;*
+public procedure Cog_ValidCde_U_Traitement
+beginp
+
+	switch harmony.Key
+	
+		case harmony.Dataarret = 1000		;zoom des validations
+			if LireProgrammeMode = C_Mode_Modification
+				ping("Cog_ValidEnt",ent)
+				Zoom_Call(63302,0)
+			endif
+
+	endswitch
+	
+endp
+
+;*

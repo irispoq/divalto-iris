@@ -1,0 +1,163 @@
+;*
+;*	Péremption des pièces
+;*
+
+Include "gttc000.dhsp"
+
+
+			HFile		"gtfdd.dhsd"	gtfent	gtfent
+			HFile 	"gtfdd.dhsd" 	gtfat		gtfat
+			HFile 	"gtfdd.dhsd" 	gtfam		gtfam
+			HFile 	"gtfdd.dhsd" 	gtfvtl	gtfvtl
+			HFile 	"gtfdd.dhsd" 	gtfres	gtfres
+Public	Record	"a5dd.dhsd"		mz			mz
+public	Record	"gtfdd.dhsd"	soc		soc
+public 	Record	"gtfdd.dhsd" 	fou		fou
+public 	Record	"gtfdd.dhsd" 	t020		t020
+public	Record	"gtfdd.dhsd"	ent		ent
+public 	Record	"gtfdd.dhsd" 	ets		ets
+public 	Record	"gtfdd.dhsd" 	cli		cli
+public 	Record	"gtfdd.dhsd"	xq			g3xq
+public 	Record	"gtfdd.dhsd"	xz			g3xz
+			Record	"gtfdd.dhsd"	mouv		mouv
+			Record	"gtfdd.dhsd"	mvtl		mvtl
+			Record	"gtfdd.dhsd"	mres		mres
+
+Const	C_Page_Trace						= 2
+Const	C_Page_Selection					= 3
+Const	C_Page_Traitement					= 4
+
+1		IdToolbar			 L
+1		Cpt					 5,0
+
+					
+;*
+;*	Programme Principal
+;* 01 | 02
+Main
+
+	If PingReceive("zechange",mz) <> 0
+		Programexit
+	Else
+		Seek_SOC(mz.Dos)
+		g3xq.TiCod = mz.TiCod
+		mz.MeCle = "coggt_ee_perime_tr.dhof"
+		Do While True
+			XmeLoad(mz.MeCle)
+			XmeInfoPage(mz.MeCle,1)
+			XmeSetWindowSize(mz.MeCle,1,harmony.Opara3,harmony.Opara4)
+			IdToolbar = XmeToolbarGetId(mz.MeCle,"MAIN")
+			XmeToolbarSetWindow(IdToolbar,mz.MeCle,1)
+			XmeTitle("Divalto - " & Left(soc.Nom) & " - " & mz.Titre2)
+			If g3xq.TiCod = "F"
+				g3xq.Choix(1) = 2
+			ElsIf g3xq.TiCod = "C"
+				g3xq.Choix(1) = 1
+			Endif
+			g3xq.Choix(2) = 1
+			g3xq.DatD = HDate(Today,"P","-1")					; On prend le dernier jour du mois précédent	
+			g3xq.DatF = HDate(Today,"D","-1")	
+			g3xq.PiNoD = " "
+			g3xq.PiNoF = " "
+			g3xq.TiersD = " "
+			Init g3xq.TiersF = "z"
+			G3_Saisie_Selections(mz.MeCle,1)
+			Cpt = 0
+			OpenTrace(C_Page_Trace,C_Page_Selection,C_Page_Traitement)
+			If g3xq.Choix(1) = 2   ; Fournisseurs
+				gtfent.Key = "I" & mz.Dos & "F2" & g3xq.PiNoD
+				Loop HRead(gtfent,ent) = 0 And ent.Dos = mz.Dos And ent.TiCod = "F" And ent.PiCod = 2 And ent.PiNo <= g3xq.PiNoF
+					g3xq.Lib(1) = ToString(ent.PiNo)
+					Afficher_Selection
+					If ent.PiDt Not In (g3xq.DatD..g3xq.DatF) | RedoLoop | EndIf
+					If ent.Tiers Not In (g3xq.TiersD..g3xq.TiersF) | RedoLoop | EndIf
+					If ent.Ce4 <> 8
+						Loop Res_ENT(ent.TiCod,ent.PiCod,ent.PiNo) <> 0
+						   Messagebox("Commande fournisseur n° " & ToString(ent.PiNo) & " réservée par un autre utilisateur, veuillez valider ou abandonner la saisie sur l'autre poste.","Attention",MB_OK)
+						Endloop	
+						gtfam.Key = "I" & ent.Dos & ent.TiCod & ent.PiNo
+						Loop HRead(gtfam,mouv) = 0 And mouv.Dos = ent.Dos And mouv.TiCod = ent.TiCod And mouv.CdNo = ent.PiNo
+							mouv.CdCe4 = "8"
+						   gtfvtl.Key = "A" & mz.Dos & mouv.EnrNo
+						   Loop HRead(gtfvtl,mvtl) = 0 And mvtl.Dos = mouv.Dos And mvtl.EnrNo = mouv.EnrNo
+								If mvtl.StRes = 2 
+									gtfres.Key = "A" & mvtl.Dos & mvtl.TicketRes		
+									Loop hread(gtfres,mres) = 0 And mres.Dos = mvtl.Dos And mres.TicketResS = mvtl.TicketRes
+										HDelete(gtfres,mres)
+									EndLoop
+								endif
+								mvtl.Ce3		= " "
+								mvtl.Ce5		= " "
+								mvtl.StRes	= 1
+								mvtl.ResQte	= 0
+								mvtl.TicketRes = " "
+								HRewrite(gtfvtl,mvtl)
+						   EndLoop
+							HRewrite(gtfam,mouv)
+						EndLoop
+						ent.Ce4 = "8"
+						HRewrite(gtfent,ent)
+						Lib_ENT(ent.TiCod,ent.PiCod,ent.PiNo)
+						Cpt++
+						g3xq.Lib(2) = ToString(ent.PiNo)
+						Afficher_Traitement
+					EndIf
+				Endloop
+			Endif
+			If g3xq.Choix(1) = 1	 ; Clients
+				gtfent.Key = "I" & mz.Dos & "C2"	& g3xq.PiNoD
+				Loop HRead(gtfent,ent) = 0 and ent.Dos = mz.Dos and ent.TiCod = "C" And ent.PiCod = 2 And ent.PiNo <= g3xq.PiNoF
+					g3xq.Lib(1) = ToString(ent.PiNo)
+					Afficher_Selection
+					If ent.PiDt Not In (g3xq.DatD..g3xq.DatF) | RedoLoop | EndIf
+					If ent.Tiers Not In (g3xq.TiersD..g3xq.TiersF) | RedoLoop | EndIf
+					If ent.Ce4 <> 8
+						Loop Res_ENT(ent.TiCod,ent.PiCod,ent.PiNo) <> 0
+						   Messagebox("Commande client n°" & ToString(ent.PiNo) & " réservée par un autre utilisateur, veuillez valider ou abandonner la saisie sur l'autre poste.",'Attention',MB_OK)
+						Endloop	
+						gtfam.Key = "I" & ent.Dos & ent.TiCod & ent.PiNo
+						Loop HRead(gtfam,mouv) = 0 And mouv.Dos = ent.Dos And mouv.TiCod = ent.TiCod And mouv.CdNo = ent.PiNo
+							mouv.CdCe4 = "8"
+						   gtfvtl.Key = "A" & mz.Dos & mouv.EnrNo
+						   Loop HRead(gtfvtl,mvtl) = 0 And mvtl.Dos = mouv.Dos And mvtl.EnrNo = mouv.EnrNo
+								 If mvtl.StRes = 2 
+									 gtfres.Key = "A" & mvtl.Dos & mvtl.TicketRes		
+									 Loop HRead(gtfres,mres) = 0 and mres.Dos = mvtl.Dos and mres.TicketResS = mvtl.TicketRes
+										 HDelete(gtfres,mres)
+									 EndLoop
+								 EndIf
+							    mvtl.Ce3 	 = " "
+								 mvtl.Ce5 	 = " "
+							    mvtl.StRes  = 1
+							    mvtl.ResQte = 0
+								 mvtl.TicketRes = " "
+							    HRewrite(gtfvtl,mvtl)
+						   EndLoop
+							HRewrite(gtfam,mouv)
+						EndLoop
+						ent.Ce4 = "8"
+						HRewrite(gtfent,ent)
+						Lib_ENT(ent.ticod,ent.picod,ent.pino)
+						Cpt++
+						g3xq.Lib(2) = ToString(ent.PiNo)
+						Afficher_Traitement
+					EndIf
+				Endloop
+			Endif
+			CloseTrace
+			If Cpt > 0
+				MessageBox("Péremption de " & ToString(Cpt) & " Commande(s) terminée.","Rapport",MB_ICONINFORMATION)
+			Else
+				MessageBox("Aucune commande périmée.","Rapport",MB_ICONINFORMATION)
+			EndIf
+			ExitDo
+		Wend
+	Endif
+
+; fin
+programexit
+	
+	
+	
+	
+	

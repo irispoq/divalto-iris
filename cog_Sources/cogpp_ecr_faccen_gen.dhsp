@@ -1,0 +1,656 @@
+;>xdiva
+;*
+;*		Génération des écritures de facturation aux centrales - Programme Cogpp_ecr_faccen_gen.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	kit104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		Cog_GenererEcrituresCentrales			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+
+include	gttcz00.dhsp						;déclarations communes
+
+module	Cogtm_000.dhop						;module de fonctions communes
+module	ccpmfic.dhop
+
+
+htmpfile			ccfdd.dhsd	ccfm		ccfmcen	deleteonexit
+
+public hfile	ccfdd.dhsd	ccfecr	ccfecr	openonuse
+public hfile	ccfdd.dhsd	ccfvtl	ccfvtl	openonuse
+public hfile	ccfdd.dhsd	ccfjca	ccfjca	openonuse
+
+
+public record	gtfdd.dhsd	cli
+public record	gtfdd.dhsd	xq			xq_cog		;enregistrement de travail
+public record	gtfdd.dhsd	xq			xq_tmp		;enregistrement de travail
+
+public record	ccfdd.dhsd	ca
+public record	ccfdd.dhsd	c3
+public record	ccfdd.dhsd	c4
+public record	ccfdd.dhsd	c8
+public record	ccfdd.dhsd	cx
+
+public record	ccfdd.dhsd	c4			c4_cen
+
+
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+
+structure EcritureCentrale
+	1	TiersGrp	>	gtfdd.dhsd	tiersgrp
+	1	Cpt		>	ccfdd.dhsd	cpt
+	1	Axe3		>	gtfdd.dhsd	axe
+	1	Axe4		>	gtfdd.dhsd	axe
+	1	CptAux	>	ccfdd.dhsd	cog_CptAnael
+	1	Mt			>	ccfdd.dhsd	mt
+	1	ecrno		>	ccfdd.dhsd	ecrno
+	1	piece		>	ccfdd.dhsd	piece
+endstructure
+
+1	list_EcrCen			L
+1	list_EcrVtl			L
+1	list_EcrC8			L
+
+1	fonc_EcrCen			16
+1	fonc_EcrVtl			16
+
+1	EcrnoG	>	ccfdd.dhsd	ecrno	= 0
+
+RecordDiva	EcritureCentrale	EcrCen
+
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+function int Cog_InitialiserVariables
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+beginf
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		if iseek(a5fdos_loc,muser_loc,"B",system.user)
+
+			if not tunnel
+				messagebox("Utilisateur "&left(system.user)&" non défini dans la base Divalto","Alerte",mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= muser_loc.dos
+			mz.etb		= muser_loc.etb
+			mz.depo		= muser_loc.depo
+			mz.mecle		= "Cogee_ecr_faccen_gen.dhof"
+			mz.mtcle		= "Cogtt_ecr_faccen_gen.dhop"
+			mz.titre2	= "Génération des écritures de facturations aux centrales"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment("Génération des écritures de facturations aux centrales")
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+	Seek_CA(mz.Dos)
+
+	if ca.Cog_Exp_Ch = "" or Seek_C4(ca.Cog_ExpCen_Jnl) <> 0
+		if not tunnel
+			messagebox("Dossier mal paramétré pour l'export vers Anaël","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Dossier mal paramétré pour l'export vers Anaël",applic="DCPT")
+		freturn(false)
+	endif
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	windowshow(sw_maximize)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	;création des listes
+	if (list_EcrC8 := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur lors de la création de la liste des écritures à traiter","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur lors de la création de la liste des écritures à traiter",applic="DCPT")
+		freturn(false)
+	endif
+	if (list_EcrCen := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur lors de la création de la liste des écritures à exporter","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur lors de la création de la liste des écritures à exporter",applic="DCPT")
+		freturn(false)
+	endif
+	GetAdressFunction("","CompareEcrCen",fonc_EcrCen)
+	ListMode(list_EcrCen,1,fonc_EcrCen) 
+	if (list_EcrVtl := listcreate) = 0
+		if not tunnel
+			messagebox("Erreur lors de la création de la liste des écritures analytiques à exporter","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Erreur lors de la création de la liste des écritures analytiques à exporter",applic="DCPT")
+		freturn(false)
+	endif
+	GetAdressFunction("","CompareEcrVtl",fonc_EcrVtl)
+	ListMode(list_EcrVtl,1,fonc_EcrVtl)
+ 
+	;réservation du journal d'export
+	if hshare(ccfjca,"C3C4"&c4.Dos&c4.Jnl,"R")
+		if not tunnel
+			messagebox("Journal "&left(c4.Jnl)&" réservé.|Génération des écritures impossible","Alerte",mb_iconexclamation)
+		endif
+		Cog_EcritureLivreDeBord("Journal "&left(c4.Jnl)&" réservé. Génération des écritures impossible",applic="DCPT")
+		freturn(false)
+	endif
+	c4_cen	= c4
+
+	freturn(true)
+
+endf
+
+;*
+procedure Cog_LibererJournal
+beginp
+
+	if not hseek(ccfjca,c4,"D"&c4_cen.Dos&c4_cen.Jnl)
+		c4.Cog_PiecePV	= c4_cen.Cog_PiecePV
+		hrewrite(ccfjca,c4)
+	endif
+	hshare(ccfjca,"C3C4"&c4_cen.Dos&c4_cen.Jnl,"L")
+
+endp
+
+;*
+procedure Cog_FinProgramme
+beginp
+
+	Cog_EcritureLivreDeBord("<-- Génération des écritures de facturations aux centrales",applic="DCPT")
+	listdestroy(list_EcrC8)
+	listdestroy(list_EcrCen)
+	listdestroy(list_EcrVtl)
+	Cog_LibererJournal
+
+	programexit
+
+endp
+
+;*
+procedure Cog_AfficherTraitement
+beginp
+
+	;test d'abandon du programme en cours de traitement
+	if getchar()=$E8 and messagebox("Abandon du traitement en cours ?","Confirmation",mb_iconquestion+mb_yesno)=idyes
+		Cog_EcritureLivreDeBord("Abandon utilisateur",applic="DCPT")
+		Cog_FinProgramme
+	endif
+
+	xmedispv mz.mecle 3 xme_mode_gosub
+	xmeret
+	xmedispv mz.mecle 4 xme_mode_gosub
+	xmeret
+
+endp
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	;test si le journal est exporté vers le journal des centrales
+	if c4.Cog_JnlCen <> 2
+		freturn(false)
+	endif
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Fonctions de Tri
+;*
+
+;*
+Function Long CompareEcrCen(&elem1,&elem2)
+recorddiva	EcritureCentrale	elem1
+recorddiva	EcritureCentrale	elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	=	elem1.TiersGrp & elem1.Cpt & elem1.Axe3 & elem1.Axe4
+	cle2	=	elem2.TiersGrp & elem2.Cpt & elem2.Axe3 & elem2.Axe4
+
+   freturn(sortcompare(cle1,cle2))
+
+Endf 
+
+;*
+Function Long CompareEcrVtl(&elem1,&elem2)
+record	ccfdd.dhsd	cx	elem1
+record	ccfdd.dhsd	cx	elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	=	elem1.EcrNo & elem1.Cpt
+	cle2	=	elem2.EcrNo & elem2.Cpt
+
+   freturn(sortcompare(cle1,cle2))
+
+Endf 
+
+  
+;*
+;	Traitements
+;*
+
+;*
+procedure Cog_IntegrerCcfm
+record	ccfdd.dhsd	xz		xz_lox
+beginp
+
+	hclose(ccfmcen)
+	xz_lox.fic		= ccfmcen.name
+	xz_lox.action	= 0
+	xz_lox.motcle	= "INTEGRE"
+
+	ping("status",1)
+	ping("c3xz",xz_lox)
+	ping("zechange",mz)
+	programcall("ccpp029.dhop",sw_hide,call_wait)
+
+endp
+
+;*
+procedure Cog_TraiterEcriture(ecrno)
+1	ecrno	>	ccfdd.dhsd	ecrno
+
+hfile		ccfdd.dhsd	ccfecr	ccfecr_rec
+
+record	ccfdd.dhsd	c8			c8_rec
+record	ccfdd.dhsd	c8			c8_loc
+
+recorddiva	EcritureCentrale	EcrCen_rec
+
+1	piece	>	ccfdd.dhsd			piece
+
+beginp
+
+	;on récupère le numéro d'écriture centralisé
+	EcrCen_rec				= ""
+	EcrCen_rec.TiersGrp	= cli.Tiers
+	if listsearch(list_EcrCen,EcrCen_rec,EcrCen) and EcrCen.TiersGrp = cli.Tiers
+		ecrno	= EcrCen.ecrno
+		piece	= EcrCen.piece
+	else
+		c4_cen.Cog_PiecePV++
+		piece	= c4_cen.Cog_PiecePV
+	endif
+
+	;on centralise les écritures
+	listbegin(list_EcrC8)
+	loop listnext(list_EcrC8,c8_loc)
+
+		Seek_C3(c8_loc.Cpt)
+
+		if not hshare(ccfecr_rec,"C3C8"&c8_loc.Dos&c8_loc.EcrNo,"R")
+			if not hseek(ccfecr_rec,c8_rec,"H"&c8_loc.Dos&c8_loc.EcrNo&c8_loc.EcrLg)
+				c8_rec.Cog_ExpPV_Jnl	= ca.Cog_ExpCen_Jnl
+				c8_rec.Cog_PiecePV	= piece
+				hrewrite(ccfecr_rec,c8_rec)
+			else
+				Cog_EcritureLivreDeBord("Ecriture "&right(c8_loc.EcrNo)&" introuvable. Mise à jour impossible",applic="DCPT")
+				erreur	= true
+			endif
+			hshare(ccfecr_rec,"C3C8"&c8_loc.Dos&c8_loc.EcrNo,"L")
+		else
+			Cog_EcritureLivreDeBord("Ecriture "&right(c8_loc.EcrNo)&" réservée. Mise à jour impossible",applic="DCPT")
+			erreur	= true
+		endif
+
+		EcrCen_rec				= ""
+		EcrCen_rec.TiersGrp	= cli.Tiers
+		EcrCen_rec.Cpt			= c3.Cpt
+		EcrCen_rec.Axe3		= c3.Axe(3)
+		EcrCen_rec.Axe4		= c3.Axe(4)
+		if listseek(list_EcrCen,EcrCen_rec,EcrCen)
+			EcrCen.Mt	+= condition(c8_loc.Sens=2,c8_loc.Mt,-c8_loc.Mt)
+			listmodify(list_EcrCen,EcrCen)
+		else
+			EcrCen			= EcrCen_rec
+			EcrCen.CptAux	= c3.Cog_CptAnael
+			EcrCen.ecrno	= ecrno
+			EcrCen.Mt		= condition(c8_loc.Sens=2,c8_loc.Mt,-c8_loc.Mt)
+			EcrCen.piece	= piece
+			listinsert(list_EcrCen,EcrCen)
+		endif
+
+		;on sauvegarde l'analytique
+		ccfvtl.Key	= "G2" & c8_loc.Dos & c8_loc.EcrNo & c8_loc.EcrLg
+		loop not hread(ccfvtl,cx) and ccfvtl.Key <= "G2" & c8_loc.Dos & c8_loc.EcrNo & c8_loc.EcrLg & $FF
+
+			cx.EcrNo	= ecrno
+			listinsert(list_EcrVtl,cx)
+
+		endloop
+
+	endloop
+	
+endp
+
+;*
+procedure Cog_GenererCcfm
+record	ccfdd.dhsd	cx		cx_rec
+
+beginp
+
+	EcrnoG			= 0
+	xq_cog.Lib(1)	= "Génération des écritures"
+	listbegin(list_EcrCen)
+	loop listnext(list_EcrCen,EcrCen)
+
+		EcrnoG++
+
+		xq_cog.Lib(2)	= EcrCen.TiersGrp & " - " & EcrCen.Cpt
+		Cog_AfficherTraitement
+
+		;écriture principale
+		c8						= ""
+		c8.Ce1				= "8"
+		c8.Ce2				= "1"
+		c8.Dos				= mz.Dos
+		c8.Etb				= ca.Etb
+		c8.Jnl				= ca.Cog_ExpCen_Jnl
+		c8.Cpt				= EcrCen.Cpt
+		c8.EcrDt				= xq_cog.DatD
+		c8.Lib				= "Fact. Centrale <"&left(EcrCen.TiersGrp)&">"
+		c8.Mt					= abs(EcrCen.Mt)
+		c8.Sens				= condition(EcrCen.Mt < 0,1,2)
+		c8.EcrNo				= EcrnoG
+		c8.EcrValNo			= EcrCen.ecrno
+		c8.Piece				= EcrCen.piece
+		c8.Cog_ExpPV_Jnl	= ca.Cog_ExpCen_Jnl
+		c8.Cog_PiecePV		= EcrCen.piece
+		hwrite(ccfmcen,c8)
+
+		;écriture des ventilations
+		cx_rec			= ""
+		cx_rec.EcrNo	= EcrCen.ecrno
+		cx_rec.Cpt		= EcrCen.Cpt
+		if listsearch(list_EcrVtl,cx_rec,cx) and cx.EcrNo = EcrCen.ecrno and cx.Cpt = EcrCen.Cpt
+			cx_rec		= cx
+			cx				= ""
+			cx.Ce1		= 2
+			cx.Dos		= mz.Dos
+			cx.Etb		= ca.Etb
+			cx.EcrNo		= EcrnoG
+			if abs(cx_rec.mt)=0
+					;messagebox("gen2","")
+				endif
+				if cx_rec.mt=80
+			 		cx.Mt			= cx_rec.Mt
+				endif
+			;début FRI 10/10/2012
+			cx.Mt			= condition(cx_rec.Sens=c8.Sens,cx_rec.Mt,-cx_rec.Mt)
+			cx.MtDev		= condition(cx_rec.Sens=c8.Sens,cx_rec.MtDev,-cx_rec.MtDev)
+			;cx.Mt			= abs(cx_rec.Mt)
+			;cx.Mtdev		= abs(cx_rec.MtDev)
+			;cx.Sens		= condition(cx_rec.Mt < 0,1,2)
+			;fin FRI
+			cx.Axe(1)	= cx_rec.Axe(1)
+			cx.Axe(2)	= cx_rec.Axe(2)
+			cx.Axe(3)	= cx_rec.Axe(3)
+			cx.Axe(4)	= cx_rec.Axe(4)
+			cx.cog_Sens	= cx_rec.Sens
+			hwrite(ccfmcen,cx)
+			loop listnext(list_EcrVtl,cx) and cx.EcrNo = EcrCen.ecrno and cx.Cpt = EcrCen.Cpt
+				cx_rec		= cx
+				cx				= ""
+				cx.Ce1		= 2
+				cx.Dos		= mz.Dos
+				cx.Etb		= ca.Etb
+				cx.EcrNo		= EcrnoG
+				if abs(cx_rec.mt)=0
+					messagebox("gen2","")
+				endif
+				if cx_rec.mt=80
+			 		cx.Mt			= cx_rec.Mt
+				endif
+				cx.Mt			= condition(cx_rec.Sens=c8.Sens,cx_rec.Mt,-cx_rec.Mt)
+				cx.MtDev		= condition(cx_rec.Sens=c8.Sens,cx_rec.MtDev,-cx_rec.MtDev)
+				cx.Axe(1)	= cx_rec.Axe(1)
+				cx.Axe(2)	= cx_rec.Axe(2)
+				cx.Axe(3)	= cx_rec.Axe(3)
+				cx.Axe(4)	= cx_rec.Axe(4)
+				cx.cog_Sens	= cx_rec.Sens
+				hwrite(ccfmcen,cx)
+			endloop
+		endif
+
+	endloop
+	
+endp
+
+;*
+procedure Cog_GenererEcrituresCentrales
+1	datd	>	gtfdd.dhsd	datd
+1	datf	>	gtfdd.dhsd	datf
+
+1	ecrno	>	ccfdd.dhsd	ecrno	= 0
+
+1	svcle						S
+
+beginp
+
+	Cog_EcritureLivreDeBord("--> Génération des écritures de facturations aux centrales",applic="DCPT")
+	Cog_EcritureLivreDeBord("Ecritures générées pour le mois : "&format("<99>",val(month(xq_cog.DatD)))&"/"&val(year(xq_cog.DatD)),applic="DCPT")
+
+	;on contrôle qu'aucune écriture n'existe sur le mois traité dans le journal d'OD
+	datd	=	hdate(xq_cog.DatD,"p")
+	datf	=	xq_cog.DatD
+
+	
+	if not hread(ccfecr,c8,"C"&mz.Dos&ca.Cog_ExpCen_Jnl&datd) and c8.Dos=mz.Dos and c8.Jnl=ca.Cog_ExpCen_Jnl and c8.EcrDt <= datf
+		if not tunnel
+			messagebox("Des écritures existent déjà pour ce mois sur le journal "&left(ca.Cog_ExpCen_Jnl)&".|Traitement impossible","Alerte",mb_iconexclamation)
+		endif
+		Cog_EcritureLivreDeBord("Des écritures existent déjà pour ce mois sur le journal "&left(ca.Cog_ExpCen_Jnl)&". Traitement impossible",applic="DCPT")
+		Cog_FinProgramme
+	endif
+
+	;affichage de la page de traitement
+	xmedispv mz.mecle 2 2
+
+	ccfjca.Key	= "D" & mz.Dos & "4"
+	loop not hread(ccfjca,c4) and ccfjca.Key <= "D" & mz.Dos & "4" & $FF
+
+		xq_cog.Lib(1)	= c4.Jnl & " " & c4.Lib
+		Cog_AfficherTraitement
+
+		svcle	= isavekey(ccfjca)
+
+		if Cog_FiltresOk
+
+			ccfecr.Key	= "C" & mz.Dos & c4.Jnl & datd
+			loop not hread(ccfecr,c8) and ccfecr.Key <= "C" & mz.Dos & c4.Jnl & datf & $FF
+
+				xq_cog.Lib(2)	= sdate(c8.EcrDt) & " - " & c8.Cpt
+				Cog_AfficherTraitement
+
+				if ecrno <> c8.EcrNo
+					if ecrno <> 0
+						Cog_TraiterEcriture(ecrno)
+					endif
+					listerase(list_EcrC8)
+					ecrno	= c8.EcrNo
+					cli	= ""
+					c3		= ""
+				endif
+
+				if Seek_CLI(c8.Cpt) = 0
+					if cli.TiersGrp <> ""
+						Seek_CLI(cli.TiersGrp)
+					endif
+					c8.Cpt	= condition(cli.Cpt<>"",cli.Cpt,c8.Cpt)
+				endif
+				listinsert(list_EcrC8,c8)
+
+			endloop
+
+			if ecrno <> 0
+				Cog_TraiterEcriture(ecrno)
+				ecrno	= 0
+			endif
+
+		endif
+
+		irestorekey(ccfjca,svcle)
+
+	endloop
+
+	Cog_GenererCcfm
+
+	xmeret
+
+	Cog_LibererJournal
+	Cog_IntegrerCcfm
+
+	listdestroy(list_EcrC8)
+	listdestroy(list_EcrCen)
+	listdestroy(list_EcrVtl)
+
+	if xq_cog.Choix(1) = 2	;Export des écritures
+		xq_cog.Choix(1)	= 1
+		ping("xq_cog",xq_cog)
+		programcall("cogpp_ecr_faccen_exp.dhop")
+	endif
+
+	Cog_EcritureLivreDeBord("<-- Génération des écritures de facturations aux centrales",applic="DCPT")
+
+endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+public procedure Cog_SaisiePage1
+1 fin		1,0	= 0
+
+beginp
+
+	xmeinput(mz.mecle,1,0,xme_mode_goto)
+
+	do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+
+			case harmony.dataarret = 1000	;ouverture de sélection de répertoire
+				WinSHBrowseForFolder(0,xq_cog.Fic,"Export Anaël","Sélectionnez le répertoire d'export",BIF_STATUSTEXT+BIF_EDITBOX,xq_cog.Fic)
+	
+			case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
+				endif
+			
+			case k_f7                ;zoom généralisé
+				Zoom_Call()
+			
+			case k_f8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			case k_f9                ;abandon
+				fin = 1
+		
+			case vsw in (k_f10,k_tab,k_return,k_down)
+				if messagebox("Génération des écritures de facturations aux centrales ?","Confirmation",mb_yesno+mb_iconquestion)=idyes
+					
+					Cog_GenererEcrituresCentrales
+		
+					if erreur
+						messagebox("Des erreurs ont été détectées.|Consultez le livre de bord","Alerte",mb_iconexclamation)
+					endif
+		
+					fin=1
+		
+				endif
+
+		endswitch
+
+	while fin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
+
+
+;*
+;	Programme principal
+;*
+main
+	
+	if pingreceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	endif
+
+	if Cog_InitialiserVariables
+
+		if not tunnel
+	
+			GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+			procedurecall(AdrProc)
+			Cog_SaisiePage1
+	
+		else	;programme piloté
+	
+			if xq_cog.Fic = ""
+				xq_tmp	= xq_cog
+				GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+				procedurecall(AdrProc)
+				swap(xq_tmp.Fic,xq_cog.Fic)
+				xq_cog	= xq_tmp
+			endif
+
+			Cog_GenererEcrituresCentrales
+	
+		endif
+
+	endif

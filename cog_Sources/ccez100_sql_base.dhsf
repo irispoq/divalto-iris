@@ -1,0 +1,4629 @@
+;>xwin4obj                              7.0       20131016170203      
+[masque]
+ libelle="écritures"
+ utilisateur="ROOT"
+ date_modification="16/10/2013"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=377
+ type_masque=2
+ dernier_id=1294
+ dernier_id_page=31
+[defaut]
+ [aide_page]
+  aide=0
+[enregistrements]
+ "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,x1,x1,1752,0
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "ccrsecr.dhoq",,ecriture,ecriture,1024,1
+ "ccfdd.dhsd",,c8,c8_sel,800,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=315,300
+  attache_lgx=oui
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=54,480
+  attache_lgx=oui
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=33
+ nb_col=130
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Fiche ... à créer"
+ nb_lig=3
+ nb_col=30
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+[page]
+ numero=3
+ libelle="Mode Liste"
+ fond="STD"
+ efface=partiel
+ nb_lig=33
+ nb_col=60
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=24
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=120,240
+   attache_lgx=oui
+   id=1283
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="ZOOM"
+ [tableau]
+  [presentation]
+   position=122,0
+   taille=175,240
+   attache_lgx=oui
+   attache_lgy=oui
+   id=155
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=7
+   separation=80
+   zonagecolonne=12345
+   zonageauto=non
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=98,21
+    taille=10,14
+    noms="typecr"
+    id=156
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=ecriture,cenote,ecriture
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CENOTE_2"
+   [info_bulle]
+   texte="présence d'une note"
+   [param_colonne]
+    titre="#tblnote"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=62,91
+    taille=20,28
+    noms="typecr"
+    id=157
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=ecriture,cejoint,ecriture
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CEJOINT"
+   [info_bulle]
+   texte="présence fichiers joints"
+   [param_colonne]
+    titre="#tblficjoin"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=107,55
+    taille=10,14
+    noms="typecr"
+    id=158
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=ecriture,vtlcod,ecriture,5
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","VTLCOD_8"
+   [info_bulle]
+   texte="présence ventilation pièce / échéance"
+   [param_colonne]
+    titre="#tblventilp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=125,100
+    taille=10,14
+    noms="typecr"
+    id=159
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=x1,affce7,x1
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","VTLCOD_9"
+   [info_bulle]
+   texte="présence ventilation axe"
+   [param_colonne]
+    titre="#tblventila"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=177,245
+    taille=7,65
+    noms="typecr"
+    id=160
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=x1,affce3,x1
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","AFFCE3_3"
+   [info_bulle]
+   texte="écriture validée"
+   [param_colonne]
+    titre="#tblcadf"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=90,27
+    taille=8,11
+    noms="typecr"
+    id=161
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=x1,choix,x1,2
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","FLAG_6"
+   [info_bulle]
+   texte="présence lettrage ou pointage"
+   [param_colonne]
+    titre="lp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=99,29
+    taille=9,13
+    noms="typecr"
+    id=162
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=x1,choix,x1,3
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","CE7"
+   [info_bulle]
+   texte="indicateur ligne de centralisation"
+   [param_colonne]
+    titre="C"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=72,60
+    taille=8,40
+    noms="confl;typecr"
+    id=163
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,ecrdt,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="date de l'écriture"
+   [param_colonne]
+    titre="Date"
+    largeur_col=38
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=167,285
+    taille=8,14
+    noms="confl;typecr"
+    id=1281
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,jnl,ecriture
+    saisie=non
+   [info_bulle]
+   texte="code journal de l'écriture"
+   [param_colonne]
+    titre="Journal"
+    largeur_col=24
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=62,55
+    taille=8,35
+    noms="confl;typecr"
+    id=164
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,cpt,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="compte de la ligne d'écriture"
+   [param_colonne]
+    titre="Compte"
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=72,95
+    taille=8,163
+    noms="confl;typecr"
+    id=165
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,lib,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=202
+    fichier="ccfaid"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Lib_1_Av"
+   [info_bulle]
+   texte="libellé de la ligne d'écriture"
+   [param_colonne]
+    titre="Libellé"
+    fl_aff=oui
+    largeur_col=144
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=8,13
+    noms="etbc3;etb_confl;typecr"
+    id=960
+    colonnes_saisie=3
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,etb,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="établissement"
+   [param_colonne]
+    titre="Etablissement"
+    fl_aff=oui
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=101,68
+    taille=8,19
+    noms="confl;typecr"
+    id=166
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,dev,ecriture
+    saisie=non
+   [info_bulle]
+   texte="devise"
+   [param_colonne]
+    titre="Devise"
+    fl_aff=oui
+    largeur_col=22
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=102,98
+    taille=8,66
+    noms="confl;typecr"
+    id=167
+    wstyle="TABLEAU_CPT_DB"
+   [description]
+    donnee=x1,mtdevdb1,x1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant débit en devise"
+   [param_colonne]
+    titre="Débit"
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=85,161
+    taille=8,66
+    noms="confl;typecr"
+    id=168
+    wstyle="TABLEAU_CPT_CR"
+   [description]
+    donnee=x1,mtdevcr1,x1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant crédit en devise"
+   [param_colonne]
+    titre="Crédit"
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=93,73
+    taille=8,66
+    noms="confl;typecr"
+    id=169
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,mtdev,ecriture
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant en devise"
+   [param_colonne]
+    titre="Montant"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=82,64
+    taille=7,65
+    noms="confl;typecr"
+    id=170
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,sens,ecriture
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","SENS_5"
+   [info_bulle]
+   texte="sens de la ligne"
+   [param_colonne]
+    titre="Sens"
+    fl_aff=non
+    largeur_col=17
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=104,44
+    taille=8,66
+    noms="confl;typecr"
+    id=171
+    wstyle="TABLEAU_CPT_DB"
+   [description]
+    donnee=x1,mtdb1,x1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant débit en #dev"
+   [param_colonne]
+    titre="Débit en #dev"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=129,126
+    taille=8,66
+    noms="confl;typecr"
+    id=172
+    wstyle="TABLEAU_CPT_CR"
+   [description]
+    donnee=x1,mtcr1,x1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant crédit en #dev"
+   [param_colonne]
+    titre="Crédit en #dev"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=87,67
+    taille=8,66
+    noms="confl;typecr"
+    id=173
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,mt,ecriture
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant en #dev"
+   [param_colonne]
+    titre="Montant en #dev"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=125,143
+    taille=8,66
+    noms="confl;typecr"
+    id=174
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,devp,ecriture
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="taux de change"
+   [param_colonne]
+    titre="Taux de change"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=124,162
+    taille=8,66
+    noms="devbis;confl;typecr"
+    id=175
+    wstyle="TABLEAU_CPT_DB"
+   [description]
+    donnee=x1,mtbisdb1,x1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant débit en #devbis"
+   [param_colonne]
+    titre="Débit en #devbis"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=93,16
+    taille=8,66
+    noms="devbis;confl;typecr"
+    id=176
+    wstyle="TABLEAU_CPT_CR"
+   [description]
+    donnee=x1,mtbiscr1,x1
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant crédit en #devbis"
+   [param_colonne]
+    titre="Crédit en #devbis"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=80,94
+    taille=8,66
+    noms="devbis;confl;typecr"
+    id=177
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,mtbis,ecriture
+    format="\a5pm000.dhop,format_blanc"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant en #devbis"
+   [param_colonne]
+    titre="Montant en #devbis"
+    fl_aff=non
+    largeur_col=60
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=77,285
+    taille=8,35
+    noms="confl;typecr"
+    id=178
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,cp,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [aide_page]
+    aide=219
+    fichier="ccfaid"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19030
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Cpt_3_Av"
+    diva_apres="Champ_Cpt_3_Ap"
+   [info_bulle]
+   texte="compte de contrepartie de la ligne d'écriture"
+   [param_colonne]
+    titre="Contrepartie"
+    fl_aff=non
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=99,192
+    taille=8,31
+    noms="confl;typecr"
+    id=1008
+    colonnes_saisie=8
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,cptcol,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=107
+    fichier="ccfaid"
+   [info_bulle]
+   texte="Compte collectif"
+   [param_colonne]
+    titre="Collectif"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=72,260
+    taille=8,31
+    noms="typecr"
+    id=179
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,piece,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [aide_page]
+    aide=205
+    fichier="ccfaid"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Piece_1_Av"
+   [info_bulle]
+   texte="numéro de  pièce de l'écriture"
+   [param_colonne]
+    titre="Pièce"
+    fl_aff=non
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,240
+    taille=10,20
+    noms="typecr"
+    id=180
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,reg,ecriture
+   [param_saisie]
+    table_associee=oui
+   [aide_page]
+    aide=204
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=9046
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Reg_1_Av"
+    diva_apres="Champ_Reg_1_Ap"
+   [info_bulle]
+   texte="mode de règlement"
+   [param_colonne]
+    titre="Règlement"
+    fl_aff=non
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=102,280
+    taille=8,40
+    noms="typecr"
+    id=181
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,echdt,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=206
+    fichier="ccfaid"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_EchDt_1_Av"
+   [info_bulle]
+   texte="date d'échéance de l'écriture"
+   [param_colonne]
+    titre="Echéance"
+    fl_aff=non
+    largeur_col=38
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=72,66
+    taille=8,55
+    noms="typecr"
+    id=182
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,pinotiers,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_PinoTiers_1_Av"
+   [info_bulle]
+   texte="pièce du tiers"
+   [param_colonne]
+    titre="Pièce du tiers"
+    fl_aff=non
+    largeur_col=58
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=117,256
+    taille=8,17
+    noms="confl;typecr"
+    id=1009
+    colonnes_saisie=4
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,natpai,ecriture
+    saisie=non
+   [info_bulle]
+   texte="Nature de paiement"
+   [param_colonne]
+    titre="Nature de paiement"
+    fl_aff=non
+    largeur_col=59
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,250
+    taille=10,20
+    noms="typecr"
+    id=183
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,critere,ecriture
+   [aide_page]
+    aide=221
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Critere_1_Av"
+   [info_bulle]
+   texte="critère"
+   [param_colonne]
+    titre="Critère"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=67,260
+    taille=10,20
+    noms="typecr"
+    id=184
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,regtyp,ecriture
+   [param_saisie]
+    table_associee=oui
+   [aide_page]
+    aide=209
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    f8=19208
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_RegTyp_1_Av"
+    diva_apres="Champ_RegTyp_1_Ap"
+   [info_bulle]
+   texte="type de règlement"
+   [param_colonne]
+    titre="Type de règlement"
+    fl_aff=non
+    largeur_col=57
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=167,205
+    taille=10,20
+    noms="typecr"
+    id=185
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,lot,ecriture
+   [aide_page]
+    aide=218
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Lot_1_Av"
+   [info_bulle]
+   texte="code lot"
+   [param_colonne]
+    titre="Lot"
+    fl_aff=non
+    largeur_col=23
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=82,200
+    taille=10,49
+    noms="typecr"
+    id=186
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=x1,choix,x1,1
+    minmaj=majuscules
+   [param_saisie]
+    defaut="            0,0000000000"
+   [param_multi]
+    choix="ccfdmc.dhfi","CHOIX_13"
+   [aide_page]
+    aide=216
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Choix_1_Av"
+    diva_apres="Champ_Choix_1_Ap"
+   [info_bulle]
+   texte="nature montant 2"
+   [param_colonne]
+    titre="Nature montant"
+    fl_aff=non
+    largeur_col=48
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,205
+    taille=10,60
+    noms="typecr"
+    id=187
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,mt2,ecriture
+    format="\a5pm000.dhop,format_blanc"
+   [param_saisie]
+    esp_si_zero=oui
+   [aide_page]
+    aide=215
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Mt2_1_Av"
+   [info_bulle]
+   texte="montant 2"
+   [param_colonne]
+    titre="Montant 2"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,250
+    taille=10,42
+    noms="typecr"
+    id=188
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,bqedt,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=212
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_BqeDt_1_Av"
+   [info_bulle]
+   texte="Date prévue banque"
+   [param_colonne]
+    titre="Date prévue"
+    fl_aff=non
+    largeur_col=38
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=167,270
+    taille=10,32
+    noms="typecr"
+    id=189
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,chqno,ecriture
+   [aide_page]
+    aide=207
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_ChqNo_1_Av"
+   [info_bulle]
+   texte="numéro de chèque"
+   [param_colonne]
+    titre="Chèque"
+    fl_aff=non
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,245
+    taille=10,42
+    noms="typecr"
+    id=190
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,opedt,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=217
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_OpeDt_1_Av"
+   [info_bulle]
+   texte="date d'opération"
+   [param_colonne]
+    titre="Date d'opération"
+    fl_aff=non
+    largeur_col=51
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,245
+    taille=10,42
+    noms="typecr"
+    id=191
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,valdt,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [aide_page]
+    aide=214
+    fichier="CCFAID"
+   [touches]
+    f1=1
+    f7=8000
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_ValDt_1_Av"
+   [info_bulle]
+   texte="date de valeur"
+   [param_colonne]
+    titre="Date de valeur"
+    fl_aff=non
+    largeur_col=45
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=98,68
+    taille=8,51
+    noms="confl;typecr"
+    id=192
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,pointmt,ecriture
+    format="\FormatMille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="montant de l'extrait"
+   [param_colonne]
+    titre="Montant pointage"
+    fl_aff=non
+    largeur_col=54
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,250
+    taille=8,10
+    noms="typecr"
+    id=193
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,point,ecriture
+    saisie=non
+   [info_bulle]
+   texte="code pointage"
+   [param_colonne]
+    titre="Pointage"
+    fl_aff=non
+    largeur_col=28
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,265
+    taille=8,40
+    noms="typecr"
+    id=194
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,pointdt,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="date de l'extrait"
+   [param_colonne]
+    titre="Date pointage"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=84,108
+    taille=8,17
+    noms="typecr"
+    id=195
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,userpt,ecriture
+    format="1"
+    saisie=non
+   [info_bulle]
+   texte="Utilisateur qui a pointé la fiche"
+   [param_colonne]
+    titre="Pointé par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=120,128
+    taille=8,35
+    noms="typecr"
+    id=196
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,userptdh,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [info_bulle]
+   texte="Pointé le"
+   [param_colonne]
+    titre="Pointé le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=82,104
+    taille=8,100
+    noms="typecr"
+    id=197
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,userptori,ecriture
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [info_bulle]
+   texte="Origine du pointage"
+   [param_colonne]
+    titre="Origine du pointage"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,275
+    taille=8,10
+    noms="typecr"
+    id=198
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,lett,ecriture
+    saisie=non
+   [info_bulle]
+   texte="code lettrage"
+   [param_colonne]
+    titre="Lettrage"
+    fl_aff=non
+    largeur_col=28
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,250
+    taille=8,40
+    noms="typecr"
+    id=199
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,lettdt,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="date de valeur du lettrage"
+   [param_colonne]
+    titre="Date lettrage"
+    fl_aff=non
+    largeur_col=41
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=89,54
+    taille=8,17
+    noms="typecr"
+    id=200
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,userlt,ecriture
+    format="1"
+    saisie=non
+   [info_bulle]
+   texte="Utilisateur qui a lettré la fiche"
+   [param_colonne]
+    titre="Lettré par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=140,181
+    taille=8,35
+    noms="typecr"
+    id=201
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,userltdh,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [info_bulle]
+   texte="Lettré le"
+   [param_colonne]
+    titre="Lettré le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=69,117
+    taille=8,100
+    noms="typecr"
+    id=202
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,userltori,ecriture
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [info_bulle]
+   texte="Origine du lettrage"
+   [param_colonne]
+    titre="Origine du lettrage"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=167,270
+    taille=8,30
+    noms="typecr"
+    id=203
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,ecrno,ecriture
+    format="\FormatMille"
+    sequence=12345
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [info_bulle]
+   texte="numéro d'écriture non validée"
+   [param_colonne]
+    titre="Numéro"
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=167,265
+    taille=8,12
+    noms="typecr"
+    id=204
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,ecrlg,ecriture
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [info_bulle]
+   texte="numéro de ligne"
+   [param_colonne]
+    titre="Ligne"
+    largeur_col=18
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=88,102
+    taille=10,47
+    noms="typecr"
+    id=205
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=x1,affce2,x1
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","AFFCE2_4"
+   [info_bulle]
+   texte="type d'écriture"
+   [param_colonne]
+    titre="Type"
+    fl_aff=non
+    largeur_col=49
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=67,270
+    taille=8,30
+    noms="typecr"
+    id=206
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,ecrvalno,ecriture
+    format="\FormatMille"
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [info_bulle]
+   texte="numéro d'écriture validée"
+   [param_colonne]
+    titre="Numéro écriture validée"
+    fl_aff=non
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=82,49
+    taille=8,27
+    noms="typecr"
+    id=207
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,ecrna,ecriture
+    format="00000000"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="numéro de l'écriture associée"
+   [param_colonne]
+    titre="Numéro écriture associée"
+    fl_aff=non
+    largeur_col=31
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=92,103
+    taille=8,12
+    noms="typecr"
+    id=208
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,ecrla,ecriture
+    format="000"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="numéro de ligne dans l'écriture associée"
+   [param_colonne]
+    titre="Numéro ligne écriture associée"
+    fl_aff=non
+    largeur_col=24
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=91,81
+    taille=8,27
+    noms="typecr"
+    id=209
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,ecrni,ecriture
+    format="00000000"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="numéro de l'écriture d'origine"
+   [param_colonne]
+    titre="Numéro écriture origine"
+    fl_aff=non
+    largeur_col=31
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=74,74
+    taille=8,12
+    noms="typecr"
+    id=210
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,ecrli,ecriture
+    format="000"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="numéro de ligne dans l'écriture d'origine"
+   [param_colonne]
+    titre="Numéro ligne écriture origine"
+    fl_aff=non
+    largeur_col=24
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=91,244
+    taille=8,17
+    noms="typecr"
+    id=211
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,usercr,ecriture
+    format="1"
+    saisie=non
+   [info_bulle]
+   texte="Utilisateur qui a créé la fiche"
+   [param_colonne]
+    titre="Créé par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=77,205
+    taille=8,40
+    noms="typecr"
+    id=212
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,usercrdh,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [info_bulle]
+   texte="Créé le"
+   [param_colonne]
+    titre="Créé le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=109,236
+    taille=8,100
+    noms="typecr"
+    id=213
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,usercrori,ecriture
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [info_bulle]
+   texte="Origine de la création"
+   [param_colonne]
+    titre="Origine de la création"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=97,338
+    taille=8,17
+    noms="typecr"
+    id=214
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,usermo,ecriture
+    format="1"
+    saisie=non
+   [info_bulle]
+   texte="Utilisateur qui a modifié la fiche"
+   [param_colonne]
+    titre="Modifié par"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=91,106
+    taille=8,40
+    noms="typecr"
+    id=215
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,usermodh,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [info_bulle]
+   texte="Modifié le"
+   [param_colonne]
+    titre="Modifié le"
+    fl_aff=non
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=116,209
+    taille=8,100
+    noms="typecr"
+    id=216
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,usermoori,ecriture
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","ORIGINE"
+   [info_bulle]
+   texte="Origine de la modification"
+   [param_colonne]
+    titre="Origine de la modification"
+    fl_aff=non
+    largeur_col=102
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=16,5
+   taille=9,69
+   id=217
+   wstyle="STD"
+  [texte]
+   texte="Journal"
+ [obj_texte]
+  [presentation]
+   position=28,5
+   taille=9,69
+   id=222
+   wstyle="STD"
+  [texte]
+   texte="Compte"
+ [obj_texte]
+  [presentation]
+   position=40,5
+   taille=9,69
+   id=218
+   wstyle="STD"
+  [texte]
+   texte="Date"
+ [obj_texte]
+  [presentation]
+   position=40,125
+   taille=9,67
+   id=1294
+   wstyle="STD"
+  [texte]
+   texte="Pièce"
+ [obj_texte]
+  [presentation]
+   position=52,5
+   taille=9,69
+   id=688
+   wstyle="STD"
+  [texte]
+   texte="Numéro d'écriture"
+ [obj_texte]
+  [presentation]
+   position=52,125
+   taille=9,67
+   id=950
+   wstyle="STD"
+  [texte]
+   texte="Ticket de pointage"
+ [obj_texte]
+  [presentation]
+   position=64,5
+   taille=9,69
+   noms="etbc3"
+   id=977
+   wstyle="STD"
+  [texte]
+   texte="Filtre établissement"
+ [champ]
+  [presentation]
+   position=16,93
+   taille=9,137
+   id=219
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,8
+   saisie=non
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=16,76
+   taille=9,16
+   noms="zoom_par_journal"
+   id=220
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c8,jnl,c8_sel
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=301
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Jnl_1_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=28,25
+   taille=9,50
+   noms="choix_compte"
+   id=1282
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,choix,x1,4
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","CPTTYP_INTERRO"
+ [champ]
+  [presentation]
+   position=28,76
+   taille=9,36
+   noms="zoom_par_compte"
+   id=287
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c8,cpt,c8_sel
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=303
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19030
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_1_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=40,18
+   taille=9,57
+   noms="choix_date"
+   id=1284
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,choix,x1,5
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","DATETYP_INTERRO"
+ [champ]
+  [presentation]
+   position=40,76
+   taille=9,36
+   noms="zoom_par_date"
+   id=221
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c8,ecrdt,c8_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=302
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=28,113
+   taille=9,116
+   id=286
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,9
+   saisie=non
+ [champ]
+  [presentation]
+   position=40,194
+   taille=9,36
+   noms="zoom_par_piece"
+   id=1293
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c8,piece,c8_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=52,76
+   taille=9,36
+   noms="zoom_par_ecrno"
+   id=689
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c8,ecrno,c8_sel
+   format="\formatmille"
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=306
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=52,194
+   taille=9,36
+   noms="zoom_par_ticketpoint"
+   id=955
+   colonnes_saisie=9
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=c8,ticketpoint,c8_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=64,76
+   taille=9,154
+   noms="ConfModifEtbC3;etbc3"
+   id=978
+   colonnes_saisie=100
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,filtreetb,x1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f8=19004
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FiltreEtb_1_Av"
+   diva_apres="Champ_FiltreEtb_1_Ap"
+  [boutons]
+   "zoom"
+ [groupe_radio]
+  [presentation]
+   position=76,5
+   taille=41,105
+   noms="zoom_lettrage"
+   id=1285
+   wstyle="STD"
+  [description]
+   donnee=x1,choix,x1,6
+  [param_groupe]
+   titre="Ecritures"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=85,10
+    taille=9,97
+    id=1286
+    wstyle="STD"
+   [param_radio]
+    texte="Non lettrées"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=95,10
+    taille=9,97
+    id=1287
+    wstyle="STD"
+   [param_radio]
+    texte="Lettrées"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=105,10
+    taille=9,97
+    id=1288
+    wstyle="STD"
+   [param_radio]
+    texte="Non lettrées et lettrées"
+    cadrage=droite
+    valeur="3"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Choix_6_Ap"
+ [groupe_radio]
+  [presentation]
+   position=76,125
+   taille=41,105
+   noms="zoom_pointage"
+   id=1289
+   wstyle="STD"
+  [description]
+   donnee=x1,choix,x1,7
+  [param_groupe]
+   titre="Ecritures"
+   notifier=oui
+  [radio_bouton]
+   [presentation]
+    position=85,130
+    taille=9,97
+    id=1290
+    wstyle="STD"
+   [param_radio]
+    texte="Non pointées"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=95,130
+    taille=9,97
+    id=1291
+    wstyle="STD"
+   [param_radio]
+    texte="Pointées"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=105,130
+    taille=9,97
+    id=1292
+    wstyle="STD"
+   [param_radio]
+    texte="Non pointées et pointées"
+    cadrage=droite
+    valeur="3"
+  [touches]
+   f7=8000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Choix_7_Ap"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=30
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=29
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=28
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=27
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=31
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=26
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=25
+[page]
+ numero=11
+ libelle="Fiche zoom"
+ fond="STD"
+ nature=double
+ titre="Ecriture"
+ efface=partiel
+ nb_lig=33
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ suiv=13
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="GENERALITES"
+   ordre=1
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=50,5
+   taille=102,270
+   id=999
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Informations comptables"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=222,5
+   taille=66,270
+   id=4
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Pièce et échéance"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=160,5
+   taille=54,270
+   id=1192
+   wstyle="GROUPE"
+  [param_groupbox]
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,20
+   id=15
+   wstyle="STD"
+  [texte]
+   texte="Ecriture"
+ [obj_texte]
+  [presentation]
+   position=26,73
+   taille=9,24
+   cadrage=droite
+   id=16
+   wstyle="STD"
+  [texte]
+   texte="numéro"
+ [obj_texte]
+  [presentation]
+   position=26,141
+   taille=9,17
+   cadrage=droite
+   id=17
+   wstyle="STD"
+  [texte]
+   texte="ligne"
+ [obj_texte]
+  [presentation]
+   position=66,10
+   taille=9,50
+   id=20
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Journal"
+ [obj_texte]
+  [presentation]
+   position=78,10
+   taille=9,50
+   id=21
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Date"
+ [obj_texte]
+  [presentation]
+   position=90,10
+   taille=9,50
+   id=22
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Compte"
+ [obj_texte]
+  [presentation]
+   position=102,10
+   taille=9,50
+   id=23
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=114,10
+   taille=9,50
+   id=24
+   wstyle="STD"
+  [texte]
+   texte="Contrepartie"
+ [obj_texte]
+  [presentation]
+   position=126,10
+   taille=9,50
+   noms="etbc3"
+   id=1024
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Collectif"
+ [obj_texte]
+  [presentation]
+   position=138,10
+   taille=9,50
+   noms="etbc3"
+   id=962
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=162,10
+   taille=9,70
+   cadrage=centre
+   id=1193
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Devise"
+ [obj_texte]
+  [presentation]
+   position=162,86
+   taille=9,57
+   cadrage=centre
+   id=1194
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Débit"
+ [obj_texte]
+  [presentation]
+   position=162,149
+   taille=9,57
+   cadrage=centre
+   id=1195
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Crédit"
+ [obj_texte]
+  [presentation]
+   position=162,212
+   taille=9,57
+   cadrage=centre
+   id=1196
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [texte]
+   texte="Taux de change"
+ [obj_texte]
+  [presentation]
+   position=176,10
+   taille=9,50
+   id=31
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Devise de la ligne"
+ [obj_texte]
+  [presentation]
+   position=188,10
+   taille=9,50
+   id=33
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Devise principale"
+ [obj_texte]
+  [presentation]
+   position=200,10
+   taille=9,50
+   noms="devbis"
+   id=34
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Devise secondaire"
+ [obj_texte]
+  [presentation]
+   position=238,10
+   taille=9,39
+   id=37
+   wstyle="STD"
+  [texte]
+   texte="Pièce"
+ [obj_texte]
+  [presentation]
+   position=250,10
+   taille=9,50
+   id=40
+   wstyle="STD"
+  [texte]
+   texte="Pièce du tiers"
+ [obj_texte]
+  [presentation]
+   position=262,10
+   taille=9,50
+   id=38
+   wstyle="STD"
+  [texte]
+   texte="Mode règlement"
+ [obj_texte]
+  [presentation]
+   position=274,10
+   taille=9,39
+   id=41
+   wstyle="STD"
+  [texte]
+   texte="Echéance"
+ [champ]
+  [presentation]
+   position=26,161
+   taille=9,19
+   cadrage=gauche
+   id=55
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ecrlg,ecriture
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=26,100
+   taille=9,39
+   cadrage=gauche
+   id=56
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ecrno,ecriture
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=36,100
+   taille=9,39
+   noms="brouillard"
+   cadrage=gauche
+   id=57
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ecrvalno,ecriture
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+ [multi_choix]
+  [presentation]
+   position=26,26
+   taille=9,46
+   id=58
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,affce2,x1
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","AFFCE2_4"
+ [multi_choix]
+  [presentation]
+   position=36,26
+   taille=9,73
+   id=59
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,affce3,x1
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","AFFCE3_2"
+ [champ]
+  [presentation]
+   position=66,62
+   taille=9,36
+   noms="conff"
+   id=60
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,jnl,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=66,99
+   taille=9,153
+   noms="conff"
+   id=61
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,journal_lib,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=138,99
+   taille=9,153
+   noms="etb_conff;etbc3"
+   id=964
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,etablissement_nom,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=78,62
+   taille=9,36
+   noms="conff"
+   id=62
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ecrdt,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=126,99
+   taille=9,153
+   noms="conff"
+   id=1026
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,compte_collectif_lib,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=90,62
+   taille=9,36
+   noms="conff"
+   id=74
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,cpt,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=90,99
+   taille=9,153
+   noms="conff"
+   id=75
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,compte_lib,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=262,99
+   taille=9,153
+   id=76
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,mode_reglement_lib,ecriture
+   saisie=non
+ [multi_choix]
+  [presentation]
+   position=274,50
+   taille=9,11
+   id=77
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,vtlcod,ecriture,5
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","VTLCODP_FICHE2"
+ [multi_choix]
+  [presentation]
+   position=238,50
+   taille=9,11
+   id=78
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,vtlcod,ecriture,5
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","VTLCODP_FICHE2"
+ [champ]
+  [presentation]
+   position=176,148
+   taille=9,59
+   noms="conff"
+   id=80
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=x1,mtdevcr1,x1
+   format="\FormatMille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=176,62
+   taille=9,19
+   noms="conff"
+   id=81
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,dev,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=176,85
+   taille=9,59
+   noms="conff"
+   id=82
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=x1,mtdevdb1,x1
+   format="\FormatMille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=188,62
+   taille=9,19
+   id=83
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ca,dev,ca
+   saisie=non
+ [champ]
+  [presentation]
+   position=114,99
+   taille=9,153
+   noms="conff"
+   id=84
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,compte_contrepartie_lib,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=188,85
+   taille=9,59
+   noms="conff"
+   id=85
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=x1,mtdb1,x1
+   format="\FormatMille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=200,62
+   taille=9,19
+   noms="devbis"
+   id=86
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ca,devbis,ca
+   saisie=non
+ [champ]
+  [presentation]
+   position=200,85
+   taille=9,59
+   noms="conff;devbis"
+   id=87
+   wstyle="CHAMP_CPT_DB_NON_SAISI"
+  [description]
+   donnee=x1,mtbisdb1,x1
+   format="\FormatMille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=200,148
+   taille=9,59
+   noms="conff;devbis"
+   id=88
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=x1,mtbiscr1,x1
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=182,211
+   taille=9,59
+   noms="conff"
+   id=89
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,devp,ecriture
+   format="\a5pm000.dhop,format_blanc"
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=138,62
+   taille=9,36
+   noms="etb_conff;etbc3"
+   id=963
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,etb,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [multi_choix]
+  [presentation]
+   position=26,204
+   taille=9,71
+   id=1179
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,affce8,x1
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","AFFCE8_1"
+ [champ]
+  [presentation]
+   position=102,62
+   taille=9,170
+   noms="conff;saisie"
+   id=90
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,lib,ecriture
+  [aide_page]
+   aide=202
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Lib_1_Av"
+ [champ]
+  [presentation]
+   position=114,62
+   taille=9,36
+   noms="conff;saisie"
+   id=91
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,cp,ecriture
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=219
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cpt_3_Av"
+   diva_apres="Champ_Cpt_3_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=238,62
+   taille=9,36
+   noms="r3cod;saisie;vtlpiece"
+   cadrage=gauche
+   id=96
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,piece,ecriture
+  [param_saisie]
+   defaut="            0,0000000000"
+   esp_si_zero=oui
+  [aide_page]
+   aide=205
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Piece_1_Av"
+ [champ]
+  [presentation]
+   position=250,62
+   taille=9,68
+   noms="r3cod;saisie"
+   id=97
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,pinotiers,ecriture
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_PinoTiers_1_Av"
+ [champ]
+  [presentation]
+   position=262,62
+   taille=9,36
+   noms="r3cod;saisie"
+   id=98
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,reg,ecriture
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=204
+   fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   f8=9046
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Reg_1_Av"
+   diva_apres="Champ_Reg_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=274,62
+   taille=9,36
+   noms="r3cod;saisie;vtlpiece"
+   id=99
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,echdt,ecriture
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=206
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EchDt_1_Av"
+ [champ]
+  [presentation]
+   position=126,62
+   taille=9,36
+   noms="conff"
+   id=1025
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,cptcol,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=188,148
+   taille=9,59
+   noms="conff"
+   id=105
+   wstyle="CHAMP_CPT_CR_NON_SAISI"
+  [description]
+   donnee=x1,mtcr1,x1
+   format="\FormatMille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+[page]
+ numero=12
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=33
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ prec=13
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANT"
+   ordre=3
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=54,270
+   id=106
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Identifiants"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=88,5
+   taille=66,131
+   id=119
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Lettrage"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=88,144
+   taille=66,131
+   id=120
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Pointage"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=162,5
+   taille=54,131
+   id=121
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=162,144
+   taille=54,131
+   id=122
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,15
+   id=124
+   wstyle="STD_AFF"
+  [texte]
+   texte="CE"
+ [obj_texte]
+  [presentation]
+   position=42,202
+   taille=9,23
+   id=1200
+   wstyle="STD_AFF"
+  [texte]
+   texte="Note"
+ [obj_texte]
+  [presentation]
+   position=54,10
+   taille=9,59
+   id=125
+   wstyle="STD_AFF"
+  [texte]
+   texte="N° écriture associée"
+ [obj_texte]
+  [presentation]
+   position=54,112
+   taille=9,20
+   cadrage=droite
+   id=126
+   wstyle="STD"
+  [texte]
+   texte="ligne"
+ [obj_texte]
+  [presentation]
+   position=54,202
+   taille=9,23
+   id=1201
+   wstyle="STD_AFF"
+  [texte]
+   texte="Joint"
+ [obj_texte]
+  [presentation]
+   position=66,10
+   taille=9,59
+   id=127
+   wstyle="STD_AFF"
+  [texte]
+   texte="N° écriture origine"
+ [obj_texte]
+  [presentation]
+   position=66,112
+   taille=9,20
+   cadrage=droite
+   id=128
+   wstyle="STD"
+  [texte]
+   texte="ligne"
+ [obj_texte]
+  [presentation]
+   position=104,10
+   taille=9,13
+   id=108
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=104,149
+   taille=9,13
+   id=111
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=116,10
+   taille=9,13
+   id=109
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=116,149
+   taille=9,13
+   id=112
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=140,149
+   taille=9,47
+   id=956
+   wstyle="STD_AFF"
+  [texte]
+   texte="Ticket pointage"
+ [obj_texte]
+  [presentation]
+   position=178,10
+   taille=9,13
+   id=115
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=178,149
+   taille=9,13
+   id=116
+   wstyle="STD_AFF"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=190,10
+   taille=9,13
+   id=117
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=190,149
+   taille=9,13
+   id=118
+   wstyle="STD_AFF"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=140,198
+   taille=9,36
+   id=957
+   colonnes_saisie=9
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ticketpoint,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=42,123
+   taille=9,8
+   id=967
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ced,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,115
+   taille=9,8
+   id=966
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,cec,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,107
+   taille=9,8
+   id=965
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ceb,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=178,25
+   taille=9,108
+   id=129
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,usercr,ecriture
+   format="1"
+   saisie=non
+ [champ]
+  [presentation]
+   position=178,164
+   taille=9,108
+   id=130
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,usermo,ecriture
+   format="1"
+   saisie=non
+ [champ]
+  [presentation]
+   position=190,25
+   taille=9,108
+   id=131
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,usercrdh,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+ [champ]
+  [presentation]
+   position=190,164
+   taille=9,108
+   id=132
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,usermodh,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+ [multi_choix]
+  [presentation]
+   position=202,10
+   taille=9,122
+   id=133
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,usercrori,ecriture
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+ [multi_choix]
+  [presentation]
+   position=202,149
+   taille=9,122
+   id=134
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,usermoori,ecriture
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+ [champ]
+  [presentation]
+   position=54,136
+   taille=9,19
+   cadrage=gauche
+   id=135
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ecrla,ecriture
+   format="0000"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=54,71
+   taille=9,39
+   cadrage=gauche
+   id=136
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ecrna,ecriture
+   format="00000000000"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=66,71
+   taille=9,39
+   cadrage=gauche
+   id=137
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ecrni,ecriture
+   format="00000000000"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=66,136
+   taille=9,19
+   cadrage=gauche
+   id=138
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ecrli,ecriture
+   format="0000"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=42,27
+   taille=9,8
+   id=139
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce1,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,35
+   taille=9,8
+   id=140
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce2,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,43
+   taille=9,8
+   id=141
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce3,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,51
+   taille=9,8
+   id=142
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce4,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,59
+   taille=9,8
+   id=143
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce5,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,67
+   taille=9,8
+   id=144
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce6,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,75
+   taille=9,8
+   id=145
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce7,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,83
+   taille=9,8
+   id=146
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce8,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,91
+   taille=9,8
+   id=147
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ce9,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,99
+   taille=9,8
+   id=148
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,cea,ecriture
+   saisie=non
+ [multi_choix]
+  [presentation]
+   position=128,10
+   taille=9,122
+   id=149
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,userltori,ecriture
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=116,25
+   taille=9,108
+   id=150
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,userltdh,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=104,25
+   taille=9,108
+   id=151
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,userlt,ecriture
+   format="1"
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=104,164
+   taille=9,108
+   id=152
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,userpt,ecriture
+   format="1"
+   saisie=non
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=116,164
+   taille=9,108
+   id=153
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,userptdh,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=128,149
+   taille=9,122
+   id=154
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,userptori,ecriture
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="ccfdmc.dhfi","ORIGINE"
+  [touches]
+   f1=1
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=42,131
+   taille=9,8
+   id=1175
+   colonnes_saisie=1
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,cee,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=42,139
+   taille=9,8
+   id=1176
+   colonnes_saisie=1
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,cef,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=42,147
+   taille=9,8
+   id=1180
+   colonnes_saisie=1
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,ceg,ecriture
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=42,227
+   taille=9,8
+   id=1202
+   colonnes_saisie=1
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,cenote,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=42,235
+   taille=9,26
+   id=1204
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,note,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=54,227
+   taille=9,8
+   id=1205
+   colonnes_saisie=1
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,cejoint,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=54,235
+   taille=9,26
+   id=1206
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,joint,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+[page]
+ numero=13
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=33
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ prec=11
+ suiv=12
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=5
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="COMPLEMENTS"
+   ordre=2
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=102,270
+   id=3
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Informations bancaires"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=198,144
+   taille=66,131
+   id=14
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Compléments"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=197,5
+   taille=66,131
+   id=13
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Axes"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=136,144
+   taille=54,131
+   id=6
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Pointage"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=136,5
+   taille=54,131
+   id=5
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Lettrage"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,63
+   id=47
+   wstyle="STD"
+  [texte]
+   texte="Type de règlement"
+ [obj_texte]
+  [presentation]
+   position=54,10
+   taille=9,63
+   id=49
+   wstyle="STD"
+  [texte]
+   texte="Date prévue banque"
+ [obj_texte]
+  [presentation]
+   position=66,10
+   taille=9,63
+   id=51
+   wstyle="STD"
+  [texte]
+   texte="Numéro de chèque"
+ [obj_texte]
+  [presentation]
+   position=78,10
+   taille=9,63
+   id=52
+   wstyle="STD"
+  [texte]
+   texte="Date d'opération"
+ [obj_texte]
+  [presentation]
+   position=90,10
+   taille=9,63
+   id=53
+   wstyle="STD"
+  [texte]
+   texte="Date de valeur"
+ [obj_texte]
+  [presentation]
+   position=102,10
+   taille=9,63
+   id=54
+   wstyle="STD"
+  [texte]
+   texte="Montant extrait"
+ [obj_texte]
+  [presentation]
+   position=114,10
+   taille=9,63
+   id=1027
+   wstyle="STD"
+  [texte]
+   texte="Nature de paiement"
+ [obj_texte]
+  [presentation]
+   position=152,10
+   taille=9,55
+   id=39
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Ligne"
+ [obj_texte]
+  [presentation]
+   position=152,149
+   taille=9,57
+   id=46
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Ligne"
+ [obj_texte]
+  [presentation]
+   position=164,10
+   taille=9,55
+   id=42
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Code lettrage"
+ [obj_texte]
+  [presentation]
+   position=164,149
+   taille=9,56
+   id=48
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Code pointage"
+ [obj_texte]
+  [presentation]
+   position=176,10
+   taille=9,55
+   id=43
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Date de valeur"
+ [obj_texte]
+  [presentation]
+   position=176,149
+   taille=9,56
+   id=50
+   wstyle="STD_CADRE3D"
+  [texte]
+   texte="Date de valeur"
+ [obj_texte]
+  [presentation]
+   position=214,149
+   taille=9,57
+   id=30
+   wstyle="STD"
+  [texte]
+   texte="Critère"
+ [obj_texte]
+  [presentation]
+   position=226,149
+   taille=9,57
+   id=32
+   wstyle="STD"
+  [texte]
+   texte="Numéro de lot"
+ [champ]
+  [presentation]
+   position=164,206
+   taille=9,37
+   id=65
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,point,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=176,206
+   taille=9,37
+   id=66
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,pointdt,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [multi_choix]
+  [presentation]
+   position=152,206
+   taille=9,41
+   id=68
+   wstyle="CHAMP_AFF_CADRE3D"
+  [description]
+   donnee=x1,affce5,x1
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","AFFCE5_2"
+ [champ]
+  [presentation]
+   position=164,67
+   taille=9,36
+   id=63
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,lett,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=176,67
+   taille=9,36
+   id=64
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,lettdt,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [multi_choix]
+  [presentation]
+   position=152,67
+   taille=9,40
+   id=67
+   wstyle="CHAMP_AFF_CADRE3D"
+  [description]
+   donnee=x1,affce4,x1
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","AFFCE4_3"
+ [champ]
+  [presentation]
+   position=114,112
+   taille=9,155
+   noms="conff"
+   id=1030
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,nature_paiement_lib,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=42,112
+   taille=9,155
+   id=73
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ecriture,type_reglement_lib,ecriture
+   saisie=non
+ [champ]
+  [presentation]
+   position=102,75
+   taille=9,52
+   id=79
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,pointmt,ecriture
+   format="\FormatMille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=42,75
+   taille=9,36
+   noms="saisie"
+   id=100
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,regtyp,ecriture
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=209
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19208
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_RegTyp_1_Av"
+   diva_apres="Champ_RegTyp_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=54,75
+   taille=9,36
+   noms="saisie"
+   id=101
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,bqedt,ecriture
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=212
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_BqeDt_1_Av"
+ [champ]
+  [presentation]
+   position=66,75
+   taille=9,36
+   noms="saisie"
+   id=102
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,chqno,ecriture
+  [aide_page]
+   aide=207
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_ChqNo_1_Av"
+ [champ]
+  [presentation]
+   position=78,75
+   taille=9,36
+   noms="saisie"
+   id=103
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,opedt,ecriture
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=217
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_OpeDt_1_Av"
+ [champ]
+  [presentation]
+   position=90,75
+   taille=9,36
+   noms="saisie"
+   id=104
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,valdt,ecriture
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=214
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_ValDt_1_Av"
+ [champ]
+  [presentation]
+   position=114,75
+   taille=9,36
+   id=1029
+   colonnes_saisie=4
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,natpai,ecriture
+   saisie=non
+ [case_a_cocher]
+  [presentation]
+   position=213,10
+   taille=9,122
+   noms="axe1;axenom1"
+   id=69
+   wstyle="CHAMP_AFF_CADRE3D"
+  [description]
+   donnee=ecriture,vtlcod,ecriture,1
+   minmaj=majuscules
+   saisie=non
+  [param_case]
+   texte="Ventilation"
+   cadrage=droite
+   valeur="2","1"
+ [case_a_cocher]
+  [presentation]
+   position=225,10
+   taille=9,122
+   noms="axe2;axenom2"
+   id=70
+   wstyle="CHAMP_AFF_CADRE3D"
+  [description]
+   donnee=ecriture,vtlcod,ecriture,2
+   minmaj=majuscules
+   saisie=non
+  [param_case]
+   texte="Ventilation"
+   cadrage=droite
+   valeur="2","1"
+ [case_a_cocher]
+  [presentation]
+   position=237,10
+   taille=9,122
+   noms="axe3;axenom3"
+   id=71
+   wstyle="CHAMP_AFF_CADRE3D"
+  [description]
+   donnee=ecriture,vtlcod,ecriture,3
+   minmaj=majuscules
+   saisie=non
+  [param_case]
+   texte="Ventilation"
+   cadrage=droite
+   valeur="2","1"
+ [case_a_cocher]
+  [presentation]
+   position=249,10
+   taille=9,122
+   noms="axe4;axenom4"
+   id=72
+   wstyle="CHAMP_AFF_CADRE3D"
+  [description]
+   donnee=ecriture,vtlcod,ecriture,4
+   minmaj=majuscules
+   saisie=non
+  [param_case]
+   texte="Ventilation"
+   cadrage=droite
+   valeur="2","1"
+ [champ]
+  [presentation]
+   position=214,208
+   taille=9,42
+   id=92
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,critere,ecriture
+  [aide_page]
+   aide=221
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Critere_1_Av"
+ [champ]
+  [presentation]
+   position=226,208
+   taille=9,42
+   id=93
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,lot,ecriture
+  [aide_page]
+   aide=218
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Lot_1_Av"
+   diva_apres="Champ_Lot_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=238,148
+   taille=9,59
+   id=94
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=x1,choix,x1,1
+   minmaj=majuscules
+  [param_saisie]
+   defaut="            0,0000000000"
+  [param_multi]
+   choix="ccfdmc.dhfi","CHOIX_13"
+  [aide_page]
+   aide=216
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Choix_1_Av"
+   diva_apres="Champ_Choix_1_Ap"
+ [champ]
+  [presentation]
+   position=238,208
+   taille=9,42
+   id=95
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,mt2,ecriture
+   format="\a5pm000.dhop,format_blanc"
+  [param_saisie]
+   defaut="            0,0000000000"
+  [aide_page]
+   aide=215
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Mt2_1_Av"
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPLEMENTS"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="NOTE"
+    wtexte="_Note\tShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="FICJOINT"
+    wtexte="_Fichiers joint\tCtrl+F6"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="VENTILPIEC"
+    wtexte="_Ventilation par pièce et échéance\tShift+Ctrl+F4"
+    wid_ressource="VENTILPIEC"
+    wtrait_chaine="#shift_ctrl_f4"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="VENTILAXE"
+    wtexte="_Imputation par axe\tCtrl+F4"
+    wid_ressource="VENTILAXE"
+    wtrait_chaine="#ctrl_f4"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="DETAIL"
+    wtexte="Détail de la ligne _centralisée\tF6"
+    wid_ressource="DETAIL"
+    wtrait_chaine="#f6"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Détail des lignes d'extrait _pointées\tCtrl+F5"
+    wid_ressource="DETAIL_POINTAGE"
+    wtrait_chaine="#ctrl_f5"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="MODECR"
+    wtexte="_Modifier l'écriture\tCtrl+F7"
+    wid_ressource="MODECR"
+    wtrait_chaine="#ctrl_f7"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="LETCPT"
+    wtexte="_Lettrer ou pointer le compte\tCtrl+F8"
+    wid_ressource="LETCPT"
+    wtrait_chaine="#ctrl_f8"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="LETDEL"
+    wtexte="_Délettrer ou dépointer la ligne\tShift+Ctrl+F8"
+    wid_ressource="LETDEL"
+    wtrait_chaine="#shift_ctrl_f8"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Extourner"
+    wid_ressource="EXTOURNER"
+    wetype_trait=arret
+    warret=5502
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Lier à un abonnement\tCtrl+F11"
+    wid_ressource="LIERABO"
+    wtrait_chaine="#ctrl_f11"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Voir l'abonnement associé\tShift+Ctrl+F11"
+    wid_ressource="VOIRABO"
+    wtrait_chaine="#shift_ctrl_f11"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wtrait_chaine="#home"
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wtrait_chaine="#end"
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    wetype_trait=arret
+    warret=5
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2__3"
+  [item]
+   [param_bouton]
+    wnom="LETCPT"
+    wid_ressource="LETCPT"
+    wtrait_chaine="#ctrl_f8"
+   [info_bulle]
+   texte="Lettrer le compte <Ctrl+F8>"
+  [item]
+   [param_bouton]
+    wnom="LETDEL"
+    wid_ressource="LETDEL"
+    wtrait_chaine="#shift_ctrl_f8"
+   [info_bulle]
+   texte="Délettrer la ligne <Shift+Ctrl+F8>"
+  [item]
+   [param_bouton]
+    wnom="MODECR"
+    wid_ressource="MODECR"
+    wtrait_chaine="#ctrl_f7"
+   [info_bulle]
+   texte="Modifier l'écriture <Ctrl+F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__10"
+  [item]
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Extourner"
+    wid_ressource="EXTOURNER"
+    wetype_trait=arret
+    warret=5502
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_2"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   [param_bouton]
+    wnom="FICJOINT"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+   [info_bulle]
+   texte="Fichiers joints <Ctrl+F6>"
+  [item]
+   [param_bouton]
+    wnom="VENTILPIEC"
+    wid_ressource="VENTILPIEC"
+    wtrait_chaine="#shift_ctrl_f4"
+   [info_bulle]
+   texte="Ventilation par pièce et échéance <Shift+Ctrl+F4>"
+  [item]
+   [param_bouton]
+    wnom="VENTILAXE"
+    wid_ressource="VENTILAXE"
+    wtrait_chaine="#ctrl_f4"
+   [info_bulle]
+   texte="Ventilation par axe <Ctrl+F4>"
+  [item]
+   [param_bouton]
+    wnom="DETAIL"
+    wid_ressource="DETAIL"
+    wtrait_chaine="#f6"
+   [info_bulle]
+   texte="Détail de la ligne centralisée <F6>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Lignes d'extrait pointées"
+    wid_ressource="DETAIL_POINTAGE"
+    wtrait_chaine="#ctrl_f5"
+   [info_bulle]
+   texte="Détail des lignes d'extrait pointées <Ctrl+F5>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Générique"
+    wid_ressource="ZOOM1"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_5"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=6
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+SetModuleInfo('$Id: ccez100_sql.dhsf 34533 2013-10-16 15:06:46Z als $')
+;>xdiva
+;*
+;*		Zoom écritures																															cctez100.dhsp
+;*
+
+;*		Log	 Version	  N°modif		Date		Modifications
+;*
+;*		pb 		4.1						04.1999	Version initiale en Diva
+;*		hc			5.1						07.2000
+
+
+;*
+;*		Déclarations
+;*
+
+; includes
+include	"cctc000.dhsp"
+
+; record SQL
+public	recordSQL	'CCRSECR.dhoq'			ECRITURE
+
+; enregistrements
+public	record	CCFDD.dhsd		C3								; intitulé de compte
+public	record	CCFDD.dhsd		C4								; paramètres de journal
+public	record	CCFDD.dhsd		C8			C8_SEL			; ligne d'écriture (sélection)
+public	record	CCFDD.dhsd		CA								; dossier, paramètres généraux
+public	record	CCFDD.dhsd		H8								; types de règlement
+public	record	CCFDD.dhsd		X1								; work zoom
+
+public	record	GTFDD.dhsd 		T006							; modes de règlement
+
+public	record	DDSYS.dhsd		ZOOM							; variables de contrôle du zoom
+public	record	DDSYS.dhsd 		ROWINFO ZOOMSELECTION
+
+; modules
+module	"gttm000.dhop"
+
+
+;*
+;*		procédures sur données des onglets
+;*
+
+;*
+public procedure Champ_Cpt_1_Ap
+
+; après saisie du compte sur l'onglet (compte de sélection)
+
+beginp	; Champ_Cpt_1_Ap
+
+	X1.Lib(9) = ' '
+	if Controle_Compte(C8_SEL.Cpt, nonvide = false, syntaxe = false, collectif = condition(X1.Choix(4) = 3, true, false), err = 0, etablissement = false) = 0
+		X1.Lib(9) = C3.Lib
+		if X1.Choix(4) = 3 and C3.CptTyp <> 2		; type du compte de sélection est "collectif" mais le compte saisi n'est pas un collectif
+			X1.Lib(9) = ' '
+			Mes_Alert(3035, C3.Cpt)
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endif
+	endif
+
+endp		; Champ_Cpt_1_Ap
+
+
+;*
+public procedure Champ_Jnl_1_Ap
+
+; après saisie du code journal sur l'onglet (journal de sélection)
+
+beginp	; Champ_Jnl_1_Ap
+
+	X1.Lib(8) = ' '
+	if Controle_Journal(C8_SEL.Jnl, err = 0) = 0
+		X1.Lib(8) = C4.Lib
+		if Jnl_Lie_A_Reglement(MZ.EtbC3, C4.Jnl) = 'O'              
+			XmeSetAttribut("r3cod", AN_STYLE, "CHAMP_NON_SAISI")
+		else
+			XmeResetAttribut("r3cod", AN_TOUS_ATTRIBUTS)
+		endif
+	endif
+
+endp		; Champ_Jnl_1_Ap
+
+
+;*
+;*		procédures sur données de la ligne d'écriture
+;*
+
+;*
+public procedure Champ_Lib_1_Av
+
+; avant libellé
+
+beginp	; Champ_Lib_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Lib_1_Av
+
+
+;*
+public procedure Champ_Cpt_3_Av
+
+; avant compte de contrepartie
+
+beginp	; Champ_Cpt_3_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Cpt_3_Av
+
+
+;*
+public procedure Champ_Cpt_3_Ap
+
+; après compte de contrepartie
+
+beginp	; Champ_Cpt_3_Ap
+
+	ECRITURE.Compte_Contrepartie_Lib = ' '
+	if Controle_Compte(ECRITURE.Cp, nonvide = false, etablissement = false) = 0
+		ECRITURE.Compte_Contrepartie_Lib = C3.Lib
+	endif
+
+endp		; Champ_Cpt_3_Ap
+
+
+;*
+public procedure Champ_Reg_1_Av
+
+; avant mode de règlement
+
+beginp	; Champ_Reg_1_Av
+
+	if Zoom.SceNoCle in (9, 10) or Cpt_Lie_A_Reglement(ECRITURE.Etb, ECRITURE.Jnl, ECRITURE.Cpt) = 'O'     
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Reg_1_Av
+
+
+;*
+public procedure Champ_Reg_1_Ap
+
+; après mode de règlement
+
+beginp	; Champ_Reg_1_Ap
+
+	Lectab(6, ECRITURE.Reg, 1106)
+	ECRITURE.Mode_Reglement_Lib = T006.Lib
+
+endp		; Champ_Reg_1_Ap
+
+
+;*
+public procedure Champ_EchDt_1_Av
+
+; avant échéance
+
+beginp	; Champ_EchDt_1_Av
+
+	if Zoom.SceNoCle in (9, 10) or ECRITURE.VtlCod(5) = 2 or Cpt_Lie_A_Reglement(ECRITURE.Etb, ECRITURE.Jnl, ECRITURE.Cpt) = 'O'		
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_EchDt_1_Av
+
+
+;*
+public procedure Champ_Piece_1_Av
+
+; avant pièce
+
+beginp	; Champ_Piece_1_Av
+
+	if Zoom.SceNoCle in (9, 10) or ECRITURE.VtlCod(5) = 2 or Cpt_Lie_A_Reglement(ECRITURE.Etb, ECRITURE.Jnl, ECRITURE.Cpt) = 'O'
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Piece_1_Av
+
+
+;*
+public procedure Champ_PinoTiers_1_Av
+
+; avant pièce du tiers
+
+beginp	; Champ_PinoTiers_1_Av
+
+	if Zoom.SceNoCle in (9, 10) or Cpt_Lie_A_Reglement(ECRITURE.Etb, ECRITURE.Jnl, ECRITURE.Cpt) = 'O'
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_PinoTiers_1_Av
+
+
+;*
+public procedure Champ_RegTyp_1_Av
+
+; avant type de règlement
+
+beginp	; Champ_RegTyp_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_RegTyp_1_Av
+
+
+;*
+public procedure Champ_RegTyp_1_Ap
+
+; après type de règlement
+
+beginp	; Champ_RegTyp_1_Ap
+
+	Lectab_H8(ECRITURE.RegTyp, 9108)
+	ECRITURE.Type_Reglement_Lib = H8.Lib
+
+endp		; Champ_RegTyp_1_Ap
+
+
+;*
+public procedure Champ_BqeDt_1_Av
+
+; avant date prévue banque
+
+beginp	; Champ_BqeDt_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_BqeDt_1_Av
+
+
+;*
+public procedure Champ_ChqNo_1_Av
+
+; avant numéro de chèque
+
+beginp	; Champ_ChqNo_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_ChqNo_1_Av
+
+
+;*
+public procedure Champ_OpeDt_1_Av
+
+; avant date d'opération
+
+beginp	; Champ_OpeDt_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_OpeDt_1_Av
+
+
+;*
+public procedure Champ_ValDt_1_Av
+
+; avant date de valeur
+
+beginp	; Champ_ValDt_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_ValDt_1_Av
+
+
+;*
+public procedure Champ_Critere_1_Av
+
+; avant critere
+
+beginp	; Champ_Critere_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Critere_1_Av
+
+
+;*
+public procedure Champ_Lot_1_Av
+
+; avant numéro de lot
+
+beginp	; Champ_Lot_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Lot_1_Av
+
+
+;*
+public procedure Champ_Lot_1_Ap
+
+; après numéro de lot
+
+beginp	; Champ_Lot_1_Ap
+
+	ECRITURE.LotCod = condition(ECRITURE.Lot <> ' ', 2, 1)
+
+endp		; Champ_Lot_1_Ap
+
+
+;*
+public procedure Champ_Choix_1_Av
+
+; avant nature montant 2
+
+beginp	; Champ_Choix_1_Av
+
+	if Zoom.SceNoCle in (9, 10)
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Choix_1_Av
+
+
+;*
+public procedure Champ_Choix_1_Ap
+
+; après nature montant 2
+
+beginp	; Champ_Choix_1_Ap
+
+	ECRITURE.Mt2Nat = X1.Choix(1) - 1
+	if ECRITURE.Mt2Nat <> 0	|	SYSTEM.ZDEC(1) = CA.Mt2DecNb(ECRITURE.Mt2Nat)	|	endif
+
+	if X1.Choix(1) = 1	|	ECRITURE.Mt2 = ' '
+	else						|	ECRITURE.Mt2 = ECRITURE.Mt2
+	endif
+
+endp		; Champ_Choix_1_Ap
+
+
+;*
+public procedure Champ_Choix_6_Ap
+
+; Après multichoix ecr lettrées / non / toutes
+
+beginp	; Champ_Choix_6_Ap
+
+	if X1.Choix(6) <> 3				; pas "lettrées et non lettrées"
+		X1.Choix(7) = 3				; on force "pointées et non pointées"
+	endif
+
+endp		; Champ_Choix_6_Ap
+
+
+;*
+public procedure Champ_Choix_7_Ap
+
+; Après multichoix ecr pointée / non / toutes
+
+beginp	; Champ_Choix_7_Ap
+
+	if X1.Choix(7) <> 3				; pas "pointées et non pointées"
+		X1.Choix(6) = 3				; on force "lettrées et non lettrées"
+	endif
+
+endp		; Champ_Choix_7_Ap
+
+
+;*
+Public Procedure Champ_FiltreEtb_1_Av
+
+; Avant saisie du filtre établissement
+
+Beginp	; Champ_FiltreEtb_1_Av
+
+	C3XZ.Pong = true				; demande de reception d'une selection	sur zoom établissements
+
+Endp		; Champ_FiltreEtb_1_Av
+
+
+;*
+Public Procedure Champ_FiltreEtb_1_Ap
+
+; après saisie du filtre établissements
+
+Beginp	; Champ_FiltreEtb_1_Ap
+
+	if Harmony.ClicOnglet		|		preturn		|		endif
+
+	if	Harmony.Key	= K_CTRL_S
+	 	Receptionner_Selection_ZoomEtablissement(X1.FiltreEtb)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	else
+		if Filtre_Verifier_Syntaxe(X1.FiltreEtb) <> 0
+			Mes_Alert(3033)
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endif
+	endif
+
+Endp		; Champ_FiltreEtb_1_Ap
+
+
+;*
+public procedure Champ_Mt2_1_Av
+
+; avant saisie du montant 2
+
+beginp	; Champ_Mt2_1_Av
+
+	if Zoom.SceNoCle in (9, 10) or ECRITURE.Mt2Nat = 0
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+
+endp		; Champ_Mt2_1_Av
+
+
+[/diva]
+[diva_base]
+[/diva]

@@ -1,0 +1,153 @@
+;*
+;*    Active les cotisations PDV
+;*
+
+;*    Log    version   nPmodif      date     modifications
+;*    TR       6.3a      01        06.2011 	 Initial
+
+Include 			"GTQC000.dhsp"
+
+Module	GRPMFIC.dhop
+Module	GRTM000.dhop
+Module	GTTM000.dhop
+
+HfileVersion 	Cogfdd.dhsd 	COGGTF_TAB
+
+Hfile 	Cogfdd.dhsd 	COGGTF_TAB	COGGTF_TAB
+HFile		GTFDD.DHSD		GTFPROJ		GTFPROJ			; Projet Affaire
+Public HFile	GTFDD.DHSD	GTFPCF		GTFPCF_DEV_01			; Tiers
+
+Record 	Cogfdd.dhsd 	COG_UT104					
+Record 	Cogfdd.dhsd 	COG_UT108					
+Record 	grfdd.dhsd  	GRTEVT							; Code événement
+
+Record	GTFDD.DHSD	PRJAP		PRJAP						; Projet apres vente
+Record	GTFDD.DHSD	CLI		CLI						; Client
+Public Record	GTFDD.DHSD	CLI		CLI_DEV_01					; Client
+
+; Variables globales
+1	g_Dossier	>GTFDD.DHSD	Dos
+1	g_Affaire	>GTFDD.DHSD	Affaire
+
+1	t_Ce1_01				>CCFDD.DHSD	Ce1
+1	t_Key_01				255
+1	x_st_01				X
+
+;*
+;*		Procédures et fonctions
+;*
+
+;*
+Public Function int Verifier_Affaire(temp_Dos, temp_Affaire)
+; Fonction qui charge l'enregistrement	PRJAP
+; Renvoi 0 si OK
+; 			1 si KO
+1	temp_Dos			>GTFDD.DHSD	Dos
+1	temp_Affaire	>GTFDD.DHSD	Affaire
+1	x_st0	X
+BeginF
+	GTFPROJ.Key = "A" & temp_Dos & temp_Affaire
+	x_st0 = HRead(GTFPROJ, PRJAP)
+	If x_st0 = 0 And PRJAP.Dos = temp_Dos And PRJAP.Affaire = temp_Affaire
+		FReturn(0)
+	Else
+		FReturn(1)
+	EndIf 
+EndF
+
+;*
+Public Procedure Active_Affaire
+1		x_st0				X
+1		Liste				L
+1		wdate				8
+1		note				8,0
+BeginP
+	Liste = ListCreate
+	COGGTF_TAB.Key = 'E' & PRJAP.DOS & PRJAP.ETB & PRJAP.Cog_Cotisation_PDV
+	Loop Hread(COGGTF_TAB,COG_UT104) = 0 And COG_UT104.Dos = PRJAP.DOS And COG_UT104.Etb = PRJAP.ETB And COG_UT104.Cog_Cotisation_PDV = PRJAP.Cog_Cotisation_PDV
+		ListAddEnd(Liste,COG_UT104)
+	EndLoop
+	Listbegin(Liste)
+	Loop Listnext(Liste,COG_UT104) > 0
+		COG_UT108 	  		= ' '
+		COG_UT108.CE1 		= '8'
+		COG_UT108.USERCR	= system.User
+		COG_UT108.USERCRDH= Time(7)
+		COG_UT108.CENOTE		= 1
+		COG_UT108.DOS 		= COG_UT104.DOS
+		COG_UT108.ETB 		= COG_UT104.Etb
+		COG_UT108.Affaire = g_Affaire
+		COG_UT108.Ref		= COG_UT104.Ref
+		COG_UT108.Cog_Period 			= COG_UT104.Cog_Period
+;		COG_UT108.Cog_Date_Debut 			= Hdate(Today,"p")
+;		COG_UT108.Cog_Date_Fin   			= '99991231'
+		If CLI_DEV_01.Cog_Op <> " "
+			COG_UT108.Cog_Op	= CLI_DEV_01.Cog_Op
+		Else
+			COG_UT108.Cog_Op	= "C00"	; Code OP par défaut
+		EndIf
+		COG_UT108.Cog_AxeAnael				= COG_UT104.Cog_AxeAnael
+		COG_UT108.Cog_Duree_Limitee 		= COG_UT104.Cog_Duree_Limitee
+		COG_UT108.Cog_Nombre_Cotisation 	= COG_UT104.Cog_Nombre_Cotisation	
+		COG_UT108.Cog_Date_Debut 			= Hdate(Today,"p")
+		If Cog_UT108.Cog_Duree_Limitee 	= 2 
+			If Cog_UT108.Cog_Nombre_Cotisation > system.esp
+				wdate = COG_UT108.Cog_Date_Debut
+			 	Switch COG_UT108.Cog_Period
+					Case 1  ; Mensuelle
+						COG_UT108.Cog_Date_Fin = Hdate(wdate,,(COG_UT108.Cog_Nombre_Cotisation-1))
+					Case 2  ; Bimestrielle
+						COG_UT108.Cog_Date_Fin = Hdate(wdate,,((COG_UT108.Cog_Nombre_Cotisation * 2)-2))
+					Case 3  ; Trimestrielle
+						COG_UT108.Cog_Date_Fin = Hdate(wdate,,((COG_UT108.Cog_Nombre_Cotisation * 3)-3))
+					Case 4  ; Semestrielle
+						COG_UT108.Cog_Date_Fin = Hdate(wdate,,((COG_UT108.Cog_Nombre_Cotisation * 6)-6))
+					Case 5  ; Annuelle
+						COG_UT108.Cog_Date_Fin = Hdate(wdate,,((COG_UT108.Cog_Nombre_Cotisation * 12)-12))
+				EndSwitch
+				COG_UT108.Cog_Nombre_Cotisation_Restantes = Cog_UT108.Cog_Nombre_Cotisation
+			Endif
+	 	Else
+			COG_UT108.Cog_Date_Fin = '99991231'
+		Endif				
+		Hwrite(COGGTF_TAB,COG_UT108)
+	EndLoop
+	ListDestroy(Liste)
+EndP
+
+;*
+;*	Main
+;*
+
+;* 
+Main
+
+If PingReceiveAndDelete("ZECHANGE", MZ) = 0 And PingReceiveAndDelete("NumAffaire",g_Affaire) = 0
+	; Chargement de l'environnement
+	Seek_Soc(MZ.DOS)
+	g_Dossier = MZ.Dos
+	; Verification de l'affaire
+	If	Verifier_Affaire(g_Dossier, g_Affaire) = 0
+		; Vérification du client et de son code OP
+		t_Ce1_01 = "3"
+		GTFPCF_DEV_01.Key = "C" & PRJAP.Dos & t_Ce1_01 & PRJAP.Tiers
+		t_Key_01 = PRJAP.Dos & t_Ce1_01 & PRJAP.Tiers
+		x_st_01 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_01)
+		If x_st_01 = 0 And CLI_DEV_01.Dos = PRJAP.Dos And CLI_DEV_01.Ce1 = t_Ce1_01 And CLI_DEV_01.Tiers = PRJAP.Tiers
+			CLI_DEV_01	
+		Else
+			Init CLI_DEV_01 = " "	 
+		EndIf
+		; Traitement
+		If PRJAP.Cog_Cotisation_PDV <> system.esp And CLI_DEV_01.Tiers = PRJAP.Tiers And Lectab(20,CLI_DEV_01.COG_OP) = 0
+			Active_Affaire
+			Pong('RETOUR',0)
+		Else
+			Pong('RETOUR',1)
+		Endif
+	Else
+		Pong('RETOUR',2)
+	EndIf
+EndIf
+
+ProgramExit

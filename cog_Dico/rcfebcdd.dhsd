@@ -1,0 +1,7590 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=5,20021018105258,PHB ,20131118114623,VJ                  
+Nom=rcfebcdd.dhsd,rcfebcdd.dhsd,1
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129140213,MS                  
+Nom=AccCod,Code acceptation,1
+DateM=66FE74D6DD29C701
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=ACCCOD_1
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20030703115049,DEMO
+Nom=Adr,Adresse normalisée    *W,1
+Gel=3
+Nature=128
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20070430183048,FH                  ,20070430183150,FH                  
+Nom=AdrD9,Adresse de l'élément D9,1
+DateM=047A190E458BC701
+Gel=3
+Nature=L
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110151005,PHB ,20061227183845,FH                  
+Nom=AdrLig,Lignes d'adresse,1
+DateM=6672CBDBDD29C701
+Gel=3
+Nature=35*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110150549,PHB ,20061227183852,FH                  
+Nom=AdrTbl,Table d'adresses,1
+DateM=26B60EE0DD29C701
+Gel=3
+Nature=140*5
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 8290000,B3  ,1995 8290000,B3
+Nom=Apres,Recherche nn jours après,1
+Gel=3
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 8290000,B3  ,1995 8290000,B3
+Nom=Avant,Recherche nn jours avant,1
+Gel=3
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026180641,MS                  ,20091030145309,MS                  
+Nom=BankAuthCertif,Nom du certificat d'authentification de la banque,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026180723,MS                  ,20091030145318,MS                  
+Nom=BankEncCertif,Nom du certificat de chiffrement de la banque,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026180609,MS                  ,20091030145302,MS                  
+Nom=BankEUCertif,Nom du certificat de signature de la banque,1
+DateM=FB8171B35E56CA01
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026171105,MS                  ,20091027140933,MS                  
+Nom=BankURL,URL du système bancaire,1
+DateM=465AEDB90657CA01
+Gel=1
+Nature=100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110154751,PHB ,20061227183901,FH                  
+Nom=BdfPays,code pays pour déclaration BDF,1
+DateM=163D92E5DD29C701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030207103331,PHB                 ,20061227183906,FH                  
+Nom=BdxNo,No bordereau,1
+DateM=C60C61E8DD29C701
+Gel=3
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110152350,PHB ,20061227183915,FH                  
+Nom=BenefId,Identification national du bénéficiaire,1
+DateM=663FBCEDDD29C701
+Gel=3
+Nature=17
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110152527,PHB ,20061227183920,FH                  
+Nom=BenefPays,Code pays du bénéficiaire,1
+DateM=D69C5BF0DD29C701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021205115004,PHB ,20021205115004,PHB
+Nom=Bic,code bic de la banque,1
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199610160000,B3  ,20061227183941,FH                  
+Nom=BqC,Nom du compte banque,1
+DateM=6B2DE1FCDD29C701
+Gel=3
+Nature=8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Bqe,Banque,1
+Gel=3
+Nature=8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030114161949,PHB ,20061227183953,FH                  
+Nom=BqeBBic,Code BIC de la banque du bénéficiaire,1
+DateM=E6CA8904DE29C701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030114162319,PHB ,20061227184002,FH                  
+Nom=BqeBPays,Code pays de la banque du bénéficiaire,1
+DateM=31A9F609DE29C701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030114162009,PHB ,20061227184013,FH                  
+Nom=BqeMBic,Code BIC de la banque intermédiaire,1
+DateM=5AA37C10DE29C701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030114162334,PHB ,20061227184026,FH                  
+Nom=BqeMPays,Code pays de la banque intermédiaire,1
+DateM=1267DB17DE29C701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20030703111109,DEMO
+Nom=Ce,Codes enregistrements *W,1
+Gel=3
+Nature=10
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 8280000,B3
+Nom=Ce1,8 = en-tête,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 8280000,B3
+Nom=Ce2,1 = erreur,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 8280000,B3
+Nom=Ce3,1 = à transmettre,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 8280000,B3
+Nom=Ce4,<esp> = non pointé,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Ce5,Code enregistrement 5,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Ce6,Code enregistrement 6,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Ce7,Code enregistrement 7,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Ce8,Code enregistrement 8,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Ce9,Code enregistrement 9,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Cea,Code enregistrement 10,1
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 8160000,EPR3,20071126120738,FH                  
+Nom=CeNote,Indicateur de présence d'une note,1
+DateM=FD6D8322562AC701
+Gel=1
+Nature=1,0
+Choix=rcfdmc.dhfi
+NomChoix=CENOTE_2
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1997 3180000,B3  ,20061227184037,FH                  
+Nom=CesCpt,Compte de cession,1
+DateM=51BB821EDE29C701
+Gel=3
+Nature=8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 9130000,EPR3,20071129141108,MS                  
+Nom=Choix,Choix tableau 1-9,1
+Gel=3
+Nature=B*9
+Choix=rcfebcdmc.dhfi
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2100000,B3  ,20071129141147,MS                  
+Nom=Chx,Choix,1
+Gel=3
+Nature=2,0
+Choix=rcfebcdmc.dhfi
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2 60000,B3  ,1995 2 60000,B3
+Nom=Cid,Identité client,1
+Gel=3
+Nature=20
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021205115127,PHB ,20061227184143,FH                  
+Nom=CliId,identification client pour paiement internationaux,1
+DateM=5B5BFC45DE29C701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120125115051,VJ                  ,20120125115102,VJ                  
+Nom=CodTyp,type de code,1
+Gel=1
+Nature=1,0
+NomOdbc=TypeCode
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070510141155,FH                  ,20070510141155,FH                  
+Nom=CombMax,Nombre maximum de combinaisons,1
+Gel=3
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120807094341,MS                  ,20120807094341,MS                  
+Nom=Conf,Confidentialité,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,1995 2 70000,B3
+Nom=Conv,Convention,1
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Cpl,Adresse: Complément,1
+Gel=3
+Nature=32
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Cpt,Compte comptable,1
+Gel=3
+Nature=8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061227184200,FH                  
+Nom=CreDt,Date  création,1
+DateM=83552F50DE29C701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061227184208,FH                  
+Nom=CreDtA,Date  création      AAAA,1
+DateM=6DB5D154DE29C701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061227184215,FH                  
+Nom=CreDtJ,Date  création        JJ,1
+DateM=D3F8AB58DE29C701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061227184219,FH                  
+Nom=CreDtM,Date  création        MM,1
+DateM=F245745BDE29C701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20110316110320,MS                  ,20110316110320,MS                  
+Nom=Critere,Critère,1
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,1995 2 60000,B3
+Nom=Cst,Valeur constante,1
+Gel=3
+Nature=40
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20101215094237,MS                  ,20110316091650,MS                  
+Nom=CstCod,Code de la constante,1
+DateM=01943880B2E3CB01
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110412165638,MS                  ,20110412165638,MS                  
+Nom=CstFic,Valeur à chercher dans le fichier dont le nom est dans CstVal,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20101215094647,MS                  ,20101215094647,MS                  
+Nom=CstVal,Valeur de la constante,1
+Gel=1
+Nature=80
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026180028,MS                  ,20091030145242,MS                  
+Nom=CustAuthCertif,Nom du certificat d'authentification client,1
+DateM=A54F8FB75E56CA01
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091104110424,MS                  ,20091104110424,MS                  
+Nom=CustAuthPrivKey,Nom du fichier contenant la clé privée d'authentification,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026180053,MS                  ,20091030145254,MS                  
+Nom=CustEncCertif,Nom du certification de chiffrement client,1
+DateM=CF3EB7B55E56CA01
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091104110442,MS                  ,20091104110442,MS                  
+Nom=CustEncPrivKey,Nom du fichier contenant la clé privée de chiffrement,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026175952,MS                  ,20091030145230,MS                  
+Nom=CustEUCertif,Nom du certificat de signature client,1
+DateM=D54595BB5E56CA01
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091104110400,MS                  ,20091104110446,MS                  
+Nom=CustEUPrivKey,Nom du fichier contenant la clé privée de signature,1
+DateM=383AD03C365DCA01
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129141552,MS                  
+Nom=Dailly,Code Dailly,1
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=DAILLY
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1997 1270000,B3  ,20061227184228,FH                  
+Nom=DaillyMt,Montant maximum Dailly,1
+DateM=59436560DE29C701
+Gel=3
+Nature=16,2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185534,FH                  
+Nom=DBa,Code enregistrement,1
+DateM=D60D0C35E029C701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185535,FH                  
+Nom=DBb,Données de service,1
+DateM=92B0E735E029C701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185542,FH                  
+Nom=DBb1,Code opération,1
+DateM=CCB2E039E029C701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185544,FH                  
+Nom=DBb2,Numérotage,1
+DateM=2D91013BE029C701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185546,FH                  
+Nom=DBb3,Numéro émetteur,1
+DateM=CD8A7F3CE029C701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185549,FH                  
+Nom=DBc,Références,1
+DateM=587BDE3DE029C701
+Gel=3
+Nature=36
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185551,FH                  
+Nom=DBc1,Référence donneur ordre,1
+DateM=AFAC0D3FE029C701
+Gel=3
+Nature=12
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185552,FH                  
+Nom=DBc11,Type de convention,1
+DateM=F1D41D40E029C701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185554,FH                  
+Nom=DBc111,Code CCD,1
+DateM=85C33241E029C701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185600,FH                  
+Nom=DBc122,Date échéance,1
+DateM=89A88444E029C701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185604,FH                  
+Nom=DBc12a,Référence tiré,1
+DateM=B3E32547E029C701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021018122136,PHB ,20061227185609,FH                  
+Nom=DBc12au,Pour permettre décalage Dbc12a,1
+DateM=2FE5CB49E029C701
+Gel=3
+Nature=12
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185612,FH                  
+Nom=DBc12b,Date remise,1
+DateM=0EFAA64BE029C701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021018122226,PHB ,20061227185619,FH                  
+Nom=DBc12bu,Pour permettre décalage Dbc12b,1
+DateM=169BE74FE029C701
+Gel=3
+Nature=12
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185622,FH                  
+Nom=DBc2,Nom,1
+DateM=5BD0AA51E029C701
+Gel=3
+Nature=24
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185625,FH                  
+Nom=DBd,RIB,1
+DateM=25DC6653E029C701
+Gel=3
+Nature=48
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185627,FH                  
+Nom=DBd1,RIB: domiciliation,1
+DateM=EE38E754E029C701
+Gel=3
+Nature=24
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185631,FH                  
+Nom=DBd11,RIB: domiciliation,1
+DateM=913F1857E029C701
+Gel=3
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185634,FH                  
+Nom=DBd111,Référence remise,1
+DateM=EACEBE58E029C701
+Gel=3
+Nature=7
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185636,FH                  
+Nom=DBd2,Codes,1
+DateM=2DA60A5AE029C701
+Gel=3
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129142000,MS                  
+Nom=DBd21,Code entrée/acceptation,1
+DateM=4978CB5BE029C701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185642,FH                  
+Nom=DBd22,Code Dailly,1
+DateM=AD639F5DE029C701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199812 80000,R3X ,20061227185645,FH                  
+Nom=DBd23,Code monnaie,1
+DateM=C935605FE029C701
+Gel=3
+Nature=1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185648,FH                  
+Nom=DBd3,RIB : banque,1
+DateM=73C01261E029C701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185651,FH                  
+Nom=DBd4,RIB: guichet,1
+DateM=A7D6F962E029C701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185655,FH                  
+Nom=DBd5,RIB: compte,1
+DateM=F6443965E029C701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185657,FH                  
+Nom=DBe,Montant,1
+DateM=9922B066E029C701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185659,FH                  
+Nom=DBe1,Montant,1
+DateM=EA2AB967E029C701
+Gel=3
+Nature=12
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185701,FH                  
+Nom=DBf,Libellé,1
+DateM=EC03E668E029C701
+Gel=3
+Nature=31
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185703,FH                  
+Nom=DBf1,Date valeur/échéance,1
+DateM=EEDC126AE029C701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185705,FH                  
+Nom=DBf2,Réservé,1
+DateM=F428366BE029C701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185707,FH                  
+Nom=DBf21,Date création,1
+DateM=6089976CE029C701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227185709,FH                  
+Nom=DBf3,Numéro SIREN,1
+DateM=EC81AC6DE029C701
+Gel=3
+Nature=15
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091432,FH                  
+Nom=DBg,Référence remise,1
+DateM=F6395B34582AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091436,FH                  
+Nom=DBg1a,RIB: banque,1
+DateM=02925836582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091439,FH                  
+Nom=DBg1b,Référence tireur,1
+DateM=D0626138582AC701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021018121204,PHB ,20061228091445,FH                  
+Nom=DBg1bu,Pour permettre décalage Dbg1b,1
+DateM=761ED03B582AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091448,FH                  
+Nom=DCa,Code enregistrement,1
+DateM=420B843D582AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091449,FH                  
+Nom=DCb,Données de service,1
+DateM=C4C56B3E582AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091451,FH                  
+Nom=DCb1,Code opération,1
+DateM=C472913F582AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091453,FH                  
+Nom=DCb2,Numérotage,1
+DateM=02A7AB40582AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091455,FH                  
+Nom=DCc,Numéro et nom de la voie,1
+DateM=629EAC41582AC701
+Gel=3
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091456,FH                  
+Nom=DCd,Localité,1
+DateM=B4B3A642582AC701
+Gel=3
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091458,FH                  
+Nom=DCe,Code postal et bureau,1
+DateM=ECE8E743582AC701
+Gel=3
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091500,FH                  
+Nom=DCf,Réservé,1
+DateM=2A1D0245582AC701
+Gel=3
+Nature=46
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091508,FH                  
+Nom=DDa,Identification enreg.,1
+DateM=5477AD49582AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091509,FH                  
+Nom=DDa1,Code enregistrement,1
+DateM=445E774A582AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091511,FH                  
+Nom=DDa2,Numérotage,1
+DateM=50094F4B582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091512,FH                  
+Nom=DDad,Description DCD AP,1
+DateM=E6A4164C582AC701
+Gel=3
+Nature=106
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091532,FH                  
+Nom=DDad1,Référence banque corr.,1
+DateM=0A0ECB57582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091534,FH                  
+Nom=DDad2,RIB corrigé: domiciliat.,1
+DateM=189DF758582AC701
+Gel=3
+Nature=24
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091535,FH                  
+Nom=DDad3,Libellé,1
+DateM=4EEEE359582AC701
+Gel=3
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091537,FH                  
+Nom=DDad4,RIB corrigé: banque,1
+DateM=765DC95A582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091539,FH                  
+Nom=DDad5,RIB corrigé: guichet,1
+DateM=9AB12A5C582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091542,FH                  
+Nom=DDad6,RIB corrigé: compte,1
+DateM=6C9DB75D582AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091543,FH                  
+Nom=DDad7,Réservé,1
+DateM=1EFD8C5E582AC701
+Gel=3
+Nature=9
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091545,FH                  
+Nom=DDad8,Date règlement initiale,1
+DateM=5C31A75F582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091546,FH                  
+Nom=DDad9,Référence présentateur,1
+DateM=0E917C60582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091549,FH                  
+Nom=DDai,Description AP impayé,1
+DateM=9C175862582AC701
+Gel=3
+Nature=106
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091551,FH                  
+Nom=DDai1,Référence présentateur,1
+DateM=A4464363582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091553,FH                  
+Nom=DDai2,RIB dest: domiciliation,1
+DateM=F0CA5864582AC701
+Gel=3
+Nature=24
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091554,FH                  
+Nom=DDai3,Libellé,1
+DateM=64165265582AC701
+Gel=3
+Nature=31
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091556,FH                  
+Nom=DDai4,Libellé complémentaire,1
+DateM=2E117866582AC701
+Gel=3
+Nature=31
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091601,FH                  
+Nom=DDai5,Date règlement initiale,1
+DateM=F60F7269582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091603,FH                  
+Nom=DDai6,Référence présentateur,1
+DateM=4294876A582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091605,FH                  
+Nom=DDai7,Code motif du rejet,1
+DateM=1EE9AF6B582AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091608,FH                  
+Nom=DDb,Identification relevé,1
+DateM=902F506D582AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091610,FH                  
+Nom=DDb1,Code opération,1
+DateM=90387D6E582AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091611,FH                  
+Nom=DDb2,Date,1
+DateM=2C4B5A6F582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091613,FH                  
+Nom=DDc,Description autres enreg,1
+DateM=945DB670582AC701
+Gel=3
+Nature=56
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091616,FH                  
+Nom=DDc1,RIB: banque compensation,1
+DateM=BA286E72582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199812100000,R3X ,20061228091619,FH                  
+Nom=DDc11,Code monnaie,1
+DateM=7CFDD573582AC701
+Gel=3
+Nature=1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091621,FH                  
+Nom=DDc2,RIB: banque,1
+DateM=D6C80E75582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091622,FH                  
+Nom=DDc3,RIB: guichet,1
+DateM=A4D61376582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091624,FH                  
+Nom=DDc4,RIB: compte,1
+DateM=06C80A77582AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091626,FH                  
+Nom=DDc5,RIB: nom du titulaire,1
+DateM=182B3A78582AC701
+Gel=3
+Nature=24
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091629,FH                  
+Nom=DDc6a,Date échéance,1
+DateM=5E97177A582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091631,FH                  
+Nom=DDc6b,Numéro émetteur,1
+DateM=C0880E7B582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091633,FH                  
+Nom=DDd,RIB,1
+DateM=9CDD367C582AC701
+Gel=3
+Nature=156
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091635,FH                  
+Nom=DDd1,RIB: banque compensation,1
+DateM=9CE6637D582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091637,FH                  
+Nom=DDd2,RIB: banque,1
+DateM=8A958E7E582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091638,FH                  
+Nom=DDd3,RIB: guichet,1
+DateM=6E10757F582AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091640,FH                  
+Nom=DDd4,RIB: compte,1
+DateM=D0016C80582AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091642,FH                  
+Nom=DDd5,RIB: nom du titulaire,1
+DateM=F0ABBE81582AC701
+Gel=3
+Nature=24
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091644,FH                  
+Nom=DDd6,Descriptions spécifiques,1
+DateM=96F2DF82582AC701
+Gel=3
+Nature=106
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091646,FH                  
+Nom=DDe,Montant,1
+DateM=765AE783582AC701
+Gel=3
+Nature=12
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227184540,FH                  
+Nom=DDeDh,Début dernier essai,1
+DateM=31283AD3DE29C701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061227184548,FH                  
+Nom=DDeDt,date début dernier essai,1
+DateM=515DB3D7DE29C701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061227184601,FH                  
+Nom=DDeHe,heure début dernier essai,1
+DateM=821785DFDE29C701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061227184636,FH                  
+Nom=DDeHeH,heures début dernier essai,1
+DateM=87B992F4DE29C701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061227184647,FH                  
+Nom=DDeHeM,minutes début dernier essai,1
+DateM=20A1D3FADE29C701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061227184654,FH                  
+Nom=DDeHeS,secondes début dernier essai,1
+DateM=991AFEFEDE29C701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061227184701,FH                  
+Nom=DDEn,Description entêtes,1
+DateM=7F2B8F03DF29C701
+Gel=3
+Nature=106
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091834,FH                  
+Nom=DDEn1,Référence présentateur,1
+DateM=7E6F52C4582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091843,FH                  
+Nom=DDla,Description LCR à payer,1
+DateM=86C2F1C9582AC701
+Gel=3
+Nature=106
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091851,FH                  
+Nom=DDla1,Référence présentateur,1
+DateM=6C66E5CE582AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091854,FH                  
+Nom=DDla2,RIB tiré: domiciliation,1
+DateM=324E2CD0582AC701
+Gel=3
+Nature=24
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091904,FH                  
+Nom=DDla3,Date entrée portefeuille,1
+DateM=06A14AD6582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091921,FH                  
+Nom=DDla4,Réservé,1
+DateM=C6AF94E0582AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091923,FH                  
+Nom=DDla5,Code acceptation,1
+DateM=E03882E1582AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091925,FH                  
+Nom=DDla6,Référence tireur,1
+DateM=2497D9E2582AC701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091927,FH                  
+Nom=DDla7,Référence tiré,1
+DateM=EE91FFE3582AC701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091931,FH                  
+Nom=DDla8,Date création LCR,1
+DateM=CE0234E6582AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091937,FH                  
+Nom=DDla9,Numéro SIREN tireur,1
+DateM=7048D0E9582AC701
+Gel=3
+Nature=15
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091947,FH                  
+Nom=DDlaa,Numérotage présentateur,1
+DateM=FC32E5EF582AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091951,FH                  
+Nom=DDld,Description DCD LCR,1
+DateM=D06A7CF2582AC701
+Gel=3
+Nature=106
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091955,FH                  
+Nom=DDld1,Référence banque corr.,1
+DateM=9E81AEF4582AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091957,FH                  
+Nom=DDld2,RIB corrigé: domiciliat.,1
+DateM=BE2B01F6582AC701
+Gel=3
+Nature=24
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228091959,FH                  
+Nom=DDld3,Référence tireur,1
+DateM=1C0A19F7582AC701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092002,FH                  
+Nom=DDld4,Référence tiré,1
+DateM=BC3802F9582AC701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092017,FH                  
+Nom=DDld5,Numéro SIREN tireur,1
+DateM=CCCCE601592AC701
+Gel=3
+Nature=15
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092020,FH                  
+Nom=DDld6,RIB corrigé: banque,1
+DateM=2080E703592AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092023,FH                  
+Nom=DDld7,RIB corrigé: guichet,1
+DateM=F8C13005592AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092024,FH                  
+Nom=DDld8,RIB corrigé: compte,1
+DateM=B4753306592AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092026,FH                  
+Nom=DDld9,Réservé,1
+DateM=48625207592AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092030,FH                  
+Nom=DDlda,Date règlement initiale,1
+DateM=5EE18D09592AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092034,FH                  
+Nom=DDldb,Référence présentateur,1
+DateM=0A52410C592AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092055,FH                  
+Nom=DDli,Description LCR impayée,1
+DateM=494B4718592AC701
+Gel=3
+Nature=106
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092100,FH                  
+Nom=DDli1,Référence présentateur,1
+DateM=5DE6A61B592AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092103,FH                  
+Nom=DDli2,Date entrée portefeuille,1
+DateM=BA8B751D592AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092106,FH                  
+Nom=DDli3,Code entrée,1
+DateM=D0E0081F592AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092110,FH                  
+Nom=DDli4,Code acceptation,1
+DateM=12816321592AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092112,FH                  
+Nom=DDli5,Référence tireur,1
+DateM=EE99E822592AC701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092122,FH                  
+Nom=DDli6,Référence tiré,1
+DateM=8B25DE28592AC701
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092126,FH                  
+Nom=DDli7,Date création LCR,1
+DateM=12FDE02A592AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092129,FH                  
+Nom=DDli8,Numéro SIREN tiré,1
+DateM=74B1EF2C592AC701
+Gel=3
+Nature=9
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092131,FH                  
+Nom=DDli9,Numéro SIREN tireur,1
+DateM=8DFC2F2E592AC701
+Gel=3
+Nature=9
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092136,FH                  
+Nom=DDlia,Réservé,1
+DateM=AF88D630592AC701
+Gel=3
+Nature=18
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092149,FH                  
+Nom=DDlib,Montant origine,1
+DateM=18237738592AC701
+Gel=3
+Nature=12
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092152,FH                  
+Nom=DDlic,Date règlement initiale,1
+DateM=75C8453A592AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092154,FH                  
+Nom=DDlid,Référence présentateur,1
+DateM=7E09AC3B592AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092156,FH                  
+Nom=DDlie,Code motif du rejet,1
+DateM=C186203D592AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092204,FH                  
+Nom=DDTt,Description pour totaux,1
+DateM=D4446641592AC701
+Gel=3
+Nature=56
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092246,FH                  
+Nom=DDTt1,Numéro du relevé,1
+DateM=1F7D815A592AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092253,FH                  
+Nom=DDTt2,Date retour instructions,1
+DateM=2231ED5E592AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228092305,FH                  
+Nom=DDTt3,Date valeur relevé,1
+DateM=A1C1C165592AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228092322,FH                  
+Nom=DEa,Code enregistrement,1
+DateM=41012370592AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228092324,FH                  
+Nom=DEb,RIB et codes,1
+DateM=A9A18B71592AC701
+Gel=3
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228092327,FH                  
+Nom=DEb1,RIB: banque,1
+DateM=DF0AD372592AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228092328,FH                  
+Nom=DEb2,Code opération extrait,1
+DateM=87D3A373592AC701
+Gel=3
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228092329,FH                  
+Nom=DEb3,RIB: guichet,1
+DateM=02749374592AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228092331,FH                  
+Nom=DEb4,Réserv (devise),1
+DateM=9A328A75592AC701
+Gel=3
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199812100000,R3X ,20061228092333,FH                  
+Nom=DEb41,Code devise,1
+DateM=894B9676592AC701
+Gel=3
+Nature=3
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199812100000,R3X ,20061228092335,FH                  
+Nom=DEb42,Nombre de décimales,1
+DateM=705FB577592AC701
+Gel=3
+Nature=1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199812100000,R3X ,20061228092336,FH                  
+Nom=DEb43,Code monnaie,1
+DateM=253CB378592AC701
+Gel=3
+Nature=1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228092338,FH                  
+Nom=DEb5,RIB: compte,1
+DateM=73B4C179592AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228092340,FH                  
+Nom=DEb6,Opération interbancaire,1
+DateM=DE4AD77A592AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20091218110630,MS                  
+Nom=DebCe,Code enregistrement déb.,1
+DateM=A7AB31C5C97FCA01
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030109165909,PHB ,20061228093057,FH                  
+Nom=DebDev,devise compte à débiter,1
+DateM=151D4F7F5A2AC701
+Gel=3
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228093104,FH                  
+Nom=DebDh,Début transmission    *W,1
+DateM=C5FE9F835A2AC701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061228093111,FH                  
+Nom=DebDt,date début transmission,1
+DateM=DE7EEE875A2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061228093119,FH                  
+Nom=DebHe,heure début transmission,1
+DateM=A2F35B8C5A2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228093155,FH                  
+Nom=DebHeH,heures début transmission,1
+DateM=3A8229A25A2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228093203,FH                  
+Nom=DebHeM,minutes début transmission,1
+DateM=049462A65A2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228093209,FH                  
+Nom=DebHeS,secondes début transmission,1
+DateM=C64C16AA5A2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129143642,MS                  
+Nom=DebOp,Code opération      déb.,1
+DateM=DFCC64AE5A2AC701
+Gel=3
+Nature=2
+Choix=rcfebcdmc.dhfi
+NomChoix=DEBOP
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20030109174922,PHB ,20071129143736,MS                  
+Nom=DebVirIntCod,Type de débit si virement international,1
+DateM=F196AFB95A2AC701
+Gel=3
+Nature=1,0
+Choix=rcfdmc.dhfi
+NomChoix=DEBVIRINTCOD
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093240,FH                  
+Nom=DEc,Date solde / mouvement,1
+DateM=069F8ABC5A2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120124150203,VJ                  ,20120124150203,VJ                  
+Nom=DecaissBqc,compte de substitution si le seuil (decaissMt) est atteint,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120124150039,VJ                  ,20120124155538,VJ                  
+Nom=DecaissMt,montant seuil de décaissement,1
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093242,FH                  
+Nom=DEd,Réservé sur soldes,1
+DateM=A8F328BE5A2AC701
+Gel=3
+Nature=50
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093245,FH                  
+Nom=DEd1,Réservé (motif rejet),1
+DateM=B98390BF5A2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093246,FH                  
+Nom=DEd2,Date valeur,1
+DateM=7AC785C05A2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093248,FH                  
+Nom=DEd3,Libellé,1
+DateM=21DB92C15A2AC701
+Gel=3
+Nature=31
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093250,FH                  
+Nom=DEd4,Réservé,1
+DateM=A0C866C25A2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093251,FH                  
+Nom=DEd5,Numéro de pièce,1
+DateM=A9FF48C35A2AC701
+Gel=3
+Nature=7
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093253,FH                  
+Nom=DEd6,Code exonération,1
+DateM=6A433EC45A2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093254,FH                  
+Nom=DEd7,Code indisponibilité,1
+DateM=0ADC22C55A2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,B3  ,20061228093315,FH                  
+Nom=DEe,Montant solde/mvt,1
+DateM=A981E0D15A2AC701
+Gel=3
+Nature=14
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 90000,HC  ,20061228093320,FH                  
+Nom=DEf,valeur par défaut,1
+DateM=EDB187D45A2AC701
+Gel=3
+Nature=256
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228093341,FH                  
+Nom=DePDh,Dern. exécution prévue,1
+DateM=352DD6E05A2AC701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061228093349,FH                  
+Nom=DePDt,date dern. exécution prévue,1
+DateM=7D6CFEE55A2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061228093357,FH                  
+Nom=DePHe,heure dern. exécution prévue,1
+DateM=D98890EA5A2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228093405,FH                  
+Nom=DePHeH,heures dern. exécution prévue,1
+DateM=C54E52EF5A2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228093415,FH                  
+Nom=DePHeM,minutes dern. exécution prévue,1
+DateM=B91483F55A2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228093423,FH                  
+Nom=DePHeS,secondes dern. exécution prévue,1
+DateM=ED6C10FA5A2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021205115025,PHB ,20021205115025,PHB
+Nom=Dev,devise,1
+Gel=3
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199812 80000,R3X ,20071129144210,MS                  
+Nom=DevCod,Monnaie (1=FRF,1
+DateM=4D7A90FD5A2AC701
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=DEVCOD
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20030110155252,PHB ,20061228093433,FH                  
+Nom=DevP,taux de change,1
+DateM=89B4F9FF5A2AC701
+Gel=3
+Nature=17,6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228093449,FH                  
+Nom=DExDh,Dernier examen,1
+DateM=19AEB1095B2AC701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061228093455,FH                  
+Nom=DExDt,date dernier examen,1
+DateM=056A420D5B2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061228093500,FH                  
+Nom=DExHe,heure dernier examen,1
+DateM=29CC22105B2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228093509,FH                  
+Nom=DExHeH,heures dernier examen,1
+DateM=2D749E155B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228093515,FH                  
+Nom=DExHeM,minutes dernier examen,1
+DateM=01D30D195B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228093523,FH                  
+Nom=DExHeS,secondes dernier examen,1
+DateM=5DEF9F1D5B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021213163841,PHB ,20061228093527,FH                  
+Nom=DFb,enreg. banque du Bénéficiaire,1
+DateM=BD7787205B2AC701
+Gel=3
+Nature=320
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170656,PHB ,20061228093531,FH                  
+Nom=DFb01,Code enregistrement,1
+DateM=993D6B225B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164623,PHB ,20061228093533,FH                  
+Nom=DFb02,Code opération,1
+DateM=C10BA1235B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164637,PHB ,20061228093535,FH                  
+Nom=DFb03,Numéro séquentiel,1
+DateM=CD062F255B2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191217,PHB ,20061228093538,FH                  
+Nom=DFb04,Nom de la banque du bénéficiaire,1
+DateM=5DBA8F265B2AC701
+Gel=3
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191233,PHB ,20061228093540,FH                  
+Nom=DFb05,Localisation de l'agence,1
+DateM=AD4CCA275B2AC701
+Gel=3
+Nature=105
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213210039,PHB ,20061228093545,FH                  
+Nom=DFb05l,localisation agence ligne,1
+DateM=BDD1402B5B2AC701
+Gel=3
+Nature=35*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191249,PHB ,20061228093549,FH                  
+Nom=DFb06,Code BIC,1
+DateM=0DE9132D5B2AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191313,PHB ,20061228093551,FH                  
+Nom=DFb07,Code pays de la banque du bénéficiaire,1
+DateM=CD56B72E5B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191324,PHB ,20061228093556,FH                  
+Nom=DFb08,zone réservée,1
+DateM=11875E315B2AC701
+Gel=3
+Nature=157
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164150,PHB ,20061228093557,FH                  
+Nom=DFc,enreg. renseignements Complémentaires,1
+DateM=45C158325B2AC701
+Gel=3
+Nature=320
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170656,PHB ,20061228093600,FH                  
+Nom=DFc01,Code enregistrement,1
+DateM=EDD1DA335B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164623,PHB ,20061228093601,FH                  
+Nom=DFc02,Code opération,1
+DateM=0DAAD2345B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164637,PHB ,20061228093604,FH                  
+Nom=DFc03,Numéro séquentiel,1
+DateM=ADC416365B2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216142923,PHB ,20061228093606,FH                  
+Nom=DFc04,Motif du règlement,1
+DateM=49E43B375B2AC701
+Gel=3
+Nature=140
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030115140653,PHB ,20061228093610,FH                  
+Nom=DFc04l,Motif du règlement Ligne,1
+DateM=F9F42C3A5B2AC701
+Gel=3
+Nature=35*4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216142954,PHB ,20061228093613,FH                  
+Nom=DFc05,Achat devise effectué (O/N),1
+DateM=517DA53B5B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216152508,PHB ,20061228093615,FH                  
+Nom=DFc06,Référence contrat de change,1
+DateM=A9051E3D5B2AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216152519,PHB ,20061228093622,FH                  
+Nom=DFc07,Date de l'achat,1
+DateM=71F8C8405B2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216152528,PHB ,20061228093624,FH                  
+Nom=DFc08,Taux de change,1
+DateM=31666C425B2AC701
+Gel=3
+Nature=12
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216152632,PHB ,20061228093626,FH                  
+Nom=DFc09,Instructions particulières,1
+DateM=CD8591435B2AC701
+Gel=3
+Nature=105
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216152728,PHB ,20061228093628,FH                  
+Nom=DFc09l,Instruction particulière ligne,1
+DateM=A5CBBD445B2AC701
+Gel=3
+Nature=35*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216152654,PHB ,20061228093630,FH                  
+Nom=DFc10,zone réservée,1
+DateM=5152C6455B2AC701
+Gel=3
+Nature=28
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213163820,PHB ,20061228093632,FH                  
+Nom=DFd,enreg. détail de l'opération,1
+DateM=C1B2C7465B2AC701
+Gel=3
+Nature=320
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170656,PHB ,20061228093635,FH                  
+Nom=DFd01,Code enregistrement,1
+DateM=9D78AB485B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164623,PHB ,20061228093639,FH                  
+Nom=DFd02,Code opération,1
+DateM=19D43A4B5B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164637,PHB ,20061228093642,FH                  
+Nom=DFd03,Numéro séquentiel,1
+DateM=715CB34C5B2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165407,PHB ,20061228093644,FH                  
+Nom=DFd04,Type identifiant du compte du bénéficiaire (0:autre/1:IBAN/2:BBAN),1
+DateM=4D9DFE4D5B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165453,PHB ,20061228093646,FH                  
+Nom=DFd05,Identifiant du compte du bénéficiaire,1
+DateM=6504514F5B2AC701
+Gel=3
+Nature=34
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164712,PHB ,20061228093648,FH                  
+Nom=DFd06,Nom du bénéficiaire,1
+DateM=8166C2505B2AC701
+Gel=3
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164755,PHB ,20061228093651,FH                  
+Nom=DFd07,Adresse du bénéficiaire,1
+DateM=1D0B80525B2AC701
+Gel=3
+Nature=105
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213205842,PHB ,20061228093654,FH                  
+Nom=DFd07l,adresse bénéficiaire ligne,1
+DateM=C51B02545B2AC701
+Gel=3
+Nature=35*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213172944,PHB ,20061228093657,FH                  
+Nom=DFd08,Identification nationale du bénéficiaire,1
+DateM=F5640E565B2AC701
+Gel=3
+Nature=17
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213173002,PHB ,20061228093700,FH                  
+Nom=DFd09,Code pays du bénéficiaire,1
+DateM=4181C2575B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174209,PHB ,20061228093704,FH                  
+Nom=DFd10,Référence de l'opération,1
+DateM=0D655B5A5B2AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174353,PHB ,20061228093726,FH                  
+Nom=DFd11,Qualifiant du montant de l'ordre (T:en dev du transfert\vD:en dev cpt à débiter),1
+DateM=918B49675B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174440,PHB ,20061228093730,FH                  
+Nom=DFd12,zone réservée,1
+DateM=9D0B70695B2AC701
+Gel=3
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174639,PHB ,20061228093737,FH                  
+Nom=DFd13,Montant de l'ordre,1
+DateM=BD01FB6D5B2AC701
+Gel=3
+Nature=14
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174657,PHB ,20061228093741,FH                  
+Nom=DFd14,Nombre de décimales,1
+DateM=75FEF86F5B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174720,PHB ,20061228093744,FH                  
+Nom=DFd15,zone réservée,1
+DateM=5D30A1715B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174745,PHB ,20061228093746,FH                  
+Nom=DFd16,Code motif économique,1
+DateM=818850735B2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174809,PHB ,20061228093750,FH                  
+Nom=DFd17,Code pays pour déclaration BDF,1
+DateM=99743B755B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174903,PHB ,20061228093752,FH                  
+Nom=DFd18,Mode de règlement (0:autre\v1:par chèque bqe émettrice\v2:par chèque bqe récept),1
+DateM=6949C2765B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213174949,PHB ,20061228093755,FH                  
+Nom=DFd19,Code imputation des frais (13:bénef\v14:émett&bénef\v15:émett),1
+DateM=714931785B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165647,PHB ,20061228093757,FH                  
+Nom=DFd20,Type identifiant du compte de frais (0:autre/1:IBAN/2:BBAN),1
+DateM=B96AC6795B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165700,PHB ,20061228093759,FH                  
+Nom=DFd21,Identifiant du compte de frais,1
+DateM=4523087B5B2AC701
+Gel=3
+Nature=34
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165715,PHB ,20061228093802,FH                  
+Nom=DFd22,Code devise du compte de frais,1
+DateM=247A857C5B2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165745,PHB ,20061228093804,FH                  
+Nom=DFd23,zone réservée,1
+DateM=421EFE7D5B2AC701
+Gel=3
+Nature=22
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170343,PHB ,20061228093808,FH                  
+Nom=DFd24,Date d'exécution,1
+DateM=0D987A805B2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170359,PHB ,20061228093811,FH                  
+Nom=DFd25,Code devise du transfert,1
+DateM=648CE2815B2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213163805,PHB ,20061228093813,FH                  
+Nom=DFe,enreg. En-tête,1
+DateM=CBA470835B2AC701
+Gel=3
+Nature=320
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164515,PHB ,20061228093815,FH                  
+Nom=DFe01,Code enregistrement,1
+DateM=4BC5A1845B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164623,PHB ,20061228093817,FH                  
+Nom=DFe02,Code opération,1
+DateM=35749E855B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164637,PHB ,20061228093819,FH                  
+Nom=DFe03,Numéro séquentiel,1
+DateM=171188865B2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164656,PHB ,20061228093820,FH                  
+Nom=DFe04,Date de création,1
+DateM=77E96C875B2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164712,PHB ,20061228093822,FH                  
+Nom=DFe05,Raison social émetteur,1
+DateM=305A8D885B2AC701
+Gel=3
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164755,PHB ,20061228093824,FH                  
+Nom=DFe06,Adresse de l'émetteur,1
+DateM=5B6B8C895B2AC701
+Gel=3
+Nature=105
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165147,PHB ,20061228093827,FH                  
+Nom=DFe06l,adresse émetteur ligne,1
+DateM=702B888B5B2AC701
+Gel=3
+Nature=35*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165252,PHB ,20061228093830,FH                  
+Nom=DFe07,No SIRET de l'émetteur,1
+DateM=BAB2698D5B2AC701
+Gel=3
+Nature=14
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165308,PHB ,20061228093832,FH                  
+Nom=DFe08,Référence remise,1
+DateM=C832BC8E5B2AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165324,PHB ,20061228093834,FH                  
+Nom=DFe09,Code BIC banque émettrice,1
+DateM=717FB68F5B2AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165407,PHB ,20061228093836,FH                  
+Nom=DFe10,Type identifiant du compte à débiter (0:autre/1:IBAN/2:BBAN),1
+DateM=3A14FD905B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165453,PHB ,20061228093838,FH                  
+Nom=DFe11,Identifiant du compte à débiter,1
+DateM=440B46925B2AC701
+Gel=3
+Nature=34
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165528,PHB ,20061228093842,FH                  
+Nom=DFe12,Code devise du compte à débiter,1
+DateM=1CF248945B2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165545,PHB ,20061228093844,FH                  
+Nom=DFe13,Identification client,1
+DateM=DD747C955B2AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165647,PHB ,20061228093845,FH                  
+Nom=DFe14,Type identifiant du compte de frais (0:autre/1:IBAN/2:BBAN),1
+DateM=4D7187965B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165700,PHB ,20061228093847,FH                  
+Nom=DFe15,Identifiant du compte de frais,1
+DateM=90B8BF975B2AC701
+Gel=3
+Nature=34
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165715,PHB ,20061228093849,FH                  
+Nom=DFe16,Code devise du compte de frais,1
+DateM=8602D9985B2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165745,PHB ,20061228093851,FH                  
+Nom=DFe17,zone réservée,1
+DateM=743ADF995B2AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170302,PHB ,20061228093853,FH                  
+Nom=DFe18,Indice type de débit de la remise (1:global/2:unitaire/3:global par dev),1
+DateM=7AA81E9B5B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165920,PHB ,20061228093855,FH                  
+Nom=DFe19,Indice type de remises (1:monodat\vmonodev/2:mono\vmulti/3:multi\vmono/4:mult\vmono,1
+DateM=E61B209C5B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170343,PHB ,20061228093857,FH                  
+Nom=DFe20,Date d'exécution souhaitée,1
+DateM=E0EE429D5B2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170359,PHB ,20061228093858,FH                  
+Nom=DFe21,Code devise des transferts,1
+DateM=C28B2C9E5B2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228093900,FH                  
+Nom=DFi,Indicateur début / fin,1
+DateM=AC3A299F5B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164424,PHB ,20061228093904,FH                  
+Nom=DFm,enreg. banque interMédiaire,1
+DateM=E14271A15B2AC701
+Gel=3
+Nature=320
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170656,PHB ,20061228093905,FH                  
+Nom=DFm01,Code enregistrement,1
+DateM=C76864A25B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164623,PHB ,20061228093907,FH                  
+Nom=DFm02,Code opération,1
+DateM=2F535CA35B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164637,PHB ,20061228093909,FH                  
+Nom=DFm03,Numéro séquentiel,1
+DateM=190259A45B2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191217,PHB ,20061228093910,FH                  
+Nom=DFm04,Nom de la banque intermédiaire,1
+DateM=3C0145A55B2AC701
+Gel=3
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191233,PHB ,20061228093912,FH                  
+Nom=DFm05,Localisation de l'agence,1
+DateM=9CD929A65B2AC701
+Gel=3
+Nature=105
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213212338,PHB ,20061228093913,FH                  
+Nom=DFm05l,localisation agence ligne,1
+DateM=8E9A39A75B2AC701
+Gel=3
+Nature=35*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191249,PHB ,20061228093915,FH                  
+Nom=DFm06,Code BIC,1
+DateM=B5222FA85B2AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213191313,PHB ,20061228093917,FH                  
+Nom=DFm07,Code pays de la banque intermédiaire,1
+DateM=97BF18A95B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213205008,PHB ,20061228093918,FH                  
+Nom=DFm08,zone réservée,1
+DateM=0FCE36AA5B2AC701
+Gel=3
+Nature=157
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164444,PHB ,20061228093923,FH                  
+Nom=DFt,enreg. Total,1
+DateM=6C30DEAC5B2AC701
+Gel=3
+Nature=320
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213170656,PHB ,20061228093931,FH                  
+Nom=DFt01,Code enregistrement,1
+DateM=131A67B15B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164623,PHB ,20061228093940,FH                  
+Nom=DFt02,Code opération,1
+DateM=32120EB75B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213164637,PHB ,20061228093943,FH                  
+Nom=DFt03,Numéro séquentiel,1
+DateM=13DD8DB85B2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216152943,PHB ,20061228093947,FH                  
+Nom=DFt04,Date de création,1
+DateM=5480F2BA5B2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216153005,PHB ,20061228093949,FH                  
+Nom=DFt05,zone réservée,1
+DateM=CF45B0BC5B2AC701
+Gel=3
+Nature=140
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216153057,PHB ,20061228093952,FH                  
+Nom=DFt06,No SIRET de l'émetteur,1
+DateM=9451EDBD5B2AC701
+Gel=3
+Nature=14
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216153108,PHB ,20061228093954,FH                  
+Nom=DFt07,Référence remise,1
+DateM=F35768BF5B2AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216153121,PHB ,20061228093956,FH                  
+Nom=DFt08,zone réservée,1
+DateM=01D8BAC05B2AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165407,PHB ,20061228093958,FH                  
+Nom=DFt09,Type identifiant du compte à débiter (0:autre/1:IBAN/2:BBAN),1
+DateM=48A8FCC15B2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165453,PHB ,20061228094000,FH                  
+Nom=DFt10,Identifiant du compte à débiter,1
+DateM=C0B61AC35B2AC701
+Gel=3
+Nature=34
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021213165528,PHB ,20061228094004,FH                  
+Nom=DFt11,Code devise du compte à débiter,1
+DateM=FDD075C55B2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216153612,PHB ,20061228094007,FH                  
+Nom=DFt12,Identification client,1
+DateM=D689E2C65B2AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216153638,PHB ,20061228094010,FH                  
+Nom=DFt13,Total de contrôle,1
+DateM=9AC3B5C85B2AC701
+Gel=3
+Nature=18
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021216153649,PHB ,20061228094014,FH                  
+Nom=DFt14,zone réservée,1
+DateM=8D9791CB5B2AC701
+Gel=3
+Nature=49
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110653,MS                  ,20100127111431,MS                  
+Nom=DgAHoro,Horodatage du fichier,1
+DateM=C3ED5C84399FCA01
+Gel=1
+Nature=14
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110839,MS                  ,20100127111500,MS                  
+Nom=DgAIdDest,Identifiant destinataire,1
+DateM=556F5295399FCA01
+Gel=1
+Nature=37
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127111726,MS                  ,20100127111759,MS                  
+Nom=DgAIdDestTyp,Code type identifiant destinataire,1
+DateM=16C92A003A9FCA01
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127111741,MS                  ,20100127111741,MS                  
+Nom=DgAIdDestVal,Identifiant destinataire,1
+Gel=1
+Nature=34
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110724,MS                  ,20100127111452,MS                  
+Nom=DgAIdEmet,Identifiant émetteur,1
+DateM=2BBECB90399FCA01
+Gel=1
+Nature=37
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110752,MS                  ,20100127111705,MS                  
+Nom=DgAIdEmetTyp,Code type identifiant émetteur,1
+DateM=C0CF57D1399FCA01
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110804,MS                  ,20100127111700,MS                  
+Nom=DgAIdEmetVal,Identifiant émetteur,1
+DateM=DCCEDAD9399FCA01
+Gel=1
+Nature=34
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110952,MS                  ,20100127111516,MS                  
+Nom=DgAVers,Numéro de version,1
+DateM=D465179F399FCA01
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112540,MS                  ,20100127112540,MS                  
+Nom=DgBARTyp,Caractéristiques de l'AR,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112604,MS                  ,20100127112604,MS                  
+Nom=DgBEtat,Code état de la remise,1
+Gel=1
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113731,MS                  ,20100127113827,MS                  
+Nom=DgBInfos,Informations additionnelles de la remise,1
+DateM=67F112DC3C9FCA01
+Gel=1
+Nature=100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112306,MS                  ,20100127112340,MS                  
+Nom=DgBOp,Type d'opération,1
+DateM=944F9BCB3A9FCA01
+Gel=1
+Nature=7
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112433,MS                  ,20100127112433,MS                  
+Nom=DgBOp1,Type d'opération 1,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112452,MS                  ,20100127112452,MS                  
+Nom=DgBOp2,Type d'opération 2,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112334,MS                  ,20100127112334,MS                  
+Nom=DgBOpRlv,Type d'opération des relevés de compte,1
+Gel=1
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112144,MS                  ,20100127112144,MS                  
+Nom=DgBOpTyp,Identifiant du type d'opération,1
+Gel=1
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112622,MS                  ,20100127112622,MS                  
+Nom=DgBRejet,Existence de rejets ou de suspens,1
+Gel=1
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113402,MS                  ,20100127113402,MS                  
+Nom=DgBRemExec,Caractéristiques de la remise exécutée,1
+Gel=1
+Nature=44
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113553,MS                  ,20100127113553,MS                  
+Nom=DgBRemExecDec,Nombre de décimales du montant de la remise,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113609,MS                  ,20100127113609,MS                  
+Nom=DgBRemExecDev,Devise de la remise exécutée,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113459,MS                  ,20100127113459,MS                  
+Nom=DgBRemExecDt,Date de la remise exécutée,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113437,MS                  ,20100127113437,MS                  
+Nom=DgBRemExecDtTyp,Qualifiant de la date de la remise exécutée,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113532,MS                  ,20100127113532,MS                  
+Nom=DgBRemExecMt,Montant de la remise exécutée,1
+Gel=1
+Nature=14,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113631,MS                  ,20100127113631,MS                  
+Nom=DgBRemExecNbTransac,Nombre de transactions de la remise exécutée,1
+Gel=1
+Nature=5,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112938,MS                  ,20100127112938,MS                  
+Nom=DgBRemInit,Caractéristiques de la remise initiale,1
+Gel=1
+Nature=44
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113231,MS                  ,20100127113231,MS                  
+Nom=DgBRemInitDec,Nombre de décimale du montant de la remise,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113248,MS                  ,20100127113248,MS                  
+Nom=DgBRemInitDev,Devise de la remise initiale,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113055,MS                  ,20100127113055,MS                  
+Nom=DgBRemInitDt,Date de la remise initiale,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113032,MS                  ,20100127113032,MS                  
+Nom=DgBRemInitDtTyp,Qualifiant de la date de la remise initiale,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113200,MS                  ,20100127113200,MS                  
+Nom=DgBRemInitMt,Montant de la remise initiale,1
+Gel=1
+Nature=14,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113318,MS                  ,20100127113318,MS                  
+Nom=DgBRemInitNbTransac,Nombre de transactions de la remise initiale,1
+Gel=1
+Nature=5,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112652,MS                  ,20100127112652,MS                  
+Nom=DgBTransac,Présence de transactions acceptées ou exécutées,1
+Gel=1
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112212,MS                  ,20100127112212,MS                  
+Nom=DgBTypCod,Type de codification,1
+Gel=1
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140552,MS                  ,20100127140552,MS                  
+Nom=DgCCpCpt,Compte de la contrepartie,1
+Gel=1
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140527,MS                  ,20100127140534,MS                  
+Nom=DgCCpNom,Nom de la contrepartie,1
+DateM=A1CF4769519FCA01
+Gel=1
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110553,MS                  ,20100127111340,MS                  
+Nom=DgCe,Code enregistrement,1
+DateM=D715A665399FCA01
+Gel=1
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140421,MS                  ,20100127140421,MS                  
+Nom=DgCEtat,Code état de la transaction,1
+Gel=1
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140500,MS                  ,20100127140500,MS                  
+Nom=DgCInfos,Informations additionnelles sur la transaction,1
+Gel=1
+Nature=170
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140607,MS                  ,20100127140607,MS                  
+Nom=DgCMisc,Autres informations,1
+Gel=1
+Nature=100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112809,MS                  ,20100127112809,MS                  
+Nom=DgCpt,Identification du compte client,1
+Gel=1
+Nature=23
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140037,MS                  ,20100127140037,MS                  
+Nom=DgCTraExec,Caractéristiques de la transaction exécutée,1
+Gel=1
+Nature=39
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140235,MS                  ,20100127140258,MS                  
+Nom=DgCTraExecDec,Nombre de décimales du montant de la transaction,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140316,MS                  ,20100127140316,MS                  
+Nom=DgCTraExecDev,Devise de la transaction exécutée,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140139,MS                  ,20100127140139,MS                  
+Nom=DgCTraExecDt,Date de la transaction exécutée,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140118,MS                  ,20100127140118,MS                  
+Nom=DgCTraExecDtTyp,Qualifiant de la date de la transaction exécutée,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127140209,MS                  ,20100127140209,MS                  
+Nom=DgCTraExecMt,Montant de la transaction exécutée,1
+Gel=1
+Nature=14,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127114147,MS                  ,20100127114147,MS                  
+Nom=DgCTraInit,Caractéristiques de la transaction initiale,1
+Gel=1
+Nature=39
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127114326,MS                  ,20100127114326,MS                  
+Nom=DgCTraInitDec,Nombre de décimales du montant de la transaction,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127114349,MS                  ,20100127114349,MS                  
+Nom=DgCTraInitDev,Devise de la transaction initiale,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127114247,MS                  ,20100127114247,MS                  
+Nom=DgCTraInitDt,Date de la transaction initiale,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127114219,MS                  ,20100127114219,MS                  
+Nom=DgCTraInitDtTyp,Qualifiant de la date de la transaction initiale,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127114310,MS                  ,20100127114310,MS                  
+Nom=DgCTraInitMt,Montant de la transaction initiale,1
+Gel=1
+Nature=14,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127112837,MS                  ,20100127112837,MS                  
+Nom=DgLib,Libellé du compte client,1
+Gel=1
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110610,MS                  ,20100127111345,MS                  
+Nom=DgNo,Numéro séquentiel,1
+DateM=1B9AFB68399FCA01
+Gel=1
+Nature=6,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127110631,MS                  ,20100127111349,MS                  
+Nom=DgRef,Référence du fichier,1
+DateM=1D17656B399FCA01
+Gel=1
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127111922,MS                  ,20100127112015,MS                  
+Nom=DgRefBqe,Référence banque de la remise/transaction,1
+DateM=50156A4B3A9FCA01
+Gel=1
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127111938,MS                  ,20100127112023,MS                  
+Nom=DgRefCli,Référence client de la remise/transaction,1
+DateM=5BB5ED553A9FCA01
+Gel=1
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113902,MS                  ,20100127140635,MS                  
+Nom=DgRejetTb,Motifs du rejet ou du suspens de la remise,1
+DateM=2FD1B38D519FCA01
+Gel=1
+Nature=43*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113937,MS                  ,20100127140642,MS                  
+Nom=DgRetCod,Code retour,1
+DateM=438D0F92519FCA01
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100127113956,MS                  ,20100127140645,MS                  
+Nom=DgRetLib,Libellé retour,1
+DateM=9835E593519FCA01
+Gel=1
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070430164945,FH                  ,20070430164945,FH                  
+Nom=DiffMt,Montant de différence,1
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129145031,MS                  
+Nom=DisCod,Code disponibilité,1
+DateM=16DDA1CE5B2AC701
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=DISCOD
+Flags=n,1,n,o,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Dos,Dossier,1
+Gel=3
+Nature=3,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094109,FH                  
+Nom=DPEDh,Début premier essai,1
+DateM=F88526EC5B2AC701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061228094114,FH                  
+Nom=DPEDt,date début premier essai,1
+DateM=DB35DCEE5B2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061228094127,FH                  
+Nom=DPEHe,heure début premier essai,1
+DateM=FA6EE5F65B2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228094136,FH                  
+Nom=DPEHeH,heures début premier essai,1
+DateM=9874F1FB5B2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228094144,FH                  
+Nom=DPEHeM,minutes début premier essai,1
+DateM=8B892F015C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228094152,FH                  
+Nom=DPEHeS,secondes début premier essai,1
+DateM=4E32FB055C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20070510140716,FH                  ,20070510141204,FH                  
+Nom=DurMax,Durée maximale,1
+Gel=3
+Nature=12,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128152123,MS                  ,20100128152123,MS                  
+Nom=EbxAuthCertCod,Indicateur de création du certificat d'authentification,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030144835,MS                  ,20091030144835,MS                  
+Nom=EbxAuthVersion,Version de l'authentification,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128153825,MS                  ,20100128154045,MS                  
+Nom=EbxC,Country name (2 letter code),1
+DateM=3A89D5AF27A0CA01
+Gel=1
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128180750,MS                  ,20100128180750,MS                  
+Nom=EbxCertFic,Nom du fichier du certificat,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128180409,MS                  ,20100128180729,MS                  
+Nom=EbxCertFicTb,Nom de fichier du certificat,1
+DateM=982BCF5F3CA0CA01
+Gel=1
+Nature=32*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128154248,MS                  ,20100128154248,MS                  
+Nom=EbxCN,Common Name (username),1
+Gel=1
+Nature=64
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091029114349,MS                  ,20091029114349,MS                  
+Nom=EbxDetailCod,Indicateur affichage détail,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128154305,MS                  ,20100128154305,MS                  
+Nom=EbxEmail,Email,1
+Gel=1
+Nature=64
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128152144,MS                  ,20100128152144,MS                  
+Nom=EbxEncCertCod,Indicateur de création du certificat de chiffrement,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030144850,MS                  ,20091030144850,MS                  
+Nom=EbxEncVersion,Version du chiffrement,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128152058,MS                  ,20100128152153,MS                  
+Nom=EbxEUCertCod,Indicateur de création du certificat de scellement,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030144819,MS                  ,20091030144819,MS                  
+Nom=EbxEUVersion,Version de la signature,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030144407,MS                  ,20091030144407,MS                  
+Nom=EbxHash,Hash de la signature du certificat,1
+Gel=1
+Nature=1000
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030144438,MS                  ,20091030144438,MS                  
+Nom=EbxHashLg,Taille du hash,1
+Gel=1
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030144501,MS                  ,20091030144501,MS                  
+Nom=EbxHashTxt,Texte du hash,1
+Gel=1
+Nature=998
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100121112823,MS                  ,20100121112823,MS                  
+Nom=EbxIniCod,Indicateur type de message d'initialisation,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030142254,MS                  ,20091030142254,MS                  
+Nom=EbxKeyCod,Type de clé (scellement\v authentification ou chiffrement),1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128180811,MS                  ,20100128180811,MS                  
+Nom=EbxKeyFic,Nom de fichier de la clé privée,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128180417,MS                  ,20100128180733,MS                  
+Nom=EbxKeyFicTb,Nom de fichier de la clé privée,1
+DateM=068712623CA0CA01
+Gel=1
+Nature=32*3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030161414,MS                  ,20091030161414,MS                  
+Nom=EbxKeyVersion,Version de la clé (A005\v X002\v E002),1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128154116,MS                  ,20100128154116,MS                  
+Nom=EbxL,Locality name (city),1
+Gel=1
+Nature=64
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030141247,MS                  ,20091030141247,MS                  
+Nom=EbxLogDh,Date et heure,1
+Gel=1
+Nature=DH
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030141444,MS                  ,20091030141444,MS                  
+Nom=EbxLogDt,Date,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100326112236,MS                  ,20100326112236,MS                  
+Nom=EbxLogFic,Nom du fichier de log,1
+Gel=1
+Nature=256
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030141614,MS                  ,20091030141935,MS                  
+Nom=EbxLogHr,Heure,1
+DateM=9C1BCA9F6359CA01
+Gel=1
+Nature=H6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030152619,MS                  ,20091030152619,MS                  
+Nom=EbxMaxWait,Temps d'attente maximum pour réception de la réponse du serveur bancaire,1
+Gel=1
+Nature=3,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091217115644,MS                  ,20091217115644,MS                  
+Nom=EbxNbTrial,Nombre de tentative maximum d'émission d'un bloc de données,1
+Gel=1
+Nature=2,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100420180326,MS                  ,20100420180326,MS                  
+Nom=EbxNewCertCod,Type de requête à utiliser pour modifier les certificats (PUB\v HCA ou HCS),1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128154138,MS                  ,20100128154138,MS                  
+Nom=EbxO,Organisation name (company),1
+Gel=1
+Nature=64
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091029114258,MS                  ,20091029163443,MS                  
+Nom=EbxOp,Libellé opération,1
+DateM=5426A656AD58CA01
+Gel=1
+Nature=256
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091216110259,MS                  ,20100126151728,MS                  
+Nom=EbxOrderID,Identifiant de transmission Ebics,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128154155,MS                  ,20100128154155,MS                  
+Nom=EbxOU,Organisation Unit name (section),1
+Gel=1
+Nature=64
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091028175021,MS                  ,20091030152523,MS                  
+Nom=EbxProtocol,Protocole Ebics utilisé,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091217115553,MS                  ,20091217115553,MS                  
+Nom=EbxRevision,Numéro de révision du protocole Ebics utilisé,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100128154020,MS                  ,20100128154020,MS                  
+Nom=EbxST,State or Province name,1
+Gel=1
+Nature=64
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026183854,MS                  ,20091028174911,MS                  
+Nom=EbxStatusCod,Statut de la connexion avec la banque (non initialisée\v initialisée\v ok),1
+DateM=3F7A5593EE57CA01
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091027174725,MS                  ,20091028174800,MS                  
+Nom=EbxTestCod,Indicateur transmission Ebics en test,1
+DateM=F187E068EE57CA01
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091029112946,MS                  ,20091029112946,MS                  
+Nom=EbxTexte,Texte,1
+Gel=1
+Nature=10000
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030141040,MS                  ,20091030141040,MS                  
+Nom=EbxTitre,Titre édition lettre d'initialisation Ebics,1
+Gel=1
+Nature=100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091030140850,MS                  ,20091030141015,MS                  
+Nom=EbxTitreTb,Titre édition lettre d'initialisation,1
+DateM=FEF432526259CA01
+Gel=1
+Nature=100*4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091029114318,MS                  ,20091029163505,MS                  
+Nom=EbxTrt,Libellé traitement,1
+DateM=2E9C8E63AD58CA01
+Gel=1
+Nature=256
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091029113056,MS                  ,20091029113056,MS                  
+Nom=EbxTxt,Texte,1
+Gel=1
+Nature=9998
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091029113045,MS                  ,20091029113045,MS                  
+Nom=EbxTxtLg,Longueur,1
+Gel=1
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091028175006,MS                  ,20091028175006,MS                  
+Nom=EbxVersion,Version Ebics utilisée,1
+Gel=1
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228094158,FH                  
+Nom=EchDt,Date  échéance,1
+DateM=F3364E095C2AC701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228094205,FH                  
+Nom=EchDtA,Date  échéance      AAAA,1
+DateM=0026990D5C2AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228094212,FH                  
+Nom=EchDtJ,Date  échéance        JJ,1
+DateM=D5965E115C2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228094218,FH                  
+Nom=EchDtM,Date  échéance        MM,1
+DateM=CA4F70155C2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20070510120217,FH                  ,20070510141437,FH                  
+Nom=EcrDDt,Date de début des écritures,1
+DateM=8A2816C7FC92C701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070510120229,FH                  ,20070510141441,FH                  
+Nom=EcrFDt,Date de fin des écritures,1
+DateM=EF82CCC9FC92C701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070430175357,FH                  ,20070430175416,FH                  
+Nom=EcrMt,Montant écriture,1
+DateM=06F646CE3F8BC701
+Gel=3
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070430175330,FH                  ,20070430175330,FH                  
+Nom=EcrMtTb,Montants écritures,1
+Gel=3
+Nature=16,D0*10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20090402135315,PP                  ,20090402135315,PP                  
+Nom=EcrNo,N° écriture,1
+Gel=1
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228094226,FH                  
+Nom=EffDt,Date  effet,1
+DateM=501F431A5C2AC701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228094230,FH                  
+Nom=EffDtA,Date  effet         AAAA,1
+DateM=7503651C5C2AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228094236,FH                  
+Nom=EffDtJ,Date  effet           JJ,1
+DateM=E9C9DB1F5C2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228094241,FH                  
+Nom=EffDtM,Date  effet           MM,1
+DateM=7698F5225C2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094246,FH                  
+Nom=EffMt,Montant de l'effet,1
+DateM=138B35265C2AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094253,FH                  
+Nom=EmeNo,Numéro émetteur,1
+DateM=CFF3572A5C2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021230183609,PHB ,20061228094259,FH                  
+Nom=EmetBic,Code BIC banque émettrice,1
+DateM=BD6CC02D5C2AC701
+Gel=3
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094304,FH                  
+Nom=EntCod,Codes entête / pied   *W,1
+DateM=3D4BBB305C2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094309,FH                  
+Nom=EntDiv,Renseignements divers *W,1
+DateM=9A2ED5335C2AC701
+Gel=3
+Nature=98
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094318,FH                  
+Nom=EntId,Identification trans. *W,1
+DateM=DA6432395C2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20030109170202,PHB ,20061228094337,FH                  
+Nom=EntVirInt,spécifique entête virement international,1
+DateM=29B936445C2AC701
+Gel=3
+Nature=100
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20030703111621,DEMO
+Nom=Err,Identification erreur *W,1
+Gel=3
+Nature=26
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094342,FH                  
+Nom=ErrCod,Code erreur,1
+DateM=32EE20475C2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094347,FH                  
+Nom=ErrFic,Fichier en erreur,1
+DateM=A637FF495C2AC701
+Gel=3
+Nature=14
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094353,FH                  
+Nom=ErrNum,Numéro d'erreur,1
+DateM=7713954D5C2AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228094358,FH                  
+Nom=EsNo,Numéro dernier essai,1
+DateM=E1CFA7505C2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094402,FH                  
+Nom=ExeDh,Exécution,1
+DateM=11907C535C2AC701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061228094407,FH                  
+Nom=ExeDt,date exécution,1
+DateM=EA55F4555C2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20070116140941,FH                  
+Nom=ExeHe,heure exécution,1
+DateM=38F353956F39C701
+Gel=3
+Nature=H6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228094414,FH                  
+Nom=ExeHeH,heures exécution,1
+DateM=7C97975A5C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228094418,FH                  
+Nom=ExeHeM,minutes exécution,1
+DateM=04FB0C5D5C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228094421,FH                  
+Nom=ExeHeS,secondes exécution,1
+DateM=9AE0BE5E5C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129150210,MS                  
+Nom=ExoCod,Code exonération,1
+DateM=E10658615C2AC701
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=EXOCOD
+Flags=n,1,n,o,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20070510115832,FH                  ,20070510141424,FH                  
+Nom=ExtrDDt,Date de début des extraits,1
+DateM=8BFCB1BFFC92C701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070510120136,FH                  ,20070510141432,FH                  
+Nom=ExtrFDt,Date de fin des extraits,1
+DateM=5A6EF4C3FC92C701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070430164926,FH                  ,20070430164926,FH                  
+Nom=ExtrTotMt,Montant total des lignes d'extrait,1
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1998 6190000,R3X ,1998 6190000,R3X
+Nom=Fax,Numéro de fax,1
+Gel=3
+Nature=15
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094436,FH                  
+Nom=FDeDh,Fin dernier essai,1
+DateM=13BB78675C2AC701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061228094445,FH                  
+Nom=FDeDt,date fin dernier essai,1
+DateM=FF42A66C5C2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061228094453,FH                  
+Nom=FDeHe,heure fin dernier essai,1
+DateM=E87EA6715C2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228094504,FH                  
+Nom=FDeHeH,heures fin dernier essai,1
+DateM=7E061D785C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228094511,FH                  
+Nom=FDeHeM,minutes fin dernier essai,1
+DateM=CC001E7C5C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228094517,FH                  
+Nom=FDeHeS,secondes fin dernier essai,1
+DateM=87C817805C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20071129150545,MS                  
+Nom=FDP,Type de fin de paquet,1
+DateM=2C6629845C2AC701
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=FDP
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2200000,PHB ,2002 4180000,PHB
+Nom=Fic,Nom fichier,1
+Gel=3
+Nature=256
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094529,FH                  
+Nom=FinCe,Code enregistrement fin,1
+DateM=A29358875C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094535,FH                  
+Nom=FinDh,Fin transmission      *W,1
+DateM=8AA8B28A5C2AC701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061228094538,FH                  
+Nom=FinDt,date fin transmission,1
+DateM=290EA08C5C2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061228094542,FH                  
+Nom=FinHe,heure fin transmission,1
+DateM=E3ABA78E5C2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228094546,FH                  
+Nom=FinHeH,heures fin transmission,1
+DateM=3A8C1A915C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228094550,FH                  
+Nom=FinHeM,minutes fin transmission,1
+DateM=97734F935C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228094554,FH                  
+Nom=FinHeS,secondes fin transmission,1
+DateM=2ACBB8955C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129150723,MS                  
+Nom=FinOp,Code opération      fin,1
+DateM=6165DF975C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131108144602,VJ                  ,20131108144602,VJ                  
+Nom=FlagBic,Flag Bic facultatif,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021205115200,PHB ,20061228094624,FH                  
+Nom=FraisBqC,compte bancaire pour l'imputation des frais,1
+DateM=79D896A75C2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110155009,PHB ,20071129150812,MS                  
+Nom=FraisCod,code d'imputation des frais,1
+DateM=DAD46DAA5C2AC701
+Gel=3
+Nature=2,0
+Choix=rcfdmc.dhfi
+NomChoix=FRAISCOD
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20030114153750,PHB ,20061228094632,FH                  
+Nom=FraisDev,Code devise du compte de frais,1
+DateM=52F4BCAC5C2AC701
+Gel=3
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030109174541,PHB ,20061228094638,FH                  
+Nom=FrsDev,devise compte de frais,1
+DateM=BD0CF8AF5C2AC701
+Gel=3
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030109170334,PHB ,20061228094646,FH                  
+Nom=FrsIban,iban compte de frais,1
+DateM=1F33C1B45C2AC701
+Gel=3
+Nature=34
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030109170922,PHB ,20061228094651,FH                  
+Nom=FrsIban1,Code pays Iban,1
+DateM=5EF72BB85C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20030109170946,PHB ,20061228094655,FH                  
+Nom=FrsIban2,Super Clé Iban,1
+DateM=CB0187BA5C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20030109171026,PHB ,20061228094658,FH                  
+Nom=FrsIban3,BBAN de l'IBAN,1
+DateM=1FC6E7BB5C2AC701
+Gel=3
+Nature=30
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20061220174135,FH                  ,20071114170726,FH                  
+Nom=FrsIban3Fin,Filler pour stockage BBAN complet dans base SQL,1
+Gel=3
+Nature=7
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20061220174111,FH                  ,20061220174244,FH                  
+Nom=FrsIban3Rib,RIB compte de frais,1
+Gel=3
+Nature=23
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20091026171221,MS                  ,20091026180517,MS                  
+Nom=HostID,Identifiant Ebics de la banque,1
+DateM=9AD04F7E5E56CA01
+Gel=1
+Nature=11
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021211102216,PHB ,20030703135754,DEMO
+Nom=Iban,Intenational Bank Account Number,1
+Gel=3
+Nature=34
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021211102306,PHB ,20030703135814,DEMO
+Nom=Iban1,Code pays Iban,1
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021211102320,PHB ,20030703135822,DEMO
+Nom=Iban2,Super Clé Iban,1
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021211102344,PHB ,20030703112900,DEMO
+Nom=Iban3,BBAN de l'IBAN,1
+Gel=3
+Nature=30
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20030703143854,DEMO                ,20061228094718,FH                  
+Nom=Iban3Fin,Filler pour stockage BBAN complet dans base SQL,1
+DateM=8B9B3BC85C2AC701
+Gel=3
+Nature=7
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021211102759,PHB ,20061228094723,FH                  
+Nom=Iban3Rib,RIB,1
+DateM=BB3510CB5C2AC701
+Gel=3
+Nature=23
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021211104546,PHB ,20061228094732,FH                  
+Nom=IbanTbl,Table d'IBAN (et d'infos RIB complémentaires),1
+DateM=DBDD20D05C2AC701
+Gel=3
+Nature=87*3
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20131008170712,MS                  ,20131008170712,MS                  
+Nom=Ics,Identifiant créancier SEPA,1
+Gel=1
+Nature=13
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20030703111139,DEMO
+Nom=Id,Identification enreg. *W,1
+DateM=A0CCDC4B8CCEC201
+Gel=3
+Nature=50
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094737,FH                  
+Nom=ImpMt,Montant impayé,1
+DateM=EF464BD35C2AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094742,FH                  
+Nom=IniRef,Référence initiale,1
+DateM=14CC2BD65C2AC701
+Gel=3
+Nature=8
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20030110154554,PHB ,20061228094812,FH                  
+Nom=IntEcoCod,Code international du code motif économique,1
+DateM=73FC2FE85C2AC701
+Gel=3
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080611113413,FH                  ,20080611113504,FH                  
+Nom=InterroInvDh,Date et heure inverse pour l'interrogation,1
+Gel=1
+Nature=14
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20080611113620,FH                  ,20080611113724,FH                  
+Nom=InterroInvDt,Date inverse pour l'interrogation,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080611113638,FH                  ,20080611113757,FH                  
+Nom=InterroInvHe,Heure inverse pour l'interrogation,1
+Gel=1
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094817,FH                  
+Nom=InvDh,Date et heure inverse *W,1
+DateM=4BEE63EB5C2AC701
+Gel=3
+Nature=14
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20080611113152,FH                  
+Nom=InvDt,date inverse,1
+DateM=E73432FBA5CBC801
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061228094823,FH                  
+Nom=InvHe,heure inverse,1
+DateM=7488E6EE5C2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228094828,FH                  
+Nom=InvHeH,heures inverses,1
+DateM=11FCB3F15C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228094831,FH                  
+Nom=InvHeM,minutes inverses,1
+DateM=E1C3A3F35C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228094835,FH                  
+Nom=InvHeS,secondes inverses,1
+DateM=6AFFA8F55C2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20071129151408,MS                  
+Nom=Jdc,Ascii (1) ou Ebcdic (2),1
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=JDC
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1997 2120000,B3
+Nom=Jnl,Journal,1
+Gel=3
+Nature=3
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129151522,MS                  
+Nom=LcrCod,Code entrée remise LCR,1
+DateM=3B534FFE5C2AC701
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=LCRCOD_1
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094855,FH                  
+Nom=LcrRef,Référence remise LCR/BOR,1
+DateM=C0AA14025D2AC701
+Gel=3
+Nature=11
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,1995 2 60000,B3
+Nom=Lg,Longueur,1
+Gel=3
+Nature=3,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20040713105906,PHB
+Nom=Lib,Libellé,1
+Gel=3
+Nature=32
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 3140000,B3  ,1995 3140000,B3
+Nom=Lib1,Libellé 1,1
+Gel=3
+Nature=60
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20061222170929,FH                  ,20061222171310,FH                  
+Nom=Lib1Tb,Libellé 1 découpé en caractères,1
+DateM=B3FEEBFBE325C701
+Gel=3
+Nature=1*60
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 3140000,B3  ,1995 3140000,B3
+Nom=Lib2,Libellé 2,1
+Gel=3
+Nature=60
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20061222171144,FH                  ,20061222171257,FH                  
+Nom=Lib2Tb,Libellé 2 découpé en caractères,1
+DateM=B30EC300E425C701
+Gel=3
+Nature=1*60
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 3140000,B3  ,1995 3140000,B3
+Nom=Lib3,Libellé 3,1
+Gel=3
+Nature=60
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20040713105930,PHB                 ,20040713105947,PHB
+Nom=Lib32,Libellé,1
+Gel=3
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228094912,FH                  
+Nom=LibCpl,Libellé complémentaire,1
+DateM=2C4F060C5D2AC701
+Gel=3
+Nature=32
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20040709113950,PHB
+Nom=Loc,Adresse: Localité,1
+Gel=3
+Nature=32
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228094919,FH                  
+Nom=LocCod,Code INSEE de la commune,1
+DateM=289C28105D2AC701
+Gel=3
+Nature=5
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228094922,FH                  
+Nom=LocNom,Nom de la localité,1
+DateM=1EB126125D2AC701
+Gel=3
+Nature=26
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228094926,FH                  
+Nom=LocSep,Séparateur (espace),1
+DateM=4F448B145D2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228094931,FH                  
+Nom=MaxDl,Délai maxi de transfert,1
+DateM=7AD02D175D2AC701
+Gel=3
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228094935,FH                  
+Nom=MaxEs,Nombre maxi d'essais,1
+DateM=DCC594195D2AC701
+Gel=3
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2220000,B3  ,20071129152525,MS                  
+Nom=Mc1,Décodage CE2,1
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=MC1
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2220000,B3  ,20071129152625,MS                  
+Nom=Mc2,Décodage CE3,1
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=MC2
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 8250000,B3  ,20071129152725,MS                  
+Nom=Mc3,Décodage CE4,1
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=MC3_1
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 9210000,B3  ,20071129152759,MS                  
+Nom=Mc4,Décodage CE5,1
+Gel=3
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 9210000,B3  ,1995 9210000,B3
+Nom=Mc5,Décodage CE6,1
+Gel=3
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 9210000,B3  ,1995 9210000,B3
+Nom=Mc6,Décodage CE7,1
+Gel=3
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 9210000,B3  ,1995 9210000,B3
+Nom=Mc7,Décodage CE8,1
+Gel=3
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 9210000,B3  ,1995 9210000,B3
+Nom=Mc8,Décodage CE9,1
+Gel=3
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 9210000,B3  ,1995 9210000,B3
+Nom=Mc9,Décodage CEA,1
+Gel=3
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228094946,FH                  
+Nom=MDP,Mot de passe,1
+DateM=D74A89205D2AC701
+Gel=3
+Nature=20
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199812100000,R3X ,20071129152950,MS                  
+Nom=MMO,Monnaie/Montant Origine,1
+DateM=E3BAD1245D2AC701
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=MMO
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20131009142645,MS                  ,20131010173255,MS                  
+Nom=MndtCod,Code du contrat/mandat,1
+DateM=5E267AFDCDC5CE01
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131009142821,MS                  ,20131010173321,MS                  
+Nom=MndtDDt,Date de signature du mandat,1
+DateM=E2D51A0DCEC5CE01
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131009142832,MS                  ,20131010173325,MS                  
+Nom=MndtFDt,Date de fin du mandat,1
+DateM=FA89D60FCEC5CE01
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131009142805,MS                  ,20131010173311,MS                  
+Nom=MndtStep,Etape du mandat (premier\v récurrent\v final),1
+DateM=AA825207CEC5CE01
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131009142738,MS                  ,20131010173303,MS                  
+Nom=MndtTyp,Type du mandat (unique ou série),1
+DateM=3EA42902CEC5CE01
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20030703114946,DEMO
+Nom=Modem,Paramètres modem      *W,1
+Gel=3
+Nature=90
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228095005,FH                  
+Nom=ModIni,Séquence d'init. modem,1
+DateM=19A2C82B5D2AC701
+Gel=3
+Nature=40
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228095021,FH                  
+Nom=ModPrf,Préfixe numéro téléphone,1
+DateM=F5ABE8345D2AC701
+Gel=3
+Nature=20
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228095026,FH                  
+Nom=ModRes,Unité logique réservée,1
+DateM=770A3E385D2AC701
+Gel=3
+Nature=3
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228095030,FH                  
+Nom=ModTel,Numéro de téléphone,1
+DateM=B1A4C13A5D2AC701
+Gel=3
+Nature=20
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 3140000,B3  ,1995 3170000,B3
+Nom=Modul7,Unité logique modem 7bit,1
+Gel=3
+Nature=3
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,1995 3170000,B3
+Nom=Modul8,Unité logique modem 8bit,1
+Gel=3
+Nature=3
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110154628,PHB ,20061228095045,FH                  
+Nom=MotifEcoCod,Code motif économique,1
+DateM=40DBAA435D2AC701
+Gel=3
+Nature=3
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1997 4230000,B3  ,20061228095056,FH                  
+Nom=MtImp,Frais d'impayés,1
+DateM=5D1EB1495D2AC701
+Gel=3
+Nature=8,2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110152755,PHB ,20061228095105,FH                  
+Nom=MtQualif,Qualifiant du montant de l'ordre,1
+DateM=07A6554F5D2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095111,FH                  
+Nom=MvtCe1,Code enreg. mouvement  1,1
+DateM=C260EB525D2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095114,FH                  
+Nom=MvtCe2,Code enreg. mouvement  2,1
+DateM=77CED8545D2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095116,FH                  
+Nom=MvtCe3,Code enreg. mouvement  3,1
+DateM=70B9B1555D2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030109163054,PHB ,20061228095117,FH                  
+Nom=MvtCe4,Code enreg. mouvement  4,1
+DateM=A4068D565D2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095124,FH                  
+Nom=MvtDiv,Renseignements divers *W,1
+DateM=33C7B15A5D2AC701
+Gel=3
+Nature=190
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095142,FH                  
+Nom=MvtId,Identification ligne  *W,1
+DateM=776B88655D2AC701
+Gel=3
+Nature=16
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095147,FH                  
+Nom=MvtIni,Numérotage origine,1
+DateM=C06D9D685D2AC701
+Gel=3
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095202,FH                  
+Nom=MvtMtN,Montant mouvement (si -),1
+DateM=53B00A715D2AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095206,FH                  
+Nom=MvtMtP,Montant mouvement (si +),1
+DateM=B22FD8735D2AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095213,FH                  
+Nom=MvtNum,Numérotage,1
+DateM=43F6BE775D2AC701
+Gel=3
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095219,FH                  
+Nom=MvtOp1,Code opér.  mouvement  1,1
+DateM=4D8A4D7B5D2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095221,FH                  
+Nom=MvtOp2,Code opér.  mouvement  2,1
+DateM=B72AC67C5D2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095226,FH                  
+Nom=MvtOp3,Code  opér. mouvement  3,1
+DateM=2B246B7F5D2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20030109163111,PHB ,20061228095228,FH                  
+Nom=MvtOp4,Code  opér. mouvement  4,1
+DateM=0C8CC9805D2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110152849,PHB ,20061228095246,FH                  
+Nom=MvtVirInt,spécifique détail virement international,1
+DateM=64A7968B5D2AC701
+Gel=3
+Nature=900
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20071129153436,MS                  
+Nom=Na,Nature,1
+Gel=3
+Nature=2,0
+Choix=rcfebcdmc.dhfi
+NomChoix=NA
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 3140000,B3  ,20071129153509,MS                  
+Nom=NbB,Nombre de bits,1
+DateM=10FA9A8E5D2AC701
+Gel=3
+Nature=1,0
+Flags=o,1,n,n,n,n,n,n
+presentation=4
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228095256,FH                  
+Nom=NewDt,Date  nouveau solde,1
+DateM=0C2979915D2AC701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228095303,FH                  
+Nom=NewDtA,Date  nouveau solde AAAA,1
+DateM=897869955D2AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228095307,FH                  
+Nom=NewDtJ,Date  nouveau solde   JJ,1
+DateM=11E904985D2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228095311,FH                  
+Nom=NewDtM,Date  nouveau solde   MM,1
+DateM=9856BF9A5D2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095319,FH                  
+Nom=NewMtN,Nouveau solde     (si -),1
+DateM=EAAE1F9F5D2AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095324,FH                  
+Nom=NewMtP,Nouveau solde     (si +),1
+DateM=A97539A25D2AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Nic,Numéro NIC,1
+Gel=3
+Nature=5
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095341,FH                  
+Nom=NL,Numéro de ligne,1
+DateM=2F9139AC5D2AC701
+Gel=3
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228095348,FH                  
+Nom=NO,Numéro d'ordre,1
+DateM=0D2B57B05D2AC701
+Gel=3
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,1995 2 60000,B3
+Nom=Nom,Nom,1
+Gel=3
+Nature=40
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110150853,PHB ,20061228095353,FH                  
+Nom=NomAdr,Nom pour zone adresse,1
+DateM=A2FDC1B35D2AC701
+Gel=3
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 8160000,EPR3,20050106155434,HC
+Nom=Note,Numéro de note,1
+Gel=1
+Nature=8,0
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2100000,B3  ,20071129153736,MS                  
+Nom=Ok,Validation Oui(2) Non(1),1
+Gel=3
+Nature=1,0
+Flags=o,1,n,n,n,n,n,n
+presentation=3
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228095409,FH                  
+Nom=OldDt,Date  ancien solde,1
+DateM=A4EF0CBD5D2AC701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228095413,FH                  
+Nom=OldDtA,Date  ancien solde  AAAA,1
+DateM=44E322BF5D2AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228095419,FH                  
+Nom=OldDtJ,Date  ancien solde    JJ,1
+DateM=D7AFCBC25D2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228095425,FH                  
+Nom=OldDtM,Date  ancien solde    MM,1
+DateM=B64CCAC65D2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095434,FH                  
+Nom=OldMtN,Ancien solde      (si -),1
+DateM=DAA4F7CB5D2AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095442,FH                  
+Nom=OldMtP,Ancien solde      (si +),1
+DateM=52E582D05D2AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20071129154152,MS                  
+Nom=Op,Code opération,1
+Gel=3
+Nature=2,0
+Choix=rcfebcdmc.dhfi
+NomChoix=OP
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228095502,FH                  
+Nom=OpECod,Code opération extrait,1
+DateM=139EE7DC5D2AC701
+Gel=3
+Nature=4
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095604,FH                  
+Nom=OpEDt,Date  opération,1
+DateM=AC4A95015E2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095607,FH                  
+Nom=OpEDtA,Date  opération     AAAA,1
+DateM=762347035E2AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095611,FH                  
+Nom=OpEDtJ,Date  opération       JJ,1
+DateM=CD8E72055E2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095613,FH                  
+Nom=OpEDtM,Date  opération       MM,1
+DateM=AF31EB065E2AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095639,FH                  
+Nom=OpICod,Opération interbancaire,1
+DateM=5E5192165E2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228095646,FH                  
+Nom=OutDl,Délai entre chaque trame,1
+DateM=48215A1A5E2AC701
+Gel=3
+Nature=8,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110155023,PHB ,20061228095709,FH                  
+Nom=PadCod,code pré-achat de devises,1
+DateM=29F158285E2AC701
+Gel=3
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030115140340,PHB ,20061228095719,FH                  
+Nom=PadFlag,Pré-Achat de Devises effectué 'O'/'N',1
+DateM=721A392E5E2AC701
+Gel=3
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026171029,MS                  ,20091026180509,MS                  
+Nom=PartnerID,Identifiant Ebics de la société,1
+DateM=595E29795E56CA01
+Gel=1
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228095737,FH                  
+Nom=PepDh,Proc. exécution prévue,1
+DateM=C3AFCA385E2AC701
+Gel=3
+Nature=DH
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143742,PHB ,20061228095741,FH                  
+Nom=PepDt,date proc. exécution prévue,1
+DateM=7827473B5E2AC701
+Gel=3
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143823,PHB ,20061228095823,FH                  
+Nom=PepHe,heure proc. exécution prévue,1
+DateM=C14839545E2AC701
+Gel=3
+Nature=6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021025143842,PHB ,20061228095829,FH                  
+Nom=PepHeH,heures proc. exécution prévue,1
+DateM=FA56DD575E2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025143923,PHB ,20061228095835,FH                  
+Nom=PepHeM,minutes proc. exécution prévue,1
+DateM=95E8C85B5E2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021025144007,PHB ,20061228095841,FH                  
+Nom=PepHeS,secondes proc. exécution prévue,1
+DateM=BF28F85E5E2AC701
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,1995 2 60000,B3
+Nom=Per,Périodicité,1
+Gel=3
+Nature=7
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2150000,B3  ,20061228102301,FH                  
+Nom=PiANo,Numéro de pièce alphanumérique,1
+DateM=800E3EC5612AC701
+Gel=3
+Nature=7*20
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2150000,B3  ,20061228102357,FH                  
+Nom=PiANoT,Piano pour RAZ,1
+DateM=9AA4B7E6612AC701
+Gel=3
+Nature=140
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,1995 2 60000,B3
+Nom=Po,Position,1
+Gel=3
+Nature=3,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 8280000,B3  ,20040709113518,PHB
+Nom=Point,Code pointage,1
+Gel=3
+Nature=2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 8280000,B3  ,20061228102404,FH                  
+Nom=PointDt,Date  pointage,1
+DateM=05DDC4EA612AC701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 8280000,B3  ,20061228102407,FH                  
+Nom=PointDtA,Date  pointage      AAAA,1
+DateM=F95BBEEC612AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 8280000,B3  ,20061228102413,FH                  
+Nom=PointDtJ,Date  pointage        JJ,1
+DateM=31E63EF0612AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 8280000,B3  ,20061228102434,FH                  
+Nom=PointDtM,Date  pointage        MM,1
+DateM=40B6E4FC612AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228102453,FH                  
+Nom=PreRef,Référence présentateur,1
+DateM=4E1E0108622AC701
+Gel=3
+Nature=8
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228102501,FH                  
+Nom=RazDl,Délai entre deux RAZ,1
+DateM=04ECF70C622AC701
+Gel=3
+Nature=3,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228102511,FH                  
+Nom=RazDt,Date  remise à zéro,1
+DateM=C09BF212622AC701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228102516,FH                  
+Nom=RazDtA,Date  remise à zéro AAAA,1
+DateM=08BC9715622AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228102522,FH                  
+Nom=RazDtJ,Date  remise à zéro   JJ,1
+DateM=DE343719622AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228102527,FH                  
+Nom=RazDtM,Date  remise à zéro   MM,1
+DateM=B0268F1C622AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20030115141119,PHB ,20061228102645,FH                  
+Nom=RefContrat,reférence du contrat de change si pré-achat de devises,1
+DateM=C03CFA4A622AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021030103145,PHB ,20061228102651,FH                  
+Nom=RefD8,références de D8,1
+DateM=428DB14E622AC701
+Gel=3
+Nature=18
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228102655,FH                  
+Nom=RefD9,références de D9,1
+DateM=6CFF0751622AC701
+Gel=3
+Nature=16
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030110154954,PHB ,20071129160233,MS                  
+Nom=RegInt,mode de règlement international,1
+DateM=229ECD54622AC701
+Gel=3
+Nature=1,0
+Choix=rcfdmc.dhfi
+NomChoix=REGINT
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228102707,FH                  
+Nom=RejCod,Motif de rejet,1
+DateM=1A1DD257622AC701
+Gel=3
+Nature=2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030109174908,PHB ,20071129160454,MS                  
+Nom=RemVirIntCod,Type de remise si virement international,1
+DateM=ECF91F61622AC701
+Gel=3
+Nature=1,0
+Choix=rcfdmc.dhfi
+NomChoix=REMVIRINTCOD
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 2100000,B3  ,1995 2100000,B3
+Nom=Rep,Réponse,1
+Gel=3
+Nature=1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228102728,FH                  
+Nom=RetDt,Date  retour,1
+DateM=663C4864622AC701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228102738,FH                  
+Nom=RetDtA,Date  retour        AAAA,1
+DateM=A4AF666A622AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228102819,FH                  
+Nom=RetDtJ,Date  retour          JJ,1
+DateM=2E2DF182622AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228102826,FH                  
+Nom=RetDtM,Date  retour          MM,1
+DateM=70C9F486622AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228102901,FH                  
+Nom=RibBoc,RIB: Banque compensation,1
+DateM=D0A5F79B622AC701
+Gel=3
+Nature=5
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228102913,FH                  
+Nom=RibBqe,RIB: Banque,1
+DateM=86D150A3622AC701
+Gel=3
+Nature=5
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20061220174527,FH                  ,20071114170651,FH                  
+Nom=RibBqeFrs,RIB : Banque,1
+Gel=3
+Nature=5
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228102955,FH                  
+Nom=RibCle,RIB: Clé de contrôle,1
+DateM=AAA041BC622AC701
+Gel=3
+Nature=2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20061220174624,FH                  ,20071114170709,FH                  
+Nom=RibCleFrs,RIB : Clé de contrôle,1
+Gel=3
+Nature=2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20021211103938,PHB ,20061228103002,FH                  
+Nom=RibCpl,Compléments du RIB,1
+DateM=CF6F40C0622AC701
+Gel=3
+Nature=53
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103006,FH                  
+Nom=RibCpt,RIB: Numéro de compte,1
+DateM=97DBB5C2622AC701
+Gel=3
+Nature=11
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20061220174607,FH                  ,20071114170658,FH                  
+Nom=RibCptFrs,RIB : Numéro de compte,1
+Gel=3
+Nature=11
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20110915162949,VJ                  
+Nom=RibDom,RIB: Domiciliation,1
+DateM=4551F8C5622AC701
+Gel=3
+Nature=24
+NomOdbc=DomiciliationRib
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103016,FH                  
+Nom=RibGui,RIB: Guichet,1
+DateM=EAF3C5C8622AC701
+Gel=3
+Nature=5
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20061220174548,FH                  ,20071114170703,FH                  
+Nom=RibGuiFrs,RIB : Guichet,1
+Gel=3
+Nature=5
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103021,FH                  
+Nom=RibNom,RIB: Nom du titulaire,1
+DateM=15BF7BCB622AC701
+Gel=3
+Nature=24
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228103024,FH                  
+Nom=RlvNo,Numéro relevé,1
+DateM=65A76BCD622AC701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20040709113946,PHB
+Nom=Rue,Adresse: Rue,1
+Gel=3
+Nature=32
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103028,FH                  
+Nom=RueBis,Bis,1
+DateM=879FACCF622AC701
+Gel=3
+Nature=1
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103031,FH                  
+Nom=RueNom,Nature et nom de la voie,1
+DateM=E2AEA3D1622AC701
+Gel=3
+Nature=26
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103046,FH                  
+Nom=RueNum,Numéro dans la voie,1
+DateM=DB934ADA622AC701
+Gel=3
+Nature=4
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103054,FH                  
+Nom=RueSep,Séparateur (espace),1
+DateM=B9A630DF622AC701
+Gel=3
+Nature=1
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20131009142702,MS                  ,20131009142702,MS                  
+Nom=Rum,Référence unique du mandat,1
+Gel=1
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131118104600,VJ                  ,20131118114613,VJ                  
+Nom=SCTVers,Flag version virement SEPA ,1
+DateM=A334DE664BE4CE01
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Siren,Numéro SIREN,1
+Gel=3
+Nature=9
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20030703112705,DEMO
+Nom=Siret,Numéro SIRET,1
+Gel=3
+Nature=14
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2160000,B3  ,20061228103101,FH                  
+Nom=SirTbl,Table de SIRET        *W,1
+DateM=F39974E3622AC701
+Gel=3
+Nature=14*2
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 3170000,B3  ,20071129161959,MS                  
+Nom=Sys,Type de système,1
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=SYS
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20091026171042,MS                  ,20091026180511,MS                  
+Nom=SystemID,Identifiant Ebics du système,1
+DateM=A19D6D7A5E56CA01
+Gel=1
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 90000,HC  ,1999 7 90000,HC
+Nom=Tbl,table dialogue,1
+Gel=3
+Nature=1004*11
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091216091652,MS                  ,20091216091652,MS                  
+Nom=Tel,Numéro de téléphone,1
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070515172402,FH                  ,20070515172410,FH                  
+Nom=TicketPoint,Ticket de pointage,1
+Gel=3
+Nature=9,0
+NomOdbc=TicketPointage
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 60000,B3  ,20061228103109,FH                  
+Nom=TId,Identité Transpac,1
+DateM=F22170E8622AC701
+Gel=3
+Nature=20
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070529100332,JLSI                ,20070529100332,JLSI                
+Nom=Tiers,Code tiers,1
+DateM=2D247E09C8A1C701
+Gel=3
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,1995 2 70000,B3
+Nom=Tire,Référence tiré,1
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,1995 2 70000,B3
+Nom=Tireur,Référence tireur,1
+Gel=3
+Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2150000,B3  ,1995 2150000,B3
+Nom=Tit,Titre du traitement,1
+Gel=3
+Nature=32
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199710290000,B3  ,20061228103124,FH                  
+Nom=ToNum,Time-Out numerotation,1
+DateM=B443F3F0622AC701
+Gel=3
+Nature=4,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228103127,FH                  
+Nom=TotMt,Total,1
+DateM=EDB30BF3622AC701
+Gel=3
+Nature=16,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20091026170510,MS                  ,20091028174943,MS                  
+Nom=TransCod,Indicateur méthode de transmission bancaire,1
+DateM=015A57A6EE57CA01
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 90000,HC  ,1999 7 90000,HC
+Nom=Txt,dialogue,1
+Gel=3
+Nature=1000
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20061220161059,FH                  ,20061220161406,FH                  
+Nom=Txt256,Dialogue découpage sur 256 caractères,1
+Gel=3
+Nature=256
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131008170739,MS                  ,20131008170820,MS                  
+Nom=Uccsdd,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070710105043,FH                  ,20070710105051,FH                  
+Nom=UD0,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070710105229,FH                  ,20070710105239,FH                  
+Nom=UD1,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070710105502,FH                  ,20070710105509,FH                  
+Nom=UD2,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070710105614,FH                  ,20070710105621,FH                  
+Nom=UD3,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070710105632,FH                  ,20070710105641,FH                  
+Nom=UD4,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070710105728,FH                  ,20070710105735,FH                  
+Nom=UD5,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070710105750,FH                  ,20070710105758,FH                  
+Nom=UD6,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20101215094747,MS                  ,20101215094747,MS                  
+Nom=UD7,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20070710095649,FH                  ,20070710095716,FH                  
+Nom=UD8,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070710103229,FH                  ,20070710103239,FH                  
+Nom=UD9,Réservé distributeur,1
+Gel=3
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20070507120227,FH                  ,20070507120227,FH                  
+Nom=UD9T1,Réservé distributeur,1
+Gel=3
+Nature=400
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131009142935,MS                  ,20131009142946,MS                  
+Nom=Umndt,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20021021104532,PHB ,20061228105327,JLSI                
+Nom=UserCr,Utilisateur création,1
+DateM=F49D8105662AC701
+Gel=1
+Nature=20
+NomOdbc=UtilisateurCreation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021021095501,PHB ,20061228105343,JLSI                
+Nom=UserCrDH,Horodatage création,1
+DateM=9C9B080F662AC701
+Gel=1
+Nature=DH
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20050106155631,HC                  ,20061228105352,JLSI                
+Nom=UserCrDt,Date de création,1
+DateM=44CAAF14662AC701
+Gel=1
+Nature=D8
+NomOdbc=DateCreation
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,2002 9 90000,PHB ,20071129134320,MS                  
+Nom=UserCrOri,Origine création,1
+DateM=6C88E419662AC701
+Gel=1
+Nature=2,0
+Choix=rcfdmc.dhfi
+NomChoix=ORIGINE
+NomOdbc=OrigineCreation
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20091026171006,MS                  ,20091026180506,MS                  
+Nom=UserID,Identifiant Ebics de l'utilisateur,1
+DateM=57B134775E56CA01
+Gel=1
+Nature=35
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021021104543,PHB ,20061228105406,JLSI                
+Nom=UserMo,Utilisateur modification,1
+DateM=CCFFE81C662AC701
+Gel=1
+Nature=20
+NomOdbc=UtilisateurModif
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021021095531,PHB ,20061228105415,JLSI                
+Nom=UserMoDH,Horodatage modification,1
+DateM=E405A822662AC701
+Gel=1
+Nature=DH
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20050106155842,HC                  ,20061228105429,JLSI                
+Nom=UserMoDt,Date modification,1
+DateM=DCC7AC2A662AC701
+Gel=1
+Nature=D8
+NomOdbc=DateModif
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,2002 9 90000,PHB ,20071129134425,MS                  
+Nom=UserMoOri,Origine modification,1
+DateM=E4E9C42F662AC701
+Gel=1
+Nature=2,0
+Choix=rcfdmc.dhfi
+NomChoix=ORIGINE
+NomOdbc=OrigineModif
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1995 8280000,B3  ,20061228103139,FH                  
+Nom=UserPoint,Utilisateur pointage,1
+DateM=CB1F54FA622AC701
+Gel=3
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228103146,FH                  
+Nom=UserX,utilisateur,1
+DateM=A2B357FE622AC701
+Gel=3
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103152,FH                  
+Nom=ValDt,Date  valeur,1
+DateM=183CAD01632AC701
+Gel=3
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103156,FH                  
+Nom=ValDtA,Date  valeur        AAAA,1
+DateM=70CD4804632AC701
+Gel=3
+Nature=4,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103203,FH                  
+Nom=ValDtJ,Date  valeur          JJ,1
+DateM=5DAF5A08632AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103210,FH                  
+Nom=ValDtM,Date  valeur          MM,1
+DateM=5FB5B10C632AC701
+Gel=3
+Nature=2,0
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2150000,B3  ,1995 2150000,B3
+Nom=Version,Version du traitement,1
+Gel=3
+Nature=4
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,1995 2 30000,B3
+Nom=Vil,Adresse : Ville,1
+Gel=3
+Nature=32
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103217,FH                  
+Nom=VilCod,Code postal,1
+DateM=630F9B10632AC701
+Gel=3
+Nature=5
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103222,FH                  
+Nom=VilNom,Bureau distributeur,1
+DateM=12AFA613632AC701
+Gel=3
+Nature=26
+Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 30000,B3  ,20061228103226,FH                  
+Nom=VilSep,Séparateur (espace),1
+DateM=D01DDE15632AC701
+Gel=3
+Nature=1
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20071129161945,MS                  
+Nom=VirCod,Code CCD remise OV,1
+DateM=4805ED1F632AC701
+Gel=3
+Nature=1,0
+Choix=rcfebcdmc.dhfi
+NomChoix=VIRCOD
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20021230182742,PHB ,20061228103315,FH                  
+Nom=VirIntRef,Référence remise ordre de virement international,1
+DateM=F83D7233632AC701
+Gel=3
+Nature=16
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1995 2 70000,B3  ,20061228103323,FH                  
+Nom=VirRef,Référence remise OV/AP,1
+DateM=A0B7FD37632AC701
+Gel=3
+Nature=7
+Flags=n,1,n,o,n,n,n,n
+[CHAMPR]
+nom=AccCod
+[CHAMPL]
+Nom=DisCod,1,0,0,N,3
+[/CHAMPL]
+nom=Adr
+[CHAMPL]
+Nom=Cpl,1,0,0,N,3
+Nom=Rue,33,0,0,N,3
+Nom=Loc,65,0,0,N,3
+Nom=Vil,97,0,0,N,3
+[/CHAMPL]
+nom=AdrTbl
+[CHAMPL]
+Nom=NomAdr,1,0,0,N,3
+Nom=AdrLig,36,0,0,N,3
+[/CHAMPL]
+nom=Ce
+[CHAMPL]
+Nom=Ce1,1,0,0,N,3
+Nom=Ce2,2,0,0,N,3
+Nom=Ce3,3,0,0,N,3
+Nom=Ce4,4,0,0,N,3
+Nom=Ce5,5,0,0,N,3
+Nom=Ce6,6,0,0,N,3
+Nom=Ce7,7,0,0,N,3
+Nom=Ce8,8,0,0,N,3
+Nom=Ce9,9,0,0,N,3
+Nom=Cea,10,0,0,N,3
+[/CHAMPL]
+nom=CreDt
+[CHAMPL]
+Nom=CreDtA,1,0,0,N,3
+Nom=CreDtM,5,0,0,N,3
+Nom=CreDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=DBb
+[CHAMPL]
+Nom=DBb1,1,0,0,N,3
+Nom=DBb2,3,0,0,N,3
+Nom=DBb3,11,0,0,N,3
+[/CHAMPL]
+nom=DBc
+[CHAMPL]
+Nom=DBc1,1,0,0,N,3
+Nom=DBc2,13,0,0,N,3
+[/CHAMPL]
+nom=DBc1
+[CHAMPL]
+[UNION]
+TailleUnion=1,12,N,3
+Nom=DBc11,1,0,0,N,3
+Nom=DBc12au,1,0,0,N,3
+Nom=DBc12bu,1,0,0,N,3
+[/UNION]
+[/CHAMPL]
+nom=DBc11
+[CHAMPL]
+Nom=DBc111,1,0,0,N,3
+[/CHAMPL]
+nom=DBc12au
+[CHAMPL]
+Nom=Filler,1,0,2,N,1
+Nom=DBc12a,3,0,0,N,3
+[/CHAMPL]
+nom=DBc12b
+[CHAMPL]
+Nom=Filler,1,0,1,N,1
+Nom=DBc122,2,0,0,N,3
+[/CHAMPL]
+nom=DBc12bu
+[CHAMPL]
+Nom=Filler,1,0,6,N,1
+Nom=DBc12b,7,0,0,N,3
+[/CHAMPL]
+nom=DBd
+[CHAMPL]
+Nom=DBd1,1,0,0,N,3
+Nom=DBd2,25,0,0,N,3
+Nom=DBd3,28,0,0,N,3
+Nom=DBd4,33,0,0,N,3
+Nom=DBd5,38,0,0,N,3
+[/CHAMPL]
+nom=DBd1
+[CHAMPL]
+Nom=DBd11,1,0,0,N,3
+[/CHAMPL]
+nom=DBd11
+[CHAMPL]
+Nom=DBd111,1,0,0,N,3
+[/CHAMPL]
+nom=DBd2
+[CHAMPL]
+Nom=DBd21,1,0,0,N,3
+Nom=DBd22,2,0,0,N,3
+Nom=DBd23,3,0,0,N,3
+[/CHAMPL]
+nom=DBe
+[CHAMPL]
+Nom=DBe1,1,0,0,N,3
+[/CHAMPL]
+nom=DBf
+[CHAMPL]
+Nom=DBf1,1,0,0,N,3
+Nom=DBf2,7,0,0,N,3
+Nom=DBf3,17,0,0,N,3
+[/CHAMPL]
+nom=DBf2
+[CHAMPL]
+Nom=DBf21,1,0,0,N,3
+[/CHAMPL]
+nom=DBg
+[CHAMPL]
+[UNION]
+TailleUnion=1,11,N,3
+Nom=DBg1a,1,0,0,N,3
+Nom=DBg1bu,1,0,0,N,3
+[/UNION]
+[/CHAMPL]
+nom=DBg1bu
+[CHAMPL]
+Nom=Filler,1,0,1,N,1
+Nom=DBg1b,2,0,0,N,3
+[/CHAMPL]
+nom=DCb
+[CHAMPL]
+Nom=DCb1,1,0,0,N,3
+Nom=DCb2,3,0,0,N,3
+[/CHAMPL]
+nom=DDa
+[CHAMPL]
+Nom=DDa1,1,0,0,N,3
+Nom=DDa2,3,0,0,N,3
+[/CHAMPL]
+nom=DDad
+[CHAMPL]
+Nom=DDad1,1,0,0,N,3
+Nom=DDad2,7,0,0,N,3
+Nom=DDad3,31,0,0,N,3
+Nom=DDad4,63,0,0,N,3
+Nom=DDad5,68,0,0,N,3
+Nom=DDad6,73,0,0,N,3
+Nom=DDad7,84,0,0,N,3
+Nom=DDad8,93,0,0,N,3
+Nom=DDad9,99,0,0,N,3
+[/CHAMPL]
+nom=DDai
+[CHAMPL]
+Nom=DDai1,1,0,0,N,3
+Nom=DDai2,7,0,0,N,3
+Nom=DDai3,31,0,0,N,3
+Nom=DDai4,62,0,0,N,3
+Nom=DDai5,93,0,0,N,3
+Nom=DDai6,99,0,0,N,3
+Nom=DDai7,105,0,0,N,3
+[/CHAMPL]
+nom=DDb
+[CHAMPL]
+Nom=DDb1,1,0,0,N,3
+Nom=DDb2,3,0,0,N,3
+[/CHAMPL]
+nom=DDc
+[CHAMPL]
+Nom=DDc1,1,0,0,N,3
+Nom=DDc2,6,0,0,N,3
+Nom=DDc3,11,0,0,N,3
+Nom=DDc4,16,0,0,N,3
+Nom=DDc5,27,0,0,N,3
+[UNION]
+TailleUnion=51,6,N,3
+Nom=DDc6a,1,0,0,N,3
+Nom=DDc6b,1,0,0,N,3
+[/UNION]
+[/CHAMPL]
+nom=DDc1
+[CHAMPL]
+Nom=DDc11,1,0,0,N,3
+[/CHAMPL]
+nom=DDd
+[CHAMPL]
+Nom=DDd1,1,0,0,N,3
+Nom=DDd2,6,0,0,N,3
+Nom=DDd3,11,0,0,N,3
+Nom=DDd4,16,0,0,N,3
+Nom=DDd5,27,0,0,N,3
+Nom=DDd6,51,0,0,N,3
+[/CHAMPL]
+nom=DDd6
+[CHAMPL]
+[UNION]
+TailleUnion=1,106,N,3
+Nom=DDEn,1,0,0,N,3
+Nom=DDla,1,0,0,N,3
+Nom=DDli,1,0,0,N,3
+Nom=DDai,1,0,0,N,3
+Nom=DDld,1,0,0,N,3
+Nom=DDad,1,0,0,N,3
+[/UNION]
+[/CHAMPL]
+nom=DDeDh
+[CHAMPL]
+Nom=DDeDt,1,0,0,N,3
+Nom=DDeHe,9,0,0,N,3
+[/CHAMPL]
+nom=DDeHe
+[CHAMPL]
+Nom=DDeHeH,1,0,0,N,3
+Nom=DDeHeM,3,0,0,N,3
+Nom=DDeHeS,5,0,0,N,3
+[/CHAMPL]
+nom=DDEn
+[CHAMPL]
+Nom=DDEn1,1,0,0,N,3
+[/CHAMPL]
+nom=DDla
+[CHAMPL]
+Nom=DDla1,1,0,0,N,3
+Nom=DDla2,9,0,0,N,3
+Nom=DDla3,33,0,0,N,3
+Nom=DDla4,39,0,0,N,3
+Nom=DDla5,40,0,0,N,3
+Nom=DDla6,41,0,0,N,3
+Nom=DDla7,51,0,0,N,3
+Nom=DDla8,61,0,0,N,3
+Nom=DDla9,67,0,0,N,3
+Nom=DDlaa,82,0,0,N,3
+[/CHAMPL]
+nom=DDld
+[CHAMPL]
+Nom=DDld1,1,0,0,N,3
+Nom=DDld2,9,0,0,N,3
+Nom=DDld3,33,0,0,N,3
+Nom=DDld4,43,0,0,N,3
+Nom=DDld5,53,0,0,N,3
+Nom=DDld6,68,0,0,N,3
+Nom=DDld7,73,0,0,N,3
+Nom=DDld8,78,0,0,N,3
+Nom=DDld9,89,0,0,N,3
+Nom=DDlda,91,0,0,N,3
+Nom=DDldb,97,0,0,N,3
+[/CHAMPL]
+nom=DDli
+[CHAMPL]
+Nom=DDli1,1,0,0,N,3
+Nom=DDli2,9,0,0,N,3
+Nom=DDli3,15,0,0,N,3
+Nom=DDli4,16,0,0,N,3
+Nom=DDli5,17,0,0,N,3
+Nom=DDli6,27,0,0,N,3
+Nom=DDli7,37,0,0,N,3
+Nom=DDli8,43,0,0,N,3
+Nom=DDli9,52,0,0,N,3
+Nom=DDlia,61,0,0,N,3
+Nom=DDlib,79,0,0,N,3
+Nom=DDlic,91,0,0,N,3
+Nom=DDlid,97,0,0,N,3
+Nom=DDlie,105,0,0,N,3
+[/CHAMPL]
+nom=DDTt
+[CHAMPL]
+Nom=DDTt1,1,0,0,N,3
+Nom=DDTt2,9,0,0,N,3
+Nom=DDTt3,15,0,0,N,3
+[/CHAMPL]
+nom=DEb
+[CHAMPL]
+Nom=DEb1,1,0,0,N,3
+Nom=DEb2,6,0,0,N,3
+Nom=DEb3,10,0,0,N,3
+Nom=DEb4,15,0,0,N,3
+Nom=DEb5,20,0,0,N,3
+Nom=DEb6,31,0,0,N,3
+[/CHAMPL]
+nom=DEb4
+[CHAMPL]
+Nom=DEb41,1,0,0,N,3
+Nom=DEb42,4,0,0,N,3
+Nom=DEb43,5,0,0,N,3
+[/CHAMPL]
+nom=DebDh
+[CHAMPL]
+Nom=DebDt,1,0,0,N,3
+Nom=DebHe,9,0,0,N,3
+[/CHAMPL]
+nom=DebHe
+[CHAMPL]
+Nom=DebHeH,1,0,0,N,3
+Nom=DebHeM,3,0,0,N,3
+Nom=DebHeS,5,0,0,N,3
+[/CHAMPL]
+nom=DEd
+[CHAMPL]
+Nom=DEd1,1,0,0,N,3
+Nom=DEd2,3,0,0,N,3
+Nom=DEd3,9,0,0,N,3
+Nom=DEd4,40,0,0,N,3
+Nom=DEd5,42,0,0,N,3
+Nom=DEd6,49,0,0,N,3
+Nom=DEd7,50,0,0,N,3
+[/CHAMPL]
+nom=DePDh
+[CHAMPL]
+Nom=DePDt,1,0,0,N,3
+Nom=DePHe,9,0,0,N,3
+[/CHAMPL]
+nom=DePHe
+[CHAMPL]
+Nom=DePHeH,1,0,0,N,3
+Nom=DePHeM,3,0,0,N,3
+Nom=DePHeS,5,0,0,N,3
+[/CHAMPL]
+nom=DExDh
+[CHAMPL]
+Nom=DExDt,1,0,0,N,3
+Nom=DExHe,9,0,0,N,3
+[/CHAMPL]
+nom=DExHe
+[CHAMPL]
+Nom=DExHeH,1,0,0,N,3
+Nom=DExHeM,3,0,0,N,3
+Nom=DExHeS,5,0,0,N,3
+[/CHAMPL]
+nom=DFb
+[CHAMPL]
+Nom=DFb01,1,0,0,N,3
+Nom=DFb02,3,0,0,N,3
+Nom=DFb03,5,0,0,N,3
+Nom=DFb04,11,0,0,N,3
+Nom=DFb05,46,0,0,N,3
+Nom=DFb06,151,0,0,N,3
+Nom=DFb07,162,0,0,N,3
+Nom=DFb08,164,0,0,N,3
+[/CHAMPL]
+nom=DFb05
+[CHAMPL]
+Nom=DFb05l,1,0,0,N,3
+[/CHAMPL]
+nom=DFc
+[CHAMPL]
+Nom=DFc01,1,0,0,N,3
+Nom=DFc02,3,0,0,N,3
+Nom=DFc03,5,0,0,N,3
+Nom=DFc04,11,0,0,N,3
+Nom=DFc05,151,0,0,N,3
+Nom=DFc06,152,0,0,N,3
+Nom=DFc07,168,0,0,N,3
+Nom=DFc08,176,0,0,N,3
+Nom=DFc09,188,0,0,N,3
+Nom=DFc10,293,0,0,N,3
+[/CHAMPL]
+nom=DFc04
+[CHAMPL]
+Nom=DFc04l,1,0,0,N,3
+[/CHAMPL]
+nom=DFc09
+[CHAMPL]
+Nom=DFc09l,1,0,0,N,3
+[/CHAMPL]
+nom=DFd
+[CHAMPL]
+Nom=DFd01,1,0,0,N,3
+Nom=DFd02,3,0,0,N,3
+Nom=DFd03,5,0,0,N,3
+Nom=DFd04,11,0,0,N,3
+Nom=DFd05,12,0,0,N,3
+Nom=DFd06,46,0,0,N,3
+Nom=DFd07,81,0,0,N,3
+Nom=DFd08,186,0,0,N,3
+Nom=DFd09,203,0,0,N,3
+Nom=DFd10,205,0,0,N,3
+Nom=DFd11,221,0,0,N,3
+Nom=DFd12,222,0,0,N,3
+Nom=DFd13,226,0,0,N,3
+Nom=DFd14,240,0,0,N,3
+Nom=DFd15,241,0,0,N,3
+Nom=DFd16,242,0,0,N,3
+Nom=DFd17,245,0,0,N,3
+Nom=DFd18,247,0,0,N,3
+Nom=DFd19,248,0,0,N,3
+Nom=DFd20,250,0,0,N,3
+Nom=DFd21,251,0,0,N,3
+Nom=DFd22,285,0,0,N,3
+Nom=DFd23,288,0,0,N,3
+Nom=DFd24,310,0,0,N,3
+Nom=DFd25,318,0,0,N,3
+[/CHAMPL]
+nom=DFd07
+[CHAMPL]
+Nom=DFd07l,1,0,0,N,3
+[/CHAMPL]
+nom=DFe
+[CHAMPL]
+Nom=DFe01,1,0,0,N,3
+Nom=DFe02,3,0,0,N,3
+Nom=DFe03,5,0,0,N,3
+Nom=DFe04,11,0,0,N,3
+Nom=DFe05,19,0,0,N,3
+Nom=DFe06,54,0,0,N,3
+Nom=DFe07,159,0,0,N,3
+Nom=DFe08,173,0,0,N,3
+Nom=DFe09,189,0,0,N,3
+Nom=DFe10,200,0,0,N,3
+Nom=DFe11,201,0,0,N,3
+Nom=DFe12,235,0,0,N,3
+Nom=DFe13,238,0,0,N,3
+Nom=DFe14,254,0,0,N,3
+Nom=DFe15,255,0,0,N,3
+Nom=DFe16,289,0,0,N,3
+Nom=DFe17,292,0,0,N,3
+Nom=DFe18,308,0,0,N,3
+Nom=DFe19,309,0,0,N,3
+Nom=DFe20,310,0,0,N,3
+Nom=DFe21,318,0,0,N,3
+[/CHAMPL]
+nom=DFe06
+[CHAMPL]
+Nom=DFe06l,1,0,0,N,3
+[/CHAMPL]
+nom=DFm
+[CHAMPL]
+Nom=DFm01,1,0,0,N,3
+Nom=DFm02,3,0,0,N,3
+Nom=DFm03,5,0,0,N,3
+Nom=DFm04,11,0,0,N,3
+Nom=DFm05,46,0,0,N,3
+Nom=DFm06,151,0,0,N,3
+Nom=DFm07,162,0,0,N,3
+Nom=DFm08,164,0,0,N,3
+[/CHAMPL]
+nom=DFm05
+[CHAMPL]
+Nom=DFm05l,1,0,0,N,3
+[/CHAMPL]
+nom=DFt
+[CHAMPL]
+Nom=DFt01,1,0,0,N,3
+Nom=DFt02,3,0,0,N,3
+Nom=DFt03,5,0,0,N,3
+Nom=DFt04,11,0,0,N,3
+Nom=DFt05,19,0,0,N,3
+Nom=DFt06,159,0,0,N,3
+Nom=DFt07,173,0,0,N,3
+Nom=DFt08,189,0,0,N,3
+Nom=DFt09,200,0,0,N,3
+Nom=DFt10,201,0,0,N,3
+Nom=DFt11,235,0,0,N,3
+Nom=DFt12,238,0,0,N,3
+Nom=DFt13,254,0,0,N,3
+Nom=DFt14,272,0,0,N,3
+[/CHAMPL]
+nom=DgAIdDest
+[CHAMPL]
+Nom=DgAIdDestTyp,1,0,0,N,1
+Nom=DgAIdDestVal,4,0,0,N,1
+[/CHAMPL]
+nom=DgAIdEmet
+[CHAMPL]
+Nom=DgAIdEmetTyp,1,0,0,N,1
+Nom=DgAIdEmetVal,4,0,0,N,1
+[/CHAMPL]
+nom=DgBARTyp
+[CHAMPL]
+Nom=DgBEtat,1,0,0,N,1
+Nom=DgBRejet,2,0,0,N,1
+Nom=DgBTransac,3,0,0,N,1
+[/CHAMPL]
+nom=DgBOp
+[CHAMPL]
+Nom=DgBOp1,1,0,0,N,1
+Nom=DgBOp2,4,0,0,N,1
+[/CHAMPL]
+nom=DgBOpTyp
+[CHAMPL]
+Nom=DgBTypCod,1,0,0,N,1
+Nom=DgBOp,2,0,0,N,1
+Nom=DgBOpRlv,9,0,0,N,1
+[/CHAMPL]
+nom=DgBRemExec
+[CHAMPL]
+Nom=DgBRemExecDtTyp,1,0,0,N,1
+Nom=DgBRemExecDt,4,0,0,N,1
+Nom=Filler,12,0,10,N,1
+Nom=DgBRemExecMt,22,0,0,N,1
+Nom=DgBRemExecDec,36,0,0,N,1
+Nom=DgBRemExecDev,37,0,0,N,1
+Nom=DgBRemExecNbTransac,40,0,0,N,1
+[/CHAMPL]
+nom=DgBRemInit
+[CHAMPL]
+Nom=DgBRemInitDtTyp,1,0,0,N,1
+Nom=DgBRemInitDt,4,0,0,N,1
+Nom=Filler,12,0,10,N,1
+Nom=DgBRemInitMt,22,0,0,N,1
+Nom=DgBRemInitDec,36,0,0,N,1
+Nom=DgBRemInitDev,37,0,0,N,1
+Nom=DgBRemInitNbTransac,40,0,0,N,1
+[/CHAMPL]
+nom=DgCInfos
+[CHAMPL]
+Nom=DgCCpNom,1,0,0,N,1
+Nom=DgCCpCpt,36,0,0,N,1
+Nom=DgCMisc,71,0,0,N,1
+[/CHAMPL]
+nom=DgCTraExec
+[CHAMPL]
+Nom=DgCTraExecDtTyp,1,0,0,N,1
+Nom=DgCTraExecDt,4,0,0,N,1
+Nom=Filler,12,0,10,N,1
+Nom=DgCTraExecMt,22,0,0,N,1
+Nom=DgCTraExecDec,36,0,0,N,1
+Nom=DgCTraExecDev,37,0,0,N,1
+[/CHAMPL]
+nom=DgCTraInit
+[CHAMPL]
+Nom=DgCTraInitDtTyp,1,0,0,N,1
+Nom=DgCTraInitDt,4,0,0,N,1
+Nom=Filler,12,0,10,N,1
+Nom=DgCTraInitMt,22,0,0,N,1
+Nom=DgCTraInitDec,36,0,0,N,1
+Nom=DgCTraInitDev,37,0,0,N,1
+[/CHAMPL]
+nom=DgRejetTb
+[CHAMPL]
+Nom=DgRetCod,1,0,0,N,1
+Nom=DgRetLib,9,0,0,N,1
+[/CHAMPL]
+nom=DPEDh
+[CHAMPL]
+Nom=DPEDt,1,0,0,N,3
+Nom=DPEHe,9,0,0,N,3
+[/CHAMPL]
+nom=DPEHe
+[CHAMPL]
+Nom=DPEHeH,1,0,0,N,3
+Nom=DPEHeM,3,0,0,N,3
+Nom=DPEHeS,5,0,0,N,3
+[/CHAMPL]
+nom=EbxCertFicTb
+[CHAMPL]
+Nom=EbxCertFic,1,0,0,N,1
+[/CHAMPL]
+nom=EbxHash
+[CHAMPL]
+Nom=EbxHashLg,1,0,0,N,1
+Nom=EbxHashTxt,3,0,0,N,1
+[/CHAMPL]
+nom=EbxKeyFicTb
+[CHAMPL]
+Nom=EbxKeyFic,1,0,0,N,1
+[/CHAMPL]
+nom=EbxLogDh
+[CHAMPL]
+Nom=EbxLogDt,1,0,0,N,1
+Nom=EbxLogHr,9,0,0,N,1
+[/CHAMPL]
+nom=EbxTexte
+[CHAMPL]
+Nom=EbxTxtLg,1,0,0,N,1
+Nom=EbxTxt,3,0,0,N,1
+[/CHAMPL]
+nom=EbxTitreTb
+[CHAMPL]
+Nom=EbxTitre,1,0,0,N,1
+[/CHAMPL]
+nom=EchDt
+[CHAMPL]
+Nom=EchDtA,1,0,0,N,3
+Nom=EchDtM,5,0,0,N,3
+Nom=EchDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=EcrMtTb
+[CHAMPL]
+Nom=EcrMt,1,0,0,N,3
+[/CHAMPL]
+nom=EffDt
+[CHAMPL]
+Nom=EffDtA,1,0,0,N,3
+Nom=EffDtM,5,0,0,N,3
+Nom=EffDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=EntCod
+[CHAMPL]
+Nom=LcrCod,1,0,0,N,3
+Nom=Dailly,2,0,0,N,3
+Nom=VirCod,3,0,0,N,3
+[/CHAMPL]
+nom=EntDiv
+[CHAMPL]
+Nom=RlvNo,1,0,0,N,3
+Nom=EmeNo,9,0,0,N,3
+Nom=Conv,15,0,0,N,3
+Nom=RefD8,21,0,0,N,3
+Nom=Point,39,0,0,N,3
+Nom=Siret,41,0,0,N,3
+[/CHAMPL]
+nom=EntId
+[CHAMPL]
+Nom=DebCe,1,0,0,N,3
+Nom=DebOp,3,0,0,N,3
+Nom=FinCe,5,0,0,N,3
+Nom=FinOp,7,0,0,N,3
+[/CHAMPL]
+nom=EntVirInt
+[CHAMPL]
+Nom=EmetBic,1,0,0,N,3
+Nom=DebDev,12,0,0,N,3
+Nom=CliId,16,0,0,N,3
+Nom=FrsIban,32,0,0,N,3
+Nom=FrsDev,66,0,0,N,3
+Nom=Dev,70,0,0,N,3
+[/CHAMPL]
+nom=Err
+[CHAMPL]
+Nom=ErrNum,1,0,0,N,3
+Nom=ErrFic,5,0,0,N,3
+Nom=ErrCod,19,0,0,N,3
+[/CHAMPL]
+nom=ExeDh
+[CHAMPL]
+Nom=ExeDt,1,0,0,N,3
+Nom=ExeHe,9,0,0,N,3
+[/CHAMPL]
+nom=ExeHe
+[CHAMPL]
+Nom=ExeHeH,1,0,0,N,3
+Nom=ExeHeM,3,0,0,N,3
+Nom=ExeHeS,5,0,0,N,3
+[/CHAMPL]
+nom=FDeDh
+[CHAMPL]
+Nom=FDeDt,1,0,0,N,3
+Nom=FDeHe,9,0,0,N,3
+[/CHAMPL]
+nom=FDeHe
+[CHAMPL]
+Nom=FDeHeH,1,0,0,N,3
+Nom=FDeHeM,3,0,0,N,3
+Nom=FDeHeS,5,0,0,N,3
+[/CHAMPL]
+nom=FinDh
+[CHAMPL]
+Nom=FinDt,1,0,0,N,3
+Nom=FinHe,9,0,0,N,3
+[/CHAMPL]
+nom=FinHe
+[CHAMPL]
+Nom=FinHeH,1,0,0,N,3
+Nom=FinHeM,3,0,0,N,3
+Nom=FinHeS,5,0,0,N,3
+[/CHAMPL]
+nom=FrsIban
+[CHAMPL]
+Nom=FrsIban1,1,0,0,N,3
+Nom=FrsIban2,3,0,0,N,3
+Nom=FrsIban3,5,0,0,N,3
+[/CHAMPL]
+nom=FrsIban3
+[CHAMPL]
+Nom=FrsIban3Rib,1,0,0,N,3
+Nom=FrsIban3Fin,24,0,0,N,3
+[/CHAMPL]
+nom=FrsIban3Rib
+[CHAMPL]
+Nom=RibBqeFrs,1,0,0,N,3
+Nom=RibGuiFrs,6,0,0,N,3
+Nom=RibCptFrs,11,0,0,N,3
+Nom=RibCleFrs,22,0,0,N,3
+[/CHAMPL]
+nom=Iban
+[CHAMPL]
+Nom=Iban1,1,0,0,N,3
+Nom=Iban2,3,0,0,N,3
+Nom=Iban3,5,0,0,N,3
+[/CHAMPL]
+nom=Iban3
+[CHAMPL]
+Nom=Iban3Rib,1,0,0,N,3
+Nom=Iban3Fin,24,0,0,N,3
+[/CHAMPL]
+nom=Iban3Rib
+[CHAMPL]
+Nom=RibBqe,1,0,0,N,3
+Nom=RibGui,6,0,0,N,3
+Nom=RibCpt,11,0,0,N,3
+Nom=RibCle,22,0,0,N,3
+[/CHAMPL]
+nom=IbanTbl
+[CHAMPL]
+Nom=Iban,1,0,0,N,3
+Nom=RibCpl,35,0,0,N,3
+[/CHAMPL]
+nom=Id
+[CHAMPL]
+Nom=Ce,1,0,0,N,3
+Nom=Bqe,11,0,0,N,3
+Nom=Dos,19,0,0,N,3
+Nom=Jnl,22,0,0,N,3
+Nom=Op,25,0,0,N,3
+Nom=NO,27,0,0,N,3
+Nom=NL,35,0,0,N,3
+Nom=BdxNo,43,0,0,N,3
+[/CHAMPL]
+nom=IntEcoCod
+[CHAMPL]
+Nom=Filler,1,0,1,N,1
+Nom=MotifEcoCod,2,0,0,N,3
+[/CHAMPL]
+nom=InterroInvDh
+[CHAMPL]
+Nom=InterroInvDt,1,0,0,N,1
+Nom=InterroInvHe,9,0,0,N,1
+[/CHAMPL]
+nom=InvDh
+[CHAMPL]
+Nom=InvDt,1,0,0,N,3
+Nom=InvHe,9,0,0,N,3
+[/CHAMPL]
+nom=InvHe
+[CHAMPL]
+Nom=InvHeH,1,0,0,N,3
+Nom=InvHeM,3,0,0,N,3
+Nom=InvHeS,5,0,0,N,3
+[/CHAMPL]
+nom=LcrCod
+[CHAMPL]
+Nom=ExoCod,1,0,0,N,3
+[/CHAMPL]
+nom=Lib1
+[CHAMPL]
+Nom=Lib1Tb,1,0,0,N,3
+[/CHAMPL]
+nom=Lib2
+[CHAMPL]
+Nom=Lib2Tb,1,0,0,N,3
+[/CHAMPL]
+nom=Lib32
+[CHAMPL]
+Nom=Lib,1,0,0,N,3
+[/CHAMPL]
+nom=Loc
+[CHAMPL]
+Nom=LocCod,1,0,0,N,3
+Nom=LocSep,6,0,0,N,3
+Nom=LocNom,7,0,0,N,3
+[/CHAMPL]
+nom=Modem
+[CHAMPL]
+Nom=Modul8,1,0,0,N,3
+Nom=Modul7,4,0,0,N,3
+Nom=ModRes,7,0,0,N,3
+Nom=ModIni,10,0,0,N,3
+Nom=ModPrf,50,0,0,N,3
+Nom=ModTel,70,0,0,N,3
+[/CHAMPL]
+nom=MvtDiv
+[CHAMPL]
+[UNION]
+TailleUnion=1,32,N,3
+Nom=Rue,1,0,0,N,3
+Nom=Lib,1,0,0,N,3
+[/UNION]
+[UNION]
+TailleUnion=33,32,N,3
+Nom=Loc,1,0,0,N,3
+Nom=LibCpl,1,0,0,N,3
+[/UNION]
+Nom=Vil,65,0,0,N,3
+Nom=RefD9,97,0,0,N,3
+Nom=Filler,113,0,8,N,1
+Nom=Point,121,0,0,N,3
+Nom=UserPoint,123,0,0,N,3
+Nom=Tire,143,0,0,N,3
+Nom=Tireur,153,0,0,N,3
+Nom=SirTbl,163,0,0,N,3
+[/CHAMPL]
+nom=MvtId
+[CHAMPL]
+Nom=MvtCe1,1,0,0,N,3
+Nom=MvtOp1,3,0,0,N,3
+Nom=OpECod,5,0,0,N,3
+Nom=MvtCe3,9,0,0,N,3
+Nom=MvtOp3,11,0,0,N,3
+Nom=MvtCe4,13,0,0,N,3
+Nom=MvtOp4,15,0,0,N,3
+[/CHAMPL]
+nom=MvtMtN
+[CHAMPL]
+Nom=ImpMt,1,0,0,N,3
+[/CHAMPL]
+nom=MvtMtP
+[CHAMPL]
+Nom=EffMt,1,0,0,N,3
+[/CHAMPL]
+nom=MvtOp1
+[CHAMPL]
+Nom=OpICod,1,0,0,N,3
+[/CHAMPL]
+nom=MvtOp3
+[CHAMPL]
+Nom=RejCod,1,0,0,N,3
+[/CHAMPL]
+nom=MvtVirInt
+[CHAMPL]
+Nom=AdrTbl,1,0,0,N,3
+Nom=BenefId,701,0,0,N,3
+Nom=BenefPays,718,0,0,N,3
+Nom=BdfPays,720,0,0,N,3
+Nom=MtQualif,722,0,0,N,3
+Nom=IntEcoCod,723,0,0,N,3
+Nom=RegInt,727,0,0,N,3
+Nom=FraisDev,728,0,0,N,3
+Nom=Dev,732,0,0,N,3
+Nom=BqeBBic,736,0,0,N,3
+Nom=BqeBPays,747,0,0,N,3
+Nom=BqeMBic,749,0,0,N,3
+Nom=BqeMPays,760,0,0,N,3
+Nom=PadFlag,762,0,0,N,3
+Nom=RefContrat,763,0,0,N,3
+[/CHAMPL]
+nom=NewDt
+[CHAMPL]
+Nom=NewDtA,1,0,0,N,3
+Nom=NewDtM,5,0,0,N,3
+Nom=NewDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=OldDt
+[CHAMPL]
+Nom=OldDtA,1,0,0,N,3
+Nom=OldDtM,5,0,0,N,3
+Nom=OldDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=OpECod
+[CHAMPL]
+Nom=MvtCe2,1,0,0,N,3
+Nom=MvtOp2,3,0,0,N,3
+[/CHAMPL]
+nom=OpEDt
+[CHAMPL]
+Nom=OpEDtA,1,0,0,N,3
+Nom=OpEDtM,5,0,0,N,3
+Nom=OpEDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=PepDh
+[CHAMPL]
+Nom=PepDt,1,0,0,N,3
+Nom=PepHe,9,0,0,N,3
+[/CHAMPL]
+nom=PepHe
+[CHAMPL]
+Nom=PepHeH,1,0,0,N,3
+Nom=PepHeM,3,0,0,N,3
+Nom=PepHeS,5,0,0,N,3
+[/CHAMPL]
+nom=PiANoT
+[CHAMPL]
+Nom=PiANo,1,0,0,N,3
+[/CHAMPL]
+nom=PointDt
+[CHAMPL]
+Nom=PointDtA,1,0,0,N,3
+Nom=PointDtM,5,0,0,N,3
+Nom=PointDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=RazDt
+[CHAMPL]
+Nom=RazDtA,1,0,0,N,3
+Nom=RazDtM,5,0,0,N,3
+Nom=RazDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=RefD8
+[CHAMPL]
+[UNION]
+TailleUnion=1,16,N,3
+Nom=LcrRef,1,0,0,N,3
+Nom=VirRef,1,0,0,N,3
+Nom=VirIntRef,1,0,0,N,3
+[/UNION]
+[/CHAMPL]
+nom=RefD9
+[CHAMPL]
+Nom=PreRef,1,0,0,N,3
+Nom=IniRef,9,0,0,N,3
+[/CHAMPL]
+nom=RetDt
+[CHAMPL]
+Nom=RetDtA,1,0,0,N,3
+Nom=RetDtM,5,0,0,N,3
+Nom=RetDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=RibCpl
+[CHAMPL]
+Nom=RibNom,1,0,0,N,3
+Nom=RibBoc,25,0,0,N,3
+Nom=RibDom,30,0,0,N,3
+[/CHAMPL]
+nom=Rue
+[CHAMPL]
+Nom=RueNum,1,0,0,N,3
+Nom=RueBis,5,0,0,N,3
+Nom=RueSep,6,0,0,N,3
+Nom=RueNom,7,0,0,N,3
+[/CHAMPL]
+nom=Siret
+[CHAMPL]
+Nom=Siren,1,0,0,N,3
+Nom=Nic,10,0,0,N,3
+[/CHAMPL]
+nom=SirTbl
+[CHAMPL]
+Nom=Siret,1,0,0,N,3
+[/CHAMPL]
+nom=Tbl
+[CHAMPL]
+Nom=Lg,1,0,0,N,3
+Nom=Txt,4,0,0,N,3
+[/CHAMPL]
+nom=Txt
+[CHAMPL]
+Nom=Txt256,1,0,0,N,3
+[/CHAMPL]
+nom=UserCrDH
+[CHAMPL]
+Nom=UserCrDt,1,0,0,N,1
+[/CHAMPL]
+nom=UserMoDH
+[CHAMPL]
+Nom=UserMoDt,1,0,0,N,1
+[/CHAMPL]
+nom=ValDt
+[CHAMPL]
+Nom=ValDtA,1,0,0,N,3
+Nom=ValDtM,5,0,0,N,3
+Nom=ValDtJ,7,0,0,N,3
+[/CHAMPL]
+nom=Vil
+[CHAMPL]
+Nom=VilCod,1,0,0,N,3
+Nom=VilSep,6,0,0,N,3
+Nom=VilNom,7,0,0,N,3
+[/CHAMPL]
+[/CHAMPR]
+[TABLE]
+Version=1,20131008170140,MS                  ,20131009094843,MS                  
+Nom=ccsdd,Dossier - Paramètres du prélèvement SEPA,1
+DateM=ADA02DFAC3C4CE01
+Taille=200,200
+Pack=0,0
+CE=Ce1,1
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=Cea,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Ics,14,2,N,0,0,N,1
+Nom=UserCr,27,2,N,0,0,N,1
+Nom=UserCrDH,47,2,N,0,0,N,1
+Nom=UserCrOri,61,2,N,0,0,N,1
+Nom=UserMo,63,2,N,0,0,N,1
+Nom=UserMoDH,83,2,N,0,0,N,1
+Nom=UserMoOri,97,2,N,0,0,N,1
+Nom=Filler,99,2,N,0,52,N,1
+Nom=Uccsdd,151,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 30000,B3  ,20030703152912,DEMO
+Nom=D0,Paramètres généraux,1
+DateM=2EEF2476F4E3CB01
+Taille=508,508
+Pack=0,0
+CE=Ce1,0
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,3
+Nom=Bqe,11,2,N,0,0,N,3
+Nom=Dos,19,2,N,0,0,N,3
+Nom=Filler,22,2,N,0,50,N,1
+Nom=Modem,72,2,N,0,0,N,3
+Nom=MaxDl,162,2,N,0,0,N,3
+Nom=MaxEs,164,2,N,0,0,N,3
+Nom=RazDt,166,2,N,0,0,N,3
+Nom=RazDl,174,2,N,0,0,N,3
+Nom=Sys,177,2,N,0,0,N,3
+Nom=Avant,178,2,N,0,0,N,3
+Nom=Apres,180,2,N,0,0,N,3
+Nom=ExtrDDt,182,2,N,0,0,N,3
+Nom=ExtrFDt,190,2,N,0,0,N,3
+Nom=EcrDDt,198,2,N,0,0,N,3
+Nom=EcrFDt,206,2,N,0,0,N,3
+Nom=DurMax,214,2,N,0,0,N,3
+Nom=CombMax,226,2,N,0,0,N,3
+Nom=Filler,234,2,N,0,225,N,1
+Nom=UD0,459,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 30000,B3  ,20091026183506,MS                  
+Nom=D1,Banque,1
+DateM=567EC078F4E3CB01
+Taille=1500,1500
+Pack=0,0
+CE=Ce1,1
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,3
+Nom=Bqe,11,2,N,0,0,N,3
+Nom=Dos,19,2,N,0,0,N,3
+Nom=Filler,22,2,N,0,50,N,1
+Nom=Nom,72,2,N,0,0,N,3
+Nom=Adr,112,2,N,0,0,N,3
+Nom=TId,240,2,N,0,0,N,3
+Nom=Cid,260,2,N,0,0,N,3
+Nom=MDP,280,2,N,0,0,N,3
+Nom=Jdc,300,2,N,0,0,N,3
+Nom=FDP,301,2,N,0,0,N,3
+Nom=NbB,302,2,N,0,0,N,3
+Nom=OutDl,303,2,N,0,0,N,3
+Nom=Fax,311,2,N,0,0,N,3
+Nom=TransCod,326,2,N,0,0,N,1
+Nom=EbxStatusCod,327,2,N,0,0,N,1
+Nom=UserID,328,2,N,0,0,N,1
+Nom=PartnerID,363,2,N,0,0,N,1
+Nom=SystemID,398,2,N,0,0,N,1
+Nom=BankURL,433,2,N,0,0,N,1
+Nom=HostID,533,2,N,0,0,N,1
+Nom=CustEUCertif,544,2,N,0,0,N,1
+Nom=CustAuthCertif,576,2,N,0,0,N,1
+Nom=CustEncCertif,608,2,N,0,0,N,1
+Nom=BankEUCertif,640,2,N,0,0,N,1
+Nom=BankAuthCertif,672,2,N,0,0,N,1
+Nom=BankEncCertif,704,2,N,0,0,N,1
+Nom=Filler,736,2,N,0,45,N,1
+Nom=EbxTestCod,781,2,N,0,0,N,1
+Nom=EbxVersion,782,2,N,0,0,N,1
+Nom=EbxProtocol,787,2,N,0,0,N,1
+Nom=EbxEUVersion,791,2,N,0,0,N,1
+Nom=EbxAuthVersion,795,2,N,0,0,N,1
+Nom=EbxEncVersion,799,2,N,0,0,N,1
+Nom=EbxMaxWait,803,2,N,0,0,N,1
+Nom=CustEUPrivKey,806,2,N,0,0,N,1
+Nom=CustAuthPrivKey,838,2,N,0,0,N,1
+Nom=CustEncPrivKey,870,2,N,0,0,N,1
+Nom=EbxOrderID,902,2,N,0,0,N,1
+Nom=EbxRevision,906,2,N,0,0,N,1
+Nom=EbxNbTrial,907,2,N,0,0,N,1
+Nom=Filler,909,2,N,0,422,N,1
+Nom=UserCr,1331,2,N,0,0,N,1
+Nom=UserMo,1351,2,N,0,0,N,1
+Nom=UserCrDH,1371,2,N,0,0,N,1
+Nom=UserMoDH,1385,2,N,0,0,N,1
+Nom=UserCrOri,1399,2,N,0,0,N,1
+Nom=UserMoOri,1401,2,N,0,0,N,1
+Nom=CeNote,1403,2,N,0,0,N,1
+Nom=Note,1404,2,N,0,0,N,1
+Nom=Tel,1412,2,N,0,0,N,1
+Nom=Filler,1432,2,N,0,19,N,1
+Nom=UD1,1451,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,20131108142216,VJ                  ,20131113120113,VJ                  
+Nom=d1sdd,Banque - Bic Obligatoire/Facultatif,1
+DateM=A334DE664BE4CE01
+Taille=100,100
+Pack=0,0
+CE=Ce1,2
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,1
+Nom=Bqe,11,2,N,0,0,N,1
+Nom=Dos,19,2,N,0,0,N,1
+Nom=Filler,22,2,N,0,50,N,1
+Nom=FlagBic,72,2,N,0,0,N,1
+Nom=SCTVers,73,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Nom=SCTVers
+[/PROPLOC]
+[TABLE]
+Version=1,1995 2 30000,B3  ,20030703153019,DEMO
+Nom=D2,Compte,1
+DateM=2E82F11B4FDBCC01
+Taille=508,508
+Pack=0,0
+CE=Ce1,2
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,3
+Nom=Bqe,11,2,N,0,0,N,3
+Nom=Dos,19,2,N,0,0,N,3
+Nom=Jnl,22,2,N,0,0,N,3
+Nom=Filler,25,2,N,0,47,N,1
+Nom=Cpt,72,2,N,0,0,N,3
+Nom=Iban,80,2,N,0,0,N,3
+Nom=RibCpl,114,2,N,0,0,N,3
+Nom=BqC,167,2,N,0,0,N,3
+Nom=DaillyMt,175,2,N,0,0,N,3
+Nom=EmeNo,191,2,N,0,0,N,3
+Nom=Conv,197,2,N,0,0,N,3
+Nom=CesCpt,203,2,N,0,0,N,3
+Nom=MtImp,211,2,N,0,0,N,3
+Nom=Bic,219,2,N,0,0,N,3
+Nom=Dev,230,2,N,0,0,N,3
+Nom=CliId,234,2,N,0,0,N,3
+Nom=FraisBqC,250,2,N,0,0,N,3
+Nom=DecaissMt,258,2,N,0,0,N,1
+Nom=DecaissBqc,274,2,N,0,0,N,1
+Nom=CodTyp,282,2,N,0,0,N,1
+Nom=Filler,283,2,N,0,176,N,1
+Nom=UD2,459,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 60000,B3  ,20030703153029,DEMO
+Nom=D3,Carte paramètres,1
+DateM=5D1E157DF4E3CB01
+Taille=508,508
+Pack=0,0
+CE=Ce1,3
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,3
+Nom=Bqe,11,2,N,0,0,N,3
+Nom=Dos,19,2,N,0,0,N,3
+Nom=Jnl,22,2,N,0,0,N,3
+Nom=Op,25,2,N,0,0,N,3
+Nom=Filler,27,2,N,0,45,N,1
+Nom=Po,72,2,N,0,0,N,3
+Nom=Lg,75,2,N,0,0,N,3
+Nom=Na,78,2,N,0,0,N,3
+Nom=Cst,80,2,N,0,0,N,3
+Nom=Filler,120,2,N,0,339,N,1
+Nom=UD3,459,2,N,0,0,N,3
+[/CHAMPS]
+[PROPLOC]
+Commentaire=7
+Nom=Na
+[/PROPLOC]
+[TABLE]
+Version=1,1995 2 60000,B3  ,20030703153039,DEMO
+Nom=D4,Transfert automatique,1
+DateM=8AD4B77FF4E3CB01
+Taille=508,508
+Pack=0,0
+CE=Ce1,4
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,3
+Nom=Bqe,11,2,N,0,0,N,3
+Nom=Dos,19,2,N,0,0,N,3
+Nom=Jnl,22,2,N,0,0,N,3
+Nom=Op,25,2,N,0,0,N,3
+Nom=Filler,27,2,N,0,45,N,1
+Nom=EffDt,72,2,N,0,0,N,3
+Nom=NO,80,2,N,0,0,N,3
+Nom=Per,88,2,N,0,0,N,3
+Nom=ExeDt,95,2,N,0,0,N,3
+Nom=ExeHe,103,2,N,0,0,N,3
+Nom=DePDh,109,2,N,0,0,N,3
+Nom=DExDh,123,2,N,0,0,N,3
+Nom=PepDh,137,2,N,0,0,N,3
+Nom=DPEDh,151,2,N,0,0,N,3
+Nom=DDeDh,165,2,N,0,0,N,3
+Nom=FDeDh,179,2,N,0,0,N,3
+Nom=EsNo,193,2,N,0,0,N,3
+Nom=Filler,195,2,N,0,264,N,1
+Nom=UD4,459,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 60000,B3  ,20030703153049,DEMO
+Nom=D5,Motif de rejet,1
+DateM=92AE9F82F4E3CB01
+Taille=508,508
+Pack=0,0
+CE=Ce1,5
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,3
+Nom=Bqe,11,2,N,0,0,N,3
+Nom=Dos,19,2,N,0,0,N,3
+Nom=RejCod,22,2,N,0,0,N,3
+Nom=Filler,24,2,N,0,48,N,1
+Nom=Lib32,72,2,N,0,0,N,3
+Nom=Filler,104,2,N,0,355,N,1
+Nom=UD5,459,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 60000,B3  ,20030703153059,DEMO
+Nom=D6,Code opération,1
+DateM=F8DC1985F4E3CB01
+Taille=508,508
+Pack=0,0
+CE=Ce1,6
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,3
+Nom=Bqe,11,2,N,0,0,N,3
+Nom=Dos,19,2,N,0,0,N,3
+Nom=OpECod,22,2,N,0,0,N,3
+Nom=Filler,26,2,N,0,46,N,1
+Nom=Lib32,72,2,N,0,0,N,3
+Nom=Filler,104,2,N,0,355,N,1
+Nom=UD6,459,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,20101215093910,MS                  ,20101215105933,MS                  
+Nom=D7,Constantes Ebics,1
+DateM=5F6A0341F4E3CB01
+Taille=500,500
+Pack=0,0
+CE=Ce1,7
+[CHAMPS]
+Nom=Ce,1,2,N,0,0,N,1
+Nom=Bqe,11,2,N,0,0,N,1
+Nom=Dos,19,2,N,0,0,N,1
+Nom=BqC,22,2,N,0,0,N,1
+Nom=CstCod,30,2,N,0,0,N,1
+Nom=Op,50,2,N,0,0,N,1
+Nom=Critere,52,2,N,0,0,N,1
+Nom=CstVal,72,2,N,0,0,N,1
+Nom=Lib32,152,2,N,0,0,N,1
+Nom=Filler,184,2,N,0,155,N,1
+Nom=UserCr,339,2,N,0,0,N,1
+Nom=UserMo,359,2,N,0,0,N,1
+Nom=UserCrDH,379,2,N,0,0,N,1
+Nom=UserMoDH,393,2,N,0,0,N,1
+Nom=UserCrOri,407,2,N,0,0,N,1
+Nom=UserMoOri,409,2,N,0,0,N,1
+Nom=CeNote,411,2,N,0,0,N,1
+Nom=Note,412,2,N,0,0,N,1
+Nom=CstFic,420,2,N,0,0,N,1
+Nom=Filler,421,2,N,0,30,N,1
+Nom=UD7,451,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 30000,R3X ,20120807101055,MS                  
+Nom=D8,Entête transaction,1
+DateM=0E8260C47074CD01
+ChConf=Conf
+ConfPP=DPAIE
+Taille=800,800
+Pack=0,0
+CE=Ce1,8
+[CHAMPS]
+Nom=Id,1,2,N,0,0,N,3
+Nom=InvDh,51,2,N,0,0,N,3
+Nom=UserX,65,2,N,0,0,N,3
+Nom=DebDh,85,2,N,0,0,N,3
+Nom=FinDh,99,2,N,0,0,N,3
+Nom=Err,113,2,N,0,0,N,3
+Nom=EntId,139,2,N,0,0,N,3
+Nom=EntDiv,147,2,N,0,0,N,3
+Nom=EntCod,245,2,N,0,0,N,3
+Nom=Iban,248,2,N,0,0,N,3
+Nom=RibCpl,282,2,N,0,0,N,3
+Nom=DevCod,335,2,N,0,0,N,3
+Nom=EntVirInt,336,2,N,0,0,N,3
+Nom=CreDt,436,2,N,0,0,N,1
+Nom=OldDt,444,2,N,0,0,N,1
+Nom=EchDt,452,2,N,0,0,N,1
+Nom=ValDt,460,2,N,0,0,N,1
+Nom=NewDt,468,2,N,0,0,N,1
+Nom=RetDt,476,2,N,0,0,N,1
+Nom=TotMt,484,2,N,0,0,N,1
+Nom=OldMtP,500,2,N,0,0,N,1
+Nom=OldMtN,516,2,N,0,0,N,1
+Nom=NewMtP,532,2,N,0,0,N,1
+Nom=NewMtN,548,2,N,0,0,N,1
+Nom=RemVirIntCod,564,2,N,0,0,N,1
+Nom=DebVirIntCod,565,2,N,0,0,N,1
+Nom=EbxOrderID,566,2,N,0,0,N,1
+Nom=Conf,570,2,N,0,0,N,1
+Nom=Filler,574,2,N,0,177,N,1
+Nom=UD8,751,2,N,0,0,N,3
+[/CHAMPS]
+[PROPLOC]
+Commentaire=2
+Nom=LcrCod
+Commentaire=3
+Nom=Dailly
+Commentaire=4
+Nom=VirCod
+Commentaire=5
+Nom=Op
+Commentaire=9
+Nom=InvDt
+Commentaire=8
+Nom=InvDh
+[/PROPLOC]
+[TABLE]
+Version=1,1995 2 30000,R3X ,20100126122341,MS                  
+Nom=D9,Détail transaction,1
+DateM=F84A45037A9ECA01
+Taille=1800,1800
+Pack=0,0
+CE=Ce1,9
+[CHAMPS]
+Nom=Id,1,2,N,0,0,N,3
+Nom=MvtId,51,2,N,0,0,N,3
+Nom=MvtDiv,67,2,N,0,0,N,3
+Nom=LcrCod,257,2,N,0,0,N,3
+Nom=AccCod,258,2,N,0,0,N,3
+Nom=IbanTbl,259,2,N,0,0,N,3
+Nom=MMO,520,2,N,0,0,N,3
+Nom=MvtVirInt,521,2,N,0,0,N,3
+Nom=Filler,1421,2,N,0,100,N,1
+Nom=TicketPoint,1521,2,N,0,0,N,3
+Nom=MvtNum,1530,2,N,0,0,N,1
+Nom=MvtIni,1538,2,N,0,0,N,1
+Nom=CreDt,1546,2,N,0,0,N,1
+Nom=OpEDt,1554,2,N,0,0,N,1
+Nom=EchDt,1562,2,N,0,0,N,1
+Nom=ValDt,1570,2,N,0,0,N,1
+Nom=RetDt,1578,2,N,0,0,N,1
+Nom=PointDt,1586,2,N,0,0,N,1
+Nom=MvtMtP,1594,2,N,0,0,N,1
+Nom=MvtMtN,1610,2,N,0,0,N,1
+Nom=FraisCod,1626,2,N,0,0,N,1
+Nom=PadCod,1628,2,N,0,0,N,1
+Nom=DevP,1629,2,N,0,0,N,1
+Nom=Filler,1646,2,N,0,105,N,1
+Nom=UD9,1751,2,N,0,0,N,3
+[/CHAMPS]
+[PROPLOC]
+Commentaire=10
+Nom=Op
+Commentaire=6
+Nom=AccCod
+[/PROPLOC]
+[TABLE]
+Version=1,20070430182744,FH                  ,20070710103813,FH                  
+Nom=D9T1,Pointage extraits,1
+DateM=6EE3EA07789ECA01
+Taille=2404,2404
+Pack=0,0
+[CHAMPS]
+TableInsere=D9,1,1800,0,1
+Nom=Filler,1801,2,N,0,200,N,1
+Nom=AdrD9,2001,2,N,0,0,N,1
+Nom=UD9T1,2005,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 30000,B3  ,20021022150923,PHB
+Nom=Da,Séparateur,1
+DateM=38F353956F39C701
+Taille=508,508
+Pack=0,0
+[CHAMPS]
+Nom=DFi,1,2,N,0,0,N,3
+Nom=NO,2,2,N,0,0,N,3
+Nom=UserX,10,2,N,0,0,N,3
+Nom=Dos,30,2,N,0,0,N,3
+Nom=Jnl,33,2,N,0,0,N,3
+Nom=Op,36,2,N,0,0,N,3
+Nom=ExeDh,38,2,N,0,0,N,3
+Nom=Err,52,2,N,0,0,N,3
+Nom=EbxOrderID,78,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Commentaire=1
+Nom=Op
+[/PROPLOC]
+[TABLE]
+Version=1,1995 2 30000,B3  ,20021018120638,PHB
+Nom=Db,Remise,1
+DateM=761ED03B582AC701
+Taille=160,160
+Pack=0,0
+[CHAMPS]
+Nom=DBa,1,2,N,0,0,N,3
+Nom=DBb,3,2,N,0,0,N,3
+Nom=DBc,19,2,N,0,0,N,3
+Nom=DBd,55,2,N,0,0,N,3
+Nom=DBe,103,2,N,0,0,N,3
+Nom=DBf,119,2,N,0,0,N,3
+Nom=DBg,150,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 30000,B3  ,20021022150930,PHB
+Nom=Dc,Adresse tiré,1
+DateM=2A1D0245582AC701
+Taille=160,160
+Pack=0,0
+[CHAMPS]
+Nom=DCa,1,2,N,0,0,N,3
+Nom=DCb,3,2,N,0,0,N,3
+Nom=DCc,19,2,N,0,0,N,3
+Nom=DCd,51,2,N,0,0,N,3
+Nom=DCe,83,2,N,0,0,N,3
+Nom=DCf,115,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 30000,B3  ,20021018124920,PHB
+Nom=Dd,Relevé,1
+DateM=A1C1C165592AC701
+Taille=240,240
+Pack=0,0
+[CHAMPS]
+Nom=DDa,1,2,N,0,0,N,3
+Nom=DDb,9,2,N,0,0,N,3
+[UNION]
+TailleUnion=17,56,N,3
+Nom=DDTt,1,2,N,0,0,N,3
+Nom=DDc,1,2,N,0,0,N,3
+[/UNION]
+Nom=DDd,73,2,N,0,0,N,3
+Nom=DDe,229,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2 30000,B3  ,20021022150937,PHB
+Nom=De,Extrait,1
+DateM=A981E0D15A2AC701
+Taille=120,120
+Pack=0,0
+[CHAMPS]
+Nom=DEa,1,2,N,0,0,N,3
+Nom=DEb,3,2,N,0,0,N,3
+Nom=DEc,35,2,N,0,0,N,3
+Nom=DEd,41,2,N,0,0,N,3
+Nom=DEe,91,2,N,0,0,N,3
+[/CHAMPS]
+[TABLE]
+Version=1,20021213163634,PHB ,20021213163650,PHB
+Nom=Df,Remise virement international,1
+DateM=8D9791CB5B2AC701
+Taille=320,320
+Pack=0,0
+[CHAMPS]
+[UNION]
+TailleUnion=1,320,N,3
+Nom=DFe,1,2,N,0,0,N,3
+Nom=DFd,1,2,N,0,0,N,3
+Nom=DFb,1,2,N,0,0,N,3
+Nom=DFm,1,2,N,0,0,N,3
+Nom=DFc,1,2,N,0,0,N,3
+Nom=DFt,1,2,N,0,0,N,3
+[/UNION]
+[/CHAMPS]
+[TABLE]
+Version=1,20100127110446,MS                  ,20100127110446,MS                  
+Nom=DgA,Accusé de réception applicatif (entête),1
+DateM=16C92A003A9FCA01
+Taille=560,560
+Pack=0,0
+[CHAMPS]
+Nom=DgCe,1,2,N,0,0,N,1
+Nom=DgNo,3,2,N,0,0,N,1
+Nom=DgRef,9,2,N,0,0,N,1
+Nom=DgAHoro,25,2,N,0,0,N,1
+Nom=DgAIdEmet,39,2,N,0,0,N,1
+Nom=DgAIdDest,76,2,N,0,0,N,1
+Nom=DgAVers,113,2,N,0,0,N,1
+Nom=Filler,116,2,N,0,445,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20100127111031,MS                  ,20100127111031,MS                  
+Nom=DgB,Accusé de réception applicatif (remise),1
+DateM=9835E593519FCA01
+Taille=560,560
+Pack=0,0
+[CHAMPS]
+Nom=DgCe,1,2,N,0,0,N,1
+Nom=DgNo,3,2,N,0,0,N,1
+Nom=DgRefBqe,9,2,N,0,0,N,1
+Nom=DgRefCli,25,2,N,0,0,N,1
+Nom=DgBOpTyp,41,2,N,0,0,N,1
+Nom=DgBARTyp,51,2,N,0,0,N,1
+Nom=DgCpt,54,2,N,0,0,N,1
+Nom=DgLib,77,2,N,0,0,N,1
+Nom=DgBRemInit,112,2,N,0,0,N,1
+Nom=DgBRemExec,156,2,N,0,0,N,1
+Nom=DgBInfos,200,2,N,0,0,N,1
+Nom=DgRejetTb,300,2,N,0,0,N,1
+Nom=Filler,429,2,N,0,132,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20100127111052,MS                  ,20100127111052,MS                  
+Nom=DgC,Accusé de réception applicatif (transaction),1
+DateM=A1CF4769519FCA01
+Taille=560,560
+Pack=0,0
+[CHAMPS]
+Nom=DgCe,1,2,N,0,0,N,1
+Nom=DgNo,3,2,N,0,0,N,1
+Nom=DgRefBqe,9,2,N,0,0,N,1
+Nom=DgRefCli,25,2,N,0,0,N,1
+Nom=DgCpt,41,2,N,0,0,N,1
+Nom=DgCTraInit,64,2,N,0,0,N,1
+Nom=DgCTraExec,103,2,N,0,0,N,1
+Nom=DgCEtat,142,2,N,0,0,N,1
+Nom=DgCInfos,143,2,N,0,0,N,1
+Nom=DgRejetTb,313,2,N,0,0,N,1
+Nom=Filler,442,2,N,0,119,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20100127111109,MS                  ,20100127111109,MS                  
+Nom=DgD,Accusé de réception applicatif (fin de fichier),1
+DateM=C948240C399FCA01
+Taille=560,560
+Pack=0,0
+[CHAMPS]
+Nom=DgCe,1,2,N,0,0,N,1
+Nom=DgNo,3,2,N,0,0,N,1
+Nom=DgRef,9,2,N,0,0,N,1
+Nom=Filler,25,2,N,0,536,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20131009142349,MS                  ,20131017102805,MS                  
+Nom=mndt,Mandat du prélèvement SEPA,1
+DateM=06460CCD12CBCE01
+Taille=300,300
+Pack=0,0
+CE=Ce1,M
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=Cea,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=MndtCod,14,2,N,0,0,N,1
+Nom=Tiers,22,2,N,0,0,N,1
+Nom=Iban,30,2,N,0,0,N,1
+Nom=Rum,64,2,N,0,0,N,1
+Nom=MndtTyp,99,2,N,0,0,N,1
+Nom=MndtStep,100,2,N,0,0,N,1
+Nom=MndtDDt,101,2,N,0,0,N,1
+Nom=MndtFDt,109,2,N,0,0,N,1
+Nom=CeNote,117,2,N,0,0,N,1
+Nom=Note,118,2,N,0,0,N,1
+Nom=UserCr,126,2,N,0,0,N,1
+Nom=UserCrDH,146,2,N,0,0,N,1
+Nom=UserCrOri,160,2,N,0,0,N,1
+Nom=UserMo,162,2,N,0,0,N,1
+Nom=UserMoDH,182,2,N,0,0,N,1
+Nom=UserMoOri,196,2,N,0,0,N,1
+Nom=Filler,198,2,N,0,53,N,1
+Nom=Umndt,251,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20070430162649,FH                  ,20090330175948,PP                  
+Nom=RcEbc040,Pointage semi automatique des extraits,1
+DateM=8987E36866B3C901
+Taille=256,256
+Pack=0,0
+[CHAMPS]
+Nom=ExtrTotMt,1,2,N,0,0,N,1
+Nom=DiffMt,17,2,N,0,0,N,1
+Nom=EcrMtTb,33,2,N,0,0,N,1
+Nom=PointDt,193,2,N,0,0,N,1
+Nom=Point,201,2,N,0,0,N,1
+Nom=ValDt,203,2,N,0,0,N,1
+Nom=OpEDt,211,2,N,0,0,N,1
+Nom=EcrNo,219,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20091029104622,MS                  ,20091030140958,MS                  
+Nom=XEbx,Work Ebics,1
+DateM=068712623CA0CA01
+Taille=15000,15000
+Pack=0,0
+[CHAMPS]
+Nom=EbxTexte,1,2,N,0,0,N,1
+Nom=EbxOp,10001,2,N,0,0,N,1
+Nom=EbxTrt,10257,2,N,0,0,N,1
+Nom=EbxDetailCod,10513,2,N,0,0,N,1
+Nom=EbxTitreTb,10514,2,N,0,0,N,1
+Nom=EbxLogDh,10914,2,N,0,0,N,1
+Nom=EbxKeyCod,10928,2,N,0,0,N,1
+Nom=EbxKeyVersion,10929,2,N,0,0,N,1
+Nom=EbxHash,10933,2,N,0,0,N,1
+Nom=EbxIniCod,11933,2,N,0,0,N,1
+Nom=EbxEUCertCod,11934,2,N,0,0,N,1
+Nom=EbxAuthCertCod,11935,2,N,0,0,N,1
+Nom=EbxEncCertCod,11936,2,N,0,0,N,1
+Nom=EbxC,11937,2,N,0,0,N,1
+Nom=EbxST,11939,2,N,0,0,N,1
+Nom=EbxL,12003,2,N,0,0,N,1
+Nom=EbxO,12067,2,N,0,0,N,1
+Nom=EbxOU,12131,2,N,0,0,N,1
+Nom=EbxCN,12195,2,N,0,0,N,1
+Nom=EbxEmail,12259,2,N,0,0,N,1
+Nom=EbxCertFicTb,12323,2,N,0,0,N,1
+Nom=EbxKeyFicTb,12419,2,N,0,0,N,1
+Nom=EbxLogFic,12515,2,N,0,0,N,1
+Nom=EbxNewCertCod,12771,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1995 2100000,PHB ,20021022150951,PHB
+Nom=Xx,Work XME - XMT        *W,1
+DateM=E73432FBA5CBC801
+Taille=2000,2000
+Pack=0,0
+[CHAMPS]
+Nom=Ok,1,2,N,0,0,N,1
+Nom=Rep,2,2,N,0,0,N,1
+Nom=Chx,3,2,N,0,0,N,1
+Nom=Tit,5,2,N,0,0,N,1
+Nom=Version,37,2,N,0,0,N,1
+Nom=PiANoT,41,2,N,0,0,N,1
+Nom=Lib,181,2,N,0,0,N,1
+Nom=Lib1,213,2,N,0,0,N,1
+Nom=Lib2,273,2,N,0,0,N,1
+Nom=Lib3,333,2,N,0,0,N,1
+Nom=NO,393,2,N,0,0,N,1
+Nom=Op,401,2,N,0,0,N,1
+Nom=Jnl,403,2,N,0,0,N,1
+Nom=Fic,406,2,N,0,0,N,1
+Nom=Mc1,662,2,N,0,0,N,1
+Nom=Mc2,663,2,N,0,0,N,1
+Nom=Mc3,664,2,N,0,0,N,1
+Nom=Mc4,665,2,N,0,0,N,1
+Nom=Mc5,666,2,N,0,0,N,1
+Nom=Mc6,667,2,N,0,0,N,1
+Nom=Mc7,668,2,N,0,0,N,1
+Nom=Mc8,669,2,N,0,0,N,1
+Nom=Mc9,670,2,N,0,0,N,1
+Nom=InvDh,671,2,N,0,0,N,1
+Nom=DebDh,685,2,N,0,0,N,1
+Nom=FinDh,699,2,N,0,0,N,1
+Nom=Point,713,2,N,0,0,N,1
+Nom=ToNum,715,2,N,0,0,N,1
+Nom=Choix,719,2,N,0,0,N,1
+Nom=Tiers,728,2,N,0,0,N,1
+Nom=Bqe,736,2,N,0,0,N,1
+Nom=Po,744,2,N,0,0,N,1
+Nom=InterroInvDh,747,2,N,0,0,N,1
+Nom=Conf,761,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Commentaire=12
+Nom=InvDt
+[/PROPLOC]
+[TABLE]
+Version=1,1999 7 90000,HC  ,20021022150953,PHB
+Nom=Yy,Work transfert,1
+DateM=EDB187D45A2AC701
+Taille=12000,12000
+Pack=0,0
+[CHAMPS]
+Nom=Tbl,1,2,N,0,0,N,1
+Nom=DEf,11045,2,N,0,0,N,1
+[/CHAMPS]
+[BASE]
+Version=1,1995 2 30000,VH  ,20120807094441,MS                  
+Nom=RcfEbcEtb,Historique opérations,1
+DateM=DCA0D2807074CD01
+Fichier=I,0,RcfEbcEtb.dhfi
+Versionbase=7.1b
+DateMIndex=874575B8FD2CCC01
+[TABLES]
+Nom=D8,0
+Nom=D9,0
+[/TABLES]
+[BASE]
+Version=1,1995 2 30000,B3  ,20090128175130,PP                  
+Nom=RcfEbcIn,Réceptions,1
+DateM=58E9E0AA6881C901
+Fichier=N,0,RcFEbcIN
+FichierTemporaire=O
+[TABLES]
+Nom=Da,0
+Nom=Db,0
+Nom=Dc,0
+Nom=Dd,0
+Nom=De,0
+Nom=Df,0
+Nom=DgA,0
+Nom=DgB,0
+Nom=DgC,0
+Nom=DgD,0
+[/TABLES]
+[BASE]
+Version=1,1995 2 30000,B3  ,20090128175137,PP                  
+Nom=RcfEbcOut,Emissions,1
+DateM=82BE97AF6881C901
+Fichier=N,0,RcFEbcOut
+FichierTemporaire=O
+[TABLES]
+Nom=Da,0
+Nom=Db,0
+Nom=Dc,0
+Nom=Dd,0
+Nom=De,0
+Nom=Df,0
+Nom=DgA,0
+Nom=DgB,0
+Nom=DgC,0
+Nom=DgD,0
+[/TABLES]
+[BASE]
+Version=1,20131008165902,MS                  ,20131008165902,MS                  
+Nom=RcfEbcSdd,Prélèvements SEPA,1
+DateM=002F02ED36C4CE01
+Fichier=I,0,RcfEbcSdd.dhfi
+Versionbase=7.2
+DateMIndex=ED7D6A7E90DCCE01
+[TABLES]
+Nom=ccsdd,0
+Nom=d1sdd,0
+Nom=mndt,0
+[/TABLES]
+[BASE]
+Version=1,1995 2 30000,VH  ,20120125150151,VJ                  
+Nom=RcfEbcTab,Tables,1
+DateM=3E32F1E269DBCC01
+Fichier=I,0,RcfEbcTab.dhfi
+Versionbase=7.2
+DateMIndex=AC20A3AEF4E3CB01
+[TABLES]
+Nom=D0,0
+Nom=D1,0
+Nom=D2,0
+Nom=D3,0
+Nom=D4,0
+Nom=D5,0
+Nom=D6,0
+Nom=D7,0
+[/TABLES]
+[BASE]
+Version=1,20100201113712,MS                  ,20100201113712,MS                  
+Nom=RcfEbcTmp,Fichier temporaire,1
+DateM=FC08CB832AA3CA01
+Fichier=U,0,
+DateMIndex=FC08CB832AA3CA01
+[TABLES]
+[/TABLES]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20040602141744,HC
+Nom=Index_A,En-tête transaction par date/heure inverse,1
+DateM=C0EAB99B9B48C401
+CLE=RcfEbcEtb,A,Ce1,2,8,n,1,n
+[CHAMPS]
+Nom=InvDh,1,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20040602141753,HC
+Nom=Index_B,En-tête transaction par code opération,1
+DateM=0089EFA09B48C401
+CLE=RcfEbcEtb,B,Ce1,2,8,n,1,n
+[CHAMPS]
+Nom=Op,1,0,
+Nom=InvDh,3,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20030212101837,JSM
+Nom=Index_C,En-tête transaction par journal et par date/heure inverse,1
+DateM=742486B977D2C201
+CLE=RcfEbcEtb,C,Ce1,2,8,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Jnl,4,0,
+Nom=InvDh,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20030212101921,JSM
+Nom=Index_D,En-tête transaction par journal et par code opération,1
+DateM=66DBB8D377D2C201
+CLE=RcfEbcEtb,D,Ce1,2,8,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Jnl,4,0,
+Nom=Op,7,0,
+Nom=InvDh,9,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20030212102049,JSM
+Nom=Index_E,En-tête transaction en erreur par date/heure inverse,1
+DateM=D2837BED77D2C201
+CLE=RcfEbcEtb,E,Ce2,2,1,n,1,n
+[CHAMPS]
+Nom=InvDh,1,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20040602141730,HC
+Nom=Index_F,En-tête transaction par numéro d'ordre,1
+DateM=008858939B48C401
+CLE=RcfEbcEtb,F,Ce1,2,8,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=NO,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20030212102125,JSM
+Nom=Index_G,En-tête transaction à transmettre par journal,1
+DateM=98E5E61D78D2C201
+CLE=RcfEbcEtb,G,Ce3,2,1,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Jnl,4,0,
+Nom=Op,7,0,
+Nom=NO,9,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20070511150451,FH                  ,20070511150602,FH                  
+Nom=Index_H,En-tête extrait de compte non pointé,1
+DateM=6ACD3C20CD93C701
+CLE=RcfEbcEtb,H,Ce5,2,1,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Jnl,4,0,
+Nom=DebDh,7,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20040602141810,HC
+Nom=Index_L,Détail transaction par numéro d'ordre,1
+DateM=60852EAB9B48C401
+CLE=RcfEbcEtb,L,Ce1,2,9,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=NO,4,0,
+Nom=NL,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20070515173155,FH                  ,20070515173226,FH                  
+Nom=Index_M,Détail extrait de compte par ticket de pointage,1
+DateM=F58A8A310697C701
+CLE=RcfEbcEtb,M,Ce6,2,1,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=TicketPoint,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20110615152245,VJ                  ,20110615152414,VJ                  
+Nom=Index_I,En-tête transaction par numéro de bordereau,1
+DateM=DA350D855F2BCC01
+CLE=RcfEbcEtb,I,Ce1,2,8,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=BdxNo,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20131008171022,MS                  ,20131009151342,MS                  
+Nom=Index_A,Paramètres prélèvement SEPA par dossier,1
+DateM=D9E07460F1C4CE01
+CLE=RcfEbcSdd,A,Ce1,2,1,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20131009145613,MS                  ,20131017103003,MS                  
+Nom=Index_M,Mandats de prélèvement SEPA par code contrat,1
+DateM=54A7CC1313CBCE01
+CLE=RcfEbcSdd,M,Ce1,2,M,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=MndtCod,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20131009151509,MS                  ,20131017103007,MS                  
+Nom=Index_N,Mandats de prélèvement SEPA par tiers,1
+DateM=E29C181613CBCE01
+CLE=RcfEbcSdd,N,Ce1,2,M,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Tiers,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20131009152012,MS                  ,20131017103011,MS                  
+Nom=Index_O,Mandats de prélèvement SEPA par RIB,1
+DateM=FE254F1813CBCE01
+CLE=RcfEbcSdd,O,Ce1,2,M,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=RibBqe,4,0,
+Nom=RibGui,9,0,
+Nom=RibCpt,14,0,
+Nom=RibCle,25,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20131108101320,MS                  ,20131108101320,MS                  
+Nom=Index_P,Mandats de prélèvement SEPA par RUM,1
+DateM=2CB970C462DCCE01
+CLE=RcfEbcSdd,P,Ce1,2,M,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Rum,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20131108142651,VJ                  ,20131108162321,VJ                  
+Nom=Index_B,Banque avec flag bic,1
+DateM=23E0527596DCCE01
+CLE=RcfEbcSdd,B,Ce1,2,2,o,1,n
+[CHAMPS]
+Nom=Bqe,1,0,
+Nom=Dos,9,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20030212140650,JSM                 ,20090921110828,MS                  
+Nom=Index_A_D2,Compte par banque,1
+DateM=63718F159B3ACA01
+CLE=RcfEbcTab,A,,1,032,n,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Bqe,2,0,
+Nom=Dos,10,0,
+Nom=Jnl,13,0,
+Nom=Filler,16,0,47
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 60000,TEST,20090921110703,MS                  
+Nom=Index_B,Compte par journal,1
+DateM=5D6A75E29A3ACA01
+CLE=RcfEbcTab,B,Ce1,2,2,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Jnl,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 60000,TEST,20090921110824,MS                  
+Nom=Index_C,Compte par banque et par journal,1
+DateM=09B52A139B3ACA01
+CLE=RcfEbcTab,C,Ce1,2,2,o,1,n
+[CHAMPS]
+Nom=Bqe,1,0,
+Nom=Dos,9,0,
+Nom=Jnl,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 60000,TEST,20090921110712,MS                  
+Nom=Index_D,Compte par RIB Banque,1
+DateM=29F0CDE79A3ACA01
+CLE=RcfEbcTab,D,Ce1,2,2,n,1,n
+[CHAMPS]
+Nom=RibBqe,1,0,
+Nom=RibGui,6,0,
+Nom=RibCpt,11,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 60000,TEST,20090921110716,MS                  
+Nom=Index_E,Compte par compte comptable,1
+DateM=DF458DEA9A3ACA01
+CLE=RcfEbcTab,E,Ce1,2,2,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Cpt,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20030212141042,JSM                 ,20090921110720,MS                  
+Nom=Index_K,Compte par nom compte banque,1
+DateM=29A492EC9A3ACA01
+CLE=RcfEbcTab,K,Ce1,2,2,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=BqC,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20030212140815,JSM                 ,20030703160910,DEMO
+Nom=Index_A_D4,Transfert automatique par banque,1
+DateM=DA9DEAAC6C41C301
+CLE=RcfEbcTab,A,,1,032,n,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Bqe,2,0,
+Nom=Dos,10,0,
+Nom=Jnl,13,0,
+Nom=Op,16,0,
+Nom=Filler,18,0,45
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20030212140729,JSM                 ,20030212140729,JSM
+Nom=Index_A_D3,Carte paramètres par banque,1
+DateM=3082A3B297D2C201
+CLE=RcfEbcTab,A,,1,032,n,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Bqe,2,0,
+Nom=Dos,10,0,
+Nom=Jnl,13,0,
+Nom=Op,16,0,
+Nom=Filler,18,0,45
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20030212140557,JSM                 ,20040602142924,HC
+Nom=Index_A_D1,Banque par banque,1
+DateM=E0B95E3D9D48C401
+CLE=RcfEbcTab,A,,1,032,o,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Bqe,2,0,
+Nom=Dos,10,0,
+Nom=Filler,13,0,50
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 60000,TEST,20040602142913,HC
+Nom=Index_A_D0,Paramètres généraux par banque,1
+DateM=2096A8369D48C401
+CLE=RcfEbcTab,A,,1,032,o,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Bqe,2,0,
+Nom=Dos,10,0,
+Nom=Filler,13,0,50
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 60000,B3  ,20040602141900,HC
+Nom=Index_F,Carte paramètres par position et longueur,1
+DateM=E0D832C99B48C401
+CLE=RcfEbcTab,F,Ce1,2,3,o,1,n
+[CHAMPS]
+Nom=Po,1,0,
+Nom=Lg,4,0,
+Nom=Bqe,7,0,
+Nom=Dos,15,0,
+Nom=Jnl,18,0,
+Nom=Op,21,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 60000,TEST,20040602141917,HC
+Nom=Index_G,Transfert automatique par journal,1
+DateM=A0A60ED39B48C401
+CLE=RcfEbcTab,G,Ce1,2,4,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Jnl,4,0,
+Nom=Op,7,0,
+Nom=EffDt,9,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 60000,TEST,20090921110855,MS                  
+Nom=Index_H,Transfert automatique par numéro d'ordre,1
+DateM=EF4056259B3ACA01
+CLE=RcfEbcTab,H,Ce1,2,4,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=NO,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20090423141411,PP                  ,20090423152735,MS                  
+Nom=Index_A_D5,Motif de rejet par banque,1
+DateM=E83ABD4317C4C901
+CLE=RcfEbcTab,A,,1,032,n,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Bqe,2,0,
+Nom=Dos,10,0,
+Nom=RejCod,13,0,
+Nom=Filler,15,0,48
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20090423152743,MS                  
+Nom=Index_I,Motif de rejet par motif de rejet,1
+DateM=9A209C4817C4C901
+CLE=RcfEbcTab,I,Ce1,2,5,o,1,n
+[CHAMPS]
+Nom=RejCod,1,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20090423141636,PP                  ,20090423152753,MS                  
+Nom=Index_A_D6,Code opération par banque,1
+DateM=22FE154E17C4C901
+CLE=RcfEbcTab,A,,1,032,n,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Bqe,2,0,
+Nom=Dos,10,0,
+Nom=OpECod,13,0,
+Nom=Filler,17,0,46
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,1995 2 70000,B3  ,20040602142849,HC
+Nom=Index_J,Code opération par banque,1
+DateM=60E838289D48C401
+CLE=RcfEbcTab,J,Ce1,2,6,o,1,n
+[CHAMPS]
+Nom=Bqe,1,0,
+Nom=OpECod,9,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20101215094909,MS                  ,20101215095006,MS                  
+Nom=Index_A_D7,Constantes Ebics par banque,1
+DateM=DB2B2812359CCB01
+CLE=RcfEbcTab,A,,1,032,n,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Bqe,2,0,
+Nom=Dos,10,0,
+Nom=BqC,13,0,
+Nom=CstCod,21,0,
+Nom=Op,41,0,
+Nom=Critere,43,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20101215095150,MS                  ,20101215095153,MS                  
+Nom=Index_L,Constantes Ebics par banque et code constante,1
+DateM=F76EE551359CCB01
+CLE=RcfEbcTab,L,Ce1,2,7,o,1,n
+[CHAMPS]
+Nom=Bqe,1,0,
+Nom=BqC,9,0,
+Nom=CstCod,17,0,
+Nom=Op,37,0,
+Nom=Critere,39,0,
+[/CHAMPS]
+[/INDEX]
+[INDEXL]
+Nom=RcfEbcEtb,D8,Index_A,0
+Nom=RcfEbcEtb,D8,Index_B,0
+Nom=RcfEbcEtb,D8,Index_C,0
+Nom=RcfEbcEtb,D8,Index_D,0
+Nom=RcfEbcEtb,D8,Index_E,0
+Nom=RcfEbcEtb,D8,Index_F,0
+Nom=RcfEbcEtb,D8,Index_G,0
+Nom=RcfEbcEtb,D8,Index_H,0
+Nom=RcfEbcEtb,D9,Index_L,0
+Nom=RcfEbcEtb,D9,Index_M,0
+Nom=RcfEbcEtb,D8,Index_I,0
+Nom=RcfEbcSdd,ccsdd,Index_A,0
+Nom=RcfEbcSdd,mndt,Index_M,0
+Nom=RcfEbcSdd,mndt,Index_N,0
+Nom=RcfEbcSdd,mndt,Index_O,0
+Nom=RcfEbcSdd,mndt,Index_P,0
+Nom=RcfEbcSdd,d1sdd,Index_B,0
+Nom=RcfEbcTab,D2,Index_A_D2,0
+Nom=RcfEbcTab,D2,Index_B,0
+Nom=RcfEbcTab,D2,Index_C,0
+Nom=RcfEbcTab,D2,Index_D,0
+Nom=RcfEbcTab,D2,Index_E,0
+Nom=RcfEbcTab,D2,Index_K,0
+Nom=RcfEbcTab,D4,Index_A_D4,0
+Nom=RcfEbcTab,D3,Index_A_D3,0
+Nom=RcfEbcTab,D1,Index_A_D1,0
+Nom=RcfEbcTab,D0,Index_A_D0,0
+Nom=RcfEbcTab,D3,Index_F,0
+Nom=RcfEbcTab,D4,Index_G,0
+Nom=RcfEbcTab,D4,Index_H,0
+Nom=RcfEbcTab,D5,Index_A_D5,0
+Nom=RcfEbcTab,D5,Index_I,0
+Nom=RcfEbcTab,D6,Index_A_D6,0
+Nom=RcfEbcTab,D6,Index_J,0
+Nom=RcfEbcTab,D7,Index_A_D7,0
+Nom=RcfEbcTab,D7,Index_L,0
+[/INDEXL]
+[LienDico]
+BeginFile
+entete=1;1;
+nom=Schéma RcfEbcEtb.D8;liens sortants
+nom=Schéma RcfEbcEtb.D9;liens sortants
+nom=Schéma RcfEbcTab.D0;liens sortants
+nom=Schéma RcfEbcTab.D1;liens sortants
+nom=Schéma RcfEbcTab.D2;liens sortants
+nom=Schéma RcfEbcTab.D4;liens sortants
+nom=Schéma RcfEbcTab.D3;liens sortants
+nom=Schéma RcfEbcTab.D5;liens sortants
+nom=Schéma RcfEbcTab.D6;liens sortants
+nom=Schéma Rcfeff.R2;liens sortants
+nom=Schéma Rcftab.Rb;liens sortants
+BeginDico
+dico=rcfdd.dhsd
+BeginTable
+table=RCFEBCETB;D8
+tblpos=1;1;160;780;1
+tblpos=;337;160;316;1
+tblpos=321;221;160;100
+tblskip=2
+tblpos=321;1;160;100
+tblpos=321;331;160;100
+tblpos=321;1;160;100
+tblskip=1
+tblpos=321;111;160;100
+table=RCFEBCETB;D9
+tblpos=321;1;160;100
+tblpos=249;;160;780;1
+tblpos=321;331;160;100
+tblskip=2
+tblpos=321;441;160;100
+tblskip=1
+tblpos=321;111;160;100
+tblskip=1
+tblpos=321;221;160;100
+table=RCFEBCTAB;D0
+tblpos=321;111;160;100
+tblskip=1
+tblpos=1;1;160;540;1
+tblpos=321;1;160;100
+tblskip=1
+tblpos=321;111;160;100
+tblpos=321;1;160;100
+tblpos=321;221;160;100
+tblskip=1
+tblpos=321;331;160;100
+table=RCFEBCTAB;D1
+tblpos=320;1;160;299;1
+tblpos=;;160;300;1
+tblpos=321;1;160;100
+tblpos=1;1;160;653;1
+tblpos=320;;160;301;1
+tblpos=320;1;160;304;1
+tblpos=319;;160;303;1
+tblpos=321;331;160;100
+tblpos=318;;160;303;1
+tblpos=321;441;160;100
+table=RCFEBCTAB;D2
+tblpos=321;331;160;316;1
+tblpos=618;2;160;318;1
+tblpos=321;111;160;100
+tblskip=1
+tblpos=1;1;160;661;1
+tblpos=321;331;160;316;1
+tblpos=320;317;160;317;1
+tblpos=321;441;160;100
+tblskip=1
+tblpos=321;1;160;529;1
+tblpos=321;1;160;542;1
+table=RCFEBCTAB;D4
+tblpos=321;441;160;100
+tblskip=4
+tblpos=1;1;160;780;1
+tblpos=321;551;160;100
+table=RCFEBCTAB;D5
+tblpos=321;551;160;100
+tblpos=458;379;160;273;1
+tblpos=321;551;160;100
+tblskip=3
+tblpos=521;1;160;100
+tblpos=1;1;160;304;1
+tblpos=521;1;160;100
+table=RCFEBCTAB;D6
+tblpos=521;1;160;100
+tblpos=648;379;160;274;1
+tblpos=521;1;160;100
+tblskip=3
+tblpos=521;111;160;100
+tblpos=521;1;160;100
+tblpos=1;1;160;318;1
+tblpos=521;111;160;100
+table=RCFEBCTAB;D3
+tblpos=521;111;160;100
+tblskip=5
+tblpos=1;1;160;350;1
+tblpos=521;111;160;100
+tblskip=1
+tblpos=521;221;160;100
+dico=rcfdd.dhsd
+table=RCFEFF;R2
+tblpos=5;5;160;200
+tblskip=8
+tblpos=1;1;160;780;1
+tblpos=521;331;160;100
+table=RCFTAB;RB
+tblpos=175;5;160;200
+tblskip=9
+tblpos=1;1;160;400;1
+BeginLien
+table=RCFEBCETB;D8
+lien=;RCFEBCTAB;D1;INDEX_A_D1;1
+lienpos=243;231;-78;214;1
+lienpos=-20;25;180;5
+lienpos=-20;25;180;95
+lienpos=-20;25;180;270
+lienpos=-20;25;180;95
+lienpos=-20;25;180;5
+lienpos=-20;25;180;95
+lienpos=-20;25;180;5
+lienskip=1
+lienpos=-20;5;180;5
+remp=CE1;$ident
+remp=BQE;BQE
+remp=DOS;' '
+lien=;RCFEBCTAB;D2;INDEX_B;1
+lienpos=238;257;-81;244;1
+lienpos=-20;35;180;5
+lienpos=-20;35;180;95
+lienskip=1
+lienpos=-20;35;180;270
+lienpos=-20;35;180;5
+lienpos=-20;35;180;95
+lienpos=-20;35;180;5
+lienskip=1
+lienpos=-20;15;180;95
+remp=DOS;DOS
+remp=JNL;JNL
+table=RCFEBCETB;D9
+lien=;RCFEBCETB;D8;INDEX_F;1
+lienpos=-20;5;180;50
+lienpos=-47;287;203;288;1
+lienpos=-20;5;180;95
+remp=DOS;DOS
+remp=NO;NO
+lien=;RCFEBCTAB;D1;INDEX_A_D1;1
+lienpos=-20;25;180;5
+lienpos=-44;230;205;214;1
+lienpos=-20;25;180;95
+lienpos=-20;25;180;380
+lienpos=-20;25;180;95
+lienskip=2
+lienpos=-20;25;180;5
+lienskip=1
+lienpos=-20;15;180;5
+remp=CE1;$ident
+remp=BQE;BQE
+remp=DOS;' '
+lien=;RCFEBCTAB;D2;INDEX_B;1
+lienpos=-20;35;180;5
+lienpos=254;257;-121;243;1
+lienpos=-20;35;180;95
+lienskip=1
+lienpos=-20;35;180;380
+lienpos=-20;35;180;95
+lienskip=1
+lienpos=-20;35;180;5
+lienskip=1
+lienpos=-20;25;180;95
+remp=DOS;DOS
+remp=JNL;JNL
+lien=;RCFEBCTAB;D5;INDEX_I;1
+lienpos=-20;55;180;5
+lienpos=178;469;-30;242;1
+lienpos=-20;55;180;5
+lienskip=3
+lienpos=180;55;-20;95
+lienpos=-20;55;180;160
+lienpos=180;55;-20;95
+lienpos=180;35;-20;95
+remp=REJCOD;REJCOD
+lien=;RCFEBCTAB;D6;INDEX_J;1
+lienpos=180;65;-20;50
+lienpos=383;396;-15;244;1
+lienpos=180;65;-20;95
+lienskip=5
+lienpos=-20;65;180;160
+lienpos=180;45;-20;95
+remp=BQE;BQE
+remp=OPECOD;OPECOD
+lien=;RCFEBCTAB;D6;INDEX_J;1;;;1
+lienpos=180;50;-20;55
+lienpos=448;376;46;-15;1
+lienpos=180;50;80;380
+lienskip=2
+lienpos=180;50;80;490
+lienpos=180;50;80;380
+lienpos=180;50;80;160
+lienpos=-20;50;180;165
+lienpos=180;55;-20;95
+remp=BQE;' '
+remp=OPECOD;OPICOD
+table=RCFEBCTAB;D2
+lien=;RCFEBCTAB;D1;INDEX_A_D1;1
+lienpos=-20;15;180;95
+lienskip=2
+lienpos=-20;15;180;160
+lienpos=237;213;-84;214;1
+lienpos=-20;15;180;95
+lienskip=3
+lienpos=-20;5;180;5
+remp=CE1;$ident
+remp=BQE;BQE
+remp=DOS;' '
+table=RCFEBCTAB;D4
+lien=;RCFEBCTAB;D1;INDEX_A_D1;1
+lienpos=-20;25;180;95
+lienskip=2
+lienpos=-20;25;180;395
+lienpos=-20;25;180;95
+lienpos=176;216;-15;212;1
+lienpos=-20;25;180;95
+lienskip=2
+lienpos=-20;5;180;95
+remp=CE1;$ident
+remp=BQE;BQE
+remp=DOS;' '
+lien=;RCFEBCTAB;D2;INDEX_B;1
+lienpos=-20;35;180;95
+lienskip=3
+lienpos=-20;35;180;395
+lienpos=241;245;-78;243;1
+lienpos=-20;35;180;95
+lienskip=2
+lienpos=-20;15;180;95
+remp=DOS;DOS
+remp=JNL;JNL
+table=RCFEBCTAB;D6
+lien=;RCFEBCTAB;D1;INDEX_A_D1;1
+lienpos=-20;55;180;55
+lienpos=-20;137;80;516
+lienpos=-20;50;180;50
+lienskip=1
+lienpos=-20;50;180;51
+lienpos=-20;50;180;50
+lienpos=-20;50;180;161
+lienpos=-20;50;80;-280
+lienpos=237;212;-74;212;1
+lienpos=-20;5;180;5
+remp=CE1;$ident
+remp=BQE;BQE
+remp=DOS;' '
+table=RCFEBCTAB;D3
+lien=;RCFEBCTAB;D1;INDEX_A_D1;1
+lienpos=-20;15;180;5
+lienskip=1
+lienpos=-20;15;180;95
+lienpos=-20;15;180;160
+lienpos=-20;15;180;50
+lienpos=-20;15;180;5
+lienpos=224;211;-71;213;1
+lienpos=-20;15;180;5
+lienskip=1
+lienpos=-20;5;180;5
+remp=CE1;$ident
+remp=BQE;BQE
+remp=DOS;' '
+lien=;RCFEBCTAB;D2;INDEX_B;1
+lienpos=-20;25;180;5
+lienskip=1
+lienpos=-20;25;180;50
+lienskip=1
+lienpos=-20;25;180;160
+lienpos=-20;25;180;5
+lienpos=240;243;-79;244;1
+lienpos=-20;25;180;5
+lienskip=1
+lienpos=-20;15;180;95
+remp=DOS;DOS
+remp=JNL;JNL
+dico=rcfdd.dhsd
+table=RCFEFF;R2
+lien=;RCFEBCTAB;D2;INDEX_K;1
+lienpos=180;100;80;-226
+lienpos=180;100;-20;103
+lienpos=180;86;80;-20
+lienskip=1
+lienpos=-20;100;180;104
+lienpos=180;100;80;-226
+lienpos=180;100;80;-212
+lienpos=180;100;80;-336
+lienskip=1
+lienpos=221;631;-99;497;1
+lienpos=-20;5;180;95
+remp=DOS;DOS
+remp=BQC;CESBQC
+lien=;RCFEBCTAB;D2;INDEX_K;1;;;1
+lienpos=180;105;85;-221
+lienpos=180;105;-20;108
+lienpos=180;91;85;-20
+lienskip=1
+lienpos=-20;105;180;109
+lienpos=180;105;85;-221
+lienpos=180;105;85;-207
+lienpos=180;105;85;-331
+lienskip=1
+lienpos=221;709;-99;497;1
+lienpos=-20;15;180;95
+remp=DOS;DOS
+remp=BQC;BQC
+table=RCFTAB;RB
+lien=;RCFEBCTAB;D2;INDEX_K;1
+lienpos=180;100;95;-226
+lienpos=180;100;-20;118
+lienpos=180;86;95;-20
+lienskip=1
+lienpos=-20;100;180;119
+lienpos=180;100;95;-226
+lienpos=180;100;95;-212
+lienpos=180;100;95;-336
+lienskip=1
+lienpos=180;100;-20;109
+lienpos=234;348;-87;499;1
+remp=DOS;DOS
+remp=BQC;BQC
+[/LienDico]

@@ -1,0 +1,1490 @@
+;_13/05/2009		09		SR		P_DTPOS & F_DCHAMP
+;_19/12/2007		08		SR		h_donnee	et h_datainfo
+;_24/09/2007		07		SR		F_INIT_TOOLBAR
+;_??/??/????		06		SR		f_serv, f_readini, P_ESCAPE
+;_12/02/2004		05		bt		Déclaration local de zoom pour la fct f_appel_zoom
+;_01/10/2003		04		sr		Ajout fx F_MonthWeek
+;_01/02/2003		03		bt	
+;_01/02/2003		02		sr
+;_01/06/2002		01		sr		
+;_??/??/????		01		FT
+
+;_03/2008 Pb conversion voir MREN
+
+;--------------------------------------------------------------------------
+;Objet...: sablier
+;--------------------------------------------------------------------------
+
+Extern Record		gtfdd.dhsd		ART
+Extern Record		gtfdd.dhsd		SART
+public record		gtfdd.dhsd		XZ		G3XZ
+
+;Extern Record		a5dd.dhsd			MZ
+
+public record		ddsys.dhsd		zoom	zoom
+public RECORD		A5DD.dhsd			M4		
+public record 		ddsys.dhsd			DATAINFO 		DATAINFO
+
+
+include 'gttc000.dhsp'
+
+
+;--------------------------------------------------------------------------
+;Objet...: sablier
+;--------------------------------------------------------------------------
+public procedure  mettresablier   
+ BEGINP
+     SetHourGlassCursor
+ ENDP
+public procedure  enleversablier 
+ BEGINP
+    SetNormalCursor
+ ENDP
+;--------------------------------------------------------------------------
+;Objet...: messagebox OK 
+;--------------------------------------------------------------------------
+public PROCEDURE P_MESSf(MESS,type,titre)
+01 MESS 		A
+01 type 		1='I'
+01 titre		32='Message'
+01 typeicon	L
+BEGINP
+	switch fstring('U',type)
+		case 'I' | typeicon = mb_iconinformation
+		case '!' | typeicon = mb_iconexclamation
+		case 'S' | typeicon = mb_iconstop
+	endswitch
+	messagebox(mess,titre,mb_ok + typeicon + mb_setforeground)
+ENDP
+;--------------------------------------------------------------------------
+;Objet...: messagebox OK  quitte le prog
+;--------------------------------------------------------------------------
+public procedure  P_aban(MESS)   ;affichage message abandon impossible
+01   MESS      A
+ BEGINP
+    messagebox(mess,'Abandon',mb_ok + MB_ICONstop)
+	 programgoto ' '
+ ENDP
+;--------------------------------------------------------------------------
+;Objet...: messagebox OK cancel ou retry cancel si cancel quitte le progr
+;--------------------------------------------------------------------------
+public procedure  P_MESSc(MESS,typ)   ;choix abandon ou suite
+01   MESS      A
+01	  typ			n	= 1
+01	  st			L
+ BEGINP
+	st = 0
+	if typ = 1
+   	st = messagebox(mess,'Votre choix',mb_okcancel + MB_ICONquestion	)
+   elsif typ = 0
+		st = messagebox(mess,'Votre choix',mb_retrycancel + MB_ICONquestion	)
+	endif
+   if idcancel = st
+      programgoto ' '
+   endif
+ ENDP
+;--------------------------------------------------------------------------
+;Objet...: messagebox OK cancel ou retry cancel si cancel quitte le progr
+;--------------------------------------------------------------------------
+public function char F_ouinon(mess)     ;zzrep contient O = oui ou N =non
+01      mess    a
+01			st		l	
+ beginf
+        st = messagebox(mess,' ',mb_yesno + MB_ICONquestion	)
+        if idyes = st
+				freturn('O')
+		  endif
+        freturn('N')
+ endf
+;--------------------------------------------------------------------------
+;Objet...: Conversion pointeur <--> decimal
+;Synthaxe: F_PDEC(POIN)
+;Retour..: La valeur decimale 5,0
+;--------------------------------------------------------------------------
+public function INT F_PDEC(POIN)
+ 01       POIN      X
+ 01       DEC       5,0
+     BEGINF
+          DEC = POIN
+          FRETURN(DEC)
+     ENDF
+;--------------------------------------------------------------------------
+;Objet...: Conversion pointeur <--> hexadecimal
+;Synthaxe: F_PHEXA(hexa)
+;Retour..: La valeur hexa sur 4 caracteres
+;--------------------------------------------------------------------------
+ public function CHAR F_PHEX(POIN)
+ 01       POIN      X
+ 01       HEX       4
+     BEGINF
+          HEX = BINHEXA(LDX(POIN))
+          FRETURN(HEX)
+     ENDF
+;--------------------------------------------------------------------------
+;Objet ..: Affiche l' erreur systeme avec input en ZMLIG ZMCOL
+;........: et quitte le programme (abort)
+;Synthaxe: P_SYST(pointeur code erreur,nom du fichier)
+;--------------------------------------------------------------------------
+ public procedure  P_SYST(PP,FIC)
+01  PP     X
+01  FIC    A
+ BEGINP
+     ferror(fic,pp)
+ ENDP
+;--------------------------------------------------------------------------
+;Objet ..: gere le message reservation
+;--------------------------------------------------------------------------
+ public procedure  P_rese(&tdf,&enr,par,typ,aff,mes)
+record * htdf tdf	  	;Adr de la tdf obligatoire
+1	enr		A			;Adr enreg pour hseek hread hpread 
+1 	par		A			;partage R P F
+1	typ      A     	;type d'action	Seek Read pread f_open fopen
+1	aff		N=0 		;Nbr de retry
+1	mes		A			;affichage message
+1	st			x
+1  cpt      2,0
+ BEGINP
+	cpt = 0
+	par = fstring('U',par)
+	mes = fstring('U',mes)
+	
+	loop ++cpt <= aff
+	
+		sleep(1000)
+		
+		switch typ
+		case 'seek'
+			st = fseek2(tdf,enr,tdf.key,par)
+		case 'read'
+			st = fread(tdf,enr,,par)
+		case 'pread'
+			st = fpread(tdf,enr,,par)
+		case 'open'
+			st = fopen(tdf,par)
+		default
+			p_aban("public procedure p_rese type invalide" & typ)	
+		endswitch
+	endloop
+
+	if st = H_RESERVED ;and mes = 'O'
+		if typ = 'open'	| p_messc("Fichier : " & left(tdf.name) & " réservé",aff)
+		else				  	| p_messc("Enregistrement réservé sur Fichier : " & left(tdf.name),aff)
+		endif
+		programgoto ' '
+	endif
+
+ ENDP
+
+;________________________________________________________________
+; Fonction     : F_OPEN	 	tdf = tdf du fichier
+;									par = P ou p : partagé		R ou r : réserve		F ou f : forcé
+;									mes = O ou o : affiche message si fichier absent ou reservé
+;
+; Paramètres en sortie : 0 = ok 1 = absent 
+;_______________________________________________________________
+;
+public function int f_hopen ( &tdf , par , mes)
+record * htdf tdf	  	; table définition fichier
+1   par  	A='P'		; code partage
+1   mes  	A='N'  	; indic message si absent O = message si absent	A = aucun message
+1	 st		x			
+beginf
+ 
+	par = fstring('U',par)
+	mes = fstring('U',mes)
+	st = fopen (tdf,par) 
+							  
+	switch st
+	case st = $14		;absent 	
+      if mes = 'O' |	p_messf("Fichier :" & left(tdf.name) & " absent") | endif 
+      freturn (1)
+
+   case H_RESERVED    
+		p_rese(tdf,tdf,par,'open',10,mes) 		;10 retry avant abandon
+		continue
+
+	case 0
+		freturn(0)
+
+	default
+      if st <> 0 | p_syst(st,left(tdf.name))	| endif
+
+   endswitch
+
+	freturn(0)
+endf
+
+;-----------------------------------------------------------------------------------------
+; Fonction     : F_hseek 	tdf = tdf du fichier
+;									enr = enregistrement du fichier
+;									cle = valeur de la cle
+;									par = P ou p : partagé		R ou r : réserve		F ou f : forcé
+;									mes = O ou o : affiche message si enreg reservé	ou absent
+;........: 
+;Retour..: 0 = ok		1 = invalid cle	autre erreur systeme : abandon
+;-----------------------------------------------------------------------------------------
+public function PTR  F_hseek(&TDF,&ENR,cle,par,mes,dep)
+record * htdf  TDF 
+1 ENR		A				  
+1 cle		A= ' '
+1 par		a='P'
+1 mes		a='N'	  
+1 dep 	1,0 = 1
+1 PP		X
+BEGINF
+	par = fstring('U',par)
+	mes = fstring('U',mes)
+	if cle <> ' ' | tdf.key = cle | endif 									 
+	pp   = fseek2(tdf,enr,par,dep)
+
+	switch pp
+		case H_RECORD_NOT_FOUND
+			if mes = 'O'  |	errorfatal(H_RECORD_NOT_FOUND,tdf.name,'%s |'& 'Clé : '& cle) | endif
+			freturn(1)
+		
+		case H_reserved
+			p_rese(tdf,enr,par,'seek',60,mes) 	;60 retry avant abandon
+			continue
+		
+		case 0
+			freturn(0)
+		
+		default
+			p_syst(pp,tdf.name)
+	endswitch
+ ENDF
+
+;-------------------------------------------------------------------------------------------
+; Fonction     : F_hread 	tdf = tdf du fichier
+;									enr = enregistrement du fichier
+;									cle = valeur de la cle
+;									par = P ou p : partagé		R ou r : réserve		F ou f : forcé
+;									mes = O ou o : affiche message si enreg reservé	ou fin de fichier
+;........: 
+;Retour..: 0 = ok		1 = fin de fichier	autre erreur systeme : abandon
+;-------------------------------------------------------------------------------------------
+Public function PTR  F_hread(&TDF,&ENR,cle,Par,mes,dep)
+record * htdf  TDF 
+1	ENR   A
+1	cle   A=' '
+1	par	a='P'
+1	mes	a='N'	  
+1	dep 	1,0 = 1
+1	PP    X
+BEGINF
+		par = fstring('U',par)
+		mes = fstring('U',mes)
+		if cle <> ' ' | tdf.key = cle | endif
+		pp = fread(tdf,enr,Par,dep)
+
+   	switch pp
+		case H_eof
+			if mes = 'O' 	| errorfatal(H_RECORD_NOT_FOUND,tdf.name,'%s') | endif
+
+			freturn(1)
+
+		case H_reserved
+			p_rese(tdf,enr,par,'read',60,mes)  	;60 retry avant abandon
+			continue
+
+		case 0
+			freturn(0)
+
+		default
+			p_syst(pp,tdf.name)
+		endswitch
+ENDF
+
+;-------------------------------------------------------------------------------------------
+; Fonction     : F_hpread 	tdf = tdf du fichier
+;									enr = enregistrement du fichier
+;									cle = valeur de la cle
+;									par = P ou p : partagé		R ou r : réserve		F ou f : forcé
+;									mes = O ou o : affiche message si enreg reservé	ou debut de fichier
+;........: 
+;Retour..: 0 = ok		1 = fin de fichier	autre erreur systeme : abandon
+;-------------------------------------------------------------------------------------------
+public function PTR  f_hpread(&TDF,&ENR,cle,Par,mes,dep)
+record * htdf tdf	
+1	ENR   A
+1	cle   A=' '
+1	par	a='P'
+1	mes	a='N'	  
+1	dep 	1,0 = 1
+1	PP    X
+BEGINF
+		par = fstring('U',par)
+		mes = fstring('U',mes)
+		if cle <> ' ' | tdf.key = cle | endif
+		pp = fpread(tdf,enr,Par,dep)
+
+   	switch pp
+		case H_eof
+			if mes = 'O'  	| errorfatal(H_RECORD_NOT_FOUND,tdf.name,'%s')	| endif
+			freturn(1)
+
+		case H_reserved
+			p_rese(tdf,enr,par,'pread',60,mes)		;60 retry avant abandon
+			continue
+
+		case 0
+			freturn(0)
+
+		default
+			p_syst(pp,tdf.name)
+
+		endswitch
+ENDF
+
+;--------------------------------------------------------------------------
+;Chargement d'une cle  CLE = [ 'A,,,1,4']
+;       - Dans cle chaque donnée est separée par une ,
+;       - La 1ere donnée corespond a la lettre clé
+;       - La 2ième et 3ième à position et longeur de la condition
+;       - Les autres a position et longeur de la donnée (5 fois maxi)
+;--------------------------------------------------------------------------
+extern record ddsys.dhsd cles ycles
+public procedure P_CRECLE(IND,CLE,test)
+ 01  IND       X  	;No de la cle ; =1 (1ere cle )  =2 (Autre CLES)
+ 01  CLE       A  	;zone cle
+ 01  test		B=0  	; (test valeur CE)	  0= 1<> 2< 3> 4<= 5>= 6& 	
+ 01  PP        X
+ 01  PY        X
+ 01  PX        X
+ 01  PZ        X
+ 01  PL        X
+ 01  PM        X
+ 01  PN        X
+ 01  ZY        X
+
+ BEGINP
+     IF IND = 1
+          INIT ycles = $00
+          ZY = 1
+     ELSE
+         ;ZY = ZY + 1
+         ;IND = ZY
+     ENDIF
+     PN = LENGTH(CLE) + 1
+     PP = COUNT(',',CLE)
+     IF PP < 4
+          p_aban('Generation de cle incorrect (Nb de zone)')
+     ENDIF
+     PZ = 1
+     PM = 0
+     FOR PY = 1 TO PP
+          PX = STRING(',',CLE,PZ)
+          PL = PX - PZ
+          SWITCH PY
+          CASE 1; lettre cle
+               IF PX <> 2 AND mid(CLE,PZ,PL) NOT IN('A..Z','a..z')
+                     p_aban('Generation de cle incorrect (Lettre)')
+               ENDIF
+               ycles.lettrecle(IND) = mid(CLE,PZ,PL)
+					ycles.testce(ind) = test
+          CASE 2 ;pos de la condition
+               IF PL >= 1
+                    Ycles.PositionCe(IND) = NMID(CLE,PZ,PL,0)
+               ENDIF
+          CASE 3 ;valeur de la condition
+               IF PL = 1
+                    Ycles.ValeurCe(IND) = mid(CLE,PZ,PL)
+               ENDIF
+          CASE BAND(PY,$01) = 0  ;PAIR Position donnée PM
+               PM = PM + 1
+               IF PM > 16
+                     p_aban('Generation de cle incorrect (Nb donnée)')
+               ENDIF
+               ycles.poscle (IND,PM) = NMID(CLE,PZ,PL,0)
+          CASE BAND(PY,$01) = 1
+               ycles.lgcle(IND,PM) = NMID(CLE,PZ,PL,0)
+          ENDSWITCH
+          PZ = PX + 1
+     NEXT
+     PL = PN - PZ
+     ycles.lgcle(IND,PM) = NMID(CLE,PZ,PL,0)
+ ENDP
+
+;-------------------------------------------------------------------------------------------------
+;objet		: appel d'un zoom paramétré dans a5f
+;appel 		;f_appel_zoom(numero,privilege,no_cle,retour,parametre,scénario,p_scenario,valeur,fichier)
+;				 		numero 		: numero du zoom
+;						Privilége	: 1=consult 	2=modif 	3=creation 	4=supp
+;						No cle 		: cle ou onglet de départ
+;						retour		: true = renvoie les valeurs 		False=ne renvoie pas
+;						parametre 	: zone libre (utilisé pour le pilotage)
+;						scénario		: 1=standard	2=aff	3=creat	4=dupl	5=modif	6=supp	7=impre
+;						p_scenario	: zone 7 digit selon les valeur suivantes
+;  			 							mode initial 			1=fiche 		2=liste	
+; 		 									sens lecture 			1=normal		2=inverse
+; 		 									saisie cle				1=non			2=oui			3=pas première
+; 	 										saisie cle creation	1=non			2=oui
+; 											aff aurtorise			1=fiche		2=liste		3=tous
+;  										rester en création	1=non			2=oui
+;  										rester en modif		1=non			2=oui
+;					valeur			: valeur 
+;					fichier			: Permet d'assigner un nom de fichier # de celui de l'enreg 
+;					titre				: Nouveau titre du zoom
+;-------------------------------------------------------------------------------------------------
+Public Function char F_APPEL_ZOOM(num,scepriv,scenocle,sceretour,param,sceaction,scevar,scevaleur,fichier,titre)
+1	num			5,0				;Numéro de zoom = 
+1	scepriv		1,0	= 0		;Privilège = paramètre 
+1	scenocle		2,0	= 0		;clé de départ
+1	sceretour	1,0	= true	;Retour o/n
+1	param			8		= ' '		;paramètre du zoom
+1	sceaction	1,0	= 0		;scénario
+1	scevar		8		= ' '		;detail du scenario si non standard
+ 2	scemode		1,0					;mode initial 			1=fiche 		2=liste	
+ 2	scesens		1,0					;sens lecture 			1=normal		2=inverse
+ 2	scesaisie	1,0					;saisie cle				1=non			2=oui			3=pas première
+ 2 sceclecrea	1,0					;saisie cle creation	1=non			2=oui
+ 2	scemodelf	1,0					;aff aurtorise			1=fiche		2=liste		3=tous
+ 2	scercrea		1,0					;rester en création	1=non			2=oui
+ 2	scermodif	1,0					;rester en modif		1=non			2=oui
+1	scevaleur	256	= ' '		;valeur 	
+1	fichier		A		= ' '		;fichier
+1	titre			A		= ' '		;titre
+1	l_adr_val	L	
+1	s_ret			s
+
+hfile		a5dd.dhsd		a5f		a5f
+hfile		a5dd.dhsd		a5f		a5fu		"a5fu.dhfi"	
+record	a5dd.dhsd		m4			m4bis
+record	ddsys.dhsd		zoom
+
+Beginf
+
+	if f_hseek(A5Fu,m4bis,'A4' & num) <> 0
+		if	f_hseek(A5F,m4bis,'A4' & num) <> 0
+			errorfatal(2,,'Zoom non paramétré dans le fichier A5F')
+			programexit
+		endif
+	endif
+
+	zoom.msqimp		= m4bis.msqimp
+	
+	if scepriv <> 0
+		zoom.priv = scepriv
+	else
+		zoom.priv = 0
+		if g3_protection(m4bis.confl,true) = 0
+			zoom.priv = 1
+			if g3_protection(m4bis.confm,true) = 0
+				zoom.priv = 2
+				if g3_protection(m4bis.confc,true) = 0
+					zoom.priv = 3
+					if g3_protection(m4bis.confs,true) = 0
+						zoom.priv = 4
+					endif	
+				endif
+			endif
+		endif
+	endif
+	if scenocle <> 0 		| zoom.scenocle = scenocle 			| else | zoom.scenocle = m4bis.scenocle			| endif
+	if scevar <> ' ' 		| zoom.sceaction = zoom_affichage 	| sceaction = zoom_affichage							| endif
+	if sceaction <> 0 	| zoom.sceaction = sceaction 			| else | zoom.sceaction = m4bis.sceaction			| endif
+	if scemode <> 0 		| zoom.scemode = scemode	 			| else | zoom.scemode = m4bis.scemode  			| endif
+	if scesens <> 0 		| zoom.scesens = scesens 				| else | zoom.scesens = m4bis.scesens		 		| endif
+	if scesaisie <> 0 	| zoom.scesaisie	= scesaisie 		| else | zoom.scesaisie =m4bis.scesaisie			| endif
+	if sceclecrea <> 0 	| zoom.sceclecrea = sceclecrea 		| else | zoom.sceclecrea= m4bis.sceclecrea		| endif
+	if scemodelf <> 0 	| zoom.scemodelf	= scemodelf 		| else | zoom.scemodelf = m4bis.scemodelf			| endif
+	if scercrea <> 0 		| zoom.scercrea = scercrea 			| else | zoom.scercrea = m4bis.scercrea			| endif
+	if scermodif <> 0 	| zoom.scermodif	= scermodif 		| else | zoom.scermodif = m4bis.scermodif			| endif
+	if titre <> ' '	 	| zoom.titrefixe	= titre		 		| else | zoom.titrefixe	= m4bis.lib					| endif
+	zoom.sceretour = 1
+	zoom.scevaleur = scevaleur
+	if param <> ' ' 		| m4bis.zoompar	= param 		| endif
+	if fichier <> ' '		| m4bis.zoomfic  = fichier	| endif
+	
+	M4 = m4bis
+	Ping("M4",m4bis)
+	ping("zechange",mz)				;obligatoire pour zoom de g3
+	ping('zoompar',m4bis.zoompar)	;idem
+	ping('g3xz',g3xz)					;idem
+
+	zoom4(zoom,m4bis.zoomfic,m4bis.zoomenr,m4bis.msqecran,m4bis.modtrait,recup = sceretour) 
+
+	if zoom.status = e_zoom_abandon or sceretour=false
+		harmony.retour = xmenext_ressaisie
+	elsif pongreceiveanddelete('zoom_creation_rapide',s_ret) = 0
+		zoom.valretour = s_ret
+		zoom.status 	= e_zoom_ok
+	endif 
+	 
+	freturn(zoom)
+
+Endf
+
+;--------------------------------------------------------------------------
+;Objet...: appel genéralisé d'masque en saisie
+;			
+;retour	:	0	a valider
+;				1	a abandonner
+;
+;Appel	:	ptr = f_xmeinput(masque,pag,seq,mode,a_affok,a_affaban,a_menu,a_toolbar)
+;paramètres	obligatoire : 	masque pag seq mode 
+;paramètre optionnel		:	aff permet ou pas l'afficahge de confirmation abandon
+;									l'abandon est géré pour toutes les touches qui provoque la sortie
+;									sauf return	et F10
+;									aff = 'O' ou omis et abandon affichage 'Abandon' Oui/non 
+;																					oui retourne 1
+;																					non revient a la saisie de la dernière variable		  		
+;									aff = 'N' et abandon retourne 1
+;									a_menu = nom du menu a ajouter a la fenetre
+;									a_toolbar = nom de la barre de tache a ajouter a la fenetre
+;--------------------------------------------------------------------------
+public function ptr f_xmeinput(a_masque,n_pag,n_seq,n_mode,a_affok,a_affaban,a_menu,a_toolbar,a_titre)
+1	a_masque		a
+1	n_pag			n=1
+1	n_seq			n=0
+1	n_mode		n=2
+1	a_affok		a='O'
+1	a_affaban	a='O'
+1	a_menu		a=' '
+1	a_toolbar	a=' '
+1	a_titre		a=' '
+
+1  b_fini   	b
+1	l_idm			L
+1	l_idt			L
+1	s_mes			s
+
+beginf
+	if a_menu <> ' '
+		l_idm = xmemenugetid(a_masque,a_menu,true)
+		xmemenusetwindow(l_idm,a_masque,n_pag)
+	endif
+	if a_toolbar <> ' '
+		l_idt = xmetoolbargetid(a_masque,a_toolbar,true)
+		xmetoolbarsetwindow(l_idt,a_masque,n_pag)
+	endif
+	xmedisp(a_masque,n_pag,n_mode)
+	if a_titre <> ' '
+		xmetitle(a_titre)
+	endif
+
+	xmeInput (a_masque,n_pag,n_seq,0)
+	repeat
+		b_fini = 2
+		switch harmony.key
+		case k_f10
+			s_mes 	= ' '
+			b_fini 	= 0
+			if a_affok <> 'N'
+				if a_affok = 'O' 	| pinglocalreceiveanddelete('message',s_mes)
+				else					| s_mes = a_affok
+				endif
+				if messagebox(condition(s_mes=' ','Validation',s_mes),a_titre,mb_setforeground+mb_iconquestion+mb_yesno) = idno
+					xmenext 3 0
+					b_fini = 2
+				endif
+			endif
+
+		case k_f9
+			s_mes 	= ' '
+			b_fini 	= 1
+			if a_affaban <> 'N'
+				if a_affaban = 'O' 	| pinglocalreceiveanddelete('message',s_mes)
+				else						| s_mes = a_affaban
+				endif
+				if messagebox(condition(s_mes=' ','Abandon',s_mes),a_titre,mb_setforeground+mb_iconquestion+mb_yesno) = idno
+					xmenext 3 0
+					b_fini = 2
+				endif		
+			endif
+
+		case harmony.key in(k_f1..k_f8)
+			xmenext 15 0
+
+		case harmony.key in(c_up,k_btab)
+			xmenext 9 0
+
+		default
+			xmenext 8 0
+		endswitch
+	until b_fini in(0..1)
+
+	if n_mode = 2 | xmeret | endif
+
+	freturn(b_fini)
+endf
+
+;--------------------------------------------------------------------------
+;Objet...: appel d'un zoom génération 3
+;			  F_zoom3(masque,trait,tdf,enr,priv,recup,pilote,cle,fic)	
+;
+;
+;retour	:	0	a valider
+;				1	a abandonner
+;
+;Appel	:	if f_zoom3("zagpan","tagpan"," ","acenr",4,1,2,1,"fbgacti")	=0
+;					 tests de validité du masque
+;				else
+;						resaisiie
+;				endif
+;
+;--------------------------------------------------------------------------
+
+
+include "Zclipboard.dhsp"
+
+ public function char ctrl_w   ;lecture presse papier
+01   pp   x
+01	  zon	 200
+ beginf
+   pp = MemoryReadClipBoard(FALSE) ; allocation mémoire et copie
+   MemoryRead(pp,zon)     ; lecture d'une ligne
+   MemoryClose(pp)
+	freturn(zon)
+ endf
+ public function ptr ctrl_c(zon)   ;écriture presse papier
+01	  zon	 a
+01   pp   x
+ beginf
+	pp= MemoryCreate(0)            ; création de la mémoire
+   MemoryWrite(pp,left(zon))    ; écriture dans la mémoire
+   MemoryWriteClipBoard(pp)        ; copie dans le presse-papier
+   MemoryClose(pp)
+   freturn(0)
+ endf
+;gestion du ctrl+c ou ctrl+ w
+public procedure p_presse_papier
+beginp
+if system.statin = 36 ;ctrl-c
+	ctrl_c(harmony.dataval)
+endif
+if system.statin = 56 ;ctrl-w
+	xmeloadcurrentdata(ctrl_w)
+endif
+endp 
+;--------------------------------------------------------------------------
+;Objet...: test ou reserve le moteur des courriers
+;........: prg = 0 on test si non ouvert le lance
+;........: 		= autre reserve le moteru
+;Retour..: 0 = ok,1 = le moteur est déja ouvert
+;--------------------------------------------------------------------------
+
+public function ptr f_moteur(prg)
+1	prg	n=0 ;on test si le moteur est ouvert sinon onest dans le moteur
+1	st		x
+RECORD	* 	htdf fmoteur	
+beginf
+fmoteur.name = '\harmony\coho\fbgmoteur.dhfd' 
+if (st := fopen(fmoteur,'R')) = $14
+   st = 0
+	if prg <> 0
+	   if HCreateFile (fmoteur.name,'U',0 ,false)
+			freturn(1)
+		endif
+		f_hopen(fmoteur,'R')
+	endif
+elsif st = 0 and prg = 0
+	hclose(fmoteur)
+endif
+if prg = 0 and st = 0
+	WindowShow(SW_hide)
+	programcall('coher_courrier_moteur.dhop',SW_SHOWMINIMIZED	,CALL_NOWAIT )
+	WindowShow(SW_SHOW)
+endif
+freturn(st)
+endf
+;--------------------------------------------------------------------------
+;Objet...: arrete le moteur des courriers
+;--------------------------------------------------------------------------
+
+public procedure f_moteur_arret
+1	st		x
+RECORD	* 	htdf fmoteur	
+beginp
+fmoteur.name = '\harmony\ctmp\arret' 
+if fopen(fmoteur,'R') = $14
+	HCreateFile (fmoteur.name,'U',0 ,false)
+elsif st = 0 
+	hclose(fmoteur)
+endif
+endp
+
+;--------------------------------------------------------------------------
+; public procedure qui affiche un message d'erreur en clair
+; pour les public procedure du type :
+;  HCreateFile, HSicreate, HSiread, HSimod, HdeleteFile,  Fcreate, Ficreate, Fdelfile, Siread et Simod 
+;--------------------------------------------------------------------------
+public procedure	P_AFFICH_FILE_ERROR(num,abort)
+1	Num	X
+1	Abort	1	= 'N'
+Beginp
+	Switch	NUM
+		Case 0x1701 	
+			p_messf("Nom de fichier erroné")
+		Case 0x1702	
+			p_messf("Taille du fichier des clés incorrecte")
+		Case 0x1703
+		 	p_messf("Type de fichier différent de 'U' ou 'N' ")
+		Case 0x1704 	
+			p_messf("* Erreur à la lecture du fichier LABEL")
+		Case 0x1705 	
+			p_messf("Longueur d'enregistrement supérieure à la taille maximale")
+		Case 0x1706 	
+			p_messf("* Erreur à la création du fichier ")
+		Case 0x1707 	
+			p_messf("* Erreur à l'initialisation du fichier des données ")
+		Case 0x1708 	
+			p_messf("Nom du fichier des données erroné (fichier séquentiel. indexé) ")
+		Case 0x1709	
+			p_messf("Taille du fichier des données incorrecte ")
+		Case 0x170A 	
+			p_messf("Type du fichier erroné (non séquentiel indexé)")
+		Case 0x170B 	
+			p_messf("Construction des clés incorrecte")
+		Case 0x170C 	
+			p_messf("* Erreur à la création du fichier des clés ")
+		Case 0x170D	
+			p_messf("* Erreur à la lecture ou à la mise à jour des paramètres")
+		Case 0x170E  	
+			p_messf("* Erreur à la lecture ou à la mise à jour du fichier Index ")
+		Case 0x170F 	
+			p_messf("* Erreur à l'initialisation du fichier séquentiel indexé ")
+		Case 0x1710 	
+			p_messf("* Erreur à l'ouverture du fichier ")
+		Case 0x1711 	
+			p_messf("* Erreur à la suppression du fichier ")
+		Case 0x1712 	
+			p_messf("* Erreur à la suppression du fichier des clés ")
+		Case 0x1713	
+			p_messf("Le fichier n'est pas de type séquentiel indexé étendu")
+		Default
+			p_messf("Erreur non répertoriée")
+	EndSwitch
+	If Abort = 'O'
+		programexit
+	EndIf
+EndP
+
+;--------------------------------------------------------------------------
+;Objet...: chemin serveur	
+;
+;--------------------------------------------------------------------------
+public function char f_serv
+record ddsys.dhsd implicite serv	;répertoire harmony de harmony sur le serveur
+beginf
+	serv.path = WinReadProfileString("System","ServeurXlogf","divalto.ini")
+	if serv.path = ' '
+		serv.path = '/divalto'
+	else
+		serv.path = '//' & left(serv.path) & '/divalto'
+	endif
+	freturn(left(serv.path))
+endf
+
+;--------------------------------------------------------------------------
+;Objet...: lecture des paramètres de coherence.ini ou cohérence_serveur.ini	
+;
+;retour	:	rien	non trouvé
+;				autre trouvé
+;--------------------------------------------------------------------------
+public function char f_readini(cle,par,Fichier)
+1	cle		A  							; cle à rechercher
+1 	par   	A	= 'System' 				; paragraphe du .ini
+1	Fichier	A	= 'divalto.ini'
+1	ENR_INIS	512
+record ddsys.dhsd implicite serv	; répertoire harmony de harmony sur le serveur
+record ddsys.dhsd implicite loca	; répertoire windows de harmony local
+record ddsys.dhsd implicite fich	; répertoire de travail
+RECORD	* 	htdf FIC_INI = ' '
+RECORD	* 	htdf FIC_INIS = ' '
+Beginf
+	FIC_INI.name = '/divalto/' & Fichier
+	serv.path = fstring('l',f_serv)
+	FIC_INIS.name = left(serv.path) & '/' & left(Fichier) ;'//coge2000/harmony/udivaltoav.ini' 
+	If FIC_INI.name <> FIC_INIS.name
+		If fopen(FIC_INI,'P') <> 0
+			FIC_INI.name = '/divalto/' & Fichier
+			If HCreateFile(FIC_INI.name,'U',,False) <> 0
+				freturn(' ')
+			ElsIf fopen(FIC_INI,'P') <> 0
+				freturn(' ')
+			EndIf
+		EndIf
+		If fopen(FIC_INIS,'P') = 0
+			Herase(FIC_INI)
+			Loop f_hread(FIC_INIS,ENR_INIS) = 0
+				Hwrite(FIC_INI,ENR_INIS)
+			Endloop
+			Hclose(FIC_INIS)
+		EndIf
+		Hclose(FIC_INI)
+	EndIf
+	freturn(WinReadProfileString(left(par),left(cle),GetHarmonyDirectory & '\' & Fichier))
+Endf
+
+;----------------------------------------------------------------------------
+; public procedure permettant d'interrompre les boucles de traitement
+;----------------------------------------------------------------------------
+public procedure	P_ESCAPE
+1	car	1
+Beginp
+	car = getchar()
+	If car = $e8
+		if f_ouinon("Voulez-vous interrompre le traitement et quitter le programme?") = 'O'
+			ProgramExit
+		endif
+	Else
+		sleep(0)
+	Endif
+Endp
+
+; Permet de renvoyer en clair le mois de la date passée en paramètre 1 OU
+; du numéro de mois passé en paramètre 2
+; Retourne esp si erreur
+Public	Function	Char	F_MonthWeek(DAT,MOI)
+1	DAT	8		= ' '
+1	MOI	2,0	= 0
+Beginf
+	If DAT <> ' '
+		MOI = month(DAT)
+	EndIf
+	Switch MOI
+		Case 1
+			freturn("Janvier")
+		Case 2 
+			Freturn("Février")
+		Case 3
+			Freturn("Mars")
+		Case 4
+			Freturn("Avril")
+		Case 5
+			Freturn("Mai")
+		Case 6
+			Freturn("Juin")
+		Case 7
+			Freturn("Juillet")
+		Case 8
+			Freturn("Août")
+		Case 9
+			Freturn("Septembre")
+		Case 10
+			Freturn("Octobre")
+		Case 11
+			Freturn("Novembre")
+		Case 12
+			Freturn("Décembre")
+	EndSwitch
+	Freturn(" ")
+Endf
+
+;----------------------------------------------------------------------------
+; affichage des données d'un traitement
+; utilise un masque ecran contenant les lignes a afficher wrk.a(i)
+; chaque ligne doit avoir un point de sequence
+;		aff_traitement(0,titre,masque,page,)	;initialisation (par defaut masque=coge_fonct.dhoe, page=1, titre = traitemen)
+;		aff_traitement(x,titre)						;affiche les ligne dont le point de sequence est egal a x. Masque contient le message
+;															;x = 1 à 9 		Libellés fixes (par défaut Select et Traitement)
+;															;x = 11 à 20	message de traitement 
+;		aff_traitement(9)								;fermeture
+;----------------------------------------------------------------------------
+public record	utilitaires.dhsd	wrk
+
+01		s_aff			1,0=0
+01		s_mmasq		S
+01		n_mpage		2,0
+01		s_mtit		S
+
+public procedure aff_traitement(n_f,s_tit,s_masq,n_page)
+01		n_f			2,0					  ;fonction
+01		s_tit			S='Traitement'		  ;titre
+01		s_masq		S='coge_fonct.dhoe'  ;masque 				
+01		n_page		2,0=1					  ;page du masque 	
+
+beginp
+	switch n_f
+	case 0
+		s_aff	  = 0	
+		s_mmasq = s_masq
+		n_mpage = n_page
+		s_mtit  = s_tit	
+		wrk.a_128(1) = 'Selection'
+		wrk.a_128(2) = 'Traitement'
+
+	case vsw in(1..20)
+		if s_aff = 0
+			xmeload(s_mmasq)
+			xmedispv(s_mmasq,n_mpage,xme_mode_gosub)
+			xmetitle(s_mtit)
+			s_aff = 1
+		endif
+		wrk.a_128(n_f)		= s_tit
+		harmony.sequence 	= n_f
+		harmony.retour	  	= 4	
+		xmedispv(s_mmasq,n_mpage,xme_mode_goto)
+
+	case 99
+		s_aff = 0
+		xmeret
+
+	endswitch
+endp
+
+;*
+;*	charge un masque d'impression
+;*
+public function int f_charge_masque_imp(a_mino,a_param)
+01		a_mino		5
+01		a_param		1='*'
+
+record		a5dd.dhsd	m7
+record		*htdf			a5ffic
+01				n_n			1,0=3
+
+beginf
+	mz.micle 	= ' '	
+	if a_param 	= ' ' | a_param = '*' | endif								
+	a5ffic.name = 'a5fu.dhfi'
+	loop n_n > 1
+		if fopen(a5ffic,'F')	= 0
+			a5ffic.key = 'J' & a_mino
+			loop fread(a5ffic,m7,'F') = 0	and m7.mino = a_mino
+				if (m7.miparam = a_param) or (m7.MiDefaut <> 1 and a_param = '*')
+					mz.micle = m7.micle6
+					n_n = 1
+					exitloop
+				endif
+			endloop
+		endif
+		fclose(a5ffic)
+		a5ffic.name = 'a5f.dhfi'
+		n_n--
+	endloop
+
+  freturn(n_n)
+endf
+
+;* Permet d'initialiser une toolbar (par défaut harmony.masque, page 1 toolbar = main)
+;* Retour 0 si ok, 1 si toolbar non trouvée ou msq non chargé
+Public Function  int F_INIT_TOOLBAR(aMSQ, aNTB, nPAG)
+1	aMSQ		32		= " "
+1	aNTB		32		= "MAIN"
+1	nPAG		3,0	= 1
+1	lIDTB		L
+Beginf
+	If aMSQ = " " and mz.MECLE <> " "
+		aMSQ = mz.MECLE
+	Elsif aMSQ = " " and mz.MECLE = " "
+		aMSQ = harmony.MASQUE
+	EndIf
+	If (lIDTB := XmeToolbarGetId (aMSQ, aNTB, False)) <> 0
+		XmeToolbarSetWindow (lIDTB, aMSQ, nPAG)
+	Else
+		freturn(1)
+	EndIf
+	Freturn(0)
+Endf
+
+;* simule datainfo
+;* SR repris de FT
+public procedure h_datainfo(reponse)
+1	reponse	a
+1	I			1,0
+beginp
+	datainfo  = ' '
+	datainfo.Mnemo = HmpSeek(reponse,"Nom")
+	datainfo.Libdata = HmpSeek(reponse,"Libelle")
+	datainfo.Dtcreat = HmpSeek(reponse,"DateCreation")
+	datainfo.Dtmodif = HmpSeek(reponse,"DateModif")
+	datainfo.Cdutil = HmpSeek(reponse,"UtilisateurModif")
+	if	HmpSeek(reponse,"DonneePack") = 1
+		datainfo.Datapack = 'D'
+	endif
+	datainfo.Datanat = HmpSeek(reponse,"Nature")
+	datainfo.Datadecim = HmpSeek(reponse,"NbDecimales")
+	
+	datainfo.Nbdim = HmpSeek(reponse,"NbDimensions")
+	for i = 1 to  datainfo.Nbdim
+		datainfo.Tabdim(i) = HmpSeek(reponse,"Dimensions"& i)
+		datainfo.Tabenj(i)    = HmpSeek(reponse,"Enjambees" & i)
+	next
+	datainfo.Dataoffset = HmpSeek(reponse,"Position")
+	datainfo.Tailletot = HmpSeek(reponse,"Longueur")
+endp 
+
+;*  test la donnée d'un enreng et retourne datainfo ou libel ou mnemo
+;* SR repris de FT
+public function char h_donnee(dic,enreg,don,ret)
+1	dic A
+1	enreg a
+1	don a
+1	ret	a =' '  ;'L' libellé ou M le mnemo ou T taille ou O offset ou autre datainfo
+1  reponse	8096
+1	ticket	L
+1	niveaudico	x=1
+1  dico	32
+1	don1	10
+beginf
+	don1 =don
+	if pinglocalreceive("DD_OPEN" & fstring('U',dico),ticket) 
+		dico = fstring('U',dic)
+		if right(left(dico),4) <> '.dhsd'
+			dico = left(dico) & '.dhsd'
+		endif
+		if DDInterface(DD_OPEN,ticket,dico,reponse) <> 0  or enreg = ' '
+			if ret <> 'P'
+				DDInterface(DD_GETERROR,ticket," ",reponse,niveaudico)
+				p_messf(HmpSeek(reponse,"TexteErreur"))
+			endif
+			freturn( ' ')
+		endif
+		pinglocal("DD_OPEN" & fstring('U',dico),ticket) 
+	endif
+	if DDInterface(DD_TABLEFIND_DD,ticket,enreg,reponse) <> 0
+		if ret <> 'P'
+			DDInterface(DD_GETERROR,ticket," ",reponse,niveaudico)
+			p_messf(HmpSeek(reponse,"TexteErreur"))
+		endif
+		freturn( ' ')
+	endif
+	if DDInterface(DD_DATAFIND,ticket,don1,reponse) <> 0
+		if ret <> 'P'
+			DDInterface(DD_GETERROR,ticket," ",reponse,niveaudico)
+			p_messf(HmpSeek(reponse,"TexteErreur"))
+		endif	
+		freturn( ' ')
+	endif
+	h_datainfo(reponse)
+	switch ret
+		case ' '
+			freturn(datainfo)
+		case 'L'
+			freturn(datainfo.libdata)
+		case 'M'
+			freturn(datainfo.mnemo)
+		case 'T'
+			freturn(datainfo.tailletot)
+		case 'O'
+			freturn(datainfo.dataoffset)
+		case 'P' ;offset sans erreur
+			freturn(datainfo.dataoffset)
+	endswitch
+	freturn(datainfo)
+endf
+
+
+;*
+;*	controle de syntaxe d'une chaine d'intervalle + reclassement + appel zoom
+;*	syntaxe autoris‚es xxx,yyy,cccc;hhh aaa aaa..bbb ccc-ggg 
+
+;tri croissant des items 
+function long string_in_control_tri(&p1,&p2)
+1		p1		a 
+1		p2		a
+beginf
+   freturn SortCompare(p1,p2)
+endf
+
+;controle du champ
+public function int string_in_control(&a_libl,x_zoom)
+01		a_libl		> gtfdd.dhsd	lib
+01		x_zoom		X=0
+01		s_trt			150
+01		s_trtd		S			;depot debut intervalle
+01		s_trtf		S			;depot fin								
+01		s_libr		S=' '		;chaine depot en recherche
+01		s_libn		S=' '		;chaine depot control‚e et restitu‚e dans la chaine d'entre a_libl
+01		n_err			X			;<> 0 si un depot est inexistant
+01		n_pos			X=0
+
+01		l_list		L
+01		a_adr			16		
+
+beginf
+	if system.statin = c_f8 and harmony.dataarret < 9000 and x_zoom <> 0 
+		zoom = f_appel_zoom(x_zoom,sceretour=false,scevar='213') ;pas de recup direct / option paspremiere
+		a_libl &= ' ' & zoom.valretour
+	endif
+
+	if a_libl  <> ' '
+		l_list = listcreate
+		getadressfunction(" ","string_in_control_tri",a_adr)
+		listmode(l_list,1,a_adr)
+
+		s_libr = modify(';',' '	,a_libl)
+		s_libr = modify(',',' '	,s_libr)
+		s_libr = modify('-','..',s_libr)
+		s_libr = fstring('BL',s_libr)
+		if inspect($ff,s_libr) = 2
+			messagebox('Syntaxe erron‚e dans la description du champ','Erreur',mb_setforeground+mb_iconexclamation+mb_ok)
+			freturn(1)
+		endif
+
+		loop s_libr <> ' '
+			s_trt		= fstring('C',s_libr)  				;recup 1er depot
+			s_trtd	= s_trt
+			s_trtf	= ' '
+			s_libr 	= fstring('EL',s_libr)				;eff 1er depot + decalage gauche
+
+			;test si operateur d'intervalle
+			if s_trt like "*..*"
+				n_pos = string('..',s_trt)
+				s_trtd = mid(s_trt,1,n_pos-1) 	
+				s_trtf = mid(s_trt,n_pos+2)
+				if s_trtf < s_trtd
+					swap s_trtd s_trtf
+					s_trt = s_trtd & '..' & s_trtf
+				endif
+			endif
+
+			listinsert(l_list,s_trt)		
+
+			;suppression des depots existants dans la chaine 
+			if inspect(s_trtd,s_libr) = 1
+				mid(s_libr,string(s_trtd,s_libr),length(s_trtd)) = ' '
+			endif
+			;if inspect(s_trtf,s_libr) = 1
+			;	mid(s_libr,string(s_trtf,s_libr),length(s_trtf)) = ' '
+			;endif
+
+		endloop
+
+		;tri par ordre croissant
+		s_libn = ' '
+		listbegin(l_list)
+		loop listnext(l_list,s_trt) > 0 | s_libn &= ' ' & s_trt | endloop 
+		a_libl = fstring('BL',s_libn)
+	endif
+	freturn(0)
+endf
+
+;*
+;*	transformation d'une chaine d'intervalle en clause hfilter
+;*	syntaxe autoris‚es xxx,yyy,cccc;hhh aaa aaa..bbb ccc-ggg 
+
+public function char string_in_to_hfilter(a_champ,a_in,&a_first,&a_last,a_pref)
+01		a_champ		A			;nom du champ dans le dico
+01		a_in			A			;chaine a convertir
+01		a_first		A=' '		;premier element
+01		a_last		A=' '		;dernier ‚l‚ment
+01		a_pref		A=' '		;prefixe selection	
+
+01		a_result		1000=' '	;resultat
+
+01		s_trt			S
+01		s_trtd		S			;depot debut intervalle
+01		s_trtf		S			;depot fin		
+01		s_out_b		S			;chaine "between"
+01		s_out_e		S			;chaine enum‚ration
+01		n_pos			X=0
+
+beginf
+	a_result = ' '
+	a_first	= ' '
+	a_last	= ' '
+	
+	;;;;;;;;;;;
+	;a_in = ' '
+	;;;;;;;;;;;
+	
+	if a_in  <> ' '
+		if string_in_control(a_in) <> 0
+			messagebox("Syntaxe erronée dans le champ d'entrée",'Erreur',mb_setforeground+mb_iconexclamation+mb_ok)
+		else
+			
+			;1er element
+			a_first 	= fstring('C',a_in)
+			if (n_pos := string('.',a_first)) <> 0 | mid(a_first,n_pos) = ' ' | endif
+
+			loop a_in <> ' '
+				s_trt	= fstring('C',a_in)  				;recup 1er mot
+				s_trtd	= s_trt
+				s_trtf	= ' '
+				a_in 	= fstring('EL',a_in)					;eff 1er mot + decalage gauche
+	
+				;test si operateur d'intervalle
+				if s_trt like "*..*"
+					n_pos = string('..',s_trt)
+					s_trtd = mid(s_trt,1,n_pos-1) 	
+					s_trtf = mid(s_trt,n_pos+2)
+					s_out_b &= ' OR (' & a_champ & " BETWEEN '" & s_trtd && "' AND '" & s_trtf &&"')"
+				else
+					s_out_e &= " '" & s_trtd && "'"
+				endif
+
+				if s_trtd > a_last 	| a_last = s_trtd  | endif
+				if s_trtf > a_last 	| a_last = s_trtf  | endif
+		 	endloop
+
+			;syntaxe enum‚ration
+			if s_out_e <> ' '
+				s_out_e = fstring('BL',s_out_e)
+				s_out_e = modify(' ',",",left(s_out_e))
+				s_out_e = " OR (" & a_champ & " IN(" & s_out_e && "))"
+			endif
+
+			;chaine resulat + 1er element			
+			a_result = fstring('EBL', s_out_b && s_out_e)
+		endif
+	endif
+	if a_pref <> ' ' | a_result = a_pref && condition(a_result=' ',' ',' and ' & a_result) | endif
+	freturn(a_result)
+endf
+
+1	aENR	254											; enreg génerique de lecture du fichier imothep
+1	TPOS  X*500
+1	TMAX  X
+1	TADR  L
+1	tchp  1
+
+
+;* Détermine le nombre de zones + transco	Ansi
+Public Procedure P_DTPOS(SEP, &ZON, chp)  
+1	SEP	B   ;	SéPARATEUR
+1	ZON	A   ;	Zone de recherche
+1	chp	A   ;	'O' champ encadre
+1	PP		X
+1	px	 	x
+Beginp
+	tchp = chp
+	TADR = ptr(ZON)
+	TMAX = count(sep,zon)
+	px = 0
+	for pp = 1 to tmax
+		px = string(sep,zon,(px+1))
+		tpos(pp) = px
+	next
+	zon = AnsiToOem(zon)
+	;derniere zone
+	if tmax >= 1
+		tmax = tmax + 1
+		TPOS(TMAX) = length(zon) + 1
+	endif
+Endp
+
+;*	Retourne le champs n
+Public Function Char F_DCHAMP(#NUM)
+1   NUM  N   ;Numéro de champ
+1   POS  X
+1   POSF X
+1   zon  508
+BEGINF
+	IF NUM > TMAX or num = 0
+	    FRETURN(system.esp)
+	ELSE
+		IF NUM = 1
+			POS =  1
+		ELSE
+		   POS = TPOS(NUM-1) + 1
+		ENDIF
+		POSF = TPOS(NUM) - POS
+		if tchp = 'O'
+		   if posf < 2
+		        posf = 2
+		   endif
+		   pos = pos + 1
+		   posf = posf - 2
+		endif
+		if posf > 0
+		   zon = MID(ptrdata(TADR),POS,POSF)
+		   zon = fstring('FBL',zon)
+		   FRETURN(left(zon))
+		endif
+	   freturn(system.esp)
+	ENDIF
+ENDF
+
+;* Permet d'initialiser un MENU (par défaut harmony.masque, page 1 menu = main)
+;* Retour 0 si ok, 1 si toolbar non trouvée ou msq non chargé
+Public Function  int F_INIT_MSQMENU(aMSQ, aNMENU, nPAG)
+1	aMSQ		32		= " "
+1	aNMENU		32		= "MAIN"
+1	nPAG		3,0	= 1
+1	lIDTB		L
+Beginf
+	If aMSQ = " " and mz.MECLE <> " "
+		aMSQ = mz.MECLE
+	Elsif aMSQ = " " and mz.MECLE = " "
+		aMSQ = harmony.MASQUE
+	EndIf
+	If (lIDTB := XmeMenuGetId (aMSQ, aNMENU, False)) <> 0
+		XmeMenuSetWindow (lIDTB, aMSQ, nPAG)
+	Else
+		freturn(1)
+	EndIf
+	Freturn(0)
+Endf
+
+;*
+;* lecture de caractéristique du fichier
+;*
+
+public record 			ddsys.dhsd 	cles			a_clefich
+public record 			ddsys.dhsd 	cles			a_cledico
+record 					ddsys.dhsd 	eparamsi 	a_compl
+record					ddsys.dhsd	hstat
+01							buffer		8096     					;buffer du flux
+
+;
+public function char fichier_lecture_params(a_dico,a_fich,a_vers,a_fich_r,a_affmes)
+01			a_dico			a	 		;dico
+01			a_fich			a			;fichier a tester	dans le dico
+01			a_vers			a=' '		;version attendue	: si * pas de controle de version dans le dico et dans le fichier physique
+01			a_fich_r			a=' '		;fichier physique a tester pour renvoi de la version : si ' ' reprend a_fich,
+01			a_affmes			s=' '		;affiche le message et abandon du prog
+								
+Record	*	htdf			gtf_wri
+
+01			a_rver			4=' '
+01			a_type			1,0
+01			ptdico			L	      ;pt dico
+01  		niveaudico  	x = 1  	;niveau 1 , 2 ou 3
+01			cog_l				8,0
+01			a_err				200=' '			
+beginf
+	a_dico = filenamenoext(a_dico) && '.dhsd'
+	;ouverture du dico
+	if DDInterface(DD_OPEN,ptdico,a_dico,buffer,niveaudico) <> 0 
+		a_err = "Dictionnaire " & a_dico && " absent ou erronné" 
+	else
+		;lecture particularite fichier
+		if DDInterface(DD_FILEFIND,ptdico,a_fich,buffer,niveaudico) <> 0 
+			a_err = "Descriptif du fichier " & a_fich && " absent du dictionnaire " & a_dico && " absent ou erronné"
+		else
+			;recup num version
+			DDInterface(DD_close,ptdico,a_dico,buffer,niveaudico)
+			a_rver = HmpSeek(buffer,"VersionFichier")
+			a_type = HmpSeek(buffer,"TypeFichier")
+
+			;test version dico
+			if a_vers <> ' ' and left(a_vers,1) <> '*' and a_rver <> a_vers
+				a_err = "Version du fichier " & a_fich && " incorrecte dans le dictionnaire " & a_dico && "||" & \
+						  "Version attendue " & a_vers && " / Version en cours " & a_rver 
+			endif	
+		endif
+	endif
+	
+	if a_err = ' '
+		;lecture cle dico	si pas d'erreur : lecture version fichier si fichier <> '*'
+		if a_type = 1 | DDHSiRead(a_dico,a_fich,a_cledico,a_compl,a_err,FALSE) | endif
+		
+		;determine extension fichier
+		if a_fich_r = ' ' 	| gtf_wri.name 	= a_fich 	 
+		else						| gtf_wri.name 	= a_fich_r	 			
+		endif		
+		switch a_type 																				   
+			case 1 				| gtf_wri.name = filenamebase(gtf_wri.name) && '/' & filenamenoext(gtf_wri.name) & '.dhfi'  
+			case vsw in(2,3)	| gtf_wri.name = filenamebase(gtf_wri.name) && '/' & filenamenoext(gtf_wri.name) & '.dhfd'
+		endswitch
+		gtf_wri.name = condition(left(gtf_wri.name,1)='/',mid(gtf_wri.name,2),gtf_wri.name)
+	
+		if a_err = ' ' and left(a_vers,1) <> '*'
+			hopen(gtf_wri,'p')
+			hclose(gtf_wri)
+			statFile(gtf_wri.name,Hstat)
+			a_rver = hstat.version
+	
+			if a_type = 1 | HSiread(gtf_wri.name,a_err,a_clefich,cog_l,true) | endif
+		endif
+	endif
+
+	if a_err <> ' ' 
+		if a_affmes = ' ' | messagebox(a_err,'Erreur de structure',mb_iconstop) 	| programexit
+		else					| pinglocal('$error',a_err)										| freturn($ff) 
+		endif
+	endif
+
+	freturn(a_rver)
+endf
+
+;*
+;* Ecriture params
+;*
+public function int fichier_ecriture_params(a_dico,a_fich,a_vers,a_fich_r,a_majcle)
+01			a_dico			a		 	;dico
+01			a_fich			a			;fichier ds le dico
+01			a_vers			a=' '	  	;version a ecrirr
+01			a_fich_r			a=' '		;fichier physique
+01			a_majcle			a=' '		;mise a jour des cle si espace et si verion a ecrire <> version fichier
+
+Record	*	htdf			gtf_wri
+01			a_ret				1,0=0
+01			cog_l				8,0
+01			a_err				200
+beginf
+	a_dico = filenamenoext(a_dico) && '.dhsd'
+	if a_fich_r = ' ' 	| gtf_wri.name 	= a_fich & '.dhfi'	 
+	else						| gtf_wri.name 	= a_fich_r	 			
+	endif		
+	hopen(gtf_wri,'p')
+	hclose(gtf_wri)
+	statFile(gtf_wri.name,Hstat)
+
+	if filenameextension(gtf_wri.name) = 'dhfi' and (a_vers = ' ' or a_vers <> hstat.version) and a_majcle = ' ' 
+		DDHSiRead(a_dico,a_fich,a_cledico,a_compl,a_err,true)
+		HSimod(gtf_wri.name,a_cledico,cog_l,' ',true) 
+		ping('XREOF_FICHIER',gtf_wri.name)
+		ping('XREOF_MESSAGES',false)
+		ping('XREOF_OPERATION',2)						;1=rege   2=reorg
+		programcall('xreof.dhop',,CALL_WAIT  )   	;SW_HIDE
+		a_ret = 1
+	endif
+
+	if a_vers <> ' ' and a_vers <> hstat.version
+		hstat.Diconom 		= a_dico
+		hstat.Dicomnemo 	= a_fich
+		hstat.CtrlRel		= 1
+		hstat.version		= a_vers
+		fmodstat(gtf_wri.name,hstat,STAT_CHANGE_VERSION+STAT_CHANGE_DICO+STAT_CHANGE_CTRLREL)
+	endif
+
+	freturn(a_ret)
+endf
+
+;*
+;*	controle de version et creation du fichier
+;*
+public function int Fichier_controle_creation(w_dico,w_memo,&w_fic,w_vers,w_action)
+01			w_dico		A		;dico
+01			w_memo		A		;memo fichie ds dico
+01			w_fic			A=' '	;fichier physique
+01			w_vers		A=' '	;version a controler
+01			w_action		A=' '
+
+01			w_versp		4
+01			w_x			x
+01			w_typ			1,0
+record	*	htdf		w_tdf	
+
+beginf
+	
+	;lecture du type de fichier pour determiner l'extension
+	w_versp = fichier_lecture_params(w_dico,w_memo,'*no_read_version',,'*no_exit_prog_if_error') 
+	if w_versp = $ff | freturn(9) | endif
+
+	w_typ = HmpSeek(buffer,"TypeFichier")
+	switch w_typ 																				   
+		case 1 				| w_fic = filenamebase(w_fic) && '/' & filenamenoext(w_fic) & '.dhfi'  
+		case vsw in(2,3)	| w_fic = filenamebase(w_fic) && '/' & filenamenoext(w_fic) & '.dhfd'
+	endswitch
+	w_fic = condition(left(w_fic,1)='/',mid(w_fic,2),w_fic)
+	if w_action <> ' ' | freturn(0) | endif 
+
+	;test fichier
+	w_tdf.name = w_fic
+	if f_hopen(w_tdf,'p') = 0
+		hclose(w_tdf)
+		if (w_versp := fichier_lecture_params(w_dico,w_memo,w_vers,w_tdf.name,'*no_exit_prog_if_error'))  <> $ff
+			if w_versp <> w_vers  
+				fichier_ecriture_params(w_dico,w_memo,w_vers,w_tdf.name)
+				freturn(1)
+			else
+				freturn(0)		
+			endif
+		else
+			freturn(9)
+		endif
+	else
+		switch w_typ
+			case 1 				| hsicreate(w_tdf.name,' ','N',0,a_cledico,,w_x)
+			case vsw in(2,3)	| hcreatefile(w_tdf.name,'N')
+			case 4 				| hcreatefile(w_tdf.name,'U')
+		endswitch
+		fichier_ecriture_params(w_dico,w_memo,w_versp,w_tdf.name,'*no_maj_cle')
+		freturn(2)
+	endif
+endf

@@ -1,0 +1,175 @@
+;*
+;*	Péremption des pièces
+
+Include "gttc000.dhsp"
+
+
+hfile		gtfdd.dhsd	gtfent		gtfent
+hfile 	gtfdd.dhsd 	gtfat   		gtfat
+hfile 	gtfdd.dhsd 	gtfam   		gtfam
+hfile 	gtfdd.dhsd 	gtfvtl  		gtfvtl
+hfile 	gtfdd.dhsd 	gtfres  		gtfres
+
+Public	record		a5dd.dhsd	mz
+public	record		gtfdd.dhsd	soc
+public 	record 		gtfdd.dhsd 	fou
+public 	record 		gtfdd.dhsd 	t020
+public	record		gtfdd.dhsd	ent
+public 	record 		gtfdd.dhsd 	ETS
+public 	record 		gtfdd.dhsd 	CLI
+public 	record  		GTFDD.DHSD	XQ				G3XQ	
+public 	record  		GTFDD.DHSD	XZ				G3XZ
+
+record gtfdd.dhsd mouv
+record gtfdd.dhsd mvtl
+record gtfdd.dhsd mres
+
+1		idtoolbar			 L
+1		i						 X
+1		wok					 1
+1		cpt					 5,0
+1		cumul					 10,0
+
+1		enreg	160
+ 2		wce	2
+ 2		wno	6,0
+ 2R	wna	6
+ 2		wref	3
+ 2		wfa	2
+ 2		wcli	6
+ 2		wdev	3
+ 2		wdat	8
+  3	wzzz	1
+  3	wnuf	7
+ 2		wtie	15
+ 2		wdaf	8
+ 2		wech	8
+ 2		wreg	3
+ 2		wzer	131.15
+  3	wcpt	6.10,0
+ 2		wmon	146.15
+  3	wttc	6.10,0
+					
+;*
+;*	Programme Principal
+;* 01 | 02
+Main
+
+if pingreceive ("zechange" , mz ) <> 0
+	programexit
+else
+	seek_soc(mz.dos)
+	G3XQ.Ticod = MZ.Ticod
+	Do while True
+		xmeload("coggt_ee_perime_bl.dhof")
+		idtoolbar = xmetoolbargetid("coggt_ee_perime_bl.dhof","MAIN")
+		xmetoolbarsetwindow(idtoolbar,"coggt_ee_perime_bl.dhof",1)
+
+		If 	G3XQ.Ticod = 'F' | G3XQ.Choix(1) = 2
+		ElsIf G3XQ.Ticod = 'C' | G3XQ.Choix(1) = 1
+		Endif
+		G3XQ.Choix(2) = 1
+		G3XQ.DATD = HDate(Today, 'P', "-1")					; On prend le dernier jour du mois précédent	
+		G3XQ.DATF = HDate(Today, 'D', "-1")	
+		G3XQ.PINOD = system.esp
+		G3XQ.PINOF = 99999999
+		G3XQ.TIERSD = system.esp
+		G3XQ.TIERSF = 'zzzzzzzz'
+	
+		G3_Saisie_Selections("coggt_ee_perime_bl.dhof",1)
+		Sethourglasscursor
+		If G3XQ.Choix(1) = 2   ; Fournisseurs
+			gtfent.key = 'I' & MZ.dos & 'F3' & G3XQ.PINOD
+			Loop hread(gtfent,ent,gtfent.key) = 0 and ent.DOS = MZ.dos and ent.ticod = 'F' and ent.picod = 3 and ent.pino <= G3XQ.PINOF
+				if ENT.Pidt >= G3XQ.DatD And ENT.Pidt <= G3XQ.DatF And ENT.Tiers >= G3XQ.TIERSD And ENT.Tiers <= G3XQ.TIERSF
+					If ENT.Ce4 <> 8
+						Loop Res_ENT(ent.ticod,ent.picod,ent.pino) <> 0
+						   Messagebox("Pièce réservée par un autre utilisateur, veuillez valider ou abandonner la saisie sur l'autre poste.",'Attention',MB_OK)
+						Endloop	
+						g3xz.fic = "Dossier : " & mz.DOS & " Tiers : " & ent.tiers & ' ' & ent.pino
+						XmeDispv ("coggt_ee_perime_bl.dhof",2,XME_MODE_GOTO) | XmeRet 
+						gtfam.key = 'I' & ent.dos & ent.ticod & ent.pino
+						Loop Hread(gtfam,mouv) = 0
+							If Not mouv.dos   = ent.dos			| exitloop | endif
+							If Not mouv.ticod = ent.ticod 		| exitloop | endif
+							If Not mouv.cdno  = ent.pino  		| exitloop | endif
+							MOUV.CdCe4 = '8'
+						   gtfvtl.key = 'A' & MZ.Dos & MOUV.Enrno
+						   Loop Hread(gtfvtl,mvtl) = 0 And mvtl.DOS = MOUV.DOS And mvtl.ENRNO = MOUV.ENRNO
+								 if Mvtl.StRes = 2 
+									 gtfres.key = 'A' & mvtl.dos & mvtl.ticketres		
+									 loop hread(gtfres,mres) = 0 and mres.dos = mvtl.dos and mres.ticketress = mvtl.ticketres
+										 Hdelete(gtfres,mres)
+									 endloop
+								 endif
+							    mvtl.Ce3 	 = ' '
+								 mvtl.Ce5 	 = ' '
+							    mvtl.StRes  = 1
+							    mvtl.ResQte = 0
+								 mvtl.ticketres = system.esp
+							    Hrewrite(gtfvtl,mvtl)
+						   EndLoop
+							Hrewrite(gtfam,mouv)
+						EndLoop
+						ENT.Ce4 = '8'
+						Hrewrite(gtfent,ent)
+						Lib_ENT(ent.ticod,ent.picod,ent.pino)
+						Cpt++
+					EndIf
+				endif
+			Endloop
+		Endif
+		If G3XQ.Choix(1) = 1	 ; Clients
+			gtfent.key = 'I' & mz.dos & 'C3'	& G3XQ.PINOD
+			Loop hread(gtfent,ent,gtfent.key) = 0 and ent.DOS = mz.dos and ent.ticod = 'C' and ent.picod = 3 and ent.pino <= G3XQ.PINOF
+				if ENT.Pidt >= G3XQ.DatD And ENT.Pidt <= G3XQ.DatF And ENT.Tiers >= G3XQ.TIERSD And ENT.Tiers <= G3XQ.TIERSF
+					If Ent.Ce4 <> 8
+						Loop Res_ENT(ent.ticod,ent.picod,ent.pino) <> 0
+						   Messagebox("Pièce réservée par un autre utilisateur, veuillez valider ou abandonner la saisie sur l'autre poste.",'Attention',MB_OK)
+						Endloop	
+						g3xz.fic = "Dossier : " & mz.DOS & " Tiers : " & ent.tiers & ' ' & ent.pino
+						XmeDispv ("coggt_ee_perime_bl.dhof",2,XME_MODE_GOTO) | XmeRet 
+						gtfam.key = 'I' & ent.dos & ent.ticod & ent.pino
+						Loop Hread(gtfam,mouv) = 0
+							If Not mouv.dos   = ent.dos			| exitloop | endif
+							If Not mouv.ticod = ent.ticod 		| exitloop | endif
+							If Not mouv.cdno  = ent.pino  		| exitloop | endif
+							MOUV.CdCe4 = '8'
+						   gtfvtl.key = 'A' & MZ.Dos & MOUV.Enrno
+						   Loop Hread(gtfvtl,mvtl) = 0 And mvtl.DOS = MOUV.DOS And mvtl.ENRNO = MOUV.ENRNO
+								 if Mvtl.StRes = 2 
+									 gtfres.key = 'A' & mvtl.dos & mvtl.ticketres		
+									 loop hread(gtfres,mres) = 0 and mres.dos = mvtl.dos and mres.ticketress = mvtl.ticketres
+										 Hdelete(gtfres,mres)
+									 endloop
+								 endif
+							    mvtl.Ce3 	 = ' '
+								 mvtl.Ce5 	 = ' '
+							    mvtl.StRes  = 1
+							    mvtl.ResQte = 0
+								 mvtl.ticketres = system.esp
+							    Hrewrite(gtfvtl,mvtl)
+						   EndLoop
+							Hrewrite(gtfam,mouv)
+						EndLoop
+						ENT.Ce4 = '8'
+						Hrewrite(gtfent,ent)
+						Lib_ENT(ent.ticod,ent.picod,ent.pino)
+						Cpt++
+					EndIf
+				endif
+			Endloop
+		Endif
+		Setnormalcursor
+		If Cpt > system.esp | MessageBox("Péremption de " & nospaces(Cpt) & ' pièce(s) terminée(s).','Rapport',MB_OK) | Endif
+		exitdo
+	Wend
+Endif
+
+; fin
+programexit
+	
+	
+	
+	
+	

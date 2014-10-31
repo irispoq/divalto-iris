@@ -1,0 +1,239 @@
+;>xdiva
+;*
+;*      Zoom sur Paramétrage reddition                    
+;*
+
+;*		Log		Version		NPmodif		Date		Modifications
+;*
+;*		ROBL		KIT101G		01				05/2009	Version initiale
+;*
+
+OverWrittenBy "Coguz_t000.dhop"
+
+include "GTTC000.dhsp"			;déclarations communes
+
+
+hfileversion  cogfdd.dhsd  Cog_FReddition
+
+public record ddsys.dhsd	zoom 
+public record cogfdd.dhsd	Cog_Red_Param
+public record a5dd.dhsd		mz 
+
+;*
+;* procedures d'initialisation et fin de zoom
+;*
+
+;*
+public procedure ZoomDebut 
+beginp
+
+	if pingreceive ("zechange" , mz ) <> 0  
+			zoom.ok = 'N'
+		preturn
+	endif
+	Seek_Soc(mz.Dos)
+  
+	Zoom.TitreFixe = Translate("Paramètres Reddition")
+
+endp
+
+;*
+public procedure ZoomAbandon		; sortie du zoom par f9
+beginp
+endp
+
+;*
+public procedure ZoomVAlidation ; validation du zoom
+beginp
+endp
+
+;*
+public procedure ZoomFin			; à la sortie du zoom
+beginp
+endp
+
+
+;*
+;* procedures création, duplication, modification et suppression
+;*
+
+public procedure ZoomCreation
+beginp
+	; initialiser les données 
+	Cog_Red_Param						= ' '
+endp
+
+
+;*
+public procedure ZoomDuplication 
+beginp
+	Zoom.Ok = 'N'
+endp
+
+;*
+public procedure ZoomApresCleCreation ; après saisie de la clé 
+beginp
+	Zoom.cle = "P" & mz.Dos
+	Zoom.Res	= [ "COG_RED" mz.Dos ]
+endp
+
+;*
+public procedure ZoomCreationRes		; apres réservation en création 
+beginp
+endp
+
+;*
+public procedure ZoomAvantWrite 
+beginp
+	; initialisation des codes enregistrement et mise à jour date et user
+   Cog_Red_Param.Ce1			= "P"
+   Cog_Red_Param.dos			= mz.Dos
+   Cog_Red_Param.usercr		= system.user
+	Cog_Red_Param.usercrdh	= time(7)
+endp
+
+
+;*
+public procedure ZoomApresCreation ; compte-rendu de création
+beginp
+endp
+
+
+;*
+public procedure ZoomModification ; avant entrée en modif
+
+beginp
+	Zoom.Res	= [ "COG_RED" mz.Dos ]
+endp
+
+
+;*
+public procedure ZoomModificationRes		; apres réservation en modif
+beginp
+endp
+
+
+;*
+public procedure ZoomAvantRewrite 
+beginp
+   Cog_Red_Param.usermo		= system.user
+   Cog_Red_Param.usermodh	= time(7)
+endp
+
+
+;*
+public procedure ZoomApresModification ; compte rendu de modification
+beginp
+endp
+
+
+;*
+public procedure ZoomSuppression ; avant entrée en suppression
+beginp
+	Zoom.ok = 'N'
+endp
+
+
+;*
+public procedure ZoomSuppressionRes
+beginp
+endp
+
+
+;*
+public procedure ZoomAvantDelete 
+beginp
+endp
+
+;*
+public procedure ZoomApresSuppression ; compte rendu de suppression
+beginp
+endp
+
+
+
+;*
+;* Actions
+;*
+
+
+;*
+public procedure ZoomConsultFiche 	; à utiliser si note
+beginp
+endp
+
+;*
+public procedure ZoomConsultListe ; à utiliser si note
+beginp
+
+	switch Harmony.Key
+
+	case k_f7
+		zoom_call()
+
+	endswitch
+	
+endp
+
+
+;*
+public procedure ZoomAvantInput			; permet de griser les boutons et les choix
+beginp
+endp
+
+;*
+public procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+beginp											; pour appel d'un zoom 
+
+	switch Harmony.Key
+
+	case Harmony.DataArret = 8002
+		if Harmony.Sourisbout = Right_Button
+			Zoom_Call()
+		elsif Harmony.Sourisclic = Double_Click
+			Harmony.Retour = Xmenext_Simulation_Touche
+			Harmony.Cplretour = K_F8
+		endif
+
+	case K_F7
+		Zoom_Call()
+
+	case K_F8 or Harmony.Arret in (9000..9999,11000..65000)				; Appel de zoom
+		Zoom_Call(harmony.arret)
+
+	endswitch
+
+endp
+
+;*
+public procedure ZoomFiltreAvantValeur
+beginp
+endp
+
+;*
+public procedure ZoomFiltreApresValeur 
+beginp
+endp
+
+
+
+;*
+;* procedures liées à la lecture du ficher
+;*
+
+
+;* génération de la clé sur
+public procedure ZoomApresCle1 
+beginp
+   zoom.cle 	= ['P' mz.Dos ]
+   zoom.clemin = ['P' mz.Dos ]
+   zoom.clemax = ['P' mz.Dos ]
+endp
+
+;* après lecture clé sur
+public procedure ZoomApresRead1 							 
+beginp
+endp
+
+
+;*

@@ -1,0 +1,42 @@
+;>xdiva
+;*
+;*		Objet : Export des écritures liées aux centrales - Traitement associé au programme : cogpp_ecr_faccen_exp.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ROBL	kit104				01		07/2011		Version Initiale
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ChargementAvant						Avant chargement du masque pour initialisation des variables
+;*
+
+overwrittenby "cogut_ecr_faccen_exp.dhop"
+
+module	"a5tm000.dhop"
+module	"a5pmwin.dhop"
+
+public record	gtfdd.dhsd	xq		xq_cog		;enregistrement de travail
+public record	ccfdd.dhsd	ca
+public record	a5dd.dhsd	mchemin
+public record	a5dd.dhsd	mz
+
+
+;*	Avant chargement du masque pour initialisation des variables
+public procedure ChargementAvant
+beginp
+
+	Rechercher_Chemin (mz.Dos, mz.Etb, ca.Cog_Exp_Ch)
+
+	xq_cog				= ""
+	xq_cog.DatD			= hdate(,"d",-1)
+	xq_cog.Fic			= condition(mchemin.CheminTyp<3,Win_ConvertirEnNomWindows(mChemin.Chemin),mchemin.Chemin)
+	xq_cog.Choix(1)	= 1
+ 
+endp
+
+;*
