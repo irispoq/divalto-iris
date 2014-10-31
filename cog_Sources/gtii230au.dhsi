@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20140923175559      
+;>xwin4obj     imprimante               6.0       20141030120410      
 [masque]
  utilisateur="ROOT"
- date_modification="23/09/2014"
+ date_modification="30/10/2014"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -11,7 +11,7 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000225
+ dernier_id=1000235
  surcharge=oui
  date_modif_base="20130528154836"
  dernier_id_page=100000
@@ -42,6 +42,8 @@
  "gtfdd.dhsd",,soc,socaafficher,2800,0
  "gtfdd.dhsd",,t037,t037,450,0
  "gtfdd.dhsd",,t2,t2,1000,0
+ "gtfdd.dhsd",,cli,cli,2450,0
+ "a5dd.dhsd",,muser,muser,2000,0
 [bloc]
  numero=1
  libelle="En-tête"
@@ -78,7 +80,7 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=164,1
+   position=161,1
    taille=18,311
    id=1000089
   [param_cadre]
@@ -109,6 +111,35 @@
    saisie=non
   [param_bitmapv]
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=93,164
+   taille=8,38
+   noms="Alattention"
+   id=1000227
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="A l'attention de"
+ [obj_texte]
+  [presentation]
+   position=189,254
+   taille=8,13
+   noms="tel"
+   id=1000230
+   wstyle="STD"
+   wtaille_fonte=7
+  [texte]
+   texte="Tel :"
+ [obj_texte]
+  [presentation]
+   position=196,254
+   taille=8,13
+   noms="fax"
+   id=1000231
+   wstyle="STD"
+   wtaille_fonte=7
+  [texte]
+   texte="Fax :"
  [cadre]
   [presentation]
    position=564,1
@@ -183,8 +214,8 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=164,189
-   taille=38,1
+   position=161,189
+   taille=50,1
    id=1000103
   [param_cadre]
    nature=vertical
@@ -192,8 +223,8 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=164,253
-   taille=38,1
+   position=161,253
+   taille=50,1
    id=1000102
   [param_cadre]
    nature=vertical
@@ -201,8 +232,8 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=164,1
-   taille=38,311
+   position=161,1
+   taille=50,311
    id=1000101
   [param_cadre]
    nature=vide_arrondi
@@ -211,8 +242,8 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=164,32
-   taille=38,1
+   position=161,32
+   taille=50,1
    id=1000100
   [param_cadre]
    nature=vertical
@@ -220,8 +251,8 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=164,68
-   taille=38,1
+   position=161,68
+   taille=50,1
    id=1000099
   [param_cadre]
    nature=vertical
@@ -229,8 +260,8 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=164,100
-   taille=38,1
+   position=161,100
+   taille=50,1
    id=1000098
   [param_cadre]
    nature=vertical
@@ -293,7 +324,7 @@
    wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
-   position=17,260
+   position=616,260
    taille=9,50
    cadrage=droite
    id=1000121
@@ -320,7 +351,7 @@
    texte="et pour le compte de :"
  [obj_texte]
   [presentation]
-   position=90,164
+   position=83,164
    taille=10,139
    noms="Cog_DirCliente"
    id=1000143
@@ -328,7 +359,7 @@
   [texte]
  [obj_texte]
   [presentation]
-   position=113,6
+   position=108,6
    taille=10,21
    id=1000119
    wstyle="STD"
@@ -336,7 +367,7 @@
    texte="Tél."
  [obj_texte]
   [presentation]
-   position=113,77
+   position=108,77
    taille=10,21
    id=1000120
    wstyle="STD"
@@ -344,7 +375,7 @@
    texte="Fax"
  [obj_texte]
   [presentation]
-   position=121,6
+   position=120,6
    taille=10,150
    noms="cog_Siret"
    id=1000141
@@ -352,7 +383,7 @@
   [texte]
  [obj_texte]
   [presentation]
-   position=129,6
+   position=128,6
    taille=10,150
    noms="cog_TvaNo"
    id=1000142
@@ -360,7 +391,7 @@
   [texte]
  [obj_texte]
   [presentation]
-   position=137,6
+   position=136,6
    taille=10,150
    noms="cog_editioncplt"
    id=1000145
@@ -368,7 +399,7 @@
   [texte]
  [obj_texte]
   [presentation]
-   position=168,2
+   position=165,2
    taille=10,30
    cadrage=centre
    id=1000122
@@ -377,7 +408,7 @@
    texte="Date"
  [obj_texte]
   [presentation]
-   position=168,33
+   position=165,33
    taille=10,35
    cadrage=centre
    id=1000123
@@ -386,7 +417,7 @@
    texte="Numéro pièce"
  [obj_texte]
   [presentation]
-   position=168,69
+   position=165,69
    taille=10,31
    cadrage=centre
    id=1000124
@@ -395,7 +426,7 @@
    texte="Code Client"
  [obj_texte]
   [presentation]
-   position=168,101
+   position=165,101
    taille=10,88
    cadrage=centre
    id=1000125
@@ -404,16 +435,16 @@
    texte="Votre référence"
  [obj_texte]
   [presentation]
-   position=168,254
+   position=165,254
    taille=10,57
    cadrage=centre
    id=1000126
    wstyle="STD"
   [texte]
-   texte="Contact GIE"
+   texte="Votre contact"
  [obj_texte]
   [presentation]
-   position=168,189
+   position=165,189
    taille=10,65
    cadrage=centre
    id=1000127
@@ -587,7 +618,18 @@
   [texte]
  [champ]
   [presentation]
-   position=65,6
+   position=73,164
+   taille=8,139
+   id=1000226
+   colonnes_saisie=38
+   wstyle="STD_GRAS"
+  [description]
+   donnee=cli,nom,cli
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=68,6
    taille=10,117
    id=1000146
    colonnes_saisie=38
@@ -598,25 +640,30 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=80,164
-   taille=10,139
-   id=1000147
-   wstyle="STD_GRAS"
+   position=93,201
+   taille=8,70
+   noms="responsable"
+   id=1000228
+   colonnes_saisie=60
+   wstyle="STD"
+   wnom_police="STD_ITALIQUE"
   [description]
-   donnee=g4,nom,g4,4
+   donnee=cli,cog_responsable,cli
+  [param_saisie]
+   type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=100,164
+   position=83,164
    taille=10,139
    id=1000148
-   wstyle="STD"
+   wstyle="STD_GRAS"
   [description]
    donnee=g4,adrcpl1,g4,4
   [param_saisie]
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=110,164
+   position=103,164
    taille=10,139
    id=1000149
    wstyle="STD"
@@ -626,7 +673,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=140,164
+   position=133,164
    taille=9,27
    id=1000150
    wstyle="STD"
@@ -636,7 +683,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=140,192
+   position=133,192
    taille=9,117
    id=1000151
    wstyle="STD"
@@ -644,7 +691,7 @@
    donnee=g4,vil,g4,4
  [champ]
   [presentation]
-   position=150,164
+   position=143,164
    taille=10,138
    id=1000152
    wstyle="STD"
@@ -654,7 +701,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=130,164
+   position=123,164
    taille=10,139
    id=1000153
    wstyle="STD"
@@ -662,7 +709,7 @@
    donnee=g4,loc,g4,4
  [champ]
   [presentation]
-   position=120,164
+   position=113,164
    taille=10,139
    id=1000154
    wstyle="STD"
@@ -684,7 +731,7 @@
    choix="gtfdmc.dhfi","NBEX"
  [champ]
   [presentation]
-   position=142,4
+   position=145,4
    taille=19,155
    id=1000156
    colonnes_saisie=40
@@ -695,7 +742,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=185,4
+   position=179,4
    taille=9,34
    id=1000157
    wstyle="STD"
@@ -703,7 +750,7 @@
    donnee=ent,pidt,ent
  [champ]
   [presentation]
-   position=185,34
+   position=179,34
    taille=9,28
    cadrage=gauche
    id=1000158
@@ -714,7 +761,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=185,255
+   position=179,255
    taille=7,54
    id=1000159
    colonnes_saisie=38
@@ -726,7 +773,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=185,191
+   position=179,191
    taille=7,61
    id=1000160
    colonnes_saisie=38
@@ -738,7 +785,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=185,71
+   position=179,71
    taille=11,32
    id=1000161
    wstyle="STD_GRAS"
@@ -746,7 +793,7 @@
    donnee=ent,tiers,ent
  [champ]
   [presentation]
-   position=73,6
+   position=76,6
    taille=10,117
    id=1000162
    colonnes_saisie=38
@@ -758,7 +805,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=81,6
+   position=84,6
    taille=10,117
    id=1000163
    colonnes_saisie=38
@@ -770,7 +817,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=105,6
+   position=100,6
    taille=10,27
    id=1000164
    colonnes_saisie=8
@@ -782,7 +829,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=113,90
+   position=108,90
    taille=10,63
    id=1000165
    colonnes_saisie=20
@@ -794,19 +841,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=97,6
-   taille=10,117
-   id=1000166
-   colonnes_saisie=38
-   wstyle="STD"
-  [description]
-   donnee=soc,loc,socaafficher
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
-   position=89,6
+   position=92,6
    taille=10,117
    id=1000167
    colonnes_saisie=38
@@ -818,7 +853,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=113,19
+   position=108,19
    taille=10,63
    id=1000168
    colonnes_saisie=20
@@ -830,7 +865,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=105,34
+   position=100,34
    taille=10,117
    id=1000169
    colonnes_saisie=38
@@ -842,12 +877,51 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=185,103
+   position=179,103
    taille=10,87
    id=1000170
    wstyle="STD"
   [description]
    donnee=ent,piref,ent
+ [champ]
+  [presentation]
+   position=189,266
+   taille=8,35
+   noms="numtel"
+   id=1000232
+   colonnes_saisie=20
+   wstyle="STD_ITALIQUE"
+   wtaille_fonte=7
+  [description]
+   donnee=muser,tel,muser
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=196,266
+   taille=8,35
+   noms="numfax"
+   id=1000233
+   colonnes_saisie=20
+   wstyle="STD_ITALIQUE"
+   wtaille_fonte=7
+  [description]
+   donnee=muser,fax,muser
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=203,254
+   taille=8,58
+   noms="mail"
+   id=1000234
+   colonnes_saisie=80
+   wstyle="STD_ITALIQUE"
+   wtaille_fonte=6
+  [description]
+   donnee=muser,email,muser
+  [param_saisie]
+   type_date=jj/mm/aaaa
 [bloc]
  numero=2
  libelle="Ligne article"
@@ -921,7 +995,7 @@
  numero=3
  libelle="Débordement"
  saut_fin=oui
- taille=1
+ taille=0
  type_bloc=mobile
  debut=65522
  fin=65522
@@ -1403,15 +1477,15 @@
    format="+0V00"
  [champ]
   [presentation]
-   position=49,297
-   taille=9,15
+   position=49,299
+   taille=9,12
    id=1000195
    wstyle="STD_GRAS"
   [description]
    donnee=ent,dev,ent
  [champ]
   [presentation]
-   position=48,242
+   position=48,245
    taille=11,55
    cadrage=droite
    id=1000196
@@ -1513,7 +1587,7 @@
    format="+0V00"
  [champ]
   [presentation]
-   position=19,242
+   position=19,245
    taille=11,55
    cadrage=droite
    id=1000207
@@ -1556,30 +1630,6 @@
    format="\FormatMille"
   [param_saisie]
    esp_si_zero=oui
- [champ]
-  [presentation]
-   position=35,7
-   taille=9,75
-   id=1000211
-   wstyle="STD_GRIS"
-  [description]
-   donnee=g4,piedlib,g4,1
- [champ]
-  [presentation]
-   position=44,7
-   taille=9,75
-   id=1000212
-   wstyle="STD_GRIS"
-  [description]
-   donnee=g4,piedlib,g4,2
- [champ]
-  [presentation]
-   position=53,7
-   taille=9,75
-   id=1000213
-   wstyle="STD_GRIS"
-  [description]
-   donnee=g4,piedlib,g4,3
  [champ]
   [presentation]
    position=63,252
@@ -1834,18 +1884,20 @@
  ident_unique=20
  [obj_texte]
   [presentation]
-   position=0,3
-   taille=9,43
+   position=0,1
+   taille=9,46
    id=176
    wstyle="PETIT_GRAS_ITALIQUE_GRIS"
+   wtaille_fonte=8
   [texte]
-   texte="Début chapitre"
+   texte="**Début chapitre"
  [champ]
   [presentation]
-   position=0,47
+   position=0,48
    taille=9,123
    id=177
    wstyle="PETIT_GRAS_ITALIQUE_GRIS"
+   wtaille_fonte=8
   [description]
    donnee=mouv,des,g4mouv
 [bloc]
@@ -1860,20 +1912,23 @@
  position_fond=3
  diva_avant="Bloc_ChapitreFin_Av"
  ident_unique=21
+ [obj_texte]
+  [presentation]
+   position=0,1
+   taille=9,45
+   id=1000229
+   wstyle="PETIT_GRAS_ITALIQUE_GRIS"
+   wtaille_fonte=8
+  [texte]
+   texte="**Sous-total"
  [champ]
   [presentation]
-   position=0,3
-   taille=9,43
-   id=1000223
-   wstyle="STD"
-  [description]
-   donnee=mouv,ref,g4mouv
- [champ]
-  [presentation]
-   position=0,47
+   position=0,48
    taille=10,152
    id=1000224
-   wstyle="STD"
+   wstyle="PETIT_GRAS_ITALIQUE"
+   wtaille_fonte=8
+   wnom_police="PETIT_GRAS_ITALIQUE_GRIS"
   [description]
    donnee=g4,chapdes,g4
  [champ]
@@ -1881,7 +1936,8 @@
    position=0,263
    taille=9,43
    id=1000225
-   wstyle="STD"
+   wstyle="PETIT_GRAS_ITALIQUE_GRIS"
+   wtaille_fonte=8
   [description]
    donnee=g4,chapmt,g4
    format="\FormatMille"
@@ -2261,6 +2317,8 @@ public record "gtfdd.dhsd"	cli
 Public Record "cogfdd.dhsd" Cog_DirCliente Cog_DirCliente_01
 Public Record "gtfdd.dhsd" ent ent_bl_01
 Public Record "cogfdd.dhsd" Cog_UT110
+Public Record "a5dd.dhsd" muser muser
+Public Record "gtfdd.dhsd" t1 t1
 
 1		wenveloppe	>gtfdd.dhsd	COG_ID_ENVELOPPE
 
@@ -2398,6 +2456,24 @@ Beginp
 		XMiSetAttribut("Cog_DirCliente", AN_TITRE, " ")
 	EndIf
 	; JDT 27/10/2011
+
+	if (ent.Dos = 105 and ent.Cog_Facturation_Compte <> 2)
+		XmiSetAttribut("Alattention",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("responsable",AN_VISIBILITE,AV_CACHE)
+	endif
+	if ent.Dos = 105
+		XmiSetAttribut("tel",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("numtel",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("fax",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("numfax",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("mail",AN_VISIBILITE,AV_CACHE)
+	endif
+	if ent.Dos = 103
+		XmiSetAttribut("logobas",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("telsoc",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("faxsoc",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("pied",AN_VISIBILITE,AV_CACHE)
+	endif
 		
 Endp
 
