@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20140820171924      
+;>xwin4obj     imprimante               6.0       20141017120500      
 [masque]
- utilisateur="UGIE"
- date_modification="20/08/2014"
+ utilisateur="ROOT"
+ date_modification="17/10/2014"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -11,7 +11,7 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000028
+ dernier_id=1000047
  surcharge=oui
  date_modif_base="20130528155032"
  dernier_id_page=100000
@@ -53,18 +53,6 @@
  position_fond=62
  diva_avantgestion="Bloc_EnTete_AvGestion"
  ident_unique=1
- [bitmap_variable]
-  [presentation]
-   position=1,3
-   taille=74,102
-   actionbitmap=reduire
-   id=1000013
-   wstyle="STD"
-  [description]
-   donnee=soc,media,soc
-   saisie=non
-  [param_bitmapv]
-   wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
    position=213,1
@@ -95,6 +83,18 @@
    arrondi=10
    wnom_couleurcadre="TRANS"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
+ [bitmap_variable]
+  [presentation]
+   position=2,2
+   taille=45,120
+   actionbitmap=reduire
+   id=1000047
+   wstyle="STD"
+  [description]
+   donnee=g4,winchnc,g4
+   saisie=non
+  [param_bitmapv]
+   wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
    position=16,260
@@ -106,7 +106,7 @@
    texte="Page $1/nbpages$"
  [obj_texte]
   [presentation]
-   position=89,6
+   position=83,6
    taille=9,21
    id=1000015
    wstyle="STD"
@@ -114,7 +114,7 @@
    texte="Tél."
  [obj_texte]
   [presentation]
-   position=89,75
+   position=83,75
    taille=9,21
    id=1000016
    wstyle="STD"
@@ -127,7 +127,7 @@
    id=1000012
    wstyle="STD"
   [texte]
-   texte="Contact GIE"
+   texte="Votre contact"
  [obj_texte]
   [presentation]
    position=215,4
@@ -136,6 +136,38 @@
    wstyle="STD"
   [texte]
    texte="<hog>Référence|Fournisseur"
+ [obj_texte]
+  [presentation]
+   position=620,251
+   taille=8,12
+   id=1000029
+   wstyle="PETIT_GRAS_ITALIQUE_GRIS"
+  [texte]
+   texte="NAF"
+ [obj_texte]
+  [presentation]
+   position=620,42
+   taille=8,12
+   id=1000030
+   wstyle="PETIT_GRAS_ITALIQUE_GRIS"
+  [texte]
+   texte="Siret"
+ [obj_texte]
+  [presentation]
+   position=620,103
+   taille=8,9
+   id=1000031
+   wstyle="PETIT_GRAS_ITALIQUE_GRIS"
+  [texte]
+   texte="RC"
+ [obj_texte]
+  [presentation]
+   position=620,183
+   taille=8,22
+   id=1000032
+   wstyle="PETIT_GRAS_ITALIQUE_GRIS"
+  [texte]
+   texte="TVA Intra"
  [cadre]
   [presentation]
    position=164,242
@@ -156,31 +188,12 @@
  [obj_texte]
   [presentation]
    position=609,2
-   taille=8,308
-   cadrage=centre
+   taille=8,300
+   cadrage=gauche
    id=1000002
    wstyle="PETIT"
   [texte]
-   texte="Les factures sont à adresser à : U GIE-IRIS – Service Comptabilité – Place des Pléïades – ZI Belle Etoile-Antarès - BP 50405 - 44474 CARQUEFOU Cedex"
- [obj_texte]
-  [presentation]
-   position=616,1
-   taille=8,282
-   noms="Pied"
-   cadrage=centre
-   id=1000001
-   wstyle="PETIT"
-  [texte]
-   texte="Groupement d’intérêt économique au capital de  5 114 000.00 €"
- [obj_texte]
-  [presentation]
-   position=623,2
-   taille=8,308
-   cadrage=centre
-   id=1000003
-   wstyle="PETIT"
-  [texte]
-   texte="532 036 399  RCS NANTES  - SIRET 53203639900014 – APE-NAF 6201Z  - N° identification TVA FR 11 532036399"
+   texte="Les factures sont à adresser à :"
  [cadre]
   [presentation]
    position=588,214
@@ -559,17 +572,6 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=35,6
-   taille=9,117
-   id=1000017
-   colonnes_saisie=38
-   wstyle="STD_GRAS"
-  [description]
-   donnee=soc,nom,soc
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
    position=53,6
    taille=9,117
    id=1000018
@@ -592,6 +594,66 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
+   position=609,221
+   taille=8,20
+   id=1000046
+   colonnes_saisie=38
+   wstyle="STD"
+   wtaille_fonte=7
+  [description]
+   donnee=soc,adrcpl2,soc
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=609,133
+   taille=8,35
+   id=1000045
+   colonnes_saisie=38
+   wstyle="STD"
+   wtaille_fonte=7
+  [description]
+   donnee=soc,rue,soc
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=609,172
+   taille=9,45
+   id=1000041
+   colonnes_saisie=38
+   wstyle="STD"
+   wtaille_fonte=7
+  [description]
+   donnee=soc,adrcpl1,soc
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=609,244
+   taille=9,13
+   id=1000043
+   colonnes_saisie=8
+   wstyle="STD"
+   wtaille_fonte=7
+  [description]
+   donnee=soc,cpostal,soc
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=609,259
+   taille=9,50
+   id=1000044
+   colonnes_saisie=38
+   wstyle="STD"
+   wtaille_fonte=7
+  [description]
+   donnee=soc,vil,soc
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
    position=62,6
    taille=9,117
    id=1000020
@@ -603,18 +665,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=71,6
-   taille=9,117
-   id=1000021
-   colonnes_saisie=38
-   wstyle="STD"
-  [description]
-   donnee=soc,loc,soc
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
-   position=80,6
+   position=74,6
    taille=9,27
    id=1000022
    colonnes_saisie=8
@@ -625,7 +676,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=80,31
+   position=74,31
    taille=9,117
    id=1000023
    colonnes_saisie=38
@@ -636,7 +687,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=89,16
+   position=83,16
    taille=9,63
    id=1000024
    colonnes_saisie=20
@@ -647,7 +698,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=89,85
+   position=83,85
    taille=9,63
    id=1000025
    colonnes_saisie=20
@@ -796,7 +847,7 @@
  [champ]
   [presentation]
    position=148,4
-   taille=19,264
+   taille=19,220
    id=222
    colonnes_saisie=40
    wstyle="TRES_TRES_TRES_GRAND_GRAS"
@@ -856,6 +907,62 @@
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=609,89
+   taille=8,40
+   id=1000040
+   colonnes_saisie=40
+   wstyle="STD"
+   wtaille_fonte=7
+  [description]
+   donnee=soc,web,soc
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=609,65
+   taille=8,25
+   id=1000039
+   colonnes_saisie=38
+   wstyle="STD"
+   wtaille_fonte=7
+  [description]
+   donnee=soc,nom,soc
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=620,54
+   taille=9,45
+   id=1000034
+   wstyle="PETIT_ITALIQUE"
+  [description]
+   donnee=soc,siret,soc
+ [champ]
+  [presentation]
+   position=620,111
+   taille=11,72
+   id=1000035
+   wstyle="PETIT_ITALIQUE"
+  [description]
+   donnee=soc,rc,soc
+ [champ]
+  [presentation]
+   position=620,205
+   taille=11,43
+   id=1000036
+   wstyle="PETIT_ITALIQUE"
+  [description]
+   donnee=soc,tvano,soc
+ [champ]
+  [presentation]
+   position=620,262
+   taille=9,14
+   id=1000037
+   wstyle="PETIT_ITALIQUE"
+  [description]
+   donnee=soc,naf,soc
 [bloc]
  numero=2
  libelle="Ligne article"
@@ -1624,30 +1731,6 @@
    format="\FormatMille"
   [param_saisie]
    esp_si_zero=oui
- [champ]
-  [presentation]
-   position=32,3
-   taille=9,75
-   id=161
-   wstyle="STD_GRIS"
-  [description]
-   donnee=g4,piedlib,g4,1
- [champ]
-  [presentation]
-   position=39,3
-   taille=9,75
-   id=162
-   wstyle="STD_GRIS"
-  [description]
-   donnee=g4,piedlib,g4,2
- [champ]
-  [presentation]
-   position=46,3
-   taille=9,75
-   id=163
-   wstyle="STD_GRIS"
-  [description]
-   donnee=g4,piedlib,g4,3
 [bloc]
  numero=13
  libelle="Traite en facture"
