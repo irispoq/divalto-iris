@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20140728114633      
+;>xwin4obj                              7.0       20141016154518      
 [masque]
  libelle="client"
- utilisateur="UGIE"
- date_modification="28/07/2014"
+ utilisateur="ROOT"
+ date_modification="16/10/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=732
  type_masque=2
- dernier_id=1000041
+ dernier_id=1000044
  surcharge=oui
  date_modif_base="20131120171826"
  dernier_id_page=100000
@@ -3746,6 +3746,14 @@
    texte="Groupement"
  [obj_texte]
   [presentation]
+   position=46,99
+   taille=9,20
+   id=1000042
+   wstyle="STD"
+  [texte]
+   texte="Ville"
+ [obj_texte]
+  [presentation]
    position=56,5
    taille=9,41
    id=1315
@@ -3917,7 +3925,7 @@
    "zoom"
  [case_a_cocher]
   [presentation]
-   position=46,99
+   position=56,100
    taille=9,99
    noms="pilotage;validite"
    id=507
@@ -3946,7 +3954,7 @@
  [champ]
   [presentation]
    position=56,48
-   taille=9,92
+   taille=9,40
    noms="pilotage"
    id=1316
    wstyle="CHAMP_SAISI"
@@ -3964,6 +3972,23 @@
    ctrl_f=31
   [traitements]
    microbol_click=8002
+ [champ]
+  [presentation]
+   position=46,115
+   taille=9,80
+   id=1000044
+   colonnes_saisie=38
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cli,adrcpl1,cli_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
 [page]
  numero=4
  fond="STD"

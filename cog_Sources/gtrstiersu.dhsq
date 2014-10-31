@@ -12,6 +12,9 @@
 <RecordSql Name=client>
 <SELECT>
 	CLI.*
+<WHERE>
+	case Zoom_Like_adrcpl1(char adrcpl1)
+		UPPER(CLI.ADRCPL1) LIKE UPPER(adrcpl1)
 
 ;*
 ;*		Fournisseur							FOU
