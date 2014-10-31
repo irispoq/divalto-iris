@@ -346,7 +346,11 @@ BeginF
 	ENT.Projet	=	xlmouv.Projet
 	ENT.Marche	=	xlmouv.Marche
 	ENT.SalCod	=	xlent.SalCod
-
+	; Ajout JCH : Nature pièce = renouvellement
+	If g7.Choix(4) = 2
+		ENT.SU_NATURE = "Renouvellement      "
+	EndIf
+	
 	HWrite(gtfi,ent) 					
 	If wwNote <> " "
 		Creation_Texte("1",wwNote)
@@ -985,6 +989,29 @@ BeginF
 			g7.Choix(3) = Oui
 		EndIf
 	EndIf
+
+	; Renouvellement   JCH 31/10/2014
+	Lecture_Cellule(1,11,Ligne)
+	If FString("U",Ligne) <> "RENOUVELLEMENT"
+		If MessErr
+			MessageBox('La cellule "K1" doit contenir le mot clé "Renouvellement".',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	Lecture_Cellule(1,12,Ligne)
+	If FString("U",Ligne) Not In("NON","OUI")
+		If MessErr
+			MessageBox('Renouvellement doit être OUI ou NON (Cellule "L1").',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	Else
+		If FString("U",Ligne) = "NON"
+			g7.Choix(4) = Non
+		Else
+			g7.Choix(4) = Oui
+		EndIf
+	EndIf
+
 
 	FReturn(True)
 EndF
