@@ -96,6 +96,74 @@ Const		C_Page_RechercheTarif		= 24						; Page de la recherche de tarif client
 ;*
 
 ;*
+Procedure Construire_Condition_Selection(nom, premier)
+; Construit la condition à appliquer sur les données clients
+1		Nom						A					; Nom de la condition
+1		premier					1,0 = FALSE		; Gestion de '*' en fin de champ
+
+1 		Valeur_Condition		S					; Valeur de la condition
+1  	Param						S					; Paramètre saisi
+
+Beginp
+	If estPilote	|	PReturn	|	EndIf
+
+	CLIENT.Where.RemoveCondition(Nom)
+
+	If CLI_Sel.Tiers <> ' '														; Code tiers
+		Param = Banaliser_Condition(CLI_Sel.Tiers, premier)
+		CLIENT.Where.Zoom_Like_Tiers(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Like_Tiers')
+	EndIf
+	If CLI_Sel.Stat(1) <> ' '													; Code statistique
+		Param = Banaliser_Condition(CLI_Sel.Stat(1), premier)
+		Switch G7.StatNo
+		Case 1	|	CLIENT.Where.Zoom_Like_Stat1(Param)	|	Ajouter_Condition(Valeur_Condition, 'Zoom_Like_Stat1')
+		Case 2	|	CLIENT.Where.Zoom_Like_Stat2(Param)	|	Ajouter_Condition(Valeur_Condition, 'Zoom_Like_Stat2')
+		Case 3	|	CLIENT.Where.Zoom_Like_Stat3(Param)	|	Ajouter_Condition(Valeur_Condition, 'Zoom_Like_Stat3')
+		EndSwitch
+	EndIf
+	If CLI_Sel.NomAbr <> ' '													; Nom abrégé
+		Param = Banaliser_Condition(CLI_Sel.NomAbr, premier)
+		CLIENT.Where.Zoom_Like_NomAbr(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Like_NomAbr')
+	EndIf
+	If CLI_Sel.adrcpl1 <> ' '													; Adresse complémentaire 1
+		Param = Banaliser_Condition(CLI_Sel.adrcpl1, premier)
+		CLIENT.Where.Zoom_Like_adrcpl1(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Like_adrcpl1')
+	EndIf
+	If CLI_Sel.Pay <> ' '														; Pays
+		Param = Banaliser_Condition(CLI_Sel.Pay, premier)
+		CLIENT.Where.Zoom_Like_Pay(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Like_Pay')
+	EndIf
+	If CLI_Sel.Cpostal <> ' '													; Code postal
+		Param = Banaliser_Condition(CLI_Sel.Cpostal, premier)
+		CLIENT.Where.Zoom_Like_CPostal(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Like_CPostal')
+	EndIf
+	If CLI_Sel.TiersGrp <> ' '													; Groupement - centrale
+		Param = Banaliser_Condition(CLI_Sel.TiersGrp, premier)
+		CLIENT.Where.Zoom_Like_TiersGrp(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Like_TiersGrp')
+	EndIf
+	If CLI_Sel.Tel <> ' '														; Téléphone
+		Param = Banaliser_Condition(CLI_Sel.Tel, premier)
+		CLIENT.Where.Zoom_Like_Tel(Param)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_Like_Tel')
+	EndIf
+	If G7.ZoomPar <> C_Pilotage_ParTiers And G7.Choix(1) = 2			; Validité client
+		CLIENT.Where.Zoom_ClientValide(Today)
+		Ajouter_Condition(Valeur_Condition, 'Zoom_ClientValide')
+	EndIf
+
+	If Valeur_Condition <> ' '
+		CLIENT.Where.AddCondition(Nom, Valeur_Condition)
+	EndIf
+Endp
+
+
+;*
 Procedure rechercher_libelle
 BeginP
 	Standard.rechercher_libelle
