@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20140822084002,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20141110122504,UGIE_YLF            
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -185,6 +185,12 @@ Nom=Cog_AxeAnael,Axe anaël,1
 Gel=1
 Nature=8
 NomOdbc=Cog_AxeAnael
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141110114828,UGIE_YLF            ,20141110114828,UGIE_YLF            
+Nom=Cog_BlocNo,N° de bloc,1
+Gel=1
+Nature=3,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110524145239,SYSTEMU_VR          ,20110524145243,SYSTEMU_VR          
@@ -603,6 +609,14 @@ Nature=8
 NomOdbc=CodePostal
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1989 1230000,CO  ,20050104165341,MARIE JO            
+Nom=CptA,Compte d'achat,1
+DateM=20BB439075F2C401
+Gel=1
+Nature=8
+NomOdbc=CompteAchat
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1996 2160000,c321,20050105170143,HC
 Nom=CptCol,Compte collectif,1
 DateM=D8D6AEC51A99C601
@@ -631,6 +645,13 @@ Nom=Des,Désignation,1
 Gel=1
 Nature=80
 NomOdbc=Designation
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20041222190435,MARIE JO            
+Nom=Dev,Devise,1
+Gel=1
+Nature=4
+NomOdbc=Devise
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1989 1230000,CO  ,20041222111845,MARIE JO            
@@ -756,6 +777,21 @@ Nature=38
 NomOdbc=Localite
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1996 2160000,hc  ,20050118115244,HC
+Nom=Mt,Montant en devise principale,1
+Gel=1
+Nature=16,D0
+NomOdbc=Mt
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199610310000,hc  ,20050118115253,HC
+Nom=MtBis,Montant en devise secondaire,1
+DateM=D8F68AA91C99C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtSecondaire
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1989 1230000,MJV ,20090623111847,CI                  
 Nom=Nom,Nom,1
 Gel=1
@@ -833,6 +869,16 @@ Gel=1
 Nature=38
 NomOdbc=Rue
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20071127170139,MS                  
+Nom=Sens,Sens,1
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=SENS_5
+NomOdbc=Sens
+Flags=o,1,n,n,n,n,n,n
+presentation=2
 [CHAMP]
 Version=1,198910130000,MJV ,20040616174929,MARIE JO            
 Nom=Sref,Sous-références 1 et 2,1
@@ -1225,6 +1271,22 @@ Nom=UGrtEvt,251,2,N,0,0,N,1
 Flags=n,1,n,n,i,n,n,n
 Nom=ActCod
 [/PROPLOC]
+[TABLE]
+Version=1,20141110114551,UGIE_YLF            ,20141110114551,UGIE_YLF            
+Nom=Cog_Imp_FnpFae,Enreg pour impression FNP FAE,1
+DateM=58175D77D8FCCF01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+Nom=Cog_BlocNo,1,2,N,0,0,N,1
+Nom=Etb,4,2,N,0,0,N,1
+Nom=Dev,7,2,N,0,0,N,1
+Nom=CptA,11,2,N,0,0,N,1
+Nom=MtBis,19,2,N,0,0,N,1
+Nom=Mt,35,2,N,0,0,N,1
+Nom=Sens,51,2,N,0,0,N,1
+Nom=Lib,52,2,N,0,0,N,1
+[/CHAMPS]
 [TABLE]
 Version=1,20110530100012,SYSTEMU_VR          ,20110530100456,SYSTEMU_VR          
 Nom=Cog_ImpRap,Enregistrement W pour impression rapport,1
