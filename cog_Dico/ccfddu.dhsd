@@ -1,15 +1,7 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20021014173940,hc  ,20141022151504,UGIE_YLF            
+Version=5,20021014173940,hc  ,20141112150206,UGIE_YLF            
 Nom=ccfdd.dhsd,ccfdd.dhsd,1
-[CHAMP]
-Version=1,1989 1230000,MJV ,20061107110600,MARIE JO            
-Nom=BlNo,No de Bl,1
-DateM=7CD655535402C701
-Gel=1
-Nature=8,0
-NomOdbc=BLNo
-Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20141007161805,UGIE                ,20141007161810,UGIE                
 Nom=Cog_AmoFlag,Comptabilisation amortissement,1
@@ -323,7 +315,7 @@ Nom=CptDotRep,57,0,0,N,1
 [/CHAMPL]
 nom=UI1
 [CHAMPL]
-Nom=BlNo,1,0,0,N,1
+Nom=Filler,1,0,8,N,1
 Nom=Cog_AmoFlag,9,0,0,N,1
 Nom=Cog_IsilogRef,10,0,0,N,1
 Nom=Cog_CptCes,50,0,0,N,1
@@ -362,16 +354,6 @@ DateM=9572D6CC75CCCD01
 Version=1,1996 2160000,hc  ,20121010143952,MS                  
 Nom=ca,Dossier - paramètres généraux,1
 DateM=9DBBE92CFAEDCF01
-[PROPLOC]
-Nom=Cog_FnpJnl
-Nom=Cog_FnpCpt
-Nom=Cog_FnpRgpFlag
-Nom=Cog_FnpTvaCpt
-Nom=Cog_FaeJnl
-Nom=Cog_FaeCpt
-Nom=Cog_FaeTvaCpt
-Nom=Cog_FaeRgpFlag
-[/PROPLOC]
 [TABLEU]
 Version=1,1997 1170000,hc  ,20100708142510,VJ                  
 Nom=cd,Dossier - paramètres du module immobilisations,1
@@ -391,7 +373,7 @@ DateM=BC2E1EC1833FCB01
 [TABLEU]
 Version=1,1997 1220000,hc  ,20100708162734,VJ                  
 Nom=i1,Immobilisation,1
-DateM=DF96391344E2CF01
+DateM=587CB63A81FECF01
 [BASEU]
 Version=1,20080325171416,MS                  ,20121001183857,MS                  
 Nom=CcfEcr,Ecritures,1
