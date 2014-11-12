@@ -272,6 +272,11 @@ beginf
 			Else
 				CLI.Cog_Facturation_Compte = "1"
 			EndIf
+			;*Ajout JCH : Pas de facturation pour compte sur dossier 103 et masque de compte article ******* 
+			If cli.Dos = 103
+				 CLI.Cog_Facturation_Compte = "1"
+				 cli.CptMsk = "********"
+			EndIf
 		else
 			cli.Ce5 = " "
 			cli.CptMsk = "********"
@@ -409,6 +414,10 @@ beginf
 					exitdo
 				endif
  			Wend
+		endif
+		;*Ajout JCH : Sur le dossier 103, le code OP doit être CIU
+		if cli.Dos = 103
+			cli.cog_op = "CIU"
 		endif
 		hrewrite(gtfpcf,cli)
 	endif
