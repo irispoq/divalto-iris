@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20141030120410      
+;>xwin4obj     imprimante               6.0       20141105091111      
 [masque]
  utilisateur="ROOT"
- date_modification="30/10/2014"
+ date_modification="05/11/2014"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -2457,16 +2457,14 @@ Beginp
 	EndIf
 	; JDT 27/10/2011
 
-	if (ent.Dos = 105 and ent.Cog_Facturation_Compte <> 2)
-		XmiSetAttribut("Alattention",AN_VISIBILITE,AV_CACHE)
-		XmiSetAttribut("responsable",AN_VISIBILITE,AV_CACHE)
-	endif
 	if ent.Dos = 105
 		XmiSetAttribut("tel",AN_VISIBILITE,AV_CACHE)
 		XmiSetAttribut("numtel",AN_VISIBILITE,AV_CACHE)
 		XmiSetAttribut("fax",AN_VISIBILITE,AV_CACHE)
 		XmiSetAttribut("numfax",AN_VISIBILITE,AV_CACHE)
 		XmiSetAttribut("mail",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("Alattention",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("responsable",AN_VISIBILITE,AV_CACHE)
 	endif
 	if ent.Dos = 103
 		XmiSetAttribut("logobas",AN_VISIBILITE,AV_CACHE)
