@@ -55,7 +55,7 @@ Procedure Cog_Maj_Menu_Boutons
 ;
 BeginP
 	
-	XmeToolbarEnableButton(Zoom.Idtoolbar, "cog_btnint", Condition(IMMOBILISATION.BlNo > 0 AND IMMOBILISATION.CptAux <> ' ', TRUE, FALSE))
+	XmeToolbarEnableButton(Zoom.Idtoolbar, "cog_btnint", Condition(IMMOBILISATION.MvBlNo+IMMOBILISATION.MvFaNo > 0 AND IMMOBILISATION.CptAux <> ' ', TRUE, FALSE))
 
 EndP
 
@@ -80,8 +80,8 @@ BeginP
 
 	If Seek_FOU(IMMOBILISATION.CptAux) = 0
 		
-		Ping("COG_GTPP300_PICOD", '3') 
-		Ping("COG_GTPP300_PINO", IMMOBILISATION.BlNo) 
+		Ping("COG_GTPP300_PICOD", Condition(IMMOBILISATION.FaCe4='1', '4', '3')) 
+		Ping("COG_GTPP300_PINO", Condition(IMMOBILISATION.FaCe4='1',IMMOBILISATION.MvFaNo, IMMOBILISATION.MvBlNo)) 
 		Tunnel_Tiers_Interroger('F', IMMOBILISATION.CptAux)
 
 	Else

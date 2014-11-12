@@ -13,7 +13,11 @@
 	I1.*,
 	CPTCES.LIB,
 	CPTCESAMO.LIB,
-	CptCesVal.LIB
+	CptCesVal.LIB,
+	MOUV.BLNO	AS		MvBlNo,
+	MOUV.BLCE4,
+	MOUV.FANO  	AS		MvFaNo,
+	MOUV.FACE4
 <LEFTJOIN>
 	C3 as CptCes
 	on CptCes.Dos = I1.Dos and CptCes.Cpt = I1.Cog_CptCes and CptCes.Ce1 = '3'
@@ -23,6 +27,9 @@
 <LEFTJOIN>
 	C3 as CptCesVal
 	on CptCesVal.Dos = I1.Dos and CptCesVal.Cpt = I1.COG_CptCesVal and CptCesVal.Ce1 = '3'
+<LEFTJOIN>
+	GTFDD.DHSD MOUV
+	ON MOUV.DOS = I1.DOS AND MOUV.ENRNO = I1.ENRNO
 <WHERE>
 	Case Equal_Enrno(int enrno)
 		I1.ENRNO = enrno
