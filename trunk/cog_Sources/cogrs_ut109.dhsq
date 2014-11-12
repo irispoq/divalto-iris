@@ -1,0 +1,23 @@
+<DictionarySql defaultDictionary=cogfdd.dhsd DataBase=DAV overwrittenby="cogrs_ut109u.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL table spé
+;*
+
+;*
+;* 		
+;*
+
+<RecordSql Name=CogRS_Val_Jh Comment='Montant JH'>
+public	record	A5DD.dhsd	MZ		MZ	
+<SELECT>
+	SUM(COG_UT109.Cog_Montant) AS TotValJh(12,3),
+	COG_UT109.Affaire,
+<FROM Insert=No Update=No Delete=No>
+	COG_UT109
+<WHERE>
+	COG_UT109.Dos = MZ.Dos AND
+	COG_UT109.COG_DATE_FACTURATION like '2014%'
+	Case Par_Affaire (char Affaire)
+		  COG_UT109.Affaire = Affaire
+<GROUPBY>
+	COG_UT109.Affaire
