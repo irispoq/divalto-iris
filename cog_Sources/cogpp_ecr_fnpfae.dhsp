@@ -618,12 +618,12 @@ BeginP
 		; calcul prestation de service
 		jDatD 			= Condition(CogRs_MOUV.Cog_Date_Debut < XQ_Cog.DatD2,  XQ_Cog.DatD2, CogRs_MOUV.Cog_Date_Debut)
 		jDatF 			= Condition(CogRs_MOUV.Cog_Date_Fin < XQ_Cog.DatF2, CogRs_MOUV.Cog_Date_Fin, XQ_Cog.DatF2)
-		jnb_chargeMax	= Condition(jDatF > jDatD, DtNum(jDatF) - DtNum(jDatD), 0)
-		jnb_total		= (DtNum(CogRs_MOUV.Cog_Date_Fin) - DtNum(CogRs_MOUV.Cog_Date_Debut))
+		jnb_chargeMax	= Condition(jDatF > jDatD, (DtNum(jDatF) - DtNum(jDatD)) + 1, 0)
+		jnb_total		= (DtNum(CogRs_MOUV.Cog_Date_Fin) - DtNum(CogRs_MOUV.Cog_Date_Debut)) + 1
 
-		If jnb_chargeMax > 0	 AND DatJour > jDatD
+		If jnb_chargeMax > 0	 AND DatJour >= jDatD
 
-			jnb_charge 	= DtNum(DatJour) - DtNum(jDatD)
+			jnb_charge 	= (DtNum(DatJour) - DtNum(jDatD)) + 1
 			mt_max		= (jnb_chargeMax / jnb_total) * CogRs_MOUV.Mont
 			mt_reel 		= (jnb_charge / jnb_chargeMax) * mt_max  			; affectation à un entier pour arrondi
 			mt_loc		= mt_reel
