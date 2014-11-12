@@ -1,0 +1,49 @@
+SetModuleInfo('$Id$')
+
+OverWrite gatt004.dhop
+RecordSql	Cogrs_Ut109.dhoq	CogRS_Val_Jh		CogRS_Val_Jh
+
+
+
+
+Public 	Record  	GAFDD.dhsd 			XQ			GAXQ
+Public 	Record  	GAFDD.dhsd 			XT			GAXT
+Public 	Record  	GAFDD.dhsd 			PSTCEL	PSTCEL
+
+Public 	Record  	keepdatanames 		GRFDD.dhsd 			EVTTIERS	
+Public 	Record  	keepdatanames 		GRFDD.dhsd 			MANIF		
+Public 	Record  	keepdatanames 		A5DD.dhsd 			MRBQVAL	
+Public 	Record  	keepdatanames 		A5DD.dhsd 			MRBQ		
+Public 	Record  	keepdatanames     GTFDD.dhsd 			ART		
+Public 	Record  	keepdatanames     GTFDD.dhsd 			MOUV		
+Public 	Record  	keepdatanames     GTFDD.dhsd 			BF		
+Public 	Record  	keepdatanames     GGFDD.dhsd 			BP		
+Public 	Record  	keepdatanames     GGFDD.dhsd 			BR		
+Public 	Record  	keepdatanames     GGFDD.dhsd 			BS		
+Public 	Record  	keepdatanames     GTFDD.dhsd 			T065		
+Public 	Record  	keepdatanames     GTFDD.dhsd 			T039		
+Public 	Record  	keepdatanames     GTFDD.dhsd 			T037		
+Public 	Record  	keepdatanames     GAFDD.dhsd 			AFRTPS	
+Public 	Record  	keepdatanames     GAFDD.dhsd 			AFRDET	
+Public 	Record  	keepdatanames     GRFDD.dhsd 			GRTEVT	
+Public 	Record  	keepdatanames     CCFDD.dhsd 			CX		
+Public 	Record  	keepdatanames     PPFDD.dhsd 			PLIG	
+Public 	Record  	GAFDD.dhsd 			XT			GAXT
+
+
+1		NoAffaire	8
+
+;*
+Function Int Cog_CalculMn_Val_Jh
+Beginf
+	ListCurrent (GAXT.idTABLEAU(4),NoAffaire)
+
+	CogRS_Val_Jh.Where.RemoveCondition(" ")
+	CogRS_Val_Jh.Where.Par_Affaire(NoAffaire)
+	If CogRS_Val_Jh.Select() = True
+		Freturn(CogRS_Val_Jh.TotValJh)	
+	Else
+		Freturn(0)	
+	EndIf
+	
+Endf
