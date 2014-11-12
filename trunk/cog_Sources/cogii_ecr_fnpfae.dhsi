@@ -1,0 +1,618 @@
+;>xwin4obj     imprimante               6.0       20141112101725      
+[masque]
+ utilisateur="UGIE_YLF"
+ date_modification="12/11/2014"
+ feuille_style="fstyleimp.dhfi"
+ id_traitements=1
+ taille_ligne=9
+ taille_page=calcule
+ taille_colonne=4
+ nombre_colonnes=78
+ nombre_lignes=70
+ etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ diva_init="Masque_Init"
+ dernier_id=90
+ dernier_id_page=8
+ [adresses]
+  type_ad1=rien
+  type_ad2=rien
+  type_ad3=rien
+[defaut]
+[enregistrements]
+ "ccfdd.dhsd",ccfdos,ca,ca,1350,0
+ "rcfdd.dhsd",,xd,xd,2000,0
+ "cogfdd.dhsd",,cog_imp_fnpfae,cog_imp_fnpfae,1000,0
+ "cog_ccrsjca.dhoq",,cogrs_c3,cogrs_c3dst,1024,1
+ "cog_ccrsjca.dhoq",,cogrs_c3,cogrs_c3tva,1024,1
+ "cogfdd.dhsd",,cog_imp_fnpfae,cog_imp_totalcpt,1000,0
+ "ccrsjca.dhoq",,journal,cogrs_jnldst,1024,1
+ "cog_ccrsjca.dhoq",,cogrs_c3,cogrs_c3imp,1024,1
+[bloc]
+ numero=1
+ libelle="En-tête"
+ taille=0
+ type_bloc=fond
+ debut=1
+ fin=70
+ bloc_fond=2
+ position_fond=10
+ diva_avant="Bloc_EnTete_Av"
+ ident_unique=1
+ [cadre]
+  [presentation]
+   position=56,1
+   taille=23,311
+   id=1
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TITRE_ENCADRE_FOND"
+ [cadre]
+  [presentation]
+   position=57,206
+   taille=565,1
+   id=42
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=78,310
+   taille=544,1
+   id=4
+  [param_cadre]
+   nature=vertical_d
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=78,1
+   taille=544,1
+   id=5
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=56,258
+   taille=566,1
+   id=6
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=620,1
+   taille=1,311
+   id=8
+  [param_cadre]
+   nature=horizontal_b
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=40,109
+   taille=16,185
+   noms="erreur"
+   id=87
+   wstyle="TRES_TRES_TRES_GRAND_GRAS"
+   wcouleur_fonte=255,0,0,0,0,0
+  [texte]
+   texte="ECRITURES REJETEES"
+ [obj_texte]
+  [presentation]
+   position=23,173
+   taille=9,26
+   id=53
+   wstyle="STD_GRAS"
+  [texte]
+   texte="Journal"
+ [obj_texte]
+  [presentation]
+   position=61,211
+   taille=10,30
+   id=51
+   wstyle="STD"
+  [texte]
+   texte="Débit"
+ [obj_texte]
+  [presentation]
+   position=61,263
+   taille=10,30
+   id=52
+   wstyle="STD"
+  [texte]
+   texte="Crédit"
+ [obj_texte]
+  [presentation]
+   position=8,255
+   taille=12,10
+   id=12
+   wstyle="GRAND"
+  [texte]
+   texte="le"
+ [obj_texte]
+  [presentation]
+   position=61,40
+   taille=10,90
+   id=14
+   wstyle="STD"
+  [texte]
+   texte="Détail des écritures intégrées"
+ [champ]
+  [presentation]
+   position=31,173
+   taille=8,129
+   id=84
+   colonnes_saisie=40
+   wstyle="STD"
+  [description]
+   donnee=journal,lib,cogrs_jnldst
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=23,195
+   taille=8,11
+   id=83
+   colonnes_saisie=3
+   wstyle="STD"
+  [description]
+   donnee=journal,jnl,cogrs_jnldst
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=7,4
+   taille=14,174
+   id=16
+   wstyle="TRES_GRAND_GRAS"
+  [description]
+   donnee=ca,nom,ca
+ [champ]
+  [presentation]
+   position=19,4
+   taille=12,114
+   id=17
+   wstyle="STD"
+  [description]
+   donnee=ca,adrcpl,ca
+ [champ]
+  [presentation]
+   position=28,4
+   taille=9,115
+   id=18
+   wstyle="STD"
+  [description]
+   donnee=ca,rue,ca
+ [champ]
+  [presentation]
+   position=36,4
+   taille=12,115
+   id=19
+   wstyle="STD"
+  [description]
+   donnee=ca,loc,ca
+ [champ]
+  [presentation]
+   position=44,4
+   taille=9,115
+   id=20
+   wstyle="STD"
+  [description]
+   donnee=ca,vil,ca
+ [champ]
+  [presentation]
+   position=8,267
+   taille=13,40
+   id=26
+   wstyle="GRAND"
+  [description]
+   donnee=xd,rlvdt,xd
+[bloc]
+ numero=2
+ libelle="Détail"
+ taille=1
+ type_bloc=mobile
+ debut=10
+ fin=65534
+ debordement=3
+ bloc_fond=8
+ position_fond=2
+ ident_unique=2
+ [champ]
+  [presentation]
+   position=0,12
+   taille=8,43
+   id=86
+   colonnes_saisie=8
+   wstyle="STD"
+  [description]
+   donnee=cog_imp_fnpfae,cpta,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,260
+   taille=8,48
+   id=58
+   colonnes_saisie=16
+   wstyle="STD"
+  [description]
+   donnee=cog_imp_fnpfae,mtbis,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=0,205
+   taille=8,51
+   id=57
+   colonnes_saisie=16
+   wstyle="STD"
+  [description]
+   donnee=cog_imp_fnpfae,mt,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=0,52
+   taille=10,144
+   id=56
+   colonnes_saisie=40
+   wstyle="STD"
+  [description]
+   donnee=cog_imp_fnpfae,lib,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[bloc]
+ numero=3
+ libelle="Débordement"
+ saut_fin=oui
+ taille=1
+ type_bloc=mobile
+ debut=65535
+ fin=65535
+ chainage=1
+ ident_unique=3
+[bloc]
+ numero=4
+ libelle="Total compte"
+ taille=2
+ type_bloc=mobile
+ debut=10
+ fin=65534
+ debordement=3
+ bloc_fond=2
+ position_fond=2
+ ident_unique=4
+ [cadre]
+  [presentation]
+   position=4,74
+   taille=1,237
+   id=59
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=0,52
+   taille=10,65
+   id=45
+   wstyle="GRAND"
+  [texte]
+   texte="Total"
+ [champ]
+  [presentation]
+   position=6,260
+   taille=8,48
+   id=80
+   colonnes_saisie=16
+   wstyle="STD_GRAS"
+  [description]
+   donnee=cog_imp_fnpfae,mtbis,cog_imp_totalcpt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=6,208
+   taille=8,48
+   id=79
+   colonnes_saisie=16
+   wstyle="STD_GRAS"
+  [description]
+   donnee=cog_imp_fnpfae,mt,cog_imp_totalcpt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=0,12
+   taille=10,41
+   id=78
+   colonnes_saisie=8
+   wstyle="GRAND"
+  [description]
+   donnee=cog_imp_fnpfae,cpta,cog_imp_totalcpt
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[bloc]
+ numero=5
+ libelle="Etablissement début"
+ taille=1
+ type_bloc=mobile
+ debut=10
+ fin=65534
+ debordement=3
+ bloc_fond=4
+ position_fond=2
+ ident_unique=5
+ [obj_texte]
+  [presentation]
+   position=0,100
+   taille=10,31
+   id=75
+   wstyle="GRAND"
+  [texte]
+   texte="Devise"
+ [obj_texte]
+  [presentation]
+   position=0,10
+   taille=10,65
+   id=63
+   wstyle="GRAND"
+  [texte]
+   texte="Etablissement"
+ [champ]
+  [presentation]
+   position=0,130
+   taille=10,22
+   id=76
+   colonnes_saisie=4
+   wstyle="GRAND"
+  [description]
+   donnee=cog_imp_fnpfae,dev,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,74
+   taille=10,17
+   id=64
+   colonnes_saisie=3
+   wstyle="GRAND"
+  [description]
+   donnee=cog_imp_fnpfae,etb,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[bloc]
+ numero=6
+ libelle="TVA"
+ taille=1
+ type_bloc=mobile
+ debut=10
+ fin=65534
+ debordement=3
+ bloc_fond=4
+ position_fond=2
+ ident_unique=6
+ [champ]
+  [presentation]
+   position=1,260
+   taille=8,48
+   id=69
+   colonnes_saisie=16
+   wstyle="STD"
+  [description]
+   donnee=cog_imp_fnpfae,mtbis,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=1,208
+   taille=8,48
+   id=68
+   colonnes_saisie=16
+   wstyle="STD"
+  [description]
+   donnee=cog_imp_fnpfae,mt,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=0,52
+   taille=10,158
+   id=67
+   colonnes_saisie=40
+   wstyle="GRAND"
+  [description]
+   donnee=cogrs_c3,lib,cogrs_c3tva
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,12
+   taille=10,40
+   id=65
+   colonnes_saisie=8
+   wstyle="GRAND"
+  [description]
+   donnee=cogrs_c3,cpt,cogrs_c3tva
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[bloc]
+ numero=7
+ libelle="Début compte"
+ taille=1
+ type_bloc=mobile
+ debut=10
+ fin=65534
+ debordement=3
+ bloc_fond=6
+ position_fond=2
+ diva_avant="Bloc_DebutCompte_Av"
+ ident_unique=7
+ [champ]
+  [presentation]
+   position=0,52
+   taille=10,187
+   id=90
+   colonnes_saisie=40
+   wstyle="GRAND"
+  [description]
+   donnee=cogrs_c3,lib,cogrs_c3imp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,12
+   taille=10,41
+   id=89
+   colonnes_saisie=8
+   wstyle="GRAND"
+  [description]
+   donnee=cogrs_c3,cpt,cogrs_c3imp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[bloc]
+ numero=8
+ libelle="Contrepartie"
+ taille=1
+ type_bloc=mobile
+ debut=10
+ fin=65534
+ debordement=3
+ bloc_fond=6
+ position_fond=2
+ ident_unique=8
+ [champ]
+  [presentation]
+   position=1,259
+   taille=8,49
+   id=74
+   colonnes_saisie=16
+   wstyle="STD"
+  [description]
+   donnee=cog_imp_fnpfae,mtbis,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=1,208
+   taille=8,48
+   id=73
+   colonnes_saisie=16
+   wstyle="STD"
+  [description]
+   donnee=cog_imp_fnpfae,mt,cog_imp_fnpfae
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=0,52
+   taille=10,160
+   id=72
+   colonnes_saisie=40
+   wstyle="GRAND"
+  [description]
+   donnee=cogrs_c3,lib,cogrs_c3dst
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,12
+   taille=10,41
+   id=71
+   colonnes_saisie=8
+   wstyle="GRAND"
+  [description]
+   donnee=cogrs_c3,cpt,cogrs_c3dst
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[diva]
+SetModuleInfo('$Id$')
+
+;*
+;*
+;*
+
+;
+Public RecordSql "cog_ccrsjca.dhoq" 		cogrs_c3 cogrs_c3dst
+Public RecordSql "cog_ccrsjca.dhoq" 		cogrs_c3 cogrs_c3tva
+Public RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3	CogRs_C3Imp
+Public RecordSql "ccrsjca.dhoq" journal cogrs_jnl
+Public RecordSql "ccrsjca.dhoq" journal cogrs_jnldst
+
+;
+Public Record "gtfdd.dhsd" 	cli 				cli
+Public Record "ccfdd.dhsd" 	ca 				ca
+Public Record "rcfdd.dhsd" 	xd 				xd
+Public Record "cogfdd.dhsd" 	cog_imp_fnpfae cog_imp_fnpfae
+Public Record "cogfdd.dhsd" 	cog_imp_fnpfae cog_imp_totalcpt
+
+;
+1		wSansErreur		1,0
+
+;*
+Public Procedure Bloc_DebutCompte_Av
+;
+Beginp
+	CogRs_C3Imp.Init()
+	CogRs_C3Imp.Where.Equal_Cpt(cog_imp_fnpfae.CptA)
+	CogRs_C3Imp.Select()
+Endp
+
+
+;*
+Public Procedure Bloc_EnTete_Av
+;
+Beginp
+
+	If PingLocalReceiveAndDelete("COG_ERRIMP_FNPFAE", wSansErreur) = 0
+		XmiSetAttribut("Erreur", AN_VISIBILITE, Condition(wSansErreur, AV_CACHE, AV_VISIBLE))
+	EndIf
+
+Endp
+
+
+;*
+Public Procedure Masque_Init
+;
+Beginp
+	xd.RlvDt = Today
+Endp
+[/diva]
+[diva_base]
+[/diva]
