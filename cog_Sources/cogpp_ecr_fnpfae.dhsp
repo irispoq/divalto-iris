@@ -1,0 +1,1293 @@
+;>xdiva
+;*
+;*		Objet : Factures non parvenues - Programme Cogpp_ecr_fnpfae.dhsp
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF	P205a					01		10/2014		Ajouts spécifiques: lecture par RS /traitement des FAE / traitement avec paramètres dossier
+;*												11/2014		Gestion Etb
+;*												11/2014		Gestion Rapport impression
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		Cog_Traitement_Boucle_Principale	Lecture des mouvements éligibles	- garnissage des listes puis traitement - intégration CCFM		
+;*		Cog_SaisiePage1						Saisie de la première page du masque
+;*		Cog_Insert_List_Impression			Garnit lId_IMP
+;*		Cog_Print_Rapport_CCFM				Imprime le contenu de lId_IMP
+
+;*
+;*		Déclarations
+;*
+
+;
+Include	gttcz00.dhsp										;déclarations communes
+
+;
+Module	'CCpmFic.dhop'
+Module	'CCpm000.dhop'
+Module	'CogTm_000.dhop'								;module de fonctions communes
+
+;
+Hfile	gtfdd.dhsd	GTFENT	GTFENT
+Hfile	gtfdd.dhsd	GTFAM		GTFAM
+
+;
+Htmpfile	ccfdd.dhsd	ccfm	CCFM	OpenonUse DeleteOnExit
+
+;
+Public 	RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3				CogRs_C3Dst				; Compte	FNP ou FAE
+Public 	RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3				CogRs_C3Tva				; Compte TVA FNP ou FAE
+Public 	RecordSQL	"CCRSJCA.DHOQ"				Journal				CogRs_JnlDst			; Journal FNP ou FAE
+Public 	RecordSQL	"GTRSPPTAB.DHOQ"			CodeOperation		CogRs_OP					; Code opération
+Public 	RecordSQL	"GTRSPPPCE.DHOQ"			Mouvement			CogRs_MOUV
+Public 	RecordSQL	"GTRSPPTAB.DHOQ"			TauxTvaN				CogRs_TVA
+
+;
+Public 	Record	gtfdd.dhsd	xq			XQ_Cog	;enregistrement de travail
+
+Public 	Record	gtfdd.dhsd	SOC
+;Public 	Record	gtfdd.dhsd	T020					;Code OP
+Public 	Record	gtfdd.dhsd	T030					;Regime TVA tiers
+Public 	Record	gtfdd.dhsd	ENT
+Public 	Record	gtfdd.dhsd	ENT		ENT_SEEK
+Public 	Record	gtfdd.dhsd	ART
+Public 	Record	gtfdd.dhsd	CLI
+
+
+Public Record	ccfdd.dhsd	CA
+Public Record	ccfdd.dhsd	CB
+Public Record	ccfdd.dhsd	C3
+Public Record	ccfdd.dhsd	C4
+Public Record	ccfdd.dhsd	C5
+Public Record	ccfdd.dhsd	C8
+Public Record	ccfdd.dhsd	C8						C8_Cp
+Public Record	ccfdd.dhsd	C8						C8_Tva
+Public Record	ccfdd.dhsd	CX
+Public Record	cogfdd.dhsd	COG_IMP_FNPFAE
+Public Record	cogfdd.dhsd	COG_IMP_FNPFAE		COG_IMP_TOTALCPT
+
+;
+1 	id_toolbar		L						;ident barre d'outils
+1 	id_menu			L						;ident menu
+1	AdrProc			16						;adresse des procédures appelées dans le module associé
+1	erreur			x		= $00			;détermine s'il y a eu des erreurs lors de l'exécution du programme
+1	tunnel			b		= false		;si appelé en recupérant XQ par pingreceive
+1	readOP			L
+1	readMOUV			L
+1	DatJour			>gtfdd.dhsd		BlDt
+
+1	idl_ent			L=$00									;Liste des ENT	 RESERVEES
+1	stl_ent			L=0
+1	idl_EcrDet		L=$00									;Liste ecritures Détaillée
+1	stl_Decr			L
+1	idl_EcrCumul	L=$00									;Liste ecritures cumulées par dev, compte, sens
+1	stl_Cecr			L
+1	idl_AnaCumul	L=$00									;Liste ventilations cumulées par dev, compte, sens
+1	stl_Cana			L
+1	lId_IMP			L
+1	txtDebug			S
+
+Structure Ecriture
+	1	Etb		>ccfdd.dhsd	etb
+	1	Dev		>ccfdd.dhsd	dev
+	1	Cpt		>ccfdd.dhsd	cpt
+	1	Sens		>ccfdd.dhsd	sens
+	1	AxeTb		>ccfdd.dhsd	axe*4
+	1	MtDev		>ccfdd.dhsd	mtdev
+	1	Mt			>ccfdd.dhsd	mt
+	1	TvaMtD	>ccfdd.dhsd	mtdev
+	1	TvaMt		>ccfdd.dhsd	mt
+	1	Lib		>ccfdd.dhsd	Lib
+EndStructure
+
+Public RecordDiva	Ecriture		DEcr
+Public RecordDiva	Ecriture		Cecr
+Public RecordDiva	Ecriture		CAna
+
+
+1	Adr_Tri		16
+
+ 
+1	Wecrvalno		>ccfdd.dhsd ecrvalno			;Rupture ecriture
+1	Wecrno			>ccfdd.dhsd ecrno				;Lien ecriture C8 => CX
+
+1	Wlib				>ccfdd.dhsd	Lib
+1	Wmtdeb			>ccfdd.dhsd	mt
+1	Wmtdevdeb		>ccfdd.dhsd	mtdev
+1	Wmtcre			>ccfdd.dhsd	mt
+1	Wmtdevcre		>ccfdd.dhsd	mtdev
+1	Wmtsld			>ccfdd.dhsd	mt
+1	Wmtdevsld		>ccfdd.dhsd	mtdev
+1	WTvamtdeb		>ccfdd.dhsd	mt
+1	WTvamtdevdeb	>ccfdd.dhsd	mtdev
+1	WTvamtcre		>ccfdd.dhsd	mt
+1	WTvamtdevcre	>ccfdd.dhsd	mtdev
+1	WTvamtsld		>ccfdd.dhsd	mt
+1	WTvamtdevsld	>ccfdd.dhsd	mtdev
+
+1	Wnb_C8		8,0 = 0
+1	Wnb_CX		8,0 = 0
+1	Wnb_ent		8,0 = 0
+1	Wnb_mouv		8,0 = 0
+
+;
+Const	C_entree	=1
+Const	C_sortie	=2
+Const	C_debit	=1
+Const C_credit	=2
+Const C_TRAITEMENT_FNP 	= 1
+Const C_TRAITEMENT_FAE 	= 2
+Const C_PRODNAT_ACHETE 	= 1
+Const C_PRODNAT_FABRIQUE= 2
+Const C_PRODNAT_SERVICE = 4
+Const C_BLOC_PAGEFOND	= 1
+COnst C_BLOC_C8			= 2
+Const C_BLOC_CPTF			= 4
+Const C_BLOC_ETB			= 5
+Const C_BLOC_TVA			= 6
+Const C_BLOC_CPTD			= 7
+Const C_BLOC_CP			= 8
+Const	C_PRGMODE_SIMUL	= 1
+Const C_PRGMODE_INTC8	= 2
+
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;*
+Function int Cog_LireProgrammeTypeTrt
+;
+BeginF
+
+	Switch XQ_Cog.TiCod
+		Case 'C'
+			FReturn(C_TRAITEMENT_FAE)
+		Case 'F'
+			FReturn(C_TRAITEMENT_FNP)
+		Default
+			FReturn(C_TRAITEMENT_FNP)
+
+	EndSwitch
+
+EndF
+
+;*
+Function Long Tri_L_ENT(&A, &B)
+; Tri des entêtes de pièces
+Record	"gtfdd.dhsd" 		ENT		A
+Record	"gtfdd.dhsd" 		ENT		B
+1		cleA		13
+1		cleB		13
+BeginF
+
+	cleA = A.Dos & A.TiCod & A.PiCod & A.PiNo
+	cleB = B.Dos & B.TiCod & B.PiCod & B.PiNo
+
+	FReturn(SortCompare(A, B))
+
+EndF
+
+;*----------------------------
+Function long Tri_L_Decr(&A,&B)
+;-----------------------------
+RecordDiva	Ecriture		A
+RecordDiva	Ecriture		B
+1		cleA		S
+1		cleB		S
+
+BeginF
+
+	cleA = A.Etb & A.Dev & A.Cpt & A.Sens
+	cleB = B.Etb & B.Dev & B.Cpt & B.Sens
+
+	Freturn(SortCompare(cleA, cleB))
+;	if ADecr_dev=BDecr_dev and ADecr_Cpt=ADecr_Cpt and ADecr_sens=BDecr_sens
+;		Freturn(2)
+;	else
+;		Freturn(ADecr_dev & ADecr_Cpt & ADecr_sens < BDecr_dev & BDecr_Cpt & BDecr_sens)
+;	endif
+EndF
+
+;*----------------------------
+Function long Tri_L_Cecr(&A,&B)
+;-----------------------------
+RecordDiva	Ecriture		A
+RecordDiva	Ecriture		B
+1		cleA		S
+1		cleB		S
+BeginF
+	cleA = A.Etb & A.Dev & A.Cpt & A.Sens
+	cleB = B.Etb & B.Dev & B.Cpt & B.Sens
+
+	Freturn(SortCompare(cleA, cleB))
+EndF
+
+;*----------------------------
+Function long Tri_L_Cana(&ACana,&BCana)
+;-----------------------------
+RecordDiva	Ecriture		ACana
+RecordDiva	Ecriture		BCana
+1		cleA		S
+1		cleB		S
+	
+Beginf
+	cleA = ACana.Etb & ACana.dev & ACana.cpt & ACana.sens & ACana.AxeTb(1) & ACana.AxeTb(2) & ACana.AxeTb(3) & ACana.AxeTb(4)  
+	cleB = BCana.Etb & BCana.dev & BCana.cpt & BCana.sens & BCana.AxeTb(1) & BCana.AxeTb(2) & BCana.AxeTb(3) & BCana.AxeTb(4)  
+	
+	Freturn(SortCompare(cleA, cleB))
+EndF
+
+;*
+Procedure CogRs_Mouv_Init_Selection
+;
+BeginP
+	
+	CogRs_MOUV.Init()
+	CogRs_MOUV.Where.RemoveCondition("")
+	CogRs_MOUV.Where.Equal_Ce2('1')							; type mouvement
+	CogRs_MOUV.Where.AddCondition("Equal_Ce2")
+	;CogRs_MOUV.Where.FNP_FAE_Non_Traite()			
+	;CogRs_MOUV.Where.AddCondition("FNP_FAE_Non_Traite")
+	CogRs_MOUV.Where.Equal_BlCe4('1')
+	CogRs_MOUV.Where.AddCondition("Equal_BlCe4")
+	CogRs_MOUV.Where.Equal_PiCod(XQ_Cog.PiCod)
+	CogRs_MOUV.Where.AddCondition("Equal_PiCod")
+	CogRs_MOUV.Where.Equal_TiCod(XQ_Cog.TiCod)
+	CogRs_MOUV.Where.AddCondition("Equal_TiCod")	
+	CogRs_MOUV.Where.Equal_Op(CogRs_OP.Op)
+	CogRs_MOUV.Where.AddCondition("Equal_Op")
+	
+	CogRs_MOUV.OrderBy.Ordre_FNP_FAE()
+
+EndP
+
+
+;* Initialisation des variables
+function int Cog_InitialiserVariables
+;
+recordsql	'a5rsuser.dhoq'	utilisateur						;Utilisateurs
+
+beginf
+
+	;le programme n'a pas été lancé à partir du menu
+	if pingreceive("zechange",mz) <> 0
+
+		;--------mode tunnel, on recherche l'utilisateur
+		if tunnel=true
+			utilisateur.init()
+			utilisateur.where.exists(system.User)
+			if utilisateur.select() = 0
+				Cog_EcritureLivreDeBord("Utilisateur " & left(system.user) & " non défini dans la base Divalto", , , nivalerte=1, dos=999)
+				Erreur++
+				freturn(false)
+			else
+				MZ.TiCod		= XQ_Cog.TiCod
+				mz.dos		= utilisateur.dos
+				mz.etb		= utilisateur.etb
+				mz.depo		= utilisateur.depo
+				mz.mecle		= "Cogee_ecr_fnpfae.dhof"
+				mz.micle		= "Cogii_ecr_fnpfae.dhoi"
+				mz.mtcle		= " "
+				mz.titre2	= Condition(MZ.TiCod = 'C', "Intégration comptables des F.N.E. clients", "Intégration comptables des F.N.P. fournisseurs")
+			endif
+		else
+			messagebox("Erreur de lecture de la zone zechange", "Alerte", mb_iconexclamation)
+			Erreur++
+			freturn(false)
+		endif
+	endif
+	
+	;--------init XQ
+	if not tunnel
+		init XQ_Cog = ' '
+		XQ_Cog.DatF			= today
+		XQ_Cog.Choix(1)	= C_PRGMODE_SIMUL					; simulation
+		XQ_Cog.TiCod		= MZ.TiCod
+	endif
+
+	DatJour		 = Time(1)
+	XQ_Cog.PiCod = 3
+
+	If XQ_Cog.TiCod not IN ('C', 'F')
+	 	Cog_EcritureLivreDeBord("Impossible de déterminer le type de traitement (type de tiers paramètre menu)", , , nivalerte=1, dos=999)
+		Erreur++
+		freturn(false)
+	EndIf
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+	Seek_CA(MZ.Dos)
+	If Seek_CB_Key(['C' CA.Dos CA.ExoDDt]) = 0
+		XQ_Cog.DatD2 = CB.ExoDDt
+		XQ_Cog.DatF2 = CB.ExoFDt
+	EndIf
+
+	If not ((DatJour >= XQ_Cog.DatD2) AND (DatJour <= XQ_Cog.DatF2))
+ 		if tunnel=false 
+			messagebox("Date du jour en dehors de l'exercice comptable (Paramètre dossier comptabilité)","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Date du jour en dehors de l'exercice comptable")
+		freturn(false)
+	EndIf
+
+	;--------Verif paramètres	comptes - journal
+	CogRs_C3Dst.Init()
+	CogRs_C3Dst.Where.Equal_Cpt(Condition(XQ_Cog.TiCod = 'C', CA.Cog_FaeCpt, CA.Cog_FnpCpt))
+	If CogRs_C3Dst.Select() = 0
+		if tunnel=false 
+			messagebox("Le compte FNP ou FAE n'est pas paramétré dans le dossier","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Le compte FNP ou FAE n'est pas paramétré dans le dossier")
+		freturn(false)
+	EndIf
+
+	CogRs_C3Tva.Init()
+	CogRs_C3Tva.Where.Equal_Cpt(Condition(XQ_Cog.TiCod = 'C', CA.Cog_FaeTvaCpt, CA.Cog_FnpTvaCpt))
+	If CogRs_C3Tva.Select() = 0
+		if tunnel=false 
+			messagebox("Le compte TVA FNP ou FAE n'est pas paramétré dans le dossier","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Le compte FNP ou FAE n'est pas paramétré dans le dossier")
+		freturn(false)
+	EndIf
+
+ 	CogRs_JnlDst.Init()
+	CogRs_JnlDst.Where.Zoom_PK(Condition(XQ_Cog.TiCod = 'C', CA.Cog_FaeJnl, CA.Cog_FnpJnl))
+	If CogRs_JnlDst.Select() = 0
+		if tunnel=false 
+			messagebox("Le journal FNP ou FAE n'est pas paramétré dans le dossier","Erreur",mb_iconstop)
+		endif
+		Cog_EcritureLivreDeBord("Le journal FNP ou FAE n'est pas paramétré dans le dossier")
+		freturn(false)
+	EndIf
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	XmeInfoPage(mz.mecle,1)						;lire la taille de la page
+	XmeSetWindowSize(mz.mecle,1,Harmony.Opara3,Harmony.Opara4)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+ 	;commentaire du programme
+	ProgramSetComment(left(MZ.Titre2))
+
+	Freturn(true)
+endf
+
+;*
+procedure Cog_AfficherTraitement
+;
+beginp
+
+	If not tunnel
+		G3_Afficher_Selection
+		G3_Afficher_Traitement
+	EndIf
+
+endp
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	;if Cog_XQ.Choix(1)<>2 and ENT.Cog_ARC=2 | freturn(false) | endif
+	
+	freturn(true)
+endf
+
+;*
+Procedure Cog_Print_Rapport_CCFM(wSansErreur)
+;
+1		cptPrec			>ccfdd.dhsd		Cpt
+1		wTotalDeb		>ccfdd.dhsd		MtDev
+1		wTotalCre		>ccfdd.dhsd		MtDev
+1		wTrait			1,0
+1		wSansErreur		1,0
+
+BeginP
+
+	If ListCount(lId_IMP) = 0	OR MZ.MiCle = ' '
+		PReturn
+	EndIf
+
+	wTrait = Cog_LireProgrammeTypeTrt
+
+	XmiLoad(MZ.MiCle)
+	ListBegin(lId_IMP)
+	PrintBegin
+	PingLocal("COG_ERRIMP_FNPFAE", wSansErreur)
+	XmiPrint(MZ.MiCle, 1)
+
+	Do While ListNext(lId_IMP, COG_IMP_FNPFAE) not in (-1, 0)
+
+		; rupture compte
+		If (wTrait = C_TRAITEMENT_FNP AND CA.Cog_FnpRgpFlag = 2) OR	(wTrait = C_TRAITEMENT_FAE AND CA.Cog_FaeRgpFlag = 2)
+			If COG_IMP_FNPFAE.CptA <> cptPrec AND cptPrec <> ' '
+				XmiPrint(MZ.MiCle, C_BLOC_CPTF)
+				cptPrec = ' '
+				COG_IMP_TOTALCPT = ' '
+			EndIf
+		EndIf
+
+		Switch COG_IMP_FNPFAE.Cog_BlocNo
+			Case C_BLOC_ETB
+				XmiPrint(MZ.MiCle, C_BLOC_ETB)
+
+			Case C_BLOC_TVA
+				XmiPrint(MZ.MiCle, C_BLOC_TVA)
+
+			Case C_BLOC_CP
+				XmiPrint(MZ.MiCle, C_BLOC_CP)
+
+			Case C_BLOC_C8
+				If (wTrait = C_TRAITEMENT_FNP AND CA.Cog_FnpRgpFlag = 2) OR	(wTrait = C_TRAITEMENT_FAE AND CA.Cog_FaeRgpFlag = 2)
+					If COG_IMP_FNPFAE.CptA <> cptPrec
+						XmiPrint(MZ.MiCle, C_BLOC_CPTD)
+						cptPrec = COG_IMP_FNPFAE.CptA 
+						COG_IMP_TOTALCPT.CptA 	= COG_IMP_FNPFAE.CptA
+						COG_IMP_TOTALCPT.Dev		= COG_IMP_FNPFAE.Dev
+						COG_IMP_TOTALCPT.Etb		= COG_IMP_FNPFAE.Etb
+						COG_IMP_TOTALCPT.Sens	= COG_IMP_FNPFAE.Sens
+					EndIf
+				EndIf
+
+				XmiPrint(MZ.MiCle, C_BLOC_C8)
+				COG_IMP_TOTALCPT.Mt		+=	COG_IMP_FNPFAE.Mt
+				COG_IMP_TOTALCPT.MtBis	+=	COG_IMP_FNPFAE.MtBis
+
+		EndSwitch
+
+	WEnd
+
+	PrintEnd
+
+EndP
+
+;*
+Procedure Cog_Insert_List_Impression(iBlocNo, iCpt, iDev, iEtb, iLib, iMt, iSens)
+;
+1 	iBlocNo 	>cogfdd.dhsd		Cog_BlocNo
+1	iCpt		>ccfdd.dhsd			Cpt
+1	iDev		>ccfdd.dhsd			Dev
+1	iEtb		>ccfdd.dhsd			Etb
+1	iLib		>ccfdd.dhsd			Lib
+1	iMt		>ccfdd.dhsd			Mt
+1	iSens		>ccfdd.dhsd			Sens
+BeginP
+
+	Init COG_IMP_FNPFAE = ' '
+	COG_IMP_FNPFAE.Cog_BlocNo	= iBlocNo
+	COG_IMP_FNPFAE.CptA			= iCpt
+	COG_IMP_FNPFAE.Dev			= iDev
+	COG_IMP_FNPFAE.Etb			= iEtb
+	COG_IMP_FNPFAE.Lib			= iLib
+	COG_IMP_FNPFAE.Mt				= Condition(iSens = C_debit, iMt, 0)
+	COG_IMP_FNPFAE.MtBis			= Condition(iSens = C_credit, iMt, 0)
+	COG_IMP_FNPFAE.Sens			= iSens
+	ListInsert(lId_IMP, COG_IMP_FNPFAE)
+
+EndP
+
+;*
+Procedure Cog_Masquage_compte(&cpt,m1,m2,m3)
+;
+1	cpt	A
+1	m1		A
+1	m2		A
+1	m3		A
+BeginP
+	if m1<>' ' | Cog_ApplicationMasque(cpt,m1) | endif
+	if m2<>' ' | Cog_ApplicationMasque(cpt,m2) | endif
+	if m3<>' ' | Cog_ApplicationMasque(cpt,m3) | endif
+EndP
+
+;*
+Procedure P_Calcul_Solde_Cp(sens_loc, Mt_loc, MtDev_Loc)
+1		sens_loc				>gtfdd.dhsd		Sens
+1		Mt_loc			>gtfdd.dhsd		Mt
+1		MtDev_Loc		>gtfdd.dhsd		MtDev
+;
+BeginP
+	if sens_loc		 = C_debit
+		Wmtdeb		+=	Mt_loc
+		Wmtdevdeb	+=	MtDev_Loc
+		WmtSld		+=	Mt_loc
+		WmtdevSld	+=	MtDev_Loc
+	else
+		Wmtcre		+= Mt_loc
+		Wmtdevcre	+= MtDev_Loc
+		WmtSld		-= Mt_loc
+		WmtdevSld	-= MtDev_Loc
+	endif
+EndP
+
+;*
+Procedure P_Calcul_Solde_Avec_Tva
+;	 C8_Tva est chargé
+BeginP
+
+	if C8_Tva.Sens = C_debit
+		Wmtdeb		+=	C8_Tva.Mt
+		Wmtdevdeb	+=	C8_Tva.MtDev
+		WmtSld		+=	C8_Tva.Mt
+		WmtdevSld	+=	C8_Tva.MtDev
+	else
+		Wmtcre		+= C8_Tva.Mt
+		Wmtdevcre	+= C8_Tva.MtDev
+		WmtSld		-= C8_Tva.Mt
+		WmtdevSld	-= C8_Tva.MtDev
+	endif
+
+EndP
+
+;*
+Procedure P_Calcul_Solde_Tva(sens_loc, tvaMt_loc, tvaMtDev_Loc)
+1		sens_loc				>gtfdd.dhsd		Sens
+1		tvaMt_loc			>gtfdd.dhsd		Mt
+1		tvaMtDev_Loc		>gtfdd.dhsd		MtDev
+;
+BeginP
+	if sens_loc = C_debit
+		WTvamtdeb		+=	tvaMt_loc
+		WTvamtdevdeb	+=	tvaMtDev_Loc
+		WTvamtSld		-=	tvaMt_loc
+		WTvamtdevSld	-=	tvaMtDev_Loc
+	else
+		WTvamtcre		+= tvaMt_loc
+		WTvamtdevcre	+= tvaMtDev_Loc
+		WTvamtSld		+= tvaMt_loc
+		WTvamtdevSld	+= tvaMtDev_Loc
+	endif
+EndP
+
+;*
+Procedure P_Ecrit_C8_Tva_CCFM(dev_loc, Etb_Loc)
+;
+1		dev_loc		>gtfdd.dhsd		Dev
+1		Etb_loc		>gtfdd.dhsd		Etb
+BeginP
+
+	init C8_Tva			= ' '
+	C8_Tva.Ce1			= '8'
+	C8_Tva.Dos			= MZ.Dos
+	C8_Tva.Etb			= Etb_loc
+	C8_Tva.Cpt			= CogRs_C3Tva.Cpt
+	C8_Tva.Jnl			= CogRs_JnlDst.Jnl
+	C8_Tva.EcrDt		= XQ_Cog.datF
+	C8_Tva.Lib			= Wlib
+	C8_Tva.Dev			= dev_loc
+	C8_Tva.Sens			= condition(WTvamtsld<0 , C_debit, C_credit)
+	C8_Tva.MtDev		= Abs(WTvamtdevSld)
+	C8_Tva.Mt			= Abs(WTvamtsld)
+	C8_Tva.EcrValNo	= Wecrvalno
+
+	Hwrite(CCFM,C8_Tva)	| Wnb_C8++
+
+EndP
+
+;*
+Procedure P_Calculer_Montant_Ecriture(&mt_loc)
+;	calcul d'après le cogrs_MOUV et ART chargés
+1	mt_loc			>gtfdd.dhsd		Mt
+1	mt_max			>gtfdd.dhsd		Mt		; montant max sur l'année fiscale en cours
+1	mt_reel			8,0
+1	jnb_total		8,0						; nombre de jours de charge total
+1	jnb_chargeMax	3,0						; nombre de jours de charge max sur année en cours
+1	jnb_charge		3,0						; nombre de jours de charge à constater réellement
+1	jDatF				>gtfdd.dhsd		DatF	; dernier jour de constat de charge pour l'exercice en cours
+1	jDatD				>gtfdd.dhsd		DatD  ; permier	''			''				''			''			''		''	
+BeginP
+
+	If (ART.ProdNat IN (C_PRODNAT_ACHETE, C_PRODNAT_FABRIQUE)) OR CogRs_MOUV.Cog_Date_Debut = ' ' OR CogRs_MOUV.Cog_Date_Fin = ' ' \
+		OR  XQ_Cog.DatD2 = ' ' OR 	XQ_Cog.DatF2 = ' '
+
+		mt_loc	= CogRs_MOUV.Mont
+
+	Else 
+		; calcul prestation de service
+		jDatD 			= Condition(CogRs_MOUV.Cog_Date_Debut < XQ_Cog.DatD2,  XQ_Cog.DatD2, CogRs_MOUV.Cog_Date_Debut)
+		jDatF 			= Condition(CogRs_MOUV.Cog_Date_Fin < XQ_Cog.DatF2, CogRs_MOUV.Cog_Date_Fin, XQ_Cog.DatF2)
+		jnb_chargeMax	= Condition(jDatF > jDatD, DtNum(jDatF) - DtNum(jDatD), 0)
+		jnb_total		= (DtNum(CogRs_MOUV.Cog_Date_Fin) - DtNum(CogRs_MOUV.Cog_Date_Debut))
+
+		If jnb_chargeMax > 0	 AND DatJour > jDatD
+
+			jnb_charge 	= DtNum(DatJour) - DtNum(jDatD)
+			mt_max		= (jnb_chargeMax / jnb_total) * CogRs_MOUV.Mont
+			mt_reel 		= (jnb_charge / jnb_chargeMax) * mt_max  			; affectation à un entier pour arrondi
+			mt_loc		= mt_reel
+
+		EndIf
+
+	EndIf
+
+EndP
+
+
+;*
+Function int F_init_Decr
+;	FALSE: MOUV à ignorer
+1	i			1,0
+1	wTrait	1,0
+BeginF
+
+	wTrait = Cog_LireProgrammeTypeTrt
+
+	If CogRs_MOUV.Cog_ImoFlag = 2			; non inclu dans la clause where car non indexé
+		FReturn(FALSE)
+	EndIf
+
+	if CLI.Dos <> CogRs_MOUV.Dos or CLI.Tiers <> CogRs_MOUV.Tiers
+		Seek_Tiers(CogRs_MOUV.Tiers)
+	endif
+
+	if ART.Dos <> CogRs_MOUV.Dos or ART.Ref <> CogRs_MOUV.Ref	
+		If Seek_ART(CogRs_MOUV.Ref) <> 0
+			Cog_EcritureLivreDeBord("Article " & left(CogRs_MOUV.Ref) & " absent de la base de données.")
+			FReturn(FALSE)
+		EndIf
+	endif
+
+	If ART.ProdNat1 not IN (C_PRODNAT_ACHETE, C_PRODNAT_FABRIQUE, C_PRODNAT_SERVICE)
+		FReturn(FALSE)
+	EndIf
+
+	; déjà chargé dans la boucle principale
+;	if (T020.Dos <> 999 and T020.Dos <> CogRs_MOUV.Dos) or T020.Op <> CogRs_MOUV.Op
+;		Lectab(20,CogRs_MOUV.Op)
+;	endif
+
+	if (T030.Dos<>999 and T030.Dos <> CogRs_MOUV.Dos) or T030.TvaT <> ENT.TvaTie
+		Lectab(30, ENT.TvaTie)
+	endif
+
+	Init Decr=' '
+
+	Decr.Cpt		= Condition(wTrait = C_TRAITEMENT_FNP, ART.CptA, ART.CptV)
+	Cog_Masquage_compte(Decr.Cpt, CogRs_OP.CptMsk, T030.CptMsk, CLI.CptMsk)
+
+	Decr.Sens		= Condition(CogRs_MOUV.Sens=C_entree,C_debit,C_credit)
+	
+	for i=1 to 4
+		if CogRs_MOUV.Axe(i)<>' '
+			Decr.AxeTb(i) 		=CogRs_MOUV.Axe(i) 
+			if CLI.axeno=i and CLI.AxeMsk<>' '
+				Cog_ApplicationMasque(Decr.AxeTb(i),CLI.AxeMsk)
+			endif
+		endif
+	next
+	
+	DEcr.Etb		= CogRs_MOUV.Etb
+	Decr.Dev		= CogRs_MOUV.Dev
+	Decr.Lib		= "BL " & CogRs_MOUV.BlNo & " - " & left(CogRs_MOUV.Ref)
+	P_Calculer_Montant_Ecriture(Decr.MtDev)
+
+	if CogRs_MOUV.dev <> CA.Dev
+		Decr.Mt = Convertir_MtDev_MtDev (Decr.MtDev, CogRs_MOUV.Dev, CA.Dev, ENT.PiDt)
+	else
+		Decr.Mt = Decr.MtDev
+	endif	
+
+	; calcul du montant de TVA
+	If ((T000.TabTyp(85) = 2 AND CogRs_TVA.Dos <> 999) OR (CogRs_TVA.Dos)) OR CogRs_TVA.TvaArt <> ART.TvaArt OR CogRs_TVA.TvaTie	<> ENT.TvaTie \
+		OR CogRs_TVA.EffetDt > ENT.PiDt
+		CogRs_TVA.Init()
+		CogRs_TVA.Where.RemoveCondition("")
+		CogRs_TVA.Where.Equal_TvaArt(ART.TvaArt)
+		CogRs_TVA.Where.AddCondition("Equal_TvaArt")
+		CogRs_TVA.Where.Equal_TvaTie(ENT.TvaTie)
+		CogRs_TVA.Where.AddCondition("Equal_TvaTie")
+		CogRs_TVA.Where.InfEqual_EffetDt(ENT.PiDt)
+		CogRs_TVA.Where.AddCondition("InfEqual_EffetDt")
+		CogRs_TVA.OrderBy.Par_CodeDate()
+		If CogRs_TVA.Select() = 0
+			FReturn(TRUE)	; 
+		EndIf
+	EndIf
+
+	Decr.TvaMtD = (Decr.Mt / 100) * CogRs_TVA.TvaP
+	Decr.TvaMt	= Decr.TvaMtD
+	If CogRs_MOUV.dev <> CA.Dev
+		Decr.TvaMt	= Convertir_MtDev_MtDev (Decr.TvaMtD, CogRs_MOUV.Dev, CA.Dev, ENT.PiDt)
+	EndIf
+	
+	FReturn(TRUE)
+
+EndF
+
+;*
+Procedure	P_insert_Liste_Decr
+;
+BeginP
+	ListInsert(idl_EcrDet,Decr)
+EndP
+
+;*
+Procedure	P_insert_Liste_CEcr_Cana
+;
+BeginP
+	Cecr=' '
+	Cecr.dev	 = Decr.dev
+	Cecr.Etb	 = DEcr.Etb
+	Cecr.cpt	 = Decr.cpt
+	Cecr.sens = Decr.sens
+
+
+	if ListSeek(idl_EcrCumul,Cecr,Cecr)>0
+		Cecr.mtdev	+= Decr.mtdev
+		Cecr.mt		+= Decr.mt
+		Cecr.TvaMt	+=	Decr.TvaMt
+		Cecr.TvaMtD	+=	Decr.TvaMtD
+		ListModify(idl_EcrCumul,Cecr)
+	else
+		Cecr=' '
+		Cecr.dev	 	= Decr.dev
+		Cecr.Etb		= DEcr.Etb
+		Cecr.cpt	 	= Decr.cpt
+		Cecr.sens 	= Decr.sens
+		Cecr.mtdev	= Decr.mtdev
+		Cecr.mt	 	= Decr.mt
+		Cecr.TvaMt	= Decr.TvaMt
+		Cecr.TvaMtD	= Decr.TvaMtD
+		ListInsert(idl_EcrCumul,Cecr)
+	endif
+
+	if Decr.axetb(*)<>' '
+		Cana=' '
+		Cana.dev			= Decr.dev
+		CAna.Etb			= DEcr.Etb
+		Cana.cpt			= Decr.cpt
+		Cana.sens		= Decr.sens
+		Cana.axetb(*)	= Decr.axetb(*)
+		
+		if ListSeek(idl_AnaCumul,Cana,Cana)>0
+			Cana.mtdev	+=Decr.mtdev		
+			Cana.mt		+=Decr.mt
+			ListModify(idl_AnaCumul,Cana)
+		else
+			CAna=' '
+			CAna.dev			= Decr.dev
+			CAna.Etb			= DEcr.Etb
+			CAna.cpt			= Decr.cpt
+			CAna.sens		= Decr.sens
+			CAna.axetb(*)	= Decr.axetb(*)
+			CAna.mtdev		= Decr.mtdev		
+			CAna.mt			= Decr.mt
+			ListInsert(idl_AnaCumul,CAna)
+		endif
+	endif
+EndP
+
+
+;*
+Procedure P_Ecrit_Decr_Ccfm
+;
+1	i		x
+BeginP
+	init C8			= ' '
+	C8.Ce1			= '8'
+	C8.Dos			= MZ.Dos
+	C8.Cpt			= Decr.cpt
+	C8.Jnl			= CogRs_JnlDst.Jnl
+	C8.EcrDt			= XQ_Cog.datF
+	C8.Sens			= Decr.sens
+	C8.Lib			= Wlib
+	C8.Dev			= Decr.dev
+	C8.Etb			= DEcr.Etb
+	C8.MtDev			= Decr.mtdev
+	C8.Mt				= Decr.mt
+	C8.EcrValNo		= Wecrvalno
+
+	if Decr.axetb(*)<>' '
+		Wecrno++
+		C8.EcrNo=Wecrno
+	  for i=1 to 4
+			C8.VtlCod(i)=condition(Decr.axetb(i)<>' ',2,1)
+		next
+	endif
+
+	Hwrite(CCFM,C8)	| Wnb_C8++
+	
+	if Decr.axetb(*)<>' '
+		init Cx		=' '
+		CX.Ce1		='2'
+		for i=1 to 4
+			CX.Axe(i)	=Decr.axetb(i)
+		next
+		CX.Dos		= C8.Dos
+		CX.Etb		= C8.Etb
+		CX.EcrNo		= C8.EcrNo
+		CX.Dev		= C8.Dev
+		CX.MtDev		= C8.MtDev
+		CX.Mt			= C8.Mt
+
+		Hwrite(CCFM,CX)	| Wnb_CX++
+	endif
+	
+	P_Calcul_Solde_Cp(DEcr.Sens, DEcr.Mt, DEcr.MtDev)
+	P_Calcul_Solde_Tva(Decr.sens, Decr.TvaMt, Decr.TvaMtD)
+
+EndP
+
+;*
+Procedure P_Ecrit_Cecr_Ccfm(WaxeFl)
+;
+1	WaxeFl	N
+1	i				x
+BeginP
+	init C8		= ' '
+	C8.Ce1		= '8'
+	C8.Dos		= MZ.Dos
+	C8.Cpt		= Cecr.cpt
+	C8.Jnl		= CogRs_JnlDst.Jnl
+	C8.EcrDt		= XQ_Cog.datF
+	C8.Sens		= Cecr.sens
+	C8.Lib		= Cecr.Lib
+	C8.Dev		= Cecr.dev
+	C8.Etb		= Cecr.Etb
+	C8.MtDev		= Cecr.mtdev
+	C8.Mt			= Cecr.mt
+	C8.EcrValNo	= Wecrvalno
+
+ 	if WaxeFl=2
+		Wecrno++
+		C8.EcrNo=Wecrno
+	endif
+
+	Hwrite(CCFM,C8)	| Wnb_C8++
+
+	txtDebug &= "- Cpt " & C8.Cpt & " Mt " & C8.Mt & " - " & C8.Lib 
+
+	P_Calcul_Solde_Cp(Cecr.Sens, Cecr.Mt, Cecr.MtDev)
+	P_Calcul_Solde_Tva(Cecr.sens, Cecr.TvaMt, Cecr.TvaMtD)
+
+EndP
+
+;*
+Procedure P_Ecrit_Cana_Ccfm
+;	Ventilations CX
+1	i				x
+BeginP
+	init Cx		=' '
+	CX.Ce1		='2'
+	for i=1 to 4
+		CX.Axe(i)	=Cana.axetb(i)
+	next
+	CX.Dos	= C8.Dos
+	CX.Etb	= C8.Etb
+	CX.Etb	= CAna.Etb
+	CX.EcrNo	= C8.EcrNo
+	CX.Dev	= Cana.Dev
+	CX.MtDev	= Cana.mtdev
+	CX.Mt		= Cana.mt
+	
+	Hwrite(CCFM,CX)	| Wnb_CX++
+EndP
+
+;*
+Procedure P_Contre_partie_Ccfm(Dev_Loc, Etb_Loc)
+;
+1	Dev_Loc	>ccfdd.dhsd		Dev
+1	Etb_Loc	>ccfdd.dhsd		Etb
+BeginP
+	init C8_CP			= ' '
+	C8_CP.Ce1			= '8'
+	C8_CP.Dos			= MZ.Dos
+	C8_CP.Cpt			= CogRs_C3Dst.Cpt
+	C8_CP.Jnl			= CogRs_JnlDst.Jnl
+	C8_CP.EcrDt			= XQ_Cog.datF
+	C8_CP.Lib			= Wlib
+	C8_CP.Dev			= Dev_Loc
+	C8_CP.Etb			= Etb_Loc
+	C8_CP.Sens			= condition(Wmtsld < 0 , C_debit, C_credit)
+	C8_CP.MtDev			= Abs(WmtdevSld)
+	C8_CP.Mt				= Abs(Wmtsld)
+	C8_CP.EcrValNo		= Wecrvalno
+
+	Hwrite(CCFM,C8_CP)	| Wnb_C8++
+EndP
+
+
+;*
+Procedure	P_Traite_Liste_Decr
+;	Traitement des C8 détaillés
+1	Wdev	>gtfdd.dhsd	Dev
+1	wEtb	>ccfdd.dhsd	Etb
+BeginP
+	GetAdressfunction(' ', 'Tri_L_Decr', Adr_Tri)
+	Listsort(idl_EcrDet,Adr_Tri)
+
+	stl_Decr=ListFirst(idl_EcrDet,Decr)
+	Do While stl_Decr not in (0,-1)
+		Wecrvalno++	
+		Wdev = Decr.dev
+		wEtb = DEcr.Etb
+
+		Cog_Insert_List_Impression(C_BLOC_ETB, DEcr.Cpt, DEcr.Dev, DEcr.Etb, "", 0, 0) 
+
+		Do While stl_Decr not in (0,-1) and DEcr.Etb = wEtb AND Decr.dev = Wdev
+			P_Ecrit_Decr_Ccfm
+			Cog_Insert_List_Impression(C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens) 
+			stl_Decr=ListNext(idl_EcrDet,Decr)
+		Wend
+		P_Ecrit_C8_Tva_CCFM(wDev, wEtb)
+		Cog_Insert_List_Impression(C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens) 	
+		P_Calcul_Solde_Avec_Tva
+		if WmtSld<>0
+			P_Contre_partie_Ccfm(Wdev, wEtb)
+			Cog_Insert_List_Impression(C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens) 	
+			Wmtdeb=0 | Wmtdevdeb=0 | Wmtcre=0 | Wmtdevcre=0  
+			WmtSld=0 | WmtdevSld=0
+		endif
+	Wend
+EndP
+
+;*
+Procedure P_Traite_Liste_CEcr_Cana
+;	Traitement des C8 regroupés
+1	Wdev		>gtfdd.dhsd	Dev
+1	Wetb		>gtfdd.dhsd	Etb
+1	WaxeFl	1,0
+1	i				x
+BeginP
+	stl_Cecr=ListFirst(idl_EcrCumul,Cecr)
+	Do While stl_Cecr not in (0,-1)
+		Wecrvalno++	
+		Wdev = Cecr.dev
+		Wetb = Cecr.Etb
+		Cog_Insert_List_Impression(C_BLOC_ETB, "", Cecr.Dev, Cecr.Etb, "", 0, 0) 
+		Do While stl_Cecr not in (0,-1) and Cecr.Etb = Wetb AND Cecr.dev=Wdev
+			
+			;--------reperage si analytique
+			WaxeFl=1
+			Cana = ' '
+			CAna.Etb			= Cecr.Etb
+			Cana.Dev			= Cecr.Dev
+			Cana.Cpt			= Cecr.Cpt
+			Cana.Sens		= Cecr.Sens
+			stl_Cana=ListSearch(idl_AnaCumul,Cana,Cana)
+			if stl_Cana not in (0,-1) and CAna.Etb = Cecr.Etb AND Cana.Dev = Cecr.Dev and Cana.cpt = Cecr.Cpt and Cana.Sens = Cecr.Sens
+				WaxeFl=2	
+			endif
+ 
+			;--------Ecriture C8
+			P_Ecrit_Cecr_Ccfm(WaxeFl)
+
+			; -- détail pour impression --
+			ListBegin(idl_EcrDet)
+			Do WHile ListNext(idl_EcrDet, DEcr) not IN (-1, 0)
+
+				If DEcr.Etb & DEcr.Dev & decr.Cpt & DEcr.Sens = Cecr.Etb & Cecr.Dev & Cecr.Cpt & Cecr.Sens
+					Cog_Insert_List_Impression(C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens) 
+					ListDeleteAndPrevious(idl_EcrDet)
+				EndIf
+
+			WEnd
+
+			;--------Ecriture CX du C8
+			if WaxeFl=2
+				Cana=' '
+				CAna.Etb		= Cecr.Etb
+				Cana.dev		= Cecr.dev
+				Cana.cpt		= Cecr.cpt
+				Cana.sens	= Cecr.sens
+				stl_Cana = ListSearch(idl_AnaCumul,Cana,Cana)
+				Loop stl_Cana not in (0,-1) and CAna.Etb = Cecr.Etb AND Cana.Dev = Cecr.Dev and CAna.Cpt = Cecr.Cpt and Cana.Sens = Cecr.Sens
+					P_Ecrit_Cana_Ccfm
+					stl_Cana=ListNext(idl_AnaCumul,Cana)
+				EndLoop
+			endif
+
+			stl_Cecr=ListNext(idl_EcrCumul,Cecr)
+		Wend
+
+		P_Ecrit_C8_Tva_CCFM(Wdev, Wetb)
+		Cog_Insert_List_Impression(C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens) 	
+		P_Calcul_Solde_Avec_Tva
+
+		if WmtSld<>0
+			P_Contre_partie_Ccfm(Wdev, Wetb)
+			Cog_Insert_List_Impression(C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens) 	
+			Wmtdeb=0 | Wmtdevdeb=0 | Wmtcre=0 | Wmtdevcre=0  
+			WmtSld=0 | WmtdevSld=0
+		endif
+
+	Wend
+EndP
+
+
+;*
+;	Traitements
+;*
+
+;*
+Procedure Cog_Traitement_Boucle_Principale
+;	Boucle de lecture sur les codes opération paramétrés pour la génération des écritures
+;	Puis boucle de lecture sur les mouvements	associés au code opération
+1	wPicod		>gtfdd.dhsd	picod	=	'3'
+1	Cle_Max		256
+1	Werr			x=$00
+1	Wret			1,0  	= FALSE
+1	wTrait		1,0
+Beginp
+	Cog_EcritureLivreDeBord("--> " & Left(mz.titre2))
+	wTrait =  Cog_LireProgrammeTypeTrt
+	;--------initialisation
+	Herase(CCFM)
+	Wnb_mouv = 0
+	Wnb_ent	= 0
+
+	idl_ent = ListGetId("COG_LISTE_ENT")
+	ListErase(idl_ent)
+	GetAdressFunction(' ', 'TRI_L_ENT', Adr_Tri)
+	ListMode(idl_ent, 1, Adr_Tri)
+
+	lId_IMP = ListGetId("COG_LISTE_IMPC8")
+	ListErase(lId_IMP)
+
+
+	idl_EcrCumul = ListGetId("COG_LISTE_CECR")
+	ListErase(idl_EcrCumul)
+	GetAdressfunction(' ', 'Tri_L_Cecr', Adr_Tri)
+	Listmode(idl_EcrCumul,1,Adr_Tri)
+
+	idl_AnaCumul = ListGetId("COG_LISTE_CANA")
+	ListErase(idl_AnaCumul)
+	GetAdressfunction(' ', 'Tri_L_Cana', Adr_Tri)
+	Listmode(idl_AnaCumul,1,Adr_Tri)
+
+	idl_EcrDet = ListGetId("COG_LISTE_DECR")
+	ListErase(idl_EcrDet)
+	
+	
+	; Lecture des codes OP
+	CogRs_OP.Init()
+	CogRs_OP.Where.RemoveCondition("")
+	readOP = CogRs_OP.ReaderOpen()
+	If Cog_LireProgrammeTypeTrt = C_TRAITEMENT_FNP
+		CogRs_OP.Where.Equal_FNP()
+		CogRs_OP.Where.AddCondition("Equal_FNP")
+	Else
+		CogRs_OP.Where.Equal_FAE() 	
+		CogRs_OP.Where.AddCondition("Equal_FAE")
+	EndIF
+	CogRs_OP.ReaderSelect(readOP)
+
+	Do While CogRs_OP.ReaderNext(readOP)
+
+		Cog_AfficherTraitement
+		; lecture MOUV
+		CogRs_MOUV_Init_Selection
+		readMOUV = CogRs_MOUV.ReaderOpen()
+		CogRs_MOUV.ReaderSelect(readMOUV)
+
+		Do While CogRs_MOUV.ReaderNext(readMOUV) > 0 AND not wErr
+			
+			Cog_AfficherTraitement
+			; chargement ENT
+			If ENT.Dos <> CogRs_MOUV.Dos OR ENT.TiCod <>  CogRs_MOUV.Ticod OR ENT.PiCod <> CogRs_MOUV.PiCod	OR ENT.PiNo <> CogRs_MOUV.BlNo
+				If Seek_ENT(CogRs_MOUV.Ticod , CogRs_MOUV.PiCod	, CogRs_MOUV.BlNo) <> 0
+ 					wErr++
+				EndIf
+			EndIF
+
+			; resa + sauvegarde 
+			If ListSeek(idl_ent, ENT, ENT_SEEK)	in (-1, 0)
+				If Res_ENT(ENT.TiCod, ENT.PiCod, ENT.PiNo) = 0
+					ListInsert(idl_ent, ENT)
+					Wnb_ent++
+				Else
+					wErr++
+				EndIF
+			EndIf
+			
+			; recherche info C8
+			if CogRs_MOUV.Mont > 0 AND F_init_Decr AND not Werr
+			
+				If DEcr.Mt > 0
+					Wnb_mouv++ 
+					P_insert_Liste_Decr
+					if (wTrait = C_TRAITEMENT_FNP AND CA.Cog_FnpRgpFlag = 2) OR (wTrait = C_TRAITEMENT_FAE AND CA.Cog_FaeRgpFlag = 2)
+						P_insert_Liste_Cecr_Cana
+					endif
+				EndIf
+
+			EndIf
+
+		WEnd
+
+		CogRs_MOUV.ReaderClose(readMOUV)
+
+	WEnd
+
+	CogRs_OP.ReaderClose(readOP)
+
+	; fin sur erreur --> libération des pièces
+	If Werr > 0
+		Erreur++
+		ListBegin(idl_ent)
+		Loop ListNext(idl_ent,ENT) not in (0,-1)
+			Lib_Ent(ENT.TiCod, ENT.PiCod, ENT.PiNo)
+		EndLoop
+
+		Cog_EcritureLivreDeBord('Au moins un bon de livraison fournisseur est réservé, Abandon du traitement')
+		if not tunnel
+			MessageBox('Au moins un bon de livraison fournisseur est réservé, Abandon du traitement', 'Information', MB_Iconinformation)
+		endif
+
+		Preturn
+
+	Endif
+
+	;
+	if Wnb_mouv > 0 
+		if (wTrait = C_TRAITEMENT_FNP AND CA.Cog_FnpRgpFlag = 2) OR (wTrait = C_TRAITEMENT_FAE AND CA.Cog_FaeRgpFlag = 2)
+			P_Traite_Liste_Cecr_Cana
+		else
+			P_Traite_Liste_Decr
+		endif
+	endif
+	
+	;--------Intégration ccfm
+	If Wnb_mouv>0 and Wnb_C8>0	AND XQ_Cog.Choix(1) = C_PRGMODE_INTC8
+		Hclose(CCFM)
+
+		Pinglocal('ZONEMZ',MZ)
+		MZ.Param = "1"						; si erreur ne rien importer , marche avec le ccut029
+		Ping('SIMUL',MZ.Param)
+
+		C3_Integration(CCFM.name)
+		PinglocalReceiveAndDelete('ZONEMZ',MZ)
+		If Pongreceive("erreurs",wErr) = 0 and wErr > 0
+			; rejet des écritures - tracé en standard dans le livre de bord
+			Werr++
+			erreur++
+		Else
+			Wret = TRUE
+			CogRs_Mouv_Init_Selection
+			CogRs_MOUV.InitForUpdateWhere()
+			CogRs_MOUV.Cog_EcrDt = Today
+			CogRs_MOUV.UpdateWhere()
+		EndIf
+
+		Hopen(CCFM,"R")
+	ElsIf	XQ_Cog.Choix(1) = C_PRGMODE_SIMUL
+	 	Wret = TRUE
+	Else
+		Cog_EcritureLivreDeBord('Aucune écriture à générer')	
+	Endif
+
+	;--------Libération des resa ENT
+	ListBegin(idl_ent)
+	Do While ListNext(idl_ent,ENT) not in (0,-1)
+		Lib_Ent(ENT.TiCod, ENT.PiCod, ENT.PiNo)
+	WEnd
+
+	; Impression
+	Cog_Print_Rapport_CCFM(wRet)
+
+
+	;------
+	ListDestroy(idl_ent)
+	ListDestroy(idl_EcrCumul)
+	ListDestroy(idl_AnaCumul)
+	ListDestroy(idl_EcrDet)
+	
+	Cog_EcritureLivreDeBord("<-- " & Left(mz.titre2) & ' : ' & right(Wnb_ent) & ' BLs lus' & ', ' & right(Wnb_C8) & ' Ecritures' )
+	if not tunnel
+		messagebox(Left(mz.titre2) & ' : ' & right(Wnb_ent) & ' BLs lus' & ', ' & right(Wnb_C8) & ' Ecritures','Information',mb_iconinformation)
+	endif
+		
+Endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+Function bin Cog_SaisiePage1(Page,Seq,Mode)
+;
+1	Page		2,0	=1
+1	seq			2,0	=1
+1	Mode		1,0	=xme_mode_goto
+
+1 fin			b=$00
+
+BeginF
+	xmeinput(mz.mecle, Page, Seq, Mode)
+
+	do
+		switch harmony.key            ;tests des causes de l'interruption
+	
+			case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
+				endif
+			
+			case k_f7                ;zoom généralisé
+				Zoom_Call()
+			
+			case k_f8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			case k_f9                ;abandon
+				fin = 9
+		
+			case vsw in (k_f10,k_tab,k_return,k_down)
+				if messagebox("Lancer le traitement ?","Confirmation",mb_yesno+mb_iconquestion)=idyes
+					G3_OpenTrace(2,3,4)
+					Cog_Traitement_Boucle_Principale
+					G3_CloseTrace()
+					if erreur
+						messagebox("Des erreurs ont été détectées.|Consultez le livre de bord","Alerte",mb_iconexclamation)
+					endif
+					fin=1									;Validation
+				endif
+
+		endswitch
+
+	while not fin
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+	
+	Freturn(fin)
+EndF
+
+
+;*
+;	Programme principal
+;*
+main
+	
+	if pingreceive("Cog_xq", XQ_Cog) = 0 | tunnel=true | endif
+	
+	if Cog_InitialiserVariables
+
+		if not tunnel 
+			Cog_SaisiePage1()
+		Else
+			Cog_Traitement_Boucle_Principale
+		endif
+	
+	endif
+
+	Programexit
+
+
+
+		

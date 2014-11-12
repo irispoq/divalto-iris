@@ -1,0 +1,52 @@
+;>xdiva
+;*
+;*      Zoom sur Tables code opération Enregistrement CodeOperation de GTFTAB                    
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		mjv		4.1						01.1999	Version initiale en Diva 
+
+
+SetModuleInfo('$Id$')
+
+OverWrittenBy "COG_GTUZ060_sql.dhop"
+
+Include "GTTCZ00.dhsp"			;déclarations communes
+
+Module 	CCTM000.dhop
+Module 	A5PMNoteJoint.dhop
+Module 	XZOOM7.dhop
+
+; TDF
+HFileVersion 	GTFDD.dhsd 	GTFTAB
+
+; RecordSQL
+Public RecordSQL "gtrstab.dhoq" CodeOperation CodeOperation			
+Public RecordSQL "gtrstab.dhoq" CodeOperation Code_Op_Sel
+
+; Variables
+1		CeBin			>GTFDD.dhsd	CeBin			; CE binaire
+1		NbSel			4,0							; Nombre de lignes sélectionnées
+1		Dos			>GTFDD.dhsd	Dos			; Dossier
+1		tiCod			>GTFDD.dhsd TiCod			; Type de tiers
+
+;*
+;* procedures 
+;*
+		 
+;*
+Public Procedure Cog_Controler_Fnp_Fae
+;
+BeginP
+
+	Switch CodeOperation.TiCod
+		Case not 'C'
+			CodeOperation.Cog_FaeFlag = 1
+
+		Case not 'F'
+			CodeOperation.Cog_FnpFlag = 1
+
+	EndSwitch
+
+EndP

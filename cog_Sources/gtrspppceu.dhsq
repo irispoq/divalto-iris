@@ -21,8 +21,6 @@
 <WHERE>
 	Case Equal_Ce2(char ce2)
 		MOUV.CE2 = ce2
-	Case FNP_FAE_Non_Traite
-		MOUV.COG_ECRFLAG <> 2
 <ORDERBY>
 	Case Ordre_FNP_FAE
 		MOUV.DOS,

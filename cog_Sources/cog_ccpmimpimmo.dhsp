@@ -1,0 +1,1021 @@
+
+SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 7009 2014-11-12 13:04:46Z admin $')
+;*
+;* cog_ccpmimpimmo					Procedure de traitement des champs importés (avant ou aprés saisie)
+;*
+;* Créé			le 	23/08/2010		Par	MN								initial
+;* Modifié		le		jj_mm_aaaa		Par	XX								Objet
+;*							
+
+include	"cctc000.dhsp"
+include  "cctc700.dhsp"
+
+module	ccpm700.dhop
+module	cctm700.dhop
+
+hfile	ccfdd.dhsd		ccfimmo	ccfimmo
+
+public record	ccfdd.dhsd		cd
+public record	ccfdd.dhsd		i1
+public record	ccfdd.dhsd		i2
+public record	ccfdd.dhsd		i3
+public record	ccfdd.dhsd		c3										; intitulé de compte
+
+;*
+;* fonction interne de contrôle repris de Divalto
+;*
+
+function int Calcul_Possible
+
+; vérifie que tous les paramètres nécessaires au calcul des cumuls sont renseignés
+; et que l'on a le droit de saisir ou modifier les cumuls
+
+; true	tous les paramètres sont renseignés
+; false	il manque des paramètres
+
+beginf	; calcul_possible
+
+	if I1.ECOTYP < 1			|	freturn(false)	|	endif
+	if I1.FISTYP < 1			|	freturn(false)	|	endif
+	if I1.ACQDT = ' '			|	freturn(false)	|	endif
+	if I1.ECOTYP = 3			|	freturn(false)	|	endif
+	if I1.FISTYP = 3			|	freturn(false)	|	endif
+
+	if I1.ECOTYP <> 4
+		if I1.ECOBAS = 0		|	freturn(false)	|	endif
+		if I1.ECODUR = 0		|	freturn(false)	|	endif
+		switch I1.ECOTYP
+		case 1
+			if I1.SVCDT = ' '	|	freturn(false)	|	endif
+		case 2
+			if I1.ECOCOE = 0	|	freturn(false)	|	endif
+		case 3
+			if I1.SVCDT = ' '	|	freturn(false)	|	endif
+			if I1.DOTECO = 0	|	freturn(false)	|	endif
+		case 5
+			if I1.UOCODE = ' '|	freturn(false)	|	endif
+		endswitch
+	endif
+
+	if I1.FISTYP <> 4
+		if I1.FISBAS = 0		|	freturn(false)	|	endif
+		if I1.FISDUR = 0		|	freturn(false)	|	endif
+		switch I1.FISTYP
+		case 1
+			if I1.SVCDT = ' '	|	freturn(false)	|	endif
+		case 2
+			if I1.FISCOE = 0	|	freturn(false)	|	endif
+		case 3
+			if I1.SVCDT = ' '	|	freturn(false)	|	endif
+			if I1.DOTFIS = 0	|	freturn(false)	|	endif
+		endswitch
+	endif
+
+	freturn(true)
+
+endf		; calcul_possible
+
+;*
+function int Reglage_Acces_Cumuls
+
+; renvoie true ou false selon que l'on peut ou pas modifier les reports
+
+; on ne peut saisir les reports que si les conditions suivantes sont réunies :
+; - au moins un des modes d'amortissements (économique ou fiscal) doit être différent de "sans"
+; - lorsque les modes d'amortissements économique et fiscal sont identiques, la date de mise en service
+;   (pour le linéaire et le manuel) ou la date d'acquisition (pour le dégressif) doit être inférieure au
+;   début de l'exercice en cours
+; - lorsque les modes d'amortissements économique et fiscal sont différents, la date de mise en service
+;   doit être inférieure au début de l'exercice en cours
+; - si l'enregistrement report existe déjà, il doit être le seul enregistrement existant pour le bien
+
+beginf
+
+	; On vérifie que le bien est amortissable (les biens 'en construction' ne doivent pas être calculés)
+	if Verifier_Bien_Amortissable = false
+		freturn(false)
+	endif
+
+	if I1.ECOTYP = 4 and I1.FISTYP = 4	|	freturn(false)	|	endif
+
+	if I1.ECOTYP = I1.FISTYP
+		if I1.ECOTYP <> 2 and I1.SVCDT >= CD.EXODDT	|	freturn(false)	|	endif
+		if I1.ECOTYP =  2 and I1.ACQDT >= CD.EXODDT	|	freturn(false)	|	endif
+	else
+		if I1.SVCDT >= CD.EXODDT and not((I1.ECOTYP = 2 or I1.FISTYP = 2) and I1.ACQDT < CD.EXODDT)
+			freturn(false)
+		endif
+	endif
+
+	freturn(true)
+endf
+
+
+
+;*
+public procedure Enregistrer_Cumuls
+
+; après une création, met à jour l'enregistrement report s'il y a lieu
+
+beginp	; enregistrer_cumuls
+
+	if not Reglage_Acces_Cumuls  \
+			and (I1.ECOTYP <> 4 or I1.SVCDT >= CD.EXODDT)	\	; pas à cause de la méthode
+			and (I1.FISTYP <> 4 or I1.SVCDT >= CD.EXODDT)
+
+		preturn
+	endif
+
+	; il faut créer un enregistrement i2 pour stocker les reports
+
+	I2					= ' '
+	I2.CE1			= '2'
+	I2.CE2			= '1'									; identifie un cumul
+	I2.DOS			= I1.DOS
+	I2.Etb			= I1.Etb
+	I2.IMMO			= I1.IMMO
+	I2.IMMOCOMP		= I1.IMMOCOMP
+	I2.EXODDT		= I1.EXODDT							; dates début et fin de l'exercice "report"
+	I2.EXOFDT		= I1.EXOFDT
+	
+	I2.USERCR		= SYSTEM.USER
+	I2.USERCRDH		= I1.USERCRDH
+	I2.USERCRORI	= I1.USERCRORI
+	I2.USERMO		= SYSTEM.USER
+	I2.USERMODH		= I1.USERMODH
+	I2.USERMOORI	= I1.USERMOORI	
+
+	I2.ECONOMIQUE	= I1.ECONOMIQUE
+	I2.ECOLINTAU	= ' '																										;2476
+	I2.RESFINMT 	= I1.RESFINMT
+	if I1.UOCODE <> ' ' 									; test uniquement s'il y a un plan UO
+		I2.UOCODE		= I1.UOCODE
+		if Rechercher_PlanUO(I1.UOCODE)=0					; recherche du plan UO 'valide' actuel
+			I2.EFFETDT	=  I3.EFFETDT						; recup de sa date d'effet pour identification (UOCODE+EFFETDT)
+		else
+			pinglocal('RetErreur', "E;Aucun plan UOCODE valide trouvé : incoherence" )
+			preturn
+		endif
+	endif
+	I2.FISCAL		= I1.FISCAL
+	I2.FISLINTAU	= ' '																										;2476
+	I2.DEROG			= I1.DEROG
+
+	if I1.ECOTYP = 4
+		I2.EXODDT	= I1.EXOPDT
+		I2.EXOFDT	= hdate(CD.EXODDT, -1)
+		I2.ECODDT	= I2.EXODDT
+		I2.ECOFDT	= I2.EXOFDT
+	elsif I2.ECOTOTMT = ' '
+		I2.ECONOMIQUE = ' '
+	endif
+
+	if I1.FISTYP = 4
+		I2.EXODDT	= I1.EXOPDT
+		I2.EXOFDT	= hdate(CD.EXODDT, -1)
+		I2.FISDDT	= I2.EXODDT
+		I2.FISFDT	= I2.EXOFDT
+	elsif I2.FISTOTMT = ' '
+		I2.FISCAL = ' '
+	endif
+
+	if I1.ECOTYP = 4 or I2.ECOTOTMT or I1.FISTYP = 4 or I2.FISTOTMT
+		hwrite(CCFIMMO, I2)
+	endif
+
+endp		; enregistrer_cumuls
+
+;*
+;* Procedures de traitement de simulation de saisie
+;*
+public procedure ImpCreation
+;Après la saisie du champ immoComp
+hfile		ccfdd.dhsd		ccfimmo		ccfimmo
+record	ccfdd.dhsd		i1				lI1
+
+beginp
+
+	;I1.Immo et I1.ImmoComp sont déjà renseignés on continu l'initialisation
+
+	I1.DOS			= MZ.DOS
+	I1.CE1			= '1'									; enregistrement immobilisation
+	I1.CE3			= '1'									; bien actif
+	I1.EXODDT		= CD.EXODDT							; date début exercice
+	I1.EXOFDT		= CD.EXOFDT							; date fin exercice
+	I1.Etb			= MZ.EtbC3
+	I1.IMMODT		= CD.EXODDT							; date d'effet=debut exercice courant
+	I1.ETAT			= 1									; état en cours
+	I1.POSITION    = 1									; position non amorti
+	I1.CALCUL		= 2									; à recalculer
+	I1.EXOPDT	   = CD.EXODDT
+	I1.ECOTYP		= 1									; mode économique = linéaire
+	I1.FISTYP		= 1									; mode fiscal = linéaire
+	I1.CENOTE		= 1
+	I1.NOTE			= 0
+	I1.ImmoComp    = 0									;sera alimenté si <> 0
+	
+	if i1.Immo <> ''
+		;il ne faut pas de doublon
+		if hseek(CCFIMMO, lI1, [ 'B' MZ.DOS I1.Immo I1.ImmoComp ], 'F') = 0 and lI1.DOS = MZ.DOS
+			pinglocal('RetErreur',"E;Doublon")
+		endif
+	else
+		if hpread(CCFIMMO, I1, [ 'B' MZ.DOS $FF ], 'F') = 0 and I1.DOS = MZ.DOS
+			lI1.IMMO = I1.IMMO + 1
+		else
+			lI1.IMMO = 1
+		endif
+	endif
+
+endp
+
+;*
+public procedure ImpApresCreation
+beginp
+	Enregistrer_Cumuls	
+endp
+
+;*
+public procedure Champ_NatImmo_1_Ap
+beginp
+		
+endp
+
+
+;*
+public procedure Champ_Etat_1_Ap
+beginp
+	if I1.ETAT not in (1,4)												; seuls les état 'en-cours'(1) ou 'en construction' sont autorisés
+		I1.ETAT = 1
+		pinglocal('RetErreur',"I;Seuls les états <en-cours> ou <en construction> sont autorisés (valeur forcée)")
+	endif
+
+endp
+
+;*
+public procedure Champ_Cr_1_Ap
+beginp
+	if I1.CR <= 0
+		pinglocal('RetErreur',"E;Le coût de revient doit être positif")
+		preturn
+	endif
+
+	if I1.CR > 0
+		I1.BTPMT		= I1.CR
+		I1.ECOBAS	= I1.CR
+		I1.ECORESMT	= I1.CR
+		I1.FISBAS	= I1.CR
+		I1.FISRESMT	= I1.CR
+		I1.POSITION = Position_Bien(I1.POSITION, I1.ECORESMT, I1.RESFINMT)
+	endif
+
+endp
+
+;*
+public procedure Champ_AcqDt_1_Ap
+
+; après date d'acquisition
+
+beginp	; Champ_AcqDt_1_Ap
+
+	if I1.ACQDT = ' '
+		pinglocal('RetErreur',"E;Donnée obligatoire ne peut être laissée vide")
+		preturn
+	endif
+
+	I1.EXOPDT = Debut_Exercice(I1.ACQDT)
+;	I1.EXOPDT = left(I1.AcqDt,4) & "0101"
+
+	if I1.SVCDT < I1.ACQDT
+		if Verifier_Bien_Amortissable
+			I1.SVCDT = I1.ACQDT
+			I1.ECOAMDT = I1.ACQDT
+		else
+			; le bien n'est pas amortissable ('en construction' par exemple)
+			I1.SVCDT = hdate('99991231')
+			I1.ECOAMDT = I1.SVCDT
+		endif
+	endif
+
+endp		; Champ_AcqDt_1_Ap
+
+;*
+public procedure Champ_SvcDt_1_Ap
+
+; après date de mise en service
+
+beginp	; Champ_SvcDt_1_Ap
+
+	if I1.SVCDT < I1.ACQDT
+		pinglocal('RetErreur',"E;La mise en service doit être postérieure à l acquisition")
+		preturn
+	endif
+
+	if I1.SVCDT < CD.EXOFDT \
+		and Verifier_Bien_Amortissable = false
+		;"Le bien n'est pas amortissable, il ne peut pas être mis en service durant l'exercice courant"
+		pinglocal('RetErreur',"E;Le bien n est pas amortissable: il ne peut pas être mis en service durant l exercice courant")
+		preturn
+	endif
+
+	if I1.ECOAMDT < I1.SVCDT
+		I1.ECOAMDT = I1.SVCDT
+	endif
+
+endp		; Champ_SvcDt_1_Ap
+
+;*
+public procedure Champ_EcoAmDt_1_Ap
+
+; après date de debut d'amortissement
+
+beginp	; Champ_EcoAmDt_1_Ap
+
+	if I1.ECOAMDT < I1.SVCDT
+		pinglocal('RetErreur',"E;Le début d amortissement ne peut être inférieur à la mise en service")
+		preturn
+	endif
+
+endp		; Champ_EcoAmDt_1_Ap
+
+;*
+public procedure Champ_Cpt_1_Ap
+
+; après compte d'immobilisation
+
+beginp	; Champ_Cpt_1_Ap
+
+	if I1.Cpt = ''
+		pinglocal('RetErreur', "E;Donnée obligatoire ne peut être laissée vide")
+		preturn
+	endif
+
+	if Controle_Compte(I1.CPT, etablissement = True, etb = I1.Etb, err=0) >= 2
+		pinglocal('RetErreur', "E;Compte d immobilisation inconnu")
+	endif
+
+endp		; Champ_Cpt_1_Ap
+
+;*
+public procedure Champ_CptAux_1_Ap
+
+; après compte auxiliaire fournisseur
+
+beginp	; Champ_CptAux_1_Ap
+
+	if I1.CPTAUX <> ' '
+		if Controle_Compte(I1.CPTAUX, CPTNAT = 4, conf=false, etablissement = True, etb = I1.Etb,err=0) >= 2
+			I1.CptAux = ''
+			pinglocal('RetErreur', "I;Compte auxiliaire fournisseur inconnu (valeur forcée à vide)")
+		endif
+	endif
+
+endp		; Champ_CptAux_1_Ap
+
+;*
+public procedure Champ_EcoBas_1_Ap
+
+; après base d'amortissement économique
+
+beginp	; Champ_EcoBas_1_Ap
+
+	if I1.ECOBAS < 0
+		pinglocal('RetErreur', "E;La base d amortissement doit être positive")
+		preturn
+	endif
+
+	if I1.EcoBas <> I1.Cr
+		if	Calcul_Possible
+			Dotations_Cumuls
+		endif
+	endif
+
+endp		; Champ_EcoBas_1_Ap
+
+;*
+public procedure Champ_EcoTyp_1_Ap
+
+; après méthode d'amortissement économique
+
+beginp	; Champ_EcoTyp_1_Ap
+
+	if i1.EcoTyp = ''
+		pinglocal('RetErreur', "E;Donnée obligatoire ne peut être laissée vide")	
+		preturn
+	endif
+
+	if I1.ECOTYP = 5 and CD.IFRSFL = 1
+		pinglocal('RetErreur', "E;Le dossier n adhère pas aux normes IFRS, cette fonction est inhibée")
+		preturn
+	endif
+
+	if I1.ECOTYP <> 3	|	I1.DOTECO = ' '	|	endif
+	if I1.ECOTYP = 4	|	I1.ECODUR = ' '	|	endif
+
+
+endp		; Champ_EcoTyp_1_Ap
+
+;*
+public procedure Champ_DotEco_1_Ap
+
+; apres dotation manuelle économique
+
+beginp
+
+	if I1.ECOTYP <> 3
+		I1.DOTECO = ' '
+	endif
+
+endp
+
+;*
+public procedure Champ_EcoDur_1_Ap
+
+; après durée de vie économique
+
+beginp	; Champ_EcoDur_1_Ap
+
+	if I1.ECODUR = 0
+		pinglocal('RetErreur', "E;La durée de vie doit être renseignée")
+		preturn
+	endif
+
+	if I1.ECODUR < 0
+		pinglocal('RetErreur', "E;La durée de vie doit être positive")
+		preturn
+	endif
+
+	if I1.ECOTYP = 2 and I1.ECODUR < 3
+		pinglocal('RetErreur', "E;La durée de vie ne peut être inférieure à 3 ans")
+		preturn
+	endif
+
+	if	Reglage_Parametres(C_Plan_Eco, I1.ECOTYP, I1.ECODUR, I1.ECOCOE, I1.ECOTAU, I1.DOTECO, I1.UOCODE, I1.ACQDT, I1.SVCDT) and I1.ECOBAS and I1.ECOTYP <> 3 and I1.FISTYP <> 3
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_EcoDur_1_Ap
+
+;*
+public procedure Champ_UoCode_1_Ap
+
+; apres saisie plan d'unité d'oeuvre
+
+beginp	; Champ_UoCode_1_Ap
+
+	if I1.ECOTYP <> 5
+		I1.UoCode = ''
+		preturn
+	endif
+
+	if Rechercher_PlanUO(I1.UoCode)<> 0
+		pinglocal('RetErreur', "E;Plan d unité d oeuvre inexistant")
+		preturn
+	endif
+
+	if	Reglage_Parametres(C_Plan_Eco, I1.ECOTYP, I1.ECODUR, I1.ECOCOE, I1.ECOTAU, I1.DOTECO, I1.UOCODE, I1.ACQDT, I1.SVCDT) and I1.ECOBAS and I1.ECOTYP <> 3 and I1.FISTYP <> 3
+		Dotations_Cumuls
+	endif
+
+
+endp		; Champ_UoCode_1_Ap
+
+;*
+public procedure Champ_ResFinMt_1_Ap
+
+; apres saisie valeur residuelle attendue
+
+beginp	; Champ_ResFinMt_1_Ap
+
+	if I1.RESFINMT < 0
+		; 'La valeur doit être positive ou nulle'
+		pinglocal('RetErreur', "I;La valeur doit être positive ou nulle (forcée à 0)")
+		I1.ResFinMt = 0
+	endif
+
+endp
+
+;*
+public procedure Champ_FisBas_1_Ap
+
+; après base d'amortissement fiscale
+
+beginp	; Champ_FisBas_1_Ap
+
+	if I1.FISBAS < 0
+		pinglocal('RetErreur', "E;La base d amortissement doit être positive")
+		preturn
+	endif
+
+	if I1.FisBas <> I1.EcoBas
+		if	Calcul_Possible
+			Dotations_Cumuls
+		endif
+	endif
+
+endp		; Champ_FisBas_1_Ap
+
+;*
+public procedure Champ_FisTyp_1_Ap
+
+; après méthode d'amortissement fiscale
+
+beginp	; Champ_FisTyp_1_Ap
+
+	if I1.FISTYP = 5 and CD.IFRSFL = 1
+		pinglocal('RetErreur', "E;Le dossier n adhère pas aux normes IFRS, cette fonction est inhibée")
+		preturn
+	endif
+
+	if I1.EcoTyp < 3 and I1.FisTyp in (3..5)
+		I1.FisTyp = I1.EcoTyp
+		pinglocal('RetErreur', "I;Attention, la méthode d amortissement fiscal ne peut être manuel que si l'économique est manuel. (forcée à économique)")
+	elsif I1.EcoTyp = 3 and I1.FisTyp <> 3
+		I1.FisTyp = 3
+		pinglocal('RetErreur', "I;Attention, la méthode d amortissement fiscal est forcé à manuelle. (économique manuelle)")
+	endif
+
+	if I1.FISTYP <> 3	|	I1.DOTFIS = ' '	|	endif
+	if I1.FISTYP = 4	|	I1.FISDUR = ' '	|	endif
+
+	if	Reglage_Parametres(C_Plan_Fiscal, I1.FISTYP, I1.FISDUR, I1.FISCOE, I1.FISTAU, I1.DOTFIS, I1.UOCODE, I1.ACQDT, I1.SVCDT) and I1.FISBAS and I1.ECOTYP <> 3 and I1.FISTYP <> 3
+		Dotations_Cumuls
+	endif
+
+endp		; Champ_FisTyp_1_Ap
+
+;*
+public procedure Champ_DotFis_1_Ap
+
+; avant dotation manuelle fiscale
+
+beginp
+
+	if I1.FISTYP <> 3
+		I1.DOTFIS = ' '
+	endif
+
+endp
+
+;*
+public procedure Champ_FisDur_1_Ap
+
+; après durée de vie fiscale
+
+beginp
+
+	if I1.FISDUR = 0
+		pinglocal('RetErreur', "E;La durée de vie doit être renseignée")
+		preturn
+	endif
+
+	if I1.FISDUR < 0
+		pinglocal('RetErreur', "E;La durée de vie doit être positive")
+		preturn
+	endif
+
+	if I1.FISTYP = 2 and I1.FISDUR < 3
+		pinglocal('RetErreur', "E;La durée de vie ne peut être inférieure à 3 ans")
+		preturn
+	endif
+
+	if	Reglage_Parametres(C_Plan_Fiscal, I1.FISTYP, I1.FISDUR, I1.FISCOE, I1.FISTAU, I1.DOTFIS, I1.UOCODE, I1.ACQDT, I1.SVCDT) and I1.FISBAS and I1.ECOTYP <> 3 and I1.FISTYP <> 3
+		Dotations_Cumuls
+	endif
+
+endp
+
+;*
+public procedure Champ_ExoDDT_1_Ap
+1	exoddt	>ccfdd.dhsd		exoddt
+beginp
+	if pinglocalreceiveanddelete("ctrlvaleur",exoddt) = 0
+		if I1.EcoTyp = 3
+			if exoddt = ''
+				pinglocal('RetErreur', "E;La date d exercice est obligatoire pour le type MANUEL.")
+			else
+				I1.ExoDDt = exoddt
+			endif
+		endif
+	endif
+endp
+
+;*
+public procedure Champ_ExoFDt_1_Ap
+; après date fin exercice
+
+1	exofdt	>ccfdd.dhsd		exofdt
+beginp
+	if pinglocalreceiveanddelete("ctrlvaleur",exofdt) = 0
+		if I1.EcoTyp = 3
+			if exofdt = ''
+				pinglocal('RetErreur', "E;La date d exercice est obligatoire pour le type MANUEL.")
+			else
+				I1.ExoFDt = exofdt
+				if I1.EXOFDT < I1.EXODDT
+					pinglocal('RetErreur', "E;La date de fin est inférieure à la date de début")
+				endif
+			endif
+		endif
+	endif
+endp
+
+;*
+public procedure Champ_EcoDDt_1_Ap
+
+; après date début période économique
+1	ecoddt	>ccfdd.dhsd		ecoddt
+beginp	; Champ_EcoDDt_1_Ap
+
+	if pinglocalreceiveanddelete("ctrlvaleur",ecoddt) = 0
+		if I1.EcoTyp = 3
+			if ecoddt = ''
+				pinglocal('RetErreur', "E;La date de période économique est obligatoire pour le type MANUEL.")
+			else
+				I1.EcoDDt = ecoddt
+			endif
+		endif
+	endif
+endp		; Champ_EcoDDt_1_Ap
+
+
+;*
+public procedure Champ_EcoFDt_1_Ap
+
+; après date fin période économique
+1	ecofdt	>ccfdd.dhsd		ecofdt
+beginp
+	
+	if pinglocalreceiveanddelete("ctrlvaleur",ecofdt) = 0 
+		if I1.EcoTyp = 3
+			if ecofdt = ''
+				pinglocal('RetErreur', "E;La date de période économique est obligatoire pour le type MANUEL.")
+			else
+				I1.EcoFDt = ecofdt
+				if I1.ECOFDT < I1.ECODDT
+					pinglocal('RetErreur', "E;La date de fin est inférieure à la date de début")
+					preturn
+				endif
+				I1.ECOJOURNB = dtsub(I1.ECODDT, I1.ECOFDT)
+			endif
+		endif
+	endif
+endp	
+
+;*
+public procedure Champ_EcoLinMt_1_Ap
+
+; après total des dotations linéaires économiques
+1	strmtdot							20
+1	ecolinmt		>ccfdd.dhsd		ecolinmt
+beginp	; Champ_EcoLinMt_1_Ap
+
+	if pinglocalreceiveanddelete("ctrlvaleur",strmtdot) = 0
+		ecolinmt = val(strmtdot)
+		if ecolinmt <> 0	and I1.EcoTyp <> 1
+			pinglocal('RetErreur', "I;Attention, montant de dotation linéaire économimique alors que le type est différent . (forcée à 0)")
+			preturn
+		elsif ecolinmt = 0
+			preturn
+		endif
+	
+		I1.EcoLinMt = ecolinmt
+	
+		I1.ECOTOTMT = I1.ECOLINMT + I1.ECODEGMT + I1.ECOMANMT + I1.ECOPUOMT + I1.ECOEXCMT
+		I1.ECORESMT = I1.ECOBAS - I1.ECOTOTMT
+		if I1.ECOTYP <> 4 and I1.FISTYP <> 4
+			I1.DEROG	= I1.FISTOTMT - I1.ECOTOTMT
+		endif
+		I1.POSITION = Position_Bien(I1.POSITION, I1.ECORESMT, I1.RESFINMT)
+	endif
+endp		; Champ_EcoLinMt_1_Ap
+
+;*
+public procedure Champ_EcoDegMt_1_Ap
+
+; après total des dotations dégressives économiques
+1	strmtdot							20
+1	ecodegmt		>ccfdd.dhsd		ecodegmt
+beginp	; Champ_EcoDegMt_1_Ap
+
+	if pinglocalreceiveanddelete("ctrlvaleur",strmtdot) = 0
+		ecodegmt = val(strmtdot)	
+		if ecodegmt <> 0 and I1.EcoTyp <> 2
+			pinglocal('RetErreur', "I;Attention, montant de dotation dégressive économimique alors que le type est différent . (forcée à 0)")
+			preturn
+		elsif ecodegmt = 0
+			preturn
+		endif
+
+		I1.EcodegMt = ecodegmt
+	
+		I1.ECOTOTMT = I1.ECOLINMT + I1.ECODEGMT + I1.ECOMANMT + I1.ECOPUOMT + I1.ECOEXCMT
+		I1.ECORESMT = I1.ECOBAS - I1.ECOTOTMT
+		if I1.ECOTYP <> 4 and I1.FISTYP <> 4
+			I1.DEROG	= I1.FISTOTMT - I1.ECOTOTMT
+		endif
+		I1.POSITION = Position_Bien(I1.POSITION, I1.ECORESMT, I1.RESFINMT)
+	endif
+
+endp		; Champ_EcoDegMt_1_Ap
+
+;*
+public procedure Champ_EcoManMt_1_Ap
+
+; après total des dotations manuelles économiques
+1	strmtdot							20
+1	ecomanmt		>ccfdd.dhsd		ecomanmt
+beginp	; Champ_EcoManMt_1_Ap
+
+	if pinglocalreceiveanddelete("ctrlvaleur",strmtdot) = 0	
+		ecomanmt = val(strmtdot)
+		if ecomanmt <> 0 and I1.EcoTyp <> 3
+			pinglocal('RetErreur', "I;Attention, montant de dotation manuelle économimique alors que le type est différent . (forcée à 0)")
+			preturn
+		elsif ecomanmt = 0
+			preturn
+		endif
+
+		I1.EcoManMt	= ecomanmt
+	
+		I1.ECOTOTMT = I1.ECOLINMT + I1.ECODEGMT + I1.ECOMANMT + I1.ECOPUOMT + I1.ECOEXCMT
+		I1.ECORESMT = I1.ECOBAS - I1.ECOTOTMT
+		if I1.ECOTYP <> 4 and I1.FISTYP <> 4
+			I1.DEROG	= I1.FISTOTMT - I1.ECOTOTMT
+		endif
+		I1.POSITION = Position_Bien(I1.POSITION, I1.ECORESMT, I1.RESFINMT)
+	endif
+
+endp		; Champ_EcoManMt_1_Ap
+
+;*
+public procedure Champ_EcoPuoMt_1_Ap
+
+; après total des dotations plan UO économiques
+
+beginp	; Champ_EcoPuoMt_1_Ap
+
+	I1.ECOTOTMT = I1.ECOLINMT + I1.ECODEGMT + I1.ECOMANMT + I1.ECOPUOMT + I1.ECOEXCMT
+	I1.ECORESMT = I1.ECOBAS - I1.ECOTOTMT
+	if I1.ECOTYP <> 4 and I1.FISTYP <> 4
+		I1.DEROG	= I1.FISTOTMT - I1.ECOTOTMT
+	endif
+	I1.POSITION = Position_Bien(I1.POSITION, I1.ECORESMT, I1.RESFINMT)
+
+endp		; Champ_EcoPuoMt_1_Ap
+
+;*
+public procedure Champ_FisDDt_1_Ap
+
+; après date début période fiscale
+1	fisddt	>ccfdd.dhsd		fisddt
+beginp
+	if pinglocalreceiveanddelete("ctrlvaleur",fisddt) = 0
+		if I1.FisTyp = 3
+			if fisddt = ''
+				pinglocal('RetErreur', "E;La date de période fiscale est obligatoire pour le type MANUEL.")
+			else
+				I1.FisDDt = fisddt
+			endif
+		endif
+	endif
+endp
+
+;*
+public procedure Champ_FisFDt_1_Ap
+
+; après date fin période fisnomique
+1	fisfdt	>ccfdd.dhsd		fisfdt
+beginp
+
+	if pinglocalreceiveanddelete("ctrlvaleur",fisfdt) = 0
+		if I1.FisTyp = 3
+			if fisfdt = ''
+				pinglocal('RetErreur', "E;La date de période fiscale est obligatoire pour le type MANUEL.")
+			else
+				I1.FisFDt = fisfdt
+	
+				if I1.FISFDT < I1.FISDDT
+					pinglocal('RetErreur', "E;La date de fin est inférieure à la date de début")
+					preturn
+				endif
+			
+				I1.FISJOURNB = dtsub(I1.FISDDT, I1.FISFDT)
+			endif
+		endif
+	endif
+endp	
+
+;*
+public procedure Champ_FisLinMt_1_Ap
+
+; après total des dotations linéaires fiscales
+1	strmtdot							20
+1	fislinmt		>ccfdd.dhsd		fislinmt
+beginp	; Champ_FisLinMt_1_Ap
+
+	if pinglocalreceiveanddelete("ctrlvaleur",strmtdot) = 0
+		fislinmt = val(strmtdot)	
+		if fislinmt <> 0 and I1.FisTyp <> 1
+			pinglocal('RetErreur', "I;Attention, montant de dotation manuelle fiscale alors que le type est différent . (forcée à 0)")
+			preturn
+		elsif fislinmt = 0
+			preturn
+		endif
+
+		I1.FisLinMt = fislinmt
+	
+		I1.FISTOTMT = I1.FISLINMT + I1.FISDEGMT + I1.FISMANMT + I1.FISEXCMT
+		I1.FISRESMT = I1.FISBAS - I1.FISTOTMT
+		if I1.ECOTYP <> 4 and I1.FISTYP <> 4
+			I1.DEROG	= I1.FISTOTMT - I1.ECOTOTMT
+		endif
+	endif
+endp		; Champ_FisLinMt_1_Ap
+
+;*
+public procedure Champ_FisDegMt_1_Ap
+
+; après total des dotations dégressives fiscales
+1	strmtdot							20
+1	fisdegmt		>ccfdd.dhsd		fisdegmt
+beginp	; Champ_FisDegMt_1_Ap
+
+	if pinglocalreceiveanddelete("ctrlvaleur",strmtdot) = 0
+		fisdegmt = val(strmtdot)
+		if fisdegmt <> 0 and I1.FisTyp <> 2
+			pinglocal('RetErreur', "I;Attention, montant de dotation manuelle fiscale alors que le type est différent . (forcée à 0)")
+			preturn
+		elsif fisdegmt = 0
+			preturn
+		endif
+
+		I1.FisDegMt = fisdegmt
+	
+		I1.FISTOTMT = I1.FISLINMT + I1.FISDEGMT + I1.FISMANMT + I1.FISEXCMT
+		I1.FISRESMT = I1.FISBAS - I1.FISTOTMT
+		if I1.ECOTYP <> 4 and I1.FISTYP <> 4
+			I1.DEROG	= I1.FISTOTMT - I1.ECOTOTMT
+		endif
+	endif
+endp		; Champ_FisDegMt_1_Ap
+
+;*
+public procedure Champ_FisManMt_1_Ap
+
+; après total des dotations manuelles fiscales
+1	strmtdot							20
+1	fismanmt		>ccfdd.dhsd		fismanmt
+beginp	; Champ_FisManMt_1_Ap
+
+	if pinglocalreceiveanddelete("ctrlvaleur",strmtdot) = 0	
+		fismanmt = val(strmtdot)
+		if fismanmt <> 0 and I1.FisTyp <> 3
+			pinglocal('RetErreur', "I;Attention, montant de dotation manuelle fiscale alors que le type est différent . (forcée à 0)")
+			preturn
+		elsif fismanmt = 0
+			preturn
+		endif
+
+		I1.FisManMt = fismanmt
+	
+		I1.FISTOTMT = I1.FISLINMT + I1.FISDEGMT + I1.FISMANMT + I1.FISEXCMT
+		I1.FISRESMT = I1.FISBAS - I1.FISTOTMT
+		if I1.ECOTYP <> 4 and I1.FISTYP <> 4
+			I1.DEROG	= I1.FISTOTMT - I1.ECOTOTMT
+		endif
+	endif
+endp		; Champ_FisManMt_1_Ap
+
+;*
+procedure Controle_Compte_Local(&compte,libcpterr)
+1	compte		>ccfdd.dhsd		cptamo
+1	libcpterr						A
+beginp
+
+	if Controle_Compte(compte,nonvide=0, etablissement = True, etb = I1.Etb,err=0)>=2
+		pinglocal('RetErreur', "I;Le compte " & left(libcpterr) & " est inconnu. Valeur forcée à vide")
+		compte = ''
+	endif
+
+endp
+
+;*
+public procedure Champ_CptAmo_1_Ap
+
+;	Après saisie compte d'amortissement
+
+beginp	; Champ_CptAmo_1_Ap
+
+	Controle_Compte_Local(I1.CPTAMO, "d amortissement")
+
+endp		; Champ_CptAmo_1_Ap
+
+
+;*
+public procedure Champ_CptDotAmo_1_Ap
+
+;	Après saisie compte de dotation aux amortissements
+
+beginp	; Champ_CptDotAmo_1_Ap
+
+	Controle_Compte_Local(I1.CPTDOTAMO, "de dotation aux amortissements") 
+
+endp		; Champ_CptDotAmo_1_Ap
+
+
+;*
+public procedure Champ_CptProDro_1_Ap
+
+;	Après saisie compte de provision pour amortissement dérogatoire
+
+beginp	; Champ_CptProDro_1_Ap
+
+	Controle_Compte_Local(I1.CPTPRODRO, "de provision pour amortissement dérogatoire" )
+
+endp		; Champ_CptProDro_1_Ap
+
+
+;*
+public procedure Champ_CptDotDro_1_Ap
+
+;	Après saisie compte de dotation aux amortissements dérogatoires
+
+beginp	; Champ_CptDotDro_1_Ap
+
+	Controle_Compte_Local(I1.CPTDOTDRO, "de dotation aux amortissements dérogatoires" )
+
+endp		; Champ_CptDotDro_1_Ap
+
+
+;*
+public procedure Champ_CptRepDro_1_Ap
+
+;	Après saisie compte de reprise sur amortissement dérogatoire
+
+1		wcpt		>CCFDD.dhsd	CPT
+
+beginp	; Champ_CptRepDro_1_Ap
+
+	Controle_Compte_Local(I1.CPTREPDRO, "de reprise sur amortissement dérogatoire")
+
+endp		; Champ_CptRepDro_1_Ap
+
+
+;*
+public procedure Champ_CptProDep_1_Ap
+
+;	Après saisie compte de provision pour dépréciation des immo.
+
+1		wcpt		>CCFDD.dhsd	CPT
+
+beginp	; Champ_CptProDep_1_Ap
+
+	Controle_Compte_Local(I1.CPTPRODEP, "de provision pour dépréciation des immo")
+
+endp		; Champ_CptProDep_1_Ap
+
+
+;*
+public procedure Champ_CptDotDep_1_Ap
+
+;	Après saisie compte de dotation pour dépréciation
+
+1		wcpt		>CCFDD.dhsd	CPT
+
+beginp	; Champ_CptDotDep_1_Ap
+
+	Controle_Compte_Local(I1.CPTDOTDEP, "de dotation pour dépréciation")
+
+endp		; Champ_CptDotDep_1_Ap
+
+
+;*
+public procedure Champ_CptDotRep_1_Ap
+
+;	Après saisie compte de reprise de dépréciation
+
+1		wcpt		>CCFDD.dhsd	CPT
+
+beginp	; Champ_CptDotRep_1_Ap
+	
+	Controle_Compte_Local(I1.CPTDOTREP, "de reprise de dépréciation" )
+
+endp		; Champ_CptDotRep_1_Ap
+
+;*
+public procedure Champ_Axe_1_Ap
+
+; après code axe
+1	DATAIND1			x
+beginp	; Champ_Axe_1_Ap
+	if pinglocalreceiveanddelete("dataind",DATAIND1) = 0 and DATAIND1 in (1..index(i1.Axe(),1) )
+		if I1.AXE(DATAIND1) <> ' '
+			if Controle_Axe(DATAIND1, I1.AXE(DATAIND1), conf=false, axetyp=1, etablissement = True, etb = I1.Etb,err=0) <> 0
+				pinglocal('RetErreur', "I;L Axe n° " & nospaces(str(DATAIND1)) & " est inconnu. Valeur forcée à vide")
+				I1.Axe(DATAIND1) = ''
+			endif
+		endif
+	endif
+endp		; Champ_Axe_1_Ap
+

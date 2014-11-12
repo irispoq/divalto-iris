@@ -1,0 +1,45 @@
+;>xdiva
+SetModuleInfo('$Id$')
+;*
+;*      Zoom sur Tables code opération Enregistrement CodeOperation de GTFTAB                    
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		YLEF		P205A						10.2014	Controle des cac FAE/FNP
+
+OverWrite gttz060_sql.dhop
+
+;
+Include "GTTCZ00.dhsp"			;déclarations communes
+ 
+;
+Module 	"COG_GTTZ060_SQL.DHOP"
+
+; RecordSQL
+Public RecordSQL "gtrstab.dhoq" CodeOperation CodeOperation	
+ 
+;*
+;*
+;*
+
+;*
+Procedure ZoomAvantWrite
+;
+BeginP
+ 
+	Standard.ZoomAvantWrite
+	Cog_Controler_Fnp_Fae
+
+EndP
+
+;*
+Procedure ZoomAvantRewrite
+;
+BeginP
+
+	Standard.ZoomAvantRewrite
+	Cog_Controler_Fnp_Fae
+
+EndP
+
