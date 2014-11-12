@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20141103111636      
+;>xwin4obj                              7.0       20141112144026      
 [masque]
- utilisateur="UGIE"
- date_modification="03/11/2014"
+ utilisateur="UGIE_YLF"
+ date_modification="12/11/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=1000092
@@ -184,6 +184,14 @@
    texte="/"
  [obj_texte]
   [presentation]
+   position=46,240
+   taille=9,61
+   id=1181
+   wstyle="STD"
+  [texte]
+   texte="Devise"
+ [obj_texte]
+  [presentation]
    position=47,10
    taille=9,42
    id=972
@@ -192,7 +200,7 @@
    texte="Dépôt"
  [obj_texte]
   [presentation]
-   position=47,96
+   position=47,88
    taille=9,38
    noms="depodest"
    id=1209
@@ -217,20 +225,20 @@
    texte="Encours Assurance"
  [obj_texte]
   [presentation]
-   position=56,240
-   taille=9,61
-   id=1181
-   wstyle="STD"
-  [texte]
-   texte="Devise"
- [obj_texte]
-  [presentation]
    position=57,10
    taille=9,60
    id=1000004
    wstyle="STD"
   [texte]
    texte="Mode règlement"
+ [obj_texte]
+  [presentation]
+   position=57,214
+   taille=9,17
+   id=1000066
+   wstyle="STD"
+  [texte]
+   texte="Nature"
  [obj_texte]
   [presentation]
    position=64,316
@@ -260,7 +268,7 @@
    texte="A échéance le"
  [obj_texte]
   [presentation]
-   position=67,96
+   position=67,88
    taille=9,60
    noms="cog_f0;cog_c2"
    id=1000030
@@ -270,11 +278,11 @@
  [obj_texte]
   [presentation]
    position=67,214
-   taille=9,17
-   id=1000066
+   taille=9,22
+   id=1000064
    wstyle="STD"
   [texte]
-   texte="Nature"
+   texte="REQ IWS"
  [obj_texte]
   [presentation]
    position=75,316
@@ -295,12 +303,13 @@
    texte="Fin validité"
  [obj_texte]
   [presentation]
-   position=77,214
-   taille=9,22
-   id=1000064
+   position=77,88
+   taille=9,46
+   noms="cog_f0"
+   id=1000090
    wstyle="STD"
   [texte]
-   texte="REQ IWS"
+   texte="N° ID Basware"
  [multi_choix]
   [presentation]
    position=4,250
@@ -559,171 +568,6 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
- [champ]
-  [presentation]
-   position=47,50
-   taille=9,32
-   id=973
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,depo,ent
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [aide_page]
-   aide=4119
-   fichier="GTFAIDE"
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   f8=9866
-   ctrl_p=1
-   ctrl_f6=10300
-   shift_f5=149
-   shift_f6=5503
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Depo_1_Av"
-   diva_apres="Champ_Depo_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=47,136
-   taille=9,32
-   noms="depodest"
-   id=1211
-   colonnes_saisie=3
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,blasdepo,ent
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f5=6999
-   f7=3499
-   f8=9866
-   shift_f1=1
-  [traitements]
-   diva_avant="Champ_Depo_3_Av"
-   diva_apres="Champ_Depo_4_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=57,50
-   taille=9,32
-   id=1000006
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,regl,ent
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=4137
-   fichier="GTFAIDE"
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   f8=9046
-   ctrl_p=1
-   ctrl_f6=10300
-   shift_f5=149
-   shift_f6=5503
-   shift_f8=9068
-  [traitements]
-   microbol_click=6001
-   diva_apres="Champ_Regl_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=67,50
-   taille=9,32
-   noms="cog_notc1"
-   id=1000033
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,echdt,ent
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [aide_page]
-   aide=4100
-   fichier="GTFAIDE"
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   ctrl_p=1
-   ctrl_f6=10300
-   shift_f5=149
-   shift_f6=5503
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_EchDt_1_Av"
- [champ]
-  [presentation]
-   position=67,147
-   taille=9,54
-   noms="cog_f0;cog_c2"
-   id=1000031
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,deldemdt,ent
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [aide_page]
-   aide=4336
-   fichier="GTFAIDE"
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f5=145
-   shift_f6=5503
-  [traitements]
-   microbol_click=4010
-   diva_apres="Champ_DelDemDt_2_Ap"
- [multi_choix]
-  [presentation]
-   position=67,240
-   taille=9,60
-   id=1000065
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,su_nature,ent
-  [param_saisie]
-   esp_si_zero=oui
-  [param_multi]
-   choix="su_gtfdmc.dhfi","NATURE"
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=77,50
-   taille=9,32
-   noms="cog_c1"
-   id=1000015
-   colonnes_saisie=10
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,cog_validite,ent
-  [param_saisie]
-   obligatoire=oui
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f1=1
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Cog_Validite_1_Av"
-   diva_apres="Champ_Cog_Validite_1_Ap"
  [case_a_cocher]
   [presentation]
    position=38,198
@@ -769,7 +613,59 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=56,262
+   position=47,50
+   taille=9,32
+   id=973
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,depo,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4119
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9866
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Depo_1_Av"
+   diva_apres="Champ_Depo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=47,128
+   taille=9,32
+   noms="depodest"
+   id=1211
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,blasdepo,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=6999
+   f7=3499
+   f8=9866
+   shift_f1=1
+  [traitements]
+   diva_avant="Champ_Depo_3_Av"
+   diva_apres="Champ_Depo_4_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=46,262
    taille=9,18
    id=1189
    wstyle="CHAMP_SAISI"
@@ -795,6 +691,134 @@
    diva_apres="Champ_Dev_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=57,50
+   taille=9,32
+   id=1000006
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,regl,ent
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=4137
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9046
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+   shift_f6=5503
+   shift_f8=9068
+  [traitements]
+   microbol_click=6001
+   diva_apres="Champ_Regl_1_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=57,240
+   taille=9,60
+   id=1000065
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,su_nature,ent
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="su_gtfdmc.dhfi","NATURE"
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=67,50
+   taille=9,32
+   noms="cog_notc1"
+   id=1000033
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,echdt,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=4100
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EchDt_1_Av"
+ [champ]
+  [presentation]
+   position=67,139
+   taille=9,54
+   noms="cog_f0;cog_c2"
+   id=1000031
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,deldemdt,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=4336
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=145
+   shift_f6=5503
+  [traitements]
+   microbol_click=4010
+   diva_apres="Champ_DelDemDt_2_Ap"
+ [champ]
+  [presentation]
+   position=77,50
+   taille=9,32
+   noms="cog_c1"
+   id=1000015
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,cog_validite,ent
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cog_Validite_1_Av"
+   diva_apres="Champ_Cog_Validite_1_Ap"
+ [champ]
+  [presentation]
+   position=77,139
+   taille=9,161
+   noms="cog_f0"
+   id=1000091
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=ent,cog_bwid,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
  [champ]
   [presentation]
    position=64,355
@@ -1000,7 +1024,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=57,94
+   position=57,86
    taille=9,121
    id=1000005
    wstyle="CHAMP_AFF"
@@ -1049,7 +1073,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=77,240
+   position=67,240
    taille=9,60
    id=1000063
    colonnes_saisie=30
@@ -1267,15 +1291,6 @@
    wstyle="STD"
   [texte]
    texte="Pièce associée"
- [obj_texte]
-  [presentation]
-   position=113,12
-   taille=9,42
-   noms="cog_f0"
-   id=1000090
-   wstyle="STD"
-  [texte]
-   texte="N° ID Basware"
  [obj_texte]
   [presentation]
    position=139,249
@@ -1839,21 +1854,6 @@
    wstyle="CHAMP_SAISI"
   [description]
    donnee=ent,su_destinataire,ent
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=113,50
-   taille=9,144
-   noms="cog_f0"
-   id=1000091
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_SAISI"
-  [description]
-   donnee=ent,cog_bwid,ent
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]

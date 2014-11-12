@@ -276,7 +276,6 @@ BeginF
 	EndIf
 
 	wRs_IMMO.NatImmo		= Art.NatImmo
-	wRs_IMMO.BlNo			= G1t1.BlNo
 	wRs_IMMO.AcqDt			= G1T1.BlDt
 	wRs_IMMO.SvcDt			= G1T1.BlDt
 	wRs_IMMO.Lib			= G1T1.Ref
@@ -288,7 +287,9 @@ BeginF
 	wRs_IMMO.CrelTLib(1) = "Valeur d'entrée initiale"
 	wRs_IMMO.Serie			= wMVTL.Serie
 	wRs_IMMO.Axe(1)		= G1t1.Axe(1)
-	wRs_IMMO.Axe(2)		= G1t1.Axe(2)
+	wRs_IMMO.Axe(2)		= G1t1.Projet; #RECETTE G1t1.Axe(2)
+	wRs_IMMO.Axe(3)		= G1t1.Axe(3)
+	wRs_IMMO.Axe(4)		= G1t1.Axe(4)
 	wRs_IMMO.CptAux		= G1T1.Tiers
 	wRs_IMMO.Cpt			= ART.Cog_CptIA
 	wRs_IMMO.EnrNo			= G1T1.EnrNo

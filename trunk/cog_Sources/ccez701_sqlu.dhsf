@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20141021142357      
+;>xwin4obj                              7.0       20141112150221      
 [masque]
- utilisateur="UGIE"
- date_modification="21/10/2014"
+ utilisateur="UGIE_YLF"
+ date_modification="12/11/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
- dernier_id=1000021
+ dernier_id=1000025
  surcharge=oui
  date_modif_base="20130227140720"
  dernier_id_page=100000
@@ -2490,6 +2490,14 @@
    texte="No de Bl"
  [obj_texte]
   [presentation]
+   position=106,120
+   taille=9,26
+   id=1000022
+   wstyle="STD"
+  [texte]
+   texte="N° Facture"
+ [obj_texte]
+  [presentation]
    position=116,13
    taille=9,52
    id=1000014
@@ -2589,6 +2597,34 @@
    defaut="            0,0000000000"
   [param_multi]
    choix="ccfdmc.dhfi","POSITION"
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=106,66
+   taille=9,30
+   id=1000024
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,mvblno,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=106,150
+   taille=9,30
+   id=1000025
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,mvfano,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
   [touches]
    f1=1
  [champ]
@@ -3183,21 +3219,6 @@
    diva_apres="Champ_Axe_1_Ap"
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=106,66
-   taille=9,28
-   id=1000012
-   colonnes_saisie=8
-   wstyle="COG_CHAMP_NON_SAISI"
-  [description]
-   donnee=immo,blno,immobilisation
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f1=1
 [page]
  numero=12
  libelle="Elements financiers"
