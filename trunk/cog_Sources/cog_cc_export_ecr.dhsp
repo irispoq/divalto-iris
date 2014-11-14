@@ -266,7 +266,8 @@ While x_st_01 = 0 And C8_DEV_01.Dos = t_Dos And C8_DEV_01.Ce1 = t_Ce1_01
 		;*
 		;	Filtres
 		;*
-		if c4_dev_01.JnlTyp = 2 and c4_dev_01.Cog_ExportAnael = 2
+		;if c4_dev_01.JnlTyp = 2 and c4_dev_01.Cog_ExportAnael = 2
+		if c4_dev_01.Cog_ExportAnael = 2	 ; YLEF #demande U GIE 11/2014
 
 			;*
 			; Alimentation de la ligne à exporter
