@@ -8,6 +8,7 @@
 module	"ccpmfic.dhop"
 module	"gtpmfic.dhop"
 module	"gttm000.dhop"
+Module	"Cogtm_000.Dhop"
 
 public record	ccfdd.dhsd	ca
 public record	ccfdd.dhsd	c3
@@ -75,9 +76,13 @@ beginp
 		ligne = Left(ligne) & Left(ca.Cog_Dos_Anael) & Left(sep_c)
 		ligne = Left(ligne) & Left(c8_loc.Etb) & Left(sep_c)
 		ligne = Left(ligne) & condition(cx_loc="",condition(left(c8_loc.Cpt,1) in ("C","F"),Left(condition(c8_loc.CptCol<>"",c8_loc.CptCol,c3.CptCol)),left(c8_loc.Cpt)),"") & Left(sep_c)
+		
+		Cog_EcritureLivreDeBord("Mode not fixe -> c3.TvaCod = "&Left(c3.TvaCod))
 		if c3.TvaCod <> "" and lectab(85,c3.TvaCod) = 0
+			Cog_EcritureLivreDeBord("Mode not fixe -> Lectab T085 OK, valeur Cog_Anael_Corr =  "&Left(t085.Cog_Anael_Corr))
 			ligne = Left(ligne) & condition(cx_loc="",left(t085.Cog_Anael_Corr),"") & Left(sep_c)
 		else
+			Cog_EcritureLivreDeBord("Mode not fixe -> Lectab T085 NON OK")
 			ligne = Left(ligne) & condition(cx_loc="",condition(left(c8_loc.Cpt,1) in ("C","F"),Right(c8_loc.Cpt,5),""),"") & Left(sep_c)
 		endif
 		ligne = Left(ligne) & val(year(c8_loc.EcrDt)) & Left(sep_c)
@@ -307,6 +312,8 @@ beginp
 				endloop
 			elsif left(mid(ligne,11,6),1) = "7" and c3.TvaCod not in("","*") and lectab(85,c3.TvaCod) = 0
 				mid(ligne,17,8)	= t085.Cog_Anael_Corr
+				Cog_EcritureLivreDeBord("Mode fixe -> lectab t085 OK")	; YATO 13/11/2014
+
 			elsif left(mid(ligne,11,6),4) in ("4458","4678")
 				ccfecr_rec.Key	= "H" & c8_loc.Dos & c8_loc.EcrNo
 				loop not hread(ccfecr_rec,c8_rec) and ccfecr_rec.Key <= "H" & c8_loc.Dos & c8_loc.EcrNo & $FF
@@ -426,6 +433,7 @@ beginp
 		if OrigineAppel = 1
 			lectab(85,c3.TvaCod)
 			mid(ligne,197,1)	= t085.Cog_Anael_Corr
+			Cog_EcritureLivreDeBord("Mode fixe -> lectab t085 OK suit origine Appel = 1")	; YATO 13/11/2014
 		endif
 		mid(ligne,207,1)		= "0"
 		mid(ligne,215,1)		= "0"

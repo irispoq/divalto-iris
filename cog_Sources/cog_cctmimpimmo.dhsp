@@ -1,0 +1,22 @@
+
+SetModuleInfo('$Id: cog_cctmimpimmo.dhsp 6948 2014-11-04 13:56:11Z m.renaut $')
+;*
+;* cog_cctmimpimmo					Procedure de traitement des champs importés (avant ou aprés saisie)
+;*
+;* Créé le	22/10/2012		Par	MN								initial
+;* Modifié		le				Par				Objet
+;*							
+
+OverWrittenBy	cog_ccumimpimmo.dhop
+
+;*
+public procedure I1_Write_Av
+;Permet de taiter des données supplémentaires
+beginp
+endp
+
+;*
+public procedure I1_Write_Ap
+;Après insertion de l'enregistrement I1. Permet de synchroniser des données supplémentaires
+beginp
+endp

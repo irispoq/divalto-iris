@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20140424094018      
+;>xwin4obj                              7.0       20141124102850      
 [masque]
  libelle="plan comptable"
- utilisateur="UGIE"
- date_modification="24/04/2014"
+ utilisateur="UGIE_YLF"
+ date_modification="24/11/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=323
  type_masque=2
- dernier_id=1000009
+ dernier_id=1000011
  surcharge=oui
  date_modif_base="20130213123018"
  dernier_id_page=100000
@@ -2836,8 +2836,8 @@
    texte="Compte collectif"
  [obj_texte]
   [presentation]
-   position=137,6
-   taille=9,48
+   position=137,5
+   taille=9,51
    id=1000001
    wstyle="STD"
   [texte]
@@ -3753,22 +3753,6 @@
    diva_avant="Champ_Sens_1_Av"
  [champ]
   [presentation]
-   position=124,92
-   taille=9,221
-   id=847
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=compte,cpt_collectif_lib,compte
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f7=8000
-   shift_f6=10000
- [champ]
-  [presentation]
    position=124,55
    taille=9,36
    noms="cptnat"
@@ -3793,6 +3777,37 @@
    diva_apres="Champ_CptCol_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=137,55
+   taille=9,36
+   id=1000010
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=compte,cog_cptanael,compte
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=124,92
+   taille=9,221
+   id=847
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=compte,cpt_collectif_lib,compte
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=135,113
@@ -3817,21 +3832,6 @@
   [traitements]
    microbol_click=8002
    diva_avant="Champ_GrpCptCod_1_Av"
- [champ]
-  [presentation]
-   position=136,56
-   taille=9,33
-   id=1000002
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI_COG"
-  [description]
-   donnee=c3,cog_cptanael,c3
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f7=8000
-   shift_f6=10010
 [page]
  numero=12
  libelle="Fiche compte"
@@ -5559,15 +5559,13 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=172,183
-   taille=9,60
-   attache_y=oui
-   cadrage=gauche
-   id=1000005
+   position=172,184
+   taille=9,46
+   id=1000011
    colonnes_saisie=14
-   wstyle="CHAMP_NON_SAISI_COG"
+   wstyle="COG_CHAMP_NON_SAISI"
   [description]
-   donnee=c3,cog_etldateimport,c3
+   donnee=compte,cog_etldateimport,compte
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5575,9 +5573,7 @@
   [touches]
    f1=1
    f7=8000
-   shift_f6=10010
-  [info_bulle]
-  texte="ETL - Date de dernière importation"
+   shift_f6=10000
 [page]
  numero=15
  fond="STD"

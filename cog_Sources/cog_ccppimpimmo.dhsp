@@ -1,0 +1,770 @@
+SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 6948 2014-11-04 13:56:11Z m.renaut $')
+
+;*
+;* Programme qui permet d'intégrer des immos dans Divalto Compta
+;*
+;* Créé le	_10/2010			Par			SR		Initial
+;*
+;* Modifié		le				Par			Objet
+;*				09/10/2012		MN			A partir du fichier cogcc_pp_import_immo : Entèrement revu. Alimentation et calcal des données 
+;*												de l'immobilisation. Ajout du cog_cctmimpimmo qui ne contient
+;*												que des procédures de calcul en fonction des valeurs importées.
+;*
+
+
+;*
+;* Déclarations
+;*
+
+include	"cctc700.dhsp"
+
+module	cog_cctmimpimmo.dhop
+module	ccpmfic.dhop
+module	yoffice.dhop
+module	cctm700.dhop
+module	ccpm700.dhop
+module	cctm000.dhop
+
+
+Hfile		Ccfdd.dhsd	CcfDos			CcfDos
+Hfile		Ccfdd.dhsd	CcfImmo			CcfImmo
+Hfile		Ccfdd.dhsd	CcfImmo			CcfImmo_num		OpenOnUse
+Hfile		Ccfdd.dhsd	CcfImmo			ccfimmo_ctrl
+Hfile		A5dd.dhsd	A5FDos			A5FDos			OpenOnUse
+
+Public	Record		A5dd.dhsd		Mz
+Public	Record		A5dd.dhsd		Muser
+Public	Record		ccfdd.dhsd		CD
+Public	Record		ccfdd.dhsd		CA
+Public	Record		Ccfdd.dhsd		I1
+
+1	nCpt						8,0 = 0							; Compteur 
+
+1 Bufopen			700 										; zone paramètres	pour ouverure api sélection de fichier windows
+	2 Flags					L 
+	2 Filtre					256 
+	2 IndexFiltre			X 
+	2 IndexNom				X 
+	2 IndexExtension		X 
+	2 RepertoireInitial	256 
+	2 Titre					80 	
+	2 ExtensionDefaut		4
+
+1	aFic						Har_Max_Path					; Fic tableur
+1	nCLigDeb					7,0								; Première ligne non vide du classeur
+1	nCColDeb					7,0								; Première colonne non vide du classeur
+1	nCLigFin					7,0								; Dernière ligne non vide du classeur
+1	nCColFin 				7,0								; Dernière colonne non vide du classeur
+1	aVal						Har_Max_Path					; Valeur cellule Alpha
+1	nVal						>Ccfdd.dhsd		EcoTotMt		; Valeur cellule numérique
+1	tTabCorColZone			32*100							; Tableau d'indice des zones I1 du tableur pour affectation zones/valeurs (MN porté de 50 à 100)
+1  aReponse					8096								; Buffer Dd_interface
+1	lTicDico					L									; Pointeur lecture dico
+1	lIdCHAMPI1				L									; Id liste mémoire des zones de I1
+1	nNIVEAUDICO				4,0								; Niveau de lecture du dico
+1	aAdrFTriLZI1			16									; @ fx de tri de la liste des zones I1
+1	nColErr					7,0								; Numéro de la colonne erreur
+1	nEspErr					7,0 = 0							; Espion erreur
+1	aMess						251 = " "						; Message erreur
+
+Structure	cog_parazones 									; Enreg détail zones I1
+	1	ce1			1	
+	1	ce2			1	
+	1	dico			32											; Nom du dico associé
+	1	mnemo			32											; Nom mnémonique du fichier
+	1	enreg			32											; Nom de la table
+	1	champ			32											; Zone de la table
+	1	position		5,0										; Position de la zone dans la table
+	1	longueur		4,0										; Longueur de la zone
+	1	position2	5,0										; Poistion dans le fichier pivot
+	1	longueur2	4,0										; Longueur dans le fichier pivot
+	1	numchamp		4,0										; Numéro de champ dans le fichier pivot
+	1	actif			1,0										; Activer le transfert
+	1	lib			40											; Libellé
+	1	natur			2,0										; Nature
+	1	fxcrtl		32											; Fonction de controle
+	1	fxform		32											; Donction de formatage
+	1	constant		60											; Valeur constante
+	1	vdec			2,0										; Nb de la décimale
+	1	filler		38	
+	1	usercr		20											; Auteur de la création
+	1	usermo		20											; Auteur de la modification
+	1	usertrace	28											; Traçabilité utilisateur
+	2	   usercrdh	14											; Utilisateur date et heure de création
+	2	   usermodh	14											; Utilisateur date et heure de modification
+EndStructure
+
+RecordDiva	cog_parazones
+
+
+Const		cNEnreg			= "I1"
+Const		cNMNEMO			= "CCFIMO"
+Const		cNDICO			= "CCFDD.DHSD"
+
+1	ModeSimulation		B=false
+
+;*
+;* Proc & Fx
+;*
+
+
+;*
+;*
+function char Nom_ColExcel(cl)
+1	cl		N
+
+1	ra		2
+1	rx		x	;division entiere             => 1er  lettre
+1	rr		x	;reste de la division entière	=> 2eme lettre
+beginf
+
+	if cl <= 26
+		ra = chr(64+cl)
+		freturn(ra)
+	else
+		rx = 64 + (cl-1) / 26 T
+		rr = 64 + modulo(cl-1,26) + 1
+		ra = chr(rx) & chr(rr)
+		freturn(ra)
+	endif
+endf
+
+;* Ouvre le classeur à traiter
+;* 0 =Ok, 1 = erreur (abandon)
+Function	Int	Cog_FImmos_OpenTableur
+Beginf
+	; Choix du Fichier
+	Bufopen				= " "
+	Filtre				= "Excel|*.xls;*.xlsx|OpenOffice|*.ood|Tous|*.*" 
+	IndexFiltre			= 1
+	aFic					= "C:\Divalto\Cog_Import_Immos"
+	RepertoireInitial	= "C:\Divalto"
+	Titre 				= "Ouverture du fichier d'importation Immo"
+	Flags					= OFN_EXPLORER + OFN_FILEMUSTEXIST
+	ExtensionDefaut	= " "
+	If WinGetOpenFileName(Bufopen, aFic) = False
+		Freturn(1)
+	EndIf
+	If Office_Begin
+		Freturn(1)
+	EndIf
+ 	;Ouverture Office
+	If Office_Open(FileNameBase(aFIC), FileNameLastSegment(aFic)) <> 0
+		Freturn(1)
+	EndIf
+
+	;L'entête du fichier Excel NE DOIT PAS être modifié. Les données commencent en ligne 6
+	nCLigDeb	= 6
+	
+	Freturn(0)
+Endf
+
+;*
+Function	Int	Cog_FImmos_VerifTableur
+;ligne des champs en 3 FIXE 
+1	ni		7,0=0
+1	npos	2,0=1
+beginf
+	repeat
+		Office_Read(3,++ni,aVal)
+		if aVal <> ''
+			if left(aVal) = "ERREUR"
+				aVal = ''
+			else
+				Split(aVAL, nPos, , , '.')
+				tTabCorColZone(nI) = Fstring("U", Split(aVAL, nPos, , , '.'))
+			endif
+		endif
+	until aVal = ''
+	nCColDeb = 1			;quel serait l'intérêt de démarrer en colonne 10???
+	nColErr  = ni			;colonne d'erreur
+	nCColFin = ni-1		;ne tient pas compte de la colonne ERREUR		
+
+	;nombre de ligne à traiter	sur le libellé
+	ni = 5
+	repeat
+		Office_Read(++ni, search("CR", tTabCorColZone()),aVal)
+		if not isNumer(left(aVal))
+			aVal = ''							;cas de cellules avec des caractères invisibles (suppression)
+		endif
+	until aVal = ''
+	nCLigFin = ni-1
+	if nCLigFin < 6
+		freturn(1)			;Excel vide
+	endif
+
+	;Mode de traitement (simulation ou réel par défaut)
+	Office_Read(5,1,aVal)
+	nPos = string('=',aVal)
+	if nPos > 0
+		if fstring('U',mid(aVal,nPos+1)) = "VRAI"
+			ModeSimulation = true
+		endif
+	endif
+	freturn(0)
+endf
+
+;* Fin import
+Procedure	Cog_PImmos_FinTrt
+Beginp
+	;Pas de fermeture si erreur
+	if nEspErr = 0	and not ModeSimulation
+		Office_Close(True)
+		Office_Quit
+	endif
+	
+	Office_End
+Endp
+
+;* Tri de la liste mémoire lIdCHAMPI1
+;* cog_parazonesl.dico & cog_parazonesl.mnemo & cog_parazonesl.enreg & cog_parazonesl.champ
+Function	long	Cog_FTriChampI1(&P1, &P2)
+RecordDiva	cog_parazones	P1
+RecordDiva	cog_parazones	P2
+1	aC1	128 = " "
+1	aC2	128 = " "
+Beginf
+	aC1 = p1.dico & p1.mnemo & p1.enreg & p1.champ
+	aC2 = p2.dico & p2.mnemo & p2.enreg & p2.champ
+	Freturn(SortCompare(aC1, aC2))
+endf
+
+;*
+Procedure	Cog_PGest_ZoneTableau(Nom_Donnee, Position, nMode, NbDimensions)
+1	Position				6,0		;Position de la donnée
+1	Nom_Donnee			32			;Nom de la donnée
+1	aNomDonneeFinal	32
+1	nMode					1,0 = 1	; Mode 1 = chargement multi choix, 2 = chargement table ou info zones
+
+1	NbDimensions		2,0	;nombre de dimensions
+1	Dico_Dimensions	4,0*4	;Dimensions
+1	Dico_Enjambees		6,0*4	;Enjambées
+
+1	i		4,0	;Dimension 1  
+1	j		4,0	;Dimension 2  
+1	k		4,0	;Dimension 3  
+1	l		4,0	;Dimension 4  
+Beginp 
+	Dico_Dimensions(1) = HmpSeek(aREPONSE,"Dimensions1")
+	Dico_Dimensions(2) = HmpSeek(aREPONSE,"Dimensions2")
+	Dico_Dimensions(3) = HmpSeek(aREPONSE,"Dimensions3")
+	Dico_Dimensions(4) = HmpSeek(aREPONSE,"Dimensions4")
+	Dico_Enjambees(1)  = HmpSeek(aREPONSE,"Enjambees1")
+	Dico_Enjambees(2)  = HmpSeek(aREPONSE,"Enjambees2")
+	Dico_Enjambees(3)  = HmpSeek(aREPONSE,"Enjambees3")
+	Dico_Enjambees(4)  = HmpSeek(aREPONSE,"Enjambees4")
+
+	switch2 NbDimensions
+	case 1
+		for i = 1 to Dico_Dimensions(1)
+			cog_parazones.position	= Position + (i-1) * Dico_Enjambees(1)
+			aNomDonneeFinal			= left(Nom_Donnee) & "(" & right(i) & ")"
+			cog_parazones.champ 		= aNomDonneeFinal
+			ListInsert(lIdCHAMPI1, cog_parazones)
+		next
+	
+	case 2
+		for i = 1 to Dico_Dimensions(1)
+			for j = 1 to Dico_Dimensions(2)
+				cog_parazones.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2)
+				aNomDonneeFinal			= left(Nom_Donnee) & "(" & right(i) & "," & right(j) & ")"
+				cog_parazones.champ 		= aNomDonneeFinal
+				ListInsert(lIdCHAMPI1, cog_parazones)
+			next
+		next
+	
+	case 3
+		for i = 1 to Dico_Dimensions(1)
+			for j = 1 to Dico_Dimensions(2)
+				for k = 1 to Dico_Dimensions(3)
+					cog_parazones.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2) + (k-1) * Dico_Enjambees(3)
+					aNomDonneeFinal			= left(Nom_Donnee) & "(" & right(i) & "," & right(j) & "," & right(k) & ")"
+					cog_parazones.champ 		= aNomDonneeFinal
+					ListInsert(lIdCHAMPI1, cog_parazones)
+				next
+			next
+		next
+	
+	case 4
+		for i = 1 to Dico_Dimensions(1)
+			for j = 1 to Dico_Dimensions(2)
+				for k = 1 to Dico_Dimensions(3)
+					for l = 1 to Dico_Dimensions(4)
+						cog_parazones.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2) + (k-1) * Dico_Enjambees(3) + (l-1) * Dico_Enjambees(4)
+						aNomDonneeFinal			= left(Nom_Donnee) & "(" & right(i) & "," & right(j) & "," & right(k) & "," & right(l) & ")"
+						cog_parazones.champ 		= aNomDonneeFinal
+						ListInsert(lIdCHAMPI1, cog_parazones)
+					next
+				next
+			next
+		next
+	
+	endswitch
+Endp
+
+;*	Récupère les infos dico de i1 pour affectation dynamique
+Public Procedure COG_Genere_Table
+RecordDiva	cog_parazones	cog_parazonesL
+1	nNiveau				1,0
+1	nNbDimensions		2,0	;nombre de dimensions
+Beginp
+	If DDInterface(DD_OPEN, lTicDico, cNDICO, aReponse) <> 0
+    	DDInterface(DD_GETERROR,lTicDico, " ", aREPONSE, nNIVEAUDICO) 
+		MessageBox("Impossible d'ouvrir le Dictionnaire|" & left(aREPONSE), 'Abandon')
+	EndIf
+	cog_parazones.ENREG	= cNEnreg
+	cog_parazones.DICO	= cNDICO
+	cog_parazones.mnemo	= cNMNEMO
+	If DDInterface(DD_TABLEFIND_DD, lTicDico, cog_parazones.ENREG , aREPONSE) = 0
+		If DDInterface(DD_DATABEGIN, lTicDico, , aREPONSE) = 0
+			cog_parazonesl				= cog_parazones
+			cog_parazonesl.champ 	= HmpSeek(aREPONSE, "Nom")
+			If ListSeek(lIdCHAMPI1, cog_parazonesl, cog_parazones) = 0
+				cog_parazones.ce1		= "1"
+				cog_parazones.dico		= cog_parazonesl.dico
+				cog_parazones.enreg		= cog_parazonesl.enreg
+				cog_parazones.mnemo		= cog_parazonesl.mnemo
+				cog_parazones.UserCr		= system.User
+				cog_parazones.UserCrDh	= Time(7)
+				cog_parazones.champ		= cog_parazonesl.champ		
+				cog_parazones.Lib			= HmpSeek(aREPONSE, "Libelle")
+				cog_parazones.natur		= HmpSeek(aREPONSE, "Nature")
+				cog_parazones.vdec		= HmpSeek(aREPONSE, "NbDecimales")
+				nNiveau = HmpSeek(aREPONSE, "Niveau")
+				If nNiveau = 1
+					cog_parazones.POSITION	= HmpSeek(aREPONSE, "Position")
+					cog_parazones.LONGUEUR	= HmpSeek(aREPONSE, "LONGUEUR")
+					If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+						Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+					ENdIf
+				Else
+					DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP , aREPONSE, 2)
+					cog_parazones.LONGUEUR	= HmpSeek(aREPONSE, "LONGUEUR")
+					cog_parazones.POSITION	= HmpSeek(aREPONSE, "Position")
+					If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+						Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+					ENdIf
+				EndIf
+				If nNbDimensions = 0
+					ListInsert(lIdCHAMPI1, cog_parazones)
+				EndIf
+			EndIf
+			Loop DDInterface(DD_DATANEXT, lTicDico, , aREPONSE) = 0 
+				cog_parazonesl.champ 			= HmpSeek(aREPONSE, "Nom")
+				If ListSeek(lIdCHAMPI1, cog_parazonesl, cog_parazones) = 0
+					cog_parazones.ce1			= "1"
+					cog_parazones.dico		= cog_parazonesl.dico
+					cog_parazones.enreg		= cog_parazonesl.enreg
+					cog_parazones.mnemo		= cog_parazonesl.mnemo
+					cog_parazones.UserCr		= system.User
+					cog_parazones.UserCrDh	= Time(7)
+					cog_parazones.champ		= cog_parazonesl.champ		
+					cog_parazones.Lib			= HmpSeek(aREPONSE, "Libelle")
+					cog_parazones.natur		= HmpSeek(aREPONSE, "Nature")
+					cog_parazones.vdec		= HmpSeek(aREPONSE, "NbDecimales")
+					nNiveau = HmpSeek(aREPONSE, "Niveau")
+					If nNiveau = 1
+						cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
+						cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
+						If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+							Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+						ENdIf
+					Else
+						DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP , aREPONSE, 2)
+						cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
+						cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
+						If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+							Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+						ENdIf
+					EndIf
+					If nNbDimensions = 0
+						ListInsert(lIdCHAMPI1, cog_parazones)
+					EndIf
+				EndIf
+			EndLoop
+			cog_parazones				= cog_parazonesl
+		EndIf
+	EndIf
+Endp
+
+;* Transfère enreg lu ds enreg conteneur suivant lg fixes 
+Procedure Cog_PTrans_ValZone(&aEnregDest, aZone, mot)
+Record	Ccfdd.dhsd	I1		aEnregDest
+1	aZone			32
+1	mot			S	
+1	datel			8		;date à formater
+RecordDiva	cog_parazones	cog_parazonesL
+Beginp
+	If mot = " "
+		preturn
+	ElsIf mot like "ESPACE"
+		mot = " "
+	EndIf
+	; Recherche zone ds liste
+	cog_parazonesl.dico 		= cNDICO 
+	cog_parazonesl.mnemo		= cNMNEMO
+	cog_parazonesl.enreg		= cNEnreg
+	cog_parazonesl.champ		= Fstring("U", aZone)
+	If ListSeek(lIdCHAMPI1, cog_parazonesl, cog_parazones) = 0
+		Preturn
+	EndIf
+	; Decrypt
+	switch cog_parazones.natur
+
+		case 1	; Numérique avec décimales variables 
+			nmid(aEnregDest, cog_parazones.position, cog_parazones.longueur,system.Zdec(cog_parazones.vdec+1))	= val(mot)
+	
+		case 2	; Numérique
+			nmid(aEnregDest, cog_parazones.position, cog_parazones.longueur,cog_parazones.vdec)	= val(mot)
+	
+		case vsw in(3,5)	;Alphanumérique et 1 caractère
+			mid(aEnregDest, cog_parazones.position, cog_parazones.longueur)	= mot
+	
+		case 4	;Date (aaaammjj)
+			fdate(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),mot)
+	
+		case vsw in(6,8)	;Type B et Binaire
+			bmid(mid(aEnregDest,cog_parazones.position, cog_parazones.longueur),1)	= Hexabin(mot)
+		
+		case 7	;Type X
+			xmid(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),1)	= ToHexa(mot)
+		
+		case 9	;Type L
+			lmid(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),1)	= ToHexa(mot)
+		
+		case 10	;Heure (hhmmss)
+			ftime(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),mot)
+	
+		case 11	;Date mensuelle (aaaamm)
+			fdate(datel,mot)
+			mid(aEnregDest, cog_parazones.position, cog_parazones.longueur)	= left(datel,6)
+		
+		case 12	;date + heure (aaaammjjhhmmss)
+			fdatedh(mid(aEnregDest, cog_parazones.position, cog_parazones.longueur),mot)
+	
+	endswitch
+	
+Endp
+
+;*
+function int Lancer_Traitement(nomproc,champ,lig)
+1	nomproc		A
+1	champ			A
+1	lig			N
+
+1	retour	256
+1	typerr	1
+1	meserr	4096
+1	adrproc	16
+1	pos		L=1
+beginf
+	GetAdressProcedure("cog_ccpmimpimmo.dhop",nomproc,adrproc)
+	ProcedureCall(adrproc)
+	if pinglocalreceiveanddelete("RetErreur",retour) = 0
+		nEsperr++
+		;indique l'erreur dans le fichier Excel et traite la ligne suivante si message de type Erreur
+		typerr = Split(retour, pos, , , ';')
+		if typerr = 'I'
+			Office_ReadString(lig,nColErr,meserr)
+			if meserr = ''
+				meserr = Split(retour, pos, , , ';') & "      (colonne " & Nom_ColExcel(search(champ, tTabCorColZone())) & " )"
+			else
+				meserr = left(meserr) & $0d0a & Split(retour, pos, , , ';') & "      (colonne " & Nom_ColExcel(search(champ, tTabCorColZone())) & " )"
+			endif
+		else
+			meserr = Split(retour, pos, , , ';') & "      (colonne " & Nom_ColExcel(search(champ, tTabCorColZone())) & " )"
+		endif
+		Office_Write(lig,nColErr,meserr)
+		if typerr = 'E'
+			Office_FontColorIndex(lig,nColErr,30)		;rouge un peu foncé
+			freturn(false)										;arrêt des traitement de la ligne en cours
+		else
+			Office_FontColorIndex(lig,nColErr,46)		;rosé...
+		endif
+	endif
+	freturn(true)												;on continue sur la même ligne
+endf
+
+;*
+;*
+;*
+procedure cog_pWriteI1(ni)
+1	ni		N
+record	ccfdd.dhsd	i1		i1_ctrl
+record	ccfdd.dhsd	i1		wi1
+
+1	i		x
+beginp
+	wi1 = i1
+	i1  = ''		;vide I1 car des données venant d'excel ne sont pas à prendre. Seuls les champs nécessaires pour chaque type sont contrôler.
+					;les champs comptes de l'onglet "Comptabilisation" s'ils sont renseignés doivent exister mais arrête l'import de la ligne
+
+	;Il faut respecter l'odre de saisie de divalto "Gestion des biens" car les contrôle ou calcul se font dans chaque traitement après.
+	;Le module cog_cctmimpimmo contient toutes les procédures de traitement après de Divalto.
+	i1.Immo = wi1.Immo												;si vide incrément du bien précédent
+	if not Lancer_Traitement("ImpCreation","IMMO",ni)		;mise en place des élément du BIEN (pas de composante)
+		preturn
+	endif
+	
+	;* GENERALITE	
+	if wi1.NatImmo <> ''
+		i1.NatImmo = wi1.NatImmo
+		Lancer_Traitement("Champ_NatImmo_1_Ap","NATIMMO",ni)
+	endif
+
+	i1.Lib   = wi1.Lib
+	i1.Local = wi1.Local
+	i1.Serie = wi1.Serie
+
+	i1.Etat = wi1.Etat
+	Lancer_Traitement("Champ_Etat_1_Ap","ETAT",ni)
+
+	i1.AcqDt = wi1.AcqDt
+	if not Lancer_Traitement("Champ_AcqDt_1_Ap","ACQDT",ni)
+		preturn
+	endif
+
+	i1.SvcDt = wi1.SvcDt
+	if not Lancer_Traitement("Champ_SvcDt_1_Ap","SVCDT",ni)
+		preturn
+	endif
+
+	i1.EcoAmDt = wi1.EcoAmDt
+	if not Lancer_Traitement("Champ_EcoAmDt_1_Ap","ECOAMDT",ni)
+		preturn
+	endif
+
+	i1.Cpt = wi1.Cpt
+	if not Lancer_Traitement("Champ_Cpt_1_Ap","CPT",ni)
+		preturn
+	endif
+
+	i1.CptAux = wi1.CptAux
+	Lancer_Traitement("Champ_CptAux_1_Ap","CPTAUX",ni)
+
+	for i=1 to index(i1.Axe(),1)
+		pinglocal("dataind",i)
+		i1.Axe(i) = wi1.Axe(i)	 
+		Lancer_Traitement("Champ_Axe_1_Ap","AXE(" & nospaces(str(i)) & ")",ni)
+	next
+	;* Fin region
+
+	;* ELEMENTS FINANCIERS
+	i1.Cr = wi1.Cr
+	if not Lancer_Traitement("Champ_Cr_1_Ap","CR",ni)
+		preturn
+	endif
+
+	i1.CrelTMt(1) = i1.Cr					;un seul montant financier sinon il faut recalculer le Cr de 1..10
+	i1.BtpMt = condition(wi1.BtpMt <> '',wi1.BtpMt,i1.BtpMt)
+	;* Fin region
+
+	;* AMORTISSEMENTS
+	i1.EcoBas = condition(wi1.EcoBas <> '',wi1.EcoBas,i1.EcoBas)
+	if not Lancer_Traitement("Champ_EcoBas_1_Ap","ECOBAS",ni)
+		preturn
+	endif
+
+	i1.EcoTyp = wi1.EcoTyp
+	if not Lancer_Traitement("Champ_EcoTyp_1_Ap","ECOTYP",ni)
+		preturn
+	endif
+
+	i1.DotEco = wi1.DotEco				;seulement type manuel
+	Lancer_Traitement("Champ_DotEco_1_Ap","DOTECO",ni)
+
+	i1.EcoDur = wi1.Ecodur
+	if not Lancer_Traitement("Champ_EcoDur_1_Ap","ECODUR",ni)
+		preturn
+	endif
+
+	i1.FisBas = condition(wi1.FisBas <> '',wi1.FisBas,i1.FisBas)
+	if not Lancer_Traitement("Champ_FisBas_1_Ap","FISBAS",ni)
+		preturn
+	endif
+
+	i1.FisTyp = condition(wi1.FisTyp <> '',wi1.FisTyp,i1.FisTyp)
+	if not Lancer_Traitement("Champ_FisTyp_1_Ap","FISTYP",ni)
+		preturn
+	endif
+	
+	i1.DotFis = wi1.DotFis
+	Lancer_Traitement("Champ_DotFis_1_Ap","DOTFIS",ni)
+
+	i1.FisDur = condition(wi1.FisDur <> '',wi1.FisDur,i1.FisDur)
+	if not Lancer_Traitement("Champ_FisDur_1_Ap","FISDUR",ni)
+		preturn
+	endif
+
+	i1.ResFinMt = wi1.ResFinMt
+	Lancer_Traitement("Champ_ResFinMt_1_Ap","RESFINMT",ni)
+
+	;date exercices
+	pinglocal("ctrlvaleur",wi1.ExoDDt)
+	if not Lancer_Traitement("Champ_ExoDDt_1_Ap","EXODDT",ni)
+		preturn
+	endif
+	pinglocal("ctrlvaleur",wi1.ExoFDt)
+	if not Lancer_Traitement("Champ_ExoFDt_1_Ap","EXOFDT",ni)
+		preturn
+	endif
+
+	;date période Economique
+	pinglocal("ctrlvaleur",wi1.EcoDDt)
+	if not Lancer_Traitement("Champ_EcoDDt_1_Ap","ECODDT",ni)
+		preturn
+	endif
+	pinglocal("ctrlvaleur",wi1.EcoFDt)
+	if not Lancer_Traitement("Champ_EcoFDt_1_Ap","ECOFDT",ni)
+		preturn
+	endif
+
+	;total des amortissements Economiques
+	pinglocal("ctrlvaleur",tostring(wi1.EcoLinMt))
+	Lancer_Traitement("Champ_EcoLinMt_1_Ap","ECOLINMT",ni)
+
+	pinglocal("ctrlvaleur",tostring(wi1.EcoDegMt))
+	Lancer_Traitement("Champ_EcoDegMt_1_Ap","ECODEGNMT",ni)
+
+	pinglocal("ctrlvaleur",tostring(wi1.EcoManMt))
+	Lancer_Traitement("Champ_EcoManMt_1_Ap","ECOMANMT",ni)
+
+	;date période fiscal
+	pinglocal("ctrlvaleur",wi1.FisDDt)
+	if not Lancer_Traitement("Champ_FisDDt_1_Ap","FISDDT",ni)
+		preturn
+	endif
+	pinglocal("ctrlvaleur",wi1.FisFDt)
+	if not Lancer_Traitement("Champ_FisFDt_1_Ap","FISFDT",ni)
+		preturn
+	endif
+
+	;total des amortissements Fiscaux
+	pinglocal("ctrlvaleur",nospaces(str(wi1.FisLinMt)))
+	Lancer_Traitement("Champ_FisLinMt_1_Ap","FISLINMT",ni)
+
+	pinglocal("ctrlvaleur",nospaces(str(wi1.FisDegMt)))
+	Lancer_Traitement("Champ_FisDegMt_1_Ap","FISDEGNMT",ni)
+
+	pinglocal("ctrlvaleur",nospaces(str(wi1.FisManMt)))
+	Lancer_Traitement("Champ_FisManMt_1_Ap","FisMANMT",ni)
+
+	;* Fin région
+
+	;* COMPTABILISATION
+	i1.CptAmo = wi1.CptAmo
+	Lancer_Traitement("Champ_CptAmo_1_Ap","CPTAMO",ni)
+	i1.CptDotAmo = wi1.CptDotAmo
+	Lancer_Traitement("Champ_CptDotAmo_1_Ap","CPTDOTAMO",ni)
+	i1.CptProDro = wi1.CptProDro
+	Lancer_Traitement("Champ_CptProDro_1_Ap","CPTPRODRO",ni)
+	i1.CptDotDro = wi1.CptDotDro
+	Lancer_Traitement("Champ_CptDotDro_1_Ap","CPTDOTDRO",ni)
+	i1.CptRepDro = wi1.CptRepDro
+	Lancer_Traitement("Champ_CptRepDro_1_Ap","CPTREPDRO",ni)
+	i1.CptProDep = wi1.CptProDep
+	Lancer_Traitement("Champ_CptProDep_1_Ap","CPTPRODEP",ni)
+	i1.CptDotDep = wi1.CptDotDep
+	Lancer_Traitement("Champ_CptDotDep_1_Ap","CPTDOTDEP",ni)
+	i1.CptDotRep = wi1.CptDotRep
+	Lancer_Traitement("Champ_CptDotRep_1_Ap","CPTDOTREP",ni)
+
+	;* Fin région
+
+	;* Champ en surcharge
+	i1.UI1 = wi1.UI1
+	I1_Write_Av
+
+	;* Fin région
+
+	if not ModeSimulation
+		;Ensemble des saisie terminé et contrôler tous les pré-calcul sont faits
+		if Lancer_Traitement("ImpApresCreation","",ni)
+			I1.USERCR	 = SYSTEM.USER
+			I1.USERCRDH	 = time(7)
+			I1.USERCRORI = ""
+			hwrite(ccfimmo, i1)
+	
+			nCpt++
+	
+			I1_Write_Ap
+		endif
+	endif
+
+endp
+
+;*	Lance l'import suivant lecture du tableur
+Procedure	Cog_PImmos_Import
+1	nI		7,0
+1	nJ		7,0
+1	arret	B=false
+Beginp
+	; On récupère la structure de I1 dans une liste mémoire
+	lIdCHAMPI1 = ListGetId("Cog_Lst_ZI1")
+	ListErase(lIdCHAMPI1)
+	GetAdressFunction("", "Cog_FTriChampI1", aAdrFTriLZI1)
+	ListMode(lIdCHAMPI1, 1, aAdrFTriLZI1)
+	COG_Genere_Table
+	If ListCount(lIdCHAMPI1) > 0 
+		; Lecture du fichier excel
+		For nI = nCLigDeb To nCLigFin
+			I1 = ''
+			For nJ = nCColDeb To nCColFin
+				Office_Read(nI, nJ, aVal)
+				Cog_PTrans_ValZone(I1, tTabCorColZone(nJ), aVAL)
+			Next
+			Display[=4 2 "Lecture du bien  : " & i1.Immo & left(i1.Lib, 40)]
+			Cog_PWriteI1(nI)
+		Next
+	EndIf
+Endp
+
+
+;*
+;* Prog Principal
+;*
+MAIN
+
+	If PingReceive("Zechange", Mz) = 1
+		If Hseek(A5Fdos, Muser, "B" & system.User) = 0
+			mz.Dos	= muser.Dos
+			mz.Etb	= muser.Etb
+		EndIf
+	EndIf
+	Seek_Ca()
+	Seek_Cd()
+
+	If MessageBox(	"Vous allez lancer le programme d'intégration des immos dans Divalto Comptabilité|Ce programme vous demandera quel classeur tableur utiliser|Confirmez vous le traitement ?" \
+		, "Validation", MB_ICONQUESTION+MB_YesNo) = IdYes
+		If Cog_FImmos_OpenTableur = 0
+			Display[system.Clear]
+			Display[=1 5 "Import immobilisations (" & left(aFic) & ")"]
+			If Cog_FImmos_VerifTableur = 0
+				SetHourGlassCursor
+				Cog_PIMmos_Import
+				SetNormalCurSor
+			Else
+				MessageBox("Certains mots clés n'ont pas été trouvés dans le fichier tableur sélectionné ou la feuille n'est pas paramétrée correctement","Alerte", MB_ICONSTOP)
+				Cog_PImmos_FinTrt
+				programexit
+			EndIf
+			Cog_PImmos_FinTrt
+		Else
+			MessageBox("Impossible d'ouvrir le fichier tableur", "Alerte", MB_ICONSTOP)
+			programexit
+		EndIf
+	else
+		programexit
+	EndIf
+
+	If nEspErr > 0
+		if nCpt = 0
+			aMess = "0 biens importés!|" & nospaces(nEspErr) & " erreurs détectées vérifiez la colonne erreur du fichier tableur."
+		else
+			aMess = nospaces(nCpt) & " biens importés, pensez à éditer un tableau d'ammortissement sur l'exercice suivant le dernier importé.|" & nospaces(nEspErr) & \
+						" erreurs détectées vérifiez la colonne erreur du fichier tableur."
+		endif
+	Else
+		aMess = nospaces(nCpt) & " biens importés, pensez à éditer un tableau d'ammortissement sur l'exercice suivant le dernier importé"
+	EndIf
+	messagebox("Traitement terminé:|" & left(aMess),"Information",MB_ICONINFORMATION)
