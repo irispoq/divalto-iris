@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20141110122504,UGIE_YLF            
+Version=6,20110524144859,SYSTEMU_VR          ,20141114164442,UGIE_YLF            
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -357,6 +357,13 @@ Nature=5,0
 NomOdbc=Cog_Id_Refacturation
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20141007175408,UGIE                ,20141007175414,UGIE                
+Nom=Cog_ImoFlag,Immo O/N,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_ImoFlag
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20110621105533,SYSTEMU             ,20110621105535,SYSTEMU             
 Nom=Cog_Indicateur_Facture,Indicateur déjà facturé,1
 Gel=1
@@ -369,6 +376,26 @@ Nom=Cog_Lib_Env,Libellé,1
 Gel=1
 Nature=50
 NomOdbc=Cog_Lib_Env
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141114162502,UGIE_YLF            ,20141114162502,UGIE_YLF            
+Nom=Cog_LoyFaNb,Nombre de loyers facturés,1
+Gel=1
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141114120651,UGIE_YLF            ,20141114162508,UGIE_YLF            
+Nom=Cog_LoyNb,Nombre de loyers à facturer,1
+DateM=A033BC031F00D001
+Gel=1
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141114120728,UGIE_YLF            ,20141114162432,UGIE_YLF            
+Nom=Cog_LoyRestNb,Nombre de loyers restants,1
+DateM=D65C2B171F00D001
+Gel=1
+Nature=8,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110712165148,ROOT                ,20110712165156,ROOT                
@@ -804,6 +831,14 @@ Nom=Note,Numéro de note,1
 Gel=1
 Nature=8,0
 Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20060306182003,MARIE JO            
+Nom=Op,Code opération,1
+Gel=1
+Nature=3
+Attribut=PARAM
+NomOdbc=CodeOperation
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1989 5130000,MJV ,20060306182205,MARIE JO            
 Nom=Pay,Pays,1
@@ -1975,6 +2010,37 @@ Nom=HsDt,107,2,N,0,0,N,1
 Nom=Lib80,115,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
+Version=1,20141114120114,UGIE_YLF            ,20141114164419,UGIE_YLF            
+Nom=Cog_UT125,Affectations des cotisations projet spécifique,1
+DateM=D89674E62100D001
+NomOdbc=Cog_UT125
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+Nom=Dos,1,2,N,0,0,N,1
+Nom=Etb,4,2,N,0,0,N,1
+Nom=Conf,7,2,N,0,0,N,1
+Nom=UserCr,11,2,N,0,0,N,1
+Nom=UserMo,31,2,N,0,0,N,1
+Nom=UserTrace,51,2,N,0,0,N,1
+Nom=CeNote,79,2,N,0,0,N,1
+Nom=Note,80,2,N,0,0,N,1
+Nom=Affaire,88,2,N,0,0,N,1
+Nom=Ref,96,2,N,0,0,N,1
+Nom=Cog_Date_Debut,121,2,N,0,0,N,1
+Nom=Cog_Date_Fin,129,2,N,0,0,N,1
+Nom=Cog_Montant,137,2,N,0,0,N,1
+Nom=Cog_Period,148,2,N,0,0,N,1
+Nom=Cog_Duree_Limitee,149,2,N,0,0,N,1
+Nom=Cog_Date_Derniere_Facture,150,2,N,0,0,N,1
+Nom=Cog_AxeAnael,158,2,N,0,0,N,1
+Nom=Op,166,2,N,0,0,N,1
+Nom=Cog_ImoFlag,169,2,N,0,0,N,1
+Nom=Cog_LoyNb,170,2,N,0,0,N,1
+Nom=Cog_LoyRestNb,178,2,N,0,0,N,1
+Nom=Cog_LoyFaNb,186,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
 Version=1,20110712091845,ROOT                ,20110712091900,ROOT                
 Nom=Cog_Valid_Cde,Validation de commandes,1
 DateM=BBEDB283A340CC01
@@ -2139,7 +2205,7 @@ Nom=Coggtf_Tab,Tales complémentaires Facturation,1
 DateM=81B39056EC2CCC01
 Fichier=I,0,Coggtf_tab.dhfi
 Versionbase=6.3a
-DateMIndex=A54CED4C3FBDCF01
+DateMIndex=35838D70FBFFCF01
 [TABLES]
 Nom=Cog_UT100,0
 Nom=Cog_UT101,0
@@ -2153,6 +2219,7 @@ Nom=Cog_UT108,0
 Nom=Cog_UT109,0
 Nom=Cog_UT110,0
 Nom=Cog_UT120,0
+Nom=Cog_UT125,0
 [/TABLES]
 [INDEX]
 Version=1,20110816135005,ROOT                ,20110816135037,ROOT                
@@ -2522,6 +2589,19 @@ Nom=Etb,4,0,
 Nom=Cog_TypMotFac,7,0,
 [/CHAMPS]
 [/INDEX]
+[INDEX]
+Version=1,20141114120908,UGIE_YLF            ,20141114121707,UGIE_YLF            
+Nom=Index_UT125,PK,1
+DateM=D563D286FCFFCF01
+CLE=Coggtf_Tab, ,,1,032,o,1,n
+Alias=Index_UT125
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Etb,4,0,
+Nom=Affaire,7,0,
+Nom=Ref,15,0,
+[/CHAMPS]
+[/INDEX]
 [INDEXL]
 Nom=Cog_FAffectBudget,Cog_AffectationBudgetaire,Cog_AffectationBudgetaire,0
 Nom=Cog_Fcollect,Cog_Collect,Cog_TypCli,0
@@ -2553,4 +2633,5 @@ Nom=Coggtf_Tab,Cog_UT108,Index_UT108,0
 Nom=Coggtf_Tab,Cog_UT109,Index_UT109,0
 Nom=Coggtf_Tab,Cog_UT110,Index_UT110,0
 Nom=Coggtf_Tab,Cog_UT120,Index_UT120,0
+Nom=Coggtf_Tab,Cog_UT125,Index_UT125,0
 [/INDEXL]
