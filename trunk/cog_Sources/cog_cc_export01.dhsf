@@ -1,16 +1,17 @@
-;>xwin4obj                              7.0       20140423171213      
+;>xwin4obj                              7.0       20141124112732      
 [masque]
  libelle="Exportation des Ecritures"
- utilisateur="UGIE"
- date_modification="23/04/2014"
+ utilisateur="UGIE_YLF"
+ date_modification="24/11/2014"
  feuille_style="fstylewpf.dhfi"
- dernier_id=81
+ dernier_id=86
  dernier_id_page=1
 [defaut]
  [aide_page]
   aide=0
 [enregistrements]
  "gtfdd.dhsd",,xq,xq,8000,0
+ "ccfdd.dhsd",,xq,ccxq,4400,0
 [page]
  numero=1
  libelle="Exportation des Ecritures Comptables"
@@ -27,8 +28,17 @@
  ident_unique=1
  [groupbox]
   [presentation]
-   position=15,15
-   taille=19,329
+   position=69,8
+   taille=150,345
+   id=82
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Paramètres"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=15,7
+   taille=51,345
    id=81
    wstyle="GROUPE"
   [param_groupbox]
@@ -36,7 +46,15 @@
    couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=40,22
+   position=151,15
+   taille=9,30
+   id=83
+   wstyle="STD"
+  [texte]
+   texte="Journaux de"
+ [obj_texte]
+  [presentation]
+   position=32,22
    taille=9,53
    id=3
    wstyle="STD"
@@ -44,7 +62,7 @@
    texte="Dossier"
  [obj_texte]
   [presentation]
-   position=54,22
+   position=46,22
    taille=9,53
    id=4
    wstyle="STD"
@@ -52,7 +70,7 @@
    texte="Etablissement"
  [obj_texte]
   [presentation]
-   position=108,66
+   position=119,65
    taille=9,9
    noms="cog_chrono"
    id=79
@@ -61,7 +79,15 @@
    texte="à"
  [obj_texte]
   [presentation]
-   position=151,22
+   position=151,84
+   taille=9,14
+   id=85
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=164,15
    taille=9,53
    id=13
    wstyle="STD"
@@ -69,7 +95,7 @@
    texte="Chemin harmony"
  [champ]
   [presentation]
-   position=54,95
+   position=46,95
    taille=9,247
    attache_lgx=oui
    id=14
@@ -80,9 +106,47 @@
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=32,77
+   taille=9,15
+   cadrage=gauche
+   id=25
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,dos,xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=46,77
+   taille=9,15
+   id=26
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=xq,etb,xq
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=32,95
+   taille=9,247
+   id=27
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=xq,lib,xq,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
  [groupe_radio]
   [presentation]
-   position=75,15
+   position=86,14
    taille=59,99
    id=60
    wstyle="STD"
@@ -94,7 +158,7 @@
    notifier=oui
   [radio_bouton]
    [presentation]
-    position=85,25
+    position=96,24
     taille=9,74
     id=62
     wstyle="STD"
@@ -104,7 +168,7 @@
     valeur="1"
   [radio_bouton]
    [presentation]
-    position=96,25
+    position=107,24
     taille=9,83
     id=63
     wstyle="STD"
@@ -116,7 +180,7 @@
    diva_apres="Champ_Choix_1_Ap"
  [champ]
   [presentation]
-   position=108,34
+   position=119,33
    taille=9,30
    noms="cog_chrono"
    id=77
@@ -134,7 +198,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=108,78
+   position=119,77
    taille=9,30
    noms="cog_chrono"
    id=78
@@ -151,115 +215,9 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_PiNoF_1_Ap"
- [groupe_radio]
-  [presentation]
-   position=75,130
-   taille=59,99
-   id=64
-   wstyle="STD"
-  [description]
-   donnee=xq,choix,xq,2
-  [param_groupe]
-   titre="Séparateur de champs"
-   choix="cog_gtfdmc.dhfi","COG_SEPARATEURC"
-  [radio_bouton]
-   [presentation]
-    position=85,140
-    taille=9,74
-    id=65
-    wstyle="STD"
-   [param_radio]
-    texte='Séparateur : ";"'
-    cadrage=droite
-    valeur="1"
-   [info_bulle]
-   texte="Point virgule"
-  [radio_bouton]
-   [presentation]
-    position=96,140
-    taille=9,74
-    id=66
-    wstyle="STD"
-   [param_radio]
-    texte='Séparateur : ","'
-    cadrage=droite
-    valeur="2"
-   [info_bulle]
-   texte="Virgule"
-  [radio_bouton]
-   [presentation]
-    position=107,140
-    taille=9,74
-    id=67
-    wstyle="STD"
-   [param_radio]
-    texte='Séparateur : "/"'
-    cadrage=droite
-    valeur="3"
-   [info_bulle]
-   texte="Pipe"
-  [radio_bouton]
-   [presentation]
-    position=118,140
-    taille=9,74
-    id=68
-    wstyle="STD"
-   [param_radio]
-    texte='Séparateur : "     "'
-    cadrage=droite
-    valeur="4"
-   [info_bulle]
-   texte="Tabulation"
- [groupe_radio]
-  [presentation]
-   position=75,245
-   taille=59,99
-   id=69
-   wstyle="STD"
-  [description]
-   donnee=xq,choix,xq,3
-  [param_groupe]
-   titre="Séparateur de lignes"
-   choix="cog_gtfdmc.dhfi","COG_SEPARATEURL"
-  [radio_bouton]
-   [presentation]
-    position=85,255
-    taille=9,74
-    id=73
-    wstyle="STD"
-   [param_radio]
-    texte="Retour charriot (CR)"
-    cadrage=droite
-    valeur="1"
-   [info_bulle]
-   texte="Retour charriot (CR, carriage return)"
-  [radio_bouton]
-   [presentation]
-    position=101,255
-    taille=9,74
-    id=75
-    wstyle="STD"
-   [param_radio]
-    texte="Saut de ligne (LF)"
-    cadrage=droite
-    valeur="2"
-   [info_bulle]
-   texte="Saut de ligne (LF, line feed)"
-  [radio_bouton]
-   [presentation]
-    position=117,255
-    taille=9,74
-    id=74
-    wstyle="STD"
-   [param_radio]
-    texte="CRLF"
-    cadrage=droite
-    valeur="3"
-   [info_bulle]
-   texte="Carriage Return Line Feed"
  [case_a_cocher]
   [presentation]
-   position=122,25
+   position=133,24
    taille=9,43
    id=80
    wstyle="STD"
@@ -272,9 +230,137 @@
    choix="gtfdmc.dhfi",""
   [traitements]
    microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=86,129
+   taille=59,99
+   id=64
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,xq,2
+  [param_groupe]
+   titre="Séparateur de champs"
+   choix="cog_gtfdmc.dhfi","COG_SEPARATEURC"
+  [radio_bouton]
+   [presentation]
+    position=96,139
+    taille=9,74
+    id=65
+    wstyle="STD"
+   [param_radio]
+    texte='Séparateur : ";"'
+    cadrage=droite
+    valeur="1"
+   [info_bulle]
+   texte="Point virgule"
+  [radio_bouton]
+   [presentation]
+    position=107,139
+    taille=9,74
+    id=66
+    wstyle="STD"
+   [param_radio]
+    texte='Séparateur : ","'
+    cadrage=droite
+    valeur="2"
+   [info_bulle]
+   texte="Virgule"
+  [radio_bouton]
+   [presentation]
+    position=118,139
+    taille=9,74
+    id=67
+    wstyle="STD"
+   [param_radio]
+    texte='Séparateur : "/"'
+    cadrage=droite
+    valeur="3"
+   [info_bulle]
+   texte="Pipe"
+  [radio_bouton]
+   [presentation]
+    position=129,139
+    taille=9,74
+    id=68
+    wstyle="STD"
+   [param_radio]
+    texte='Séparateur : "     "'
+    cadrage=droite
+    valeur="4"
+   [info_bulle]
+   texte="Tabulation"
+ [groupe_radio]
+  [presentation]
+   position=86,244
+   taille=59,99
+   id=69
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,xq,3
+  [param_groupe]
+   titre="Séparateur de lignes"
+   choix="cog_gtfdmc.dhfi","COG_SEPARATEURL"
+  [radio_bouton]
+   [presentation]
+    position=98,254
+    taille=9,74
+    id=73
+    wstyle="STD"
+   [param_radio]
+    texte="Retour charriot (CR)"
+    cadrage=droite
+    valeur="1"
+   [info_bulle]
+   texte="Retour charriot (CR, carriage return)"
+  [radio_bouton]
+   [presentation]
+    position=112,254
+    taille=9,74
+    id=75
+    wstyle="STD"
+   [param_radio]
+    texte="Saut de ligne (LF)"
+    cadrage=droite
+    valeur="2"
+   [info_bulle]
+   texte="Saut de ligne (LF, line feed)"
+  [radio_bouton]
+   [presentation]
+    position=126,254
+    taille=9,74
+    id=74
+    wstyle="STD"
+   [param_radio]
+    texte="CRLF"
+    cadrage=droite
+    valeur="3"
+   [info_bulle]
+   texte="Carriage Return Line Feed"
  [champ]
   [presentation]
-   position=151,77
+   position=151,62
+   taille=9,15
+   id=84
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,jnl1,ccxq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=151,95
+   taille=9,15
+   id=86
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,jnl2,ccxq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=164,62
    taille=9,263
    attache_lgx=oui
    id=21
@@ -290,44 +376,6 @@
    diva_apres="Champ_Fic_1_Ap"
   [boutons]
    "parcourir"
- [champ]
-  [presentation]
-   position=40,77
-   taille=9,15
-   cadrage=gauche
-   id=25
-   colonnes_saisie=3
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=xq,dos,xq
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
- [champ]
-  [presentation]
-   position=54,77
-   taille=9,15
-   id=26
-   colonnes_saisie=3
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=xq,etb,xq
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
-   position=40,95
-   taille=9,247
-   id=27
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=xq,lib,xq,1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
 [ressources]
  [menu]
   ident="MAIN"
@@ -474,6 +522,7 @@ Module COG_CC_EXPORT_ECR.DHOP
 ; Enregistrements
 Public Record	GTFDD.DHSD	XQ				XQ				; Jobqueue
 Public Record	A5DD.DHSD	MZ				MZ
+Public Record "ccfdd.dhsd" xq ccxq
 
 Define cog_Masque = "cog_cc_export01.dhof"
 1 idTB_Main			L		; Identifiant barre d'outils MAIN
