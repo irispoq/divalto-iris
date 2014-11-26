@@ -46,78 +46,88 @@ hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisate
 record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
 
 ;*
-Main
+Function int Cog_InitialiserVariables
+;
+BeginF
+
+
+	; Initialisation
+	If PingReceive("ZEchange",MZ) <> 0
+		
+		auto	= true
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		if iseek(a5fdos_loc,muser_loc,"B",system.user) <> 0
 	
-; Initialisation
-If PingReceive("ZEchange",MZ) <> 0
+			programexit
 	
-	auto	= true
-	;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
-	if iseek(a5fdos_loc,muser_loc,"B",system.user)
-
-		programexit
-
-	else
-
-		mz.dos		= muser_loc.dos
-		mz.etb		= muser_loc.etb
-		mz.depo		= muser_loc.depo
-		mz.mecle		= "cog_cc_export01.dhof"
-
-	endif
-
-EndIf
-
-; Initialisation des variables
-Seek_Soc(MZ.Dos)		; Contrôle du dossier
-Seek_CA(mz.Dos)
-
-; Chargement d'un fichier masque
-XMeLoad(cog_Masque)
-
-;Titre fenêtre
-XMeTitle("DIVALTO Comptabilité \ Exportation des écritures comptables")
-
-; Renseigne dans des variables systèmes les paramètres de la pages 1
-XMeInfoPage(cog_Masque, 1)
-
-; Chargement en mémoire d'une barre d'outils 
-idTB_Main = XMeToolBarGetID(cog_Masque, "MAIN")
-; Attachement d'une barre d'outils à une page de masque, pour préparer son affichage
-XMeToolBarSetWindow(idTB_Main, cog_Masque, 1)
-; Chargement en mémoire d’un menu classique ou surgissant
-idME_Main = XmeMenuGetId(cog_Masque, "MAIN")
-; Attachement d’un menu classique à une page de masque, pour préparer son affichage
-XmeMenuSetWindow(idME_Main,cog_Masque,1)
-; Chargement en mémoire d’un menu classique ou surgissant
-idME_POPChemin = XmeMenuGetId(cog_Masque,"POP_CHEMIN")
-									 
-; Initialisation des variables
+		else
+	
+			mz.dos		= muser_loc.dos
+			mz.etb		= muser_loc.etb
+			mz.depo		= muser_loc.depo
+			mz.mecle		= "cog_cc_export01.dhof"
+	
+		endif
+	
+	EndIf
+	
+	; Initialisation des variables
+	Seek_Soc(MZ.Dos)		; Contrôle du dossier
+	Seek_CA(mz.Dos)
+	
+	; Chargement d'un fichier masque
+	XMeLoad(cog_Masque)
+	
+	;Titre fenêtre
+	XMeTitle("DIVALTO Comptabilité \ Exportation des écritures comptables")
+	
+	; Renseigne dans des variables systèmes les paramètres de la pages 1
+	XMeInfoPage(cog_Masque, 1)
+	
+	; Chargement en mémoire d'une barre d'outils 
+	idTB_Main = XMeToolBarGetID(cog_Masque, "MAIN")
+	; Attachement d'une barre d'outils à une page de masque, pour préparer son affichage
+	XMeToolBarSetWindow(idTB_Main, cog_Masque, 1)
+	; Chargement en mémoire d’un menu classique ou surgissant
+	idME_Main = XmeMenuGetId(cog_Masque, "MAIN")
+	; Attachement d’un menu classique à une page de masque, pour préparer son affichage
+	XmeMenuSetWindow(idME_Main,cog_Masque,1)
+	; Chargement en mémoire d’un menu classique ou surgissant
+	idME_POPChemin = XmeMenuGetId(cog_Masque,"POP_CHEMIN")
+										 
+	; Initialisation des variables
 	; Dossier
-XQ.DOS = SOC.Dos
-XQ.Lib(1) = Left(Soc.Nom)
+	XQ.DOS = SOC.Dos
+	XQ.Lib(1) = Left(Soc.Nom)
 	; Etablissement
-Seek_Ets(MZ.ETB)
-XQ.Etb = ETS.Etb
-XQ.Lib(2) = Left(ETS.Nom)
+	Seek_Ets(MZ.ETB)
+	XQ.Etb = ETS.Etb
+	XQ.Lib(2) = Left(ETS.Nom)
 	; Mode d'exportation
-XQ.Choix(1) = 1
-XQ.PiNoD = "10000000"
-XQ.PiNoF = "99999999"
-XMeSetAttribut("cog_chrono", AN_VISIBILITE, AV_GRISE)
+	XQ.Choix(1) = 1
+	XQ.PiNoD = "10000000"
+	XQ.PiNoF = "99999999"
+	XMeSetAttribut("cog_chrono", AN_VISIBILITE, AV_GRISE)
 	; Séparateur de champs
-XQ.Choix(2) = 1
-t_SeparateurC = ";"
+	XQ.Choix(2) = 1
+	t_SeparateurC = ";"
 	; Séparateur de lignes
-XQ.Choix(3) = 3
-t_SeparateurL = " " & Chr(13)	& Chr(10)
+	XQ.Choix(3) = 3
+	t_SeparateurL = " " & Chr(13)	& Chr(10)
 	;Longueur Fixe
-XQ.Choix(4)	= 2
+	XQ.Choix(4)	= 2
 	; Fichier
-Rechercher_Chemin (mz.Dos, mz.Etb, "EXPORT_VERSANAEL_H");ca.Cog_Exp_Ch)
-XQ.Fic = condition(mchemin.CheminTyp<3,Win_ConvertirEnNomWindows(mChemin.Chemin),mchemin.Chemin)
+	Rechercher_Chemin (mz.Dos, mz.Etb, "EXPORT_VERSANAEL_H");ca.Cog_Exp_Ch)
+	XQ.Fic = condition(mchemin.CheminTyp<3,Win_ConvertirEnNomWindows(mChemin.Chemin),mchemin.Chemin)
 
-if not auto
+	FReturn(1)
+
+EndF
+
+;*
+Procedure Cog_SaisiePage1
+;
+BeginP
 
 	; Lancement de la saisie d'un masque
 	Xmeinput(cog_Masque, 1,0, XMe_Mode_Goto)
@@ -198,7 +208,7 @@ if not auto
 	
 			Default
 				
-			EndSwitch
+		EndSwitch
 	While b_FIN = False
 		; Reprise de la saisie du masque
 		XmeNext(Harmony.RETOUR, Harmony.CPLRETOUR)
@@ -208,9 +218,20 @@ if not auto
 		; Suppression ou message livre de bord
 	EndIf
 
-else
-	FicNom01 = COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL)
-endif
+EndP
+
+;*
+Main
+;	
+	If Cog_InitialiserVariables
+
+		if not auto
+			Cog_SaisiePage1
+		else
+			FicNom01 = COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL)
+		endif
+
+	EndIf
 
 ProgramExit
 
