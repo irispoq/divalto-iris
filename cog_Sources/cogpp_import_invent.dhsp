@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_import_invent.dhsp 7126 2014-11-27 09:47:16Z admin $')
+SetModuleInfo('$Id: cogpp_import_invent.dhsp 7128 2014-11-27 10:49:09Z admin $')
 ;*
 ;*		Objet : Import inventaire Excel
 ;*
@@ -517,7 +517,7 @@ BeginP
 					if select = 0							
 						ListAddEnd(idinv,mvtl)		; Création des enregistrements
 						g3xq.wintitre = "N° Ligne : " & icurligne & " - Dossier : " & mz.DOS & " Article : " & mvtl.ref & mvtl.umvtl
-						XmeDispv ("cog_recup_invent.dhoe",2,XME_MODE_GOTO) | XmeRet 
+						XmeDispv (MZ.MeCle,2,XME_MODE_GOTO) | XmeRet 
 					endif
 				endif
 			endloop
@@ -538,7 +538,7 @@ BeginP
 				if not hseek(gtfinv,InvDeT,gtfinv.key) = 0
 					libtext = "Référence " & nospaces(mvtl.grref) & " non trouvée dans l'inventaire. Ajout en page complémentaire."
 					g3xq.wintitre = "Vérification des lignes par rapport à l'inventaire Divalto. Ajout " & nospaces(mvtl.grref) & " en page complémentaire."
-					XmeDispv ("cog_recup_invent.dhoe",2,XME_MODE_GOTO) | XmeRet 
+					XmeDispv (MZ.MeCle,2,XME_MODE_GOTO) | XmeRet 
 					;hwrite(fictext,libtext)
 					gtfinv.key = 'C' & mz.dos & g3xq.invno
 					if hread(gtfinv,InvDeT) = 0 and InvDeT.dos = mz.dos and InvDeT.invno = g3xq.invno and InvDeT.depo = g3xq.depof
