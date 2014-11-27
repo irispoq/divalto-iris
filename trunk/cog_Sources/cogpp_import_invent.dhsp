@@ -1,0 +1,697 @@
+SetModuleInfo('$Id: cogpp_import_invent.dhsp 7126 2014-11-27 09:47:16Z admin $')
+;*
+;*		Objet : Import inventaire Excel
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		TR			1.0						09/2008
+;*		YLEF		P205a						11.2014		Adaptations pour U GIE IRIS (prise en compte de la casse sur REF)
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*
+
+;*
+;*
+;*
+
+;
+include	"GTTCZ00.dhsp"
+
+;
+Module   "yoffice.dhop"
+Module	"CogTm_000.dhop"
+
+;
+public hfile gtfdd.dhsd gtfat  	gtfat
+public hfile gtfdd.dhsd gtfinv	gtfinv
+public hfile gtfdd.dhsd gtfinv	gtfinv2
+public hfile gtfdd.dhsd gtfvtl	gtfvtl
+
+;
+public record gtfdd.dhsd invdet
+public record gtfdd.dhsd invdet	invdet2
+public record gtfdd.dhsd invent
+public record gtfdd.dhsd invvtl
+public record gtfdd.dhsd mvtl
+public record gtfdd.dhsd mvtl		xvtl
+public record gtfdd.dhsd sart
+public record gtfdd.dhsd art
+public record gtfdd.dhsd tfo
+public record gtfdd.dhsd soc
+public record a5dd.dhsd  mz
+public record gtfdd.dhsd artdepo
+public record gtfdd.dhsd xq		g3xq
+
+;
+record ddsys.dhsd implicite implicite
+record * htdf fictext
+
+;
+1		xStatus		x					; Status retour de OLE automation
+1     lStatus     L              ; Liste status (long)
+1     iLigne      5,0            ; Ligne
+1     iCol        3,0            ; Colonne
+1     iCurLigne   5,0				; Indice ligne courante
+1     iCurCol     3,0 				; indice colonne courante
+1     tabFlg		1,0*100        ; Tableau des transferts
+1     tabCol      3,0*100        ; Tableau des colonnes 
+1     eEntCol		36					; Enr. de la structure de liste
+	5	eEntCol_Val	33					; Entête
+	5	eEntCol_Num	3,0         	; Numéro de la colonne
+1		lEntCol		L = 0				; Ticket liste des entêtes des colonnes
+1		cCE				1				; Code enregistrement
+1		cSens			1 = "E"			; (E)xportation, (I)mportation (S)imulation
+1		cFiche		33             ; Nom de la fiche
+1		cIres			256            ; Zone intermédiaire
+1		dIres			8,0				; ZOne intermédiaire date
+1		cFeuille		31					; Nom de la feuille
+1		eNLGTFNOM	28					; Enregistrement du ping/pinreceive 
+	5		eNLDOS	3,0				; Numéro dossier
+	5		eNLSens	1					; Sens E/I/S
+	5		eCptLus  8,0				;
+	5     eCptTrt	8,0				;
+	5     eCptErr	8,0				;
+1		xI				x					; Indice de travail
+1		idinv			L
+1		n_err			5,0=0
+1		idtoolbar	L
+1		select	1,0 
+1		libtext	200
+1		compteur	6,0
+1		i			X
+1		wnst		3
+1		wlieu		12
+1		wdate		8
+1     ficfeui 	512      ; Fichier feuille
+1		tunnel	1,0  = 0
+1		Erreur	X	  = 0
+
+;*
+;*
+;*
+
+;*
+; Fenêtre d'ouverture de fichier windows
+Public Function Char FichierOuvrir
+1  Bufopen             700   ; zone paramètres
+ 2 Flags                 L
+ 2 Filtre              256
+ 2 IndexFiltre           X
+ 2 IndexNom              X
+ 2 IndexExtension        X
+ 2 RepertoireInitial   256
+ 2 Titre                80
+ 2 ExtensionDefaut       4
+1 Fichier             512
+beginf
+	Bufopen           = " "
+	Filtre            = "Fichiers Microsoft Excel (*.xls)|*.xls|Fichiers Microsoft Excel (*.xlsx)|*.xlsx"  
+	IndexFiltre       = 3
+	Fichier           = ""
+	RepertoireInitial = ""
+	Titre             = "Ouverture de fichier"
+	Flags             = OFN_EXPLORER + OFN_FILEMUSTEXIST
+	ExtensionDefaut   = " "
+	if WinGetOpenFileName(Bufopen, Fichier) = false
+		Fichier = ' ' 
+	endif
+	freturn(Fichier)
+endf
+
+;* Initialisation des variables
+Function int Cog_InitialiserVariables
+;
+Recordsql	'a5rsuser.dhoq'	utilisateur						;Utilisateurs
+
+beginf
+
+	;le programme n'a pas été lancé à partir du menu
+	if pingreceive("zechange",mz) <> 0
+
+		;--------mode tunnel, on recherche l'utilisateur
+		if tunnel=true
+			utilisateur.init()
+			utilisateur.where.exists(system.User)
+			if utilisateur.select() = 0
+				Cog_EcritureLivreDeBord("Utilisateur " & left(system.user) & " non défini dans la base Divalto", , , nivalerte=1, dos=999)
+				Erreur++
+				freturn(false)
+			else
+				mz.dos		= utilisateur.dos
+				mz.etb		= utilisateur.etb
+				mz.depo		= utilisateur.depo
+				mz.mecle		= "Cogee_import_invent.dhof"
+				;mz.micle		= "Cogpp_import_invent.dhoi"
+				mz.mtcle		= " "
+				mz.titre2	= "Import Excel inventaire"
+			endif
+		else
+			messagebox("Erreur de lecture de la zone zechange", "Alerte", mb_iconexclamation)
+			Erreur++
+			freturn(false)
+		endif
+	endif
+
+	;
+	Seek_Soc(MZ.Dos)
+
+	;
+	xmeload(mz.mecle)
+	idtoolbar = xmetoolbargetid(mz.mecle,"FENETRE")
+	xmetoolbarsetwindow(idtoolbar,mz.mecle,1)
+
+	;
+	ficfeui = " "
+	ficfeui = FichierOuvrir
+	if ficfeui = " "
+		FReturn(FALSE)
+	endif
+
+	FReturn(TRUE)
+EndF
+
+;*
+;*
+;*
+
+;*	
+Function int GetColNu(pcVAL,piInd)
+;Retourne l'indice de colonne, 0 si pas trouvé
+1  pcVal 	256
+1  piInd    x
+1	icol		3,0
+1 	lStatus  L
+
+beginf
+	pcVal = Left(pcVal,length(pcVal)) ; Entête de colonne à chercher
+	lStatus = ListBegin(lEntCol)
+	lStatus = ListFind(lEntCol,1,length(pcVal),pcVal,eEntCol)
+	if lStatus > 0 						; 
+	   Tabflg(piInd) = 2					;	Entête trouvée
+		TabCol(piInd) = eEntCol_Num	; 	Numéro de colonne Excel
+	   freturn(eEntCol_Num)				;  Retour num de colonne 
+	  else
+	   freturn(0)
+	endif
+endf
+
+;* 
+function char GetEntete(piLigne,piCMin,PicMax,plListe)
+; GetEntete : RECUPERATION de 'l'entête' nom des champs
+;  Récupération de tous les noms de la ligne piligne de colonne min à max
+;  Remplir une liste commune , retour le nombre d'items trouvés,  
+
+1		piligne		5,0		 ; Numéro de la ligne
+1		piCmin		3,0		 ; limite inférieure
+1		piCmax      3,0 		 ; limite supérieure
+1     plListe		l			 ; Ticket de la liste 
+;
+1     iCol        3,0       ; indice
+1     lStatus     L         ; Status    
+1     iEntCol     3,0       ; nombre élements
+1     eEntCol		36
+	5		eEntCol_Val	33		 ; Entête
+	5		eEntCol_Num	3,0    ; Numéro de la colonne
+; 									  
+1		xStatus		x			 ; status  de retour 
+1		cRes			256
+beginf
+	for icol = piCmin to (piCmax + 1)   
+		xstatus = Office_Read(piLigne,iCol,cRes) 	                							  	   	
+		eEntCol = " " 
+	   eEntCol_Val = Left(cRes,Length(cRes))
+		eEntCol_Num = iCol
+		lStatus = ListAddAfter(plListe,eEntCol)	
+	next
+;	lStatus = ListCount(plListe)
+;	display "Nombre " & ToString(lStatus)  
+	freturn(lStatus)   																 
+endf
+
+;*	Création/effacement du fichier où sont écritrs les rejets des articles à importer
+public procedure Creation_Fic_Erreurs
+beginp
+	fictext.name = WinShGetSpecialFolderLocation(CSIDL_PERSONAL) & '\erreurs.txt'
+	if hopen(fictext,'P') <> 0
+		hcreatefile(left(fictext.name),"U")
+		hopen(fictext,'P')
+	endif
+	herase(fictext)
+endp
+
+;*	Effectue les différents ctrls sur les données récupérées. 
+;*	Retourne 0 si pas d'erreur et 1 si erreur
+function int Rech_Erreur
+1		grref	>gtfdd.dhsd	GRREF
+beginf
+	if mvtl.ref = system.esp
+		if hseek(GTFAT,SART, ['P' MZ.DOS mvtl.umvtl]) = 0
+			if Seek_Art(SART.REF) = 0
+				mvtl.ref = SART.REF
+			endif
+		elsif hseek(GTFAT,ART, ['I' MZ.DOS mvtl.umvtl]) = 0
+			mvtl.ref = ART.REF
+		endif
+	endif
+	if not Seek_Art(mvtl.ref) = 0
+		libtext = "Ligne" & Icurligne & " rejetee car la reference " & nospaces(mvtl.ref) && " n'existe pas."
+		;hwrite(fictext,libtext)
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		n_err = 1 | freturn(1)
+	elsif	mvtl.nst = system.esp
+		libtext = "Ligne" & Icurligne & " rejetee car la nature de stock n'est pas renseignee."
+		;hwrite(fictext,libtext)
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		n_err = 1 | freturn(1)
+;	elsif not mvtl.lieu = system.esp and not lectab(18,mvtl.lieu) = 0
+;		libtext = "Ligne" & Icurligne & " rejetee car l'emplacement est inconnu."
+;		;hwrite(fictext,libtext)
+;		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+;		n_err = 1 | freturn(1)
+	elsif	art.stcod = 1
+		libtext = "Ligne" & Icurligne & " rejetee car la reference " & nospaces(mvtl.ref) && " n'est pas geree en stock."
+		;hwrite(fictext,libtext)
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		n_err = 1 | freturn(1)
+	elsif	art.gicod = 1 and	(Art.StSorCod = 3 Or (Art.StSorCod = 9 And Soc.EntCodN(29) = 3)) and not mvtl.serie = system.esp
+		libtext = "Ligne" & Icurligne & " rejetee car le no de série/lot " & nospaces(mvtl.ref) && " n'est pas à espaces."
+		;hwrite(fictext,libtext)
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		n_err = 1 | freturn(1)
+	elsif	art.gicod = 1 and	(Art.StSorCod = 3 Or (Art.StSorCod = 9 And Soc.EntCodN(29) = 3)) and (mvtl.perempdt = system.esp or isdate(mvtl.perempdt) = 0)
+		if g3xq.trisens = 2
+			libtext = "Ligne" & Icurligne & " rejetee car la DLUO de la reference " & nospaces(mvtl.ref) && " est non conforme (doit être au format date, ex 03/06/2013)."
+		else
+			libtext = "Ligne" & Icurligne & " rejetee car la DLUO de la reference " & nospaces(mvtl.ref) && " est non conforme (doit être au format AAAAMMJJ)."
+		endif
+		;hwrite(fictext,libtext)
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		n_err = 1 | freturn(1)
+	elsif	art.gicod = 2 and not mvtl.qte = 1
+		libtext = "Ligne" & Icurligne & " rejetee car la quantité de la reference " & nospaces(mvtl.ref) && " est différente de 1 (article par no de série)."
+		;hwrite(fictext,libtext)
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		n_err = 1 | freturn(1)
+	elsif	art.gicod = 3 and mvtl.serie = system.esp
+		libtext = "Ligne" & Icurligne & " rejetee car le no de lot de la reference " & nospaces(mvtl.ref) && " n'est pas renseigné."
+		;hwrite(fictext,libtext)
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		n_err = 1 | freturn(1)
+	elsif	art.gicod = 3 and	(Art.StSorCod = 3 Or (Art.StSorCod = 9 And Soc.EntCodN(29) = 3)) and (mvtl.perempdt = system.esp or isdate(mvtl.perempdt) = 0)
+		if g3xq.trisens = 2
+			libtext = "Ligne" & Icurligne & " rejetee car la DLUO de la reference " & nospaces(mvtl.ref) && " est non conforme (doit être au format date, ex 03/06/2013)."
+		else
+			libtext = "Ligne" & Icurligne & " rejetee car la DLUO de la reference " & nospaces(mvtl.ref) && " est non conforme (doit être au format AAAAMMJJ)."
+		endif
+		;hwrite(fictext,libtext)
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		n_err = 1 | freturn(1)
+	elsif art.srefcod = 2
+		if not Seek_Sart(mvtl.ref,mvtl.sref1,mvtl.sref2) = 0
+			if not mvtl.sref1 = system.esp
+				gtfat.key = 'H' & mz.dos & mvtl.ref & mvtl.sref1
+				loop hread(gtfat,sart) = 0 and mz.dos = sart.dos and mvtl.ref = sart.ref
+					if sart.sref1 = mvtl.sref1 | exitloop | endif
+				endloop
+				if sart.ref = mvtl.ref and sart.sref1 = mvtl.sref1
+					compteur = 14
+					libtext = nospaces(sart.sref)
+					xStatus = Office_WriteFormat(iCurligne,compteur,libtext,'Texte')
+					loop hread(gtfat,sart) = 0 and mz.dos = sart.dos and mvtl.ref = sart.ref and sart.sref1 = mvtl.sref1
+						compteur = compteur + 1
+						libtext = nospaces(sart.sref)
+						xStatus = Office_WriteFormat(iCurligne,compteur,libtext,'Texte')
+					endloop
+				else
+					libtext = 'Sref1 ' & nospaces(mvtl.sref1) & ' inconnue'
+					xStatus = Office_WriteFormat(iCurligne,13,libtext,'Texte')
+				endif
+			endif
+			libtext = "Ligne" & Icurligne & " rejetee car la sous reference " & mvtl.grref && " n'existe pas (" & nospaces(mvtl.serie) & " " & nospaces(mvtl.qte) & ")."
+			;hwrite(fictext,libtext)
+			libtext = 'Ss ref inconnue'
+			xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+			n_err = 1 | freturn(1)
+		endif
+	elsif art.srefcod = 1 and not mvtl.sref = system.esp
+		libtext = "Ligne" & Icurligne & " rejetee car la sous reference " & mvtl.grref && " n'existe pas (" & nospaces(mvtl.serie) & " " & nospaces(mvtl.qte) & ")."
+		;hwrite(fictext,libtext)
+		libtext = 'non géré en Ss ref'
+		xStatus = Office_WriteFormat(iCurligne,12,libtext,'Texte')
+		libtext = mvtl.sref & ' effacé'
+		xStatus = Office_WriteFormat(iCurligne,13,libtext,'Texte')
+		libtext = system.esp
+		xStatus = Office_WriteFormat(iCurligne,5,libtext,'Texte')
+		xStatus = Office_WriteFormat(iCurligne,6,libtext,'Texte')
+		n_err = 1 | freturn(1)
+	endif
+;	if g3xq.Choix(20) = 1
+;		if hread(GTFAT,ARTDEPO, ['W' MZ.DOS MVTL.REF ]) = 0 and ARTDEPO.REF = MVTL.REF
+;			if not ARTDEPO.DEPO = INVENT.DEPOD
+;				libtext = "Ligne" & Icurligne & " rejetee car le depot " & nospaces(artdepo.depo) & " ne correspond pas."
+;				;hwrite(fictext,libtext)
+;				xStatus = Office_WriteFormat(iCurligne,10,libtext,'Texte')
+;				n_err = 1 | freturn(1)
+;			endif
+;		else
+;			libtext = "Ligne" & Icurligne & " rejetee car le depot de stockage est inconnu."
+;			;hwrite(fictext,libtext)
+;			xStatus = Office_WriteFormat(iCurligne,10,libtext,'Texte')
+;			n_err = 1 | freturn(1)
+;		endif
+;	endif
+	freturn(0)			
+endf
+
+;* Récupération des données 
+public procedure Recup_Donnees
+
+beginp
+	if TabFlg(1) = 2 
+		xStatus = Office_Read(iCurligne,TabCol(1),cIres)
+		mvtl.qte = cIres 
+	endif
+	if TabFlg(2) = 2 
+		xStatus = Office_Read(iCurligne,TabCol(2),cIres)
+		mvtl.ref = left(cIres, DataSize(mvtl.ref))
+	endif
+	if TabFlg(3) = 2 
+		xStatus = Office_Read(iCurligne,TabCol(3),cIres)
+		mvtl.usermo = left(cIres, DataSize(mvtl.usermo))
+	endif
+	if TabFlg(4) = 2 
+		xStatus = Office_Read(iCurligne,TabCol(4),cIres)
+		mvtl.sref1 = left(cIres, DataSize(mvtl.sref1))
+	endif
+	if TabFlg(5) = 2 
+		xStatus = Office_Read(iCurligne,TabCol(5),cIres)
+		mvtl.nst = left(cIres, DataSize(mvtl.nst))
+	endif
+	if TabFlg(6) = 2 
+		xStatus = Office_Read(iCurligne,TabCol(6),cIres)
+		mvtl.sref2 = left(cIres, DataSize(mvtl.sref2))
+	endif
+	if TabFlg(7) = 2 
+		xStatus = Office_Read(iCurligne,TabCol(7),cIres)
+		mvtl.lieu = left(cIres, DataSize(mvtl.lieu))
+	endif
+	if TabFlg(8) = 2 
+		xStatus = Office_Read(iCurligne,TabCol(8),cIres)
+		if not cIres  = system.esp 
+			mvtl.serie = left(cIres, DataSize(mvtl.serie))
+		endif
+	endif
+endp
+
+;*
+; Initialisation avec le libellé des colonnes
+public procedure Init_Col
+
+beginp
+	init Tabflg(*) = 1						; Présence dans entête 1 non 2 oui
+	init TabCOl(*) = 0						; Colonnes Excel
+	GetColNu('Qté inventoriée',	1)		; ATTENTION, Association de l'indice au nom de zone 
+	GetColNu('Référence',			2)		; pour éviter ensuite de systèmatiquement rechercher
+	GetColNu('Désignation',			3)		; le nom de la colonne dans la liste 
+	GetColNu('Sref1',					4)
+	GetColNu('Nst',					5)
+	GetColNu('Sref2',					6)
+	GetColNu('Emplacement',			7)
+	GetColNu('Numéro de série ou lot',8)
+endp
+
+;*
+Procedure Cog_Importer_Inventaire
+;
+BeginP
+
+	gtfinv.key 	  = 'A' & mz.dos & g3xq.invno
+	if hseek(gtfinv,InvEnt,gtfinv.key) = 0 and InvEnt.ce2 < '4' | InvEnt.ce2 = '3' | wnst = InvEnt.Nst | g3xq.depof = InvEnt.depod | hrewrite(gtfinv,InvEnt) 
+	else | MessageBox("Inventaire inconnu ou validé/annulé, interruption du traitement !",'Attention',mb_ok) | programexit
+	endif
+
+	;
+	If Office_Begin <> 0
+		MessageBox("Dialogue avec le tableur impossible !","Erreur",MB_ICONSTOP)
+		ProgramExit
+	EndIf
+	If IsOffice_OpenCalc <> 0
+		MessageBox("Tableur non ouvert !","Erreur",MB_ICONSTOP)
+		Office_Stop
+		Office_EndCalc
+		ProgramExit
+	EndIf
+
+	xStatus = stringr("\",ficfeui,length(ficfeui)) 
+	
+	if xStatus
+		if Office_open(left(ficfeui,xStatus),mid(ficfeui,xStatus+1)) = 0
+			; Recherche des identifiants de la ligne 
+			lEntCol = ListCreate
+			iLigne = 1
+			xStatus = GetEntete(iLigne,1, 40, lEntCol)
+			
+			iCurLigne = iLigne			; iLigne positionné sur ligne FICHE...
+			; Préambule
+			; Initialisation du tableau de la présence des données
+			Init_Col
+			
+			; Vérifier si Colonnes correctes
+			if 	tabFlg(1) <> 2 	  
+			  		MessageBox("Colonne Qté inventoriée absente", ' ', Mb_Ok)
+					ProgramExit
+			endif	
+			if 	tabFlg(2) <> 2 	  
+			  		MessageBox("Colonne Référence absente", ' ', Mb_Ok)
+					ProgramExit
+			endif	
+			if 	tabFlg(3) <> 2 	  
+			  		MessageBox("Colonne Désignation absente", ' ', Mb_Ok)
+					ProgramExit
+			endif	
+			if 	tabFlg(4) <> 2 	  
+			  		MessageBox("Colonne Sref1 absente", ' ', Mb_Ok)
+					ProgramExit
+			endif	
+			if 	tabFlg(5) <> 2 	  
+			  		MessageBox("Colonne Nst absente", ' ', Mb_Ok)
+					ProgramExit
+			endif	
+			if 	tabFlg(6) <> 2 	  
+			  		MessageBox("Colonne Sref2 absente", ' ', Mb_Ok)
+					ProgramExit
+			endif	
+			if 	tabFlg(7) <> 2 	  
+			  		MessageBox("Colonne Emplacement absente", ' ', Mb_Ok)
+					ProgramExit
+			endif	
+			if 	tabFlg(8) <> 2 	  
+			  		MessageBox("Colonne Numéro de série ou lot absente", ' ', Mb_Ok)
+					ProgramExit
+			endif	
+	
+			;Creation_Fic_Erreurs
+			idinv = listcreate				
+			listerase(idinv)
+			sethourglasscursor
+	
+			loop true
+				mvtl = system.esp
+				++iCurligne				; Ligne après titre
+				++ecptlus
+			
+			; Récupération des données	
+				Recup_Donnees
+			
+				if mvtl = system.esp
+					exitloop
+				elsif mvtl.ref = system.esp and mvtl.umvtl = system.esp		; umvtl = code EAN
+					redoloop
+				elsif mvtl.qte = system.esp
+					redoloop
+				else	
+					select = Rech_Erreur 			;Effectuer les tests et retourne 0 si ts les tests sont ok	
+					if select = 0							
+						ListAddEnd(idinv,mvtl)		; Création des enregistrements
+						g3xq.wintitre = "N° Ligne : " & icurligne & " - Dossier : " & mz.DOS & " Article : " & mvtl.ref & mvtl.umvtl
+						XmeDispv ("cog_recup_invent.dhoe",2,XME_MODE_GOTO) | XmeRet 
+					endif
+				endif
+			endloop
+			setnormalcursor
+	
+			if n_err <> 0
+				messagebox("Erreurs détectées lors de la lecture des données.|Consulter le fichier des erreurs ou voir dans Excel (colonne L).",'Information',mb_iconexclamation)
+				if g3xq.reacod = 1 | programexit | endif
+			endif
+	
+			;Ferme_excel(idserv)
+			lStatus = ListDestroy(lEntCol)		; Libère la liste 
+	
+			; 		création des pages complémentaires
+			listbegin(idinv)
+			loop listnext(idinv,mvtl) <> 0
+				gtfinv.key = 'E' & mz.dos & g3xq.invno & g3xq.depof & mvtl.grref & mvtl.Nst & mvtl.Lieu
+				if not hseek(gtfinv,InvDeT,gtfinv.key) = 0
+					libtext = "Référence " & nospaces(mvtl.grref) & " non trouvée dans l'inventaire. Ajout en page complémentaire."
+					g3xq.wintitre = "Vérification des lignes par rapport à l'inventaire Divalto. Ajout " & nospaces(mvtl.grref) & " en page complémentaire."
+					XmeDispv ("cog_recup_invent.dhoe",2,XME_MODE_GOTO) | XmeRet 
+					;hwrite(fictext,libtext)
+					gtfinv.key = 'C' & mz.dos & g3xq.invno
+					if hread(gtfinv,InvDeT) = 0 and InvDeT.dos = mz.dos and InvDeT.invno = g3xq.invno and InvDeT.depo = g3xq.depof
+						Seek_Art(mvtl.ref) 
+						Seek_Sart(mvtl.ref,mvtl.sref1,mvtl.sref2) 
+						InvDeT.Ce3 	  	  = '3'
+						InvDeT.invrang	  = 99
+						InvDeT.nst		  = wnst
+						InvDet.indexcalc = system.esp
+						InvDeT.grref	  = mvtl.grref
+						InvDeT.refun	  = art.refun
+						InvDeT.stun	     = art.stun
+						InvDeT.cr		  = sart.cr
+						InvDeT.cmp		  = sart.cmp
+						InvDeT.qte 	  	  = system.esp
+						InvDeT.refqte 	  = system.esp
+						InvDeT.nst 	  	  = mvtl.nst
+						InvDeT.lieu	  	  = mvtl.lieu
+						InvDet.stqte     = system.esp
+						InvDet.sttheoqte = system.esp
+						InvDeT.usercr 	  = system.user
+						InvDeT.sttheoflg = system.esp
+						InvDeT.usercrdh 	 = time(7)
+						InvDeT.invcptagedt = today
+						hwrite(gtfinv,InvDeT)					
+					else
+						MessageBox("Inventaire vide.|Import annulé.",'Information',mb_iconexclamation)
+						programexit
+					endif				
+				endif
+			endloop
+	
+			;* 
+	
+			sethourglasscursor
+			listbegin(idinv)
+			wlieu   = system.esp
+			g3xq.wintitre = "Import des lignes dans l'inventaire Divalto."
+			XmeDispv (MZ.MeCle,2,XME_MODE_GOTO) | XmeRet 
+			if not g3xq.invtri = 1	  		; option en ajout des qtes supprimée
+				gtfinv.key = 'C' & mz.dos & g3xq.invno 		
+				loop hread(gtfinv,InvDeT) = 0 and InvDeT.dos = mz.dos and InvDeT.invno = g3xq.invno 
+					InvDeT.qte 	 = system.esp
+					InvDeT.refqte = system.esp
+					hrewrite(gtfinv,InvDeT) 
+				endloop
+				gtfinv.key = 'H' & mz.dos & g3xq.invno 		
+				loop hread(gtfinv,InvVtl) = 0 and InvVtl.dos = mz.dos and InvVtl.invno = g3xq.invno 
+					if not InvVtl.stqte = system.esp | redoloop | endif
+					hdelete(gtfinv,InvVtl) 
+				endloop
+			endif
+			loop listnext(idinv,mvtl) <> 0
+				if hseek(gtfinv,InvDeT,'E' & mz.dos & g3xq.invno & g3xq.depof & mvtl.grref & mvtl.Nst & mvtl.Lieu) = 0
+					InvDeT.Ce3 	  	  	 = '3'
+					InvDeT.qte 	  = InvDeT.qte 	+ mvtl.qte
+					InvDeT.refqte = InvDeT.refqte + mvtl.qte
+					InvDeT.usermo 	  	 = system.user
+					InvDeT.usermodh 	 = time(7)
+					InvDeT.invcptagedt = today
+					hrewrite(gtfinv,InvDeT)
+					Seek_Art(mvtl.ref)
+					if art.gicod > 1 or (Art.StSorCod = 3 Or (Art.StSorCod = 9 And Soc.EntCodN(29) = 3))		;not mvtl.serie = system.esp
+						InvVtl = 'C Z'								  
+						InvVtl.dos 		= InvDeT.dos
+						InvVtl.invno 	= InvDeT.invno
+						InvVtl.depo 	= InvDeT.depo
+						InvVtl.nst 		= InvDeT.nst
+						InvVtl.grref 	= InvDeT.grref
+						InvVtl.serie 	= mvtl.serie
+						InvVtl.perempdt= mvtl.perempdt
+						InvVtl.Lieu		= InvDeT.Lieu
+						InvVtl.usercr 	= system.user
+						InvVtl.usercrdh = time(7)
+						InvVtl.qte 		= mvtl.qte
+						InvVtl.refqte 	= mvtl.qte
+						hwrite(gtfinv,InvVtl)
+					endif
+				endif
+			endloop
+			gtfinv.key = 'C' & mz.dos & g3xq.invno			
+			loop hread(gtfinv,InvDeT) = 0 and InvDeT.dos = MZ.dos and InvDeT.invno = G3XQ.invno 
+				if InvDeT.Ce3 = '2' | InvDeT.Ce3 = '3' | hrewrite(gtfinv,InvDeT) | endif
+			endloop
+			lStatus = ListDestroy(idinv)
+			setnormalcursor
+		else
+			MessageBox('Fichier ' & mid(ficfeui,xStatus+1) && ' inconnu','Erreur,'mb_ok+mb_iconexclamation)
+		endif
+		Office_Stop
+		Office_EndCalc
+	endif
+
+EndP
+
+;*
+Procedure Cog_SaisiePage1
+;
+BeginP
+
+	If messagebox("Ce traitement intègre l'inventaire physique à partir de la PREMIERE feuille du classeur Excel.|| Important: le fichier Inventaire ne DOIT pas avoir la fonction Filtrage activée.", \
+				  "Import d'inventaire",mb_iconquestion + mb_yesno + MB_DEFBUTTON1	) = idno | programexit 
+	EndIf
+
+	compteur       = system.esp
+   g3xq.sel 		= system.esp
+	g3xq.invtri		= 1
+	g3xq.reacod		= 1
+	g3xq.trisens	= 2
+	gtfinv.key 		= 'A' & mz.dos
+	XmeSetAttribut ("mag", AN_VISIBILITE, AV_CACHE)
+
+	do | i = hread(gtfinv,InvEnt)
+	while i = 0 and InvEnt.dos = mz.dos
+		if InvEnt.Ce2 > '3' | redodo | endif
+		if Not InvEnt.depod = InvEnt.depof | redodo | endif
+		if compteur  > 999 | messagebox("Trop d'inventaires en cours !",'Attention',mb_ok) | programexit | endif
+		if compteur  = system.esp
+			g3xq.dosd = InvEnt.invno
+			g3xq.op   =	InvEnt.depod
+			XmeSetAttribut ("mag1", AN_VISIBILITE, AV_VISIBLE)
+		endif
+		if compteur  = 1
+			g3xq.dosf = InvEnt.invno
+			g3xq.opd  =	InvEnt.depod
+			XmeSetAttribut ("mag2", AN_VISIBILITE, AV_VISIBLE)
+		endif
+		if compteur  = 2
+			g3xq.etbd = tostring(InvEnt.invno)
+			g3xq.opf  =	InvEnt.depod
+			XmeSetAttribut ("mag3", AN_VISIBILITE, AV_VISIBLE)
+		endif
+		if compteur  = 3
+			g3xq.etbf = tostring(InvEnt.invno)
+			g3xq.opmsk=	InvEnt.depod
+			XmeSetAttribut ("mag4", AN_VISIBILITE, AV_VISIBLE)
+		endif
+		compteur ++
+	wend
+	Invent = system.esp
+
+	G3_Saisie_Selections(MZ.MeCle,1)
+	Cog_Importer_Inventaire
+
+EndP
+
+;*
+Main
+;
+	If not Cog_InitialiserVariables
+		ProgramExit
+	EndIF
+
+	If not tunnel
+		Cog_SaisiePage1
+	EndIf
