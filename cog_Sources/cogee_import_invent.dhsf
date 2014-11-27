@@ -1,0 +1,441 @@
+;>xwin4obj                              7.0       20131104155143      
+[masque]
+ utilisateur="LCP_TR"
+ date_modification="04/11/2013"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=126
+ dernier_id=51
+ dernier_id_page=4
+[defaut]
+ [aide_page]
+  aide=0
+ [touches]
+  f1=129
+  f7=8000
+  f8=8000
+[enregistrements]
+ "gtfdd.dhsd",,xq,g3xq,8000,0
+ "gtfdd.dhsd",,invent,invent,1000,0
+[page]
+ numero=1
+ libelle="boutons sélections"
+ fond="STD"
+ efface=complet
+ nb_lig=30
+ nb_col=110
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=1
+ [aide_page]
+  aide=7018
+  fichier="gtfaide"
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=270,440
+   attache_lgx=oui
+   attache_lgy=oui
+   id=2
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélections"
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=17,15
+   taille=43,270
+   id=3
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="STD"
+   wnom_couleurfond="STD2D"
+ [cadre]
+  [presentation]
+   position=90,38
+   taille=28,249
+   id=20
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="STD"
+ [bitmap_constante]
+  [presentation]
+   position=28,22
+   taille=16,16
+   actionbitmap=reduire
+   id=4
+  [param_bitmapc]
+   wnom="INFOG"
+ [obj_texte]
+  [presentation]
+   position=36,49
+   taille=9,217
+   id=51
+   wstyle="STD"
+  [texte]
+   texte="L'inventaire précédent sera remis à zéro lors de l'import."
+ [cadre]
+  [presentation]
+   position=90,169
+   taille=28,1
+   id=21
+   wstyle="STD"
+  [param_cadre]
+   nature=vertical_d
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="STD"
+ [obj_texte]
+  [presentation]
+   position=24,49
+   taille=9,217
+   id=5
+   wstyle="STD"
+  [texte]
+   texte="Vous devez avoir lancé l'impression de la préparation avant de lancer ce traitement."
+ [obj_texte]
+  [presentation]
+   position=47,49
+   taille=9,234
+   id=6
+   wstyle="STD"
+  [texte]
+   texte="Choisissez l'inventaire à traiter et valider :"
+ [obj_texte]
+  [presentation]
+   position=97,193
+   taille=12,62
+   id=24
+   wstyle="STD"
+   wtaille_fonte=12
+   wgras=1
+   xaml_def_tail_pol=0
+   xaml_def_gras_pol=0
+  [texte]
+   texte="Dépôt"
+ [obj_texte]
+  [presentation]
+   position=98,55
+   taille=12,62
+   id=23
+   wstyle="STD"
+   wtaille_fonte=12
+   wgras=1
+   xaml_def_tail_pol=0
+   xaml_def_gras_pol=0
+  [texte]
+   texte="Inventaire No"
+ [champ]
+  [presentation]
+   position=96,124
+   taille=14,35
+   id=39
+   colonnes_saisie=5
+   wstyle="CHAMP_SAISI_CLE"
+   wtaille_fonte=14
+   wgras=1
+   xaml_def_tail_pol=0
+   xaml_def_gras_pol=0
+  [description]
+   donnee=xq,invno,g3xq
+   sequence=1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+   table_associee=oui
+  [touches]
+   f1=129
+   f7=8000
+   f8=9823
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_InvNo_Av"
+   diva_apres="Champ_InvNo_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=96,228
+   taille=14,25
+   id=40
+   colonnes_saisie=3
+   wstyle="CHAMP_AFF"
+   wtaille_fonte=14
+   wgras=1
+   xaml_def_tail_pol=0
+   xaml_def_gras_pol=0
+  [description]
+   donnee=invent,depod,invent
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=129
+   f7=8000
+   f8=8000
+ [groupe_radio]
+  [presentation]
+   position=172,44
+   taille=26,237
+   id=44
+   wstyle="STD"
+  [description]
+   donnee=xq,reacod,g3xq
+  [param_groupe]
+   titre="Si erreurs constatées"
+  [radio_bouton]
+   [presentation]
+    position=183,67
+    taille=9,65
+    id=45
+    wstyle="STD"
+   [param_radio]
+    texte="Faire la mise à jour"
+    cadrage=droite
+  [radio_bouton]
+   [presentation]
+    position=184,172
+    taille=9,72
+    id=46
+    wstyle="STD"
+   [param_radio]
+    texte="Annuler la mise à jour"
+    cadrage=droite
+    valeur="1"
+  [touches]
+   f1=129
+   f7=8000
+   f8=8000
+[page]
+ numero=2
+ libelle="Sélection"
+ fond="STD"
+ efface=partiel
+ nb_lig=2
+ nb_col=90
+ offset_lig=34
+ offset_col=6
+ ident_unique=3
+ [champ]
+  [presentation]
+   position=4,0
+   taille=9,358
+   id=38
+   colonnes_saisie=120
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=xq,wintitre,g3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=129
+   f7=8000
+   f8=8000
+[ressources]
+ [menu]
+  ident="MAIN"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Fichier"
+    wid_ressource="FICHIER"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Exécuter\tEntrée"
+    wid_ressource="EXEC__1"
+    wtrait_chaine="#Return"
+  [item]
+   nature=case
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Traitement différé"
+    wid_ressource="JOB"
+    wetype_trait=arret
+    warret=5999
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP_1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Quitter\tEchap"
+    wid_ressource="QUITTER"
+    wtrait_chaine="#Escape"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Outils"
+    wid_ressource="OUTILS"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Zoom généralisé\tF7"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Aide"
+    wid_ressource="AIDE"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Aide _contextuelle\tShift F1"
+    wid_ressource="AIDEC"
+    wtrait_chaine="#shift_f1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Aide sur le calcul des coûts moyens pondérés"
+    wid_ressource="AIDEP"
+    wetype_trait=arret
+    warret=5998
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Sommaire"
+    wid_ressource="AIDES"
+    wetype_trait=arret
+    warret=5997
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP_2"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="A _propos\tF1"
+    wid_ressource="APROPOS"
+    wtrait_chaine="#f1"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="FENETRE"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#Escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#Return"
+   [info_bulle]
+   texte="Exécuter <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+;*
+;*    Calcul du cmp                                                               gtte125
+;*
+
+;*    Log    version   nPmodif      date     modifications
+;*
+;*    Lm       5.1                  02.2001  version initiale en diva
+
+
+Include		"GTTC000.dhsp"																					
+
+Public Record	GTFDD.dhsd	XQ		G3XQ												; Enregistrement sélection
+public record	GTFDD.dhsd	XZ		G3XZ					
+
+Public Record "gtfdd.dhsd" invent invent
+
+;*
+Procedure Champ_InvNo_Ap
+; Après saisie du numéro d'inventaire
+beginp
+	if Controle_Inventaire(G3XQ.INVNO ,3801) = 0
+	endif
+endp
+
+;*
+Procedure Champ_InvNo_Av
+Beginp
+	G3XZ.Choix(1) = Non
+	G3XZ.Choix(2) = Oui
+	G3XZ.Choix(3) = Oui
+	G3XZ.Choix(4) = Non
+	G3XZ.Choix(5) = Non
+Endp
+
+[/diva]
+[diva_base]
+[/diva]
