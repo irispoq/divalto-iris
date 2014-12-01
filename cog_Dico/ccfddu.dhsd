@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20021014173940,hc  ,20141112150206,UGIE_YLF            
+Version=5,20021014173940,hc  ,20141127114100,UGIE_YLF            
 Nom=ccfdd.dhsd,ccfdd.dhsd,1
 [CHAMP]
 Version=1,20141007161805,UGIE                ,20141007161810,UGIE                
@@ -8,6 +8,13 @@ Nom=Cog_AmoFlag,Comptabilisation amortissement,1
 Gel=1
 Nature=1,0
 NomOdbc=Cog_AmoFlag
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110606150452,SYSTEMU_VR          ,20110606150456,SYSTEMU_VR          
+Nom=Cog_AxeAnael,Axe anaël,1
+Gel=1
+Nature=8
+NomOdbc=Cog_AxeAnael
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20141008091535,UGIE                ,20141008091542,UGIE                
@@ -227,6 +234,18 @@ Nature=8,0
 NomOdbc=Cog_PiecePV
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20141126104750,UGIE_YLF            ,20141126104750,UGIE_YLF            
+Nom=Cog_QteImmo,Quantité immo,1
+Gel=1
+Nature=12,D2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141126104910,UGIE_YLF            ,20141126104910,UGIE_YLF            
+Nom=Cog_QteTot,Quantité totale,1
+Gel=1
+Nature=12,D2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20111213135624,ROOT                ,20111213135632,ROOT                
 Nom=Cog_RedNo,N° de Reddition,1
 Gel=1
@@ -324,6 +343,9 @@ Nom=Cog_BwId,66,0,0,N,1
 Nom=EnrNo,106,0,0,N,1
 Nom=Cog_CptCesVal,115,0,0,N,1
 Nom=Cog_CesEcrFlag,123,0,0,N,1
+Nom=Cog_AxeAnael,124,0,0,N,1
+Nom=Cog_QteImmo,132,0,0,N,1
+Nom=Cog_QteTot,144,0,0,N,1
 [/CHAMPL]
 [/CHAMPR]
 [TABLEU]
@@ -373,12 +395,12 @@ DateM=BC2E1EC1833FCB01
 [TABLEU]
 Version=1,1997 1220000,hc  ,20100708162734,VJ                  
 Nom=i1,Immobilisation,1
-DateM=587CB63A81FECF01
+DateM=A42E781C5E09D001
 [BASEU]
 Version=1,20080325171416,MS                  ,20121001183857,MS                  
 Nom=CcfEcr,Ecritures,1
 DateM=CABECB40F39FCD01
-DateMIndex=FCDE636FF39FCD01
+DateMIndex=474B16A12E0AD001
 [TABLES]
 [/TABLES]
 [BASEU]
@@ -397,9 +419,10 @@ Alias=Index_COG_z_C8
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=Ce1,4,0,
-Nom=COG_CHRONO,5,0,
-Nom=EcrNo,13,0,
-Nom=EcrLg,24,0,
+Nom=Jnl,5,0,
+Nom=COG_CHRONO,8,0,
+Nom=EcrNo,16,0,
+Nom=EcrLg,27,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
