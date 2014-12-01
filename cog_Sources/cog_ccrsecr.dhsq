@@ -1,0 +1,222 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL du CCFECR
+;*
+
+<DictionarySql defaultDictionary=ccfdd.dhsd DataBase=DCPT overwrittenby="cog_ccrsecru.dhoq" ModuleInfo='$Id: cog_ccrsecr.dhsq 7151 2014-12-01 14:42:24Z admin $'>
+
+;*
+;*		Ecriture
+;*
+
+<RecordSql Name=CogRs_C8 Comment='Ecriture Comptable' zoomoptimize=yes>
+public	record	A5DD.dhsd	MZ		MZ
+public 	record 	CCFDD.dhsd	CZ
+public 	record 	GTFDD.dhsd	T000
+
+<Select>
+	C8.*
+<From Insert=No Update=Yes Delete=No>
+	C8
+
+<Where>
+	C8.Dos = MZ.Dos  AND C8.CE1 = '8'
+ 
+	case Equal_Jnl(char jnl)
+		C8.Jnl = jnl
+		
+	case Equal_Cpt(char cpt)
+		C8.Cpt = cpt
+		
+	case Equal_EcrNo(int ecrno)
+		C8.EcrNo = ecrno
+
+	case A_partir_EcrNo(int ecrno)
+		C8.EcrNo >= ecrno
+
+	case Equal_Etb(char etb)
+		C8.Etb = etb
+
+	case Equal_IndValidation_CE3(char ce)
+		C8.Ce3 = ce
+		
+	case Equal_IndLettrage_CE4(char ce)
+		C8.Ce4 = ce
+		
+	case Equal_IndPointage_CE5(char ce)
+		C8.Ce5 = ce
+		
+	case Equal_IndCentralisation_CE7(char ce)
+		C8.Ce7 <> ce
+
+	case Equal_EcrituresEnBrouillard
+		C8.Ce3 = '1'
+
+	case Equal_EcrituresValidees
+		C8.Ce3 = '2'
+
+	case Equal_EcrituresNonLettrees
+		C8.Ce4 = '1'
+
+	case Equal_EcrituresLettrees
+		C8.Ce4 = '2'
+
+	case Equal_EcrituresNonPointees
+		C8.Ce5 = '1'
+
+	case Equal_EcrituresPointees
+		C8.Ce5 = '2'
+
+	case Equal_EcrituresCentralisations
+		C8.Ce7 <> '2'
+		
+	case A_partir_Piece(int piece)
+		C8.Piece >= piece
+
+	case Equal_TicketPoint(int ticket)
+		C8.TicketPoint = ticket
+
+	case A_partir_TicketPoint(int ticket)
+		C8.TicketPoint >= ticket
+		
+	case PK(int ecrno, int ecrlg)
+		C8.EcrNo = ecrno and C8.EcrLg = ecrlg
+
+	case Exists(int ecrno, int ecrlg)
+		C8.EcrNo = ecrno and C8.EcrLg = ecrlg
+
+	Case Equal_Chrono(int chrono)
+		C8.COG_CHRONO = chrono
+
+	Case Between_Chrono(int cd, int cf)
+		C8.COG_CHRONO BETWEEN cd AND cf
+
+	Case Max_Chrono
+		C8.COG_CHRONO = (SELECT MAX(C8.COG_CHRONO) FROM C8 WHERE C8.DOS = MZ.DOS)
+	
+
+<OrderBy>
+	case Par_Journal "Par journal"
+		C8.Dos,
+		C8.Jnl,
+		C8.EcrDt,
+		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_Journal_Desc "Par journal (inversé)"
+		C8.Dos 		desc,
+		C8.Jnl		desc,
+		C8.EcrDt		desc,
+		C8.EcrNo		desc,
+		C8.EcrLg		desc
+
+	case Par_EtablissementEtJournal "Par établissement et journal"
+		C8.Dos,
+		C8.Etb,
+		C8.Jnl,
+		C8.EcrDt,
+		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_EtablissementEtJournal_Desc "Par établissement et journal (inversé)"
+		C8.Dos		desc,
+		C8.Etb		desc,
+		C8.Jnl		desc,
+		C8.EcrDt		desc,
+		C8.EcrNo		desc,
+		C8.EcrLg		desc
+
+	case Par_Compte "Par compte"
+		C8.Dos,
+		C8.Cpt,
+		C8.EcrDt,
+		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_Compte_Desc "Par compte (inversé)"
+		C8.Dos		desc,
+		C8.Cpt		desc,
+		C8.EcrDt		desc,
+		C8.EcrNo		desc,
+		C8.EcrLg		desc
+
+	case Par_EtablissementEtCompte "Par établissement et compte"
+		C8.Dos,
+		C8.Etb,
+		C8.Cpt,
+		C8.EcrDt,
+		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_EtablissementEtCompte_Desc "Par établissement et compte (inversé)"
+		C8.Dos		desc,
+		C8.Etb		desc,
+		C8.Cpt		desc,
+		C8.EcrDt		desc,
+		C8.EcrNo		desc,
+		C8.EcrLg		desc
+
+	case Par_CompteEtDateEcheance "Par compte et date d'échéance"
+		C8.Dos,
+		C8.Cpt,
+		C8.EchDt,
+ 		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_EtablissementCompteEtDateEcheance "Par établissement compte et date d'échéance"
+		C8.Dos,
+		C8.Etb,
+		C8.Cpt,
+		C8.EchDt,
+ 		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_CompteEtPiece "Par compte et pièce"
+		C8.Dos,
+		C8.Cpt,
+		C8.Piece,
+ 		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_EtablissementCompteEtPiece "Par établissement compte et pièce"
+		C8.Dos,
+		C8.Etb,
+		C8.Cpt,
+		C8.Piece,
+ 		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_CompteContrepartie "Par compte de contrepartie"
+		C8.Dos,
+		C8.Cp,
+		C8.EcrDt,
+		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_CompteCollectif "Par compte collectif"
+		C8.Dos,
+		C8.CptCol,
+		C8.EcrDt,
+		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_EtablissementEtCompteCollectif "Par établissement et compte collectif"
+		C8.Dos,
+		C8.Etb,
+		C8.CptCol,
+		C8.EcrDt,
+		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_NumeroEcriture "Par numéro d'écriture"
+		C8.Dos,
+		C8.EcrNo,
+		C8.EcrLg
+
+	case Par_NumeroEcriture_Desc "Par numéro d'écriture (inversé)"
+		C8.Dos		desc,
+		C8.EcrNo		desc,
+		C8.EcrLg		desc
+
+	case Par_TicketPointage "Par ticket de pointage"
+		C8.Dos,
+		C8.TicketPoint

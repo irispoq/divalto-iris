@@ -1,0 +1,193 @@
+SetModuleInfo('$Id: cogtc_ecr_anael.dhsp 7151 2014-12-01 14:42:24Z admin $')
+;*
+;*		COGESER  Constantes pour export Anael
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		YLEF		P205a						11.2014		
+
+Structure s_EcritureAnael
+	1		p1_Cst				1
+	1		p2_Dos_Anael		6	  	; 
+	1		p8_Blanc				3		; 
+	1		p11_CptCol			6		; 
+	1		p17_CptAnael		8		; 
+	1		p25_Blanc			1		; 
+	1		p26_EcrAn			5		; 
+	1		p31_Blanc			2		; 
+	1		p33_EcrMois			2		; Mois de la date d'écriture
+	1		p35_Blanc			2		; 
+	1		p37_EcrJour			2		; Jour de la date d'écriture
+	1		p39_Blanc			2		; 
+	1		p41_MoisCourant 	2		; Mois de lancement du traitement (date du jour)
+	1		p43_Blanc			2		; 
+	1		p45_EcrAn2			4		; Année de la date d'écriture
+	1		p49_Blanc			2		; 
+	1		p51_EcrMois2		2		; 
+	1		p53_Blanc			2		; 
+	1		p55_EcrJour2		2		; 
+	1		p57_Cst				1		; 6 OU 7
+	1		p58_Blanc 			2		;
+	1		p60_TrtAnnee		4		; Année de lancement du traitement
+	1		p64_Blanc			2
+	1		p66_EcrAn			4
+	1		p70_Blanc			2
+	1		p72_EcrMois			2
+	1		p74_Blanc			2
+	1		p76_EcrJour			2
+	1		p78_EcrNo			8
+	1		p86_Jnl				3
+	1		p89_PiNo				8
+	1		p97_Cst				2		; DI
+	1		p99_Libelle			25		; libellé de l'écriture
+	1		p124_TtcMt			16		; Montant TTC
+	1		p140_Blanc			1
+	1		p141_Cst				5		; "0,010" OU "-,010"	selon le sens
+	1		p146_MtDev			16		; montant en devise
+	1		p162_Blanc			2
+	1		p164_EchAn			4		; année de l'échéance
+	1		p168_Blanc			2
+	1		p170_EchMois		2		; mois de l'échéance
+	1		p172_Blanc			2
+	1		p174_EchJr			2		; jour de l'échéance
+	1		p176_Blanc			7
+	1		p183_Cst				1		; 0
+	1		p184_Blanc			3
+	1		p187_Cst				1		; 0
+	1		p188_Blanc			3
+	1		p191_Cst				1		; 0
+	1		p192_Blanc			3
+	1		p194_Stat2			3		; axe stat 2 du client
+	1		p197_TvaAnael		1		; correspondance TVA Anael
+	1		p198_Blanc			9
+	1		p207_Cst				1		; 0
+	1		p208_Blanc			7
+	1		p215_Cst				1		; 0
+	1		p216_Blanc			7
+	1		p223_Cst				1		; 0
+	1		p224_Blanc			15
+	1		p239_Cst				1		; 0
+	1		p240_Blanc			14
+	1		p254_Cst				7		; "1,00000"
+	1		p261_Blanc			3
+	1		p264_Cst				1		; 0
+	1		p265_Blanc			5
+	1		p270_Cst				3		; INT
+	1		p273_Blanc			2
+	1		p275_EcrNoAna		14		; 90000000000000 + EcrNo
+	1		p289_EcrLg			6		; N) de ligne écriture
+	1		p295_RegAna			2		; mode de règlement Anael
+	1		p297_Blanc			27
+	1		p324_Dev				3		; devise
+	1		p327_Blanc			3
+	1		p330_Cst				1		; 0
+	1		p331_Blanc			17
+	1		p348_TrtAn			4		; année
+	1		p352_Blanc			2
+	1		p354_TrtMois		2
+	1		p356_Blanc			2
+	1		p358_TrtJr			2		; jour
+	1		p360_Blanc			4
+	1		p364_Cst				1		; 0
+	1		p365_Blanc			5
+	1		p370_Cst				1		; 0
+	1		p371_Blanc			3
+	1		p374_Cst				1		; 0
+	1		p375_Blanc			3
+	1		p378_Cst				1		; 0
+	1		p379_Blanc			9
+	1		p388_Cst				1		; 0
+	1		p389_Blanc			9
+	1		p398_Cst				1		; 0
+	1		p399_Blanc			9
+	1		p408_Cst				1		; 0
+	1		p409_Blanc			3
+	1		p412_Cst				1		; 0
+	1		p413_Blanc			5
+	1		p418_Cst				1		; 0
+	1		p419_Blanc			36
+	1		p455_CstAxe			6		; = 999999
+	1		p461_Axe4			2		;= c3.Axe(4)
+	1		p463_Blanc			1
+	1		p464_Axe3			6		;= c3.Axe(3)
+	1		p470_Blanc			32
+	1		p502_Cst				6		; ",00000"
+	1		p508_Blanc			11
+	1		p519_Cst				6		; ",00000"
+	1		p525_Blanc			9		
+	1		p534_Cst				1		; 0
+	1		p535_Blanc			17
+	1		p552_Cst				1		; 		= "0"
+	1		p553_Blanc			9
+	1		p562_Cst				1		; 		= "0"
+	1		p563_Blanc			5
+	1		p568_Cst				1		; 		= "0"
+	1		p569_Blanc			115
+	1		p684_Cst				1		; 		= "0"
+	1		p685_Blanc			5
+	1		p690_Cst				1		; 		= "0"
+	1		p691_Blanc			14
+	1		p705_Cst				1		; 		= "0"
+	1		p706_Blanc			5
+	1		p711_Cst				1		; 		= "0"
+	1		p712_Blanc			3
+	1		p715_Cst				1		; 		= "0"
+	1		p716_Blanc			3
+	1		p719_Cst				1		; 		= "0"
+	1		p720_Blanc			3
+	1		p723_Cst				1		; 		= "0"
+	1		p724_Blanc			5
+	1		p729_Cst				1		; 		= "0"
+	1		p730_Blanc			3
+	1		p733_Cst				1		; 		= "0"
+	1		p734_Blanc			3
+	1		p737_Cst				1		; 		= "0"
+  	1		p738_Blanc			3
+	1		p741_Cst				1		; 		= "0"
+	1		p742_Blanc			253
+	1		p995_Cst				1		; 		= "0"
+	1		p996_Blanc			15
+	1		p1011_Cst			1		; 		= "0"
+	1 		p1012_Cst 			6		;= "999999"
+	1		p1018_Axe4			2		;= c3.Axe(4)
+	1		p1020_Axe3			6		;= c3.Axe(3)
+	1		p1026_Blanc			14
+	1		p1040_Cst			1		; 		= "0"
+	1		p1041_Blanc			14
+	1		p1055_Cst			1		; 		= "0"
+	1		p1056_Blanc			14
+	1		p1070_Cst			1		; 		= "0"
+	1		p1071_Blanc			14
+	1		p1085_Cst			1		; 		= "0"
+	1		p1086_Blanc			14
+	1		p1100_Cst			1		; 		= "0"
+	1		p1101_Blanc			14
+	1		p1115_Cst			1		; 		= "0"
+	1		p1116_Blanc			14
+	1		p1130_Cst			1		; 		= "0"
+	1		p1131_Blanc			5
+	1		p1136_Cst			1		; 		= "0"
+	1		p1137_Blanc			251
+	1		p1388_Cst			1		; 		= "0"
+	1		p1389_Blanc			2
+	1		p1391_Cst			4		;= ",000"
+	1		p1395					3
+	1		p1398_Cst			6		;= ",00000"
+	1		p1404_Blanc			1
+	1 		p1405_Cst			5		;= condition(Sens = 2,"0,010","-,010")
+	1		p1410_Blanc			12
+	1 		p1422_Cst			1		;		= "0"
+	1		p1423_Blanc			11
+	1 		p1434_Cst			1		;	= "0"
+	1		p1435_Blanc			11
+	1 		p1446_Cst			1		;		= "0"
+	1		p1447_Blanc			5
+	1 		p1452_Cst			1		;	= "0"
+	1		p1453_Blanc			3
+	1 		p1456_Cst			1		;		= "0"
+	1		p1457_Blanc			3
+	1 		p1460_Cst			1		;		= "0"
+
+EndStructure
+	

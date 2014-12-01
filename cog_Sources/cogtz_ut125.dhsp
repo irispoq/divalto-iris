@@ -1,0 +1,385 @@
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7151 2014-12-01 14:42:24Z admin $')
+;*
+;*      Zoom sur facturation projets spec
+;*
+
+OverWrittenBy "coguz_ut125.dhop"
+
+;
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+;
+Hfileversion   "cogfdd.dhsd"    COGGTF_TAB
+public hfile   "cogfdd.dhsd"    COGGTF_TAB	COGGTF_TAB		noopen
+
+;
+Module	"A5PMNoteJoint.dhop"
+Module 	"XZoom7.dhop"
+Module 	"CCTM000.dhop"
+Module	"CCPMFIC.dhop"
+
+
+; Record Sql 
+Public recordSQL  cogrs_uttab.dhoq  CogRs_UT125									; Table UT125
+Public recordSQL  cogrs_uttab.dhoq  cogrs_ut125		CogRs_UT125_Sel		; Table pour sélection
+
+; Variables
+1	nbsel							4,0			; Nombre de lignes sélectionnées
+
+
+;*
+;* procedures 
+;*
+
+;*
+; controle resa en cours de fact
+Include	"CogGt_Controle_Fichier.dhsp"
+
+
+;*	Mise à jour des boutons (affichage, grisés, ...)
+Public Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+
+	Switch ZOOM.ACTION
+
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", "<BITMAP>NOTE_N")
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+
+	Case ZOOM_MODIFICATION
+		; en modification
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(cogrs_ut125.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+
+	Case 	ZOOM_AFFICHAGE
+		switch Zoom.TypeInput
+
+		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(cogrs_ut125.CENOTE = 2, True, False))
+
+		endswitch
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(cogrs_ut125.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		xmetoolbarenablebutton(idOutilZoom,"NOTE", Condition(cogrs_ut125.CENOTE = 2, True, False))
+
+	EndSwitch
+
+EndP
+
+;*	Recherches complémentaires
+public procedure RechercherLibelle
+beginp
+
+endp
+
+;*
+public procedure Traiter_Selection
+beginp	; Traiter_Selection
+
+	nbsel ++
+	Pong("cogrs_ut125_" & nbsel,[ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref])
+
+endp		; Traiter_Selection
+
+
+;*
+public procedure Envoyer_Selections
+beginp	; Envoyer_Selections
+
+	nbsel	= 0
+	ZoomTraiterSelection("cogtz_ut125.dhop","Traiter_Selection")			
+	Pong("cogrs_ut125_nbre",nbsel)
+
+endp		; Envoyer_Selections
+
+;*	envoie l'élément courant si il n'y a pas eu de sélection multiple précédemment
+public procedure Envoyer_Courant
+beginp
+
+	if nbsel = 0
+
+		nbsel	= 1
+		Pong("cogrs_ut125_" & nbsel, [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref])
+		Pong("cogrs_ut125_nbre",nbsel)
+	
+	endif
+
+endp
+
+;*
+;* procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomEnteteTableau 
+Beginp
+	XmeList_ScanColumn(Zoom.IdTableau)
+Endp
+
+;*
+Public Procedure Construire_Condition_Selection(nom, premier)
+1	Nom					A
+1	premier				1,0 = FALSE
+
+1 	Valeur_Condition	S
+1  Param					S
+
+Beginp
+	cogrs_ut125.where.RemoveCondition(Nom)
+
+	if cogrs_ut125_Sel.Etb <> ' '
+		Param = banaliser_condition(cogrs_ut125_Sel.Etb, premier)
+		cogrs_ut125.Where.Like_Etb(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Etb')
+	endif
+
+	if cogrs_ut125_Sel.Affaire <> ' '
+		Param = banaliser_condition(cogrs_ut125_Sel.Affaire, premier)
+		cogrs_ut125.Where.Like_Affaire(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Affaire')
+	endif
+
+	if cogrs_ut125_Sel.Ref <> ' '
+		Param = banaliser_condition(cogrs_ut125_Sel.Ref, premier)
+		cogrs_ut125.Where.Like_Ref(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Ref')
+	endif
+																						 	
+	if Valeur_Condition <> ' '
+		cogrs_ut125.where.AddCondition(Nom, Valeur_Condition)
+	endif
+Endp
+
+;*
+Public Procedure ZoomDebut 
+Beginp
+
+	Controle_Fichier				; controle des resa sur cog_gtftab
+
+	Init_Zoom(FicheNoBloc = 0)
+	Seek_Soc(MZ.Dos)				; recherche du dossier et T000
+	Seek_CA(mz.Dos)
+
+	Note_Debut 						;Init de la gestion des notes
+
+	cogrs_ut125_Sel.Init()
+	CogRs_UT125_Sel.Etb = MZ.Etb
+	cogrs_ut125.Orderby.Ordre_PK()
+	
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE, TRUE)
+
+	; sauvegarde du mode d'appel
+	g7.pong		= g3xz.pong
+	g3xz.pong 	= false
+
+Endp
+
+;*
+Public Procedure ZoomAbandon		; sortie du zoom par f9
+Beginp
+Endp
+
+;*
+Public Procedure ZoomVAlidation ; validation du zoom
+Beginp
+
+	zoom.valretour	= [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref]
+	if g7.pong = true
+		Envoyer_Courant
+	endif
+
+Endp
+
+;*
+Public Procedure ZoomFin			; à la sortie du zoom
+Beginp
+Endp					
+
+;*
+;* procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation
+Beginp
+	; initialiser les données 
+	cogrs_ut125.init()
+	CogRs_UT125.Etb 					= MZ.Etb	
+	CogRs_UT125.Cog_Duree_Limitee = 1
+	CogRs_UT125.Cog_Period			= 1
+
+	Zoom.Modelf 		= ZOOM_MODE_FICHE		; pour interdire la création en mode liste
+Endp	  
+
+;*
+Public Procedure ZoomDuplication 
+Beginp
+	cogrs_ut125.UserMoDh 	= ' '
+	cogrs_ut125.UserCrDh 	= ' '
+	cogrs_ut125.Note 		= 0
+	cogrs_ut125.CeNote 		= 1		
+Endp
+
+;*
+Public Procedure ZoomApresCleCreation ; après saisie de la clé 
+Beginp
+	cogrs_ut125.Where.Exists(CogRs_UT125.Etb, CogRs_UT125.Affaire , CogRs_UT125.Ref)
+	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref ]
+	Zoom.Titrevar	= [CogRs_UT125.Etb " - " CogRs_UT125.Affaire " - " CogRs_UT125.Ref]
+Endp
+
+;*
+Public Procedure ZoomCreationRes		; apres réservation en création 
+Beginp
+	Note_Reinit(C_Applic_DAV)
+Endp
+
+;*
+Public Procedure ZoomAvantWrite 
+Beginp
+	; initialisation des codes enregistrement et mise à jour date et user
+   cogrs_ut125.Dos 			= mz.Dos
+	cogrs_ut125.UserCr 		= SYSTEM.User
+	cogrs_ut125.UserCrDh 	= Time(7)
+	cogrs_ut125.Note 		= Note_Creation_(C_Applic_DAV, 'cogrs_ut125')	
+	cogrs_ut125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
+Endp
+
+;*
+Public Procedure ZoomApresCreation ; compte-rendu de création
+Beginp
+	Zoom.Titrevar = [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref ]
+Endp				 
+
+;*
+Public Procedure ZoomModification ; avant entrée en modif
+Beginp
+	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref]
+Endp			  
+
+;*
+Public Procedure ZoomModificationRes		; apres réservation enmodif
+Beginp
+	Note_Chargement_(C_Applic_DAV, cogrs_ut125.Note)
+Endp					
+
+;*
+Public Procedure ZoomAvantRewrite 
+Beginp
+   cogrs_ut125.UserMo		= SYSTEM.User
+   cogrs_ut125.UserMoDh 	= Time(7)
+	cogrs_ut125.Note 		= Note_Modification_ (C_Applic_DAV, cogrs_ut125.Note, 'cogrs_ut125')
+	cogrs_ut125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
+Endp														 
+
+;*
+Public Procedure ZoomApresModification ; compte rendu de modification
+Beginp
+	Zoom.Titrevar = [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref ]
+Endp				 
+
+;*
+Public Procedure ZoomSuppression ; avant entrée en suppression
+Beginp
+	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref]
+Endp													  
+
+;*
+Public Procedure ZoomSuppressionRes
+Beginp
+Endp
+														  
+;*
+Public Procedure ZoomAvantDelete 
+Beginp
+	Note_Suppression_(C_Applic_DAV, cogrs_ut125.Note)
+Endp
+
+;*
+Public Procedure ZoomApresSuppression ; compte rendu de suppression
+Beginp
+Endp						
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsult
+Beginp
+	Maj_Menu_Boutons
+Endp				  
+
+;*
+Public Procedure ZoomConsult 	; à utiliser si note
+Beginp
+	Switch Harmony.Key
+		Case K_F7		|	Zoom_Call()
+		Case K_SF6		|	Note_Consultation_ (C_Applic_DAV, cogrs_ut125.Note)
+
+		case K_F12
+			if G7.PONG = True
+				Envoyer_Selections
+			endif
+	Endswitch 
+Endp
+
+;*
+Public Procedure ZoomAvantInput			; permet de griser les boutons et les choix
+Beginp
+	Maj_Menu_Boutons
+Endp
+
+;*
+Public Procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+Beginp											; pour appel d'un zoom 
+	Switch Harmony.Key
+	Case K_F7	|	Zoom_Call()
+	Case K_F8	|	Zoom_Call(Harmony.Arret)	; Appel de zoom
+	
+	Case K_SF6						; Saisie d'une note
+		Note_Saisie_(C_Applic_DAV, cogrs_ut125.Note, 'cogrs_ut125')				
+		XmeToolbarSetButtonInfo(IdOutilZoom,"NOTE", Condition(Not Note_Empty_(C_Applic_DAV), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		
+	
+	Case Harmony.Dataarret = 8002
+		If Harmony.Sourisbout = RIGHT_BUTTON
+			Zoom_Call()
+		Endif
+
+	Endswitch
+Endp
+
+;*
+Public Procedure ZoomFiltreAvantValeur
+Beginp
+Endp
+
+;*
+Public Procedure ZoomFiltreApresValeur 
+Beginp
+Endp	
+
+;*
+;* procedures liées à la lecture du ficher
+;*
+
+;*
+Public Procedure ZoomApresCle
+Beginp
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE)
+Endp															
+
+;*
+Public Procedure ZoomApresRead
+Beginp
+	Zoom.Titrevar = [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref ]
+Endp															
+
+
+
