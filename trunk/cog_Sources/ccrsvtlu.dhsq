@@ -1,0 +1,25 @@
+;*
+;*		Dictionnaire des définitions des RecordSQL du CCFVTL
+;*
+
+<DictionarySql overwrite="ccrsvtl.dhoq" ModuleInfo='$Id: ccrsvtlu.dhsq 7151 2014-12-01 14:42:24Z admin $'>
+
+;*
+;*		Ventilation Piece/Echeance
+;*
+
+<RecordSql Name=VTLPIECE >
+	
+<Select>
+	CP.*
+
+
+;*
+;*		Ventilation Axe
+;*
+
+<RecordSql Name=VTLAXE>
+<Select>
+	CX.*
+
+	
