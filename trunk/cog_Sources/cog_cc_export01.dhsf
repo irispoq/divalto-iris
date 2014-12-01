@@ -1,10 +1,10 @@
-;>xwin4obj                              7.0       20141124112732      
+;>xwin4obj                              7.0       20141128113823      
 [masque]
  libelle="Exportation des Ecritures"
  utilisateur="UGIE_YLF"
- date_modification="24/11/2014"
+ date_modification="28/11/2014"
  feuille_style="fstylewpf.dhfi"
- dernier_id=86
+ dernier_id=87
  dernier_id_page=1
 [defaut]
  [aide_page]
@@ -46,14 +46,6 @@
    couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=151,15
-   taille=9,30
-   id=83
-   wstyle="STD"
-  [texte]
-   texte="Journaux de"
- [obj_texte]
-  [presentation]
    position=32,22
    taille=9,53
    id=3
@@ -70,16 +62,15 @@
    texte="Etablissement"
  [obj_texte]
   [presentation]
-   position=119,65
-   taille=9,9
-   noms="cog_chrono"
-   id=79
+   position=86,15
+   taille=9,30
+   id=83
    wstyle="STD"
   [texte]
-   texte="à"
+   texte="Journaux de"
  [obj_texte]
   [presentation]
-   position=151,84
+   position=86,84
    taille=9,14
    id=85
    wstyle="STD"
@@ -87,12 +78,21 @@
    texte="à"
  [obj_texte]
   [presentation]
-   position=164,15
+   position=99,15
    taille=9,53
    id=13
    wstyle="STD"
   [texte]
    texte="Chemin harmony"
+ [obj_texte]
+  [presentation]
+   position=148,62
+   taille=9,9
+   noms="cog_chrono"
+   id=79
+   wstyle="STD"
+  [texte]
+   texte="à"
  [champ]
   [presentation]
    position=46,95
@@ -144,9 +144,64 @@
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=86,62
+   taille=9,15
+   id=84
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,jnl1,ccxq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f8=19042
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=86,95
+   taille=9,15
+   id=86
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,jnl2,ccxq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f8=19042
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Jnl2_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=99,62
+   taille=9,263
+   attache_lgx=oui
+   id=21
+   colonnes_saisie=256
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,fic,xq
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [traitements]
+   microbol_click=1001
+   diva_apres="Champ_Fic_1_Ap"
+  [boutons]
+   "parcourir"
  [groupe_radio]
   [presentation]
-   position=86,14
+   position=115,11
    taille=59,99
    id=60
    wstyle="STD"
@@ -158,7 +213,7 @@
    notifier=oui
   [radio_bouton]
    [presentation]
-    position=96,24
+    position=125,21
     taille=9,74
     id=62
     wstyle="STD"
@@ -168,7 +223,7 @@
     valeur="1"
   [radio_bouton]
    [presentation]
-    position=107,24
+    position=136,21
     taille=9,83
     id=63
     wstyle="STD"
@@ -180,7 +235,7 @@
    diva_apres="Champ_Choix_1_Ap"
  [champ]
   [presentation]
-   position=119,33
+   position=148,30
    taille=9,30
    noms="cog_chrono"
    id=77
@@ -198,7 +253,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=119,77
+   position=148,74
    taille=9,30
    noms="cog_chrono"
    id=78
@@ -217,7 +272,7 @@
    diva_apres="Champ_PiNoF_1_Ap"
  [case_a_cocher]
   [presentation]
-   position=133,24
+   position=162,21
    taille=9,43
    id=80
    wstyle="STD"
@@ -232,7 +287,7 @@
    microbol_click=8002
  [groupe_radio]
   [presentation]
-   position=86,129
+   position=115,126
    taille=59,99
    id=64
    wstyle="STD"
@@ -243,7 +298,7 @@
    choix="cog_gtfdmc.dhfi","COG_SEPARATEURC"
   [radio_bouton]
    [presentation]
-    position=96,139
+    position=125,136
     taille=9,74
     id=65
     wstyle="STD"
@@ -255,7 +310,7 @@
    texte="Point virgule"
   [radio_bouton]
    [presentation]
-    position=107,139
+    position=136,136
     taille=9,74
     id=66
     wstyle="STD"
@@ -267,7 +322,7 @@
    texte="Virgule"
   [radio_bouton]
    [presentation]
-    position=118,139
+    position=147,136
     taille=9,74
     id=67
     wstyle="STD"
@@ -279,7 +334,7 @@
    texte="Pipe"
   [radio_bouton]
    [presentation]
-    position=129,139
+    position=158,136
     taille=9,74
     id=68
     wstyle="STD"
@@ -291,7 +346,7 @@
    texte="Tabulation"
  [groupe_radio]
   [presentation]
-   position=86,244
+   position=115,241
    taille=59,99
    id=69
    wstyle="STD"
@@ -302,7 +357,7 @@
    choix="cog_gtfdmc.dhfi","COG_SEPARATEURL"
   [radio_bouton]
    [presentation]
-    position=98,254
+    position=127,251
     taille=9,74
     id=73
     wstyle="STD"
@@ -314,7 +369,7 @@
    texte="Retour charriot (CR, carriage return)"
   [radio_bouton]
    [presentation]
-    position=112,254
+    position=141,251
     taille=9,74
     id=75
     wstyle="STD"
@@ -326,7 +381,7 @@
    texte="Saut de ligne (LF, line feed)"
   [radio_bouton]
    [presentation]
-    position=126,254
+    position=155,251
     taille=9,74
     id=74
     wstyle="STD"
@@ -336,46 +391,20 @@
     valeur="3"
    [info_bulle]
    texte="Carriage Return Line Feed"
- [champ]
+ [case_a_cocher]
   [presentation]
-   position=151,62
-   taille=9,15
-   id=84
-   colonnes_saisie=3
-   wstyle="CHAMP_SAISI"
+   position=178,11
+   taille=9,112
+   id=87
+   wstyle="STD"
   [description]
-   donnee=xq,jnl1,ccxq
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
-   position=151,95
-   taille=9,15
-   id=86
-   colonnes_saisie=3
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=xq,jnl2,ccxq
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
-   position=164,62
-   taille=9,263
-   attache_lgx=oui
-   id=21
-   colonnes_saisie=256
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=xq,fic,xq
-  [param_saisie]
-   obligatoire=oui
-   type_date=jj/mm/aaaa
+   donnee=xq,choix,ccxq,1
+  [param_case]
+   texte="Exporter les ventilations analytiques"
+   cadrage=droite
+   valeur="2","1"
   [traitements]
-   microbol_click=1001
-   diva_apres="Champ_Fic_1_Ap"
-  [boutons]
-   "parcourir"
+   microbol_click=8002
 [ressources]
  [menu]
   ident="MAIN"
@@ -476,6 +505,14 @@
     wid_ressource="SEPARATEUR__2"
   [item]
    [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
     wnom="ZOOMG"
     wid_ressource="ZOOMG"
     wtrait_chaine="#f7"
@@ -513,21 +550,34 @@
 ;*		Log	 Version	  NPmodif		Date		Modifications
 ;*
 ;*		JDT		6.3			01			06.2011	Version Initiale
+;*		YLF		P205a						11.2014	Options supplémentaires: fourchette JNL, export analytique
 
 OverWrittenBy "COGuCC_EXPORT01.dhof"
 
-Include "GTTC000.DHSP"
-Module COG_CC_EXPORT_ECR.DHOP
+;*
+;*
+;*
+
+;
+Include "GTTC000.DHSP"	  
+
+;
+Module "COG_CC_EXPORT_ECR.DHOP"
+Module "CCTM000.DHOP"
 
 ; Enregistrements
 Public Record	GTFDD.DHSD	XQ				XQ				; Jobqueue
 Public Record	A5DD.DHSD	MZ				MZ
-Public Record "ccfdd.dhsd" xq ccxq
+Public Record "ccfdd.dhsd" xq 			CCXQ
 
 Define cog_Masque = "cog_cc_export01.dhof"
 1 idTB_Main			L		; Identifiant barre d'outils MAIN
 1 idME_Main			L		; Identifiant du menu MAIN 
 1 idME_POPChemin	L		; Identifiant du menu POP CHEMIN
+
+;*
+;*
+;*
 
 ;*
 Public Procedure Champ_Choix_1_Ap
@@ -560,6 +610,17 @@ Beginp
 	EndIf
 
 Endp
+
+;*
+Public Procedure Champ_Jnl2_1_Ap
+;
+Beginp
+	If Controle_DonneeFin(CCXQ.Jnl1, CCXQ.Jnl2, 1) <> 0
+		MessageBox("Donnée de fin inférieure à la donnée de début.","Alerte", MB_ICONEXCLAMATION)
+		Harmony.Retour = XMENEXT_RESSAISIE
+	EndIf
+Endp
+
 
 ;*
 Public Procedure Champ_PiNoF_1_Ap

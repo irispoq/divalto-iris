@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20141112150221      
+;>xwin4obj                              7.0       20141126161337      
 [masque]
  utilisateur="UGIE_YLF"
- date_modification="12/11/2014"
+ date_modification="26/11/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
- dernier_id=1000025
+ dernier_id=1000035
  surcharge=oui
  date_modif_base="20130227140720"
  dernier_id_page=100000
@@ -38,7 +38,7 @@
 [onglet]
  [presentation]
   position=0,0
-  taille=297,320
+  taille=315,320
   attache_lgx=oui
   attache_lgy=oui
   id=2
@@ -51,7 +51,7 @@
 [page]
  numero=1
  fond="STD"
- nb_lig=33
+ nb_lig=35
  nb_col=130
  offset_lig=1
  offset_col=1
@@ -206,7 +206,7 @@
  numero=3
  fond="STD"
  efface=partiel
- nb_lig=33
+ nb_lig=35
  nb_col=50
  offset_lig=1
  offset_col=1
@@ -226,7 +226,7 @@
  [tableau]
   [presentation]
    position=120,0
-   taille=177,200
+   taille=195,200
    attache_lgx=oui
    attache_lgy=oui
    id=1271
@@ -2351,7 +2351,7 @@
  nature=double
  titre="Bien"
  efface=partiel
- nb_lig=33
+ nb_lig=35
  nb_col=80
  offset_lig=1
  offset_col=1
@@ -2371,7 +2371,7 @@
   fichier="CCIMAIDE"
  [groupbox]
   [presentation]
-   position=227,5
+   position=244,5
    taille=66,310
    id=1001
    wstyle="GROUPE"
@@ -2381,7 +2381,7 @@
  [groupbox]
   [presentation]
    position=92,5
-   taille=44,308
+   taille=60,308
    id=1000010
    wstyle="GROUPE"
   [param_groupbox]
@@ -2389,7 +2389,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=183,5
+   position=200,5
    taille=42,310
    id=998
    wstyle="GROUPE"
@@ -2398,7 +2398,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=138,5
+   position=155,5
    taille=43,151
    id=10
    wstyle="GROUPE"
@@ -2407,7 +2407,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=138,164
+   position=155,164
    taille=43,151
    id=1005
    wstyle="GROUPE"
@@ -2466,6 +2466,14 @@
    texte="Libellé"
  [obj_texte]
   [presentation]
+   position=60,268
+   taille=9,13
+   id=1000031
+   wstyle="STD_GRAS"
+  [texte]
+   texte="/"
+ [obj_texte]
+  [presentation]
    position=70,5
    taille=9,59
    id=22
@@ -2514,7 +2522,15 @@
    texte="N° ID Basware"
  [obj_texte]
   [presentation]
-   position=151,169
+   position=136,13
+   taille=9,59
+   id=1000032
+   wstyle="STD"
+  [texte]
+   texte="Famille statistique"
+ [obj_texte]
+  [presentation]
+   position=168,169
    taille=9,74
    id=26
    wstyle="STD"
@@ -2522,7 +2538,7 @@
    texte="Acquisition"
  [obj_texte]
   [presentation]
-   position=161,169
+   position=178,169
    taille=9,74
    id=27
    wstyle="STD"
@@ -2530,7 +2546,7 @@
    texte="Mise en service"
  [obj_texte]
   [presentation]
-   position=162,11
+   position=179,11
    taille=9,73
    id=19
    wstyle="STD"
@@ -2538,7 +2554,7 @@
    texte="Prix de cession"
  [obj_texte]
   [presentation]
-   position=171,169
+   position=188,169
    taille=9,74
    id=28
    wstyle="STD"
@@ -2546,7 +2562,7 @@
    texte="Mise en service réelle"
  [obj_texte]
   [presentation]
-   position=199,10
+   position=216,10
    taille=9,74
    id=32
    wstyle="STD_AFF"
@@ -2554,12 +2570,28 @@
    texte="Compte d'immobilisation"
  [obj_texte]
   [presentation]
-   position=211,10
+   position=228,10
    taille=9,74
    id=33
    wstyle="STD_AFF"
   [texte]
    texte="Compte fournisseur"
+ [obj_texte]
+  [presentation]
+   position=267,12
+   taille=9,42
+   id=1000026
+   wstyle="STD"
+  [texte]
+   texte="AffaireGIE"
+ [obj_texte]
+  [presentation]
+   position=298,12
+   taille=9,48
+   id=1000027
+   wstyle="STD"
+  [texte]
+   texte="Axe anaël"
  [champ]
   [presentation]
    position=26,66
@@ -2601,13 +2633,17 @@
    f1=1
  [champ]
   [presentation]
-   position=106,66
-   taille=9,30
-   id=1000024
-   colonnes_saisie=8
-   wstyle="COG_CHAMP_NON_SAISI"
+   position=60,271
+   taille=9,40
+   cadrage=gauche
+   id=1000030
+   colonnes_saisie=12
+   wstyle="STD_GRAS"
+   wnom_encadr="CHAMP_AFF"
   [description]
-   donnee=immo,mvblno,immobilisation
+   donnee=immo,cog_qtetot,immobilisation
+   format="00000000000"
+   saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
    esp_si_zero=oui
@@ -2615,16 +2651,62 @@
    f1=1
  [champ]
   [presentation]
-   position=106,150
-   taille=9,30
-   id=1000025
-   colonnes_saisie=8
-   wstyle="COG_CHAMP_NON_SAISI"
+   position=60,228
+   taille=9,40
+   cadrage=droite
+   id=1000029
+   colonnes_saisie=12
+   wstyle="STD_GRAS"
+   wnom_encadr="CHAMP_AFF"
   [description]
-   donnee=immo,mvfano,immobilisation
+   donnee=immo,cog_qteimmo,immobilisation
+   format="00000000000"
+   saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
    esp_si_zero=oui
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=136,99
+   taille=9,144
+   id=1000034
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=immo,famstat1_lib,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=136,66
+   taille=9,32
+   id=1000033
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,famstat1_fam,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=298,123
+   taille=9,148
+   id=1000035
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=immo,axeanael_lib,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
   [touches]
    f1=1
  [champ]
@@ -2754,7 +2836,7 @@
    diva_apres="Champ_Cog_BwId_1_Ap"
  [multi_choix]
   [presentation]
-   position=152,10
+   position=169,10
    taille=9,52
    noms="creation"
    id=48
@@ -2780,7 +2862,7 @@
    diva_apres="Champ_Etat_1_Ap"
  [champ]
   [presentation]
-   position=152,86
+   position=169,86
    taille=9,36
    noms="datecession"
    id=49
@@ -2803,7 +2885,7 @@
    diva_apres="Champ_CesDt_1_Ap"
  [champ]
   [presentation]
-   position=162,86
+   position=179,86
    taille=9,58
    noms="prixcession"
    id=50
@@ -2825,6 +2907,289 @@
    microbol_click=8002
    diva_avant="Champ_CesMt_1_Av"
    diva_apres="Champ_CesMt_1_Ap"
+ [champ]
+  [presentation]
+   position=168,245
+   taille=9,36
+   noms="parametre"
+   id=73
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,acqdt,immobilisation
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AcqDt_1_Av"
+   diva_apres="Champ_AcqDt_1_Ap"
+ [champ]
+  [presentation]
+   position=178,245
+   taille=9,36
+   noms="parametre"
+   id=74
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,svcdt,immobilisation
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_SvcDt_1_Av"
+   diva_apres="Champ_SvcDt_1_Ap"
+ [champ]
+  [presentation]
+   position=188,245
+   taille=9,36
+   noms="parametre"
+   id=75
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,ecoamdt,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=766
+   fichier="CCIMAIDE"
+  [touches]
+   f1=1
+   f7=8000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_EcoAmDt_1_Av"
+   diva_apres="Champ_EcoAmDt_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=189,10
+   taille=9,95
+   id=1000021
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=immo,cog_cesecrflag,immobilisation
+  [param_case]
+   texte="Ecritures de cession générées"
+   cadrage=droite
+   valeur="2","1"
+   choix="ccfdmc.dhfi",""
+  [touches]
+   f1=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=216,86
+   taille=9,36
+   id=78
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cpt,immobilisation
+  [param_saisie]
+   obligatoire=oui
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=228,86
+   taille=9,36
+   id=79
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,cptaux,immobilisation
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19030
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptAux_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=257,86
+   taille=9,36
+   noms="axe1"
+   id=80
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,axe,immobilisation,1
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=267,86
+   taille=9,36
+   noms="axe2"
+   id=81
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,axe,immobilisation,2
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=9500
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=277,86
+   taille=9,36
+   noms="axe3"
+   id=82
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,axe,immobilisation,3
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=287,86
+   taille=9,36
+   noms="axe4"
+   id=83
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=immo,axe,immobilisation,4
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
+  [touches]
+   f7=8000
+   f8=19010
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=298,86
+   taille=9,36
+   id=1000028
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=immo,cog_axeanael,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f8=19012
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_AxeAnael_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=106,66
+   taille=9,30
+   id=1000024
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,mvblno,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=106,150
+   taille=9,30
+   id=1000025
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,mvfano,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
  [champ]
   [presentation]
    position=38,66
@@ -2889,25 +3254,9 @@
    type_date=jj/mm/aaaa
   [touches]
    f1=1
- [case_a_cocher]
-  [presentation]
-   position=172,10
-   taille=9,95
-   id=1000021
-   wstyle="COG_CHAMP_NON_SAISI"
-  [description]
-   donnee=immo,cog_cesecrflag,immobilisation
-   saisie=non
-  [param_case]
-   texte="Ecritures de cession générées"
-   cadrage=droite
-   valeur="2","1"
-   choix="ccfdmc.dhfi",""
-  [touches]
-   f1=1
  [champ]
   [presentation]
-   position=243,123
+   position=257,123
    taille=9,190
    noms="axe1"
    id=38
@@ -2917,7 +3266,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=255,123
+   position=267,123
    taille=9,190
    noms="axe2"
    id=39
@@ -2927,76 +3276,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=151,245
-   taille=9,36
-   noms="parametre"
-   id=73
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,acqdt,immobilisation
-  [param_saisie]
-   obligatoire=oui
-   type_date=jj/mm/aaaa
-  [aide_page]
-   aide=766
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_AcqDt_1_Av"
-   diva_apres="Champ_AcqDt_1_Ap"
- [champ]
-  [presentation]
-   position=161,245
-   taille=9,36
-   noms="parametre"
-   id=74
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,svcdt,immobilisation
-  [param_saisie]
-   obligatoire=oui
-   type_date=jj/mm/aaaa
-  [aide_page]
-   aide=766
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_SvcDt_1_Av"
-   diva_apres="Champ_SvcDt_1_Ap"
- [champ]
-  [presentation]
-   position=171,245
-   taille=9,36
-   noms="parametre"
-   id=75
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,ecoamdt,immobilisation
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [aide_page]
-   aide=766
-   fichier="CCIMAIDE"
-  [touches]
-   f1=1
-   f7=8000
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_EcoAmDt_1_Av"
-   diva_apres="Champ_EcoAmDt_1_Ap"
- [champ]
-  [presentation]
-   position=267,123
+   position=277,123
    taille=9,190
    noms="axe3"
    id=40
@@ -3006,7 +3286,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=279,123
+   position=287,123
    taille=9,190
    noms="axe4"
    id=41
@@ -3016,7 +3296,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=243,10
+   position=257,10
    taille=9,74
    noms="axe1"
    id=43
@@ -3026,17 +3306,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=255,10
-   taille=9,74
-   noms="axe2"
-   id=44
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=ca,axelib,ca,2
-   saisie=non
- [champ]
-  [presentation]
-   position=267,10
+   position=277,10
    taille=9,74
    noms="axe3"
    id=45
@@ -3046,7 +3316,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=279,10
+   position=287,10
    taille=9,74
    noms="axe4"
    id=46
@@ -3056,7 +3326,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=199,123
+   position=216,123
    taille=9,190
    id=36
    wstyle="CHAMP_AFF"
@@ -3065,167 +3335,20 @@
    saisie=non
  [champ]
   [presentation]
-   position=211,123
+   position=228,123
    taille=9,190
    id=37
    wstyle="CHAMP_AFF"
   [description]
    donnee=x1,lib,x1,2
    saisie=non
- [champ]
-  [presentation]
-   position=199,86
-   taille=9,36
-   id=78
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,cpt,immobilisation
-  [param_saisie]
-   obligatoire=oui
-   table_associee=oui
-  [aide_page]
-   aide=767
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   f8=19030
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Cpt_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=211,86
-   taille=9,36
-   id=79
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,cptaux,immobilisation
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=767
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   f8=19030
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_CptAux_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=243,86
-   taille=9,36
-   noms="axe1"
-   id=80
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,axe,immobilisation,1
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=767
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   f8=19010
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Axe_1_Av"
-   diva_apres="Champ_Axe_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=255,86
-   taille=9,36
-   noms="axe2"
-   id=81
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,axe,immobilisation,2
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=767
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   f8=19010
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Axe_1_Av"
-   diva_apres="Champ_Axe_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=267,86
-   taille=9,36
-   noms="axe3"
-   id=82
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,axe,immobilisation,3
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=767
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   f8=19010
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Axe_1_Av"
-   diva_apres="Champ_Axe_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=279,86
-   taille=9,36
-   noms="axe4"
-   id=83
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,axe,immobilisation,4
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=767
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   f8=19010
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Axe_1_Av"
-   diva_apres="Champ_Axe_1_Ap"
-  [boutons]
-   "zoom"
 [page]
  numero=12
  libelle="Elements financiers"
  fond="STD"
  titre="Bien"
  efface=partiel
- nb_lig=33
+ nb_lig=35
  nb_col=80
  offset_lig=1
  offset_col=1
@@ -3791,7 +3914,7 @@
  fond="STD"
  titre="Bien"
  efface=partiel
- nb_lig=33
+ nb_lig=35
  nb_col=80
  offset_lig=1
  offset_col=1
@@ -4947,7 +5070,7 @@
  fond="STD"
  titre="Bien"
  efface=partiel
- nb_lig=33
+ nb_lig=35
  nb_col=80
  offset_lig=1
  offset_col=1
@@ -5147,7 +5270,7 @@
  fond="STD"
  titre="Bien - paramètres compte"
  efface=partiel
- nb_lig=33
+ nb_lig=35
  nb_col=80
  offset_lig=1
  offset_col=1
@@ -6026,6 +6149,7 @@ Include	"CCTC000.dhsp"
 
 ;
 Module "GTPM000.DHOP"
+Module "GTTM000.DHOP"
 
 ;
 Public RecordSql "ccrsimmo.dhoq" immo IMMOBILISATION
@@ -6035,13 +6159,47 @@ Public Record "ccfdd.dhsd" x1 			x1
 Public Record "ccfdd.dhsd" cd 			CD
 Public Record "ccfdd.dhsd" ca 			ca
 Public Record "ccfdd.dhsd" C3				C3
+Public Record "ccfdd.dhsd" C5				C5
 Public Record "ccfdd.dhsd" HD				HD
 Public Record "ddsys.dhsd" rowinfo 		zoomselection
 Public Record "ccfdd.dhsd" i1 			i1_sel
+public record "gtfdd.dhsd"	PRJAP														; Affaire
+public record "gtfdd.dhsd"	XZ				G3XZ
 
 ;*
 ;*  Procédures 
 ;*
+
+;*
+procedure Champ_Axe_1_Av
+;
+BeginP
+
+	If Harmony.Dataind1 <> 2
+		Standard.Champ_Axe_1_Av
+	EndIf
+
+EndP
+
+;* 
+procedure Champ_Axe_1_Ap
+;
+BeginP
+
+	Switch Harmony.Dataind1
+		Case 2		; l'axe 2 est un code affaire
+			x1.Lib(4) = ' '
+			If Controle_Affaire(IMMOBILISATION.Axe(2), 5000, tiers='', conf=false, niv=1) = 0
+				x1.Lib(4) = PRJAP.Lib80
+				IMMOBILISATION.Cog_AxeAnael = PRJAP.Cog_AxeAnael
+			EndIf
+
+		Default
+			Standard.Champ_Axe_1_Ap
+
+	EndSwitch
+
+EndP
 
 ;*
 Procedure Champ_NatImmo_1_Ap
@@ -6176,6 +6334,19 @@ Private Procedure Champ_Cog_AmoFlag_1_Av
 Beginp
 	If IMMOBILISATION.Cog_BwId = ' ' OR IMMOBILISATION.EcoAmDt = ' '
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp
+
+
+;*
+Private Procedure Champ_Cog_AxeAnael_1_Ap
+;
+Beginp
+	If Harmony.Datamodif
+		IMMOBILISATION.AxeAnael_Lib = ' '
+		If IMMOBILISATION.Cog_AxeAnael <> ' ' AND Controle_Axe(2, IMMOBILISATION.Cog_AxeAnael) = 0
+			IMMOBILISATION.AxeAnael_Lib = C5.Lib	
+		EndIF
 	EndIf
 Endp
 

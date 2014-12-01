@@ -92,6 +92,7 @@ Public Record	GTFDD.dhsd 	MOUV								; Mouvement en suppression de pièce
 Public Record	GTFDD.dhsd	MVTL								; ventilation
 
 Public Record  CCFDD.dhsd	C4
+Public Record  CCFDD.dhsd	C5
 
 Public Record CCFDD.dhsd	CZ
 Public Record CCFDD.dhsd	CD									; dossier, paramètres immobilisations
@@ -290,6 +291,7 @@ BeginF
 	wRs_IMMO.Axe(2)		= G1t1.Projet; #RECETTE G1t1.Axe(2)
 	wRs_IMMO.Axe(3)		= G1t1.Axe(3)
 	wRs_IMMO.Axe(4)		= G1t1.Axe(4)
+	wRs_IMMO.Cog_AxeAnael= G1t1.Axe(2)		; ajout FE007
 	wRs_IMMO.CptAux		= G1T1.Tiers
 	wRs_IMMO.Cpt			= ART.Cog_CptIA
 	wRs_IMMO.EnrNo			= G1T1.EnrNo
@@ -319,6 +321,10 @@ BeginF
 	wRs_IMMO.Ce8		 	= condition(wRs_IMMO.Axe(2) <> ' ', '1', ' ')
 	wRs_IMMO.Ce9		 	= condition(wRs_IMMO.Axe(3) <> ' ', '1', ' ')
 	wRs_IMMO.CeA			= condition(wRs_IMMO.Axe(4) <> ' ', '1', ' ')
+
+	; ajout FE007 --> info qte fiche
+	wRs_IMMO.Cog_QteImmo = wQte
+	wRs_IMMO.Cog_QteTot	= G1T1.BlQte
 
 	; compteur
 	wRs_CPT.Init()
@@ -1344,6 +1350,44 @@ Endf
 ;*
 
 ;*
+Public Procedure Cog_G1T1_AffecterAffaire_Axe2
+;
+BeginP
+
+	If GTPCE.PiCodDst > 1
+		G1t1.Axe(2) = ' '
+		G1T1.Lib(17) = ' '
+		If G1T1.Projet <> ' ' 
+			If PRJAP.Affaire <> G1T1.Projet OR PRJAP.Dos <> G1t1.Dos
+				If Controle_Affaire(G1T1.Projet) <> 0
+					PReturn
+				EndIf
+				
+			EndIf
+			G1T1.Axe(2) = PRJAP.Cog_AxeAnael
+			If Controle_Axe(2, G1T1.AXE(2),conf=false,hsdt=ENT.PIDT, err=0) = 0
+				G1T1.LIB(15+2) = C5.LIB
+			EndIf
+		EndIf
+	EndIf
+EndP
+
+;*
+Public Procedure Cog_G1T1_Modification_Globale(wG1T1_Av)
+;
+Record "gtfdd.dhsd"		G1T1			wG1T1_Av	  			; g1t1 avant modification globale
+BeginP
+
+	; modification code affaire
+	If wG1T1_Av.Projet <> G1T1.Projet 
+
+		Cog_G1T1_AffecterAffaire_Axe2	
+
+	EndIf
+
+EndP
+
+;*
 Public Procedure COG_G1T1_Creation_Init
 ;
 1	t_key_01	255
@@ -1373,6 +1417,7 @@ BeginP
 			G1T1.Axe(3) = C3_DEV_01.Axe(3)
 			G1T1.Axe(4) = C3_DEV_01.Axe(4)
 		EndIf
+		Cog_G1T1_AffecterAffaire_Axe2
 	EndIf
 
 EndP
