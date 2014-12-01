@@ -9,6 +9,7 @@
 ;*
 
 <RecordSql Name=IMMO>
+Public Record	"gtfdd.dhsd"	T000
 <Select>
 	I1.*,
 	CPTCES.LIB,
@@ -17,19 +18,32 @@
 	MOUV.BLNO	AS		MvBlNo,
 	MOUV.BLCE4,
 	MOUV.FANO  	AS		MvFaNo,
-	MOUV.FACE4
-<LEFTJOIN>
+	MOUV.FACE4,
+	FamStat1.LIB,
+	FamStat1.Fam,
+	AxeAnael.LIB
+<LEFTJOIN Name='Zoom'>
 	C3 as CptCes
 	on CptCes.Dos = I1.Dos and CptCes.Cpt = I1.Cog_CptCes and CptCes.Ce1 = '3'
-<LEFTJOIN>
+<LEFTJOIN Name='Zoom'>
 	C3 as CptCesAmo
 	on CptCesAmo.Dos = I1.Dos and CptCesAmo.Cpt = I1.Cog_CptCesAmo and CptCesAmo.Ce1 = '3'
-<LEFTJOIN>
+<LEFTJOIN Name='Zoom'>
 	C3 as CptCesVal
 	on CptCesVal.Dos = I1.Dos and CptCesVal.Cpt = I1.COG_CptCesVal and CptCesVal.Ce1 = '3'
-<LEFTJOIN>
+<LEFTJOIN Name='Zoom'>
 	GTFDD.DHSD MOUV
 	ON MOUV.DOS = I1.DOS AND MOUV.ENRNO = I1.ENRNO
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD ART
+	ON ART.DOS = I1.DOS AND ART.REF = I1.LIB
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD T012 as FamStat1	  	
+	ON (  FamStat1.Dos = CASE WHEN T000.TabTyp(12) = 2 THEN 999 ELSE MZ.Dos END )
+	and FamStat1.ceBin = 12 AND FamStat1.FamNo = 1 AND FamStat1.Fam = ART.Fam(1)
+<LEFTJOIN Name='Zoom'>
+	CCFDD.dhsd C5 as AxeAnael
+	on AxeAnael.Dos = I1.Dos AND AxeAnael.AxeNo = 2 AND AxeAnael.Axe = I1.COG_AxeANAEL
 <WHERE>
 	Case Equal_Enrno(int enrno)
 		I1.ENRNO = enrno

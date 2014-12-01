@@ -168,5 +168,11 @@ BeginP
 
 EndP
 
+;*
+Public Procedure Cog_ZoomDebut
+;
+BeginP
+	Seek_Soc(MZ.Dos)		; T000 nécessaire aux jointures
+EndP
 
 		 

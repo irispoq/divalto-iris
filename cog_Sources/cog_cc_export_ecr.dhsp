@@ -1,3 +1,4 @@
+SetModuleInfo('$Id$')
 ;*
 ;*		COGESER  Interface d'exportation des écritures comptables à partir de DIVALTO Comptabilité
 ;*
@@ -15,6 +16,7 @@ Include	"gtTCz00.DHSP"
 ;
 Module	"CCPMFIC.DHOP"
 Module	"Cogtm_ecr_exp.dhop"
+Module	"CogTm_000.dhop"
 
 ; Fichiers
 Public HFile	GTFDD.DHSD	GTFDOS		GTFDOS_DEV_01			; Dossier Etablissement
@@ -23,6 +25,10 @@ Public HFile	GTFDD.DHSD	GTFPCF		GTFPCF_DEV_01			; Tiers
 Public HFile	CCFDD.DHSD	CCFECR		CCFECR_DEV_01			; Ecritures
 Public HFile	CCFDD.DHSD	CCFJCA		CCFJCA_DEV_01			; Intitulés
 Public HFile	CCFDD.DHSD	CCFVTL		CCFVTL_DEV_01			; Imputations et ventilations
+
+;
+Public RecordSQL	"COG_CCRSECR.DHOQ"	CogRs_C8					; Non utilisation du STD car BIND
+Public RecordSQL	"CCRSVTL.DHOQ"	 		VTLAXE			CogRs_CX
 
 ; Enregistrements
 Public Record	GTFDD.DHSD	SOC		SOC_DEV01					; Société
@@ -34,11 +40,10 @@ Public Record	GTFDD.DHSD	CLI		CLI_DEV_01					; Client
 Public Record	GTFDD.DHSD	FOU		FOU_DEV_01					; Fournisseur
 Public Record	CCFDD.DHSD	C3			C3_DEV_01					; Plan comptable
 Public Record	CCFDD.DHSD	C4			C4_DEV_01					; Journaux
-Public Record	CCFDD.DHSD	C8			C8_DEV_01					; Ecritures
+;Public Record	CCFDD.DHSD	C8			C8_DEV_01					; Ecritures
 Public Record	CCFDD.DHSD	CX			CX_DEV_01					; Ventilation sur les axes
 Public Record	CCFDD.DHSD	CP			CP_DEV_01					; Ventilation sur les pièces et les échéances
 public record  ccfdd.dhsd	ca			CA
-Public Record	CCFDD.DHSD	XQ			CCXQ							; Paramètres comptables
 
 Public Record	GTFDD.DHSD	XZ			G3XZ
 Public Record	GTFDD.DHSD	XQ			XQ							; Jobqueue
@@ -48,18 +53,55 @@ Public Record	* HTDF		TDF_01							; table définition fichier
 Public Record	* HTDF		TDF_02							; table définition fichier
  
 ;		
-1	Dossier		>GTFDD.DHSD	DOS = " "
-1	Etb			>GTFDD.DHSD	Etb = " "
 1	FicNom01		255 = " "
 1	FicNom02		255 = " "
-1	g_FichierTxt	B = false
-1	Texte			255 = " "
 1	s_datetrait	S
 1	d_datetrait	>GTFDD.DHSD UserCrDh
 1	x_user		>GTFDD.DHSD UserCr
 1	x_st_00		X
+1	readC8		L
+1	readCX		L
+1	list_EcrVtl	L
+1	fonc_EcrVtl	16
+1	lig_VTL_Mt	>CCFDD.dhsd	mt
 
-1 Ligne	1000
+structure Ventilation
+	1	Axe1		>	gtfdd.dhsd	axe
+	1	Axe2		>	gtfdd.dhsd	axe
+	1	Axe3		>	gtfdd.dhsd	axe
+	1	Axe4		>	gtfdd.dhsd	axe
+	1	Mt			>	ccfdd.dhsd	mt
+	1	Sens		>	ccfdd.dhsd	sens
+	1	Jnl		>	ccfdd.dhsd	jnl
+	1	Ecrno		>	ccfdd.dhsd	ecrno
+	1	Ecrlg		>	ccfdd.dhsd	ecrlg
+endstructure
+
+RecordDiva	Ventilation	Vtl
+RecordDiva	Ventilation	Vtl_Rec
+
+
+
+;*
+;*
+;*
+
+;*
+Function Long CompareEcrVtl(&elem1,&elem2)
+recorddiva	Ventilation	elem1
+recorddiva	ventilation	elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	=	elem1.Axe1 & elem1.Axe2 & elem1.Axe3 & elem1.Axe4
+	cle2	=	elem2.Axe1 & elem2.Axe2 & elem2.Axe3 & elem2.Axe4
+
+   freturn(sortcompare(cle1,cle2))
+
+Endf 
 
 ;*
 Public Function char COGF_CheminImplicites(s_implicite)
@@ -109,9 +151,8 @@ BeginF
 	FReturn(TRUE)
 EndF
 
-
 ;*	01
-Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL)
+Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX)
 ;
 1	t_CheminFichier	255
 1	t_NomFichier		255
@@ -122,6 +163,8 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 1	t_ChronoF			>CCFDD.DHSD	COG_CHRONO
 1	t_SeparateurC		8						; Séparateur champ
 1	t_SeparateurL		8						; Séparateur ligne
+1	t_Jnl					>CCFDD.DHSD	JNL		=		''
+1	t_CX					1,0						= FALSE
 
 1	t_Ce1_01				>CCFDD.DHSD	Ce1
 1	t_Key_01				255
@@ -133,10 +176,26 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 1	t_Chrono				>CCFDD.DHSD	COG_CHRONO
 1	t_TiCod				>GTFDD.DHSD	TiCod
 1	t_Ligne				2000
+1	t_datD				>GTFDD.DHSD	USERCRDH
+
+1	t_first				1,0	= true
+1	t_lilg				4,0	= 0
+1	t_ecrno				>CCFDD.DHSD	ecrno	= 0
 
 1	a_numfic				1
 
 BeginF
+
+	;*
+	; RESA - Pour éviter doublon de chrono
+	;*
+	t_datD = time(7)
+	Do While CogRs_C8.FShare([MZ.Dos "COG_EXPORT_ANAEL"], 'R') <> 0  
+		If SecondsBetweenDH(t_datD, time(7)) > 60
+			Cog_EcritureLivreDeBord("Timeout réservation pour l'export Anael")
+			FReturn("")
+		EndIf
+	WEnd
 
 	;*
 	; Initialisation
@@ -148,11 +207,21 @@ BeginF
 	EndIf
 
 	;*
+	;initialisation des listes
+	;*
+	if (list_EcrVtl := listcreate) = 0
+		Cog_EcritureLivreDeBord("Erreur lors de la création de la liste des écritures analytiques à exporter")
+		FReturn("")
+	endif
+	GetAdressFunction("","CompareEcrVtl",fonc_EcrVtl)
+	ListMode(list_EcrVtl,1,fonc_EcrVtl) 
+
+	;*
 	; Création du fichier TXT
 	;*
 	; Le chemin du fichier est passé en paramètre dans la variable t_CheminFichier
-	t_NomFichier = Left(t_CheminFichier) & "/COMPTA-" & Left(d_datetrait) & ".TXT"
-	t_NomFichier_SAUV = Left(t_CheminFichier) & "/SAUV/COMPTA-" & Left(d_datetrait) & ".TXT"
+	t_NomFichier = Left(t_CheminFichier) & "/COMPTA-" & left(t_Jnl) & Left(d_datetrait) & ".TXT"
+	t_NomFichier_SAUV = Left(t_CheminFichier) & "/SAUV/COMPTA-" & left(t_Jnl) & Left(d_datetrait) & ".TXT"
 	; 1° test de l'existance du fichier.
 	TDF_01.Name = t_NomFichier
 	TDF_02.Name = t_NomFichier_SAUV
@@ -168,6 +237,7 @@ BeginF
 			t_ligne = "  - Fin de programme -  "
 			G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
 			Display Left(t_ligne)
+			CogRs_C8.FShare([MZ.Dos "COG_EXPORT_ANAEL"], 'L')
 			FReturn(" ")
 		EndIf
 		; Suppression de l'original
@@ -179,6 +249,7 @@ BeginF
 			t_ligne = "  - Fin de programme -  "
 			G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
 			Display Left(t_ligne)
+			CogRs_C8.FShare([MZ.Dos "COG_EXPORT_ANAEL"], 'L')
 			FReturn(" ")
 		EndIf
 	EndIf
@@ -191,6 +262,7 @@ BeginF
 		t_ligne = "  - Fin de programme -  "
 		G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
 		Display Left(t_ligne)
+		CogRs_C8.FShare([MZ.Dos "COG_EXPORT_ANAEL"], 'L')
 		FReturn(" ")
 	EndIf
 	; La fonction Hopen permet d'ouvrir un fichier "à la main".
@@ -203,13 +275,15 @@ BeginF
 	; Recherche du dernier numéro d'exportation
 	;*
 
-	seek_ca(t_dos)
-	t_Ce1_01 = "8" 
-	CCFECR_DEV_01.Key = GetKeyByName(CCFECR_DEV_01, "Index_COG_z_C8") & t_Dos & t_Ce1_01
-	t_Key_01 = t_Dos & t_Ce1_01 & $FF
-	x_st_01 = IPRead(CCFECR_DEV_01, C8_DEV_01, GetKeyByName(CCFECR_DEV_01, "Index_COG_z_C8"), t_Key_01)
-	If x_st_01 = 0 And C8_DEV_01.Dos = t_Dos And C8_DEV_01.Ce1 = t_Ce1_01 And C8_DEV_01.COG_CHRONO <> " "
-		t_Chrono = C8_DEV_01.COG_CHRONO + 1
+	IF CA.Dos <> t_dos
+		seek_ca(t_dos)
+	EndIf
+	
+	CogRs_C8.Init()
+	CogRs_C8.Where.RemoveCondition("")
+	CogRs_C8.Where.Max_Chrono()
+	If CogRs_C8.Select() > 0 AND CogRs_C8.COG_CHRONO > 0
+		t_Chrono = CogRs_C8.COG_CHRONO + 1
 	Else
 		t_Chrono = "10000000"
 	EndIf
@@ -217,122 +291,248 @@ BeginF
 	;*
 	; Boucle sur les écritures
 	;*
-	t_Ce1_01 = "8" 
-	CCFECR_DEV_01.Key = GetKeyByName(CCFECR_DEV_01, "Index_COG_z_C8") & t_Dos & t_Ce1_01
-	t_Key_01 = t_Dos & t_Ce1_01
-	Do
-		x_st_01 = IRead(CCFECR_DEV_01, C8_DEV_01, GetKeyByName(CCFECR_DEV_01, "Index_COG_z_C8"))
-	While x_st_01 = 0 And C8_DEV_01.Dos = t_Dos And C8_DEV_01.Ce1 = t_Ce1_01
-		If (t_Export = 1 And C8_DEV_01.COG_CHRONO = " ") Or (t_Export = 2 And C8_DEV_01.COG_CHRONO in (t_ChronoD..t_ChronoF))
+
+	; initialisation requete
+	CogRs_C8.Init()
+	CogRs_C8.Where.RemoveCondition("")
+	readC8 = CogRs_C8.ReaderOpen()
+	If t_Export = 1
+		CogRs_C8.Where.Equal_Chrono(0)
+		CogRs_C8.Where.AddCondition("Equal_Chrono")
+	ElsIf t_Export = 2
+		CogRs_C8.Where.Between_Chrono(t_ChronoD, t_ChronoF)
+		CogRs_C8.Where.AddCondition("Between_Chrono")
+	EndIf
+	If t_Jnl <> ' '
+		CogRs_C8.Where.Equal_Jnl(t_Jnl)
+		CogRs_C8.Where.AddCondition("Equal_Jnl")
+	EndIf
+	CogRs_C8.ReaderSelect(readC8)
+
+	Do While CogRs_C8.ReaderNext(readC8) > 0
 		
-			;*
-			; Lecture des autres tables
-			;*
-			; Compte comptable
-			t_Ce1_02 = "3" 
-			if hseek(ccfjca_dev_01,c3_dev_01,"A"&C8_DEV_01.Dos&t_Ce1_02&C8_DEV_01.Cpt)
-				C3_DEV_01	= ""
-			endif
-	
-			; Journaux
-			t_Ce1_02 = "4" 
-			if hseek(ccfjca_dev_01,C4_DEV_01,"D"&C8_DEV_01.Dos&t_Ce1_02&C8_DEV_01.Jnl)
-				C4_DEV_01	= ""
-			endif
-			; Recherche du type de tiers
-			Switch C4_DEV_01.JnlTyp
-				Case 1 ; Achat
-					t_TiCod = "F"
-				Case 2 ; Vente
-					t_TiCod = "C"
-				Default
-					t_TiCod = " "
-			EndSwitch
-	
-			; En-tête de pièce
-			GTFENT_DEV_01.Key = "I" & C8_DEV_01.Dos & t_TiCod & "4" & C8_DEV_01.Piece
-			t_Key_02 = C8_DEV_01.Dos & t_TiCod & "4" & C8_DEV_01.Piece
-			x_st_02 = IRead(GTFENT_DEV_01, ENT_DEV_01, "I", t_Key_02)
-			If x_st_02 = 0 And ENT_DEV_01.Dos = C8_DEV_01.Dos And ENT_DEV_01.TiCod = t_TiCod And ENT_DEV_01.PiCod = "4" And ENT_DEV_01.PiNo = C8_DEV_01.Piece
-				ENT_DEV_01
-			Else
-				Init ENT_DEV_01 = " "
-			EndIf
-	
-			; Tiers (client ou fournisseur)
-			Switch t_TiCod
-				Case "C" ; Client
-					t_Ce1_02 = "3"
-					GTFPCF_DEV_01.Key = "C" & C8_DEV_01.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
-					t_Key_02 = C8_DEV_01.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
-					x_st_02 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_02)
-					If x_st_02 = 0 And CLI_DEV_01.Dos = C8_DEV_01.Dos And CLI_DEV_01.Ce1 = t_Ce1_02 And CLI_DEV_01.Tiers = ENT_DEV_01.Tiers
-						CLI_DEV_01	
-					Else
-						Init CLI_DEV_01 = " "	 
-					EndIf
-				Case "F" ; Fournisseur
-					t_Ce1_02 = "4" 
-					GTFPCF_DEV_01.Key = "C" & C8_DEV_01.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
-					t_Key_02 = C8_DEV_01.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
-					x_st_02 = IRead(GTFPCF_DEV_01, FOU_DEV_01, "C", t_Key_02)
-					If x_st_02 = 0 And FOU_DEV_01.Dos = C8_DEV_01.Dos And FOU_DEV_01.Ce1 = t_Ce1_02 And FOU_DEV_01.Tiers = ENT_DEV_01.Tiers
-						FOU_DEV_01	
-					Else
-						Init FOU_DEV_01 = " "	 
-					EndIf
-				Default
-					Init CLI_DEV_01 = " "
-					Init FOU_DEV_01 = " "
-			EndSwitch
+		;*
+		; Lecture des autres tables
+		;*
+		; Compte comptable
+		t_Ce1_02 = "3" 
+		if hseek(ccfjca_dev_01,c3_dev_01,"A" & CogRs_C8.Dos & t_Ce1_02 & CogRs_C8.Cpt)
+			C3_DEV_01	= ""
+		endif
+
+		; Journaux
+		t_Ce1_02 = "4" 
+		if hseek(ccfjca_dev_01,C4_DEV_01,"D" & CogRs_C8.Dos & t_Ce1_02 & CogRs_C8.Jnl)
+			C4_DEV_01	= ""
+		endif
+		; Recherche du type de tiers
+		Switch C4_DEV_01.JnlTyp
+			Case 1 ; Achat
+				t_TiCod = "F"
+			Case 2 ; Vente
+				t_TiCod = "C"
+			Default
+				t_TiCod = " "
+		EndSwitch
+
+		; En-tête de pièce
+		GTFENT_DEV_01.Key = "I" & CogRs_C8.Dos & t_TiCod & "4" & CogRs_C8.Piece
+		t_Key_02 = CogRs_C8.Dos & t_TiCod & "4" & CogRs_C8.Piece
+		x_st_02 = IRead(GTFENT_DEV_01, ENT_DEV_01, "I", t_Key_02)
+		If x_st_02 = 0 And ENT_DEV_01.Dos = CogRs_C8.Dos And ENT_DEV_01.TiCod = t_TiCod And ENT_DEV_01.PiCod = "4" And ENT_DEV_01.PiNo = CogRs_C8.Piece
+			ENT_DEV_01
+		Else
+			Init ENT_DEV_01 = " "
+		EndIf
+
+		; Tiers (client ou fournisseur)
+		Switch t_TiCod
+			Case "C" ; Client
+				t_Ce1_02 = "3"
+				GTFPCF_DEV_01.Key = "C" & CogRs_C8.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
+				t_Key_02 = CogRs_C8.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
+				x_st_02 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_02)
+				If x_st_02 = 0 And CLI_DEV_01.Dos = CogRs_C8.Dos And CLI_DEV_01.Ce1 = t_Ce1_02 And CLI_DEV_01.Tiers = ENT_DEV_01.Tiers
+					CLI_DEV_01	
+				Else
+					Init CLI_DEV_01 = " "	 
+				EndIf
+			Case "F" ; Fournisseur
+				t_Ce1_02 = "4" 
+				GTFPCF_DEV_01.Key = "C" & CogRs_C8.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
+				t_Key_02 = CogRs_C8.Dos & t_Ce1_02 & ENT_DEV_01.Tiers
+				x_st_02 = IRead(GTFPCF_DEV_01, FOU_DEV_01, "C", t_Key_02)
+				If x_st_02 = 0 And FOU_DEV_01.Dos = CogRs_C8.Dos And FOU_DEV_01.Ce1 = t_Ce1_02 And FOU_DEV_01.Tiers = ENT_DEV_01.Tiers
+					FOU_DEV_01	
+				Else
+					Init FOU_DEV_01 = " "	 
+				EndIf
+			Default
+				Init CLI_DEV_01 = " "
+				Init FOU_DEV_01 = " "
+		EndSwitch
+
+		;*
+		;	Filtres
+		;*
+		if Cog_FiltresOK
 
 			;*
-			;	Filtres
+			; Enregistrement du numéro chrono uniquement en cas de nouvel export
 			;*
-			if Cog_FiltresOK
-	
-				;*
-				; Alimentation de la ligne à exporter
-				;*
-	
-	
-				
-				;*
-				; Enregistrement du numéro chrono uniquement en cas de nouvel export
-				;*
-				If t_Export = 1 And C8_DEV_01.COG_CHRONO = " "
-					C8_DEV_01.COG_CHRONO = t_Chrono
-					C8_Dev_01.Cog_ExpDt	= today
-					x_st_02 = IReWrite(CCFECR_DEV_01, C8_DEV_01)
-					If x_st_02 <> 0
-						t_ligne = "  - ERREUR : l'enregistrement du numéro chrono " & Left(t_Chrono) & " sur l'écriture comptable numéro " & Left(C8_DEV_01.EcrNo) & " a échoué.  -  "
-						G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
-						Display Left(t_ligne)
-					EndIf
+			If t_Export = 1 And CogRs_C8.COG_CHRONO = " "
+				CogRs_C8.COG_CHRONO = t_Chrono
+				CogRs_C8.Cog_ExpDt	= today
+				If CogRs_C8.FShare(Formater_Res('C3C8')  & CogRs_C8.Dos & CogRs_C8.EcrNo, 'R') <> 0
+					t_ligne = "  - ERREUR : l'enregistrement du numéro chrono " & Left(t_Chrono) & " sur l'écriture comptable numéro " & Left(CogRs_C8.EcrNo) & " a échoué.  -  "
+					G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+					Display Left(t_ligne)
+				Else
+					CogRs_C8.ReaderUpdate(readC8)
+					CogRs_C8.FShare(Formater_Res('C3C8')  & CogRs_C8.Dos & CogRs_C8.EcrNo, 'L')
 				EndIf
+			EndIf
+
+			; Ecriture dans le fichier
+			Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false), CogRs_C8.C8,"",4)
+			x_st_02 = FWritSt(TDF_01, Left(t_ligne))
 	
-				; Ecriture dans le fichier
-				Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false),C8_DEV_01,"",4)
-				x_st_02 = FWritSt(TDF_01, Left(t_ligne))
-		
-	
-			endif
-		EndIf
+		 	;on prépare le cumul des ventilations analytiques
+			CogRs_CX.Init()
+			CogRs_CX.Where.RemoveCondition("")
+			readCX = CogRs_CX.ReaderOpen()
+			CogRs_CX.Where.Zoom_EcrNo(CogRs_C8.EcrNo)
+			CogRs_CX.Where.AddCondition("Zoom_EcrNo")
+			CogRs_CX.Where.Zoom_EcrLg(CogRs_C8.EcrLg)
+			CogRs_CX.Where.AddCondition("Zoom_EcrLg")
+			CogRs_CX.ReaderSelect(readCX)
+			
+			Do while CogRs_CX.ReaderNext(readCX) > 0
+
+				if t_first
+					t_first	= false
+					t_ecrno	= CogRs_CX.EcrNo
+					t_lilg	= 1
+				endif
+				
+				Vtl_rec			= ""
+				Vtl_rec.Axe1	= CogRs_CX.Axe(1)
+				Vtl_rec.Axe2	= CogRs_CX.Axe(2)
+				Vtl_rec.Axe3	= CogRs_CX.Axe(3)
+				Vtl_rec.Axe4	= CogRs_CX.Axe(4)
+				Vtl_rec.Jnl		= CogRs_CX.Jnl
+				Vtl_rec.Ecrno	= t_EcrNo
+				Vtl_rec.Ecrlg	= t_lilg
+				
+				if listseek(list_EcrVtl,Vtl_rec,Vtl)
+					
+					CogRs_CX.mtbis=abs(CogRs_CX.mt)
+					Vtl.Mt	+= condition(CogRs_CX.cog_sens=2,CogRs_CX.Mtbis,-CogRs_CX.Mtbis)
+					
+					if vtl.mt<0
+						vtl.sens=1
+					else
+						vtl.sens=2
+					endif
+					lig_vtl_mt=vtl.mt
+					listmodify(list_EcrVtl,Vtl)
+				else
+					Vtl		= Vtl_rec
+					CogRs_CX.mtbis=abs(CogRs_CX.mt)
+					Vtl.Mt	= condition(CogRs_CX.cog_sens=2,CogRs_CX.Mtbis,-CogRs_CX.Mtbis)
+					if vtl.mt<0
+						vtl.sens=1
+					else
+						vtl.sens=2
+					endif
+					lig_vtl_mt=vtl.mt
+					listinsert(list_EcrVtl,Vtl)
+					t_lilg++
+				endif
+
+				;mise à jour du cumul sur les axes 999999
+ 				Vtl_rec			= ""
+				Vtl_rec.Axe1	= "999999"
+				Vtl_rec.Axe2	= "999999"
+				Vtl_rec.Axe3	= CogRs_CX.Axe(3)
+				Vtl_rec.Axe4	= CogRs_CX.Axe(4)
+				Vtl_rec.Jnl		= CogRs_CX.Jnl
+				Vtl_rec.Ecrno	= t_EcrNo
+				Vtl_rec.Ecrlg	= t_lilg
+				if listseek(list_EcrVtl,Vtl_rec,Vtl)
+					Vtl.Mt	+= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
+					if vtl.mt<0
+						vtl.sens=2
+					else
+						vtl.sens=1
+					endif
+					listmodify(list_EcrVtl,Vtl)
+				else
+					Vtl		= Vtl_rec
+					Vtl.Mt	= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
+					if vtl.mt<0
+						vtl.sens=2
+					else
+						vtl.sens=1
+					endif
+					listinsert(list_EcrVtl,Vtl)
+					t_lilg++
+				endif
+			WEnd
+
+			CogRs_CX.ReaderClose(readCX)
+
+		endif
 	Wend
 
-;*
-; Fermeture du fichier TXT
-;*
-HClose(TDF_01)
-;; Sauvegarde du fichier
-;x_st_01 = HCopyFile(TDF_01.Name, TDF_02.Name,,,,a_numfic)
-;If x_st_01 <> 0
-;	t_ligne = "  - ERREUR : la sauvegarde du fichier " & Left(t_NomFichier) & " a échouée. -  "
-;	G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
-;	Display Left(t_ligne)
-;EndIf
+	CogRs_C8.ReaderClose(readC8)
 
-FReturn(TDF_01.Name)
+	;*
+	; ;Export de l'analytique
+	;*
+	If t_CX
+		ListBegin(list_EcrVtl)
+		Do While ListNext(list_EcrVtl,Vtl) not in (-1, 0)
+	
+			CX_DEV_01			= ""
+			CX_DEV_01.Axe(1)	= Vtl.Axe1
+			CX_DEV_01.Axe(2)	= Vtl.Axe2
+			CX_DEV_01.Axe(3)	= Vtl.Axe3
+			CX_DEV_01.Axe(4)	= Vtl.Axe4
+			if vtl.mt<0
+				vtl.mt=abs(vtl.mt)
+			endif
+			CX_DEV_01.Mt		= Vtl.Mt
+			CX_DEV_01.Sens		= Vtl.Sens
+			CX_DEV_01.Jnl		= Vtl.Jnl
+			CX_DEV_01.Ecrno	= Vtl.EcrNo
+			CX_DEV_01.Ecrlg	= Vtl.EcrLg
+			
+			Cog_GenererLigne(t_ligne, t_SeparateurC, t_SeparateurL,true,"",CX_DEV_01,2)
+			if val(mid(t_ligne,124,16))	<> 0
+				x_st_02 = FWritSt(TDF_01, Left(t_ligne))
+			endif
+	
+		WEnd
+	EndIf
+
+	ListDestroy(list_EcrVtl)
+
+	;*
+	; Fermeture du fichier TXT
+	;*
+	HClose(TDF_01)
+	;; Sauvegarde du fichier
+	;x_st_01 = HCopyFile(TDF_01.Name, TDF_02.Name,,,,a_numfic)
+	;If x_st_01 <> 0
+	;	t_ligne = "  - ERREUR : la sauvegarde du fichier " & Left(t_NomFichier) & " a échouée. -  "
+	;	G3_LOG_ANO(10013,Left(t_ligne),,,,,,,,"COG_FMSG.DHFI",,)
+	;	Display Left(t_ligne)
+	;EndIf
+	
+	CogRs_C8.FShare([MZ.Dos "COG_EXPORT_ANAEL"], 'L')
+
+	FReturn(TDF_01.Name)
 
 EndF
 
@@ -340,74 +540,73 @@ EndF
 ;* Programme Principal
 ;*
 MAIN
+;
+;Dossier = 0
+	Display  "*************************************************************"
+	Display  "*** U GIE IRIS - Exportation des ecritures comptables       ***"
+	Display  "*************************************************************"
+	Display  " " 
 
-Dossier = 0
-Display  "*************************************************************"
-Display  "*** U GIE IRIS - Exportation des ecritures comptables       ***"
-Display  "*************************************************************"
-Display  " " 
-
-If PingReceive("ZEchange",MZ) = 0
-	; Initialisation des variables
-	Dossier = MZ.Dos
-	Seek_Soc(Dossier)
-	Etb = MZ.Etb
-	Seek_Ets(Etb)
-	x_user = SYSTEM.User
-Else
-	; Dossier
-	Input "0 - Taper le code dossier de DIVALTO : " Dossier
-	GTFDOS_DEV_01.KEY = "A" & Dossier
-	x_st_00	= HRead(GTFDOS_DEV_01, SOC_DEV01)
-	If x_st_00 <> 0 And SOC_DEV01.Dos <> Dossier
-		Input "ERREUR : Dossier invalide !" Dossier
-		ProgramExit
-	Else
-		Seek_Soc(Dossier)
-		MZ.DOS = Dossier
-	EndIf
-	; Etablissement
-	Input "1 - Taper le code etablissement de DIVALTO : " Etb
-	GTFDOS_DEV_01.KEY = "C" & Dossier & Etb
-	x_st_00	= HRead(GTFDOS_DEV_01, ETS_DEV01)
-	If x_st_00 <> 0 And ETS_DEV01.Dos <> Dossier And ETS_DEV01.Etb <> Etb
-		Input "ERREUR : Etablissement invalide !" Etb
-		ProgramExit
-	Else
-		Seek_Ets(Etb)
-		MZ.Etb = Etb
-	EndIf
-EndIf
+	PingLocal("COG_MZ_SAVE", MZ)
+	PingLocal("COG_SOC_SAVE", SOC)
+	PingLocal("COG_ETS_SAVE", ETS)
 	
-Display  " " 
-; Début de l'importation
-Display  "*************************************************************"
-Display  "*** Début de l exportation des ecritures comptables       ***"
-d_datetrait = Time(7)																															 
-s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
-s_datetrait = Fstring("0", s_datetrait)
-Display  s_datetrait
-G3_LOG_ANO(10011,s_datetrait,,,,,,,,"COG_FMSG.DHFI",,)
-;
-COGF_ExportationEcritures(COGF_CheminImplicites("COMPTA"), Dossier, 1, " ", " ", ";", " " & Chr(13) & Chr(10))
-;
-d_datetrait = Time(7)																															 
-s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
-s_datetrait = Fstring("0", s_datetrait)
-G3_LOG_ANO(10012,s_datetrait,,,,,,,,"COG_FMSG.DHFI",,)
-Display  "*** Fin                                                   ***"
-Display  s_datetrait
-Display  "*************************************************************"
-Display  " " 
-
-; Restauration de l'environnement d'appel
-MZ.Dos = Dossier
-Seek_Soc(Dossier)
-MZ.Etb = Etb
-Seek_Ets(Etb)
-
-; Fin 
-Display "Fin du programme."
-Display  " "
-
-ProgramExit
+	If PingReceive("ZEchange",MZ) = 0
+		; Initialisation des variables
+		Seek_Soc(MZ.Dos)
+		Seek_Ets(MZ.Etb)
+		x_user = SYSTEM.User
+	Else
+		; Dossier
+		Input "0 - Taper le code dossier de DIVALTO : " MZ.Dos
+		GTFDOS_DEV_01.KEY = "A" & MZ.Dos
+		x_st_00	= HRead(GTFDOS_DEV_01, SOC_DEV01)
+		If x_st_00 <> 0 And SOC_DEV01.Dos <> MZ.Dos
+			Input "ERREUR : Dossier invalide !" MZ.Dos
+			ProgramExit
+		Else
+			Seek_Soc(MZ.Dos)
+		EndIf
+		; Etablissement
+		Input "1 - Taper le code etablissement de DIVALTO : " MZ.Etb
+		GTFDOS_DEV_01.KEY = "C" & MZ.Dos & MZ.Etb
+		x_st_00	= HRead(GTFDOS_DEV_01, ETS_DEV01)
+		If x_st_00 <> 0 And ETS_DEV01.Dos <> MZ.Dos And ETS_DEV01.Etb <> MZ.Etb
+			Input "ERREUR : Etablissement invalide !" MZ.Etb
+			ProgramExit
+		Else
+			Seek_Ets(MZ.Etb)
+		EndIf
+	EndIf
+		
+	Display  " " 
+	; Début de l'importation
+	Display  "*************************************************************"
+	Display  "*** Début de l exportation des ecritures comptables       ***"
+	d_datetrait = Time(7)																															 
+	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+	s_datetrait = Fstring("0", s_datetrait)
+	Display  s_datetrait
+	G3_LOG_ANO(10011,s_datetrait,,,,,,,,"COG_FMSG.DHFI",,)
+	;
+	COGF_ExportationEcritures(COGF_CheminImplicites("COMPTA"), MZ.Dos, 1, " ", " ", ";", " " & Chr(13) & Chr(10))
+	;
+	d_datetrait = Time(7)																															 
+	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
+	s_datetrait = Fstring("0", s_datetrait)
+	G3_LOG_ANO(10012,s_datetrait,,,,,,,,"COG_FMSG.DHFI",,)
+	Display  "*** Fin                                                   ***"
+	Display  s_datetrait
+	Display  "*************************************************************"
+	Display  " " 
+	
+	; Restauration de l'environnement d'appel
+	PingLocalReceiveAndDelete("COG_MZ_SAVE", MZ)
+	PingLocalReceiveAndDelete("COG_SOC_SAVE", SOC)
+	PingLocalReceiveAndDelete("COG_ETS_SAVE", ETS)
+	
+	; Fin 
+	Display "Fin du programme."
+	Display  " "
+	
+	ProgramExit

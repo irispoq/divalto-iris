@@ -1,3 +1,4 @@
+SetModuleInfo('$Id$')
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du CCFJCA
 ;*
@@ -5,12 +6,17 @@
 <DictionarySql overwrite="ccrsjca.dhoq" overwrittenby="cog_ccrsjca.dhoq" ModuleInfo='$Id: ccrsjcau.dhsq 1861 2013-04-10 06:32:43Z m.nussard $'>
 
 ;*
-;*		Journaux
+;*		Journaux	  (record std non bindé)
 ;*
 
 <RecordSql Name=Journal>
 <Select>
 	C4.*
+<WHERE>
+	Case BetWeen_Jnl(char jnlD, char jnlF)
+		C4.JNL BETWEEN jnlD AND jnlF
+	Case Export_Anael
+		C4.COG_EXPORTANAEL = 2
 
 ;*
 ;*		Journaux	Infos Etablissement

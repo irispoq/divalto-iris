@@ -1,4 +1,4 @@
-
+SetModuleInfo('$Id$')
 ;*
 ;*		COGESER  Interface d"exportation des écritures comptables
 ;*
@@ -6,44 +6,59 @@
 ;*		Log	 Version	  NPmodIf		Date		ModIfications
 ;*
 ;*		JDT		6.1			01			06.2009	Version initiale
-;*
+;*		YLEF		P205a						11.2014	Ajout paramètres de lecture par journaux / redécoupage du programme
 
 OverWrittenBy "COGuCC_EXPORT01.dhop"
 
-Module COG_CC_EXPORT_ECR.DHOP
+;*
+;*	Déclarations
+;*
 
-Include "GTTC000.DHSP"				; Déclarations communes
-module	"ccpmfic.dhop"
-module	"a5tm000.dhop"
-module	"a5pmwin.dhop"
+;
+Include "GTTCZ00.DHSP"				; Déclarations communes
 
-; Fichiers
-Public HFile	GTFDD.DHSD	GTFDOS		GTFDOS		; Dossier établissement
+;
+Module	"ccpmfic.dhop"
+Module	"a5tm000.dhop"
+Module	"a5pmwin.dhop"
+Module	"COG_CC_EXPORT_ECR.DHOP"
+
+;
+hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
+
+;
+Public RecordSQL	"CCRSJCA.DHOQ"			Journal		CogRs_JNL
 
 ; Enregistrements
-Public Record	GTFDD.DHSD	SOC			SOC			; Société
-Public Record	GTFDD.DHSD	Ets			Ets			; Etablissement
-; Enregistrement de travail
-Public Record	A5DD.DHSD	MZ				MZ				; Echanges
-Public Record	GTFDD.DHSD	XQ				XQ				; Jobqueue
-Public Record	DDSYS.DHSD	Implicite	Implicite	; Implicite
-Public Record	ccfdd.dhsd	ca				ca				; dossiers comptables
-public record	a5dd.dhsd	mchemin		mchemin
+Public 	Record	GTFDD.DHSD	SOC			SOC			; Société
+Public 	Record	GTFDD.DHSD	Ets			Ets			; Etablissement
 
-Define cog_Masque = "cog_cc_export01.dhof"
+Public 	Record	A5DD.DHSD	MZ				MZ				; Echanges
+Public 	Record	GTFDD.DHSD	XQ				XQ				; Jobqueue
+Public 	Record	CCFDD.DHSD	XQ				CCXQ			; Jobqueue
+Public 	Record	DDSYS.DHSD	Implicite	Implicite	; Implicite
+Public 	Record	ccfdd.dhsd	ca				ca				; dossiers comptables
+public 	record	a5dd.dhsd	mchemin		mchemin
+			record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+
+;
 1 idTB_Main			L					; IdentIfiant barre d'outils MAIN
 1 idME_Main			L					; IdentIfiant du menu MAIN 
 1 idME_POPChemin	L					; IdentIfiant du menu POP CHEMIN
-
 1	b_FIN				B = False 		; Variable de fin de saisie du masque
+1	t_SeparateurC	8						; Séparateur champ
+1	t_SeparateurL	8						; Séparateur ligne
+1	FicNom01			255 = " "
+1	auto				1,0	= false
+1	readJnl			L
+1	cptJnl			8,0
 
-1	t_SeparateurC		8						; Séparateur champ
-1	t_SeparateurL		8						; Séparateur ligne
-1	FicNom01				255 = " "
-1	auto					1,0	= false
+;
+Define cog_Masque = "cog_cc_export01.dhof"
 
-hfile		a5dd.dhsd	a5fdos	a5fdos_loc		openonuse	;Fichier des dossiers et utilisateurs
-record	a5dd.dhsd	muser		muser_loc						;Utilisateurs
+;*
+;*		Procédures et fonctions
+;*
 
 ;*
 Function int Cog_InitialiserVariables
@@ -107,6 +122,8 @@ BeginF
 	XQ.Choix(1) = 1
 	XQ.PiNoD = "10000000"
 	XQ.PiNoF = "99999999"
+	Init CCXQ.Jnl2= 'z' 
+	CCXQ.Choix(1) = 2				; exporter les CX
 	XMeSetAttribut("cog_chrono", AN_VISIBILITE, AV_GRISE)
 	; Séparateur de champs
 	XQ.Choix(2) = 1
@@ -123,6 +140,34 @@ BeginF
 	FReturn(1)
 
 EndF
+
+;*
+Procedure Cog_Traitement_Export_Ecr
+; Exécution du programme
+BeginP
+
+	cptJnl = 0
+	FicNom01 = " "
+	CogRs_JNL.Init()
+	CogRs_JNL.Where.RemoveCondition("")
+	readJnl = CogRs_JNL.ReaderOpen()
+	CogRs_JNL.Where.BetWeen_Jnl(CCXQ.Jnl1, CCXQ.Jnl2)
+	CogRs_JNL.Where.AddCondition("BetWeen_Jnl")
+	CogRs_JNL.Where.Export_Anael()
+	CogRs_JNL.Where.AddCondition("Export_Anael")
+	CogRs_JNL.ReaderSelect(readJnl)
+
+	Do While CogRs_JNL.ReaderNext(readJnl) > 0
+
+		cptJnl++
+		FicNom01 &= "|- " & COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL, \
+																	CogRs_JNL.Jnl, t_CX=Condition(CCXQ.Choix(1)=2, TRUE, FALSE))
+
+	WEnd	
+
+	CogRs_JNL.ReaderClose(readJnl)
+
+EndP
 
 ;*
 Procedure Cog_SaisiePage1
@@ -180,14 +225,15 @@ BeginP
 						Default
 							t_SeparateurL = " " & Chr(13)
 					EndSwitch
-					; Exécution du programme
-					FicNom01 = " "
-					FicNom01 = COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL)
+					
+					Cog_Traitement_Export_Ecr
+
 					If Left(FicNom01) <> " "
-						XQ.Echange = "L'exportation des écritures comptables s'est bien déroulée.|Le fichier suivant a été crée avec succés :|'" & Left(FicNom01) & "'"
+						XQ.Echange = "L'exportation des écritures comptables s'est bien déroulée.|Les fichiers suivants ont été créés avec succés :'" & Left(FicNom01) & "'"
 						MessageBox(Left(XQ.Echange),"Exportation des Ecritures Comptables",MB_OK+MB_ICONINFORMATION)
 						b_FIN = TRUE
 					Else
+						MessageBox("Traitement terminé. Aucun fichier n'a été généré.", "Information", MB_ICONINFORMATION)
 						b_FIN = False
 					EndIf
 				EndIf

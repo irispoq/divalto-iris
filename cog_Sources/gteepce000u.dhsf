@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20141112144026      
+;>xwin4obj                              7.0       20141126151013      
 [masque]
  utilisateur="UGIE_YLF"
- date_modification="12/11/2014"
+ date_modification="26/11/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=1000092
@@ -15098,7 +15098,7 @@
  prec=17
  suiv=19
  page_fond=11
- position_fond=25
+ position_fond=27
  attache_lgx=oui
  arret_dem_saisie=3145
  ident_unique=38
@@ -27915,6 +27915,14 @@ Public Record "gtfdd.dhsd" art art
 ;*
 ;*
 ;*
+
+;*
+Procedure Champ_Projet_2_Ap
+;
+Beginp
+	Standard.Champ_Projet_2_Ap
+	Cog_Champ_Projet_2_Ap
+EndP
 
 ;*
 Procedure Champ_AdrCod_1_Ap

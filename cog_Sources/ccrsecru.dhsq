@@ -11,4 +11,9 @@
 <RecordSql Name=ECRITURE>
 <Select>
 	C8.*
+<WHERE>
+	Case Equal_Chrono(int chrono)
+		C8.COG_CHRONO = chrono
+	Case Between_Chrono(int cd, int cf)
+		C8.COG_CHRONO BETWEEN cd AND cf
 	

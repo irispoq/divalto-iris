@@ -34,12 +34,12 @@ BeginP
 	EndIf
 EndP
 
-;*	01
-Private Procedure ZoomApresCle14
-; par numéro de chrono d'exportation
-BeginP	; ZoomApresCle14
-	ZOOM.CLE		= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1 & C8.COG_CHRONO
-	ZOOM.CLEMIN	= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1
-	ZOOM.CLEMAX	= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1 & $FF
-EndP		; ZoomApresCle14
+;;*	01
+;Private Procedure ZoomApresCle14
+;; par numéro de chrono d'exportation
+;BeginP	; ZoomApresCle14
+;	ZOOM.CLE		= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1 & C8.COG_CHRONO todo --> réécriture avec filtre SQL
+;	ZOOM.CLEMIN	= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1
+;	ZOOM.CLEMAX	= ZoomGetKeyByName("Index_COG_z_C8") & MZ.DOS & g_Ce1 & $FF
+;EndP		; ZoomApresCle14
 
