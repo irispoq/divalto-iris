@@ -1151,18 +1151,19 @@ Public Function char Cog_ENT_Modification_Av
 1		wAdr			16
 Beginf
 
-	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'C1'
+; JCH : Suppression du test interdisant de modifier un devis que l'on n'a pas créé
+;*	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+;*		Case 'C1'
 
-			If Not Lectab(37, SYSTEM.USER, 1137) = 0 | flag = 'N' | Endif
-			If flag = 'O' And ENT.Ce4 = 1
-				If Cog_Controle_Responsable = 'N'
-					MessageBox('Seul le responsable de service peut modifier ce devis, veuillez abandonner.','Attention',MB_OK)
-					flag = 'N'
-				Endif
-			Endif
+;*			If Not Lectab(37, SYSTEM.USER, 1137) = 0 | flag = 'N' | Endif
+;*			If flag = 'O' And ENT.Ce4 = 1
+;*				If Cog_Controle_Responsable = 'N'
+;*					MessageBox('Seul le responsable de service peut modifier ce devis, veuillez abandonner.','Attention',MB_OK)
+;*					flag = 'N'
+;*				Endif
+;*			Endif
 
-	EndSwitch
+;*	EndSwitch
 
 	Freturn(flag)
 Endf
@@ -1182,6 +1183,9 @@ BeginF
 			EndIf
 
 	EndSwitch
+	
+	;*Ajout JCH : Validation avant suppression de pièce
+	MessageBox("Vous êtes sur le point de supprimer une pièce. Êtes-vous sûr(e) ?","Supprimer une pièce",MB_OKCANCEL)
 
 	FReturn('O')
 
@@ -1236,18 +1240,19 @@ Public Function char Cog_ENT_Controle_Fin
 Beginf
 	
 	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'C1'
-			If Not Lectab(37, SYSTEM.USER, 1137) = 0 | Freturn('N') | Endif
-			If Left(MZ.PARAM) = 'ValA' 
-				If Cog_Controle_Responsable = 'O'
-					If Not Isdate(ENT.Cog_Validite)
-						ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
-					Endif
-				Else
-					MessageBox('Seul le responsable de service peut modifier ce devis, veuillez abandonner.','Attention',MB_OK)
-					Freturn('N')
-				Endif
-			Endif
+; JCH : Suppression du test interdisant de modifier un devis que l'on n'a pas créé
+;*		Case 'C1'
+;*			If Not Lectab(37, SYSTEM.USER, 1137) = 0 | Freturn('N') | Endif
+;*			If Left(MZ.PARAM) = 'ValA' 
+;*				If Cog_Controle_Responsable = 'O'
+;*					If Not Isdate(ENT.Cog_Validite)
+;*						ENT.Cog_Validite = Dtadd(Today,SOC.Cog_Delai_Validite)
+;*					Endif
+;*				Else
+;*					MessageBox('Seul le responsable de service peut modifier ce devis, veuillez abandonner.','Attention',MB_OK)
+;*					Freturn('N')
+;*				Endif
+;*			Endif
 
 		Case 'F2'
 			FReturn(Cog_ValidCde_ENT_Controle_Fin)
