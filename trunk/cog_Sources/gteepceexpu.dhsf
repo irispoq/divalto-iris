@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20141008094417      
+;>xwin4obj                              7.0       20141215153902      
 [masque]
  libelle="Explorateur de pièces"
- utilisateur="UGIE"
- date_modification="08/10/2014"
+ utilisateur="ROOT"
+ date_modification="15/12/2014"
  feuille_style="fstylewpf.dhfi"
  noms_boutons="zoom"
- dernier_id=1000009
+ dernier_id=1000011
  surcharge=oui
  date_modif_base="20131008112025"
  dernier_id_page=100000
@@ -1750,6 +1750,24 @@ TOTO
     titre="N° ID Basware"
     fl_aff=non
     largeur_col=142
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=94,180
+    taille=9,135
+    id=1000011
+    colonnes_saisie=38
+    wstyle="STD"
+   [description]
+    donnee=cli,adrcpl1,cli
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="Adresse complément 1"
+   [param_colonne]
+    titre="Adresse complément 1"
+    fl_aff=non
+    largeur_col=135
     wstyle="ENTETE_COLONNE"
 [page]
  numero=4
