@@ -77,7 +77,6 @@ Public Record	cogfdd.dhsd	COG_IMP_FNPFAE		COG_IMP_TOTALCPT
 1	tunnel			b		= false		;si appelé en recupérant XQ par pingreceive
 1	readOP			L
 1	readMOUV			L
-1	DatJour			>gtfdd.dhsd		BlDt
 
 1	idl_ent			L=$00									;Liste des ENT	 RESERVEES
 1	stl_ent			L=0
@@ -114,7 +113,8 @@ Public RecordDiva	Ecriture		CAna
 1	Wecrvalno		>ccfdd.dhsd ecrvalno			;Rupture ecriture
 1	Wecrno			>ccfdd.dhsd ecrno				;Lien ecriture C8 => CX
 
-1	Wlib				>ccfdd.dhsd	Lib
+1	WlibC8			>ccfdd.dhsd	Lib
+1	WlibCX			>ccfdd.dhsd	Lib
 1	Wmtdeb			>ccfdd.dhsd	mt
 1	Wmtdevdeb		>ccfdd.dhsd	mtdev
 1	Wmtcre			>ccfdd.dhsd	mt
@@ -309,8 +309,8 @@ beginf
 		XQ_Cog.TiCod		= MZ.TiCod
 	endif
 
-	DatJour		 = Time(1)
-	XQ_Cog.PiCod = 3
+	XQ_Cog.DatD		= HDate(Today,"d",-1)					; dernier jour du mois précédent
+	XQ_Cog.PiCod 	= 3
 
 	If XQ_Cog.TiCod not IN ('C', 'F')
 	 	Cog_EcritureLivreDeBord("Impossible de déterminer le type de traitement (type de tiers paramètre menu)", , , nivalerte=1, dos=999)
@@ -326,11 +326,11 @@ beginf
 		XQ_Cog.DatF2 = CB.ExoFDt
 	EndIf
 
-	If not ((DatJour >= XQ_Cog.DatD2) AND (DatJour <= XQ_Cog.DatF2))
+	If not ((XQ_Cog.DatD >= XQ_Cog.DatD2) AND (XQ_Cog.DatD <= XQ_Cog.DatF2))
  		if tunnel=false 
-			messagebox("Date du jour en dehors de l'exercice comptable (Paramètre dossier comptabilité)","Erreur",mb_iconstop)
+			messagebox("Date de calcul en dehors de l'exercice comptable (Paramètre dossier comptabilité)","Erreur",mb_iconstop)
 		endif
-		Cog_EcritureLivreDeBord("Date du jour en dehors de l'exercice comptable")
+		Cog_EcritureLivreDeBord("Date de calcul en dehors de l'exercice comptable")
 		freturn(false)
 	EndIf
 
@@ -585,7 +585,7 @@ BeginP
 	C8_Tva.Cpt			= CogRs_C3Tva.Cpt
 	C8_Tva.Jnl			= CogRs_JnlDst.Jnl
 	C8_Tva.EcrDt		= XQ_Cog.datF
-	C8_Tva.Lib			= Wlib
+	C8_Tva.Lib			= " "
 	C8_Tva.Dev			= dev_loc
 	C8_Tva.Sens			= condition(WTvamtsld<0 , C_debit, C_credit)
 	C8_Tva.MtDev		= Abs(WTvamtdevSld)
@@ -621,9 +621,9 @@ BeginP
 		jnb_chargeMax	= Condition(jDatF > jDatD, (DtNum(jDatF) - DtNum(jDatD)) + 1, 0)
 		jnb_total		= (DtNum(CogRs_MOUV.Cog_Date_Fin) - DtNum(CogRs_MOUV.Cog_Date_Debut)) + 1
 
-		If jnb_chargeMax > 0	 AND DatJour >= jDatD
+		If jnb_chargeMax > 0	 AND XQ_Cog.DatD >= jDatD
 
-			jnb_charge 	= (DtNum(DatJour) - DtNum(jDatD)) + 1
+			jnb_charge 	= (DtNum(XQ_Cog.DatD) - DtNum(jDatD)) + 1
 			mt_max		= (jnb_chargeMax / jnb_total) * CogRs_MOUV.Mont
 			mt_reel 		= (jnb_charge / jnb_chargeMax) * mt_max  			; affectation à un entier pour arrondi
 			mt_loc		= mt_reel
@@ -793,7 +793,8 @@ EndP
 ;*
 Procedure P_Ecrit_Decr_Ccfm
 ;
-1	i		x
+1	i				x
+1	flag_Loc		1,0 = FALSE
 BeginP
 	init C8			= ' '
 	C8.Ce1			= '8'
@@ -802,7 +803,7 @@ BeginP
 	C8.Jnl			= CogRs_JnlDst.Jnl
 	C8.EcrDt			= XQ_Cog.datF
 	C8.Sens			= Decr.sens
-	C8.Lib			= Wlib
+	C8.Lib			= WlibC8
 	C8.Dev			= Decr.dev
 	C8.Etb			= DEcr.Etb
 	C8.MtDev			= Decr.mtdev
@@ -813,7 +814,7 @@ BeginP
 		Wecrno++
 		C8.EcrNo=Wecrno
 	  for i=1 to 4
-			C8.VtlCod(i)=condition(Decr.axetb(i)<>' ',2,1)
+			C8.VtlCod(i)=condition(Decr.axetb(i)<>' ' AND CogRs_C3Dst.AxeSais(i)=2 , 2, 1)
 		next
 	endif
 
@@ -823,7 +824,10 @@ BeginP
 		init Cx		=' '
 		CX.Ce1		='2'
 		for i=1 to 4
-			CX.Axe(i)	=Decr.axetb(i)
+			If CogRs_C3Dst.AxeSais(i) = 2
+				CX.Axe(i)= Decr.axetb(i)
+			 	flag_Loc = TRUE
+			EndIf
 		next
 		CX.Dos		= C8.Dos
 		CX.Etb		= C8.Etb
@@ -832,7 +836,9 @@ BeginP
 		CX.MtDev		= C8.MtDev
 		CX.Mt			= C8.Mt
 
-		Hwrite(CCFM,CX)	| Wnb_CX++
+		If flag_Loc
+			Hwrite(CCFM,CX)	| Wnb_CX++
+		EndIf
 	endif
 	
 	P_Calcul_Solde_Cp(DEcr.Sens, DEcr.Mt, DEcr.MtDev)
@@ -878,11 +884,15 @@ EndP
 Procedure P_Ecrit_Cana_Ccfm
 ;	Ventilations CX
 1	i				x
+1	flag_Loc		1,0 = FALSE
 BeginP
 	init Cx		=' '
 	CX.Ce1		='2'
 	for i=1 to 4
-		CX.Axe(i)	=Cana.axetb(i)
+		If CogRs_C3Dst.AxeSais(i) = 2
+			CX.Axe(i)	=Cana.axetb(i)
+			flag_Loc = TRUE
+		EndIf
 	next
 	CX.Dos	= C8.Dos
 	CX.Etb	= C8.Etb
@@ -892,7 +902,10 @@ BeginP
 	CX.MtDev	= Cana.mtdev
 	CX.Mt		= Cana.mt
 	
-	Hwrite(CCFM,CX)	| Wnb_CX++
+	If flag_Loc
+		Hwrite(CCFM,CX)	| Wnb_CX++
+	EndIF
+
 EndP
 
 ;*
@@ -907,7 +920,7 @@ BeginP
 	C8_CP.Cpt			= CogRs_C3Dst.Cpt
 	C8_CP.Jnl			= CogRs_JnlDst.Jnl
 	C8_CP.EcrDt			= XQ_Cog.datF
-	C8_CP.Lib			= Wlib
+	C8_CP.Lib			= WlibC8
 	C8_CP.Dev			= Dev_Loc
 	C8_CP.Etb			= Etb_Loc
 	C8_CP.Sens			= condition(Wmtsld < 0 , C_debit, C_credit)
@@ -1042,7 +1055,9 @@ Procedure Cog_Traitement_Boucle_Principale
 1	wTrait		1,0
 Beginp
 	Cog_EcritureLivreDeBord("--> " & Left(mz.titre2))
-	wTrait =  Cog_LireProgrammeTypeTrt
+	wTrait = Cog_LireProgrammeTypeTrt
+	WlibC8 = Condition(wTrait=C_TRAITEMENT_FAE, "", "")
+	WlibCX =	Condition(wTrait=C_TRAITEMENT_FAE, "", "")
 	;--------initialisation
 	Herase(CCFM)
 	Wnb_mouv = 0

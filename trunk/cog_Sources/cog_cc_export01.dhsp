@@ -144,6 +144,7 @@ EndF
 ;*
 Procedure Cog_Traitement_Export_Ecr
 ; Exécution du programme
+1		jnltyp_Loc		2,0
 BeginP
 
 	cptJnl = 0
@@ -159,9 +160,12 @@ BeginP
 
 	Do While CogRs_JNL.ReaderNext(readJnl) > 0
 
+		jnltyp_Loc = Condition(CogRs_JNL.Cog_JnlCen=2, Condition(CCXQ.Choix(1)=2, 2, 1), Condition(CogRs_JNL.Cog_JnlPDV=2, 3,4))
+
+
 		cptJnl++
 		FicNom01 &= "|- " & COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL, \
-																	CogRs_JNL.Jnl, t_CX=Condition(CCXQ.Choix(1)=2, TRUE, FALSE))
+																	CogRs_JNL.Jnl, t_CX=Condition(CCXQ.Choix(1)=2, TRUE, FALSE), Condition(jnltyp_Loc))
 
 	WEnd	
 

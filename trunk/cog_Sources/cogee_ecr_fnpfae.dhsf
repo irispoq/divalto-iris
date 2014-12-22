@@ -1,9 +1,9 @@
-;>xwin4obj                              7.0       20141112114408      
+;>xwin4obj                              7.0       20141222101315      
 [masque]
- utilisateur="UGIE_YLF"
- date_modification="12/11/2014"
+ utilisateur="UGIE"
+ date_modification="22/12/2014"
  feuille_style="fstylewpf.dhfi"
- dernier_id=32
+ dernier_id=34
  dernier_id_page=4
 [defaut]
  [aide_page]
@@ -52,12 +52,12 @@
    texte="au"
  [obj_texte]
   [presentation]
-   position=36,8
-   taille=9,49
-   id=4
+   position=34,8
+   taille=9,53
+   id=33
    wstyle="STD"
   [texte]
-   texte="Intégration jusqu'au"
+   texte="Date de calcul"
  [champ]
   [presentation]
    position=18,114
@@ -84,18 +84,15 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=36,63
+   position=34,63
    taille=9,32
-   id=3
+   id=34
    colonnes_saisie=10
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=xq,datf,xq_cog
-   sequence=1
+   donnee=xq,datd,xq_cog
   [param_saisie]
    type_date=jj/mm/aaaa
-  [traitements]
-   microbol_click=8002
  [groupe_radio]
   [presentation]
    position=17,218
