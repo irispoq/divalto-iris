@@ -1,0 +1,2036 @@
+;>xwin4obj                              7.0       20111124140129      
+[masque]
+ libelle="Liste des biens"
+ utilisateur="MS"
+ date_modification="24/11/2011"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=19
+ dernier_id=110
+ dernier_id_page=4
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="ccfaid"
+ [touches]
+  f1=7000
+  f7=8000
+[enregistrements]
+ "ccfdd.dhsd",,i1,i1,1900,0
+ "ccfdd.dhsd",,xq,c3xq,4400,0
+ "ccfdd.dhsd",,ca,ca,1300,0
+[page]
+ numero=1
+ libelle="sélections"
+ fond="STD"
+ efface=complet
+ nb_lig=33
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ diva_avant="Page_Selections_1_Av"
+ diva_apres="Page_Selections_1_Ap"
+ ident_unique=1
+ [aide_page]
+  aide=785
+  fichier="CCIMAIDE"
+ [groupbox]
+  [presentation]
+   position=58,5
+   taille=102,363
+   id=3
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélections"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=168,5
+   taille=92,363
+   id=107
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Filtres"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=58,376
+   taille=102,99
+   id=106
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Tri"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=8,5
+   taille=42,235
+   id=2
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Exercice et arrêté"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=8,248
+   taille=42,227
+   id=109
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Tableaux à imprimer"
+   couleur_fond="GROUPE_FOND"
+ [cadre]
+  [presentation]
+   position=74,188
+   taille=81,1
+   id=110
+   wstyle="STD"
+  [param_cadre]
+   nature=vertical_d
+   wnom_couleurcadre="TRAIT_SIMPLE"
+   wnom_couleurfond="STD"
+ [obj_texte]
+  [presentation]
+   position=24,10
+   taille=9,114
+   id=6
+   wstyle="STD"
+  [texte]
+   texte="Etat des amortissements pour l'exercice du"
+ [obj_texte]
+  [presentation]
+   position=24,163
+   taille=9,29
+   cadrage=centre
+   id=8
+   wstyle="STD"
+  [texte]
+   texte="au"
+ [obj_texte]
+  [presentation]
+   position=36,10
+   taille=9,114
+   id=7
+   wstyle="STD"
+  [texte]
+   texte="Situation arrêtée au"
+ [obj_texte]
+  [presentation]
+   position=74,10
+   taille=9,68
+   id=9
+   wstyle="STD"
+  [texte]
+   texte="Bien"
+ [obj_texte]
+  [presentation]
+   position=74,117
+   taille=9,25
+   cadrage=centre
+   id=10
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=74,300
+   taille=9,23
+   noms="axe1"
+   cadrage=centre
+   id=11
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=86,10
+   taille=9,68
+   id=102
+   wstyle="STD"
+  [texte]
+   texte="Nature d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=86,117
+   taille=9,25
+   cadrage=centre
+   id=103
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=86,300
+   taille=9,23
+   noms="axe2"
+   cadrage=centre
+   id=14
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=98,10
+   taille=9,68
+   id=15
+   wstyle="STD"
+  [texte]
+   texte="Compte d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=98,117
+   taille=9,25
+   cadrage=centre
+   id=16
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=98,300
+   taille=9,23
+   noms="axe3"
+   cadrage=centre
+   id=17
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=110,10
+   taille=9,68
+   id=18
+   wstyle="STD"
+  [texte]
+   texte="Compte fournisseur"
+ [obj_texte]
+  [presentation]
+   position=110,117
+   taille=9,25
+   cadrage=centre
+   id=19
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=110,300
+   taille=9,23
+   noms="axe4"
+   cadrage=centre
+   id=20
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=122,10
+   taille=9,68
+   id=21
+   wstyle="STD"
+  [texte]
+   texte="Date d'acquisition"
+ [obj_texte]
+  [presentation]
+   position=122,117
+   taille=9,25
+   cadrage=centre
+   id=22
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=134,10
+   taille=9,68
+   id=23
+   wstyle="STD"
+  [texte]
+   texte="Date de mise en service"
+ [obj_texte]
+  [presentation]
+   position=134,117
+   taille=9,25
+   cadrage=centre
+   id=24
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=134,195
+   taille=9,66
+   noms="ifrs"
+   id=12
+   wstyle="STD_AFF"
+  [texte]
+   texte="Plan d'unités d'oeuvre"
+ [obj_texte]
+  [presentation]
+   position=134,300
+   taille=9,23
+   noms="ifrs"
+   cadrage=centre
+   id=13
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=146,10
+   taille=9,68
+   id=98
+   wstyle="STD"
+  [texte]
+   texte="Localisation"
+ [obj_texte]
+  [presentation]
+   position=146,117
+   taille=9,25
+   cadrage=centre
+   id=99
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=146,195
+   taille=9,66
+   noms="etbc3"
+   id=90
+   wstyle="STD_AFF"
+  [texte]
+   texte="Etablissements"
+ [champ]
+  [presentation]
+   position=24,126
+   taille=9,36
+   id=50
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,perddt,c3xq
+   sequence=1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=760
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_PerDDt_1_Ap"
+ [champ]
+  [presentation]
+   position=24,193
+   taille=9,36
+   id=51
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,perfdt,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=760
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_PerFDt_1_Ap"
+ [champ]
+  [presentation]
+   position=36,126
+   taille=9,36
+   id=52
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,arretedt,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=760
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_ArreteDt_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=24,253
+   taille=9,107
+   id=35
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,c3xq,1
+   minmaj=majuscules
+  [param_case]
+   texte="Amort. économiques"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=760
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+  [info_bulle]
+  texte="Tableau d'amortissements économiques"
+ [case_a_cocher]
+  [presentation]
+   position=36,253
+   taille=9,107
+   id=88
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,c3xq,7
+   minmaj=majuscules
+  [param_case]
+   texte="Amort. fiscaux"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=7000
+   f7=8000
+  [info_bulle]
+  texte="Tableau d'amortissements fiscaux"
+ [case_a_cocher]
+  [presentation]
+   position=24,365
+   taille=9,107
+   id=89
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,c3xq,8
+   minmaj=majuscules
+  [param_case]
+   texte="Amort. dérogatoires"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=7000
+   f7=8000
+  [info_bulle]
+  texte="Tableau d'amortissements dérogatoires"
+ [case_a_cocher]
+  [presentation]
+   position=36,365
+   taille=9,107
+   id=36
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,c3xq,2
+   minmaj=majuscules
+  [param_case]
+   texte="Cessions"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=760
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=74,80
+   taille=9,36
+   id=53
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,immo1,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+   table_associee=oui
+  [aide_page]
+   aide=753
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19701
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=74,144
+   taille=9,36
+   id=54
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,immo2,c3xq
+   sequence=2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+   table_associee=oui
+  [aide_page]
+   aide=753
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19701
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_ImmoF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=86,80
+   taille=9,36
+   id=104
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,natimmo1,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19714
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=86,144
+   taille=9,36
+   id=105
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,natimmo2,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19714
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_NatImmo2_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=98,80
+   taille=9,36
+   id=57
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,cpttab1,c3xq,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=755
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19030
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptD_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=98,144
+   taille=9,36
+   id=58
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,cpttab2,c3xq,1
+   sequence=3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=755
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19030
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=110,80
+   taille=9,36
+   id=59
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,cpttab1,c3xq,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=755
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19030
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptD_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=110,144
+   taille=9,36
+   id=60
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,cpttab2,c3xq,2
+   sequence=4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=755
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19030
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=122,80
+   taille=9,36
+   id=61
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,acqdt1,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=756
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=122,144
+   taille=9,36
+   id=62
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,acqdt2,c3xq
+   sequence=5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=756
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_AcqDtF_1_Ap"
+ [champ]
+  [presentation]
+   position=134,80
+   taille=9,36
+   id=63
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,svcdt1,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=756
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=134,144
+   taille=9,36
+   id=64
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,svcdt2,c3xq
+   sequence=6
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=756
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_SvcDtF_1_Ap"
+ [champ]
+  [presentation]
+   position=146,80
+   taille=9,36
+   id=100
+   colonnes_saisie=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,local1,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=788
+   fichier="ccimaide"
+  [touches]
+   f1=7000
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=146,144
+   taille=9,36
+   id=101
+   colonnes_saisie=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,local2,c3xq
+   sequence=11
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=788
+   fichier="ccimaide"
+  [touches]
+   f1=7000
+   f7=8000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=74,263
+   taille=9,36
+   noms="axe1"
+   id=65
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,axetab1,c3xq,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=757
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19011
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=74,325
+   taille=9,36
+   noms="axe1"
+   id=67
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,axetab2,c3xq,1
+   sequence=7
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=757
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19011
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_AxeF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=86,263
+   taille=9,36
+   noms="axe2"
+   id=69
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,axetab1,c3xq,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=757
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19012
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=86,325
+   taille=9,36
+   noms="axe2"
+   id=70
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,axetab2,c3xq,2
+   sequence=8
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=757
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19012
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_AxeF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=98,263
+   taille=9,36
+   noms="axe3"
+   id=72
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,axetab1,c3xq,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=757
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19013
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=98,325
+   taille=9,36
+   noms="axe3"
+   id=73
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,axetab2,c3xq,3
+   sequence=9
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=757
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19013
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_AxeF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=110,263
+   taille=9,36
+   noms="axe4"
+   id=75
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,axetab1,c3xq,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=757
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19014
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=110,325
+   taille=9,36
+   noms="axe4"
+   id=76
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,axetab2,c3xq,4
+   sequence=10
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=757
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19014
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_AxeF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=134,263
+   taille=9,36
+   noms="ifrs"
+   id=55
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,uocode1,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=754
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19704
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=134,325
+   taille=9,36
+   noms="ifrs"
+   id=56
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,uocode2,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=754
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   f8=19704
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_UoCodeF_1_Ap"
+ [champ]
+  [presentation]
+   position=146,263
+   taille=9,98
+   noms="ConfModifEtbC3;etbc3"
+   id=91
+   colonnes_saisie=100
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,filtreetb,c3xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=770
+   fichier="CCIMAIDE"
+  [touches]
+   f1=129
+   f7=8000
+   f8=19004
+   ctrl_e=10101
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_FiltreEtb_1_Av"
+   diva_apres="Champ_FiltreEtb_1_Ap"
+  [boutons]
+   "zoom"
+ [groupe_radio]
+  [presentation]
+   position=184,10
+   taille=42,82
+   id=31
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,c3xq,4
+   minmaj=majuscules
+  [param_groupe]
+   titre="Positions"
+  [radio_bouton]
+   [presentation]
+    position=193,15
+    taille=9,74
+    id=32
+    wstyle="STD"
+   [param_radio]
+    texte="Non amortis"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=203,15
+    taille=9,74
+    id=33
+    wstyle="STD"
+   [param_radio]
+    texte="Amortis"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=213,15
+    taille=9,74
+    id=34
+    wstyle="STD"
+   [param_radio]
+    texte="Tous"
+    cadrage=droite
+    valeur="3"
+  [aide_page]
+   aide=749
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=184,100
+   taille=72,82
+   id=37
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,c3xq,5
+   minmaj=majuscules
+  [param_groupe]
+   titre="Méthode économique"
+  [radio_bouton]
+   [presentation]
+    position=193,105
+    taille=9,74
+    id=38
+    wstyle="STD"
+   [param_radio]
+    texte="Linéaire"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=203,105
+    taille=9,74
+    id=39
+    wstyle="STD"
+   [param_radio]
+    texte="Dégressif"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=213,105
+    taille=9,74
+    id=40
+    wstyle="STD"
+   [param_radio]
+    texte="Manuel"
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=223,105
+    taille=9,74
+    id=41
+    wstyle="STD"
+   [param_radio]
+    texte="Sans amortissement"
+    cadrage=droite
+    valeur="4"
+  [radio_bouton]
+   [presentation]
+    position=233,105
+    taille=9,74
+    noms="ifrs"
+    id=42
+    wstyle="STD"
+   [param_radio]
+    texte="Plan d'unités d'oeuvre"
+    cadrage=droite
+    valeur="5"
+  [radio_bouton]
+   [presentation]
+    position=243,105
+    taille=9,74
+    id=43
+    wstyle="STD"
+   [param_radio]
+    texte="Tous"
+    cadrage=droite
+    valeur="6"
+  [aide_page]
+   aide=751
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=184,190
+   taille=62,82
+   id=44
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,c3xq,6
+   minmaj=majuscules
+  [param_groupe]
+   titre="Méthode fiscale"
+  [radio_bouton]
+   [presentation]
+    position=193,195
+    taille=9,74
+    id=45
+    wstyle="STD"
+   [param_radio]
+    texte="Linéaire"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=203,195
+    taille=9,74
+    id=46
+    wstyle="STD"
+   [param_radio]
+    texte="Dégressif"
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=213,195
+    taille=9,74
+    id=47
+    wstyle="STD"
+   [param_radio]
+    texte="Manuel"
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=223,195
+    taille=9,74
+    id=48
+    wstyle="STD"
+   [param_radio]
+    texte="Sans amortissement"
+    cadrage=droite
+    valeur="4"
+  [radio_bouton]
+   [presentation]
+    position=233,195
+    taille=9,74
+    id=49
+    wstyle="STD"
+   [param_radio]
+    texte="Tous"
+    cadrage=droite
+    valeur="6"
+  [aide_page]
+   aide=751
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=74,381
+   taille=62,88
+   id=25
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,c3xq,3
+   minmaj=majuscules
+  [param_groupe]
+   titre="Critère"
+  [radio_bouton]
+   [presentation]
+    position=83,386
+    taille=9,81
+    id=26
+    wstyle="STD"
+   [param_radio]
+    texte="Numéro de bien"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=93,386
+    taille=9,81
+    noms="axe1;raxe1"
+    id=27
+    wstyle="STD"
+   [param_radio]
+    cadrage=droite
+    valeur="2"
+  [radio_bouton]
+   [presentation]
+    position=103,386
+    taille=9,81
+    noms="axe2;raxe2"
+    id=28
+    wstyle="STD"
+   [param_radio]
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=113,386
+    taille=9,81
+    noms="axe3;raxe3"
+    id=29
+    wstyle="STD"
+   [param_radio]
+    cadrage=droite
+    valeur="4"
+  [radio_bouton]
+   [presentation]
+    position=123,386
+    taille=9,81
+    noms="axe4;raxe4"
+    id=30
+    wstyle="STD"
+   [param_radio]
+    cadrage=droite
+    valeur="5"
+  [aide_page]
+   aide=752
+   fichier="CCIMAIDE"
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=74,195
+   taille=9,66
+   noms="axe1"
+   id=66
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+ [champ]
+  [presentation]
+   position=86,195
+   taille=9,66
+   noms="axe2"
+   id=68
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+ [champ]
+  [presentation]
+   position=98,195
+   taille=9,66
+   noms="axe3"
+   id=71
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+ [champ]
+  [presentation]
+   position=110,195
+   taille=9,66
+   noms="axe4"
+   id=74
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,4
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=7000
+   f7=8000
+   shift_f7=10101
+[page]
+ numero=2
+ libelle="fenêtre de trace"
+ fond="STD"
+ type=fenetre
+ titre="Impression en cours"
+ efface=partiel
+ nb_lig=7
+ nb_col=60
+ offset_lig=8
+ offset_col=7
+ page_fond=3
+ position_fond=2
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=9,5
+   taille=9,33
+   id=79
+   wstyle="STD"
+  [texte]
+   texte="Sélection"
+ [obj_texte]
+  [presentation]
+   position=27,5
+   taille=9,33
+   id=77
+   wstyle="STD"
+  [texte]
+   texte="Traitement"
+ [bouton_graphique]
+  [presentation]
+   position=44,221
+   taille=14,14
+   id=81
+  [param_bouton]
+   wnom="ABANDON"
+   wtexte="Abandonner\tEchap"
+   wid_ressource="ABANDON"
+   wlocal=1
+   wtrait_chaine="#escape"
+  [info_bulle]
+  texte="Abandonner <Echap>"
+[page]
+ numero=3
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=1
+ nb_col=49
+ offset_lig=2
+ offset_col=11
+ ident_unique=3
+ [champ]
+  [presentation]
+   position=0,0
+   taille=9,30
+   id=82
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=i1,immo,i1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=0,52
+   taille=9,143
+   id=83
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=i1,lib,i1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,31
+   taille=9,20
+   id=84
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=i1,immocomp,i1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=7000
+   f7=8000
+[page]
+ numero=4
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=1
+ nb_col=49
+ offset_lig=4
+ offset_col=11
+ ident_unique=4
+ [champ]
+  [presentation]
+   position=0,0
+   taille=9,30
+   id=85
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=i1,immo,i1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=0,52
+   taille=9,143
+   id=86
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=i1,lib,i1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,31
+   taille=9,20
+   id=87
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=i1,immocomp,i1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=7000
+   f7=8000
+[ressources]
+ [menu]
+  ident="MAIN"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Fichier"
+    wid_ressource="FICHIER"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="OK"
+    wtexte="_Exécution\tEntrée"
+    wid_ressource="EXECUTION"
+    wtrait_chaine="#return"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP_1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="ABANDON"
+    wtexte="_Quitter\tEchap"
+    wid_ressource="QUITTER"
+    wtrait_chaine="#escape"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Outils"
+    wid_ressource="OUTILS"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="ZOOM"
+    wtexte="Zoom\tF8"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="ZOOMG"
+    wtexte="_Zoom généralisé\tF7"
+    wid_ressource="ZOOMG__1"
+    wtrait_chaine="#f7"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="SEP__1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="SAVEPARAM"
+    wtexte="_Paramètres"
+    wid_ressource="ECRIRE_PARAM"
+    wetype_trait=arret
+    warret=5996
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Aide"
+    wid_ressource="AIDE"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="AIDE"
+    wtexte="Aide _contextuelle\tShift F1"
+    wid_ressource="AIDEC"
+    wtrait_chaine="#shift_f1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Aide sur l'impression du tableau d'amortissements"
+    wid_ressource="AIDEI"
+    wetype_trait=arret
+    warret=7998
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Sommaire"
+    wid_ressource="AIDES"
+    wetype_trait=arret
+    warret=7999
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP_2"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="A _propos\tF1"
+    wid_ressource="APROPOS"
+    wtrait_chaine="#f1"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="MAIN"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   [param_bouton]
+    wnom="SAVEPARAM"
+    wid_ressource="ECRIRE_PARAM"
+    wetype_trait=arret
+    warret=5996
+   [info_bulle]
+   texte="Générer les paramètres"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Générique"
+    wid_ressource="MAIN2"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__1"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+SetModuleInfo('$Id: ccee746_base.dhsf 7192 2014-12-09 10:50:53Z m.renaut $')
+;>xdiva
+;*
+;*		impression des tableaux																												ccte746.dhsp
+;*
+
+;*		log	 version	  n°modif		date		modifications
+;*
+;*		pb			4.1						05.1999	Version initiale en Diva
+;*		hc			5.1						06.2001
+;*		hc			5.2a		2334			06.2002
+;*		jlsi		5.6		3229			11.2005	modifications IFRS
+
+
+;*
+;*		déclarations
+;*
+
+
+include	"cctc000.dhsp"
+
+module	cctm700.dhop										; pour calcul des dates
+module	ccpm700.dhop										; pour calculs d'immo
+
+public		record	CCFDD.dhsd		CD						; enregistrement "option immo" du dossier
+Public Record "ccfdd.dhsd" i1 i1
+;3911		Public Record "ccfdd.dhsd" xq c3xq
+Public Record "ccfdd.dhsd" ca ca
+
+
+;*
+;*		traitements sur les pages
+;*
+
+
+;*
+public procedure Page_Selections_1_Av
+
+; avant saisie des critères de sélection
+
+beginp	; Page_Selections_1_Av
+endp		; Page_Selections_1_Av
+
+
+;*
+public procedure Page_Selections_1_Ap
+
+; après saisie des critères de sélection
+
+1				i						3,0
+
+beginp	; Page_Selections_1_Ap
+
+	if C3XQ.PERDDT < CD.EXODDT
+		Mes_Alert(7108, sdate(CD.EXODDT))
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 1
+		preturn
+	endif
+
+	if C3XQ.PERFDT < C3XQ.PERDDT
+		Mes_Alert(3004)
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 1
+		preturn
+	endif
+
+	if C3XQ.ARRETEDT > C3XQ.PERFDT or C3XQ.ARRETEDT < C3XQ.PERDDT
+		Mes_Alert(7109)
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 1
+		preturn
+	endif
+
+	if C3XQ.IMMO2 < C3XQ.IMMO1
+		Mes_Alert(3031)
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 2
+		preturn
+	endif
+
+	if C3XQ.UOCODE2 < C3XQ.UOCODE1
+		Mes_Alert(3032)
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 2
+		preturn
+	endif
+
+	if C3XQ.CPTTAB2(1) < C3XQ.CPTTAB1(1)
+		Mes_Alert(3006)
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 3
+		preturn
+	endif
+
+	if C3XQ.CPTTAB2(2) < C3XQ.CPTTAB1(2)
+		Mes_Alert(3006)
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 4
+		preturn
+	endif
+
+	if C3XQ.ACQDT2 < C3XQ.ACQDT1
+		Mes_Alert(3004)
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 5
+		preturn
+	endif
+
+	if C3XQ.SVCDT2 < C3XQ.SVCDT1
+		Mes_Alert(3004)
+		HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+		HARMONY.CPLRETOUR	= 6
+		preturn
+	endif
+
+	if C3XQ.Local2 < C3XQ.Local1
+		Mes_Alert(3038)
+		Harmony.Retour		= XMENEXT_POINT_SEQUENCE
+		Harmony.CplRetour	= 11
+		preturn
+	endif
+
+	for i = 1 to 4
+		if C3XQ.AXETAB2(i) < C3XQ.AXETAB1(i)
+			Mes_Alert(3002)
+			HARMONY.RETOUR		= XMENEXT_POINT_SEQUENCE
+			HARMONY.CPLRETOUR	= i + 6
+			preturn
+		endif
+	next
+
+endp		; Page_Selections_1_Ap
+
+
+;*
+;*		traitements sur les données
+;*
+
+
+;*
+public procedure Champ_PerDDt_1_Ap
+
+; après saisie début exercice
+
+beginp	; Champ_PerDDt_1_Ap
+
+	C3XQ.PERDDT = Debut_Exercice(C3XQ.PERDDT)
+
+	if C3XQ.PERDDT < CD.EXODDT
+		Mes_Alert(7108, sdate(CD.EXODDT))
+		HARMONY.RETOUR = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+	if not HARMONY.DATAMODIF	|	preturn	|	endif
+
+	C3XQ.PERFDT = Fin_Exercice(C3XQ.PERDDT)
+	C3XQ.ARRETEDT = C3XQ.PERFDT
+
+endp		; Champ_PerDDt_1_Ap
+
+
+;*
+public procedure Champ_PerFDt_1_Ap
+
+; après saisie fin exercice
+
+beginp	; Champ_PerFDt_1_Ap
+
+	if C3XQ.PERFDT = ' '
+		C3XQ.PERFDT = Fin_Exercice(C3XQ.PERDDT)
+	endif
+
+	C3XQ.PERFDT = hdate(C3XQ.PERFDT, 'd')
+	Controle_Fourchette(C3XQ.PERDDT, C3XQ.PERFDT, 3, 3004)
+
+	C3XQ.ARRETEDT = C3XQ.PERFDT
+
+endp		; Champ_PerFDt_1_Ap
+
+
+;*
+public procedure Champ_ArreteDt_1_Ap
+
+; après saisie date d'arrêté
+
+beginp	; Champ_ArreteDt_1_Ap
+
+	if C3XQ.ARRETEDT = ' '
+		C3XQ.ARRETEDT = Fin_Exercice(C3XQ.PERDDT)
+	endif
+
+	C3XQ.ARRETEDT = hdate(C3XQ.ARRETEDT, 'd')
+
+	if C3XQ.ARRETEDT > C3XQ.PERFDT or C3XQ.ARRETEDT < C3XQ.PERDDT
+		Mes_Alert(7109)
+		HARMONY.RETOUR = XmeNext_Traitement_Avant
+		preturn
+	endif
+
+endp		; Champ_ArreteDt_1_Ap
+
+
+;*
+public procedure Champ_ImmoF_1_Ap
+
+; après saisie numéro de bien "fin"
+
+beginp	; Champ_ImmoF_1_Ap
+
+	Controle_Fourchette(C3XQ.IMMO1, C3XQ.IMMO2, err = 3031)
+
+endp		; Champ_ImmoF_1_Ap
+
+;*
+public procedure Champ_UoCodeF_1_Ap
+
+; après saisie code plan UO
+
+beginp	; Champ_UoCodeF_1_Ap
+
+	Controle_Fourchette(C3XQ.UOCODE1, C3XQ.UOCODE2, err = 3032)
+
+endp		; Champ_UoCodeF_1_Ap
+
+
+;*
+public procedure Champ_CptD_1_Ap
+
+; après saisie d'un compte "début" d'une fourchette
+
+beginp	; Champ_CptD_1_Ap
+
+	Controle_Compte(C3XQ.CPTTAB1(HARMONY.DATAIND1), nonvide = false, existence = false, etablissement = False)
+
+endp		; Champ_CptD_1_Ap
+
+
+;*
+public procedure Champ_CptF_1_Ap
+
+; après saisie d'un compte "fin" d'une fourchette
+
+beginp	; Champ_CptF_1_Ap
+
+	if C3XQ.CPTTAB2(HARMONY.DATAIND1) = ' '
+		C3XQ.CPTTAB2(HARMONY.DATAIND1) = C3XQ.CPTTAB1(HARMONY.DATAIND1)
+	endif
+
+	if C3XQ.CPTTAB2(HARMONY.DATAIND1) = ' '
+		C3XQ.CPTTAB2(HARMONY.DATAIND1) = "zzzzzzzz"
+	endif
+
+	Controle_Compte(C3XQ.CPTTAB2(HARMONY.DATAIND1), completion = 'z', existence = false, etablissement = False)
+	Controle_Fourchette(C3XQ.CPTTAB1(HARMONY.DATAIND1), C3XQ.CPTTAB2(HARMONY.DATAIND1), err = 3006)
+
+endp		; Champ_CptF_1_Ap
+
+
+;*
+public procedure Champ_AcqDtF_1_Ap
+
+; après saisie date d'acquisition "fin"
+
+beginp	; Champ_AcqDtF_1_Ap
+
+	Controle_Fourchette(C3XQ.ACQDT1, C3XQ.ACQDT2, 3, 3004)
+
+endp		; Champ_AcqDtF_1_Ap
+
+
+;*
+public procedure Champ_SvcDtF_1_Ap
+
+; après saisie date de mise en service "fin"
+
+beginp	; Champ_SvcDtF_1_Ap
+
+	Controle_Fourchette(C3XQ.SVCDT1, C3XQ.SVCDT2, 3, 3004)
+
+endp		; Champ_SvcDtF_1_Ap
+
+
+;*
+public procedure Champ_AxeF_1_Ap
+
+; après saisie code axe "fin"
+
+beginp	; Champ_AxeF_1_Ap
+
+	Controle_Fourchette(C3XQ.AXETAB1(HARMONY.DATAIND1), C3XQ.AXETAB2(HARMONY.DATAIND1), err = 3002)
+
+endp		; Champ_AxeF_1_Ap
+
+
+
+;*
+Public Procedure Champ_FiltreEtb_1_Ap
+; Après saisie du filtre établissement
+
+Beginp	; Champ_FiltreEtb_1_Ap
+
+	if	Harmony.Key	= K_CTRL_S
+	 	Receptionner_Selection_ZoomEtablissement(C3XQ.FiltreEtb)
+		Harmony.Retour = XmeNext_Traitement_Avant
+	else
+		if Filtre_Verifier_Syntaxe(C3XQ.FiltreEtb) <> 0
+			Mes_Alert(3033)
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endif
+	endif
+
+Endp		; Champ_FiltreEtb_1_Ap
+
+
+;*
+Public Procedure Champ_FiltreEtb_1_Av
+
+; Avant saisie du filtre établissement
+
+Beginp	; Champ_FiltreEtb_1_Av
+
+	C3XZ.Pong = true				; demande de reception d'une selection	sur zoom établissements
+
+Endp		; Champ_FiltreEtb_1_Av
+
+
+;*
+Public Procedure Champ_NatImmo2_1_Ap
+
+; après saisie nature d'immobilisation
+
+Beginp	; Champ_NatImmo2_1_Ap
+
+	Controle_Fourchette(C3XQ.NatImmo1, C3XQ.NatImmo2, err = 3039)
+
+Endp		; Champ_NatImmo2_1_Ap
+[/diva]
+[diva_base]
+[/diva]

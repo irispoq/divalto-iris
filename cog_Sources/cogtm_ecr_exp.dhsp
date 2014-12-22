@@ -367,39 +367,55 @@ BeginP
 	s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(PiDt)))
 	s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(PiDt)))
 	s_EcritureAnael.p78_EcrNo		= c8_loc.EcrNo
-	if OrigineAppel = 2
-		s_EcritureAnael.p78_EcrNo		= " "
-	endif
+
 	s_EcritureAnael.p86_Jnl		= c8_loc.Jnl
-	if OrigineAppel = 2
-		s_EcritureAnael.p66_EcrAn		= val(year(today))
-		s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(today)))
-		s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(today)))
-		s_EcritureAnael.p86_Jnl		= cx_loc.Jnl
-	endif
-	if OrigineAppel = 3
-		s_EcritureAnael.p45_EcrAn2		= val(year(c8_loc.EcrDt))
-		s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(c8_loc.EcrDt)))
-		s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(c8_loc.EcrDt)))
-		s_EcritureAnael.p66_EcrAn		= val(year(c8_loc.EcrDt))
-		s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(c8_loc.EcrDt)))
-		s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(c8_loc.EcrDt)))
-	endif
+
+	s_EcritureAnael.p97_Cst		= "DI"
+	s_EcritureAnael.p99_Libelle		= Modify("Facture","F.",c8_loc.Lib)
+
 	; JDT DEEBUT 14/09/2011
 	Switch OrigineAppel
 		Case 1
 			t_PiNo = c8_loc.EcrNo
 		Case 2
+			;
+			s_EcritureAnael.p78_EcrNo		= " "
+
+			;
+			s_EcritureAnael.p66_EcrAn		= val(year(today))
+			s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(today)))
+			s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(today)))
+			s_EcritureAnael.p86_Jnl		= cx_loc.Jnl
+
+			;
 			anneea	= year(today)
 			moisa		= month(today)
 			pinoa		= fstring("0",pinoa)
 			t_PiNo	= val(pinoa)
+
+			;
+			s_EcritureAnael.p99_Libelle		= "Ecr ana Centrales " & moisaa & right(val(year(today)),2)
+
 		Case 3
 			t_PiNo = c8_loc.Cog_RedNo
+
+			;
+			s_EcritureAnael.p45_EcrAn2		= val(year(c8_loc.EcrDt))
+			s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(c8_loc.EcrDt)))
+			s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(c8_loc.EcrDt)))
+			s_EcritureAnael.p66_EcrAn		= val(year(c8_loc.EcrDt))
+			s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(c8_loc.EcrDt)))
+			s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(c8_loc.EcrDt)))
+
+			;
+			s_EcritureAnael.p99_Libelle		= "Redd.N " & right(c8_loc.Cog_RedNo) & " de " & Right("00" & fstring("0",val(month(c8_loc.EcrDt))),2) & "/" & right(val(year(c8_loc.EcrDt)),2)
+
 		Case 4
 			t_PiNo = C8.COG_CHRONO
+
 		Default
 			t_PiNo = c8_loc.Piece
+
 	EndSwitch
 	If t_PiNo = 0
 		s_EcritureAnael.p89_PiNo = c8_loc.Piece
@@ -407,13 +423,7 @@ BeginP
 		s_EcritureAnael.p89_PiNo = t_PiNo
 	EndIf
 
-	s_EcritureAnael.p97_Cst		= "DI"
-	s_EcritureAnael.p99_Libelle		= Modify("Facture","F.",c8_loc.Lib)
-	if OrigineAppel = 2
-		s_EcritureAnael.p99_Libelle		= "Ecr ana Centrales " & moisaa & right(val(year(today)),2)
-	elsif OrigineAppel = 3
-		s_EcritureAnael.p99_Libelle		= "Redd.N " & right(c8_loc.Cog_RedNo) & " de " & Right("00" & fstring("0",val(month(c8_loc.EcrDt))),2) & "/" & right(val(year(c8_loc.EcrDt)),2)
-	endif
+	
 	s_EcritureAnael.p124_TtcMt		= ttcmt
 	s_EcritureAnael.p124_TtcMt		= fstring("R",s_EcritureAnael.p124_TtcMt)
 	if OrigineAppel = 3

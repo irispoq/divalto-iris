@@ -152,7 +152,7 @@ BeginF
 EndF
 
 ;*	01
-Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX)
+Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX, t_OA)
 ;
 1	t_CheminFichier	255
 1	t_NomFichier		255
@@ -165,6 +165,7 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 1	t_SeparateurL		8						; Séparateur ligne
 1	t_Jnl					>CCFDD.DHSD	JNL		=		''
 1	t_CX					1,0						= FALSE
+1	t_OA					2,0						= 0			; forcer origine appel (voir fonction générer ligne)
 
 1	t_Ce1_01				>CCFDD.DHSD	Ce1
 1	t_Key_01				255
@@ -394,7 +395,7 @@ BeginF
 			EndIf
 
 			; Ecriture dans le fichier
-			Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false), CogRs_C8.C8,"",4)
+			Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false), CogRs_C8.C8,"", Condition(t_OA > 0, t_OA, 4))
 			x_st_02 = FWritSt(TDF_01, Left(t_ligne))
 	
 		 	;on prépare le cumul des ventilations analytiques
@@ -508,7 +509,9 @@ BeginF
 			CX_DEV_01.Ecrno	= Vtl.EcrNo
 			CX_DEV_01.Ecrlg	= Vtl.EcrLg
 			
-			Cog_GenererLigne(t_ligne, t_SeparateurC, t_SeparateurL,true,"",CX_DEV_01,2)
+			Cog_GenererLigne(t_ligne, t_SeparateurC, t_SeparateurL,true,"",CX_DEV_01, Condition(t_OA > 0, t_OA, 2))
+			; 2 par défaut pour t_oA car à l'origine fonction prévue pour les ecr centrales
+
 			if val(mid(t_ligne,124,16))	<> 0
 				x_st_02 = FWritSt(TDF_01, Left(t_ligne))
 			endif
