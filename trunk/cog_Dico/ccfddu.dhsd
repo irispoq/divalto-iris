@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20021014173940,hc  ,20141222165007,UGIE                
+Version=5,20021014173940,hc  ,20141223114047,UGIE                
 Nom=ccfdd.dhsd,ccfdd.dhsd,1
 [CHAMP]
 Version=1,20141007161805,UGIE                ,20141007161810,UGIE                
@@ -15,6 +15,13 @@ Nom=Cog_AnaelTranscod,Transcodification Axe 2 pour Anael,1
 Gel=1
 Nature=1,0
 NomOdbc=Cog_AnaTranscod
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20141223114039,UGIE                ,20141223114045,UGIE                
+Nom=Cog_AnaJnl,Journal analytique Anael,1
+Gel=1
+Nature=3
+NomOdbc=Cog_AnaJnl
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110606150452,SYSTEMU_VR          ,20110606150456,SYSTEMU_VR          
@@ -316,6 +323,7 @@ Nom=Cog_FaeJnl,52,0,0,N,1
 Nom=Cog_FaeCpt,55,0,0,N,1
 Nom=Cog_FaeTvaCpt,63,0,0,N,1
 Nom=Cog_FaeRgpFlag,71,0,0,N,1
+Nom=Cog_AnaJnl,72,0,0,N,1
 [/CHAMPL]
 nom=UCd
 [CHAMPL]
@@ -364,9 +372,6 @@ DateM=2845ACCB54EECD01
 Version=1,1996 2160000,hc  ,20100708171529,VJ                  
 Nom=c4,Journal,1
 DateM=3FF25B66B01ECB01
-[PROPLOC]
-Nom=Cog_AnaelTranscod
-[/PROPLOC]
 [TABLEU]
 Version=1,1996 2160000,hc  ,20100708174003,VJ                  
 Nom=c5,Axe,1
@@ -387,6 +392,9 @@ DateM=9572D6CC75CCCD01
 Version=1,1996 2160000,hc  ,20121010143952,MS                  
 Nom=ca,Dossier - paramètres généraux,1
 DateM=9DBBE92CFAEDCF01
+[PROPLOC]
+Nom=Cog_AnaJnl
+[/PROPLOC]
 [TABLEU]
 Version=1,1997 1170000,hc  ,20100708142510,VJ                  
 Nom=cd,Dossier - paramètres du module immobilisations,1
