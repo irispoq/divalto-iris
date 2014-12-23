@@ -1,5 +1,5 @@
 
-SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 7009 2014-11-12 13:04:46Z admin $')
+SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 7292 2014-12-23 14:25:53Z admin $')
 ;*
 ;* cog_ccpmimpimmo					Procedure de traitement des champs importés (avant ou aprés saisie)
 ;*
@@ -255,7 +255,7 @@ endp
 ;*
 public procedure Champ_Cr_1_Ap
 beginp
-	if I1.CR <= 0
+	if I1.CR < 0
 		pinglocal('RetErreur',"E;Le coût de revient doit être positif")
 		preturn
 	endif
