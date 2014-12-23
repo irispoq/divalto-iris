@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 6948 2014-11-04 13:56:11Z m.renaut $')
+SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 7292 2014-12-23 14:25:53Z admin $')
 
 ;*
 ;* Programme qui permet d'intégrer des immos dans Divalto Compta
@@ -183,10 +183,10 @@ beginf
 	;nombre de ligne à traiter	sur le libellé
 	ni = 5
 	repeat
-		Office_Read(++ni, search("CR", tTabCorColZone()),aVal)
-		if not isNumer(left(aVal))
-			aVal = ''							;cas de cellules avec des caractères invisibles (suppression)
-		endif
+		Office_Read(++ni, search("LIB", tTabCorColZone()),aVal)
+		;if not isNumer(left(aVal)) ;AND left(aVal) <> ' '
+		;	aVal = ''							;cas de cellules avec des caractères invisibles (suppression)
+		;endif
 	until aVal = ''
 	nCLigFin = ni-1
 	if nCLigFin < 6
