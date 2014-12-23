@@ -124,6 +124,7 @@ BeginF
 	XQ.PiNoF = "99999999"
 	Init CCXQ.Jnl2= 'z' 
 	CCXQ.Choix(1) = 2				; exporter les CX
+	CCXQ.Choix(2) = 2				; applique le journal analytique Anael (paramètre du dossier CPT)
 	XMeSetAttribut("cog_chrono", AN_VISIBILITE, AV_GRISE)
 	; Séparateur de champs
 	XQ.Choix(2) = 1
@@ -165,7 +166,8 @@ BeginP
 
 		cptJnl++
 		FicNom01 &= "|- " & COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL, \
-																	CogRs_JNL.Jnl, t_CX=Condition(CCXQ.Choix(1)=2, TRUE, FALSE), Condition(jnltyp_Loc))
+																	CogRs_JNL.Jnl, t_CX=Condition(CCXQ.Choix(1)=2, TRUE, FALSE), jnltyp_Loc, \
+																	t_AnaJnl=Condition(CCXQ.Choix(2)=2, TRUE, FALSE))
 
 	WEnd	
 

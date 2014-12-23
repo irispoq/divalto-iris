@@ -29,6 +29,8 @@ Public HFile	CCFDD.DHSD	CCFVTL		CCFVTL_DEV_01			; Imputations et ventilations
 ;
 Public RecordSQL	"COG_CCRSECR.DHOQ"	CogRs_C8					; Non utilisation du STD car BIND
 Public RecordSQL	"CCRSVTL.DHOQ"	 		VTLAXE			CogRs_CX
+Public RecordSQL	"CCRSJCA.DHOQ"			Journal			CogRs_JNL
+Public RecordSQL	"GTRSPPPROJ.DHOQ"		Affaire			CogRs_PrjAp
 
 ; Enregistrements
 Public Record	GTFDD.DHSD	SOC		SOC_DEV01					; Société
@@ -39,7 +41,7 @@ Public Record	GTFDD.DHSD	ENT		ENT_DEV_01					; En tête de pièce
 Public Record	GTFDD.DHSD	CLI		CLI_DEV_01					; Client
 Public Record	GTFDD.DHSD	FOU		FOU_DEV_01					; Fournisseur
 Public Record	CCFDD.DHSD	C3			C3_DEV_01					; Plan comptable
-Public Record	CCFDD.DHSD	C4			C4_DEV_01					; Journaux
+;Public Record	CCFDD.DHSD	C4			C4_DEV_01					; Journaux
 ;Public Record	CCFDD.DHSD	C8			C8_DEV_01					; Ecritures
 Public Record	CCFDD.DHSD	CX			CX_DEV_01					; Ventilation sur les axes
 Public Record	CCFDD.DHSD	CP			CP_DEV_01					; Ventilation sur les pièces et les échéances
@@ -141,7 +143,7 @@ Function int Cog_FiltresOK
 BeginF
 
 	; 
-	If c4_dev_01.Cog_ExportAnael <> 2	
+	If CogRs_JNL.Cog_ExportAnael <> 2	
  		FReturn(FALSE)
 	EndIf
 
@@ -152,7 +154,7 @@ BeginF
 EndF
 
 ;*	01
-Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX, t_OA)
+Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX, t_OA, t_AnaJnl)
 ;
 1	t_CheminFichier	255
 1	t_NomFichier		255
@@ -166,6 +168,7 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 1	t_Jnl					>CCFDD.DHSD	JNL		=		''
 1	t_CX					1,0						= FALSE
 1	t_OA					2,0						= 0			; forcer origine appel (voir fonction générer ligne)
+1	t_AnaJnl				1,0						= FALSE
 
 1	t_Ce1_01				>CCFDD.DHSD	Ce1
 1	t_Key_01				255
@@ -322,12 +325,19 @@ BeginF
 		endif
 
 		; Journaux
-		t_Ce1_02 = "4" 
-		if hseek(ccfjca_dev_01,C4_DEV_01,"D" & CogRs_C8.Dos & t_Ce1_02 & CogRs_C8.Jnl)
-			C4_DEV_01	= ""
-		endif
+		;t_Ce1_02 = "4" 
+		;if hseek(ccfjca_dev_01,C4_DEV_01,"D" & CogRs_C8.Dos & t_Ce1_02 & CogRs_C8.Jnl)
+		;	C4_DEV_01	= ""
+		;endif
+		If CogRs_JNL.Jnl <> CogRs_C8.Jnl OR CogRs_JNL.Dos <> CogRs_C8.Dos
+			CogRs_JNL.Init()
+			CogRs_JNL.Where.Zoom_PK(CogRs_C8.Jnl)
+			CogRs_JNL.Select()
+		EndIf
+
+
 		; Recherche du type de tiers
-		Switch C4_DEV_01.JnlTyp
+		Switch CogRs_JNL.JnlTyp
 			Case 1 ; Achat
 				t_TiCod = "F"
 			Case 2 ; Vente
@@ -421,9 +431,19 @@ BeginF
 				Vtl_rec.Axe2	= CogRs_CX.Axe(2)
 				Vtl_rec.Axe3	= CogRs_CX.Axe(3)
 				Vtl_rec.Axe4	= CogRs_CX.Axe(4)
-				Vtl_rec.Jnl		= CogRs_CX.Jnl
+				Vtl_rec.Jnl		= Condition(t_AnaJnl AND CA.Cog_AnaJnl <> ' ' , CA.Cog_AnaJnl, CogRs_CX.Jnl)
 				Vtl_rec.Ecrno	= t_EcrNo
 				Vtl_rec.Ecrlg	= t_lilg
+
+				; Transcodification axe anael
+				IF CogRs_JNL.Cog_AnaelTranscod = 2
+					CogRs_PrjAp.Init()
+					CogRs_PrjAp.Where.PK(CogRs_CX.Axe(2))
+					If CogRs_PrjAp.Select()
+					 	Vtl_Rec.Axe2 = CogRs_PrjAp.Cog_AxeAnael
+					EndIF
+
+				EndIf
 				
 				if listseek(list_EcrVtl,Vtl_rec,Vtl)
 					
@@ -453,11 +473,12 @@ BeginF
 
 				;mise à jour du cumul sur les axes 999999
  				Vtl_rec			= ""
+				
 				Vtl_rec.Axe1	= "999999"
 				Vtl_rec.Axe2	= "999999"
 				Vtl_rec.Axe3	= CogRs_CX.Axe(3)
 				Vtl_rec.Axe4	= CogRs_CX.Axe(4)
-				Vtl_rec.Jnl		= CogRs_CX.Jnl
+				Vtl_rec.Jnl		= Condition(t_AnaJnl AND CA.Cog_AnaJnl <> ' ' , CA.Cog_AnaJnl, CogRs_CX.Jnl)
 				Vtl_rec.Ecrno	= t_EcrNo
 				Vtl_rec.Ecrlg	= t_lilg
 				if listseek(list_EcrVtl,Vtl_rec,Vtl)

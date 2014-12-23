@@ -342,14 +342,14 @@ BeginP
 	endif
 	s_EcritureAnael.p33_EcrMois		= fstring("0",val(month(today)))
 	s_EcritureAnael.p37_EcrJour		= fstring("0",val(month(today)))
-	s_EcritureAnael.p41_MoisCourant		= fstring("0",val(month(today)))
-	s_EcritureAnael.p45_EcrAn2		= val(year(PiDt))
+	s_EcritureAnael.p41_MoisCourant	= fstring("0",val(month(today)))
+	s_EcritureAnael.p45_EcrAn2			= val(year(PiDt))
 	s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(PiDt)))
 	s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(PiDt)))
 	if OrigineAppel = 2
 		s_EcritureAnael.p45_EcrAn2		= val(year(today))
-		s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(today)))
-		s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(today)))
+		s_EcritureAnael.p51_EcrMois2	= fstring("0",val(month(today)))
+		s_EcritureAnael.p55_EcrJour2	= fstring("0",val(day(today)))
 		s_EcritureAnael.p57_Cst		= "7"
 	endif
 	s_EcritureAnael.p60_TrtAnnee		= val(year(today))
@@ -363,10 +363,10 @@ BeginP
 	endif
 	; avant : s_EcritureAnael.p57,1)		= "6"
 	; JDT FIN 14/09/2011
-	s_EcritureAnael.p66_EcrAn		= val(year(PiDt))
+	s_EcritureAnael.p66_EcrAn			= val(year(PiDt))
 	s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(PiDt)))
 	s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(PiDt)))
-	s_EcritureAnael.p78_EcrNo		= c8_loc.EcrNo
+	s_EcritureAnael.p78_EcrNo			= c8_loc.EcrNo
 
 	s_EcritureAnael.p86_Jnl		= c8_loc.Jnl
 
@@ -400,10 +400,10 @@ BeginP
 			t_PiNo = c8_loc.Cog_RedNo
 
 			;
-			s_EcritureAnael.p45_EcrAn2		= val(year(c8_loc.EcrDt))
+			s_EcritureAnael.p45_EcrAn2			= val(year(c8_loc.EcrDt))
 			s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(c8_loc.EcrDt)))
 			s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(c8_loc.EcrDt)))
-			s_EcritureAnael.p66_EcrAn		= val(year(c8_loc.EcrDt))
+			s_EcritureAnael.p66_EcrAn			= val(year(c8_loc.EcrDt))
 			s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(c8_loc.EcrDt)))
 			s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(c8_loc.EcrDt)))
 
@@ -434,7 +434,7 @@ BeginP
 	s_EcritureAnael.p146_MtDev		= mtdev
 	s_EcritureAnael.p146_MtDev		= fstring("R",s_EcritureAnael.p146_MtDev)
 	s_EcritureAnael.p164_EchAn		= val(year(EchDt))
-	s_EcritureAnael.p170_EchMois		= fstring("0",val(month(EchDt)))
+	s_EcritureAnael.p170_EchMois	= fstring("0",val(month(EchDt)))
 	s_EcritureAnael.p174_EchJr		= fstring("0",val(day(EchDt)))
 	s_EcritureAnael.p183_Cst		= "0"
 	s_EcritureAnael.p187_Cst		= "0"
@@ -467,7 +467,7 @@ BeginP
 	s_EcritureAnael.p324_Dev		= condition(cx_loc="",c8_loc.Dev,"EUR")
 	s_EcritureAnael.p330_Cst		= "0"
 	s_EcritureAnael.p348_TrtAn		= val(year(today))
-	s_EcritureAnael.p354_TrtMois		= fstring("0",val(month(today)))
+	s_EcritureAnael.p354_TrtMois	= fstring("0",val(month(today)))
 	s_EcritureAnael.p358_TrtJr		= fstring("0",val(day(today)))
 	s_EcritureAnael.p364_Cst		= "0"
 	s_EcritureAnael.p370_Cst		= "0"
@@ -528,24 +528,24 @@ BeginP
 		case 1
 			if left(c8_loc.Cpt,1) in ("6","7")
 				s_EcritureAnael.p455_CstAxe	= "999999"
-				s_EcritureAnael.p461_Axe4	= c3.Axe(4)
-				s_EcritureAnael.p464_Axe3	= c3.Axe(3)
+				s_EcritureAnael.p461_Axe4		= c3.Axe(4)
+				s_EcritureAnael.p464_Axe3		= c3.Axe(3)
 				s_EcritureAnael.p1012_Cst		= "999999"
 				s_EcritureAnael.p1018_Axe4		= c3.Axe(4)
 				s_EcritureAnael.p1020_Axe3		= c3.Axe(3)
 			endif
 		case 2
-			s_EcritureAnael.p455_CstAxe		= cx_loc.Axe(1)
-			s_EcritureAnael.p461_Axe4	= cx_loc.Axe(4)
-			s_EcritureAnael.p464_Axe3	= cx_loc.Axe(3)
+			s_EcritureAnael.p455_CstAxe	= cx_loc.Axe(1)
+			s_EcritureAnael.p461_Axe4		= cx_loc.Axe(4)
+			s_EcritureAnael.p464_Axe3		= cx_loc.Axe(3)
 			s_EcritureAnael.p1012_Cst		= cx_loc.Axe(2)
 			s_EcritureAnael.p1018_Axe4		= cx_loc.Axe(4)
 			s_EcritureAnael.p1020_Axe3		= cx_loc.Axe(3)
 		default
 			if left(c8_loc.Cpt,1) in ("6","7")
-				s_EcritureAnael.p455_CstAxe		= condition(cx_loc="",condition(left(c8_loc.Cpt,1) not in ("C","F") and  left(c8_loc.Cpt,3) <> "445","999999",""),cx_loc.Axe(1))
-				s_EcritureAnael.p461_Axe4= condition(cx_loc="",c3.Axe(4),cx_loc.Axe(4))
-				s_EcritureAnael.p464_Axe3	= c8_loc.Cpt
+				s_EcritureAnael.p455_CstAxe	= condition(cx_loc="",condition(left(c8_loc.Cpt,1) not in ("C","F") and  left(c8_loc.Cpt,3) <> "445","999999",""),cx_loc.Axe(1))
+				s_EcritureAnael.p461_Axe4		= condition(cx_loc="",c3.Axe(4),cx_loc.Axe(4))
+				s_EcritureAnael.p464_Axe3		= c8_loc.Cpt
 				s_EcritureAnael.p1012_Cst		= condition(cx_loc="",condition(left(c8_loc.Cpt,1) not in ("C","F") and  left(c8_loc.Cpt,3) <> "445","999999",""),cx_loc.Axe(2))
 				s_EcritureAnael.p1018_Axe4		= condition(cx_loc="",c3.Axe(4),cx_loc.Axe(4))
 				s_EcritureAnael.p1020_Axe3		= c8_loc.Cpt
@@ -561,16 +561,21 @@ EndP
 
 ;*
 public procedure Cog_GenererLigne(&ligne,sep_c,sep_l,fixe,c8_loc,cx_loc,OrigineAppel)
+; Origine de l'appel : 1 = Ecritures Générales Centrales / 2 = Ecritures Analytiques Centrales
+;							  3 = Ecritures PDV / 4 = Autre
 1	ligne							A
 1	sep_c							A
 1	sep_l							A
 1	fixe							1,0
 record	ccfdd.dhsd	c8		c8_loc
 record	ccfdd.dhsd	cx		cx_loc
-1	OrigineAppel 2,0 = 1 ; Origine de l'appel : 1 = Ecritures Générales Centrales / 2 = Ecritures Analytiques Centrales
-;																/ 3 = Ecritures PDV / 4 = Autre
+1	OrigineAppel 2,0 = 1 
 
 beginp
+
+	If CA.Dos <> MZ.dos
+		Seek_CA(MZ.dos)
+	EndIf
 
 	if cx_loc <> ""
 		Seek_C8(cx_loc.EcrNo,cx_loc.EcrLg)
