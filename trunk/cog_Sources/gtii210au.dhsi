@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20141017173836      
+;>xwin4obj     imprimante               6.0       20141223133216      
 [masque]
- utilisateur="ROOT"
- date_modification="17/10/2014"
+ utilisateur="UGIE"
+ date_modification="23/12/2014"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -14,7 +14,7 @@
  diva_init="Masque_1_Init"
  dernier_id=1000134
  surcharge=oui
- date_modif_base="20130528154524"
+ date_modif_base="20140912105131"
  dernier_id_page=100000
  niveau_surcharge=1
  [adresses]
@@ -39,9 +39,9 @@
  "gtfdd.dhsd",,g4t1,g4t1,100,0
  "gtfdd.dhsd",,mvtl,g4mvtl,1000,0
  "gtfdd.dhsd",,t013,t013,300,0
+ "gtfdd.dhsd",,soc,socaafficher,2800,0
  "gtfdd.dhsd",,t037,t037,450,0
  "gtfdd.dhsd",,t2,t2,1000,0
- "gtfdd.dhsd",,soc,socaafficher,2800,0
 [bloc]
  numero=1
  libelle="En-tête"
@@ -108,108 +108,65 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=166,189
-   taille=36,1
-   id=1000025
+   position=112,5
+   taille=34,123
+   id=1000006
+  [param_cadre]
+   nature=vide_arrondi
+   arrondi=10
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=213,1
+   taille=355,311
+   id=1000007
+  [param_cadre]
+   nature=vide_arrondi
+   arrondi=10
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=213,265
+   taille=291,1
+   id=1000008
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=166,253
-   taille=36,1
-   id=1000024
+   position=213,216
+   taille=291,1
+   id=1000009
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=503,245
-   taille=64,1
-   id=1000023
+   position=213,181
+   taille=291,1
+   id=1000010
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=533,1
-   taille=1,129
-   id=1000022
-  [param_cadre]
-   nature=horizontal_b
-   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=503,129
-   taille=65,1
-   id=1000021
+   position=213,42
+   taille=291,1
+   id=1000011
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=534,81
-   taille=33,1
-   id=1000020
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=534,246
-   taille=1,64
-   id=1000019
-  [param_cadre]
-   nature=horizontal_b
-   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=503,184
-   taille=64,1
-   id=1000018
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=503,207
-   taille=65,1
-   id=1000017
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=166,100
-   taille=36,1
-   id=1000016
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=166,68
-   taille=36,1
-   id=1000015
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=166,32
-   taille=36,1
-   id=1000014
+   position=213,306
+   taille=291,1
+   id=1000012
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
@@ -226,126 +183,112 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=213,306
-   taille=291,1
-   id=1000012
+   position=166,32
+   taille=36,1
+   id=1000014
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=213,42
-   taille=291,1
-   id=1000011
+   position=166,68
+   taille=36,1
+   id=1000015
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=213,181
-   taille=291,1
-   id=1000010
+   position=166,100
+   taille=36,1
+   id=1000016
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=213,216
-   taille=291,1
-   id=1000009
+   position=503,207
+   taille=65,1
+   id=1000017
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=213,265
-   taille=291,1
-   id=1000008
+   position=503,184
+   taille=64,1
+   id=1000018
   [param_cadre]
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=213,1
-   taille=355,311
-   id=1000007
+   position=534,246
+   taille=1,64
+   id=1000019
   [param_cadre]
-   nature=vide_arrondi
-   arrondi=10
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   nature=horizontal_b
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=112,5
-   taille=34,123
-   id=1000006
+   position=534,81
+   taille=33,1
+   id=1000020
   [param_cadre]
-   nature=vide_arrondi
-   arrondi=10
+   nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
- [obj_texte]
+ [cadre]
   [presentation]
-   position=580,55
-   taille=10,255
-   noms="pied;piedadr1"
-   id=1000130
-   wstyle="STD"
-  [texte]
- [obj_texte]
+   position=503,129
+   taille=65,1
+   id=1000021
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
+ [cadre]
   [presentation]
-   position=590,55
-   taille=10,255
-   noms="pied;piedadr2"
-   id=1000131
-   wstyle="STD"
-  [texte]
- [obj_texte]
+   position=533,1
+   taille=1,129
+   id=1000022
+  [param_cadre]
+   nature=horizontal_b
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
+ [cadre]
   [presentation]
-   position=600,55
-   taille=10,255
-   noms="pied;piedadr3"
-   id=1000132
-   wstyle="STD"
-  [texte]
- [obj_texte]
+   position=503,245
+   taille=64,1
+   id=1000023
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
+ [cadre]
   [presentation]
-   position=610,55
-   taille=10,255
-   noms="pied;piedadr4"
-   id=1000133
-   wstyle="STD"
-  [texte]
- [obj_texte]
+   position=166,253
+   taille=36,1
+   id=1000024
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
+ [cadre]
   [presentation]
-   position=90,6
-   taille=8,21
-   id=1000125
-   wstyle="STD"
-  [texte]
-   texte="Tél."
- [obj_texte]
-  [presentation]
-   position=99,6
-   taille=10,21
-   id=1000126
-   wstyle="STD"
-  [texte]
-   texte="Fax"
- [obj_texte]
-  [presentation]
-   position=20,260
-   taille=9,50
-   cadrage=droite
-   id=1000044
-   wstyle="STD"
-  [texte]
-   texte="Page $1/nbpages$"
+   position=166,189
+   taille=36,1
+   id=1000025
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
    position=115,8
@@ -354,6 +297,38 @@
    wstyle="PETIT_GRAS_ITALIQUE"
   [texte]
    texte="Livré à"
+ [obj_texte]
+  [presentation]
+   position=219,276
+   taille=9,22
+   id=1000027
+   wstyle="STD"
+  [texte]
+   texte="Montant"
+ [obj_texte]
+  [presentation]
+   position=214,307
+   taille=9,5
+   id=1000028
+   wstyle="PETIT"
+  [texte]
+   texte="T"
+ [obj_texte]
+  [presentation]
+   position=219,307
+   taille=9,5
+   id=1000029
+   wstyle="PETIT"
+  [texte]
+   texte="V"
+ [obj_texte]
+  [presentation]
+   position=225,307
+   taille=8,5
+   id=1000030
+   wstyle="PETIT"
+  [texte]
+   texte="A"
  [obj_texte]
   [presentation]
    position=170,5
@@ -388,54 +363,6 @@
    texte="Votre référence"
  [obj_texte]
   [presentation]
-   position=170,257
-   taille=9,51
-   id=1000045
-   wstyle="STD"
-  [texte]
-   texte="Votre contact"
- [obj_texte]
-  [presentation]
-   position=170,191
-   taille=9,51
-   id=1000046
-   wstyle="STD"
-  [texte]
-   texte="Contact Client"
- [obj_texte]
-  [presentation]
-   position=214,307
-   taille=9,5
-   id=1000028
-   wstyle="PETIT"
-  [texte]
-   texte="T"
- [obj_texte]
-  [presentation]
-   position=216,5
-   taille=15,45
-   id=1000047
-   wstyle="STD"
-  [texte]
-   texte="<hog>Référence|interne"
- [obj_texte]
-  [presentation]
-   position=219,276
-   taille=9,22
-   id=1000027
-   wstyle="STD"
-  [texte]
-   texte="Montant"
- [obj_texte]
-  [presentation]
-   position=219,307
-   taille=9,5
-   id=1000029
-   wstyle="PETIT"
-  [texte]
-   texte="V"
- [obj_texte]
-  [presentation]
    position=219,59
    taille=11,86
    id=1000035
@@ -460,20 +387,13 @@
    texte="Prix unitaire"
  [obj_texte]
   [presentation]
-   position=225,307
-   taille=8,5
-   id=1000030
-   wstyle="PETIT"
+   position=541,247
+   taille=9,31
+   id=1000038
+   wstyle="STD"
+   wgras=1
   [texte]
-   texte="A"
- [obj_texte]
-  [presentation]
-   position=507,277
-   taille=11,30
-   id=1000043
-   wstyle="STD_GRAS"
-  [texte]
-   texte="T.T.C."
+   texte="Net à payer"
  [obj_texte]
   [presentation]
    position=508,52
@@ -508,13 +428,93 @@
    texte="Montant T.V.A"
  [obj_texte]
   [presentation]
-   position=541,247
-   taille=9,31
-   id=1000038
-   wstyle="STD"
-   wgras=1
+   position=507,277
+   taille=11,30
+   id=1000043
+   wstyle="STD_GRAS"
   [texte]
-   texte="Net à payer"
+   texte="T.T.C."
+ [obj_texte]
+  [presentation]
+   position=20,260
+   taille=9,50
+   cadrage=droite
+   id=1000044
+   wstyle="STD"
+  [texte]
+   texte="Page $1/nbpages$"
+ [obj_texte]
+  [presentation]
+   position=170,257
+   taille=9,51
+   id=1000045
+   wstyle="STD"
+  [texte]
+   texte="Votre contact"
+ [obj_texte]
+  [presentation]
+   position=170,191
+   taille=9,51
+   id=1000046
+   wstyle="STD"
+  [texte]
+   texte="Contact Client"
+ [obj_texte]
+  [presentation]
+   position=216,5
+   taille=15,45
+   id=1000047
+   wstyle="STD"
+  [texte]
+   texte="<hog>Référence|interne"
+ [obj_texte]
+  [presentation]
+   position=90,6
+   taille=8,21
+   id=1000125
+   wstyle="STD"
+  [texte]
+   texte="Tél."
+ [obj_texte]
+  [presentation]
+   position=99,6
+   taille=10,21
+   id=1000126
+   wstyle="STD"
+  [texte]
+   texte="Fax"
+ [obj_texte]
+  [presentation]
+   position=580,55
+   taille=10,255
+   noms="pied;piedadr1"
+   id=1000130
+   wstyle="STD"
+  [texte]
+ [obj_texte]
+  [presentation]
+   position=590,55
+   taille=10,255
+   noms="pied;piedadr2"
+   id=1000131
+   wstyle="STD"
+  [texte]
+ [obj_texte]
+  [presentation]
+   position=600,55
+   taille=10,255
+   noms="pied;piedadr3"
+   id=1000132
+   wstyle="STD"
+  [texte]
+ [obj_texte]
+  [presentation]
+   position=610,55
+   taille=10,255
+   noms="pied;piedadr4"
+   id=1000133
+   wstyle="STD"
+  [texte]
  [champ]
   [presentation]
    position=52,6
@@ -578,6 +578,7 @@
    wstyle="STD"
   [description]
    donnee=g4,nom,g4,2
+  [param_saisie]
  [champ]
   [presentation]
    position=85,164
@@ -658,6 +659,7 @@
    wstyle="STD"
   [description]
    donnee=g4,loc,g4,2
+  [param_saisie]
  [champ]
   [presentation]
    position=126,192
@@ -666,6 +668,7 @@
    wstyle="STD"
   [description]
    donnee=g4,vil,g4,2
+  [param_saisie]
  [champ]
   [presentation]
    position=105,164
@@ -674,6 +677,7 @@
    wstyle="STD"
   [description]
    donnee=g4,rue,g4,2
+  [param_saisie]
  [champ]
   [presentation]
    position=131,27
@@ -682,6 +686,7 @@
    wstyle="PETIT"
   [description]
    donnee=g4,loc,g4,3
+  [param_saisie]
  [champ]
   [presentation]
    position=138,45
@@ -690,62 +695,7 @@
    wstyle="PETIT"
   [description]
    donnee=g4,vil,g4,3
- [champ]
-  [presentation]
-   position=123,27
-   taille=8,96
-   id=1000066
-   wstyle="PETIT"
-  [description]
-   donnee=g4,rue,g4,3
- [champ]
-  [presentation]
-   position=115,27
-   taille=8,96
-   id=1000067
-   wstyle="PETIT_GRAS"
-  [description]
-   donnee=g4,nom,g4,3
- [multi_choix]
-  [presentation]
-   position=4,226
-   taille=13,76
-   id=1000068
-   wstyle="TRES_GRAND_GRAS"
-  [description]
-   donnee=g4,nbex,g4
-   minmaj=majuscules
   [param_saisie]
-   esp_si_zero=oui
-  [param_multi]
-   ouverture=oui
-   choix="gtfdmc.dhfi","NBEX"
- [champ]
-  [presentation]
-   position=187,3
-   taille=9,34
-   id=1000069
-   wstyle="STD"
-  [description]
-   donnee=ent,pidt,ent
- [champ]
-  [presentation]
-   position=187,36
-   taille=9,28
-   id=1000070
-   wstyle="STD"
-  [description]
-   donnee=ent,pino,ent
-  [param_saisie]
-   esp_si_zero=oui
- [champ]
-  [presentation]
-   position=187,69
-   taille=11,32
-   id=1000071
-   wstyle="STD_GRAS"
-  [description]
-   donnee=ent,tiers,ent
  [champ]
   [presentation]
    position=187,255
@@ -772,12 +722,73 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
+   position=123,27
+   taille=8,96
+   id=1000066
+   wstyle="PETIT"
+  [description]
+   donnee=g4,rue,g4,3
+  [param_saisie]
+ [champ]
+  [presentation]
+   position=115,27
+   taille=8,96
+   id=1000067
+   wstyle="PETIT_GRAS"
+  [description]
+   donnee=g4,nom,g4,3
+  [param_saisie]
+ [multi_choix]
+  [presentation]
+   position=4,226
+   taille=13,76
+   id=1000068
+   wstyle="TRES_GRAND_GRAS"
+  [description]
+   donnee=g4,nbex,g4
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   ouverture=oui
+   choix="gtfdmc.dhfi","NBEX"
+ [champ]
+  [presentation]
+   position=187,3
+   taille=9,34
+   id=1000069
+   wstyle="STD"
+  [description]
+   donnee=ent,pidt,ent
+  [param_saisie]
+ [champ]
+  [presentation]
+   position=187,36
+   taille=9,28
+   id=1000070
+   wstyle="STD"
+  [description]
+   donnee=ent,pino,ent
+  [param_saisie]
+   esp_si_zero=oui
+ [champ]
+  [presentation]
+   position=187,69
+   taille=11,32
+   id=1000071
+   wstyle="STD_GRAS"
+  [description]
+   donnee=ent,tiers,ent
+  [param_saisie]
+ [champ]
+  [presentation]
    position=187,102
    taille=10,87
    id=1000074
    wstyle="STD"
   [description]
    donnee=ent,piref,ent
+  [param_saisie]
  [champ]
   [presentation]
    position=147,4
@@ -820,6 +831,7 @@
    wstyle="DAV_DES"
   [description]
    donnee=mouv,des,g4mouv
+  [param_saisie]
  [champ]
   [presentation]
    position=0,177
@@ -839,6 +851,7 @@
    wstyle="PETIT"
   [description]
    donnee=art,tvaart,g4art
+  [param_saisie]
  [champ]
   [presentation]
    position=0,215
@@ -869,6 +882,7 @@
    wstyle="DAV_REF"
   [description]
    donnee=mouv,ref,g4mouv
+  [param_saisie]
 [bloc]
  numero=3
  libelle="Débordement"
@@ -1272,6 +1286,7 @@
    wstyle="STD_GRAS"
   [description]
    donnee=ent,dev,ent
+  [param_saisie]
  [champ]
   [presentation]
    position=49,243

@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20141022154804      
+;>xwin4obj                              7.0       20141223114246      
 [masque]
  libelle="ZOOM DOSSIER"
- utilisateur="UGIE_YLF"
- date_modification="22/10/2014"
+ utilisateur="UGIE"
+ date_modification="23/12/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=551
  type_masque=2
- dernier_id=1000030
+ dernier_id=1000032
  surcharge=oui
  date_modif_base="20121211091434"
  dernier_id_page=100001
@@ -8811,7 +8811,7 @@
  [groupbox]
   [presentation]
    position=22,6
-   taille=62,328
+   taille=72,328
    id=1000001
    wstyle="GROUPE"
   [param_groupbox]
@@ -8819,7 +8819,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=150,5
+   position=160,5
    taille=58,330
    noms="6.2"
    id=1000012
@@ -8829,7 +8829,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=89,5
+   position=99,5
    taille=58,330
    noms="6.2"
    id=1000011
@@ -8839,7 +8839,7 @@
    couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=38,10
+   position=37,10
    taille=9,49
    id=1000002
    wstyle="STD"
@@ -8847,7 +8847,15 @@
    texte="Code Dossier Anaël"
  [obj_texte]
   [presentation]
-   position=49,10
+   position=48,10
+   taille=9,64
+   id=1000031
+   wstyle="STD"
+  [texte]
+   texte="Journal analytique Anael"
+ [obj_texte]
+  [presentation]
+   position=59,10
    taille=9,86
    id=1000003
    wstyle="STD"
@@ -8855,7 +8863,7 @@
    texte="Journal Facturations aux Centrales"
  [obj_texte]
   [presentation]
-   position=60,10
+   position=70,10
    taille=9,86
    id=1000004
    wstyle="STD"
@@ -8863,7 +8871,7 @@
    texte="Journal Facturations aux P.V."
  [obj_texte]
   [presentation]
-   position=71,10
+   position=81,10
    taille=9,86
    id=1000005
    wstyle="STD"
@@ -8871,7 +8879,7 @@
    texte="Chemin du répertoire d'échange"
  [obj_texte]
   [presentation]
-   position=104,10
+   position=114,10
    taille=9,86
    id=1000027
    wstyle="STD"
@@ -8879,7 +8887,7 @@
    texte="Journal factures non parvenues"
  [obj_texte]
   [presentation]
-   position=115,10
+   position=125,10
    taille=9,91
    id=1000023
    wstyle="STD"
@@ -8887,7 +8895,7 @@
    texte="Compte factures non parvenues"
  [obj_texte]
   [presentation]
-   position=126,10
+   position=136,10
    taille=9,50
    id=1000025
    wstyle="STD"
@@ -8895,7 +8903,7 @@
    texte="Compte TVA FNP"
  [obj_texte]
   [presentation]
-   position=164,10
+   position=174,10
    taille=9,86
    id=1000015
    wstyle="STD"
@@ -8903,7 +8911,7 @@
    texte="Journal factures à émettre"
  [obj_texte]
   [presentation]
-   position=175,10
+   position=185,10
    taille=9,87
    id=1000013
    wstyle="STD"
@@ -8911,7 +8919,7 @@
    texte="Compte factures à émettre"
  [obj_texte]
   [presentation]
-   position=186,10
+   position=196,10
    taille=9,63
    id=1000017
    wstyle="STD"
@@ -8919,7 +8927,7 @@
    texte="Compte TVA FAE"
  [champ]
   [presentation]
-   position=186,137
+   position=196,137
    taille=9,144
    id=1000030
    colonnes_saisie=40
@@ -8939,7 +8947,7 @@
    shift_f7=19009
  [champ]
   [presentation]
-   position=175,137
+   position=185,137
    taille=9,144
    id=1000029
    colonnes_saisie=40
@@ -8959,7 +8967,7 @@
    shift_f7=19009
  [champ]
   [presentation]
-   position=38,102
+   position=37,102
    taille=9,21
    id=1000006
    colonnes_saisie=5
@@ -8980,7 +8988,33 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=49,102
+   position=48,102
+   taille=9,21
+   id=1000032
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,cog_anajnl,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19042
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_AnaJnl_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=59,102
    taille=9,21
    id=1000007
    colonnes_saisie=3
@@ -9005,7 +9039,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=60,102
+   position=70,102
    taille=9,21
    id=1000008
    colonnes_saisie=3
@@ -9030,7 +9064,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=71,102
+   position=81,102
    taille=9,75
    id=1000009
    colonnes_saisie=20
@@ -9056,7 +9090,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=104,102
+   position=114,102
    taille=9,32
    id=1000028
    colonnes_saisie=3
@@ -9082,7 +9116,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=115,102
+   position=125,102
    taille=9,32
    id=1000024
    colonnes_saisie=8
@@ -9108,7 +9142,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=126,102
+   position=136,102
    taille=9,32
    id=1000026
    colonnes_saisie=8
@@ -9134,7 +9168,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=126,137
+   position=136,137
    taille=9,144
    id=1000020
    colonnes_saisie=40
@@ -9154,7 +9188,7 @@
    shift_f7=19009
  [champ]
   [presentation]
-   position=115,137
+   position=125,137
    taille=9,144
    id=1000019
    colonnes_saisie=40
@@ -9174,7 +9208,7 @@
    shift_f7=19009
  [case_a_cocher]
   [presentation]
-   position=137,10
+   position=147,10
    taille=9,142
    id=1000021
    wstyle="COG_CHAMP_SAISI"
@@ -9197,7 +9231,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=164,102
+   position=174,102
    taille=9,32
    id=1000016
    colonnes_saisie=3
@@ -9223,7 +9257,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=175,102
+   position=185,102
    taille=9,32
    id=1000014
    colonnes_saisie=8
@@ -9249,7 +9283,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=186,102
+   position=196,102
    taille=9,32
    id=1000018
    colonnes_saisie=8
@@ -9275,7 +9309,7 @@
    "zoom"
  [case_a_cocher]
   [presentation]
-   position=197,10
+   position=207,10
    taille=9,131
    id=1000022
    wstyle="COG_CHAMP_SAISI"
@@ -9796,6 +9830,14 @@ Public Record "ccfdd.dhsd" C4
 ;*
 ;*
 ;*
+
+;*
+Private Procedure Champ_Cog_AnaJnl_1_Ap
+;
+Beginp
+ 	Controle_Journal(DOSSIER.Cog_AnaJnl)
+Endp
+
 
 ;*
 Private Procedure Champ_Cog_Exp_Ch_1_Ap
