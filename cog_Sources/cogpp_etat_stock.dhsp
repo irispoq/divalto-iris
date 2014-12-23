@@ -1,0 +1,610 @@
+setmoduleinfo("$id$")
+;>xdiva
+;*
+;*		Objet : Etat stock spécifique
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF	P205a					01		12/2014		Reprise prg existant - Intégration au projet U GIE
+;*											
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*
+
+;*
+;*		Déclarations
+;*
+
+;
+Include gttc000.dhsp
+
+;
+Module gtpmficsql.dhop
+Module yoffice.dhop
+
+;
+
+public recordSql	"cogrs_mvtl.dhoq"	CogRs_Stock
+public recordSql	"cogrs_mvtl.dhoq"	CogRs_CDes
+public recordSql	"cogrs_art.dhoq"	CogRs_Article
+
+;
+public record "a5dd.dhsd"	mz
+public record "gtfdd.dhsd"	xq	g3xq
+Public Record "gtfdd.dhsd" mvtl totlig
+Public Record "gtfdd.dhsd" mvtl totfrs
+Public Record "gtfdd.dhsd" xq g3xqtotlig
+Public Record "gtfdd.dhsd" xq g3xqtotfrs
+Public Record "gtfdd.dhsd" xq g3xqtotlgnl
+Public Record "gtfdd.dhsd" mvtl totgnl
+Public Record "gtfdd.dhsd" xq g3xqtotgnl
+Public Record "gtfdd.dhsd" xq	cog_UX
+public record "gtfdd.dhsd"	fou
+public record "gtfdd.dhsd" sart
+public record "gtfdd.dhsd" mvtl
+public record "gtfdd.dhsd" art
+public record "gtfdd.dhsd"	t025
+
+;
+structure EltStk
+	1	Frs	> gtfdd.dhsd	tiers
+	1	GrRefStk	> gtfdd.dhsd	Grref
+		2 RefStk	> gtfdd.dhsd	Ref
+		2 Sref1Stk	> gtfdd.dhsd	Sref1
+		2 Sref2Stk	> gtfdd.dhsd	Sref2
+	1	Depot	> gtfdd.dhsd	Depo
+	1	QteStk	> gtfdd.dhsd	StQte
+	1	QteCdeA	> gtfdd.dhsd	cdqte
+	1	QteCdeV	> gtfdd.dhsd	cdqte
+endstructure	
+
+Recorddiva	EltStk	
+Recorddiva	EltStk	EltRech
+Recorddiva	EltStk	EltSav
+
+;
+1	fini	B
+1	idtoolbar	L
+1	ReaderArt	L
+1	ReaderStk	L
+1	ReaderCde	L
+1	IdLstStk		L
+1	adr		16
+1	adr2		16
+1	IdLstDepot	L
+1	wdepot	> gtfdd.dhsd	depo
+1	lig		5,0
+1	coltot	5,0
+1	coldepo	5,0*10
+
+;*
+;*		Procédures et fonctions
+;*
+
+;*
+Function Long Tri_LstStock(Elt1,Elt2)
+;
+RecordDiva	EltStk	Elt1
+RecordDiva	EltStk	Elt2
+1	CleA	S
+1	CleB	S
+beginf
+	CleA	= Elt1.Frs & Elt1.RefStk & Elt1.Sref1Stk & Elt1.Sref2Stk & Elt1.Depot
+	CleB	= Elt2.Frs & Elt2.RefStk & Elt2.Sref1Stk & Elt2.Sref2Stk & Elt2.Depot
+	freturn(sortcompare(cleA,cleB))
+endf
+
+;*
+Function Long Tri_LstDepot(Elt1,Elt2)
+;
+1	Elt1	> gtfdd.dhsd	depo
+1	Elt2	> gtfdd.dhsd	depo
+
+beginf
+	freturn(sortcompare(Elt1,Elt2))
+endf
+
+
+;*
+Procedure Cog_Init_Masque
+;
+beginp
+	init g3xq = " "
+	g3xq.DatD = "99991231"
+	g3xq.Choix(1) = 2
+	init g3xq.TiersF = 'z'
+	init g3xq.RefF = 'z'
+	init g3xq.Sref1F = 'z'
+	init g3xq.Sref2F = 'z'
+	init g3xq.FamF(1) = 'z'
+	init g3xq.FamF(2) = 'z'
+	init g3xq.FamF(3) = 'z'
+	init g3xq.DepoF = 'z'
+	init g3xq.NstFin = 'z'
+	init g3xq.Sref1Msk ='*'
+	init g3xq.Sref2Msk = '*'
+	init g3xq.FamMsk(1) = '*'
+	init g3xq.FamMsk(2) = '*'
+	init g3xq.FamMsk(3) = '*'
+	init g3xq.NstMsk = '*'
+	ReaderArt = Cogrs_Article.ReaderOpen()
+	ReaderStk = Cogrs_Stock.ReaderOpen()
+	ReaderCde = Cogrs_Cdes.ReaderOpen()
+	IdLstStk = Listgetid("Liste_Stk")
+ 	GetAdressFunction("","Tri_LstStock",adr)
+	ListMode(IdLstStk,1,adr)
+	Listerase(IdLstStk)
+	IdLstDepot = Listgetid("Liste_Depot")
+ 	GetAdressFunction("","Tri_LstDepot",adr2)
+	ListMode(IdLstDepot,1,adr2)
+	Listerase(IdLstDepot)
+endp
+
+;*
+procedure Cog_Selections
+;
+beginp
+	g3_opentrace(2,3,4)
+	Cogrs_Article.OrderBy.Par_Reference()
+	Cogrs_Article.Where.RemoveCondition(" ")
+	Cogrs_Article.Where.Between_Tiers(g3xq.TiersD,g3xq.TiersF)
+	Cogrs_Article.Where.Between_Ref(g3xq.RefD,g3xq.RefF)
+	Cogrs_Article.Where.Between_Fam1(g3xq.FamD(1),g3xq.FamF(1))
+	Cogrs_Article.Where.Between_Fam2(g3xq.FamD(2),g3xq.FamF(2))
+	Cogrs_Article.Where.Between_Fam3(g3xq.FamD(3),g3xq.FamF(3))
+	Cogrs_Article.Where.AddCondition("Between_Tiers")
+	Cogrs_Article.Where.AddCondition("Between_Ref")
+	Cogrs_Article.Where.AddCondition("Between_Fam1")
+	Cogrs_Article.Where.AddCondition("Between_Fam2")
+	Cogrs_Article.Where.AddCondition("Between_Fam3")
+	Cogrs_Article.ReaderSelect(ReaderArt)
+	loop Cogrs_Article.ReaderNext(ReaderArt)
+		G3_Afficher_Selection()
+		if G3_Masquage (Cogrs_article.Ref , G3XQ.REFMSK) <> 0 | redoloop | endif
+		if G3_Masquage (Cogrs_article.Fam(1), g3xq.FamMsk(1)) <> 0 | redoloop | endif
+		if G3_Masquage (Cogrs_article.Fam(2), g3xq.FamMsk(2)) <> 0 | redoloop | endif
+		if G3_Masquage (Cogrs_article.Fam(3), g3xq.FamMsk(3)) <> 0 | redoloop | endif
+		if cogrs_article.StCod <> 2	| redoloop	| endif
+		Cogrs_Stock.Where.RemoveCondition(" ")
+		Cogrs_Stock.Where.Pour_Ref(Cogrs_Article.Ref)
+		cogrs_stock.ReaderSelect(ReaderStk)
+		loop cogrs_stock.ReaderNext(ReaderStk)
+			if lectab(25,cogrs_stock.nst) = 0 and t025.PhyInv <> 2 | redoloop | endif
+			EltRech.Frs = Cogrs_Article.Tiers
+			EltRech.RefStk = cogrs_stock.Ref
+			EltRech.Sref1Stk = cogrs_stock.Sref1
+			EltRech.Sref2Stk = cogrs_stock.Sref2
+			EltRech.Depot = cogrs_stock.Depo	
+			if listseek(IdLstStk,EltRech,EltStk) = 0
+ 				EltStk = " "
+				EltStk.Frs = Cogrs_Article.Tiers
+				EltStk.RefStk = cogrs_stock.Ref
+				EltStk.Sref1Stk = cogrs_stock.Sref1
+				EltStk.Sref2Stk = cogrs_stock.Sref2
+				EltStk.Depot = cogrs_stock.Depo	
+				EltStk.QteStk = cogrs_stock.TotStQte
+				mvtl.GrRef = EltStk.GrRefStk
+ 				G3_Afficher_Traitement()
+				listinsert(IdLstStk,EltStk)
+				if listseek(IdLstDepot,EltStk.Depot,Wdepot) = 0
+					listinsert(IdLstDepot,EltStk.Depot)
+				endif
+			else
+				EltStk.QteStk =  cogrs_stock.TotStQte
+				listmodify(IdLstStk,EltStk)
+			endif
+		endloop
+		Cogrs_Cdes.Where.RemoveCondition(" ")
+		Cogrs_Cdes.Where.Pour_Ref_Sens(Cogrs_Article.Ref,1,g3xq.DatD)	
+		Cogrs_Cdes.ReaderSelect(ReaderCde)
+		loop Cogrs_Cdes.ReaderNext(ReaderCde)
+			EltRech.Frs = Cogrs_Article.Tiers
+			EltRech.RefStk = Cogrs_Cdes.Ref
+			EltRech.Sref1Stk = Cogrs_Cdes.Sref1
+			EltRech.Sref2Stk = Cogrs_Cdes.Sref2
+			EltRech.Depot = Cogrs_Cdes.Depo	
+			if listseek(IdLstStk,EltRech,EltStk) not in (-1,0)
+				EltStk.QteCdeA = Cogrs_Cdes.TotQteCde
+				listmodify(IdLstStk,EltStk)
+			else
+				EltStk = " "
+				EltStk.Frs = Cogrs_Article.Tiers
+				EltStk.RefStk = Cogrs_Cdes.Ref
+				EltStk.Sref1Stk = Cogrs_Cdes.Sref1
+				EltStk.Sref2Stk = Cogrs_Cdes.Sref2
+				EltStk.Depot = Cogrs_Cdes.Depo	
+				EltStk.QteCdeA = Cogrs_Cdes.TotQteCde
+				listinsert(IdLstStk,EltStk)
+				if listseek(IdLstDepot,EltStk.Depot,Wdepot) = 0
+					listinsert(IdLstDepot,EltStk.Depot)
+				endif
+			endif
+			mvtl.GrRef = EltStk.GrRefStk
+			G3_Afficher_Traitement()
+		endloop
+		Cogrs_Cdes.Where.RemoveCondition(" ")
+		Cogrs_Cdes.Where.Pour_Ref_Sens(Cogrs_Article.Ref,2,g3xq.DatD)	
+		Cogrs_Cdes.ReaderSelect(ReaderCde)
+		loop Cogrs_Cdes.ReaderNext(ReaderCde)
+			EltRech.Frs = Cogrs_Article.Tiers
+			EltRech.RefStk = Cogrs_Cdes.Ref
+			EltRech.Sref1Stk = Cogrs_Cdes.Sref1
+			EltRech.Sref2Stk = Cogrs_Cdes.Sref2
+			EltRech.Depot = Cogrs_Cdes.Depo	
+			if listseek(IdLstStk,EltRech,EltStk) not in (-1,0)
+				EltStk.QteCdeV = Cogrs_Cdes.TotQteCde
+				listmodify(IdLstStk,EltStk)
+			else
+				EltStk = " "
+				EltStk.Frs = Cogrs_Article.Tiers
+				EltStk.RefStk = Cogrs_Cdes.Ref
+				EltStk.Sref1Stk = Cogrs_Cdes.Sref1
+				EltStk.Sref2Stk = Cogrs_Cdes.Sref2
+				EltStk.Depot = Cogrs_Cdes.Depo	
+				EltStk.QteCdeV = Cogrs_Cdes.TotQteCde
+				listinsert(IdLstStk,EltStk)
+				if listseek(IdLstDepot,EltStk.Depot,Wdepot) = 0
+					listinsert(IdLstDepot,EltStk.Depot)
+				endif
+			endif
+		endloop
+	endloop
+endp
+
+;*
+procedure Cog_Parcourir
+;
+beginp
+	WinShBrowseForFolder(0,"C:","Emplacement du fichier excel à créer","Veuillez choisir le repertoire",BIF_DONTGOBELOWDOMAIN + BIF_STATUSTEXT ,g3xq.Fic) 
+endp
+
+;*
+procedure Cog_Init_Zones_Bloc_Detail
+;
+beginp
+	init mvtl = " "
+	seek_sart(EltStk.RefStk,EltStk.Sref1Stk,EltStk.Sref2Stk)
+	mvtl.GrRef = EltStk.GrRefStk
+	mvtl.Depo = EltStk.Depot
+	mvtl.StQte = EltStk.QteStk
+	if sart.Cmp <> 0
+		g3xq.PubD(1) = sart.Cmp
+		g3xq.PubF(1) = sart.Cmp * mvtl.StQte
+	else
+		g3xq.PubD(1) = sart.Cr
+		g3xq.PubF(1) = sart.Cr * mvtl.StQte
+	endif
+	mvtl.Qte = EltStk.QteCdeA
+	mvtl.RefQte = EltStk.QteCdeV
+	mvtl.Resqte = mvtl.StQte + mvtl.Qte - mvtl.RefQte
+	totlig.StQte += mvtl.StQte
+	totfrs.StQte += mvtl.StQte
+	totgnl.StQte += mvtl.StQte
+	g3xqtotlig.PubF(1) += g3xq.PubF(1)
+	g3xqtotfrs.PubF(1) += g3xq.PubF(1)
+ 	g3xqtotgnl.PubF(1) += g3xq.PubF(1)
+	totlig.Qte += mvtl.Qte
+	totfrs.Qte += mvtl.Qte
+	totgnl.Qte += mvtl.Qte
+	totlig.RefQte += mvtl.RefQte
+	totfrs.RefQte += mvtl.RefQte
+	totgnl.RefQte += mvtl.RefQte
+	totlig.Resqte += mvtl.Resqte
+	totfrs.Resqte += mvtl.Resqte
+	totgnl.Resqte += mvtl.Resqte
+endp
+
+;*
+procedure Cog_Export_total_Frs
+;
+1	ccol	5,0
+beginp
+	if g3xq.Choix(1) = 2
+		Office_WriteString(lig,1,"TOTAL Fournisseur " & left(EltSav.frs) & " - " & left(fou.Nom))
+		ccol = coltot
+		Office_WriteString(lig,ccol,totfrs.StQte)
+		ccol+=2
+		Office_WriteString(lig,ccol,g3xqtotfrs.PubF(1))
+		ccol++
+		Office_WriteString(lig,ccol,totfrs.Qte)
+		ccol++
+		Office_WriteString(lig,ccol,totfrs.RefQte)
+		ccol++
+		Office_WriteString(lig,ccol,totfrs.Resqte)
+		lig++
+	endif
+endp
+
+;*
+procedure Cog_Export_total_Gnl
+;
+1	ccol	5,0
+beginp
+	if g3xq.Choix(1) = 2
+		Office_WriteString(lig,1,"TOTAL GENERAL ")
+		ccol = coltot
+		Office_WriteString(lig,ccol,totgnl.StQte)
+		ccol+=2
+		Office_WriteString(lig,ccol,g3xqtotgnl.PubF(1))
+		ccol++
+		Office_WriteString(lig,ccol,totgnl.Qte)
+		ccol++
+		Office_WriteString(lig,ccol,totgnl.RefQte)
+		ccol++
+		Office_WriteString(lig,ccol,totgnl.Resqte)
+	endif
+endp
+
+;*
+procedure Cog_Export_Ligne_Detail
+;
+1	ccol	5,0
+beginp
+	if g3xq.Choix(1) = 2
+ 		Office_WriteString(lig,1,mvtl.GrRef)
+		Office_WriteString(lig,2,art.des)
+		if listseek(IdLstDepot,EltStk.Depot,Wdepot) not in (1,0)
+			ccol = coldepo(listnumber(Idlstdepot))
+			Office_WriteString(lig,ccol,mvtl.StQte)
+			ccol++
+			Office_WriteString(lig,ccol,g3xq.PubD(1))
+			ccol++
+			Office_WriteString(lig,ccol,g3xq.PubF(1))
+			ccol++
+			Office_WriteString(lig,ccol,mvtl.Qte)
+			ccol++
+			Office_WriteString(lig,ccol,mvtl.RefQte)
+			ccol++
+			Office_WriteString(lig,ccol,mvtl.Resqte)
+		endif
+	endif
+endp
+
+;*
+procedure Cog_Export_Ligne_total
+;
+1	ccol	5,0
+beginp
+	if g3xq.Choix(1) = 2
+		ccol = coltot
+		Office_WriteString(lig,ccol,Totlig.StQte)
+		ccol++
+		Office_WriteString(lig,ccol,g3xqtotlig.PubD(1))
+		ccol++
+		Office_WriteString(lig,ccol,g3xqtotlig.PubF(1))
+		ccol++
+		Office_WriteString(lig,ccol,Totlig.Qte)
+		ccol++
+		Office_WriteString(lig,ccol,TotLig.RefQte)
+		ccol++
+		Office_WriteString(lig,ccol,Totlig.Resqte)
+	endif
+endp
+
+;*
+procedure Cog_Fermeture_Excel
+;
+beginp
+	Office_SaveAsCalc(g3xq.Fic)
+
+	Office_End
+
+endp
+
+
+;*
+procedure Cog_Ouverture_Excel
+;
+1	slig	5,0
+1	ccol	5,0
+1	i 	2,0
+beginp
+	If	Office_Begin = 0
+
+		If Office_OpenCalc(visible=True) = 0
+			lig = 1
+			slig = 2
+			Office_WriteString(lig, 1, "REFERENCE")	  				| Office_ColumnWidth(lig, 1, 40)
+			Office_WriteString(lig, 2, "LIBELLE")						| Office_ColumnWidth(lig, 2, 60)				
+			ccol = 3
+			i = 1
+			listbegin(IDLstDepot)
+			loop listnext(IdLstDepot,Wdepot) not in (-1,0)
+				coldepo(i) = ccol
+				Office_WriteString(lig, ccol, "DEPOT " & Wdepot)		| Office_ColumnWidth(lig, ccol, 20)
+				Office_WriteString(slig, ccol ,"Stock")					| Office_ColumnWidth(slig,ccol, 20)
+				ccol++
+				Office_WriteString(slig, ccol ,"CMP")					| Office_ColumnWidth(slig,ccol, 20)
+				ccol++
+				Office_WriteString(slig, ccol ,"Valeur")					| Office_ColumnWidth(slig,ccol, 20)
+				ccol++
+				Office_WriteString(slig, ccol ,"Achats")					| Office_ColumnWidth(slig,ccol, 20)
+				ccol++
+				Office_WriteString(slig, ccol ,"Ventes")					| Office_ColumnWidth(slig,ccol, 20)
+				ccol++
+				Office_WriteString(slig, ccol ,"Stock Virtuel")					| Office_ColumnWidth(slig,ccol, 20)
+				ccol++
+				i++
+			endloop
+			coltot = ccol
+			Office_WriteString(lig, ccol, "TOTAL ")		| Office_ColumnWidth(lig, ccol, 20)
+			Office_WriteString(slig, ccol ,"Stock")					| Office_ColumnWidth(slig,ccol, 20)
+			ccol++
+			Office_WriteString(slig, ccol ,"CMP")					| Office_ColumnWidth(slig,ccol, 20)
+			ccol++
+			Office_WriteString(slig, ccol ,"Valeur")					| Office_ColumnWidth(slig,ccol, 20)
+			ccol++
+			Office_WriteString(slig, ccol ,"Achats")					| Office_ColumnWidth(slig,ccol, 20)
+			ccol++
+			Office_WriteString(slig, ccol ,"Ventes")					| Office_ColumnWidth(slig,ccol, 20)
+			ccol++
+			Office_WriteString(slig, ccol ,"Stock Virtuel")					| Office_ColumnWidth(slig,ccol, 20)
+			ccol++
+			lig = 3
+
+		Else ;echec ouverture d'un nouveau calque office
+
+			MessageBox(Translate("Impossible d'ouvrir un nouveau calque Excel."), Translate("Alerte"), MB_ICONEXCLAMATION)
+
+		EndIf
+
+	Else	; Echec ouverture du module office
+
+		MessageBox(Translate("Impossible d'exécuter le module YOffice."), Translate("Alerte"), MB_ICONEXCLAMATION)
+
+	EndIf
+
+endp
+
+
+;*
+procedure Cog_Impression
+;
+1	pos	10
+1	cog_miseazero B=false
+beginp
+	if listcount(IdLstStk) > 0
+		if g3xq.Choix(1) = 2
+			Cog_Ouverture_Excel
+		endif
+		listfirst(IdLstStk,EltStk)
+		g3xq.LogDh = time(7)
+		printbegin
+		g3xq.TitreImp = "ETAT DE STOCK"
+		xmiprint(mz.MiCle,1)
+		xmiinfobloc(mz.MiCle,5)
+		pinglocal("opara3",harmony.Opara3)
+		harmony.Opara3 = 14
+		xmimodifybloc(mz.MiCle,5)
+		seek_fou(EltStk.frs)
+		xmisetattribut("cog_libfrs",an_titre,"Fournisseur " & left(EltStk.frs) & " - " & left(fou.Nom))
+		xmiprint(mz.MiCle,5)
+		if g3xq.choix(1) = 2
+			Office_WriteString(lig,1,"Fournisseur " & left(EltStk.frs) & " - " & left(fou.Nom))
+			lig++
+		endif
+		listbegin(IdLstStk)
+		init EltSav = " "
+		loop listnext(IdLstStk,EltStk) not in (-1,0)
+			if EltSav.Frs <> EltStk.Frs 
+				if totfrs.Resqte <> 0
+					xmisetattribut("cog_totfrs",an_titre,"TOTAL Fournisseur " & left(EltSav.frs) & " - " & left(fou.Nom))
+					xmiprint(mz.MiCle,6)
+					Cog_Export_Total_Frs
+				endif
+				init g3xqtotfrs = " "
+				init totfrs = " "
+				xmiinfobloc(mz.MiCle,5)
+				if harmony.Opara3 = 14
+					pinglocalreceive("opara3", harmony.Opara3)
+					xmimodifybloc(mz.MiCle,5)
+				endif
+				seek_fou(EltStk.frs)
+				xmisetattribut("cog_libfrs",an_titre,"Fournisseur " & left(fou.Nom))
+				xmiprint(mz.MiCle,5)
+				if g3xq.choix(1) = 2
+					Office_WriteString(lig,1,"Fournisseur " & left(EltStk.frs) & " - " & left(fou.Nom))
+					lig++
+				endif
+			endif
+			if EltSav.GrRefStk <> EltStk.GrRefStk or EltSav.GrRefStk = " "
+				xmisetattribut("cog_ref",an_visibilite,av_visible)
+			else
+				xmisetattribut("cog_ref",an_visibilite,av_cache)
+			endif
+			EltSav = EltStk
+			Cog_Init_Zones_Bloc_Detail
+			listgetposition(IdLststk,pos)
+			cog_miseazero = false
+			if listnext(IdLstStk,EltStk) not in (-1,0)
+				if EltStk.GrRefStk = EltSav.GrRefStk
+					xmisetattribut("cog_totlg",an_visibilite,av_cache)
+				else
+					xmisetattribut("cog_totlg",an_visibilite,av_visible)
+					cog_miseazero = true
+				endif
+			else
+				cog_miseazero = true
+			endif
+			listprevious(IdLstStk,EltStk)
+			seek_art(mvtl.Ref)
+			;designation sur plusieurs lignes
+			cog_ux.WinTitre = "  "&art.Des
+			xmiprint(mz.MiCle,2)
+			Cog_Export_Ligne_Detail
+			if cog_miseazero = true
+				Cog_Export_Ligne_Total
+				init totlig = " "
+				init g3xqtotlig = " "
+				lig++
+			endif
+		endloop
+		xmisetattribut("cog_totfrs",an_titre,"TOTAL Fournisseur " & left(EltStk.frs) & " - " & left(fou.Nom))
+		xmiprint(mz.MiCle,6)
+		Cog_Export_total_Frs
+		xmiprint(mz.MiCle,7)
+		Cog_Export_total_Gnl
+		printend
+		if g3xq.Choix(1) = 2
+			Cog_Fermeture_Excel
+		endif
+	endif
+endp
+
+
+;*
+;*
+main
+;
+	pingreceive("zechange", mz)
+	seek_soc(mz.Dos)
+	xmeload(mz.MeCle)
+	xmiload(mz.MiCle)
+	xmetitle("Sélections")
+	idtoolbar = xmetoolbargetid(mz.MeCle,"MAIN")
+	xmetoolbarsetwindow(idtoolbar,mz.MeCle,1)
+	Cog_Init_Masque
+	fini = 0
+	XmeInput (mz.MeCle,1,0,XME_MODE_GOTO)		;lance la saisie
+	do
+		switch Harmony.Arret											;tests des causes de l'interruption
+			case Harmony.Key = K_F9									;abandon
+				fini = 1
+
+			case harmony.Key = K_f8
+				zoom_call(harmony.Dataarret)
+
+			case harmony.Key = k_f7
+				zoom_call()
+
+			case Harmony.Key in (K_UP,K_BTAB)					;Flèche en haut ou Back-Tab
+																			;tapée sur la 1ère donnée du masque
+			case harmony.Dataarret = 1200
+				Cog_Parcourir					
+
+			case Harmony.Key in (K_F10,K_TAB,K_DOWN)			;validation ou sortie par Tab ou Flèche en bas
+				if filenameextension(filenamelastsegment(g3xq.Fic)) not in ("xls","xlsx") and g3xq.Choix(1) = 2
+					messagebox("Le nom du fichier excel à créer n'est pas renseigné. Vous devez donner un nom de fichier excel à créer","Contrôle",mb_iconstop)
+					harmony.Retour = xmenext_point_sequence
+					harmony.Cplretour = 10
+				else
+					fini = 2	
+					Cog_Selections
+					Cog_Impression
+				endif
+											
+		endswitch
+
+	while fini = 0
+		XmeNext (Harmony.Retour,Harmony.CplRetour)			;poursuite de la saisie
+	wend
+	Listdestroy(IdLstStk)
+	Listdestroy(IdLstDepot)
+	Cogrs_Article.ReaderClose(ReaderArt)
+	Cogrs_Stock.ReaderClose(ReaderStk)
+	Cogrs_Cdes.ReaderClose(ReaderCde)
+
+	programexit
