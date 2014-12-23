@@ -1,0 +1,32 @@
+<DictionarySql DefaultDictionary=GTFDD.dhsd DataBase=DAV overwrittenby="cogrs_artu.dhoq" ModuleInfo='$Id: cogrs_art.dhsq 7293 2014-12-23 15:18:20Z admin $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFAT
+;*
+
+;*
+;*		Article						ART
+;*
+
+<RecordSql Name=Cogrs_Article Comment='Articles'>
+Public Record A5DD.dhsd		MZ
+Public Record GTFDD.dhsd	T000
+<SELECT>
+	ART.*,
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	ART
+<WHERE>
+	ART.Dos = MZ.Dos
+	Case Between_Ref(char refD, char refF)						; Référence
+		ART.Ref BETWEEN refD AND refF
+	Case Between_Tiers(char tiersD, char tiersF)				; Tiers
+		ART.Tiers BETWEEN tiersD AND tiersF
+	Case Between_Fam1(char fam1D, char fam1F)					; Famille statistique 1
+		ART.Fam(1) BETWEEN fam1D AND fam1F
+	Case Between_Fam2(char fam2D, char fam2F)					; Famille statistique 2
+		ART.Fam(2) BETWEEN fam2D AND fam2F
+	Case Between_Fam3(char fam3D, char fam3F)					; Famille statistique 3
+		ART.Fam(3) BETWEEN fam3D AND fam3F
+<ORDERBY>
+	Case Par_Reference				"Par référence"
+		ART.Dos,
+		ART.Ref
