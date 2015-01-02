@@ -1,0 +1,47 @@
+<DictionarySql DefaultDictionary=GTFDD.dhsd DataBase=DAV OverWrittenBy='cogrs_mvtlu.dhoq' ModuleInfo='$Id: cogrs_mvtl.dhsq 3920 2013-11-04 08:05:57Z v.resplandy $'>
+
+
+;*
+<RecordSql Name=Cogrs_Stock Comment='Stock'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	SUM(MVTL.STQTE) AS TotStQte(12,3),
+	MVTL.REF,
+	MVTL.SREF1,
+	MVTL.SREF2,
+	MVTL.DEPO,
+	MVTL.nst,
+<FROM Insert=No Update=No Delete=No>
+	MVTL
+<WHERE>
+	MVTL.DOS = MZ.DOS AND MVTL.CEA = '1'
+	Case Pour_Ref(char Ref)
+		MVTL.Ref = ref 
+<GROUPBY>
+	MVTL.REF,
+	MVTL.SREF1,
+	MVTL.SREF2,
+	MVTL.DEPO,
+	Mvtl.nst
+
+
+;*
+<RecordSql Name=Cogrs_Cdes Comment='Commandes actives'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	SUM(MVTL.RefQTE) AS TotQteCde(12,3),
+	MVTL.REF,
+	MVTL.SREF1,
+	MVTL.SREF2,
+	MVTL.DEPO,
+<FROM Insert=No Update=No Delete=No>
+	MVTL
+<WHERE>
+	MVTL.DOS = MZ.DOS AND MVTL.Ce3 = '1'
+	Case Pour_Ref_Sens(char Ref,int Sens, date Delai)
+		MVTL.Ref = ref and mvtl.sens = sens	and mvtl.deldt <= Delai
+<GROUPBY>
+	MVTL.REF,
+	MVTL.SREF1,
+	MVTL.SREF2,
+	MVTL.DEPO
