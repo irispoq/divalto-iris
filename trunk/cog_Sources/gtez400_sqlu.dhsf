@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20140422155757      
+;>xwin4obj                              7.0       20150120114812      
 [masque]
  libelle="zoom entreprise"
- utilisateur="UGIE"
- date_modification="22/04/2014"
+ utilisateur="ROOT"
+ date_modification="20/01/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=346
  type_masque=2
- dernier_id=1000005
+ dernier_id=1000006
  surcharge=oui
  date_modif_base="20130213094839"
  dernier_id_page=100000
@@ -2990,6 +2990,26 @@
     titre="Regroupement par Direction Cliente"
     fl_aff=non
     largeur_col=52
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=117,40
+    taille=9,142
+    id=1000006
+    colonnes_saisie=40
+    wstyle="STD"
+   [description]
+    donnee=piece_entete,cog_bwid,piece_entete
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+   [info_bulle]
+   texte="N° ID Basware"
+   [param_colonne]
+    titre="N° ID Basware"
+    fl_aff=non
+    largeur_col=142
     wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
