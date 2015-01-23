@@ -1,0 +1,218 @@
+SetModuleInfo('$Id: cogtz_t000.dhsp 7440 2015-01-23 13:04:23Z admin $')
+;*
+;*      Paramétrage des tables communes Cogeser                 
+;*
+
+;*
+;*	Déclarations
+;*
+
+OverWrittenBy "COGUZ_T000.dhop"
+
+;
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+;
+Module A5PMNoteJoint.dhop
+
+
+; Record Sql 
+Public recordSQL cogrs_tab.dhoq TableParametre			; Table Paramètres
+
+; Variables
+1	CeBin		> GTFDD.dhsd CeBin		; CE binaire
+1	Dos		> GTFDD.dhsd Dos			; Dossier
+
+;*
+;* procedures 
+;*
+
+;*
+Public Procedure ZoomEnteteTableau 
+Beginp
+	XmeList_ScanColumn(Zoom.IdTableau)
+Endp
+
+;*
+Public Procedure ZoomDebut 
+Beginp
+
+	Init_Zoom(FicheNoBloc = 0)
+
+	Seek_Soc(MZ.Dos)			; recherche du dossier et T000
+	
+	Zoom.TitreFixe = Translate("Tables communes")
+	cebin = 0
+
+Endp
+
+;*
+Public Procedure ZoomAbandon		; sortie du zoom par f9
+Beginp
+Endp
+
+;*
+Public Procedure ZoomVAlidation ; validation du zoom
+Beginp
+Endp
+
+;*
+Public Procedure ZoomFin			; à la sortie du zoom
+Beginp
+Endp					
+
+;*
+;* procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation
+;
+Beginp
+	; initialiser les données 
+	TableParametre.init()
+	init TableParametre.TABTYP()	= '1'
+	zoom.Ok = "C"
+Endp	  
+
+;*
+Public Procedure ZoomDuplication 
+Beginp
+	zoom.Ok	= "N"
+Endp
+
+;*
+Public Procedure ZoomApresCleCreation ; après saisie de la clé 
+Beginp
+	TableParametre.Where.Exists()
+	Zoom.Res			= [ 'COGTB' Dos CeBin ]
+Endp
+
+;*
+Public Procedure ZoomCreationRes		; apres réservation en création 
+Beginp
+Endp
+
+;*
+Public Procedure ZoomAvantWrite 
+Beginp
+	; initialisation des codes enregistrement et mise à jour date et user
+   TableParametre.dos		= 999
+   TableParametre.tabno		= 0
+	TableParametre.cebin		= TableParametre.tabno
+   TableParametre.usercr	= system.user
+	TableParametre.usercrdh	= time(7)
+Endp
+
+;*
+Public Procedure ZoomApresCreation ; compte-rendu de création
+Beginp
+Endp				 
+
+;*
+Public Procedure ZoomModification ; avant entrée en modif
+Beginp
+	Zoom.Res		= [ 'COGTB' Dos CeBin ]
+Endp			  
+
+;*
+Public Procedure ZoomModificationRes		; apres réservation enmodif
+Beginp
+Endp					
+
+;*
+Public Procedure ZoomAvantRewrite 
+Beginp
+   TableParametre.usermo	= system.user
+   TableParametre.usermodh = time(7)
+Endp														 
+
+;*
+Public Procedure ZoomApresModification ; compte rendu de modification
+Beginp
+Endp				 
+
+;*
+Public Procedure ZoomSuppression ; avant entrée en suppression
+Beginp
+	Zoom.Ok	= "N"
+Endp													  
+
+;*
+Public Procedure ZoomSuppressionRes
+Beginp
+Endp
+														  
+;*
+Public Procedure ZoomAvantDelete 
+Beginp
+Endp
+
+;*
+Public Procedure ZoomApresSuppression ; compte rendu de suppression
+Beginp
+Endp						
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsult
+Beginp
+Endp				  
+
+;*
+Public Procedure ZoomConsult 	; à utiliser si note
+Beginp
+	Switch Harmony.Key
+	Case K_F7	|	Zoom_Call()
+	Endswitch 
+Endp
+
+;*
+Public Procedure ZoomAvantInput			; permet de griser les boutons et les choix
+Beginp
+Endp
+
+;*
+Public Procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+Beginp											; pour appel d'un zoom 
+	Switch Harmony.Key
+	Case K_F7	|	Zoom_Call()
+	Case K_F8	|	Zoom_Call(Harmony.Arret)	; Appel de zoom
+	
+	Case Harmony.Dataarret = 8002
+		If Harmony.Sourisbout = RIGHT_BUTTON
+			Zoom_Call()
+		Endif
+
+	Endswitch
+Endp
+
+;*
+Public Procedure ZoomFiltreAvantValeur
+Beginp
+Endp
+
+;*
+Public Procedure ZoomFiltreApresValeur 
+Beginp
+Endp	
+
+;*
+;* procedures liées à la lecture du ficher
+;*
+
+;*
+Public Procedure ZoomApresCle
+Beginp
+Endp															
+
+;*
+Public Procedure ZoomApresRead
+Beginp
+Endp															
+
+
+

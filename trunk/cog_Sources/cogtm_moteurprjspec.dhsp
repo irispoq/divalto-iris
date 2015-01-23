@@ -1,0 +1,243 @@
+SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7440 2015-01-23 13:04:23Z admin $')
+;>xdiva
+;*
+;*		Objet : Module de fonctions communes à la facturation des projets spécifiques UT125
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF		P204A						01/2015
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		Cog_MoteurFacturationPrjSpe_RES
+;*		Cog_MoteurFacturationPrjSpe_LIB
+
+;*
+;*
+;*
+
+;
+Include	gttcz00.dhsp						;déclarations communes
+
+;
+Module	"COGTM_000.DHOP"
+
+;
+Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			CogRs_UT125_RESA
+
+;*
+;*	 Réservations
+;*	
+
+;*
+Public Function int Cog_MoteurFacturationPrjSpe_RES()
+; Réservation pour action sur les tables du moteur de facturation spécifique
+; 0  --> OK
+1		wCpt		3,0	= 0
+1		wRetResa	1,0	= 1
+BeginF
+
+	CogRs_UT125_RESA.Init()
+
+	Do While wRetResa <> 0 AND wCpt < 100
+
+		If CogRs_UT125_RESA.FShare([MZ.Dos 'COG_UT125_FACTURATION'], 'R') = 0
+	  		wRetResa = 0
+		EndIf
+		wCpt++ 
+
+	WEnd
+
+	FReturn(wRetResa)
+
+EndF
+
+;*
+Public Function int Cog_MoteurFacturationPrjSpe_LIB()
+; Réservation pour action sur les tables du moteur de facturation spécifique
+; 0  --> OK
+BeginF
+
+	FReturn(CogRs_UT125_RESA.FShare([MZ.Dos 'COG_UT125_FACTURATION'], 'L'))
+
+EndF
+
+;*
+;*	  Traitements communs
+;*
+
+;*
+Public Function int Cog_CalculerDateFinFacturation(wDatD, wNbLoyer, wPeriod, &wDatF)
+; Calcul de la date de fin de facturation en fonction des 3 premiers paramètres
+; 0 --> Absence d'un paramètre, calcul non effectué
+; 1 --> wDatF est renseigné
+1		wDatD		 D
+1		wDatF		 D
+1		wNbLoyer	 >cogfdd.dhsd		Cog_LoyNb
+1		wPeriod	 >cogfdd.dhsd		Cog_Period	; 1;Mensuel 2:Bimestriel 3:Trimestriel 4:Semestriel 5:Annuel
+1		wNbMois	 6,0
+
+BeginF
+
+	;
+	wDatF = ' '
+	If wDatD = ' ' OR wNbLoyer	<= 0 OR wPeriod not in (1..5)
+		FReturn(0)
+	EndIf
+
+	;
+	Switch2 wPeriod
+		Case 1
+		 	wNbMois = wNbLoyer 
+		Case 2
+			wNbMois = wNbLoyer * 2
+		Case 3
+			wNbMois = wNbLoyer * 3
+		Case 4
+		 	wNbMois = wNbLoyer * 6
+		Case 5
+			wNbMois = wNbLoyer * 12
+	EndSwitch
+
+	wDatF = HDate(wDatD, -1, wNbMois)
+	If wDatF < wDatD
+		wDatF = '99991231'
+	EndIf
+
+	FReturn(1)
+
+EndF
+
+
+;*
+;*	  Actions sur UT126
+;*
+
+;*
+Public Procedure Cog_UT126_DeleteEcheancier(wUT125)
+;	La RESA sur COG_UT125 doit être gérée avant appel à cette procédure
+;  Suppression de l'échéancier COG_UT126 s'il existe 
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126		wRs_UT126
+Record		"COGFDD.DHSD"			COG_UT125		wUT125
+BeginP
+
+	; Filtres
+	IF wUT125.Affaire = ' ' OR wUT125.Ref = ' ' OR wUT125.Cog_LgNo = 0
+		Cog_EcritureLivreDeBord("Informations UT125 incomplètes - génération échéancier facturation non effectuée.")
+		PReturn
+	EndIf
+
+	; Suppression échéancier existant
+	wRs_UT126.Init()
+	wRs_UT126.Where.RemoveCondition("")
+	wRs_UT126.Where.Equal_Affaire(wUT125.Affaire)
+	wRs_UT126.Where.AddCondition("Equal_Affaire")
+	wRs_UT126.Where.Equal_Ref(wUT125.Ref)
+	wRs_UT126.Where.AddCondition("Equal_Ref")
+	wRs_UT126.Where.Equal_LgNo(wUT125.Cog_LgNo)
+	wRs_UT126.Where.AddCondition("Equal_LgNo")
+	wRs_UT126.DeleteWhere()
+
+	; Nouveau calcul
+
+
+EndP
+
+;*
+Public Procedure Cog_UT126_GenererEcheancier(wUT125)
+;	La RESA sur COG_UT125 doit être gérée avant appel à cette procédure
+;  Suppression de l'échéancier COG_UT126 s'il existe puis régénération
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126		wRs_UT126
+Record		"COGFDD.DHSD"			COG_UT125		wUT125
+1		wLoyerMt		13,D0			; montant loyer
+1		wLoyerMMt	13,D0			; montant loyer mensuel
+1		wSolde		13,D0
+1		wFaDDt		D				; date de première facture
+1		wFaFDt		D
+1		wPrevFaDt	D				; date facture précédente
+1		wAnD			4,0			; année première facture
+1		wAnF			4,0			; année dernière facture
+1		i				4,0
+1		j				2,0
+1		wNextFaMois 2,0			; prochain mois de facturation
+1		wStepMois	2,0
+
+BeginP
+
+	; Filtres
+	IF wUT125.Affaire = ' ' OR wUT125.Ref = ' ' OR wUT125.Cog_LgNo = 0
+		Cog_EcritureLivreDeBord("Informations UT125 incomplètes - génération échéancier facturation non effectuée.")
+		PReturn
+	EndIf
+
+	; Suppression échéancier existant
+	Cog_UT126_DeleteEcheancier(wUT125)
+
+	; Nouveau calcul
+	wFaDDt = Condition(Hday(wUT125.Cog_Date_Debut) = 1,  wUT125.Cog_Date_Debut, HDate(wUT125.Cog_Date_Debut, 'p', +1))
+	Cog_CalculerDateFinFacturation(wFaDDt, wUT125.Cog_LoyNb, wUT125.Cog_Period, wFaFDt)
+	wAnD = HYear(wFaDDt)
+	wAnF = HYear(wUT125.Cog_Date_Fin)
+
+	Switch2 wUT125.Cog_Period
+		Case 1
+		 	wStepMois = 1 
+		Case 2
+			wStepMois = 2
+		Case 3
+			wStepMois = 3
+		Case 4
+		 	wStepMois = 6
+		Case 5
+			wStepMois = 12
+	EndSwitch
+
+	wLoyerMt = Condition(wUT125.Cog_LoyNb > 0, wUT125.Cog_Montant / wUT125.Cog_LoyNb, 0)
+	wLoyerMMt= wLoyerMt / wStepMois
+	wSolde	= wUT125.Cog_Montant
+	wNextFaMois = HMonth(wFaDDt)
+
+	; dotations annuelles
+	For i = wAnD to wAnF
+
+		wRs_UT126.Init()
+		wRs_UT126.Dos		= wUT125.Dos
+		wRs_UT126.Annee 	= i
+		wRs_UT126.Affaire	= wUT125.Affaire
+		wRs_UT126.Ref		= wUT125.Ref
+		wRs_UT126.Cog_LgNo= wUT125.Cog_LgNo
+		wRs_UT126.DDt		= Condition(i&"0101" >= wFaDDt, i&"0101", wFaDDt)
+		wRs_UT126.FDt		= Condition(i&"1231" <= wFaFDt, i&"1231", wFaFDt)
+		wRs_UT126.Cog_BaseMt = wSolde
+		wRs_UT126.AntMt	= wUT125.Cog_Montant - wSolde
+
+		; dotations mensuelles et cumuls
+		For j = wNextFaMois to 12 step wStepMois
+
+			wRs_UT126.MoisMt(j) = Condition(wSolde <> 0,  wLoyerMt, 0)
+			wSolde = Condition(wSolde <> 0, wSolde - wLoyerMt, 0)
+			wPrevFaDt = wAnD & j & '01'
+			
+			; dernière échéance
+			If i = wAnF AND j = Hmonth(wFaFDt) AND wSolde <> 0
+				wRs_UT126.MoisMt(j) += wSolde
+				wSolde = 0
+			EndIf
+			
+			; cumul dotations	annuelles
+			wRs_UT126.AnMt += wRs_UT126.MoisMt(j)
+
+		Next
+
+		wRs_UT126.Insert()
+
+		wNextFaMois	= HMonth(Hdate(wPrevFaDt, '', wStepMois))
+
+	Next
+
+EndP
+

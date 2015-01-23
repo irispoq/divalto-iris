@@ -705,6 +705,7 @@ Else
 			Exitdo
 			;*
 		ElsIf G7.Choix(1) = 3	  	; facturation des projets spécifiques
+			; FLAG YLEF --> programCall du nouveau prg de facturation spec à implémenter?
 			Gtfproj.key = 'C' & MZ.Dos & G7.Projet
 			Loop Hread(Gtfproj,Prjap) = 0 and MZ.Dos = Prjap.Dos And Prjap.Affaire <= G7.AfrClas
 				; controle Affaire

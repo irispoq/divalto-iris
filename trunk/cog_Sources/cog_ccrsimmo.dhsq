@@ -5,10 +5,10 @@
 <DictionarySql defaultDictionary=ccfdd.dhsd DataBase=DCPT overwrittenby="cog_ccrsimmou.dhoq" ModuleInfo='$Id$'>
 
 ;*
-;*		Plan Budgétaire	 SANS BIND
+;*		Immobilisations	 SANS BIND
 ;*
 
-<RecordSql Name=CogRs_IMMO Comment='Immobilisation'>
+<RecordSql Name=CogRs_IMMO Comment='Immobilisation' ZoomOptimize=Yes>
 	public	record	A5DD.dhsd	MZ		MZ
 	public 	record 	CCFDD.dhsd	CZ
 

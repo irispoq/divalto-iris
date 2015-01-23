@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150122105029      
+;>xwin4obj                              7.0       20150123114222      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="22/01/2015"
+ date_modification="23/01/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
- dernier_id=117
+ dernier_id=71
  dernier_id_page=22
 [defaut]
  [aide_page]
@@ -17,8 +17,8 @@
   shift_f6=10000
 [enregistrements]
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "cogrs_uttab.dhoq",,cogrs_ut125,cogrs_ut125,1024,1
- "cogrs_uttab.dhoq",,cogrs_ut125,cogrs_ut125_sel,1024,1
+ "cogrs_tab.dhoq",,cogrs_tauxfi,cogrs_tauxfi,1024,1
+ "cogfdd.dhsd",,cog_t002,cog_t002_sel,300,0
 [onglet]
  [presentation]
   position=0,0
@@ -60,104 +60,36 @@
  fond="ZOOM"
  nature=double
  type=fenetre
- titre="Enregistrement à créer"
- nb_lig=6
+ titre="Date d'application"
+ nb_lig=3
  nb_col=50
  offset_lig=8
  offset_col=20
  ident_unique=2
  [obj_texte]
   [presentation]
-   position=11,8
-   taille=9,39
-   id=63
+   position=8,22
+   taille=9,50
+   id=3
    wstyle="STD"
   [texte]
-   texte="Affaire"
- [obj_texte]
-  [presentation]
-   position=23,8
-   taille=9,25
-   id=65
-   wstyle="STD"
-  [texte]
-   texte="Référence"
+   texte="Date d'application"
  [champ]
   [presentation]
-   position=11,80
-   taille=9,119
-   id=116
-   colonnes_saisie=80
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_ut125,prjlib,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=11,44
-   taille=9,36
-   noms="pilot"
-   id=64
-   colonnes_saisie=8
+   position=8,73
+   taille=9,33
+   id=61
+   colonnes_saisie=10
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=cogrs_ut125,affaire,cogrs_ut125
-   sequence=1
+   donnee=cogrs_tauxfi,cog_tauxdt,cogrs_tauxfi
   [param_saisie]
-   obligatoire=oui
    type_date=jj/mm/aaaa
-   table_associee=oui
   [touches]
    f7=135
-   f8=9500
    shift_f6=10000
   [traitements]
    microbol_click=8002
-   diva_apres="Champ_Affaire_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=23,44
-   taille=9,94
-   id=66
-   colonnes_saisie=25
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_ut125,ref,cogrs_ut125
-  [param_saisie]
-   obligatoire=oui
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=135
-   f8=9000
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Ref_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=33,44
-   taille=9,154
-   id=108
-   colonnes_saisie=80
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_ut125,artdes,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
 [page]
  numero=3
  fond="STD"
@@ -172,7 +104,7 @@
  [groupbox]
   [presentation]
    position=0,0
-   taille=47,199
+   taille=41,199
    attache_lgx=oui
    id=27
    wstyle="GROUPE"
@@ -181,8 +113,8 @@
    couleur_fond="ZOOM"
  [tableau]
   [presentation]
-   position=49,0
-   taille=176,200
+   position=42,0
+   taille=183,200
    attache_lgx=oui
    attache_lgy=oui
    id=31
@@ -208,7 +140,7 @@
     id=44
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=cogrs_ut125,cenote,cogrs_ut125
+    donnee=cogrs_tauxfi,cenote,cogrs_tauxfi
     saisie=non
    [param_saisie]
     esp_si_zero=oui
@@ -224,101 +156,118 @@
     titre="#tblnote"
     largeur_col=12
     wstyle="ENTETE_COLONNE"
-  [champ_tableau]
+  [multi_choix_tableau]
    [presentation]
-    position=39,49
-    taille=9,36
-    id=114
-    colonnes_saisie=8
-    wstyle="CHAMP_NON_SAISI"
+    position=0,0
+    taille=16,28
+    id=45
+    wstyle="TABLEAU_SAISI"
    [description]
-    donnee=cogrs_ut125,affaire,cogrs_ut125
+    donnee=cogrs_tauxfi,cejoint,cogrs_tauxfi
     saisie=non
    [param_saisie]
-    type_date=jj/mm/aaaa
-    table_associee=oui
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CEJOINT"
+    obligatoire=non
    [touches]
     f7=135
     shift_f6=10000
    [info_bulle]
-   texte="Affaire"
+   texte="Présence Fichier Joint"
    [param_colonne]
-    titre="Affaire"
-    largeur_col=36
+    titre="#tblficjoin"
+    largeur_col=13
     wstyle="ENTETE_COLONNE"
-   [boutons]
-    "zoom"
   [champ_tableau]
    [presentation]
-    position=51,49
-    taille=9,94
-    id=115
-    colonnes_saisie=25
+    position=27,61
+    taille=9,32
+    id=70
+    colonnes_saisie=10
     wstyle="CHAMP_NON_SAISI"
    [description]
-    donnee=cogrs_ut125,ref,cogrs_ut125
+    donnee=cogrs_tauxfi,cog_tauxdt,cogrs_tauxfi
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
-    table_associee=oui
    [touches]
     f7=135
     shift_f6=10000
    [info_bulle]
-   texte="Référence"
+   texte="Date d'application"
    [param_colonne]
-    titre="Référence"
-    largeur_col=94
+    titre="Date"
+    largeur_col=32
     wstyle="ENTETE_COLONNE"
-   [boutons]
-    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,142
+    id=46
+    colonnes_saisie=40
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_tauxfi,lib,cogrs_tauxfi
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="Libellé"
+    largeur_col=107
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=58,61
+    taille=9,22
+    id=68
+    colonnes_saisie=6
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_tauxfi,cog_taux,cogrs_tauxfi
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Taux"
+   [param_colonne]
+    titre="Taux"
+    largeur_col=26
+    wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
-   position=22,8
-   taille=9,26
-   id=76
+   position=23,8
+   taille=9,15
+   id=58
    wstyle="STD"
   [texte]
-   texte="Affaire"
- [obj_texte]
-  [presentation]
-   position=32,8
-   taille=9,33
-   id=78
-   wstyle="STD"
-  [texte]
-   texte="Référence"
+   texte="Libellé"
  [champ]
   [presentation]
-   position=22,45
-   taille=9,36
-   noms="pilot"
-   id=77
-   colonnes_saisie=8
+   position=23,38
+   taille=9,144
+   id=60
+   colonnes_saisie=40
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=cogrs_ut125,affaire,cogrs_ut125_sel
+   donnee=cog_t002,lib,cog_t002_sel
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
    f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=32,45
-   taille=9,92
-   noms="pilot"
-   id=79
-   colonnes_saisie=25
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_ut125,ref,cogrs_ut125_sel
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
+   ctrl_f6=10300
    shift_f6=10000
   [traitements]
    microbol_click=8002
@@ -404,290 +353,82 @@
    nom="FICHE"
    libelle="DEFINITION"
    couleur_fond="STD"
- [groupbox]
-  [presentation]
-   position=74,3
-   taille=139,273
-   id=73
-   wstyle="GROUPE"
-  [param_groupbox]
-   texte="Paramètres"
-   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=26,13
-   taille=9,39
-   id=68
+   position=27,13
+   taille=9,43
+   id=65
    wstyle="STD"
   [texte]
-   texte="Affaire"
+   texte="Date d'application"
  [obj_texte]
   [presentation]
-   position=38,13
-   taille=9,25
-   id=67
+   position=47,13
+   taille=9,15
+   id=48
    wstyle="STD"
   [texte]
-   texte="Référence"
+   texte="Libellé"
  [obj_texte]
   [presentation]
-   position=102,10
-   taille=9,42
-   id=84
+   position=58,13
+   taille=9,22
+   id=63
    wstyle="STD"
   [texte]
-   texte="Date Début"
+   texte="Taux"
  [obj_texte]
   [presentation]
-   position=102,152
-   taille=9,33
-   id=88
-   wstyle="STD"
-  [texte]
-   texte="Date Fin"
- [obj_texte]
-  [presentation]
-   position=113,10
-   taille=9,51
-   id=96
-   wstyle="STD"
-  [texte]
-   texte="Code opération"
- [obj_texte]
-  [presentation]
-   position=124,10
-   taille=9,71
-   id=90
-   wstyle="STD"
-  [texte]
-   texte="Nombre de loyers à facturer"
- [obj_texte]
-  [presentation]
-   position=124,152
-   taille=9,38
-   id=99
-   wstyle="STD"
-  [texte]
-   texte="Périodicité"
- [obj_texte]
-  [presentation]
-   position=135,10
-   taille=9,34
-   id=94
-   wstyle="STD"
-  [texte]
-   texte="Montant"
- [obj_texte]
-  [presentation]
-   position=146,10
-   taille=9,64
-   id=104
-   wstyle="STD"
-  [texte]
-   texte="Nombre de loyers facturés"
- [obj_texte]
-  [presentation]
-   position=157,10
-   taille=9,86
-   id=92
-   wstyle="STD"
-  [texte]
-   texte="Nombre de loyers restants"
- [obj_texte]
-  [presentation]
-   position=168,10
-   taille=9,68
-   id=86
-   wstyle="STD"
-  [texte]
-   texte="Date Derniere Facture"
- [obj_texte]
-  [presentation]
-   position=179,10
-   taille=9,38
-   id=82
-   wstyle="STD"
-  [texte]
-   texte="Axe anaël"
- [champ]
-  [presentation]
-   position=26,49
-   taille=9,36
+   position=58,85
+   taille=9,22
    id=71
-   colonnes_saisie=8
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_ut125,affaire,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=135
-   shift_f6=10000
-  [boutons]
-   "zoom"
+   wstyle="STD"
+  [texte]
+   texte="%"
  [champ]
   [presentation]
-   position=38,49
-   taille=9,94
-   id=72
-   colonnes_saisie=25
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_ut125,ref,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=135
-   shift_f6=10000
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=48,49
-   taille=9,224
-   id=102
-   colonnes_saisie=80
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_ut125,artdes,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=179,133
-   taille=9,144
-   id=103
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_ut125,anaellib,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
- [case_a_cocher]
-  [presentation]
-   position=90,9
-   taille=9,48
-   id=100
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_duree_limitee,cogrs_ut125
-  [param_case]
-   texte="Durée limitée"
-   cadrage=droite
-   valeur="2","1"
-   choix="cog_gtfdmc.dhfi",""
-  [touches]
-   f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=102,95
-   taille=9,36
-   id=85
-   colonnes_saisie=10
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_date_debut,cogrs_ut125
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=102,205
+   position=27,61
    taille=9,32
-   id=89
+   id=66
    colonnes_saisie=10
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=cogrs_ut125,cog_date_fin,cogrs_ut125
+   donnee=cogrs_tauxfi,cog_tauxdt,cogrs_tauxfi
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
    f7=135
    shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
-   position=113,95
-   taille=9,36
-   id=97
-   colonnes_saisie=3
+   position=47,61
+   taille=9,144
+   id=50
+   colonnes_saisie=40
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=cogrs_ut125,op,cogrs_ut125
+   donnee=cogrs_tauxfi,lib,cogrs_tauxfi
   [param_saisie]
    obligatoire=oui
    type_date=jj/mm/aaaa
-   table_associee=oui
   [touches]
    f7=135
-   f8=9060
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Op_1_Ap"
- [champ]
-  [presentation]
-   position=124,95
-   taille=9,36
-   id=107
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_loynb,cogrs_ut125
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f6=10000
- [multi_choix]
-  [presentation]
-   position=124,205
-   taille=9,67
-   id=98
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_period,cogrs_ut125
-  [param_saisie]
-   esp_si_zero=oui
-  [param_multi]
-   choix="cog_gtfdmc.dhfi","PERIODICITE"
-  [touches]
-   f7=135
+   ctrl_f6=10300
    shift_f6=10000
   [traitements]
    microbol_click=8002
  [champ]
   [presentation]
-   position=135,95
-   taille=9,36
-   id=95
-   colonnes_saisie=11
+   position=58,61
+   taille=9,22
+   id=64
+   colonnes_saisie=6
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=cogrs_ut125,cog_montant,cogrs_ut125
+   donnee=cogrs_tauxfi,cog_taux,cogrs_tauxfi
   [param_saisie]
+   obligatoire=oui
    type_date=jj/mm/aaaa
    esp_si_zero=oui
   [touches]
@@ -695,89 +436,6 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
- [champ]
-  [presentation]
-   position=146,95
-   taille=9,36
-   id=105
-   colonnes_saisie=8
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_loyfanb,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=157,95
-   taille=9,36
-   id=106
-   colonnes_saisie=8
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_loyrestnb,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=168,95
-   taille=9,36
-   id=87
-   colonnes_saisie=10
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_date_derniere_facture,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=179,95
-   taille=9,36
-   id=83
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_axeanael,cogrs_ut125
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=135
-   f8=19012
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Cog_AxeAnael_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=26,89
-   taille=9,182
-   id=117
-   colonnes_saisie=80
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_ut125,prjlib,cogrs_ut125
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
 [page]
  numero=12
  fond="STD"
@@ -853,7 +511,7 @@
    colonnes_saisie=20
    wstyle="CHAMP_AFF"
   [description]
-   donnee=cogrs_ut125,usercr,cogrs_ut125
+   donnee=cogrs_tauxfi,usercr,cogrs_tauxfi
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -868,7 +526,7 @@
    colonnes_saisie=20
    wstyle="CHAMP_AFF"
   [description]
-   donnee=cogrs_ut125,usermo,cogrs_ut125
+   donnee=cogrs_tauxfi,usermo,cogrs_tauxfi
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -883,7 +541,7 @@
    colonnes_saisie=19
    wstyle="CHAMP_AFF"
   [description]
-   donnee=cogrs_ut125,usercrdh,cogrs_ut125
+   donnee=cogrs_tauxfi,usercrdh,cogrs_tauxfi
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa+hh:mm:ss
@@ -898,7 +556,7 @@
    colonnes_saisie=19
    wstyle="CHAMP_AFF"
   [description]
-   donnee=cogrs_ut125,usermodh,cogrs_ut125
+   donnee=cogrs_tauxfi,usermodh,cogrs_tauxfi
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa+hh:mm:ss
@@ -995,6 +653,13 @@
    [info_bulle]
    texte="Note <Shift+F6>"
   [item]
+   [param_bouton]
+    wnom="FICJOINT"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+   [info_bulle]
+   texte="Fichiers joints <Ctrl+F6>"
+  [item]
    type=sep
    dessin=sep
    [param_bouton]
@@ -1064,21 +729,6 @@
    [info_bulle]
    texte="Aide <Shift+F1>"
   [item]
-   type=sep
-   dessin=sep
-   [param_bouton]
-    wnom=""
-    wid_ressource="SEPARATEUR_7__2"
-  [item]
-   [param_bouton]
-    wnom=".TOOLBAR"
-    wfic1="#aff_compta",0
-    wid_ressource="COG_BTNUT126"
-    wetype_trait=arret
-    warret=1001
-   [info_bulle]
-   texte="Echéancier de facturation"
-  [item]
    dessin=vide
    [param_bouton]
     wnom=""
@@ -1131,89 +781,19 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogez_ut125.dhsf 7440 2015-01-23 13:04:23Z admin $')
-;*
-;*	  Traitement du zoom facturation loyer sur projets spec
-;*
-;*		Log	Version		N° modif		Date			Modifications
-;*		--------------------------------------------------------------------------------------------------------------
-;*	  	YLEF	P205A			Init			11.2014		Version initiale
-;*
+
+SetModuleInfo('$Id: cogez_t002.dhsf 7440 2015-01-23 13:04:23Z admin $')
 
 ;*
-;*	  Déclarations
+;*
 ;*
 
 ;
-Include "GTTCZ00.DHSP"
+Public RecordSql "cogrs_tab.dhoq" CogRs_TauxFi CogRs_TauxFi
 
 ;
-Module "CCTM000.dhop"
-
-;
-Public RecordSql "cogrs_uttab.dhoq" cogrs_ut125 cogrs_ut125
-Public RecordSql "cogrs_uttab.dhoq" cogrs_ut125 cogrs_ut125_sel
-
-;
-Public Record "ddsys.dhsd" rowinfo 	zoomselection
-Public Record "ccfdd.dhsd" c5 		c5
-Public Record "gtfdd.dhsd" ETS
-Public Record "gtfdd.dhsd" ART
-Public Record "gtfdd.dhsd" PRJAP
-Public Record "gtfdd.dhsd" T020
-
-;*
-;*
-;*
-
-;*
-Public Procedure Champ_Affaire_1_Ap
-;
-Beginp
-	cogrs_ut125.PRJLIB = ' '
- 	If Controle_Affaire(cogrs_ut125.Affaire,5000,,conf=false,niv=1) < 4
- 		cogrs_ut125.PRJLIB = PRJAP.Lib80													
-	EndIf
-Endp
-
-
-;*
-Public Procedure Champ_Cog_AxeAnael_1_Ap
-;
-Beginp
-	If cogrs_ut125.Cog_AxeAnael <> ' '
-		COGrs_UT125.ANAELLIB = ' '
-		If Controle_Axe(2, cogrs_ut125.Cog_AxeAnael, existence = true, conf = false, hsdt = today, axetyp = 1, etablissement = false) < 2
-			COGrs_UT125.ANAELLIB = C5.Lib
-		Else
-			MessageBox("Code axe non valide.", "Alerte", MB_ICONEXCLAMATION)
-		Endif
-   Endif
-Endp
-
-
-;*
-Public Procedure Champ_Op_1_Ap
-; contrôle du code opération 
-Beginp
-	If Lectab(20, cogrs_ut125.OP, 1120)	= 0
-		If T020.Cog_MotPrjFlag <> 2
-			MessageBox("Code opération non paramétré pour le moteur de facturation projets spécifiques.", "Alerte", MB_ICONEXCLAMATION)
-			Harmony.Retour = XMENEXT_RESSAISIE
-		EndIf
-	EndIf
-Endp
-
-
-;*
-Public Procedure Champ_Ref_1_Ap
-;
-Beginp
-	COGrs_UT125.ARTDES = ' '
-	If Controle_Article(cogrs_ut125.Ref,2100)	= 0
-		COGrs_UT125.ARTDES = ART.Des
-	EndIf
-Endp
+Public Record "ddsys.dhsd" rowinfo zoomselection
+Public Record "cogfdd.dhsd" Cog_T002 Cog_T002_sel
 [/diva]
 [diva_base]
 [/diva]

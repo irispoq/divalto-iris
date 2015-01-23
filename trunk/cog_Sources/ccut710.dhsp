@@ -1,0 +1,28 @@
+SetModuleInfo('$Id: ccut710.dhsp 7357 2015-01-09 16:28:33Z admin $')
+;>xdiva
+;*
+;*		consultation des amortissements																									cctt710.dhsp
+;*
+
+;*		log	 version	  n°modif		date		modifications
+;*
+;*		hc 		5.2a		2332			06.2002	réécriture en mode tableau
+;*		jlsi		5.6		3229			07.2005	modifications selon IFRS
+   
+OverWrite cctt710.dhop
+
+;*
+;*		déclarations
+;*
+
+;
+Include	"cctc000.dhsp"
+
+
+;
+Public	Record		"CCFDD.dhsd"		I2T1					; amortissement en liste
+
+;*
+;*
+;*
+
