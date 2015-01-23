@@ -24,6 +24,16 @@ Public RecordSQL "gtrstab.dhoq" CodeOperation CodeOperation
 ;*
 
 ;*
+Procedure ZoomAvantConsult
+;
+BeginP
+
+	Standard.ZoomAvantConsult
+	XmeSetAttribut('cog_prjflux', AN_VISIBILITE, Condition(codeoperation.Cog_MotPrjFlag=2, AV_VISIBLE, AV_GRISE))
+
+EndP
+
+;*
 Procedure ZoomAvantWrite
 ;
 BeginP

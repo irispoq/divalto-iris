@@ -53,3 +53,33 @@ Bind	Cog_T001
 		COG_T001.Lib
 
 ;*
+;* 		Taux financiers
+;*
+
+<RecordSql Name=CogRs_TauxFi Comment='Table Taux financiers' ZoomOptimize=Yes>
+Public Record A5DD.dhsd		MZ
+Public Record COGFDD.dhsd	COG_T000
+<SELECT>
+	COG_T002.*
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_T002 
+<WHERE>
+	( COG_T002.Dos = CASE WHEN COG_T000.TabTyp(2) = 2 THEN 999 ELSE MZ.Dos END)
+	Case Like_Lib(char Lib)
+		COG_T002.Lib LIKE Lib		
+	Case PK(date dt)
+		COG_T002.Cog_TauxDt = dt
+	Case Exists(date dt)
+		COG_T002.Cog_TauxDt = dt
+	Case SupEgal_Date(date dt)
+		COG_T002.Cog_TauxDt >= dt
+	Case En_Vigueur(date dt)
+		COG_T002.Cog_TauxDt <= dt
+<ORDERBY>
+	Case Par_Date		"Par date"
+		COG_T002.Cog_TauxDt DESC,
+		COG_T002.Cog_Taux
+	Case Par_Libelle	"Par Libellé"
+		COG_T002.Lib,
+		COG_T002.Cog_TauxDt,
+		COG_T002.Cog_Taux

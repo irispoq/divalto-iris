@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 7151 2014-12-01 14:42:24Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7440 2015-01-23 13:04:23Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -17,11 +17,14 @@ Module	"A5PMNoteJoint.dhop"
 Module 	"XZoom7.dhop"
 Module 	"CCTM000.dhop"
 Module	"CCPMFIC.dhop"
-
+Module	"COGTM_MoteurPrjSpec.DHOP"
 
 ; Record Sql 
-Public recordSQL  cogrs_uttab.dhoq  CogRs_UT125									; Table UT125
-Public recordSQL  cogrs_uttab.dhoq  cogrs_ut125		CogRs_UT125_Sel		; Table pour sélection
+Public recordSQL  "cogrs_uttab.dhoq"  CogRs_UT125									; Table UT125
+Public recordSQL  "cogrs_uttab.dhoq"  cogrs_ut125		CogRs_UT125_Sel		; Table pour sélection
+
+;
+Public Record "gtfdd.dhsd" PRJAP
 
 ; Variables
 1	nbsel							4,0			; Nombre de lignes sélectionnées
@@ -32,14 +35,27 @@ Public recordSQL  cogrs_uttab.dhoq  cogrs_ut125		CogRs_UT125_Sel		; Table pour s
 ;*
 
 ;*
-; controle resa en cours de fact
-Include	"CogGt_Controle_Fichier.dhsp"
+Procedure Cog_UT125_Next_LgNo
+;	renseigne Cog_LgNo au RS CogRS_UT125
+RecordSQL  "cogrs_uttab.dhoq"  	CogRs_UT125			wRs_UT125
+BeginP
 
+	wRs_UT125.Init()
+	wRs_UT125.Where.Max_LgNo(CogRs_UT125.Affaire)
+	If wRs_UT125.Select() > 0
+		CogRs_UT125.Cog_LgNo = wRs_UT125.Cog_LgNo + 1
+	Else
+		CogRs_UT125.Cog_LgNo = 1
+	EndIf
+
+EndP
 
 ;*	Mise à jour des boutons (affichage, grisés, ...)
 Public Procedure Maj_Menu_Boutons
 ; met à jour le menu et les boutons
 BeginP
+
+	xmetoolbarenablebutton(idOutilZoom,"cog_btnut126", False)
 
 	Switch ZOOM.ACTION
 
@@ -66,6 +82,7 @@ BeginP
 
 		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(cogrs_ut125.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
 		xmetoolbarenablebutton(idOutilZoom,"NOTE", Condition(cogrs_ut125.CENOTE = 2, True, False))
+		xmetoolbarenablebutton(idOutilZoom,"cog_btnut126", Condition(cogrs_ut125.Ref <> ' ', True, False))
 
 	EndSwitch
 
@@ -82,7 +99,7 @@ public procedure Traiter_Selection
 beginp	; Traiter_Selection
 
 	nbsel ++
-	Pong("cogrs_ut125_" & nbsel,[ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref])
+	Pong("cogrs_ut125_" & nbsel,[ CogRs_UT125.Affaire CogRs_UT125.Ref])
 
 endp		; Traiter_Selection
 
@@ -104,7 +121,7 @@ beginp
 	if nbsel = 0
 
 		nbsel	= 1
-		Pong("cogrs_ut125_" & nbsel, [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref])
+		Pong("cogrs_ut125_" & nbsel, [ CogRs_UT125.Affaire CogRs_UT125.Ref])
 		Pong("cogrs_ut125_nbre",nbsel)
 	
 	endif
@@ -132,12 +149,6 @@ Public Procedure Construire_Condition_Selection(nom, premier)
 Beginp
 	cogrs_ut125.where.RemoveCondition(Nom)
 
-	if cogrs_ut125_Sel.Etb <> ' '
-		Param = banaliser_condition(cogrs_ut125_Sel.Etb, premier)
-		cogrs_ut125.Where.Like_Etb(Param)
-		Ajouter_condition(Valeur_Condition,'Like_Etb')
-	endif
-
 	if cogrs_ut125_Sel.Affaire <> ' '
 		Param = banaliser_condition(cogrs_ut125_Sel.Affaire, premier)
 		cogrs_ut125.Where.Like_Affaire(Param)
@@ -159,8 +170,6 @@ Endp
 Public Procedure ZoomDebut 
 Beginp
 
-	Controle_Fichier				; controle des resa sur cog_gtftab
-
 	Init_Zoom(FicheNoBloc = 0)
 	Seek_Soc(MZ.Dos)				; recherche du dossier et T000
 	Seek_CA(mz.Dos)
@@ -168,10 +177,19 @@ Beginp
 	Note_Debut 						;Init de la gestion des notes
 
 	cogrs_ut125_Sel.Init()
-	CogRs_UT125_Sel.Etb = MZ.Etb
 	cogrs_ut125.Orderby.Ordre_PK()
 	
-	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE, TRUE)
+	If G3XZ.Projet <> ' '
+		g7.ZoomPar= 'PILOTE'
+		g7.projet = G3XZ.Projet
+		cogrs_ut125_Sel.Affaire = g7.projet
+		XmeSetAttribut('pilot', AN_VISIBILITE, AV_GRISE)
+		Construire_Condition_Selection(ZOOM_SQL_CONDITION_PILOTEE, TRUE)
+	Else
+		g7.ZoomPar= 'NORMAL'
+		g7.projet = ' '
+		Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE, TRUE)
+	EndIf
 
 	; sauvegarde du mode d'appel
 	g7.pong		= g3xz.pong
@@ -188,7 +206,7 @@ Endp
 Public Procedure ZoomVAlidation ; validation du zoom
 Beginp
 
-	zoom.valretour	= [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref]
+	zoom.valretour	= [ CogRs_UT125.Affaire CogRs_UT125.Ref]
 	if g7.pong = true
 		Envoyer_Courant
 	endif
@@ -209,9 +227,19 @@ Public Procedure ZoomCreation
 Beginp
 	; initialiser les données 
 	cogrs_ut125.init()
-	CogRs_UT125.Etb 					= MZ.Etb	
 	CogRs_UT125.Cog_Duree_Limitee = 1
 	CogRs_UT125.Cog_Period			= 1
+
+	;	 Mode piloté
+	If G7.ZoomPar = 'PILOTE' 
+		cogrs_ut125.Affaire = G7.Projet 
+		If Controle_Affaire(cogrs_ut125.Affaire,5000,,conf=false,niv=1) < 4
+		 	cogrs_ut125.PRJLIB = PRJAP.Lib80
+		Else
+			MessageBox("Code affaire " & left(cogrs_ut125.Affaire) & " non autorisé.", "Alerte", MB_ICONERROR)
+			Zoom.Ok = 'I'
+		EndIf
+	EndIf
 
 	Zoom.Modelf 		= ZOOM_MODE_FICHE		; pour interdire la création en mode liste
 Endp	  
@@ -228,9 +256,14 @@ Endp
 ;*
 Public Procedure ZoomApresCleCreation ; après saisie de la clé 
 Beginp
-	cogrs_ut125.Where.Exists(CogRs_UT125.Etb, CogRs_UT125.Affaire , CogRs_UT125.Ref)
-	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref ]
-	Zoom.Titrevar	= [CogRs_UT125.Etb " - " CogRs_UT125.Affaire " - " CogRs_UT125.Ref]
+	Cog_UT125_Next_LgNo 
+	If CogRs_UT125.Cog_LgNo >=995
+		MessageBox("Le nombre maximal de lignes est atteint pour cette affaire.", "Alerte", MB_ICONEXCLAMATION)
+		Zoom.Ok = 'I'
+	EndIf
+	cogrs_ut125.Where.Exists(CogRs_UT125.Affaire , CogRs_UT125.Ref, CogRs_UT125.Cog_LgNo)
+	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Affaire CogRs_UT125.Ref CogRs_UT125.Cog_LgNo]
+	Zoom.Titrevar	= [CogRs_UT125.Affaire " - " CogRs_UT125.Ref]
 Endp
 
 ;*
@@ -242,24 +275,47 @@ Endp
 ;*
 Public Procedure ZoomAvantWrite 
 Beginp
-	; initialisation des codes enregistrement et mise à jour date et user
-   cogrs_ut125.Dos 			= mz.Dos
-	cogrs_ut125.UserCr 		= SYSTEM.User
-	cogrs_ut125.UserCrDh 	= Time(7)
-	cogrs_ut125.Note 		= Note_Creation_(C_Applic_DAV, 'cogrs_ut125')	
-	cogrs_ut125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
+
+	; RESA COMMUNE
+	If Cog_MoteurFacturationPrjSpe_RES <> 0
+
+		MessageBox("Le moteur de facturation est réservé, mise à jour impossible.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'S'
+
+	Else
+
+		; initialisation des codes enregistrement et mise à jour date et user
+	   CogRs_UT125.Dos 			= mz.Dos
+		CogRs_UT125.UserCr 		= SYSTEM.User
+		CogRs_UT125.UserCrDh 	= Time(7)
+		CogRs_UT125.Note 			= Note_Creation_(C_Applic_DAV, 'cogrs_ut125')	
+		CogRs_UT125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
+		CogRs_UT125.Cog_LoyRestNb= CogRs_UT125.Cog_LoyNb
+		Cog_CalculerDateFinFacturation(CogRs_UT125.Cog_Date_Debut, CogRs_UT125.Cog_LoyNb, CogRs_UT125.Cog_Period, CogRs_UT125.Cog_Date_Fin)
+
+	EndIf
+
 Endp
 
 ;*
 Public Procedure ZoomApresCreation ; compte-rendu de création
 Beginp
-	Zoom.Titrevar = [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref ]
+	
+	Zoom.Titrevar = [ CogRs_UT125.Affaire CogRs_UT125.Ref ]
+	Cog_UT126_GenererEcheancier(CogRs_UT125.COG_UT125)
+	Cog_MoteurFacturationPrjSpe_LIB
+
 Endp				 
 
 ;*
 Public Procedure ZoomModification ; avant entrée en modif
 Beginp
-	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref]
+	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Affaire CogRs_UT125.Ref CogRs_UT125.Cog_LgNo]
+
+	If CogRs_UT125.Cog_LoyFaNb > 0
+		MessageBox("La facturation a débuté, modification impossible","Alerte", MB_ICONEXCLAMATION)
+		Zoom.Ok = 'I'
+	EndIf
 Endp			  
 
 ;*
@@ -271,22 +327,38 @@ Endp
 ;*
 Public Procedure ZoomAvantRewrite 
 Beginp
-   cogrs_ut125.UserMo		= SYSTEM.User
-   cogrs_ut125.UserMoDh 	= Time(7)
-	cogrs_ut125.Note 		= Note_Modification_ (C_Applic_DAV, cogrs_ut125.Note, 'cogrs_ut125')
-	cogrs_ut125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
+
+	; RESA COMMUNE
+	If Cog_MoteurFacturationPrjSpe_RES <> 0
+
+		MessageBox("Le moteur de facturation est réservé, mise à jour impossible.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'S'
+
+	Else
+
+	   cogrs_ut125.UserMo		= SYSTEM.User
+	   cogrs_ut125.UserMoDh 	= Time(7)
+		cogrs_ut125.Note 			= Note_Modification_ (C_Applic_DAV, cogrs_ut125.Note, 'cogrs_ut125')
+		cogrs_ut125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
+		CogRs_UT125.Cog_LoyRestNb= CogRs_UT125.Cog_LoyNb
+		Cog_CalculerDateFinFacturation(CogRs_UT125.Cog_Date_Debut, CogRs_UT125.Cog_LoyNb, CogRs_UT125.Cog_Period, CogRs_UT125.Cog_Date_Fin)
+
+	EndIf
+
 Endp														 
 
 ;*
 Public Procedure ZoomApresModification ; compte rendu de modification
 Beginp
-	Zoom.Titrevar = [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref ]
+	Zoom.Titrevar = [ CogRs_UT125.Affaire CogRs_UT125.Ref ]
+	Cog_UT126_GenererEcheancier(CogRs_UT125.COG_UT125)
+	Cog_MoteurFacturationPrjSpe_LIB
 Endp				 
 
 ;*
 Public Procedure ZoomSuppression ; avant entrée en suppression
 Beginp
-	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref]
+	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Affaire CogRs_UT125.Ref CogRs_UT125.Cog_LgNo]
 Endp													  
 
 ;*
@@ -297,12 +369,26 @@ Endp
 ;*
 Public Procedure ZoomAvantDelete 
 Beginp
-	Note_Suppression_(C_Applic_DAV, cogrs_ut125.Note)
+
+	; RESA COMMUNE
+	If Cog_MoteurFacturationPrjSpe_RES <> 0
+
+		MessageBox("Le moteur de facturation est réservé, suppression impossible.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'I'
+
+	Else
+		Note_Suppression_(C_Applic_DAV, cogrs_ut125.Note)
+	EndIf
+
 Endp
 
 ;*
 Public Procedure ZoomApresSuppression ; compte rendu de suppression
 Beginp
+
+	Cog_UT126_DeleteEcheancier(CogRs_UT125.COG_UT125)
+	Cog_MoteurFacturationPrjSpe_LIB
+
 Endp						
 
 ;*
@@ -326,6 +412,11 @@ Beginp
 			if G7.PONG = True
 				Envoyer_Selections
 			endif
+
+		Case Harmony.Dataarret = 1001
+			Ping("COG_UT125", Cogrs_UT125.Cog_UT125)
+			ProgramCall("cogpp_ut126.dhop")
+													 
 	Endswitch 
 Endp
 
@@ -378,7 +469,7 @@ Endp
 ;*
 Public Procedure ZoomApresRead
 Beginp
-	Zoom.Titrevar = [ CogRs_UT125.Etb CogRs_UT125.Affaire CogRs_UT125.Ref ]
+	Zoom.Titrevar = [ CogRs_UT125.Affaire CogRs_UT125.Ref ]
 Endp															
 
 

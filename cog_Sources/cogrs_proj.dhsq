@@ -1,0 +1,21 @@
+<DictionarySql DefaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_proju.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du GTFAT
+;*
+
+;*
+;*		Article						ART
+;*
+
+<RecordSql Name=Cogrs_PrjComp Comment='Complément projet'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	COG_PRJAP.*
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_PRJAP
+<WHERE>
+	COG_PRJAP.DOS = MZ.Dos
+	Case PK(char aff)
+		COG_PRJAP.AFFAIRE = aff
+	
+

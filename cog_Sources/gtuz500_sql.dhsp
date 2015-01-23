@@ -1,15 +1,33 @@
+;>xdiva
+;*
+;*      Zoom sur Affaire				Enregistrement PrjAp de GTFPROJ
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		mjv		4.1						01.1999	Version initiale en Diva 
+;*		TP			7.0						12.2011	Migration Zoom SQL
+;*		YLEF		P205A						01.2015	Synchronisation avec COG_PRJAP
+
 OverWrite gttz500_sql.dhop
 
+;*
+;*	Déclarations
+;*
+
+;
+include "GTTCZ00.dhsp"			;déclarations communes
+
+;
 Module	GRPMFIC.dhop
 Module	GRTM000.dhop
 ;Module	Cog_Gdiva.dhop
 
-include "GTTCZ00.dhsp"			;déclarations communes
-public RecordSQL 	"gtrsproj.dhoq" 	Affaire 	Affaire		; Affaire (Enregistrement principal)
 ;
-;Surcharge SU
-public RecordSQL 	"gtrsppproj.dhoq" Affaire 	su_sel		; Affaire (Enregistrement principal)
-;
+public RecordSQL 	"gtrsproj.dhoq" 	Affaire 				Affaire		; Affaire (Enregistrement principal)
+public RecordSQL 	"gtrsppproj.dhoq" Affaire 				su_sel		; Affaire (Enregistrement principal)
+Public RecordSQL	"COGRS_PROJ.DHOQ"	CogRs_PrjComp
+
 ;
 HfileVersion 	Cogfdd.dhsd 	COGGTF_TAB
 
@@ -19,6 +37,7 @@ Public Hfile	cogfdd.dhsd	Cog_FAffectBudget	Cog_FAffectBudget_01
 Public Hfile	cogfdd.dhsd	Cog_FDirCliente	Cog_FDirCliente_01
 Public hfile	"ccfdd.dhsd"	ccfjca	ccfjca_dev_01
 
+;
 Public record 	Cogfdd.dhsd 	COG_GRTEVT				; Code événement
 Public record 	grfdd.dhsd 		EVTTIERS					; Evénement
 Public Record	grfdd.dhsd		XZ				GRXZ		; Enregistrement de communication avec le module RT
@@ -30,6 +49,7 @@ Public record 	Cogfdd.dhsd 	COG_UT107
 Public record 	Cogfdd.dhsd 	COG_UT108
 Public record 	Cogfdd.dhsd 	COG_UT109
 Public record 	Cogfdd.dhsd 	COG_UT110
+Public record 	Cogfdd.dhsd 	COG_UT125
 Public Record 	gtfdd.dhsd 		T012
 Public Record 	gtfdd.dhsd 		T064
 Public record 	gtfdd.dhsd 		SOCCRM					; Dossier CRM
@@ -41,8 +61,10 @@ public record "gtfdd.dhsd" CLI 		CLI_sel
 public record "gtfdd.dhsd" T064		T064_sel					; classe d'affaire (sélection)
 Public Record "Cogfdd.Dhsd"	Cog_Ut120
 
+;
 define IdMenuZoomBis		= G3XT.IDBARRE(3)	
 
+;
 1		Sauve_Classe		8
 1		Liste					L
 1		wafrclas				8
@@ -51,6 +73,7 @@ define IdMenuZoomBis		= G3XT.IDBARRE(3)
 
 1	g_Dossier	>GTFDD.DHSD	Dos
 
+;
 include "CogGt_Controle_Fichier.dhsp"
 
 ;*
@@ -133,7 +156,7 @@ BeginP
 	Standard.Maj_Menu_Boutons
 	Switch ZOOM.ACTION
 
-	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION, ZOOM_MODIFICATION)
+		Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION, ZOOM_MODIFICATION)
 			XmeToolBarEnableButton(IdMenuZoomBis,'COTISATION',False)
 			XmeToolBarEnableButton(IdMenuZoomBis,'REGUL',False)
 			XmeToolBarEnableButton(IdMenuZoomBis,'PDV',False)
@@ -141,9 +164,11 @@ BeginP
 			XmeToolBarEnableButton(IdMenuZoomBis,'EVENEMENTS',False)
 			XmeToolBarEnableButton(IdMenuZoomBis,'SECTION',False)
 			XmeToolBarEnableButton(IdMenuZoomBis,'REGULARISATION',False)
-	Case 	ZOOM_AFFICHAGE
+			XmeToolBarEnableButton(IdMenuZoomBis,'COG_BTNUT125',False)
+			XmeToolBarEnableButton(IdMenuZoomBis,'COG_BTNUT126',False)
+		Case 	ZOOM_AFFICHAGE
 			switch Zoom.TypeInput
-			case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+				case ZOOM_S_CONSULT		; avant consultation fiche ou liste
 					XmeToolBarEnableButton(IdMenuZoomBis,'COTISATION',True)
 					XmeToolBarEnableButton(IdMenuZoomBis,'REGUL',True)
 					XmeToolBarEnableButton(IdMenuZoomBis,'PDV',True)
@@ -151,7 +176,9 @@ BeginP
 					XmeToolBarEnableButton(IdMenuZoomBis,'EVENEMENTS',True)
 					XmeToolBarEnableButton(IdMenuZoomBis,'SECTION',True)
 					XmeToolBarEnableButton(IdMenuZoomBis,'REGULARISATION',True)
-			case ZOOM_S_DEPART		; avant clé de départ
+					XmeToolBarEnableButton(IdMenuZoomBis,'COG_BTNUT125',TRUE)
+					XmeToolBarEnableButton(IdMenuZoomBis,'COG_BTNUT126',TRUE)
+				case ZOOM_S_DEPART		; avant clé de départ
 					XmeToolBarEnableButton(IdMenuZoomBis,'COTISATION',False)
 					XmeToolBarEnableButton(IdMenuZoomBis,'REGUL',False)
 					XmeToolBarEnableButton(IdMenuZoomBis,'PDV',False)
@@ -159,6 +186,8 @@ BeginP
 					XmeToolBarEnableButton(IdMenuZoomBis,'EVENEMENTS',False)
 					XmeToolBarEnableButton(IdMenuZoomBis,'SECTION',False)
 					XmeToolBarEnableButton(IdMenuZoomBis,'REGULARISATION',False)
+					XmeToolBarEnableButton(IdMenuZoomBis,'COG_BTNUT125',False)
+					XmeToolBarEnableButton(IdMenuZoomBis,'COG_BTNUT126',False)
 			endswitch
 	EndSwitch
 EndP
@@ -219,6 +248,10 @@ beginp
 			MessageBox ("Veuillez saisir le code client.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
 			Harmony.Retour = Xmenext_Point_Sequence
 			Harmony.CplRetour = 1001
+		Else
+			CogRs_PrjComp.Dos 		= Affaire.Dos
+			CogRs_PrjComp.Affaire	= Affaire.Affaire
+			CogRs_PrjComp.Insert()
 		Endif
 	Endif
 	affaire.Cog_Hierarchie = 1
@@ -289,6 +322,14 @@ beginp
 			MessageBox ("Veuillez saisir le code client.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
 			Harmony.Retour = Xmenext_Point_Sequence
 			Harmony.CplRetour = 1001
+		Else
+			If CogRs_PrjComp.Dos = Affaire.Dos
+				CogRs_PrjComp.Update()
+			Else
+			  	CogRs_PrjComp.Dos 		= Affaire.Dos
+				CogRs_PrjComp.Affaire 	= Affaire.Affaire
+				CogRs_PrjComp.Insert()
+			EndIf
 		Endif
 	Endif
 Endp
@@ -365,46 +406,68 @@ Beginp
 		Loop Hread(COGGTF_TAB,COG_UT109) = 0 And COG_UT109.Dos = affaire.Dos And COG_UT109.Etb = affaire.Etb And COG_UT109.Affaire = affaire.Affaire 
 			Hdelete(COGGTF_TAB,COG_UT109)
 		EndLoop
+
+		;
+		CogRs_PrjComp.Init()
+		CogRs_PrjComp.Where.PK(Affaire.Affaire)
+		If CogRs_PrjComp.Select() > 0
+			CogRs_PrjComp.Delete()
+		EndIf
+
 	Endif
 Endp
+
 
 ;*
 procedure ZoomConsult
 beginp
 	Switch Harmony.Key
-	Case K_F11
-		GRXZ.EvtFam  = affaire.AfrClas
-		GRXZ.Affaire = affaire.Affaire
-		Ping("grxz" , grxz)
-		Zoom_Call(65010,false)
+		Case K_F11
+			GRXZ.EvtFam  = affaire.AfrClas
+			GRXZ.Affaire = affaire.Affaire
+			Ping("grxz" , grxz)
+			Zoom_Call(65010,false)
 	Endswitch
+
 	Standard.ZoomConsult
-	switch Harmony.Key
-	case 	Harmony.DataArret = 65005
-		G3XZ.Projet	= affaire.Affaire
-		Ping( 'zechange', MZ )
-		Zoom_Call(64001)
-	case 	Harmony.DataArret = 65006				
-		G3XZ.Projet	= affaire.Affaire
-		Ping( 'zechange', MZ )
-		Zoom_Call(64005)
-	case 	Harmony.DataArret = 65007				
-		G3XZ.Projet	= affaire.Affaire
-		g3xz.pino=affaire.cog_id_enveloppe
-		Ping( 'zechange', MZ )
-		Zoom_Call(64009)
-	case 	Harmony.DataArret = 65008
-		G3XZ.Projet	= affaire.Affaire
-		Ping( 'zechange', MZ )
-		Zoom_Call(64008)
-	case 	Harmony.DataArret = 65009
-		G3XZ.Projet	= affaire.Affaire
-		Ping( 'zechange', MZ )
-		Zoom_Call(64006)
-	case 	Harmony.DataArret = 65010
-		G3XZ.Projet	= affaire.Affaire
-		Ping( 'zechange', MZ )
-		Zoom_Call(64007)
+
+	Switch Harmony.Key
+		Case Harmony.DataArret = 64125  		; Appel UT125
+			G3XZ.Projet	= Affaire.Affaire
+			Ping( 'zechange', MZ )
+			Zoom_Call(64125)
+		Case Harmony.DataArret = 64126  		; Appel UT126
+			init COG_UT125 = ' '
+			COG_UT125.Dos = Affaire.Dos
+			COG_UT125.Affaire = Affaire.Affaire
+			Ping( 'COG_UT125', COG_UT125 )
+			ProgramCall("cogpp_ut126.dhop")
+
+		case 	Harmony.DataArret = 65005
+			G3XZ.Projet	= affaire.Affaire
+			Ping( 'zechange', MZ )
+			Zoom_Call(64001)
+		case 	Harmony.DataArret = 65006				
+			G3XZ.Projet	= affaire.Affaire
+			Ping( 'zechange', MZ )
+			Zoom_Call(64005)
+		case 	Harmony.DataArret = 65007				
+			G3XZ.Projet	= affaire.Affaire
+			g3xz.pino=affaire.cog_id_enveloppe
+			Ping( 'zechange', MZ )
+			Zoom_Call(64009)
+		case 	Harmony.DataArret = 65008
+			G3XZ.Projet	= affaire.Affaire
+			Ping( 'zechange', MZ )
+			Zoom_Call(64008)
+		case 	Harmony.DataArret = 65009
+			G3XZ.Projet	= affaire.Affaire
+			Ping( 'zechange', MZ )
+			Zoom_Call(64006)
+		case 	Harmony.DataArret = 65010
+			G3XZ.Projet	= affaire.Affaire
+			Ping( 'zechange', MZ )
+			Zoom_Call(64007)
 	endswitch 
 Endp
 
@@ -415,6 +478,7 @@ BeginP
 
 	Standard.ZoomCreation
 	Init G7.Lib() = " "
+	CogRs_PrjComp.Init()
 
 EndP
 
@@ -424,12 +488,15 @@ BeginP
 	Standard.ZoomDuplication
 	affaire.LibAbr					= " "
 	affaire.Cog_Cotisation_PDV	= " "
-	affaire.Cog_Hierarchie = 1
-	affaire.Cog_Facture 	= 1
+	affaire.Cog_Hierarchie 	= 1
+	affaire.Cog_Facture 		= 1
+	CogRs_PrjComp.Dos 		= ' '
+	CogRs_PrjComp.Affaire 	= ' '
 EndP
 
-;* après lecture clé sur  code
+;* 
 Procedure ZoomApresRead
+;	après lecture clé sur  code
 1 	i 		L
 1	famno	>gtfdd.dhsd	FAMNO
 1	x_st_01	x
@@ -485,5 +552,13 @@ beginp
 	Else
 		G7.Lib(31) = Cog_UT120.Lib80
 	EndIf
+
+	; Complément PRJAP
+	CogRs_PrjComp.Init()
+	CogRs_PrjComp.Where.PK(Affaire.Affaire)
+	If CogRs_PrjComp.Select() = 0
+		CogRs_PrjComp.COG_PRJAP = ' '
+	EndIf
+
 EndP
-	
+

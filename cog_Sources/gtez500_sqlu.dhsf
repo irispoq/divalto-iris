@@ -1,15 +1,15 @@
-;>xwin4obj                              7.0       20140825150851      
+;>xwin4obj                              7.0       20150123112439      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
- date_modification="25/08/2014"
+ date_modification="23/01/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
- dernier_id=1000091
+ dernier_id=1000148
  surcharge=oui
  date_modif_base="20131227150954"
- dernier_id_page=100006
+ dernier_id_page=100007
  niveau_surcharge=1
 [defaut]
  [aide_page]
@@ -34,6 +34,7 @@
  "gtrsppproj.dhoq",,affaire,su_sel,1024,1
  "ddsys.dhsd",,rowinfo,cog_gantt,120,0
  "gtfdd.dhsd",,wgnum,wgnum,1000,0
+ "cogrs_proj.dhoq",,cogrs_prjcomp,cogrs_prjcomp,1024,1
 [onglet]
  [presentation]
   position=0,0
@@ -3146,7 +3147,7 @@
  nb_col=60
  offset_lig=1
  offset_col=1
- prec=26
+ prec=27
  attache_x=oui
  attache_lgy=oui
  ident_unique=13
@@ -3154,7 +3155,7 @@
   [param_onglet_page]
    nom="FICHE"
    libelle="IDENTIFIANTS"
-   ordre=2
+   ordre=3
    couleur_fond="STD"
  [groupbox]
   [presentation]
@@ -4493,7 +4494,7 @@
  offset_lig=1
  offset_col=1
  prec=25
- suiv=13
+ suiv=27
  attache_x=oui
  attache_lgy=oui
  ident_unique=100006
@@ -4527,6 +4528,14 @@
    wstyle="GROUPE"
   [param_groupbox]
    couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=37,101
+   taille=9,63
+   id=1000147
+   wstyle="STD"
+  [texte]
+   texte="Taux journalier mensuel"
  [obj_texte]
   [presentation]
    position=62,14
@@ -4605,6 +4614,24 @@
    cadrage=droite
    valeur="2","1"
    choix="gtfdmc.dhfi",""
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=37,166
+   taille=9,43
+   id=1000148
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,tjm,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
   [touches]
    f5=5001
    f6=5005
@@ -4897,6 +4924,699 @@
    diva_avant="Champ_Cog_Hierarchie_1_Av"
   [info_bulle]
   texte="Génération de la hiérarchie d'évènements"
+[page]
+ numero=27
+ fond="STD"
+ nature=double
+ efface=partiel
+ nb_lig=35
+ nb_col=60
+ offset_lig=1
+ offset_col=1
+ prec=26
+ suiv=13
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=100007
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="PROJET SPEC"
+   ordre=2
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=21,6
+   taille=85,228
+   id=1000092
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Mise en service"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=208,7
+   taille=52,228
+   id=1000138
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Durées"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=109,123
+   taille=47,110
+   id=1000118
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Investissements"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=109,6
+   taille=46,112
+   id=1000093
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Charges non immobilisables"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=158,7
+   taille=46,111
+   id=1000119
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Prestations"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=72,125
+   taille=9,88
+   id=1000112
+   wstyle="STD"
+  [texte]
+   texte="Mise en service PROJET (devis)"
+ [obj_texte]
+  [presentation]
+   position=82,10
+   taille=9,105
+   id=1000108
+   wstyle="STD"
+  [texte]
+   texte="Mise en service INFRA (prév)"
+ [obj_texte]
+  [presentation]
+   position=72,10
+   taille=9,85
+   id=1000106
+   wstyle="STD"
+  [texte]
+   texte="Mise en service INFRA (devis)"
+ [obj_texte]
+  [presentation]
+   position=58,125
+   taille=9,74
+   id=1000104
+   wstyle="STD"
+  [texte]
+   texte="Date fin des travaux (réelle)"
+ [obj_texte]
+  [presentation]
+   position=58,10
+   taille=9,79
+   id=1000102
+   wstyle="STD"
+  [texte]
+   texte="Date début des travaux (réelle)"
+ [obj_texte]
+  [presentation]
+   position=48,125
+   taille=9,63
+   id=1000100
+   wstyle="STD"
+  [texte]
+   texte="Date fin travaux (prév)"
+ [obj_texte]
+  [presentation]
+   position=48,10
+   taille=9,71
+   id=1000098
+   wstyle="STD"
+  [texte]
+   texte="Date de validation du devis"
+ [obj_texte]
+  [presentation]
+   position=38,125
+   taille=9,74
+   id=1000096
+   wstyle="STD"
+  [texte]
+   texte="Date fin des travaux (devis)"
+ [obj_texte]
+  [presentation]
+   position=38,10
+   taille=9,79
+   id=1000094
+   wstyle="STD"
+  [texte]
+   texte="Date début des travaux (devis)"
+ [obj_texte]
+  [presentation]
+   position=82,125
+   taille=9,83
+   id=1000114
+   wstyle="STD"
+  [texte]
+   texte="Mise en service PROJET (prév)"
+ [obj_texte]
+  [presentation]
+   position=92,10
+   taille=9,85
+   id=1000110
+   wstyle="STD"
+  [texte]
+   texte="Mise en service INFRA (réelle)"
+ [obj_texte]
+  [presentation]
+   position=92,125
+   taille=9,79
+   id=1000116
+   wstyle="STD"
+  [texte]
+   texte="Mise en service PROJET (réelle)"
+ [obj_texte]
+  [presentation]
+   position=124,9
+   taille=9,83
+   id=1000120
+   wstyle="STD"
+  [texte]
+   texte="Montant devis"
+ [obj_texte]
+  [presentation]
+   position=125,126
+   taille=9,83
+   id=1000128
+   wstyle="STD"
+  [texte]
+   texte="Montant devis"
+ [obj_texte]
+  [presentation]
+   position=134,9
+   taille=9,92
+   id=1000122
+   wstyle="STD"
+  [texte]
+   texte="Montant prévisionnel"
+ [obj_texte]
+  [presentation]
+   position=135,126
+   taille=9,92
+   id=1000127
+   wstyle="STD"
+  [texte]
+   texte="Montant prévisionnel"
+ [obj_texte]
+  [presentation]
+   position=144,9
+   taille=9,79
+   id=1000124
+   wstyle="STD"
+  [texte]
+   texte="Montant réel"
+ [obj_texte]
+  [presentation]
+   position=145,126
+   taille=9,79
+   id=1000126
+   wstyle="STD"
+  [texte]
+   texte="Montant réel"
+ [obj_texte]
+  [presentation]
+   position=174,9
+   taille=9,83
+   id=1000134
+   wstyle="STD"
+  [texte]
+   texte="Montant devis"
+ [obj_texte]
+  [presentation]
+   position=184,9
+   taille=9,92
+   id=1000133
+   wstyle="STD"
+  [texte]
+   texte="Montant prévisionnel"
+ [obj_texte]
+  [presentation]
+   position=194,9
+   taille=9,79
+   id=1000132
+   wstyle="STD"
+  [texte]
+   texte="Montant réel"
+ [obj_texte]
+  [presentation]
+   position=223,8
+   taille=9,81
+   id=1000139
+   wstyle="STD"
+  [texte]
+   texte="Nombre de mois de facturation"
+ [obj_texte]
+  [presentation]
+   position=233,8
+   taille=9,79
+   id=1000143
+   wstyle="STD"
+  [texte]
+   texte="Durée d'amortissement INFRA"
+ [obj_texte]
+  [presentation]
+   position=233,110
+   taille=9,83
+   id=1000145
+   wstyle="STD"
+  [texte]
+   texte="mois"
+ [obj_texte]
+  [presentation]
+   position=243,8
+   taille=9,83
+   id=1000141
+   wstyle="STD"
+  [texte]
+   texte="Durée d'amortissement PROJET"
+ [obj_texte]
+  [presentation]
+   position=243,110
+   taille=9,83
+   id=1000146
+   wstyle="STD"
+  [texte]
+   texte="mois"
+ [champ]
+  [presentation]
+   position=38,89
+   taille=9,32
+   id=1000095
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,travdevddt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=38,200
+   taille=9,32
+   id=1000097
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,travdevfdt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=48,89
+   taille=9,32
+   id=1000099
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,valdevdt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=48,200
+   taille=9,32
+   id=1000101
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,travprevfdt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=58,89
+   taille=9,32
+   id=1000103
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,travreelddt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=58,200
+   taille=9,32
+   id=1000105
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,travreelfdt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=72,89
+   taille=9,32
+   id=1000107
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,infraservdevdt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=72,200
+   taille=9,32
+   id=1000113
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,projservdevdt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=82,89
+   taille=9,32
+   id=1000109
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,infraservprevdt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=82,200
+   taille=9,32
+   id=1000115
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,projservprevdt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=92,89
+   taille=9,32
+   id=1000111
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,infraservreeldt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=92,200
+   taille=9,32
+   id=1000117
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,projservreeldt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=124,63
+   taille=9,43
+   id=1000121
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,chargenidevmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=134,63
+   taille=9,43
+   id=1000123
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,chargeniprevmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=144,63
+   taille=9,43
+   id=1000125
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,chargenireelmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=125,180
+   taille=9,43
+   id=1000129
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,investdevmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=135,180
+   taille=9,43
+   id=1000130
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,investprevmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=145,180
+   taille=9,43
+   id=1000131
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,investreelmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=174,64
+   taille=9,43
+   id=1000135
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,prestadevmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=184,64
+   taille=9,43
+   id=1000136
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,prestaprevmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=194,64
+   taille=9,43
+   id=1000137
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,prestareelmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=223,89
+   taille=9,16
+   id=1000140
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,famoisnb,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=233,89
+   taille=9,16
+   id=1000144
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,infraamomoisnb,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=243,89
+   taille=9,16
+   id=1000142
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,projamomoisnb,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
 [ressources]
  [menu]
   ident="ZOOMAPPEND"
@@ -5463,6 +6183,22 @@
    [info_bulle]
    texte="Sections pour régularisations"
   [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Cotisations PS"
+    wid_ressource="COG_BTNUT125"
+    wetype_trait=arret
+    warret=64125
+   [info_bulle]
+   texte="Informations projet spécifique (UT125)"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Echéanciers"
+    wid_ressource="COG_BTNUT126"
+    wetype_trait=arret
+    warret=64126
+  [item]
    dessin=vide
    [param_bouton]
     wnom=""
@@ -5519,6 +6255,7 @@ Public Record "cogfdd.dhsd" Cog_DirCliente	Cog_DirCliente_01
 Public Record "cogfdd.dhsd" Cog_Periodicite	Cog_Periodicite_01
 Public Record	"ccfdd.dhsd"	C5		C5_DEV_01
 Public RecordSql "gtrsppproj.dhoq" affaire su_sel
+Public RecordSql "cogrs_proj.dhoq" cogrs_prjcomp cogrs_prjcomp
 
 
 1	Ident			L

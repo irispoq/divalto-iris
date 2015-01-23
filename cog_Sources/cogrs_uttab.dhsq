@@ -1,10 +1,10 @@
-<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7151 2014-12-01 14:42:24Z admin $'>
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7440 2015-01-23 13:04:23Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGF_GTFTAB
 ;*
 
 ;*
-;* 		Libellé Table Test
+;* 		COG_UT125 Table des cotisations
 ;*
 
 <RecordSql Name=CogRs_UT125 Comment='Table affectation des facturations projets spec' ZoomOptimize=YES>
@@ -13,7 +13,6 @@ Public Record A5DD.dhsd		MZ
 <SELECT>
 	COG_UT125.*,
 	ART.DES		AS ARTDES,
-	ETS.NOM		AS ETBNOM,
 	C5.LIB		AS	ANAELLIB,
 	PRJAP.LIB80	AS	PRJLIB
 <FROM Insert=Yes Update=Yes Delete=Yes>
@@ -25,26 +24,25 @@ Public Record A5DD.dhsd		MZ
 	GTFDD.DHSD	PRJAP
 	ON PRJAP.DOS = COG_UT125.DOS AND PRJAP.AFFAIRE = COG_UT125.AFFAIRE
 <LEFTJOIN Name='Zoom'>
-	GTFDD.DHSD	ETS
-	ON ETS.ETB = COG_UT125.ETB AND ETS.DOS = COG_UT125.DOS
-<LEFTJOIN Name='Zoom'>
 	CCFDD.DHSD C5
 	ON C5.DOS = COG_UT125.DOS AND C5.AXE = COG_UT125.COG_AXEANAEL  AND  C5.AXENO = 2
 <WHERE>
 	COG_UT125.Dos = MZ.Dos 
 		
-	Case PK(char etb, char aff, char ref)
-		COG_UT125.ETB = etb AND COG_UT125.AFFAIRE = aff AND COG_UT125.REF = ref
-	Case Exists(char etb, char aff, char ref)
-		COG_UT125.ETB = etb AND COG_UT125.AFFAIRE = aff AND COG_UT125.REF = ref
-
+	Case PK(char aff, char ref, int lgno)
+		COG_UT125.AFFAIRE = aff AND COG_UT125.REF = ref AND COG_UT125.COG_LGNO = lgno
+	Case Exists(char aff, char ref, int lgno)
+		COG_UT125.AFFAIRE = aff AND COG_UT125.REF = ref	AND COG_UT125.COG_LGNO = lgno
+	Case Max_LgNo(char aff)
+		COG_UT125.AFFAIRE = aff
+		AND COG_UT125.COG_LGNO = (SELECT MAX(COG_LGNO) FROM COG_UT125 WHERE AFFAIRE = aff)
 	Case Equal_Ref(char ref)
 	 	COG_UT125.REF = ref
 	Case Equal_Affaire(char aff)
 		COG_UT125.AFFAIRE = aff
+	Case Equal_LgNo(int lgno)
+		COG_UT125.COG_LGNO = lgno
 
-	Case Like_Etb(char etb)
-		COG_UT125.ETB LIKE etb
 	Case Like_Ref(char ref)
 	 	COG_UT125.REF LIKE ref
 	Case Like_Affaire(char aff)
@@ -52,7 +50,32 @@ Public Record A5DD.dhsd		MZ
 
 <ORDERBY>
 	Case Ordre_PK
-		COG_UT125.ETB,
 		COG_UT125.AFFAIRE,
 		COG_UT125.REF
-	
+
+;*
+;* 		COG_UT125 Table des cotisations
+;*
+
+<RecordSql Name=CogRs_UT126 Comment='Table affectation des facturations projets spec' ZoomOptimize=YES>
+Public Record A5DD.dhsd		MZ
+
+<SELECT>
+	COG_UT126.*
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_UT126
+<WHERE>
+	COG_UT126.DOS = MZ.DOS
+
+	Case PK(char affaire, char ref, int lgno, int an)
+		COG_UT126.AFFAIRE = affaire AND COG_UT126.REF = ref AND COG_UT126.COG_LGNO = lgno AND COG_UT126.ANNEE = an
+	Case Exists(char affaire, char ref, int lgno, int an)
+		COG_UT126.AFFAIRE = affaire AND COG_UT126.REF = ref AND COG_UT126.COG_LGNO = lgno AND COG_UT126.ANNEE = an
+	Case Equal_Affaire(char aff)
+		COG_UT126.AFFAIRE = aff
+ 	Case Equal_Ref(char ref)
+		COG_UT126.REF = ref
+ 	Case Equal_LgNo(int lgNo)
+		COG_UT126.COG_LGNO = lgNo 
+	Case Equal_An(int an)
+		COG_UT126.ANNEE = an

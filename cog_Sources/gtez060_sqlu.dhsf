@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20141022161429      
+;>xwin4obj                              7.0       20150120113228      
 [masque]
  libelle="table code opération"
- utilisateur="UGIE_YLF"
- date_modification="22/10/2014"
+ utilisateur="UGIE"
+ date_modification="20/01/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=78
  type_masque=2
- dernier_id=1000002
+ dernier_id=1000006
  surcharge=oui
  date_modif_base="20121017105548"
  dernier_id_page=100000
@@ -1831,8 +1831,8 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=26,5
-   taille=146,310
+   position=22,5
+   taille=139,310
    id=65
    wstyle="GROUPE"
   [param_groupbox]
@@ -1840,16 +1840,25 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=180,5
+   position=191,5
    taille=28,310
    id=68
    wstyle="GROUPE"
   [param_groupbox]
    texte="Protection"
    couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=162,5
+   taille=28,310
+   id=1000003
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Moteur de facturation projets spécifiques"
+   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=42,10
+   position=38,10
    taille=9,64
    id=69
    wstyle="STD"
@@ -1857,7 +1866,7 @@
    texte="OP associé si lettrage"
  [obj_texte]
   [presentation]
-   position=52,10
+   position=48,10
    taille=9,64
    id=192
    wstyle="STD"
@@ -1865,7 +1874,15 @@
    texte="OP pour avoir"
  [obj_texte]
   [presentation]
-   position=196,10
+   position=178,119
+   taille=9,64
+   id=1000006
+   wstyle="STD"
+  [texte]
+   texte="Nature charge"
+ [obj_texte]
+  [presentation]
+   position=207,10
    taille=9,50
    id=71
    wstyle="STD"
@@ -1873,7 +1890,7 @@
    texte="Confidentialité"
  [champ]
   [presentation]
-   position=42,96
+   position=38,96
    taille=9,149
    id=72
    wstyle="CHAMP_AFF"
@@ -1890,7 +1907,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=42,76
+   position=38,76
    taille=9,20
    id=74
    wstyle="CHAMP_SAISI"
@@ -1912,7 +1929,7 @@
    diva_apres="Champ_OP_1_Ap"
  [champ]
   [presentation]
-   position=52,96
+   position=48,96
    taille=9,149
    id=191
    wstyle="CHAMP_AFF"
@@ -1929,7 +1946,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=52,76
+   position=48,76
    taille=9,20
    id=190
    colonnes_saisie=3
@@ -1952,7 +1969,7 @@
    diva_apres="Champ_OP_2_Ap"
  [case_a_cocher]
   [presentation]
-   position=72,10
+   position=68,10
    taille=9,188
    id=76
    wstyle="STD"
@@ -1971,7 +1988,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=82,10
+   position=78,10
    taille=9,188
    id=77
    wstyle="STD"
@@ -1990,7 +2007,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=92,10
+   position=88,10
    taille=9,188
    id=78
    wstyle="STD"
@@ -2009,7 +2026,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=102,10
+   position=98,10
    taille=9,188
    id=79
    wstyle="STD"
@@ -2028,7 +2045,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=112,10
+   position=108,10
    taille=9,188
    id=80
    wstyle="STD"
@@ -2047,7 +2064,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=122,10
+   position=118,10
    taille=9,188
    id=81
    wstyle="STD"
@@ -2066,7 +2083,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=132,10
+   position=128,10
    taille=9,188
    id=82
    wstyle="STD"
@@ -2085,7 +2102,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=142,10
+   position=138,10
    taille=9,95
    id=1000001
    wstyle="COG_CHAMP_SAISI"
@@ -2103,7 +2120,7 @@
    diva_avant="Champ_Cog_FnpFlag_1_Av"
  [case_a_cocher]
   [presentation]
-   position=152,10
+   position=148,10
    taille=9,95
    id=1000002
    wstyle="COG_CHAMP_SAISI"
@@ -2121,7 +2138,7 @@
    diva_avant="Champ_Cog_FaeFlag_1_Av"
  [case_a_cocher]
   [presentation]
-   position=72,200
+   position=68,200
    taille=9,114
    id=83
    wstyle="STD"
@@ -2140,7 +2157,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=82,200
+   position=78,200
    taille=9,114
    id=84
    wstyle="STD"
@@ -2159,7 +2176,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=92,200
+   position=88,200
    taille=9,114
    id=126
    wstyle="STD"
@@ -2178,7 +2195,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=102,200
+   position=98,200
    taille=9,114
    id=128
    wstyle="STD"
@@ -2197,7 +2214,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=112,200
+   position=108,200
    taille=9,114
    id=129
    wstyle="STD"
@@ -2216,7 +2233,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=122,200
+   position=118,200
    taille=9,114
    id=130
    wstyle="STD"
@@ -2235,7 +2252,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=132,200
+   position=128,200
    taille=9,114
    id=198
    wstyle="STD"
@@ -2254,7 +2271,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=142,200
+   position=138,200
    taille=9,114
    id=196
    wstyle="STD"
@@ -2271,9 +2288,43 @@
   [touches]
    f7=135
    shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=178,10
+   taille=9,77
+   id=1000004
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=codeoperation,cog_motprjflag,codeoperation
+  [param_case]
+   texte="Facturation spécifique"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   diva_apres="Champ_Cog_MotPrjFlag_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=178,163
+   taille=9,66
+   noms="cog_prjflux"
+   id=1000005
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=codeoperation,cog_motprjflux,codeoperation
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","NATURECHARGE"
+  [touches]
+   f7=135
+   shift_f6=10000
  [champ]
   [presentation]
-   position=196,61
+   position=207,61
    taille=9,20
    id=85
    wstyle="CHAMP_SAISI"
@@ -2667,6 +2718,14 @@ Beginp
  	If codeoperation.TiCod <> 'F'
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	EndIf
+Endp
+
+
+;*
+Private Procedure Champ_Cog_MotPrjFlag_1_Ap
+;
+Beginp
+	XmeSetAttribut('cog_prjflux', AN_VISIBILITE, Condition(codeoperation.Cog_MotPrjFlag=2, AV_VISIBLE, AV_GRISE))
 Endp
 [/diva]
 [diva_base]

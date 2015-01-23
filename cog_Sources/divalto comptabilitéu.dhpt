@@ -2,8 +2,8 @@ xwin-s-projet      2.0
 [general]
 nom="divalto comptabilité"
 progexec="divalto.dhop"
-date="20141209343210282399"
-util="UGIE_RCT"
+date="20150109009510313999"
+util="UGIE"
 filtres="??pp*;??pc*;??pm*;??pz*;??p9*"
 flagrelatif=1
 cheminbases="/../../../../divalto/&div72a_cd205a/sources"
@@ -43,6 +43,12 @@ fic="cog_ccrsdos.dhsq"," "
 fic="cog_ccrsecr.dhsq"," "
 fic="cog_ccrsimmo.dhsq"," "
 fic="cog_ccrsjca.dhsq"," "
+[communs]
+nom="cog_dico"
+fic="cogfdd.dhsd"," "
+[communs]
+nom="cog_recordsql"
+fic="cogrs_immo.dhsq"," "
 [sousprojets]
 fic="cog - fe120 - facturation cen export.dhps"," "
 fic="cog - fe120 - facturation cen génération.dhps"," "
