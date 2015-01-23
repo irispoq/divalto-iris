@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20141114164442,UGIE_YLF            
+Version=6,20110524144859,SYSTEMU_VR          ,20150122151013,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -48,6 +48,25 @@ Gel=1
 Nature=8
 NomOdbc=ClasseAffaire
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150109121101,UGIE                ,20150109121101,UGIE                
+Nom=AnMt,Dotation annuelle,1
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150109110309,UGIE                ,20150109110309,UGIE                
+Nom=Annee,Année,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1300000,hc  ,20150109120643,UGIE                
+Nom=AntMt,Dotation antérieure,1
+DateM=5C1CD14CFC2BD001
+Gel=1
+Nature=16,D0
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,199710 30000,MJV ,20050106105123,MARIE JO            
 Nom=Axe,Axe analytique,1
@@ -165,6 +184,25 @@ NomChoix=CENOTE_1
 Flags=n,1,o,n,n,n,n,n
 presentation=2
 [CHAMP]
+Version=1,20150107113118,UGIE                ,20150107113256,UGIE                
+Nom=ChargeNiDevMt,Montant charges non immo (devis),1
+DateM=1BBBE64C652AD001
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107113326,UGIE                ,20150107113326,UGIE                
+Nom=ChargeNiPrevMt,Montant charges non immo (prévision),1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107113353,UGIE                ,20150107113353,UGIE                
+Nom=ChargeNiReelMt,Montant charges non immo (réel),1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20090903181000,INFOU               ,20110524192502,SYSTEMU             
 Nom=Classement,no d'ordre,1
 Gel=1
@@ -185,6 +223,13 @@ Nom=Cog_AxeAnael,Axe anaël,1
 Gel=1
 Nature=8
 NomOdbc=Cog_AxeAnael
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150109120901,UGIE                ,20150109121439,UGIE                
+Nom=Cog_BaseMt,Base ,1
+DateM=3D85B275FD2BD001
+Gel=1
+Nature=16,D0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20141110114828,UGIE_YLF            ,20141110114828,UGIE_YLF            
@@ -335,6 +380,12 @@ Nature=256
 NomOdbc=RedditionFichierPdf
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150109155212,UGIE                ,20150109155212,UGIE                
+Nom=Cog_FiMt,Montant frais financiers,1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20110617155414,SYSTEMU             ,20110617155416,SYSTEMU             
 Nom=Cog_Format_Facture,Format Facture Client,1
 Gel=1
@@ -371,6 +422,13 @@ Nature=1,0
 NomOdbc=Cog_Indicateur_Facture
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150109110723,UGIE                ,20150109110727,UGIE                
+Nom=Cog_LgNo,N° ligne,1
+Gel=1
+Nature=3,0
+NomOdbc=Cog_LgNo
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20130514115423,ROOT                ,20130514115435,ROOT                
 Nom=Cog_Lib_Env,Libellé,1
 Gel=1
@@ -378,24 +436,25 @@ Nature=50
 NomOdbc=Cog_Lib_Env
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20141114162502,UGIE_YLF            ,20141114162502,UGIE_YLF            
+Version=1,20141114162502,UGIE_YLF            ,20150122105831,UGIE                
 Nom=Cog_LoyFaNb,Nombre de loyers facturés,1
+DateM=B9FD3FFA2936D001
 Gel=1
-Nature=8,0
+Nature=4,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20141114120651,UGIE_YLF            ,20141114162508,UGIE_YLF            
+Version=1,20141114120651,UGIE_YLF            ,20150122105818,UGIE                
 Nom=Cog_LoyNb,Nombre de loyers à facturer,1
-DateM=A033BC031F00D001
+DateM=CAA85FF22936D001
 Gel=1
-Nature=8,0
+Nature=4,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20141114120728,UGIE_YLF            ,20141114162432,UGIE_YLF            
+Version=1,20141114120728,UGIE_YLF            ,20150122105824,UGIE                
 Nom=Cog_LoyRestNb,Nombre de loyers restants,1
-DateM=D65C2B171F00D001
+DateM=691A1FF62936D001
 Gel=1
-Nature=8,0
+Nature=4,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110712165148,ROOT                ,20110712165156,ROOT                
@@ -557,6 +616,12 @@ Nature=6,2
 NomOdbc=Cog_Taux
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150109152710,UGIE                ,20150109152710,UGIE                
+Nom=Cog_TauxDt,Date d'application,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20110617151650,SYSTEMU             ,20110617160134,SYSTEMU             
 Nom=Cog_Type,Type de refacturation,1
 Gel=1
@@ -660,12 +725,25 @@ Nature=8
 NomOdbc=CompteVente
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150109120748,UGIE                ,20150109120748,UGIE                
+Nom=DDt,Date début,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1991 4160000,MJV ,20050302152454,MARIE JO            
 Nom=Depar,Département,1
 Gel=1
 Nature=2
 NomOdbc=Departement
 Flags=o,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20050114161615,HC
+Nom=Derog,Amortissement dérogatoire,1
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementDerogatoire
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1989 1230000,MJV ,20090623111935,CI                  
 Nom=Des,Désignation,1
@@ -704,6 +782,210 @@ Nature=D8
 NomOdbc=DateEcheance
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1997 1220000,hc  ,20060627135949,DEMO                
+Nom=EcoBas,Base de l'amortissement économique,1
+DateM=E716AE30E199C601
+Gel=1
+Nature=16,D0
+NomOdbc=BaseAmortissementEconomique
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060627135952,DEMO                
+Nom=EcoCoe,Coefficient de dégressivité économique,1
+DateM=67C7E032E199C601
+Gel=1
+Nature=4,2
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060627140112,DEMO                
+Nom=EcoDDt,Date début de l'amortissement économique,1
+DateM=47FA6262E199C601
+Gel=1
+Nature=D8
+NomOdbc=DateDebutAmortissementEconomique
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060627140121,DEMO                
+Nom=EcoDegMt,Montant de l'amortissement dégressif économique,1
+DateM=A7B4C267E199C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementEconomiqueDegressif
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050629105417,JLSI                ,20060627140133,DEMO                
+Nom=EcoDotDepMt,Valeur de dépréciation (dotation) pour l'exercice,1
+DateM=67AC016FE199C601
+Gel=1
+Nature=16,D0
+NomOdbc=ValeurDepreciationDansExercice
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050629105615,JLSI                ,20060627140210,DEMO                
+Nom=EcoDotRepMt,Valeur de dépréciation (dotation reprise) pour l'exercice,1
+DateM=C7061285E199C601
+Gel=1
+Nature=16,D0
+NomOdbc=ValeurDepreciationRepriseDansExercice
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1300000,root,20060627140214,DEMO                
+Nom=EcoDur,Durée de vie,1
+DateM=C78C9A87E199C601
+Gel=1
+Nature=6,3
+NomOdbc=DureeVieEconomique
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060627140224,DEMO                
+Nom=EcoExcMt,Montant de l'amortissement exceptionnel économique,1
+DateM=87F5488DE199C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementEconomiqueExceptionnel
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060627140231,DEMO                
+Nom=EcoFDt,Date fin de l'amortissement économique,1
+DateM=47BC5391E199C601
+Gel=1
+Nature=D8
+NomOdbc=DateFinAmortissementEconomique
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060627140242,DEMO                
+Nom=EcoJourNb,Nombre de jours de la période économique,1
+DateM=4744E297E199C601
+Gel=1
+Nature=4,0
+NomOdbc=DureePeriodeEconomique
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060627140250,DEMO                
+Nom=EcoLinMt,Montant de l'amortissement linéaire économique,1
+DateM=4704A79CE199C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementEconomiqueLineaire
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060627140258,DEMO                
+Nom=EcoLinTau,Taux de passage de dégressif en linéaire,1
+DateM=A73981A1E199C601
+Gel=1
+Nature=6,2
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060627140308,DEMO                
+Nom=EcoManMt,Montant de l'amortissement manuel économique,1
+DateM=076653A7E199C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementEconomiqueManuel
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060627140323,DEMO                
+Nom=EcoMoisNb,Nombre de mois de la période économique,1
+DateM=67B046B0E199C601
+Gel=1
+Nature=3,0
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20050629090431,JLSI
+Nom=Economique,Amortissement économique,1
+DateM=440C5ECC787CC501
+Gel=1
+Nature=209
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20050803111446,JLSI                ,20060627140349,DEMO                
+Nom=EcoPuoMt,Amortissement plan d'unités d'oeuvre économique,1
+DateM=A76ED4BFE199C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementEconomiquePlanUnitesOeuvre
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060627140357,DEMO                
+Nom=EcoResMt,Valeur résiduelle économique,1
+DateM=07030EC5E199C601
+Gel=1
+Nature=16,D0
+NomOdbc=ValeurResiduelleEconomique
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050629105116,JLSI                ,20060627140410,DEMO                
+Nom=EcoResTheoMt,Montant de la valeur résiduelle théorique (hors dépréciations),1
+DateM=27E2D4CCE199C601
+Gel=1
+Nature=16,D0
+NomOdbc=MontantValResiduelleTheorique
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060627140416,DEMO                
+Nom=EcoTau,Taux de l'amortissement économique,1
+DateM=E79ED4CFE199C601
+Gel=1
+Nature=6,2
+NomOdbc=TxAmortissementEconomique
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060627140426,DEMO                
+Nom=EcoTotMt,Montant total de l'amortissement économique,1
+DateM=27625ED6E199C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementEconomique
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1290000,c321,20071126150206,MS                  
+Nom=EcoTyp,Méthode d'amortissement économique,1
+DateM=27C2C0D8E199C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=ECOTYP
+NomOdbc=MethodeAmortissementEconomique
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20050629110045,JLSI                ,20060627140445,DEMO                
+Nom=EcoUoQte,Quantité d'unité d'oeuvre pour l'exercice,1
+DateM=879A41E1E199C601
+Gel=1
+Nature=16,D0
+NomOdbc=QteUniteOeuvreExercice
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20060627141310,DEMO                
+Nom=EffetDt,Date d'effet,1
+DateM=A7994C0EE399C601
+Gel=1
+Nature=D8
+NomOdbc=DateEffet
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050622163922,JLSI                ,20060627141327,DEMO                
+Nom=EffetDtA,Année,1
+DateM=47AECB18E399C601
+Gel=1
+Nature=4
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20050622163942,JLSI                ,20060627141336,DEMO                
+Nom=EffetDtJ,Jour,1
+DateM=A7F6B81DE399C601
+Gel=1
+Nature=2
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20050622163932,JLSI                ,20060627141342,DEMO                
+Nom=EffetDtM,Mois,1
+DateM=87BEA421E399C601
+Gel=1
+Nature=2
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,1999 7300000,MJV ,20050105110103,MARIE JO            
 Nom=Etb,Etablissement,1
 Gel=1
@@ -734,6 +1016,212 @@ Choix=grfdmc.dhfi
 NomChoix=EVT_TYPE
 NomOdbc=EvtTyp
 Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,hc  ,20090518154454,MS                  
+Nom=ExoDDt,Date début d'exercice,1
+DateM=27FD7B5AE399C601
+Gel=1
+Nature=D8
+Attribut=PARAM
+NomOdbc=DateDebutExercice
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20040202175910,JPS                 ,20060627141527,DEMO                
+Nom=ExoDDtA,Année,1
+DateM=0754F85FE399C601
+Gel=1
+Nature=4,0
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20040202175946,JPS                 ,20060627141536,DEMO                
+Nom=ExoDDtJ,Jour,1
+DateM=E75E2865E399C601
+Gel=1
+Nature=2,0
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20040202175938,JPS                 ,20060627141546,DEMO                
+Nom=ExoDDtM,Mois,1
+DateM=079C4B6BE399C601
+Gel=1
+Nature=2,0
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1996 7110000,hc  ,20060627141554,DEMO                
+Nom=ExoFDt,Date fin d'exercice,1
+DateM=A70C2170E399C601
+Gel=1
+Nature=D8
+NomOdbc=DateFinExercice
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20040202180231,JPS                 ,20060627141602,DEMO                
+Nom=ExoFDtA,Année,1
+DateM=278F2875E399C601
+Gel=1
+Nature=4,0
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20040202180248,JPS                 ,20060627141613,DEMO                
+Nom=ExoFDtJ,Jour,1
+DateM=07DD9C7BE399C601
+Gel=1
+Nature=2,0
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20040202180240,JPS                 ,20060627141621,DEMO                
+Nom=ExoFDtM,Mois,1
+DateM=07773B80E399C601
+Gel=1
+Nature=2,0
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20150120095550,UGIE                ,20150120095550,UGIE                
+Nom=FaMoisNb,Nombre de mois de facturation,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150109120757,UGIE                ,20150109120757,UGIE                
+Nom=FDt,Date fin,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060628142144,DEMO                
+Nom=FisBas,Base de l'amortissement fiscal,1
+DateM=E483456BAD9AC601
+Gel=1
+Nature=16,D0
+NomOdbc=BaseAmortissementFiscal
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20050629095314,JLSI
+Nom=Fiscal,Amortissement fiscal,1
+DateM=FAD8609A7F7CC501
+Gel=1
+Nature=209
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060628142200,DEMO                
+Nom=FisCoe,Coefficient de dégressivité fiscal,1
+DateM=E168BD74AD9AC601
+Gel=1
+Nature=4,2
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060628142225,DEMO                
+Nom=FisDDt,Date début de l'amortissement fiscal,1
+DateM=CB4F5B83AD9AC601
+Gel=1
+Nature=D8
+NomOdbc=DateDebutAmortissementFiscal
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060628142237,DEMO                
+Nom=FisDegMt,Montant de l'amortissement fiscal dégressif,1
+DateM=9065D08AAD9AC601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementFiscalDegressif
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060628142242,DEMO                
+Nom=FisDur,Durée de vie,1
+DateM=39DCB08DAD9AC601
+Gel=1
+Nature=6,3
+NomOdbc=DureeVieFiscale
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060628142254,DEMO                
+Nom=FisExcMt,Montant de l'amortissement fiscal exceptionnel,1
+DateM=E679A094AD9AC601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementFiscalExceptionnel
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060628142302,DEMO                
+Nom=FisFDt,Date fin de l'amortissement fiscal,1
+DateM=6D62F199AD9AC601
+Gel=1
+Nature=D8
+NomOdbc=DateFinAmortissementFiscal
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060628142314,DEMO                
+Nom=FisJourNb,Nombre de jours de la période fiscale,1
+DateM=7ABB94A0AD9AC601
+Gel=1
+Nature=4,0
+NomOdbc=DureePeriodeFiscale
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060628142327,DEMO                
+Nom=FisLinMt,Montant de l'amortissement fiscal linéaire,1
+DateM=0AD679A8AD9AC601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementFiscalLineaire
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060628142353,DEMO                
+Nom=FisLinTau,Taux de passage de dégressif en linéaire,1
+DateM=712038B8AD9AC601
+Gel=1
+Nature=6,2
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060628142403,DEMO                
+Nom=FisManMt,Montant de l'amortissement fiscal manuel,1
+DateM=C96B1ABEAD9AC601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementFiscalManuel
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060628142431,DEMO                
+Nom=FisMoisNb,Nombre de mois de la période fiscale,1
+DateM=95A173CEAD9AC601
+Gel=1
+Nature=3,0
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060628142505,DEMO                
+Nom=FisResMt,Valeur résiduelle fiscale,1
+DateM=FFE406E3AD9AC601
+Gel=1
+Nature=16,D0
+NomOdbc=ValeurResiduelleFiscale
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20060628142513,DEMO                
+Nom=FisTau,Taux de l'amortissement fiscal,1
+DateM=6BA6C1E7AD9AC601
+Gel=1
+Nature=6,2
+NomOdbc=TxAmortissementFiscal
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,hc  ,20060628142538,DEMO                
+Nom=FisTotMt,Montant total de l'amortissement fiscal,1
+DateM=4B52F3F6AD9AC601
+Gel=1
+Nature=16,D0
+NomOdbc=MtAmortissementFiscal
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1220000,c321,20071127110944,MS                  
+Nom=FisTyp,Méthode d'amortissement fiscal,1
+DateM=B96F22FAAD9AC601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=FISTYP
+NomOdbc=MethodeAmortissementFiscal
+Flags=o,1,n,n,n,n,n,n
 presentation=2
 [CHAMP]
 Version=1,20021209220414,RR  ,20050111105833,RR                  
@@ -776,6 +1264,64 @@ Nature=13,D0
 NomOdbc=HTProduit
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1997 1220000,c321,20050107143329,HC
+Nom=Immo,Numéro identifiant de l'immobilisation,1
+Gel=1
+Nature=8,0
+NomOdbc=Bien
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050628170820,JLSI                ,20060628143321,DEMO                
+Nom=ImmoComp,Numéro de composant,1
+DateM=90AA890AAF9AC601
+Commentaire=148
+Gel=1
+Nature=5,0
+NomOdbc=NumeroComposant
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150120095646,UGIE                ,20150120095646,UGIE                
+Nom=InfraAmoMoisNb,Durée d'amortissement INFRA,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112230,UGIE                ,20150107112230,UGIE                
+Nom=InfraServDevDt,Date mise en service INFRA (devis),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112254,UGIE                ,20150107112254,UGIE                
+Nom=InfraServPrevDt,Date mise en service INFRA (prévisionnelle),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112336,UGIE                ,20150107112336,UGIE                
+Nom=InfraServReelDt,Date mise en service INFRA (réelle),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107113445,UGIE                ,20150107113445,UGIE                
+Nom=InvestDevMt,Montant investissements immo (devis),1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107113520,UGIE                ,20150107113520,UGIE                
+Nom=InvestPrevMt,Montant investissements immo (prévision),1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107113541,UGIE                ,20150107113541,UGIE                
+Nom=InvestReelMt,Montant investissements immo (réel),1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20030111152542,MJV ,20041222172313,MARIE JO            
 Nom=Joint,Numéro fichier joint,1
 Gel=1
@@ -802,6 +1348,13 @@ Nom=Loc,Localité,1
 Gel=1
 Nature=38
 NomOdbc=Localite
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2002 6 60000,hc  ,20150109120606,UGIE                
+Nom=MoisMt,Dotations mensuelles,1
+DateM=D5C0FD43FC2BD001
+Gel=1
+Nature=16,D0*12
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1996 2160000,hc  ,20050118115244,HC
@@ -876,6 +1429,48 @@ Nature=8,0
 NomOdbc=PieceNo
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150120095345,UGIE                ,20150120095345,UGIE                
+Nom=PrestaDevMt,Montant prestations immo (devis),1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150120095410,UGIE                ,20150120095410,UGIE                
+Nom=PrestaPrevMt,Montant prestations immo (prévision),1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150120095435,UGIE                ,20150120095435,UGIE                
+Nom=PrestaReelMt,Montant prestations immo (réel),1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150120095721,UGIE                ,20150120095721,UGIE                
+Nom=ProjAmoMoisNb,Durée d'amortissement PROJET,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112415,UGIE                ,20150107112415,UGIE                
+Nom=ProjServDevDt,Date mise en service PROJET (devis),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112443,UGIE                ,20150107112443,UGIE                
+Nom=ProjServPrevDt,Date mise en service PROJET (prévisionnelle),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112504,UGIE                ,20150107112504,UGIE                
+Nom=ProjServReelDt,Date mise en service PROJET (réelle),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20030128175707,RR                  ,20051019075110,RR                  
 Nom=Question,Questionnaire,1
 Gel=1
@@ -890,6 +1485,14 @@ Gel=1
 Nature=25
 NomOdbc=Reference
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050629094811,JLSI                ,20060721131506,FH                  
+Nom=ResFinMt,Valeur résiduelle en fin d'amortissement,1
+DateM=9CF9A4EBB6ACC601
+Gel=1
+Nature=16,D0
+NomOdbc=ValeurResiduelleFinAmortissement
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20040401094225,RR                  ,20071128092557,RR                  
 Nom=RubSt,Saisie des rubriques après création d'un événement,1
@@ -1006,6 +1609,48 @@ Nature=8
 NomOdbc=Groupement
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150120094939,UGIE                ,20150120094939,UGIE                
+Nom=TJM,Taux journalier mensuel,1
+Gel=1
+Nature=13,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107111914,UGIE                ,20150107111914,UGIE                
+Nom=TravDevDDt,Date début des travaux (devis),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107111936,UGIE                ,20150107111936,UGIE                
+Nom=TravDevFDt,Date fin des travaux (devis),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112011,UGIE                ,20150107112011,UGIE                
+Nom=TravPrevDDt,Date début des travaux (prévisionnelle),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112031,UGIE                ,20150107112031,UGIE                
+Nom=TravPrevFDt,Date fin des travaux (prévisionnelle),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112101,UGIE                ,20150107112101,UGIE                
+Nom=TravReelDDt,Date début des travaux (réelle),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150107112128,UGIE                ,20150107112128,UGIE                
+Nom=TravReelFDt,Date fin des travaux (réelle),1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1991 1140000,MJV ,20061113165745,MARIE JO            
 Nom=TtcMt,TTC de la pièce,1
 DateM=028452753C07C701
@@ -1041,6 +1686,29 @@ Gel=1
 Nature=50
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,2002 6110000,hc  ,20061221154432,JLSI                
+Nom=UI2,Réservé distributeur,1
+DateM=8FB1F4860E25C701
+Gel=1
+Nature=100
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20050622163628,JLSI                ,20061221154512,JLSI                
+Nom=UoCode,Id plan d'unité d'oeuvre,1
+DateM=3FE6D09E0E25C701
+Gel=1
+Nature=8
+NomOdbc=IdPlanUniteOeuvre
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050629110201,JLSI                ,20061221154614,JLSI                
+Nom=UsagMt,Valeur d'usage du bien,1
+DateM=F725D1C30E25C701
+Gel=1
+Nature=16,D0
+NomOdbc=ValeurUsage
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20021023220947,RR  ,20050111112312,RR                  
 Nom=User,Utilisateur,1
 DateM=90F81126D07AC201
@@ -1071,6 +1739,17 @@ Nature=D8
 NomOdbc=DateCreation
 Flags=o,1,n,o,n,n,n,n
 [CHAMP]
+Version=1,2002 7 90000,hc  ,20071128095232,MS                  
+Nom=UserCrOri,Origine création,1
+DateM=D8D098A41B99C601
+Gel=1
+Nature=2,0
+Choix=ccfdmc.dhfi
+NomChoix=ORIGINE
+NomOdbc=OrigineCreation
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
 Version=1,20021015170117,LM  ,20041222171433,MARIE JO            
 Nom=UserMo,Auteur de la modification,1
 Gel=1
@@ -1091,6 +1770,17 @@ Nature=D8
 NomOdbc=DateModif
 Flags=n,1,n,o,n,n,n,n
 [CHAMP]
+Version=1,2002 7 90000,hc  ,20071128115500,MS                  
+Nom=UserMoOri,Origine modification,1
+DateM=D8AA86AA1B99C601
+Gel=1
+Nature=2,0
+Choix=ccfdmc.dhfi
+NomChoix=ORIGINE
+NomOdbc=OrigineModif
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
 Version=1,20021015174750,LM  ,20021016105758,LM
 Nom=UserTrace,Traçabilité utilisateur,1
 Gel=1
@@ -1102,6 +1792,20 @@ Nom=userx,User pour sql,1
 Gel=1
 Nature=20
 Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20150120095521,UGIE                ,20150120095521,UGIE                
+Nom=ValDevDt,Date de validation du devis,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050629110135,JLSI                ,20061221154753,JLSI                
+Nom=VenalMt,Valeur vénale du bien,1
+DateM=471882FE0E25C701
+Gel=1
+Nature=16,D0
+NomOdbc=ValeurVenale
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1989 1230000,MJV ,20050105102834,MARIE JO            
 Nom=Vil,Ville,1
@@ -1140,6 +1844,65 @@ Nom=Ce4N,1,0,0,N,1
 nom=Cpostal
 [CHAMPL]
 Nom=Depar,1,0,0,N,1
+[/CHAMPL]
+nom=Economique
+[CHAMPL]
+Nom=EcoTyp,1,0,0,N,1
+Nom=EcoDur,2,0,0,N,1
+Nom=EcoJourNb,8,0,0,N,1
+Nom=EcoMoisNb,12,0,0,N,1
+Nom=EcoCoe,15,0,0,N,1
+Nom=EcoDDt,19,0,0,N,1
+Nom=EcoFDt,27,0,0,N,1
+Nom=EcoBas,35,0,0,N,1
+Nom=EcoTau,51,0,0,N,1
+Nom=EcoLinTau,57,0,0,N,1
+Nom=EcoLinMt,63,0,0,N,1
+Nom=EcoDegMt,79,0,0,N,1
+Nom=EcoManMt,95,0,0,N,1
+Nom=EcoExcMt,111,0,0,N,1
+Nom=EcoTotMt,127,0,0,N,1
+Nom=EcoResMt,143,0,0,N,1
+Nom=EcoPuoMt,159,0,0,N,1
+Nom=Filler,175,0,34,N,1
+[/CHAMPL]
+nom=EffetDt
+[CHAMPL]
+Nom=EffetDtA,1,0,0,N,1
+Nom=EffetDtM,5,0,0,N,1
+Nom=EffetDtJ,7,0,0,N,1
+[/CHAMPL]
+nom=ExoDDt
+[CHAMPL]
+Nom=ExoDDtA,1,0,0,N,1
+Nom=ExoDDtM,5,0,0,N,1
+Nom=ExoDDtJ,7,0,0,N,1
+[/CHAMPL]
+nom=ExoFDt
+[CHAMPL]
+Nom=ExoFDtA,1,0,0,N,1
+Nom=ExoFDtM,5,0,0,N,1
+Nom=ExoFDtJ,7,0,0,N,1
+[/CHAMPL]
+nom=Fiscal
+[CHAMPL]
+Nom=FisTyp,1,0,0,N,1
+Nom=FisDur,2,0,0,N,1
+Nom=FisJourNb,8,0,0,N,1
+Nom=FisMoisNb,12,0,0,N,1
+Nom=FisCoe,15,0,0,N,1
+Nom=FisDDt,19,0,0,N,1
+Nom=FisFDt,27,0,0,N,1
+Nom=FisBas,35,0,0,N,1
+Nom=FisTau,51,0,0,N,1
+Nom=FisLinTau,57,0,0,N,1
+Nom=FisLinMt,63,0,0,N,1
+Nom=FisDegMt,79,0,0,N,1
+Nom=FisManMt,95,0,0,N,1
+Nom=FisExcMt,111,0,0,N,1
+Nom=FisTotMt,127,0,0,N,1
+Nom=FisResMt,143,0,0,N,1
+Nom=Filler,159,0,50,N,1
 [/CHAMPL]
 nom=GrRef
 [CHAMPL]
@@ -1307,6 +2070,51 @@ Flags=n,1,n,n,i,n,n,n
 Nom=ActCod
 [/PROPLOC]
 [TABLE]
+Version=1,20150102135658,UGIE                ,20150102135703,UGIE                
+Nom=Cog_I2,Amortissements,1
+DateM=4432A2978B26D001
+NomOdbc=Cog_I2
+Taille=1500,1500
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Immo,17,2,N,0,0,N,1
+Nom=ImmoComp,25,2,N,0,0,N,1
+Nom=ExoDDt,30,2,N,0,0,N,1
+Nom=ExoFDt,38,2,N,0,0,N,1
+Nom=UserCr,46,2,N,0,0,N,1
+Nom=UserMo,66,2,N,0,0,N,1
+Nom=EcoResTheoMt,86,2,N,0,0,N,1
+Nom=EcoDotDepMt,102,2,N,0,0,N,1
+Nom=EcoDotRepMt,118,2,N,0,0,N,1
+Nom=EcoUoQte,134,2,N,0,0,N,1
+Nom=ResFinMt,150,2,N,0,0,N,1
+Nom=VenalMt,166,2,N,0,0,N,1
+Nom=UsagMt,182,2,N,0,0,N,1
+Nom=UoCode,198,2,N,0,0,N,1
+Nom=EffetDt,206,2,N,0,0,N,1
+Nom=UserCrDh,214,2,N,0,0,N,1
+Nom=UserMoDh,228,2,N,0,0,N,1
+Nom=UserCrOri,242,2,N,0,0,N,1
+Nom=UserMoOri,244,2,N,0,0,N,1
+Nom=Economique,246,2,N,0,0,N,1
+Nom=Fiscal,455,2,N,0,0,N,1
+Nom=Derog,664,2,N,0,0,N,1
+Nom=Filler,680,2,N,0,21,N,1
+Nom=UI2,701,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
 Version=1,20141110114551,UGIE_YLF            ,20141110114551,UGIE_YLF            
 Nom=Cog_Imp_FnpFae,Enreg pour impression FNP FAE,1
 DateM=58175D77D8FCCF01
@@ -1368,6 +2176,43 @@ Nom=Filler,82,2,N,0,199,N,1
 Nom=UserCr,281,2,N,0,0,N,1
 Nom=UserMo,301,2,N,0,0,N,1
 Nom=UserTrace,321,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20150107111430,UGIE                ,20150107111436,UGIE                
+Nom=Cog_PrjAp,Table complémentaire projetAp,1
+DateM=3323F3B68E34D001
+NomOdbc=Cog_PrjAp
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+Nom=Dos,1,2,N,0,0,N,1
+Nom=Affaire,4,2,N,0,0,N,1
+Nom=TravDevDDt,12,2,N,0,0,N,1
+Nom=TravDevFDt,20,2,N,0,0,N,1
+Nom=TravPrevDDt,28,2,N,0,0,N,1
+Nom=TravPrevFDt,36,2,N,0,0,N,1
+Nom=TravReelDDt,44,2,N,0,0,N,1
+Nom=TravReelFDt,52,2,N,0,0,N,1
+Nom=InfraServDevDt,60,2,N,0,0,N,1
+Nom=InfraServPrevDt,68,2,N,0,0,N,1
+Nom=InfraServReelDt,76,2,N,0,0,N,1
+Nom=ProjServDevDt,84,2,N,0,0,N,1
+Nom=ProjServPrevDt,92,2,N,0,0,N,1
+Nom=ProjServReelDt,100,2,N,0,0,N,1
+Nom=ChargeNiDevMt,108,2,N,0,0,N,1
+Nom=ChargeNiPrevMt,121,2,N,0,0,N,1
+Nom=ChargeNiReelMt,134,2,N,0,0,N,1
+Nom=InvestDevMt,147,2,N,0,0,N,1
+Nom=InvestPrevMt,160,2,N,0,0,N,1
+Nom=InvestReelMt,173,2,N,0,0,N,1
+Nom=PrestaDevMt,186,2,N,0,0,N,1
+Nom=PrestaPrevMt,199,2,N,0,0,N,1
+Nom=PrestaReelMt,212,2,N,0,0,N,1
+Nom=TJM,225,2,N,0,0,N,1
+Nom=ValDevDt,238,2,N,0,0,N,1
+Nom=FaMoisNb,246,2,N,0,0,N,1
+Nom=InfraAmoMoisNb,250,2,N,0,0,N,1
+Nom=ProjAmoMoisNb,254,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20111213140124,ROOT                ,20111213140232,ROOT                
@@ -1524,6 +2369,30 @@ Nom=CeNote,141,2,N,0,0,N,1
 Nom=Joint,142,2,N,0,0,N,1
 Nom=CeJoint,150,2,N,0,0,N,1
 Nom=Lib,151,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20150109152620,UGIE                ,20150109152816,UGIE                
+Nom=Cog_T002,Table taux financiers,1
+DateM=A153D17C182CD001
+NomOdbc=TableTauxFi
+Taille=300,300
+Pack=0,0
+CE=CeBin,002
+[CHAMPS]
+Nom=CeBin,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=TabNo,5,2,N,0,0,N,1
+Nom=Cog_TauxDt,8,2,N,0,0,N,1
+Nom=Filler,16,2,N,0,49,N,1
+Nom=UserCr,65,2,N,0,0,N,1
+Nom=UserMo,85,2,N,0,0,N,1
+Nom=UserTrace,105,2,N,0,0,N,1
+Nom=Note,133,2,N,0,0,N,1
+Nom=CeNote,141,2,N,0,0,N,1
+Nom=Joint,142,2,N,0,0,N,1
+Nom=CeJoint,150,2,N,0,0,N,1
+Nom=Lib,151,2,N,0,0,N,1
+Nom=Cog_Taux,191,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110617144614,SYSTEMU             ,20110618000639,SYSTEMU             
@@ -2012,21 +2881,21 @@ Nom=Lib80,115,2,N,0,0,N,1
 [TABLE]
 Version=1,20141114120114,UGIE_YLF            ,20141114164419,UGIE_YLF            
 Nom=Cog_UT125,Affectations des cotisations projet spécifique,1
-DateM=D89674E62100D001
+DateM=205797022A36D001
 NomOdbc=Cog_UT125
 Taille=500,500
 Pack=0,0
 [CHAMPS]
 Nom=Dos,1,2,N,0,0,N,1
-Nom=Etb,4,2,N,0,0,N,1
-Nom=Conf,7,2,N,0,0,N,1
-Nom=UserCr,11,2,N,0,0,N,1
-Nom=UserMo,31,2,N,0,0,N,1
-Nom=UserTrace,51,2,N,0,0,N,1
-Nom=CeNote,79,2,N,0,0,N,1
-Nom=Note,80,2,N,0,0,N,1
-Nom=Affaire,88,2,N,0,0,N,1
-Nom=Ref,96,2,N,0,0,N,1
+Nom=Conf,4,2,N,0,0,N,1
+Nom=UserCr,8,2,N,0,0,N,1
+Nom=UserMo,28,2,N,0,0,N,1
+Nom=UserTrace,48,2,N,0,0,N,1
+Nom=CeNote,76,2,N,0,0,N,1
+Nom=Note,77,2,N,0,0,N,1
+Nom=Affaire,85,2,N,0,0,N,1
+Nom=Ref,93,2,N,0,0,N,1
+Nom=Cog_LgNo,118,2,N,0,0,N,1
 Nom=Cog_Date_Debut,121,2,N,0,0,N,1
 Nom=Cog_Date_Fin,129,2,N,0,0,N,1
 Nom=Cog_Montant,137,2,N,0,0,N,1
@@ -2037,8 +2906,33 @@ Nom=Cog_AxeAnael,158,2,N,0,0,N,1
 Nom=Op,166,2,N,0,0,N,1
 Nom=Cog_ImoFlag,169,2,N,0,0,N,1
 Nom=Cog_LoyNb,170,2,N,0,0,N,1
-Nom=Cog_LoyRestNb,178,2,N,0,0,N,1
-Nom=Cog_LoyFaNb,186,2,N,0,0,N,1
+Nom=Cog_LoyRestNb,174,2,N,0,0,N,1
+Nom=Cog_LoyFaNb,178,2,N,0,0,N,1
+Nom=Cog_FiMt,182,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20150109104215,UGIE                ,20150109105954,UGIE                
+Nom=Cog_UT126,Echéancier de facturation projet spécifique,1
+DateM=E340571F4D36D001
+NomOdbc=EcheancierFacturation
+Taille=2500,2500
+Pack=0,0
+[CHAMPS]
+Nom=Dos,1,2,N,0,0,N,1
+Nom=Affaire,4,2,N,0,0,N,1
+Nom=Ref,12,2,N,0,0,N,1
+Nom=Cog_LgNo,37,2,N,0,0,N,1
+Nom=Annee,40,2,N,0,0,N,1
+Nom=UserCr,44,2,N,0,0,N,1
+Nom=UserMo,64,2,N,0,0,N,1
+Nom=UserCrDh,84,2,N,0,0,N,1
+Nom=UserMoDh,98,2,N,0,0,N,1
+Nom=AntMt,112,2,N,0,0,N,1
+Nom=MoisMt,128,2,N,0,0,N,1
+Nom=AnMt,320,2,N,0,0,N,1
+Nom=DDt,336,2,N,0,0,N,1
+Nom=FDt,344,2,N,0,0,N,1
+Nom=Cog_BaseMt,352,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110712091845,ROOT                ,20110712091900,ROOT                
@@ -2186,9 +3080,11 @@ Nom=cogf_tab,Tables,1
 DateM=71461FB5BAEFCC01
 Fichier=I,0,cogf_tab.dhfi
 Versionbase=7.1
+DateMIndex=F4FB1AAB182CD001
 [TABLES]
 Nom=Cog_T000,0
 Nom=Cog_T001,0
+Nom=Cog_T002,0
 [/TABLES]
 [BASE]
 Version=1,20090903122300,INFOU               ,20110520142138,SYSTEMU             
@@ -2200,12 +3096,22 @@ Versionbase=6.3a
 Nom=Cog_GrtEvt,0
 [/TABLES]
 [BASE]
+Version=1,20150107111358,UGIE                ,20150107111358,UGIE                
+Nom=CogGtf_Proj,Tables complémentaires Projets / AFfaires,1
+DateM=7E6AB2A6622AD001
+Fichier=I,0,Coggtf_proj
+Versionbase=7.2
+DateMIndex=150F19FC122CD001
+[TABLES]
+Nom=Cog_PrjAp,0
+[/TABLES]
+[BASE]
 Version=1,20110617144446,SYSTEMU             ,20110617144446,SYSTEMU             
 Nom=Coggtf_Tab,Tales complémentaires Facturation,1
 DateM=81B39056EC2CCC01
 Fichier=I,0,Coggtf_tab.dhfi
 Versionbase=6.3a
-DateMIndex=35838D70FBFFCF01
+DateMIndex=E72530C0122CD001
 [TABLES]
 Nom=Cog_UT100,0
 Nom=Cog_UT101,0
@@ -2220,6 +3126,7 @@ Nom=Cog_UT109,0
 Nom=Cog_UT110,0
 Nom=Cog_UT120,0
 Nom=Cog_UT125,0
+Nom=Cog_UT126,0
 [/TABLES]
 [INDEX]
 Version=1,20110816135005,ROOT                ,20110816135037,ROOT                
@@ -2435,6 +3342,19 @@ Nom=Filler,13,0,49
 [/CHAMPS]
 [/INDEX]
 [INDEX]
+Version=1,20150109152843,UGIE                ,20150109152844,UGIE                
+Nom=Index_A_T002,PK,1
+DateM=930B9992182CD001
+CLE=cogf_tab, ,,1,032,o,1,n
+Alias=Index_A_T002
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=CeBin,4,0,
+Nom=Cog_TauxDt,5,0,
+Nom=Filler,13,0,49
+[/CHAMPS]
+[/INDEX]
+[INDEX]
 Version=1,20031120091603,RR                  ,20090903192839,INFOU               
 Nom=Index_A,Dossier Classe Affaire,1
 DateM=5070969AF051C401
@@ -2444,6 +3364,17 @@ Nom=Dos,1,0,
 Nom=Affaire,4,0,
 Nom=AfrClas,12,0,
 Nom=Classement,20,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20150109144830,UGIE                ,20150109144831,UGIE                
+Nom=Cog_PrjAp_Pk,PK,1
+DateM=6F6F57F4122CD001
+CLE=CogGtf_Proj, ,,1,032,o,1,n
+Alias=Cog_PrjAp_Pk
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Affaire,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -2597,9 +3528,23 @@ CLE=Coggtf_Tab, ,,1,032,o,1,n
 Alias=Index_UT125
 [CHAMPS]
 Nom=Dos,1,0,
-Nom=Etb,4,0,
-Nom=Affaire,7,0,
-Nom=Ref,15,0,
+Nom=Affaire,4,0,
+Nom=Ref,12,0,
+Nom=Cog_LgNo,37,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20150109110817,UGIE                ,20150109110819,UGIE                
+Nom=Index_UT126,Pk,1
+DateM=C3122931F42BD001
+CLE=Coggtf_Tab, ,,1,032,o,1,n
+Alias=Index_UT126
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Affaire,4,0,
+Nom=Ref,12,0,
+Nom=Cog_LgNo,37,0,
+Nom=Annee,40,0,
 [/CHAMPS]
 [/INDEX]
 [INDEXL]
@@ -2620,7 +3565,9 @@ Nom=Cog_FValid_Cde,Cog_Valid_PMt,Cog_Ind_M,0
 Nom=Cog_FValid_Cde,Cog_Valid_PMt,Cog_Ind_N,0
 Nom=cogf_tab,Cog_T000,Index_A_T000,0
 Nom=cogf_tab,Cog_T001,Index_A_T001,0
+Nom=cogf_tab,Cog_T002,Index_A_T002,0
 Nom=Coggrf_Tab,Cog_GrtEvt,Index_A,0
+Nom=CogGtf_Proj,Cog_PrjAp,Cog_PrjAp_Pk,0
 Nom=Coggtf_Tab,Cog_UT100,Index_UT100,0
 Nom=Coggtf_Tab,Cog_UT101,Index_UT101,0
 Nom=Coggtf_Tab,Cog_UT102,Index_UT102,0
@@ -2634,4 +3581,5 @@ Nom=Coggtf_Tab,Cog_UT109,Index_UT109,0
 Nom=Coggtf_Tab,Cog_UT110,Index_UT110,0
 Nom=Coggtf_Tab,Cog_UT120,Index_UT120,0
 Nom=Coggtf_Tab,Cog_UT125,Index_UT125,0
+Nom=Coggtf_Tab,Cog_UT126,Index_UT126,0
 [/INDEXL]
