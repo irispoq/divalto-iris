@@ -291,6 +291,7 @@ record	ccfdd.dhsd	cx		cx_loc
  2		anneea	4,0
  2		moisa		2,0
   3	moisaa	2
+1	wCar			1
 
 BeginP
 
@@ -366,7 +367,7 @@ BeginP
 	s_EcritureAnael.p66_EcrAn			= val(year(PiDt))
 	s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(PiDt)))
 	s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(PiDt)))
-	s_EcritureAnael.p78_EcrNo			= c8_loc.EcrNo
+	s_EcritureAnael.p78_EcrNo			= nospaces(c8_loc.EcrNo)
 
 	s_EcritureAnael.p86_Jnl		= c8_loc.Jnl
 
@@ -383,9 +384,9 @@ BeginP
 
 			;
 			s_EcritureAnael.p66_EcrAn		= val(year(today))
-			s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(today)))
-			s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(today)))
-			s_EcritureAnael.p86_Jnl		= cx_loc.Jnl
+			s_EcritureAnael.p72_EcrMois	= fstring("0",val(month(today)))
+			s_EcritureAnael.p76_EcrJour	= fstring("0",val(day(today)))
+			s_EcritureAnael.p86_Jnl			= cx_loc.Jnl
 
 			;
 			anneea	= year(today)
@@ -411,7 +412,12 @@ BeginP
 			s_EcritureAnael.p99_Libelle		= "Redd.N " & right(c8_loc.Cog_RedNo) & " de " & Right("00" & fstring("0",val(month(c8_loc.EcrDt))),2) & "/" & right(val(year(c8_loc.EcrDt)),2)
 
 		Case 4
-			t_PiNo = C8.COG_CHRONO
+			t_PiNo 									= 0
+			s_EcritureAnael.p57_Cst				= '6'
+			s_EcritureAnael.p78_EcrNo			= Condition(c8_loc <> ' ', nospaces(c8_loc.EcrNo), nospaces(cx_loc.EcrNo))
+			s_EcritureAnael.p86_Jnl				= Condition(c8_loc <> ' ', c8_loc.Jnl, cx_loc.Jnl)
+			;s_EcritureAnael.p99_Libelle		= Condition(c8_loc <> ' ', c8_loc.Lib, "Vtl ana de l'ecr " & nospaces(cx_loc.EcrNo))
+			s_EcritureAnael.p99_Libelle		= Modify("Facture","F.",c8_loc.Lib)
 
 		Default
 			t_PiNo = c8_loc.Piece
@@ -439,11 +445,11 @@ BeginP
 	s_EcritureAnael.p183_Cst		= "0"
 	s_EcritureAnael.p187_Cst		= "0"
 	s_EcritureAnael.p191_Cst		= "0"
-	; JDT DEBUT 02/12/2011
+
 	If left(c8_loc.Cpt,1) in ("A".."Z") And Recherche_Client(c8_loc.Cpt,False) = 0 and OrigineAppel <> 2
 		s_EcritureAnael.p194_Stat2 = Left(CLI.Stat(2),3)
 	EndIf
-	; JDT FIN 02/12/2011
+
 	if OrigineAppel = 1
 		;lectab(85,c3.TvaCod)
 		Lectab_(TauxTvaN, C3.TvaArt, C3.TvaTie, Condition(cx_loc <> ' ', cx_loc.EcrDt, c8_loc.EcrDt))
@@ -460,10 +466,12 @@ BeginP
 	s_EcritureAnael.p275_EcrNoAna		= condition(cx_loc="",(90000000000000+c8_loc.EcrNo),(90000000000000+cx_loc.EcrNo))
 	s_EcritureAnael.p289_EcrLg		= condition(cx_loc="",c8_loc.EcrLg,cx_loc.EcrLg)
 	s_EcritureAnael.p289_EcrLg		= fstring("R",s_EcritureAnael.p289_EcrLg)
+
 	if OrigineAppel in(1,3,4) And left(c8_loc.Cpt,1) in ("A".."Z")
 		lectab(6,c8_loc.Reg)
 		s_EcritureAnael.p295_RegAna	= t006.Cog_Modreganael
 	endif
+
 	s_EcritureAnael.p324_Dev		= condition(cx_loc="",c8_loc.Dev,"EUR")
 	s_EcritureAnael.p330_Cst		= "0"
 	s_EcritureAnael.p348_TrtAn		= val(year(today))
@@ -524,9 +532,10 @@ BeginP
 	s_EcritureAnael.p1456_Cst		= "0"
 	s_EcritureAnael.p1460_Cst		= "0"
 
+	wCar = Condition(c8_loc <> ' ', 	left(c8_loc.Cpt,1), left(cx_loc.Cpt,1))
 	switch OrigineAppel
 		case 1
-			if left(c8_loc.Cpt,1) in ("6","7")
+			if wCar in ("6","7")
 				s_EcritureAnael.p455_CstAxe	= "999999"
 				s_EcritureAnael.p461_Axe4		= c3.Axe(4)
 				s_EcritureAnael.p464_Axe3		= c3.Axe(3)
@@ -542,7 +551,7 @@ BeginP
 			s_EcritureAnael.p1018_Axe4		= cx_loc.Axe(4)
 			s_EcritureAnael.p1020_Axe3		= cx_loc.Axe(3)
 		default
-			if left(c8_loc.Cpt,1) in ("6","7")
+			if wCar in ("6","7")
 				s_EcritureAnael.p455_CstAxe	= condition(cx_loc="",condition(left(c8_loc.Cpt,1) not in ("C","F") and  left(c8_loc.Cpt,3) <> "445","999999",""),cx_loc.Axe(1))
 				s_EcritureAnael.p461_Axe4		= condition(cx_loc="",c3.Axe(4),cx_loc.Axe(4))
 				s_EcritureAnael.p464_Axe3		= c8_loc.Cpt
