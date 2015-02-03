@@ -154,7 +154,7 @@ BeginF
 EndF
 
 ;*	01
-Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX, t_OA, t_AnaJnl)
+Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX, t_OA, t_AnaJnl, t_Trace)
 ;
 1	t_CheminFichier	255
 1	t_NomFichier		255
@@ -185,6 +185,7 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 1	t_first				1,0	= true
 1	t_lilg				4,0	= 0
 1	t_ecrno				>CCFDD.DHSD	ecrno	= 0
+1	t_trace				1,0	= FALSE							; si TRUE, activation de opentrace sur pages 2,3,4 de MZ.mecle
 
 1	a_numfic				1
 
@@ -209,6 +210,11 @@ BeginF
 		s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
 		s_datetrait = Fstring("0", s_datetrait)
 	EndIf
+
+	If t_trace
+		PingLocal("TraceCompteur",False)
+		G3_OpenTrace(2, 3, 4)
+	EndIF
 
 	;*
 	;initialisation des listes
@@ -315,6 +321,14 @@ BeginF
 
 	Do While CogRs_C8.ReaderNext(readC8) > 0
 		
+		;*
+		;
+		;*
+		If t_trace
+			Afficher_Selection
+			Afficher_Traitement
+		EndIF
+
 		;*
 		; Lecture des autres tables
 		;*
@@ -541,6 +555,10 @@ BeginF
 	EndIf
 
 	ListDestroy(list_EcrVtl)
+
+	If t_trace
+		CloseTrace
+	EndIF
 
 	;*
 	; Fermeture du fichier TXT
