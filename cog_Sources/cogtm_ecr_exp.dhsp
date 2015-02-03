@@ -296,6 +296,7 @@ record	ccfdd.dhsd	cx		cx_loc
 BeginP
 
 	ligne	= ""
+	init s_EcritureAnael				= " "
 	s_EcritureAnael.p1_Cst			= "C"
 	s_EcritureAnael.p2_Dos_Anael	= nospaces(ca.Cog_Dos_Anael)
 	s_EcritureAnael.p2_Dos_Anael	= fstring("R",s_EcritureAnael.p2_Dos_Anael)
@@ -377,7 +378,7 @@ BeginP
 	; JDT DEEBUT 14/09/2011
 	Switch OrigineAppel
 		Case 1
-			t_PiNo = c8_loc.EcrNo
+			t_PiNo = c8_loc.Piece
 		Case 2
 			;
 			s_EcritureAnael.p78_EcrNo		= " "
@@ -414,7 +415,7 @@ BeginP
 		Case 4
 			t_PiNo 									= 0
 			s_EcritureAnael.p57_Cst				= '6'
-			s_EcritureAnael.p78_EcrNo			= Condition(c8_loc <> ' ', nospaces(c8_loc.EcrNo), nospaces(cx_loc.EcrNo))
+			s_EcritureAnael.p78_EcrNo			= Condition(c8_loc <> ' ', right(c8_loc.EcrNo,8), right(cx_loc.EcrNo,8))
 			s_EcritureAnael.p86_Jnl				= Condition(c8_loc <> ' ', c8_loc.Jnl, cx_loc.Jnl)
 			;s_EcritureAnael.p99_Libelle		= Condition(c8_loc <> ' ', c8_loc.Lib, "Vtl ana de l'ecr " & nospaces(cx_loc.EcrNo))
 			s_EcritureAnael.p99_Libelle		= Modify("Facture","F.",c8_loc.Lib)
