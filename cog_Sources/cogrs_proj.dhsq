@@ -10,7 +10,11 @@
 <RecordSql Name=Cogrs_PrjComp Comment='Complément projet'>
 Public Record A5DD.dhsd		MZ
 <SELECT>
-	COG_PRJAP.*
+	COG_PRJAP.*,
+	CLI.NOM  	AS NOMCLI
+<LEFTJOIN>
+	GTFDD.DHSD CLI
+	ON CLI.DOS = MZ.DOS AND CLI.TIERS = COG_PRJAP.DIRCLITIERS
 <FROM Insert=Yes Update=Yes Delete=Yes>
 	COG_PRJAP
 <WHERE>

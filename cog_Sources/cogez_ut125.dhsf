@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150122105029      
+;>xwin4obj                              7.0       20150213173130      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="22/01/2015"
+ date_modification="13/02/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
- dernier_id=117
+ dernier_id=122
  dernier_id_page=22
 [defaut]
  [aide_page]
@@ -68,7 +68,7 @@
  ident_unique=2
  [obj_texte]
   [presentation]
-   position=11,8
+   position=8,8
    taille=9,39
    id=63
    wstyle="STD"
@@ -76,15 +76,23 @@
    texte="Affaire"
  [obj_texte]
   [presentation]
-   position=23,8
+   position=20,8
    taille=9,25
    id=65
    wstyle="STD"
   [texte]
    texte="Référence"
+ [obj_texte]
+  [presentation]
+   position=40,8
+   taille=9,48
+   id=121
+   wstyle="STD"
+  [texte]
+   texte="Code OP"
  [champ]
   [presentation]
-   position=11,80
+   position=8,80
    taille=9,119
    id=116
    colonnes_saisie=80
@@ -99,7 +107,7 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=11,44
+   position=8,44
    taille=9,36
    noms="pilot"
    id=64
@@ -123,7 +131,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=23,44
+   position=20,44
    taille=9,94
    id=66
    colonnes_saisie=25
@@ -145,7 +153,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=33,44
+   position=30,44
    taille=9,154
    id=108
    colonnes_saisie=80
@@ -158,6 +166,26 @@
   [touches]
    f7=135
    shift_f6=10000
+ [champ]
+  [presentation]
+   position=40,44
+   taille=9,36
+   id=122
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut125,op,cogrs_ut125
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9060
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Op_1_Ap"
 [page]
  numero=3
  fond="STD"
@@ -575,24 +603,53 @@
   [touches]
    f7=135
    shift_f6=10000
- [case_a_cocher]
+ [champ]
   [presentation]
-   position=90,9
-   taille=9,48
-   id=100
-   wstyle="CHAMP_SAISI"
+   position=113,133
+   taille=9,142
+   id=118
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
   [description]
-   donnee=cogrs_ut125,cog_duree_limitee,cogrs_ut125
-  [param_case]
-   texte="Durée limitée"
-   cadrage=droite
-   valeur="2","1"
-   choix="cog_gtfdmc.dhfi",""
+   donnee=cogrs_ut125,oplib,cogrs_ut125
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
   [touches]
    f7=135
    shift_f6=10000
-  [traitements]
-   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=60,49
+   taille=10,68
+   id=119
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_ut125,prodnattyp,cogrs_ut125
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","TYPENATUREPROD"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=60,126
+   taille=10,110
+   id=120
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_ut125,opflux,cogrs_ut125
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","NATURECHARGE"
+  [touches]
+   f7=135
+   shift_f6=10000
  [champ]
   [presentation]
    position=102,95
@@ -1131,7 +1188,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogez_ut125.dhsf 7440 2015-01-23 13:04:23Z admin $')
+SetModuleInfo('$Id: cogez_ut125.dhsf 7592 2015-02-13 16:59:11Z admin $')
 ;*
 ;*	  Traitement du zoom facturation loyer sur projets spec
 ;*

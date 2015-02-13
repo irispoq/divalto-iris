@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150123151811      
+;>xwin4obj                              7.0       20150213100328      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="23/01/2015"
+ date_modification="13/02/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
- dernier_id=639
+ dernier_id=641
  dernier_id_page=22
 [defaut]
  [aide_page]
@@ -17,10 +17,11 @@
   shift_f6=10000
 [enregistrements]
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "cogfdd.dhsd",,cog_ut126,cog_ut126,2500,0
+ "cogfdd.dhsd",,cog_ut126,cog_ut126,1500,0
  "cogfdd.dhsd",,cog_ut125,ut125_sel,500,0
  "cogfdd.dhsd",,cog_ut125,cog_ut125,500,0
  "cogrs_uttab.dhoq",,cogrs_ut125,cogrs_ut125,1024,1
+ "ddsys.dhsd",,rowinfo,rowut126,120,0
 [onglet]
  [presentation]
   position=0,0
@@ -92,9 +93,31 @@
    hauteur_lig=11
    hauteur_entete=10
    largeur_controle=8
-   var_controle=non
+   var_controle=oui
    col_fixes=4
    separation=160
+  [description]
+   donnee=rowinfo,rowinfo,rowut126
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=166,118
+    taille=9,44
+    id=641
+    wstyle="STD"
+   [description]
+    donnee=cog_ut126,ce1n,cog_ut126
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="cog_gtfdmc.dhfi","STATUT_UT126"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    largeur_col=15
+    wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
     position=0,0
@@ -221,6 +244,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot1"
     id=628
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -242,6 +266,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot2"
     id=639
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -263,6 +288,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot3"
     id=638
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -284,6 +310,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot4"
     id=637
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -305,6 +332,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot5"
     id=636
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -326,6 +354,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot6"
     id=635
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -347,6 +376,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot7"
     id=634
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -368,6 +398,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot8"
     id=633
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -389,6 +420,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot9"
     id=632
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -410,6 +442,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot10"
     id=631
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -431,6 +464,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot11"
     id=630
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -452,6 +486,7 @@
    [presentation]
     position=0,0
     taille=7,50
+    noms="dot12"
     id=629
     colonnes_saisie=16
     wstyle="TABLEAU_SAISI"
@@ -731,25 +766,6 @@
   [touches]
    f7=135
    shift_f6=10000
- [case_a_cocher]
-  [presentation]
-   position=63,128
-   taille=9,48
-   id=609
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_ut125,cog_duree_limitee,cogrs_ut125
-   saisie=non
-  [param_case]
-   texte="Durée limitée"
-   cadrage=droite
-   valeur="2","1"
-   choix="cog_gtfdmc.dhfi",""
-  [touches]
-   f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
    position=75,214
@@ -983,11 +999,26 @@
    [info_bulle]
    texte="Renvoyer les données <F12>"
   [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__1"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wfic1="#dregred",0
+    wid_ressource="COG_BTNEXCEL"
+    wetype_trait=arret
+    warret=1002
+   [info_bulle]
+   texte="Export Excel"
+  [item]
    dessin=vide
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogee_ut126.dhsf 7440 2015-01-23 13:04:23Z admin $')
+SetModuleInfo('$Id: cogee_ut126.dhsf 7592 2015-02-13 16:59:11Z admin $')
 ;*
 ;*	  Traitement du zoom amortissements
 ;*
@@ -1011,6 +1042,7 @@ Public Record "ddsys.dhsd" rowinfo 	zoomselection
 Public Record "cogfdd.dhsd" cog_ut126 cog_ut126
 Public Record "cogfdd.dhsd" cog_ut125 ut125_sel
 Public Record "cogfdd.dhsd" cog_ut125 cog_ut125
+Public Record "ddsys.dhsd" rowinfo rowut126
 
 
 

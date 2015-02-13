@@ -22,6 +22,7 @@ include "GTTCZ00.dhsp"			;déclarations communes
 Module	GRPMFIC.dhop
 Module	GRTM000.dhop
 ;Module	Cog_Gdiva.dhop
+Module	"CogTm_MoteurPrjSpec.dhop"
 
 ;
 public RecordSQL 	"gtrsproj.dhoq" 	Affaire 				Affaire		; Affaire (Enregistrement principal)
@@ -31,35 +32,36 @@ Public RecordSQL	"COGRS_PROJ.DHOQ"	CogRs_PrjComp
 ;
 HfileVersion 	Cogfdd.dhsd 	COGGTF_TAB
 
-Public Hfile 	Cogfdd.dhsd 	COGGTF_TAB	COGGTF_TAB	 noopen
-Public Hfile 	Cogfdd.dhsd 	COGGRF_TAB	COGGRF_TAB	
-Public Hfile	cogfdd.dhsd	Cog_FAffectBudget	Cog_FAffectBudget_01
-Public Hfile	cogfdd.dhsd	Cog_FDirCliente	Cog_FDirCliente_01
-Public hfile	"ccfdd.dhsd"	ccfjca	ccfjca_dev_01
+Public Hfile 	"Cogfdd.dhsd" 	COGGTF_TAB			COGGTF_TAB	 noopen
+Public Hfile 	"Cogfdd.dhsd" 	COGGRF_TAB			COGGRF_TAB	
+Public Hfile	"cogfdd.dhsd"	Cog_FAffectBudget	Cog_FAffectBudget_01
+Public Hfile	"cogfdd.dhsd"	Cog_FDirCliente	Cog_FDirCliente_01
+Public hfile	"ccfdd.dhsd"	ccfjca				ccfjca_dev_01
 
 ;
-Public record 	Cogfdd.dhsd 	COG_GRTEVT				; Code événement
-Public record 	grfdd.dhsd 		EVTTIERS					; Evénement
-Public Record	grfdd.dhsd		XZ				GRXZ		; Enregistrement de communication avec le module RT
-Public record 	Cogfdd.dhsd 	COG_UT101
-Public record 	Cogfdd.dhsd 	COG_UT103
-Public record 	Cogfdd.dhsd 	COG_UT105
-Public record 	Cogfdd.dhsd 	COG_UT106
-Public record 	Cogfdd.dhsd 	COG_UT107
-Public record 	Cogfdd.dhsd 	COG_UT108
-Public record 	Cogfdd.dhsd 	COG_UT109
-Public record 	Cogfdd.dhsd 	COG_UT110
-Public record 	Cogfdd.dhsd 	COG_UT125
-Public Record 	gtfdd.dhsd 		T012
-Public Record 	gtfdd.dhsd 		T064
-Public record 	gtfdd.dhsd 		SOCCRM					; Dossier CRM
-Public Record "cogfdd.dhsd" Cog_AffectationBudgetaire	Cog_AffectationBudgetaire_01
-Public Record "cogfdd.dhsd" Cog_DirCliente	Cog_DirCliente_01
-Public Record	"ccfdd.dhsd"	C5		C5_DEV_01
-public record 		"gtfdd.dhsd" 		PrjAp		PrjAp_sel	; Affaire (sélection)
-public record "gtfdd.dhsd" CLI 		CLI_sel
-public record "gtfdd.dhsd" T064		T064_sel					; classe d'affaire (sélection)
-Public Record "Cogfdd.Dhsd"	Cog_Ut120
+Public Record 	"gtfdd.dhsd" 	PRJAP								COG_PRJAP_AVTMODIF
+Public record 	"Cogfdd.dhsd" 	COG_GRTEVT						; Code événement
+Public record 	"grfdd.dhsd" 	EVTTIERS							; Evénement
+Public Record	"grfdd.dhsd"	XZ									GRXZ		; Enregistrement de communication avec le module RT
+Public record 	"Cogfdd.dhsd" 	COG_UT101
+Public record 	"Cogfdd.dhsd" 	COG_UT103
+Public record 	"Cogfdd.dhsd" 	COG_UT105
+Public record 	"Cogfdd.dhsd" 	COG_UT106
+Public record 	"Cogfdd.dhsd" 	COG_UT107
+Public record 	"Cogfdd.dhsd" 	COG_UT108
+Public record 	"Cogfdd.dhsd" 	COG_UT109
+Public record 	"Cogfdd.dhsd" 	COG_UT110
+Public record 	"Cogfdd.dhsd" 	COG_UT125
+Public Record 	"gtfdd.dhsd" 	T012
+Public Record 	"gtfdd.dhsd" 	T064
+Public record 	"gtfdd.dhsd" 	SOCCRM							; Dossier CRM
+Public Record 	"cogfdd.dhsd"  Cog_AffectationBudgetaire	Cog_AffectationBudgetaire_01
+Public Record 	"cogfdd.dhsd"  Cog_DirCliente					Cog_DirCliente_01
+Public Record 	"ccfdd.dhsd"	C5									C5_DEV_01
+public record 	"gtfdd.dhsd" 	PrjAp								PrjAp_sel	; Affaire (sélection)
+public record 	"gtfdd.dhsd" 	CLI 								CLI_sel
+public record 	"gtfdd.dhsd" 	T064								T064_sel					; classe d'affaire (sélection)
+Public Record 	"Cogfdd.Dhsd"	Cog_Ut120
 
 ;
 define IdMenuZoomBis		= G3XT.IDBARRE(3)	
@@ -72,6 +74,9 @@ define IdMenuZoomBis		= G3XT.IDBARRE(3)
 1		whierarchie			1,0
 
 1	g_Dossier	>GTFDD.DHSD	Dos
+
+;
+Const 	C_STATUT_PRJ_DEMARRE = 'Démarré'	 			; stocké de cette manière dans la base de données...
 
 ;
 include "CogGt_Controle_Fichier.dhsp"
@@ -146,10 +151,7 @@ Beginp
 
 Endp
 
-
-
-
-
+;*
 Procedure Maj_Menu_Boutons
 ; met à jour le menu et les boutons
 BeginP
@@ -207,6 +209,105 @@ Beginf
 		Freturn(1)
 	Endif	
 Endf
+
+;*
+Function int Cog_Controle_Champs_Obligatoires
+;
+RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			wRS_125
+1		wErr		1,0
+1		wTxtErr	S
+BeginF
+
+	werr = FALSE
+
+	If Affaire.Cog_Prj_Status = C_STATUT_PRJ_DEMARRE AND Affaire.Cog_Facture = 2
+
+		wtxtErr = "Informations manquantes pour passer au statut démarré:"
+
+		wRs_125.Init()
+		wRs_125.Where.RemoveCondition("")
+		wRs_125.Where.Equal_Affaire(Affaire.Affaire)
+		wRs_125.Where.AddCondition("Equal_Affaire")
+		wRs_125.Where.Equal_ImmoTyp(1)
+		wRs_125.Where.AddCondition("Equal_ImmoTyp")
+
+		; Charges non immo --> date de début réelle des travaux obligatoire
+		If wRs_125.GetCount() > 0 AND cogrs_prjcomp.TravReelDDt = ' '
+			wtxtErr &= "|La date de début des travaux réelle n'est pas renseignée (présence UT125 type non immo)."
+			werr = TRUE
+		EndIf
+
+		;*
+		; Charges IMMO
+		;*
+
+		wRs_125.Where.Equal_ImmoTyp(2)
+
+		; PROJET --> date de mise en service projet réelle obligatoire	+ n° fiche de bien
+		wRs_125.Where.Equal_NatTyp(2)
+		wRs_125.Where.AddCondition("Equal_NatTyp")
+		If wRs_125.GetCount() > 0 
+			If cogrs_prjcomp.ProjServReelDt = ' ' 
+				wtxtErr &= "|La date de mise en service réelle PROJET n'est pas renseignée (présence UT125 type immo - PROJET)."
+				werr = TRUE
+			EndIf
+			If cogrs_prjcomp.PrestaBien = ' ' 
+				wtxtErr &= "|Le N° de fiche de bien PROJET n'est pas renseigné (présence UT125 type immo - PROJET)."
+				werr = TRUE
+			EndIf
+		EndIf
+
+		; INFRA logiciel / matériel  --> date de mise en service INFRA réelle obligatoire
+		wRs_125.Where.Equal_NatTyp(1)
+		If wRs_125.GetCount() > 0 AND cogrs_prjcomp.InfraServReelDt = ' ' 
+			wtxtErr &= "|La date de mise en service réelle INFRA n'est pas renseignée (présence UT125 type immo - INFRA)."
+			werr = TRUE
+		EndIf
+
+		; INFRA logiciel --> n° fiche de bien
+		wRs_125.Where.Equal_DetailTyp(2)
+		wRs_125.Where.AddCondition("Equal_DetailTyp")
+		If wRs_125.GetCount() > 0 AND cogrs_prjcomp.InfraLogBien = ' ' 
+			wtxtErr &= "|Le N° de fiche de bien INFRA logiciel n'est pas renseigné (présence UT125 type immo - INFRA log)."
+			werr = TRUE
+		EndIf
+
+		; INFRA matériel --> n° fiche de bien
+		wRs_125.Where.Equal_DetailTyp(1)
+		If wRs_125.GetCount() > 0 AND cogrs_prjcomp.InfraMatBien = ' ' 
+			wtxtErr &= "|Le N° de fiche de bien INFRA matériel n'est pas renseigné(présence UT125 type immo - INFRA mat)."
+			werr = TRUE
+		EndIf
+
+	EndIf
+
+	if werr
+		MessageBox(wtxtErr, "Alerte", MB_ICONINFORMATION)
+		FReturn(1)
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Cog_Gestion_Activation_Facturation
+;
+BeginF
+
+	; Activation
+	If (Affaire.Cog_Prj_Status = C_STATUT_PRJ_DEMARRE AND Affaire.Cog_Facture = 2) AND \
+		(COG_PRJAP_AVTMODIF.Cog_Prj_Status <> C_STATUT_PRJ_DEMARRE OR COG_PRJAP_AVTMODIF.Cog_Facture <> 2)
+		FReturn(Cog_UT126_ActivationLignes(Affaire.Affaire, wAction=1))
+	; Désactivation
+	ElsIf	(Affaire.Cog_Prj_Status <> C_STATUT_PRJ_DEMARRE OR Affaire.Cog_Facture <> 2) AND \
+			(COG_PRJAP_AVTMODIF.Cog_Prj_Status = C_STATUT_PRJ_DEMARRE AND COG_PRJAP_AVTMODIF.Cog_Facture = 2)
+		FReturn(Cog_UT126_ActivationLignes(Affaire.Affaire, wAction=2))
+	EndIf
+
+	FReturn(0)
+
+EndF
 
 ;*
 Procedure ZoomDebut 
@@ -304,10 +405,26 @@ beginp
 	wafrclas 	= affaire.AfrClas
  	wcotpdv  	= affaire.Cog_Cotisation_PDV
 	whierarchie = affaire.Cog_Hierarchie
+	COG_PRJAP_AVTMODIF = Affaire.PRJAP
 endp
 
 ;*
+Procedure ZoomSuppression
+;
+BeginP
+
+	Standard.ZoomSuppression
+
+	If Cog_UT125_FacturationDebutee(Affaire.Affaire)
+		MessageBox("Suppression impossible: présence de factures attachées à l'affaire.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'I'
+	EndIf
+
+EndP
+
+;*
 procedure ZoomAvantReWrite 
+;
 beginp 
 	Standard.ZoomAvantReWrite
 	If Zoom.Ok = 'O'
@@ -322,7 +439,13 @@ beginp
 			MessageBox ("Veuillez saisir le code client.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
 			Harmony.Retour = Xmenext_Point_Sequence
 			Harmony.CplRetour = 1001
+		ElsIf Cog_Controle_Champs_Obligatoires <> 0
+			Zoom.Ok = 'S'
+		ElsIf Cog_Gestion_Activation_Facturation <> 0
+			;MessageBox("","Alerte", MB_ICONERROR)
+			Zoom.Ok = 'S'
 		Else
+
 			If CogRs_PrjComp.Dos = Affaire.Dos
 				CogRs_PrjComp.Update()
 			Else

@@ -1,24 +1,25 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7357 2015-01-09 16:28:33Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7592 2015-02-13 16:59:11Z admin $')
 ;>xdiva
 ;*
-;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
+;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
 ;*
 
 ;*
 ;*		Log	Version		N° modif		Date			Modifications
 ;*		--------------------------------------------------------------------------------------------------------------
-;*
+;*		YLEF		P205a			INIT		01/2015
 
 ;*
 ;*		Procédures / Fonctions				Commentaires
 ;*		--------------------------------------------------------------------------------------------------------------
 ;*		InitialiserVariables					Initialisation des variables
-;*		NomDuTraitementPrincipal			
+;*		GenerationFacture						Génération facture par GTFI
+;*		FacturationProjetsSpecifiques		Boucle principale	
 ;*		SaisiePage1								Saisie de la première page du masque
 ;*
 
 ;*
-;*
+;*	  	Déclarations
 ;*
 
 ;
@@ -26,19 +27,101 @@ Include	"gttcz00.dhsp"									;déclarations communes
 
 ;
 Module	"Cogtm_000.dhop"								;module de fonctions communes
+Module	"CogTm_MoteurPrjSpec.dhop""
+Module	"GTPMPCE.DHOP"
 
 ;
-Public Record	"gtfdd.dhsd"	xq			xq_cog	;enregistrement de travail
+HTmpFile	"gtfdd.dhsd"	gtfi		GTFI		OpenOnUse	DeleteOnExit
 
 ;
-1  id_toolbar	L						;ident barre d'outils
-1  id_menu		L						;ident menu
+Public 	RecordSQL	"GTRSPPPROJ.DHOQ"			Affaire
+Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125
+Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT126
+Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT126		Rs_UT126_Prec
 
-1	AdrProc		16						;adresse des procédures appelées dans le module associé
-1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+;
+Public 	Record	"gtfdd.dhsd"	xq				XQ_Cog	;enregistrement de travail
+Public 	Record 	"cogfdd.dhsd" 	cog_Sel	 	Cog_Sel
+Public	Record	"gtfdd.dhsd"	CLI
+Public	Record	"gtfdd.dhsd"	GTPCE
+Public	Record   "gtfdd.dhsd"	ent			ENT
+Public	Record	"gtfdd.dhsd"	ipar			iPAR
+Public	Record   "gtfdd.dhsd"	ent			iENT
+Public	Record   "gtfdd.dhsd"	mouv			iMOUV
+Public	Record   "gtfdd.dhsd"	mvtl			iMVTL
+Public	Record   "gtfdd.dhsd"	PrjAp
+Public	Record   "gtfdd.dhsd"	PrjAp			PrjAp_Seek
+Public 	Record 	"cogfdd.dhsd" 	Cog_UT125
+Public 	Record 	"cogfdd.dhsd" 	Cog_UT126
+Public 	Record 	"cogfdd.dhsd" 	Cog_UT125	UT125_Seek
 
-1	tunnel		1,0	= false
+;
+1  id_toolbar		L						;ident barre d'outils
+1  id_menu			L						;ident menu
+1	AdrProc			16						;adresse des procédures appelées dans le module associé
+1	AdrFunc			16
+1	erreur			x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+1	tunnel			1,0	= false
+1	faAn				4,0					; année de facturation
+1	faMois			2,0					; mois de facturation
 
+1	lId_UT125_Res	L
+1	lId_Prj_Res		L
+1	lId_UT126_GTFI	L						; liste des ut126 en cours d'intégration
+1	lId_UT126_Maj	L						; liste des ut126 pour MAJ (facture générée ou rejetée par intégrateur)
+1	lId_BlNo			L						; liste des BL générées
+
+;*
+; 	Fonctions de tri des listes mémoire
+;*
+
+;*
+Public Function Long Tri_Prj(&A, &B)
+;
+Record "gtfdd.dhsd"	PrjAp		A
+Record "gtfdd.dhsd"	PrjAp		B
+1		wCleA		S
+1		wCleB		S
+BeginF
+
+	wCleA = [A.Dos A.Affaire]
+	wCleB	= [B.Dos B.Affaire]
+
+	FReturn(SortCompare(wCleA, wCleB))
+
+EndF
+
+;*
+Public Function Long Tri_UT125(&A, &B)
+;
+Record "cogfdd.dhsd"		Cog_UT125		A
+Record "cogfdd.dhsd"		Cog_UT125		B
+1		wCleA		S
+1		wCleB		S
+BeginF
+
+	wCleA = [A.Dos A.Affaire A.Ref A.Cog_LgNo]
+	wCleB	= [B.Dos B.Affaire A.Ref A.Cog_LgNo]
+
+	FReturn(SortCompare(wCleA, wCleB))
+
+EndF
+
+;*
+Public Function Long Tri_UT126(&A, &B)
+;
+Record "cogfdd.dhsd"		Cog_UT126		A
+Record "cogfdd.dhsd"		Cog_UT126		B
+1		wCleA		S
+1		wCleB		S
+BeginF
+
+	wCleA = [A.Dos A.Affaire A.Ref A.Cog_LgNo A.Annee]
+	wCleB	= [B.Dos B.Affaire B.Ref B.Cog_LgNo B.Annee]
+
+	FReturn(SortCompare(wCleA, wCleB))
+
+EndF
 
 ;*
 ;	Procédures / Fonctions générale
@@ -68,7 +151,6 @@ beginf
 			mz.etb		= utilisateur.etb
 			mz.depo		= utilisateur.depo
 			mz.mecle		= "Cogee_MoteurPrjSpec.dhof"
-			
 			mz.titre2	= ""
 
 		endif
@@ -98,6 +180,32 @@ beginf
 	;chargement du masque d'impression
 	;xmiload mz.micle
 
+	; 
+	Cog_Sel.DDt_Annee = HYear(Today) 
+	Cog_Sel.DDt_Mois 	= HMonth(Today) + 1
+	Cog_Sel.FDt_Annee = Cog_Sel.DDt_Annee
+	Cog_Sel.FDt_Mois 	= Cog_Sel.DDt_Mois
+	GTPCE.TiCodDst		= 'C'
+	GTPCE.PiCodDst		= 3
+
+	;
+	lId_Prj_Res 	= ListGetId("COG_LST_PROJ_RES")
+	GetAdressFunction('', "TRI_PRJ", AdrFunc)
+	ListMode(lId_Prj_Res, 1, AdrFunc)
+
+	lId_UT125_Res  = ListGetId("COG_LST_UT125_RES")
+	GetAdressFunction('', "TRI_UT125", AdrFunc)
+	ListMode(lId_UT125_Res, 1, AdrFunc)
+
+	lId_UT126_GTFI = ListGetId("COG_LST_UT126_GTFI")
+	GetAdressFunction('', "TRI_UT126", AdrFunc)
+	ListMode(lId_UT126_GTFI, 1, AdrFunc)
+
+	lId_UT126_Maj  = ListGetId("COG_LST_UT126_MAJ")
+	ListMode(lId_UT126_Maj, 1, AdrFunc)
+
+	lId_BlNo			= ListGetId("COG_LST_BLNO")
+
 	FReturn(true)
 
 endf
@@ -117,27 +225,30 @@ procedure Cog_AfficherTraitement
 ;
 beginp
 
-	;test d'abandon du programme en cours de traitement
-	if getchar()=$E8 and messagebox(translate("Abandon du traitement en cours ?"),translate("Confirmation"),mb_iconquestion+mb_yesno)=idyes
-		Cog_EcritureLivreDeBord(translate("Abandon utilisateur"))
-		Cog_FinProgramme
-	endif
-
-	xmedispv mz.mecle 3 xme_mode_gosub
-	xmeret
-	xmedispv mz.mecle 4 xme_mode_gosub
-	xmeret
+	If not tunnel
+		Afficher_Selection
+		Afficher_Traitement
+	EndIf
 
 endp
 
 ;*
-function int Cog_FiltresOk
-;
-beginf
+Function int Cog_Selection_OK
+; vérification des critères de sélection avant lancement traitement
+; retour: TRUE si OK
+BeginF
 
-	freturn(true)
+	XQ_Cog.DatD = Cog_Sel.DDt_Annee &  Fstring('R0', Cog_Sel.DDt_Mois) & '01' 
+	XQ_Cog.DatF = Cog_Sel.FDt_Annee &  Fstring('R0', Cog_Sel.FDt_Mois) & '01'
 
-endf
+	If XQ_Cog.DatF < XQ_Cog.DatD
+		MessageBox("Critères de dates incohérents", "Alerte", MB_ICONEXCLAMATION)
+		FReturn(FALSE)
+	EndIf
+
+	FReturn(TRUE)
+
+EndF
 
 
 ;*
@@ -145,29 +256,423 @@ endf
 ;*
 
 ;*
-procedure NomDuTraitementPrincipal
+Function int Lib_PrjEtUT125
+; Libération des réservations contenues dans lId_Prj_Res et lId_UT125_Res
+1		wRet		X = 0
+BeginF
+
+	ListBegin(lId_Prj_Res)
+	Do While ListNext(lId_Prj_Res, PrjAp) not in (-1, 0)
+		wRet += Lib_PrjAp(PrjAp.Affaire)
+	WEnd
+	ListErase(lId_Prj_Res)
+
+	ListBegin(lId_UT125_Res)
+	Do While ListNext(lId_UT125_Res, Cog_UT125) not in (-1, 0)
+		wRet += CogRs_UT125.FShare(['COG_UT125' mz.Dos Cog_UT125.Affaire Cog_UT125.Ref Cog_UT125.Cog_LgNo], 'L')
+	WEnd
+	ListErase(lId_UT125_Res)
+
+	FReturn(wRet)
+
+EndF
+
+;*
+Function int Res_PrjEtUT125
+; RES de PrjAp et Cog_UT125 associés au CogRs_UT126 courant
+; Les enregistrements réservés sont stockés dans les listes mémoires lId_Prj_Res et lId_UT125_Res
+; 0 --> RES OK, pas d'erreur
+BeginF
+
+	; resa PRJ
+	init PrjAp		= ' '
+	PrjAp.Dos 		= CogRs_UT126.Dos
+	PrjAp.Affaire	= CogRs_UT126.Affaire
+	If ListSeek(lId_Prj_Res, PrjAp, PrjAp_Seek) = 0
+		If Res_PrjAp(PrjAp.Affaire, err=0) = 0
+			ListInsert(lId_Prj_Res, PrjAp)
+		Else
+			erreur++
+			Cog_EcritureLivreDeBord("Affaire réservée, facturation UT125 impossible.<AFF>"\
+											& left(CogRs_UT126.Affaire) & "<REF>" & left(CogRs_UT126.Ref) & "<LGNO>" & nospaces(CogRs_UT126.Cog_LgNo))
+			FReturn(1)
+		EndIf
+	EndIf
+
+
+	; resa UT125
+	init Cog_UT125 	= ' '
+	Cog_UT125.Dos		= CogRs_UT126.Dos
+	Cog_UT125.Affaire	= CogRs_UT126.Affaire
+	Cog_UT125.Ref		= CogRs_UT126.Ref
+	Cog_UT125.Cog_LgNo= CogRs_UT126.Cog_LgNo
+	If ListSeek(lId_UT125_Res, Cog_UT125, UT125_Seek) = 0
+		If CogRs_UT125.FShare(['COG_UT125' mz.Dos CogRs_UT126.Affaire CogRs_UT126.Ref CogRs_UT126.Cog_LgNo], 'R') = 0
+			ListInsert(lId_UT125_Res, Cog_UT125)
+		Else
+			erreur++
+			Cog_EcritureLivreDeBord("Enregistrement UT125 réservé, facturation impossible.<AFF>"\
+											& left(CogRs_UT126.Affaire) & "<REF>" & left(CogRs_UT126.Ref) & "<LGNO>" & nospaces(CogRs_UT126.Cog_LgNo))
+			FReturn(1)
+		EndIf
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Controle_UT126_InfosFacturation
+;	0 --> OK
+BeginF
+
+	; Contrôle tiers
+	If CogRs_UT126.Tiers = ' '
+		erreur++
+		Cog_EcritureLivreDeBord("Code client non renseigné, facturation impossible.<AFF>"\
+										& left(CogRs_UT126.Affaire) & "<REF>" & left(CogRs_UT126.Ref) & "<LGNO>" & nospaces(CogRs_UT126.Cog_LgNo))
+		FReturn(1)
+	EndIf
+
+	If CogRs_UT126.Tiers <> Rs_UT126_Prec.Tiers
+		 If Seek_CLI(CogRs_UT126.Tiers) <> 0
+			erreur++
+			Cog_EcritureLivreDeBord("Code client incorrect, facturation impossible.<AFF>"\
+											& left(CogRs_UT126.Affaire) & "<REF>" & left(CogRs_UT126.Ref) & "<LGNO>" & nospaces(CogRs_UT126.Cog_LgNo) & "<TIERS>" & left(CogRs_UT126.Tiers))
+			FReturn(1)
+		EndIf
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Procedure ImpressionBL
+; Impression
+1		wPiNo		>gtfdd.dhsd		PiNo
+BeginP
+
+	If Cog_Sel.FlagImpression = 2
+		ListBegin(lId_BlNo)
+		Do While ListNext(lId_BlNo, wPiNo) not in (-1, 0)
+			Seek_ENT('C', 3, ENT.PiNo)
+			MZ.MiCle		= "*09220"
+			mz.EtaNoTyp = oui
+			Xmi_Preparation(Condition(ENT.EtaNo = " ", SOC.EntCod(2), ENT.EtaNo))
+			Piece_Imprimer('C', 3, wPINO, choixpresentation=FALSE)
+		WEnd
+	EndIf
+
+	ListErase(lId_BlNo)
+
+EndP
+
+;*
+Procedure GenerationBL
+;	Intégration GTFI
+;  Sauvegarde des UT126 concernés (pour MAJ avec pino) dans lId_UT126_MAJ
+; 	lId_UT126_GTFI est vidée
+1		i		2,0
+1		wFini	1,0
+BeginP
+
+	HClose(GTFI)
+	Tunnel_Integration_Piece(GTFI.Name)
+	PongReceive('G3XZ', G3XZ)
+	ListBegin(lId_UT126_GTFI)
+
+	If G3XZ.PINO = system.esp	
+
+		erreur ++
+		ListNext(lId_UT126_GTFI, Cog_UT126)	
+		Cog_EcritureLivreDeBord("Pièce rejetée lors de la facturation de l'affaire.<AFF>" & left(Cog_UT126.Affaire) )
+
+	Else
+
+		Do While ListNext(lId_UT126_GTFI, Cog_UT126) not in (-1, 0)
+
+			wFini = TRUE
+			Cog_UT126.FaNoTb(faMois) = G3XZ.PINO
+			Cog_UT126.CeFaTb(faMois) = 2
+			For i = 1 to 12
+				If Cog_UT126.CeFaTb(i) = 1
+					wFini = FALSE
+					i = 12
+				EndIF
+			Next
+			If wFini
+				Cog_UT126.Ce1 = '8'  	; statut périmé
+			EndIf
+			ListInsert(lId_UT126_Maj, Cog_UT126)
+
+			; cumuls sur ut125
+			CogRs_UT125.Init()
+			CogRs_UT125.Where.PK(Cog_UT126.Affaire, Cog_UT126.Ref, Cog_UT126.Cog_LgNo)
+			If CogRs_UT125.Select()
+
+				CogRs_UT125.Cog_Date_Derniere_Facture = iENT.PiDt
+				CogRs_UT125.Cog_LoyRestNb -= 1
+				CogRs_UT125.Cog_LoyFaNb	  += 1
+				CogRs_UT125.Update()
+
+			EndiF
+
+		WEnd
+
+		ListInsert(lId_BlNo, G3XZ.PiNo)
+
+	EndIf
+
+	;
+	ListErase(lId_UT126_GTFI)
+
+	;
+	HOpen(GTFI, 'P')
+	HErase(GTFI)
+
+EndP
+
+;*
+Procedure Facturation_Ut126_Init_Requete
+;
+BeginP
+
+	CogRs_UT126.Init()
+	CogRs_UT126.Where.RemoveCondition("")
+	
+	CogRs_UT126.Where.Equal_An(faAn)
+	CogRs_UT126.Where.AddCondition("Equal_An")
+	CogRs_UT126.Where.Equal_Etat('1')					; actif
+	CogRs_UT126.Where.AddCondition("Equal_Etat")
+
+	Switch2 faMois
+		Case 1
+		 	CogRs_UT126.Where.Equal_CeJanvier('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeJanvier")
+		Case 2
+		 	CogRs_UT126.Where.Equal_CeFevrier('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeFevrier")
+		Case 3
+			CogRs_UT126.Where.Equal_CeMars('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeMars")
+		Case 4
+			CogRs_UT126.Where.Equal_CeAvril('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeAvril")
+		Case 5
+			CogRs_UT126.Where.Equal_CeMai('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeMai")
+		Case 6
+			CogRs_UT126.Where.Equal_CeJuin('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeJuin")
+		Case 7
+			CogRs_UT126.Where.Equal_CeJuillet('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeJuillet")
+		Case 8
+			CogRs_UT126.Where.Equal_CeAout('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeAout")
+		Case 9
+			CogRs_UT126.Where.Equal_CeSeptembre('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeSeptembre")
+		Case 10
+			CogRs_UT126.Where.Equal_CeOctobre('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeOctobre")
+		Case 11
+			CogRs_UT126.Where.Equal_CeNovembre('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeNovembre")
+		Case 12
+			CogRs_UT126.Where.Equal_CeDecembre('1')
+			CogRs_UT126.Where.AddCondition("Equal_CeDecembre")
+	EndSwitch
+
+	CogRs_UT126.OrderBy.Pour_Facturation()
+
+EndP
+
+;*
+Procedure Creation_iPAR
+;
+BeginP
+
+	init iPAR 	= " "
+	iPAR.Ce1 	= "I"
+	iPAR.Trait 	= "C"
+	iPAR.Dos 	= MZ.Dos
+	iPAR.Etb 	= MZ.Etb
+ 	iPAR.PiCod 	= 3
+	iPAR.TiCod 	= 'C'
+
+	HWrite(GTFI,iPAR)
+
+EndP
+
+;*
+Procedure Creation_iENT
+;
+BeginP
+
+	Init iENT 		= " "
+	iENT.Ce1 		= "A"
+	iENT.Ce4 		= "1"
+	iENT.Tiers 		= CogRs_UT126.Tiers
+	iENT.Op 			= CogRs_UT126.Op
+	iENT.Depo		= MZ.Depo
+	iENT.PiDt 		= XQ_Cog.DatD
+	iENT.PiRef  	= "Facturation loyer"
+	iENT.PiNoTiers = " "
+	iENT.Projet		= CogRs_UT126.Affaire
+
+	If Seek_PRJAP(iENT.Projet) = 0
+		iENt.Cog_ImpDetail = PrjAp.Cog_ImpDetail
+	EndIf
+
+	HWrite(GTFI, iENT) 
+
+EndP
+
+;*
+Procedure Creation_iMOUV
+;
+BeginP
+
+	Init iMOUV 	= " "
+	iMOUV.Ce1 	= "C"
+	iMOUV.Ce2 	= 1
+	iMOUV.Ref 	= CogRs_UT126.Ref
+	iMOUV.BlQte = 1
+	iMOUV.BlDt 	= iENT.PiDt
+	iMOUV.Pub	= CogRs_UT126.MoisMt(faMois)
+	iMOUV.Projet= CogRs_UT126.Affaire
+
+	iMOUV.Pcod(1)= 4
+	iMOUV.Pcod(2)= 4
+	iMOUV.Pcod(3)= 1
+	iMOUV.Pcod(4)= 1
+	iMOUV.Pcod(5)= 1
+
+	HWrite(GTFI, iMOUV)
+
+EndP
+
+;*
+FUnction int Rupture_GTFI
+;
+BeginF
+
+  	If CogRs_UT126.Affaire <> Rs_UT126_Prec.Affaire \
+	OR CogRs_UT126.Op	<>	Rs_UT126_Prec.Op
+		FReturn(TRUE)
+	EndIf
+
+	FReturn(FALSE)
+
+EndF
+
+;*
+Procedure FacturationProjetsSpecifiques
+;
+1		wRead126	L
+1		wIPAR		1,0
 beginp
 
-	Cog_EcritureLivreDeBord(translate("--> zzzzzzzzzzzzzzzzzzzzzzzzzzz"))
+	Cog_EcritureLivreDeBord(translate("--> Début de la facturation des projets spécifiques"))
 
-	;affichage de la page de traitement
-	xmedispv mz.mecle 2 2
+	; RESA principale
+	If Cog_MoteurFacturationPrjSpe_RES <> 0
+		Cog_EcritureLivreDeBord("Moteur de facturation réservé.")
+		erreur++
+		PReturn
+	EndIf
 
-	loop true
+	; init variables
+	XQ_Cog.DatD = Cog_Sel.DDt_Annee &  Fstring('R0', Cog_Sel.DDt_Mois) & '01' 
+	XQ_Cog.DatF = Cog_Sel.FDt_Annee &  Fstring('R0', Cog_Sel.FDt_Mois) & '01'
+	ListErase(lId_Prj_Res)
+	ListErase(lId_UT125_Res)
+	ListErase(lId_UT126_GTFI)
+	ListErase(lId_UT126_Maj)
 
-		Cog_AfficherTraitement
+	; Boucle pour facturation
+	Do WHile XQ_Cog.DatD <= xq_cog.DatF
 
-		if Cog_FiltresOk
+		Rs_UT126_Prec.Init()
+		wIPAR  = FALSE
+		faAn 	 = HYear(XQ_Cog.DatD)
+		faMois = HMonth(XQ_Cog.DatD)
+		Facturation_Ut126_Init_Requete
+		wRead126 = CogRs_UT126.ReaderOpen()
+		CogRs_UT126.ReaderSelect(wRead126)
 
-			Cog_AfficherTraitement
+		Do While CogRs_UT126.ReaderNext(wRead126) > 0
 
-		endif
+			Afficher_Selection
+			Cog_sel.Lib80 = "Constitution de la facture du " & SDate(XQ_Cog.DatD, '/')
+			Afficher_Traitement
 
-	endloop
+			; rupture
+			If wIPAR AND Rupture_GTFI
+				GenerationBL
+				wIPAR = FALSE
+			EndIf
 
-	xmeret
+			;
+			If Res_PrjEtUT125 = 0  AND Controle_UT126_InfosFacturation = 0
 
-	Cog_EcritureLivreDeBord(translate("<-- zzzzzzzzzzzzzzzzzzzzzzzzzzz"))
+				If not wIPAR
+					Creation_iPAR
+					Creation_iENT
+					wIPAR = TRUE
+				EndIf
+
+				Creation_iMOUV
+				ListInsert(lId_UT126_GTFI, CogRs_UT126.COG_UT126)
+
+				Rs_UT126_Prec = CogRs_UT126
+
+			EndIf
+	
+
+		WEnd
+
+		; dernière rupture
+		If wIPAR 
+			GenerationBL
+		EndIf
+
+		; Nouvelle boucle pour MAJ
+		CogRs_UT126.ReaderBegin(wRead126)
+		Do While CogRs_UT126.ReaderNext(wRead126) > 0
+
+			Afficher_Selection
+			Cog_sel.Lib80 = "Mise à jour des enregistrements UT126"
+			Afficher_Traitement
+
+			If ListSeek(lId_UT126_Maj, CogRs_UT126.COG_UT126, Cog_UT126) not in (-1, 0)
+	
+				CogRs_UT126.COG_UT126 = Cog_UT126
+				CogRs_UT126.ReaderUpdate(wRead126)
+
+			EndIf
+
+		WEnd
+		CogRs_UT126.ReaderClose(wRead126)
+		ListErase(lId_UT126_Maj)
+
+		;
+		ImpressionBL
+
+		; libération des réservations
+		Lib_PrjEtUT125
+
+		; positionnement sur le mois suivant
+		XQ_Cog.DatD = HDate(XQ_Cog.DatD, '', +1)
+
+	WEnd
+	
+	; LIB moteur facturation
+	Cog_MoteurFacturationPrjSpe_LIB
+
+	Cog_EcritureLivreDeBord(translate("<-- Fin de la facturation des projets spécifiques"))
 
 endp
 
@@ -178,7 +683,8 @@ endp
 
 ;* Saisie du masque page 1
 public procedure Cog_SaisiePage1
-1 fin		1,0	= 0
+; page de lancement
+1 wfin		1,0	= 0
 
 beginp
 
@@ -188,39 +694,41 @@ beginp
 	                                
 		switch harmony.key            ;tests des causes de l'interruption
 	
-		case harmony.dataarret = 8002
-			if Harmony.Sourisbout = Right_Button
-				Zoom_Call()
-			elsif Harmony.Sourisclic = Double_Click
-				Harmony.Retour = Xmenext_Simulation_Touche
-				Harmony.Cplretour = k_f8
-			endif
-		
-		case k_f7                ;zoom généralisé
-			Zoom_Call()
-		
-		case k_f8                ;zooms
-			Zoom_Call(harmony.arret)
-	
-		case k_f9                ;abandon
-			fin = 1
-	
-		case vsw in (k_f10,k_tab,k_return,k_down)
-			if messagebox(translate("zzzzzzzzzzzzzzzzzzzzzzzzzzz ?"),translate("Confirmation"),mb_yesno+mb_iconquestion)=idyes
-				
-				NomDuTraitementPrincipal
-	
-				if erreur
-					messagebox(translate("Des erreurs ont été détectées.|Consultez le livre de bord"),translate("Alerte"),mb_iconexclamation)
+			case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
 				endif
-	
-				fin=1
-	
-			endif
+			
+			case k_f7                ;zoom généralisé
+				Zoom_Call()
+			
+			case k_f8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			case k_f9                ;abandon
+				wfin = 1
+		
+			case vsw in (k_f10,k_tab,k_return,k_down)
+				if Cog_Selection_OK AND MessageBox(translate("Lancer la facturation?"),translate("Confirmation"),mb_yesno+mb_iconquestion)=idyes
+					
+					G3_OpenTrace(2,3,4)
+					FacturationProjetsSpecifiques
+					G3_CloseTrace
+		
+					if erreur
+						messagebox(translate("Des erreurs ont été détectées.|Consultez le livre de bord"),translate("Alerte"),mb_iconexclamation)
+					endif
+		
+					wfin=1
+		
+				endif
 
 		endswitch
 
-	while fin = 0         ;suite de la saisie
+	while wfin = 0         ;suite de la saisie
 		xmenext(harmony.retour,harmony.cplretour)
 	wend
 		
@@ -236,17 +744,15 @@ main
 		tunnel	= true
 	endif
 
-	if Cog_InitialiserVariables
+	if Cog_InitialiserVariables																											
 
 		if not tunnel
 	
-			GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
-			procedurecall(AdrProc)
 			Cog_SaisiePage1
 	
 		else	;programme piloté
 	
-			NomDuTraitementPrincipal
+			FacturationProjetsSpecifiques
 	
 		endif
 
