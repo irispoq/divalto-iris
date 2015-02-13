@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_ut126.dhsp 7440 2015-01-23 13:04:23Z admin $')
+SetModuleInfo('$Id: cogpp_ut126.dhsp 7592 2015-02-13 16:59:11Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Consultation des amortissements
@@ -23,10 +23,12 @@ SetModuleInfo('$Id: cogpp_ut126.dhsp 7440 2015-01-23 13:04:23Z admin $')
 ;*	
 
 ;
-Include "GTTCZ00.dhsp"					; Déclarations communes
+Include 	"GTTCZ00.dhsp"					; Déclarations communes
+Include	"COGTC_YOFFICE.DHSP"
 
 ;
 Module	"Cogtm_000.dhop"																;module de fonctions communes
+Module	"Yoffice.dhop"
 
 ; Record Sql 
 Public RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT125
@@ -45,7 +47,7 @@ public record		"ddsys.dhsd" 	 		rowinfo		rowinfo_ut125
 
 		 record		"ddsys.dhsd"			columninfo	columninfo_ut126
 		 record		"ddsys.dhsd"			scrollbar	scrollbar_ut126
-public record		"ddsys.dhsd"  			rowinfo		rowinfo_ut126
+Public Record 		"ddsys.dhsd" 			rowinfo 		rowUT126
 
 ; Variables
 1	lId_Tab125		L
@@ -61,6 +63,114 @@ public record		"ddsys.dhsd"  			rowinfo		rowinfo_ut126
 ;*
 ;	Procédures / Fonctions générale
 ;*
+
+;*
+Procedure Cog_UT126_ExportExcel
+; Export de l'échéancier sur tableur Excel
+Record	"cogfdd.dhsd"		COG_UT126		wUT_Prec
+1		wRead126		L
+1		wLig			8,0
+1		i				2,0
+1		wCouleur		2,0 = COULEUR_EXCEL_GRISCLAIR		
+BeginP
+
+	; Ouverture module office
+	If Office_Begin <> 0
+		MessageBox("Echec à l'ouverture du module Office.", "Erreur", MB_ICONERROR)
+		PReturn
+	EndIf
+
+	If Office_OpenCalc() = 0
+
+		; Ligne d'entête
+		wLig = 1
+		Office_Write(wLig,1,"AFFAIRE")				;| Office_ColumnWidth(2, 1, 10)
+		Office_Write(wLig,2,"REFERENCE")				;| Office_ColumnWidth(2, 2, 20)
+		Office_Write(wLig,3,"LIGNE")					;| Office_ColumnWidth(2, 3, 20)
+		Office_Write(wLig,4,"ANNEE")					;| Office_ColumnWidth(2, 4, 60)
+		Office_Write(wLig,5,"DATE DEBUT")			;| Office_ColumnWidth(2, 5, 40)
+		Office_Write(wLig,6,"DATE FIN")
+		Office_Write(wLig,7,"BASE")
+		Office_Write(wLig,8,"DOTATION ANTERIEURE")
+		Office_Write(wLig,9,"DOTATION ANNUELLE")
+		Office_Write(wLig,10,"JANVIER")
+		Office_Write(wLig,11,"FEVRIER")
+		Office_Write(wLig,12,"MARS")
+		Office_Write(wLig,13,"AVRIL")
+		Office_Write(wLig,14,"MAI")
+		Office_Write(wLig,15,"JUIN")
+		Office_Write(wLig,16,"JUILLET")
+		Office_Write(wLig,17,"AOUT")
+		Office_Write(wLig,18,"SEPTEMBRE")
+		Office_Write(wLig,19,"OCTOBRE")
+		Office_Write(wLig,20,"NOVEMBRE")
+		Office_Write(wLig,21,"DECEMBRE")
+		For i=1 to 21
+			Office_InteriorColorIndex(wLig,i,COULEUR_EXCEL_JAUNEFONCE)		
+			Office_FontBold(wLig,i)
+		next
+
+
+		; Tableau d'amortissement
+		CogRs_UT126.Init()
+		CogRs_UT126.Where.RemoveCondition("")
+		wRead126 = CogRs_UT126.ReaderOpen()
+		If UT125_SEL.Affaire <> ' '
+			CogRs_UT126.Where.Equal_Affaire(COG_UT125.Affaire)
+			CogRs_UT126.Where.AddCondition("Equal_Affaire")
+		EndIf
+		If UT125_SEL.Ref <> ' '
+			CogRs_UT126.Where.Equal_Ref(COG_UT125.Ref)
+			CogRs_UT126.Where.AddCondition("Equal_Ref")
+		EndIf
+		If UT125_SEL.Cog_LgNo > 0
+			CogRs_UT126.Where.Equal_LgNo(COG_UT125.Cog_LgNo)
+			CogRs_UT126.Where.AddCondition("Equal_LgNo")
+		EndIf
+		CogRs_UT126.OrderBy.Par_PK()
+		CogRs_UT126.ReaderSelect(wRead126)
+	
+		Do While CogRs_UT126.ReaderNext(wRead126) > 0
+	
+			wLig++
+
+			Office_Write(wLig,1, CogRs_UT126.Affaire)				
+			Office_Write(wLig,2, CogRs_UT126.Ref)					
+			Office_Write(wLig,3, CogRs_UT126.Cog_LgNo)				
+			Office_Write(wLig,4, CogRs_UT126.Annee)					
+			Office_Write(wLig,5, SDate(CogRs_UT126.DDt))			
+			Office_Write(wLig,6, SDate(CogRs_UT126.FDt))
+			Office_Write(wLig,7, CogRs_UT126.Cog_BaseMt)
+			Office_Write(wLig,8, CogRs_UT126.AntMt)
+			Office_Write(wLig,9, CogRs_UT126.AnMt)
+			
+			; dotations mensuelles
+			For i=1 to 12
+				Office_Write(wLig, i+9, CogRs_UT126.MoisMt(i))	
+			next	
+
+			;
+			If CogRs_UT126.Affaire <> wUT_Prec.Affaire OR CogRs_UT126.Ref <> wUT_Prec.Ref OR CogRs_UT126.Cog_LgNo <> wUT_Prec.Cog_LgNo
+				wCouleur = Condition(wCouleur = COULEUR_EXCEL_GRISCLAIR, COULEUR_EXCEL_TURQUOISEPALE, COULEUR_EXCEL_GRISCLAIR)
+			EndIf
+			For i=1 to 21
+				Office_InteriorColorIndex(wLig,i, wCouleur)		
+			next
+
+			; Sauvegarde élément précédent
+			wUT_Prec = CogRs_UT126.COG_UT126
+	
+		WEnd
+
+		CogRs_UT126.ReaderClose(wRead126)
+
+	Else ; Echec de Office_OpenCalc
+		MessageBox("Echec à l'ouverture du classeur Excel.", "Erreur", MB_ICONERROR)
+	EndIf
+
+	Office_End
+
+EndP
 
 ;* Initialisation des variables
 function int Cog_InitialiserVariables
@@ -120,16 +230,19 @@ beginf
 
 	;initialisation du tableau des amortissements
 	lId_Tab126					= XmeListGetId(MZ.mecle,1,"AMORTISSEMENT", COG_UT126)
-	init rowinfo_ut126			= $00
-	rowinfo_ut126					= ""
-	rowinfo_ut126.Bitmap 		= 1
-	rowinfo_ut126.Selection		= false
+	init rowut126				= $00
+	rowUT126						= ""
+	rowUT126.Bitmap 			= 1
+	rowUT126.Selection		= false
 
 	;
 	If PingReceiveAndDelete("COG_UT125", UT125_SEL) = 0
 		pilote = TRUE
 		XmeSetAttribut("pilote", AN_VISIBILITE, AV_GRISE)
 	EndIf
+
+	;
+	XmeToolbarEnableButton(id_toolbar , 'cog_btnexcel', FALSE)
 
 	freturn(true)
 
@@ -140,6 +253,8 @@ endf
 Public Procedure Raffraichir
 ; met à jour le menu et les boutons
 BeginP
+
+	XmeToolbarEnableButton(id_toolbar , 'cog_btnexcel', Condition(ListCount(lId_Tab125) > 0, TRUE, FALSE))
 
 	xmedispv(MZ.MeCle,1,XME_MODE_GOTO)
 	XmeListDisplay(lId_Tab125)
@@ -198,6 +313,8 @@ endf
 Procedure Charger_UT126_ListeEcheanciers
 ;
 Record	"ccfdd.dhsd"		I1		wI1
+1		i				2,0
+1		wLgNo			9,0	= 0
 1		wRead126		L
 1		SimDDt		>gtfdd.dhsd		PiDt
 BeginP
@@ -225,8 +342,15 @@ BeginP
 
 	Do While CogRs_UT126.ReaderNext(wRead126) > 0
 
-		COG_UT126 = CogRs_UT126.COG_UT126
+		wLgNo++
+		init rowUT126 		= ' '
+		COG_UT126 			= CogRs_UT126.COG_UT126
+		rowUT126.Nomligne	= "Ligne" & wLgNo
 		XmeListInsert(lId_Tab126, COG_UT126)
+
+		For i = 1 to 12
+			XmeListSetAttribut(rowUT126.Nomligne, "dot" & nospaces(i), AN_STYLE, Condition(COG_UT126.CeFaTb(i)=2, "TABLEAU_PROP_2", "TABLEAU_SAISI"))
+		Next
 
 	WEnd
 
@@ -246,6 +370,7 @@ procedure Charger_UT125_ListeCotisations
 BeginP
 
 	XmeListErase(lId_Tab125)
+	XmeListErase(lId_Tab126)
 
 	CogRs_UT125.Init()
 	CogRs_UT125.Where.RemoveCondition("")
@@ -326,6 +451,9 @@ beginp
 				focus = 1001
 				XmeListConsultDefault(lId_Tab126, COG_UT126, scrollbar_ut126, zoom_privilege_consultation) 
 
+			Case Harmony.Dataarret	= 1002
+				Cog_UT126_ExportExcel
+
 			case harmony.dataarret = 8002
 				if Harmony.Sourisbout = Right_Button
 					Zoom_Call()
@@ -340,7 +468,7 @@ beginp
 			case k_f8                ;zooms
 				Zoom_Call(harmony.arret)
 		
-			case k_f9                ;abandon
+			case vsw IN (k_f9, K_f12)                ;abandon
 				fin = 1
 
 			Default

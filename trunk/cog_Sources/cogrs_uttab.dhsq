@@ -1,4 +1,4 @@
-<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7440 2015-01-23 13:04:23Z admin $'>
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7592 2015-02-13 16:59:11Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGF_GTFTAB
 ;*
@@ -9,12 +9,15 @@
 
 <RecordSql Name=CogRs_UT125 Comment='Table affectation des facturations projets spec' ZoomOptimize=YES>
 Public Record A5DD.dhsd		MZ
-
+Public Record GTFDD.dhsd	T000
 <SELECT>
 	COG_UT125.*,
-	ART.DES		AS ARTDES,
-	C5.LIB		AS	ANAELLIB,
-	PRJAP.LIB80	AS	PRJLIB
+	ART.DES					AS ARTDES,
+	C5.LIB					AS	ANAELLIB,
+	PRJAP.LIB80				AS	PRJLIB,
+	T020.LIB					AS OPLIB,
+	T020.COG_MOTPRJFLUX	AS OPFLUX,
+	T036.COG_MOTFACTYP	AS PRODNATTYP
 <FROM Insert=Yes Update=Yes Delete=Yes>
 	COG_UT125 
 <LEFTJOIN Name='Zoom'>
@@ -26,6 +29,12 @@ Public Record A5DD.dhsd		MZ
 <LEFTJOIN Name='Zoom'>
 	CCFDD.DHSD C5
 	ON C5.DOS = COG_UT125.DOS AND C5.AXE = COG_UT125.COG_AXEANAEL  AND  C5.AXENO = 2
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD	T020
+	ON (T020.Dos = CASE WHEN T000.TabTyp(20) = 2 THEN 999 ELSE MZ.Dos END) AND T020.CEBIN = 20 AND T020.OP = COG_UT125.OP
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD	T036
+	ON (T036.Dos = CASE WHEN T000.TabTyp(36) = 2 THEN 999 ELSE MZ.Dos END) AND T036.CEBIN = 36 AND T036.PRODNAT = ART.PRODNAT 
 <WHERE>
 	COG_UT125.Dos = MZ.Dos 
 		
@@ -42,11 +51,18 @@ Public Record A5DD.dhsd		MZ
 		COG_UT125.AFFAIRE = aff
 	Case Equal_LgNo(int lgno)
 		COG_UT125.COG_LGNO = lgno
-
+	Case Facture
+		COG_UT125.COG_LOYFANB > 0
 	Case Like_Ref(char ref)
 	 	COG_UT125.REF LIKE ref
 	Case Like_Affaire(char aff)
 		COG_UT125.AFFAIRE LIKE aff
+	Case Equal_ImmoTyp(int flux)		'1: Non immo - 2:immo'
+		T020.COG_MOTPRJFLUX= flux
+	Case Equal_NatTyp(int typ)			'1: INFRA - 2:PROJET'
+		T036.COG_MOTFACTYP = typ
+	Case Equal_DetailTyp(int det)		'1: Matériel - 2:Logiciel'
+		T036.COG_DETAILTYP = det
 
 <ORDERBY>
 	Case Ordre_PK
@@ -61,9 +77,17 @@ Public Record A5DD.dhsd		MZ
 Public Record A5DD.dhsd		MZ
 
 <SELECT>
-	COG_UT126.*
+	COG_UT126.*,
+	PRJAP.TIERS,
+	COG_UT125.OP
 <FROM Insert=Yes Update=Yes Delete=Yes>
 	COG_UT126
+<LEFTJOIN>
+	GTFDD.DHSD	PRJAP
+	ON PRJAP.DOS = COG_UT126.DOS AND PRJAP.AFFAIRE = COG_UT126.AFFAIRE
+<LEFTJOIN>
+	COG_UT125
+	ON COG_UT125.DOS = COG_UT126.DOS AND COG_UT125.AFFAIRE = COG_UT126.AFFAIRE AND COG_UT125.REF = COG_UT126.REF AND COG_UT125.COG_LGNO = COG_UT126.COG_LGNO 
 <WHERE>
 	COG_UT126.DOS = MZ.DOS
 
@@ -79,3 +103,39 @@ Public Record A5DD.dhsd		MZ
 		COG_UT126.COG_LGNO = lgNo 
 	Case Equal_An(int an)
 		COG_UT126.ANNEE = an
+	Case Equal_Etat(char etat)
+		COG_UT126.CE1 = etat
+	Case Equal_CeJanvier(char ce)
+		COG_UT126.CEFATB(1) = ce
+	Case Equal_CeFevrier(char ce)
+		COG_UT126.CEFATB(2) = ce
+	Case Equal_CeMars(char ce)
+		COG_UT126.CEFATB(3) = ce
+	Case Equal_CeAvril(char ce)
+		COG_UT126.CEFATB(4) = ce
+	Case Equal_CeMai(char ce)
+		COG_UT126.CEFATB(5) = ce
+	Case Equal_CeJuin(char ce)
+		COG_UT126.CEFATB(6) = ce
+	Case Equal_CeJuillet(char ce)
+		COG_UT126.CEFATB(7) = ce
+	Case Equal_CeAout(char ce)
+		COG_UT126.CEFATB(8) = ce
+	Case Equal_CeSeptembre(char ce)
+		COG_UT126.CEFATB(9) = ce
+	Case Equal_CeOctobre(char ce)
+		COG_UT126.CEFATB(10) = ce
+	Case Equal_CeNovembre(char ce)
+		COG_UT126.CEFATB(11) = ce
+	Case Equal_CeDecembre(char ce)
+		COG_UT126.CEFATB(12) = ce
+<ORDERBY>
+	Case Par_PK
+		COG_UT126.AFFAIRE,
+		COG_UT126.REF,
+		COG_UT126.COG_LGNO,
+		COG_UT126.ANNEE
+	Case Pour_Facturation
+		COG_UT126.AFFAIRE,
+		COG_UT125.OP,
+		COG_UT126.COG_LGNO

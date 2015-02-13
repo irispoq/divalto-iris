@@ -1,14 +1,16 @@
-;>xwin4obj                              7.0       20120727145253      
+;>xwin4obj                              7.0       20150213105344      
 [masque]
- utilisateur="R.BLOUET"
- date_modification="27/07/2012"
+ utilisateur="UGIE"
+ date_modification="13/02/2015"
  feuille_style="fstylewpf.dhfi"
- dernier_id=7
+ dernier_id=24
  dernier_id_page=4
 [defaut]
  [aide_page]
   aide=0
 [enregistrements]
+ "cogfdd.dhsd",,cog_sel,cog_sel,200,0
+ "cogrs_uttab.dhoq",,cogrs_ut126,cogrs_ut126,1024,1
 [page]
  numero=1
  fond="STD"
@@ -22,44 +24,128 @@
  ident_unique=1
  [groupbox]
   [presentation]
-   position=6,6
-   taille=259,467
-   attache_lgx=oui
-   attache_lgy=oui
-   id=2
+   position=8,10
+   taille=62,152
+   id=13
    wstyle="GROUPE"
+   wcouleur=128,128,128,0,0,0
   [param_groupbox]
-   texte="Sélections"
+   texte="Mois à facturer"
    couleur_fond="GROUPE_FOND"
+   wcouleur_fond=236,236,236,0,0,0
+ [groupbox]
+  [presentation]
+   position=8,176
+   taille=62,152
+   id=16
+   wstyle="GROUPE"
+   wcouleur=128,128,128,0,0,0
+  [param_groupbox]
+   texte="Options"
+   couleur_fond="GROUPE_FOND"
+   wcouleur_fond=236,236,236,0,0,0
+ [obj_texte]
+  [presentation]
+   position=28,29
+   taille=9,16
+   id=9
+   wstyle="STD"
+  [texte]
+   texte="De"
+ [obj_texte]
+  [presentation]
+   position=45,28
+   taille=9,16
+   id=11
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [multi_choix]
+  [presentation]
+   position=28,48
+   taille=9,54
+   id=14
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_sel,ddt_mois,cog_sel
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","MOIS"
+   notifier=oui
+ [champ]
+  [presentation]
+   position=28,112
+   taille=9,18
+   id=10
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_sel,ddt_annee,cog_sel
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_DDt_Annee_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=45,48
+   taille=9,54
+   id=15
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_sel,fdt_mois,cog_sel
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","MOIS"
+   notifier=oui
+ [champ]
+  [presentation]
+   position=45,112
+   taille=9,18
+   id=12
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_sel,fdt_annee,cog_sel
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_FDt_Annee_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=27,187
+   taille=9,96
+   id=17
+   wstyle="STD"
+  [description]
+   donnee=cog_sel,flagimpression,cog_sel
+  [param_case]
+   texte="Imprimer les pièces générées"
+   cadrage=droite
+   valeur="2","1"
+   choix="cog_gtfdmc.dhfi",""
+  [traitements]
+   microbol_click=8002
 [page]
  numero=2
  libelle="Trace"
  fond="STD"
  nature=double
  type=fenetre
- titre="Titre du programme / module"
+ titre="Facturation"
  efface=complet
  nb_lig=8
  nb_col=60
  offset_lig=10
  offset_col=15
  ident_unique=2
- [obj_texte]
-  [presentation]
-   position=9,8
-   taille=9,22
-   id=5
-   wstyle="STD"
-  [texte]
-   texte="Sélection"
- [obj_texte]
-  [presentation]
-   position=29,8
-   taille=9,26
-   id=6
-   wstyle="STD"
-  [texte]
-   texte="Traitement"
  [cadre]
   [presentation]
    position=4,3
@@ -81,6 +167,22 @@
    wnom_couleurcadre="TRAIT_SIMPLE"
    wnom_couleurfond="STD"
    wcouleur_cadre=192,192,192,0,0,0
+ [obj_texte]
+  [presentation]
+   position=9,8
+   taille=9,22
+   id=5
+   wstyle="STD"
+  [texte]
+   texte="Sélection"
+ [obj_texte]
+  [presentation]
+   position=29,8
+   taille=9,26
+   id=6
+   wstyle="STD"
+  [texte]
+   texte="Traitement"
  [bouton_graphique]
   [presentation]
    position=55,96
@@ -103,6 +205,46 @@
  page_fond=2
  position_fond=1
  ident_unique=3
+ [obj_texte]
+  [presentation]
+   position=0,0
+   taille=9,17
+   id=18
+   wstyle="STD"
+  [texte]
+   texte="Affaire"
+ [obj_texte]
+  [presentation]
+   position=0,61
+   taille=9,25
+   id=20
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [champ]
+  [presentation]
+   position=0,22
+   taille=9,32
+   id=19
+   colonnes_saisie=8
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut126,affaire,cogrs_ut126
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,91
+   taille=9,92
+   id=21
+   colonnes_saisie=25
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut126,ref,cogrs_ut126
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
 [page]
  numero=4
  libelle="Traitement"
@@ -113,6 +255,17 @@
  offset_lig=4
  offset_col=11
  ident_unique=4
+ [champ]
+  [presentation]
+   position=0,0
+   taille=9,196
+   id=24
+   colonnes_saisie=80
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_sel,lib80,cog_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
 [ressources]
  [menu]
   ident="MAIN"
@@ -234,7 +387,30 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogee_moteurprjspec.dhsf 7357 2015-01-09 16:28:33Z admin $')
+SetModuleInfo('$Id: cogee_moteurprjspec.dhsf 7592 2015-02-13 16:59:11Z admin $')
+Public Record "gtfdd.dhsd" xq xq_cog
+Public Record "cogfdd.dhsd" cog_sel Cog_Sel
+Public RecordSql "cogrs_uttab.dhoq" cogrs_ut126 cogrs_ut126
+
+
+;*
+Public Procedure Champ_DDt_Annee_1_Ap
+;
+Beginp
+	If Cog_Sel.DDt_Annee	< 1000
+		Cog_Sel.DDt_Annee = 2000 + abs(Cog_Sel.DDt_Annee)
+	EndIf
+Endp
+
+
+;*
+Public Procedure Champ_FDt_Annee_1_Ap
+;
+Beginp
+	If Cog_Sel.FDt_Annee	< 1000
+		Cog_Sel.FDt_Annee = 2000 + abs(Cog_Sel.FDt_Annee)
+	EndIf		
+Endp
 [/diva]
 [diva_base]
 [/diva]

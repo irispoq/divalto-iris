@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 7440 2015-01-23 13:04:23Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7592 2015-02-13 16:59:11Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -20,15 +20,27 @@ Module	"CCPMFIC.dhop"
 Module	"COGTM_MoteurPrjSpec.DHOP"
 
 ; Record Sql 
-Public recordSQL  "cogrs_uttab.dhoq"  CogRs_UT125									; Table UT125
-Public recordSQL  "cogrs_uttab.dhoq"  cogrs_ut125		CogRs_UT125_Sel		; Table pour sélection
+Public recordSQL  "cogrs_uttab.dhoq"  	CogRs_UT125									; Table UT125
+Public recordSQL  "cogrs_uttab.dhoq"  	cogrs_ut125		CogRs_UT125_Sel		; Table pour sélection
+Public recordSQL	"cogrs_proj.dhoq"		CogRs_PrjComp
 
 ;
 Public Record "gtfdd.dhsd" PRJAP
+Public Record "gtfdd.dhsd" ART
+Public Record "gtfdd.dhsd" T020
+Public Record "gtfdd.dhsd" T036
 
 ; Variables
 1	nbsel							4,0			; Nombre de lignes sélectionnées
 
+; 
+Const 	C_STATUT_PRJ_DEMARRE = 'Démarré'	 	
+Const		C_OP_IMMO	  			= 2
+Const		C_OP_NONIMMO 			= 1
+Const 	C_PRODNAT_PROJET		= 2
+Const		C_PRODNAT_INFRA		= 1
+Const 	C_PRODNAT_MATOS		= 1
+Const		C_PRODNAT_LOG			= 2
 
 ;*
 ;* procedures 
@@ -49,6 +61,110 @@ BeginP
 	EndIf
 
 EndP
+
+;*
+Function int Cog_UT125_Controle_ART
+; 0 --> OK
+; Controle que NatProd est renseigné sur ART et que NatProd possède les informations pour facturation
+; Si l'affaire remplit les conditions pour débuter la facturation, controle des dates obligatoires
+1		wtxtErr		S
+1		wErr			1,0
+BeginF
+
+	wErr = 0
+
+	If ART.Ref <> CogRs_UT125.Ref
+		Seek_ART(CogRs_UT125.Ref)
+	EndIf
+	If PRJAP.Affaire <> CogRs_UT125.Affaire
+		Seek_PRJAP(CogRs_UT125.Affaire)
+	ENdIf
+	If CogRs_PrjComp.Dos <> PRJAP.Dos OR CogRs_PrjComp.Affaire <> PRJAP.Affaire
+		CogRs_PrjComp.Init()
+		CogRs_PrjComp.Where.RemoveCondition("")
+		CogRs_PrjComp.Where.PK(PRJAP.Affaire)
+		If CogRs_PrjComp.Select() = 0
+			MessageBox("Erreur au chargement du complément affaire.", "Erreur", MB_ICONERROR)
+			FReturn(1)	
+		EndIf
+	EndIf
+	If T020.OP <> CogRs_UT125.Op
+		Lectab(20, CogRs_UT125.Op)
+	EndIf
+
+	;	La nature de produit doit être renseignée
+	If ART.ProdNat = ' ' OR Lectab(36, ART.ProdNat) <> 0
+		MessageBox("Nature de produit incorrecte sur la fiche article", "Erreur", MB_ICONERROR)
+		FReturn(1)
+	EndIf
+
+	; Suite des tests uniquement si la fiche affaire est au statut Actif
+	If PRJAP.Cog_Prj_Status <> C_STATUT_PRJ_DEMARRE OR PRJAP.Cog_Facture <> 2
+		FReturn(0)
+	EndIf
+
+	wtxtErr = "La facturation est activée sur la fiche affaire, vous devez renseigner ce(s) champs(s) pour créer ce type d'enregistrement sur la table UT125:"
+
+	;*
+	; NON IMMO
+	;*
+
+	;
+	If	T020.Cog_MotPrjFlux = C_OP_NONIMMO AND CogRs_PrjComp.TravReelDDt = ' '
+		wtxtErr &= "|Date de début des travaux réelle (nature NON IMMO)."
+		wErr = 1
+	EndIf
+
+	;*
+	; IMMO
+	;*
+
+	If T020.Cog_MotPrjFlux = C_OP_IMMO
+
+		;
+		If T036.Cog_MotFacTyp = C_PRODNAT_PROJET	
+			
+			If CogRs_PrjComp.ProjServReelDt = ' '
+				wtxtErr &= "|Date de mise en service PROJET réelle (IMMO / PROJET)."
+				wErr = 1
+			EndIf
+
+			If CogRs_PrjComp.PrestaBien = ' '
+				wtxtErr &= "|N° fiche de bien PRESTA (IMMO / PROJET)."
+				wErr = 1
+			EndIf
+
+		EndIf
+
+		;
+		If T036.Cog_MotFacTyp = C_PRODNAT_INFRA	
+			
+			If CogRs_PrjComp.InfraServReelDt = ' '
+				wtxtErr &= "|Date de mise en service INFRA réelle (IMMO / INFRA)."
+				wErr = 1
+			EndIf
+
+			If T036.Cog_DetailTyp = C_PRODNAT_MATOS AND CogRs_PrjComp.InfraMatBien = ' '
+				wtxtErr &= "|N° fiche de bien (IMMO / INFRA MATERIEL)."
+				wErr = 1
+			EndIf
+
+			IF T036.Cog_DetailTyp = C_PRODNAT_LOG AND CogRs_PrjComp.InfraLogBien
+				wtxtErr &= "|N° fiche de bien (IMMO / INFRA LOGICIEL)."
+				wErr = 1
+			EndIf
+
+		EndIf
+
+	EndIf
+
+	If wErr
+		MessageBox(wtxtErr, "Erreur", MB_ICONERROR)
+	EndIf
+
+	FReturn(wErr)
+
+EndF
 
 ;*	Mise à jour des boutons (affichage, grisés, ...)
 Public Procedure Maj_Menu_Boutons
@@ -224,10 +340,10 @@ Endp
 
 ;*
 Public Procedure ZoomCreation
+;
 Beginp
 	; initialiser les données 
 	cogrs_ut125.init()
-	CogRs_UT125.Cog_Duree_Limitee = 1
 	CogRs_UT125.Cog_Period			= 1
 
 	;	 Mode piloté
@@ -254,8 +370,15 @@ Beginp
 Endp
 
 ;*
-Public Procedure ZoomApresCleCreation ; après saisie de la clé 
+Public Procedure ZoomApresCleCreation 
+; après saisie de la clé 
 Beginp
+
+	If Cog_UT125_Controle_ART <> 0
+		Zoom.Ok = 'I'
+		PReturn
+	EndIf
+
 	Cog_UT125_Next_LgNo 
 	If CogRs_UT125.Cog_LgNo >=995
 		MessageBox("Le nombre maximal de lignes est atteint pour cette affaire.", "Alerte", MB_ICONEXCLAMATION)
@@ -264,6 +387,12 @@ Beginp
 	cogrs_ut125.Where.Exists(CogRs_UT125.Affaire , CogRs_UT125.Ref, CogRs_UT125.Cog_LgNo)
 	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Affaire CogRs_UT125.Ref CogRs_UT125.Cog_LgNo]
 	Zoom.Titrevar	= [CogRs_UT125.Affaire " - " CogRs_UT125.Ref]
+
+	If Res_Affaire(cogrs_ut125.Affaire, 0)	<> 0
+		MessageBox("Code affaire " & left(cogrs_ut125.Affaire) & " réservé, création impossible.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'I'
+	EndIf
+
 Endp
 
 ;*
@@ -298,17 +427,23 @@ Beginp
 Endp
 
 ;*
-Public Procedure ZoomApresCreation ; compte-rendu de création
+Public Procedure ZoomApresCreation 
+; compte-rendu de création
 Beginp
 	
+	If Zoom.Ok = 'O'
+		Cog_UT126_GenererEcheancier(CogRs_UT125.COG_UT125)
+	EndIf
+
 	Zoom.Titrevar = [ CogRs_UT125.Affaire CogRs_UT125.Ref ]
-	Cog_UT126_GenererEcheancier(CogRs_UT125.COG_UT125)
 	Cog_MoteurFacturationPrjSpe_LIB
+	Lib_Affaire(CogRs_UT125.Affaire)
 
 Endp				 
 
 ;*
-Public Procedure ZoomModification ; avant entrée en modif
+Public Procedure ZoomModification 
+; avant entrée en modif
 Beginp
 	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Affaire CogRs_UT125.Ref CogRs_UT125.Cog_LgNo]
 
@@ -316,10 +451,17 @@ Beginp
 		MessageBox("La facturation a débuté, modification impossible","Alerte", MB_ICONEXCLAMATION)
 		Zoom.Ok = 'I'
 	EndIf
+
+	If Res_Affaire(cogrs_ut125.Affaire, 0)	<> 0
+		MessageBox("Code affaire " & left(cogrs_ut125.Affaire) & " réservé, modification impossible.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'I'
+	EndIf
+
 Endp			  
 
 ;*
-Public Procedure ZoomModificationRes		; apres réservation enmodif
+Public Procedure ZoomModificationRes		
+; apres réservation enmodif
 Beginp
 	Note_Chargement_(C_Applic_DAV, cogrs_ut125.Note)
 Endp					
@@ -348,10 +490,16 @@ Beginp
 Endp														 
 
 ;*
-Public Procedure ZoomApresModification ; compte rendu de modification
+Public Procedure ZoomApresModification 
+; compte rendu de modification
 Beginp
+
+	If Zoom.Ok = 'O'
+		Cog_UT126_GenererEcheancier(CogRs_UT125.COG_UT125)
+	EndIf
+
 	Zoom.Titrevar = [ CogRs_UT125.Affaire CogRs_UT125.Ref ]
-	Cog_UT126_GenererEcheancier(CogRs_UT125.COG_UT125)
+	Lib_Affaire(CogRs_UT125.Affaire)
 	Cog_MoteurFacturationPrjSpe_LIB
 Endp				 
 
@@ -386,7 +534,9 @@ Endp
 Public Procedure ZoomApresSuppression ; compte rendu de suppression
 Beginp
 
-	Cog_UT126_DeleteEcheancier(CogRs_UT125.COG_UT125)
+	If Zoom.ok = 'O'
+		Cog_UT126_DeleteEcheancier(CogRs_UT125.COG_UT125)
+	EndIf
 	Cog_MoteurFacturationPrjSpe_LIB
 
 Endp						

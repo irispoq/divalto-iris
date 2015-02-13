@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7440 2015-01-23 13:04:23Z admin $')
+SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7592 2015-02-13 16:59:11Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Module de fonctions communes à la facturation des projets spécifiques UT125
@@ -15,6 +15,7 @@ SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7440 2015-01-23 13:04:23Z admin $')
 ;*		--------------------------------------------------------------------------------------------------------------
 ;*		Cog_MoteurFacturationPrjSpe_RES
 ;*		Cog_MoteurFacturationPrjSpe_LIB
+;*		Cog_CalculerDateFinFacturation
 
 ;*
 ;*
@@ -28,6 +29,9 @@ Module	"COGTM_000.DHOP"
 
 ;
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			CogRs_UT125_RESA
+
+;
+Const 	C_STATUT_PRJ_DEMARRE = 'Démarré'	 			; stocké de cette manière dans la base de données...
 
 ;*
 ;*	 Réservations
@@ -112,6 +116,63 @@ BeginF
 
 EndF
 
+;*
+Public Function int Cog_Affaire_Facturable(wAff)
+; TRUE --> conditions remplies
+RecordSQL	"GTRSPPPROJ.DHOQ"	Affaire		wRs_Aff
+1		wAff		>gtfdd.dhsd		Affaire
+BeginF
+
+	wRs_Aff.Init()
+	wRs_Aff.Where.RemoveCondition("")
+	wRs_Aff.Where.PK(wAff)
+
+	If wRs_Aff.Select() > 0
+
+		; 1ere condition: émission de facture OUI
+		If wRs_Aff.Cog_Facture <> 2
+			FReturn(FALSE)
+		EndIF
+
+		; 2: Indicateur de fcturation sur statut démarré
+		If wRs_Aff.Cog_Prj_Status <> C_STATUT_PRJ_DEMARRE
+			FReturn(FALSE)
+		EndIf
+
+		; 3: code tiers renseigné
+		If wRs_Aff.Tiers = ' '
+			FReturn(FALSE)
+		EndIf
+
+		; 4: TODO date en fonction de nature article
+
+	EndIf
+
+	FReturn(TRUE)
+
+EndF
+
+;*
+Public Function int Cog_UT125_FacturationDebutee(wAff)
+; TRUE --> au moins 1 facture
+RecordSQL "COGRS_UTTAB.dhoq" 		CogRs_UT125			wRS_125
+1		wAff		>gtfdd.dhsd		Affaire
+BeginF
+
+	wRS_125.Init()
+	wRS_125.Where.RemoveCondition("")
+	wRS_125.Where.Equal_Affaire(wAff)
+	wRS_125.Where.AddCondition("Equal_Affaire")
+	wRS_125.Where.Facture()
+	wRS_125.Where.AddCondition("Facture")
+
+	If wRS_125.GetCount() > 0
+		FReturn(TRUE)
+	EndIf
+
+	FReturn(FALSE)
+
+EndF
 
 ;*
 ;*	  Actions sur UT126
@@ -142,10 +203,91 @@ BeginP
 	wRs_UT126.Where.AddCondition("Equal_LgNo")
 	wRs_UT126.DeleteWhere()
 
-	; Nouveau calcul
-
 
 EndP
+
+;*
+Public Function int Cog_UT126_ActivationLignes(wAff, wAction, wMsg)
+; Lecture des UT126 associés à wAff
+; Modification du Ce1 en fonction de wAction
+; Action = 1 --> passage du Ce1 de 6 à 1 (Activation)
+; Action = 2 --> passage du Ce1 de 1 à 6 (Désactivation)
+; 0 --> OK
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT125		wRs_UT125
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126		wRs_UT126
+1		wAff		>gtfdd.dhsd		Affaire
+1		wAction	1,0		
+1		wMsg		1,0			= 	TRUE
+1		wRet		1,0			=  0
+1		wRead125	L
+1		wRead126 L
+1		wCe1Ori	1
+1		wCe1Dst	1
+BeginF
+
+	If wAction not in (1,2)
+		FReturn(1)
+	EndIf
+	wCe1Ori = Condition(wAction=1, '6', '1') 
+	wCe1Dst = Condition(wAction=1, '1', '6') 
+
+	If Cog_MoteurFacturationPrjSpe_RES <> 0
+		If wMsg
+			MessageBox("Le moteur de facturation est réservé, modification des échéanciers impossibles.","Alerte", MB_ICONINFORMATION)
+		EndIf
+		FReturn(1)
+	EndIF
+
+	; resa des UT125 avant maj des UT126
+	wRs_UT125.Init()
+	wRs_UT125.Where.RemoveCondition("")
+	wRead125 = wRs_UT125.ReaderOpen()
+	wRs_UT125.Where.Equal_Affaire(wAff)
+	wRs_UT125.OrderBy.Ordre_PK()
+	wRs_UT125.ReaderSelect(wRead125)
+	Do While wRs_UT125.ReaderNext(wRead125) > 0 AND wRet = 0
+		If wRs_UT125.FShare(['COG_UT125' mz.Dos wRs_UT125.Affaire wRs_UT125.Ref wRs_UT125.Cog_LgNo], 'R') <> 0
+			wRet = 1
+		EndIf
+	WEnd
+
+	; Activation ou désactivation UT126
+	If wRet = 0
+		wRs_UT126.Init()
+		wRs_UT126.Where.RemoveCondition("")
+		wRead126 = wRs_UT126.ReaderOpen()
+		wRs_UT126.Where.Equal_Affaire(wAff)
+		wRs_UT126.Where.AddCondition("Equal_Affaire")
+		wRs_UT126.Where.Equal_Etat(wCe1Ori)
+		wRs_UT126.Where.AddCondition("Equal_Etat")
+		wRs_UT126.ReaderSelect(wRead126)
+		Do While wRs_UT126.ReaderNext(wRead126) > 0 
+		
+			wRs_UT126.Ce1 = wCe1Dst
+			wRs_UT126.ReaderUpdate(wRead126)
+
+		WEnd
+
+		wRs_UT126.ReaderClose(wRead126)
+
+	Else
+		If wMsg
+			MessageBox("Un ou plusieurs enregistrements UT125 sont réservés, modification des échéanciers impossible.","Alerte", MB_ICONINFORMATION)
+		EndIf
+	EndIf
+
+	; Libération des resa
+	wRs_UT125.ReaderBegin(wRead125)
+	Do While wRs_UT125.ReaderNext(wRead125) > 0 
+		wRs_UT125.FShare(['COG_UT125' mz.Dos wRs_UT125.Affaire wRs_UT125.Ref wRs_UT125.Cog_LgNo], 'L') 
+	WEnd
+	wRs_UT125.ReaderClose(wRead125)
+
+	Cog_MoteurFacturationPrjSpe_LIB
+
+	FReturn(wRet)
+
+EndF
 
 ;*
 Public Procedure Cog_UT126_GenererEcheancier(wUT125)
@@ -165,6 +307,7 @@ Record		"COGFDD.DHSD"			COG_UT125		wUT125
 1		j				2,0
 1		wNextFaMois 2,0			; prochain mois de facturation
 1		wStepMois	2,0
+1		wFacturable	1,0
 
 BeginP
 
@@ -178,6 +321,7 @@ BeginP
 	Cog_UT126_DeleteEcheancier(wUT125)
 
 	; Nouveau calcul
+	wFacturable = Cog_Affaire_Facturable(wUT125.Affaire)
 	wFaDDt = Condition(Hday(wUT125.Cog_Date_Debut) = 1,  wUT125.Cog_Date_Debut, HDate(wUT125.Cog_Date_Debut, 'p', +1))
 	Cog_CalculerDateFinFacturation(wFaDDt, wUT125.Cog_LoyNb, wUT125.Cog_Period, wFaFDt)
 	wAnD = HYear(wFaDDt)
@@ -214,6 +358,8 @@ BeginP
 		wRs_UT126.FDt		= Condition(i&"1231" <= wFaFDt, i&"1231", wFaFDt)
 		wRs_UT126.Cog_BaseMt = wSolde
 		wRs_UT126.AntMt	= wUT125.Cog_Montant - wSolde
+		wRs_UT126.UserCr  = System.User
+		wRs_UT126.UserCrDh= Time(7)
 
 		; dotations mensuelles et cumuls
 		For j = wNextFaMois to 12 step wStepMois
@@ -230,6 +376,20 @@ BeginP
 			
 			; cumul dotations	annuelles
 			wRs_UT126.AnMt += wRs_UT126.MoisMt(j)
+
+		Next
+
+		; init des ce
+		wRs_UT126.Ce1 = '8'	 ; par défaut périmé
+		For j = 1 to 12
+
+			wRs_UT126.CeFaTb(j) = '9' ; par défault non concerné par la facturation
+			If wRs_UT126.MoisMt(j) > 0
+
+				wRs_UT126.Ce1 = Condition(wFacturable=TRUE, '1', '6') ; au moins un loyer facturable --> ut126 est actif ou en attente que les conditions de facturation soient remplies
+				wRs_UT126.CeFaTb(j) = '1'										; mois à facturer
+
+			EndIf
 
 		Next
 
