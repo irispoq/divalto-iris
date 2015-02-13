@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,,,20150120112726,UGIE                
+Version=6,,,20150213103607,UGIE                
 Nom=gtfdd.dhsd,gtfdd1.dhsd,1
 [CHAMP]
 Version=1,20131006064734,SYSTEMNEW           ,20131006064734,SYSTEMNEW           
@@ -148,6 +148,13 @@ Nom=Cog_Delai_Validite,Délai de validité en devis,1
 Gel=1
 Nature=3,0
 NomOdbc=Cog_Delai_Validite
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150213103559,UGIE                ,20150213103604,UGIE                
+Nom=Cog_DetailTyp,Précision sur le type de produit,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_DetailTyp
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20100628222539,INFOU               ,20110524191754,SYSTEMU             
@@ -362,6 +369,13 @@ Nom=Cog_Modregext,Mode règlement externe,1
 Gel=1
 Nature=15
 NomOdbc=Cog_Modregext
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150212173929,UGIE                ,20150212173938,UGIE                
+Nom=Cog_MotFacTyp,Type de nature pour le moteur facturation,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_MotFacTyp
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20150120111524,UGIE                ,20150120111530,UGIE                
@@ -771,6 +785,11 @@ nom=UT029
 Nom=CptMsk,1,0,0,N,1
 Nom=Cog_Facturation_Compte,9,0,0,N,1
 [/CHAMPL]
+nom=UT036
+[CHAMPL]
+Nom=Cog_MotFacTyp,1,0,0,N,1
+Nom=Cog_DetailTyp,2,0,0,N,1
+[/CHAMPL]
 nom=UT051
 [CHAMPL]
 Nom=Cog_SalGrp,1,0,0,N,1
@@ -841,14 +860,17 @@ DateM=4D1C5FFBE61CCB01
 Version=1,1999 4280000,MJV ,20050106171940,MARIE JO            
 Nom=T020,Code opération,1
 DateM=28836AAE9B34D001
-[PROPLOC]
-Nom=Cog_MotPrjFlag
-Nom=Cog_MotPrjFlux
-[/PROPLOC]
 [TABLEU]
 Version=1,1999 4280000,MJV ,20050106172036,MARIE JO            
 Nom=T029,Code statistique tiers,1
 DateM=55AA2049E71CCB01
+[TABLEU]
+Version=1,1999 9 30000,MJV ,20050107085715,MARIE JO            
+Nom=T036,Nature produit,1
+DateM=93A4055DE71CCB01
+[PROPLOC]
+Nom=Cog_DetailTyp
+[/PROPLOC]
 [TABLEU]
 Version=1,2000 6270000,MJV ,20050107085622,MARIE JO            
 Nom=T051,Service,1
