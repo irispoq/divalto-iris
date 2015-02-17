@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20141223133218      
+;>xwin4obj     imprimante               6.0       20150216111726      
 [masque]
- utilisateur="UGIE"
- date_modification="23/12/2014"
+ utilisateur="ROOT"
+ date_modification="16/02/2015"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -11,9 +11,9 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000235
+ dernier_id=1000240
  surcharge=oui
- date_modif_base="20140911112351"
+ date_modif_base="20130528154836"
  dernier_id_page=100000
  niveau_surcharge=1
  [adresses]
@@ -111,35 +111,6 @@
    saisie=non
   [param_bitmapv]
    wnom_couleurfond="TRANS"
- [obj_texte]
-  [presentation]
-   position=93,164
-   taille=8,38
-   noms="Alattention"
-   id=1000227
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="A l'attention de"
- [obj_texte]
-  [presentation]
-   position=189,254
-   taille=8,13
-   noms="tel"
-   id=1000230
-   wstyle="STD"
-   wtaille_fonte=7
-  [texte]
-   texte="Tel :"
- [obj_texte]
-  [presentation]
-   position=196,254
-   taille=8,13
-   noms="fax"
-   id=1000231
-   wstyle="STD"
-   wtaille_fonte=7
-  [texte]
-   texte="Fax :"
  [cadre]
   [presentation]
    position=564,1
@@ -324,6 +295,35 @@
    wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
+   position=93,164
+   taille=8,38
+   noms="Alattention"
+   id=1000227
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="A l'attention de"
+ [obj_texte]
+  [presentation]
+   position=189,254
+   taille=8,13
+   noms="tel"
+   id=1000230
+   wstyle="STD"
+   wtaille_fonte=7
+  [texte]
+   texte="Tel :"
+ [obj_texte]
+  [presentation]
+   position=196,254
+   taille=8,13
+   noms="fax"
+   id=1000231
+   wstyle="STD"
+   wtaille_fonte=7
+  [texte]
+   texte="Fax :"
+ [obj_texte]
+  [presentation]
    position=616,260
    taille=9,50
    cadrage=droite
@@ -351,7 +351,7 @@
    texte="et pour le compte de :"
  [obj_texte]
   [presentation]
-   position=83,164
+   position=93,164
    taille=10,139
    noms="Cog_DirCliente"
    id=1000143
@@ -619,14 +619,11 @@
  [champ]
   [presentation]
    position=73,164
-   taille=8,139
-   id=1000226
-   colonnes_saisie=38
+   taille=10,139
+   id=1000240
    wstyle="STD_GRAS"
   [description]
-   donnee=cli,nom,cli
-  [param_saisie]
-   type_date=jj/mm/aaaa
+   donnee=g4,nom,g4,4
  [champ]
   [presentation]
    position=68,6
@@ -932,7 +929,7 @@
  debordement=3
  diva_avant="BLOC_LIGNEARTICLE_1_AV"
  diva_apres="BLOC_LIGNEARTICLE_1_AP"
- diva_avantgestion="Cog_ImpDetail"
+ diva_avantgestion="COG_ImpDetail"
  ident_unique=2
  [champ]
   [presentation]
@@ -2526,7 +2523,7 @@ Private Procedure Cog_ImpDetail
 ;
 Beginp
 	; JDT 08/08/2011
-	If ENT.Cog_ImpDetail <> 2
+	If ENT.Cog_ImpDetail <> 2 and ENT.Dos = 105
 		Harmony.Retour = XMINEXT_SAUT_BLOC
 	EndIf
 	; JDT 08/08/2011
