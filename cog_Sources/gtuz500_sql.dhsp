@@ -76,7 +76,8 @@ define IdMenuZoomBis		= G3XT.IDBARRE(3)
 1	g_Dossier	>GTFDD.DHSD	Dos
 
 ;
-Const 	C_STATUT_PRJ_DEMARRE = 'Démarré'	 			; stocké de cette manière dans la base de données...
+Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
+Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer'
 
 ;
 include "CogGt_Controle_Fichier.dhsp"
@@ -220,9 +221,9 @@ BeginF
 
 	werr = FALSE
 
-	If Affaire.Cog_Prj_Status = C_STATUT_PRJ_DEMARRE AND Affaire.Cog_Facture = 2
+	If Affaire.Cog_Prj_Status = C_STATUT_PRJ_AFACTURER AND Affaire.Cog_Facture = 2
 
-		wtxtErr = "Informations manquantes pour passer au statut démarré:"
+		wtxtErr = 'Informations manquantes pour passer au statut "A facturer":'
 
 		wRs_125.Init()
 		wRs_125.Where.RemoveCondition("")
@@ -296,12 +297,12 @@ Function int Cog_Gestion_Activation_Facturation
 BeginF
 
 	; Activation
-	If (Affaire.Cog_Prj_Status = C_STATUT_PRJ_DEMARRE AND Affaire.Cog_Facture = 2) AND \
-		(COG_PRJAP_AVTMODIF.Cog_Prj_Status <> C_STATUT_PRJ_DEMARRE OR COG_PRJAP_AVTMODIF.Cog_Facture <> 2)
+	If (Affaire.Cog_Prj_Status = C_STATUT_PRJ_AFACTURER AND Affaire.Cog_Facture = 2) AND \
+		(COG_PRJAP_AVTMODIF.Cog_Prj_Status <> C_STATUT_PRJ_AFACTURER OR COG_PRJAP_AVTMODIF.Cog_Facture <> 2)
 		FReturn(Cog_UT126_ActivationLignes(Affaire.Affaire, wAction=1))
 	; Désactivation
-	ElsIf	(Affaire.Cog_Prj_Status <> C_STATUT_PRJ_DEMARRE OR Affaire.Cog_Facture <> 2) AND \
-			(COG_PRJAP_AVTMODIF.Cog_Prj_Status = C_STATUT_PRJ_DEMARRE AND COG_PRJAP_AVTMODIF.Cog_Facture = 2)
+	ElsIf	(Affaire.Cog_Prj_Status <> C_STATUT_PRJ_AFACTURER OR Affaire.Cog_Facture <> 2) AND \
+			(COG_PRJAP_AVTMODIF.Cog_Prj_Status = C_STATUT_PRJ_AFACTURER AND COG_PRJAP_AVTMODIF.Cog_Facture = 2)
 		FReturn(Cog_UT126_ActivationLignes(Affaire.Affaire, wAction=2))
 	EndIf
 

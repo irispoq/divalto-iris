@@ -1,0 +1,41 @@
+;>xdiva
+;*
+;*      Zoom sur nature produit Enregistrement NatureProduit de GTFTAB                    
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		YLEF		P205A						02/2015	Gestion INFRA / PROJET - MATERIEL / LOGICIEL
+
+
+OverWrite gttz076_sql.dhop
+
+;*
+;*
+;*
+
+;
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+;
+Module A5PMNoteJoint.dhop
+Module XZOOM7.dhop
+
+;TDF
+HFileVersion 	GTFDD.dhsd GTFTAB
+
+; RecordSQL
+Public RecordSQL "gtrstab.dhoq" NatureProduit NatureProduit			
+Public RecordSQL "gtrstab.dhoq" NatureProduit NatureProduit_Sel
+
+;*
+;*
+;*
+
+;*
+Procedure ZoomAvantInput		
+; permet de griser les boutons et les choix
+Beginp
+	Standard.ZoomAvantInput
+	XmeSetAttribut("cog_detailtyp", AN_VISIBILITE, Condition(NatureProduit.Cog_MotFacTyp=1, AV_VISIBLE, AV_GRISE))
+Endp

@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150213104228      
+;>xwin4obj                              7.0       20150216111605      
 [masque]
  libelle="table nature produit"
  utilisateur="UGIE"
- date_modification="13/02/2015"
+ date_modification="16/02/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=52
  type_masque=2
- dernier_id=1000007
+ dernier_id=1000012
  surcharge=oui
  date_modif_base="20130213094839"
  dernier_id_page=100000
@@ -287,7 +287,7 @@
    [presentation]
     position=71,70
     taille=10,45
-    id=1000006
+    id=1000011
     wstyle="COG_CHAMP_SAISI"
    [description]
     donnee=natureproduit,cog_motfactyp,natureproduit
@@ -295,21 +295,26 @@
     esp_si_zero=oui
    [param_multi]
     choix="cog_gtfdmc.dhfi","TYPENATUREPROD"
+    notifier=oui
    [touches]
     f7=135
     shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Cog_MotFacTyp_1_Ap"
    [info_bulle]
    texte="Type de nature pour le moteur facturation"
    [param_colonne]
     titre="Type de nature pour le moteur facturation"
-    fl_aff=non
+    fl_aff=oui
     largeur_col=45
     wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
     position=71,120
     taille=10,59
-    id=1000007
+    noms="cog_detailtyp"
+    id=1000012
     wstyle="COG_CHAMP_SAISI"
    [description]
     donnee=natureproduit,cog_detailtyp,natureproduit
@@ -317,15 +322,17 @@
     esp_si_zero=oui
    [param_multi]
     choix="cog_gtfdmc.dhfi","DETNATUREPROD"
-    obligatoire=non
+    notifier=oui
    [touches]
     f7=135
     shift_f6=10000
+   [traitements]
+    microbol_click=8002
    [info_bulle]
    texte="Précision sur le type de produit"
    [param_colonne]
     titre="Précision sur le type de produit"
-    fl_aff=non
+    fl_aff=oui
     largeur_col=59
     wstyle="ENTETE_COLONNE"
  [obj_texte]
@@ -601,13 +608,18 @@
    esp_si_zero=oui
   [param_multi]
    choix="cog_gtfdmc.dhfi","TYPENATUREPROD"
+   notifier=oui
   [touches]
    f7=135
    shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_MotFacTyp_1_Ap"
  [multi_choix]
   [presentation]
    position=71,120
    taille=10,59
+   noms="cog_detailtyp"
    id=1000003
    wstyle="COG_CHAMP_SAISI"
   [description]
@@ -616,10 +628,12 @@
    esp_si_zero=oui
   [param_multi]
    choix="cog_gtfdmc.dhfi","DETNATUREPROD"
-   obligatoire=non
+   notifier=oui
   [touches]
    f7=135
    shift_f6=10000
+  [traitements]
+   microbol_click=8002
 [page]
  numero=12
  fond="STD"
@@ -934,9 +948,17 @@
    [param_bouton]
     wnom=""
 [diva]
-Public RecordSql "gtrstab.dhoq" natureproduit natureproduit
+Public RecordSql "gtrstab.dhoq" natureproduit NatureProduit
 Public RecordSql "gtrstab.dhoq" natureproduit natureproduit_sel
 Public Record "ddsys.dhsd" rowinfo zoomselection
+
+
+;*
+Private Procedure Champ_Cog_MotFacTyp_1_Ap
+;
+Beginp
+	XmeSetAttribut("cog_detailtyp", AN_VISIBILITE, Condition(NatureProduit.Cog_MotFacTyp=1, AV_VISIBLE, AV_GRISE))
+Endp
 [/diva]
 [diva_base]
 ;>xdiva
@@ -949,7 +971,7 @@ Public Record "ddsys.dhsd" rowinfo zoomselection
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez076_sqlu.dhsf 7592 2015-02-13 16:59:11Z admin $')
+SetModuleInfo('$Id: gtez076_sqlu.dhsf 7617 2015-02-23 14:06:01Z admin $')
 
 
 include 'GTTC000.dhsp'

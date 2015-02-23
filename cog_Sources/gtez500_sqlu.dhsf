@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150213175153      
+;>xwin4obj                              7.0       20150216112945      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
- date_modification="13/02/2015"
+ date_modification="16/02/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
@@ -6798,7 +6798,8 @@ Public Record	"ccfdd.dhsd"	C5		C5_DEV_01
 1	cPageGantt	2,0	= 25
 
 ;
-Const 	C_STATUT_PRJ_DEMARRE = 'Démarré'	 			; stocké de cette manière dans la base de données...
+Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
+Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer'
 
 ;*
 ;*
