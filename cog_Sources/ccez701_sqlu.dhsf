@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20141126161337      
+;>xwin4obj                              7.0       20150223162743      
 [masque]
- utilisateur="UGIE_YLF"
- date_modification="26/11/2014"
+ utilisateur="UGIE"
+ date_modification="23/02/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
- dernier_id=1000035
+ dernier_id=1000050
  surcharge=oui
  date_modif_base="20130227140720"
  dernier_id_page=100000
@@ -1871,6 +1871,162 @@
     fl_aff=non
     largeur_col=102
     wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=149,66
+    taille=9,32
+    id=1000045
+    colonnes_saisie=8
+    wstyle="COG_CHAMP_NON_SAISI"
+   [description]
+    donnee=immo,famstat1_fam,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+   [info_bulle]
+   texte="Famille statistique article"
+   [param_colonne]
+    titre="Famille statistique article"
+    fl_aff=non
+    largeur_col=32
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=149,99
+    taille=9,144
+    id=1000044
+    colonnes_saisie=40
+    wstyle="COG_CHAMP_AFF"
+   [description]
+    donnee=immo,famstat1_lib,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+   [info_bulle]
+   texte="Libellé"
+   [param_colonne]
+    titre="Libellé fam stat"
+    fl_aff=non
+    largeur_col=144
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=119,222
+    taille=9,95
+    id=1000046
+    wstyle="COG_CHAMP_SAISI"
+   [description]
+    donnee=immo,cog_amoflag,immobilisation
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="Comptabilisation amortissement"
+    cadrage=droite
+    valeur="2","1"
+    choix="ccfdmc.dhfi",""
+   [touches]
+    f1=1
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Cog_AmoFlag_1_Av"
+   [param_colonne]
+    titre="Comptabilisation amortissement"
+    fl_aff=non
+    largeur_col=95
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=129,66
+    taille=9,160
+    id=1000047
+    colonnes_saisie=40
+    wstyle="COG_CHAMP_SAISI"
+   [description]
+    donnee=immo,cog_isilogref,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Référence ISILOG"
+   [param_colonne]
+    titre="Référence ISILOG"
+    fl_aff=non
+    largeur_col=160
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=139,66
+    taille=9,160
+    id=1000048
+    colonnes_saisie=40
+    wstyle="COG_CHAMP_SAISI"
+   [description]
+    donnee=immo,cog_bwid,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Cog_BwId_1_Ap"
+   [info_bulle]
+   texte="N° ID Basware"
+   [param_colonne]
+    titre="N° ID Basware"
+    fl_aff=non
+    largeur_col=160
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=119,66
+    taille=9,30
+    id=1000049
+    colonnes_saisie=8
+    wstyle="COG_CHAMP_NON_SAISI"
+   [description]
+    donnee=immo,mvblno,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+   [info_bulle]
+   texte="No de Bl"
+   [param_colonne]
+    titre="No de Bl"
+    fl_aff=non
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=119,150
+    taille=9,30
+    id=1000050
+    colonnes_saisie=8
+    wstyle="COG_CHAMP_NON_SAISI"
+   [description]
+    donnee=immo,mvfano,immobilisation
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f1=1
+   [info_bulle]
+   texte="Facture no"
+   [param_colonne]
+    titre="Facture no"
+    fl_aff=non
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
    position=16,5
@@ -2380,8 +2536,8 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=92,5
-   taille=60,308
+   position=105,5
+   taille=54,308
    id=1000010
    wstyle="GROUPE"
   [param_groupbox]
@@ -2389,8 +2545,8 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=200,5
-   taille=42,310
+   position=207,5
+   taille=35,310
    id=998
    wstyle="GROUPE"
   [param_groupbox]
@@ -2398,7 +2554,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=155,5
+   position=162,5
    taille=43,151
    id=10
    wstyle="GROUPE"
@@ -2407,7 +2563,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=155,164
+   position=162,164
    taille=43,151
    id=1005
    wstyle="GROUPE"
@@ -2474,7 +2630,7 @@
    texte="/"
  [obj_texte]
   [presentation]
-   position=70,5
+   position=80,5
    taille=9,59
    id=22
    wstyle="STD"
@@ -2482,7 +2638,7 @@
    texte="Localisation"
  [obj_texte]
   [presentation]
-   position=80,5
+   position=90,5
    taille=9,59
    id=23
    wstyle="STD"
@@ -2490,7 +2646,7 @@
    texte="Numéro de série"
  [obj_texte]
   [presentation]
-   position=106,13
+   position=119,13
    taille=9,20
    id=1000011
    wstyle="STD"
@@ -2498,7 +2654,7 @@
    texte="No de Bl"
  [obj_texte]
   [presentation]
-   position=106,120
+   position=119,120
    taille=9,26
    id=1000022
    wstyle="STD"
@@ -2506,7 +2662,7 @@
    texte="N° Facture"
  [obj_texte]
   [presentation]
-   position=116,13
+   position=129,13
    taille=9,52
    id=1000014
    wstyle="STD"
@@ -2514,7 +2670,7 @@
    texte="Référence ISILOG"
  [obj_texte]
   [presentation]
-   position=126,13
+   position=139,13
    taille=9,49
    id=1000016
    wstyle="STD"
@@ -2522,7 +2678,7 @@
    texte="N° ID Basware"
  [obj_texte]
   [presentation]
-   position=136,13
+   position=149,13
    taille=9,59
    id=1000032
    wstyle="STD"
@@ -2530,7 +2686,7 @@
    texte="Famille statistique"
  [obj_texte]
   [presentation]
-   position=168,169
+   position=175,169
    taille=9,74
    id=26
    wstyle="STD"
@@ -2538,7 +2694,7 @@
    texte="Acquisition"
  [obj_texte]
   [presentation]
-   position=178,169
+   position=185,169
    taille=9,74
    id=27
    wstyle="STD"
@@ -2546,7 +2702,7 @@
    texte="Mise en service"
  [obj_texte]
   [presentation]
-   position=179,11
+   position=186,11
    taille=9,73
    id=19
    wstyle="STD"
@@ -2554,7 +2710,7 @@
    texte="Prix de cession"
  [obj_texte]
   [presentation]
-   position=188,169
+   position=195,169
    taille=9,74
    id=28
    wstyle="STD"
@@ -2562,7 +2718,7 @@
    texte="Mise en service réelle"
  [obj_texte]
   [presentation]
-   position=216,10
+   position=221,10
    taille=9,74
    id=32
    wstyle="STD_AFF"
@@ -2570,7 +2726,7 @@
    texte="Compte d'immobilisation"
  [obj_texte]
   [presentation]
-   position=228,10
+   position=233,10
    taille=9,74
    id=33
    wstyle="STD_AFF"
@@ -2669,7 +2825,7 @@
    f1=1
  [champ]
   [presentation]
-   position=136,99
+   position=149,99
    taille=9,144
    id=1000034
    colonnes_saisie=40
@@ -2683,7 +2839,7 @@
    f1=1
  [champ]
   [presentation]
-   position=136,66
+   position=149,66
    taille=9,32
    id=1000033
    colonnes_saisie=8
@@ -2704,6 +2860,20 @@
    wstyle="COG_CHAMP_AFF"
   [description]
    donnee=immo,axeanael_lib,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=70,66
+   taille=9,247
+   id=1000036
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=immo,des,immobilisation
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -2751,9 +2921,10 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+   diva_apres="Champ_Lib_1_Ap"
  [champ]
   [presentation]
-   position=70,66
+   position=80,66
    taille=9,160
    id=51
    wstyle="CHAMP_SAISI"
@@ -2770,7 +2941,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=80,66
+   position=90,66
    taille=9,160
    id=52
    wstyle="CHAMP_SAISI"
@@ -2787,7 +2958,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=106,222
+   position=119,222
    taille=9,95
    id=1000013
    wstyle="COG_CHAMP_SAISI"
@@ -2805,7 +2976,7 @@
    diva_avant="Champ_Cog_AmoFlag_1_Av"
  [champ]
   [presentation]
-   position=116,66
+   position=129,66
    taille=9,160
    id=1000015
    colonnes_saisie=40
@@ -2820,7 +2991,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=126,66
+   position=139,66
    taille=9,160
    id=1000017
    colonnes_saisie=40
@@ -2836,7 +3007,7 @@
    diva_apres="Champ_Cog_BwId_1_Ap"
  [multi_choix]
   [presentation]
-   position=169,10
+   position=176,10
    taille=9,52
    noms="creation"
    id=48
@@ -2862,7 +3033,7 @@
    diva_apres="Champ_Etat_1_Ap"
  [champ]
   [presentation]
-   position=169,86
+   position=176,86
    taille=9,36
    noms="datecession"
    id=49
@@ -2885,7 +3056,7 @@
    diva_apres="Champ_CesDt_1_Ap"
  [champ]
   [presentation]
-   position=179,86
+   position=186,86
    taille=9,58
    noms="prixcession"
    id=50
@@ -2909,7 +3080,7 @@
    diva_apres="Champ_CesMt_1_Ap"
  [champ]
   [presentation]
-   position=168,245
+   position=175,245
    taille=9,36
    noms="parametre"
    id=73
@@ -2932,7 +3103,7 @@
    diva_apres="Champ_AcqDt_1_Ap"
  [champ]
   [presentation]
-   position=178,245
+   position=185,245
    taille=9,36
    noms="parametre"
    id=74
@@ -2955,7 +3126,7 @@
    diva_apres="Champ_SvcDt_1_Ap"
  [champ]
   [presentation]
-   position=188,245
+   position=195,245
    taille=9,36
    noms="parametre"
    id=75
@@ -2978,7 +3149,7 @@
    diva_apres="Champ_EcoAmDt_1_Ap"
  [case_a_cocher]
   [presentation]
-   position=189,10
+   position=196,10
    taille=9,95
    id=1000021
    wstyle="COG_CHAMP_SAISI"
@@ -2995,7 +3166,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=216,86
+   position=221,86
    taille=9,36
    id=78
    wstyle="CHAMP_SAISI"
@@ -3019,7 +3190,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=228,86
+   position=233,86
    taille=9,36
    id=79
    wstyle="CHAMP_SAISI"
@@ -3162,7 +3333,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=106,66
+   position=119,66
    taille=9,30
    id=1000024
    colonnes_saisie=8
@@ -3177,7 +3348,7 @@
    f1=1
  [champ]
   [presentation]
-   position=106,150
+   position=119,150
    taille=9,30
    id=1000025
    colonnes_saisie=8
@@ -3326,7 +3497,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=216,123
+   position=221,123
    taille=9,190
    id=36
    wstyle="CHAMP_AFF"
@@ -3335,7 +3506,7 @@
    saisie=non
  [champ]
   [presentation]
-   position=228,123
+   position=233,123
    taille=9,190
    id=37
    wstyle="CHAMP_AFF"
@@ -6149,6 +6320,7 @@ Include	"CCTC000.dhsp"
 
 ;
 Module "GTPM000.DHOP"
+Module "GTPMFIC.DHOP"
 Module "GTTM000.DHOP"
 
 ;
@@ -6165,6 +6337,7 @@ Public Record "ddsys.dhsd" rowinfo 		zoomselection
 Public Record "ccfdd.dhsd" i1 			i1_sel
 public record "gtfdd.dhsd"	PRJAP														; Affaire
 public record "gtfdd.dhsd"	XZ				G3XZ
+public record "gtfdd.dhsd"	ART
 
 ;*
 ;*  Procédures 
@@ -6362,6 +6535,17 @@ Endp
 
 
 
+
+
+;*
+Private Procedure Champ_Lib_1_Ap
+;
+Beginp
+	IMMOBILISATION.Des = ' '
+	If Seek_ARt(IMMOBILISATION.Lib) = 0
+		IMMOBILISATION.Des = ART.DES
+	EndIf
+Endp
 [/diva]
 [diva_base]
 SetModuleInfo('$Id: ccez701_sql.dhsf 29928 2013-02-27 13:04:42Z ms $')
