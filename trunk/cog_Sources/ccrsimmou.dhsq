@@ -21,7 +21,8 @@ Public Record	"gtfdd.dhsd"	T000
 	MOUV.FACE4,
 	FamStat1.LIB,
 	FamStat1.Fam,
-	AxeAnael.LIB
+	AxeAnael.LIB,
+	ART.DES
 <LEFTJOIN Name='Zoom'>
 	C3 as CptCes
 	on CptCes.Dos = I1.Dos and CptCes.Cpt = I1.Cog_CptCes and CptCes.Ce1 = '3'
