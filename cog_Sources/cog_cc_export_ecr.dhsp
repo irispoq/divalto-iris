@@ -77,6 +77,7 @@ structure Ventilation
 	1	Jnl		>	ccfdd.dhsd	jnl
 	1	Ecrno		>	ccfdd.dhsd	ecrno
 	1	Ecrlg		>	ccfdd.dhsd	ecrlg
+	1	EcrDt		>  ccfdd.dhsd	ecrDt
 endstructure
 
 RecordDiva	Ventilation	Vtl
@@ -101,6 +102,24 @@ Beginf
 
 	cle1	=	elem1.Axe1 & elem1.Axe2 & elem1.Axe3 & elem1.Axe4
 	cle2	=	elem2.Axe1 & elem2.Axe2 & elem2.Axe3 & elem2.Axe4
+
+   freturn(sortcompare(cle1,cle2))
+
+Endf 
+
+;*
+Function Long CompareEcrVtlAvecDate(&elem1,&elem2)
+;
+recorddiva	Ventilation	elem1
+recorddiva	ventilation	elem2
+
+1	cle1		S
+1	cle2		S
+
+Beginf
+
+	cle1	=	HYEar(elem1.ecrdt) & HMonth(elem1.EcrDt) & elem1.Axe1 & elem1.Axe2 & elem1.Axe3 & elem1.Axe4
+	cle2	=	HYEar(elem2.ecrdt) & HMonth(elem2.EcrDt) & elem2.Axe1 & elem2.Axe2 & elem2.Axe3 & elem2.Axe4
 
    freturn(sortcompare(cle1,cle2))
 
@@ -223,7 +242,11 @@ BeginF
 		Cog_EcritureLivreDeBord("Erreur lors de la création de la liste des écritures analytiques à exporter")
 		FReturn("")
 	endif
-	GetAdressFunction("","CompareEcrVtl",fonc_EcrVtl)
+	If t_OA = 4
+		GetAdressFunction("","CompareEcrVtlAvecDate",fonc_EcrVtl)		
+	Else
+		GetAdressFunction("","CompareEcrVtl",fonc_EcrVtl)
+	EndIf
 	ListMode(list_EcrVtl,1,fonc_EcrVtl) 
 
 	;*
@@ -448,6 +471,7 @@ BeginF
 				Vtl_rec.Jnl		= Condition(CA.Cog_AnaJnl <> ' ' , CA.Cog_AnaJnl, CogRs_CX.Jnl)
 				Vtl_rec.Ecrno	= t_EcrNo
 				Vtl_rec.Ecrlg	= t_lilg
+				Vtl_Rec.EcrDt  = CogRs_CX.EcrDt
 
 				; Transcodification axe anael
 				IF CogRs_JNL.Cog_AnaelTranscod = 2
@@ -495,6 +519,7 @@ BeginF
 				Vtl_rec.Jnl		= Condition(CA.Cog_AnaJnl <> ' ' , CA.Cog_AnaJnl, CogRs_CX.Jnl)
 				Vtl_rec.Ecrno	= t_EcrNo
 				Vtl_rec.Ecrlg	= t_lilg
+				Vtl_Rec.EcrDt  = CogRs_CX.EcrDt
 				if listseek(list_EcrVtl,Vtl_rec,Vtl_Cumul)
 					Vtl_Cumul.Mt	+= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
 					if Vtl_Cumul.mt<0
@@ -543,6 +568,7 @@ BeginF
 			CX_DEV_01.Jnl		= Vtl.Jnl
 			CX_DEV_01.Ecrno	= Vtl.EcrNo
 			CX_DEV_01.Ecrlg	= Vtl.EcrLg
+			CX_DEV_01.EcrDt	= Vtl.EcrDt
 			
 			Cog_GenererLigne(t_ligne, t_SeparateurC, t_SeparateurL,true,"",CX_DEV_01, Condition(t_OA > 0, t_OA, 2))
 			; 2 par défaut pour t_oA car à l'origine fonction prévue pour les ecr centrales
