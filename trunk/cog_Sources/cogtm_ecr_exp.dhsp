@@ -610,8 +610,8 @@ beginp
 		c8_loc	= c8
 	endif
 
-	sens	= condition(c8_loc.Sens>0,c8_loc.Sens,cx_loc.Sens)
-	if OrigineAppel = 2
+	sens	= condition(c8_loc.Sens > 0, c8_loc.Sens, cx_loc.Sens)
+	if OrigineAppel = 2 OR (OrigineAppel = 4 AND cx_loc <> ' ')
 		sens	= cx_loc.Sens
 	endif
 
