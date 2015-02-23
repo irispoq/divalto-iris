@@ -1,5 +1,5 @@
 
-SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 7292 2014-12-23 14:25:53Z admin $')
+SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 7625 2015-02-23 16:30:28Z admin $')
 ;*
 ;* cog_ccpmimpimmo					Procedure de traitement des champs importés (avant ou aprés saisie)
 ;*
@@ -260,7 +260,7 @@ beginp
 		preturn
 	endif
 
-	if I1.CR > 0
+	if I1.CR > 0	 
 		I1.BTPMT		= I1.CR
 		I1.ECOBAS	= I1.CR
 		I1.ECORESMT	= I1.CR
