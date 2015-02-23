@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150216112945      
+;>xwin4obj                              7.0       20150223154449      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
- date_modification="16/02/2015"
+ date_modification="23/02/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
@@ -4908,6 +4908,7 @@
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Cog_Prj_Status_1_Av"
+   diva_apres="Champ_Cog_Prj_Status_1_Ap"
  [case_a_cocher]
   [presentation]
    position=231,14
@@ -6796,6 +6797,7 @@ Public Record	"ccfdd.dhsd"	C5		C5_DEV_01
 1	datret		8
 1	wdate			8
 1	cPageGantt	2,0	= 25
+1	statut_prec	25
 
 ;
 Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
@@ -7158,10 +7160,28 @@ Endp
 
 
 ;*
+Private Procedure Champ_Cog_Prj_Status_1_Ap
+;	  TODO controle sur statut précédent
+Beginp
+
+	If Harmony.Datamodif
+
+		If statut_prec
+
+		EndIf
+
+	EndIf
+
+	statut_prec
+
+Endp
+
+
+;*
 Private Procedure Champ_Cog_Prj_Status_1_Av
 ;
 Beginp
-	Cog_Affaire_Champ_Modifiable
+	statut_prec = Affaire.Cog_Prj_Status	
 Endp
 
 

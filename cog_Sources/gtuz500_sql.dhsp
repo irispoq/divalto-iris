@@ -225,6 +225,12 @@ BeginF
 
 		wtxtErr = 'Informations manquantes pour passer au statut "A facturer":'
 
+		; Le détail des factures doit être activé
+		If Affaire.Cog_ImpDetail <> 2
+			wtxtErr &= "|Le détail des lignes de facture pour l'impression n'est pas activé."
+			werr = TRUE
+		EndIf
+
 		wRs_125.Init()
 		wRs_125.Where.RemoveCondition("")
 		wRs_125.Where.Equal_Affaire(Affaire.Affaire)
