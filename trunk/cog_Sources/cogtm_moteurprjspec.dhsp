@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7592 2015-02-13 16:59:11Z admin $')
+SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7617 2015-02-23 14:06:01Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Module de fonctions communes à la facturation des projets spécifiques UT125
@@ -31,7 +31,8 @@ Module	"COGTM_000.DHOP"
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			CogRs_UT125_RESA
 
 ;
-Const 	C_STATUT_PRJ_DEMARRE = 'Démarré'	 			; stocké de cette manière dans la base de données...
+Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
+Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer'
 
 ;*
 ;*	 Réservations
@@ -135,7 +136,7 @@ BeginF
 		EndIF
 
 		; 2: Indicateur de fcturation sur statut démarré
-		If wRs_Aff.Cog_Prj_Status <> C_STATUT_PRJ_DEMARRE
+		If wRs_Aff.Cog_Prj_Status <> C_STATUT_PRJ_AFACTURER
 			FReturn(FALSE)
 		EndIf
 
@@ -145,6 +146,7 @@ BeginF
 		EndIf
 
 		; 4: TODO date en fonction de nature article
+		MessageBox("CONTROLE 4","TODO")
 
 	EndIf
 

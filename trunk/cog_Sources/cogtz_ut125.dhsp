@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 7592 2015-02-13 16:59:11Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7617 2015-02-23 14:06:01Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -34,7 +34,8 @@ Public Record "gtfdd.dhsd" T036
 1	nbsel							4,0			; Nombre de lignes sélectionnées
 
 ; 
-Const 	C_STATUT_PRJ_DEMARRE = 'Démarré'	 	
+Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			
+Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer' 	
 Const		C_OP_IMMO	  			= 2
 Const		C_OP_NONIMMO 			= 1
 Const 	C_PRODNAT_PROJET		= 2
@@ -93,13 +94,18 @@ BeginF
 	EndIf
 
 	;	La nature de produit doit être renseignée
-	If ART.ProdNat = ' ' OR Lectab(36, ART.ProdNat) <> 0
+	If ART.ProdNat = ' ' OR Lectab(36, ART.ProdNat) <> 0	OR T036.Cog_MotFacTyp = 0
 		MessageBox("Nature de produit incorrecte sur la fiche article", "Erreur", MB_ICONERROR)
 		FReturn(1)
 	EndIf
 
+	If T036.Cog_MotFacTyp = C_PRODNAT_INFRA AND T036.Cog_DetailTyp not in (C_PRODNAT_MATOS, C_PRODNAT_LOG)
+		MessageBox("Type de nature de produit INFRA sur la fiche article, complément MATERIEL ou LOGICIEL non précisé.", "Erreur", MB_ICONERROR)
+		FReturn(1)
+	EndIf
+
 	; Suite des tests uniquement si la fiche affaire est au statut Actif
-	If PRJAP.Cog_Prj_Status <> C_STATUT_PRJ_DEMARRE OR PRJAP.Cog_Facture <> 2
+	If PRJAP.Cog_Prj_Status <> C_STATUT_PRJ_AFACTURER OR PRJAP.Cog_Facture <> 2
 		FReturn(0)
 	EndIf
 

@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150203174207      
+;>xwin4obj                              7.0       20150223145210      
 [masque]
  libelle="Exportation des Ecritures"
  utilisateur="UGIE"
- date_modification="03/02/2015"
+ date_modification="23/02/2015"
  feuille_style="fstylewpf.dhfi"
  dernier_id=97
  dernier_id_page=4
@@ -186,7 +186,8 @@
   [presentation]
    position=99,62
    taille=9,263
-   attache_lgx=oui
+   attache_x=non
+   attache_lgx=non
    id=21
    colonnes_saisie=256
    wstyle="CHAMP_SAISI"
@@ -402,20 +403,6 @@
    donnee=xq,choix,ccxq,1
   [param_case]
    texte="Exporter les ventilations analytiques"
-   cadrage=droite
-   valeur="2","1"
-  [traitements]
-   microbol_click=8002
- [case_a_cocher]
-  [presentation]
-   position=178,118
-   taille=9,112
-   id=88
-   wstyle="STD"
-  [description]
-   donnee=xq,choix,ccxq,2
-  [param_case]
-   texte="Appliquer le journal analytique Anael"
    cadrage=droite
    valeur="2","1"
   [traitements]

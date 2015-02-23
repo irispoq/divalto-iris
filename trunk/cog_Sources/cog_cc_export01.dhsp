@@ -166,8 +166,7 @@ BeginP
 
 		cptJnl++
 		FicNom01 &= "|- " & COGF_ExportationEcritures(XQ.Fic, XQ.DOS, XQ.Choix(1), XQ.PiNoD, XQ.PiNoF, t_SeparateurC, t_SeparateurL, \
-																	CogRs_JNL.Jnl, t_CX=Condition(CCXQ.Choix(1)=2, TRUE, FALSE), jnltyp_Loc, \
-																	t_AnaJnl=Condition(CCXQ.Choix(2)=2, TRUE, FALSE), t_trace=TRUE)
+																	CogRs_JNL.Jnl, t_CX=Condition(CCXQ.Choix(1)=2, TRUE, FALSE), jnltyp_Loc, t_trace=TRUE)
 
 	WEnd	
 

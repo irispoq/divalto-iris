@@ -80,6 +80,7 @@ structure Ventilation
 endstructure
 
 RecordDiva	Ventilation	Vtl
+RecordDiva	Ventilation	Vtl_Cumul
 RecordDiva	Ventilation	Vtl_Rec
 
 
@@ -154,7 +155,7 @@ BeginF
 EndF
 
 ;*	01
-Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX, t_OA, t_AnaJnl, t_Trace)
+Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX, t_OA, t_Trace)
 ;
 1	t_CheminFichier	255
 1	t_NomFichier		255
@@ -168,7 +169,6 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 1	t_Jnl					>CCFDD.DHSD	JNL		=		''
 1	t_CX					1,0						= FALSE
 1	t_OA					2,0						= 0			; forcer origine appel (voir fonction générer ligne)
-1	t_AnaJnl				1,0						= FALSE
 
 1	t_Ce1_01				>CCFDD.DHSD	Ce1
 1	t_Key_01				255
@@ -445,7 +445,7 @@ BeginF
 				Vtl_rec.Axe2	= CogRs_CX.Axe(2)
 				Vtl_rec.Axe3	= CogRs_CX.Axe(3)
 				Vtl_rec.Axe4	= CogRs_CX.Axe(4)
-				Vtl_rec.Jnl		= Condition(t_AnaJnl AND CA.Cog_AnaJnl <> ' ' , CA.Cog_AnaJnl, CogRs_CX.Jnl)
+				Vtl_rec.Jnl		= Condition(CA.Cog_AnaJnl <> ' ' , CA.Cog_AnaJnl, CogRs_CX.Jnl)
 				Vtl_rec.Ecrno	= t_EcrNo
 				Vtl_rec.Ecrlg	= t_lilg
 
@@ -492,26 +492,26 @@ BeginF
 				Vtl_rec.Axe2	= "999999"
 				Vtl_rec.Axe3	= CogRs_CX.Axe(3)
 				Vtl_rec.Axe4	= CogRs_CX.Axe(4)
-				Vtl_rec.Jnl		= Condition(t_AnaJnl AND CA.Cog_AnaJnl <> ' ' , CA.Cog_AnaJnl, CogRs_CX.Jnl)
+				Vtl_rec.Jnl		= Condition(CA.Cog_AnaJnl <> ' ' , CA.Cog_AnaJnl, CogRs_CX.Jnl)
 				Vtl_rec.Ecrno	= t_EcrNo
 				Vtl_rec.Ecrlg	= t_lilg
-				if listseek(list_EcrVtl,Vtl_rec,Vtl)
-					Vtl.Mt	+= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
-					if vtl.mt<0
-						vtl.sens=2
+				if listseek(list_EcrVtl,Vtl_rec,Vtl_Cumul)
+					Vtl_Cumul.Mt	+= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
+					if Vtl_Cumul.mt<0
+						Vtl_Cumul.sens=2
 					else
-						vtl.sens=1
+						Vtl_Cumul.sens=1
 					endif
-					listmodify(list_EcrVtl,Vtl)
+					listmodify(list_EcrVtl,Vtl_Cumul)
 				else
-					Vtl		= Vtl_rec
-					Vtl.Mt	= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
+					Vtl_Cumul		= Vtl_rec
+					Vtl_Cumul.Mt	= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
 					if vtl.mt<0
-						vtl.sens=2
+						Vtl_Cumul.sens=2
 					else
-						vtl.sens=1
+						Vtl_Cumul.sens=1
 					endif
-					listinsert(list_EcrVtl,Vtl)
+					listinsert(list_EcrVtl,Vtl_Cumul)
 					t_lilg++
 				endif
 			WEnd
