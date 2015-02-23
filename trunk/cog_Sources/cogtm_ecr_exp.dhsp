@@ -417,9 +417,9 @@ BeginP
 		Case 4
 			s_EcritureAnael.p26_EcrAn			= val(year(today)) & "0"
 			t_PiNo 									= 0
-			s_EcritureAnael.p45_EcrAn2			= val(year(today))
-			s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(today)))
-			s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(today)))
+			s_EcritureAnael.p45_EcrAn2			= val(year(Condition(cx_loc	<> ' ', cx_loc.EcrDt, c8_loc.EcrDt)))	
+			s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(Condition(cx_loc	<> ' ', cx_loc.EcrDt, c8_loc.EcrDt))))
+			s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(Condition(cx_loc	<> ' ', cx_loc.EcrDt, c8_loc.EcrDt))))
 			s_EcritureAnael.p66_EcrAn			= val(year(Condition(cx_loc	<> ' ', cx_loc.EcrDt, c8_loc.EcrDt)))		 
 			s_EcritureAnael.p72_EcrMois		= fstring("0",val(month(Condition(cx_loc	<> ' ', cx_loc.EcrDt, c8_loc.EcrDt))))
 			s_EcritureAnael.p76_EcrJour		= fstring("0",val(day(Condition(cx_loc	<> ' ', cx_loc.EcrDt, c8_loc.EcrDt))))
@@ -561,7 +561,7 @@ BeginP
 			s_EcritureAnael.p1018_Axe4		= cx_loc.Axe(4)
 			s_EcritureAnael.p1020_Axe3		= cx_loc.Axe(3)
 		case 4
-			if wCar in ("6","7")
+			if wCar in ("6","7")	OR cx_loc <> ' '
 				s_EcritureAnael.p455_CstAxe	= Condition(cx_loc <> ' ', cx_loc.Axe(1), "999999")
 				s_EcritureAnael.p461_Axe4		= Condition(cx_loc <> ' ', cx_loc.Axe(4), c3.Axe(4))
 				s_EcritureAnael.p464_Axe3		= Condition(cx_loc <> ' ', cx_loc.Axe(3), c3.Axe(3))
