@@ -22,6 +22,14 @@ Public Record	"a5dd.dhsd"		MZ
 		
 	case Borne_Date(date dt)
 		CB.EXODDT <= dt AND CB.EXOFDT >= dt
+	case Zoom_Dos(int dos)
+		CB.Dos = dos	
+	case Zoom_PK(int dos, date exoddt)
+		CB.Dos = dos and CB.ExoDDt = exoddt
+	case Exists(int dos, date exoddt)
+		CB.Dos = dos and CB.ExoDDt = exoddt
+	case Exo_En_Cours(date aujourdhui)
+		CB.ExoDDT <= aujourdhui AND CB.ExoFDT >= aujourdhui
 
 
 <OrderBy>
@@ -30,4 +38,4 @@ Public Record	"a5dd.dhsd"		MZ
 		CB.Dos,
 		CB.ExoDDt
 
-			 
+

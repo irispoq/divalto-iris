@@ -1,4 +1,4 @@
-;>xwin4obj                              7.0       20150223154449      
+;>xwin4obj                              7.0       20150223163516      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
@@ -6802,6 +6802,10 @@ Public Record	"ccfdd.dhsd"	C5		C5_DEV_01
 ;
 Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
 Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer'
+Const		C_STATUT_PRJ_ARRETE 		= 'Arrêté'
+Const		C_STATUT_PRJ_REPORTE 	= 'Reporté'
+Const		C_STATUT_PRJ_ARCHIVE 	= 'Archivé'
+Const		C_STATUT_PRJ_TERMINE 	= 'Terminé'
 
 ;*
 ;*
@@ -7166,13 +7170,16 @@ Beginp
 
 	If Harmony.Datamodif
 
-		If statut_prec
+		Switch statut_prec 
+			Case C_STATUT_PRJ_AFACTURER 
 
-		EndIf
+			Case C_stat
+
+		EndSwitch
 
 	EndIf
 
-	statut_prec
+	statut_prec	= ' '
 
 Endp
 

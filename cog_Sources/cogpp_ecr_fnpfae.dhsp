@@ -38,6 +38,7 @@ Hfile	gtfdd.dhsd	GTFAM		GTFAM
 Htmpfile	ccfdd.dhsd	ccfm	CCFM	OpenonUse DeleteOnExit
 
 ;
+Public 	RecordSQL	"COG_CCRSDOS.DHOQ"		CogRs_CB
 Public 	RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3				CogRs_C3Dst				; Compte	FNP ou FAE
 Public 	RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3				CogRs_C3Tva				; Compte TVA FNP ou FAE
 Public 	RecordSQL	"CCRSJCA.DHOQ"				Journal				CogRs_JnlDst			; Journal FNP ou FAE
@@ -87,6 +88,7 @@ Public Record	cogfdd.dhsd	COG_IMP_FNPFAE		COG_IMP_TOTALCPT
 1	idl_AnaCumul	L=$00									;Liste ventilations cumulées par dev, compte, sens
 1	stl_Cana			L
 1	lId_IMP			L
+1	lId_IMP_Ana		L
 1	txtDebug			S
 
 Structure Ecriture
@@ -150,6 +152,8 @@ Const C_BLOC_ETB			= 5
 Const C_BLOC_TVA			= 6
 Const C_BLOC_CPTD			= 7
 Const C_BLOC_CP			= 8
+Const C_BLOC_ANA_FOND	= 9
+Const C_BLOC_CX			= 10
 Const	C_PRGMODE_SIMUL	= 1
 Const C_PRGMODE_INTC8	= 2
 
@@ -321,18 +325,19 @@ beginf
 	;recherche du dossier et T000
 	seek_soc(mz.dos)
 	Seek_CA(MZ.Dos)
-	If Seek_CB_Key(['C' CA.Dos CA.ExoDDt]) = 0
-		XQ_Cog.DatD2 = CB.ExoDDt
-		XQ_Cog.DatF2 = CB.ExoFDt
-	EndIf
-
-	If not ((XQ_Cog.DatD >= XQ_Cog.DatD2) AND (XQ_Cog.DatD <= XQ_Cog.DatF2))
+	 
+	CogRs_CB.Init()
+	CogRs_CB.Where.Exo_En_Cours(XQ_Cog.DatD)
+	If CogRs_CB.Select() = 0 OR CogRs_CB.ClotCod = 2
  		if tunnel=false 
-			messagebox("Date de calcul en dehors de l'exercice comptable (Paramètre dossier comptabilité)","Erreur",mb_iconstop)
+			messagebox("Date de calcul en dehors d'un exercice comptable non clôturé (Paramètre dossier comptabilité)","Erreur",mb_iconstop)
 		endif
-		Cog_EcritureLivreDeBord("Date de calcul en dehors de l'exercice comptable")
+		Cog_EcritureLivreDeBord("Date de calcul en dehors d'un exercice comptable non clôturé.")
 		freturn(false)
 	EndIf
+
+	XQ_Cog.DatD2 = CogRs_CB.ExoDDt
+	XQ_Cog.DatF2 = CogRs_CB.ExoFDt
 
 	;--------Verif paramètres	comptes - journal
 	CogRs_C3Dst.Init()
@@ -407,36 +412,42 @@ beginf
 endf
 
 ;*
-Procedure Cog_Print_Rapport_CCFM(wSansErreur)
+Procedure Cog_Print_Rapport_CCFM(wEcrTyp, wIdLst, wSansErreur)
 ;
+1		wEcrTyp			1,0							; 1: compta gen		2: Ecr analytiques
+1		wIdLst			L								; ID de la liste à imprimer
 1		cptPrec			>ccfdd.dhsd		Cpt
 1		wTotalDeb		>ccfdd.dhsd		MtDev
 1		wTotalCre		>ccfdd.dhsd		MtDev
 1		wTrait			1,0
-1		wSansErreur		1,0
+1		wSansErreur		1,0							; active l'information de présence d'erreur sur l'édition par XmiSetAttribut
+1		wBlocFond		3,0
 
 BeginP
 
-	If ListCount(lId_IMP) = 0	OR MZ.MiCle = ' '
+	If ListCount(wIdLst) = 0	OR MZ.MiCle = ' '
 		PReturn
 	EndIf
 
-	wTrait = Cog_LireProgrammeTypeTrt
+	wTrait 		= Cog_LireProgrammeTypeTrt
+	wBlocFond	= Condition(wEcrTyp=2, C_BLOC_ANA_FOND, C_BLOC_PAGEFOND)
 
 	XmiLoad(MZ.MiCle)
-	ListBegin(lId_IMP)
+	ListBegin(wIdLst)
 	PrintBegin
 	PingLocal("COG_ERRIMP_FNPFAE", wSansErreur)
-	XmiPrint(MZ.MiCle, 1)
+	XmiPrint(MZ.MiCle, wBlocFond)
 
-	Do While ListNext(lId_IMP, COG_IMP_FNPFAE) not in (-1, 0)
+	Do While ListNext(wIdLst, COG_IMP_FNPFAE) not in (-1, 0)
 
-		; rupture compte
-		If (wTrait = C_TRAITEMENT_FNP AND CA.Cog_FnpRgpFlag = 2) OR	(wTrait = C_TRAITEMENT_FAE AND CA.Cog_FaeRgpFlag = 2)
-			If COG_IMP_FNPFAE.CptA <> cptPrec AND cptPrec <> ' '
-				XmiPrint(MZ.MiCle, C_BLOC_CPTF)
-				cptPrec = ' '
-				COG_IMP_TOTALCPT = ' '
+		If wEcrTyp <> 2
+			; rupture compte
+			If (wTrait = C_TRAITEMENT_FNP AND CA.Cog_FnpRgpFlag = 2) OR	(wTrait = C_TRAITEMENT_FAE AND CA.Cog_FaeRgpFlag = 2)
+				If COG_IMP_FNPFAE.CptA <> cptPrec AND cptPrec <> ' '
+					XmiPrint(MZ.MiCle, C_BLOC_CPTF)
+					cptPrec = ' '
+					COG_IMP_TOTALCPT = ' '
+				EndIf
 			EndIf
 		EndIf
 
@@ -466,6 +477,9 @@ BeginP
 				COG_IMP_TOTALCPT.Mt		+=	COG_IMP_FNPFAE.Mt
 				COG_IMP_TOTALCPT.MtBis	+=	COG_IMP_FNPFAE.MtBis
 
+			Case C_BLOC_CX
+				XmiPrint(MZ.MiCle, C_BLOC_CX)
+
 		EndSwitch
 
 	WEnd
@@ -475,8 +489,9 @@ BeginP
 EndP
 
 ;*
-Procedure Cog_Insert_List_Impression(iBlocNo, iCpt, iDev, iEtb, iLib, iMt, iSens)
+Procedure Cog_Insert_List_Impression(iIdList, iBlocNo, iCpt, iDev, iEtb, iLib, iMt, iSens, iAxe1, iAxe2,iAxe3,iAxe4)
 ;
+1	iIdList	L
 1 	iBlocNo 	>cogfdd.dhsd		Cog_BlocNo
 1	iCpt		>ccfdd.dhsd			Cpt
 1	iDev		>ccfdd.dhsd			Dev
@@ -484,6 +499,10 @@ Procedure Cog_Insert_List_Impression(iBlocNo, iCpt, iDev, iEtb, iLib, iMt, iSens
 1	iLib		>ccfdd.dhsd			Lib
 1	iMt		>ccfdd.dhsd			Mt
 1	iSens		>ccfdd.dhsd			Sens
+1	iAxe1		>ccfdd.dhsd			Axe	= ' '
+1	iAxe2		>ccfdd.dhsd			Axe	= ' '
+1	iAxe3		>ccfdd.dhsd			Axe	= ' '
+1	iAxe4		>ccfdd.dhsd			Axe	= ' '
 BeginP
 
 	Init COG_IMP_FNPFAE = ' '
@@ -495,7 +514,11 @@ BeginP
 	COG_IMP_FNPFAE.Mt				= Condition(iSens = C_debit, iMt, 0)
 	COG_IMP_FNPFAE.MtBis			= Condition(iSens = C_credit, iMt, 0)
 	COG_IMP_FNPFAE.Sens			= iSens
-	ListInsert(lId_IMP, COG_IMP_FNPFAE)
+	COG_IMP_FNPFAE.Axe(1)		= iAxe1
+	COG_IMP_FNPFAE.Axe(2)		= iAxe2
+	COG_IMP_FNPFAE.Axe(3)		= iAxe3
+	COG_IMP_FNPFAE.Axe(4)		= iAxe4
+	ListInsert(iIdList, COG_IMP_FNPFAE)
 
 EndP
 
@@ -793,6 +816,7 @@ EndP
 ;*
 Procedure P_Ecrit_Decr_Ccfm
 ;
+RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3				wRs_C3
 1	i				x
 1	flag_Loc		1,0 = FALSE
 BeginP
@@ -821,11 +845,18 @@ BeginP
 	Hwrite(CCFM,C8)	| Wnb_C8++
 	
 	if Decr.axetb(*)<>' '
+
+		If wRs_C3.Cpt <> c8.Cpt
+			wRs_C3.Init()
+			wRs_C3.Where.Equal_Cpt(c8.Cpt)
+			wRs_C3.Select()
+		EndIf
+
 		init Cx		=' '
 		CX.Ce1		='2'
 		for i=1 to 4
-			If CogRs_C3Dst.AxeSais(i) = 2
-				CX.Axe(i)= Decr.axetb(i)
+			If wRs_C3.AxeSais(i) = 2
+				CX.Axe(i)= Condition(wRs_C3.Axe(i) <> ' ',  wRs_C3.Axe(i), Decr.axetb(i))
 			 	flag_Loc = TRUE
 			EndIf
 		next
@@ -838,6 +869,7 @@ BeginP
 
 		If flag_Loc
 			Hwrite(CCFM,CX)	| Wnb_CX++
+			Cog_Insert_List_Impression(lId_IMP_Ana, C_BLOC_CX, C8.Cpt, CX.Dev, CX.Etb, C8.Lib, CX.Mt, C8.Sens, CX.Axe(1), CX.Axe(2),CX.Axe(3),CX.Axe(4))
 		EndIf
 	endif
 	
@@ -883,20 +915,26 @@ EndP
 ;*
 Procedure P_Ecrit_Cana_Ccfm
 ;	Ventilations CX
+RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3				wRs_C3
 1	i				x
 1	flag_Loc		1,0 = FALSE
 BeginP
+
+	wRs_C3.Init()
+	wRs_C3.Where.Equal_Cpt(C8.Cpt)
+	wRs_C3.Select()
+
 	init Cx		=' '
 	CX.Ce1		='2'
 	for i=1 to 4
-		If CogRs_C3Dst.AxeSais(i) = 2
-			CX.Axe(i)	=Cana.axetb(i)
+		;If CogRs_C3Dst.AxeSais(i) = 2	
+	  	If wRs_C3.AxeSais(i) = 2
+			CX.Axe(i)	=Condition(wRs_C3.Axe(i) <> ' ',  wRs_C3.Axe(i),Cana.axetb(i))
 			flag_Loc = TRUE
 		EndIf
 	next
 	CX.Dos	= C8.Dos
 	CX.Etb	= C8.Etb
-	CX.Etb	= CAna.Etb
 	CX.EcrNo	= C8.EcrNo
 	CX.Dev	= Cana.Dev
 	CX.MtDev	= Cana.mtdev
@@ -904,6 +942,7 @@ BeginP
 	
 	If flag_Loc
 		Hwrite(CCFM,CX)	| Wnb_CX++
+		Cog_Insert_List_Impression(lId_IMP_Ana, C_BLOC_CX, C8.Cpt, CX.Dev, CX.Etb, ' ', CX.Mt, C8.Sens, CX.Axe(1), CX.Axe(2),CX.Axe(3),CX.Axe(4))
 	EndIF
 
 EndP
@@ -947,19 +986,19 @@ BeginP
 		Wdev = Decr.dev
 		wEtb = DEcr.Etb
 
-		Cog_Insert_List_Impression(C_BLOC_ETB, DEcr.Cpt, DEcr.Dev, DEcr.Etb, "", 0, 0) 
+		Cog_Insert_List_Impression(lId_IMP, C_BLOC_ETB, DEcr.Cpt, DEcr.Dev, DEcr.Etb, "", 0, 0) 
 
 		Do While stl_Decr not in (0,-1) and DEcr.Etb = wEtb AND Decr.dev = Wdev
 			P_Ecrit_Decr_Ccfm
-			Cog_Insert_List_Impression(C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens) 
+			Cog_Insert_List_Impression(lId_IMP,C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens) 
 			stl_Decr=ListNext(idl_EcrDet,Decr)
 		Wend
 		P_Ecrit_C8_Tva_CCFM(wDev, wEtb)
-		Cog_Insert_List_Impression(C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens) 	
+		Cog_Insert_List_Impression(lId_IMP, C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens) 	
 		P_Calcul_Solde_Avec_Tva
 		if WmtSld<>0
 			P_Contre_partie_Ccfm(Wdev, wEtb)
-			Cog_Insert_List_Impression(C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens) 	
+			Cog_Insert_List_Impression(lId_IMP, C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens) 	
 			Wmtdeb=0 | Wmtdevdeb=0 | Wmtcre=0 | Wmtdevcre=0  
 			WmtSld=0 | WmtdevSld=0
 		endif
@@ -979,7 +1018,7 @@ BeginP
 		Wecrvalno++	
 		Wdev = Cecr.dev
 		Wetb = Cecr.Etb
-		Cog_Insert_List_Impression(C_BLOC_ETB, "", Cecr.Dev, Cecr.Etb, "", 0, 0) 
+		Cog_Insert_List_Impression(lId_IMP, C_BLOC_ETB, "", Cecr.Dev, Cecr.Etb, "", 0, 0) 
 		Do While stl_Cecr not in (0,-1) and Cecr.Etb = Wetb AND Cecr.dev=Wdev
 			
 			;--------reperage si analytique
@@ -1002,7 +1041,7 @@ BeginP
 			Do WHile ListNext(idl_EcrDet, DEcr) not IN (-1, 0)
 
 				If DEcr.Etb & DEcr.Dev & decr.Cpt & DEcr.Sens = Cecr.Etb & Cecr.Dev & Cecr.Cpt & Cecr.Sens
-					Cog_Insert_List_Impression(C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens) 
+					Cog_Insert_List_Impression(lId_IMP, C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens) 
 					ListDeleteAndPrevious(idl_EcrDet)
 				EndIf
 
@@ -1026,12 +1065,12 @@ BeginP
 		Wend
 
 		P_Ecrit_C8_Tva_CCFM(Wdev, Wetb)
-		Cog_Insert_List_Impression(C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens) 	
+		Cog_Insert_List_Impression(lId_IMP, C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens) 	
 		P_Calcul_Solde_Avec_Tva
 
 		if WmtSld<>0
 			P_Contre_partie_Ccfm(Wdev, Wetb)
-			Cog_Insert_List_Impression(C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens) 	
+			Cog_Insert_List_Impression(lId_IMP, C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens) 	
 			Wmtdeb=0 | Wmtdevdeb=0 | Wmtcre=0 | Wmtdevcre=0  
 			WmtSld=0 | WmtdevSld=0
 		endif
@@ -1071,6 +1110,8 @@ Beginp
 	lId_IMP = ListGetId("COG_LISTE_IMPC8")
 	ListErase(lId_IMP)
 
+	lId_IMP_Ana = ListGetId("COG_LISTE_IMPCX")
+	ListErase(lId_IMP_Ana)
 
 	idl_EcrCumul = ListGetId("COG_LISTE_CECR")
 	ListErase(idl_EcrCumul)
@@ -1210,8 +1251,8 @@ Beginp
 	WEnd
 
 	; Impression
-	Cog_Print_Rapport_CCFM(wRet)
-
+	Cog_Print_Rapport_CCFM( wEcrTyp=1, lId_IMP, wRet)
+	Cog_Print_Rapport_CCFM( wEcrTyp=2, lId_IMP_Ana, wRet)
 
 	;------
 	ListDestroy(idl_ent)

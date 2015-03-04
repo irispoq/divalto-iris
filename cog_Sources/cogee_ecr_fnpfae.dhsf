@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20150226124555      
+;>xwin4obj                              7.0       20150304153049      
 [masque]
  utilisateur="UGIE"
- date_modification="26/02/2015"
+ date_modification="04/03/2015"
  feuille_style="fstylewpf.dhfi"
  dernier_id=34
  dernier_id_page=4
@@ -94,6 +94,9 @@
    sequence=1
   [param_saisie]
    type_date=jj/mm/aaaa
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_DatD_1_Ap"
  [groupe_radio]
   [presentation]
    position=17,218
@@ -386,6 +389,26 @@
 Public Record "gtfdd.dhsd" xq XQ_COG
 Public RecordSql "gtrspppce.dhoq" mouvement cogrs_mouv
 Public RecordSql "gtrspptab.dhoq" codeoperation cogrs_op
+Public 	RecordSQL	"COG_CCRSDOS.DHOQ"		CogRs_CB
+
+
+;*
+Public Procedure Champ_DatD_1_Ap
+;
+Beginp
+
+	CogRs_CB.Init()
+	CogRs_CB.Where.Exo_En_Cours(XQ_Cog.DatD)
+	If CogRs_CB.Select() = 0 OR CogRs_CB.ClotCod = 2
+		MessageBox("Date de calcul en dehors d'un exercice comptable non clôturé (Paramètre dossier comptabilité)","Erreur",mb_iconstop)
+		Harmony.Retour = XMENEXT_RESSAISIE
+		PReturn
+	EndIf
+
+	XQ_Cog.DatD2 = CogRs_CB.ExoDDt
+	XQ_Cog.DatF2 = CogRs_CB.ExoFDt
+
+Endp
 [/diva]
 [diva_base]
 [/diva]
