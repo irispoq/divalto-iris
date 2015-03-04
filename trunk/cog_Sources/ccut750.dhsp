@@ -44,7 +44,7 @@ BeginF	; i1_read_ap
 
 	If (ret := Standard.I1_Read_Ap) = 'O'			
 		
-		ret = Condition(I1.Cog_AmoFlag = 2, ret, 'N')
+		ret = Condition(I1.Cog_AmoFlag = 2, ret, 'I')
 														
 	EndIf
 
