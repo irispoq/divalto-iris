@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20150213150745,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20150306153509,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -80,12 +80,20 @@ Gel=1
 Nature=16,D0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,199710 30000,MJV ,20050106105123,MARIE JO            
+Version=1,199710 30000,MJV ,20100727154013,SN                  
 Nom=Axe,Axe analytique,1
 Gel=1
 Nature=8
+Attribut=PARAM
 NomOdbc=Axe
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199710 30000,MJV ,20061107110310,MARIE JO            
+Nom=AxeTb,Table des axes analytiques,1
+DateM=7C0C27EE5302C701
+Gel=1
+Nature=8*4
+Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20021125153845,RR  ,20071128092538,RR                  
 Nom=Bitmap,Nom de l'image,1
@@ -232,6 +240,12 @@ Nom=Classement,no d'ordre,1
 Gel=1
 Nature=3,0
 NomOdbc=Classement
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150305090127,UGIE                ,20150305090127,UGIE                
+Nom=CnCdNo,N° bon de commande CN,1
+Gel=1
+Nature=15
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110816131438,ROOT                ,20140418115936,UGIE                
@@ -822,6 +836,14 @@ Nature=T10
 NomOdbc=Duree
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1989 1230000,MJV ,20061113135813,MARIE JO            
+Nom=DvNo,Devis no,1
+DateM=C2CB1B612307C701
+Gel=1
+Nature=8,0
+NomOdbc=DevisNo
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1989 1230000,MJV ,20061113135902,MARIE JO            
 Nom=EchDt,Date d'échéance,1
 DateM=6E3B167E2307C701
@@ -1004,6 +1026,14 @@ Gel=1
 Nature=16,D0
 NomOdbc=QteUniteOeuvreExercice
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,pb  ,20090422180236,MS                  
+Nom=EcrNo,Numéro d'écriture,1
+DateM=A93C18C163C3C901
+Gel=1
+Nature=11,0
+NomOdbc=NoEcriture
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1996 2160000,c321,20060627141310,DEMO                
 Nom=EffetDt,Date d'effet,1
@@ -1308,6 +1338,18 @@ DateM=A0DBB59AC69FC201
 Gel=1
 Nature=4,0
 NomOdbc=NoFlash
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150306153439,UGIE                ,20150306153439,UGIE                
+Nom=FraisFiRef,Ref pour facturation des frais financiers,1
+Gel=1
+Nature=25
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150305112450,UGIE                ,20150305112450,UGIE                
+Nom=FraisMoisMt,Frais mensuels,1
+Gel=1
+Nature=16,D0*12
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,198910130000,MJV ,20061113152925,MARIE JO            
@@ -1990,6 +2032,10 @@ Nom=Vil,191,0,0,N,1
 Nom=Pay,229,0,0,N,1
 Nom=Cpostal,232,0,0,N,1
 [/CHAMPL]
+nom=AxeTb
+[CHAMPL]
+Nom=Axe,1,0,0,N,1
+[/CHAMPL]
 nom=Ce1
 [CHAMPL]
 Nom=Ce1N,1,0,0,N,1
@@ -2290,6 +2336,8 @@ Nom=MtBis,19,2,N,0,0,N,1
 Nom=Mt,35,2,N,0,0,N,1
 Nom=Sens,51,2,N,0,0,N,1
 Nom=Lib,52,2,N,0,0,N,1
+Nom=AxeTb,92,2,N,0,0,N,1
+Nom=EcrNo,124,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110530100012,SYSTEMU_VR          ,20110530100456,SYSTEMU_VR          
@@ -2388,11 +2436,9 @@ Nom=InfraMatMoisNb,376,2,N,0,0,N,1
 Nom=InfraLogMoisNb,380,2,N,0,0,N,1
 Nom=ProjAmoMoisNb,384,2,N,0,0,N,1
 Nom=DirCliTiers,388,2,N,0,0,N,1
+Nom=DvNo,396,2,N,0,0,N,1
+Nom=CnCdNo,404,2,N,0,0,N,1
 [/CHAMPS]
-[PROPLOC]
-Nom=InfraLogBien
-Nom=InfraMatMoisNb
-[/PROPLOC]
 [TABLE]
 Version=1,20111213140124,ROOT                ,20111213140232,ROOT                
 Nom=Cog_Red_Ent,Entêtes Reddition,1
@@ -2528,6 +2574,16 @@ Nom=FlagImpression,33,2,N,0,0,N,1
 Nom=Lib80,34,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
+Version=1,20150306153407,UGIE                ,20150306153407,UGIE                
+Nom=Cog_Soc,Table complément dossier,1
+DateM=E9CD879A1A58D001
+Taille=300,300
+Pack=0,0
+[CHAMPS]
+Nom=Dos,1,2,N,0,0,N,1
+Nom=FraisFiRef,4,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
 Version=1,1999 4220000,MJV ,20120220114332,ROOT                
 Nom=Cog_T000,Table paramétrage commun,1
 DateM=B5257D7DBCEFCC01
@@ -2575,6 +2631,30 @@ NomOdbc=TableTauxFi
 Taille=300,300
 Pack=0,0
 CE=CeBin,002
+[CHAMPS]
+Nom=CeBin,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=TabNo,5,2,N,0,0,N,1
+Nom=Cog_TauxDt,8,2,N,0,0,N,1
+Nom=Filler,16,2,N,0,49,N,1
+Nom=UserCr,65,2,N,0,0,N,1
+Nom=UserMo,85,2,N,0,0,N,1
+Nom=UserTrace,105,2,N,0,0,N,1
+Nom=Note,133,2,N,0,0,N,1
+Nom=CeNote,141,2,N,0,0,N,1
+Nom=Joint,142,2,N,0,0,N,1
+Nom=CeJoint,150,2,N,0,0,N,1
+Nom=Lib,151,2,N,0,0,N,1
+Nom=Cog_Taux,191,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20150305100155,UGIE                ,20150305100221,UGIE                
+Nom=Cog_T003,Table taux de structure,1
+DateM=3A291C172357D001
+NomOdbc=TableTauxStruc
+Taille=300,300
+Pack=0,0
+CE=CeBin,003
 [CHAMPS]
 Nom=CeBin,1,2,N,0,0,N,1
 Nom=Dos,2,2,N,0,0,N,1
@@ -3132,6 +3212,7 @@ Nom=Cog_BaseMt,352,2,N,0,0,N,1
 Nom=CeFaTb,368,2,N,0,0,N,1
 Nom=FaNoTb,380,2,N,0,0,N,1
 Nom=Ce1,476,2,N,0,0,N,1
+Nom=FraisMoisMt,477,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110712091845,ROOT                ,20110712091900,ROOT                
@@ -3166,7 +3247,7 @@ Nom=Cog_MailUser,161,2,N,0,0,N,1
 [TABLE]
 Version=1,20110712091655,ROOT                ,20110712091724,ROOT                
 Nom=Cog_Valid_PArt,Paramètres liés aux articles,1
-DateM=F13859956440CC01
+DateM=A461C35A6156D001
 NomOdbc=ValidationsCdeParamArticles
 Taille=500,500
 Pack=0,0
@@ -3187,7 +3268,7 @@ Nom=Joint,99,2,N,0,0,N,1
 [TABLE]
 Version=1,20110712091756,ROOT                ,20110712091827,ROOT                
 Nom=Cog_Valid_PMt,Paramètres des montants seuils de validation,1
-DateM=891D11E56340CC01
+DateM=A461C35A6156D001
 NomOdbc=ValidationsCdeParamMontants
 Taille=500,500
 Pack=0,0
@@ -3279,11 +3360,12 @@ Nom=cogf_tab,Tables,1
 DateM=71461FB5BAEFCC01
 Fichier=I,0,cogf_tab.dhfi
 Versionbase=7.1
-DateMIndex=F4FB1AAB182CD001
+DateMIndex=1893C6352357D001
 [TABLES]
 Nom=Cog_T000,0
 Nom=Cog_T001,0
 Nom=Cog_T002,0
+Nom=Cog_T003,0
 [/TABLES]
 [BASE]
 Version=1,20090903122300,INFOU               ,20110520142138,SYSTEMU             
@@ -3293,6 +3375,16 @@ Fichier=I,0,Coggrf_tab.dhfi
 Versionbase=6.3a
 [TABLES]
 Nom=Cog_GrtEvt,0
+[/TABLES]
+[BASE]
+Version=1,20150306153324,UGIE                ,20150306153335,UGIE                
+Nom=CogGtf_Dos,Tables complémentaires Dossiers,1
+DateM=B177F6861A58D001
+Fichier=I,0,Coggtf_Dos.dhfi
+Versionbase=7.2a
+DateMIndex=E16F7ABD1A58D001
+[TABLES]
+Nom=Cog_Soc,0
 [/TABLES]
 [BASE]
 Version=1,20150107111358,UGIE                ,20150107111358,UGIE                
@@ -3521,7 +3613,7 @@ Nom=User,32,0,
 Version=1,20030127090119,LM  ,20040702174452,ROOT                
 Nom=Index_A_T000,Par code,1
 DateM=E059D0834B60C401
-CLE=cogf_tab,A,,1,032,o,5,n
+CLE=cogf_tab,A,,1,032,o,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=CeBin,4,0,
@@ -3532,7 +3624,7 @@ Nom=T000Filler,5,0,
 Version=1,20030127090304,LM  ,20051130114444,MARIE JO            
 Nom=Index_A_T001,Par code,1
 DateM=8CBC6E139BF5C501
-CLE=cogf_tab,A,,1,032,o,5,n
+CLE=cogf_tab,A,,1,032,o,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=CeBin,4,0,
@@ -3554,6 +3646,18 @@ Nom=Filler,13,0,49
 [/CHAMPS]
 [/INDEX]
 [INDEX]
+Version=1,20150305100313,UGIE                ,20150305100315,UGIE                
+Nom=Index_A_T003,PK,1
+DateM=21022E372357D001
+CLE=cogf_tab,A,,1,032,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=CeBin,4,0,
+Nom=Cog_TauxDt,5,0,
+Nom=Filler,13,0,49
+[/CHAMPS]
+[/INDEX]
+[INDEX]
 Version=1,20031120091603,RR                  ,20090903192839,INFOU               
 Nom=Index_A,Dossier Classe Affaire,1
 DateM=5070969AF051C401
@@ -3563,6 +3667,16 @@ Nom=Dos,1,0,
 Nom=Affaire,4,0,
 Nom=AfrClas,12,0,
 Nom=Classement,20,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20150306153459,UGIE                ,20150306153500,UGIE                
+Nom=Cog_Soc_Pk,PK,1
+DateM=838D09BA1A58D001
+CLE=CogGtf_Dos, ,,1,032,o,1,n
+Alias=Cog_Soc_Pk
+[CHAMPS]
+Nom=Dos,1,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -3776,7 +3890,9 @@ Nom=Cog_FValid_Cde,Cog_Valid_PMt,Cog_Ind_N,0
 Nom=cogf_tab,Cog_T000,Index_A_T000,0
 Nom=cogf_tab,Cog_T001,Index_A_T001,0
 Nom=cogf_tab,Cog_T002,Index_A_T002,0
+Nom=cogf_tab,Cog_T003,Index_A_T003,0
 Nom=Coggrf_Tab,Cog_GrtEvt,Index_A,0
+Nom=CogGtf_Dos,Cog_Soc,Cog_Soc_Pk,0
 Nom=CogGtf_Proj,Cog_PrjAp,Cog_PrjAp_Pk,0
 Nom=Coggtf_Tab,Cog_UT100,Index_UT100,0
 Nom=Coggtf_Tab,Cog_UT101,Index_UT101,0
