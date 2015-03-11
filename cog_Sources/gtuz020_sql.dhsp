@@ -1,0 +1,105 @@
+SetModuleInfo('$Id: gtuz020_sql.dhsp 7664 2015-03-11 09:37:45Z admin $')
+;>xdiva
+;*
+;*      Zoom sur Société  Record SQL Dossier de GTRSDOS                    
+;*
+   
+;*
+;*
+;*
+
+OverWrite gttz020_sql.dhop
+
+;
+include "GTTCZ00.dhsp"			;déclarations communes
+Include	'ZMAPI7.dhsp'
+
+;
+module A5PMWIN.dhop
+module A5TM000.dhop
+Module RCTM000.dhop 				
+Module a5pmportail.dhop
+
+; Record SQL
+Public RecordSQL	"COGRS_DOS.DHOQ"	CogRs_SocComp
+Public RecordSql 	'GTRSDOS.dhoq'		Dossier Dossier
+Public RecordSql 	'GTRSDOS.dhoq'		Dossier Dossier_Sel
+
+;
+HFileVersion 	gtfdd.dhsd 	GTFDOS
+
+;
+public record	gtfdd.dhsd	SocNo
+Public Record	A5DD.dhsd	mChemin		; Enregistrement Chemin
+public Record	gtfdd.dhsd	G7	G7Bis
+
+;
+Public Record "rcfebcdd.dhsd" d2 d2 		; Compte bancaire par défaut 
+Public Record "rcfebcdd.dhsd" d2 d2A		; Pour les achats 
+Public Record "rcfebcdd.dhsd" d2 d2V		; Pour les ventes 
+
+;*
+;*
+;*
+
+;*
+Procedure ZoomApresCreation 
+; compte-rendu de création
+BeginP
+
+	Standard.ZoomApresCreation
+
+	If Zoom.Ok = 'O'
+		CogRs_SocComp.Dos = Dossier.Dos
+		CogRs_SocComp.Insert()
+	EndIf
+
+EndP
+
+;*
+Procedure ZoomApresModification 
+; compte rendu de modification
+BeginP
+
+	Standard.ZoomApresModification
+
+	If Zoom.Ok = 'O'
+		If CogRs_SocComp.Dos > 0
+			CogRs_SocComp.Update()	
+		Else
+			CogRs_SocComp.Dos = Dossier.Dos
+			CogRs_SocComp.Insert()
+		EndIf
+	EndIf
+EndP
+
+;*
+Procedure ZoomApresSuppression ; compte rendu de suppression
+BeginP
+	
+	Standard.ZoomApresSuppression
+
+	If Zoom.Ok = 'O' AND CogRs_SocComp.Dos = Dossier.Dos
+		CogRs_SocComp.Delete()
+	EndIf
+
+EndP
+
+;*
+Procedure ZoomCreation
+;
+BeginP
+	Standard.ZoomCreation
+	CogRs_SocComp.Init()
+EndP
+
+;*
+Procedure ZoomApresRead
+; après chaque lecture
+
+BeginP	; zoomapresread	
+	Standard.ZoomApresRead
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(Dossier.Dos)
+	CogRs_SocComp.Select()
+EndP		; zoomapresread

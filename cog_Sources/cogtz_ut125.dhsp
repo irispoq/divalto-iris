@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 7617 2015-02-23 14:06:01Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7664 2015-03-11 09:37:45Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -6,7 +6,8 @@ SetModuleInfo('$Id: cogtz_ut125.dhsp 7617 2015-02-23 14:06:01Z admin $')
 OverWrittenBy "coguz_ut125.dhop"
 
 ;
-Include "GTTCZ00.dhsp"					; Déclarations communes
+Include 	"GTTCZ00.dhsp"					; Déclarations communes
+Include	"COGTC_MOTEURPRJSPEC.DHSP"
 
 ;
 Hfileversion   "cogfdd.dhsd"    COGGTF_TAB
@@ -20,6 +21,7 @@ Module	"CCPMFIC.dhop"
 Module	"COGTM_MoteurPrjSpec.DHOP"
 
 ; Record Sql 
+Public recordSQL  "cogrs_tab.dhoq"		TableParametre
 Public recordSQL  "cogrs_uttab.dhoq"  	CogRs_UT125									; Table UT125
 Public recordSQL  "cogrs_uttab.dhoq"  	cogrs_ut125		CogRs_UT125_Sel		; Table pour sélection
 Public recordSQL	"cogrs_proj.dhoq"		CogRs_PrjComp
@@ -33,15 +35,7 @@ Public Record "gtfdd.dhsd" T036
 ; Variables
 1	nbsel							4,0			; Nombre de lignes sélectionnées
 
-; 
-Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			
-Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer' 	
-Const		C_OP_IMMO	  			= 2
-Const		C_OP_NONIMMO 			= 1
-Const 	C_PRODNAT_PROJET		= 2
-Const		C_PRODNAT_INFRA		= 1
-Const 	C_PRODNAT_MATOS		= 1
-Const		C_PRODNAT_LOG			= 2
+
 
 ;*
 ;* procedures 
@@ -290,11 +284,15 @@ Endp
 
 ;*
 Public Procedure ZoomDebut 
+;
 Beginp
 
 	Init_Zoom(FicheNoBloc = 0)
 	Seek_Soc(MZ.Dos)				; recherche du dossier et T000
 	Seek_CA(mz.Dos)
+
+	TableParametre.init()
+	TableParametre.Select()
 
 	Note_Debut 						;Init de la gestion des notes
 

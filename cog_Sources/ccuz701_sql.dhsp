@@ -33,6 +33,24 @@ EndP
 ;*
 
 ;*
+Procedure Regler_creation(mode)
+; initialise les zones de saisie de la page de création selon le mode
+1			mode						8			; mode de saisie
+													;			CC = Creation Composant
+													;			CB ou ' ' = Creation Bien
+BeginP
+
+	Standard.Regler_creation(mode)
+
+	Cog_Regler_Creation(mode)
+
+EndP
+
+;*
+;*
+;*
+
+;*
 Procedure ZoomArret
 ;
 BeginP

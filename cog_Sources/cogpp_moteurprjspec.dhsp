@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7592 2015-02-13 16:59:11Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7664 2015-03-11 09:37:45Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -541,7 +541,7 @@ BeginP
 	iMOUV.Ref 	= CogRs_UT126.Ref
 	iMOUV.BlQte = 1
 	iMOUV.BlDt 	= iENT.PiDt
-	iMOUV.Pub	= CogRs_UT126.MoisMt(faMois)
+	iMOUV.Pub	= CogRs_UT126.MoisMt(faMois) + CogRs_UT126.FraisMoisMt(famois)
 	iMOUV.Projet= CogRs_UT126.Affaire
 
 	iMOUV.Pcod(1)= 4

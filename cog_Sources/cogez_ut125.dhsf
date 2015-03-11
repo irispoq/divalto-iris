@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150216153605      
+;>xwin4obj                              7.0       20150305100048      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="16/02/2015"
+ date_modification="05/03/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
@@ -488,7 +488,7 @@
    id=90
    wstyle="STD"
   [texte]
-   texte="Nombre de loyers à facturer"
+   texte="Nombre de facturations"
  [obj_texte]
   [presentation]
    position=124,152
@@ -508,11 +508,11 @@
  [obj_texte]
   [presentation]
    position=146,10
-   taille=9,64
+   taille=9,84
    id=104
    wstyle="STD"
   [texte]
-   texte="Nombre de loyers facturés"
+   texte="Nombre de facturations établies"
  [obj_texte]
   [presentation]
    position=157,10
@@ -520,7 +520,7 @@
    id=92
    wstyle="STD"
   [texte]
-   texte="Nombre de loyers restants"
+   texte="Nombre de facturations restantes"
  [obj_texte]
   [presentation]
    position=168,10
@@ -1188,7 +1188,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogez_ut125.dhsf 7617 2015-02-23 14:06:01Z admin $')
+SetModuleInfo('$Id: cogez_ut125.dhsf 7664 2015-03-11 09:37:45Z admin $')
 ;*
 ;*	  Traitement du zoom facturation loyer sur projets spec
 ;*

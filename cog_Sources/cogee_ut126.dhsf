@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150216153618      
+;>xwin4obj                              7.0       20150305152501      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="16/02/2015"
+ date_modification="05/03/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
- dernier_id=641
+ dernier_id=653
  dernier_id_page=22
 [defaut]
  [aide_page]
@@ -502,6 +502,258 @@
    [param_colonne]
     titre="Dotation Décembre"
     fl_aff=oui
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=653
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,1
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Janvier"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=652
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,2
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Février"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=651
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,3
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Mars"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=650
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,4
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Avril"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=649
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,5
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Mai"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=648
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,6
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Juin"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=647
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,7
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Juillet"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=646
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,8
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Août"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=645
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,9
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Septembre"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=644
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,10
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Octobre"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=643
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,11
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Novembre"
+    fl_aff=non
+    largeur_col=50
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,50
+    id=642
+    colonnes_saisie=16
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=cog_ut126,fraismoismt,cog_ut126,12
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [param_colonne]
+    titre="Frais Décembre"
+    fl_aff=non
     largeur_col=50
     wstyle="ENTETE_COLONNE"
  [tableau]
@@ -1018,7 +1270,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogee_ut126.dhsf 7617 2015-02-23 14:06:01Z admin $')
+SetModuleInfo('$Id: cogee_ut126.dhsf 7664 2015-03-11 09:37:45Z admin $')
 ;*
 ;*	  Traitement du zoom amortissements
 ;*

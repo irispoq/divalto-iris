@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20140428155807      
+;>xwin4obj                              7.0       20150306161746      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="28/04/2014"
+ date_modification="06/03/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
- dernier_id=1000036
+ dernier_id=1000039
  surcharge=oui
  date_modif_base="20130207143007"
  dernier_id_page=100001
@@ -29,6 +29,7 @@
  "gtrsdos.dhoq",,dossier,dossier,1024,1
  "gtrsdos.dhoq",,dossier,dossier_sel,1024,1
  "gtfdd.dhsd",,soc,soc,2800,0
+ "cogrs_dos.dhoq",,cogrs_soccomp,cogrs_soccomp,1024,1
 [onglet]
  [presentation]
   position=0,0
@@ -9654,12 +9655,20 @@
    texte="Numéro de flash pour validation des commandes fournisseurs"
  [obj_texte]
   [presentation]
-   position=112,10
+   position=105,10
    taille=9,145
    id=1000020
    wstyle="STD"
   [texte]
    texte="Référence article modèle (pour création automatique AXE)"
+ [obj_texte]
+  [presentation]
+   position=116,10
+   taille=9,156
+   id=1000037
+   wstyle="STD"
+  [texte]
+   texte="Référence pour facturation des frais financiers"
  [obj_texte]
   [presentation]
    position=149,18
@@ -9692,6 +9701,21 @@
    wstyle="STD"
   [texte]
    texte="Numéro de Flash pour le rapport"
+ [champ]
+  [presentation]
+   position=116,285
+   taille=9,188
+   id=1000039
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_soccomp,art_des,cogrs_soccomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
  [case_a_cocher]
   [presentation]
    position=21,10
@@ -9833,8 +9857,8 @@
    "zoom"
  [champ]
   [presentation]
-   position=111,167
-   taille=8,115
+   position=104,167
+   taille=9,115
    id=1000032
    colonnes_saisie=25
    wstyle="CHAMP_SAISI_COG"
@@ -9850,6 +9874,27 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Cog_RefModele_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=116,167
+   taille=9,115
+   id=1000038
+   colonnes_saisie=25
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,fraisfiref,cogrs_soccomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9000
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_FraisFiRef_1_Ap"
   [boutons]
    "zoom"
  [champ]
@@ -10473,23 +10518,39 @@
    [param_bouton]
     wnom=""
 [diva]
+
+;*
+;*
+;*
+
+;
 include "gttc000.dhsp"
 
+;
 Module	A5TM000.dhop
 Module	A5PM000.dhop
 Module	A5PMFIC.dhop
 Module "A5PMFLASH.dhop"
-								
-Public Record "gtfdd.dhsd" g7 g7
-Public Record "gtfdd.dhsd" socno socno
-Public Record "ddsys.dhsd" rowinfo zoomselection
-Public Record "gtfdd.dhsd" g7 g7bis
-Public Record "rcfebcdd.dhsd" d2 d2a
-Public Record "rcfebcdd.dhsd" d2 d2v
-Public Record "gtfdd.dhsd" t037 t037
+
+;
 Public RecordSql "gtrsdos.dhoq" dossier dossier
 Public RecordSql "gtrsdos.dhoq" dossier dossier_sel
+Public RecordSql "cogrs_dos.dhoq" cogrs_soccomp 		CogRs_SocComp
+
+;
+Public Record "gtfdd.dhsd" ART								
+Public Record "gtfdd.dhsd" g7 		g7
+Public Record "gtfdd.dhsd" socno 	socno
+Public Record "ddsys.dhsd" rowinfo 	zoomselection
+Public Record "gtfdd.dhsd" g7 		g7bis
+Public Record "rcfebcdd.dhsd" d2 	d2a
+Public Record "rcfebcdd.dhsd" d2 	d2v
+Public Record "gtfdd.dhsd" t037 		t037
 Public Record "gtfdd.dhsd" soc soc
+
+;*
+;*
+;*
 
 ;*
 Private Procedure Champ_Cog_ArtemisChW_1_Ap
@@ -10552,6 +10613,17 @@ Endp
 Private Procedure Champ_Cog_Regl_1_Ap
 Beginp
 	Lectab(6,dossier.cog_Regl,1106)
+Endp
+
+
+;*
+Private Procedure Champ_FraisFiRef_1_Ap
+;
+Beginp
+	CogRs_SocComp.ART_DES = ' '
+	If Controle_Article(cogrs_soccomp.FraisFiRef, 2100) = 0
+		CogRs_SocComp.ART_DES = ART.Des	
+	EndIf
 Endp
 [/diva]
 [diva_base]

@@ -1,0 +1,21 @@
+;*
+;*	  Constantes utilisées par les programmes liés au moteur de facturation specifique
+;*
+
+; Statut U GIE IRIS de la fiche projet
+Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
+Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer'
+Const		C_STATUT_PRJ_ARRETE 		= 'Arrêté'
+Const		C_STATUT_PRJ_REPORTE 	= 'Reporté'
+Const		C_STATUT_PRJ_ARCHIVE 	= 'Archivé'
+Const		C_STATUT_PRJ_TERMINE 	= 'Terminé'
+
+; Champs de T020 (OP)	
+Const		C_OP_IMMO	  			= 2
+Const		C_OP_NONIMMO 			= 1
+
+; Champs de T036 (PRODNAT)
+Const 	C_PRODNAT_PROJET		= 2
+Const		C_PRODNAT_INFRA		= 1
+Const 	C_PRODNAT_MATOS		= 1
+Const		C_PRODNAT_LOG			= 2
