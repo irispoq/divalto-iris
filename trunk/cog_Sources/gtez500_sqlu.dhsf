@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150223163516      
+;>xwin4obj                              7.0       20150305115335      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
- date_modification="23/02/2015"
+ date_modification="05/03/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
- dernier_id=1000188
+ dernier_id=1000192
  surcharge=oui
  date_modif_base="20131227150954"
  dernier_id_page=100007
@@ -4506,7 +4506,7 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=95,7
+   position=115,7
    taille=100,229
    id=1000038
    wstyle="GROUPE"
@@ -4515,14 +4515,14 @@
  [groupbox]
   [presentation]
    position=21,8
-   taille=70,228
+   taille=87,228
    id=1000039
    wstyle="GROUPE"
   [param_groupbox]
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=198,7
+   position=218,7
    taille=66,229
    id=1000040
    wstyle="GROUPE"
@@ -4530,7 +4530,23 @@
    couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=37,101
+   position=35,172
+   taille=9,26
+   id=1000189
+   wstyle="STD"
+  [texte]
+   texte="N° devis"
+ [obj_texte]
+  [presentation]
+   position=71,14
+   taille=9,65
+   id=1000191
+   wstyle="STD"
+  [texte]
+   texte="N° bon de commande CN"
+ [obj_texte]
+  [presentation]
+   position=82,14
    taille=9,63
    id=1000147
    wstyle="STD"
@@ -4538,7 +4554,7 @@
    texte="Taux journalier mensuel"
  [obj_texte]
   [presentation]
-   position=62,14
+   position=93,14
    taille=9,113
    id=1000041
    wstyle="STD"
@@ -4546,7 +4562,7 @@
    texte='Section analytique " Anael " (axe analytique 2)'
  [obj_texte]
   [presentation]
-   position=109,11
+   position=129,11
    taille=9,55
    id=1000042
    wstyle="STD"
@@ -4554,7 +4570,7 @@
    texte="Type de refacturation"
  [obj_texte]
   [presentation]
-   position=122,11
+   position=142,11
    taille=9,50
    id=1000043
    wstyle="STD"
@@ -4562,7 +4578,7 @@
    texte="Périodicité"
  [obj_texte]
   [presentation]
-   position=135,11
+   position=155,11
    taille=9,50
    id=1000044
    wstyle="STD"
@@ -4570,7 +4586,7 @@
    texte="Cotisation PDV"
  [obj_texte]
   [presentation]
-   position=150,11
+   position=170,11
    taille=9,50
    id=1000045
    wstyle="STD"
@@ -4578,7 +4594,7 @@
    texte="Direction cliente"
  [obj_texte]
   [presentation]
-   position=164,11
+   position=184,11
    taille=9,56
    id=1000046
    wstyle="STD"
@@ -4586,7 +4602,7 @@
    texte="Affectation budgétaire"
  [obj_texte]
   [presentation]
-   position=178,11
+   position=198,11
    taille=9,56
    id=1000047
    wstyle="STD"
@@ -4594,16 +4610,54 @@
    texte="Enveloppe budgétaire"
  [obj_texte]
   [presentation]
-   position=213,14
+   position=233,14
    taille=9,17
    noms="efface"
    id=1000048
    wstyle="STD"
   [texte]
    texte="Statut"
+ [champ]
+  [presentation]
+   position=35,198
+   taille=9,32
+   id=1000190
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,dvno,cogrs_prjcomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=37,14
+   position=36,14
+   taille=10,62
+   id=1000050
+   wstyle="CHAMP_SAISI_COG"
+  [description]
+   donnee=affaire,cog_prj_chapeau,affaire
+  [param_case]
+   texte="Projet chapeau"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=47,14
    taille=9,63
    id=1000049
    wstyle="CHAMP_SAISI_COG"
@@ -4623,10 +4677,50 @@
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Cog_Facture_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=57,14
+   taille=10,119
+   id=1000052
+   wstyle="CHAMP_SAISI_COG"
+  [description]
+   donnee=affaire,cog_impdetail,affaire
+  [param_case]
+   texte="Impression du détail sur la ou les factures"
+   cadrage=droite
+   valeur="2","1"
+   choix="cog_gtfdmc.dhfi","NONOUI"
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [info_bulle]
+  texte="Initialisation, sur les factures générées par le moteur de facturation, de l'impression du détail"
  [champ]
   [presentation]
-   position=37,166
-   taille=9,43
+   position=71,79
+   taille=9,57
+   id=1000192
+   colonnes_saisie=15
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,cncdno,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=82,79
+   taille=9,57
    id=1000148
    colonnes_saisie=13
    wstyle="CHAMP_SAISI"
@@ -4641,28 +4735,9 @@
    f7=135
    ctrl_f6=10300
    shift_f6=10000
- [case_a_cocher]
-  [presentation]
-   position=48,14
-   taille=10,62
-   id=1000050
-   wstyle="CHAMP_SAISI_COG"
-  [description]
-   donnee=affaire,cog_prj_chapeau,affaire
-  [param_case]
-   texte="Projet chapeau"
-   cadrage=droite
-   valeur="2","1"
-   choix="gtfdmc.dhfi",""
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
  [champ]
   [presentation]
-   position=62,129
+   position=93,129
    taille=9,33
    id=1000051
    colonnes_saisie=8
@@ -4686,30 +4761,9 @@
   texte='Section analytique " Anael " (axe analytique 2)'
   [boutons]
    "zoom"
- [case_a_cocher]
-  [presentation]
-   position=76,14
-   taille=10,119
-   id=1000052
-   wstyle="CHAMP_SAISI_COG"
-  [description]
-   donnee=affaire,cog_impdetail,affaire
-  [param_case]
-   texte="Impression du détail sur la ou les factures"
-   cadrage=droite
-   valeur="2","1"
-   choix="cog_gtfdmc.dhfi","NONOUI"
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
-  [info_bulle]
-  texte="Initialisation, sur les factures générées par le moteur de facturation, de l'impression du détail"
  [champ]
   [presentation]
-   position=62,165
+   position=93,165
    taille=9,66
    id=1000053
    wstyle="CHAMP_AFF"
@@ -4728,7 +4782,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=109,70
+   position=129,70
    taille=9,40
    cadrage=gauche
    id=1000054
@@ -4754,7 +4808,7 @@
    "zoom"
  [multi_choix]
   [presentation]
-   position=122,70
+   position=142,70
    taille=9,40
    id=1000055
    wstyle="CHAMP_SAISI_COG"
@@ -4772,7 +4826,7 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=136,70
+   position=156,70
    taille=9,40
    id=1000056
    colonnes_saisie=8
@@ -4798,7 +4852,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=150,70
+   position=170,70
    taille=9,40
    cadrage=gauche
    id=1000057
@@ -4822,7 +4876,7 @@
    diva_apres="Champ_Cog_DirCliente_1_Ap"
  [champ]
   [presentation]
-   position=164,70
+   position=184,70
    taille=9,40
    cadrage=gauche
    id=1000058
@@ -4846,7 +4900,7 @@
    diva_apres="Champ_Cog_AffectationBudgetaire_1_Ap"
  [champ]
   [presentation]
-   position=178,70
+   position=198,70
    taille=9,40
    id=1000059
    colonnes_saisie=5
@@ -4868,7 +4922,7 @@
    diva_apres="Champ_Cog_Id_Enveloppe_1_Ap"
  [champ]
   [presentation]
-   position=213,32
+   position=233,32
    taille=9,79
    noms="efface"
    id=1000060
@@ -4887,7 +4941,7 @@
    shift_f6=10000
  [multi_choix]
   [presentation]
-   position=212,115
+   position=232,115
    taille=9,59
    noms="efface"
    id=1000061
@@ -4911,7 +4965,7 @@
    diva_apres="Champ_Cog_Prj_Status_1_Ap"
  [case_a_cocher]
   [presentation]
-   position=231,14
+   position=251,14
    taille=12,124
    id=1000062
    wstyle="CHAMP_SAISI_COG"
@@ -4977,7 +5031,7 @@
    id=1000119
    wstyle="GROUPE"
   [param_groupbox]
-   texte="Prestations"
+   texte="Charges immobilisables"
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
@@ -6728,6 +6782,7 @@
 ;*		YLEF		P205A						02/2015	Onglet moteur de factu spec
 
 Include 	"Gttcz00.Dhsp"
+Include	"COGTC_MOTEURPRJSPEC.DHSP"
 ;
 Module	"GRPMFIC.DHOP"
 Module	"COGTM_MOTEURPRJSPEC.DHOP"
@@ -6799,13 +6854,6 @@ Public Record	"ccfdd.dhsd"	C5		C5_DEV_01
 1	cPageGantt	2,0	= 25
 1	statut_prec	25
 
-;
-Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
-Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer'
-Const		C_STATUT_PRJ_ARRETE 		= 'Arrêté'
-Const		C_STATUT_PRJ_REPORTE 	= 'Reporté'
-Const		C_STATUT_PRJ_ARCHIVE 	= 'Archivé'
-Const		C_STATUT_PRJ_TERMINE 	= 'Terminé'
 
 ;*
 ;*
@@ -7171,9 +7219,7 @@ Beginp
 	If Harmony.Datamodif
 
 		Switch statut_prec 
-			Case C_STATUT_PRJ_AFACTURER 
-
-			Case C_stat
+		
 
 		EndSwitch
 

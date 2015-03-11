@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7617 2015-02-23 14:06:01Z admin $')
+SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7664 2015-03-11 09:37:45Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Module de fonctions communes à la facturation des projets spécifiques UT125
@@ -22,7 +22,8 @@ SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7617 2015-02-23 14:06:01Z admin $')
 ;*
 
 ;
-Include	gttcz00.dhsp						;déclarations communes
+Include	"gttcz00.dhsp"						;déclarations communes
+Include	"COGTC_MOTEURPRJSPEC.DHSP"
 
 ;
 Module	"COGTM_000.DHOP"
@@ -31,8 +32,10 @@ Module	"COGTM_000.DHOP"
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			CogRs_UT125_RESA
 
 ;
-Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
-Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer'
+Public 	Record		"GTFDD.DHSD"				ART
+Public 	Record		"GTFDD.DHSD"				T020
+Public 	Record		"GTFDD.DHSD"				T036
+
 
 ;*
 ;*	 Réservations
@@ -295,11 +298,13 @@ EndF
 Public Procedure Cog_UT126_GenererEcheancier(wUT125)
 ;	La RESA sur COG_UT125 doit être gérée avant appel à cette procédure
 ;  Suppression de l'échéancier COG_UT126 s'il existe puis régénération
-RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126		wRs_UT126
-Record		"COGFDD.DHSD"			COG_UT125		wUT125
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126			wRs_UT126
+RecordSQL	"COGRS_TAB.DHOQ"		CogRs_TauxFi		wRs_TauxFi
+RecordSQL	"COGRS_TAB.DHOQ"		CogRs_TauxStruc	wRs_TauxSt
+Record		"COGFDD.DHSD"			COG_UT125			wUT125
 1		wLoyerMt		13,D0			; montant loyer
 1		wLoyerMMt	13,D0			; montant loyer mensuel
-1		wSolde		13,D0
+1		wSolde		13,D0		
 1		wFaDDt		D				; date de première facture
 1		wFaFDt		D
 1		wPrevFaDt	D				; date facture précédente
@@ -322,12 +327,25 @@ BeginP
 	; Suppression échéancier existant
 	Cog_UT126_DeleteEcheancier(wUT125)
 
+	;*
 	; Nouveau calcul
+	;*
 	wFacturable = Cog_Affaire_Facturable(wUT125.Affaire)
 	wFaDDt = Condition(Hday(wUT125.Cog_Date_Debut) = 1,  wUT125.Cog_Date_Debut, HDate(wUT125.Cog_Date_Debut, 'p', +1))
 	Cog_CalculerDateFinFacturation(wFaDDt, wUT125.Cog_LoyNb, wUT125.Cog_Period, wFaFDt)
 	wAnD = HYear(wFaDDt)
 	wAnF = HYear(wUT125.Cog_Date_Fin)
+
+	; chargement tables comp --> les tests d'existence sont réalisés à la saisie
+	If ART.Ref <> wUT125.Ref
+		Seek_ART(wUT125.Ref)
+	EndIf
+	If T020.Op <> wUT125.Op
+		Lectab(20, wUT125.Op)
+	EndIf
+	If T036.ProdNat <> ART.ProdNat  
+		Lectab(36, ART.ProdNat)
+	EndIf
 
 	Switch2 wUT125.Cog_Period
 		Case 1
@@ -340,6 +358,8 @@ BeginP
 		 	wStepMois = 6
 		Case 5
 			wStepMois = 12
+		Default
+			wStepMois = 1
 	EndSwitch
 
 	wLoyerMt = Condition(wUT125.Cog_LoyNb > 0, wUT125.Cog_Montant / wUT125.Cog_LoyNb, 0)
@@ -379,13 +399,33 @@ BeginP
 			; cumul dotations	annuelles
 			wRs_UT126.AnMt += wRs_UT126.MoisMt(j)
 
+			; Frais financiers de construction ou frais de structure
+			wRs_UT126.FraisMoisMt(j) = 0
+			Switch T020.Cog_MotPrjFlux & T036.Cog_MotFacTyp
+				Case C_OP_IMMO & C_PRODNAT_PROJET  	; Frais financiers
+					wRs_TauxFi.Init()
+					wRs_TauxFi.Where.En_Vigueur(wUT125.Cog_Date_Debut)
+					If wRs_TauxFi.Select() > 0
+						wRs_UT126.FraisMoisMt(j) = (wRs_UT126.MoisMt(j)/2) * (wRs_TauxFi.Cog_Taux / 100)	* wUT125.Cog_LoyNb
+					EndIf
+
+				Case C_OP_IMMO & C_PRODNAT_INFRA		; Frais de structure
+					wRs_TauxSt.Init()
+					wRs_TauxSt.Where.En_Vigueur(wPrevFaDt)
+					If wRs_TauxSt.Select() > 0
+						wRs_UT126.FraisMoisMt(j) = wRs_TauxSt.Cog_Taux * (wRs_UT126.MoisMt(j) / 100)
+					EndIf
+
+
+			EndSwitch
+
 		Next
 
 		; init des ce
 		wRs_UT126.Ce1 = '8'	 ; par défaut périmé
 		For j = 1 to 12
 
-			wRs_UT126.CeFaTb(j) = '9' ; par défault non concerné par la facturation
+			wRs_UT126.CeFaTb(j) = '9' ; par défaut non concerné par la facturation
 			If wRs_UT126.MoisMt(j) > 0
 
 				wRs_UT126.Ce1 = Condition(wFacturable=TRUE, '1', '6') ; au moins un loyer facturable --> ut126 est actif ou en attente que les conditions de facturation soient remplies

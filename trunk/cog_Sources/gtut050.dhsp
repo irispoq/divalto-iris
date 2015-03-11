@@ -1,0 +1,47 @@
+
+; >xdiva
+;*
+;*    Suppression de dossier                                               gtpp899
+;*
+
+;*    Log    version   nPmodif      date     modifications
+;*
+;*    Lm       5.1                  09.2001  version initiale en diva
+;*		YLEF		P205						03/2015	Suppression complément dossier
+
+;*
+;*      Déclarations
+;*
+
+SetModuleInfo('$Id')
+
+ OverWrite gttt050.dhop
+
+;
+Module		"GTTM000.dhop"																					
+
+;
+Public RecordSQL	"COGRS_DOS.DHOQ"	CogRs_SocComp
+
+;
+Public		Record	GTFDD.dhsd		XQ				G3XQ												; Sélections
+
+;*
+;*   Séquences appelées par gtpp199.dhop
+;*
+
+
+;* 
+Procedure GTFDOS_TRAITEMENT_AP
+;
+BeginP										
+
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(G3XQ.DosD)
+	If CogRs_SocComp.Select() > 0
+		CogRs_SocComp.Delete()
+	EndIf
+
+	Standard.GTFDOS_TRAITEMENT_AP
+
+EndP

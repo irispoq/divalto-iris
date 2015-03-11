@@ -1,0 +1,24 @@
+<DictionarySql DefaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_dosu.dhoq" ModuleInfo='$Id: cogrs_dos.dhsq 7664 2015-03-11 09:37:45Z admin $'>
+;*
+;*		Dictionnaire des définitions des RecordSQL du COGGTF_DOS
+;*
+
+;*
+;*		Article						ART
+;*
+
+<RecordSql Name=CogRs_SocComp Comment='Complément dossier'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	COG_SOC.*,
+	ART.DES		AS	ART_DES
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_SOC
+<LEFTJOIN>
+	GTFDD.DHSD	ART
+	ON ART.DOS = COG_SOC.DOS AND ART.REF = COG_SOC.FRAISFIREF
+<WHERE>
+	Case PK(int dos)
+		COG_SOC.DOS = dos
+	
+

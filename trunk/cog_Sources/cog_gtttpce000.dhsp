@@ -12,20 +12,15 @@ OverWrittenBy	"COG_GTUTPCE000.dhop"
 Include	'GTTCZ00.dhsp'
 Include	'GTTCPCE000.dhsp'
 
-;Module	'CCTM000.dhop'
 Module 	'CCTM000.DHOP'
 Module	'CCPMFIC.DHOP'
-;Module	'GTPMPCE.dhop'
 Module	'GTPMPCE000.dhop'
-;Module	'GTPMPCEAFFICHAGE.dhop'
-;Module 	'GTPMFICSQL.dhop'
-;Module	'GTPMSTOC.dhop'
 Module	'GTPPPCE000.dhop'
 Module	'GTTMPCE.dhop'
-;Module 	'RCTM000.dhop'
 Module 	'A5PMFIC.dhop'
 Module 	'A5PMFLASH.dhop'
 Module	'COGTM_VALID_CDE.DHOP'
+Module	'COG_CCTZ701_SQL.DHOP'
 
 ; Fichiers
 			Hfile	a5dd.dhsd	A5FFLASH				A5FFLASH
@@ -242,6 +237,7 @@ Record		"GTFDD.dhsd"			MVTL				wMVTL
 1				wErr						1,0		= FALSE
 1				wQte						8,0		= 1
 1				wCout						16,D0	
+1				wEssai					2,0		= 0
 BeginF
 
 	wRs_IMMO.Init()
@@ -327,43 +323,44 @@ BeginF
 	wRs_IMMO.Cog_QteTot	= G1T1.BlQte
 
 	; compteur
-	wRs_CPT.Init()
-	wRs_CPT.Where.Max_Immo()
-	If wRs_CPT.Select() > 0
-		wRs_IMMO.Immo = wRs_CPT.Immo 
-	Else
-	  	wRs_IMMO.Immo = 0
-	EndIf
+	wResaOK 	= FALSE
+	wErr	  	= FALSE
+	wEssai	= 0
 
-	wResaOK = FALSE
-	Do While not wResaOK	AND not wErr
-		wRs_IMMO.Immo++
-		wRs_CPT.Where.Zoom_PK(wRs_IMMO.Immo, wRs_IMMO.ImmoComp)
-
-		If wRs_CPT.Select() = 0 
-			If wRs_IMMO.FShare([ Formater_Res("C3I1") MZ.Dos wRs_IMMO.Immo ], 'R') = 0
-				wResaOK = TRUE
-			EndIf
+	Do While not wResaOK AND not wErr
+		
+		If wEssai = 20
+			MessageBox("Impossible d'attribuer un numéro de fiche de bien.","Erreur", MB_ICONERROR)
+		 	wErr = TRUE
 		EndIf
 
-		If not wResaOK AND wRs_IMMO.Immo = 99999999
-			If MessageBox("Le compteur des fiches bien est saturé.|Reprendre la numérotation à 1? Le premier numéro libre sera attribué.","Erreur", \
-				MB_ICONERROR+MB_YESNO) = IDYES
-				wRs_IMMO.Immo = 0
-			Else
-				wErr = TRUE
-			EndIf
-		EndIF
+		wRs_IMMO.Immo = Cog_Next_ImmoNo(wMsgErr=FALSE, wReinit=TRUE)
 
+		If wRs_IMMO.Immo = 0
+			wEssai++
+			
+		ElsIf wRs_IMMO.FShare([ Formater_Res("C3I1") MZ.Dos wRs_IMMO.Immo ], 'R') = 0
+			wRs_CPT.Init()
+			wRs_CPT.Where.Zoom_PK(wRs_IMMO.Immo, wRs_IMMO.ImmoComp)
+			If wRs_CPT.Select() = 0 										 	; retest du select = 0 après la resa pour etre certain de la disponibilité du n°
+				wResaOK = TRUE
+			Else
+				wRs_IMMO.FShare([ Formater_Res("C3I1") MZ.Dos wRs_IMMO.Immo ], 'L')
+			EndIf
+		Else
+			wEssai++
+		EndIf
 	WEnd
 
-	wRs_IMMO.Insert()
-	wRs_IMMO.FShare([ Formater_Res("C3I1") MZ.Dos wRs_IMMO.Immo ], 'L')
-	Trace_SOX_SQL(wRs_IMMO, MZ.Applic, 1)
+	If wResaOK
+		wRs_IMMO.Insert()
+		wRs_IMMO.FShare([ Formater_Res("C3I1") MZ.Dos wRs_IMMO.Immo ], 'L')
+		Trace_SOX_SQL(wRs_IMMO, MZ.Applic, 1)
+	
+		ListInsert(lId_ListImmo, wRs_IMMO.Immo)
+	EndIf
 
-	ListInsert(lId_ListImmo, wRs_IMMO.Immo)
-
-	FReturn(1)
+	FReturn(Condition(wErr=TRUE, 0, 1))
 
 EndF
 
@@ -553,6 +550,43 @@ BeginP
 	Lib_ENT('F', wPicod, wPino)	 ; Libération Pièce
 
 EndP
+
+;*
+Public Function int Cog_PrjAp_Maj_DvNo(wPiNo, wPrj, wMsgErr)
+; Met à jour le champ DVno de wPrj avec la valeur de wPiNo
+;	0 --> OK
+RecordSQL 	"COGRS_PROJ.DHOQ"		CogRs_PrjComp			wRs_PrjComp
+1		wPiNo		>gtfdd.dhsd		PiNo
+1		wPrj		>gtfdd.dhsd		Projet
+1		wMsgErr	1,0	= FALSE				; affichage de MSB
+BeginF
+
+	wRs_PrjComp.Init()
+	wRs_PrjComp.Where.PK(ENT.Projet)
+	If wRs_PrjComp.Select() > 0 
+
+		If Res_PrjAp(wPrj, err=FALSE) = 0
+			wRs_PrjComp.DvNo = wPiNo
+			wRs_PrjComp.Update()
+			Lib_PrjAp(wPrj)
+		Else
+			If wMsgErr
+				MessageBox("Echec lors de la mise à jour de la fiche projet: fiche réservée", "Alerte", MB_ICONINFORMATION)
+			EndIf
+			FReturn(1)
+		EndIf
+
+	Else
+		If wMsgErr
+			MessageBox("Echec lors de la mise à jour de la fiche projet: la fiche complémentaire n'a pas été créée."\
+						& "|(Présence d'informations dans l'onglet PROJET SPEC)", "Alerte", MB_ICONINFORMATION)
+			FReturn(1)
+		EndIf
+	EndIf
+		
+	FReturn(0)
+
+EndF
 
 ;*
 Public Function char Cog_Controle_Responsable
@@ -1278,6 +1312,9 @@ BeginP
 					A5_Flash_envoi(Soc.Cog_Flash_Devis_Retour,MZ.ETB,' ',3)
 				Endif
 			Endif
+			If ENT.Projet <> ' '
+				Cog_PrjAp_Maj_DvNo(ENT.PiNo, ENT.Projet, wMsgErr=TRUE)
+			EndIf
 
 		Case 'C2'	 ; COMMANDES CLIENTS	  (En saisie et en validation)
 			Lib_ENT(MZ.TICOD, MZ.PICOD, ENT.PINO)

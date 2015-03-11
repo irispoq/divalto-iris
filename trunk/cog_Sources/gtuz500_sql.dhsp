@@ -17,6 +17,7 @@ OverWrite gttz500_sql.dhop
 
 ;
 include "GTTCZ00.dhsp"			;déclarations communes
+Include "COGTC_MOTEURPRJSPEC.DHSP"
 
 ;
 Module	GRPMFIC.dhop
@@ -75,9 +76,6 @@ define IdMenuZoomBis		= G3XT.IDBARRE(3)
 
 1	g_Dossier	>GTFDD.DHSD	Dos
 
-;
-Const 	C_STATUT_PRJ_DEMARRE 	= 'Démarré'	 			; stocké de cette manière dans la base de données...
-Const		C_STATUT_PRJ_AFACTURER 	= 'A facturer'
 
 ;
 include "CogGt_Controle_Fichier.dhsp"
@@ -238,7 +236,9 @@ BeginF
 		wRs_125.Where.Equal_ImmoTyp(1)
 		wRs_125.Where.AddCondition("Equal_ImmoTyp")
 
-		; Charges non immo --> date de début réelle des travaux obligatoire
+		;*
+		; Charges NON IMMO --> date de début réelle des travaux obligatoire
+		;*
 		If wRs_125.GetCount() > 0 AND cogrs_prjcomp.TravReelDDt = ' '
 			wtxtErr &= "|La date de début des travaux réelle n'est pas renseignée (présence UT125 type non immo)."
 			werr = TRUE

@@ -74,7 +74,7 @@ Public Record COGFDD.dhsd	COG_T000
 	Case SupEgal_Date(date dt)
 		COG_T002.Cog_TauxDt >= dt
 	Case En_Vigueur(date dt)
-		COG_T002.Cog_TauxDt <= dt
+		COG_T002.Cog_TauxDt = (SELECT MAX(COG_T002.Cog_TauxDt) FROM COG_T002 WHERE COG_T002.Cog_TauxDt <= dt)
 <ORDERBY>
 	Case Par_Date		"Par date"
 		COG_T002.Cog_TauxDt DESC,
@@ -83,3 +83,37 @@ Public Record COGFDD.dhsd	COG_T000
 		COG_T002.Lib,
 		COG_T002.Cog_TauxDt,
 		COG_T002.Cog_Taux
+
+
+;*
+;* 		Taux financiers
+;*
+
+<RecordSql Name=CogRs_TauxStruc Comment='Table Taux de structure' ZoomOptimize=Yes>
+Public Record A5DD.dhsd		MZ
+Public Record COGFDD.dhsd	COG_T000
+<SELECT>
+	COG_T003.*
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_T003 
+<WHERE>
+	( COG_T003.Dos = CASE WHEN COG_T000.TabTyp(3) = 2 THEN 999 ELSE MZ.Dos END)
+	Case Like_Lib(char Lib)
+		COG_T003.Lib LIKE Lib		
+	Case PK(date dt)
+		COG_T003.Cog_TauxDt = dt
+	Case Exists(date dt)
+		COG_T003.Cog_TauxDt = dt
+	Case SupEgal_Date(date dt)
+		COG_T003.Cog_TauxDt >= dt
+	Case En_Vigueur(date dt)
+		COG_T003.Cog_TauxDt = (SELECT MAX(COG_T003.Cog_TauxDt) FROM COG_T003 WHERE COG_T003.Cog_TauxDt <= dt)
+
+<ORDERBY>
+	Case Par_Date		"Par date"
+		COG_T003.Cog_TauxDt DESC,
+		COG_T003.Cog_Taux
+	Case Par_Libelle	"Par Libellé"
+		COG_T003.Lib,
+		COG_T003.Cog_TauxDt,
+		COG_T003.Cog_Taux

@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150305101438      
+;>xwin4obj                              7.0       20150305101258      
 [masque]
- libelle="table paramètres"
+ libelle="table code test"
  utilisateur="UGIE"
  date_modification="05/03/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
- dernier_id=44
+ dernier_id=74
  dernier_id_page=22
 [defaut]
  [aide_page]
@@ -17,7 +17,8 @@
   shift_f6=10000
 [enregistrements]
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "cogfdd.dhsd",,cog_t000,cog_t000,350,0
+ "cogrs_tab.dhoq",,cogrs_tauxstruc,cogrs_tauxstruc,1024,1
+ "cogfdd.dhsd",,cog_t003,cog_t003_sel,300,0
 [onglet]
  [presentation]
   position=0,0
@@ -59,11 +60,36 @@
  fond="ZOOM"
  nature=double
  type=fenetre
+ titre="Date d'application"
  nb_lig=3
  nb_col=50
  offset_lig=8
  offset_col=20
  ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=8,22
+   taille=9,50
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Date d'application"
+ [champ]
+  [presentation]
+   position=8,73
+   taille=9,33
+   id=61
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_tauxstruc,cog_tauxdt,cogrs_tauxstruc
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
 [page]
  numero=3
  fond="STD"
@@ -75,10 +101,20 @@
  attache_lgx=oui
  attache_lgy=oui
  ident_unique=12
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=41,199
+   attache_lgx=oui
+   id=27
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="ZOOM"
  [tableau]
   [presentation]
-   position=13,0
-   taille=212,200
+   position=42,0
+   taille=183,200
    attache_lgx=oui
    attache_lgy=oui
    id=31
@@ -97,65 +133,144 @@
    donnee=rowinfo,rowinfo,zoomselection
    minmaj=majuscules
    saisie=non
-  [case_a_cocher_tableau]
+  [multi_choix_tableau]
    [presentation]
-    position=30,17
-    taille=9,54
-    id=40
-    wstyle="STD"
-   [description]
-    donnee=cog_t000,tabtyp,cog_t000,2
-   [param_saisie]
-    esp_si_zero=oui
-   [param_case]
-    texte="Table Test"
-    cadrage=droite
-    valeur="2","1"
-    choix="gtfdmc.dhfi",""
-   [touches]
-    f7=135
-    shift_f6=10000
-   [traitements]
-    microbol_click=8002
-   [param_colonne]
-    titre="Taux Financiers"
-    largeur_col=54
-    wstyle="ENTETE_COLONNE"
-  [case_a_cocher_tableau]
-   [presentation]
-    position=42,17
-    taille=9,57
+    position=0,0
+    taille=16,28
     id=44
-    wstyle="STD"
+    wstyle="TABLEAU_SAISI"
    [description]
-    donnee=cog_t000,tabtyp,cog_t000,3
+    donnee=cogrs_tauxstruc,cenote,cogrs_tauxstruc
+    saisie=non
    [param_saisie]
     esp_si_zero=oui
-   [param_case]
-    texte="Taux de structure"
-    cadrage=droite
-    valeur="2","1"
-    choix="gtfdmc.dhfi",""
+   [param_multi]
+    choix="gtfdmc.dhfi","CENOTE_1"
+    obligatoire=non
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Présence Note"
+   [param_colonne]
+    titre="#tblnote"
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=0,0
+    taille=16,28
+    id=45
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cogrs_tauxstruc,cejoint,cogrs_tauxstruc
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CEJOINT"
+    obligatoire=non
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Présence Fichier Joint"
+   [param_colonne]
+    titre="#tblficjoin"
+    largeur_col=13
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=27,61
+    taille=9,32
+    id=70
+    colonnes_saisie=10
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_tauxstruc,cog_tauxdt,cogrs_tauxstruc
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Date d'application"
+   [param_colonne]
+    titre="Date"
+    largeur_col=32
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
+    taille=7,142
+    id=46
+    colonnes_saisie=40
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_tauxstruc,lib,cogrs_tauxstruc
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="Libellé"
+    largeur_col=107
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=58,61
+    taille=9,22
+    id=68
+    colonnes_saisie=6
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_tauxstruc,cog_taux,cogrs_tauxstruc
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
    [touches]
     f7=135
     shift_f6=10000
    [traitements]
     microbol_click=8002
+   [info_bulle]
+   texte="Taux"
    [param_colonne]
-    titre="Taux de structure"
-    fl_aff=non
-    largeur_col=57
+    titre="Taux"
+    largeur_col=26
     wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
-   position=0,0
-   taille=13,200
-   attache_lgx=oui
-   cadrage=centre
-   id=41
-   wstyle="TITRE_GROUPE"
+   position=20,8
+   taille=9,15
+   id=58
+   wstyle="STD"
   [texte]
-   texte="TABLES COMMUNES"
+   texte="Libellé"
+ [champ]
+  [presentation]
+   position=20,38
+   taille=9,144
+   id=60
+   colonnes_saisie=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_t003,lib,cog_t003_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
 [page]
  numero=4
  fond="STD"
@@ -236,39 +351,86 @@
  [onglet_page]
   [param_onglet_page]
    nom="FICHE"
-   libelle="TABLES COMMUNES"
+   libelle="DEFINITION"
    couleur_fond="STD"
- [case_a_cocher]
+ [obj_texte]
   [presentation]
-   position=30,17
-   taille=9,54
-   id=38
+   position=27,13
+   taille=9,43
+   id=65
    wstyle="STD"
+  [texte]
+   texte="Date d'application"
+ [obj_texte]
+  [presentation]
+   position=47,13
+   taille=9,15
+   id=48
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=58,13
+   taille=9,22
+   id=63
+   wstyle="STD"
+  [texte]
+   texte="Taux"
+ [obj_texte]
+  [presentation]
+   position=58,85
+   taille=9,22
+   id=71
+   wstyle="STD"
+  [texte]
+   texte="%"
+ [champ]
+  [presentation]
+   position=27,61
+   taille=9,32
+   id=66
+   colonnes_saisie=10
+   wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=cog_t000,tabtyp,cog_t000,2
-  [param_case]
-   texte="Taux Financiers"
-   cadrage=droite
-   valeur="2","1"
-   choix="gtfdmc.dhfi",""
+   donnee=cogrs_tauxstruc,cog_tauxdt,cogrs_tauxstruc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
   [touches]
    f7=135
    shift_f6=10000
+ [champ]
+  [presentation]
+   position=47,61
+   taille=9,144
+   id=50
+   colonnes_saisie=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_tauxstruc,lib,cogrs_tauxstruc
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
   [traitements]
    microbol_click=8002
- [case_a_cocher]
+ [champ]
   [presentation]
-   position=42,17
-   taille=9,57
-   id=42
-   wstyle="STD"
+   position=58,61
+   taille=9,22
+   id=64
+   colonnes_saisie=6
+   wstyle="CHAMP_SAISI"
   [description]
-   donnee=cog_t000,tabtyp,cog_t000,3
-  [param_case]
-   texte="Taux de structure"
-   cadrage=droite
-   valeur="2","1"
-   choix="gtfdmc.dhfi",""
+   donnee=cogrs_tauxstruc,cog_taux,cogrs_tauxstruc
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
   [touches]
    f7=135
    shift_f6=10000
@@ -341,6 +503,66 @@
    wstyle="STD"
   [texte]
    texte="Le"
+ [champ]
+  [presentation]
+   position=42,33
+   taille=9,74
+   id=51
+   colonnes_saisie=20
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_tauxstruc,usercr,cogrs_tauxstruc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=42,170
+   taille=9,74
+   id=52
+   colonnes_saisie=20
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_tauxstruc,usermo,cogrs_tauxstruc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=52,33
+   taille=9,56
+   id=53
+   colonnes_saisie=19
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_tauxstruc,usercrdh,cogrs_tauxstruc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=52,170
+   taille=9,56
+   id=54
+   colonnes_saisie=19
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_tauxstruc,usermodh,cogrs_tauxstruc
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
 [ressources]
  [toolbar]
   ident="ZOOM"
@@ -390,6 +612,14 @@
     wid_ressource="SEPARATEUR_1"
   [item]
    [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#ctrl_insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
     wnom="CREATION"
     wid_ressource="CREATION"
     wtrait_chaine="#insert"
@@ -403,11 +633,38 @@
    [info_bulle]
    texte="Modifier <F4>"
   [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
    type=sep
    dessin=sep
    [param_bouton]
     wnom=""
     wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   [param_bouton]
+    wnom="FICJOINT"
+    wid_ressource="JOINT"
+    wtrait_chaine="#ctrl_f6"
+   [info_bulle]
+   texte="Fichiers joints <Ctrl+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
   [item]
    [param_bouton]
     wnom="ZOOM"
@@ -479,6 +736,27 @@
   ident="ZOOMCREATION"
   [item]
    [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
     wnom="ABANDON"
     wid_ressource="ABANDON"
     wtrait_chaine="#escape"
@@ -504,11 +782,18 @@
     wnom=""
 [diva]
 
-SetModuleInfo('$Id: cogez_t000.dhsf 7664 2015-03-11 09:37:45Z admin $')
+SetModuleInfo('$Id: cogez_t003.dhsf 7664 2015-03-11 09:37:45Z admin $')
 
+;*
+;*
+;*
 
+;
+Public RecordSql "cogrs_tab.dhoq" cogrs_tauxstruc cogrs_tauxstruc
+
+;
 Public Record "ddsys.dhsd" rowinfo zoomselection
-Public Record "cogfdd.dhsd" cog_t000 cog_t000
+Public Record "cogfdd.dhsd" cog_t003 cog_t003_sel
 [/diva]
 [diva_base]
 [/diva]

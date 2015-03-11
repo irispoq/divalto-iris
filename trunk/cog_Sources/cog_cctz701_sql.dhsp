@@ -6,7 +6,7 @@ SetModuleInfo('$Id$')
 
 ;*		log	 version	  n°modif		date		modifications	
 ;*		YLEF		P205A						10/2014	Appel de l'interrogation tiers
-;*
+;*												03/2015	Cog_Regler_creation --> utilisation d'un compteur dossier
 
 OverWrittenBy	"cog_ccuz701_sql.dhop"
 
@@ -28,6 +28,7 @@ Module	"GTPMFIC.DHOP"
 
 ; record SQL
 public	recordSQL	'CCRSIMMO.dhoq'		IMMO			IMMOBILISATION
+Public	RecordSQL	"CCRSDOS.DHOQ"			DOSIMMO
 
 ; enregistrements
 public	record		A5DD.dhsd		M7						; description d'un masque d'impression
@@ -49,6 +50,74 @@ public	record		CCFDD.dhsd		XDecoupage			; work pour découpage champ
 ;*
 ;*
 ;*
+
+;*
+Public function int Cog_Next_ImmoNo(wMsgErr, wReinit)
+; Delivre le prochain numéro immo disponible
+; 0 --> Compteur saturé
+RecordSQL	"COG_CCRSIMMO.DHOQ"	CogRs_IMMO		wRs_I1
+1		wCpt	>ccfdd.dhsd	Immo
+1		wMsgErr				1,0	= FALSE
+1		wReinit				1,0	= FALSE		; Reinitialiser à 1 si fin du compteur atteinte
+1		wHmp					S
+1		wFin					1,0	= FALSE
+BeginF
+
+	; Chargement dossier IMMO (CD)
+	If DOSIMMO.Dos <> MZ.Dos
+		DOSIMMO.Init()
+		DOSIMMO.Where.Zoom_PK(MZ.Dos)
+		If DOSIMMO.Select() = 0
+			MessageBox("Dossier immo " & MZ.Dos & " non trouvé.", "Alerte", MB_ICONEXCLAMATION)
+			ProgramExit
+		EndIf
+	EndIf
+
+	;
+	If DOSIMMO.FShare(['C3CD' MZ.Dos], 'R') = 0
+
+		DOSIMMO.Immo = Condition(DOSIMMO.Immo > 0, DOSIMMO.Immo, 1)
+		Do While not wFin
+
+			wRs_I1.Where.Exists(DOSIMMO.Immo, 0)
+
+			; l'enregistrement existe	
+			If wRs_I1.Exists() = 1				
+				If DOSIMMO.Immo = 99999999
+					If wReinit
+						DOSIMMO.Immo = 1
+						wReinit=FALSE	
+					Else
+						wFin = TRUE
+						If wMsgErr
+							MessageBox("Tous les numéros de fiche de bien ont été utilisés.", "Erreur", MB_ICONERROR)
+						EndIf
+					EndIf
+				Else
+					DOSIMMO.Immo++
+				EndIf
+
+			; clé disponible
+			Else
+				wCpt = DOSIMMO.Immo
+				wFin = TRUE
+			EndIf
+
+		WEnd
+
+		DOSIMMO.Update()
+		DOSIMMO.FShare(['C3CD' MZ.Dos], 'L')
+
+	Else
+		If wMsgErr
+			DOSIMMO.ShareLastError(wHmp)
+			MessageBox("Dossier immobilisation réservé.|Numérotation automatique impossible.", Left(wHmp), MB_ICONINFORMATION)
+		EndIf
+	EndIf
+
+	FReturn(wCpt)
+
+EndF
 
 ;*
 Procedure Cog_Maj_Menu_Boutons
@@ -110,6 +179,31 @@ BeginP
 	Switch Harmony.Key
 		Case Harmony.Dataarret = 1000
 			Cog_Interro_Tiers
+	EndSwitch
+
+EndP
+												  
+;*
+Public Procedure Cog_Regler_creation(mode)
+; initialise les zones de saisie de la page de création selon le mode
+1			mode						8			; mode de saisie
+													;			CC = Creation Composant
+													;			CB ou ' ' = Creation Bien
+BeginP
+	
+	Switch mode
+		; mode création de composant
+		; mode duplication de composant'DC'
+		case vsw IN ('CC', 'DC')
+			PReturn
+
+		; mode duplication de bien	'DB'
+		; le zoom est appelé en mode creation de bien depuis la saisie d'écriture	'EB'
+		; le zoom est appelé en mode creation de bien depuis le module GRM  'GR'
+		; "CB" ou ' ' mode création standard (Bien composé ou non) 'CB' ou espace
+		Default
+			IMMOBILISATION.Immo = Cog_Next_ImmoNo(TRUE, TRUE)	
+
 	EndSwitch
 
 EndP
@@ -175,6 +269,12 @@ Public Procedure Cog_ZoomDebut
 ;
 BeginP
 	Seek_Soc(MZ.Dos)		; T000 nécessaire aux jointures
+	DOSIMMO.Init()
+	DOSIMMO.Where.Zoom_PK(MZ.Dos)
+	If DOSIMMO.Select() = 0
+		MessageBox("Dossier immo " & MZ.Dos & " non trouvé.", "Alerte", MB_ICONEXCLAMATION)
+		ProgramExit
+	EndIf
 EndP
 
 		 
