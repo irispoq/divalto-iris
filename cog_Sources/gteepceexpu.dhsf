@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20141215153902      
+;>xwin4obj                              7.0       20150316120417      
 [masque]
  libelle="Explorateur de pièces"
  utilisateur="ROOT"
- date_modification="15/12/2014"
+ date_modification="16/03/2015"
  feuille_style="fstylewpf.dhfi"
  noms_boutons="zoom"
- dernier_id=1000011
+ dernier_id=1000014
  surcharge=oui
  date_modif_base="20131008112025"
  dernier_id_page=100000
@@ -1768,6 +1768,44 @@ TOTO
     titre="Adresse complément 1"
     fl_aff=non
     largeur_col=135
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,159
+    taille=9,5
+    id=1000013
+    colonnes_saisie=1
+    wstyle="STD"
+   [description]
+    donnee=ent,cog_facturation_compte,ent
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="Facturation Compte"
+   [param_colonne]
+    titre="Facturation Compte"
+    fl_aff=non
+    largeur_col=5
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=54,422
+    taille=9,5
+    id=1000014
+    colonnes_saisie=1
+    wstyle="STD"
+   [description]
+    donnee=ent,cog_impdetail,ent
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [info_bulle]
+   texte="Impression du détail"
+   [param_colonne]
+    titre="Impression du détail"
+    fl_aff=non
+    largeur_col=5
     wstyle="ENTETE_COLONNE"
 [page]
  numero=4
