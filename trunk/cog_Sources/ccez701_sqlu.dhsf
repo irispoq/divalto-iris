@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20150223162743      
+;>xwin4obj                              7.0       20150302155811      
 [masque]
- utilisateur="UGIE"
- date_modification="23/02/2015"
+ utilisateur="ROOT"
+ date_modification="02/03/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
- dernier_id=1000050
+ dernier_id=1000051
  surcharge=oui
  date_modif_base="20130227140720"
  dernier_id_page=100000
@@ -2026,6 +2026,26 @@
     titre="Facture no"
     fl_aff=non
     largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=149,40
+    taille=9,201
+    id=1000051
+    colonnes_saisie=80
+    wstyle="STD"
+   [description]
+    donnee=immo,des,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+   [info_bulle]
+   texte="Désignation"
+   [param_colonne]
+    titre="Désignation"
+    fl_aff=non
+    largeur_col=201
     wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
