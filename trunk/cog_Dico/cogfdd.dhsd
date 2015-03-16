@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20150306153509,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20150311112339,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -242,10 +242,11 @@ Nature=3,0
 NomOdbc=Classement
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20150305090127,UGIE                ,20150305090127,UGIE                
+Version=1,20150305090127,UGIE                ,20150311112316,UGIE                
 Nom=CnCdNo,N° bon de commande CN,1
+DateM=22836363E55BD001
 Gel=1
-Nature=15
+Nature=8
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110816131438,ROOT                ,20140418115936,UGIE                
@@ -2389,7 +2390,7 @@ Nom=UserTrace,321,2,N,0,0,N,1
 [TABLE]
 Version=1,20150107111430,UGIE                ,20150107111436,UGIE                
 Nom=Cog_PrjAp,Table complémentaire projetAp,1
-DateM=2A3064C89447D001
+DateM=22836363E55BD001
 NomOdbc=Cog_PrjAp
 Taille=1000,1000
 Pack=0,0
@@ -2439,6 +2440,9 @@ Nom=DirCliTiers,388,2,N,0,0,N,1
 Nom=DvNo,396,2,N,0,0,N,1
 Nom=CnCdNo,404,2,N,0,0,N,1
 [/CHAMPS]
+[PROPLOC]
+Nom=CnCdNo
+[/PROPLOC]
 [TABLE]
 Version=1,20111213140124,ROOT                ,20111213140232,ROOT                
 Nom=Cog_Red_Ent,Entêtes Reddition,1
