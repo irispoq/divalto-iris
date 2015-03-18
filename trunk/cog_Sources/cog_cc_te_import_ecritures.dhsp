@@ -5,173 +5,124 @@
 
 ;*		Log	 Version	  N°modIf		Date		Modifications
 ;*
-;*		JDT		6.3		01				03/2010	Version initiale : traitement des lignes d'écritures, des lignes de ventilations et/ou du plan comptable.
+;*		JDT		6.2		01				03/2010	Version initiale : traitement des lignes d'écritures, des lignes de ventilations et/ou du plan comptable.
 
-OverWrittenBy "COGuCC_TE_IMPORT_ECRITURES.DHOF"
+OverWrittenBy "COGuCC_TE_IMPORT_ECRITURES.DHOE"
 
-Include	"CCTC000.DHSP"
-Module	"GTPMFIC.dhop"
+Include	CCTC000.DHSP
+Module	GTPMFIC.dhop
 
 ; Fichiers
 Public HFile	GTFDD.DHSD	GTFDOS			GTFDOS		; Dossier établissement
 
 ; Enregistrements
-Public Record	A5DD.DHSD		M2				M2
 Public Record	GTFDD.DHSD		Soc			Soc			; Société
 Public Record	GTFDD.DHSD		Ets			Ets			; Etablissement
+Public Record	ccfdd.DHSD		C8				C8_Sel
 
-Define cog_Masque = "COG_CC_EE_IMPORT_ECRITURES.DHOF"
+;	Constantes
+Const 	C_Page_Fond  	= 1
+Const 	C_Page_1     	= 2
+
+;	Variables
 1 idTB_Main			L		; Identifiant barre d'outils MAIN
 1 idME_Main			L		; Identifiant du menu MAIN 
 
-1	b_FIN				B = False 		; Variable de fin de saisie du masque
+;*	  initialisation de variables
+Public Procedure initialisation_variable
+;
+BeginP
 
-;* 01
-Public Function char COGF_RAFRAICHIR
-1	t_Serveur						50			; Serveur DDE
-1	t_Topic							50			; Objet destinataire (system,feuille)
-1	t_IdServ							X			; Excel
-1	t_IdServF						X			; Feuille du classeur
-1	t_Item							255		; Nom de la cellule
-1	x_st_00							X			; Pointeur	
-1	t_Retour							255		; Retour
-BeginF
 	; Initialisation
-	t_Retour = " "
-	Harm_Init(60,60,60,60,60)
-	If DDEOpen = 0
-	   t_Retour = "Erreur d'initialisation (DDE Open)."
-	Else
-		t_Serveur	= "Excel"
-		t_Topic		= "system"
-		t_IdServ		= DDEConnect(t_Serveur, t_Topic) T
-		If t_IdServ = 0
-			t_Retour = "Erreur lors de l'accès à l'application Excel (DDE Open)."
-		Else
-		   t_Serveur	= "Excel"			   
-		   t_Topic		= "COGESER - CCFM"
-		   t_IdServF	= DDEConnect(t_Serveur, t_Topic)
-		   If t_IdServF <> 0   		
-				t_Retour = 'Connexion avec la feuille "COGESER - CCFM" établie.'
-				; Déconnexion
-				x_st_00 = DDEDeconnect(t_IdServF)
-			Else
-				t_Retour = 'Erreur de connexion avec la feuille "COGESER - CCFM".'
-			EndIf																
-		EndIf	
-		; Déconnexion
-		x_st_00 = DDEDeconnect(t_IdServ)
-		x_st_00 = DDEClose 
+	If PingReceive("ZEchange",MZ) <> 0
+		ProgramExit
 	EndIf
-	FReturn(t_Retour)
-EndF
 
-;*
-Main
+	; 	recherche du dossier et T000
+	Seek_Soc(MZ.DOS)	
 	
-; Initialisation
-If PingReceive("ZEchange",MZ) <> 0
-	ProgramExit
-EndIf
+	xmeload(Mz.MeCle) 
+	
+	; 	Titre de la fenêtre
+	xmetitle(Mz.Titre2)
 
-; Initialisation des variables
-Seek_Soc(MZ.Dos)		; Contrôle du dossier
-Seek_Ets(MZ.Etb)
+	; Initialisation des variables
+	Seek_Soc(MZ.Dos)		; Contrôle du dossier
+	Seek_Ets(MZ.Etb)
 
-; Chargement d'un fichier masque
-XMeLoad(cog_Masque)
+	C8_Sel.Ce2 = 1
 
-;Titre fenêtre
-XMeTitle("DIVALTO Comptabilité \ Importation des écritures comptables et/ou du plan comptable")
+	; Chargement d'un fichier masque
+	XMeLoad(Mz.Mecle)
 
-; Renseigne dans des variables systèmes les paramètres de la pages 1
-XMeInfoPage(cog_Masque, 1)
+	; Renseigne dans des variables systèmes les paramètres de la pages 1
+	XMeInfoPage(Mz.Mecle, 1)
 
-; Chargement en mémoire d'une barre d'outils 
-idTB_Main = XMeToolBarGetID(cog_Masque, "MAIN")
-; Attachement d'une barre d'outils à une page de masque, pour préparer son affichage
-XMeToolBarSetWindow(idTB_Main, cog_Masque, 1)
-; Chargement en mémoire d’un menu classique ou surgissant
-idME_Main = XmeMenuGetId(cog_Masque, "MAIN")
-; Attachement d’un menu classique à une page de masque, pour préparer son affichage
-XmeMenuSetWindow(idME_Main,cog_Masque,1)
-									 
-; Initialisation des variables
-	; Dossier
-C3XQ.Dos = MZ.Dos
-	; Etablissement
-C3XQ.Etb = MZ.Etb
-	; Mode d'importation
-C3XQ.Choix(1) = 1
-	; Fichier
-C3XQ.Fic = COGF_RAFRAICHIR
+	xmesetwindowsize(Mz.Mecle,C_page_Fond,harmony.Opara3,harmony.Opara4)
+	
+EndP
+;*
+Public Procedure initialisation_menu
+;
+BeginP
 
-; Lancement de la saisie d'un masque
-Xmeinput(cog_Masque, 1,0, XMe_Mode_Goto)
+	idTB_Main = xmetoolbargetid(Mz.Mecle,'toolbar1')
+	xmetoolbarsetwindow(idTB_Main,Mz.Mecle, C_Page_Fond)
+	idME_Main = xmemenugetid(Mz.Mecle,'menu1')
+	xmemenusetwindow(idME_Main,Mz.Mecle, C_Page_Fond)
 
-; Boucle sur la saisie	
-Do
-	Switch Harmony.Arret
-
-		Case Harmony.Arret = 19997
-			; Livre de bord
-			Zoom_Call(Harmony.Arret)
-		
-		Case Harmony.Arret = 19106
-			; Ecritures
-			Zoom_Call(Harmony.Arret)
-
-		Case STATIN_F9  ;Abandon
-			b_FIN = True
-		
-		Case STATIN_F5 Or Harmony.Arret = 1001
-			; Actualisation
-			C3XQ.Fic = COGF_RAFRAICHIR
-
-		Case STATIN_F10 Or Harmony.Arret = 1002
-			; 
-			If Left(COGF_RAFRAICHIR) = 'Connexion avec la feuille "COGESER - CCFM" établie.'
-				If MessageBox("Vous allez lancer l'importation des écritures comptables.|Voulez vous continuer ?", "Importation des Ecritures Comptables", MB_YESNO + MB_ICONQUESTION) = IDYES
+EndP
+;***** boucle principale
+Public Procedure Boucle_Principale
+1 Fin B=False
+BeginP
+	xmeDispv(Mz.Mecle,C_Page_Fond,xme_mode_goto)
+	XmeInput(Mz.Mecle,C_Page_1,xme_mode_goto,1)
+	do
+		switch harmony.Key
+			case K_F10
+				If MessageBox("Vous allez lancer l'importation des écritures comptables.|Voulez vous continuer ?", "Importation des Ecritures Comptables",MB_OKCANCEL+MB_ICONQUESTION)	=IDOK
 					; Exécution du programme
-					MZ.Echange = "COGP_Edition_CompteRendu"	; Pour l'impression du compte rendu
 					Ping("ZEchange",MZ)
+					Ping("Typecr",c8_sel.Ce1)
 					ProgramCall("cog_cc_tt_import_ecritures.dhop")
-					MessageBox("Traitement terminé.", "Importation des Ecritures Comptables", MB_OK + MB_ICONINFORMATION)
-					;b_FIN = TRUE
+					Fin=true
 				EndIf
-			EndIf
-			; Reprise de la saisie du masque
-			System.Statin = 0
-			Harmony.Arret = 0
+				
+			case K_F9
+				If MessageBox("Confirmez-vous l'abandon ?",Titre='Validation',MB_OKCANCEL+MB_ICONQUESTION)	=IDOK
+					Fin=true
+				endif
 
-;		Case STATIN_F12
-;			b_FIN = TRUE
+			case K_F7
+				zoom_call()
+				Boucle_Principale
 
-		Case Statin_F8						; Appel de zoom
-			Zoom_Call(Harmony.Arret)
+			Case K_F8
+				Zoom_Call(harmony.DATAARRET)
+			; Arrets clic souris
 
-		Case Statin_F7
-			Zoom_Call()
+			Case harmony.DataArret = 8002 
+				If harmony.SourisBout = RIGHT_BUTTON
+				; Clic souris droit = appel zoom généralisé
+					Zoom_Call()
+				ElsIf harmony.SourisClic = DOUBLE_CLICK
+			; Double clic = simulation touche F8 pour appel zoom éventuel
+					harmony.Retour = XMENEXT_SIMULATION_TOUCHE
+					harmony.CplRetour = K_F8
+			   EndIf 
 
-		Case Harmony.DataArret = 8002
-			If Harmony.Sourisbout = Right_Button
-				Zoom_Call()
-			ElsIf Harmony.Sourisclic = Double_Click
-				Harmony.Retour = Xmenext_Simulation_Touche
-				Harmony.Cplretour = C_F8
-			EndIf
+		endswitch
+		while Not Fin
+		xmenext(harmony.Retour,harmony.Cplretour)	
+	wend
 
-		Default
-			
-		EndSwitch
-While b_FIN = False
-	; Reprise de la saisie du masque
-	XmeNext(Harmony.RETOUR, Harmony.CPLRETOUR)
-Wend
+EndP
 
-If b_FIN = TRUE
-	; Suppression ou message livre de bord
-EndIf
-
-ProgramExit
+;*** Main
+main
+	initialisation_variable
+	initialisation_menu
+	Boucle_Principale
+	
 

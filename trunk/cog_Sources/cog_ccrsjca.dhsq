@@ -64,4 +64,31 @@ public 	record 	GTFDD.dhsd	T000
 		C3.CptCol,
 		C3.Cpt
 
+;*
+;*		Journaux
+;*
+
+<RecordSql Name=CogRs_C4 Comment='Journal'>
+	public	record	A5DD.dhsd	MZ		MZ	
+
+<Select>
+	C4.*
+
+<From Insert=Yes Update=Yes Delete=Yes>
+	C4 
+
+<Where>
+
+	case Zoom_Dos(Int Dos)
+		C4.Dos = Dos	
+
+	case Zoom_PK(char Jnl)
+		C4.Jnl = Jnl	
+
+<OrderBy>
+	case Par_Journal	"Par journal"
+		C4.Dos,
+		C4.Ce1,
+		C4.Jnl
+
 							
