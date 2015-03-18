@@ -84,7 +84,7 @@ BeginP
 				If MessageBox("Vous allez lancer l'importation des écritures comptables.|Voulez vous continuer ?", "Importation des Ecritures Comptables",MB_OKCANCEL+MB_ICONQUESTION)	=IDOK
 					; Exécution du programme
 					Ping("ZEchange",MZ)
-					Ping("Typecr",c8_sel.Ce1)
+					Ping("Typecr",c8_sel.Ce2)
 					ProgramCall("cog_cc_tt_import_ecritures.dhop")
 					Fin=true
 				EndIf
