@@ -1,64 +1,43 @@
 
 ;*
-;*	COGESER - Intégration des écritures comptables et/ou du plan comptable depuis Excel
+;*	COGESER - Intégration des écritures comptables depuis Excel
 ;*
 
 ;*		Log	 Version	  N°modIf		Date		Modifications
 ;*
-;*		JDT		6.2		01				03/2010	Version initiale : traitement des lignes d'écritures, des lignes de ventilations et/ou du plan comptable.
-;*		JDT		6.2		02				04/2010	Modification pour adaptation nouvelles spécificités DIVALTO, retrait de l'alimentation automatique du champs C8.PIECE
-;*		JDT		6.2		03				07/2010	Gestion du numéro d'écriture
-;*		JDT		6.3		04				10/2010	Recompilation en version 6.3
-;*		JDT		6.3		05				11/2010	Gestion anomalie quand code dossier est inférieur à 100
-
-;*
-;
-; Ce programme sert à importer des écritures comptables ou des comptes comptables depuis Excel vers DIVALTO.
-; Il peut être lancé par tunnel ou par un programme avec une interface IHM.
-; Le programme créer une liaison DDE avec EXCEL puis il créer un fichier CCFM temporaire par écriture comptable qui est absorbable par DIVALTO.
-;
-;*
+;*		BK		7.2							10/2014	Version initial
+;*		YLEF		P205a						03/2015	Adaptation U GIE
 
 OverWrittenBy "COGuCC_TT_IMPORT_ECRITURES.DHOP"
 
+;
 Include	CCTC000.DHSP
-Module	GTPMFIC.dhop
-Module	Lctm000.Dhop
 
-Public HTmpFile	CCFDD.DHSD	CCFM			CCFM_DEV_01	NoOpen DeleteOnExit	; Fichier d'intégration
+;
+Module	cogpm_ole.dhop
+Module	'YOFFICE.dhop'
+Module	'GTPMFIC.DHOP'
 
-Public Record	CCFDD.DHSD		C3				C3			; Plan comptables
+;	Hfile
+Public HTmpFile	CCFDD.DHSD	CCFM			CCFM_DEV_01	DeleteOnExit	; Fichier d'intégration
+
+;	Record
 Public Record	CCFDD.DHSD		C8				C8			; Ecritures
-Public Record	CCFDD.DHSD		CP				CP			; Ventilation sur les pièces et les échéances
 Public Record	CCFDD.DHSD		CX				CX			; Ventilation sur les axes
-
-Public HFile	CCFDD.DHSD		CCFECR		CCFECR_TEMP	; Ecritures temporaires
-Public Record	CCFDD.DHSD		C8				C8_TEMP		; Ecritures	temporaires
-Public Record	CCFDD.DHSD		C4				C4				; Journaux
-
-Public Record	CCFDD.DHSD		C3				C3_01		; Enregistrement tampon pour le "Plan comptables"
-Public Record	CCFDD.DHSD		C8				C8_01		; Enregistrement tampon pour les "Ecritures"
-Public Record	CCFDD.DHSD		CP				CP_01		; Enregistrement tampon pour les "Ventilation sur les pièces et les échéances"
-Public Record	CCFDD.DHSD		CX				CX_01		; Enregistrement tampon pour les "Ventilation sur les axes"
-
-Public Record	DDSYS.DHSD		RecordInfo	RecordInfo_DEV_C3		; Infos enregistrement table C3
+Public Record	CCFDD.DHSD		C4				C4		
+Public Record	gtfdd.DHSD		cli			cli	
 Public Record	DDSYS.DHSD		RecordInfo	RecordInfo_DEV_C8		; Infos enregistrement table C8
-Public Record	DDSYS.DHSD		RecordInfo	RecordInfo_DEV_CX		; Infos enregistrement table CX
-Public Record	DDSYS.DHSD		DataInfo		DataInfo_DEV_C3		; Informations donnée pour la table C3
 Public Record	DDSYS.DHSD		DataInfo		DataInfo_DEV_C8		; Informations donnée pour la table C8
-Public Record	DDSYS.DHSD		DataInfo		DataInfo_DEV_CX		; Informations donnée pour la table CX
 
-1	g_IndTabChamp		5,0			; Indice du tableau des champs de la table
-1	g_TabChamp			37888			; Tableau contenant les inforamtions relatives aux champs de la table
-	2	g_TabChamp_NumColonne		5,0*256 	; Numéro de la colonne sous Excel
+;	RecordSql
+Recordsql 	cog_ccrsjca.dhoq		CogRs_C4		CogRs_Journal		
+RecordSql	cog_ccrsjca.dhoq		CogRs_C3		CogRs_Compte_w1
+
+;	Variables
+1	g_IndTabChamp		3,0			; Indice du tableau des champs de la table
+1	g_TabChamp			37376			; Tableau contenant les inforamtions relatives aux champs de la table
+	2	g_TabChamp_NumColonne		3,0*256 	; Numéro de la colonne sous Excel
 	2	g_TabChamp_NomColonne		50*256 	; Nom du champ dans le dictionnaire et sous Excel
-	2	g_TabChamp_C3					1,0*256	; Champ présent dans la table C3 (1 Non - 2 Oui)
-	2	g_TabChamp_DataOffSet_C3	5,0*256	; (pointeur) Offset dans l'enreg	C3 (position début)
-	2	g_TabChamp_TailleTot_C3		5,0*256	; (pointeur) Taille totale dans l'enreg C3 (position fin)
-	2	g_TabChamp_TailleElem_C3	5,0*256	; (pointeur) Taille d'un élément dans l'enreg C3
-	2	g_TabChamp_DataNat_C3		5,0*256	; (pointeur) Nature dans l'enreg C3
-	2	g_TabChamp_NbDim_C3			5,0*256	; (pointeur) Nombre de dimensions dans l'enreg C3
-	2	g_TabChamp_Dim_C3				5,0*256	; Dimension	(indice du tableau) dans l'enreg C3
 	2	g_TabChamp_C8					1,0*256	; Champ présent dans la table C8 (1 Non - 2 Oui)
 	2	g_TabChamp_DataOffSet_C8	5,0*256	; (pointeur) Offset dans l'enreg	C8 (position début)
 	2	g_TabChamp_TailleTot_C8		5,0*256	; (pointeur) Taille totale dans C8 (position fin)
@@ -66,107 +45,41 @@ Public Record	DDSYS.DHSD		DataInfo		DataInfo_DEV_CX		; Informations donnée pour 
 	2	g_TabChamp_DataNat_C8		5,0*256	; (pointeur) Nature dans l'enreg C8
 	2	g_TabChamp_NbDim_C8			5,0*256	; (pointeur) Nombre de dimensions dans l'enreg C8
 	2	g_TabChamp_Dim_C8				5,0*256	; Dimension	(indice du tableau) dans l'enreg C8
-	2	g_TabChamp_CX					1,0*256	; Champ présent dans la table CX (1 Non - 2 Oui)
-	2	g_TabChamp_DataOffSet_CX	5,0*256	; (pointeur) Offset dans l'enreg CX (position début)
-	2	g_TabChamp_TailleTot_CX		5,0*256	; (pointeur) Taille totale dans CX (position fin)
-	2	g_TabChamp_TailleElem_CX	5,0*256	; (pointeur) Taille d'un élément	dans l'enreg CX
-	2	g_TabChamp_DataNat_CX		5,0*256	; (pointeur) Nature dans l'enreg CX
-	2	g_TabChamp_NbDim_CX			5,0*256	; (pointeur) Nombre de dimensions dans l'enreg CX
-	2	g_TabChamp_Dim_CX				5,0*256	; Dimension	(indice du tableau) dans l'enreg CX
 
 1	g_NumLigneExcel				14,0 = 5	; Première ligne lue sous Excel
-
 1	g_Serveur						50			; Serveur DDE
 1	g_Topic							50			; Objet destinataire (system,feuille)
 1	g_IdServ							X			; Excel
 1	g_IdServF						X			; Feuille du classeur
-
-1	g_EnregistrementGenerique_C3	1500	; Enregistrement générique	pour l'enregistrement C3
 1	g_EnregistrementGenerique_C8	1500	; Enregistrement générique	pour l'enregistrement C8
-1	g_EnregistrementGenerique_CX	1500	; Enregistrement générique pour l'enregistrement CX
-1	g_NumColonneCE1				5,0		; Numéro de colonne du champ CE1
-
 1	x_st_00							X			; Pointeur	
-1	s_datetrait						S
-1	d_datetrait						>GTFDD.DHSD UserCrDh
-
-; Variables pour la gestion de l'édition du compte rendu	CR
-1	g_Msg_Num		8,0
-1	l_LST_CR			L					; Adresse de la liste du CR
-1	a_ADR_CR			16					; Adresse de la fonction de tri de la liste du CR
-1	enr_LST_CR			258
-	2	cog_CR_Num		8,0
-	2	cog_CR_Lib		250
-
-;*	03
-Procedure COGP_EcritureCR(t_Msg)
-; Procedure qui gère l'écriture du compte rendu et l'écriture dans le livre de bord
-1	t_Msg		250
-BeginP
-	g_Msg_Num	= g_Msg_Num + 1
-	cog_CR_Num	= g_Msg_Num
-	cog_CR_Lib	= Left(t_Msg)
-	ListInsert(l_LST_CR, enr_LST_CR)
-	C3_Log_Ano(5193,Left(t_Msg),,,,,,,,,,)
-EndP 
+1	ClnDbt							3,0			
+1	ClnCrdt							3,0	
+1	ClnAX1							3,0	
+1	ClnAX2							3,0	
+1	ClnAX3							3,0	
+1	ClnAX4							3,0
+1	AXE1								8
+1	AXE2								8
+1	AXE3								8
+1	AXE4								8
+			
+1	PieceDr			>ccfdd.dhsd		Piece	
+1	NPieceDRExcel	>ccfdd.dhsd		Piece	
+1	NPieceExcel		>ccfdd.dhsd		Piece		
+1	Feuilencours	256	
 
 ;*	03
-Function Long COGF_Tri_Liste_CR(&EnrA,&EnrB)
-; Procedure qui tri la liste du CR
-1	EnrA	258
-	2 CleA	8,0
-1	EnrB	258
-	2 CleB	8,0
-BeginF
-   FReturn SortCompare(CleA,CleB)
-EndF 
-
-;*	03
-Procedure COGP_Edition_CompteRendu
-; Edition du compte rendu
-1	x_st_01	X
-BeginP
-	XMiLoad("COG_GT_II_IMPORT_ECRITURES.DHOI")
-	x_st_01 = PrintBegin
-	XMiPrint("COG_GT_II_IMPORT_ECRITURES.DHOI",1)
-	ListBegin(l_LST_CR)
-	Loop ListNext(l_LST_CR, enr_LST_CR) Not In (-1,0)
-		XmiSetAttribut("cog_msg",AN_TITRE,Left(cog_CR_Lib))
-		XMiPrint("COG_GT_II_IMPORT_ECRITURES.DHOI",2)
-	EndLoop
-	XMiPrint("COG_GT_II_IMPORT_ECRITURES.DHOI",4)
-	x_st_01 = PrintEnd
-EndP
-
-;*	03
-Function int COGF_RechercheEcrNoDernier(t_Dos)
-; Fonction qui renvoi le dernier numéro d'écriture utilisée
-1	t_Dos				>CCFDD.DHSD	Dos
-1	x_st_01			X				; Pointeur
-1	t_Key_01			254			; Clé
-1	t_EcrNo			>CCFDD.DHSD	EcrNo
-BeginF
-	t_EcrNo = 0
-	CCFECR_TEMP.Key = "H" & t_Dos & $FF
-	t_Key_01	= t_Dos & $FF
-	x_st_01 = IPRead(CCFECR_TEMP,	C8_TEMP,"H", t_Key_01)
- 	If x_st_01 = 0 And C8_TEMP.Dos = t_Dos
-		t_EcrNo = C8_TEMP.EcrNo
-	EndIf
-	FReturn(t_EcrNo)
-EndF
-
-;*	02
 Function int COGF_Elimine_Parenthese(&p_Text, &p_IndTab)
 ; Fonction qui retire les carectères entre les parenthèses incluses à un champ de type tableau
 ; Retourne l'indice du tableau
 1 p_Text		255
-1 p_IndTab 	5,0
+1 p_IndTab 	3,0
 
 1 t_Car		1
 1 i			x
-1 t_Debut	5,0
-1 t_Fin		5,0
+1 t_Debut	3,0
+1 t_Fin		3,0
 BeginF	
 	t_Debut	= String("(" , p_Text)
 	t_Fin		= String(")" , p_Text)
@@ -175,18 +88,19 @@ BeginF
 		p_Text	= FString(FString("A","D(" & t_Debut & "," & t_Fin & ")"), p_Text)		
 	EndIf
 	FReturn(0)
+
 EndF
 
 ;*	02
 Function Int COGF_Analyse_PremiereLigne(p_Nom_Dico)
 1  p_Nom_Dico     25
 
-1	t_Colonne		5,0	; Numéro de la colonne
+1	t_Colonne		3,0	; Numéro de la colonne
 1	t_Item			255	; Nom de la cellule
 1	t_Valeur			255	; Contenu de la cellule
 
-1	t_IndTab			5,0	; Indice d'un champ tableau
-1	t_PosPoint		5,0	; Position du point dans le nom du champ
+1	t_IndTab			3,0	; Indice d'un champ tableau
+1	t_PosPoint		3,0	; Position du point dans le nom du champ
 1  t_Nom_Enrrec   50		; Nom du champ
 
 1	x_st_01			X		; Pointeur
@@ -194,15 +108,13 @@ BeginF
    ; Lecture des colonnes du fichier Excel
 	For t_Colonne = 1 to 256
       ; Initialisation
-		t_Item	= FString("A","l1c" & t_Colonne)	; retrait des espaces
-      t_Valeur	= " "
       ; Récupération de la donnée
-		x_st_01 = DDERequest(g_IdServF, t_Item, t_Valeur)  		
+		t_Valeur = Cog_OLE_LireCelluleAt(1,t_Colonne) 
 		If t_Valeur = " " 
 			redofor
 		EndIf			
       ; Si différent de la dernière colonne
-		If t_Valeur <> "*FIN*"						
+		If t_Valeur not in ("*FIN*","DEBIT","CREDIT","AXE1","AXE2","AXE3","AXE4")  
 			; Retrait des parenthèses
 			t_IndTab = 0
 			COGF_Elimine_Parenthese(t_Valeur, t_IndTab)			
@@ -212,42 +124,20 @@ BeginF
 			t_Nom_Enrrec	= " "
          t_PosPoint = String(".",t_Valeur,1)  
          If t_PosPoint <> 0
-            ;t_Nom_Table		= Mid(t_Valeur, 1, t_PosPoint-1)
 				t_Nom_Enrrec	= Mid(t_Valeur, t_PosPoint+1)
          Else
 				t_Nom_Enrrec	= Left(t_Valeur)
          EndIf
-			; Verification que le champ ne soit pas aussi présent dans la table C3
-			Init RecordInfo_DEV_C3 = " "
-			Init DataInfo_DEV_C3 = " "
-			If DDGetRecord3(p_Nom_Dico, "C3", RecordInfo_DEV_C3) <> 0
-			   COGP_EcritureCR(" -- Importation CCFM - Erreur " & DDGetTextError3)
-			Else
-				Do
-					x_st_01 = DDNextData3(DataInfo_DEV_C3)
-				While x_st_01 = 0
-					If t_Nom_Enrrec = DataInfo_DEV_C3.MNemo
-						ExitDo
-					EndIf	
-				Wend
-				If t_Nom_Enrrec <> DataInfo_DEV_C3.MNemo
-					Init RecordInfo_DEV_C3 = " "
-					Init DataInfo_DEV_C3 = " "
-				EndIf
-			EndIf
 			; Lecture de la définition de la table et du champ	pour l'enregistrement C8
 			Init RecordInfo_DEV_C8 = " "
 			Init DataInfo_DEV_C8 = " "
 			If DDGetRecord3(p_Nom_Dico, "C8", RecordInfo_DEV_C8) <> 0
-			   COGP_EcritureCR(" -- Importation CCFM - Erreur " & DDGetTextError3)
+		      Display DDGetTextError3 
 			Else
 				Do
 					x_st_01 = DDNextData3(DataInfo_DEV_C8)
 				While x_st_01 = 0
 					If t_Nom_Enrrec = DataInfo_DEV_C8.MNemo
-						If Left(DataInfo_DEV_C8.MNemo) = "CE1"
-							g_NumColonneCE1 = t_Colonne
-						EndIf
 						ExitDo
 					EndIf	
 				Wend
@@ -256,45 +146,10 @@ BeginF
 					Init DataInfo_DEV_C8 = " "
 				EndIf
 			EndIf
-			; Verification que le champ ne soit pas aussi présent dans la table CX
-			Init RecordInfo_DEV_CX = " "
-			Init DataInfo_DEV_CX = " "
-			If DDGetRecord3(p_Nom_Dico, "CX", RecordInfo_DEV_CX) <> 0
-			   COGP_EcritureCR(" -- Importation CCFM - Erreur " & DDGetTextError3)
-			Else
-				Do
-					x_st_01 = DDNextData3(DataInfo_DEV_CX)
-				While x_st_01 = 0
-					If t_Nom_Enrrec = DataInfo_DEV_CX.MNemo
-						ExitDo
-					EndIf	
-				Wend
-				If t_Nom_Enrrec <> DataInfo_DEV_CX.MNemo
-					Init RecordInfo_DEV_CX = " "
-					Init DataInfo_DEV_CX = " "
-				EndIf
-			EndIf
 			; Sauvegarde de la colonne
          g_IndTabChamp = g_IndTabChamp + 1  
 			g_TabChamp_NumColonne(g_IndTabChamp)	= t_Colonne							; Numéro de la colonne
          g_TabChamp_NomColonne(g_IndTabChamp)	= FString("U",t_Nom_Enrrec)	; Nom du champ
-			If DataInfo_DEV_C3 <> " "
-				g_TabChamp_C3(g_IndTabChamp)					= 2									; Champ présent dans la table C3
-				g_TabChamp_DataOffSet_C3(g_IndTabChamp)	= DataInfo_DEV_C3.DataOffSet	; Offset dans l'enreg
-	         g_TabChamp_TailleTot_C3(g_IndTabChamp)		= DataInfo_DEV_C3.TailleTot	; Taille totale
-	         g_TabChamp_TailleElem_C3(g_IndTabChamp)	= DataInfo_DEV_C3.TailleElem	; Taille d'un élément
-	         g_TabChamp_DataNat_C3(g_IndTabChamp)		= DataInfo_DEV_C3.DataNat		; Nature
-		      g_TabChamp_NbDim_C3(g_IndTabChamp)			= DataInfo_DEV_C3.NbDim			; Nombre de dimensions
-				g_TabChamp_Dim_C3(g_IndTabChamp)				= t_IndTab							; Dimension
-			Else
-				g_TabChamp_C3(g_IndTabChamp)					= 1									; Champ présent dans la table C3
-				g_TabChamp_DataOffSet_C3(g_IndTabChamp)	= " "									; Offset dans l'enreg
-	         g_TabChamp_TailleTot_C3(g_IndTabChamp)		= " "									; Taille totale
-	         g_TabChamp_TailleElem_C3(g_IndTabChamp)	= " "									; Taille d'un élément
-	         g_TabChamp_DataNat_C3(g_IndTabChamp)		= " "									; Nature
-		      g_TabChamp_NbDim_C3(g_IndTabChamp)			= " "									; Nombre de dimensions
-				g_TabChamp_Dim_C3(g_IndTabChamp)				= " "									; Dimension
-			EndIf
  			If DataInfo_DEV_C8 <> " "
 				g_TabChamp_C8(g_IndTabChamp)					= 2									; Champ présent dans la table C8
 				g_TabChamp_DataOffSet_C8(g_IndTabChamp)	= DataInfo_DEV_C8.DataOffSet	; Offset dans l'enreg
@@ -312,295 +167,373 @@ BeginF
 		      g_TabChamp_NbDim_C8(g_IndTabChamp)			= " "									; Nombre de dimensions
 				g_TabChamp_Dim_C8(g_IndTabChamp)				= " "									; Dimension
 			EndIf
-			If DataInfo_DEV_CX <> " "
-				g_TabChamp_CX(g_IndTabChamp)					= 2									; Champ présent dans la table CX
-				g_TabChamp_DataOffSet_CX(g_IndTabChamp)	= DataInfo_DEV_CX.DataOffSet	; Offset dans l'enreg
-	         g_TabChamp_TailleTot_CX(g_IndTabChamp)		= DataInfo_DEV_CX.TailleTot	; Taille totale
-	         g_TabChamp_TailleElem_CX(g_IndTabChamp)	= DataInfo_DEV_CX.TailleElem	; Taille d'un élément
-	         g_TabChamp_DataNat_CX(g_IndTabChamp)		= DataInfo_DEV_CX.DataNat		; Nature
-		      g_TabChamp_NbDim_CX(g_IndTabChamp)			= DataInfo_DEV_CX.NbDim			; Nombre de dimensions
-				g_TabChamp_Dim_CX(g_IndTabChamp)				= t_IndTab							; Dimension
-			Else
-				g_TabChamp_CX(g_IndTabChamp)					= 1									; Champ présent dans la table CX
-				g_TabChamp_DataOffSet_CX(g_IndTabChamp)	= " "									; Offset dans l'enreg
-	         g_TabChamp_TailleTot_CX(g_IndTabChamp)		= " "									; Taille totale
-	         g_TabChamp_TailleElem_CX(g_IndTabChamp)	= " "									; Taille d'un élément
-	         g_TabChamp_DataNat_CX(g_IndTabChamp)		= " "									; Nature
-		      g_TabChamp_NbDim_CX(g_IndTabChamp)			= " "									; Nombre de dimensions
-				g_TabChamp_Dim_CX(g_IndTabChamp)				= " "									; Dimension
-			EndIf
-       Else
+		Elsif t_Valeur = "DEBIT"
+			ClnDbt  = t_Colonne
+		Elsif t_Valeur = "CREDIT"
+			ClnCrdt = t_Colonne	
+		Elsif t_Valeur = "AXE1"
+			ClnAX1 = t_Colonne 
+		Elsif t_Valeur = "AXE2"
+			ClnAX2 = t_Colonne 
+		Elsif t_Valeur = "AXE3"
+			ClnAX3 = t_Colonne 
+		Elsif t_Valeur = "AXE4"
+			ClnAX4 = t_Colonne 
+		Else
          ; Colonne fin : t_Valeur = "*FIN*"
 			ExitFor
       EndIf
    Next
    FReturn(0)
 EndF
+;*
+Public Procedure Cog_reserve_C4
+;
+Beginp
+	CogRs_Journal.Hshare("PIECE",'R')   	 
+EndP
+;*
+Public Procedure Cog_Libere_C4
+;
+Beginp
+	CogRs_Journal.Hshare("PIECE",'P')   
+EndP
+;*
+Public Procedure Cog_Recherche_Journal(Dos,JNL,Piece,Mode) 
+;
+1	JNL 			>ccfdd.dhsd	JNL
+1	Dos 			>ccfdd.dhsd	Dos
+1	Piece			>ccfdd.dhsd	Piece
+1	Mode			1
+;
+BeginP
 
+	CogRs_Journal.Init()
+	CogRs_Journal.Where.Zoom_Dos(Dos)
+	CogRs_Journal.Where.AddCondition('Zoom_Dos')
+	CogRs_Journal.Where.Zoom_PK(JNL)
+	CogRs_Journal.Where.AddCondition('Zoom_PK')
+
+	If CogRs_Journal.Select() = 1
+		If Mode = 'M'
+			CogRs_Journal.Piece = Piece 
+			CogRs_Journal.Update()
+		EndIf
+	Endif
+
+EndP
+
+;*
+Public function char Cog_Recherche_Cpt(wDos,wCPT)
+;
+1	wCPT 			>ccfdd.dhsd	CPT
+1	wDos 			>ccfdd.dhsd	Dos
+1	wRet 			>gtfdd.dhsd	Regl
+;
+BeginF
+
+	PingLocal("MZDOS_LOC", Mz.Dos)
+	Mz.Dos = wDos
+
+	CogRs_Compte_w1.Init()
+	CogRs_Compte_w1.Where.Equal_Cpt(wCPT)
+	CogRs_Compte_w1.Where.AddCondition('Equal_Cpt')
+
+	If CogRs_Compte_w1.Select() = 1
+		wRet = CogRs_Compte_w1.Reg
+	Endif
+
+	PingLocalReceiveAndDelete("MZDOS_LOC", Mz.Dos)
+
+	freturn(wRet)
+
+EndF
+
+;*
+Public function int Cog_Affecter_NDrPiece(Dos,JNL,NPExcel,NPDRExcel,PDr)
+;
+1	JNL 			>ccfdd.dhsd	JNL
+1	Dos 			>ccfdd.dhsd	Dos
+1	NPExcel 		>ccfdd.dhsd	Piece
+1	NPDRExcel 	>ccfdd.dhsd	Piece
+1	PDr		 	>ccfdd.dhsd	Piece
+1	Ret 			>ccfdd.dhsd	Piece
+;
+BeginF
+
+	If NPDRExcel <> NPExcel
+
+		CogRs_Journal.Init()
+		CogRs_Journal.Where.Zoom_Dos(Dos)
+		CogRs_Journal.Where.AddCondition('Zoom_Dos')
+		CogRs_Journal.Where.Zoom_PK(JNL)
+		CogRs_Journal.Where.AddCondition('Zoom_PK')
+	
+		If CogRs_Journal.Select() = 1
+			Ret = CogRs_Journal.Piece+1 
+		Endif
+
+	Else
+		Ret = PDr 
+	EndIf
+
+	freturn(Ret)
+
+EndF
 ;*	01
 Public Function int COGF_Import_CCFM
-1	t_Item					255						; Nom de la cellule
-1	t_Valeur					255						; Contenu de la cellule
+1	t_Item			255			; Nom de la cellule
+1	t_Valeur			255			; Contenu de la cellule
 
-1	x_st_01					X							; Pointeur
-1	i							5,0 = 0					; Compteur
+1	x_st_01			X				; Pointeur
+1	i					3,0 = 0		; Compteur
 
-1	t_ValColonneCE1		1 = " "					; Type de ligne
+1	t_ValColonneCE1	1 = " "	; Type de ligne
 
-1	t_EcrNo_DIVALTO_00	>CCFDD.DHSD	EcrNo
-1	t_EcrNo_DIVALTO_01	>CCFDD.DHSD	EcrNo
-1	t_EcrValNo				>CCFDD.DHSD	EcrValNo
-
+1  CompteurEcr    8,0
+1	NVide          3,0
+1	Ce5          	>gtfdd.dhsd	Ce5 = '2'
 BeginF	
-   g_Serveur	= "Excel"			   
-   g_Topic		= "COGESER - CCFM"
-   g_IdServF	= DDEConnect(g_Serveur, g_Topic) 	
-   If g_IdServF <> 0   		
- 		; Initilisation
-		t_EcrValNo			= 0
-		x_st_01 = TmpFCreate(CCFM_DEV_01)
-		t_EcrNo_DIVALTO_00	= COGF_RechercheEcrNoDernier(MZ.Dos)
-		t_EcrNo_DIVALTO_01	= t_EcrNo_DIVALTO_00 + 1
-		; Enregistrement des champs (1° ligne d'Excel)
-		Init g_TabChamp	= " "
-		g_IndTabChamp		= 0
-		g_NumColonneCE1	= 0
-		If COGF_Analyse_PremiereLigne("ccfdd.dhsd") = 0
-			; Lecture des données à partir de la ligne "g_NumLigneExcel"							
-			g_NumLigneExcel	= g_NumLigneExcel - 1	; Retrait de la 1° incrémentation
-			Do
-				g_NumLigneExcel = g_NumLigneExcel + 1
-         	g_EnregistrementGenerique_C3 = " "
-         	g_EnregistrementGenerique_C8 = " "
-				g_EnregistrementGenerique_CX = " "
-				t_Valeur	= " " 
-	         t_Item	= "l" & Left(g_NumLigneExcel) & "c1"
-            t_Item	= FString("A", t_Item)
-            x_st_01 = DDERequest(g_IdServF, t_Item, t_Valeur)
-			While t_Valeur <> " "
-		      ; Détermination du type de ligne (générale ou ventilation) en fonction de la valeur de CE1
-	         t_Item	= "l" & Left(g_NumLigneExcel) & "c" & Left(g_NumColonneCE1)
-	         t_Item	= FString("A", t_Item)
-				t_Valeur	= " "
-	         x_st_01	= DDERequest(g_IdServF, t_Item, t_Valeur)
-				t_ValColonneCE1 = Left(t_Valeur)
+	CompteurEcr = 1
+	NVide       = 0
+	; Enregistrement des champs (1° ligne d'Excel)
+	Init g_TabChamp	= " "
+	g_IndTabChamp		= 0
+	If COGF_Analyse_PremiereLigne("ccfdd.dhsd") = 0
+		; Lecture des données à partir de la ligne "g_NumLigneExcel"
+		g_NumLigneExcel   = 1				
+		Do
+
+			g_NumLigneExcel = g_NumLigneExcel + 1
+			g_EnregistrementGenerique_C8 = " "
+			t_Valeur	= " " 
+			t_Valeur = Cog_OLE_LireCelluleAt(g_NumLigneExcel,1)
+
+		While NVide < 20 
+
+			If	t_Valeur <> " " 
+				NVide = 0
 				; Lecture de la ligne Excel
-				For i = 1 to g_IndTabChamp				      			
-		         t_Item	= "l" & Left(g_NumLigneExcel) & "c" & Left(g_TabChamp_NumColonne(i))
-		         t_Item	= FString("A", t_Item)
+				For i = 1 to g_IndTabChamp; - 1				      			
 					t_Valeur	= " "
-		         x_st_01	= DDERequest(g_IdServF, t_Item, t_Valeur)
-					; En fonction de la positon du champ, enregistrement dans la variable "g_EnregistrementGenerique"
-					Switch t_ValColonneCE1
-						Case 3		; Plan comptable
-							If g_TabChamp_C3(i) = 2
-								If g_TabChamp_Dim_C3(i) > 0 ; Tableau
-							  		Switch g_TabChamp_DataNat_C3(i)
-										Case g_TabChamp_DataNat_C3(i) in (1..2)	; Numérique
-											Mid(g_EnregistrementGenerique_C3, g_TabChamp_DataOffSet_C3(i) + g_TabChamp_TailleElem_C3(i)*(g_TabChamp_Dim_C3(i) - 1), g_TabChamp_TailleElem_C3(i)) = FString("A",Str(t_Valeur))
-										Case 4												; Date
-											FDate(Mid(g_EnregistrementGenerique_C3, g_TabChamp_DataOffSet_C3(i) + g_TabChamp_TailleElem_C3(i)*(g_TabChamp_Dim_C3(i) - 1), g_TabChamp_TailleElem_C3(i)), FString("B", t_Valeur))
-										Default
-											Mid(g_EnregistrementGenerique_C3, g_TabChamp_DataOffSet_C3(i) + g_TabChamp_TailleElem_C3(i)*(g_TabChamp_Dim_C3(i) - 1), g_TabChamp_TailleElem_C3(i)) = FString("B", t_Valeur)
-									EndSwitch
-								Else
-							  		Switch g_TabChamp_DataNat_C3(i)
-										Case g_TabChamp_DataNat_C3(i) in (1..2)	; Numérique
-											Mid(g_EnregistrementGenerique_C3, g_TabChamp_DataOffSet_C3(i), g_TabChamp_TailleTot_C3(i))	= FString("A",Str(t_Valeur))
-										Case 4												; Date
-											FDate(Mid(g_EnregistrementGenerique_C3, g_TabChamp_DataOffSet_C3(i), g_TabChamp_TailleTot_C3(i)), FString("B", t_Valeur))
-										Default
-											Mid(g_EnregistrementGenerique_C3, g_TabChamp_DataOffSet_C3(i), g_TabChamp_TailleTot_C3(i))	= FString("B", t_Valeur)
-									EndSwitch
-								EndIf
-							EndIf
-						Case 8		; Ecriture
-							If g_TabChamp_C8(i) = 2
-								If g_TabChamp_Dim_C8(i) > 0 ; Tableau
-							  		Switch g_TabChamp_DataNat_C8(i)
-										Case g_TabChamp_DataNat_C8(i) in (1..2)	; NumériqueD, Numérique
-											Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i) + g_TabChamp_TailleElem_C8(i)*(g_TabChamp_Dim_C8(i) - 1), g_TabChamp_TailleElem_C8(i)) = FString("A",Str(t_Valeur))
-										Case 4												; Date
-											FDate(Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i) + g_TabChamp_TailleElem_C8(i)*(g_TabChamp_Dim_C8(i) - 1), g_TabChamp_TailleElem_C8(i)), FString("B", t_Valeur))
-										Default
-											Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i) + g_TabChamp_TailleElem_C8(i)*(g_TabChamp_Dim_C8(i) - 1), g_TabChamp_TailleElem_C8(i)) = FString("B", t_Valeur)
-									EndSwitch
-								Else
-							  		Switch g_TabChamp_DataNat_C8(i)
-										Case g_TabChamp_DataNat_C8(i) in (1..2)	; NumériqueD, Numérique
-											Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i), g_TabChamp_TailleTot_C8(i))	= FString("A",Str(t_Valeur))
-										Case 4												; Date
-											FDate(Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i), g_TabChamp_TailleTot_C8(i)), FString("B", t_Valeur))
-										Default
-											Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i), g_TabChamp_TailleTot_C8(i))	= FString("B", t_Valeur)
-									EndSwitch
-								EndIf
-							EndIf
-						Case 2		; Ventilation
-							If g_TabChamp_CX(i) = 2
-								If g_TabChamp_Dim_CX(i) > 0 ; Tableau
-							  		Switch g_TabChamp_DataNat_CX(i)
-										Case g_TabChamp_DataNat_CX(i) in (1..2)	; NumériqueD, Numérique
-											Mid(g_EnregistrementGenerique_CX, g_TabChamp_DataOffSet_CX(i) + g_TabChamp_TailleElem_CX(i)*(g_TabChamp_Dim_CX(i) - 1), g_TabChamp_TailleElem_CX(i)) = FString("A",Str(t_Valeur))
-										Case 4												; Date
-								  			FDate(Mid(g_EnregistrementGenerique_CX, g_TabChamp_DataOffSet_CX(i) + g_TabChamp_TailleElem_CX(i)*(g_TabChamp_Dim_CX(i) - 1), g_TabChamp_TailleElem_CX(i)), FString("B", t_Valeur))
-										Default
-								  			Mid(g_EnregistrementGenerique_CX, g_TabChamp_DataOffSet_CX(i) + g_TabChamp_TailleElem_CX(i)*(g_TabChamp_Dim_CX(i) - 1), g_TabChamp_TailleElem_CX(i)) = FString("B", t_Valeur)
-									EndSwitch
-								Else
-							  		Switch g_TabChamp_DataNat_CX(i)
-										Case g_TabChamp_DataNat_CX(i) in (1..2)	; NumériqueD, Numérique
-											Mid(g_EnregistrementGenerique_CX, g_TabChamp_DataOffSet_CX(i), g_TabChamp_TailleTot_CX(i))	= FString("A",Str(t_Valeur))
-										Case 4												; Date
-											FDate(Mid(g_EnregistrementGenerique_CX, g_TabChamp_DataOffSet_CX(i), g_TabChamp_TailleTot_CX(i)), FString("B", t_Valeur))
-										Default
-											Mid(g_EnregistrementGenerique_CX, g_TabChamp_DataOffSet_CX(i), g_TabChamp_TailleTot_CX(i))	= FString("B", t_Valeur)
-									EndSwitch
-								EndIf
-							EndIf
-					EndSwitch
-		      Next															
-				; Enregistrement								
-				Switch t_ValColonneCE1
-					Case 3
-						Init C3 = " "
-							; 05 - DEBUT - Gestion anomalie quand code dossier est inférieur à 100	
-							Init C3_01 = " "
-							C3_01 = g_EnregistrementGenerique_C3
-							C3 = C3_01
-							C3.Dos = C3.Dos
-							C3.Etb = C3.Etb
-							; 05 - FIN - Gestion anomalie quand code dossier est inférieur à 100	
-						C3.Ce2	= " "
-						C3.Ce6	= 1
-						C3.NomAbr = Nom_Abrege(C3.Lib)
-						If C3.CptCol <> " "
-							C3.Ce8	= 1
-						EndIf
-						C3.UserCrDh = Time(7)
-						C3.UserCr	= SYSTEM.User
-						x_st_01	= IWrite(CCFM_DEV_01, C3, "P")
-						If x_st_01 <> 0
-							COGP_EcritureCR(" -- Importation CCFM - Erreur lors de l'écriture dans la table C3.")
-						EndIf
-					Case 8
-						Init C8 = " "
-							; 05 - DEBUT - Gestion anomalie quand code dossier est inférieur à 100	
-							Init C8_01 = " "
-							C8_01 = g_EnregistrementGenerique_C8
-							C8 = C8_01
-							C8.Dos = C8.Dos
-							C8.Etb = C8.Etb
-							; 05 - FIN - Gestion anomalie quand code dossier est inférieur à 100	
-						; Importation
-						If t_EcrValNo <> 0 And t_EcrValNo <> C8.EcrValNo
-							x_st_01 = HClose(CCFM_DEV_01)
-							x_st_01 = C3_Integration(CCFM_DEV_01.Name,)
-							If x_st_01 <> True
-								COGP_EcritureCR(" -- Importation CCFM - Erreur : l'importation de l'écriture " & Left(t_EcrValNo) & " n'a pas pu se dérouler correctement.")
+					t_Valeur = Cog_OLE_LireCelluleAt(g_NumLigneExcel,Left(g_TabChamp_NumColonne(i)))
+					
+					If g_TabChamp_C8(i) = 2
+						If g_TabChamp_Dim_C8(i) > 0 ; Tableau
+							If	g_TabChamp_DataNat_C8(i) = 4	; Date
+								FDate(Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i) + g_TabChamp_TailleElem_C8(i)*(g_TabChamp_Dim_C8(i) - 1), g_TabChamp_TailleElem_C8(i)), FString("B", t_Valeur))
 							Else
-								COGP_EcritureCR(" -- Importation CCFM - Transfert vers DIVALTO de l'écriture numéro " & Left(t_EcrValNo) & " - " & Left(t_EcrNo_DIVALTO_01) & " .")
+								Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i) + g_TabChamp_TailleElem_C8(i)*(g_TabChamp_Dim_C8(i) - 1), g_TabChamp_TailleElem_C8(i)) = FString("B", t_Valeur)
 							EndIf
-							x_st_01 = TmpFCreate(CCFM_DEV_01)
-							t_EcrNo_DIVALTO_00	= COGF_RechercheEcrNoDernier(MZ.Dos)
-							t_EcrNo_DIVALTO_01	= t_EcrNo_DIVALTO_00 + 1
+						Else
+							If	g_TabChamp_DataNat_C8(i) = 4	; Date
+								FDate(Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i), g_TabChamp_TailleTot_C8(i)), FString("B", t_Valeur))
+							Else
+								Mid(g_EnregistrementGenerique_C8, g_TabChamp_DataOffSet_C8(i), g_TabChamp_TailleTot_C8(i))	= FString("B", t_Valeur)
+							EndIf
 						EndIf
-						t_EcrNo_DIVALTO_00	= t_EcrNo_DIVALTO_00 + 1
-						C8.EcrNo					= t_EcrNo_DIVALTO_00
-						t_EcrValNo				= C8.EcrValNo
-						C8.UserCrDh				= Time(7)
-						C8.UserCr				= SYSTEM.User
-						x_st_01	= IWrite(CCFM_DEV_01, C8, "P")
+					EndIf
+	
+				Next		
+											
+				; Enregistrement								
+				Init C8 = " "
+				
+				C8 = g_EnregistrementGenerique_C8 
+	
+				t_Valeur	= " "
+				t_Valeur = Cog_OLE_LireCelluleAt(g_NumLigneExcel,ClnCrdt)
+
+				NPieceExcel = c8.Piece
+	
+				If t_Valeur <> ' '
+					c8.Mt 	= t_Valeur
+	 				c8.Sens 	= 2
+				EndIf
+	
+				t_Valeur	= " "
+				t_Valeur = Cog_OLE_LireCelluleAt(g_NumLigneExcel,ClnDbt)
+	
+				If t_Valeur <> ' '
+					c8.Mt	= t_Valeur
+	 				c8.Sens 	= 1
+				EndIf
+	
+				C8.Ce1 			= '8'
+				PingReceive("Typecr",C8.Ce2)
+				C8.Ce2   		;= Typecr			
+				c8.Ce3 			= " "
+				c8.Ce4 			= " "
+				c8.Ce5 			= " "
+				c8.Ce6 			= " "
+				c8.Ce7 			= " "
+				c8.Ce8 			= " "
+				c8.Ce9 			= " "
+				c8.Cea 			= " "
+				c8.Conf 			= " "
+				c8.EcrNo 		= CompteurEcr++
+;				c8.EcrLg 		= " "
+;				c8.EcrValNo 	= " "
+				If C8.CptCol = ' '
+					C8.CptCol = C8.Cpt
+				EndIf
+;				c8.Lett 			= " "
+;				c8.Point 		= " "
+;				c8.LotCod 		= 1
+;				c8.Lot 			= " "
+;				c8.ChqNo 		= " "
+;				c8.Critere 		= " "
+;				c8.RegTyp  		= " "
+				c8.UserCrDh 	= Time(7)
+;				c8.CeNote 		= " "
+;				c8.Note 			= " "
+;				c8.MtBis 		= " "
+;				c8.Mt2 			= " "
+;				c8.LettDt 		= " "
+;				c8.PointDt 		= " "
+;				c8.Mt2Nat 		= " "
+;				c8.BqeDt 		= " "
+;				c8.ValDt 		= " "
+;				c8.OpeDt 		= " "
+				c8.UserCrOri 	= 2
+;				c8.SaisCod(*)	= " "
+;				c8.PointMt 		= " "
+				C8.UserCr		= SYSTEM.User
+	
+				AXE1 = Cog_OLE_LireCelluleAt(g_NumLigneExcel,ClnAX1)
+				AXE2 = Cog_OLE_LireCelluleAt(g_NumLigneExcel,ClnAX2)
+				AXE3 = Cog_OLE_LireCelluleAt(g_NumLigneExcel,ClnAX3)
+				AXE4 = Cog_OLE_LireCelluleAt(g_NumLigneExcel,ClnAX4)
+		
+				if C8.Dos = 0
+					C8.Dos = Mz.Dos
+				Endif
+
+				If C8.Etb = 0
+					C8.Etb = Mz.Etb
+				EndIf
+
+				Cog_Recherche_Cpt(c8.Dos,c8.Cpt)
+	
+				If C8.Reg = ' '
+					C8.Reg = Cog_Recherche_Cpt(c8.Dos,c8.Cpt)			
+				Endif
+	
+				Cog_Recherche_Journal(C8.Dos,c8.Jnl,PieceDr,'')
+	
+				If CogRs_Journal.EchSais = 3
+					C8.EchDt = ' '	
+				EndIf
+	
+				;	Vérification de montant
+				If c8.Mt <> 0
+					;	Vérification de n° Piece
+					If CogRs_Journal.PieceSais in (2,3) and c8.Piece <> 0 
+						x_st_01		= IWrite(CCFM_DEV_01, C8, "P")
 						If x_st_01 <> 0
-							COGP_EcritureCR(" -- Importation CCFM - Erreur lors de l'écriture dans la table C8.")
+							MessageBox("Erreur lors de l'écriture dans la table C8.", "Erreur d'écriture", MB_OK + MB_ICONEXCLAMATION)
 						EndIf
-					Case 2
-						Init CX = " "
-							; 05 - DEBUT - Gestion anomalie quand code dossier est inférieur à 100	
-							Init CX_01 = " "
-							CX_01 = g_EnregistrementGenerique_CX
-							Init CX = CX_01
-							CX.Dos = CX.Dos
-							CX.Etb = CX.Etb
-							; 05 - FIN - Gestion anomalie quand code dossier est inférieur à 100	
-						CX.Ce2	= " "
-						CX.EcrNo		= C8.EcrNo
-						CX.UserCrDh = Time(7)
-						CX.UserCr	= SYSTEM.User
-						x_st_01	= IWrite(CCFM_DEV_01, CX, "P")
+					Elsif CogRs_Journal.PieceSais = 4
+						Cog_reserve_C4
+						C8.Piece 		= Cog_Affecter_NDrPiece(C8.Dos,c8.Jnl,NPieceExcel,NPieceDRExcel,PieceDr)
+						PieceDr 			= C8.Piece
+
+						x_st_01		= IWrite(CCFM_DEV_01, C8, "P")
 						If x_st_01 <> 0
-							COGP_EcritureCR(" -- Importation CCFM - Erreur lors de l'écriture dans la table CX.")
+							MessageBox("Erreur lors de l'écriture dans la table C8.", "Erreur d'écriture", MB_OK + MB_ICONEXCLAMATION)
+						Else
+							Cog_Libere_C4
+							Cog_Recherche_Journal(C8.Dos,c8.Jnl,PieceDr,'M')
 						EndIf
-					Default
-						COGP_EcritureCR(" -- Importation CCFM - Erreur de donnée : la colonne C8.CE1 ne contient pas une valeur reconnue pas le progiciel.")
-				EndSwitch
-			Wend
+						NPieceDRExcel = NPieceExcel
+					Elsif CogRs_Journal.PieceSais = 1
+						x_st_01		= IWrite(CCFM_DEV_01, C8, "P")
+						If x_st_01 <> 0
+							MessageBox("Erreur lors de l'écriture dans la table C8.", "Erreur d'écriture", MB_OK + MB_ICONEXCLAMATION)
+						EndIf
+					Endif
+				Endif	
+
+				If (CogRs_Compte_w1.AxeSais(1) = 2 and AXE1 <> ' ') Or (CogRs_Compte_w1.AxeSais(2) = 2 and AXE2 <> ' ') Or (CogRs_Compte_w1.AxeSais(3) = 2 and AXE3 <> ' ') Or (CogRs_Compte_w1.AxeSais(4) = 2 and AXE4 <> ' ')
+					Init CX = " "
+					CX.CE1 		= 2
+					CX.DOS 		= C8.Dos
+					CX.ETB 		= C8.Etb
+					CX.ECRNO 	= C8.EcrNo
+					CX.MT 		= C8.Mt
+					If CogRs_Compte_w1.AxeSais(1) = 2 and AXE1 <> ' '
+						CX.AXE(1)	= AXE1
+					Endif
+					If CogRs_Compte_w1.AxeSais(2) = 2 and AXE2 <> ' '
+						CX.AXE(2)	= AXE2
+					Endif
+					If CogRs_Compte_w1.AxeSais(3) = 2 and AXE3 <> ' '
+						CX.AXE(3)	= AXE3
+					Endif
+					If CogRs_Compte_w1.AxeSais(4) = 2 and AXE4 <> ' '
+						CX.AXE(4)	= AXE4
+					Endif
+					CX.UserCrDh = Time(7)
+					CX.UserCr	= SYSTEM.User
+					IWrite(CCFM_DEV_01, CX, "P")
+				Endif
+
+			Else
+
+				NVide++
+
+			EndIf
+
+		Wend
 			; Importation
 			x_st_01 = HClose(CCFM_DEV_01)
 			x_st_01 = C3_Integration(CCFM_DEV_01.Name,)
-			If x_st_01 <> True
-				COGP_EcritureCR(" -- Importation CCFM - Erreur : l'importation de l'écriture " & Left(t_EcrValNo) & " n'a pas pu se dérouler correctement.")
+			If x_st_01 = True
+				MessageBox("Traitement effectué","Import Simplifié des écritures comptables", MB_OK + MB_ICONINFORMATION)
 			Else
-				COGP_EcritureCR(" -- Importation CCFM - Transfert vers DIVALTO de l'écriture numéro " & Left(t_EcrValNo) & " - " & Left(t_EcrNo_DIVALTO_01) & " .")
+				MessageBox("Veuillez consulter le livre de bord, des erreurs ont empêchés l'importation des écritures","Import Simplifié des écritures comptables", MB_OK + MB_ICONEXCLAMATION)
 			EndIf
-      EndIf
-		; Déconnexion
-		x_st_01 = DDEDeconnect(g_IdServF)
-   EndIf
+	
+	EndIf
+	
 	FReturn(0)
-EndF
 
+EndF
+;*
+Function Char Cog_NomFeuil_Excel()
+1	Classeur			256
+1	Feuille			256
+;
+BeginF
+	Office_SetInterfaceCalc(1)
+	Office_Begin
+	IsOffice_OpenCalc
+	Office_GetActiveSheetAndWorkbookName(Classeur,Feuille)
+	Office_End
+	freturn(Feuille)	
+EndF
 ;*
 ;Programme principal
 ;*	00
 Main
-	
-If PingReceive("ZEchange", MZ) = 0
-	; Initialisation
-	Seek_Soc(MZ.Dos)		; Contrôle du dossier
-	Seek_Ets(MZ.Etb)
-	Harm_Init(60,60,60,60,60)
-	; Création et initialisation de la liste du compte rendu CR
-	g_Msg_Num = 0
-	l_LST_CR = ListCreate
-	GetAdressFunction(" ", "COGF_Tri_Liste_CR", a_ADR_CR)	; La fonction GetAdressFunction permet d'obtenir l'adresse d'une fonction en vue de son exécution par l'instruction FunctionCall
-	ListMode(l_LST_CR, 1, a_ADR_CR)								; ListMode permet d'avoir les listes automatiquements triées
 
-	d_datetrait = Time(7)																															 
-	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
-	s_datetrait = Fstring("0", s_datetrait)
-	COGP_EcritureCR("==== IMPORTATION CCFM - DEBUT : " & s_datetrait & " ====")
+	If PingReceive("ZEchange", MZ) = 0
+		; Initialisation
+		Seek_Soc(MZ.Dos)		; Contrôle du dossier
+		Seek_Ets(MZ.Etb)
 
-	If DDEOpen = 0
-		COGP_EcritureCR(" -- Importation CCFM - Erreur d'initialisation (DDE Open).")
-	EndIf
-	g_Serveur	= "Excel"
-	g_Topic		= "system"
-	g_IdServ		= DDEConnect(g_Serveur,g_Topic) T
-	If g_IdServ = 0
-		COGP_EcritureCR(" -- Importation CCFM - Erreur lors de l'accès à l'application Excel (DDE Open).")
-	EndIf	
-	; Importation des données
-	COGF_Import_CCFM
-	
-	; Déconnexion
-	x_st_00 = DDEDeconnect(g_IdServ)
-	x_st_00 = DDEClose 
+		Feuilencours = ' '
+		Feuilencours = Cog_NomFeuil_Excel
 
-	; Fin
-	d_datetrait = Time(7)																															 
-	s_datetrait = Mid(d_datetrait,7,2) & "/" & Mid(d_datetrait,5,2) & "/" & Mid(d_datetrait,1,4) & "-" & Mid(d_datetrait,9,2) & ":" &	Mid(d_datetrait,11,2) & ":" & Mid(d_datetrait,13,2)
-	s_datetrait = Fstring("0", s_datetrait)
+		If Cog_OLE_Ouvrir(Feuilencours)= 0
+			; Importation des données
+			COGF_Import_CCFM
+			Cog_OLE_Fermer()
+		Else
+			MessageBox("Problème d'ouverture de fichier Excel","Alerte",MB_ICONEXCLAMATION)
+	   	ProgramEXIT
+		EndIf
 
-	; Impression du compte rendu CR
-	If Left(MZ.Echange) = "COGP_Edition_CompteRendu"
-		COGP_EcritureCR(" -- Importation CCFM - Impression du compte rendu : pour plus de renseignements, veuillez consulter le libre de bord.")
-		COGP_EcritureCR("==== IMPORTATION CCFM - FIN : " & s_datetrait & " ====")
-		COGP_Edition_CompteRendu
-	Else
-		COGP_EcritureCR("==== IMPORTATION CCFM - FIN : " & s_datetrait & " ====")
 	EndIf
 
-EndIf
-
-ProgramExit
+	ProgramExit
