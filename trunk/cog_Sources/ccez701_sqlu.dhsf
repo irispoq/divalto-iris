@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20150302155811      
+;>xwin4obj                              7.0       20150318155321      
 [masque]
  utilisateur="ROOT"
- date_modification="02/03/2015"
+ date_modification="18/03/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
- dernier_id=1000051
+ dernier_id=1000052
  surcharge=oui
  date_modif_base="20130227140720"
  dernier_id_page=100000
@@ -2046,6 +2046,26 @@
     titre="Désignation"
     fl_aff=non
     largeur_col=201
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=140,137
+    taille=9,30
+    id=1000052
+    colonnes_saisie=10
+    wstyle="STD"
+   [description]
+    donnee=immo,ecoamdt,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+   [info_bulle]
+   texte="Date de démarrage de l'amortissement"
+   [param_colonne]
+    titre="Date de démarrage de l'amortissement"
+    fl_aff=non
+    largeur_col=30
     wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
