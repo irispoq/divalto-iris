@@ -498,13 +498,13 @@ beginp
 	endif
 
 	;on met à jour le n° de reddition
-	if not hshare(ccfecr_loc,"C3C8"&mz.Dos&ecrno_maj,"R")
+	if not hshare(ccfecr_loc, Formater_Res("C3C8")&mz.Dos&ecrno_maj,"R")
 		ccfecr_loc.Key	= "H" & mz.Dos & ecrno_maj
 		loop not hread(ccfecr_loc,c8_loc) and ccfecr_loc.Key <= "H" & mz.Dos & ecrno_maj & $FF
 			c8_loc.Cog_RedNo	= redno
 			hrewrite(ccfecr_loc,c8_loc)
 		endloop
-		hshare(ccfecr_loc,"C3C8"&mz.Dos&ecrno,"L")
+		hshare(ccfecr_loc,Formater_Res("C3C8")&mz.Dos&ecrno,"L")
 	else
 		Cog_EcritureLivreDeBord("Ecriture "&right(ecrno_maj)&" réservée. Mise à jour impossible",applic="DCPT")
 		erreur	= true
