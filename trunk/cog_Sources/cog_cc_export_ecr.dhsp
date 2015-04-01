@@ -562,6 +562,9 @@ BeginF
 			CX_DEV_01.Axe(4)	= Vtl.Axe4
 			if vtl.mt<0
 				vtl.mt=abs(vtl.mt)
+				vtl.Sens = 1
+			Else
+				vtl.Sens = 2
 			endif
 			CX_DEV_01.Mt		= Vtl.Mt
 			CX_DEV_01.Sens		= Vtl.Sens

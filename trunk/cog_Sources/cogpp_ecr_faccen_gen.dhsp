@@ -165,7 +165,7 @@ beginf
 	ListMode(list_EcrVtl,1,fonc_EcrVtl)
  
 	;réservation du journal d'export
-	if hshare(ccfjca,"C3C4"&c4.Dos&c4.Jnl,"R")
+	if hshare(ccfjca,Formater_Res("C3C4")&c4.Dos&c4.Jnl,"R")
 		if not tunnel
 			messagebox("Journal "&left(c4.Jnl)&" réservé.|Génération des écritures impossible","Alerte",mb_iconexclamation)
 		endif
@@ -186,7 +186,7 @@ beginp
 		c4.Cog_PiecePV	= c4_cen.Cog_PiecePV
 		hrewrite(ccfjca,c4)
 	endif
-	hshare(ccfjca,"C3C4"&c4_cen.Dos&c4_cen.Jnl,"L")
+	hshare(ccfjca,Formater_Res("C3C4")&c4_cen.Dos&c4_cen.Jnl,"L")
 
 endp
 
@@ -327,7 +327,7 @@ beginp
 
 		Seek_C3(c8_loc.Cpt)
 
-		if not hshare(ccfecr_rec,"C3C8"&c8_loc.Dos&c8_loc.EcrNo,"R")
+		if not hshare(ccfecr_rec,Formater_Res("C3C8")&c8_loc.Dos&c8_loc.EcrNo,"R")
 			if not hseek(ccfecr_rec,c8_rec,"H"&c8_loc.Dos&c8_loc.EcrNo&c8_loc.EcrLg)
 				c8_rec.Cog_ExpPV_Jnl	= ca.Cog_ExpCen_Jnl
 				c8_rec.Cog_PiecePV	= piece
@@ -336,7 +336,7 @@ beginp
 				Cog_EcritureLivreDeBord("Ecriture "&right(c8_loc.EcrNo)&" introuvable. Mise à jour impossible",applic="DCPT")
 				erreur	= true
 			endif
-			hshare(ccfecr_rec,"C3C8"&c8_loc.Dos&c8_loc.EcrNo,"L")
+			hshare(ccfecr_rec,Formater_Res("C3C8")&c8_loc.Dos&c8_loc.EcrNo,"L")
 		else
 			Cog_EcritureLivreDeBord("Ecriture "&right(c8_loc.EcrNo)&" réservée. Mise à jour impossible",applic="DCPT")
 			erreur	= true
