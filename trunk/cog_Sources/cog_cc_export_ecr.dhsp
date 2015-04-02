@@ -462,6 +462,12 @@ BeginF
 					t_ecrno	= CogRs_CX.EcrNo
 					t_lilg	= 1
 				endif
+
+				CogRs_CX.Cog_sens = Condition(CogRs_CX.Cog_sens > 0, CogRs_CX.Cog_sens, CogRs_CX.sens)
+				; DEBUG
+				;If CogRs_CX.AXE(1) = '330163'AND CogRs_CX.AXE(3) = '681235' AND CogRs_CX.AXE(4) = '3P'
+				;	CogRs_CX.AXE(1)
+				;EndIf
 				
 				Vtl_rec			= ""
 				Vtl_rec.Axe1	= CogRs_CX.Axe(1)
@@ -485,8 +491,8 @@ BeginF
 				
 				if listseek(list_EcrVtl,Vtl_rec,Vtl)
 					
-					CogRs_CX.mtbis=abs(CogRs_CX.mt)
-					Vtl.Mt	+= condition(CogRs_CX.cog_sens=2,CogRs_CX.Mtbis,-CogRs_CX.Mtbis)
+					;CogRs_CX.mtbis=abs(CogRs_CX.mt)
+					Vtl.Mt	+= condition(CogRs_CX.Cog_Sens=2, CogRs_CX.Mt, -1 * CogRs_CX.Mt)
 					
 					if vtl.mt<0
 						vtl.sens=1
@@ -497,8 +503,8 @@ BeginF
 					listmodify(list_EcrVtl,Vtl)
 				else
 					Vtl		= Vtl_rec
-					CogRs_CX.mtbis=abs(CogRs_CX.mt)
-					Vtl.Mt	= condition(CogRs_CX.cog_sens=2,CogRs_CX.Mtbis,-CogRs_CX.Mtbis)
+					;CogRs_CX.mtbis=abs(CogRs_CX.mt)
+					Vtl.Mt	= condition(CogRs_CX.Cog_Sens=2,CogRs_CX.Mt, -1 * CogRs_CX.Mt)
 					if vtl.mt<0
 						vtl.sens=1
 					else
@@ -508,6 +514,12 @@ BeginF
 					listinsert(list_EcrVtl,Vtl)
 					t_lilg++
 				endif
+
+
+				; DEBUG
+				;If CogRs_CX.Axe(3) = '681230' AND CogRs_CX.Axe(4) = '3P'
+				;	CogRs_CX
+				;EndIf
 
 				;mise à jour du cumul sur les axes 999999
  				Vtl_rec			= ""
@@ -521,7 +533,7 @@ BeginF
 				Vtl_rec.Ecrlg	= t_lilg
 				Vtl_Rec.EcrDt  = CogRs_CX.EcrDt
 				if listseek(list_EcrVtl,Vtl_rec,Vtl_Cumul)
-					Vtl_Cumul.Mt	+= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
+					Vtl_Cumul.Mt	+= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-1 * CogRs_CX.Mt)
 					if Vtl_Cumul.mt<0
 						Vtl_Cumul.sens=2
 					else
@@ -530,8 +542,8 @@ BeginF
 					listmodify(list_EcrVtl,Vtl_Cumul)
 				else
 					Vtl_Cumul		= Vtl_rec
-					Vtl_Cumul.Mt	= condition(CogRs_CX.Sens=2,CogRs_CX.Mt,-CogRs_CX.Mt)
-					if vtl.mt<0
+					Vtl_Cumul.Mt	= condition(CogRs_CX.Sens=2,CogRs_CX.Mt, -1 * CogRs_CX.Mt)
+					if vtl_Cumul.mt<0
 						Vtl_Cumul.sens=2
 					else
 						Vtl_Cumul.sens=1
@@ -561,10 +573,8 @@ BeginF
 			CX_DEV_01.Axe(3)	= Vtl.Axe3
 			CX_DEV_01.Axe(4)	= Vtl.Axe4
 			if vtl.mt<0
-				vtl.mt=abs(vtl.mt)
-				vtl.Sens = 1
+				vtl.mt	=abs(vtl.mt)
 			Else
-				vtl.Sens = 2
 			endif
 			CX_DEV_01.Mt		= Vtl.Mt
 			CX_DEV_01.Sens		= Vtl.Sens
