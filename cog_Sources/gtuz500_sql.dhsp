@@ -210,7 +210,7 @@ Beginf
 Endf
 
 ;*
-Function int Cog_Controle_Champs_Obligatoires
+Function int Cog_Affaire_Ctrl_Champs_Obligatoires
 ;
 RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			wRS_125
 1		wErr		1,0
@@ -226,6 +226,12 @@ BeginF
 		; Le détail des factures doit être activé
 		If Affaire.Cog_ImpDetail <> 2
 			wtxtErr &= "|Le détail des lignes de facture pour l'impression n'est pas activé."
+			werr = TRUE
+		EndIf
+
+		; La date de validation du devis client doit être renseignée
+		If CogRs_PrjComp.ValDevDt = ' '
+			wtxtErr &= "|La date de validation du devis client n'est pas renseignée."
 			werr = TRUE
 		EndIf
 
@@ -293,6 +299,126 @@ BeginF
 		FReturn(1)
 	EndIf
 
+	FReturn(0)
+
+EndF
+
+;*
+Procedure Cog_UT125_Update_Date_Debut(wDD, &wRS_125, &wTxt, &wErr)
+;	Routine commune à tous les types d'enreg UT125
+; MAj de Cog_Date_Debut avec la valeur de wDD
+RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			wRS_125
+1		wDD		>cogfdd.dhsd		Cog_Date_Debut
+1		wTxt		S
+1		wErr		1,0
+1		wRead		L
+BeginP
+
+	wRs_125.Where.Equal_Affaire(Affaire.Affaire)
+	wRs_125.Where.AddCondition("Equal_Affaire")
+	wRS_125.Where.NonFacture()
+	wRs_125.Where.AddCondition("NonFacture")
+	wRead = wRS_125.ReaderOpen()
+	wRS_125.ReaderSelect(wRead)
+
+	Do WHile wRS_125.ReaderNext(wRead) > 0
+
+		If wDD <> wRS_125.Cog_Date_Debut
+
+			If wRS_125.FShare([ 'COG_UT125' wRS_125.Dos wRS_125.Affaire wRS_125.Ref wRS_125.Cog_LgNo], 'R') = 0
+				
+				wRS_125.Cog_Date_Debut = wDD
+				Cog_CalculerDateFinFacturation(wRS_125.Cog_Date_Debut, wRS_125.Cog_LoyNb, wRS_125.Cog_Period, wRS_125.Cog_Date_Fin)
+				wRS_125.ReaderUpdate(wRead)
+				Cog_UT126_GenererEcheancier(wRS_125.COG_UT125)
+				wRS_125.FShare([ 'COG_UT125' wRS_125.Dos wRS_125.Affaire wRS_125.Ref wRS_125.Cog_LgNo], 'L')
+	
+			Else
+				wTxt &= "|Enregistrement réservé - Ref: " & Left(wRS_125.Ref) & " - ligne n°" & nospaces(wRS_125.Cog_LgNo)
+				wErr = TRUE
+			EndIf
+
+		EndIf
+
+	WEnd
+
+	wRS_125.ReaderClose(wRead)
+
+EndP
+
+;*
+Function int Cog_Affaire_Reporter_Dates_Sur_UT125
+; Modifie la date début des fiches UT125
+RecordSQL	"COGRS_PROJ.DHOQ"			CogRs_PrjComp		wRs_PrjComp_Old
+RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			wRS_125
+1		wTxt		S		= ' '
+1		wErr		1,0
+1		wRead		L
+BeginF
+
+	werr = FALSE
+	wTxt = "Fiches UT125 non mises à jour:"
+
+	wRs_PrjComp_Old.Init()
+	wRs_PrjComp_Old.Where.PK(Affaire.Affaire)
+	If wRs_PrjComp_Old.Select() = 0
+		wRs_PrjComp_Old.Init()
+	EndIf
+
+	;*
+	; Charges NON IMMO --> date de début des travaux  réelle 
+	;*
+	If wRs_PrjComp_Old.TravReelDDt <> CogRs_PrjComp.TravReelDDt
+
+
+		wRs_125.Init()
+		wRs_125.Where.RemoveCondition("")
+		wRs_125.Where.Equal_ImmoTyp(C_OP_NONIMMO)
+		wRs_125.Where.AddCondition("Equal_ImmoTyp")
+
+		Cog_UT125_Update_Date_Debut(CogRs_PrjComp.TravReelDDt, wRS_125, wTxt, wErr)
+
+	EndIf
+
+
+	;*
+	; Charges IMMO
+	;*
+
+		
+	; PROJET --> date de mise en service PROJET réelle 
+	If wRs_PrjComp_Old.ProjServReelDt <> CogRs_PrjComp.ProjServReelDt
+
+		wRs_125.Init()
+		wRs_125.Where.RemoveCondition("")
+		wRs_125.Where.Equal_ImmoTyp(C_OP_IMMO)
+		wRs_125.Where.AddCondition("Equal_ImmoTyp")
+		wRS_125.Where.Equal_NatTyp(C_PRODNAT_PROJET)
+		wRs_125.Where.AddCondition("Equal_NatTyp")
+
+		Cog_UT125_Update_Date_Debut(CogRs_PrjComp.ProjServReelDt, wRS_125, wTxt, wErr)
+
+	EndIf
+
+	; INFRA  --> date de mise en service INFRA réelle
+	If wRs_PrjComp_Old.InfraServReelDt <> CogRs_PrjComp.InfraServReelDt
+
+		wRs_125.Init()
+		wRs_125.Where.RemoveCondition("")
+		wRs_125.Where.Equal_ImmoTyp(C_OP_IMMO)
+		wRs_125.Where.AddCondition("Equal_ImmoTyp")
+		wRS_125.Where.Equal_NatTyp(C_PRODNAT_INFRA)
+		wRs_125.Where.AddCondition("Equal_NatTyp")
+
+		Cog_UT125_Update_Date_Debut(CogRs_PrjComp.InfraServReelDt, wRS_125, wTxt, wErr)
+
+	EndIf	
+
+	;
+	If wErr
+		MessageBox(wTxt,"Erreur", MB_ICONERROR)
+	EndIf
+	
 	FReturn(0)
 
 EndF
@@ -446,7 +572,9 @@ beginp
 			MessageBox ("Veuillez saisir le code client.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
 			Harmony.Retour = Xmenext_Point_Sequence
 			Harmony.CplRetour = 1001
-		ElsIf Cog_Controle_Champs_Obligatoires <> 0
+		ElsIf Cog_Affaire_Ctrl_Champs_Obligatoires <> 0
+			Zoom.Ok = 'S'
+		ElsIf Cog_Affaire_Reporter_Dates_Sur_UT125 <> 0
 			Zoom.Ok = 'S'
 		ElsIf Cog_Gestion_Activation_Facturation <> 0
 			;MessageBox("","Alerte", MB_ICONERROR)

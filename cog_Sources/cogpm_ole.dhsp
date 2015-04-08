@@ -1,0 +1,225 @@
+;>xdiva
+;*
+;*		Module de parcours de fichier XLS par OLE
+;*
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		BK		 6.3							10/2013  Version initiale en diva
+							 
+1	OLE_ouvert		1,0		;OLE est bien ouvert correctement (1 = Ouvert / 2 = Fermé)
+1	Entetes			S*100
+1	curs_lig			4,0   = 2
+1  ticket_serveur x        ;Excel
+1	ticket_feuille	x			;Feuille de classeur
+Module	yoffice.dhop
+
+
+
+;*
+Function int Cog_OLE_ChargeEntetes()
+;Lis une celule à la position donnée
+;Retour 0 si pas d'erreur, 1 sinon
+1	ligne	  L
+1	colonne L
+1	retour  L   = 0
+1	i		  3,0 = 1  
+1	position 60
+1  valeur   80
+BeginF
+	Entetes() = ' '	
+	Do							 		 
+		position = "l1" && "c" && FSTRING("A",Str(i))
+		DDEREQUEST(ticket_feuille,position,valeur)
+	 	Entetes(i) = valeur
+	While Entetes(i) <> ' '
+	 	i+=1
+	Wend	
+	freturn(retour)
+EndF
+
+;*
+Public Function int Cog_OLE_Ouvrir(feuille)
+;Ouvre office en mode OLE
+;Retour 0 si pas d'erreur
+;1 : impossible de connecter OLE, 2: Excel non chargé, 3: feuille non trouvée
+1	retour  1,0
+1  serveur 40      ;serveur dde
+1  topic   40      ;objet destinataire(system,feuille)
+1	feuille 40 	 ;	= "Feuil1"
+BeginF
+	if DDEOPEN() = 0
+ 		;Action en cas d'erreur
+		retour = 1
+	else
+		serveur = "Excel"
+		topic = "system"
+		
+		if (ticket_serveur :=DDECONNECT(serveur,topic)) = 0	
+			;Action en cas de chargement d'excel impossible
+			retour = 2
+			DDECLOSE()
+		else
+			if (ticket_feuille:=DDECONNECT(serveur,feuille)) = 0
+				;Action en cas de feuille non trouvée
+				retour = 3
+				DDECLOSE()
+			else
+				Cog_OLE_ChargeEntetes()
+			endif
+		endif	 
+	endif	
+	if retour = 0 | OLE_ouvert = 1 | endif
+	freturn(retour)	
+EndF
+
+;*
+Public Function int Cog_OLE_Fermer
+;Ferme office en mode OLE
+;Retour 0 si pas d'erreur, 1 si excel n'a pas été chargé
+1	retour	1,0
+BeginF
+	if OLE_ouvert = 1
+		DDEDECONNECT(ticket_serveur)
+		DDECLOSE()
+	else
+		;Action si OLE n'a pas été ouvert
+		retour = 1
+	endif
+	freturn(retour)	
+EndF
+
+;*
+Public Function String Cog_OLE_LireCelluleAt(ligne,colonne)
+;Lis une celule à la position donnée
+;Retourne la valeur, "!ERREUR" sinon
+1	ligne	   L
+1	colonne  L
+1	retour   S
+1  valeur   1000
+1	position 60
+BeginF	  
+	if OLE_ouvert = 1
+		position = "l" && FSTRING("A",Str(ligne)) && "c" && FSTRING("A",Str(colonne))
+		DDEREQUEST(ticket_feuille,position,valeur)
+	 	retour = valeur
+	else
+		;Action si OLE n'a pas été ouvert
+		retour = "!ERREUR"
+	endif
+	freturn(retour)
+EndF
+
+;*
+Public Function String Cog_OLE_LireValeurAt(entete,ligne)
+;Lis une celule à la position donnée
+;Retourne la valeur, "!ERREUR" sinon
+1	ligne	  L
+1	entete  S
+1	retour  S
+1	curs	  L
+1  valeur   1000
+1	position 60
+BeginF
+	if OLE_ouvert = 1
+		 if (curs := search(entete,entetes())) <> 0	  
+			position = "l" && FSTRING("A",Str(ligne)) && "c" && FSTRING("A",Str(curs))
+			DDEREQUEST(ticket_feuille,position,valeur)
+	 		retour = valeur
+		 else
+			 ;Action si en-tête non trouvée
+			 retour = "!ERREUR"
+		 endif
+	else
+		;Action si OLE n'a pas été ouvert
+		retour = "!ERREUR"
+	endif
+	freturn(retour)
+EndF
+
+;*
+Public Procedure Cog_OLE_NextLigne
+;Incrémente le curseur
+BeginP
+	curs_lig += 1	
+EndP
+
+
+;*
+Public Function String Cog_OLE_LireValeur(entete)
+;Lis une celule à la position "curseur"
+;Retourne la valeur, "!ERREUR" sinon
+1	entete  S
+1	retour  S
+1	curs	  L
+1  valeur   1000
+1	position 60
+BeginF
+	if OLE_ouvert = 1
+		 if (curs := search(entete,entetes())) <> 0
+		 	position = "l" && FSTRING("A",Str(curs_lig)) && "c" & FSTRING("A",Str(curs))
+			DDEREQUEST(ticket_feuille,position,valeur)
+	 		retour = valeur	 
+		 else
+			 ;Action si en-tête non trouvée
+			 retour = "!ERREUR"
+		 endif
+	else
+		;Action si OLE n'a pas été ouvert
+		retour = "!ERREUR"
+	endif
+	freturn(retour)
+EndF
+
+;*
+Public Function int Cog_OLE_EcrireValeur(entete,valeur)
+;Ecrit une celule à la position "curseur"
+;Retourne 0 pour ok, 1 sinon
+1	entete  S
+1	retour  1, 0
+1	curs	  L					  = 0
+1  valeur   1000
+1	position 60
+BeginF
+	if OLE_ouvert = 1
+		 if (curs := search(entete,entetes())) <> 0
+		 	position = "l" && FSTRING("A",Str(curs_lig)) && "c" & FSTRING("A",Str(curs))	
+			DDEPoke(ticket_feuille,position,valeur)
+	 		retour = valeur	 
+		 else
+			 ;Action si en-tête non trouvée
+			 retour = 1
+		 endif
+	else
+		;Action si OLE n'a pas été ouvert
+		retour = 1
+	endif
+	freturn(retour)
+EndF
+
+;*
+Public Function int Cog_OLE_EcrireErreur(valeur)
+;Ecrit une erreur à la position "curseur"
+;Retourne 0 pour ok, 1 sinon
+1	entete  S = 'ERREUR'
+1	retour  1, 0
+1	curs	  L					  = 0
+1  valeur   1000
+1	position 60
+BeginF
+	if OLE_ouvert = 1
+		 if (curs := search(entete,entetes())) <> 0
+		 	position = "l" && FSTRING("A",Str(curs_lig)) && "c" & FSTRING("A",Str(curs))	
+			DDEPoke(ticket_feuille,position,valeur)
+	 		retour = 0	 
+		 else
+			 ;Action si en-tête non trouvée
+			 retour = 1
+		 endif
+	else
+		;Action si OLE n'a pas été ouvert
+		retour = 1
+	endif
+	freturn(retour)
+EndF
+;*

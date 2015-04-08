@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 7664 2015-03-11 09:37:45Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7833 2015-04-08 07:26:43Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -40,22 +40,6 @@ Public Record "gtfdd.dhsd" T036
 ;*
 ;* procedures 
 ;*
-
-;*
-Procedure Cog_UT125_Next_LgNo
-;	renseigne Cog_LgNo au RS CogRS_UT125
-RecordSQL  "cogrs_uttab.dhoq"  	CogRs_UT125			wRs_UT125
-BeginP
-
-	wRs_UT125.Init()
-	wRs_UT125.Where.Max_LgNo(CogRs_UT125.Affaire)
-	If wRs_UT125.Select() > 0
-		CogRs_UT125.Cog_LgNo = wRs_UT125.Cog_LgNo + 1
-	Else
-		CogRs_UT125.Cog_LgNo = 1
-	EndIf
-
-EndP
 
 ;*
 Function int Cog_UT125_Controle_ART
@@ -166,6 +150,19 @@ BeginF
 
 EndF
 
+;*
+Function int Cog_UT125_Repartition_Autorisee
+; FALSE --> non --> loyers restants = 0 ou loyers restants = loyers à facturer (facturation non débutée donc inutile de lancer nouvelle répartition)
+; TRUE --> oui
+BeginF
+
+	If CogRs_UT125.Cog_LoyRestNb = 0 OR CogRs_UT125.Cog_LoyRestNb = CogRs_UT125.Cog_LoyNb
+		FReturn(FALSE)
+	EndIf
+
+	FReturn(TRUE)
+EndF
+
 ;*	Mise à jour des boutons (affichage, grisés, ...)
 Public Procedure Maj_Menu_Boutons
 ; met à jour le menu et les boutons
@@ -193,6 +190,7 @@ BeginP
 
 		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
 			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(cogrs_ut125.CENOTE = 2, True, False))
+			xmetoolbarenablebutton(idOutilZoom,"cog_btnrepart", Cog_UT125_Repartition_Autorisee)
 
 		endswitch
 
@@ -383,7 +381,8 @@ Beginp
 		PReturn
 	EndIf
 
-	Cog_UT125_Next_LgNo 
+	CogRs_UT125.Cog_LgNo = Cog_UT125_Next_LgNo(CogRs_UT125.Affaire) 
+
 	If CogRs_UT125.Cog_LgNo >=995
 		MessageBox("Le nombre maximal de lignes est atteint pour cette affaire.", "Alerte", MB_ICONEXCLAMATION)
 		Zoom.Ok = 'I'
@@ -556,7 +555,8 @@ Beginp
 Endp				  
 
 ;*
-Public Procedure ZoomConsult 	; à utiliser si note
+Public Procedure ZoomConsult 	
+; Points d'arrets en consultation
 Beginp
 	Switch Harmony.Key
 		Case K_F7		|	Zoom_Call()
@@ -570,6 +570,16 @@ Beginp
 		Case Harmony.Dataarret = 1001
 			Ping("COG_UT125", Cogrs_UT125.Cog_UT125)
 			ProgramCall("cogpp_ut126.dhop")
+
+		Case Harmony.Dataarret = 1002
+
+			If MessageBox("Clôturer cette fiche et récupérer le restant à facturer?", "Question", MB_ICONQUESTION+MB_YESNO) = IDYES
+				If Cog_UT125_Nouvelle_Repartition(Cogrs_UT125.Cog_UT125)	<> 0
+					MessageBox("Erreur à la création de la nouvelle fiche.|Veuillez consulter le livre de bord.", "Erreur", MB_ICONERROR)
+				EndIf
+				ZoomReactualiserListe
+				ZoomReactualiserPage
+			EndIf
 													 
 	Endswitch 
 Endp

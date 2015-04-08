@@ -1,4 +1,4 @@
-<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7592 2015-02-13 16:59:11Z admin $'>
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7833 2015-04-08 07:26:43Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGF_GTFTAB
 ;*
@@ -53,6 +53,8 @@ Public Record GTFDD.dhsd	T000
 		COG_UT125.COG_LGNO = lgno
 	Case Facture
 		COG_UT125.COG_LOYFANB > 0
+	Case NonFacture
+		COG_UT125.COG_LOYFANB = 0
 	Case Like_Ref(char ref)
 	 	COG_UT125.REF LIKE ref
 	Case Like_Affaire(char aff)

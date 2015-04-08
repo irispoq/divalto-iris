@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7664 2015-03-11 09:37:45Z admin $')
+SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7833 2015-04-08 07:26:43Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Module de fonctions communes à la facturation des projets spécifiques UT125
@@ -182,6 +182,38 @@ EndF
 ;*
 ;*	  Actions sur UT126
 ;*
+
+;*
+Public Procedure Cog_UT126_AnnulerEcheancier(wUT125)
+;	La RESA sur COG_UT125 doit être gérée avant appel à cette procédure
+;  Péremption des UT126 ACTIFS de l'enreg UT125 passé en paramètre
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126		wRs_UT126
+Record		"COGFDD.DHSD"			COG_UT125		wUT125
+BeginP
+
+	; Filtres
+	IF wUT125.Affaire = ' ' OR wUT125.Ref = ' ' OR wUT125.Cog_LgNo = 0
+		Cog_EcritureLivreDeBord("Informations UT125 incomplètes - génération échéancier facturation non effectuée.")
+		PReturn
+	EndIf
+
+	; Modification de l'état 
+	wRs_UT126.Init()
+	wRs_UT126.Where.RemoveCondition("")
+	wRs_UT126.Where.Equal_Affaire(wUT125.Affaire)
+	wRs_UT126.Where.AddCondition("Equal_Affaire")
+	wRs_UT126.Where.Equal_Ref(wUT125.Ref)
+	wRs_UT126.Where.AddCondition("Equal_Ref")
+	wRs_UT126.Where.Equal_LgNo(wUT125.Cog_LgNo)
+	wRs_UT126.Where.AddCondition("Equal_LgNo")
+	wRs_UT126.Where.Equal_Etat(C_UT126_STATUT_ACTIF)
+	wRs_UT126.Where.AddCondition("Equal_Etat")
+								
+	wRs_UT126.InitForUpdateWhere()
+	wRs_UT126.Ce1 = C_UT126_STATUT_ANNULE
+	wRs_UT126.UpdateWhere()
+
+EndP
 
 ;*
 Public Procedure Cog_UT126_DeleteEcheancier(wUT125)
@@ -422,14 +454,14 @@ BeginP
 		Next
 
 		; init des ce
-		wRs_UT126.Ce1 = '8'	 ; par défaut périmé
+		wRs_UT126.Ce1 = C_UT126_STATUT_PERIME	 ; par défaut périmé
 		For j = 1 to 12
 
-			wRs_UT126.CeFaTb(j) = '9' ; par défaut non concerné par la facturation
+			wRs_UT126.CeFaTb(j) = C_UT126_CEMOIS_NONFACTURABLE ; par défaut non concerné par la facturation
 			If wRs_UT126.MoisMt(j) > 0
 
-				wRs_UT126.Ce1 = Condition(wFacturable=TRUE, '1', '6') ; au moins un loyer facturable --> ut126 est actif ou en attente que les conditions de facturation soient remplies
-				wRs_UT126.CeFaTb(j) = '1'										; mois à facturer
+				wRs_UT126.Ce1 = Condition(wFacturable=TRUE, C_UT126_STATUT_ACTIF, C_UT126_STATUT_SIMUL) ; au moins 1 mois facturable --> statut actif ou simul
+				wRs_UT126.CeFaTb(j) = C_UT126_CEMOIS_AFACTURER			; mois à facturer
 
 			EndIf
 
@@ -442,4 +474,146 @@ BeginP
 	Next
 
 EndP
+
+;*
+Public function int Cog_UT125_Next_LgNo(wAff)
+;	renvoie le prochain Cog_LgNo disponible pour le RS CogRS_UT125
+RecordSQL  "cogrs_uttab.dhoq"  	CogRs_UT125			wRs_UT125
+1		wAff	>gtfdd.dhsd		Affaire
+1		wNo	>cogfdd.dhsd	Cog_LgNo	= 0
+BeginF
+
+	wRs_UT125.Init()
+	wRs_UT125.Where.Max_LgNo(wAff)
+	If wRs_UT125.Select() > 0
+		wNo = wRs_UT125.Cog_LgNo + 1
+	Else
+		wNo = 1
+	EndIf
+
+	FReturn(wNo)
+
+EndF
+
+;*
+Public Function int Cog_UT125_Nouvelle_Repartition(wUT125)
+;	Création d'un nouveau UT125 à partir de celui passé en paramètre
+;	Péremption des UT126 de l'UT125 passé en paramètre
+; 	Génération d'un échéancier UT126 à partir du reste à facturer de l'UT125 passé en paramètre
+; 0 --> pas d'erreur
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT125			wRs_UT125_Old
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT125			wRs_UT125_New
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126			wRs_UT126
+Record		"COGFDD.DHSD"			COG_UT125			wUT125
+1		wHMP		S
+1		wRet		1,0 = 0
+1		wLgNo		>cogfdd.dhsd	Cog_LgNo
+1		wRead		L
+1		i			2,0
+BeginF
+
+	;
+	wRs_UT125_Old.Init()
+	wRs_UT125_Old.Where.PK(wUT125.Affaire, wUT125.Ref, wUT125.Cog_LgNo)
+	If wRs_UT125_Old.Select() = 0
+		Cog_EcritureLivreDeBord("Enregistrement UT125 non retrouvé pour répartition du reste à facturer.")
+		FReturn(1)
+	EndIf
+
+	;
+	If Res_Affaire(wUT125.Affaire, 0)	<> 0
+		Cog_EcritureLivreDeBord("Code affaire " & left(wUT125.Affaire) & " réservé.")
+		wRet = 1
+	EndIf
+
+	If wRs_UT125_Old.FShare([ 'COG_UT125' mz.Dos wUT125.Affaire wUT125.Ref wUT125.Cog_LgNo], 'R') <> 0
+		wRs_UT125_Old.ShareLastError(wHMP)
+		Cog_EcritureLivreDeBord("Enregistrement UT125 réservé - " & left(wHMP))
+		wRet = 1
+	EndIf
+
+	wLgNo = Cog_UT125_Next_LgNo(wUT125.Affaire)
+	If wLgNo > 995
+		Cog_EcritureLivreDeBord("Le nombre maximal de lignes est atteint pour l'affaire " & left(wUT125.Affaire))
+		wRet = 1
+	ElsIf wRs_UT125_New.FShare([ 'COG_UT125' mz.Dos wUT125.Affaire wUT125.Ref wLgNo], 'R') <> 0
+		wRs_UT125_New.ShareLastError(wHMP)
+		Cog_EcritureLivreDeBord("Enregistrement UT125 réservé - " & left(wHMP))
+		wRet = 1
+	EndIf
+
+	;
+	If wRet = 0
+		
+		Cog_UT126_AnnulerEcheancier(wUT125)
+	
+		; Init du nouvel enreg
+		wRs_UT125_New.Init()
+		wRs_UT125_New.COG_UT125 	= wUT125
+		wRs_UT125_New.Cog_LgNo  	= wLgNo
+		wRs_UT125_New.UserCr		= System.User
+		wRs_UT125_New.UserCrDt	= Time(7)
+		wRs_UT125_New.UserMo		= ' '
+		wRs_UT125_New.UserMoDh	= ' '
+		wRs_UT125_New.Note			= 0
+		wRs_UT125_New.CeNote		= 1
+		wRs_UT125_New.Cog_Date_Derniere_Facture	= ' '
+		wRs_UT125_New.Cog_LoyNb	= 0
+		wRs_UT125_New.Cog_LoyFaNb= 0
+		wRs_UT125_New.Cog_LoyRestNb = 0
+		wRs_UT125_New.Cog_Montant= 0
+		wRs_UT125_New.Cog_Date_Debut = ' '
+
+		; récupération du reste à facturer
+		wRs_UT126.Init()
+		wRs_UT126.Where.RemoveCondition("")
+		wRead = wRs_UT126.ReaderOpen()
+		wRs_UT126.Where.Equal_Affaire(wUT125.Affaire)
+		wRs_UT126.Where.AddCondition("Equal_Affaire")
+		wRs_UT126.Where.Equal_Ref(wUT125.Ref)
+		wRs_UT126.Where.AddCondition("Equal_Ref")
+		wRs_UT126.Where.Equal_LgNo(wUT125.Cog_LgNo)
+		wRs_UT126.Where.AddCondition("Equal_LgNo")
+		wRs_UT126.Where.Equal_Etat(C_UT126_STATUT_ANNULE)
+		wRs_UT126.Where.AddCondition("Equal_Etat")
+		wRs_UT126.OrderBy.Par_PK()
+		wRs_UT126.ReaderSelect(wRead)
+
+		Do While wRs_UT126.ReaderNext(wRead) > 0
+
+			For i=1 to 12
+
+				If wRs_UT126.CeFaTb(i) = C_UT126_CEMOIS_AFACTURER			; le mois n'avait pas été facturé on récupère le montant
+
+					If wRs_UT125_New.Cog_Date_Debut = ' '
+ 						wRs_UT125_New.Cog_Date_Debut = wRs_UT126.Annee & Condition(i<10, '0'&nospaces(i), ToString(i)) & '01'
+					EndIf
+
+					wRs_UT125_New.Cog_LoyNb++
+					wRs_UT125_New.Cog_Montant += wRs_UT126.MoisMt(i)
+
+				EndIf
+
+			Next
+
+		WEnd
+
+		wRs_UT126.ReaderClose(wRead)
+
+		;
+		wRs_UT125_New.Insert()	
+		wRs_UT125_Old.Cog_LoyRestNb = 0
+		wRs_UT125_Old.Update()
+
+
+	EndIf
+
+	;
+	wRs_UT125_Old.FShare([ 'COG_UT125' mz.Dos wUT125.Affaire wUT125.Ref wUT125.Cog_LgNo], 'L')
+	wRs_UT125_New.FShare([ 'COG_UT125' mz.Dos wUT125.Affaire wUT125.Ref wLgNo], 'L')
+	Lib_Affaire(wUT125.Affaire)
+
+	FReturn(0)
+
+EndF
 

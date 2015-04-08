@@ -74,7 +74,7 @@ BeginF
 	EndIf
 
 	;
-	If DOSIMMO.FShare(['C3CD' MZ.Dos], 'R') = 0
+	If DOSIMMO.FShare([Formater_Res('C3CD') MZ.Dos], 'R') = 0
 
 		DOSIMMO.Immo = Condition(DOSIMMO.Immo > 0, DOSIMMO.Immo, 1)
 		Do While not wFin
@@ -106,7 +106,7 @@ BeginF
 		WEnd
 
 		DOSIMMO.Update()
-		DOSIMMO.FShare(['C3CD' MZ.Dos], 'L')
+		DOSIMMO.FShare([Formater_Res('C3CD') MZ.Dos], 'L')
 
 	Else
 		If wMsgErr
