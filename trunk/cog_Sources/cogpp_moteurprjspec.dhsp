@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7664 2015-03-11 09:37:45Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7833 2015-04-08 07:26:43Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -24,6 +24,7 @@ SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7664 2015-03-11 09:37:45Z admin $')
 
 ;
 Include	"gttcz00.dhsp"									;déclarations communes
+Include	"cogtc_moteurprjspec.dhsp"
 
 ;
 Module	"Cogtm_000.dhop"								;module de fonctions communes
@@ -394,9 +395,9 @@ BeginP
 
 			wFini = TRUE
 			Cog_UT126.FaNoTb(faMois) = G3XZ.PINO
-			Cog_UT126.CeFaTb(faMois) = 2
+			Cog_UT126.CeFaTb(faMois) = C_UT126_CEMOIS_FACTURE
 			For i = 1 to 12
-				If Cog_UT126.CeFaTb(i) = 1
+				If Cog_UT126.CeFaTb(i) = C_UT126_CEMOIS_AFACTURER		; il reste au moins 1 mois a facturer, UT126 reste actif
 					wFini = FALSE
 					i = 12
 				EndIF

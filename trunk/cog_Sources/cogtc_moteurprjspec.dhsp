@@ -19,3 +19,14 @@ Const 	C_PRODNAT_PROJET		= 2
 Const		C_PRODNAT_INFRA		= 1
 Const 	C_PRODNAT_MATOS		= 1
 Const		C_PRODNAT_LOG			= 2
+
+; Statuts pour UT126
+Const		C_UT126_STATUT_ACTIF 	= '1'		; Prêt à facturer
+Const		C_UT126_STATUT_ANNULE 	= '4'		; La fiche UT125 a été périmée pour en créer une nouvelle
+Const		C_UT126_STATUT_SIMUL 	= '6'		; En attente / simulation (les conditions de facturation ne sont pas remplies)
+Const		C_UT126_STATUT_PERIME 	= '8'		; Facturation Terminée
+
+Const		C_UT126_CEMOIS_AFACTURER= '1'
+Const		C_UT126_CEMOIS_FACTURE	= '2'
+Const		C_UT126_CEMOIS_NONFACTURABLE= '9'
+

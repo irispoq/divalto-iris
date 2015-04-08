@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150305100048      
+;>xwin4obj                              7.0       20150311140823      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="05/03/2015"
+ date_modification="11/03/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
@@ -1136,6 +1136,21 @@
    [info_bulle]
    texte="Echéancier de facturation"
   [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__3"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wfic1="#aff_manuel",0
+    wid_ressource="COG_BTNREPART"
+    wetype_trait=arret
+    warret=1002
+   [info_bulle]
+   texte="Nouvelle répartition de montant"
+  [item]
    dessin=vide
    [param_bouton]
     wnom=""
@@ -1188,7 +1203,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogez_ut125.dhsf 7664 2015-03-11 09:37:45Z admin $')
+SetModuleInfo('$Id: cogez_ut125.dhsf 7833 2015-04-08 07:26:43Z admin $')
 ;*
 ;*	  Traitement du zoom facturation loyer sur projets spec
 ;*

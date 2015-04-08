@@ -688,7 +688,7 @@ EndP
 ;*
 Procedure Cog_Maj_Journal_Comptable
 ;
-1		i 		3,0
+1		wOK	1,0
 
 BeginP
 
@@ -705,17 +705,22 @@ BeginP
 			If Seek_C4(T020.Jnl) = 0 And C4.PieceSais = 4 And C4.PieceCod = 3	
 			
 				Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'L')
-				For i = 1 to 50
+
+				wOK 	= FALSE
+				Do While C4.Piece < 99999999 AND not wOK
 					C4.Piece++
 					If Res_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece) = 0
-						If ENT.Pino = C4.Piece | ExitFor | Endif
-						If Not Seek_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece) = 0 | ExitFor
-						Else  | Lib_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece)
+						If ENT.Pino = C4.Piece 
+							wOK = TRUE
+						ElsIf Not Seek_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece) = 0 
+							wOK = TRUE
+						Else  
+							Lib_Ent(W1ENT.TiCod,W1ENT.PiCod,C4.Piece)
 						Endif
 					Endif
-				Next
+				WEnd
 
-				If i < 50
+				If wOK
 					Gtfent.key = 'G' & W1ENT.Dos & W1ENT.TiCod & W1ENT.PiCod & W1ENT.PINO			 
 					If Hseek(Gtfent,Ent,Gtfent.Key) = 0 
 						Loop Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'R') = H_RESERVED 
