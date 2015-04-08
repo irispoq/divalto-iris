@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20150311112339,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20150407150318,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -445,13 +445,6 @@ DateM=4C1D09088650CE01
 Gel=1
 Nature=5,0
 NomOdbc=Cog_Id_Refacturation
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20141007175408,UGIE                ,20141007175414,UGIE                
-Nom=Cog_ImoFlag,Immo O/N,1
-Gel=1
-Nature=1,0
-NomOdbc=Cog_ImoFlag
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110621105533,SYSTEMU             ,20110621105535,SYSTEMU             
@@ -2440,9 +2433,6 @@ Nom=DirCliTiers,388,2,N,0,0,N,1
 Nom=DvNo,396,2,N,0,0,N,1
 Nom=CnCdNo,404,2,N,0,0,N,1
 [/CHAMPS]
-[PROPLOC]
-Nom=CnCdNo
-[/PROPLOC]
 [TABLE]
 Version=1,20111213140124,ROOT                ,20111213140232,ROOT                
 Nom=Cog_Red_Ent,Entêtes Reddition,1
@@ -3162,7 +3152,7 @@ Nom=Lib80,115,2,N,0,0,N,1
 [TABLE]
 Version=1,20141114120114,UGIE_YLF            ,20141114164419,UGIE_YLF            
 Nom=Cog_UT125,Affectations des cotisations projet spécifique,1
-DateM=23ADE5B66B47D001
+DateM=5DD09B353371D001
 NomOdbc=Cog_UT125
 Taille=500,500
 Pack=0,0
@@ -3184,11 +3174,10 @@ Nom=Cog_Period,148,2,N,0,0,N,1
 Nom=Cog_Date_Derniere_Facture,149,2,N,0,0,N,1
 Nom=Cog_AxeAnael,157,2,N,0,0,N,1
 Nom=Op,165,2,N,0,0,N,1
-Nom=Cog_ImoFlag,168,2,N,0,0,N,1
-Nom=Cog_LoyNb,169,2,N,0,0,N,1
-Nom=Cog_LoyRestNb,173,2,N,0,0,N,1
-Nom=Cog_LoyFaNb,177,2,N,0,0,N,1
-Nom=Cog_FiMt,181,2,N,0,0,N,1
+Nom=Cog_LoyNb,168,2,N,0,0,N,1
+Nom=Cog_LoyRestNb,172,2,N,0,0,N,1
+Nom=Cog_LoyFaNb,176,2,N,0,0,N,1
+Nom=Cog_FiMt,180,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20150109104215,UGIE                ,20150127170302,UGIE                
