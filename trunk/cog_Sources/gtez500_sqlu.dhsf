@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150305115335      
+;>xwin4obj                              7.0       20150409170359      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
- date_modification="05/03/2015"
+ date_modification="09/04/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
- dernier_id=1000192
+ dernier_id=1000205
  surcharge=oui
  date_modif_base="20131227150954"
  dernier_id_page=100007
@@ -4942,7 +4942,7 @@
  [multi_choix]
   [presentation]
    position=232,115
-   taille=9,59
+   taille=9,39
    noms="efface"
    id=1000061
    wstyle="CHAMP_SAISI_COG"
@@ -4951,6 +4951,7 @@
   [param_saisie]
    esp_si_zero=oui
   [param_multi]
+   ouverture=oui
    choix="cog_gtfdmc.dhfi","COG_STATUS_PRJ"
    notifier=oui
   [touches]
@@ -5417,6 +5418,120 @@
    shift_f6=10000
  [champ]
   [presentation]
+   position=244,179
+   taille=9,43
+   id=1000205
+   colonnes_saisie=16
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,i1_log_cr,cogrs_prjcomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=234,179
+   taille=9,43
+   id=1000204
+   colonnes_saisie=12
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,i1_log_cog_qtetot,cogrs_prjcomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=244,63
+   taille=9,43
+   id=1000203
+   colonnes_saisie=16
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,i1_mat_cr,cogrs_prjcomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=162,179
+   taille=9,43
+   id=1000202
+   colonnes_saisie=16
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,i1_proj_cr,cogrs_prjcomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=234,63
+   taille=9,43
+   id=1000200
+   colonnes_saisie=12
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,i1_mat_cog_qtetot,cogrs_prjcomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=152,179
+   taille=9,43
+   id=1000199
+   colonnes_saisie=12
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,i1_proj_cog_qtetot,cogrs_prjcomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=33,89
    taille=9,32
    id=1000095
@@ -5463,7 +5578,6 @@
   [description]
    donnee=cogrs_prjcomp,valdevdt,cogrs_prjcomp
   [param_saisie]
-   obligatoire=oui
    type_date=jj/mm/aaaa
   [touches]
    f5=5001
@@ -5716,7 +5830,6 @@
   [description]
    donnee=cogrs_prjcomp,dirclitiers,cogrs_prjcomp
   [param_saisie]
-   obligatoire=oui
    type_date=jj/mm/aaaa
    table_associee=oui
   [touches]
@@ -5818,46 +5931,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=152,179
-   taille=9,43
-   id=1000163
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,prestabiennb,cogrs_prjcomp
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=162,179
-   taille=9,43
-   id=1000164
-   colonnes_saisie=13
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,prestabienmt,cogrs_prjcomp
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
    position=194,63
    taille=9,43
    id=1000180
@@ -5943,46 +6016,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=234,63
-   taille=9,43
-   id=1000179
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,inframatbiennb,cogrs_prjcomp
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=244,63
-   taille=9,43
-   id=1000178
-   colonnes_saisie=13
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,inframatbienmt,cogrs_prjcomp
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
    position=194,179
    taille=9,43
    id=1000186
@@ -6066,46 +6099,6 @@
    diva_apres="Champ_InfraLogBien_1_Ap"
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=234,179
-   taille=9,43
-   id=1000185
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,infralogbiennb,cogrs_prjcomp
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=244,179
-   taille=9,43
-   id=1000184
-   colonnes_saisie=13
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,infralogbienmt,cogrs_prjcomp
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
    position=270,89

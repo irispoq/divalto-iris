@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150216111605      
+;>xwin4obj                              7.0       20150409111416      
 [masque]
  libelle="table nature produit"
  utilisateur="UGIE"
- date_modification="16/02/2015"
+ date_modification="09/04/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=52
  type_masque=2
@@ -599,7 +599,7 @@
  [multi_choix]
   [presentation]
    position=71,70
-   taille=10,45
+   taille=9,33
    id=1000001
    wstyle="COG_CHAMP_SAISI"
   [description]
@@ -607,6 +607,7 @@
   [param_saisie]
    esp_si_zero=oui
   [param_multi]
+   ouverture=oui
    choix="cog_gtfdmc.dhfi","TYPENATUREPROD"
    notifier=oui
   [touches]
@@ -618,7 +619,7 @@
  [multi_choix]
   [presentation]
    position=71,120
-   taille=10,59
+   taille=9,34
    noms="cog_detailtyp"
    id=1000003
    wstyle="COG_CHAMP_SAISI"
@@ -627,6 +628,7 @@
   [param_saisie]
    esp_si_zero=oui
   [param_multi]
+   ouverture=oui
    choix="cog_gtfdmc.dhfi","DETNATUREPROD"
    notifier=oui
   [touches]
@@ -957,7 +959,7 @@ Public Record "ddsys.dhsd" rowinfo zoomselection
 Private Procedure Champ_Cog_MotFacTyp_1_Ap
 ;
 Beginp
-	XmeSetAttribut("cog_detailtyp", AN_VISIBILITE, Condition(NatureProduit.Cog_MotFacTyp=1, AV_VISIBLE, AV_GRISE))
+	XmeSetAttribut("cog_detailtyp", AN_VISIBILITE, Condition(NatureProduit.Cog_MotFacTyp=1, AV_VISIBLE, AV_CACHE))
 Endp
 [/diva]
 [diva_base]
@@ -971,7 +973,7 @@ Endp
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez076_sqlu.dhsf 7617 2015-02-23 14:06:01Z admin $')
+SetModuleInfo('$Id: gtez076_sqlu.dhsf 7873 2015-04-13 15:52:13Z admin $')
 
 
 include 'GTTC000.dhsp'

@@ -202,7 +202,13 @@ BeginP
 		; le zoom est appelé en mode creation de bien depuis le module GRM  'GR'
 		; "CB" ou ' ' mode création standard (Bien composé ou non) 'CB' ou espace
 		Default
-			IMMOBILISATION.Immo = Cog_Next_ImmoNo(TRUE, TRUE)	
+			IMMOBILISATION.Immo 				= Cog_Next_ImmoNo(TRUE, TRUE)	
+			IMMOBILISATION.MvBlNo 			= 0
+			IMMOBILISATION.MvFaNo 			= 0
+			IMMOBILISATION.FamStat1_Fam 	= ' '
+			IMMOBILISATION.FamStat1_Lib 	= ' '
+			IMMOBILISATION.AxeAnael_Lib 	= ' '
+			IMMOBILISATION.Des				= ' '
 
 	EndSwitch
 

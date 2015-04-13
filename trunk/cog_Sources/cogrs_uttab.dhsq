@@ -1,4 +1,4 @@
-<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7833 2015-04-08 07:26:43Z admin $'>
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7873 2015-04-13 15:52:13Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGF_GTFTAB
 ;*
@@ -17,7 +17,8 @@ Public Record GTFDD.dhsd	T000
 	PRJAP.LIB80				AS	PRJLIB,
 	T020.LIB					AS OPLIB,
 	T020.COG_MOTPRJFLUX	AS OPFLUX,
-	T036.COG_MOTFACTYP	AS PRODNATTYP
+	T036.COG_MOTFACTYP	AS PRODNATTYP,
+	T036.COG_DETAILTYP	AS PRODNATDET
 <FROM Insert=Yes Update=Yes Delete=Yes>
 	COG_UT125 
 <LEFTJOIN Name='Zoom'>
@@ -107,6 +108,10 @@ Public Record A5DD.dhsd		MZ
 		COG_UT126.ANNEE = an
 	Case Equal_Etat(char etat)
 		COG_UT126.CE1 = etat
+	Case Not_Equal_Etat(char etat)
+		COG_UT126.CE1 <> etat
+	Case Between_Affaire(char AffD, char AffF)
+		COG_UT126.AFFAIRE BETWEEN AffD AND AffF
 	Case Equal_CeJanvier(char ce)
 		COG_UT126.CEFATB(1) = ce
 	Case Equal_CeFevrier(char ce)

@@ -33,9 +33,17 @@ Public RecordSQL "gtrstab.dhoq" NatureProduit NatureProduit_Sel
 ;*
 
 ;*
+Procedure ZoomAvantConsult
+;
+Beginp
+	Standard.ZoomAvantConsult
+	XmeSetAttribut("cog_detailtyp", AN_VISIBILITE, Condition(NatureProduit.Cog_MotFacTyp=1, AV_VISIBLE, AV_CACHE))
+Endp		
+
+;*
 Procedure ZoomAvantInput		
 ; permet de griser les boutons et les choix
 Beginp
 	Standard.ZoomAvantInput
-	XmeSetAttribut("cog_detailtyp", AN_VISIBILITE, Condition(NatureProduit.Cog_MotFacTyp=1, AV_VISIBLE, AV_GRISE))
+	XmeSetAttribut("cog_detailtyp", AN_VISIBILITE, Condition(NatureProduit.Cog_MotFacTyp=1, AV_VISIBLE, AV_CACHE))
 Endp

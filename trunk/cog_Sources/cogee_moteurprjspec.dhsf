@@ -1,9 +1,9 @@
-;>xwin4obj                              7.0       20150213105344      
+;>xwin4obj                              7.0       20150409171725      
 [masque]
  utilisateur="UGIE"
- date_modification="13/02/2015"
+ date_modification="09/04/2015"
  feuille_style="fstylewpf.dhfi"
- dernier_id=24
+ dernier_id=29
  dernier_id_page=4
 [defaut]
  [aide_page]
@@ -24,6 +24,17 @@
  ident_unique=1
  [groupbox]
   [presentation]
+   position=8,169
+   taille=62,152
+   id=25
+   wstyle="GROUPE"
+   wcouleur=128,128,128,0,0,0
+  [param_groupbox]
+   texte="Affaires"
+   couleur_fond="GROUPE_FOND"
+   wcouleur_fond=236,236,236,0,0,0
+ [groupbox]
+  [presentation]
    position=8,10
    taille=62,152
    id=13
@@ -35,7 +46,7 @@
    wcouleur_fond=236,236,236,0,0,0
  [groupbox]
   [presentation]
-   position=8,176
+   position=8,328
    taille=62,152
    id=16
    wstyle="GROUPE"
@@ -54,9 +65,25 @@
    texte="De"
  [obj_texte]
   [presentation]
+   position=28,175
+   taille=9,32
+   id=26
+   wstyle="STD"
+  [texte]
+   texte="De"
+ [obj_texte]
+  [presentation]
    position=45,28
    taille=9,16
    id=11
+   wstyle="STD"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=45,176
+   taille=9,24
+   id=28
    wstyle="STD"
   [texte]
    texte="à"
@@ -118,9 +145,36 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_FDt_Annee_1_Ap"
+ [champ]
+  [presentation]
+   position=28,212
+   taille=9,32
+   id=27
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_sel,affaired,cog_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=45,212
+   taille=9,32
+   id=29
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cog_sel,affairef,cog_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_AffaireF_1_Ap"
  [case_a_cocher]
   [presentation]
-   position=27,187
+   position=27,337
    taille=9,96
    id=17
    wstyle="STD"
@@ -387,10 +441,30 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogee_moteurprjspec.dhsf 7592 2015-02-13 16:59:11Z admin $')
+;*
+;*
+;*
+SetModuleInfo('$Id: cogee_moteurprjspec.dhsf 7873 2015-04-13 15:52:13Z admin $')
+
+;
+Include "gttcZ00.dhsp"
+;
+
+
+;
 Public Record "gtfdd.dhsd" xq xq_cog
 Public Record "cogfdd.dhsd" cog_sel Cog_Sel
+
+;
 Public RecordSql "cogrs_uttab.dhoq" cogrs_ut126 cogrs_ut126
+
+
+;*
+Public Procedure Champ_AffaireF_1_Ap
+;
+Beginp
+	Controle_DonneeFin(Cog_Sel.AffaireD, Cog_Sel.AffaireF, type=1)
+Endp
 
 
 ;*

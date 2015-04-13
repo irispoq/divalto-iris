@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7833 2015-04-08 07:26:43Z admin $')
+SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 7873 2015-04-13 15:52:13Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Module de fonctions communes à la facturation des projets spécifiques UT125
@@ -30,6 +30,8 @@ Module	"COGTM_000.DHOP"
 
 ;
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			CogRs_UT125_RESA
+public 	RecordSQL 	"gtrsproj.dhoq" 			Affaire 				Affaire					; Affaire (Enregistrement principal)
+Public 	RecordSQL	"COGRS_PROJ.DHOQ"			CogRs_PrjComp
 
 ;
 Public 	Record		"GTFDD.DHSD"				ART
@@ -121,17 +123,34 @@ BeginF
 EndF
 
 ;*
-Public Function int Cog_Affaire_Facturable(wAff)
-; TRUE --> conditions remplies
-RecordSQL	"GTRSPPPROJ.DHOQ"	Affaire		wRs_Aff
-1		wAff		>gtfdd.dhsd		Affaire
+Public Function int Cog_Affaire_Facturable(wUT125, wLoadPrj)
+; TRUE --> conditions remplies pour facturer wUT125 passé en paramètre
+RecordSQL	"GTRSPPPROJ.DHOQ"	Affaire				wRs_Aff
+RecordSQL	"COGRS_PROJ.DHOQ"	CogRs_PrjComp		wRs_AffComp
+RecordSQL	"COGRS_UTTAB.DHOQ"CogRs_UT125			wRs_UT125
+Record		"cogfdd.dhsd"		COG_UT125			wUT125
+1		wLoadPrj						1,0 = TRUE								; si FALSE, lecture de CogRs_PrjComp et AFFAIRE
 BeginF
 
 	wRs_Aff.Init()
 	wRs_Aff.Where.RemoveCondition("")
-	wRs_Aff.Where.PK(wAff)
+	wRs_Aff.Where.PK(wUT125.Affaire)
 
-	If wRs_Aff.Select() > 0
+	wRs_AffComp.Init()
+	wRs_AffComp.Where.RemoveCondition("")
+	wRs_AffComp.Where.PK(wUT125.Affaire)
+
+	wRs_UT125.Init()																												  
+	wRs_UT125.Where.RemoveCondition("")
+	wRs_UT125.Where.PK(wUT125.Affaire, wUT125.Ref, wUT125.Cog_LgNo) 
+
+	If wRs_Aff.Select() > 0	AND wRs_AffComp.Select() > 0 AND wRs_UT125.Select() > 0  
+
+		; 	 Dans le cas du rewrite	de la fiche affaire, les nouvelles données ne sont pas encore en base
+		If not wLoadPrj
+			wRs_Aff.PRJAP	= Affaire.PRJAP
+			wRs_AffComp 	= CogRs_PrjComp
+		EndIf
 
 		; 1ere condition: émission de facture OUI
 		If wRs_Aff.Cog_Facture <> 2
@@ -148,9 +167,56 @@ BeginF
 			FReturn(FALSE)
 		EndIf
 
-		; 4: TODO date en fonction de nature article
-		MessageBox("CONTROLE 4","TODO")
+		; 4: Impression du détail sur la facture
+		If wRs_Aff.Cog_ImpDetail <> 2
+			FReturn(FALSE)
+		EndIf
 
+		; 5: date en fonction de nature article
+		If wRs_UT125.OPFLUX = C_OP_NONIMMO
+
+			; Charges NON IMMO --> date de début réelle des travaux obligatoire
+			If wRs_AffComp.TravReelDDt = ' ' 
+				FReturn(FALSE)
+			EndIf
+
+		Else	; C_OP_IMMO
+
+			SWitch wRs_UT125.PRODNATTYP
+
+				Case C_PRODNAT_PROJET  
+					; PROJET --> date de mise en service projet réelle obligatoire	+ n° fiche de bien
+					If wRs_AffComp.ProjServReelDt = ' ' OR wRs_AffComp.PrestaBien = 0 
+					 	FReturn(FALSE)
+					EndIf
+
+				Case C_PRODNAT_INFRA
+					; INFRA logiciel / matériel  --> date de mise en service INFRA réelle obligatoire
+					If wRs_AffComp.InfraServReelDt = ' ' 
+						FReturn(FALSE)
+					EndIf
+
+					Switch wRs_UT125.PRODNATDET
+						Case C_PRODNAT_LOG
+							; INFRA logiciel --> n° fiche de bien
+								If wRs_AffComp.InfraLogBien = 0
+									FReturn(FALSE)
+								EndIf
+
+						Case C_PRODNAT_MATOS
+							; INFRA matériel --> n° fiche de bien
+							If wRs_AffComp.InfraMatBien = 0 
+								FReturn(FALSE)
+							EndIf
+
+					EndSwitch
+
+			EndSwitch
+
+		EndIf ; Fin test OP NON IMMO / IMMO
+
+	Else	 ; Echec des Select()
+	 	FReturn(FALSE)
 	EndIf
 
 	FReturn(TRUE)
@@ -327,26 +393,27 @@ BeginF
 EndF
 
 ;*
-Public Procedure Cog_UT126_GenererEcheancier(wUT125)
+Public Procedure Cog_UT126_GenererEcheancier(wUT125, wLoadPrj)
 ;	La RESA sur COG_UT125 doit être gérée avant appel à cette procédure
 ;  Suppression de l'échéancier COG_UT126 s'il existe puis régénération
 RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126			wRs_UT126
 RecordSQL	"COGRS_TAB.DHOQ"		CogRs_TauxFi		wRs_TauxFi
 RecordSQL	"COGRS_TAB.DHOQ"		CogRs_TauxStruc	wRs_TauxSt
 Record		"COGFDD.DHSD"			COG_UT125			wUT125
-1		wLoyerMt		13,D0			; montant loyer
-1		wLoyerMMt	13,D0			; montant loyer mensuel
-1		wSolde		13,D0		
-1		wFaDDt		D				; date de première facture
-1		wFaFDt		D
-1		wPrevFaDt	D				; date facture précédente
-1		wAnD			4,0			; année première facture
-1		wAnF			4,0			; année dernière facture
-1		i				4,0
-1		j				2,0
-1		wNextFaMois 2,0			; prochain mois de facturation
-1		wStepMois	2,0
-1		wFacturable	1,0
+1		wLoyerMt			13,D0			; montant loyer
+1		wLoyerMMt		13,D0			; montant loyer mensuel
+1		wSolde			13,D0		
+1		wFaDDt			D				; date de première facture
+1		wFaFDt			D
+1		wPrevFaDt		D				; date facture précédente
+1		wAnD				4,0			; année première facture
+1		wAnF				4,0			; année dernière facture
+1		i					4,0
+1		j					2,0
+1		wNextFaMois 	2,0			; prochain mois de facturation
+1		wStepMois		2,0
+1		wFacturable		1,0
+1		wLoadPrj			1,0 = TRUE	; si FALSE, lecture des données de Affaire et CogRs_PrjComp sans Select()
 
 BeginP
 
@@ -362,7 +429,7 @@ BeginP
 	;*
 	; Nouveau calcul
 	;*
-	wFacturable = Cog_Affaire_Facturable(wUT125.Affaire)
+	wFacturable = Cog_Affaire_Facturable(wUT125, wLoadPrj)
 	wFaDDt = Condition(Hday(wUT125.Cog_Date_Debut) = 1,  wUT125.Cog_Date_Debut, HDate(wUT125.Cog_Date_Debut, 'p', +1))
 	Cog_CalculerDateFinFacturation(wFaDDt, wUT125.Cog_LoyNb, wUT125.Cog_Period, wFaFDt)
 	wAnD = HYear(wFaDDt)

@@ -235,6 +235,12 @@ BeginF
 			werr = TRUE
 		EndIf
 
+		; controle tiers
+		If Affaire.Tiers = ' '
+			wtxtErr &= "|Le tiers n'est pas renseigné."
+			werr = TRUE
+		EndIf
+
 		wRs_125.Init()
 		wRs_125.Where.RemoveCondition("")
 		wRs_125.Where.Equal_Affaire(Affaire.Affaire)
@@ -323,21 +329,17 @@ BeginP
 
 	Do WHile wRS_125.ReaderNext(wRead) > 0
 
-		If wDD <> wRS_125.Cog_Date_Debut
+		If wRS_125.FShare([ 'COG_UT125' wRS_125.Dos wRS_125.Affaire wRS_125.Ref wRS_125.Cog_LgNo], 'R') = 0
+			
+			wRS_125.Cog_Date_Debut = wDD
+			Cog_CalculerDateFinFacturation(wRS_125.Cog_Date_Debut, wRS_125.Cog_LoyNb, wRS_125.Cog_Period, wRS_125.Cog_Date_Fin)
+			wRS_125.ReaderUpdate(wRead)
+			Cog_UT126_GenererEcheancier(wRS_125.COG_UT125, FALSE)
+			wRS_125.FShare([ 'COG_UT125' wRS_125.Dos wRS_125.Affaire wRS_125.Ref wRS_125.Cog_LgNo], 'L')
 
-			If wRS_125.FShare([ 'COG_UT125' wRS_125.Dos wRS_125.Affaire wRS_125.Ref wRS_125.Cog_LgNo], 'R') = 0
-				
-				wRS_125.Cog_Date_Debut = wDD
-				Cog_CalculerDateFinFacturation(wRS_125.Cog_Date_Debut, wRS_125.Cog_LoyNb, wRS_125.Cog_Period, wRS_125.Cog_Date_Fin)
-				wRS_125.ReaderUpdate(wRead)
-				Cog_UT126_GenererEcheancier(wRS_125.COG_UT125)
-				wRS_125.FShare([ 'COG_UT125' wRS_125.Dos wRS_125.Affaire wRS_125.Ref wRS_125.Cog_LgNo], 'L')
-	
-			Else
-				wTxt &= "|Enregistrement réservé - Ref: " & Left(wRS_125.Ref) & " - ligne n°" & nospaces(wRS_125.Cog_LgNo)
-				wErr = TRUE
-			EndIf
-
+		Else
+			wTxt &= "|Enregistrement réservé - Ref: " & Left(wRS_125.Ref) & " - ligne n°" & nospaces(wRS_125.Cog_LgNo)
+			wErr = TRUE
 		EndIf
 
 	WEnd

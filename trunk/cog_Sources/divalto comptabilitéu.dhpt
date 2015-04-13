@@ -2,11 +2,11 @@ xwin-s-projet      2.0
 [general]
 nom="divalto comptabilité"
 progexec="divalto.dhop"
-date="20150109009510313999"
+date="20150409099409543799"
 util="UGIE"
 filtres="??pp*;??pc*;??pm*;??pz*;??p9*"
 flagrelatif=1
-cheminbases="/../../../../divalto/&div72a_cd205a/sources"
+cheminbases="/../../p205a/sources"
 modeweb=3
 f5compile=1
 typetransport=3
@@ -31,6 +31,13 @@ repobjetsurcharge="/svnwork/ylef/&ugieiris/cog_objets"
 repbrowsesurcharge="/svnwork/ylef/&ugieiris/cog_browse"
 versioncible="7.2a"
 repcouverture="/svnwork/ylef/&ugieiris/cog_ccode"
+[profil]
+nom="yohann_local"
+repobjet="/p205a/objets"
+browse=0
+implicites="ugie.txt"
+repobjetsurcharge="/ugie/cog_objets"
+versioncible="7.2a"
 [communs]
 nom="cog_cc_recordsql"
 fic="ccrsdosu.dhsq"," "
@@ -46,6 +53,9 @@ fic="cog_ccrsjca.dhsq"," "
 [communs]
 nom="cog_dico"
 fic="cogfdd.dhsd"," "
+[communs]
+nom="cog_module"
+fic="cogpm_ole.dhsp"," "
 [communs]
 nom="cog_recordsql"
 fic="cogrs_immo.dhsq"," "

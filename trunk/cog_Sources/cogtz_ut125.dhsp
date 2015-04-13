@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 7833 2015-04-08 07:26:43Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7873 2015-04-13 15:52:13Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -169,6 +169,7 @@ Public Procedure Maj_Menu_Boutons
 BeginP
 
 	xmetoolbarenablebutton(idOutilZoom,"cog_btnut126", False)
+	XmeSetAttribut("cog_closed", AN_VISIBILITE, AV_CACHE)
 
 	Switch ZOOM.ACTION
 
@@ -191,6 +192,7 @@ BeginP
 		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
 			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(cogrs_ut125.CENOTE = 2, True, False))
 			xmetoolbarenablebutton(idOutilZoom,"cog_btnrepart", Cog_UT125_Repartition_Autorisee)
+			XmeSetAttribut("cog_closed", AN_VISIBILITE, Condition(cogrs_ut125.Cog_LoyFaNb > 0 AND cogrs_ut125.Cog_LoyRestNb = 0, AV_VISIBLE, AV_CACHE))
 
 		endswitch
 
@@ -291,6 +293,8 @@ Beginp
 
 	TableParametre.init()
 	TableParametre.Select()
+
+	XmeSetAttribut("cog_closed", AN_VISIBILITE, AV_CACHE)
 
 	Note_Debut 						;Init de la gestion des notes
 
@@ -455,7 +459,7 @@ Beginp
 		Zoom.Ok = 'I'
 	EndIf
 
-	If Res_Affaire(cogrs_ut125.Affaire, 0)	<> 0
+	If Res_Affaire(cogrs_ut125.Affaire, 0)	<> 0	  
 		MessageBox("Code affaire " & left(cogrs_ut125.Affaire) & " réservé, modification impossible.", "Alerte", MB_ICONERROR)
 		Zoom.Ok = 'I'
 	EndIf
@@ -550,6 +554,7 @@ Endp
 
 ;*
 Public Procedure ZoomAvantConsult
+;
 Beginp
 	Maj_Menu_Boutons
 Endp				  

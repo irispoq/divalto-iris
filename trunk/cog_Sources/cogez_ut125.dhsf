@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150311140823      
+;>xwin4obj                              7.0       20150409153128      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="11/03/2015"
+ date_modification="09/04/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
- dernier_id=122
+ dernier_id=147
  dernier_id_page=22
 [defaut]
  [aide_page]
@@ -300,6 +300,291 @@
     wstyle="ENTETE_COLONNE"
    [boutons]
     "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=60,49
+    taille=10,68
+    id=135
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut125,prodnattyp,cogrs_ut125
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="cog_gtfdmc.dhfi","TYPENATUREPROD"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Type de nature pour le moteur facturation"
+   [param_colonne]
+    titre="Type de nature pour le moteur facturation"
+    fl_aff=oui
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=60,126
+    taille=10,110
+    id=136
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut125,opflux,cogrs_ut125
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="cog_gtfdmc.dhfi","NATURECHARGE"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Nature charge"
+   [param_colonne]
+    titre="Nature charge"
+    fl_aff=oui
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=102,95
+    taille=9,36
+    id=137
+    colonnes_saisie=10
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_date_debut,cogrs_ut125
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Date Début"
+   [param_colonne]
+    titre="Date Début"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=102,205
+    taille=9,32
+    id=138
+    colonnes_saisie=10
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_date_fin,cogrs_ut125
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Date Fin"
+   [param_colonne]
+    titre="Date Fin"
+    fl_aff=oui
+    largeur_col=32
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=113,95
+    taille=9,36
+    id=139
+    colonnes_saisie=3
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut125,op,cogrs_ut125
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=9060
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Op_1_Ap"
+   [info_bulle]
+   texte="Code opération"
+   [param_colonne]
+    titre="OP"
+    largeur_col=19
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=124,95
+    taille=9,36
+    id=140
+    colonnes_saisie=8
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_loynb,cogrs_ut125
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Nombre de loyers à facturer"
+   [param_colonne]
+    titre="Nombre de loyers à facturer"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=124,205
+    taille=9,67
+    id=141
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_period,cogrs_ut125
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="cog_gtfdmc.dhfi","PERIODICITE"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Periodicité facturation"
+   [param_colonne]
+    titre="Periodicité facturation"
+    fl_aff=oui
+    largeur_col=67
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=135,95
+    taille=9,36
+    id=142
+    colonnes_saisie=11
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_montant,cogrs_ut125
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Montant"
+   [param_colonne]
+    titre="Montant"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=146,95
+    taille=9,36
+    id=143
+    colonnes_saisie=8
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_loyfanb,cogrs_ut125
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Nombre de loyers facturés"
+   [param_colonne]
+    titre="Nombre de loyers facturés"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=157,95
+    taille=9,36
+    id=144
+    colonnes_saisie=8
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_loyrestnb,cogrs_ut125
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Nombre de loyers restants"
+   [param_colonne]
+    titre="Nombre de loyers restants"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=168,95
+    taille=9,36
+    id=145
+    colonnes_saisie=10
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_date_derniere_facture,cogrs_ut125
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Date Derniere Facture"
+   [param_colonne]
+    titre="Date Derniere Facture"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=179,95
+    taille=9,36
+    id=146
+    colonnes_saisie=8
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut125,cog_axeanael,cogrs_ut125
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=19012
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Cog_AxeAnael_1_Ap"
+   [info_bulle]
+   texte="Axe anaël"
+   [param_colonne]
+    titre="Axe anaël"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
  [obj_texte]
   [presentation]
    position=22,8
@@ -434,8 +719,8 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=74,3
-   taille=139,273
+   position=89,3
+   taille=124,273
    id=73
    wstyle="GROUPE"
   [param_groupbox]
@@ -457,6 +742,17 @@
    wstyle="STD"
   [texte]
    texte="Référence"
+ [obj_texte]
+  [presentation]
+   position=70,49
+   taille=18,154
+   noms="cog_closed"
+   id=147
+   wstyle="TITRE_SIMPLE_GRAND"
+   wtaille_fonte=20
+   wcouleur_fonte=255,0,0,0,0,0
+  [texte]
+   texte="FICHE CLOTUREE"
  [obj_texte]
   [presentation]
    position=102,10
@@ -1203,7 +1499,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogez_ut125.dhsf 7833 2015-04-08 07:26:43Z admin $')
+SetModuleInfo('$Id: cogez_ut125.dhsf 7873 2015-04-13 15:52:13Z admin $')
 ;*
 ;*	  Traitement du zoom facturation loyer sur projets spec
 ;*
@@ -1268,11 +1564,13 @@ Endp
 Public Procedure Champ_Op_1_Ap
 ; contrôle du code opération 
 Beginp
+	cogrs_ut125.OPLIB = ' '
 	If Lectab(20, cogrs_ut125.OP, 1120)	= 0
 		If T020.Cog_MotPrjFlag <> 2
 			MessageBox("Code opération non paramétré pour le moteur de facturation projets spécifiques.", "Alerte", MB_ICONEXCLAMATION)
 			Harmony.Retour = XMENEXT_RESSAISIE
 		EndIf
+		cogrs_ut125.OPLIB = T020.Lib
 	EndIf
 Endp
 
