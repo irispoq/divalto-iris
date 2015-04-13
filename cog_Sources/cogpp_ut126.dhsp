@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_ut126.dhsp 7592 2015-02-13 16:59:11Z admin $')
+SetModuleInfo('$Id: cogpp_ut126.dhsp 7873 2015-04-13 15:52:13Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Consultation des amortissements
@@ -15,7 +15,7 @@ SetModuleInfo('$Id: cogpp_ut126.dhsp 7592 2015-02-13 16:59:11Z admin $')
 ;*		--------------------------------------------------------------------------------------------------------------
 ;*		InitialiserVariables					Initialisation des variables			
 ;*		Boucle_Principale						Affichage des tableaux et gestion des points d'arret
-;*
+;*		Cog_UT126_ExportExcel
 
 
 ;*
@@ -25,6 +25,7 @@ SetModuleInfo('$Id: cogpp_ut126.dhsp 7592 2015-02-13 16:59:11Z admin $')
 ;
 Include 	"GTTCZ00.dhsp"					; Déclarations communes
 Include	"COGTC_YOFFICE.DHSP"
+Include	"COGTC_MOTEURPRJSPEC.DHSP"
 
 ;
 Module	"Cogtm_000.dhop"																;module de fonctions communes
@@ -71,6 +72,7 @@ Record	"cogfdd.dhsd"		COG_UT126		wUT_Prec
 1		wRead126		L
 1		wLig			8,0
 1		i				2,0
+1		j				3,0
 1		wCouleur		2,0 = COULEUR_EXCEL_GRISCLAIR		
 BeginP
 
@@ -93,23 +95,35 @@ BeginP
 		Office_Write(wLig,7,"BASE")
 		Office_Write(wLig,8,"DOTATION ANTERIEURE")
 		Office_Write(wLig,9,"DOTATION ANNUELLE")
-		Office_Write(wLig,10,"JANVIER")
-		Office_Write(wLig,11,"FEVRIER")
-		Office_Write(wLig,12,"MARS")
-		Office_Write(wLig,13,"AVRIL")
-		Office_Write(wLig,14,"MAI")
-		Office_Write(wLig,15,"JUIN")
-		Office_Write(wLig,16,"JUILLET")
-		Office_Write(wLig,17,"AOUT")
-		Office_Write(wLig,18,"SEPTEMBRE")
-		Office_Write(wLig,19,"OCTOBRE")
-		Office_Write(wLig,20,"NOVEMBRE")
-		Office_Write(wLig,21,"DECEMBRE")
-		For i=1 to 21
+		Office_Write(wLig,10,"DOTATION JANVIER")
+		Office_Write(wLig,11,"FRAIS JANVIER")
+		Office_Write(wLig,12,"DOTATION FEVRIER")
+		Office_Write(wLig,13,"FRAIS FEVRIER")
+		Office_Write(wLig,14,"DOTATION MARS")
+		Office_Write(wLig,15,"FRAIS MARS")
+		Office_Write(wLig,16,"DOTATION AVRIL")
+		Office_Write(wLig,17,"FRAIS AVRIL")
+		Office_Write(wLig,18,"DOTATION MAI")
+		Office_Write(wLig,19,"FRAIS MAI")
+		Office_Write(wLig,20,"DOTATION JUIN")
+		Office_Write(wLig,21,"FRAIS JUIN")
+		Office_Write(wLig,22,"DOTATION JUILLET")
+		Office_Write(wLig,23,"FRAIS JUILLET")
+		Office_Write(wLig,24,"DOTATION AOUT")
+		Office_Write(wLig,25,"FRAIS AOUT")
+		Office_Write(wLig,26,"DOTATION SEPTEMBRE")
+		Office_Write(wLig,27,"FRAIS SEPTEMBRE")
+		Office_Write(wLig,28,"DOTATION OCTOBRE")
+		Office_Write(wLig,29,"FRAIS OCTOBRE")
+		Office_Write(wLig,30,"DOTATION NOVEMBRE")
+		Office_Write(wLig,31,"FRAIS NOVEMBRE")
+		Office_Write(wLig,32,"DOTATION DECEMBRE")
+		Office_Write(wLig,33,"FRAIS DECEMBRE")
+		For i=1 to 33
 			Office_InteriorColorIndex(wLig,i,COULEUR_EXCEL_JAUNEFONCE)		
 			Office_FontBold(wLig,i)
 		next
-
+			  
 
 		; Tableau d'amortissement
 		CogRs_UT126.Init()
@@ -127,6 +141,8 @@ BeginP
 			CogRs_UT126.Where.Equal_LgNo(COG_UT125.Cog_LgNo)
 			CogRs_UT126.Where.AddCondition("Equal_LgNo")
 		EndIf
+		CogRs_UT126.Where.Not_Equal_Etat(C_UT126_STATUT_ANNULE)
+		CogRs_UT126.Where.AddCondition("Not_Equal_Etat")
 		CogRs_UT126.OrderBy.Par_PK()
 		CogRs_UT126.ReaderSelect(wRead126)
 	
@@ -145,15 +161,24 @@ BeginP
 			Office_Write(wLig,9, CogRs_UT126.AnMt)
 			
 			; dotations mensuelles
+			j=10
 			For i=1 to 12
-				Office_Write(wLig, i+9, CogRs_UT126.MoisMt(i))	
-			next	
+				Office_Write(wLig, j, CogRs_UT126.MoisMt(i))
+				j += 2
+			next
+	
+			; frais financiers
+			j=11
+			For i=1 to 12
+				Office_Write(wLig, j, CogRs_UT126.FraisMoisMt(i))
+				j += 2
+			next
 
 			;
 			If CogRs_UT126.Affaire <> wUT_Prec.Affaire OR CogRs_UT126.Ref <> wUT_Prec.Ref OR CogRs_UT126.Cog_LgNo <> wUT_Prec.Cog_LgNo
 				wCouleur = Condition(wCouleur = COULEUR_EXCEL_GRISCLAIR, COULEUR_EXCEL_TURQUOISEPALE, COULEUR_EXCEL_GRISCLAIR)
 			EndIf
-			For i=1 to 21
+			For i=1 to 33
 				Office_InteriorColorIndex(wLig,i, wCouleur)		
 			next
 

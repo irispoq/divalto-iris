@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7833 2015-04-08 07:26:43Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7873 2015-04-13 15:52:13Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -186,6 +186,8 @@ beginf
 	Cog_Sel.DDt_Mois 	= HMonth(Today) + 1
 	Cog_Sel.FDt_Annee = Cog_Sel.DDt_Annee
 	Cog_Sel.FDt_Mois 	= Cog_Sel.DDt_Mois
+	Cog_Sel.AffaireD	= ' '
+	Cog_Sel.AffaireF	= 'zzzzzzzz'
 	GTPCE.TiCodDst		= 'C'
 	GTPCE.PiCodDst		= 3
 
@@ -280,7 +282,7 @@ EndF
 
 ;*
 Function int Res_PrjEtUT125
-; RES de PrjAp et Cog_UT125 associés au CogRs_UT126 courant
+; RES de PrjAp et Cog_UT125 associés au CogRs_UT126 courant	+ chargement CogRs_Ut125
 ; Les enregistrements réservés sont stockés dans les listes mémoires lId_Prj_Res et lId_UT125_Res
 ; 0 --> RES OK, pas d'erreur
 BeginF
@@ -307,6 +309,14 @@ BeginF
 	Cog_UT125.Affaire	= CogRs_UT126.Affaire
 	Cog_UT125.Ref		= CogRs_UT126.Ref
 	Cog_UT125.Cog_LgNo= CogRs_UT126.Cog_LgNo
+
+	If [CogRs_UT125.Dos  CogRs_UT125.Affaire CogRs_UT125.Ref CogRs_UT125.Cog_LgNo] <> [Cog_UT125.Dos  Cog_UT125.Affaire Cog_UT125.Ref Cog_UT125.Cog_LgNo]
+		CogRs_UT125.Init()
+		CogRs_UT125.Where.RemoveCondition("")
+		CogRs_UT125.Where.PK(Cog_UT125.Affaire, Cog_UT125.Ref, Cog_UT125.Cog_LgNo)
+		CogRs_UT125.Select()
+	EndIf
+
 	If ListSeek(lId_UT125_Res, Cog_UT125, UT125_Seek) = 0
 		If CogRs_UT125.FShare(['COG_UT125' mz.Dos CogRs_UT126.Affaire CogRs_UT126.Ref CogRs_UT126.Cog_LgNo], 'R') = 0
 			ListInsert(lId_UT125_Res, Cog_UT125)
@@ -446,6 +456,8 @@ BeginP
 	CogRs_UT126.Where.AddCondition("Equal_An")
 	CogRs_UT126.Where.Equal_Etat('1')					; actif
 	CogRs_UT126.Where.AddCondition("Equal_Etat")
+	CogRs_UT126.Where.Between_Affaire(Cog_Sel.AffaireD, Cog_Sel.AffaireF)
+	CogRs_UT126.Where.AddCondition("Between_Affaire")
 
 	Switch2 faMois
 		Case 1
@@ -489,6 +501,16 @@ BeginP
 	CogRs_UT126.OrderBy.Pour_Facturation()
 
 EndP
+
+;*
+Function int Facturation_Ligne_Frais(&wMOUV)
+;	FALSE --> pas de ligne de frais
+;	TRUE	--> informations chargées dans wMOUV
+Record	"gtfdd.dhsd"	MOUV	wMOUV 
+BeginF
+
+	FReturn(0)
+EndF
 
 ;*
 Procedure Creation_iPAR
@@ -552,6 +574,12 @@ BeginP
 	iMOUV.Pcod(5)= 1
 
 	HWrite(GTFI, iMOUV)
+
+
+	; Ligne de frais
+	If Facturation_Ligne_Frais(iMOUV)
+		HWrite(GTFI, iMOUV)
+	EndIf
 
 EndP
 
