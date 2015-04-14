@@ -1,4 +1,4 @@
-<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7873 2015-04-13 15:52:13Z admin $'>
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7877 2015-04-14 12:23:37Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGF_GTFTAB
 ;*
@@ -22,7 +22,7 @@ Public Record GTFDD.dhsd	T000
 <FROM Insert=Yes Update=Yes Delete=Yes>
 	COG_UT125 
 <LEFTJOIN Name='Zoom'>
-	GTFDD.DHSD	ART
+	GTFDD.DHSD	ART AS ART
 	ON ART.DOS = COG_UT125.DOS AND ART.REF = COG_UT125.REF
 <LEFTJOIN Name='Zoom'>
 	GTFDD.DHSD	PRJAP
@@ -33,7 +33,7 @@ Public Record GTFDD.dhsd	T000
 <LEFTJOIN Name='Zoom'>
 	GTFDD.DHSD	T020
 	ON (T020.Dos = CASE WHEN T000.TabTyp(20) = 2 THEN 999 ELSE MZ.Dos END) AND T020.CEBIN = 20 AND T020.OP = COG_UT125.OP
-<LEFTJOIN Name='Zoom'>
+<LEFTJOIN Name='Zoom' Dependencies='ART'>
 	GTFDD.DHSD	T036
 	ON (T036.Dos = CASE WHEN T000.TabTyp(36) = 2 THEN 999 ELSE MZ.Dos END) AND T036.CEBIN = 36 AND T036.PRODNAT = ART.PRODNAT 
 <WHERE>
