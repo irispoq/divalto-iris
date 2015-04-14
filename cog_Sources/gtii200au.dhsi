@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20141024165613      
+;>xwin4obj     imprimante               6.0       20150409171349      
 [masque]
  utilisateur="ROOT"
- date_modification="24/10/2014"
+ date_modification="09/04/2015"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -12,7 +12,7 @@
  num_page_sur_n=1
  etat=1,2,0,0,0,0,0,0,0,0,1,3,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000159
+ dernier_id=1000161
  surcharge=oui
  date_modif_base="20130528154215"
  dernier_id_page=100000
@@ -138,6 +138,15 @@
    wstyle="STD"
   [texte]
    texte="Fax"
+ [obj_texte]
+  [presentation]
+   position=123,4
+   taille=8,55
+   noms="FinValidite"
+   id=1000161
+   wstyle="STD"
+  [texte]
+   texte="Date de fin de validité :"
  [obj_texte]
   [presentation]
    position=185,254
@@ -690,6 +699,18 @@
    wstyle="STD"
   [description]
    donnee=g4,cpostal,g4,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=123,61
+   taille=8,29
+   noms="FinValidite2"
+   id=1000160
+   colonnes_saisie=10
+   wstyle="STD"
+  [description]
+   donnee=ent,cog_validite,ent
   [param_saisie]
    type_date=jj/mm/aaaa
  [champ]
@@ -2242,6 +2263,8 @@ Beginp
 		XmiSetAttribut("fax",AN_VISIBILITE,AV_CACHE)
 		XmiSetAttribut("numfax",AN_VISIBILITE,AV_CACHE)
 		XmiSetAttribut("mail",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("FinValidite",AN_VISIBILITE,AV_CACHE)
+		XmiSetAttribut("FinValidite2",AN_VISIBILITE,AV_CACHE)
 	endif
 	if ent.Dos = 103
 		XmiSetAttribut("logobas",AN_VISIBILITE,AV_CACHE)
