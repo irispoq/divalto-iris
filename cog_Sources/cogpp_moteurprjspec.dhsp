@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7873 2015-04-13 15:52:13Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7882 2015-04-15 07:18:04Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -39,6 +39,9 @@ Public 	RecordSQL	"GTRSPPPROJ.DHOQ"			Affaire
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT126
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT126		Rs_UT126_Prec
+Public 	RecordSQL	"COGRS_TAB.DHOQ"			TableParametre
+Public 	RecordSQL	"COGRS_TAB.DHOQ"			CogRs_TauxFi
+Public 	RecordSQL	"COGRS_DOS.DHOQ"			CogRs_SocComp
 
 ;
 Public 	Record	"gtfdd.dhsd"	xq				XQ_Cog	;enregistrement de travail
@@ -163,6 +166,15 @@ beginf
 
 	;recherche du dossier et T000
 	Seek_Soc(MZ.dos)
+
+	;	Complément dossier et table parametre COgeser
+	TableParametre.Init()
+	If TableParametre.Select() = 0
+		If not tunnel | MessageBox("Les tables communes spécifiques ne sont pas paramétrées.", "Erreur", MB_ICONERROR) | EndIf
+	EndIF
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(MZ.Dos)
+	CogRs_SocComp.Select()
 
 	;chargement du masque écran
 	xmeload mz.mecle
@@ -507,7 +519,39 @@ Function int Facturation_Ligne_Frais(&wMOUV)
 ;	FALSE --> pas de ligne de frais
 ;	TRUE	--> informations chargées dans wMOUV
 Record	"gtfdd.dhsd"	MOUV	wMOUV 
+1		wCapitalMoy	12,D2
+1		i				2,0
+1		wDuree		2,0
 BeginF
+
+	If CogRs_UT125.PRODNATTYP = C_PRODNAT_PROJET AND CogRs_UT125.OPFLUX = C_OP_IMMO AND CogRs_SocComp.FraisFiRef <> ' '
+
+		; Moyenne entre le capital dû restant début de période et fin de période
+		wCapitalMoy = (CogRs_UT126.Cog_BaseMt + (CogRs_UT126.Cog_BaseMt - CogRs_UT126.AnMt)) / 2
+		wDuree = 0
+
+		; Nombre de mois facturés sur l'année
+;		For i=1 to 12
+;			If CogRs_UT126.CeFaTb(i) = C_UT126_CEMOIS_AFACTURER OR CogRs_UT126.CeFaTb(i) = C_UT126_CEMOIS_FACTURE
+; 				wDuree++
+;			EndIf
+;		Next
+
+		; Taux financier en vigueur
+		CogRs_TauxFi.Init()
+		CogRs_TauxFi.Where.RemoveCondition("")
+		CogRs_TauxFi.Where.En_Vigueur(iENT.PiDt)
+
+		If CogRs_TauxFi.Select() > 0
+
+			wMOUV.Ref = CogRs_SocComp.FraisFiRef
+			wMOUV.Pub = wCapitalMoy * (CogRs_TauxFi.Cog_Taux/100)
+
+			FReturn(1)
+
+		EndIf
+
+	EndIf
 
 	FReturn(0)
 EndF
