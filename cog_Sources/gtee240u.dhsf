@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20140728154047      
+;>xwin4obj                              7.0       20150428105253      
 [masque]
  libelle="facturation différée"
  utilisateur="UGIE"
- date_modification="28/07/2014"
+ date_modification="28/04/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=139
- dernier_id=1000019
+ dernier_id=1000020
  surcharge=oui
  date_modif_base="20130213094839"
  dernier_id_page=100000
@@ -456,7 +456,25 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=144,5
+   position=135,5
+   taille=9,220
+   id=1000020
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,g3xq,19
+  [param_case]
+   texte="Codes opérations du moteur de facturation projets spécifiques"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=129
+   f7=8000
+   f8=8000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=152,5
    taille=9,355
    id=21
    wstyle="STD"
@@ -474,7 +492,7 @@
    ctrl_p=5001
  [case_a_cocher]
   [presentation]
-   position=156,5
+   position=164,5
    taille=9,355
    id=22
    wstyle="STD"
@@ -492,7 +510,7 @@
    ctrl_p=5001
  [case_a_cocher]
   [presentation]
-   position=168,5
+   position=176,5
    taille=9,355
    id=23
    wstyle="STD"
@@ -510,7 +528,7 @@
    ctrl_p=5001
  [case_a_cocher]
   [presentation]
-   position=180,5
+   position=188,5
    taille=9,355
    id=24
    wstyle="STD"
@@ -528,7 +546,7 @@
    ctrl_p=5001
  [case_a_cocher]
   [presentation]
-   position=192,5
+   position=200,5
    taille=9,355
    id=25
    wstyle="STD"

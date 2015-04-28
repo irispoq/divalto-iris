@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7882 2015-04-15 07:18:04Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7939 2015-04-28 09:18:39Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -379,7 +379,7 @@ BeginP
 	If Cog_Sel.FlagImpression = 2
 		ListBegin(lId_BlNo)
 		Do While ListNext(lId_BlNo, wPiNo) not in (-1, 0)
-			Seek_ENT('C', 3, ENT.PiNo)
+			Seek_ENT('C', 3, wPiNo)	 
 			MZ.MiCle		= "*09220"
 			mz.EtaNoTyp = oui
 			Xmi_Preparation(Condition(ENT.EtaNo = " ", SOC.EntCod(2), ENT.EtaNo))
@@ -578,19 +578,22 @@ Procedure Creation_iENT
 ;
 BeginP
 
-	Init iENT 		= " "
-	iENT.Ce1 		= "A"
-	iENT.Ce4 		= "1"
-	iENT.Tiers 		= CogRs_UT126.Tiers
-	iENT.Op 			= CogRs_UT126.Op
-	iENT.Depo		= MZ.Depo
-	iENT.PiDt 		= XQ_Cog.DatD
-	iENT.PiRef  	= "Facturation loyer"
-	iENT.PiNoTiers = " "
-	iENT.Projet		= CogRs_UT126.Affaire
+	Init iENT 			= " "
+	iENT.Ce1 			= "A"
+	iENT.Ce4 			= "1"
+	iENT.Tiers 			= CogRs_UT126.Tiers
+	iENT.Op 				= CogRs_UT126.Op
+	iENT.Depo			= MZ.Depo
+	iENT.PiDt 			= XQ_Cog.DatD
+	iENT.PiRef  		= "Facturation loyer"
+	iENT.PiNoTiers 	= " "
+	iENT.Projet			= CogRs_UT126.Affaire
+	iENT.Cog_BL_Moteur= 2
+	iENT.Cog_Regroupe_Direction = 2
 
 	If Seek_PRJAP(iENT.Projet) = 0
 		iENt.Cog_ImpDetail = PrjAp.Cog_ImpDetail
+		iENT.Cog_DirCliente= PrjAp.Cog_DirCliente
 	EndIf
 
 	HWrite(GTFI, iENT) 

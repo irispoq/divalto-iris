@@ -153,11 +153,18 @@ Function char ENT_Accepter
 ; renvoyer 	'O' pour traiter la pièce
 ;				'N' pour ignorer la pièce
 BeginF
+
+	If T020.Op <> ENT.Op
+		Lectab(20, ENT.Op)
+	EndIf
+
 	If not ENT.ETB = MZ.ETB | Freturn('N') 
 	ElsIf ENT.PROJET < G3XQ.PROJETD Or ENT.PROJET > G3XQ.PROJETF
 		Freturn('N') 
 	ElsIf G3XQ.CHOIX(20) = 1 And ENT.Cog_BL_Moteur < 2
 		Freturn('N') 
+	ElsIf G3XQ.CHOIX(19)	= 2 AND T020.Cog_MotPrjFlag <> 2
+		FReturn('N')
 	Else
 		Freturn(Standard.ENT_Accepter)
 	Endif
