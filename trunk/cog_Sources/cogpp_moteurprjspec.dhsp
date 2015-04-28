@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7939 2015-04-28 09:18:39Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7941 2015-04-28 10:29:16Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -585,7 +585,7 @@ BeginP
 	iENT.Op 				= CogRs_UT126.Op
 	iENT.Depo			= MZ.Depo
 	iENT.PiDt 			= XQ_Cog.DatD
-	iENT.PiRef  		= "Facturation loyer"
+	iENT.PiRef  		= "Fact. Projets - " & Right(SDate(XQ_Cog.DatD), 7)
 	iENT.PiNoTiers 	= " "
 	iENT.Projet			= CogRs_UT126.Affaire
 	iENT.Cog_BL_Moteur= 2
