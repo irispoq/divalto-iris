@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 7873 2015-04-13 15:52:13Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7937 2015-04-28 08:31:57Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -113,7 +113,7 @@ BeginF
 				wErr = 1
 			EndIf
 
-			If CogRs_PrjComp.PrestaBien = ' '
+			If CogRs_PrjComp.PrestaBien = 0
 				wtxtErr &= "|N° fiche de bien PRESTA (IMMO / PROJET)."
 				wErr = 1
 			EndIf
@@ -128,12 +128,12 @@ BeginF
 				wErr = 1
 			EndIf
 
-			If T036.Cog_DetailTyp = C_PRODNAT_MATOS AND CogRs_PrjComp.InfraMatBien = ' '
+			If T036.Cog_DetailTyp = C_PRODNAT_MATOS AND CogRs_PrjComp.InfraMatBien = 0
 				wtxtErr &= "|N° fiche de bien (IMMO / INFRA MATERIEL)."
 				wErr = 1
 			EndIf
 
-			IF T036.Cog_DetailTyp = C_PRODNAT_LOG AND CogRs_PrjComp.InfraLogBien
+			IF T036.Cog_DetailTyp = C_PRODNAT_LOG AND CogRs_PrjComp.InfraLogBien	= 0
 				wtxtErr &= "|N° fiche de bien (IMMO / INFRA LOGICIEL)."
 				wErr = 1
 			EndIf
