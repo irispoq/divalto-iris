@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 7937 2015-04-28 08:31:57Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 7972 2015-05-07 09:04:25Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -371,8 +371,11 @@ Public Procedure ZoomDuplication
 Beginp
 	cogrs_ut125.UserMoDh 	= ' '
 	cogrs_ut125.UserCrDh 	= ' '
-	cogrs_ut125.Note 		= 0
-	cogrs_ut125.CeNote 		= 1		
+	cogrs_ut125.Note 			= 0
+	cogrs_ut125.CeNote 		= 1
+	CogRs_UT125.Cog_LoyFaNb = 0
+	CogRs_UT125.Cog_LoyRestNb= CogRs_UT125.Cog_LoyNb
+	CogRs_UT125.Cog_Date_Derniere_Facture = ' '
 Endp
 
 ;*

@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7941 2015-04-28 10:29:16Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 7972 2015-05-07 09:04:25Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -42,11 +42,13 @@ Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT126		Rs_UT126_Prec
 Public 	RecordSQL	"COGRS_TAB.DHOQ"			TableParametre
 Public 	RecordSQL	"COGRS_TAB.DHOQ"			CogRs_TauxFi
 Public 	RecordSQL	"COGRS_DOS.DHOQ"			CogRs_SocComp
+Public 	RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3
 
 ;
 Public 	Record	"gtfdd.dhsd"	xq				XQ_Cog	;enregistrement de travail
 Public 	Record 	"cogfdd.dhsd" 	cog_Sel	 	Cog_Sel
 Public	Record	"gtfdd.dhsd"	CLI
+Public	Record	"gtfdd.dhsd"	ART
 Public	Record	"gtfdd.dhsd"	GTPCE
 Public	Record   "gtfdd.dhsd"	ent			ENT
 Public	Record	"gtfdd.dhsd"	ipar			iPAR
@@ -357,6 +359,7 @@ BeginF
 		FReturn(1)
 	EndIf
 
+	;
 	If CogRs_UT126.Tiers <> Rs_UT126_Prec.Tiers
 		 If Seek_CLI(CogRs_UT126.Tiers) <> 0
 			erreur++
@@ -365,6 +368,24 @@ BeginF
 			FReturn(1)
 		EndIf
 	EndIf
+
+	;	Article
+	If CogRs_UT126.Ref <> ART.Ref
+		If Seek_Art(CogRs_UT126.Ref) <> 0
+			erreur++
+			Cog_EcritureLivreDeBord("Code client non renseigné, facturation impossible.<AFF>"\
+											& left(CogRs_UT126.Affaire) & "<REF>" & left(CogRs_UT126.Ref) & "<LGNO>" & nospaces(CogRs_UT126.Cog_LgNo))
+			FReturn(1)
+		EndIf
+	EndIf
+
+	; Compte de vente de l'article
+	If ART.CptV <> CogRs_C3.Cpt
+		CogRs_C3.Init()
+		CogRs_C3.Where.Equal_Cpt(ART.CptV)
+		CogRs_C3.Select()
+	EndIF
+
 
 	FReturn(0)
 
@@ -619,6 +640,10 @@ BeginP
 	iMOUV.Pcod(3)= 1
 	iMOUV.Pcod(4)= 1
 	iMOUV.Pcod(5)= 1
+	iMOUV.Axe(1) ; standard
+	iMOUV.Axe(2) =	 Condition(CogRs_UT125.Cog_AxeAnael <> ' ', CogRs_UT125.Cog_AxeAnael, PrjAp.Cog_AxeAnael)
+	iMOUV.Axe(3) =	 CogRs_C3.Axe(3)
+	iMOUV.Axe(4) =	 CogRs_C3.Axe(4)
 
 	HWrite(GTFI, iMOUV)
 
