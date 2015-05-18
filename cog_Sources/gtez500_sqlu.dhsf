@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150428145602      
+;>xwin4obj                              7.0       20150518101835      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
- date_modification="28/04/2015"
+ date_modification="18/05/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
- dernier_id=1000205
+ dernier_id=1000211
  surcharge=oui
  date_modif_base="20131227150954"
  dernier_id_page=100007
@@ -5418,120 +5418,6 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=244,179
-   taille=9,43
-   id=1000205
-   colonnes_saisie=16
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,i1_log_cr,cogrs_prjcomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=234,179
-   taille=9,43
-   id=1000204
-   colonnes_saisie=12
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,i1_log_cog_qtetot,cogrs_prjcomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=244,63
-   taille=9,43
-   id=1000203
-   colonnes_saisie=16
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,i1_mat_cr,cogrs_prjcomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=162,179
-   taille=9,43
-   id=1000202
-   colonnes_saisie=16
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,i1_proj_cr,cogrs_prjcomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=234,63
-   taille=9,43
-   id=1000200
-   colonnes_saisie=12
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,i1_mat_cog_qtetot,cogrs_prjcomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=152,179
-   taille=9,43
-   id=1000199
-   colonnes_saisie=12
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,i1_proj_cog_qtetot,cogrs_prjcomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
- [champ]
-  [presentation]
    position=33,89
    taille=9,32
    id=1000095
@@ -5931,6 +5817,42 @@
    "zoom"
  [champ]
   [presentation]
+   position=152,179
+   taille=9,43
+   id=1000206
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,prestabiennb,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=162,179
+   taille=9,43
+   id=1000207
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,prestabienmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=194,63
    taille=9,43
    id=1000180
@@ -6016,6 +5938,42 @@
    "zoom"
  [champ]
   [presentation]
+   position=234,63
+   taille=9,43
+   id=1000209
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,inframatbiennb,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=244,63
+   taille=9,43
+   id=1000208
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,inframatbienmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=194,179
    taille=9,43
    id=1000186
@@ -6099,6 +6057,42 @@
    diva_apres="Champ_InfraLogBien_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=234,179
+   taille=9,43
+   id=1000210
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,infralogbiennb,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=244,179
+   taille=9,43
+   id=1000211
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_prjcomp,infralogbienmt,cogrs_prjcomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
  [champ]
   [presentation]
    position=270,89
@@ -6784,6 +6778,7 @@ Module	"COGTM_MOTEURPRJSPEC.DHOP"
 Public RecordSql "gtrsproj.dhoq" 	affaire 			Affaire
 Public RecordSql "gtrsppproj.dhoq" 	affaire 			su_sel
 Public RecordSql "cogrs_proj.dhoq" 	cogrs_prjcomp 	CogRs_PrjComp
+Public RecordSQL "COG_CCRSIMMO.DHOQ"CogRs_IMMO		CogRs_Immo
 
 ;
 Public Record "gtfdd.dhsd" g7 		g7
@@ -6871,18 +6866,18 @@ EndP
 ;*
 Function int Cog_Seek_Immo(wImmo, wErr)
 ; Recherche fiche bien (sans composant)
+; 0 --> CogRs_Immo chargé
 ; si wErr > 0; msg  + retour en saisir
-RecordSQL	"COG_CCRSIMMO.DHOQ"		CogRs_IMMO		wRs_IMMO
 1		wImmo		>ccfdd.dhsd		Immo
 1		wIcomp	>ccfdd.dhsd		ImmoComp	= ' '
 1		wErr		1,0							= TRUE
 BeginF
 
 	If wImmo <> ' '
-		wRs_IMMO.Init()
-		wRs_IMMO.Where.RemoveCondition("")
-		wRs_IMMO.Where.Zoom_PK(wImmo, wIcomp)
-		If wRs_IMMO.Select() = 0
+		CogRs_Immo.Init()
+		CogRs_Immo.Where.RemoveCondition("")
+		CogRs_Immo.Where.Zoom_PK(wImmo, wIcomp)
+		If CogRs_Immo.Select() = 0
 			If wErr > 0
 				Harmony.Retour = XMENEXT_RESSAISIE
 				MessageBox("N° fiche bien inconnu.", "Alerte", MB_ICONERROR)
@@ -7279,7 +7274,14 @@ Private Procedure Champ_InfraLogBien_1_Ap
 ;
 Beginp
 
-	Cog_Seek_Immo(CogRs_PrjComp.InfraLogBien)
+	CogRs_PrjComp.InfraLogBienMt = 0
+	CogRs_PrjComp.InfraLogBienNb = 0
+	If Cog_Seek_Immo(CogRs_PrjComp.InfraLogBien)	= 0
+
+		CogRs_PrjComp.InfraLogBienMt = CogRs_Immo.Cr
+		CogRs_PrjComp.InfraLogBienNb = CogRs_Immo.Cog_QteTot 
+
+	EndIf
 
 Endp
 
@@ -7289,7 +7291,14 @@ Private Procedure Champ_InfraMatBien_1_Ap
 ;
 Beginp
 
-	Cog_Seek_Immo(CogRs_PrjComp.InfraMatBien)
+	CogRs_PrjComp.InfraMatBienMt = 0
+	CogRs_PrjComp.InfraMatBienNb = 0
+	If Cog_Seek_Immo(CogRs_PrjComp.InfraMatBien) = 0
+
+		CogRs_PrjComp.InfraMatBienMt = CogRs_Immo.Cr
+		CogRs_PrjComp.InfraMatBienNb = CogRs_Immo.Cog_QteTot 
+
+	EndIf
 
 Endp
 
@@ -7298,7 +7307,14 @@ Private Procedure Champ_PrestaBien_1_Ap
 ;
 Beginp
 
-	Cog_Seek_Immo(CogRs_PrjComp.PrestaBien)
+	CogRs_PrjComp.PrestaBienMt = 0
+	CogRs_PrjComp.PrestaBienNb = 0
+	If Cog_Seek_Immo(CogRs_PrjComp.PrestaBien) = 0
+
+		CogRs_PrjComp.PrestaBienMt = CogRs_Immo.Cr
+		CogRs_PrjComp.PrestaBienNb = CogRs_Immo.Cog_QteTot 
+
+	EndIf
 
 Endp
 
