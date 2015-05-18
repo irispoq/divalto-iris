@@ -59,6 +59,20 @@ BeginP
 EndP
 
 ;*
+Procedure ZoomAvantDelete
+;
+BeginP
+
+	Standard.ZoomAvantDelete
+
+	;
+	If Zoom.Ok = 'O'
+		Cog_ZoomAvantDelete
+	EndIf
+
+EndP
+
+;*
 Procedure ZoomAvantInput
 ;
 BeginP

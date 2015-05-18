@@ -120,6 +120,27 @@ BeginF
 EndF
 
 ;*
+Public Function int Cog_CB_Cloture(wDt)
+;  Chargement de l'exercice comptable CB dans lequel wDt est inclue
+; 0 --> exercice en cours
+; 1 --> exercice clôturé
+RecordSQL	"COG_CCRSDOS.DHOQ"		CogRs_CB			wRs_CB
+1		wDt		>gtfdd.dhsd		DatD
+BeginF
+
+	wRs_CB.Init()
+	wRs_CB.Where.Borne_Date(wDt)
+	If wRs_CB.Select() > 0 AND wRs_CB.ClotCod = 2
+
+		FReturn(1)
+
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
 Procedure Cog_Maj_Menu_Boutons
 ;
 BeginP
@@ -219,7 +240,6 @@ Public Procedure Cog_ZoomAvantReWrite
 ;
 RecordSQL	"COG_CCRSIMMO.DHOQ"		CogRs_IMMO		wRs_IMMO
 RecordSQL	"COG_CCRSIMMO.DHOQ"		CogRs_IMMO		wRs_IMMO_new
-RecordSQL	"COG_CCRSDOS.DHOQ"		CogRs_CB			wRs_CB
 1 	txtMSB	S
 1	i			1,0
 BeginP
@@ -231,9 +251,7 @@ BeginP
 
 		If wRs_IMMO.EcoAmDt <> ' ' 
 
-			wRs_CB.Init()
-			wRs_CB.Where.Borne_Date(wRs_IMMO.EcoAmDt)
-			If wRs_CB.Select() > 0 AND wRs_CB.ClotCod = 2
+			If Cog_CB_Cloture(wRs_IMMO.EcoAmDt)
 
 				; contrôle des champs non autorisés pour modif après clôture exercice
 				wRs_IMMO_new.I1 = IMMOBILISATION.I1
@@ -265,6 +283,20 @@ BeginP
 			EndIf
 
 		EndIF
+
+	EndIf
+
+EndP
+
+;*
+Public Procedure Cog_ZoomAvantDelete
+;
+BeginP
+
+	If Cog_CB_Cloture(IMMOBILISATION.EcoAmDt) = TRUE
+
+		Zoom.Ok = 'I'
+		MessageBox(TRanslate("Suppression interdite:|la date de mise en service réelle est comprise dans un exercice comptable clôturé."), Translate("Alerte"), MB_ICONINFORMATION)
 
 	EndIf
 
