@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150409153128      
+;>xwin4obj                              7.0       20150518112959      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="09/04/2015"
+ date_modification="18/05/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
@@ -350,6 +350,7 @@
    [presentation]
     position=102,95
     taille=9,36
+    noms="cog_axeonly"
     id=137
     colonnes_saisie=10
     wstyle="CHAMP_SAISI"
@@ -397,6 +398,7 @@
    [presentation]
     position=113,95
     taille=9,36
+    noms="cog_axeonly"
     id=139
     colonnes_saisie=3
     wstyle="CHAMP_SAISI"
@@ -423,6 +425,7 @@
    [presentation]
     position=124,95
     taille=9,36
+    noms="cog_axeonly"
     id=140
     colonnes_saisie=8
     wstyle="CHAMP_SAISI"
@@ -445,6 +448,7 @@
    [presentation]
     position=124,205
     taille=9,67
+    noms="cog_axeonly"
     id=141
     wstyle="CHAMP_SAISI"
    [description]
@@ -469,6 +473,7 @@
    [presentation]
     position=135,95
     taille=9,36
+    noms="cog_axeonly"
     id=142
     colonnes_saisie=11
     wstyle="CHAMP_SAISI"
@@ -950,6 +955,7 @@
   [presentation]
    position=102,95
    taille=9,36
+   noms="cog_axeonly"
    id=85
    colonnes_saisie=10
    wstyle="CHAMP_SAISI"
@@ -983,6 +989,7 @@
   [presentation]
    position=113,95
    taille=9,36
+   noms="cog_axeonly"
    id=97
    colonnes_saisie=3
    wstyle="CHAMP_SAISI"
@@ -1003,6 +1010,7 @@
   [presentation]
    position=124,95
    taille=9,36
+   noms="cog_axeonly"
    id=107
    colonnes_saisie=8
    wstyle="CHAMP_SAISI"
@@ -1018,6 +1026,7 @@
   [presentation]
    position=124,205
    taille=9,67
+   noms="cog_axeonly"
    id=98
    wstyle="CHAMP_SAISI"
   [description]
@@ -1035,6 +1044,7 @@
   [presentation]
    position=135,95
    taille=9,36
+   noms="cog_axeonly"
    id=95
    colonnes_saisie=11
    wstyle="CHAMP_SAISI"
@@ -1104,6 +1114,7 @@
    wstyle="CHAMP_SAISI"
   [description]
    donnee=cogrs_ut125,cog_axeanael,cogrs_ut125
+   sequence=1
   [param_saisie]
    type_date=jj/mm/aaaa
    table_associee=oui
@@ -1499,7 +1510,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: cogez_ut125.dhsf 7873 2015-04-13 15:52:13Z admin $')
+SetModuleInfo('$Id: cogez_ut125.dhsf 8026 2015-05-18 09:36:13Z admin $')
 ;*
 ;*	  Traitement du zoom facturation loyer sur projets spec
 ;*
@@ -1558,7 +1569,6 @@ Beginp
 		Endif
    Endif
 Endp
-
 
 ;*
 Public Procedure Champ_Op_1_Ap
