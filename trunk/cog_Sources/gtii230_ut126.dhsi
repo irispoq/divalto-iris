@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20150306093051      
+;>xwin4obj     imprimante               6.0       20150518175919      
 [masque]
  utilisateur="UGIE"
- date_modification="06/03/2015"
+ date_modification="18/05/2015"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -11,8 +11,8 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=221
- dernier_id_page=38
+ dernier_id=230
+ dernier_id_page=41
  [adresses]
   type_ad1_var=variable
   type_ad2_var=variable
@@ -38,6 +38,8 @@
  "gtfdd.dhsd",,t013,t013,300,0
  "gtfdd.dhsd",,t2,t2,1000,0
  "gtfdd.dhsd",,t037,t037,450,0
+ "gtfdd.dhsd",,prjap,prjap,1000,0
+ "gtfdd.dhsd",,g4,g4_cog,8000,0
 [bloc]
  numero=1
  libelle="En-tête"
@@ -47,6 +49,7 @@
  fin=70
  bloc_fond=2
  position_fond=23
+ diva_avant="Bloc_EnTete_Av"
  ident_unique=1
  [cadre]
   [presentation]
@@ -170,7 +173,7 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=181,1
+   position=180,1
    taille=427,311
    id=7
   [param_cadre]
@@ -726,6 +729,7 @@
  debordement=3
  diva_avant="BLOC_LIGNEARTICLE_1_AV"
  diva_apres="BLOC_LIGNEARTICLE_1_AP"
+ diva_avantgestion="Bloc_LigneArticle_AvGestion"
  ident_unique=2
  [champ]
   [presentation]
@@ -1146,6 +1150,7 @@
  taille=0
  debut=65528
  fin=65535
+ diva_avantgestion="Bloc_Pied_AvGestion"
  ident_unique=12
  [champ]
   [presentation]
@@ -1602,7 +1607,7 @@
 [bloc]
  numero=15
  libelle="Facture début Bl"
- taille=1
+ taille=0
  type_bloc=mobile
  debut=23
  fin=65526
@@ -1629,14 +1634,13 @@
 [bloc]
  numero=16
  libelle="Facture fin BL"
- taille=1
+ taille=0
  type_bloc=mobile
  debut=23
  fin=65526
  debordement=3
  bloc_fond=2
  position_fond=3
- diva_apres="BLOC_FACTUREFINBL_1_AP"
  ident_unique=16
  [obj_texte]
   [presentation]
@@ -2161,35 +2165,342 @@
  debut=23
  fin=65526
  debordement=3
+ bloc_fond=2
+ position_fond=2
+ diva_avant="Bloc_DebutAffaire_Av"
+ diva_apres="Bloc_DebutAffaire_Ap"
  ident_unique=38
+ [champ]
+  [presentation]
+   position=0,67
+   taille=9,246
+   id=223
+   colonnes_saisie=80
+   wstyle="STD_GRAS_ITALIQUE"
+  [description]
+   donnee=prjap,lib80,prjap
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,3
+   taille=9,46
+   id=222
+   colonnes_saisie=8
+   wstyle="STD_GRAS_ITALIQUE"
+  [description]
+   donnee=prjap,affaire,prjap
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[bloc]
+ numero=39
+ libelle="Fin Affaire"
+ taille=2
+ type_bloc=mobile
+ debut=23
+ fin=65526
+ debordement=3
+ bloc_fond=2
+ position_fond=2
+ diva_apres="Bloc_FinAffaire_Ap"
+ ident_unique=39
+ [obj_texte]
+  [presentation]
+   position=2,67
+   taille=12,36
+   id=224
+   wstyle="STD_GRAS_ITALIQUE"
+  [texte]
+   texte="Total"
+ [champ]
+  [presentation]
+   position=2,82
+   taille=12,178
+   id=229
+   colonnes_saisie=80
+   wstyle="STD_GRAS_ITALIQUE"
+  [description]
+   donnee=prjap,lib80,prjap
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=2,266
+   taille=9,40
+   id=225
+   colonnes_saisie=12
+   wstyle="STD_GRAS_ITALIQUE"
+  [description]
+   donnee=g4,blmt,g4_cog
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+[bloc]
+ numero=40
+ libelle="Devis associé"
+ taille=1
+ type_bloc=mobile
+ debut=23
+ fin=65526
+ debordement=3
+ bloc_fond=2
+ position_fond=2
+ diva_avant="Bloc_DevisAssocie_Av"
+ diva_apres="Bloc_DevisAssocie_Ap"
+ ident_unique=40
+ [champ]
+  [presentation]
+   position=0,67
+   taille=9,139
+   cadrage=gauche
+   id=228
+   colonnes_saisie=40
+   wstyle="STD"
+  [description]
+   donnee=g4,lib,g4_cog,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+[bloc]
+ numero=41
+ libelle="Date BL"
+ taille=1
+ type_bloc=mobile
+ debut=23
+ fin=65526
+ debordement=3
+ bloc_fond=2
+ position_fond=2
+ diva_apres="Bloc_DateBl_Ap"
+ diva_avantgestion="Bloc_DateBl_AvGestion"
+ ident_unique=41
+ [champ]
+  [presentation]
+   position=0,29
+   taille=9,139
+   cadrage=gauche
+   id=230
+   colonnes_saisie=40
+   wstyle="STD_ITALIQUE"
+  [description]
+   donnee=g4,lib,g4_cog,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
 [diva]
-SetModuleInfo('$Id: gtii230_ut126.dhsi 7664 2015-03-11 09:37:45Z admin $')
-
-Module	'GTPM000.dhop'
-Module	'GTTMPCE.dhop'
-Public Record "gtfdd.dhsd" art g4art
-Public Record "gtfdd.dhsd" ent ent
-Public Record "gtfdd.dhsd" mouv g4mouv
-Public Record "gtfdd.dhsd" g4 g4
-Public Record "gtfdd.dhsd" soc soc
-Public Record "gtfdd.dhsd" vrp vrp
-Public Record "gtfdd.dhsd" t020 w2t020
-Public Record "a5dd.dhsd" mw mw
-Public Record "gtfdd.dhsd" g4t1 g4t1
-Public Record "gtfdd.dhsd" mvtl g4mvtl
-Public Record "gtfdd.dhsd" eec eec
-Public Record "gtfdd.dhsd" t013 t013
-Public Record "gtfdd.dhsd" t2 t2
-Public Record "gtfdd.dhsd" t037 t037
+SetModuleInfo('$Id: gtii230_ut126.dhsi 8047 2015-05-20 12:22:33Z admin $')
 
 ;*
-Public Procedure Bloc_ArticleComposant_Ap		; Après une ligne de composant
+;*		Objet : Masque pour les factures issues du moteur de facturation projets spécifiques
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF		P205a			INIT		05/2015
+;*
+
+;*
+;*	  	Déclarations
+;*
+
+;
+Include	"GTTCZ00.DHSP"
+
+;
+Module	'GTTMPCE.dhop'
+
+;
+Public RecordSQL	"COGRS_PROJ.DHOQ"			CogRs_PrjComp
+
+;
+Public Record "gtfdd.dhsd" art 				g4ART
+Public Record "gtfdd.dhsd" ent 				ENT
+Public Record "gtfdd.dhsd" mouv 				g4MOUV
+Public Record "gtfdd.dhsd" g4 				g4
+Public Record "gtfdd.dhsd" soc 				SOC
+Public Record "gtfdd.dhsd" vrp 				VRP
+Public Record "gtfdd.dhsd" t020 				w2t020
+Public Record "a5dd.dhsd" 	mw 				mw
+Public Record "gtfdd.dhsd" g4t1 				g4T1
+Public Record "gtfdd.dhsd" mvtl 				g4MVTL
+Public Record "gtfdd.dhsd" eec 				eec
+Public Record "gtfdd.dhsd" t013 				T013
+Public Record "gtfdd.dhsd" t2 				T2
+Public Record "gtfdd.dhsd" t037 				T037
+Public Record "gtfdd.dhsd" prjap 			PRJAP
+Public Record "gtfdd.dhsd" g4 				G4_COG
+
+;
+1		flagBL			1,0
+1		flagPied			1,0
+1		flagFirstLg		1,0
+1		flagLigne		1,0
+1		blDt				6
+	2	yDt				4,0
+	2	mDt				2,0
+1		blDt_Prec		6
+	2	yDt_Prec			4,0
+	2	mDt_Prec			2,0 	
+
+;
+Const C_BLOC_PRJ_DEBUT		= 38
+Const	C_BLOC_PRJ_FIN			= 39
+Const C_BLOC_PRJ_DVNO		= 40
+Const	C_BLOC_BLDT				= 41
+Const	C_BLOC_LIGNE			= 2
+Const C_BLOC_PIED				= 12
+Const C_BLOC_BL_DEBUT		= 15
+
+Const C_TRT_AVANT				= 1
+Const	C_TRT_APRES				= 2
+Const	C_TRT_AVGESTION		= 3
+
+;*
+;*
+;*
+
+;*
+Procedure Aiguillage_Bloc(wBloc, wTrt)
+;	chargement des informations necessaires à l'impression du bloc
+; 	gestion des chainages
+1		wBloc		3,0
+1		wTrt		1,0
+BeginP												
+
+	Switch wBloc
+	
+		;	BLOC n°2 --> lignes articles
+		Case C_BLOC_LIGNE
+			Switch wTrt
+				yDt = Year(G4MOUV.BlDt) 
+				mDt = Month(G4MOUV.BlDt)
+				Case C_TRT_AVGESTION		  						; rupture projet --> dans tous les cas bloc fin projet sauf si c'est la première ligne
+					If g4MOUV.Projet <> PRJAP.Affaire
+						Harmony.Retour = XMINEXT_AUTRE_BLOC
+						If not flagFirstLg
+							Harmony.Cplretour = C_BLOC_PRJ_FIN
+						Else
+							flagFirstLg = FALSE
+							Harmony.Cplretour = C_BLOC_PRJ_DEBUT
+						EndIf
+						Break	
+					ElsIf blDt <> blDt_Prec
+						Harmony.Retour = XMINEXT_AUTRE_BLOC
+						Harmony.Cplretour = C_BLOC_BLDT
+					EndIf
+
+				Case C_TRT_APRES									; cumuls des montants par code projet
+					G4_COG.BlMt += G4MOUV.Mont
+					Break
+
+			EndSwitch
+
+		;	BLOC n°38 --> bloc début projet
+		Case C_BLOC_PRJ_DEBUT
+			Switch wTrt
+
+				Case C_TRT_AVANT									; chargement des records projet / init du cumul
+					G4_COG.BlMt = 0
+					blDt			= ' '
+					If Seek_PRJAP(G4MOUV.Projet) = 0
+						CogRs_PrjComp.Init()
+						CogRs_PrjComp.Where.PK(G4MOUV.Projet)
+						CogRs_PrjComp.Select()
+					Else
+						PRJAP.Affaire = G4MOUV.Projet
+						PRJAP.Lib80	= "Projet inconnu"
+					EndIf
+					Break
+
+				Case C_TRT_APRES				 					; soit le bloc avec n° du devis soit impression du détail ligne
+					Harmony.Retour = XMINEXT_AUTRE_BLOC
+					If CogRs_PrjComp.DvNo > 0 OR CogRs_PrjComp.CnCdNo <> ' '
+						Harmony.Cplretour = C_BLOC_PRJ_DVNO
+					Else
+						Harmony.Cplretour = C_BLOC_BLDT
+					EndIf
+					Break
+			EndSwitch
+
+		; BLOC N°39 --> bloc fin projet
+		Case C_BLOC_PRJ_FIN
+			Switch wTrt
+				Case C_TRT_APRES
+					Harmony.Retour = XMINEXT_AUTRE_BLOC
+				 	If g4MOUV.Projet <> PRJAP.Affaire	  ; apres fin projet	si rupture --> bloc debut projet /// pas de rupture --> bloc pied
+ 						Harmony.Cplretour	= C_BLOC_PRJ_DEBUT
+					Else
+						Harmony.CplRetour = C_BLOC_PIED
+					EndIf 
+					Break
+			EndSwitch
+
+		; BLOC N°40 --> bloc n° de devis projet
+		Case C_BLOC_PRJ_DVNO
+			Switch wTrt
+
+				Case C_TRT_AVANT									; libellé n° de devis ou n° de commande centrale nationale
+					G4_COG.Lib(1) = Condition(CogRs_PrjComp.DvNo > 0, "Devis N°" & NoSpaces(CogRs_PrjComp.DvNo), "Commande CN N°" & left(CogRs_PrjComp.CnCdNo))
+
+				Case C_TRT_APRES									; impression de la ligne article ou début BL
+					Harmony.Retour = XMINEXT_AUTRE_BLOC
+					Harmony.Cplretour = C_BLOC_BLDT
+
+					Break
+			EndSwitch
+
+		; BLOC N°41 --> date BL
+		Case C_BLOC_BLDT
+			Switch wTrt
+				Case C_TRT_AVGESTION
+					yDt = Year(G4MOUV.BlDt) 
+					mDt = Month(G4MOUV.BlDt)
+					If blDt <> blDt_Prec
+						G4_COG.Lib(2) = "Facturation " & Modify(' ', '0', mDt) & "/" & yDt
+						blDt_Prec = blDt
+					Else
+						Harmony.Retour = XMINEXT_AUTRE_BLOC
+						Harmony.Cplretour = C_BLOC_LIGNE	
+					EndIf
+
+				Case C_TRT_APRES
+					Harmony.Retour = XMINEXT_AUTRE_BLOC
+					Harmony.Cplretour = C_BLOC_LIGNE	
+
+			EndSwitch
+
+		; BLOC N°12 --> bloc montants pied de piece
+		Case C_BLOC_PIED
+			Switch wTrt
+				CASE C_TRT_AVGESTION
+					If not flagPied					; dernière rupture projet
+						flagPied = TRUE
+						Harmony.Retour = XMINEXT_AUTRE_BLOC
+						Harmony.Cplretour = C_BLOC_PRJ_FIN
+						Break
+					EndIF
+
+			EndSwitch
+
+	EndSwitch
+
+EndP
+
+;*
+Public Procedure Bloc_ArticleComposant_Ap		
+; Après une ligne de composant
 Beginp
 	Piece_Imp_Ligne_Cpl
 Endp														
 
-
+;*
 Public Procedure Masque_1_Init
+;
 Beginp
 	 G4.VTLEDITTYP = 0	; pas d'impressions des ventilations (bloc 2 uiquement)
 	; G4.VTLEDITTYP = 1	; 1ere ventilation avec le mouvement (bloc 2) ventilations suivantes (bloc 5)
@@ -2199,32 +2510,126 @@ Beginp
 	 G4.RELEDITTYP = False	; on n'imprime pas les lignes non livrées en pied de bl =true pour imprimer
 Endp
 
+;*
 Public Procedure BLOC_LIGNEARTICLE_1_AV
+;
 Beginp
 	Piece_Imp_Ligne_Vente_Av
 Endp
 
+;*
 Public Procedure BLOC_LIGNEARTICLE_1_AP
+;
 Beginp
+
+	Aiguillage_Bloc(C_BLOC_LIGNE, C_TRT_APRES)
+
 	;Piece_Imp_Ligne_Ap
 	Piece_Imp_Ligne_Cpl
 Endp
 
+;*
 Public Procedure BLOC_COMPLEMENTLIGNE_1_AP
+;
 Beginp
 	Piece_Imp_Ligne_CplSousRef
 Endp
 
-Public Procedure BLOC_FACTUREFINBL_1_AP
+;*
+Public Procedure Bloc_DateBl_Ap
+;
 Beginp
-	Piece_Imp_Bl_Fin
+	Aiguillage_Bloc(C_BLOC_BLDT, C_TRT_APRES)
 Endp
 
+
+;*
+Public Procedure Bloc_DateBl_AvGestion
+;
+Beginp
+	Aiguillage_Bloc(C_BLOC_BLDT, C_TRT_AVGESTION)
+Endp
+
+
+;*
+Public Procedure Bloc_DebutAffaire_Ap
+;
+Beginp
+	Aiguillage_Bloc(C_BLOC_PRJ_DEBUT, C_TRT_APRES)
+Endp
+
+
+;*
+Public Procedure Bloc_DebutAffaire_Av
+;
+Beginp
+	Aiguillage_Bloc(C_BLOC_PRJ_DEBUT, C_TRT_AVANT)
+Endp
+
+
+;*
+Public Procedure Bloc_DevisAssocie_Ap
+;
+Beginp
+	Aiguillage_Bloc(C_BLOC_PRJ_DVNO, C_TRT_APRES)
+Endp
+
+
+;*
+Public Procedure Bloc_DevisAssocie_Av
+;
+Beginp
+	Aiguillage_Bloc(C_BLOC_PRJ_DVNO, C_TRT_AVANT)
+Endp
+
+
+;*
+Public Procedure Bloc_EnTete_Av
+;
+Beginp
+
+	If System.Zpage = 1
+		Init g4_cog = ' '
+		Init PRJAP 	= ' '
+		flagBL		= FALSE
+		flagPied		= FALSE
+		flagLigne	= FALSE
+		flagFirstLg	= TRUE
+		blDt_Prec	= ' '
+	EndIf
+
+Endp
+
+;*
 Public Procedure BLOC_FACTUREFINCOMMANDE_1_AP
 Beginp
 	Piece_Imp_Cde_Fin
 Endp
 
+
+;*
+Public Procedure Bloc_FinAffaire_Ap
+;
+Beginp
+	Aiguillage_Bloc(C_BLOC_PRJ_FIN, C_TRT_APRES)
+Endp
+
+
+;*
+Public Procedure Bloc_LigneArticle_AvGestion
+;
+Beginp
+
+	Aiguillage_Bloc(C_BLOC_LIGNE, C_TRT_AVGESTION)	
+Endp
+
+
+;*
+Public Procedure Bloc_Pied_AvGestion
+;
+Beginp
+	Aiguillage_Bloc(C_BLOC_PIED, C_TRT_AVGESTION)
+Endp
 [/diva]
 [diva_base]
 [/diva]

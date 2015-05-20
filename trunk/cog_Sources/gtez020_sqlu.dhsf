@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150415083659      
+;>xwin4obj                              7.0       20150518134724      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="15/04/2015"
+ date_modification="18/05/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
- dernier_id=1000040
+ dernier_id=1000043
  surcharge=oui
  date_modif_base="20130207143007"
  dernier_id_page=100001
@@ -5066,6 +5066,14 @@
    texte="Veuillez indiquer le no d'état utilisé habituellement pour ce dossier"
  [obj_texte]
   [presentation]
+   position=36,198
+   taille=9,141
+   id=1000041
+   wstyle="STD"
+  [texte]
+   texte="N° d'état pour les pièces issues du moteur de facturation"
+ [obj_texte]
+  [presentation]
    position=63,298
    taille=9,75
    id=1000008
@@ -5246,6 +5254,20 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_ETANO_1_Ap"
+ [champ]
+  [presentation]
+   position=36,338
+   taille=9,8
+   id=1000043
+   colonnes_saisie=1
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=dossier,cog_motfetano,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
  [case_a_cocher]
   [presentation]
    position=66,10
