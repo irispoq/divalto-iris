@@ -1092,7 +1092,26 @@ BeginP
 ;
 ;	EndSwitch
 
-EndP
+EndP 
+
+;*
+Public Procedure Cog_Ent_Init_Final
+;
+BeginP
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+		Case 'C4'		; FACTURES CLIENTS
+			; N° d'état pour les factures projets spécifiques
+			If T020.Op <> ENT.Op
+				Lectab(20, ENT.Op)
+			EndIf
+			If T020.Cog_MotPrjFlag = 2 AND SOC.Cog_MotFEtaNo <> ' '
+				ENT.EtaNo = SOC.Cog_MotFEtaNo
+			EndIf
+
+	EndSwitch
+
+ENdP
 
 ;*
 Public Procedure Cog_Charger_Lib_EntBis

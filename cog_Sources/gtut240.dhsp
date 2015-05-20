@@ -9,15 +9,19 @@
 
 OverWrite	"GTTT240.dhop"
 
+;
 include "GTTC000.dhsp"	
-									
-Module	CCPMFIC.dhop									  
 
+;									
+Module	"CCPMFIC.dhop"									  
+
+;
 public hfile	ccfdd.dhsd	CCFJCA 		CCFJCA			; Fichier dossier de C3
 Public HFile	GTFDD.DHSD	GTFPCF		GTFPCF_DEV_01			; Tiers
 Public HFile	GTFDD.DHSD	GTFENT		GTFENT
 Public HFile	GTFDD.DHSD	GTFAM			GTFAM
 
+;
 public record	a5dd.dhsd	MZ
 public record	gtfdd.dhsd	ENT								; En-tête
 public record	gtfdd.dhsd	ENT			W1ENT				; En-tête origine bl
@@ -41,6 +45,7 @@ Public Record	GTFDD.DHSD	CLI		CLI_DEV_01					; Client
 
 Public Record "gtfdd.dhsd" g6 g6
 
+;
 1		werr			5,0
 1		Id_Factures	L
 1		Id_Lignes	L
@@ -254,10 +259,21 @@ Procedure ENT_Finale_Write_Av
 ; avant réécriture de l'en-tête de facture, sert dans un export sans attendre que l'impression de la facture soit faite (sinon ech = esp)
 BeginP
 	Standard.ENT_Finale_Write_Av
+
 	if GTENT.SENS = 2
 		ENT.ECHDT = Calcul_Echeance(ENT.REGL, ENT.PIDT, ENT.ECHDT,' ')	
 	endif
+
 	If ENT.TiCod = "C" And ENT.Cog_BL_Moteur = 2 And ENT.TpvBl = 3 | ListAddAfter(Id_Factures,ENT) | Endif	; facturation des projets spécifiques : tri des lignes
+
+	; N° d'état pour les factures projets spécifiques
+	If T020.Op <> ENT.Op
+		Lectab(20, ENT.Op)
+	EndIf
+	If T020.Cog_MotPrjFlag = 2 AND SOC.Cog_MotFEtaNo <> ' '
+		ENT.EtaNo = SOC.Cog_MotFEtaNo
+	EndIf
+
 EndP
 
 ;*
