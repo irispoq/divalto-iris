@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150518101835      
+;>xwin4obj                              7.0       20150529135909      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
- date_modification="18/05/2015"
+ date_modification="29/05/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
@@ -5061,15 +5061,6 @@
   [param_groupbox]
    texte="Charges non immobilisables"
    couleur_fond="GROUPE_FOND"
- [groupbox]
-  [presentation]
-   position=145,6
-   taille=33,111
-   id=1000149
-   wstyle="GROUPE"
-  [param_groupbox]
-   texte="Direction cliente"
-   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
    position=33,10
@@ -5232,14 +5223,6 @@
    texte="Nombre fiche bien"
  [obj_texte]
   [presentation]
-   position=159,9
-   taille=9,53
-   id=1000150
-   wstyle="STD"
-  [texte]
-   texte="Tiers direction cliente"
- [obj_texte]
-  [presentation]
    position=162,124
    taille=9,79
    id=1000161
@@ -5398,24 +5381,6 @@
    wstyle="STD"
   [texte]
    texte="mois"
- [champ]
-  [presentation]
-   position=169,7
-   taille=9,106
-   id=1000152
-   colonnes_saisie=38
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_prjcomp,nomcli,cogrs_prjcomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
  [champ]
   [presentation]
    position=33,89
@@ -5706,30 +5671,6 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
- [champ]
-  [presentation]
-   position=159,63
-   taille=9,42
-   id=1000151
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=cogrs_prjcomp,dirclitiers,cogrs_prjcomp
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   f8=9021
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_DirCliTiers_1_Ap"
-  [boutons]
-   "zoom"
  [champ]
   [presentation]
    position=112,179
@@ -7251,22 +7192,22 @@ Beginp
 Endp
 
 
-;*
-Private Procedure Champ_DirCliTiers_1_Ap
+;;*
+;Private Procedure Champ_DirCliTiers_1_Ap
+;;
+;Beginp
+;	
+;	PingLocal("COG_SAVE_CLI", CLI)
 ;
-Beginp
-	
-	PingLocal("COG_SAVE_CLI", CLI)
-
-	CogRs_PrjComp.NOMCLI = ' '
-
-	If CogRs_PrjComp.DirCliTiers <> ' '	AND Controle_Client(CogRs_PrjComp.DirCliTiers, 2000) = 0 
-		CogRs_PrjComp.NOMCLI = CLI.Nom
-	EndIf
-
-	PingLocalReceiveAndDelete("COG_SAVE_CLI", CLI)
-
-Endp
+;	CogRs_PrjComp.NOMCLI = ' '
+;
+;	If CogRs_PrjComp.DirCliTiers <> ' '	AND Controle_Client(CogRs_PrjComp.DirCliTiers, 2000) = 0 
+;		CogRs_PrjComp.NOMCLI = CLI.Nom
+;	EndIf
+;
+;	PingLocalReceiveAndDelete("COG_SAVE_CLI", CLI)
+;
+;Endp
 
 
 ;*
