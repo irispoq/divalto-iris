@@ -164,7 +164,7 @@ BeginF
 	EndIf
 
 	If not ENT.ETB = MZ.ETB | Freturn('N') 
-	ElsIf ENT.PROJET < G3XQ.PROJETD Or ENT.PROJET > G3XQ.PROJETF
+	ElsIf ENT.PROJET < G3XQ.PROJETD Or ENT.PROJET > G3XQ.PROJETF	
 		Freturn('N') 
 	ElsIf G3XQ.CHOIX(20) = 1 And ENT.Cog_BL_Moteur < 2
 		Freturn('N') 
@@ -295,7 +295,56 @@ beginf
 		else
 			freturn(ZoneA < ZoneB)
 		endif
-endf	
+endf
+
+;*
+Function char Cog_OP_Regrouper(wOP1, wOP2)
+; teste la possibilité de regrouper 2 codes OP différents sur une pièce
+; O --> Oui
+; N --> Non
+RecordSQL	"GTRSPPTAB.dhoq"		CodeOperation		wRs_OP1
+RecordSQL	"GTRSPPTAB.dhoq"		CodeOperation		wRs_OP2
+1		wOP1		>gtfdd.dhsd		OP
+1		wOP2		>gtfdd.dhsd		OP
+1		wOP		>gtfdd.dhsd		OP
+BeginF
+	
+	; égalité --> pas besoin de test
+	If wOP1 = wOP2
+		FReturn('O')
+	EndIf
+
+	; chargement des codes OP
+	If wOP1 > wOP2	 	; pour optimiser les select on charge par ordre alpha
+		wOP = wOP2
+		wOP2 = wOP1
+		wOP1 = wOP
+	EndIf
+	If wRs_OP1.Op <> wOP1
+		wRs_OP1.Init()
+		wRs_OP1.Where.PK(wOP1)
+		wRs_OP1.Select()
+	EndIf
+	If wRs_OP2.Op <> wOP2
+		wRs_OP2.Init()
+		wRs_OP2.Where.PK(wOP2)
+		wRs_OP2.Select()
+	EndIf
+
+	; Tests de compatibilité
+	If wRs_OP1.Sens <> wRs_OP2.Sens
+		FReturn('N')
+	EndIf
+	If wRs_OP1.Jnl <> wRs_OP2.Jnl
+		FReturn('N')
+	EndIf
+	If wRs_OP1.Cog_MotPrjFlag <> 2 OR wRs_OP2.Cog_MotPrjFlag <> 2
+		FReturn('N')
+	EndIf
+
+	FReturn('O')
+
+EndF
 
 ;*
 Function char Regrouper_Bl
@@ -304,7 +353,20 @@ Function char Regrouper_Bl
 ;				'N' sinon
 1		flag			1			
 Beginf
-	flag = Standard.Regrouper_Bl	
+
+	If G1T6.Cog_BL_Moteur = 2 AND W1G1T6.Cog_BL_Moteur = 2  		; on autorise sous certaines conditions le regroupement de 2 codes OP différents
+		if G1T6.DEV <> W1G1T6.DEV or G1T6.REGL <> W1G1T6.REGL or G1T6.ESCP <> W1G1T6.ESCP or G1T6.PERIOD <> W1G1T6.PERIOD or\
+			G1T6.TVATIE <> W1G1T6.TVATIE or G1T6.TPFT <> W1G1T6.TPFT or \ 
+			G1T6.ADRTIERSF <> W1G1T6.ADRTIERSF or G1T6.ADRCOD(4) <> W1G1T6.ADRCOD(4) or G1T6.RIBCOD <> W1G1T6.RIBCOD or \
+			G1T6.ENCASSCOD <> W1G1T6.ENCASSCOD or G1T6.PIEDNO() <> W1G1T6.PIEDNO() or G1T6.HTCOD <> W1G1T6.HTCOD
+			flag = 'N'
+		Else
+		 	flag = Cog_OP_Regrouper(G1T6.Op, W1G1T6.Op)
+		EndIf
+	Else
+		flag = Standard.Regrouper_Bl	
+	EndIf
+		
 	If  flag = 'O' And G1T6.Cog_DirCliente = system.esp
  		Freturn(flag)
 	ElsIf flag = 'O' And G1T6.Cog_Regroupe_Direction = 1 And W1G1T6.Cog_Regroupe_Direction = 1
