@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,,,20150518120251,UGIE                
+Version=6,,,20150611115641,ROOT                
 Nom=gtfdd.dhsd,gtfdd1.dhsd,1
 [CHAMP]
 Version=1,20131006064734,SYSTEMNEW           ,20131006064734,SYSTEMNEW           
@@ -290,6 +290,12 @@ Nom=Cog_Id_Enveloppe,Enveloppe budgétaire,1
 Gel=1
 Nature=5,0
 NomOdbc=Cog_Id_Enveloppe
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150611115639,ROOT                ,20150611115639,ROOT                
+Nom=Cog_ImmoFlag,Type IMMO,1
+Gel=1
+Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20141007175408,UGIE                ,20141007175414,UGIE                
@@ -750,6 +756,7 @@ Nom=Cog_AffectationBudgetaire,169,0,0,N,1
 Nom=Cog_ImpDetail,173,0,0,N,1
 Nom=Cog_Id_Enveloppe,174,0,0,N,1
 Nom=Cog_TypMotFac,179,0,0,N,1
+Nom=Cog_ImmoFlag,187,0,0,N,1
 [/CHAMPL]
 nom=USoc
 [CHAMPL]
