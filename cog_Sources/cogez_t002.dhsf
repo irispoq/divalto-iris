@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20150123114222      
+;>xwin4obj                              7.0       20150612121001      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="23/01/2015"
+ date_modification="12/06/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
@@ -90,6 +90,7 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+   diva_apres="Champ_Cog_TauxDt_1_Ap"
 [page]
  numero=3
  fond="STD"
@@ -782,7 +783,7 @@
     wnom=""
 [diva]
 
-SetModuleInfo('$Id: cogez_t002.dhsf 7440 2015-01-23 13:04:23Z admin $')
+SetModuleInfo('$Id: cogez_t002.dhsf 8145 2015-06-12 10:18:38Z admin $')
 
 ;*
 ;*
@@ -794,6 +795,18 @@ Public RecordSql "cogrs_tab.dhoq" CogRs_TauxFi CogRs_TauxFi
 ;
 Public Record "ddsys.dhsd" rowinfo zoomselection
 Public Record "cogfdd.dhsd" Cog_T002 Cog_T002_sel
+
+
+;*
+Public Procedure Champ_Cog_TauxDt_1_Ap
+;
+1		wAn		4,0
+Beginp
+
+	wAn = Year(CogRs_TauxFi.Cog_TauxDt)
+	CogRs_TauxFi.Cog_TauxDt = wAn & "01" & "01"
+
+Endp
 [/diva]
 [diva_base]
 [/diva]
