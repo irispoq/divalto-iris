@@ -95,31 +95,46 @@ BeginP
 		Office_Write(wLig,7,"BASE")
 		Office_Write(wLig,8,"DOTATION ANTERIEURE")
 		Office_Write(wLig,9,"DOTATION ANNUELLE")
-		Office_Write(wLig,10,"DOTATION JANVIER")
-		Office_Write(wLig,11,"FRAIS JANVIER")
-		Office_Write(wLig,12,"DOTATION FEVRIER")
-		Office_Write(wLig,13,"FRAIS FEVRIER")
-		Office_Write(wLig,14,"DOTATION MARS")
-		Office_Write(wLig,15,"FRAIS MARS")
-		Office_Write(wLig,16,"DOTATION AVRIL")
-		Office_Write(wLig,17,"FRAIS AVRIL")
-		Office_Write(wLig,18,"DOTATION MAI")
-		Office_Write(wLig,19,"FRAIS MAI")
-		Office_Write(wLig,20,"DOTATION JUIN")
-		Office_Write(wLig,21,"FRAIS JUIN")
-		Office_Write(wLig,22,"DOTATION JUILLET")
-		Office_Write(wLig,23,"FRAIS JUILLET")
-		Office_Write(wLig,24,"DOTATION AOUT")
-		Office_Write(wLig,25,"FRAIS AOUT")
-		Office_Write(wLig,26,"DOTATION SEPTEMBRE")
-		Office_Write(wLig,27,"FRAIS SEPTEMBRE")
-		Office_Write(wLig,28,"DOTATION OCTOBRE")
-		Office_Write(wLig,29,"FRAIS OCTOBRE")
-		Office_Write(wLig,30,"DOTATION NOVEMBRE")
-		Office_Write(wLig,31,"FRAIS NOVEMBRE")
-		Office_Write(wLig,32,"DOTATION DECEMBRE")
-		Office_Write(wLig,33,"FRAIS DECEMBRE")
-		For i=1 to 33
+		Office_Write(wLig,10,"BASE FRAIS")
+		Office_Write(wLig,11,"DOTATION ANNUELLE FRAIS")
+		Office_Write(wLig,12,"DOTATION ANNUELLE FRAIS NON IMMO")
+		Office_Write(wLig,13,"DOTATION JANVIER")
+		Office_Write(wLig,14,"FRAIS JANVIER")
+		Office_Write(wLig,15,"FRAIS NON IMMO JANVIER")
+		Office_Write(wLig,16,"DOTATION FEVRIER")
+		Office_Write(wLig,17,"FRAIS FEVRIER")
+		Office_Write(wLig,18,"FRAIS NON IMMO ")
+		Office_Write(wLig,19,"DOTATION MARS")
+		Office_Write(wLig,20,"FRAIS MARS")
+		Office_Write(wLig,21,"FRAIS NON IMMO ")
+		Office_Write(wLig,22,"DOTATION AVRIL")
+		Office_Write(wLig,23,"FRAIS AVRIL")
+		Office_Write(wLig,24,"FRAIS NON IMMO ")
+		Office_Write(wLig,25,"DOTATION MAI")
+		Office_Write(wLig,26,"FRAIS MAI")
+		Office_Write(wLig,27,"FRAIS NON IMMO ")
+		Office_Write(wLig,28,"DOTATION JUIN")
+		Office_Write(wLig,29,"FRAIS JUIN")
+		Office_Write(wLig,30,"FRAIS NON IMMO ")
+		Office_Write(wLig,31,"DOTATION JUILLET")
+		Office_Write(wLig,32,"FRAIS JUILLET")
+		Office_Write(wLig,33,"FRAIS NON IMMO ")
+		Office_Write(wLig,34,"DOTATION AOUT")
+		Office_Write(wLig,35,"FRAIS AOUT")
+		Office_Write(wLig,36,"FRAIS NON IMMO ")
+		Office_Write(wLig,37,"DOTATION SEPTEMBRE")
+		Office_Write(wLig,38,"FRAIS SEPTEMBRE")
+		Office_Write(wLig,39,"FRAIS NON IMMO ")
+		Office_Write(wLig,40,"DOTATION OCTOBRE")
+		Office_Write(wLig,41,"FRAIS OCTOBRE")
+		Office_Write(wLig,42,"FRAIS NON IMMO ")
+		Office_Write(wLig,43,"DOTATION NOVEMBRE")
+		Office_Write(wLig,44,"FRAIS NOVEMBRE")
+		Office_Write(wLig,45,"FRAIS NON IMMO ")
+		Office_Write(wLig,46,"DOTATION DECEMBRE")
+		Office_Write(wLig,47,"FRAIS DECEMBRE")
+		Office_Write(wLig,48,"FRAIS NON IMMO ")
+		For i=1 to 48
 			Office_InteriorColorIndex(wLig,i,COULEUR_EXCEL_JAUNEFONCE)		
 			Office_FontBold(wLig,i)
 		next
@@ -159,26 +174,36 @@ BeginP
 			Office_Write(wLig,7, CogRs_UT126.Cog_BaseMt)
 			Office_Write(wLig,8, CogRs_UT126.AntMt)
 			Office_Write(wLig,9, CogRs_UT126.AnMt)
+			Office_Write(wLig,10,CogRs_UT126.FraisBaseMt)
+			Office_Write(wLig,11,CogRs_UT126.FraisAnMt)
+			Office_Write(wLig,12,CogRs_UT126.FraisFaAnMt)
 			
 			; dotations mensuelles
-			j=10
+			j=13
 			For i=1 to 12
 				Office_Write(wLig, j, CogRs_UT126.MoisMt(i))
-				j += 2
+				j += 3
 			next
 	
 			; frais financiers
-			j=11
+			j=14
 			For i=1 to 12
 				Office_Write(wLig, j, CogRs_UT126.FraisMoisMt(i))
-				j += 2
+				j += 3
+			next
+
+			; frais financiers non immo
+			j=15
+			For i=1 to 12
+				Office_Write(wLig, j, CogRs_UT126.FraisFaMoisMt(i))
+				j += 3
 			next
 
 			;
 			If CogRs_UT126.Affaire <> wUT_Prec.Affaire OR CogRs_UT126.Ref <> wUT_Prec.Ref OR CogRs_UT126.Cog_LgNo <> wUT_Prec.Cog_LgNo
 				wCouleur = Condition(wCouleur = COULEUR_EXCEL_GRISCLAIR, COULEUR_EXCEL_TURQUOISEPALE, COULEUR_EXCEL_GRISCLAIR)
 			EndIf
-			For i=1 to 33
+			For i=1 to 48
 				Office_InteriorColorIndex(wLig,i, wCouleur)		
 			next
 

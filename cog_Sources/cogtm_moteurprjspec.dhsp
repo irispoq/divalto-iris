@@ -402,7 +402,13 @@ RecordSQL	"COGRS_TAB.DHOQ"		CogRs_TauxStruc	wRs_TauxSt
 Record		"COGFDD.DHSD"			COG_UT125			wUT125
 1		wLoyerMt			13,D0			; montant loyer
 1		wLoyerMMt		13,D0			; montant loyer mensuel
-1		wSolde			13,D0		
+1		wSolde			13,D0	
+1		wSoldeFrais		13,D0
+1		wFraisMt			13,D0			; frais immo projet pour la durée totale
+1		wFraisMMt		13,D0			; frais immo projet pour le mois
+1		wFrFaMt			13,D0			; frais non immo liés à la facturation pour la période
+1		wFrFaMMt			13,D0			; frais non immo pour le mois
+1		wCapitalMoy		13,D0
 1		wFaDDt			D				; date de première facture
 1		wFaFDt			D
 1		wPrevFaDt		D				; date facture précédente
@@ -412,6 +418,7 @@ Record		"COGFDD.DHSD"			COG_UT125			wUT125
 1		j					2,0
 1		wNextFaMois 	2,0			; prochain mois de facturation
 1		wStepMois		2,0
+1		wConstMoisNb	4,0			; durée de la construction
 1		wFacturable		1,0
 1		wLoadPrj			1,0 = TRUE	; si FALSE, lecture des données de Affaire et CogRs_PrjComp sans Select()
 
@@ -429,6 +436,17 @@ BeginP
 	;*
 	; Nouveau calcul
 	;*
+	
+	;
+	If wLoadPrj
+		If CogRs_PrjComp.Affaire <> wUT125.Affaire
+			CogRs_PrjComp.Init()
+			CogRs_PrjComp.Where.PK(wUT125.Affaire)
+			CogRs_PrjComp.Select()
+		EndIf
+	EndIf
+	
+	;
 	wFacturable = Cog_Affaire_Facturable(wUT125, wLoadPrj)
 	wFaDDt = Condition(Hday(wUT125.Cog_Date_Debut) = 1,  wUT125.Cog_Date_Debut, HDate(wUT125.Cog_Date_Debut, 'p', +1))
 	Cog_CalculerDateFinFacturation(wFaDDt, wUT125.Cog_LoyNb, wUT125.Cog_Period, wFaFDt)
@@ -465,6 +483,31 @@ BeginP
 	wLoyerMMt= wLoyerMt / wStepMois
 	wSolde	= wUT125.Cog_Montant
 	wNextFaMois = HMonth(wFaDDt)
+	wFraisMMt = 0
+
+	Switch T020.Cog_MotPrjFlux & T036.Cog_MotFacTyp
+	; frais financiers projet immo
+		Case C_OP_IMMO & C_PRODNAT_PROJET  
+
+			; durée de la construction	en mois
+			wConstMoisNb =  Abs((DtNum(CogRs_PrjComp.ProjServReelDt) - DtNum(CogRs_PrjComp.TravReelDDt)) / 30)
+	
+			; taux financier
+			wRs_TauxFi.Init()
+			wRs_TauxFi.Where.En_Vigueur(wUT125.Cog_Date_Debut)
+				If wRs_TauxFi.Select() > 0
+					
+					; montant total des frais et montant par loyer
+					wFraisMt = (wUT125.Cog_Montant / 2) * (wRs_TauxFi.Cog_Taux / 100) * ((wUT125.Cog_LoyNb*wStepMois)/12)
+					wFraisMMt= wFraisMt / wUT125.Cog_LoyNb
+					wSoldeFrais = wFraisMt
+	
+				EndIf
+
+		;Case C_OP_IMMO & C_PRODNAT_INFRA		; Frais de structure
+
+
+	EndSwitch
 
 	; dotations annuelles
 	For i = wAnD to wAnF
@@ -481,6 +524,8 @@ BeginP
 		wRs_UT126.AntMt	= wUT125.Cog_Montant - wSolde
 		wRs_UT126.UserCr  = System.User
 		wRs_UT126.UserCrDh= Time(7)
+		wRs_UT126.FraisBaseMt = wSoldeFrais
+
 
 		; dotations mensuelles et cumuls
 		For j = wNextFaMois to 12 step wStepMois
@@ -502,23 +547,39 @@ BeginP
 			wRs_UT126.FraisMoisMt(j) = 0
 			Switch T020.Cog_MotPrjFlux & T036.Cog_MotFacTyp
 				Case C_OP_IMMO & C_PRODNAT_PROJET  	; Frais financiers
-					wRs_TauxFi.Init()
-					wRs_TauxFi.Where.En_Vigueur(wUT125.Cog_Date_Debut)
-					If wRs_TauxFi.Select() > 0
-						wRs_UT126.FraisMoisMt(j) = (wRs_UT126.MoisMt(j)/2) * (wRs_TauxFi.Cog_Taux / 100)	* wUT125.Cog_LoyNb
-					EndIf
+					wRs_UT126.FraisMoisMt(j) = wFraisMMt*wStepMois
+					wRs_UT126.FraisAnMt += wRs_UT126.FraisMoisMt(j)
+					wSoldeFrais -= wRs_UT126.FraisMoisMt(j)
 
 				Case C_OP_IMMO & C_PRODNAT_INFRA		; Frais de structure
 					wRs_TauxSt.Init()
 					wRs_TauxSt.Where.En_Vigueur(wPrevFaDt)
 					If wRs_TauxSt.Select() > 0
 						wRs_UT126.FraisMoisMt(j) = wRs_TauxSt.Cog_Taux * (wRs_UT126.MoisMt(j) / 100)
+						wRs_UT126.FraisAnMt += wRs_UT126.FraisMoisMt(j)
 					EndIf
 
 
 			EndSwitch
 
 		Next
+
+		; nouvelle boucle pour les frais non immo liés à la facturation
+		If T020.Cog_MotPrjFlux & T036.Cog_MotFacTyp = C_OP_IMMO & C_PRODNAT_PROJET  	
+
+			wCapitalMoy = 		((wRs_UT126.Cog_BaseMt + wRs_UT126.FraisBaseMt) \
+								+ 	((wRs_UT126.Cog_BaseMt + wRs_UT126.FraisBaseMt) - (wRs_UT126.AnMt + wRs_UT126.FraisAnMt)))	\
+								/ 2
+
+			wRs_UT126.FraisFaAnMt =  wCapitalMoy * (wRs_TauxFi.Cog_Taux / 100) * (1/12)
+
+			For j = wNextFaMois to 12 step wStepMois
+
+				wRs_UT126.FraisFaMoisMt(j) = (wRs_UT126.FraisFaAnMt / 12) * wStepMois
+
+			Next
+
+		EndIf
 
 		; init des ce
 		wRs_UT126.Ce1 = C_UT126_STATUT_PERIME	 ; par défaut périmé

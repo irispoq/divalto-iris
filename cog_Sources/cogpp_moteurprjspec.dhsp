@@ -615,7 +615,7 @@ BeginP
 	If Seek_PRJAP(iENT.Projet) = 0
 		iENt.Cog_ImpDetail 	= PrjAp.Cog_ImpDetail
 		iENT.Cog_DirCliente	= PrjAp.Cog_DirCliente
-		iENT.AdrCod(4)			= NoSpaces(PrjAp.Cog_DirCliente)
+		;iENT.AdrCod(4)			= NoSpaces(PrjAp.Cog_DirCliente)
 	EndIf
 
 	HWrite(GTFI, iENT) 

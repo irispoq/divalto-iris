@@ -359,6 +359,7 @@ Beginp
 		cogrs_ut125.Affaire = G7.Projet 
 		If Controle_Affaire(cogrs_ut125.Affaire,5000,,conf=false,niv=1) < 4
 		 	cogrs_ut125.PRJLIB = PRJAP.Lib80
+			CogRs_UT125.Cog_AxeAnael = PRJAP.Cog_AxeAnael
 		Else
 			MessageBox("Code affaire " & left(cogrs_ut125.Affaire) & " non autorisé.", "Alerte", MB_ICONERROR)
 			Zoom.Ok = 'I'

@@ -100,7 +100,6 @@ Beginp
 		Ajouter_condition(Valeur_Condition,'Zoom_Pour_Etb')
 	endif
 
-	;
 	;Surcharge SU
 	if prjap_sel.affaire <> ' '
 	   if (zoom.scevaleur <> ' ') and (mid (zoom.scevaleur,1,1) = '-')
@@ -112,7 +111,7 @@ Beginp
 		Affaire.where.Zoom_Su_Like_Affaire(Param)
 		Ajouter_condition(Valeur_Condition,'Zoom_Su_Like_Affaire')
 	endif
-	;
+	
 	;Surcharge SU
 	if su_sel.affaire <> ' '
 	   if (zoom.scevaleur <> ' ') and (mid (zoom.scevaleur,1,1) = '-')
@@ -124,8 +123,17 @@ Beginp
 		Affaire.Where.SupEgalAffaire(su_sel.affaire)
 		Ajouter_Condition(Valeur_Condition,'SupEgalAffaire')
 	endif
-	;
-	;
+	
+	; YLEF 06/2015 --> filtre sur type affaire immo / non immo	- !!! champ non indexé !!!
+	If PrjAp_sel.Cog_ImmoFlag = 1
+		Affaire.Where.Equal_Non_Immo()
+		Ajouter_Condition(Valeur_Condition,'Equal_Non_Immo')
+	EndIf
+	If PrjAp_sel.Cog_ImmoFlag = 2
+		Affaire.Where.Equal_Immo()
+		Ajouter_Condition(Valeur_Condition,'Equal_Immo')
+	EndIf
+
 	if prjap_sel.LibAbr <> ' '
 		Param = banaliser_condition(prjap_sel.LibAbr, true)	 		
 		Affaire.where.Zoom_Like_LibAbr(Param)

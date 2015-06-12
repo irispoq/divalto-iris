@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150529135909      
+;>xwin4obj                              7.0       20150611121445      
 [masque]
  libelle="affaire"
- utilisateur="UGIE"
- date_modification="29/05/2015"
+ utilisateur="ROOT"
+ date_modification="11/06/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
- dernier_id=1000211
+ dernier_id=1000219
  surcharge=oui
  date_modif_base="20131227150954"
  dernier_id_page=100007
@@ -339,6 +339,34 @@
    [param_colonne]
     fl_aff=oui
     largeur_col=18
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=23,196
+    taille=9,40
+    id=1000216
+    wstyle="STD"
+   [description]
+    donnee=affaire,cog_immoflag,affaire
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="IMMO"
+    cadrage=droite
+    valeur="2","1"
+    choix="gtfdmc.dhfi",""
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="IMMO"
+    fl_aff=non
+    largeur_col=40
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -1349,7 +1377,7 @@
    texte="A partir de"
  [obj_texte]
   [presentation]
-   position=28,4
+   position=27,4
    taille=9,45
    id=550
    wstyle="STD"
@@ -1357,7 +1385,7 @@
    texte="Libellé"
  [obj_texte]
   [presentation]
-   position=39,4
+   position=37,4
    taille=9,45
    id=542
    wstyle="STD"
@@ -1365,7 +1393,7 @@
    texte="Classe d'affaire"
  [obj_texte]
   [presentation]
-   position=50,4
+   position=47,4
    taille=9,45
    id=547
    wstyle="STD"
@@ -1373,13 +1401,22 @@
    texte="Client"
  [obj_texte]
   [presentation]
-   position=71,4
+   position=57,4
    taille=9,45
    noms="etb"
    id=555
    wstyle="STD"
   [texte]
    texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=67,137
+   taille=9,45
+   noms="etb"
+   id=1000219
+   wstyle="STD"
+  [texte]
+   texte="Type affaire"
  [champ]
   [presentation]
    position=17,50
@@ -1401,7 +1438,24 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=28,50
+   position=17,120
+   taille=9,46
+   id=1000011
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,affaire,su_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=27,50
    taille=9,92
    id=561
    colonnes_saisie=25
@@ -1418,7 +1472,7 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=39,50
+   position=37,50
    taille=9,35
    noms="AFR_SEL"
    id=543
@@ -1441,7 +1495,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=50,50
+   position=47,50
    taille=9,35
    noms="tierspilote"
    id=548
@@ -1463,30 +1517,9 @@
    diva_apres="Champ_Tiers_2_Ap"
   [boutons]
    "zoom"
- [case_a_cocher]
-  [presentation]
-   position=61,50
-   taille=9,115
-   id=554
-   wstyle="STD"
-  [description]
-   donnee=g7,choix,g7,7
-   minmaj=majuscules
-  [param_case]
-   texte="Uniquement les affaires principales"
-   cadrage=droite
-   valeur="2","1"
-  [touches]
-   f3=1
-   f6=5002
-   f7=135
-   insert=1
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
-   position=71,50
+   position=57,50
    taille=9,15
    noms="etb"
    id=556
@@ -1506,6 +1539,27 @@
    diva_apres="Champ_Etb_1_Ap"
   [boutons]
    "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=67,3
+   taille=9,101
+   id=554
+   wstyle="STD"
+  [description]
+   donnee=g7,choix,g7,7
+   minmaj=majuscules
+  [param_case]
+   texte="Uniquement les affaires principales"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f3=1
+   f6=5002
+   f7=135
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [case_a_cocher]
   [presentation]
    position=16,175
@@ -1530,7 +1584,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=50,86
+   position=47,86
    taille=9,82
    attache_lgx=oui
    id=549
@@ -1546,7 +1600,7 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=39,86
+   position=37,86
    taille=9,80
    attache_lgx=oui
    id=544
@@ -1652,17 +1706,19 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
- [champ]
+ [multi_choix]
   [presentation]
-   position=17,120
-   taille=10,46
-   id=1000011
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
+   position=67,175
+   taille=9,64
+   id=1000218
+   wstyle="COG_CHAMP_SAISI"
   [description]
-   donnee=affaire,affaire,su_sel
+   donnee=prjap,cog_immoflag,prjap_sel
   [param_saisie]
-   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","NATURECHARGE"
+   obligatoire=non
   [touches]
    f5=5001
    f6=5005
@@ -1940,6 +1996,27 @@
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=23,196
+   taille=9,40
+   id=1000214
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=affaire,cog_immoflag,affaire
+  [param_case]
+   texte="IMMO"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
   [touches]
    f5=5001
    f6=5005
