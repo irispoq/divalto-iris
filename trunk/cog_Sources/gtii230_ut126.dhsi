@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20150518175919      
+;>xwin4obj     imprimante               6.0       20150611163813      
 [masque]
- utilisateur="UGIE"
- date_modification="18/05/2015"
+ utilisateur="ROOT"
+ date_modification="11/06/2015"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -11,7 +11,7 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=230
+ dernier_id=231
  dernier_id_page=41
  [adresses]
   type_ad1_var=variable
@@ -40,6 +40,7 @@
  "gtfdd.dhsd",,t037,t037,450,0
  "gtfdd.dhsd",,prjap,prjap,1000,0
  "gtfdd.dhsd",,g4,g4_cog,8000,0
+ "cogrs_dircliente.dhoq",,cogrs_dircli,cogrs_dircli,1024,1
 [bloc]
  numero=1
  libelle="En-tête"
@@ -47,8 +48,8 @@
  type_bloc=fond
  debut=1
  fin=70
- bloc_fond=2
- position_fond=23
+ bloc_fond=12
+ position_fond=58
  diva_avant="Bloc_EnTete_Av"
  ident_unique=1
  [cadre]
@@ -76,7 +77,7 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=549,1
+   position=511,1
    taille=18,312
    id=2
   [param_cadre]
@@ -123,7 +124,7 @@
    wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
-   position=555,89
+   position=517,89
    taille=10,40
    id=198
    wstyle="STD"
@@ -131,7 +132,7 @@
    texte="Eco-contribution"
  [obj_texte]
   [presentation]
-   position=555,41
+   position=517,41
    taille=10,20
    id=199
    wstyle="STD"
@@ -139,7 +140,7 @@
    texte="% esc."
  [obj_texte]
   [presentation]
-   position=555,62
+   position=517,62
    taille=10,26
    id=200
    wstyle="STD"
@@ -147,7 +148,7 @@
    texte="Escompte"
  [obj_texte]
   [presentation]
-   position=555,20
+   position=517,20
    taille=9,23
    id=201
    wstyle="STD"
@@ -155,7 +156,7 @@
    texte="Total HT"
  [cadre]
   [presentation]
-   position=580,280
+   position=542,280
    taille=1,31
    id=4
   [param_cadre]
@@ -164,7 +165,7 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=605,1
+   position=567,1
    taille=1,310
    id=5
   [param_cadre]
@@ -174,7 +175,7 @@
  [cadre]
   [presentation]
    position=180,1
-   taille=427,311
+   taille=405,311
    id=7
   [param_cadre]
    nature=vide_arrondi
@@ -184,7 +185,7 @@
  [cadre]
   [presentation]
    position=180,266
-   taille=425,1
+   taille=403,1
    id=8
   [param_cadre]
    nature=vertical
@@ -193,7 +194,7 @@
  [cadre]
   [presentation]
    position=180,227
-   taille=370,1
+   taille=348,1
    id=10
   [param_cadre]
    nature=vertical
@@ -202,7 +203,7 @@
  [cadre]
   [presentation]
    position=180,193
-   taille=370,1
+   taille=348,1
    id=11
   [param_cadre]
    nature=vertical
@@ -211,7 +212,7 @@
  [cadre]
   [presentation]
    position=180,66
-   taille=370,1
+   taille=348,1
    id=12
   [param_cadre]
    nature=vertical
@@ -220,7 +221,7 @@
  [cadre]
   [presentation]
    position=180,306
-   taille=370,1
+   taille=348,1
    id=13
   [param_cadre]
    nature=vertical
@@ -228,7 +229,7 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=551,129
+   position=513,129
    taille=55,1
    id=14
   [param_cadre]
@@ -237,7 +238,7 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=576,1
+   position=538,1
    taille=1,129
    id=15
   [param_cadre]
@@ -292,7 +293,7 @@
    wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
-   position=576,248
+   position=538,248
    taille=9,31
    id=21
    wstyle="STD"
@@ -348,7 +349,7 @@
    texte="A"
  [obj_texte]
   [presentation]
-   position=555,160
+   position=517,160
    taille=9,43
    id=34
    wstyle="STD"
@@ -356,7 +357,7 @@
    texte="Base T.V.A"
  [obj_texte]
   [presentation]
-   position=555,196
+   position=517,196
    taille=9,19
    id=35
    wstyle="STD"
@@ -364,7 +365,7 @@
    texte="Taux"
  [obj_texte]
   [presentation]
-   position=555,210
+   position=517,210
    taille=9,68
    id=36
    wstyle="STD"
@@ -372,7 +373,7 @@
    texte="Montant T.V.A"
  [obj_texte]
   [presentation]
-   position=554,277
+   position=516,277
    taille=11,30
    id=37
    wstyle="STD_GRAS"
@@ -444,7 +445,7 @@
    texte="Prix unitaire"
  [obj_texte]
   [presentation]
-   position=620,285
+   position=623,285
    taille=8,12
    id=49
    wstyle="PETIT_GRAS_ITALIQUE_GRIS"
@@ -452,7 +453,7 @@
    texte="NAF"
  [obj_texte]
   [presentation]
-   position=620,76
+   position=623,76
    taille=8,12
    id=50
    wstyle="PETIT_GRAS_ITALIQUE_GRIS"
@@ -460,7 +461,7 @@
    texte="Siret"
  [obj_texte]
   [presentation]
-   position=620,137
+   position=623,137
    taille=8,9
    id=51
    wstyle="PETIT_GRAS_ITALIQUE_GRIS"
@@ -468,12 +469,24 @@
    texte="RC"
  [obj_texte]
   [presentation]
-   position=620,217
+   position=623,217
    taille=8,22
    id=52
    wstyle="PETIT_GRAS_ITALIQUE_GRIS"
   [texte]
    texte="TVA Intra"
+ [champ]
+  [presentation]
+   position=67,164
+   taille=7,125
+   id=231
+   colonnes_saisie=40
+   wstyle="STD"
+  [description]
+   donnee=cogrs_dircli,lib,cogrs_dircli
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
  [champ]
   [presentation]
    position=84,5
@@ -494,7 +507,7 @@
    donnee=soc,vil,soc
  [champ]
   [presentation]
-   position=65,164
+   position=59,164
    taille=10,139
    id=56
    wstyle="STD"
@@ -681,40 +694,40 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=620,1
-   taille=11,76
+   position=623,1
+   taille=8,76
    id=84
    wstyle="PETIT_ITALIQUE"
   [description]
    donnee=soc,capi,soc
  [champ]
   [presentation]
-   position=620,88
-   taille=9,45
+   position=623,88
+   taille=6,45
    id=85
    wstyle="PETIT_ITALIQUE"
   [description]
    donnee=soc,siret,soc
  [champ]
   [presentation]
-   position=620,145
-   taille=11,72
+   position=623,145
+   taille=8,72
    id=86
    wstyle="PETIT_ITALIQUE"
   [description]
    donnee=soc,rc,soc
  [champ]
   [presentation]
-   position=620,239
-   taille=11,43
+   position=623,239
+   taille=8,43
    id=87
    wstyle="PETIT_ITALIQUE"
   [description]
    donnee=soc,tvano,soc
  [champ]
   [presentation]
-   position=620,296
-   taille=9,14
+   position=623,296
+   taille=6,14
    id=88
    wstyle="PETIT_ITALIQUE"
   [description]
@@ -725,7 +738,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  diva_avant="BLOC_LIGNEARTICLE_1_AV"
  diva_apres="BLOC_LIGNEARTICLE_1_AP"
@@ -794,8 +807,8 @@
  saut_fin=oui
  taille=1
  type_bloc=mobile
- debut=65527
- fin=65527
+ debut=65523
+ fin=65523
  chainage=1
  ident_unique=3
  [obj_texte]
@@ -823,7 +836,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=5
  position_fond=3
@@ -887,7 +900,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -937,7 +950,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=4
  position_fond=2
@@ -975,7 +988,7 @@
  taille=2
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -1019,7 +1032,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -1062,7 +1075,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -1131,7 +1144,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  ident_unique=10
 [bloc]
@@ -1140,7 +1153,7 @@
  taille=0
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  ident_unique=11
 [bloc]
@@ -1148,8 +1161,8 @@
  libelle="Pied"
  saut_fin=oui
  taille=0
- debut=65528
- fin=65535
+ debut=65524
+ fin=65531
  diva_avantgestion="Bloc_Pied_AvGestion"
  ident_unique=12
  [champ]
@@ -1610,7 +1623,7 @@
  taille=0
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  ident_unique=15
  [obj_texte]
@@ -1637,7 +1650,7 @@
  taille=0
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -1667,7 +1680,7 @@
  taille=0
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  ident_unique=17
  [obj_texte]
@@ -1694,7 +1707,7 @@
  taille=0
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  diva_apres="BLOC_FACTUREFINCOMMANDE_1_AP"
  ident_unique=18
@@ -1723,7 +1736,7 @@
  taille=2
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -1744,7 +1757,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -1771,7 +1784,7 @@
  taille=2
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -1809,7 +1822,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=20
  position_fond=2
@@ -1836,7 +1849,7 @@
  taille=2
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=21
  position_fond=2
@@ -1874,7 +1887,7 @@
  taille=1
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  repeter_rich=oui
  ident_unique=24
@@ -1895,7 +1908,7 @@
  taille=1
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  repeter_rich=oui
  ident_unique=25
@@ -1916,7 +1929,7 @@
  taille=1
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  repeter_rich=oui
  ident_unique=26
@@ -1937,7 +1950,7 @@
  taille=1
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  repeter_rich=oui
  ident_unique=27
@@ -1958,7 +1971,7 @@
  taille=1
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  repeter_rich=oui
  ident_unique=28
@@ -1979,7 +1992,7 @@
  taille=1
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  repeter_rich=oui
  ident_unique=29
@@ -2000,7 +2013,7 @@
  taille=1
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  repeter_rich=oui
  ident_unique=30
@@ -2021,7 +2034,7 @@
  taille=2
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -2056,7 +2069,7 @@
  taille=1
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  ident_unique=32
 [bloc]
@@ -2064,7 +2077,7 @@
  taille=2
  type_bloc=mobile
  debut=24
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=3
@@ -2099,7 +2112,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=2
@@ -2163,7 +2176,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=2
@@ -2200,7 +2213,7 @@
  taille=2
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=2
@@ -2245,7 +2258,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=2
@@ -2271,7 +2284,7 @@
  taille=1
  type_bloc=mobile
  debut=23
- fin=65526
+ fin=65522
  debordement=3
  bloc_fond=2
  position_fond=2
@@ -2280,7 +2293,7 @@
  ident_unique=41
  [champ]
   [presentation]
-   position=0,29
+   position=0,68
    taille=9,139
    cadrage=gauche
    id=230
@@ -2316,6 +2329,7 @@ Module	'GTTMPCE.dhop'
 
 ;
 Public RecordSQL	"COGRS_PROJ.DHOQ"			CogRs_PrjComp
+Public RecordSql 	"cogrs_dircliente.dhoq" CogRs_DirCli 	CogRs_DirCli
 
 ;
 Public Record "gtfdd.dhsd" art 				g4ART
@@ -2596,6 +2610,13 @@ Beginp
 		flagLigne	= FALSE
 		flagFirstLg	= TRUE
 		blDt_Prec	= ' '
+
+		If ENT.Cog_DirCliente <> ' ' AND CogRs_DirCli.Cog_DirClienteCod <> ENT.Cog_DirCliente 
+			CogRs_DirCli.Init()
+			CogRs_DirCli.Where.Zoom_PK(ENT.Etb, ENT.Cog_DirCliente)
+			CogRs_DirCli.Select()
+		EndIf
+
 	EndIf
 
 Endp

@@ -50,6 +50,7 @@ Public Record "gtfdd.dhsd" g6 g6
 1		Id_Factures	L
 1		Id_Lignes	L
 1		 PtrFoncPDV 16	
+1		lId_FaMotFa	L
 
 ;*
 ;* Séquences début de programme
@@ -69,6 +70,29 @@ BeginF
 EndF																											
 
 ;*
+;*
+;*
+
+;*
+Function int Cog_Factures_MotFac_Traiter_Liste
+; 0 --> ok
+; 1 --> des factures n'ont pas pu être retriées
+1		wErr_Loc		1,0 	= FALSE
+BeginF
+
+	ListBegin(lId_FaMotFa)
+	Do While ListNext(lId_FaMotFa, ENT) not in (-1, 0)
+
+		; TO DO --> wErr_Loc = fonction de tri des lignes de facture
+		ListDeleteAndPrevious(lId_FaMotFa)
+
+	WEnd
+
+	FReturn(wErr_Loc)
+
+EndF
+
+;*
 ;*		Fonctions sur les en-têtes
 ;*
 
@@ -83,7 +107,11 @@ BeginP
 	GetAdressFunction (' ' , "Tri_LIG" , PtrFoncPDV)
 	ListMode (Id_Lignes, 1 , PtrFoncPDV)
 
+	lId_FaMotFa = ListGetId("COG_FACTURES_MOTFA")
+	ListErase(lId_FaMotFa)
+
 EndP
+
 
 ;*
 Procedure Programme_Fin
@@ -140,6 +168,12 @@ BeginP
 	If werr > system.esp
 		Messagebox("Des erreurs ont été constatées lors de la facturation.||Veuillez consulter le livre de bord.",'Erreur')
 	Endif
+
+	;
+	If ListCount(lId_FaMotFa) > 0
+		Cog_Factures_MotFac_Traiter_Liste
+	EndIf
+
 EndP
 
 ;*
@@ -270,8 +304,12 @@ BeginP
 	If T020.Op <> ENT.Op
 		Lectab(20, ENT.Op)
 	EndIf
-	If T020.Cog_MotPrjFlag = 2 AND SOC.Cog_MotFEtaNo <> ' '
-		ENT.EtaNo = SOC.Cog_MotFEtaNo
+	If T020.Cog_MotPrjFlag = 2 
+		If SOC.Cog_MotFEtaNo <> ' '
+			ENT.EtaNo = SOC.Cog_MotFEtaNo
+		EndIf
+		ENT.PiRef = "Facturation projets"
+		ListInsert(lId_FaMotFa, ENT)
 	EndIf
 
 EndP

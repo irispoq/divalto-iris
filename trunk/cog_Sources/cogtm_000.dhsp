@@ -22,13 +22,21 @@
 
 overwrittenby "Cogum_000.dhop"							
 
+;*
+;*		Déclarations
+;*
+
+;
 include	Cogtc_000.dhsp		;fichiers constantes
 
+;
 module	Gttm000.dhop
 
+;
+Public RecordSQL	"GTRSPPPCE.DHOQ"		Mouvement			CogRs_MOUV
 
+;
 public record	gtfdd.dhsd	T020			;code opérations
-
 public record	a5dd.dhsd	mz				;zone échange
 
 
@@ -273,4 +281,30 @@ beginf
 endf
 
 ;*
+;*		Tri des lignes de pièce
+;*
+
+;*
+Function int CogRs_MOUV_Init_Tri(wParamTri)
+;	0 --> OK
+;	1 --> Paramètre inconnu
+1		wParamTri	2,0			= 1 					; 1: par Projet\BLDt\Ref
+BeginF
+
+
+
+EndF
+
+;*
+Public Function int Cog_Piece_Trier_Ligne(wTicod, wPicod, wPiNo, wParamTri)
+;
+1		wTicod		>gtfdd.dhsd			Ticod
+1		wPicod		>gtfdd.dhsd			PiCod
+1		wPiNo			>gtfdd.dhsd			PiNo
+1		wParamTri	2,0			= 1 					; 1: par Projet\BLDt\Ref
+BeginF
+
+
+
+EndF
 

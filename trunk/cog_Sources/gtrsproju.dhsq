@@ -16,8 +16,12 @@
 	;On ne prend pas en compte la casse
 	Case Zoom_Su_Like_Affaire	(char Affaire)
 		UPPER(PRJAP.Affaire) LIKE UPPER(Affaire)
-	;
-	;
+	
+	Case Equal_Immo
+		PRJAP.COG_IMMOFLAG = 2
+
+	Case Equal_Non_Immo
+		PRJAP.COG_IMMOFLAG <> 2
 
 ;*
 <RecordSql Name=Affaire_Domaine>
