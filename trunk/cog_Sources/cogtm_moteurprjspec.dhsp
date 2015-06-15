@@ -419,6 +419,8 @@ Record		"COGFDD.DHSD"			COG_UT125			wUT125
 1		wNextFaMois 	2,0			; prochain mois de facturation
 1		wStepMois		2,0
 1		wConstMoisNb	4,0			; durée de la construction
+1		wConstDDt		D
+1		wConstFDt		D
 1		wFacturable		1,0
 1		wLoadPrj			1,0 = TRUE	; si FALSE, lecture des données de Affaire et CogRs_PrjComp sans Select()
 
@@ -490,7 +492,10 @@ BeginP
 		Case C_OP_IMMO & C_PRODNAT_PROJET  
 
 			; durée de la construction	en mois
-			wConstMoisNb =  Abs((DtNum(CogRs_PrjComp.ProjServReelDt) - DtNum(CogRs_PrjComp.TravReelDDt)) / 30)
+			wConstDDt	= Condition(CogRs_PrjComp.TravReelDDt <> ' ', CogRs_PrjComp.TravReelDDt, CogRs_PrjComp.TravDevDDt)
+			wConstFDt	= Condition(CogRs_PrjComp.ProjServReelDt <> ' ', CogRs_PrjComp.ProjServReelDt, \
+							  Condition(CogRs_PrjComp.ProjServPrevDt, CogRs_PrjComp.ProjServPrevDt, CogRs_PrjComp.ProjServDevDt))
+			wConstMoisNb =  Abs((DtNum(wConstFDt) - DtNum(wConstDDt)) / 30) + 1
 	
 			; taux financier
 			wRs_TauxFi.Init()

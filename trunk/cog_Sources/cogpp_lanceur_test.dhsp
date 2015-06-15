@@ -1,0 +1,137 @@
+SetModuleInfo('$Id$')
+;>xdiva
+;*
+;*		Objet : Nom du programme / module - Programme Cogpp_lanceur_test.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*					
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+;*
+;*	Déclarations
+;*
+
+;
+Include	"gttcz00.dhsp"						;déclarations communes
+
+;
+Module	"Cogtm_000.dhop"						;module de fonctions communes
+
+;
+Public Record	"gtfdd.dhsd"	xq			xq_cog		;enregistrement de travail
+
+;
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+Function int Cog_InitialiserVariables
+;
+Recordsql	a5rsuser.dhoq	utilisateur						;Utilisateurs
+
+BeginF
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		utilisateur.init()
+		utilisateur.where.exists(system.User)
+		if utilisateur.select() = 0
+
+			if not tunnel
+				messagebox(modify("%1",left(system.user),translate("Utilisateur %1 non défini dans la base Divalto")),translate("Alerte"),mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= utilisateur.dos
+			mz.etb		= utilisateur.etb
+			mz.depo		= utilisateur.depo
+			mz.mecle		= ""
+			mz.micle		= ""
+			mz.mtcle		= ""
+			mz.titre2	= ""
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment(translate(""))
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+
+
+	FReturn(true)
+
+endf
+
+;*
+Procedure Cog_FinProgramme
+;
+BeginP
+
+	programexit
+
+EndP
+
+;*
+Procedure Cog_AfficherTraitement
+;
+BeginP
+
+	
+
+EndP
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Traitements
+;*
+
+
+
+
+;*
+;	Programme principal
+;*
+Main
+;	
+
+
+	If Cog_InitialiserVariables
+
+		; test de la fonction renumérotation facture
+		Cog_Facture_Trier_Ligne('C', 16900016)
+
+	EndIf

@@ -27,10 +27,8 @@ overwrittenby "Cogum_000.dhop"
 ;*
 
 ;
-include	Cogtc_000.dhsp		;fichiers constantes
-
-;
-module	Gttm000.dhop
+Include	"gtTCz00.dhsp"
+include	"Cogtc_000.dhsp"		;fichiers constantes
 
 ;
 Public RecordSQL	"GTRSPPPCE.DHOQ"		Mouvement			CogRs_MOUV
@@ -285,26 +283,137 @@ endf
 ;*
 
 ;*
-Function int CogRs_MOUV_Init_Tri(wParamTri)
+Function int CogRs_MOUV_Init_Tri(wTicod, wPicod, wPiNo, wParamTri)
 ;	0 --> OK
 ;	1 --> Paramètre inconnu
-1		wParamTri	2,0			= 1 					; 1: par Projet\BLDt\Ref
+1		wTicod		>gtfdd.dhsd			Ticod
+1		wPicod		>gtfdd.dhsd			PiCod
+1		wPiNo			>gtfdd.dhsd			PiNo
+1		wParamTri	2,0			= 1 					; 1: par Projet\BLDt\LG\SLG
 BeginF
+  
+	CogRs_MOUV.Init()
+	CogRs_MOUV.Where.RemoveCondition("")
+	CogRs_MOUV.Where.Equal_TiCod(wTicod)
+	CogRs_MOUV.Where.AddCondition("Equal_TiCod")
+	CogRs_MOUV.Where.Equal_PiCod(wPicod)
+	CogRs_MOUV.Where.AddCondition("Equal_PiCod")
+
+	;
+	Switch wPicod
+		Case 1
+			CogRs_MOUV.Where.Equal_DvNo(wPiNo)
+			CogRs_MOUV.Where.AddCondition("Equal_DvNo")
+
+		Case 2
+			CogRs_MOUV.Where.Equal_CdNo(wPiNo)
+			CogRs_MOUV.Where.AddCondition("Equal_CdNo")
+
+		Case 3
+			CogRs_MOUV.Where.Equal_BlNo(wPiNo)
+			CogRs_MOUV.Where.AddCondition("Equal_BlNo")
+
+		Case 4
+			CogRs_MOUV.Where.Equal_FaNo(wPiNo)
+			CogRs_MOUV.Where.AddCondition("Equal_FaNo")
+
+	EndSwitch
+
+	;	Order by selon picod et param de tri
+	Switch wPicod & nospaces(wParamTri)
+
+		Case "41"
+			CogRs_MOUV.OrderBy.Fa_AffaireBldt()
+
+		Default
+			FReturn(1)
+
+	EndSwitch
 
 
+	FReturn(0)
 
 EndF
 
 ;*
-Public Function int Cog_Piece_Trier_Ligne(wTicod, wPicod, wPiNo, wParamTri)
-;
+Public Function int Cog_Facture_Trier_Ligne(wTicod, wPiNo, wParamTri)
+;	Tri des lignes de facture en fonction de 
 1		wTicod		>gtfdd.dhsd			Ticod
 1		wPicod		>gtfdd.dhsd			PiCod
 1		wPiNo			>gtfdd.dhsd			PiNo
 1		wParamTri	2,0			= 1 					; 1: par Projet\BLDt\Ref
+1		wOK			1,0
+1		wRead			L
+1		wLgPrec		>gtfdd.dhsd			FaLg
+1		wLgNew		>gtfdd.dhsd			FaLg
+1		wCompo		1,0			
 BeginF
 
+	wOK = TRUE
+	wPicod = 4
 
+	; chargement et réservation de la pièce
+	If Seek_Ent(wTicod, wPicod, wPiNo) <> 0
+		Cog_EcritureLivreDeBord("Tri lignes: pièce " & wPino & " inconnue.")
+		FReturn(1)
+	EndIf
+	If Res_ENT(wTicod, wPicod, wPino, 0) <> 0
+		Cog_EcritureLivreDeBord("Tri lignes: pièce " & wPino & " réservée.")
+		FReturn(1)
+	EndIf
+
+	; recherche de chapitre ou de poste --> dans ce cas tri interdit
+	CogRs_MOUV.Init()
+	CogRs_MOUV.Where.RemoveCondition("")
+	CogRs_MOUV.Where.Not_Equal_Ce2('1')
+	CogRs_MOUV.Where.AddCondition("Not_Equal_Ce2")
+	CogRs_MOUV.Where.Equal_TiCod(wTicod)
+	CogRs_MOUV.Where.AddCondition("Equal_TiCod")
+	CogRs_MOUV.Where.Equal_PiCod(wPicod)
+	CogRs_MOUV.Where.AddCondition("Equal_PiCod")
+	CogRs_MOUV.Where.Equal_FaNo(wPiNo)
+	CogRs_MOUV.Where.AddCondition("Equal_FaNo")
+
+	If CogRs_MOUV.GetCount() > 0
+		Cog_EcritureLivreDeBord("Tri lignes impossible: pièce " & wPino & " présence de chapitre et/ou de poste.")
+		wOK = FALSE
+	EndIf
+
+	; init de la clause where + order BY
+	If CogRs_MOUV_Init_Tri(wTicod, wPicod, wPiNo, wParamTri)	<> 0
+		Cog_EcritureLivreDeBord("Tri lignes impossible: pièce " & wPino & " paramètre de tri non géré.")
+		wOK = FALSE
+	EndIf
+
+	;
+	If wOK
+
+		wLgPrec = 0
+
+		wRead = CogRs_MOUV.ReaderOpen()
+		CogRs_MOUV.ReaderSelect(wRead)
+		Do While CogRs_MOUV.ReaderNext(wRead) > 0
+
+			If CogRs_MOUV.Falg <> wLgPrec ; même numéro de ligne --> composant lié
+				wLgPrec = CogRs_MOUV.Falg
+				wLgNew++
+			EndIf
+
+			CogRs_MOUV.Falg = wLgNew
+
+			CogRs_MOUV.ReaderUpdate(wRead)
+
+		WEnd
+
+		CogRs_MOUV.ReaderClose(wRead)
+
+	EndIf
+
+	;
+	Lib_ENT(wTicod, wPicod, wPiNo)
+
+	;
+	FReturn(Condition(wOK, 0, 1))
 
 EndF
 

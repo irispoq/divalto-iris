@@ -13,7 +13,8 @@ OverWrite	"GTTT240.dhop"
 include "GTTC000.dhsp"	
 
 ;									
-Module	"CCPMFIC.dhop"									  
+Module	"CCPMFIC.dhop"		
+Module	"CogTm_000.dhop"							  
 
 ;
 public hfile	ccfdd.dhsd	CCFJCA 		CCFJCA			; Fichier dossier de C3
@@ -83,7 +84,9 @@ BeginF
 	ListBegin(lId_FaMotFa)
 	Do While ListNext(lId_FaMotFa, ENT) not in (-1, 0)
 
-		; TO DO --> wErr_Loc = fonction de tri des lignes de facture
+		If Cog_Facture_Trier_Ligne(ENT.TiCod, ENT.PiNo) <> 0
+			wErr_Loc = TRUE
+		EndIf
 		ListDeleteAndPrevious(lId_FaMotFa)
 
 	WEnd
@@ -171,7 +174,9 @@ BeginP
 
 	;
 	If ListCount(lId_FaMotFa) > 0
-		Cog_Factures_MotFac_Traiter_Liste
+		If Cog_Factures_MotFac_Traiter_Liste <> 0
+			MessageBox("Erreur lors du tri des lignes de facture.|Veuillez consulter le livre de bord.","Erreur", MB_ICONERROR)
+		EndIf
 	EndIf
 
 EndP
@@ -300,7 +305,7 @@ BeginP
 
 	If ENT.TiCod = "C" And ENT.Cog_BL_Moteur = 2 And ENT.TpvBl = 3 | ListAddAfter(Id_Factures,ENT) | Endif	; facturation des projets spécifiques : tri des lignes
 
-	; N° d'état pour les factures projets spécifiques
+	; N° d'état pour les factures projets spécifiques (FE004)
 	If T020.Op <> ENT.Op
 		Lectab(20, ENT.Op)
 	EndIf
