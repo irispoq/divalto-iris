@@ -21,6 +21,9 @@
 <WHERE>
 	Case Equal_Ce2(char ce2)
 		MOUV.CE2 = ce2
+	Case Not_Equal_Ce2(char ce2)
+		MOUV.CE2 <> ce2
+
 <ORDERBY>
 	Case Ordre_FNP_FAE
 		MOUV.DOS,
@@ -33,10 +36,12 @@
 		MOUV.AXE(3),
 		MOUV.AXE(4),
 		MOUV.BLNO
-	Case Ordre_AffaireBldtRef
+	Case Fa_AffaireBldt
 		MOUV.DOS,
 		MOUV.PROJET,
 		MOUV.BLDT,
+		MOUV.FALG,
+		MOUV.FASLG,
 		MOUV.REF
 	
 ;* 
