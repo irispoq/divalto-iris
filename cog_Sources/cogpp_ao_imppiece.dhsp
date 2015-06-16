@@ -65,7 +65,7 @@ Const		MaxLgEnt						= 20
 1	Ligne				1000												; 215
 1	TexteLigne		20000
 1	PiedMt			12*3
-1	iTab				228
+1	iTab				236
 	2	iFaCe2		4,0
 	2	iTiers		4,0
 	2	iAdrTiersBL	4,0
@@ -118,6 +118,8 @@ Const		MaxLgEnt						= 20
 	2	iTxtLig		4,0
 	2	iVenun		4,0
 	2	iErreur		4,0
+   2  iCogDateDeb	4,0
+   2  iCogDateFin	4,0
 
 1	nCptPce			8,0 = 0
 1	bClose			B = False
@@ -443,6 +445,8 @@ BeginP
 	; Ajout YLEF spé U GIE
 	mouv.Projet = xlmouv.Projet
 	mouv.Marche = xlmouv.Marche
+	mouv.Cog_date_debut = xlmouv.Cog_date_debut
+	mouv.Cog_date_fin = xlmouv.Cog_date_fin
 
 	HWrite(gtfi,mouv)
 	If Texte <> " "
@@ -566,6 +570,9 @@ BeginF
 				Case "PROJET"		| iProjet		= Col
 				Case "MARCHE"		| iMarche		= Col
 				Case "SALCOD"		| iSalcod		= Col
+				
+				Case "COG_DATE_DEBUT"  	| iCogDateDeb		= Col
+				Case "COG_DATE_FIN"  	| iCogDateFin		= Col
 
 				Default
 					If Ligne <> " "
@@ -707,7 +714,8 @@ BeginP
 
 		Lecture_Cellule(Lig,iProjet,Ligne) | xlmouv.Projet = Ligne
 		If xlmouv.Projet <> ' ' AND MZ.PiCod > 1 AND Controle_Affaire(xlmouv.Projet, 0, xlmouv.TIERS, conf=false,niv=1) <> 0
-			EcrireErreur(Lig,iErreur,"Code projet " & left(xlmouv.Projet) & " inconnu.")
+			;EcrireErreur(Lig,iErreur,"Code projet " & left(xlmouv.Projet) & " inconnu.")
+			MessageBox("Le Tiers sur le projet " & left(xlmouv.Projet) & " n'est pas correct","Attention",MB_ICONINFORMATION)
 		ElsIf MZ.PiCod = 1 
 			xlmouv.Projet = " " ; non géré en devis
 		EndIf
@@ -716,6 +724,18 @@ BeginP
 		If xlent.SalCod <> ' ' AND Lectab(37 , xlENT.SALCOD , 0) <> 0
 			EcrireErreur(Lig,iErreur,"Code ADV " & left(xlent.SalCod) & " inconnu.")
 		EndIf
+
+
+		Lecture_Cellule(Lig,iCogDateDeb,Ligne) | xlmouv.Cog_date_debut = Ligne
+		If xlmouv.Cog_date_debut <> " " And IsDate(xlmouv.Cog_date_debut) = 0
+			EcrireErreur(Lig,iErreur,"Format de date COG_DATE_DEBUT incorrect.")
+		EndIf
+
+		Lecture_Cellule(Lig,iCogDateFin,Ligne) | xlmouv.Cog_date_fin = Ligne
+		If xlmouv.Cog_date_fin <> " " And IsDate(xlmouv.Cog_date_fin) = 0
+			EcrireErreur(Lig,iErreur,"Format de date COG_DATE_FIN incorrect.")
+		EndIf
+
 		; Fin ajout spé U GIE
 
 		For i = 1 To 3
@@ -1097,6 +1117,11 @@ BeginP
 	Imprimer_Mot_Cle(' '				,' ')
 	Imprimer_Mot_Cle('SALCOD'		,'Zone "Code ADV" de la pièce')
 	Imprimer_Mot_Cle(' '				,' ')
+	Imprimer_Mot_Cle('COG_DATE_DEBUT'		,'Zone "Date début" de la ligne de mouvement')
+	Imprimer_Mot_Cle(' '				,' ')
+	Imprimer_Mot_Cle('COG_DATE_FIN'		,'Zone "Date fin" de la ligne de mouvement')
+	Imprimer_Mot_Cle(' '				,' ')
+
 	; fin spé U GIE
 
 	Imprimer_Mot_Cle('FACE2'		,'Zone concernant les factures')
