@@ -16,13 +16,20 @@
 ;*
 
 <RecordSql Name=Mouvement>
+Record	"gtfdd.dhsd"		T000
 <SELECT>
 	MOUV.*
+<LEFTJOIN> 
+	T020 as CodeOP
+	ON (  CodeOP.Dos = CASE WHEN T000.TabTyp(20) = 2 THEN 999 ELSE MZ.Dos END )
+	AND CodeOP.OP = MOUV.OP AND CodeOP.CEBIN = 20
 <WHERE>
 	Case Equal_Ce2(char ce2)
 		MOUV.CE2 = ce2
 	Case Not_Equal_Ce2(char ce2)
 		MOUV.CE2 <> ce2
+	Case Equal_Nst(char nst)
+		CodeOP.NSTO = nst
 
 <ORDERBY>
 	Case Ordre_FNP_FAE

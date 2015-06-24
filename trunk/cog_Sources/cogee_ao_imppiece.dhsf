@@ -1,10 +1,10 @@
-;>xwin4obj                              7.0       20140915094746      
+;>xwin4obj                              7.0       20150622101000      
 [masque]
  utilisateur="UGIE"
- date_modification="15/09/2014"
+ date_modification="22/06/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=2
- dernier_id=184
+ dernier_id=188
  dernier_id_page=4
 [defaut]
  [aide_page]
@@ -36,7 +36,7 @@
  [cadre]
   [presentation]
    position=71,7
-   taille=22,428
+   taille=29,428
    id=148
    wstyle="STD"
   [param_cadre]
@@ -320,6 +320,46 @@
    texte="Les entêtes de colonnes doivent êtres identifiées dans les 20 premières lignes."
  [obj_texte]
   [presentation]
+   position=77,17
+   taille=9,55
+   id=146
+   wstyle="STD"
+  [texte]
+   texte="Intégration détectée :"
+ [obj_texte]
+  [presentation]
+   position=77,78
+   taille=9,19
+   id=137
+   wstyle="STD"
+  [texte]
+   texte="Dossier"
+ [obj_texte]
+  [presentation]
+   position=77,124
+   taille=9,33
+   id=73
+   wstyle="STD"
+  [texte]
+   texte="Type de tiers"
+ [obj_texte]
+  [presentation]
+   position=77,216
+   taille=9,35
+   id=75
+   wstyle="STD"
+  [texte]
+   texte="Type de pièce"
+ [obj_texte]
+  [presentation]
+   position=77,310
+   taille=9,26
+   id=143
+   wstyle="STD"
+  [texte]
+   texte="Simulation"
+ [obj_texte]
+  [presentation]
    position=77,374
    taille=9,24
    id=183
@@ -328,44 +368,20 @@
    texte="Provisoire"
  [obj_texte]
   [presentation]
-   position=78,17
-   taille=9,55
-   id=146
-   wstyle="STD"
-  [texte]
-   texte="Intégration détectée :"
- [obj_texte]
-  [presentation]
-   position=78,78
-   taille=9,19
-   id=137
-   wstyle="STD"
-  [texte]
-   texte="Dossier"
- [obj_texte]
-  [presentation]
-   position=78,124
-   taille=9,33
-   id=73
-   wstyle="STD"
-  [texte]
-   texte="Type de tiers"
- [obj_texte]
-  [presentation]
-   position=78,216
+   position=88,124
    taille=9,35
-   id=75
+   id=185
+   wstyle="STD"
+  [texte]
+   texte="Traitement"
+ [obj_texte]
+  [presentation]
+   position=88,216
+   taille=9,35
+   id=187
    wstyle="STD"
   [texte]
    texte="Type de pièce"
- [obj_texte]
-  [presentation]
-   position=78,310
-   taille=9,26
-   id=143
-   wstyle="STD"
-  [texte]
-   texte="Simulation"
  [obj_texte]
   [presentation]
    position=106,38
@@ -517,7 +533,7 @@
  [multi_choix]
   [presentation]
    position=77,159
-   taille=9,42
+   taille=9,44
    id=72
    wstyle="CHAMP_SAISI_CLE"
   [description]
@@ -599,6 +615,32 @@
    esp_si_zero=oui
   [param_multi]
    choix="gtfdmc.dhfi","NONOUI"
+ [multi_choix]
+  [presentation]
+   position=88,159
+   taille=9,44
+   id=186
+   wstyle="CHAMP_SAISI_CLE"
+  [description]
+   donnee=g7,choix,g7,5
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","GTFITRAIT"
+ [multi_choix]
+  [presentation]
+   position=88,253
+   taille=9,41
+   id=188
+   wstyle="CHAMP_SAISI_CLE"
+  [description]
+   donnee=g7,picod,g7
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","PICOD"
  [bouton_graphique]
   [presentation]
    position=215,94
@@ -668,8 +710,8 @@
  ident_unique=3
  [champ]
   [presentation]
-   position=1,1
-   taille=7,27
+   position=0,1
+   taille=9,27
    id=160
    colonnes_saisie=8
    wstyle="STD"
@@ -681,8 +723,8 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=1,30
-   taille=7,134
+   position=0,30
+   taille=9,134
    id=161
    colonnes_saisie=40
    wstyle="STD"
@@ -693,8 +735,8 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=1,165
-   taille=7,27
+   position=0,165
+   taille=9,27
    id=163
    colonnes_saisie=8
    wstyle="STD"
@@ -716,8 +758,8 @@
  ident_unique=4
  [champ]
   [presentation]
-   position=1,1
-   taille=7,27
+   position=0,1
+   taille=9,27
    id=159
    colonnes_saisie=8
    wstyle="STD"
@@ -729,8 +771,8 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=1,31
-   taille=7,134
+   position=0,31
+   taille=9,134
    id=162
    colonnes_saisie=40
    wstyle="STD"
@@ -741,8 +783,8 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=1,165
-   taille=7,27
+   position=0,165
+   taille=9,27
    id=164
    colonnes_saisie=8
    wstyle="STD"

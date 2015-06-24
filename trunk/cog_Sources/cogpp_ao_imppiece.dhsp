@@ -1,45 +1,80 @@
+SetModuleInfo('$Id$')
+;>xdiva
 ;*
-;* Intégration de pièce
+;*		Objet : Programme Intégration de pièce
 ;*
 
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		Init													Outil d'intégration de pièces par fichier Excel
+;*
+;*		YLEF	P205A							06/2015		Validation de commandes en BL
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		Traitement								Lecture et intégration des lignes
+;*		ValidationPiece_Traitement_Liste	En validation pièce les lignes du fichier Excel sont stockées dans une liste mémoire
+;*		ValidationPiece_Ecrire_GTFI		Relecture des listes pour constituer le GTFI de validation commande en BL 
+
+;*
+;*	Déclarations
+;*
+
+;
 Include	"gttc000.dhsp"
+
+;
 Module	"yoffice.dhop"
 Module	"cctm000.dhop"
 Module	"gtpmpce.dhop"
 Module	"gttmpce.dhop"
 
-			HTmpFile	"gtfdd.dhsd"	gtfi		gtfi		DeleteOnExit
+;
+			HTmpFile	"gtfdd.dhsd"	gtfi		GTFI		DeleteOnExit
 Public	HFile		"gtfdd.dhsd"	gtfdos	gtfdos
 Public	HFile		"gtfdd.dhsd"	gtfpcf	gtfpcf
 Public	HFile		"gtfdd.dhsd"	gtfat		gtfat
 Public	HFile		"gtfdd.dhsd"	gtfent	gtfent
 
-hfile						a5dd.dhsd   a5flog	a5flog
+hfile					"a5dd.dhsd"  	a5flog	a5flog
 
-Public	Record	"a5dd.dhsd"		mz			mz
+;
+Public 	RecordSQL	"gtRsppTab.dhoq"		NatureStock				CogRs_Nst
+Public 	RecordSQL	"gtRsppTab.dhoq"		CodeOperation			CogRs_OP
+
+;
+Public	Record	"a5dd.dhsd"		mz			MZ
 Public	Record	"ccfdd.dhsd"	ca			ca
 Public	Record	"gtfdd.dhsd"	ets		ets_test
 Public	Record	"gtfdd.dhsd"	cli		cli_test
 Public	Record	"gtfdd.dhsd"	vrp		vrp_test
-Public	Record	"gtfdd.dhsd"	art		art_test
+Public	Record	"gtfdd.dhsd"	art		ART_test
 Public	Record	"gtfdd.dhsd"	sart		sart_test
-Public	Record   "gtfdd.dhsd"	ent		ent_test
-Public	Record	"gtfdd.dhsd"	soc		soc
-Public	Record	"gtfdd.dhsd"	ipar		ipar
-Public	Record   "gtfdd.dhsd"	mouv		mouv
-Public	Record   "gtfdd.dhsd"	mvtl		mvtl
-Public	Record   "gtfdd.dhsd"	ent		ent
-Public	Record	"gtfdd.dhsd"	itxt		itxt
+Public	Record   "gtfdd.dhsd"	ent		ENT_test
+Public	Record	"gtfdd.dhsd"	soc		SOC
+Public	Record	"gtfdd.dhsd"	ipar		iPAR
+Public	Record   "gtfdd.dhsd"	mouv		MOUV
+Public	Record   "gtfdd.dhsd"	mouv		iMOUV
+Public	Record   "gtfdd.dhsd"	mvtl		MVTL
+Public	Record   "gtfdd.dhsd"	mvtl		iMVTL
+Public	Record   "gtfdd.dhsd"	ent		ENT
+Public	Record	"gtfdd.dhsd"	itxt		iTXT
 Public	Record	"gtfdd.dhsd"	xz			g3xz
 Public	Record	"gtfdd.dhsd"	xq			g3xq
 Public	Record   "gtfdd.dhsd"	ent		xlent
 Public	Record   "gtfdd.dhsd"	ent		xlent_prec
-Public	Record   "gtfdd.dhsd"	mouv		xlmouv
+Public	Record   "gtfdd.dhsd"	mouv		xlMOUV
 Public	Record   "gtfdd.dhsd"	mouv		xlmouv_prec
-Public	Record   "gtfdd.dhsd"	mvtl		xlmvtl
-Public	Record	"gtfdd.dhsd"	g7			g7
+Public	Record   "gtfdd.dhsd"	mouv		MOUV_Seek
+Public	Record   "gtfdd.dhsd"	mvtl		xlMVTL
+Public	Record   "gtfdd.dhsd"	mvtl		MVTL_Seek
+Public	Record	"gtfdd.dhsd"	g7			G7
 Public	Record	"Gtfdd.Dhsd"	Art		Art
 
+;
 Const		C_Prix_Auto					= 1							; Recherche complète
 Const		C_Prix_Promotion_Saisi	= 2							; Code promo saisi
 Const		C_Prix_Standard_Saisi	= 3							; Code standard saisi
@@ -53,8 +88,12 @@ Const		C_Rem_Manuelle				= 4							; Remise manuel
 Const		C_Com_Auto					= 1
 Const		C_Com_Manuelle				= 2
 
+Const		C_Trait_Creation			= 1
+Const		C_Trait_Validation		= 2
+
 Const		MaxLgEnt						= 20
 
+;
 1	IdToolBar		L
 1	ww					1000
 	2	wwNote		>gtfdd.dhsd	Texte
@@ -122,11 +161,71 @@ Const		MaxLgEnt						= 20
    2  iCogDateFin	4,0
 
 1	nCptPce			8,0 = 0
+1	nCptErr			8,0 = 0
 1	bClose			B = False
+1	lId_XlMVTL		L							; Lignes réceptionnées PROSERVIA
+1	lId_CdMOUV		L	 						; Mouvements commande Divalto pouvant être réceptionnés
+1	lId_iMOUV		L							; Mouvements à intégrer
+1	lId_iMVTL		L							; Ventilations à intégrer
+1	adrF				16
 
+;
 Define	C_Page_Trace		= 2
 Define	C_Page_Selection	= 3
 Define	C_Page_Traitement	= 4
+
+;*
+;*;
+;*
+
+;*
+Function Long	Tri_XlMVTL(&A, &B)
+;
+Record	"gtfdd.dhsd"		MVTL			A
+Record	"gtfdd.dhsd"		MVTL			B
+1		cleA		75
+1		cleB		75
+BeginF
+
+	cleA = [A.Dos A.PiNo A.GrRef A.Depo A.Nst A.Serie]
+	cleB = [B.Dos B.PiNo B.GrRef B.Depo B.Nst B.Serie]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;*
+Function Long	Tri_iMVTL(&A, &B)
+;
+Record	"gtfdd.dhsd"		MVTL			A
+Record	"gtfdd.dhsd"		MVTL			B
+1		cleA		75
+1		cleB		75
+BeginF
+
+	cleA = [A.Dos A.PiNo A.Enrno A.GrRef]
+	cleB = [B.Dos B.PiNo B.Enrno B.GrRef]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;*
+Function Long	Tri_iMOUV(&A, &B)
+;
+Record	"gtfdd.dhsd"		MOUV			A
+Record	"gtfdd.dhsd"		MOUV			B
+1		cleA		75
+1		cleB		75
+BeginF
+
+	cleA = [A.Dos A.CdNo A.GrRef A.Enrno A.Depo A.Op]
+	cleB = [B.Dos B.CdNo B.GrRef B.Enrno B.Depo B.Op]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
 
 ;*	; YATO 15/09/2014 : FE006_CdeRenouvellement
 procedure Cog_GenererDecomposition(grref,qte)
@@ -258,6 +357,8 @@ EndP
 
 ;*
 Procedure EcrireErreur(Lig,Col,ValeurA)
+; Ajoute le texte de valeurA dans la colonne Erreur
+; le flag Erreur du programme passe à TRUE
 	1	Lig			6,0
 	1	Col			3,0
 	1	ValeurA		60
@@ -289,16 +390,22 @@ EndP
 
 ;*
 Function Int Creation_Entete
+;
 BeginF
-	ipar = " "
-	ipar.Ce1 = "I"
-	ipar.Trait = "C"
-	ipar.Dos = mz.Dos
-	ipar.Etb = xlent.Etb
- 	ipar.PiCod = mz.PiCod
-	ipar.TiCod = mz.TiCod
-	ipar.PiNo = xlmouv.FaNo
-	HWrite(gtfi,ipar)
+
+	; iPAR
+	iPAR = " "
+	iPAR.Ce1 = "I"
+	iPAR.Trait = "C"
+	iPAR.Dos = mz.Dos
+	iPAR.Etb = xlent.Etb
+ 	iPAR.PiCod = mz.PiCod
+	iPAR.TiCod = mz.TiCod
+	iPAR.PiNo = xlmouv.FaNo
+	HWrite(GTFI,iPAR)
+
+
+	; iENT
 	Init ent = " "
 	ent.Ce1 = "A"
 	
@@ -357,7 +464,9 @@ BeginF
 	If wwNote <> " "
 		Creation_Texte("1",wwNote)
 	EndIf
+
 	FReturn(1)
+
 EndF
 																	  
 ;*
@@ -477,14 +586,22 @@ Record	A5dd.dhsd	M2
 1	param					S
 1	valeur				S
 1	nPino					>Gtfdd.dhsd	Pino
+1	wPicod				>gtfdd.dhsd	Picod
 BeginP
+
+	wPicod = Condition(G7.Choix(5) = C_Trait_Validation AND G7.PiCod <> 0, G7.PiCod, MZ.PiCod)
+
 	Tunnel_Integration_Piece(gtfi.Name, True, Desactiver_MAJWMS=TRUE)
 	If PongReceive('Resultat', ResultatHMP) = 0
 		loop HmpRead(ResultatHMP, param, valeur) = 0 		
 			If param = "PIECE"
 				nPino = HmpSeek(valeur, "PINO")
-				Cog_EcritureLivreDeBord("  Pièce n° " & nospaces(nPino) & " générée (Ticod = " & mz.TiCod & " Picod = " & mz.PiCod & ")")
-				nCptPce++
+				If nPino > 0
+					Cog_EcritureLivreDeBord("  Pièce n° " & nospaces(nPino) & " générée (Ticod = " & mz.TiCod & " Picod = " & G7.PiCod & ")")
+					nCptPce++
+				Else
+					nCptErr++
+				EndIf
 			EndIf
 		endloop
 	EndIf
@@ -605,14 +722,284 @@ BeginF
 EndF
 
 ;*
+Function int ValidationPiece_Ecrire_GTFI
+; Constitution du GTFI avec les listes lId_iMOUV et lId_iMVTL
+Record	"gtfdd.dhsd"		MOUV			wMOUV_P	
+1		txtDebug		S	= ' '	 
+BeginF
+
+	Init wMOUV_P = ' '
+
+	ListBegin(lId_iMOUV)
+	Do While ListNext(lId_iMOUV, iMOUV) not in (-1, 0)
+
+		; rupture commande à valider
+		If wMOUV_P.CdNo <> iMOUV.CdNo
+			Seek_Ent(MZ.TiCod, MZ.PiCod, iMOUV.CdNo)
+			Init iPAR	= ' '
+			iPAR.Ce1		= 'I'
+			iPAR.Dos		= ENT.Dos
+			iPAR.Etb		= ENT.Etb
+			iPAR.TiCod	= ENT.TiCod
+			iPAR.PiCod	= ENT.PiCod
+			iPAR.PiCodF	= 3
+			iPAR.PiNo	= ENT.PiNo
+			iPAR.Trait	= 'V'
+			HWrite(GTFI, iPAR)
+
+			;txtDebug &= '|IPAR n°' & ENT.PiNo
+
+		EndIf
+
+		; iMOUV
+		wMOUV_P = iMOUV
+		iMOUV.Ce1	= 'C'
+		iMOUV.Ce2	= '1'
+		iMOUV.CdNo 	= 0
+		HWrite(GTFI, iMOUV)
+		
+		;txtDebug &= '|MOUV n°' & iMOUV.EnrNo & ' Ref:' & iMOUV.Ref & ' qte BL=' & iMOUV.BlQte
+
+		; iMVTL
+		If CogRs_OP.Op <> wMOUV_P.Op
+			CogRs_OP.Init()
+			CogRs_OP.Where.PK(wMOUV_P.Op)
+			CogRs_OP.Select()
+		EndIf
+
+		ListBegin(lId_iMVTL)
+		Do While ListNext(lId_iMVTL, iMVTL) not in (-1, 0)
+
+			If iMVTL.EnrNo = wMOUV_P.EnrNo AND iMVTL.GrRef = wMOUV_P.GrRef AND iMVTL.PiNo = wMOUV_P.CdNo	AND iMVTL.Depo = wMOUV_P.Depo	AND CogRs_OP.NstO = iMVTL.Nst
+
+				iMVTL.Ce1	= 'V'
+				iMVTL.PiNo 	= 0
+				iMVTL.EnrNo	= 0
+				HWrite(GTFI, iMVTL)
+				
+				;txtDebug &= '|VTL Qte=' & iMVTL.Qte	& ' série:' & iMVTL.Serie
+
+				ListDeleteAndPrevious(lId_iMVTL)
+
+			EndIf
+
+		WEnd
+
+	WEnd
+
+	;MessageBox(txtDebug, "DEBUG")
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int ValidationPiece_Charger_MOUV(wTicod, wPiCod, wPiNo, wGrRef, wDepo, wNst)
+;
+RecordSQL		"GTRSPPPCE.Dhoq"		Mouvement		wRs_MOUV
+1		wTicod		>gtfdd.dhsd 		Ticod
+1		wPicod		>gtfdd.dhsd			PiCod
+1		wPiNo			>gtfdd.dhsd			PiNo
+1		wGrRef		>gtfdd.dhsd			GrRef
+	2	wRef			>gtfdd.dhsd			Ref
+	2	wSref1		>gtfdd.dhsd			Sref1
+	2	wSref2		>gtfdd.dhsd			Sref2
+1		wRead			L
+1		wDepo			>gtfdd.dhsd			Depo
+1		wNst			>gtfdd.dhsd			Nst
+BeginF
+
+	ListErase(lId_CdMOUV)
+
+	wRs_MOUV.Init()
+	wRs_MOUV.Where.RemoveCondition("")
+	wRs_MOUV.Where.Equal_TiCod(wTicod)
+	wRs_MOUV.Where.AddCondition("Equal_TiCod")
+	wRs_MOUV.Where.Equal_PiCod(wPicod)
+	wRs_MOUV.Where.AddCondition("Equal_PiCod")
+	wRs_MOUV.Where.Equal_Ref(wRef)
+	wRs_MOUV.Where.AddCondition("Equal_Ref")
+	wRs_MOUV.Where.Equal_Sref1(wSref1)
+	wRs_MOUV.Where.AddCondition("Equal_Sref1")
+	wRs_MOUV.Where.Equal_Sref2(wSref2)
+	wRs_MOUV.Where.AddCondition("Equal_Sref2")
+	wRs_MOUV.Where.Equal_Depo(wDepo)
+	wRs_MOUV.Where.AddCondition("Equal_Depo")
+	wRs_MOUV.Where.Equal_Nst(wNst)					 
+	wRs_MOUV.Where.AddCondition("Equal_Nst")
+
+	Switch2 wPicod
+		Case 2
+			wRs_MOUV.Where.Equal_CdNo(wPiNo)
+			wRs_MOUV.Where.AddCondition("Equal_CdNo")
+			wRs_MOUV.Where.Equal_CdCe4('1')
+			wRs_MOUV.Where.AddCondition("Equal_CdCe4")
+		Default
+			FReturn(1) ; autres cas non gérés
+
+	EndSwitch
+
+	wRead = wRs_MOUV.ReaderOpen()
+	wRs_MOUV.ReaderSelect(wRead)
+
+	;
+	Do While wRs_MOUV.ReaderNext(wRead) > 0
+
+		ListInsert(lId_CdMOUV, wRs_MOUV.MOUV)
+
+	WEnd
+
+	wRs_MOUV.ReaderClose(wRead)
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int ValidationPiece_Traitement_Liste
+; Lecture des éléments à réceptionner
+; Constitution du GTFI de validation de pièce
+Record	"gtfdd.dhsd"		MVTL			wMVTL_Prec
+1		wBlQte		>gtfdd.dhsd			BlQte
+1		wCdQte		>gtfdd.dhsd			CdQte
+BeginF
+
+	;
+	If ListCount(lId_XlMVTL) = 0
+		FReturn(1)
+	EndIf
+
+	ListErase(lId_iMOUV)
+	ListErase(lId_iMVTL)
+
+	; lecture des ventil à intégrer triées par cdno / grref
+	Init wMVTL_Prec = ' '
+	ListBegin(lId_XlMVTL)
+	Do While ListNext(lId_XlMVTL, xlMVTL) not in (-1, 0)
+
+		wBlQte = xlMVTL.Qte
+
+		; changement commande / changement référence	/ changement dépôt / changement Nst
+		If wMVTL_Prec.PiNo & wMVTL_Prec.GrRef & wMVTL_Prec.Depo & wMVTL_Prec.Nst <> xlMVTL.PiNo & xlMVTL.GrRef & xlMVTL.Depo & xlMVTL.Nst
+			ValidationPiece_Charger_MOUV(MZ.TiCod, MZ.PiCod, xlMVTL.PiNo, xlMVTL.GrRef, xlMVTL.Depo, xlMVTL.Nst)
+		EndIf
+
+		; recherche des quantités à valider sur les MOUV commande
+		ListBegin(lId_CdMOUV)
+		Do While ListNext(lId_CdMOUV, MOUV) not in (-1, 0)	AND wBlQte > 0
+
+			Init iMVTL 	= ' '
+			iMVTL.Dos 	= xlMVTL.Dos
+			iMVTL.EnrNo	= MOUV.EnrNo
+			iMVTL.GrRef	= xlMVTL.GrRef
+			iMVTL.PiNo	= xlMVTL.PiNo
+			iMVTL.Serie = xlMVTL.Serie
+			iMVTL.Lieu	= xlMVTL.Lieu
+			iMVTL.Nst	= xlMVTL.Nst
+			iMVTL.Depo	= xlMVTL.Depo
+
+			wCdQte = MOUV.CdQte - MOUV.BlQte
+			If wCdQte >= wblqte
+				MOUV.BlQte += wBlQte
+				iMVTL.Qte = wBlQte
+				wBlQte = 0
+			Else
+				MOUV.BlQte += wCdQte
+				wBlQte -= wCdQte
+				iMVTL.Qte = wCdQte
+			EndIf
+
+			ListModify(lId_CdMOUV, MOUV)
+			ListInsert(lId_iMVTL, iMVTL)
+
+		WEnd
+
+		; mémorisation des MOUV avec blQte > 0
+		ListBegin(lId_CdMOUV)
+		Do While ListNext(lId_CdMOUV, MOUV) not in (-1, 0)	
+			If MOUV.BlQte > 0
+				If ListSeek(lId_iMOUV, MOUV, MOUV_Seek) not in (-1, 0)
+					MOUV_Seek = MOUV
+					ListModify(lId_iMOUV, MOUV_Seek)
+				Else
+					ListInsert(lId_iMOUV, MOUV)
+				EndIf
+				If MOUV.BlQte = MOUV.CdQte
+					ListDeleteAndPrevious(lId_CdMOUV) 			; toute la quantité commandée est réceptionnée 
+				EndIf
+			EndIf
+		WEnd
+
+		; quantité réceptionnée > quantité restante en commande
+		If wBlQte > 0
+
+			; chargement de la nature de stock
+			If CogRs_Nst.Nst <> xlMVTL.Nst
+				CogRs_Nst.Init()
+				CogRs_Nst.Where.PK(xlMVTL.Nst)
+				CogRs_Nst.Select()
+			EndIf
+
+			If CogRs_Nst.OpAch <> ' '
+
+				; création d'un nouveau MOUV
+				Init iMOUV = ' '
+				iMOUV.Dos 	= xlMVTL.Dos
+				iMOUV.GrRef	= xlMVTL.GrRef
+				iMOUV.CdNo	= xlMVTL.PiNo
+				iMOUV.Op		= CogRs_Nst.OpAch
+				iMOUV.Depo	= xlMVTL.Depo
+				If ListSeek(lId_iMOUV, iMOUV, MOUV_Seek) not in (-1, 0)
+					MOUV_Seek.BlQte += wBlQte
+					ListModify(lId_iMOUV, MOUV_Seek)
+				Else
+					iMOUV.BlQte = wBlQte
+					ListInsert(lId_iMOUV, iMOUV)
+				EndIf
+	
+				; 1 seule ventil avec le solde de la quantité à réceptionner
+				Init iMVTL 	= ' '
+				iMVTL.Dos 	= xlMVTL.Dos
+				iMVTL.GrRef	= xlMVTL.GrRef
+				iMVTL.Qte	= wBlQte
+				iMVTL.Serie = xlMVTL.Serie
+				iMVTL.PiNo 	= xlMVTL.PiNo
+				iMVTL.Lieu	= xlMVTL.Lieu
+				iMVTL.Depo	= xlMVTL.Depo
+				iMVTL.Nst	= xlMVTL.Nst
+				ListInsert(lId_iMVTL, iMVTL)
+
+			Else
+
+				Erreur++
+				Cog_EcritureLivreDeBord("Pas de code OP achat associé à la nature de stock " & xlMVTL.Nst & " pour réceptionner des produits en surplus.")
+				FReturn(1)
+
+			EndIf
+
+		EndIf
+
+		wMVTL_Prec = xlMVTL
+
+	WEnd
+
+
+	FReturn(0)
+EndF
+
+;*
 Procedure Traitement
+;
 	1	Flag_Entete					1,0 = 0
 	1	i								2,0
 	1	NbLg			>gtfdd.dhsd	FaLg
 	1	Blanc							X
 	1	Lig							6,0
 	1	Integ							1,0
-BeginP
+	1	wRet							1,0
+BeginP	
+
+	;
 	If g7.Choix(1) = Non
 		Cog_EcritureLivreDeBord("Début génération de pièce commerciale par Tableur pour la société " & nospaces(mz.Dos))
 	EndIf
@@ -623,13 +1010,21 @@ BeginP
 	EndIf
 	HErase(gtfi)
 	XmeDispv(mz.MeCle,1,0)
+
 	If (Lig := Recherche_Mot_Cle_Piece) = 0
 		PReturn
 	EndIf
+
+	; Init des variables
+	nCptErr = 0
 	Init xlmouv_prec = " "
 	Init xlmouv_prec.FaNo = $FF
 	Blanc = 0
+	ListErase(lId_XlMVTL)
+
 	OpenTrace(C_Page_Trace,C_Page_Selection,C_Page_Traitement)
+
+	; Lecture des lignes
 	Loop Not Fini
 		Lig++
 		NbLg++
@@ -649,10 +1044,19 @@ BeginP
 		xlmouv.PCod(4)	= C_Com_Auto
 		xlmouv.PCod(5)	= C_Com_Auto
 
+		; N° de pièce renseigné
 		Lecture_Cellule(Lig,iPiNo,Ligne) | xlmouv.FaNo = Ligne
-		If xlmouv.FaNo <> 0 And ISeek(gtfent,ent_test,"I",mz.Dos & mz.TiCod & mz.PiCod & xlmouv.FaNo) = 0
-			EcrireErreur(Lig,iErreur,"Pièce n° " & ToString(xlmouv.FaNo) & " déjà existante.")
+		If xlmouv.FaNo <> 0 
+			
+			wRet = ISeek(gtfent,ent_test,"I",mz.Dos & mz.TiCod & mz.PiCod & xlmouv.FaNo) 
+			If G7.Choix(5) = C_Trait_Creation AND wRet = 0
+				EcrireErreur(Lig,iErreur,"Pièce n° " & ToString(xlmouv.FaNo) & " déjà existante.")
+			ElsIf G7.Choix(5) = C_Trait_Validation AND (wRet <> 0 OR ent_test.Ce4 <> '1')
+				EcrireErreur(Lig,iErreur,"Pièce n° " & ToString(xlmouv.FaNo) & " inexistante ou non active.") 
+			EndIf
 		EndIf
+
+		; recherche de la référence suivante
 		Lecture_Cellule(Lig,iRef,Ligne) | xlmouv.Ref = Ligne
 		g7.PiNo = xlmouv.FaNo
 		g7.Lib(1) = xlmouv.Ref
@@ -668,11 +1072,17 @@ BeginP
 		ElsIf ISeek(gtfat,art_test,"A",xlmouv.Dos & xlmouv.Ref) <> 0
 			EcrireErreur(Lig,iErreur,"Article " & Left(xlmouv.Ref) & " inexistant.")
 		EndIf
+
+		; contrôle dépôt
 		Lecture_Cellule(Lig,iDepo,Ligne) | xlmouv.Depo = Ligne
-		If xlmouv.Depo = " " | xlmouv.Depo = mz.Depo | EndIf
 		If xlmouv.Depo <> " " And Lectab(17,xlmouv.Depo) <> 0
 			EcrireErreur(Lig,iErreur,"Dépot '" & Left(xlmouv.Depo) & "' inconnu.")
+		ElsIf xlmouv.Depo = " " AND G7.Choix(5) = C_Trait_Validation
+			EcrireErreur(Lig,iErreur,"Dépôt obligatoire pour le traitement de validation.")
 		EndIf
+		If xlmouv.Depo = " " | xlmouv.Depo = mz.Depo | EndIf
+
+		; flag d'intégration comptable de la  facture
 		If mz.PiCod = 4 And iFaCe2 <> 0
 			Lecture_Cellule(Lig,iFaCe2,Ligne)
 			If Ligne Not In (" ","1","2")
@@ -681,16 +1091,24 @@ BeginP
 				xlent.Ce2 = Ligne
 			EndIf
 		EndIf
+
+		;
 		Lecture_Cellule(Lig,iSRef1,Ligne) | xlmouv.SRef1 = Ligne
 		Lecture_Cellule(Lig,iSRef2,Ligne) | xlmouv.SRef2 = Ligne
 		If ISeek(gtfat,sart_test,"H",xlmouv.Dos & xlmouv.Ref & xlmouv.SRef1 & xlmouv.SRef2) <> 0
 			EcrireErreur(Lig,iErreur,"Sous-Réference '" & Left(xlmouv.SRef1) & "/" & Left(xlmouv.SRef2) & "' inconnue pour '" & xlmouv.Ref & "'.")
 		EndIf
 		Lecture_Cellule(Lig,iDes,Ligne) | xlmouv.Des = Ligne
-		Lecture_Cellule(Lig,iTiers,Ligne) | xlmouv.Tiers = Ligne
-		If ISeek(gtfpcf,cli_test,"A",xlmouv.Dos & xlmouv.Tiers) <> 0
-			EcrireErreur(Lig,iErreur,"Tiers '" & Left(xlmouv.Tiers) & "' inconnu.")
+
+		;	contrôle tiers
+		If G7.Choix(5) = C_Trait_Creation
+			Lecture_Cellule(Lig,iTiers,Ligne) | xlmouv.Tiers = Ligne
+			If ISeek(gtfpcf,cli_test,"A",xlmouv.Dos & xlmouv.Tiers) <> 0
+				EcrireErreur(Lig,iErreur,"Tiers '" & Left(xlmouv.Tiers) & "' inconnu.")
+			EndIf
 		EndIf
+
+		;
 		Lecture_Cellule(Lig,iAdrTiersBL,Ligne) | xlent.AdrTiers(3) = Ligne
 		If xlent.AdrTiers(3) <> " " And ISeek(gtfpcf,cli_test,"A",xlmouv.Dos & xlent.AdrTiers(3)) <> 0
 			EcrireErreur(Lig,iErreur,"ADRTIERBL '" & Left(xlent.AdrTiers(3)) & "' inconnu.")
@@ -738,6 +1156,7 @@ BeginP
 
 		; Fin ajout spé U GIE
 
+		; montants pied de pièce
 		For i = 1 To 3
 			Lecture_Cellule(Lig,iPiedMt(i),PiedMt(i))
 			If PiedMt(i) <> " "
@@ -774,6 +1193,7 @@ BeginP
 			EndIf
 		Next
 
+		; Quantité
 		Lecture_Cellule(Lig,iQte,Ligne) | xlmouv.FaQte = Ligne
 		If iMvCod <> 0
 			Lecture_Cellule(Lig,iMvCod,Ligne) | xlmouv.MvCod = Ligne
@@ -804,16 +1224,20 @@ BeginP
 		If iPCod5 <> 0 | Lecture_Cellule(Lig,iPCod5,Ligne) | xlmouv.PCod(5) = Ligne | EndIf
 		If xlmouv.ComP(3) <> 0 | xlmouv.PCod(5) = 2 | Else | xlmouv.PCod(5) = C_Com_Manuelle | EndIf
 		
-		For i = 1 to 4
-			If iAxe(i) <> 0 And ca.AxeLib(i) <> " "
-				Lecture_Cellule(Lig,iAxe(i),Ligne) | xlmouv.Axe(i) = Ligne
-				If ca.AxeLib(i) <> " " And soc.AxeSais(1,i) = 3 and xlmouv.Axe(i) = " "
-					EcrireErreur(Lig,iErreur,"Axe analytique " & ToString(i) & " obligatoire.")
-				ElsIf xlmouv.Axe(i) <> " " And Recherche_Axe(i,xlmouv.Axe(i),False) <> 0
-					EcrireErreur(Lig,iErreur,"Axe analytique " & Left(xlmouv.Axe(i)) & " inconnu.")
+		; contrôle des axes analytiques
+		If G7.Choix(5) = C_Trait_Creation
+			For i = 1 to 4
+				If iAxe(i) <> 0 And ca.AxeLib(i) <> " "
+					Lecture_Cellule(Lig,iAxe(i),Ligne) | xlmouv.Axe(i) = Ligne
+					If ca.AxeLib(i) <> " " And soc.AxeSais(1,i) = 3 and xlmouv.Axe(i) = " "
+						EcrireErreur(Lig,iErreur,"Axe analytique " & ToString(i) & " obligatoire.")
+					ElsIf xlmouv.Axe(i) <> " " And Recherche_Axe(i,xlmouv.Axe(i),False) <> 0
+						EcrireErreur(Lig,iErreur,"Axe analytique " & Left(xlmouv.Axe(i)) & " inconnu.")
+					EndIf
 				EndIf
-			EndIf
-		Next
+			Next
+		EndIf
+
 		Lecture_Cellule(Lig,iDeeePu,Ligne) | xlmouv.DeeePu = Ligne
 		Lecture_Cellule(Lig,iPiRef,Ligne) | xlent.PiRef = Ligne
 		Lecture_Cellule(Lig,iEtb,Ligne) | xlent.Etb = Ligne
@@ -856,21 +1280,32 @@ BeginP
 		If xlmvtl.StDt <> " " And IsDate(xlmvtl.StDt) = 0
 			EcrireErreur(Lig,iErreur,"Format de date STDT incorrect.")
 		EndIf
+
+		; Nature de stock
 		Lecture_Cellule(Lig,iNSt,Ligne) | xlmvtl.NSt = Ligne
 		If xlmvtl.NSt <> " " And Lectab(25,xlmvtl.NSt) <> 0
 			EcrireErreur(Lig,iErreur,"Nature de stock '" & Left(xlent.Dev) & "' inconnue.")
+		ElsIf xlmvtl.NSt = " " AND G7.Choix(5) = C_Trait_Validation
+			EcrireErreur(Lig,iErreur,"Nature de stock obligatoire pour le traitement de validation.")
 		EndIf
+
+		; Emplacement
 		Lecture_Cellule(Lig,iLieu,Ligne) | xlmvtl.Lieu = Ligne
 		If xlmvtl.Lieu <> " " And Lectab(18,xlmouv.Depo & xlmvtl.Lieu) <> 0
 			EcrireErreur(Lig,iErreur,"Emplacement '" & Left(xlmvtl.Lieu) & "' inconnue pour le dépôt '" & Left(xlmouv.Depo) & "'.")
+		ElsIf xlmvtl.Lieu = " " AND G7.Choix(5) = C_Trait_Validation
+			EcrireErreur(Lig,iErreur,"Emplacement obligatoire pour le traitement de validation.")
 		EndIf
 		Lecture_Cellule(Lig,iTxtLig,TexteLigne)
-		If PieceRupture(NbLg)
+
+		; 	Ecriture de iPAR + iENT
+		If G7.Choix(5) = C_Trait_Creation AND PieceRupture(NbLg)
 			NbLg = 0
 			Integ = Creation_Entete
 			xlmouv_prec = xlmouv
 			xlent_prec = xlent
 		EndIf
+
 		Lecture_Cellule(Lig,iVenun,Ligne) | xlmouv.Venun = Ligne
 		If xlmouv.Venun = " " 
 			Switch mz.TiCod
@@ -885,27 +1320,59 @@ BeginP
 		If xlmouv.VenUn <> " " And Lectab_Unite(xlmouv.Ref, xlmouv.Sref1, xlmouv.Sref2, xlmouv.VenUn) <> 0
 			EcrireErreur(Lig,iErreur,"Unité '" & Left(xlmouv.VenUn) & "' inconnue.")
 		EndIf
-		Creation_Ligne(TexteLigne)
+
+		; Ecriture de iMOUV + iMVTL
 		g7.PiNo = xlmouv.FaNo
 		g7.Lib(1) = xlmouv.Ref
 		g7.Ticket = Lig
 	   Afficher_Traitement
+		If G7.Choix(5) = C_Trait_Creation
+			Creation_Ligne(TexteLigne)
+		Else
+			xlMVTL.Dos	= MZ.Dos
+			xlMVTL.PiNo = xlMOUV.FaNo
+			xlMVTL.GrRef= xlMOUV.GrRef
+			xlMVTL.Qte	= xlMOUV.FaQte
+			xlMVTL.Depo	= xlMOUV.Depo
+			
+			If ListSeek(lId_XlMVTL, xlMVTL, MVTL_Seek) not in (-1, 0)
+				MVTL_Seek.Qte += xlMVTL.Qte
+				ListModify(lId_XlMVTL, MVTL_Seek)
+			Else
+				ListInsert(lId_XlMVTL, xlMVTL)
+			EndIf
+		EndIf
+
 	EndLoop
-	CloseTrace
+	; fin lecture fichier
+
+	; Validation de pièce --> traitement de la liste mémoire
+	If G7.Choix(5) = C_Trait_Validation
+		If ValidationPiece_Traitement_Liste() = 0,
+			Integ = Condition(ValidationPiece_Ecrire_GTFI() = 0, TRUE, FALSE)
+		EndIf
+	EndIf
+
+	CloseTrace		 
+
+	; Intégration GTFI
 	FClose(gtfi)
 	bClose = True
 	If Integ = 1 And Not Erreur
 		If g7.Choix(1) = Non
 			Integration_GTFI
-			MessageBox("Intégration terminée.|" & nospaces(nCptPce) & " pièces générées|Veuillez consulter le livre de bord.","Information",MB_ICONINFORMATION)
+			MessageBox("Intégration terminée.|" & nospaces(nCptPce) & " pièce(s) générée(s).|" & nospaces(nCptErr) & " pièce(s) rejetée(s)."\
+							& "|Veuillez consulter le livre de bord.","Information",MB_ICONINFORMATION)
 		Else
 			MessageBox("Simulation effectuée.|Veuillez consulter la colonne ERREUR du fichier Tableur.","Message",MB_ICONINFORMATION)
 		EndIf
 	ElsIf Erreur
-		MessageBox("Intégration non effectuée.|Veuillez consulter la colonne ERREUR du fichier Tableur.","Message",MB_ICONEXCLAMATION)
+		MessageBox("Intégration non effectuée.|Veuillez consulter la colonne ERREUR du fichier Tableur et/ou le livre de bord.","Message",MB_ICONEXCLAMATION)
 	ElsIf Integ = 0
 		MessageBox("Aucune ligne à intégrer.","Message",MB_ICONEXCLAMATION)
 	EndIf
+
+	;
 	If g7.Choix(1) = Non
 		Cog_EcritureLivreDeBord("Fin génération de pièce commerciale par Tableur pour la société " & nospaces(mz.Dos))
 	EndIf
@@ -1032,9 +1499,97 @@ BeginF
 		EndIf
 	EndIf
 
+	; YLEF --> validation des commandes en BL
+	Lecture_Cellule(1,13,Ligne)
+	If FString("U",Ligne) <> "TRAITEMENT"
+		If MessErr
+			MessageBox('La cellule "M1" doit contenir le mot clé "Traitement".',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	Lecture_Cellule(1,14,Ligne)
+	G7.Choix(5) = Condition(FString("U",Ligne) = 'V', C_Trait_Validation, C_Trait_Creation)		
+		
+	Lecture_Cellule(1,15,Ligne)
+	If FString("U",Ligne) <> "PICODDST"
+		If MessErr
+			MessageBox('La cellule "O1" doit contenir le mot clé "PicodDst".',"Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	Lecture_Cellule(1,16,Ligne)
+	G7.PiCod = Ligne
+	If G7.Choix(5) = C_Trait_Validation AND (MZ.TiCod <> 'F' OR MZ.PiCod <> 2 OR G7.PiCod <> 3)
+		If MessErr
+			MessageBox("Traitement validation:|seules les validations de commandes fournisseur en BL sont gérées (TypeTiers = F et PicodDst = 3).","Alerte",MB_ICONEXCLAMATION)
+		EndIf
+		FReturn(False)
+	EndIf
+	G7.PiCod = Condition(G7.Choix(5) = C_Trait_Validation, G7.PiCod, MZ.PiCod)
 
 	FReturn(True)
 EndF
+
+;*
+Function int InitialiserVariables
+;
+BeginF
+
+	mz.MeCle = "cogee_ao_imppiece.dhof"
+	mz.MiCle = "cogii_ao_imppiece.dhoi"
+	XmiLoad(mz.MiCle)
+	g7.Choix(2) = Condition(mz.Param like "*CALC*", 2, 1)
+	Office_SetInterfaceCalc(g7.Choix(2))
+	If Office_Begin <> 0
+		MessageBox("Dialogue avec le tableur impossible !","Erreur",MB_ICONSTOP)
+		FReturn(FALSE)
+	EndIf
+	If IsOffice_OpenCalc <> 0
+		MessageBox("Tableur non ouvert !","Erreur",MB_ICONSTOP)
+		Office_Stop
+		Office_EndCalc
+		FReturn(FALSE)
+	EndIf
+	If Not Office_GetActiveSheetAndWorkbookName(Classeur,Feuille)
+		MessageBox("Aucun feuille/classeur Tableur ouvert !","Erreur",MB_ICONSTOP)
+		Office_Stop
+		Office_EndCalc
+		FReturn(FALSE)
+	EndIf
+
+	mz.Dos 	= 0
+	mz.TiCod = " "
+	mz.PiCod = 0
+	g7.Choix(1) = 0  							; SIMULATION
+	g7.Choix(3) = 2							; PROVISOIRE
+	G7.Choix(5) = C_Trait_Creation		; 1: CREATION \ 2: VALIDATION
+	Feuille_Integration_Info_Valide(False)
+	
+	XmeLoad(mz.MeCle)
+	IdToolBar = XmeToolbarGetId(mz.MeCle,"MAIN")
+	XmeToolbarSetWindow(IdToolBar,mz.MeCle,1)
+	XmeInfoPage(mz.MeCle,1)
+	XmeSetWindowSize(mz.MeCle,1,harmony.Opara3,harmony.Opara4)
+	XmeTitle(mz.Titre2)
+
+	; Init listes
+	lId_XlMVTL = ListGetId("LISTE_XLMVTL")
+	GetAdressFunction('', 'Tri_XlMVTL', adrF)
+	ListMode(lId_XlMVTL, Mode=1, adrF)
+
+	lId_iMOUV = ListGetId("LISTE_IMOUV")
+	GetAdressFunction('', 'Tri_iMOUV', adrF)
+	ListMode(lId_iMOUV, Mode=1, adrF)
+
+	lId_iMVTL = ListGetId("LISTE_IMVTL")
+	GetAdressFunction('', 'Tri_iMVTL', adrF)
+	ListMode(lId_iMVTL, Mode=1, adrF)
+
+	lId_CdMOUV = ListGetId("LISTE_CDMOUV")
+
+	FReturn(TRUE)
+EndF
+
 ;*
 Procedure Imprimer_Mot_Cle(MotCle,Description)
 	1	MotCle		A
@@ -1086,6 +1641,15 @@ BeginP
 	Imprimer_Mot_Cle('PROVISOIRE'		,"Intégrer les pièces en status provisoire oui/non")
 	Imprimer_Mot_Cle(' '				,' ')
 
+	Imprimer_Mot_Cle('Traitement'	,"Type d'intégration :")
+	Imprimer_Mot_Cle(' '				,'- "C" : Création de pièce')
+	Imprimer_Mot_Cle(' '				,'- "V" : Validation de pièce (seules les validations de commandes fournisseur en BL sont gérées.')
+	Imprimer_Mot_Cle(' '				,' ')
+	
+
+	;*
+	; Lignes
+	;*
 	Imprimer_Mot_Cle('OP'			,'Code opération de la pièce')
  	Imprimer_Mot_Cle(' '				,'Par défaut le code opération paramétré au menu est utilisé. 	 	')
 	Imprimer_Mot_Cle(' '				,' ')
@@ -1299,39 +1863,11 @@ Main
 		MessageBox ("Le programme doit être lancé à partir d'un menu !","Alerte",MB_ICONSTOP)
 		ProgramExit
 	EndIf
-	mz.MeCle = "cogee_ao_imppiece.dhof"
-	mz.MiCle = "cogii_ao_imppiece.dhoi"
-	XmiLoad(mz.MiCle)
-	g7.Choix(2) = Condition(mz.Param like "*CALC*", 2, 1)
-	Office_SetInterfaceCalc(g7.Choix(2))
-	If Office_Begin <> 0
-		MessageBox("Dialogue avec le tableur impossible !","Erreur",MB_ICONSTOP)
+	
+	If not InitialiserVariables
 		ProgramExit
 	EndIf
-	If IsOffice_OpenCalc <> 0
-		MessageBox("Tableur non ouvert !","Erreur",MB_ICONSTOP)
-		Office_Stop
-		Office_EndCalc
-		ProgramExit
-	EndIf
-	If Not Office_GetActiveSheetAndWorkbookName(Classeur,Feuille)
-		MessageBox("Aucun feuille/classeur Tableur ouvert !","Erreur",MB_ICONSTOP)
-		Office_Stop
-		Office_EndCalc
-		ProgramExit
-	EndIf
-	mz.Dos = 0
-	mz.TiCod = " "
-	mz.PiCod = 0
-	g7.Choix(1) = 0
-	g7.Choix(3) = 2
-	Feuille_Integration_Info_Valide(False)
-	XmeLoad(mz.MeCle)
-	IdToolBar = XmeToolbarGetId(mz.MeCle,"MAIN")
-	XmeToolbarSetWindow(IdToolBar,mz.MeCle,1)
-	XmeInfoPage(mz.MeCle,1)
-	XmeSetWindowSize(mz.MeCle,1,harmony.Opara3,harmony.Opara4)
-	XmeTitle(mz.Titre2)
+
 	Fini = False
 	XmeDispV(mz.MeCle,1,XME_MODE_GOSUB)
 	Repeat
