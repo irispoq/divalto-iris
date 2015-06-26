@@ -29,6 +29,7 @@ Module	"CogTm_MoteurPrjSpec.dhop"
 public RecordSQL 	"gtrsproj.dhoq" 	Affaire 				Affaire		; Affaire (Enregistrement principal)
 public RecordSQL 	"gtrsppproj.dhoq" Affaire 				su_sel		; Affaire (Enregistrement principal)
 Public RecordSQL	"COGRS_PROJ.DHOQ"	CogRs_PrjComp
+Public recordSQL  "cogrs_tab.dhoq"	TableParametre
 
 ;
 HfileVersion 	Cogfdd.dhsd 	COGGTF_TAB
@@ -454,11 +455,17 @@ EndF
 
 ;*
 Procedure ZoomDebut 
+;
 Beginp
 	Controle_Fichier
 	Standard.ZoomDebut
 	;XmeSetAttribut ("efface", AN_VISIBILITE, AV_CACHE)
 	Affaire.OrderBy.Par_Affaire()
+
+	;
+	TableParametre.init()
+	TableParametre.Select()
+
 Endp
 
 ;*
