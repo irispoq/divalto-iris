@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20150612163719      
+;>xwin4obj     imprimante               6.0       20150626104341      
 [masque]
  utilisateur="UGIE"
- date_modification="12/06/2015"
+ date_modification="26/06/2015"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -2305,7 +2305,7 @@
   [param_saisie]
    type_date=jj/mm/aaaa
 [diva]
-SetModuleInfo('$Id: gtii230_ut126.dhsi 8152 2015-06-16 06:59:01Z admin $')
+SetModuleInfo('$Id: gtii230_ut126.dhsi 8229 2015-06-26 08:45:02Z admin $')
 
 ;*
 ;*		Objet : Masque pour les factures issues du moteur de facturation projets spécifiques
@@ -2460,7 +2460,7 @@ BeginP
 			Switch wTrt
 
 				Case C_TRT_AVANT									; libellé n° de devis ou n° de commande centrale nationale
-					G4_COG.Lib(1) = Condition(CogRs_PrjComp.DvNo > 0, "Devis N°" & NoSpaces(CogRs_PrjComp.DvNo), "Commande CN N°" & left(CogRs_PrjComp.CnCdNo))
+					G4_COG.Lib(1) = Condition(CogRs_PrjComp.CnCdNo <> ' ', "Commande CN N°" & left(CogRs_PrjComp.CnCdNo), "Devis N°" & NoSpaces(CogRs_PrjComp.DvNo))
 
 				Case C_TRT_APRES									; impression de la ligne article ou début BL
 					Harmony.Retour = XMINEXT_AUTRE_BLOC
