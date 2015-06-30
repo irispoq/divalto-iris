@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,,,20150611115641,ROOT                
+Version=6,,,20150630160726,UGIE                
 Nom=gtfdd.dhsd,gtfdd1.dhsd,1
 [CHAMP]
 Version=1,20131006064734,SYSTEMNEW           ,20131006064734,SYSTEMNEW           
@@ -354,6 +354,12 @@ Nom=Cog_Lib_Affaire_Principale,Libellé Affaire Principale,1
 Gel=1
 Nature=50
 NomOdbc=Cog_Lib_Affaire_Principale
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150630160722,UGIE                ,20150630160722,UGIE                
+Nom=Cog_LogBlNo,N° BR Logisticien,1
+Gel=1
+Nature=30
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110520073850,SYSTEMU             ,20110524191954,SYSTEMU             
@@ -712,6 +718,7 @@ Nom=SU_DT_INSTA_PREVIS,93,0,0,N,1
 Nom=SU_DEMANDEUR,101,0,0,N,1
 Nom=SU_DESTINATAIRE,151,0,0,N,1
 Nom=Cog_BwId,201,0,0,N,1
+Nom=Cog_LogBlNo,241,0,0,N,1
 [/CHAMPL]
 nom=UFou
 [CHAMPL]
