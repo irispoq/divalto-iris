@@ -1,4 +1,4 @@
-;>xwin4obj     imprimante               6.0       20141124150518      
+;>xwin4obj     imprimante               6.0       20141124154759      
 [masque]
  utilisateur="ROOT"
  date_modification="24/11/2014"
@@ -11,7 +11,7 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000100
+ dernier_id=1000103
  surcharge=oui
  date_modif_base="20130115105101"
  dernier_id_page=100000
@@ -81,12 +81,13 @@
    wnom_couleurfond="TITRE_ENCADRE_FOND"
  [obj_texte]
   [presentation]
-   position=557,76
-   taille=8,58
-   id=1000098
+   position=200,3
+   taille=8,80
+   id=1000103
    wstyle="STD"
+   wnom_couleur="BLANC"
   [texte]
-   texte="Poids brut total (en kg) :"
+   texte="Date d'installation :       /      /"
  [cadre]
   [presentation]
    position=155,189
@@ -118,7 +119,7 @@
  [cadre]
   [presentation]
    position=155,32
-   taille=55,1
+   taille=43,1
    id=1000033
   [param_cadre]
    nature=vertical
@@ -127,7 +128,7 @@
  [cadre]
   [presentation]
    position=155,68
-   taille=55,1
+   taille=43,1
    id=1000032
   [param_cadre]
    nature=vertical
@@ -179,6 +180,15 @@
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=569,212
+   taille=8,65
+   id=1000101
+   wstyle="STD_GRAS"
+   wnom_couleur="TRAIT_SIMPLE"
+  [texte]
+   texte="Poids brut total (en kg) :"
  [obj_texte]
   [presentation]
    position=159,257
@@ -341,11 +351,12 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=557,133
+   position=569,276
    taille=8,15
-   id=1000099
+   id=1000102
    colonnes_saisie=12
-   wstyle="STD"
+   wstyle="STD_GRAS"
+   wnom_couleur="TRAIT_SIMPLE"
   [description]
    donnee=ent,poitot,ent
   [param_saisie]
