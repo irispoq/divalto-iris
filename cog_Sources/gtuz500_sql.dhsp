@@ -370,6 +370,11 @@ BeginF
 	werr = FALSE
 	wTxt = "Fiches UT125 non mises à jour:"
 
+	If Cog_MoteurFacturationPrjSpe_RES('P') <> 0
+		MessageBox("Moteur de facturation réservé, report des dates sur les fiches UT125 impossible.","Erreur", MB_ICONERROR)
+		FReturn(1)
+	EndIf
+
 	wRs_PrjComp_Old.Init()
 	wRs_PrjComp_Old.Where.PK(Affaire.Affaire)
 	If wRs_PrjComp_Old.Select() = 0
@@ -426,11 +431,14 @@ BeginF
 	EndIf	
 
 	;
+	Cog_MoteurFacturationPrjSpe_LIB()
+
+	;
 	If wErr
 		MessageBox(wTxt,"Erreur", MB_ICONERROR)
 	EndIf
 	
-	FReturn(0)
+	FReturn(wErr)
 
 EndF
 

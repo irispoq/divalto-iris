@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_t002.dhsp 7440 2015-01-23 13:04:23Z admin $')
+SetModuleInfo('$Id: cogtz_t002.dhsp 8256 2015-06-30 08:28:37Z admin $')
 ;*
 ;*      Zoom sur les taux financiers COG_T002
 ;*
@@ -15,17 +15,21 @@ SetModuleInfo('$Id: cogtz_t002.dhsp 7440 2015-01-23 13:04:23Z admin $')
 
 OverWrittenBy "coguz_t002.dhop"
 
+;
 Include "GTTCZ00.dhsp"					; Déclarations communes
 
-Module	A5PMNoteJoint.dhop
-Module 	XZoom7.dhop
+;
+Module	"A5PMNoteJoint.dhop"
+Module 	"XZoom7.dhop"
+Module	"CogTm_MoteurPrjSpec.dhop"
 
 ; TDF
 HFileVersion 	GTFDD.dhsd GTFTAB
 
 ; Record Sql 
-Public recordSQL cogrs_tab.dhoq TableParametre				; Table paramètres
-Public recordSQL cogrs_tab.dhoq CogRs_TauxFi						; Table Taux financiers
+Public recordSQL "cogrs_tab.dhoq" TableParametre					; Table paramètres
+Public recordSQL "cogrs_tab.dhoq" CogRs_TauxFi						; Table Taux financiers
+Public recordSQL "cogrs_tab.dhoq" CogRs_TauxFi		Rs_TauxFi_Old	
 
 Public Record	cogfdd.dhsd		Cog_T000								; Table paramètres
 Public Record	cogfdd.dhsd		COG_T002		COG_T002_Sel		; Table  pour sélection
@@ -277,19 +281,30 @@ Beginp
 Endp
 
 ;*
-Public Procedure ZoomApresCreation ; compte-rendu de création
+Public Procedure ZoomApresCreation 
+; compte-rendu de création
 Beginp
 	Zoom.Titrevar = [ CogRs_TauxFi.Cog_TauxDt *1 CogRs_TauxFi.Lib ]
+
+	; impact sur UT126
+	If Zoom.Ok = 'O'
+		If Cog_UT126_Update_FraisFi(CogRs_TauxFi)	<> 0
+			MessageBox("Erreur au recalcul des frais non immo des fiches UT126.|Vérifiez le livre de bord.","Erreur", MB_ICONERROR)
+		EndIf
+	EndIf
+
 Endp				 
 
 ;*
-Public Procedure ZoomModification ; avant entrée en modif
+Public Procedure ZoomModification 
+; avant entrée en modif
 Beginp
 	Zoom.Res			= [ 'COGTB' Dos CeBin CogRs_TauxFi.Cog_TauxDt ]
 Endp			  
 
 ;*
-Public Procedure ZoomModificationRes		; apres réservation enmodif
+Public Procedure ZoomModificationRes		
+; apres réservation enmodif
 Beginp
 	Note_Chargement_(C_Applic_DAV, CogRs_TauxFi.Note)
 	Joint_Chargement_(C_Applic_DAV, CogRs_TauxFi.Note)
@@ -297,6 +312,7 @@ Endp
 
 ;*
 Public Procedure ZoomAvantRewrite 
+;
 Beginp
    CogRs_TauxFi.UserMo		= SYSTEM.User
    CogRs_TauxFi.UserMoDh 	= Time(7)
@@ -304,34 +320,53 @@ Beginp
 	CogRs_TauxFi.CeNote		= Condition(CogRs_TauxFi.Note = 0, 1, 2)
 	CogRs_TauxFi.Joint 		= Joint_Modification_ (C_Applic_DAV, CogRs_TauxFi.Joint, 'COG_T002')
 	CogRs_TauxFi.CeJoint		= Condition(CogRs_TauxFi.Joint = 0, 1, 2)
+
+	;	récupération de l'ancien taux
+	Rs_TauxFi_Old.Init()
+	Rs_TauxFi_Old.Where.PK(CogRs_TauxFi.Cog_TauxDt)
+	Rs_TauxFi_Old.Select()
+
 Endp														 
 
 ;*
-Public Procedure ZoomApresModification ; compte rendu de modification
+Public Procedure ZoomApresModification 
+; compte rendu de modification
 Beginp
 	Zoom.Titrevar = [ CogRs_TauxFi.Cog_TauxDt *1 CogRs_TauxFi.Lib ]
+
+	; impact sur UT126
+	If Zoom.Ok = 'O' AND CogRs_TauxFi.Cog_Taux <> Rs_TauxFi_Old.Cog_Taux
+		If Cog_UT126_Update_FraisFi(CogRs_TauxFi)	<> 0
+			MessageBox("Erreur au recalcul des frais non immo des fiches UT126.|Vérifiez le livre de bord.","Erreur", MB_ICONERROR)
+		EndIf
+	EndIf
+
 Endp				 
 
 ;*
-Public Procedure ZoomSuppression ; avant entrée en suppression
+Public Procedure ZoomSuppression 
+; avant entrée en suppression
 Beginp
 	Zoom.Res			= [ 'COGTB' Dos CeBin CogRs_TauxFi.Cog_TauxDt ]
 Endp													  
 
 ;*
 Public Procedure ZoomSuppressionRes
+;
 Beginp
 Endp
 														  
 ;*
 Public Procedure ZoomAvantDelete 
+;
 Beginp
 	Note_Suppression_(C_Applic_DAV, CogRs_TauxFi.Note)
 	Joint_Suppression_(C_Applic_DAV, CogRs_TauxFi.Joint)
 Endp
 
 ;*
-Public Procedure ZoomApresSuppression ; compte rendu de suppression
+Public Procedure ZoomApresSuppression 
+; compte rendu de suppression
 Beginp
 Endp						
 
@@ -346,7 +381,8 @@ Beginp
 Endp				  
 
 ;*
-Public Procedure ZoomConsult 	; à utiliser si note
+Public Procedure ZoomConsult 
+; à utiliser si note
 Beginp
 	Switch Harmony.Key
 		Case K_F7		|	Zoom_Call()
@@ -360,13 +396,15 @@ Beginp
 Endp
 
 ;*
-Public Procedure ZoomAvantInput			; permet de griser les boutons et les choix
+Public Procedure ZoomAvantInput			
+; permet de griser les boutons et les choix
 Beginp
 	Maj_Menu_Boutons
 Endp
 
 ;*
-Public Procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+Public Procedure ZoomArret					
+; exécutée si point d'arrêt en mode fiche ou liste
 Beginp											; pour appel d'un zoom 
 	Switch Harmony.Key
 	Case K_F7	|	Zoom_Call()

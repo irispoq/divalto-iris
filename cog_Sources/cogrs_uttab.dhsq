@@ -1,4 +1,4 @@
-<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 7877 2015-04-14 12:23:37Z admin $'>
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 8256 2015-06-30 08:28:37Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGF_GTFTAB
 ;*
@@ -106,6 +106,8 @@ Public Record A5DD.dhsd		MZ
 		COG_UT126.COG_LGNO = lgNo 
 	Case Equal_An(int an)
 		COG_UT126.ANNEE = an
+	Case SupEgal_An(int an)
+		COG_UT126.ANNEE >= an
 	Case Equal_Etat(char etat)
 		COG_UT126.CE1 = etat
 	Case Not_Equal_Etat(char etat)
@@ -136,6 +138,30 @@ Public Record A5DD.dhsd		MZ
 		COG_UT126.CEFATB(11) = ce
 	Case Equal_CeDecembre(char ce)
 		COG_UT126.CEFATB(12) = ce
+	Case NotEqual_CeJanvier(char ce)
+		COG_UT126.CEFATB(1) <> ce
+	Case NotEqual_CeFevrier(char ce)
+		COG_UT126.CEFATB(2) <> ce
+	Case NotEqual_CeMars(char ce)
+		COG_UT126.CEFATB(3) <> ce
+	Case NotEqual_CeAvril(char ce)
+		COG_UT126.CEFATB(4) <> ce
+	Case NotEqual_CeMai(char ce)
+		COG_UT126.CEFATB(5) <> ce
+	Case NotEqual_CeJuin(char ce)
+		COG_UT126.CEFATB(6) <> ce
+	Case NotEqual_CeJuillet(char ce)
+		COG_UT126.CEFATB(7) <> ce
+	Case NotEqual_CeAout(char ce)
+		COG_UT126.CEFATB(8) <> ce
+	Case NotEqual_CeSeptembre(char ce)
+		COG_UT126.CEFATB(9) <> ce
+	Case NotEqual_CeOctobre(char ce)
+		COG_UT126.CEFATB(10) <> ce
+	Case NotEqual_CeNovembre(char ce)
+		COG_UT126.CEFATB(11) <> ce
+	Case NotEqual_CeDecembre(char ce)
+		COG_UT126.CEFATB(12) <> ce
 <ORDERBY>
 	Case Par_PK
 		COG_UT126.AFFAIRE,
