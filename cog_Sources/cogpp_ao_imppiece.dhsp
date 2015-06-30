@@ -61,6 +61,8 @@ Public	Record   "gtfdd.dhsd"	mouv		iMOUV
 Public	Record   "gtfdd.dhsd"	mvtl		MVTL
 Public	Record   "gtfdd.dhsd"	mvtl		iMVTL
 Public	Record   "gtfdd.dhsd"	ent		ENT
+Public	Record   "gtfdd.dhsd"	ent		iENT
+Public	Record   "gtfdd.dhsd"	ent		ENT_Seek
 Public	Record	"gtfdd.dhsd"	itxt		iTXT
 Public	Record	"gtfdd.dhsd"	xz			g3xz
 Public	Record	"gtfdd.dhsd"	xq			g3xq
@@ -104,7 +106,7 @@ Const		MaxLgEnt						= 20
 1	Ligne				1000												; 215
 1	TexteLigne		20000
 1	PiedMt			12*3
-1	iTab				236
+1	iTab				240
 	2	iFaCe2		4,0
 	2	iTiers		4,0
 	2	iAdrTiersBL	4,0
@@ -159,12 +161,14 @@ Const		MaxLgEnt						= 20
 	2	iErreur		4,0
    2  iCogDateDeb	4,0
    2  iCogDateFin	4,0
+	2	iLogBlNo		4,0
 
 1	nCptPce			8,0 = 0
 1	nCptErr			8,0 = 0
 1	bClose			B = False
 1	lId_XlMVTL		L							; Lignes réceptionnées PROSERVIA
 1	lId_CdMOUV		L	 						; Mouvements commande Divalto pouvant être réceptionnés
+1	lId_iENT			L							; Informations à récupérer pour l'entête en validation
 1	lId_iMOUV		L							; Mouvements à intégrer
 1	lId_iMVTL		L							; Ventilations à intégrer
 1	adrF				16
@@ -221,6 +225,22 @@ BeginF
 
 	cleA = [A.Dos A.CdNo A.GrRef A.Enrno A.Depo A.Op]
 	cleB = [B.Dos B.CdNo B.GrRef B.Enrno B.Depo B.Op]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;*
+Function Long	Tri_iENT(&A, &B)
+;
+Record	"gtfdd.dhsd"		ENT			A
+Record	"gtfdd.dhsd"		ENT			B
+1		cleA		15
+1		cleB		15
+BeginF
+
+	cleA = [A.Dos A.TiCod A.PiCod A.PiNo]
+	cleB = [B.Dos B.TiCod B.PiCod B.PiNo]
 
 	FReturn(SortCompare(cleA, cleB))
 
@@ -687,6 +707,7 @@ BeginF
 				Case "PROJET"		| iProjet		= Col
 				Case "MARCHE"		| iMarche		= Col
 				Case "SALCOD"		| iSalcod		= Col
+				Case "COG_LOGBLNO"| iLogBlNo		= Col
 				
 				Case "COG_DATE_DEBUT"  	| iCogDateDeb		= Col
 				Case "COG_DATE_FIN"  	| iCogDateFin		= Col
@@ -748,6 +769,14 @@ BeginF
 			HWrite(GTFI, iPAR)
 
 			;txtDebug &= '|IPAR n°' & ENT.PiNo
+
+			; Champs à enregistrer dans l'entete BL --> ping pour gttt150
+			If ListSeek(lId_iENT, ENT, ENT_Seek) not in (-1, 0)
+				Ping("LOGBLNO" & ENT_Seek.TiCod & ENT_Seek.PiCod & ENT_Seek.PiNo, ENT_Seek.Cog_LogBlNo)
+				ListDelete(lId_iENT)
+			EndIf
+			Lib_ENT(ENT.TiCod, ENT.PiCod, ENT.PiNo)
+			
 
 		EndIf
 
@@ -920,7 +949,7 @@ BeginF
 			If MOUV.BlQte > 0
 				If ListSeek(lId_iMOUV, MOUV, MOUV_Seek) not in (-1, 0)
 					MOUV_Seek = MOUV
-					ListModify(lId_iMOUV, MOUV_Seek)
+					ListModify(lId_iMOUV, MOUV_Seek)		
 				Else
 					ListInsert(lId_iMOUV, MOUV)
 				EndIf
@@ -933,49 +962,52 @@ BeginF
 		; quantité réceptionnée > quantité restante en commande
 		If wBlQte > 0
 
-			; chargement de la nature de stock
-			If CogRs_Nst.Nst <> xlMVTL.Nst
-				CogRs_Nst.Init()
-				CogRs_Nst.Where.PK(xlMVTL.Nst)
-				CogRs_Nst.Select()
-			EndIf
+;			; chargement de la nature de stock
+;			If CogRs_Nst.Nst <> xlMVTL.Nst
+;				CogRs_Nst.Init()
+;				CogRs_Nst.Where.PK(xlMVTL.Nst)
+;				CogRs_Nst.Select()
+;			EndIf
+;
+;			If CogRs_Nst.OpAch <> ' '
+;
+;				; création d'un nouveau MOUV
+;				Init iMOUV = ' '
+;				iMOUV.Dos 	= xlMVTL.Dos
+;				iMOUV.GrRef	= xlMVTL.GrRef
+;				iMOUV.CdNo	= xlMVTL.PiNo
+;				iMOUV.Op		= CogRs_Nst.OpAch
+;				iMOUV.Depo	= xlMVTL.Depo
+;				If ListSeek(lId_iMOUV, iMOUV, MOUV_Seek) not in (-1, 0)
+;					MOUV_Seek.BlQte += wBlQte
+;					ListModify(lId_iMOUV, MOUV_Seek)
+;				Else
+;					iMOUV.BlQte = wBlQte
+;					ListInsert(lId_iMOUV, iMOUV)
+;				EndIf
+;	
+;				; 1 seule ventil avec le solde de la quantité à réceptionner
+;				Init iMVTL 	= ' '
+;				iMVTL.Dos 	= xlMVTL.Dos
+;				iMVTL.GrRef	= xlMVTL.GrRef
+;				iMVTL.Qte	= wBlQte
+;				iMVTL.Serie = xlMVTL.Serie
+;				iMVTL.PiNo 	= xlMVTL.PiNo
+;				iMVTL.Lieu	= xlMVTL.Lieu
+;				iMVTL.Depo	= xlMVTL.Depo
+;				iMVTL.Nst	= xlMVTL.Nst
+;				ListInsert(lId_iMVTL, iMVTL)
+;
+;			Else
+;
+;				Erreur++
+;				Cog_EcritureLivreDeBord("Pas de code OP achat associé à la nature de stock " & xlMVTL.Nst & " pour réceptionner des produits en surplus.")
+;				FReturn(1)
+;
+;			EndIf
 
-			If CogRs_Nst.OpAch <> ' '
-
-				; création d'un nouveau MOUV
-				Init iMOUV = ' '
-				iMOUV.Dos 	= xlMVTL.Dos
-				iMOUV.GrRef	= xlMVTL.GrRef
-				iMOUV.CdNo	= xlMVTL.PiNo
-				iMOUV.Op		= CogRs_Nst.OpAch
-				iMOUV.Depo	= xlMVTL.Depo
-				If ListSeek(lId_iMOUV, iMOUV, MOUV_Seek) not in (-1, 0)
-					MOUV_Seek.BlQte += wBlQte
-					ListModify(lId_iMOUV, MOUV_Seek)
-				Else
-					iMOUV.BlQte = wBlQte
-					ListInsert(lId_iMOUV, iMOUV)
-				EndIf
-	
-				; 1 seule ventil avec le solde de la quantité à réceptionner
-				Init iMVTL 	= ' '
-				iMVTL.Dos 	= xlMVTL.Dos
-				iMVTL.GrRef	= xlMVTL.GrRef
-				iMVTL.Qte	= wBlQte
-				iMVTL.Serie = xlMVTL.Serie
-				iMVTL.PiNo 	= xlMVTL.PiNo
-				iMVTL.Lieu	= xlMVTL.Lieu
-				iMVTL.Depo	= xlMVTL.Depo
-				iMVTL.Nst	= xlMVTL.Nst
-				ListInsert(lId_iMVTL, iMVTL)
-
-			Else
-
-				Erreur++
-				Cog_EcritureLivreDeBord("Pas de code OP achat associé à la nature de stock " & xlMVTL.Nst & " pour réceptionner des produits en surplus.")
-				FReturn(1)
-
-			EndIf
+			Erreur++
+			Cog_EcritureLivreDeBord("Quantité en surplus: " & NoSpaces(wBlQte) & " pour la référence " & left(xlMVTL.Ref) & " sur la commande N°" & xlMVTL.PiNo & ".")
 
 		EndIf
 
@@ -984,7 +1016,7 @@ BeginF
 	WEnd
 
 
-	FReturn(0)
+	FReturn(Condition(Erreur=0, 0, 1))
 EndF
 
 ;*
@@ -1021,6 +1053,7 @@ BeginP
 	Init xlmouv_prec.FaNo = $FF
 	Blanc = 0
 	ListErase(lId_XlMVTL)
+	ListErase(lId_iENT)
 
 	OpenTrace(C_Page_Trace,C_Page_Selection,C_Page_Traitement)
 
@@ -1153,6 +1186,8 @@ BeginP
 		If xlmouv.Cog_date_fin <> " " And IsDate(xlmouv.Cog_date_fin) = 0
 			EcrireErreur(Lig,iErreur,"Format de date COG_DATE_FIN incorrect.")
 		EndIf
+
+		Lecture_Cellule(Lig,iLogBlNo,Ligne) | xlent.Cog_LogBlNo = Ligne
 
 		; Fin ajout spé U GIE
 
@@ -1340,6 +1375,16 @@ BeginP
 				ListModify(lId_XlMVTL, MVTL_Seek)
 			Else
 				ListInsert(lId_XlMVTL, xlMVTL)
+				; nouvelle ligne --> vérification si l'entête est mémorisée
+				init ENT 		= ' '
+				ENT.Dos 			= MZ.Dos
+				ENT.TiCod		= MZ.TiCod
+				ENT.PiCod		= MZ.PiCod
+				ENT.PiNo			= xlMVTL.PiNo
+				ENT.Cog_LogBlNo= xlent.Cog_LogBlNo
+				If ListSeek(lId_iENT, ENT, ENT_Seek) = 0
+					ListInsert(lId_iENT, ENT)
+				EndIf
 			EndIf
 		EndIf
 
@@ -1576,6 +1621,10 @@ BeginF
 	lId_XlMVTL = ListGetId("LISTE_XLMVTL")
 	GetAdressFunction('', 'Tri_XlMVTL', adrF)
 	ListMode(lId_XlMVTL, Mode=1, adrF)
+
+	lId_iENT = ListGetId("LISTE_IENT")
+	GetAdressFunction('', 'Tri_iENT', adrF)
+	ListMode(lId_iENT, Mode=1, adrF)
 
 	lId_iMOUV = ListGetId("LISTE_IMOUV")
 	GetAdressFunction('', 'Tri_iMOUV', adrF)

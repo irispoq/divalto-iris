@@ -1,0 +1,83 @@
+<DictionarySql overwrite="dav_sd.dhoq" ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL pour Divalto Search
+;*
+
+;*
+;*		Client							CLI
+;*
+
+<RecordSql Name=Client >
+<SELECT>
+	CLI.*
+;*
+;*		Fournisseur							FOU
+;*
+
+<RecordSql Name=Fournisseur>
+<SELECT>
+	FOU.*
+
+;*
+;*		Prospect							PRO
+;*
+
+<RecordSql Name=Prospect >
+<SELECT>
+	PRO.*
+
+;*
+;*		Contact
+;*
+
+<RecordSql Name=Contact>
+<SELECT>
+	T2.*
+
+;*
+;*		Commercial
+;*
+
+<RecordSql Name=Commercial>
+<SELECT>
+	VRP.*
+
+;*
+;*		Adresse codifiée
+;*
+
+<RecordSql Name=Adresse>
+<SELECT>
+	T1.*
+
+;*
+;*		Adresse manuelle
+;*
+
+<RecordSql Name=AdresseManuelle>
+<SELECT>
+	EAD.*
+
+;*
+;*		Lignes de pièces / mouvements
+;*
+
+<RecordSql Name=Mouvement >
+<SELECT>
+	MOUV.* 
+
+;*
+;*		Entêtes de pièce
+;*
+
+<RecordSql Name=EntetePiece>
+<SELECT>
+	ENT.*	
+
+;*
+;*		Article
+;*
+
+<RecordSql Name=Article >
+<SELECT>
+	ART.*
