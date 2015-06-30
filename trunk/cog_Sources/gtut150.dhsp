@@ -10,9 +10,15 @@ SetModuleInfo('$Id$')
 
 OverWrite	"GTTT150.dhop"
 
+public record	gtfdd.dhsd	IPAR								; paramètre d'intégration
 public record	gtfdd.dhsd	ENT								; En-tête
+public record	gtfdd.dhsd 	GTENT	
+public record	gtfdd.dhsd 	GTPCE
 public record	gtfdd.dhsd 	G1T1								; Enregistrement gestion tableau lignes
 public record	gtfdd.dhsd 	G1T1	W3G1T1					; Mouvement de GTFI en validation
+public record	gtfdd.dhsd	ENT	WAENT						; En-têtebl associé
+public record	gtfdd.dhsd	ENT	W1ENT						; En-tête origine en validation
+public record	gtfdd.dhsd	ENT	W3ENT						; En-tête de GTFI en validation
 
 ;*
 Procedure G1T1_Validation_Affectation_Ap
@@ -28,3 +34,15 @@ BeginP
 EndP
 
 ;*
+Procedure Ent_Fournisseur_Validation_Init	
+;
+BeginP
+
+	Standard.Ent_Fournisseur_Validation_Init
+
+	;
+	If PingReceiveAndDelete("LOGBLNO" & W1ENT.TiCod & W1ENT.PiCod & W1ENT.PiNo, W1ENT.Cog_LogBlNo) = 0
+		ENT.Cog_LogBlNo = W1ENT.Cog_LogBlNo
+	EndIf
+
+EndP
