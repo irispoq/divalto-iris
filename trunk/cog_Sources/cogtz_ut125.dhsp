@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtz_ut125.dhsp 8143 2015-06-12 07:52:35Z admin $')
+SetModuleInfo('$Id: cogtz_ut125.dhsp 8256 2015-06-30 08:28:37Z admin $')
 ;*
 ;*      Zoom sur facturation projets spec
 ;*
@@ -350,6 +350,14 @@ Endp
 Public Procedure ZoomCreation
 ;
 Beginp
+
+	; RESA COMMUNE
+	If Cog_MoteurFacturationPrjSpe_RES('P') <> 0
+		MessageBox("Le moteur de facturation est réservé, création non autorisée.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'I'
+		PReturn
+	EndIf
+
 	; initialiser les données 
 	cogrs_ut125.init()
 	CogRs_UT125.Cog_Period			= 1
@@ -416,26 +424,17 @@ Endp
 
 ;*
 Public Procedure ZoomAvantWrite 
+;
 Beginp
 
-	; RESA COMMUNE
-	If Cog_MoteurFacturationPrjSpe_RES <> 0
-
-		MessageBox("Le moteur de facturation est réservé, mise à jour impossible.", "Alerte", MB_ICONERROR)
-		Zoom.Ok = 'S'
-
-	Else
-
-		; initialisation des codes enregistrement et mise à jour date et user
-	   CogRs_UT125.Dos 			= mz.Dos
-		CogRs_UT125.UserCr 		= SYSTEM.User
-		CogRs_UT125.UserCrDh 	= Time(7)
-		CogRs_UT125.Note 			= Note_Creation_(C_Applic_DAV, 'cogrs_ut125')	
-		CogRs_UT125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
-		CogRs_UT125.Cog_LoyRestNb= CogRs_UT125.Cog_LoyNb
-		Cog_CalculerDateFinFacturation(CogRs_UT125.Cog_Date_Debut, CogRs_UT125.Cog_LoyNb, CogRs_UT125.Cog_Period, CogRs_UT125.Cog_Date_Fin)
-
-	EndIf
+	; initialisation des codes enregistrement et mise à jour date et user
+   CogRs_UT125.Dos 			= mz.Dos
+	CogRs_UT125.UserCr 		= SYSTEM.User
+	CogRs_UT125.UserCrDh 	= Time(7)
+	CogRs_UT125.Note 			= Note_Creation_(C_Applic_DAV, 'cogrs_ut125')	
+	CogRs_UT125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
+	CogRs_UT125.Cog_LoyRestNb= CogRs_UT125.Cog_LoyNb
+	Cog_CalculerDateFinFacturation(CogRs_UT125.Cog_Date_Debut, CogRs_UT125.Cog_LoyNb, CogRs_UT125.Cog_Period, CogRs_UT125.Cog_Date_Fin)
 
 Endp
 
@@ -449,7 +448,7 @@ Beginp
 	EndIf
 
 	Zoom.Titrevar = [ CogRs_UT125.Affaire CogRs_UT125.Ref ]
-	Cog_MoteurFacturationPrjSpe_LIB
+	Cog_MoteurFacturationPrjSpe_LIB()
 	Lib_Affaire(CogRs_UT125.Affaire)
 
 Endp				 
@@ -460,10 +459,12 @@ Public Procedure ZoomModification
 Beginp
 	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Affaire CogRs_UT125.Ref CogRs_UT125.Cog_LgNo]
 
-;	If CogRs_UT125.Cog_LoyFaNb > 0
-;		MessageBox("La facturation a débuté, modification impossible","Alerte", MB_ICONEXCLAMATION)
-;		Zoom.Ok = 'I'
-;	EndIf
+	; RESA COMMUNE
+	If Cog_MoteurFacturationPrjSpe_RES('P') <> 0
+		MessageBox("Le moteur de facturation est réservé, modification non autorisée.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'I'
+		PReturn
+	EndIf
 
 	If Res_Affaire(cogrs_ut125.Affaire, 0)	<> 0	  
 		MessageBox("Code affaire " & left(cogrs_ut125.Affaire) & " réservé, modification impossible.", "Alerte", MB_ICONERROR)
@@ -482,27 +483,19 @@ Endp
 
 ;*
 Public Procedure ZoomAvantRewrite 
+;
 Beginp
 
-	; RESA COMMUNE
-	If Cog_MoteurFacturationPrjSpe_RES <> 0
+   cogrs_ut125.UserMo		= SYSTEM.User
+   cogrs_ut125.UserMoDh 	= Time(7)
+	cogrs_ut125.Note 			= Note_Modification_ (C_Applic_DAV, cogrs_ut125.Note, 'cogrs_ut125')
+	cogrs_ut125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
 
-		MessageBox("Le moteur de facturation est réservé, mise à jour impossible.", "Alerte", MB_ICONERROR)
-		Zoom.Ok = 'S'
-
-	Else
-
-	   cogrs_ut125.UserMo		= SYSTEM.User
-	   cogrs_ut125.UserMoDh 	= Time(7)
-		cogrs_ut125.Note 			= Note_Modification_ (C_Applic_DAV, cogrs_ut125.Note, 'cogrs_ut125')
-		cogrs_ut125.CeNote		= Condition(cogrs_ut125.Note = 0, 1, 2)
-
-		If CogRs_UT125.Cog_LoyFaNb = 0
-			CogRs_UT125.Cog_LoyRestNb= CogRs_UT125.Cog_LoyNb
-			Cog_CalculerDateFinFacturation(CogRs_UT125.Cog_Date_Debut, CogRs_UT125.Cog_LoyNb, CogRs_UT125.Cog_Period, CogRs_UT125.Cog_Date_Fin)
-		EndIf
-
+	If CogRs_UT125.Cog_LoyFaNb = 0
+		CogRs_UT125.Cog_LoyRestNb= CogRs_UT125.Cog_LoyNb
+		Cog_CalculerDateFinFacturation(CogRs_UT125.Cog_Date_Debut, CogRs_UT125.Cog_LoyNb, CogRs_UT125.Cog_Period, CogRs_UT125.Cog_Date_Fin)
 	EndIf
+
 
 Endp														 
 
@@ -517,14 +510,23 @@ Beginp
 
 	Zoom.Titrevar = [ CogRs_UT125.Affaire CogRs_UT125.Ref ]
 	Lib_Affaire(CogRs_UT125.Affaire)
-	Cog_MoteurFacturationPrjSpe_LIB
+	Cog_MoteurFacturationPrjSpe_LIB()
 
 Endp				 
 
 ;*
-Public Procedure ZoomSuppression ; avant entrée en suppression
+Public Procedure ZoomSuppression 
+; avant entrée en suppression
 Beginp
 	Zoom.Res			= [ 'COG_UT125' mz.Dos CogRs_UT125.Affaire CogRs_UT125.Ref CogRs_UT125.Cog_LgNo]
+
+	; RESA COMMUNE
+	If Cog_MoteurFacturationPrjSpe_RES('P') <> 0
+		MessageBox("Le moteur de facturation est réservé, suppression non autorisée.", "Alerte", MB_ICONERROR)
+		Zoom.Ok = 'I'
+		PReturn
+	EndIf
+
 Endp													  
 
 ;*
@@ -534,17 +536,10 @@ Endp
 														  
 ;*
 Public Procedure ZoomAvantDelete 
+;
 Beginp
 
-	; RESA COMMUNE
-	If Cog_MoteurFacturationPrjSpe_RES <> 0
-
-		MessageBox("Le moteur de facturation est réservé, suppression impossible.", "Alerte", MB_ICONERROR)
-		Zoom.Ok = 'I'
-
-	Else
-		Note_Suppression_(C_Applic_DAV, cogrs_ut125.Note)
-	EndIf
+	Note_Suppression_(C_Applic_DAV, cogrs_ut125.Note)
 
 Endp
 
@@ -555,7 +550,7 @@ Beginp
 	If Zoom.ok = 'O'
 		Cog_UT126_DeleteEcheancier(CogRs_UT125.COG_UT125)
 	EndIf
-	Cog_MoteurFacturationPrjSpe_LIB
+	Cog_MoteurFacturationPrjSpe_LIB()
 
 Endp						
 

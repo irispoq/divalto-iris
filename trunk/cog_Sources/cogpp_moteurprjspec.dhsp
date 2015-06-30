@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 8145 2015-06-12 10:18:38Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 8256 2015-06-30 08:28:37Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -676,7 +676,7 @@ beginp
 	Cog_EcritureLivreDeBord(translate("--> Début de la facturation des projets spécifiques"))
 
 	; RESA principale
-	If Cog_MoteurFacturationPrjSpe_RES <> 0
+	If Cog_MoteurFacturationPrjSpe_RES('R') <> 0
 		Cog_EcritureLivreDeBord("Moteur de facturation réservé.")
 		erreur++
 		PReturn

@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 8231 2015-06-26 12:39:30Z admin $')
+SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 8256 2015-06-30 08:28:37Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Module de fonctions communes à la facturation des projets spécifiques UT125
@@ -44,18 +44,23 @@ Public 	Record		"GTFDD.DHSD"				T036
 ;*	
 
 ;*
-Public Function int Cog_MoteurFacturationPrjSpe_RES()
+Public Function int Cog_MoteurFacturationPrjSpe_RES(wMode)
 ; Réservation pour action sur les tables du moteur de facturation spécifique
 ; 0  --> OK
+1		wMode		1					; 'P' ou 'R'
 1		wCpt		3,0	= 0
 1		wRetResa	1,0	= 1
 BeginF
+
+	If wMode not in ('P', 'R')
+		FReturn(1)
+	EndIf
 
 	CogRs_UT125_RESA.Init()
 
 	Do While wRetResa <> 0 AND wCpt < 100
 
-		If CogRs_UT125_RESA.FShare([MZ.Dos 'COG_UT125_FACTURATION'], 'R') = 0
+		If CogRs_UT125_RESA.FShare([MZ.Dos 'COG_UT125_FACTURATION'], wMode) = 0
 	  		wRetResa = 0
 		EndIf
 		wCpt++ 
@@ -334,7 +339,7 @@ BeginF
 	wCe1Ori = Condition(wAction=1, '6', '1') 
 	wCe1Dst = Condition(wAction=1, '1', '6') 
 
-	If Cog_MoteurFacturationPrjSpe_RES <> 0
+	If Cog_MoteurFacturationPrjSpe_RES('R') <> 0
 		If wMsg
 			MessageBox("Le moteur de facturation est réservé, modification des échéanciers impossibles.","Alerte", MB_ICONINFORMATION)
 		EndIf
@@ -389,6 +394,161 @@ BeginF
 	Cog_MoteurFacturationPrjSpe_LIB
 
 	FReturn(wRet)
+
+EndF
+
+;*
+Public Function int Cog_UT126_Calculer_FraisFi(&wRs_UT126, wRs_TauxFi)
+; Mise à jour des champs calculés des frais financiers pour le record wRs_UT126 en paramètre
+; avec les valeurs de taux de wRs_TauxFi 
+; pas d'update dans cette fonction
+; 0 --> pas d'erreur
+; 1 --> absence de paramètre, écriture dans le livre de bord
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT125			wRs_UT125
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126			wRs_UT126
+RecordSQL	"COGRS_TAB.DHOQ"		CogRs_TauxFi		wRs_TauxFi
+1		wCapitalMoy		13,D0
+1		wStepMois		2,0
+1		j					2,0
+BeginF
+
+	; chargement UT125
+	If [wRs_UT125.Dos wRs_UT125.Affaire  wRs_UT125.Ref wRs_UT125.Cog_LgNo] <> [wRs_UT126.Dos wRs_UT126.Affaire  wRs_UT126.Ref wRs_UT126.Cog_LgNo] 
+		wRs_UT125.Init()
+		wRs_UT125.Where.RemoveCondition("")
+		wRs_UT125.Where.PK(wRs_UT126.Affaire,  wRs_UT126.Ref, wRs_UT126.Cog_LgNo)
+		If wRs_UT125.Select() = 0
+			Cog_EcritureLivreDeBord("Enregistrement UT125 non retrouvé: <AFFAIRE>" & wRs_UT126.Affaire & "<REF>" & left(wRs_UT126.Ref) & "<LG>" & wRs_UT126.Cog_LgNo)
+			FReturn(1)
+		EndIf
+
+		If wRs_UT125.PRODNATTYP & wRs_UT125.OPFLUX <> C_PRODNAT_PROJET & C_OP_IMMO	 ; pas de frais fi dans ce cas- non inclu dans le where pour éviter jointures non opti
+		 	FReturn(0)
+		EndIf
+	EndIF
+
+	; périodicité de facturation
+	Switch2 wRs_UT125.Cog_Period
+		Case 1
+		 	wStepMois = 1 
+		Case 2
+			wStepMois = 2
+		Case 3
+			wStepMois = 3
+		Case 4
+		 	wStepMois = 6
+		Case 5
+			wStepMois = 12
+		Default
+			wStepMois = 1
+	EndSwitch
+
+	; capital moyen du entre début et fin de période
+	wCapitalMoy = 	((wRs_UT126.Cog_BaseMt + wRs_UT126.FraisBaseMt) \
+							+ 	((wRs_UT126.Cog_BaseMt + wRs_UT126.FraisBaseMt) - (wRs_UT126.AnMt + wRs_UT126.FraisAnMt)))	\
+							/ 2
+
+	wRs_UT126.FraisFaAnMt =  wCapitalMoy * (wRs_TauxFi.Cog_Taux / 100) * (1/12)
+
+	; application du montant de frais financiers
+	For j = 1 to 12 
+
+		If wRs_UT126.CeFaTb(j) = C_UT126_CEMOIS_AFACTURER
+			wRs_UT126.FraisFaMoisMt(j) = (wRs_UT126.FraisFaAnMt / 12) * wStepMois
+		EndIf
+
+	Next
+
+	FReturn(0)
+
+EndF
+
+;*
+Public Function int Cog_UT126_Update_FraisFi(wRs_TauxFi)
+; recalcul des frais fi non immo pour tous les enreg UT126 dont l'année est supérieure ou égale à celle du taux et pour lesquels il n'y a pas eu de facturation
+; 0 --> OK
+; 1 --> erreur
+RecordSQL	"COGRS_UTTAB.DHOQ"	CogRs_UT126			wRs_UT126
+RecordSQL	"COGRS_TAB.DHOQ"		CogRs_TauxFi		wRs_TauxFi
+RecordSQL	"COGRS_TAB.DHOQ"		CogRs_TauxFi		wRs_TauxFi_nx
+1		wAn_N_Only	1,0 = FALSE
+1		wRead			L
+1		wErr			1,0 = 0
+1		wAn			4,0
+BeginF
+
+	; réservation du moteur de facturation (verrouille tous les enregs ut125 et ut126)
+	If Cog_MoteurFacturationPrjSpe_RES('R') <> 0
+		Cog_EcritureLivreDeBord("Mise à jour des frais non immo non effectuée: le moteur de facturation est réservé.")
+		FReturn(1)
+	EndIf
+
+	; recherche d'un taux pour une année postérieure au taux en cours d'écriture
+	wAn = Year(wRs_TauxFi.Cog_TauxDt)
+	wRs_TauxFi_nx.Init()
+	wRs_TauxFi_nx.Where.SupEgal_Date(Hdate(wRs_TauxFi.Cog_TauxDt, '', '', +1))
+	If wRs_TauxFi_nx.GetCount() > 0
+		wAn_N_Only = TRUE
+	EndIF
+
+	; conditions de sélection UT126
+	wRs_UT126.Init()
+	wRs_UT126.Where.RemoveCondition("")
+	wRs_UT126.Where.Equal_Etat(C_UT126_STATUT_ACTIF)
+	wRs_UT126.Where.AddCondition("Equal_Etat")
+	wRs_UT126.Where.NotEqual_CeJanvier(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeJanvier")
+	wRs_UT126.Where.NotEqual_CeFevrier(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeFevrier")
+	wRs_UT126.Where.NotEqual_CeMars(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeMars")
+	wRs_UT126.Where.NotEqual_CeAvril(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeAvril")
+	wRs_UT126.Where.NotEqual_CeMai(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeMai")
+	wRs_UT126.Where.NotEqual_CeJuin(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeJuin")
+	wRs_UT126.Where.NotEqual_CeJuillet(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeJuillet")
+	wRs_UT126.Where.NotEqual_CeAout(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeAout")
+	wRs_UT126.Where.NotEqual_CeSeptembre(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeSeptembre")
+	wRs_UT126.Where.NotEqual_CeOctobre(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeOctobre")
+	wRs_UT126.Where.NotEqual_CeNovembre(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeNovembre")
+	wRs_UT126.Where.NotEqual_CeDecembre(C_UT126_CEMOIS_FACTURE)
+	wRs_UT126.Where.AddCondition("NotEqual_CeDecembre")
+
+	If wAn_N_Only
+		wRs_UT126.Where.Equal_An(wAn)
+		wRs_UT126.Where.AddCondition("Equal_An")
+	Else
+		wRs_UT126.Where.SupEgal_An(wAn)
+		wRs_UT126.Where.AddCondition("SupEgal_An")
+	EndIf
+
+	wRead = wRs_UT126.ReaderOpen()
+	wRs_UT126.ReaderSelect(wRead)
+
+	;	Boucle de lecture + maj
+	Do While wRs_UT126.ReaderNext(wRead) > 0 AND not wErr
+
+		wErr = Cog_UT126_Calculer_FraisFi(wRs_UT126, wRs_TauxFi)
+		If not wErr
+			wRs_UT126.ReaderUpdate(wRead)
+		EndIf
+
+	WEnd
+
+	wRs_UT126.ReaderClose(wRead)
+
+	;
+	Cog_MoteurFacturationPrjSpe_LIB()
+
+	;
+	FReturn(wErr)
 
 EndF
 
