@@ -1,10 +1,10 @@
-;>xwin4obj                              7.0       20141126151013      
+;>xwin4obj                              7.0       20150701095209      
 [masque]
- utilisateur="UGIE_YLF"
- date_modification="26/11/2014"
+ utilisateur="UGIE"
+ date_modification="01/07/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
- dernier_id=1000092
+ dernier_id=1000094
  surcharge=oui
  date_modif_base="20140113103937"
  dernier_id_page=100000
@@ -1293,6 +1293,15 @@
    texte="Pièce associée"
  [obj_texte]
   [presentation]
+   position=113,12
+   taille=9,40
+   noms="cog_f3"
+   id=1000093
+   wstyle="STD"
+  [texte]
+   texte="N° BR Logist."
+ [obj_texte]
+  [presentation]
    position=139,249
    taille=9,60
    id=1183
@@ -1344,7 +1353,7 @@
  [obj_texte]
   [presentation]
    position=160,102
-   taille=8,60
+   taille=11,32
    id=75
    wstyle="STD"
   [texte]
@@ -1395,7 +1404,7 @@
  [obj_texte]
   [presentation]
    position=202,249
-   taille=8,60
+   taille=9,60
    noms="configurateur"
    id=1959
    wstyle="STD"
@@ -1854,6 +1863,21 @@
    wstyle="CHAMP_SAISI"
   [description]
    donnee=ent,su_destinataire,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=113,50
+   taille=9,109
+   noms="cog_f3"
+   id=1000094
+   colonnes_saisie=30
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=ent,cog_logblno,ent
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
@@ -2975,11 +2999,11 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=106,80
-   taille=7,98
+   position=104,80
+   taille=9,98
    noms="cog_c3;cog_c4"
    id=1000040
-   wstyle="CHAMP_SAISI_COG"
+   wstyle="COG_CHAMP_SAISI"
   [description]
    donnee=ent,cog_regroupe_direction,ent
   [param_case]
@@ -2993,11 +3017,11 @@
  [champ]
   [presentation]
    position=115,80
-   taille=9,17
+   taille=9,18
    noms="cog_c3;cog_c4"
    id=1000041
    colonnes_saisie=4
-   wstyle="CHAMP_SAISI_COG"
+   wstyle="COG_CHAMP_SAISI"
   [description]
    donnee=ent,cog_dircliente,ent
   [param_saisie]
@@ -3647,7 +3671,7 @@
    noms="cog_c3;cog_c4"
    id=1000039
    colonnes_saisie=40
-   wstyle="CHAMP_AFF"
+   wstyle="COG_CHAMP_AFF"
   [description]
    donnee=cog_dircliente,lib,cog_dircliente_01
    saisie=non

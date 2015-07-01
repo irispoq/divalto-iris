@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20150316120417      
+;>xwin4obj                              7.0       20150701093817      
 [masque]
  libelle="Explorateur de pièces"
- utilisateur="ROOT"
- date_modification="16/03/2015"
+ utilisateur="UGIE"
+ date_modification="01/07/2015"
  feuille_style="fstylewpf.dhfi"
  noms_boutons="zoom"
- dernier_id=1000014
+ dernier_id=1000017
  surcharge=oui
  date_modif_base="20131008112025"
  dernier_id_page=100000
@@ -1736,6 +1736,24 @@ TOTO
   [champ_tableau]
    [presentation]
     position=0,0
+    taille=7,107
+    noms="cog_f3"
+    id=1000015
+    colonnes_saisie=30
+    wstyle="COG_CHAMP_NON_SAISI"
+   [description]
+    donnee=gtpceexp,cog_logblno,gtpceexp
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [param_colonne]
+    titre="N° BR Logisticien"
+    fl_aff=non
+    largeur_col=107
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=0,0
     taille=7,142
     noms="cog_f0"
     id=1000001
@@ -2152,8 +2170,8 @@ TOTO
    texte="Avenant"
  [obj_texte]
   [presentation]
-   position=252,311
-   taille=9,37
+   position=252,306
+   taille=9,42
    noms="cog_f0"
    id=1000003
    wstyle="STD"
@@ -2167,6 +2185,15 @@ TOTO
    wstyle="STD_AFF"
   [texte]
    texte="Centrale"
+ [obj_texte]
+  [presentation]
+   position=262,306
+   taille=9,43
+   noms="cog_f3"
+   id=1000016
+   wstyle="STD"
+  [texte]
+   texte="N° BR Logisticien"
  [obj_texte]
   [presentation]
    position=268,10
@@ -3076,6 +3103,19 @@ TOTO
    wstyle="COG_CHAMP_NON_SAISI"
   [description]
    donnee=gtpceexp,cog_bwid,gtpceexp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=262,349
+   taille=9,123
+   noms="cog_f3"
+   id=1000017
+   colonnes_saisie=30
+   wstyle="COG_CHAMP_NON_SAISI"
+  [description]
+   donnee=gtpceexp,cog_logblno,gtpceexp
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
