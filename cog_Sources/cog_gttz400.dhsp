@@ -1,0 +1,63 @@
+;>xdiva
+;*
+;*      Zoom sur En-tête de pièces		RecordSQL Piece_Entete de GTRSPCE
+;*
+
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		YLEF		205a						07/2015	Affichage champ spé propres à un type de pièce
+
+
+SetModuleInfo('$Id$')
+
+OverWrittenBy "COG_GTUZ400.dhop"
+
+;
+include "GTTCZ00.dhsp"			;déclarations communes
+
+;
+Module A5PMNoteJoint.dhop
+Module CCTM000.dhop
+Module CCPM000.dhop
+Module GTPMPCE.dhop
+Module GTTMPCE.dhop
+Module xzoom7.dhop
+
+
+; Record SQL
+Public RecordSql 'GTRSPCE.dhoq'	Piece_entete
+Public RecordSql 'GTRSPCE.dhoq'	Piece_entete 	Piece_entete_Sel
+
+;
+public record 		"gtfdd.dhsd"	ENT				Piece_Sel
+
+
+1		estPilote		1,0 = FALSE
+
+;*
+;* procedures 
+;*
+	  
+;*
+Public Procedure Cog_Afficher_Champs
+;
+1	i			2,0
+
+BeginP
+
+	for i = 0 to 9
+		xmesetattribut("cog_p"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_c"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_f"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_v"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_a"&right(i),an_visibilite,av_cache)
+		xmesetattribut("cog_i"&right(i),an_visibilite,av_cache)
+	next
+
+	xmesetattribut("cog_"&piece_sel.TiCod & "0",an_visibilite,av_visible)							;champs visibles pour tous les types de pièces
+	xmesetattribut("cog_"&piece_sel.TiCod & piece_sel.PiCod,an_visibilite,av_visible)		;champs visibles uniquement pour le type de pièce traité
+	xmesetattribut("cog_not"&piece_sel.TiCod & "0",an_visibilite,av_cache)							;champs cachés pour tous les types de pièces
+	xmesetattribut("cog_not"&piece_sel.TiCod & piece_sel.PiCod,an_visibilite,av_cache)		;champs cachés uniquement pour le type de pièce traité
+
+EndP

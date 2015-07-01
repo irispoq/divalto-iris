@@ -1,15 +1,40 @@
 OverWrite gttz400_sql.dhop
+;*
+;*      Zoom sur En-tête de pièces		RecordSQL Piece_Entete de GTRSPCE
+;*
 
+
+;*		Log	 Version	  NPmodif		Date		Modifications
+;*
+;*		YLEF		205a						07/2015	Affichage champ spé propres à un type de pièce
+
+;
 include "GTTCZ00.dhsp"			;déclarations communes
 
+;
+Module	"COG_GTTZ400.DHOP"
+
+;
 Public Hfile	cogfdd.dhsd	Cog_FDirCliente	Cog_FDirCliente_01			
 
+;
 Public Record "cogfdd.dhsd" Cog_DirCliente	Cog_DirCliente_01
 Public Record	GTFDD.dhsd	ENT								; En-tête
 
 ;*
 ;* procedures 
 ;*
+
+
+;*
+Procedure Maj_Menu_Boutons
+;
+BeginP
+
+	Standard.Maj_Menu_Boutons
+	Cog_Afficher_Champs
+
+EndP
 
 ;*
 Procedure rechercher_libelle_Fiche
