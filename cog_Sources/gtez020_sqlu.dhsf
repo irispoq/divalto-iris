@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150518134724      
+;>xwin4obj                              7.0       20150706105258      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="18/05/2015"
+ date_modification="06/07/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
- dernier_id=1000043
+ dernier_id=1000052
  surcharge=oui
  date_modif_base="20130207143007"
  dernier_id_page=100001
@@ -9635,6 +9635,15 @@
   [param_groupbox]
    texte="Intégration Artémis"
    couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=130,202
+   taille=70,183
+   id=1000044
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Intégration Proservia"
+   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
    position=25,349
@@ -9701,12 +9710,28 @@
    texte="Chemin Harmony du fichier à intégrer"
  [obj_texte]
   [presentation]
+   position=149,209
+   taille=9,85
+   id=1000045
+   wstyle="STD"
+  [texte]
+   texte="Chemin pour les BL en attente"
+ [obj_texte]
+  [presentation]
    position=160,18
    taille=9,91
    id=1000022
    wstyle="STD"
   [texte]
    texte="Chemin Windows du fichier à intégrer"
+ [obj_texte]
+  [presentation]
+   position=160,209
+   taille=9,99
+   id=1000051
+   wstyle="STD"
+  [texte]
+   texte="Chemin BL en cours de traitement"
  [obj_texte]
   [presentation]
    position=171,18
@@ -9717,12 +9742,28 @@
    texte="Format du fichier à intégrer"
  [obj_texte]
   [presentation]
+   position=171,209
+   taille=9,75
+   id=1000047
+   wstyle="STD"
+  [texte]
+   texte="Chemin pour les BL intégrés"
+ [obj_texte]
+  [presentation]
    position=182,18
    taille=9,79
    id=1000024
    wstyle="STD"
   [texte]
    texte="Numéro de Flash pour le rapport"
+ [obj_texte]
+  [presentation]
+   position=182,209
+   taille=9,73
+   id=1000049
+   wstyle="STD"
+  [texte]
+   texte="Chemin pour les BL rejetés"
  [champ]
   [presentation]
    position=116,285
@@ -9995,6 +10036,90 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Cog_ArtemisFlash_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=149,292
+   taille=9,76
+   id=1000046
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,intblattch,cogrs_soccomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11102
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_IntBlAttCh_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=160,292
+   taille=9,76
+   id=1000052
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,intblworkch,cogrs_soccomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11102
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_IntBlWorkCh_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=171,292
+   taille=9,76
+   id=1000048
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,intblokch,cogrs_soccomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11102
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_IntBlOkCh_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=182,292
+   taille=9,76
+   id=1000050
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,intblerrch,cogrs_soccomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11102
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_IntBlErrCh_1_Ap"
   [boutons]
    "zoom"
 [page]
@@ -10646,6 +10771,38 @@ Beginp
 	If Controle_Article(cogrs_soccomp.FraisFiRef, 2100) = 0
 		CogRs_SocComp.ART_DES = ART.Des	
 	EndIf
+Endp
+
+
+;*
+Private Procedure Champ_IntBlAttCh_1_Ap
+;
+Beginp
+	Controler_Chemin (Dossier.Dos, ' ', CogRs_SocComp.IntBlAttCh, 3501)
+Endp
+
+
+;*
+Private Procedure Champ_IntBlErrCh_1_Ap
+;
+Beginp
+	Controler_Chemin (Dossier.Dos, ' ', CogRs_SocComp.IntBlErrCh, 3501)
+Endp
+
+
+;*
+Private Procedure Champ_IntBlOkCh_1_Ap
+;
+Beginp
+	Controler_Chemin (Dossier.Dos, ' ', CogRs_SocComp.IntBlOkCh, 3501)
+Endp
+
+
+;*
+Private Procedure Champ_IntBlWorkCh_1_Ap
+;
+Beginp
+	Controler_Chemin (Dossier.Dos, ' ', CogRs_SocComp.IntBlWorkCh, 3501)
 Endp
 [/diva]
 [diva_base]
