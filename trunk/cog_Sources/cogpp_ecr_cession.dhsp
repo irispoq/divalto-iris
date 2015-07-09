@@ -334,6 +334,7 @@ BeginP
 	CX.Dev		=C8.Dev
 	CX.MtDev		=C8.MtDev
 	CX.Mt			=C8.Mt
+	CX.Etb		=C8.Etb
 	for i=1 to 4
 		CX.Axe(i)	= CogRs_MOUV.Axe(i)
 	next
@@ -476,8 +477,10 @@ BeginF
 EndF
 
 ;*
-procedure Cog_LectureBiensCession
-beginp
+Procedure Cog_LectureBiensCession
+;
+1		i		1,0
+BeginP
 
 	Cog_EcritureLivreDeBord(translate("--> Début de génération des écritures de cession"), applic='DCPT')
 
@@ -517,7 +520,11 @@ beginp
 				CogRs_MOUV.Init()
 				CogRs_MOUV.Join.Deactivate("$All")
 				CogRs_MOUV.Where.PK(CogRs_I1.EnrNo)
-				CogRs_MOUV.Select()
+				If CogRs_MOUV.Select() = 0
+					For i = 1 to 4
+						CogRs_MOUV.Axe(i) = CogRs_I1.Axe(i)
+					Next
+				EndIf
 			EndIf
 
 			If Cog_GenererEcrituresCession
@@ -588,7 +595,7 @@ beginp
 				if erreur
 					txtMSG &= "|Des erreurs ont été détectées.|Consultez le livre de bord"
 				endif
-				txtMSG &= "|" & nospaces(compteur) & " fiches de bien ont été traitées avec succès."
+				txtMSG &= "|" & nospaces(compteur) & " fiche(s) de bien traitée(s) avec succès."
 				MessageBox(txtMSG, "Information", MB_ICONINFORMATION)
 	
 				fin=1
