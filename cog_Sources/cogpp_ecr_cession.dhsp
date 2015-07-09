@@ -37,6 +37,9 @@ Htmpfile	"ccfdd.dhsd"  						CCFM	 			CCFM			openonuse	deleteonexit
 ;
 Public RecordSQL	"CCRSIMMO.DHOQ"		IMMO				CogRs_I1				; Immobilisations
 Public RecordSQL	"CCRSJCA.DHOQ"			JOURNAL			CogRs_Jnl			; Journaux
+Public RecordSQL	"CCRSPPJCA.DHOQ"		COMPTE			CogRs_C3Ces
+Public RecordSQL	"CCRSPPJCA.DHOQ"		COMPTE			CogRs_C3CesVal
+Public RecordSQL	"CCRSPPJCA.DHOQ"		COMPTE			CogRs_C3CesAmo
 Public RecordSQL	"CCRSDOS.DHOQ"			DOSNUM			CogRs_CN				; Numérotation dossier cpt
 Public RecordSQL	"CCRSDOS.DHOQ"			ETBCPT			CogRs_CETS			; Etablissement comptable
 Public RecordSQL	"GTRSPPPCE.DHOQ"		MOUVEMENT		CogRs_MOUV			; Mouvement
@@ -78,7 +81,7 @@ Const		C_SENS_CREDIT			= 2
 function int Cog_InitialiserVariables
 ;
 RecordSQL	"a5rsuser.dhoq"	utilisateur						;Utilisateurs
-
+1		wCpt		>ccfdd.dhsd		Cpt
 BeginF
 
 	if pingreceive("zechange",mz) <> 0
@@ -148,6 +151,22 @@ BeginF
 
 	;chargement du masque d'impression
 	;xmiload mz.micle
+
+	; comptes
+	wCpt = Condition(CD.Cog_CptCes <> ' ', CD.Cog_CptCes, '20000000') ; 20000000 valeur par défaut		
+	CogRs_C3Ces.Init()
+	CogRs_C3Ces.Where.PK(wCpt)
+	CogRs_C3Ces.Select()
+
+	wCpt = Condition(CD.Cog_CptCesVal <> ' ', CD.Cog_CptCesVal, '67500000') ; 67500000 valeur par défaut	
+	CogRs_C3CesVal.Init()
+	CogRs_C3CesVal.Where.PK(wCpt)
+	CogRs_C3CesVal.Select()
+
+	wCpt = CogRs_I1.Cog_CptCesAmo	= Condition(CD.Cog_CptCesAmo <> ' ', CD.Cog_CptCesAmo, '28000000') ; 28000000 valeur par défaut	
+	CogRs_C3CesAmo.Init()
+	CogRs_C3CesAmo.Where.PK(wCpt)
+	CogRs_C3CesAmo.Select()
 
 	freturn(true)
 
@@ -422,6 +441,7 @@ Function int Cog_GenererEcrituresCession
 ;	1 --> écriture OK
 1		wErr			8,0
 1		integration	1,0 = 0
+1		i				1,0
 BeginF
 
 	If not Cog_FiltresOk
@@ -430,14 +450,15 @@ BeginF
 
 	; comptes
 	If CogRs_I1.Cog_CptCes 		= ' ' 
-		CogRs_I1.Cog_CptCes 		= Condition(CD.Cog_CptCes <> ' ', CD.Cog_CptCes, '20000000') ; 20000000 valeur par défaut		
+		CogRs_I1.Cog_CptCes 		= CogRs_C3Ces.Cpt	
 	EndIf
 	If CogRs_I1.Cog_CptCesVal	= ' ' 
-		CogRs_I1.Cog_CptCesVal	= Condition(CD.Cog_CptCesVal <> ' ', CD.Cog_CptCesVal, '67500000') ; 67500000 valeur par défaut	
+		CogRs_I1.Cog_CptCesVal	= CogRs_C3CesVal.Cpt
 	EndIf 
 	If CogRs_I1.Cog_CptCesAmo	= ' ' 
-		CogRs_I1.Cog_CptCesAmo	= Condition(CD.Cog_CptCesAmo <> ' ', CD.Cog_CptCesAmo, '28000000') ; 28000000 valeur par défaut	
+		CogRs_I1.Cog_CptCesAmo	= CogRs_C3CesAmo.Cpt
 	EndIf
+
 	
 	;
 	HErase(CCFM)
@@ -447,8 +468,32 @@ BeginF
 	EndIf
 
 	Cog_WriteC0_CCFM	
+
+	;
+	If CogRs_I1.EnrNo = 0  ; pas de mouvement lié
+		CogRs_MOUV.Axe(1) = Condition(CogRs_C3CesVal.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
+		CogRs_MOUV.Axe(2) = Condition(CogRs_C3CesVal.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
+		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3CesVal.AxeSais(3)=2,	CogRs_C3CesVal.Axe(3), '')
+		CogRs_MOUV.Axe(4)	= Condition(CogRs_C3CesVal.AxeSais(4)=2,	CogRs_C3CesVal.Axe(4), '')
+	EndIf
 	Cog_WriteC8_CCFM(CogRs_I1.Cog_CptCesVal, C_SENS_DEBIT, CogRs_I1.EcoResMt)	; Débit: Valeur cpt des éléments actifs cédés	 
+	
+	;
+	If CogRs_I1.EnrNo = 0  ; pas de mouvement lié
+		CogRs_MOUV.Axe(1) = Condition(CogRs_C3CesAmo.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
+		CogRs_MOUV.Axe(2) = Condition(CogRs_C3CesAmo.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
+		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3CesAmo.AxeSais(3)=2,	CogRs_C3CesAmo.Axe(3), '')
+		CogRs_MOUV.Axe(4)	= Condition(CogRs_C3CesAmo.AxeSais(4)=2,	CogRs_C3CesAmo.Axe(4), '')
+	EndIf
 	Cog_WriteC8_CCFM(CogRs_I1.Cog_CptCesAmo, C_SENS_DEBIT, CogRs_I1.EcoTotMt)	; Débit: Amortissement des immobilisations
+	
+	;
+	If CogRs_I1.EnrNo = 0  ; pas de mouvement lié
+		CogRs_MOUV.Axe(1) = Condition(CogRs_C3Ces.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
+		CogRs_MOUV.Axe(2) = Condition(CogRs_C3Ces.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
+		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3Ces.AxeSais(3)=2,	CogRs_C3Ces.Axe(3), '')
+		CogRs_MOUV.Axe(4)	= Condition(CogRs_C3Ces.AxeSais(4)=2,	CogRs_C3Ces.Axe(4), '')
+	EndIf
 	Cog_WriteC8_CCFM(CogRs_I1.Cog_CptCes, C_SENS_CREDIT, CogRs_I1.EcoBas)		; Crédit: Base d'amortissement		 
 
 	;
@@ -520,11 +565,7 @@ BeginP
 				CogRs_MOUV.Init()
 				CogRs_MOUV.Join.Deactivate("$All")
 				CogRs_MOUV.Where.PK(CogRs_I1.EnrNo)
-				If CogRs_MOUV.Select() = 0
-					For i = 1 to 4
-						CogRs_MOUV.Axe(i) = CogRs_I1.Axe(i)
-					Next
-				EndIf
+				CogRs_MOUV.Select() 
 			EndIf
 
 			If Cog_GenererEcrituresCession
