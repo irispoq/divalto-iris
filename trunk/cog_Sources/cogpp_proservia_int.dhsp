@@ -1,0 +1,1097 @@
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8370 2015-07-13 08:17:06Z admin $')
+;>xdiva
+;*
+;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		Proservia_Integration			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+;*
+;*	Déclarations
+;*
+
+;
+Include	"gttcz00.dhsp"						;déclarations communes
+
+;
+Module	"A5Tm000.dhop"
+Module	"A5PmWin.dhop"
+Module	"Cogtm_000.dhop"						;module de fonctions communes
+
+;
+			HTmpFile	"gtfdd.dhsd"	gtfi		GTFI		DeleteOnExit
+
+;
+Public RecordSQL	"CogRs_Dos.dhoq"					CogRs_SocComp
+Public RecordSQL	"gtRsppTab.dhoq"					NatureStock				CogRs_Nst
+Public RecordSQL	"gtRsppTab.dhoq"					CodeOperation			CogRs_OP
+
+;
+Public Record	"gtfdd.dhsd"			xq						xq_cog			;enregistrement de travail
+Public Record	"a5dd.dhsd"				MChemin
+Public Record	"a5dd.dhsd"				MChemin				mChemin_Work
+Public Record	"a5dd.dhsd"				MChemin				mChemin_Ok
+Public Record	"a5dd.dhsd"				MChemin				mChemin_Err
+Public Record	"cogfdd.dhsd"			Cog_ProserviaInd						; table mémoire
+Public Record	"cogfdd.dhsd"			Cog_ProserviaVal
+Public Record  "gtfdd.dhsd"			iPAR
+Public Record  "gtfdd.dhsd"			mvtl					csvMVTL
+Public Record  "gtfdd.dhsd"			mvtl					iMVTL
+Public Record  "gtfdd.dhsd"			mvtl					MVTL_Seek
+Public Record  "gtfdd.dhsd"			MOUV
+Public Record  "gtfdd.dhsd"			MOUV					iMOUV
+Public Record  "gtfdd.dhsd"			MOUV					MOUV_Seek
+Public Record  "gtfdd.dhsd"			ART
+Public Record  "gtfdd.dhsd"			SART
+Public Record  "gtfdd.dhsd"			ENT
+Public Record  "gtfdd.dhsd"			ENT					ENT_Seek
+Public Record  "gtfdd.dhsd"			ENT					iENT
+Public Record  "gtfdd.dhsd"			ETS
+Public Record  "gtfdd.dhsd"			T017										; Dépôt
+Public Record  "gtfdd.dhsd"			T018										; Emplacements
+Public Record  "gtfdd.dhsd"			T020										; code opération
+Public Record  "gtfdd.dhsd"			T025										; Nature de stock
+
+;
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+1	tunnel		1,0	= false
+1	ficLg			8,0
+1	cptLg			8,0
+1	cptPce		8,0
+1	ticket		L
+1	buffer		3000
+1	AdrFunc		16
+1	tailleLue	L
+1	tabulation	L
+1	finFichier	L
+1	lId_Valeurs	L
+1	lId_csvMvtl	L
+1	lId_ENT		L
+1	lId_iMOUV	L
+1	lId_iMVTL	L
+1	lId_CdMouv	L
+1	valeur		256
+1	integ			1,0
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;*
+Function Long Tri_ProserviaVal(&A, &B)
+;
+Record	"cogfdd.dhsd"			Cog_ProserviaVal		A
+Record	"cogfdd.dhsd"			Cog_ProserviaVal		B
+BeginF
+	FReturn(SortCompare(A.Cog_Indice, B.Cog_Indice))
+EndF
+
+;*
+Function Long	Tri_csvMVTL(&A, &B)
+;
+Record	"gtfdd.dhsd"		MVTL			A
+Record	"gtfdd.dhsd"		MVTL			B
+1		cleA		75
+1		cleB		75
+BeginF
+
+	cleA = [A.Dos A.PiNo A.GrRef A.Depo A.Nst A.Serie]
+	cleB = [B.Dos B.PiNo B.GrRef B.Depo B.Nst B.Serie]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;*
+Function Long	Tri_ENT(&A, &B)
+;
+Record	"gtfdd.dhsd"		ENT			A
+Record	"gtfdd.dhsd"		ENT			B
+1		cleA		15
+1		cleB		15
+BeginF
+
+	cleA = [A.Dos A.TiCod A.PiCod A.PiNo]
+	cleB = [B.Dos B.TiCod B.PiCod B.PiNo]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;*
+Function Long	Tri_iMVTL(&A, &B)
+;
+Record	"gtfdd.dhsd"		MVTL			A
+Record	"gtfdd.dhsd"		MVTL			B
+1		cleA		75
+1		cleB		75
+BeginF
+
+	cleA = [A.Dos A.PiNo A.Enrno A.GrRef]
+	cleB = [B.Dos B.PiNo B.Enrno B.GrRef]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;*
+Function Long	Tri_iMOUV(&A, &B)
+;
+Record	"gtfdd.dhsd"		MOUV			A
+Record	"gtfdd.dhsd"		MOUV			B
+1		cleA		75
+1		cleB		75
+BeginF
+
+	cleA = [A.Dos A.CdNo A.GrRef A.Enrno A.Depo A.Op]
+	cleB = [B.Dos B.CdNo B.GrRef B.Enrno B.Depo B.Op]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;* Initialisation des variables
+Function int InitialiserVariables
+;
+Recordsql	a5rsuser.dhoq	utilisateur						;Utilisateurs
+
+BeginF
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		utilisateur.init()
+		utilisateur.where.exists(system.User)
+		if utilisateur.select() = 0
+
+			if not tunnel
+				messagebox(modify("%1",left(system.user),translate("Utilisateur %1 non défini dans la base Divalto")),translate("Alerte"),mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= utilisateur.dos
+			mz.etb		= utilisateur.etb
+			mz.depo		= utilisateur.depo
+			mz.mecle		= "Cogee_Proservia_Int.dhof"
+			;mz.micle		= "Cogii_.dhoi"
+			;mz.mtcle		= "Cogtt_.dhop"
+			mz.titre2	= "Intégration fichier Proservia"
+
+		endif
+
+	endif
+
+	;
+	MZ.TiCod = 'C'
+	MZ.PiCod = 2
+
+	;commentaire du programme
+	ProgramSetComment(translate("Intégration fichier Proservia"))
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(SOC.Dos)
+	CogRs_SocComp.Select()
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	XmeInfoPage(mz.mecle,1)						;lire la taille de la page
+	XmeSetWindowSize(mz.mecle,1,Harmony.Opara3,Harmony.Opara4)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	;chargement du masque d'impression
+	;xmiload mz.micle
+
+	; Contrôle des paramètres
+	If CogRs_SocComp.IntBlWorkCh = ' '  OR Controler_Chemin(CogRs_SocComp.Dos, ' ', CogRs_SocComp.IntBlWorkCh)
+		Cog_EcritureLivreDeBord("Paramétrage des chemins Proservia incomplet (Dossier - onglet U GIE IRIS).")
+		Freturn(FALSE)
+	EndIf
+	mChemin_Work = mChemin
+	mChemin_Work.Chemin = Win_ConvertirEnNomWindows(mChemin_Work.Chemin)
+
+	If CogRs_SocComp.IntBlErrCh = ' '  OR Controler_Chemin(CogRs_SocComp.Dos, ' ', CogRs_SocComp.IntBlErrCh)
+		Cog_EcritureLivreDeBord("Paramétrage des chemins Proservia incomplet (Dossier - onglet U GIE IRIS).")
+		Freturn(FALSE)
+	EndIf
+	mChemin_Err = mChemin
+	mChemin_Err.Chemin = Win_ConvertirEnNomWindows(mChemin_Err.Chemin)
+
+	If CogRs_SocComp.IntBlOkCh = ' '  OR Controler_Chemin(CogRs_SocComp.Dos, ' ', CogRs_SocComp.IntBlOkCh)
+		Cog_EcritureLivreDeBord("Paramétrage des chemins Proservia incomplet (Dossier - onglet U GIE IRIS).")
+		Freturn(FALSE)
+	EndIf
+	mChemin_Ok = mChemin
+	mChemin_Ok.Chemin = Win_ConvertirEnNomWindows(mChemin_Ok.Chemin)
+
+	; Init listes
+	lId_Valeurs = ListGetId("COG_PROSERVIAVAL")
+	GetAdressFunction(' ', "Tri_ProserviaVal", AdrFunc)
+	ListMode(lId_Valeurs, 1, AdrFunc)
+
+	lId_csvMvtl = ListGetId("COG_CSVMVTL")
+	GetAdressFunction(' ', "Tri_csvMvtl", AdrFunc)
+	ListMode(lId_csvMvtl, 1, AdrFunc)
+
+	lId_ENT = ListGetId("COG_PROSERVIAENT")
+	GetAdressFunction(' ', "Tri_Ent", AdrFunc)
+	ListMode(lId_ENT, 1, AdrFunc)
+
+	lId_iMOUV = ListGetId("LISTE_IMOUV")
+	GetAdressFunction('', 'Tri_iMOUV', AdrFunc)
+	ListMode(lId_iMOUV, Mode=1, AdrFunc)
+
+	lId_iMVTL = ListGetId("LISTE_IMVTL")
+	GetAdressFunction('', 'Tri_iMVTL', AdrFunc)
+	ListMode(lId_iMVTL, Mode=1, AdrFunc)
+
+	lId_CdMouv = ListGetId("LISTE_PROSERVIAMOUV")
+
+	FReturn(true)
+
+endf
+
+;*
+Procedure FinProgramme
+;
+BeginP
+
+	Cog_EcritureLivreDeBord(translate("<-- Fin programme intégration Proservia"))
+	programexit
+
+EndP
+
+;*
+Procedure AfficherTraitement(wSel, wTrt)
+;
+1		wSel		>gtfdd.dhsd		Lib
+1		wTrt		>gtfdd.dhsd		Lib
+BeginP
+
+	If not tunnel
+	
+		xq_cog.Lib(1) = wSel
+		xq_cog.Lib(2) = wTrt
+
+		Afficher_Selection()
+		Afficher_Traitement()
+
+	EndIf
+
+EndP
+
+;*
+function int FiltresOk
+beginf
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Traitements
+;*
+
+;*
+Function int Proservia_ChargerMOUV(wTicod, wPiCod, wPiNo, wGrRef, wDepo, wNst)
+;
+RecordSQL		"GTRSPPPCE.Dhoq"		Mouvement		wRs_MOUV
+1		wTicod		>gtfdd.dhsd 		Ticod
+1		wPicod		>gtfdd.dhsd			PiCod
+1		wPiNo			>gtfdd.dhsd			PiNo
+1		wGrRef		>gtfdd.dhsd			GrRef
+	2	wRef			>gtfdd.dhsd			Ref
+	2	wSref1		>gtfdd.dhsd			Sref1
+	2	wSref2		>gtfdd.dhsd			Sref2
+1		wRead			L
+1		wDepo			>gtfdd.dhsd			Depo
+1		wNst			>gtfdd.dhsd			Nst
+BeginF
+
+	ListErase(lId_CdMOUV)
+
+	wRs_MOUV.Init()
+	wRs_MOUV.Where.RemoveCondition("")
+	wRs_MOUV.Where.Equal_TiCod(wTicod)
+	wRs_MOUV.Where.AddCondition("Equal_TiCod")
+	wRs_MOUV.Where.Equal_PiCod(wPicod)
+	wRs_MOUV.Where.AddCondition("Equal_PiCod")
+	wRs_MOUV.Where.Equal_Ref(wRef)
+	wRs_MOUV.Where.AddCondition("Equal_Ref")
+	wRs_MOUV.Where.Equal_Sref1(wSref1)
+	wRs_MOUV.Where.AddCondition("Equal_Sref1")
+	wRs_MOUV.Where.Equal_Sref2(wSref2)
+	wRs_MOUV.Where.AddCondition("Equal_Sref2")
+	wRs_MOUV.Where.Equal_Depo(wDepo)
+	wRs_MOUV.Where.AddCondition("Equal_Depo")
+	wRs_MOUV.Where.Equal_Nst(wNst)					 
+	wRs_MOUV.Where.AddCondition("Equal_Nst")
+
+	Switch2 wPicod
+		Case 2
+			wRs_MOUV.Where.Equal_CdNo(wPiNo)
+			wRs_MOUV.Where.AddCondition("Equal_CdNo")
+			wRs_MOUV.Where.Equal_CdCe4('1')
+			wRs_MOUV.Where.AddCondition("Equal_CdCe4")
+		Default
+			FReturn(1) ; autres cas non gérés
+
+	EndSwitch
+
+	wRs_MOUV.OrderBy.Par_CdEnrNo()
+
+	wRead = wRs_MOUV.ReaderOpen()
+	wRs_MOUV.ReaderSelect(wRead)
+
+	;
+	Do While wRs_MOUV.ReaderNext(wRead) > 0
+
+		ListInsert(lId_CdMOUV, wRs_MOUV.MOUV)
+
+	WEnd
+
+	wRs_MOUV.ReaderClose(wRead)
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Proservia_ListeTraitement
+; Lecture des éléments à valider
+; Constitution du GTFI de validation de pièce
+Record	"gtfdd.dhsd"		MVTL			wMVTL_Prec
+1		wBlQte		>gtfdd.dhsd			BlQte
+1		wCdQte		>gtfdd.dhsd			CdQte
+BeginF
+
+	AfficherTraitement("Recherche des mouvts commande à valider", "")
+
+	;
+	If ListCount(lId_csvMVTL) = 0
+		FReturn(1)
+	EndIf
+
+	ListErase(lId_iMOUV)
+	ListErase(lId_iMVTL)
+
+	; lecture des ventil à intégrer triées par cdno / grref
+	Init wMVTL_Prec = ' '
+	ListBegin(lId_csvMVTL)
+	Do While ListNext(lId_csvMVTL, csvMVTL) not in (-1, 0)
+
+		wBlQte = csvMVTL.Qte
+
+		; changement commande / changement référence	/ changement dépôt / changement Nst
+		If wMVTL_Prec.PiNo & wMVTL_Prec.GrRef & wMVTL_Prec.Depo & wMVTL_Prec.Nst <> csvMVTL.PiNo & csvMVTL.GrRef & csvMVTL.Depo & csvMVTL.Nst
+			MZ.Dos = csvMVTL.Dos
+			Proservia_ChargerMOUV(csvMVTL.TiCod, csvMVTL.PiCod, csvMVTL.PiNo, csvMVTL.GrRef, csvMVTL.Depo, csvMVTL.Nst)
+		EndIf
+
+		; recherche des quantités à valider sur les MOUV commande
+		ListBegin(lId_CdMOUV)
+		Do While ListNext(lId_CdMOUV, MOUV) not in (-1, 0)	AND wBlQte > 0
+
+			Init iMVTL 	= ' '
+			iMVTL.Dos 	= csvMVTL.Dos
+			iMVTL.EnrNo	= MOUV.EnrNo
+			iMVTL.GrRef	= csvMVTL.GrRef
+			iMVTL.PiNo	= csvMVTL.PiNo
+			iMVTL.Serie = csvMVTL.Serie
+			iMVTL.Lieu	= csvMVTL.Lieu
+			iMVTL.Nst	= csvMVTL.Nst
+			iMVTL.Depo	= csvMVTL.Depo
+
+			wCdQte = MOUV.CdQte - MOUV.BlQte
+			If wCdQte >= wblqte
+				MOUV.BlQte += wBlQte
+				iMVTL.Qte = wBlQte
+				wBlQte = 0
+			Else
+				MOUV.BlQte += wCdQte
+				wBlQte -= wCdQte
+				iMVTL.Qte = wCdQte
+			EndIf
+
+			ListModify(lId_CdMOUV, MOUV)
+			ListInsert(lId_iMVTL, iMVTL)
+
+		WEnd
+
+		; mémorisation des MOUV avec blQte > 0
+		ListBegin(lId_CdMOUV)
+		Do While ListNext(lId_CdMOUV, MOUV) not in (-1, 0)	
+			If MOUV.BlQte > 0
+				If ListSeek(lId_iMOUV, MOUV, MOUV_Seek) not in (-1, 0)
+					MOUV_Seek = MOUV
+					ListModify(lId_iMOUV, MOUV_Seek)		
+				Else
+					ListInsert(lId_iMOUV, MOUV)
+				EndIf
+				If MOUV.BlQte = MOUV.CdQte
+					ListDeleteAndPrevious(lId_CdMOUV) 			; toute la quantité commandée est réceptionnée 
+				EndIf
+			EndIf
+		WEnd
+
+		; quantité réceptionnée > quantité restante en commande
+		If wBlQte > 0
+
+			Erreur = TRUE
+			Cog_EcritureLivreDeBord("Quantité en surplus: " & NoSpaces(wBlQte) & " pour la référence " & left(csvMVTL.Ref) & " sur la commande N°" & csvMVTL.PiNo & ".")
+
+		EndIf
+
+		wMVTL_Prec = csvMVTL
+
+	WEnd
+
+	FReturn(Erreur)
+EndF
+
+;*
+function int Proservia_FichierOuvrir(wchemin_Loc, &wTicket)
+; FALSE --> non ouvert
+
+1		wchemin_Loc		256
+1		wticket			L
+1		wficSize			L
+1		wpFort			1,0
+
+BeginF
+
+	wticket = WinCreateFile(wchemin_Loc, GENERIC_READ, 0, "", OPEN_EXISTING, 0, 0)
+
+	If wticket = -1	
+
+		WinCloseHandle(ticket)
+		erreur = TRUE
+		Cog_EcritureLivreDeBord("Echec à l'ouverture de: " & wchemin_Loc)
+
+	EndIf
+
+	FReturn(Condition(wticket > 0, True, False))
+
+EndF
+
+;*
+Function int Proservia_FichierControlerEntete()
+; contrôle que tous les mots clés obligatoires sont bien présents
+; 0 --> pas d'erreur
+1		wlId_tmp		L		
+1		wMotCle		20
+1		wMotCle_P	20
+1		wIndice		4,0
+BeginF
+
+	AfficherTraitement("Contrôle de l'entête de fichier","")
+
+	ficLg = 1
+	Do While WinReadFileRecord(ticket, buffer, tailleLue, finFichier, tabulation)	AND not finFichier AND buffer = ' '
+		ficLg++
+	WEnd
+
+	; récupération de la position des mots clés
+	wlId_tmp = SplitList(buffer, ';')
+	ListBegin(wlId_tmp)
+	wIndice = 0
+	wMotCle_P = ';'
+	Init Cog_ProserviaInd = ' '
+	Do While ListNext(wlId_tmp, wMotCle) not in (-1, 0)
+
+		If wMotCle <> ';'	 OR (wMotCle = ';' AND wMotCle_P = ';') ; colonne vide en entête --> erreur
+
+			wIndice++
+	
+			Switch FString('U', wMotCle)
+				Case 'DOS'
+					Cog_ProserviaInd.Cog_IndDos	= wIndice
+				Case 'TICOD'
+					Cog_ProserviaInd.Cog_IndTicod	= wIndice
+				Case 'PICOD'
+					Cog_ProserviaInd.Cog_IndPicod	= wIndice
+				Case 'OP'
+					Cog_ProserviaInd.Cog_IndOP		= wIndice
+				Case 'ETB'
+					Cog_ProserviaInd.Cog_IndEtb	= wIndice
+				Case 'DEPO'
+					Cog_ProserviaInd.Cog_IndDepo	= wIndice
+				Case 'PIDT'
+					Cog_ProserviaInd.Cog_IndPiDt	= wIndice
+				Case 'PIREF'
+					Cog_ProserviaInd.Cog_IndPiRef	= wIndice
+				Case 'REF'
+					Cog_ProserviaInd.Cog_IndRef	= wIndice
+				Case 'QTE'
+					Cog_ProserviaInd.Cog_IndBlQte	= wIndice
+				Case 'SERIE'
+					Cog_ProserviaInd.Cog_IndSerie	= wIndice
+				Case 'PROJET'
+					Cog_ProserviaInd.Cog_IndProjet= wIndice
+				Case 'NST'
+					Cog_ProserviaInd.Cog_IndNst	= wIndice
+				Case 'COG_LOGBLNO'
+					Cog_ProserviaInd.Cog_IndLog	= wIndice
+				Case 'PINO'
+					Cog_ProserviaInd.Cog_IndPiNo	= wIndice
+				Case 'LIEU'
+					Cog_ProserviaInd.Cog_IndLieu	= wIndice
+				Case 'SREF1'
+					Cog_ProserviaInd.Cog_IndSref1	= wIndice
+				Case 'SREF2'
+					Cog_ProserviaInd.Cog_IndSref2	= wIndice
+				Default
+					Cog_EcritureLivreDeBord("Mot clé non reconnu:" & wMotCle)
+					FReturn(1)
+
+			EndSwitch
+
+		EndIf
+
+		wMotCle_P = wMotCle
+
+	WEnd
+
+	ListDestroy(wlId_tmp)
+
+	; contrôle de la présence des mots clés obligatoires
+	If Cog_ProserviaInd.Cog_IndDos = 0
+		Cog_EcritureLivreDeBord("Mot clé DOS absent.")
+		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndOP = 0
+		Cog_EcritureLivreDeBord("Mot clé OP absent.")
+		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndRef = 0
+		Cog_EcritureLivreDeBord("Mot clé REF absent.")
+		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndNst = 0
+		Cog_EcritureLivreDeBord("Mot clé NST absent.")
+		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndPiNo = 0
+		Cog_EcritureLivreDeBord("Mot clé PINO absent.")
+		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndBlQte = 0
+		Cog_EcritureLivreDeBord("Mot clé QTE absent.")
+		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndDepo = 0
+		Cog_EcritureLivreDeBord("Mot clé DEPO absent.")
+		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndTicod = 0
+		Cog_EcritureLivreDeBord("Mot clé TICOD absent.")
+		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndPicod = 0
+		Cog_EcritureLivreDeBord("Mot clé PICOD absent.")
+		erreur = TRUE
+	EndIf
+	If erreur
+		FReturn(1)
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Proservia_MVTLControler
+; Controle les données de csvMVTL
+; 0 --> OK
+1		wErr		1,0
+BeginF
+
+	wErr = FALSE
+
+	; Dossier
+	If csvMVTL.Dos = ' ' OR (SOC.Dos <> csvMVTL.Dos AND Seek_Soc(csvMVTL.Dos) <> 0)
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": dossier " & csvMVTL.Dos & " inconnu.")
+		wErr = TRUE
+	Else
+		MZ.Dos = SOC.Dos		; nécessaire pour les appels de Lectab
+	EndIf
+
+	; Ticod
+	If csvMVTL.TiCod <> 'C'
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Ticod " & csvMVTL.Dos & " --> seuls les clients sont gérés.")
+		wErr = TRUE
+	EndIf
+
+	; Picod
+	If csvMVTL.PiCod <> 2
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Picod " & csvMVTL.Dos & " --> seules les commandes sont gérées.")
+		wErr = TRUE
+	EndIf
+
+	; Etb
+	If csvMVTL.Etb <> ' ' AND ETS.Etb <> csvMVTL.Etb AND Seek_Ets(csvMVTL.Etb) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": établissement " & csvMVTL.Etb & " inconnu.")
+		wErr = TRUE
+	ElsIf csvMVTL.Etb = ' ' AND Soc.EntCodN(22) = 2
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": établissement non renseigné.")
+		wErr = TRUE
+	EndIf
+
+	; Dépôt 
+	If csvMVTL.Depo <> ' ' AND T017.Depo <> csvMVTL.Depo AND Lectab(17, csvMVTL.Depo) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": dépôt " & csvMVTL.Depo & " inconnu.")
+		wErr = TRUE
+	ElsIf csvMVTL.Depo = ' '
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": dépôt non renseigné.")
+		wErr = TRUE
+	EndIf
+
+	; Référence
+	If csvMVTL.Ref <> ' ' AND ART.Ref <> csvMVTL.Ref AND Seek_ART(csvMVTL.Ref) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": référence " & csvMVTL.Ref & " inconnue.")
+		wErr = TRUE
+	ElsIf csvMVTL.Ref = ' '
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": référence non renseignée.")
+		wErr = TRUE
+	EndIf
+
+	; sous ref
+	If csvMVTL.Sref <> ' ' AND SART.Sref <> csvMVTL.Sref AND Seek_SART(csvMVTL.Ref, csvMVTL.Sref1, csvMVTL.Sref2) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": sous référence " & csvMVTL.SRef & " inconnue.")
+		wErr = TRUE
+	EndIf
+
+	; nature de stock
+	If csvMVTL.Nst <> ' ' AND T025.Nst <> csvMVTL.Nst AND Lectab(25, csvMVTL.Nst) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": nature de stock " & csvMVTL.Nst & " inconnue.")
+		wErr = TRUE
+	ElsIf csvMVTL.Nst = ' '
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": nature de stock non renseignée.")
+		wErr = TRUE
+	EndIf
+
+	; code OP
+	If csvMVTL.Op <> ' ' AND T020.Op <> csvMVTL.Op AND Lectab(20, csvMVTL.Op) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": code opération " & csvMVTL.OP & " inconnu.")
+		wErr = TRUE	 
+	EndiF
+
+	; emplacement
+	If csvMVTL.Lieu <> ' ' AND T018.Lieu <> csvMVTL.Lieu AND Lectab(18, [csvMVTL.Depo csvMVTL.Lieu]) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": emplacement " & csvMVTL.Lieu & " inconnu.")
+		wErr = TRUE	 
+	EndiF
+
+	; Pièce à valider
+	If csvMVTL.PiNo <> ' ' AND ENT.PiNo <> csvMVTL.PiNo AND Seek_ENT(csvMVTL.TiCod, csvMVTL.PiCod, csvMVTL.PiNo) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Pièce " & csvMVTL.PiNo & " inconnue.")
+		wErr = TRUE
+	ElsIf ENT.Ce4 <> '1'
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": la pièce " & csvMVTL.PiNo & " n'est plus active.")
+		wErr = TRUE
+	ElsIf csvMVTL.PiNo = ' '
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": numéro de pièce non renseigné.")
+		wErr = TRUE
+	EndIf
+
+	FReturn(wErr)
+
+EndF
+
+;*
+Function int Proservia_FichierLecture
+;
+1		wPos		L
+1		wInd		4,0
+1		wValPrec	256
+BeginF
+
+	AfficherTraitement("Lecture du fichier","")
+
+	ficLg = 0
+	cptLg = 0
+
+	;
+	If Proservia_FichierControlerEntete() <> 0
+		FReturn(1)
+	EndIf
+
+	;
+	ListErase(lId_ENT)
+	ListErase(lId_csvMvtl)
+
+	; lecture des lignes du fichier
+	Do While WinReadFileRecord(ticket, buffer, tailleLue, finFichier, tabulation) = TRUE AND finFichier = FALSE
+
+		ficLg++
+		cptLg++
+		ListErase(lId_Valeurs)
+		wValPrec = ';'
+		wPos = 1
+		wInd = 0
+		valeur = Split(buffer, wPos, ';', Quotes=2) 
+		Do While valeur <> $00
+
+			If valeur <> ';'
+				wInd++
+				Init Cog_ProserviaVal = ' '
+				Cog_ProserviaVal.Cog_Indice = wInd
+				Cog_ProserviaVal.Cog_Val256 = valeur
+				ListInsert(lId_Valeurs, Cog_ProserviaVal)
+			ElsIf valeur = ';' AND wValPrec = ';'				; cellule vide
+				wInd++
+			EndIf
+
+			wValPrec = valeur
+			valeur = Split(buffer, wPos, ';', Quotes=2) 
+
+		WEnd
+
+		; 	Affectation des valeurs
+		Init csvMVTL = ' '
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndDos, Cog_ProserviaVal)	not in (-,1,0)		| csvMVTL.Dos		= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf	
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndEtb, Cog_ProserviaVal)	not in (-,1,0)		| csvMVTL.Etb		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndDepo, Cog_ProserviaVal)	not in (-,1,0)	| csvMVTL.Depo		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndTiCod, Cog_ProserviaVal) not in (-,1,0) 	| csvMVTL.TiCod	= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndPiCod, Cog_ProserviaVal) not in (-,1,0) 	| csvMVTL.PiCod	= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndPiNo, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.PiNo		= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndRef, Cog_ProserviaVal)	 not in (-,1,0) 	| csvMVTL.Ref		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndBlQte, Cog_ProserviaVal) not in (-,1,0) 	| csvMVTL.Qte		= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndSerie, Cog_ProserviaVal) not in (-,1,0) 	| csvMVTL.Serie	= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndNst, Cog_ProserviaVal) not in (-,1,0) 	| csvMVTL.Nst		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndOp, Cog_ProserviaVal) not in (-,1,0)		| csvMVTL.Op		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndPiNo, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.PiNo		= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndSref1, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Sref1	= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndSref2, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Sref2	= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndLieu, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Lieu		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		;ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_Ind, csvMVTL.	)
+		
+		If Proservia_MVTLControler = 0
+
+			If ListSeek(lId_csvMVTL, csvMVTL, MVTL_Seek) not in (-1, 0)
+				MVTL_Seek.Qte += csvMVTL.Qte
+				ListModify(lId_csvMVTL, MVTL_Seek)
+			Else
+				ListInsert(lId_csvMVTL, csvMVTL)
+				; nouvelle ligne --> vérification si l'entête est mémorisée -- ENT a été chargé dans Proservia_MVTLControler
+				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndLog, Cog_ProserviaVal) not in (-,1,0) | ENT.Cog_LogBlNo= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndPiDt, Cog_ProserviaVal) not in (-,1,0)| ENT.PiDt= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+				If ListSeek(lId_ENT, ENT, ENT_Seek) = 0
+					ListInsert(lId_ENT, ENT)
+				EndIf
+			EndIf
+
+		Else ; controle données à intégrer
+			erreur = TRUE
+		EndIf
+ 
+		AfficherTraitement("Lecture du fichier", Nospaces(ficLg) & " lignes lues")
+
+	WEnd
+
+	FReturn(erreur)
+
+EndF
+
+;*
+Function int Proservia_EcrireGTFI
+; Constitution du GTFI avec les listes lId_iMOUV et lId_iMVTL
+Record	"gtfdd.dhsd"		MOUV			wMOUV_P	
+1		txtDebug		S	= ' '	 
+BeginF
+
+	AfficherTraitement("Ecriture du GTFI", "")
+
+	Init wMOUV_P = ' '
+
+	ListBegin(lId_iMOUV)
+	Do While ListNext(lId_iMOUV, iMOUV) not in (-1, 0)
+
+		; rupture commande à valider
+		If wMOUV_P.CdNo <> iMOUV.CdNo
+			Seek_Ent(MZ.TiCod, MZ.PiCod, iMOUV.CdNo)
+			Init iPAR	= ' '
+			iPAR.Ce1		= 'I'
+			iPAR.Dos		= ENT.Dos
+			iPAR.Etb		= ENT.Etb
+			iPAR.TiCod	= ENT.TiCod
+			iPAR.PiCod	= ENT.PiCod
+			iPAR.PiCodF	= 3
+			iPAR.PiNo	= ENT.PiNo
+			iPAR.Trait	= 'V'
+			HWrite(GTFI, iPAR)
+
+			;txtDebug &= '|IPAR n°' & ENT.PiNo
+
+			Init iENT 	= ' '
+			iENT.Ce1		= 'A'
+			iENT.Ce4		= '1'
+			; Champs à enregistrer dans l'entete BL --> ping pour gttt150
+			If ListSeek(lId_ENT, ENT, ENT_Seek) not in (-1, 0)
+				iENT.Tiers 	= ENT_Seek.Tiers
+				iENT.Op		= ENT_Seek.Op
+				iENT.PiDt	= ENT_Seek.PiDt
+				Ping("LOGBLNO" & ENT_Seek.TiCod & ENT_Seek.PiCod & ENT_Seek.PiNo, ENT_Seek.Cog_LogBlNo)
+				ListDelete(lId_ENT)
+			EndIf	
+			HWrite(GTFI, iENT)
+
+		EndIf
+
+		; iMOUV
+		wMOUV_P = iMOUV
+		iMOUV.Ce1	= 'C'
+		iMOUV.Ce2	= '1'
+		iMOUV.CdNo 	= 0
+		HWrite(GTFI, iMOUV)
+		
+		;txtDebug &= '|MOUV n°' & iMOUV.EnrNo & ' Ref:' & iMOUV.Ref & ' qte BL=' & iMOUV.BlQte
+
+		; iMVTL
+		If CogRs_OP.Op <> wMOUV_P.Op
+			CogRs_OP.Init()
+			CogRs_OP.Where.PK(wMOUV_P.Op)
+			CogRs_OP.Select()
+		EndIf
+
+		ListBegin(lId_iMVTL)
+		Do While ListNext(lId_iMVTL, iMVTL) not in (-1, 0)
+
+			If iMVTL.EnrNo = wMOUV_P.EnrNo AND iMVTL.GrRef = wMOUV_P.GrRef AND iMVTL.PiNo = wMOUV_P.CdNo	AND iMVTL.Depo = wMOUV_P.Depo	AND CogRs_OP.NstO = iMVTL.Nst
+
+				iMVTL.Ce1	= 'V'
+				iMVTL.PiNo 	= 0
+				iMVTL.EnrNo	= 0
+				HWrite(GTFI, iMVTL)
+				
+				;txtDebug &= '|VTL Qte=' & iMVTL.Qte	& ' série:' & iMVTL.Serie
+
+				ListDeleteAndPrevious(lId_iMVTL)
+
+			EndIf
+
+		WEnd
+
+	WEnd
+
+	;MessageBox(txtDebug, "DEBUG")
+
+	FReturn(0)
+
+EndF
+
+;*							
+Procedure Proservia_IntegrationGTFI
+;
+Record	A5dd.dhsd	M2
+
+1	wResultatHMP			S
+1	wparam					S
+1	wvaleur				S
+1	wPino					>Gtfdd.dhsd	Pino
+1	wPicod				>gtfdd.dhsd	Picod
+BeginP
+
+	FClose(GTFI)
+
+	Tunnel_Integration_Piece(GTFI.Name, True, Desactiver_MAJWMS=TRUE)
+	If PongReceive('Resultat', wResultatHMP) = 0
+		Do While HmpRead(wResultatHMP, wparam, wvaleur) = 0 		
+			If wparam = "PIECE"
+				wPino = HmpSeek(wvaleur, "PINO")
+				If wPino > 0
+					Cog_EcritureLivreDeBord("  Pièce n° " & nospaces(wPino) & " générée.")
+					cptPce++		 
+				Else
+					erreur = TRUE
+				EndIf
+			EndIf
+		WEnd
+	EndIf
+
+	Fopen(Gtfi, 'P')
+	HErase(GTFI)
+
+EndP
+
+;*
+Procedure Proservia_FichierTraitement
+;
+1		wFic		256
+1		wRes		S
+1		wSrv		256
+1		wNom		256
+1		wExt		8
+BeginP
+
+	erreur = FALSE
+	integ	= FALSE
+
+	Cog_EcritureLivreDeBord(translate("--> Interface Proservia: début intégration fichier"))
+
+	wFic	= Win_ConvertirEnNomWindows(xq_cog.Fic)
+	FileNameAnalyse(Xq_Cog.Fic, wRes, wSrv, wNom, wExt)
+	xq_cog.Fic = Left(mChemin_Work.Chemin) & '/' & left(wNom) & '.' & left(wExt)
+	If WinMoveFile(wFic, xq_cog.Fic)	AND Proservia_FichierOuvrir(xq_cog.Fic, ticket)
+
+  		If Proservia_FichierLecture()	= 0
+			If Proservia_ListeTraitement() = 0
+			  Integ = Condition(Proservia_EcrireGTFI() = 0, TRUE, FALSE)
+			EndIf
+		EndIf
+		
+		WinCloseHandle(ticket)
+
+		; intégration GTFI
+		If Integ = 1 And Not Erreur
+			Proservia_IntegrationGTFI
+		EndIf
+
+		; 
+		wFic = Condition(erreur, mChemin_Err.Chemin, mChemin_Ok.Chemin)
+		wFic = Left(wFic) & '/' & left(wNom) & '.' & left(wExt)
+		WinMoveFile(xq_cog.Fic, wFic)
+
+	Else ; échec déplacement du fichier
+		Cog_EcritureLivreDeBord(WinGetTextError(WinGetLastError))
+		erreur = TRUE
+	EndIf ; test déplacement du fichier
+
+	Cog_EcritureLivreDeBord(translate("<-- Interface Proservia: fin de l'intégration fichier"))
+
+endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;*
+Public Procedure SaisiePage1
+;
+1 wFin		1,0	= 0
+1 wBufopen 							700 ; zone paramètres
+	2 wFlags 						L 
+	2 wFiltre 						256 
+	2 wIndexFiltre 				X 
+	2 wIndexNom 					X 
+	2 wIndexExtension 			X 
+	2 wRepertoireInitial			256 
+	2 wTitre 						80 
+	2 wExtensionDefaut 			4
+1	wTxt			S
+
+BeginP
+
+	;
+	wBufopen = " "
+	wFiltre = "*.csv" 
+	wIndexFiltre = 3
+	wRepertoireInitial = xq_cog.Fic
+	wTitre = "Ouverture de fichier"
+	wFlags = OFN_FILEMUSTEXIST 
+	wExtensionDefaut = " "
+
+	XmeInput(mz.mecle,1,0,xme_mode_goto)
+
+	Do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+	
+		case harmony.dataarret = 8002
+			if Harmony.Sourisbout = Right_Button
+				Zoom_Call()
+			elsif Harmony.Sourisclic = Double_Click
+				Harmony.Retour = Xmenext_Simulation_Touche
+				Harmony.Cplretour = k_f8
+			endif
+		
+		case k_f7                ;zoom généralisé
+			Zoom_Call()
+		
+		case k_f8                ;zooms
+			Zoom_Call(harmony.arret)
+	
+		case k_f9                ;abandon
+			wFin = 1
+	
+		case vsw in (k_f10, k_return)
+			if messagebox(Translate("Lancer l'intégration du fichier?"),Translate("Confirmation"),MB_YESNO+MB_ICONQUESTION)=idyes
+				
+				PingLocal("TraceCompteur",False)
+				G3_OpenTrace(2,3,4)
+				Proservia_FichierTraitement()
+				G3_CloseTrace
+
+				;
+				wTxt = Translate("Traitement terminé.")
+				if erreur
+					wTxt &= translate("|Des erreurs ont été détectées.|Consultez le livre de bord")
+				endif
+				wTxt &= "|"	& nospaces(ficLg) & Translate(" ligne(s) lue(s).")
+				MessageBox(wTxt ,translate("Information"),mb_iconexclamation)
+	
+				wFin=1
+	
+			endif
+
+		Case Harmony.Dataarret = 1001
+				WinGetOpenFileName(wBufopen , xq_cog.Fic)
+
+		endswitch
+
+	while wFin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
+
+
+;*
+;	Programme principal
+;*
+Main
+;	
+	If PingReceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	EndIf
+
+	if InitialiserVariables
+
+		if not tunnel
+	
+			SaisiePage1
+	
+		else	;programme piloté
+	
+			Proservia_FichierTraitement()
+	
+		endif
+
+	endif
