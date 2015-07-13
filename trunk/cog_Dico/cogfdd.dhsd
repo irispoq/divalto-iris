@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20150611145940,ROOT                
+Version=6,20110524144859,SYSTEMU_VR          ,20150707094502,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -319,6 +319,13 @@ Nature=1
 NomOdbc=Cog_CrePrj
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150706121241,UGIE                ,20150706121325,UGIE                
+Nom=Cog_csvIndices,Indices pour les mots clés,1
+Gel=1
+Nature=400
+NomOdbc=Cog_csvIndices
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20120523113013,ROOT                ,20120523113019,ROOT                
 Nom=Cog_Date_Bascule,Date de bascule,1
 Gel=1
@@ -447,11 +454,126 @@ Nature=5,0
 NomOdbc=Cog_Id_Refacturation
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150706121651,UGIE                ,20150706121651,UGIE                
+Nom=Cog_IndBlQte,Indice QTE,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121550,UGIE                ,20150706121550,UGIE                
+Nom=Cog_IndDepo,Indice DEPO,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121358,UGIE                ,20150706121358,UGIE                
+Nom=Cog_IndDos,Indice DOS,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121538,UGIE                ,20150706121538,UGIE                
+Nom=Cog_IndEtb,Indice ETB,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20110621105533,SYSTEMU             ,20110621105535,SYSTEMU             
 Nom=Cog_Indicateur_Facture,Indicateur déjà facturé,1
 Gel=1
 Nature=1,0
 NomOdbc=Cog_Indicateur_Facture
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706145850,UGIE                ,20150706145915,UGIE                
+Nom=Cog_Indice,Indice de la donnée,1
+DateM=FD2C1290EBB7D001
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150707094433,UGIE                ,20150707094433,UGIE                
+Nom=Cog_IndLieu,Indice LIEU,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121751,UGIE                ,20150706121751,UGIE                
+Nom=Cog_IndLog,Indice COG_LOGBLNO,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121728,UGIE                ,20150706121728,UGIE                
+Nom=Cog_IndNst,Indice NST,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121527,UGIE                ,20150706121527,UGIE                
+Nom=Cog_IndOP,Indice OP,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121515,UGIE                ,20150706121515,UGIE                
+Nom=Cog_IndPicod,Indice PICOD,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121606,UGIE                ,20150706121606,UGIE                
+Nom=Cog_IndPiDt,Indice PIDT,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121804,UGIE                ,20150706121804,UGIE                
+Nom=Cog_IndPiNo,Indice PINO,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121621,UGIE                ,20150706121621,UGIE                
+Nom=Cog_IndPiRef,Indice PIREF,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121718,UGIE                ,20150706121718,UGIE                
+Nom=Cog_IndProjet,Indice PROJET,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121633,UGIE                ,20150706121633,UGIE                
+Nom=Cog_IndRef,Indice REF,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121702,UGIE                ,20150706121702,UGIE                
+Nom=Cog_IndSerie,Indice SERIE,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150707093941,UGIE                ,20150707093941,UGIE                
+Nom=Cog_IndSref1,Indice SREF1,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150707093955,UGIE                ,20150707093955,UGIE                
+Nom=Cog_IndSref2,Indice SREF2,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706121501,UGIE                ,20150706121501,UGIE                
+Nom=Cog_IndTicod,Indice TICOD,1
+Gel=1
+Nature=4,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20150109110723,UGIE                ,20150109110727,UGIE                
@@ -679,6 +801,13 @@ Version=1,20140821135725,UGIE                ,20140821135725,UGIE
 Nom=Cog_TypMotFac,Type moteur de facturation,1
 Gel=1
 Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706145908,UGIE                ,20150706145924,UGIE                
+Nom=Cog_Val256,Valeur,1
+DateM=5D0E2195EBB7D001
+Gel=1
+Nature=256
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110712165352,ROOT                ,20110712165356,ROOT                
@@ -1521,6 +1650,30 @@ Gel=1
 Nature=D8
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150706093313,UGIE                ,20150706093313,UGIE                
+Nom=IntBlAttCh,Chemin pour les BL en attente d'intégration,1
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706093358,UGIE                ,20150706093358,UGIE                
+Nom=IntBlErrCh,Chemin pour les BL rejetés,1
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706093340,UGIE                ,20150706093340,UGIE                
+Nom=IntBlOkCh,Chemin pour les BL intégrés,1
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150706104830,UGIE                ,20150706104830,UGIE                
+Nom=IntBlWorkCh,Chemin pour les BL en cours de traitement,1
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20030111152542,MJV ,20041222172313,MARIE JO            
 Nom=Joint,Numéro fichier joint,1
 Gel=1
@@ -2066,6 +2219,27 @@ nom=Ce4
 [CHAMPL]
 Nom=Ce4N,1,0,0,N,1
 [/CHAMPL]
+nom=Cog_csvIndices
+[CHAMPL]
+Nom=Cog_IndDos,1,0,0,N,1
+Nom=Cog_IndTicod,5,0,0,N,1
+Nom=Cog_IndPicod,9,0,0,N,1
+Nom=Cog_IndOP,13,0,0,N,1
+Nom=Cog_IndEtb,17,0,0,N,1
+Nom=Cog_IndDepo,21,0,0,N,1
+Nom=Cog_IndPiDt,25,0,0,N,1
+Nom=Cog_IndPiRef,29,0,0,N,1
+Nom=Cog_IndRef,33,0,0,N,1
+Nom=Cog_IndBlQte,37,0,0,N,1
+Nom=Cog_IndSerie,41,0,0,N,1
+Nom=Cog_IndProjet,45,0,0,N,1
+Nom=Cog_IndNst,49,0,0,N,1
+Nom=Cog_IndLog,53,0,0,N,1
+Nom=Cog_IndPiNo,57,0,0,N,1
+Nom=Cog_IndSref1,61,0,0,N,1
+Nom=Cog_IndSref2,65,0,0,N,1
+Nom=Cog_IndLieu,69,0,0,N,1
+[/CHAMPL]
 nom=Cpostal
 [CHAMPL]
 Nom=Depar,1,0,0,N,1
@@ -2458,6 +2632,25 @@ Nom=DvNo,396,2,N,0,0,N,1
 Nom=CnCdNo,404,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
+Version=1,20150706120536,UGIE                ,20150706145810,UGIE                
+Nom=Cog_ProserviaInd,Enreg pour integration Proservia,1
+DateM=26557E69EBB7D001
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+Nom=Cog_csvIndices,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20150706145835,UGIE                ,20150706145835,UGIE                
+Nom=Cog_ProserviaVal,Enreg pour intégration Proservia,1
+DateM=5D0E2195EBB7D001
+Taille=300,300
+Pack=0,0
+[CHAMPS]
+Nom=Cog_Indice,1,2,N,0,0,N,1
+Nom=Cog_Val256,5,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
 Version=1,20111213140124,ROOT                ,20111213140232,ROOT                
 Nom=Cog_Red_Ent,Entêtes Reddition,1
 DateM=C6E7DCC5F7D1CC01
@@ -2600,6 +2793,10 @@ Pack=0,0
 [CHAMPS]
 Nom=Dos,1,2,N,0,0,N,1
 Nom=FraisFiRef,4,2,N,0,0,N,1
+Nom=IntBlAttCh,29,2,N,0,0,N,1
+Nom=IntBlOkCh,49,2,N,0,0,N,1
+Nom=IntBlErrCh,69,2,N,0,0,N,1
+Nom=IntBlWorkCh,89,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1999 4220000,MJV ,20120220114332,ROOT                
