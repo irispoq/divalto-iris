@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150701090235      
+;>xwin4obj                              7.0       20150708115746      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="01/07/2015"
+ date_modification="08/07/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=346
  type_masque=2
- dernier_id=1000008
+ dernier_id=1000010
  surcharge=oui
  date_modif_base="20130213094839"
  dernier_id_page=100000
@@ -3011,6 +3011,28 @@
     fl_aff=non
     largeur_col=142
     wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=46,61
+    taille=9,110
+    noms="cog_f3;cog_c3"
+    id=1000010
+    colonnes_saisie=30
+    wstyle="COG_CHAMP_NON_SAISI"
+   [description]
+    donnee=piece_entete,cog_logblno,piece_entete
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+   [info_bulle]
+   texte="N° BR Logisticien"
+   [param_colonne]
+    titre="N° BR Logisticien"
+    fl_aff=non
+    largeur_col=110
+    wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
    position=17,5
@@ -3338,10 +3360,11 @@
   [presentation]
    position=46,12
    taille=9,45
+   noms="cog_f3;cog_c3"
    id=1000007
    wstyle="STD"
   [texte]
-   texte="N° BR Logisticien"
+   texte="N° BL Logisticien"
  [obj_texte]
   [presentation]
    position=56,10
@@ -4128,7 +4151,7 @@
   [presentation]
    position=46,61
    taille=9,110
-   noms="cog_f3"
+   noms="cog_f3;cog_c3"
    id=1000008
    colonnes_saisie=30
    wstyle="COG_CHAMP_NON_SAISI"

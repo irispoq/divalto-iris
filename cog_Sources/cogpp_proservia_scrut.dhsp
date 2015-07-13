@@ -1,0 +1,194 @@
+SetModuleInfo('$Id: cogpp_proservia_scrut.dhsp 8350 2015-07-08 08:27:13Z admin $')
+;>xdiva
+;*
+;*		Objet : 	 Interface Proservia 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLF	P205C					01		07/2015		Version Initiale
+;*
+
+;*
+;*		Déclarations
+;*
+
+;
+Include 	"gttcz00.dhsp"
+
+;MODULES
+Module	"A5PmWin.dhop"
+Module	"A5PMFIC.DHOP"
+Module	"A5TM000.DHOP"
+Module 	"ysystemex.dhop"
+Module	"CogTm_000.dhop"
+
+;
+Public RecordSQL		"CogRs_Dos.dhoq"					CogRs_SocComp
+
+;RECORDS
+public Record	"gtfdd.dhsd"			XQ					XQ_Cog
+public record 	"ddsys.dhsd"			OpDir									;paramètres de lecture de répertoire windows
+public record 	"ddsys.dhsd"			EltDir								;paramètres de lecture des fichiers du répertoire
+Public Record	"a5dd.dhsd"				MChemin
+
+;VARIABLES
+1		txtMSB			S
+1		erreur			B		= false	
+1		Mode_Affichage	1,0	= 0
+1		n_n				8,0
+1		TimerTime		4,0 	= 5000
+01		a_car				1
+ 	02	b_car				b
+1		St					X
+1 		resultat 		256
+1 		serveur 			32
+1 		extension 		6
+1 		nom 				256
+
+;*
+Function int Cog_InitialiserVariables
+;
+
+RecordSql	a5rsuser.dhoq		Utilisateur										;Utilisateurs
+
+BeginF
+
+	;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+	utilisateur.init()
+	utilisateur.where.exists(system.User)
+	if utilisateur.select() = 0
+
+
+		txtMSB =	Translate("Utilisateur %1 non défini dans la base Divalto, scrutateur non lancé.")
+		txtMSB =	Modify("%1", left(system.user), txtMSB)
+		Cog_EcritureLivreDeBord(txtMSB)
+		Display(txtMSB,Translate("Alerte"))
+
+		freturn(false)
+
+	else
+
+		mz.dos		= utilisateur.dos
+		mz.etb		= utilisateur.etb
+		mz.depo		= utilisateur.depo
+		mz.titre2	= "Scrutateur répertoire Erel"
+
+	endif
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(SOC.Dos)
+	CogRs_SocComp.Select()
+
+	; Contrôle des paramètres
+	If CogRs_SocComp.IntBlAttCh = ' '  OR CogRs_SocComp.IntBlOkCh = ' ' OR CogRs_SocComp.IntBlErrCh = ' '  OR CogRs_SocComp.IntBlWorkCh = ' '
+		Cog_EcritureLivreDeBord("Paramétrage des chemins Proservia incomplet (Dossier - onglet U GIE IRIS).")
+		Freturn(FALSE)
+	EndIf
+
+	; chargement du répertoire à scruter
+	If Controler_Chemin(CogRs_SocComp.Dos, ' ', CogRs_SocComp.IntBlAttCh, 0) <> 0
+		Cog_EcritureLivreDeBord("Code chemin " & CogRs_SocComp.IntBlAttCh & " incorrect.")
+		Freturn(FALSE)
+	EndIf
+
+	; Réservation pour lancement unique du scrutateur 
+	If CogRs_SocComp.FShare([CogRs_SocComp.Dos "COG_SCRUT_PROSERVIA"], 'R') <> 0
+		Cog_EcritureLivreDeBord("Scrutateur déjà en cours d'exécution.")
+		Freturn(FALSE)
+	EndIf
+
+	FReturn(True)
+
+EndF
+
+;*
+Procedure ProgrammeFin
+;
+BeginP
+
+	CogRs_SocComp.FShare([CogRs_SocComp.Dos "COG_SCRUT_PROSERVIA"], 'L')
+	ProgramGoto("xquit")
+
+EndP
+
+;*
+Procedure Cog_Scruter_Repertoire
+;	
+
+BeginP
+
+	OpDir.Racine			= Win_ConvertirEnNomWindows(MChemin.Chemin)
+	OpDir.Prefixe			= "*"
+	OpDir.Tri				= 3								;1:par nom, 3:par date, 4:par taille
+
+	If DirOpen(OpDir) = 0
+																								 
+		DirRewind(OpDir)										; Positionnement du curseur en début de répertoire
+		Do while DirRead(OpDir, EltDir) <> 2			; 0 pas d'erreur; 2 fin de répertoire atteinte
+
+			If EltDir.Flagdir = FALSE						; le fichier n'est pas un répertoire
+
+				Init XQ_Cog = ' '
+				XQ_Cog.Fic = left(MChemin.Chemin) & "\" & EltDir.Nom
+				Ping("xq_cog", XQ_Cog)
+				ProgramCall("cogPP_proservia_int.dhop", WpfNoClient=TRUE)
+
+			EndIf
+
+		WEnd
+
+		;fermeture du répertoire
+		DirClose(OpDir)
+
+	Else
+
+		erreur = TRUE
+		Cog_EcritureLivreDeBord("Echec à l'ouverture du répertoire d'import des fichiers Proservia.")
+	
+	EndIf
+EndP
+
+;*
+;	MAIN
+;*
+Main
+
+	If Cog_InitialiserVariables
+
+		WindowShow(SW_HIDE)		
+		Cog_EcritureLivreDeBord("Lancement du service scrutateur pour import fichiers Erel")
+
+		Do While not erreur
+			sleep(TimerTime)
+	
+
+			; Protection du lancement de tache
+			St = WinEndSessionLock	($E8,0)
+			if st <> 0
+				Cog_EcritureLivreDeBord("Demande d'arrêt du scrutateur Erel par un programme externe.")
+				ExitDo
+			endif
+		
+			
+			;		
+			Cog_Scruter_Repertoire()
+
+			;
+			st = WinEndSessionUnlock
+			if st <> 0
+				Cog_EcritureLivreDeBord("Demande d'arrêt du scrutateur Erel par un programme externe.")
+				Exitdo
+			endif	
+	
+		WEnd
+
+	EndIf
+
+	ProgrammeFin
+	
+
+
