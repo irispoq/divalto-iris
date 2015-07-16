@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8377 2015-07-16 07:40:54Z admin $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8378 2015-07-16 08:05:24Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -755,6 +755,8 @@ BeginF
 	; lecture des lignes du fichier
 	Do While WinReadFileRecord(ticket, buffer, tailleLue, finFichier, tabulation) = TRUE AND finFichier = FALSE
 
+		Cog_EcritureLivreDeBord("Valeur:" & left(buffer))
+
 		ficLg++
 		cptLg++
 		ListErase(lId_Valeurs)
@@ -778,6 +780,9 @@ BeginF
 			valeur = Split(buffer, wPos, ';', Quotes=2) 
 
 		WEnd
+
+		Sleep(1000)
+		Cog_EcritureLivreDeBord("Affectation à MVTL")
 
 		; 	Affectation des valeurs
 		Init csvMVTL = ' '
