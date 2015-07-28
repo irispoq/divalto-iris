@@ -788,16 +788,11 @@ Procedure ZoomApresRead
 beginp
 	Standard.ZoomApresRead
 
-	If affaire.Cog_Taux > system.esp And Hseek(Coggtf_Tab, Cog_UT103, [ 'D' MZ.DOS MZ.ETB affaire.Cog_Taux ])  = 0
-	Else
-		Cog_UT103 = system.esp
-	Endif
-;	famno = 2
-;	If affaire.Cog_AxeAnael <> system.esp And Lectab(12 , [famno affaire.Cog_AxeAnael ]) = 0
-;		G7.Lib(35) = T012.Lib
+;	If affaire.Cog_Taux > system.esp And Hseek(Coggtf_Tab, Cog_UT103, [ 'D' MZ.DOS MZ.ETB affaire.Cog_Taux ])  = 0
 ;	Else
-;		G7.Lib(35) = system.esp
+;		Cog_UT103 = system.esp
 ;	Endif
+
 	t_AxeNo = 2
 	CCFJCA_DEV_01.Key = "G" & MZ.DOS & t_AxeNo & affaire.Cog_AxeAnael
 	t_key_01 = MZ.DOS & t_AxeNo & affaire.Cog_AxeAnael
@@ -807,34 +802,35 @@ beginp
 	Else
 		G7.Lib(35) = " "
 	Endif
-	Cog_FDirCliente_01.Key = GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente") & MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
-	t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
-	x_st_01 = IRead(Cog_FDirCliente_01,Cog_DirCliente_01,GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente"),t_key_01)
-	If x_st_01 = 0 And Cog_DirCliente_01.Dos = MZ.Dos And Cog_DirCliente_01.Etb = MZ.Etb And Cog_DirCliente_01.Cog_DirClienteCod = affaire.Cog_DirCliente
-		G7.Lib(33) = Cog_DirCliente_01.lib
-	Else
-		G7.Lib(33) = " "
-	Endif	
-	Cog_FAffectBudget_01.Key = GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire") & MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
-	t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
-	x_st_01 = IRead(Cog_FAffectBudget_01,Cog_AffectationBudgetaire_01,GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire"),t_key_01)
-	If x_st_01 = 0 And Cog_AffectationBudgetaire_01.Dos = MZ.Dos And Cog_AffectationBudgetaire_01.Etb = MZ.Etb And Cog_AffectationBudgetaire_01.Cog_AffBCod = affaire.Cog_AffectationBudgetaire
-		G7.Lib(34) = Cog_AffectationBudgetaire_01.lib
-	Else
-		G7.Lib(34) = " "
-	Endif
-	if Hseek(Coggtf_Tab, Cog_UT110, [ 'K' MZ.DOS MZ.ETB affaire.Cog_Id_Enveloppe ]) = 0
-		G7.Lib(32) = Cog_ut110.Cog_Lib_Env
-	else
-		G7.Lib(32) = " "
-	Endif
-
-	; YATO 21/08/2014 : FE002_CLASSEAFFAIRE
-	If Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  <> 0
-		G7.Lib(31) = ' '
-	Else
-		G7.Lib(31) = Cog_UT120.Lib80
-	EndIf
+;	Cog_FDirCliente_01.Key = GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente") & MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
+;	t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
+;	x_st_01 = IRead(Cog_FDirCliente_01,Cog_DirCliente_01,GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente"),t_key_01)
+;	If x_st_01 = 0 And Cog_DirCliente_01.Dos = MZ.Dos And Cog_DirCliente_01.Etb = MZ.Etb And Cog_DirCliente_01.Cog_DirClienteCod = affaire.Cog_DirCliente
+;		G7.Lib(33) = Cog_DirCliente_01.lib
+;	Else
+;		G7.Lib(33) = " "
+;	Endif	
+;	Cog_FAffectBudget_01.Key = GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire") & MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
+;	t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
+;	x_st_01 = IRead(Cog_FAffectBudget_01,Cog_AffectationBudgetaire_01,GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire"),t_key_01)
+;	If x_st_01 = 0 And Cog_AffectationBudgetaire_01.Dos = MZ.Dos And Cog_AffectationBudgetaire_01.Etb = MZ.Etb And Cog_AffectationBudgetaire_01.Cog_AffBCod = affaire.Cog_AffectationBudgetaire
+;		G7.Lib(34) = Cog_AffectationBudgetaire_01.lib
+;	Else
+;		G7.Lib(34) = " "
+;	Endif
+;	if Hseek(Coggtf_Tab, Cog_UT110, [ 'K' MZ.DOS MZ.ETB affaire.Cog_Id_Enveloppe ]) = 0
+;		G7.Lib(32) = Cog_ut110.Cog_Lib_Env
+;	else
+;		G7.Lib(32) = " "
+;	Endif
+;
+;	; YATO 21/08/2014 : FE002_CLASSEAFFAIRE
+;	If Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  <> 0
+;		G7.Lib(31) = ' '
+;	Else
+;		G7.Lib(31) = Cog_UT120.Lib80
+;	EndIf
+;
 
 	; Complément PRJAP
 	CogRs_PrjComp.Init()

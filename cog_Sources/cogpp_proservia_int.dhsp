@@ -487,7 +487,7 @@ function int Proservia_FichierOuvrir(wchemin_Loc, &wTicket)
 
 BeginF
 
-	Cog_EcritureLivreDeBord("Ouverture du fichier")
+	;Cog_EcritureLivreDeBord("Ouverture du fichier")
 
 	wticket = WinCreateFile(wchemin_Loc, GENERIC_READ, 0, "", OPEN_EXISTING, 0, 0)
 
@@ -495,7 +495,7 @@ BeginF
 
 		WinCloseHandle(ticket)
 		erreur = TRUE
-		Cog_EcritureLivreDeBord("Echec à l'ouverture de: " & wchemin_Loc)
+		;Cog_EcritureLivreDeBord("Echec à l'ouverture de: " & wchemin_Loc)
 
 	EndIf
 
@@ -514,7 +514,7 @@ Function int Proservia_FichierControlerEntete()
 BeginF
 
 	AfficherTraitement("Contrôle de l'entête de fichier","")
-	Cog_EcritureLivreDeBord("Contrôle de l'entête de fichier")
+	;Cog_EcritureLivreDeBord("Contrôle de l'entête de fichier")
 
 	ficLg = 1
 	Do While WinReadFileRecord(ticket, buffer, tailleLue, finFichier, tabulation)	AND not finFichier AND buffer = ' '
@@ -625,7 +625,7 @@ BeginF
 		FReturn(1)
 	EndIf
 
-	Cog_EcritureLivreDeBord("Entête de fichier correcte.")
+	;Cog_EcritureLivreDeBord("Entête de fichier correcte.")
 	FReturn(0)
 
 EndF
@@ -738,7 +738,7 @@ Function int Proservia_FichierLecture
 BeginF
 
 	AfficherTraitement("Lecture du fichier","")
-	Cog_EcritureLivreDeBord("Lecture des lignes du fichier.")
+	;Cog_EcritureLivreDeBord("Lecture des lignes du fichier.")
 
 	ficLg = 0
 	cptLg = 0
@@ -755,7 +755,7 @@ BeginF
 	; lecture des lignes du fichier
 	Do While WinReadFileRecord(ticket, buffer, tailleLue, finFichier, tabulation) = TRUE AND finFichier = FALSE
 
-		Cog_EcritureLivreDeBord("Valeur:" & left(buffer))
+		;Cog_EcritureLivreDeBord("Valeur:" & left(buffer))
 
 		ficLg++
 		cptLg++
@@ -782,7 +782,7 @@ BeginF
 		WEnd
 
 		Sleep(1000)
-		Cog_EcritureLivreDeBord("Affectation à MVTL")
+		;Cog_EcritureLivreDeBord("Affectation à MVTL")
 
 		; 	Affectation des valeurs
 		Init csvMVTL = ' '

@@ -547,10 +547,12 @@ BeginP
 	readerI1 = CogRs_I1.ReaderOpen()
 	CogRs_I1.Where.Fourchette_Etat(C_ETAT_BIEN_VENDU, C_ETAT_BIEN_REBUT) 
 	CogRs_I1.Where.AddCondition("Fourchette_Etat")
-	CogRs_I1.Where.Fourchette_Acquisition(XQ.EchDt1, XQ.EchDt2)
-	CogRs_I1.Where.AddCondition("Fourchette_Acquisition")
+	CogRs_I1.Where.Fourchette_Cession(XQ.EchDt1, XQ.EchDt2)
+	CogRs_I1.Where.AddCondition("Fourchette_Cession")
 	CogRs_I1.Where.Ecr_Cession_Non_Generees()
 	CogRs_I1.Where.AddCondition("Ecr_Cession_Non_Generees")
+	CogRs_I1.Where.BetWeen_Immo(XQ.Immo1, XQ.Immo2)
+	CogRs_I1.Where.AddCondition("BetWeen_Immo")
 	CogRs_I1.ReaderSelect(readerI1)
 
 	Do While CogRs_I1.ReaderNext(readerI1) > 0

@@ -26,6 +26,7 @@ Public HFile	GTFDD.DHSD	GTFAM			GTFAM
 public record	a5dd.dhsd	MZ
 public record	gtfdd.dhsd	ENT								; En-tête
 public record	gtfdd.dhsd	ENT			W1ENT				; En-tête origine bl
+public record	gtfdd.dhsd	ENT			ENTORI					; En-tête origine bl
 Public Record  CCFDD.dhsd	C4
 Public Record	GTFDD.dhsd	ENT			W9ENT				; En-tête origine
 Public Record	GTFDD.dhsd	MOUV			RMOUV				; Renumérotation des mouvements
@@ -216,17 +217,25 @@ EndF
 
 ;*
 Procedure ENT_Cumuler
-;  l'en-tête de Bl est chargé dans W1ENT, l'en-tête de facture dans ENT
+;  l'en-tête de Bl est chargé dans W1ENT, l'en-tête de facture dans ENT	--> FAUX!!!
+; 	l'en-tête de Bl est chargé dans ENTORI
 Beginp
 	Standard.ENT_Cumuler
-	If Not (ENT.Cog_Regroupe_Direction = 2 And W1ENT.Cog_Regroupe_Direction = 2 And ENT.Cog_DirCliente = W1ENT.Cog_DirCliente)
+;	If Not (ENT.Cog_Regroupe_Direction = 2 And W1ENT.Cog_Regroupe_Direction = 2 And ENT.Cog_DirCliente = W1ENT.Cog_DirCliente)
+;		ENT.Cog_Regroupe_Direction = 1
+;		ENT.Cog_DirCliente = system.esp
+;	Endif
+
+	If Not (ENT.Cog_Regroupe_Direction = 2 And ENTORI.Cog_Regroupe_Direction = 2 And ENT.Cog_DirCliente = ENTORI.Cog_DirCliente)
 		ENT.Cog_Regroupe_Direction = 1
 		ENT.Cog_DirCliente = system.esp
 	Endif
+
 Endp
 
 ;*
 Procedure ENT_Creation_Init
+;
 1		i		X						
 1	t_Ce1_01				>CCFDD.DHSD	Ce1
 1	t_Key_01				255
@@ -272,25 +281,25 @@ Beginp
 	;If G3XQ.CHOIX(20) = 1 | ENT.PIDT = Hdate(W1ENT.PIDT,"d") | Endif
 	;If ENT.Cog_Regroupe_Direction = 1 |	ENT.Cog_DirCliente = system.esp | Endif
 	; Vérification du client et de son code OP
-		Init CLI_DEV_01 = " "
-		t_Ce1_01 = "3"
-		GTFPCF_DEV_01.Key = "C" & ENT.Dos & t_Ce1_01 & ENT.Tiers
-		t_Key_01 = ENT.Dos & t_Ce1_01 & ENT.Tiers
-		x_st_01 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_01)
-		If x_st_01 = 0 And CLI_DEV_01.Dos = ENT.Dos And CLI_DEV_01.Ce1 = t_Ce1_01 And CLI_DEV_01.Tiers = ENT.Tiers
-			ENT.Cog_ImpLogo_1 = CLI.Cog_implogo_1
-			ENT.Cog_ImpLogo_2 = CLI.Cog_implogo_2
-			ENT.Cog_ImpLogo_3 = CLI.Cog_implogo_3
-			ENT.Cog_ImpLogo_4 = CLI.Cog_implogo_4
-		Else
-			ENT.Cog_ImpLogo_1 = SOC.Cog_implogo_1
-			ENT.Cog_ImpLogo_2 = SOC.Cog_implogo_2
-			ENT.Cog_ImpLogo_3 = SOC.Cog_implogo_3
-			ENT.Cog_ImpLogo_4 = SOC.Cog_implogo_4
-		EndIf
-		If Not G6.Salcod = system.esp
-			ENT.Salcod = G6.Salcod
-		Endif
+	Init CLI_DEV_01 = " "
+	t_Ce1_01 = "3"
+	GTFPCF_DEV_01.Key = "C" & ENT.Dos & t_Ce1_01 & ENT.Tiers
+	t_Key_01 = ENT.Dos & t_Ce1_01 & ENT.Tiers
+	x_st_01 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_01)
+	If x_st_01 = 0 And CLI_DEV_01.Dos = ENT.Dos And CLI_DEV_01.Ce1 = t_Ce1_01 And CLI_DEV_01.Tiers = ENT.Tiers
+		ENT.Cog_ImpLogo_1 = CLI.Cog_implogo_1
+		ENT.Cog_ImpLogo_2 = CLI.Cog_implogo_2
+		ENT.Cog_ImpLogo_3 = CLI.Cog_implogo_3
+		ENT.Cog_ImpLogo_4 = CLI.Cog_implogo_4
+	Else
+		ENT.Cog_ImpLogo_1 = SOC.Cog_implogo_1
+		ENT.Cog_ImpLogo_2 = SOC.Cog_implogo_2
+		ENT.Cog_ImpLogo_3 = SOC.Cog_implogo_3
+		ENT.Cog_ImpLogo_4 = SOC.Cog_implogo_4
+	EndIf
+	If Not G6.Salcod = system.esp
+		ENT.Salcod = G6.Salcod
+	Endif
 Endp
 
 ;*
