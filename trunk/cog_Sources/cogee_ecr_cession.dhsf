@@ -1,9 +1,9 @@
-;>xwin4obj                              7.0       20141021170304      
+;>xwin4obj                              7.0       20150722120056      
 [masque]
- utilisateur="UGIE"
- date_modification="21/10/2014"
+ utilisateur="ROOT"
+ date_modification="22/07/2015"
  feuille_style="fstylewpf.dhfi"
- dernier_id=15
+ dernier_id=19
  dernier_id_page=4
 [defaut]
  [aide_page]
@@ -40,18 +40,34 @@
    id=8
    wstyle="STD"
   [texte]
-   texte="Date d'acquisition du bien entre le"
+   texte="Date de cession du bien entre le"
  [obj_texte]
   [presentation]
-   position=38,175
+   position=38,157
    taille=9,18
    id=10
    wstyle="STD"
   [texte]
    texte="et"
+ [obj_texte]
+  [presentation]
+   position=49,31
+   taille=11,73
+   id=16
+   wstyle="STD"
+  [texte]
+   texte="Numéro fiche de bien"
+ [obj_texte]
+  [presentation]
+   position=49,157
+   taille=9,18
+   id=19
+   wstyle="STD"
+  [texte]
+   texte="à"
  [champ]
   [presentation]
-   position=38,126
+   position=38,116
    taille=9,32
    id=9
    colonnes_saisie=10
@@ -64,7 +80,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=38,186
+   position=38,168
    taille=9,32
    id=11
    colonnes_saisie=10
@@ -76,6 +92,45 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_EchDt2_1_Ap"
+ [champ]
+  [presentation]
+   position=49,116
+   taille=9,32
+   id=17
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,immo1,xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+   table_associee=oui
+  [touches]
+   f8=19701
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=49,168
+   taille=9,32
+   id=18
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,immo2,xq
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+   table_associee=oui
+  [touches]
+   f8=19701
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Immo2_1_Ap"
+  [boutons]
+   "zoom"
 [page]
  numero=2
  libelle="Trace"
@@ -346,6 +401,14 @@ Public Procedure Champ_EchDt2_1_Ap
 ;
 Beginp
 	Controle_Fourchette(XQ.EchDt1, XQ.EchDt2, type=3)
+Endp
+
+
+;*
+Public Procedure Champ_Immo2_1_Ap
+;
+Beginp
+	Controle_Fourchette(XQ.Immo1, XQ.Immo2, type=2)
 Endp
 [/diva]
 [diva_base]

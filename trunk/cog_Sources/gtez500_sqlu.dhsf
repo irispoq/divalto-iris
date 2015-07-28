@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150611121445      
+;>xwin4obj                              7.0       20150724084431      
 [masque]
  libelle="affaire"
  utilisateur="ROOT"
- date_modification="11/06/2015"
+ date_modification="24/07/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
- dernier_id=1000219
+ dernier_id=1000233
  surcharge=oui
  date_modif_base="20131227150954"
  dernier_id_page=100007
@@ -1359,6 +1359,202 @@
     wstyle="ENTETE_COLONNE"
    [boutons]
     "zoom"
+  [champ_tableau]
+   [presentation]
+    position=97,157
+    taille=9,30
+    id=1000225
+    colonnes_saisie=10
+    wstyle="STD"
+   [description]
+    donnee=cogrs_prjcomp,infraservreeldt,cogrs_prjcomp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Date mise en service INFRA (réelle)"
+   [param_colonne]
+    titre="Date mise en service INFRA (réelle)"
+    fl_aff=non
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=100,149
+    taille=9,30
+    id=1000226
+    colonnes_saisie=10
+    wstyle="STD"
+   [description]
+    donnee=cogrs_prjcomp,projservreeldt,cogrs_prjcomp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Date mise en service PROJET (réelle)"
+   [param_colonne]
+    titre="Date mise en service PROJET (réelle)"
+    fl_aff=non
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=103,140
+    taille=9,30
+    id=1000227
+    colonnes_saisie=8
+    wstyle="STD"
+   [description]
+    donnee=cogrs_prjcomp,cncdno,cogrs_prjcomp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="N° bon de commande CN"
+   [param_colonne]
+    titre="N° bon de commande CN"
+    fl_aff=non
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=108,169
+    taille=9,26
+    id=1000228
+    colonnes_saisie=8
+    wstyle="STD"
+   [description]
+    donnee=cogrs_prjcomp,dvno,cogrs_prjcomp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Devis no"
+   [param_colonne]
+    titre="Devis no"
+    fl_aff=non
+    largeur_col=26
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=123,164
+    taille=9,30
+    id=1000229
+    colonnes_saisie=10
+    wstyle="STD"
+   [description]
+    donnee=cogrs_prjcomp,valdevdt,cogrs_prjcomp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Date de validation du devis"
+   [param_colonne]
+    titre="Date de validation du devis"
+    fl_aff=non
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=129,137
+    taille=9,26
+    id=1000231
+    colonnes_saisie=8
+    wstyle="STD"
+   [description]
+    donnee=cogrs_prjcomp,prestabien,cogrs_prjcomp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Fiche de bien prestations"
+   [param_colonne]
+    titre="Fiche de bien prestations"
+    fl_aff=non
+    largeur_col=26
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=136,100
+    taille=9,26
+    id=1000232
+    colonnes_saisie=8
+    wstyle="STD"
+   [description]
+    donnee=cogrs_prjcomp,inframatbien,cogrs_prjcomp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Fiche de bien INFRA matériel"
+   [param_colonne]
+    titre="Fiche de bien INFRA matériel"
+    fl_aff=non
+    largeur_col=26
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=141,86
+    taille=9,26
+    id=1000233
+    colonnes_saisie=8
+    wstyle="STD"
+   [description]
+    donnee=cogrs_prjcomp,infralogbien,cogrs_prjcomp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f5=5001
+    f6=5005
+    f7=135
+    ctrl_f6=10300
+    shift_f6=10000
+   [info_bulle]
+   texte="Fiche de bien INFRA logiciel"
+   [param_colonne]
+    titre="Fiche de bien INFRA logiciel"
+    fl_aff=non
+    largeur_col=26
+    wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
    position=17,4
@@ -2550,24 +2746,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=176,106
-   taille=9,130
-   id=1000089
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=g7,lib,g7,31
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
- [champ]
-  [presentation]
    position=201,175
    taille=9,32
    id=329
@@ -2953,6 +3131,24 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [champ]
+  [presentation]
+   position=176,103
+   taille=9,127
+   id=1000224
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,ut120_lib,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
 [page]
  numero=12
  fond="STD"
@@ -4707,6 +4903,78 @@
   [param_saisie]
    type_date=jj/mm/aaaa
    esp_si_zero=oui
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=198,110
+   taille=9,127
+   id=1000223
+   colonnes_saisie=50
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,ut110_lib,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=129,110
+   taille=9,127
+   id=1000222
+   colonnes_saisie=50
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,ut103_lib,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=184,110
+   taille=9,127
+   id=1000221
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,abudget_lib,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=170,110
+   taille=9,127
+   id=1000220
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=affaire,dircli_lib,affaire
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
   [touches]
    f5=5001
    f6=5005
@@ -7092,15 +7360,22 @@ Private Procedure Champ_Cog_AffectationBudgetaire_1_Ap
 1	x_st_01	x
 1	t_key_01	255
 Beginp
-	Cog_FAffectBudget_01.Key = GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire") & MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
-	t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
-	x_st_01 = IRead(Cog_FAffectBudget_01,Cog_AffectationBudgetaire_01,GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire"),t_key_01)
-	If x_st_01 = 0 And Cog_AffectationBudgetaire_01.Dos = MZ.Dos And Cog_AffectationBudgetaire_01.Etb = MZ.Etb And Cog_AffectationBudgetaire_01.Cog_AffBCod = affaire.Cog_AffectationBudgetaire
-		G7.Lib(34) = Cog_AffectationBudgetaire_01.lib
-	Else
-		G7.Lib(34) = " "
-		Cog_AffectationBudgetaire_01.Cog_AffBCod = " "
-	Endif	
+
+	Affaire.ABUDGET_LIB = ' '
+
+	If Affaire.Cog_AffectationBudgetaire <> ' '
+
+		Cog_FAffectBudget_01.Key = GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire") & MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
+		t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_AffectationBudgetaire
+		x_st_01 = IRead(Cog_FAffectBudget_01,Cog_AffectationBudgetaire_01,GetKeyByName(Cog_FAffectBudget_01,"Cog_AffectationBudgetaire"),t_key_01)
+		If x_st_01 = 0 And Cog_AffectationBudgetaire_01.Dos = MZ.Dos And Cog_AffectationBudgetaire_01.Etb = MZ.Etb And Cog_AffectationBudgetaire_01.Cog_AffBCod = affaire.Cog_AffectationBudgetaire
+			Affaire.ABUDGET_LIB = Cog_AffectationBudgetaire_01.lib
+		Else
+			Cog_AffectationBudgetaire_01.Cog_AffBCod = " "
+		Endif	
+
+	EndIf
+
 Endp
 
 ;*																	 
@@ -7140,13 +7415,19 @@ Beginp
 ; YATO 21/08/2014 FE002_CLASSEAFFAIRE Remplacement de la recherche de Cog_Cotisation dans Cog_UT120 à la place de T064 
 ; 	If affaire.AfrClas <> system.esp And LecTab(64,affaire.AfrClas,,today) = 0 And T064.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
 
- 	If affaire.Cog_TypMotFac <> system.esp And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  = 0 And Cog_UT120.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
+
+ 	If affaire.Cog_TypMotFac <> system.esp And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  = 0 \
+														And Cog_UT120.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
 		harmony.retour = xmenext_ressaisie
+		PReturn
 	ElsIf affaire.Cog_Cotisation_PDV <> system.esp And Not Hread(Coggtf_Tab, Cog_UT104, [ 'E' MZ.DOS MZ.ETB affaire.Cog_Cotisation_PDV ]) = 0 And Not \
 														(Cog_UT104.Dos = MZ.DOS And Cog_UT104.Etb = MZ.ETB And Cog_UT104.Cog_Cotisation_PDV = affaire.Cog_Cotisation_PDV)
 																																									
 		harmony.retour = xmenext_ressaisie
+		PReturn
 	Endif
+
+
 Endp																					 
 
 
@@ -7168,15 +7449,22 @@ Private Procedure Champ_Cog_DirCliente_1_Ap
 1	x_st_01	x
 1	t_key_01	255
 Beginp
-	Cog_FDirCliente_01.Key = GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente") & MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
-	t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
-	x_st_01 = IRead(Cog_FDirCliente_01,Cog_DirCliente_01,GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente"),t_key_01)
-	If x_st_01 = 0 And Cog_DirCliente_01.Dos = MZ.Dos And Cog_DirCliente_01.Etb = MZ.Etb And Cog_DirCliente_01.Cog_DirClienteCod = affaire.Cog_DirCliente
-		G7.Lib(33) = Cog_DirCliente_01.lib
-	Else
-		G7.Lib(33) = " "
-		Cog_DirCliente_01.Cog_DirClienteCod = " "
-	Endif	
+
+	Affaire.DIRCLI_LIB = ' '
+
+	If Affaire.Cog_DirCliente <> ' '
+
+		Cog_FDirCliente_01.Key = GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente") & MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
+		t_key_01 = MZ.DOS & MZ.Etb & affaire.Cog_DirCliente
+		x_st_01 = IRead(Cog_FDirCliente_01,Cog_DirCliente_01,GetKeyByName(Cog_FDirCliente_01,"Cog_DirCliente"),t_key_01)
+		If x_st_01 = 0 And Cog_DirCliente_01.Dos = MZ.Dos And Cog_DirCliente_01.Etb = MZ.Etb And Cog_DirCliente_01.Cog_DirClienteCod = affaire.Cog_DirCliente
+			Affaire.DIRCLI_LIB = Cog_DirCliente_01.lib
+		Else
+			Cog_DirCliente_01.Cog_DirClienteCod = " "
+		Endif	
+
+	EndIf
+
 EndP
 
 
@@ -7209,10 +7497,13 @@ Endp
 Private Procedure Champ_Cog_Id_Enveloppe_1_Ap
 ;
 Beginp
+
+	Affaire.UT110_LIB = ' '
+
 	if not Hseek(Coggtf_Tab, Cog_UT110, [ 'K' MZ.DOS MZ.ETB affaire.Cog_Id_Enveloppe ]) = 0
 		harmony.retour = xmenext_ressaisie
 	else
-		G7.Lib(32) = Cog_ut110.Cog_Lib_Env
+		Affaire.UT110_LIB = Cog_ut110.Cog_Lib_Env
 	Endif
 Endp
 
@@ -7246,9 +7537,17 @@ Endp
 
 ;*
 Private Procedure Champ_Cog_Taux_1_Ap
+;
 Beginp
-	If affaire.Cog_Taux > system.esp And Not Hseek(Coggtf_Tab, Cog_UT103, [ 'D' MZ.DOS MZ.ETB affaire.Cog_Taux ]) = 0
-		harmony.retour = xmenext_ressaisie
+
+	Affaire.UT103_LIB = ' '
+
+	If affaire.Cog_Taux <> system.esp 
+		If Not Hseek(Coggtf_Tab, Cog_UT103, [ 'D' MZ.DOS MZ.ETB affaire.Cog_Taux ]) = 0
+			harmony.retour = xmenext_ressaisie
+		Else
+			Affaire.UT103_LIB = COG_UT103.Cog_Type
+		EndIf
 	Endif
 Endp
 
@@ -7257,13 +7556,18 @@ Endp
 Private Procedure Champ_Cog_TypMotFac_1_Ap
 ;
 Beginp
+
+	Affaire.UT120_LIB = ' '
 	; YATO 21/08/2014 : FE002_CLASSEAFFAIRE
-	If Affaire.Cog_TypMotFac <> ' 'And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  <> 0
-		MessageBox("Type moteur facturation "&Left(Affaire.Cog_TypMotFac) & " inexistant.","Erreur",Mb_IconExclamation)
-		Harmony.Retour = XmeNext_Ressaisie
-		G7.Lib(31) = ' '
-	Else
-		G7.Lib(31) = Cog_UT120.Lib80
+	If Affaire.Cog_TypMotFac <> ' '
+		
+		IF Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  <> 0
+			MessageBox("Type moteur facturation "&Left(Affaire.Cog_TypMotFac) & " inexistant.","Erreur",Mb_IconExclamation)
+			Harmony.Retour = XmeNext_Ressaisie
+		Else
+			Affaire.UT120_LIB = Cog_UT120.Lib80
+		EndIf
+
 	EndIf
 
 Endp

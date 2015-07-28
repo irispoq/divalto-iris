@@ -48,12 +48,16 @@ Public Record	"gtfdd.dhsd"	T000
 <WHERE>
 	Case Equal_Enrno(int enrno)
 		I1.ENRNO = enrno
+	Case BetWeen_Immo(int noD, int noF)
+		I1.IMMO BETWEEN noD AND noF
 	Case Max_Immo
 		I1.IMMO = (SELECT MAX(I1.IMMO) FROM I1 WHERE I1.CE3 = '1' AND I1.DOS = MZ.DOS)
 	Case Equal_Etat(int etat)
 		I1.ETAT = etat
 	Case Fourchette_Acquisition(date acqDDt, date acqFDt)
 		I1.ACQDT >= acqDDt AND I1.ACQDT <= acqFDt
+	Case Fourchette_Cession(date DDt, date FDt)
+		I1.CESDT >= DDt AND I1.CESDT <= FDt
  	Case Ecr_Cession_Non_Generees
 		I1.COG_CESECRFLAG <> 2
 	Case Fourchette_Etat(int etatD, int etatF)

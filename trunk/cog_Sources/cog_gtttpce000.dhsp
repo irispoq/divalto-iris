@@ -577,11 +577,11 @@ BeginF
 		EndIf
 
 	Else
-		If wMsgErr
-			MessageBox("Echec lors de la mise à jour de la fiche projet: la fiche complémentaire n'a pas été créée."\
-						& "|(Présence d'informations dans l'onglet PROJET SPEC)", "Alerte", MB_ICONINFORMATION)
-			FReturn(1)
-		EndIf
+;		If wMsgErr
+;			MessageBox("Echec lors de la mise à jour de la fiche projet: la fiche complémentaire n'a pas été créée."\
+;						& "|(Présence d'informations dans l'onglet PROJET SPEC)", "Alerte", MB_ICONINFORMATION)
+;		EndIf
+		FReturn(1)
 	EndIf
 		
 	FReturn(0)

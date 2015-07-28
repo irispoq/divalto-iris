@@ -25,8 +25,11 @@ public record	"ccfdd.dhsd"		XQ				;enregistrement de travail
 public procedure ChargementAvant
 beginp
 
-	XQ	= ""
-	XQ.EchDt2 = "99991231"
+	Init XQ 		= ' '
+	XQ.EchDt1 	= '19000101' 
+	XQ.EchDt2 	= '99991231'
+	XQ.Immo1		= 1
+	Init XQ.Immo2=	'9'
 
 endp
 
