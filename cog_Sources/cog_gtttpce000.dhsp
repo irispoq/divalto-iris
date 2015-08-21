@@ -9,9 +9,12 @@ SetModuleInfo('$Id$')
 
 OverWrittenBy	"COG_GTUTPCE000.dhop"
 
+;
 Include	'GTTCZ00.dhsp'
 Include	'GTTCPCE000.dhsp'
+Include	'COGTC_000.dhsp'
 
+;
 Module 	'CCTM000.DHOP'
 Module	'CCPMFIC.DHOP'
 Module	'GTPMPCE000.dhop'
@@ -21,11 +24,11 @@ Module 	'A5PMFIC.dhop'
 Module 	'A5PMFLASH.dhop'
 Module	'COGTM_VALID_CDE.DHOP'
 Module	'COG_CCTZ701_SQL.DHOP'
+Module	'CogTm_Bundle.dhop'
 
 ; Fichiers
 			Hfile	a5dd.dhsd	A5FFLASH				A5FFLASH
 		 	Hfile	a5dd.dhsd	A5FDOS				A5FDOS
-;Public 	Hfile	cogfdd.dhsd	Cog_FDirCliente	Cog_FDirCliente_01
 Public 	HFile	CCFDD.DHSD	CCFJCA				CCFJCA_DEV_01			; Plan comptable
 		 	HFile	a5dd.dhsd	a5fdos				pw_a5fdos
 public 	hfile	gtfdd.dhsd	GTFAT					GTFAT				; Fichier des articles
@@ -33,18 +36,13 @@ public 	hfile	gtfdd.dhsd	GTFENT				GTFENT
 public 	hfile	gtfdd.dhsd	GTFAM					GTFAM	
 public 	hfile	gtfdd.dhsd	GTFVTL				GTFVTL
 public 	hfile	gtfdd.dhsd	GTFPCF				GTFPCF			; Fichier des tiers
-public 	hfile	gtfdd.dhsd	GTFPROJ				GTFPROJ			; Fichier des projets
-;public hfile	gtfdd.dhsd	GTFRF					GTFRF				; fichier référence externe 
+public 	hfile	gtfdd.dhsd	GTFPROJ				GTFPROJ			; Fichier des projets 
 public 	hfile	ccfdd.dhsd	CCFDOS				CCFDOS	noopen; Fichier dossier de C3
 public 	hfile	ccfdd.dhsd	CCFJCA 				CCFJCA	noopen; Fichier dossier de C3
 
 ;public recordsql "gtrsppslr.dhoq" LivRecLigne
 
 ; Enregistrements
-;Public Record	DDSYS.dhsd 	ROWINFO 							; Enregistrement de contrôle du tableau
-;Public Record	A5DD.dhsd	MZ
-;
-;Public Record	GTFDD.dhsd	SOC								; société
 Public Record	GTFDD.dhsd	ETS								; Etablissement
 Public Record	GTFDD.dhsd	CLI								; Client
 ;Public Record	GTFDD.dhsd	PRO								; Prospect
@@ -63,6 +61,7 @@ Public Record	GTFDD.dhsd 	T1
 ;Public Record	GTFDD.dhsd 	T3
 ;
 Public Record	GTFDD.dhsd 	ART								; Articles
+Public Record	GTFDD.dhsd 	SART
 
 ;
 ;Public Record GTFDD.dhsd 	G4
@@ -1487,6 +1486,87 @@ BeginP
 	EndIf
 
 EndP
+
+;*
+Public Procedure Cog_G1T1_Generation_Composant_Init
+;
+Record	"cogfdd.dhsd"		Cog_ArtGenAcc		wArtAcc
+Record	"gtfdd.dhsd"		XQ		wXQ
+Record	"gtfdd.dhsd"		XQ		wXQ_Ret
+BeginP
+
+	If ART.Cog_Generique = 2
+
+		Init wXQ = ' '
+		wXQ.RefMsk = G1T1.Ref
+		
+		Do While	PongReceiveAndDelete("CogRs_ArtAcc", wArtAcc) <> 0 
+			G3XZ.Pong = TRUE
+			Ping("XQ_COG", wXQ)
+			Zoom_Call(C_Zoom_ArtGenAcc)
+		WEnd
+
+		Seek_Art(wArtAcc.Ref)
+		Seek_Sart(wArtAcc.Ref, wArtAcc.SRef1, wArtAcc.SRef2)
+	
+		G1T1.Ref  = ART.Ref
+		G1T1.Sref1=	SART.SREF1
+	  	G1T1.Sref2=	SART.SREF2
+
+	EndIf
+
+EndP
+
+;**
+Public Function char Cog_G1T1_Ligne_Validation_Av
+;
+BeginF
+
+	; Article générique --> saisie non autorisée
+	If ART.Cog_Generique = 2
+		MessageBox("La saisie d'article générique n'est pas autorisée.", "Alerte", MB_ICONEXCLAMATION)
+		Harmony.Retour = XMENEXT_RESSAISIE
+	EndIf
+
+	; Composé --> présence article générique autorisée sur pièces clients uniquement
+	Switch GTPCE.TiCodDst
+		Case 'C'
+			If Cog_Bundle_RefGen(G1T1.Ref, G1T1.Sref1, G1T1.Sref2, wCtrl=TRUE) = 2
+				MessageBox("Présence d'un composant générique sans accessoire, saisie impossible.", "Alerte", MB_ICONEXCLAMATION)
+				Freturn('N')
+			EndIf
+
+		Default
+			If Cog_Bundle_RefGen(G1T1.Ref, G1T1.Sref1, G1T1.Sref2) <> 0
+				MessageBox("La saisie d'article composé avec composant générique n'est autorisée que sur les pièces clients.", "Alerte", MB_ICONEXCLAMATION)
+				Freturn('N')
+			EndIF
+
+	EndSwitch
+
+	Freturn('O')
+
+EndF
+
+;*
+Public Function char Cog_MOUV_Chargement_Ap 
+;
+BeginF
+
+	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
+
+		Case 'C4'
+			If LireProgrammefonction = C_fonction_Validation AND ENT.Cog_BL_Moteur <> 2 AND ART.Cog_PdvFa = 2			 
+				G1T1.FaQte = 0
+				G1T1.DstQte= 0
+			EndIf
+
+	EndSwitch
+
+
+	FReturn('O')
+
+EndF
 
 ;*
 ;*		Traitements lignes

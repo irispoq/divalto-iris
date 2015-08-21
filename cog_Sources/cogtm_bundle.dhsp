@@ -1,0 +1,84 @@
+SetModuleInfo('$Id: cogtm_bundle.dhsp 8474 2015-08-21 06:46:02Z admin $')
+;*
+;*      Fonctions communes aux traitements sur les bundles
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF		P205A			Init		08/2015		Version initiale selon UGIEIRIS_DAVFIN_FE008_GestBundle_V2.1
+
+
+;*
+;*		Déclarations;
+;*
+
+OverWrittenBy "cogum_bundle.dhop"
+
+;
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+; Record Sql 
+Public recordSQL  "CogRs_Art.dhoq"  CogRs_ArtAcc									; Table Accessoires des articles génériques
+
+
+;*
+;* procedures 
+;*
+Public Function int Cog_Bundle_RefGen(wRef, wSref1, wSref2, wCtrl)
+; Test si wGrRef est un composé avec présence d'un composant de type générique
+; 0 -->pas un composé ou pas de composant générique
+; 1 --> présence de composant générique
+; 2 --> présence de composant générique sans accessoire (retour possible si wCtrl = TRUE)
+RecordSQL	"gtRsppArt.dhoq"		Decomposition				wRs_Dar
+RecordSQL	"cogRs_Art.dhoq"		CogRs_ArtAcc				wRs_ArtAcc
+1		wRef		>gtfdd.dhsd			Ref
+1		wSref1	>gtfdd.dhsd			SRef1
+1		wSref2	>gtfdd.dhsd			SRef2
+1		wCtrl		1,0	= FALSE	 	; contrôle que les articles génériques ont des accessoires paramétrés
+1		wRead		L
+1		wRet		1,0	= 0
+BeginF
+ 
+	wRs_Dar.Init()
+	wRs_Dar.Where.RemoveCondition("")
+	wRs_Dar.Where.Equal_Ref(wRef)
+	wRs_Dar.Where.AddCondition("Equal_Ref")
+	wRs_Dar.Where.Equal_SRef1(wSref1)
+	wRs_Dar.Where.AddCondition("Equal_SRef1")
+	wRs_Dar.Where.Equal_SRef2(wSref2)
+	wRs_Dar.Where.AddCondition("Equal_SRef2")
+	wRs_Dar.Where.Composant_Generique()
+	wRs_Dar.Where.AddCondition("Composant_Generique")
+
+	; Présence de composants génériques
+	If wRs_Dar.GetCount() > 0
+
+		wRet = 1
+
+		; contrôle de la présence d'accessoires: boucle de lecture sur les composants génériques
+		If wCtrl
+
+			wRead = wRs_Dar.ReaderOpen()
+			wRs_Dar.ReaderSelect(wRead)
+
+			Do While wRs_Dar.ReaderNext(wRead) > 0 AND wRet = 1
+
+				wRs_ArtAcc.Init()
+				wRs_ArtAcc.Join.Deactivate("$All")
+				wRs_ArtAcc.Where.Equal_GenRef(wRs_Dar.RefCo)
+				If wRs_ArtAcc.GetCount() = 0	; pas de résultat
+					wRet = 2
+				EndIf
+
+			WEnd
+
+			wRs_Dar.ReaderClose(wRead)
+
+		EndIf	 ;	 If wCtrl
+
+	EndIf	 ;	 If wRs_Dar.GetCount() > 0
+
+	FReturn(wRet)
+
+EndF

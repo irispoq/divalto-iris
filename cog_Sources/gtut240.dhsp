@@ -31,6 +31,7 @@ Public Record  CCFDD.dhsd	C4
 Public Record	GTFDD.dhsd	ENT			W9ENT				; En-tête origine
 Public Record	GTFDD.dhsd	MOUV			RMOUV				; Renumérotation des mouvements
 Public Record	GTFDD.dhsd  PRJAP
+public record	gtfdd.dhsd	ART
 
 public record	gtfdd.dhsd	SOC				 				; Dossier
 public record	gtfdd.dhsd	CLI				 				; Client
@@ -325,6 +326,21 @@ BeginP
 		ENT.PiRef = "Facturation projets"
 		ListInsert(lId_FaMotFa, ENT)
 	EndIf
+
+EndP
+
+;*
+Procedure MOUV_Chargement_Ap
+; après le chargement d'une ligne dans la liste	 (ART est chargé car utilisé dans la proc standard)
+
+BeginP
+
+	; action sur la quantité facturée, AVANT procédure standard qui calcule les montants en fonction de cette donnée
+	If ENT.Cog_BL_Moteur <> 2 AND ART.Cog_PdvFa = 2 
+		G1T1.FaQte = 0
+	EndIf
+
+	Standard.MOUV_Chargement_Ap
 
 EndP
 

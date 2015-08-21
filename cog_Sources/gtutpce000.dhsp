@@ -263,6 +263,44 @@ Beginp
 EndP
 
 ;*
+Procedure G1T1_Generation_Composant_Init
+;
+BeginP
+
+	Cog_G1T1_Generation_Composant_Init
+	Standard.G1T1_Generation_Composant_Init
+
+EndP
+
+;*
+Function char G1T1_Ligne_Validation_Av
+;
+1		wRet		1
+BeginF
+
+	wRet = Standard.G1T1_Ligne_Validation_Av
+	If wRet = 'O'
+		wRet = Cog_G1T1_Ligne_Validation_Av
+	EndIf
+
+	FReturn(wRet)
+
+EndF
+
+;*
+Function char MOUV_Chargement_Ap
+;
+BeginF
+
+	If Cog_MOUV_Chargement_Ap <> 'O'
+		FReturn('N')	
+	EndIf
+
+	FReturn(Standard.MOUV_Chargement_Ap)
+
+EndF
+
+;*
 Procedure MOUV_Write_Av
 ;
 BeginP
@@ -277,6 +315,7 @@ BeginP
 	Standard.MOUV_ReWrite_Av
 	Cog_MOUV_ReWrite_Av
 EndP
+
 
 ;*
 Procedure MVTL_Write_Av

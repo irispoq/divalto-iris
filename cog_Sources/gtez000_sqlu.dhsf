@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150319163431      
+;>xwin4obj                              7.0       20150810102731      
 [masque]
  libelle="Article"
- utilisateur="ROOT"
- date_modification="19/03/2015"
+ utilisateur="UGIE"
+ date_modification="10/08/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=882
  type_masque=2
- dernier_id=1000017
+ dernier_id=1000022
  surcharge=oui
  date_modif_base="20131126145259"
  dernier_id_page=100000
@@ -3597,6 +3597,35 @@
     fl_aff=non
     largeur_col=90
     wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=114,169
+    taille=9,63
+    id=1000020
+    wstyle="COG_CHAMP_SAISI"
+   [description]
+    donnee=article,cog_generique,article
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="Générique"
+    cadrage=droite
+    valeur="2","1"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Cog_Generique_1_Av"
+   [param_colonne]
+    titre="Générique"
+    fl_aff=non
+    largeur_col=63
+    wstyle="ENTETE_COLONNE"
  [obj_texte]
   [presentation]
    position=16,5
@@ -4358,26 +4387,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_StCod_1_Ap"
- [case_a_cocher]
-  [presentation]
-   position=68,177
-   taille=9,52
-   id=1000003
-   wstyle="STD"
-  [description]
-   donnee=article,su_is_parc,article
-  [param_case]
-   texte="Dans le parc ?"
-   cadrage=droite
-   valeur="2","1"
-   choix="gtfdmc.dhfi",""
-  [touches]
-   f1=1
-   f5=5003
-   f6=5000
-   f7=135
-   shift_f5=5005
-   shift_f6=10000
  [multi_choix]
   [presentation]
    position=78,70
@@ -4456,6 +4465,48 @@
    diva_apres="Champ_NatImmo_1_Ap"
   [boutons]
    "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=68,177
+   taille=9,52
+   id=1000003
+   wstyle="STD"
+  [description]
+   donnee=article,su_is_parc,article
+  [param_case]
+   texte="Dans le parc ?"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=78,177
+   taille=9,80
+   id=1000022
+   wstyle="STD"
+  [description]
+   donnee=article,cog_pdvfa,article
+  [param_case]
+   texte="Facturation moteur PDV"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [case_a_cocher]
   [presentation]
    position=108,5
@@ -7833,7 +7884,7 @@
  [groupbox]
   [presentation]
    position=99,164
-   taille=48,151
+   taille=57,151
    id=157
    wstyle="GROUPE"
   [param_groupbox]
@@ -7841,8 +7892,8 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=153,164
-   taille=30,151
+   position=159,164
+   taille=26,151
    id=864
    wstyle="GROUPE"
   [param_groupbox]
@@ -7923,7 +7974,7 @@
    texte="Rang ABC"
  [obj_texte]
   [presentation]
-   position=135,169
+   position=144,169
    taille=9,99
    id=175
    wstyle="STD"
@@ -7939,7 +7990,7 @@
    texte="Inventorié le"
  [obj_texte]
   [presentation]
-   position=171,169
+   position=174,169
    taille=9,99
    id=868
    wstyle="STD"
@@ -8211,6 +8262,7 @@
   [traitements]
    microbol_click=8002
    diva_avant="Champ_StRes_1_Av"
+   diva_apres="Champ_StRes_1_Ap"
  [champ]
   [presentation]
    position=52,270
@@ -8454,7 +8506,29 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=115,169
+   position=114,169
+   taille=9,63
+   id=1000018
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=article,cog_generique,article
+  [param_case]
+   texte="Générique"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cog_Generique_1_Av"
+ [case_a_cocher]
+  [presentation]
+   position=124,169
    taille=9,145
    id=197
    wstyle="STD"
@@ -8485,7 +8559,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=125,169
+   position=134,169
    taille=9,145
    id=198
    wstyle="STD"
@@ -8516,7 +8590,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=135,270
+   position=144,270
    taille=9,32
    id=199
    wstyle="CHAMP_SAISI"
@@ -8546,7 +8620,7 @@
    diva_apres="Champ_EdCod_1_Ap"
  [champ]
   [presentation]
-   position=171,270
+   position=174,270
    taille=9,32
    id=872
    wstyle="CHAMP_SAISI"
@@ -12313,6 +12387,15 @@
    texte="Afficher les référencements client de l'article"
   [item]
    [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Accessoires"
+    wid_ressource="COG_BTNACC"
+    wetype_trait=arret
+    warret=1000
+   [info_bulle]
+   texte="Afficher les accessoires"
+  [item]
+   [param_bouton]
     wnom="EVENEMENT"
     wid_ressource="EVT"
     wetype_trait=arret
@@ -12689,10 +12772,14 @@
 ;*
 
 ;
+Include "GTTCZ00.dhsp"
+
+;
 Module "CCTM000.DHOP"
 
 ;
-Public RecordSql "gtrsart.dhoq" article 	ARTICLE
+Public RecordSql 	"gtrsart.dhoq" 	article 				ARTICLE
+Public RecordSQL	"gtRSppArt.dhoq"	Decomposition		CogRs_DAR
 
 ;
 Public Record "gtfdd.dhsd" art 		ART_sel
@@ -12749,6 +12836,21 @@ Endp
 
 
 ;*
+Private Procedure Champ_Cog_Generique_1_Av
+;
+Beginp
+
+	CogRs_DAR.Init()
+	CogRs_DAR.Join.Deactivate("$ALL")
+	CogRs_DAR.Where.Equal_Ref(Article.Ref)
+	If CogRs_DAR.GetCount() > 0  OR Article.StRes = 2
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+
+Endp
+
+
+;*
 Private Procedure Champ_NatImmo_1_Ap
 ;
 Beginp
@@ -12757,6 +12859,18 @@ Beginp
 	If Lectab_HD(ARTICLE.NatImmo, 9163) = 0
 		ARTICLE.NATI_Lib = HD.Lib
 	EndIf
+
+Endp
+
+
+;*
+Private Procedure Champ_StRes_1_Ap
+;
+Beginp
+
+	If Article.StRes = 2
+		Article.Cog_Generique = 1
+	EndIF
 
 Endp
 [/diva]

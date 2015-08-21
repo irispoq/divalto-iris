@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20150708115908      
+;>xwin4obj                              7.0       20150812171720      
 [masque]
  utilisateur="UGIE"
- date_modification="08/07/2015"
+ date_modification="12/08/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=1000094
@@ -8756,7 +8756,6 @@
     shift_f1=1
    [traitements]
     microbol_click=8002
-    diva_avant="Champ_Cog_ImoFlag_1_Av"
    [param_colonne]
     titre="Immo Oui?"
     fl_aff=non
@@ -27941,6 +27940,34 @@ Public Record "gtfdd.dhsd" art art
 ;*
 
 ;*
+Procedure Champ_Qte_1_Ap	
+; G1T1.DStQte
+BeginP
+
+	If Cog_G1T1_Composant_Controler_Qte(wChamp=1) = 'O'
+		Standard.Champ_Qte_1_Ap
+	Else
+		MessageBox("La quantité du composant doit correspondre à celle du composé.", "Alerte")
+		Harmony.Retour = XMENEXT_RESSAISIE
+	EndIf
+
+EndP
+
+;*
+Procedure Champ_Qte_5_Ap
+;	G1T1.StQte
+BeginP
+
+	If Cog_G1T1_Composant_Controler_Qte(wChamp=2) = 'O'
+		Standard.Champ_Qte_5_Ap
+	Else
+		MessageBox("La quantité du composant doit correspondre à celle du composé.", "Alerte")
+		Harmony.Retour = XMENEXT_RESSAISIE
+	EndIf
+
+EndP
+
+;*
 Procedure Champ_Projet_2_Ap
 ;
 Beginp
@@ -27962,15 +27989,6 @@ Private Procedure Champ_Cog_DirCliente_1_Ap
 Beginp
 	Cog_Champ_Cog_DirCliente_1_Ap
 EndP
-
-
-;*
-Private Procedure Champ_Cog_ImoFlag_1_Av
-;
-Beginp
-	Cog_Champ_Cog_ImoFlag_1_Av
-Endp
-
 
 ;*
 Private Procedure Champ_Cog_Validite_1_Ap

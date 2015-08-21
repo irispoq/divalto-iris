@@ -1,4 +1,4 @@
-<DictionarySql DefaultDictionary=GTFDD.dhsd DataBase=DAV overwrittenby="cogrs_artu.dhoq" ModuleInfo='$Id: cogrs_art.dhsq 7293 2014-12-23 15:18:20Z admin $'>
+<DictionarySql DefaultDictionary=GTFDD.dhsd DataBase=DAV overwrittenby="cogrs_artu.dhoq" ModuleInfo='$Id: cogrs_art.dhsq 8474 2015-08-21 06:46:02Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du GTFAT
 ;*
@@ -30,3 +30,56 @@ Public Record GTFDD.dhsd	T000
 	Case Par_Reference				"Par référence"
 		ART.Dos,
 		ART.Ref
+
+;*
+;*		Accessoires pour les articles génériques
+;*
+<RecordSQL Name=CogRs_ArtAcc Comment='Accessoire' ZoomOptimize=Yes>
+Public Record A5DD.dhsd		MZ
+Public Record GTFDD.dhsd	T000
+<SELECT>
+	COG_ARTGENACC.*,
+	ART.DES AS ART_DES,
+	ARTGEN.DES AS ARTGEN_DES,
+	SOUSREF1.LIB AS SREF1_LIB,
+	SOUSREF2.LIB AS SREF2_LIB
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COGFDD.DHSD COG_ARTGENACC
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD	ART AS ARTGEN										
+	ON ARTGEN.DOS = COG_ARTGENACC.DOS AND ARTGEN.REF = COG_ARTGENACC.COG_ARTGENREF
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD	ART										
+	ON ART.DOS = COG_ARTGENACC.DOS AND ART.REF = COG_ARTGENACC.REF
+<LEFTJOIN Name='Zoom'>
+	T019 AS SOUSREF1
+	ON (SOUSREF1.DOS = CASE WHEN T000.TABTYP(19) = 2 THEN 999 ELSE COG_ARTGENACC.DOS END) AND SOUSREF1.SREF1 = COG_ARTGENACC.SREF1 AND SOUSREF1.CEBIN = 19
+<LEFTJOIN Name='Zoom'>
+	T019 AS SOUSREF2
+	ON (SOUSREF2.DOS = CASE WHEN T000.TABTYP(19) = 2 THEN 999 ELSE COG_ARTGENACC.DOS END) AND SOUSREF2.SREF1 = COG_ARTGENACC.SREF2 AND SOUSREF2.CEBIN = 19
+<WHERE>
+	COG_ARTGENACC.DOS = MZ.Dos
+	Case PK(char genRef, char ref, char sref1, char sref2)
+		COG_ARTGENACC.COG_ARTGENREF = genRef AND COG_ARTGENACC.REF = ref AND COG_ARTGENACC.SREF1 = sref1 AND COG_ARTGENACC.SREF2 = sref2
+	Case Exists(char genRef, char ref, char sref1, char sref2)
+		COG_ARTGENACC.COG_ARTGENREF = genRef AND COG_ARTGENACC.REF = ref AND COG_ARTGENACC.SREF1 = sref1 AND COG_ARTGENACC.SREF2 = sref2
+	Case Equal_GenRef(char ref)
+		COG_ARTGENACC.COG_ARTGENREF = ref
+	Case Equal_Ref(char ref)
+		COG_ARTGENACC.REF = ref
+	Case Equal_Sref1(char sref1)
+		COG_ARTGENACC.SREF1 = sref1
+	Case Equal_Sref2(char sref2)
+		COG_ARTGENACC.SREF2 = sref2
+	Case Like_Ref(char ref)
+		COG_ARTGENACC.REF LIKE ref
+	Case Like_Sref1(char sref1)
+		COG_ARTGENACC.SREF1 LIKE sref1
+	Case Like_Sref2(char sref2)
+		COG_ARTGENACC.SREF2 LIKE sref2
+<ORDERBY>
+	Case PK
+		COG_ARTGENACC.COG_ARTGENREF,
+		COG_ARTGENACC.REF,
+		COG_ARTGENACC.SREF1,
+		COG_ARTGENACC.SREF2 

@@ -11,6 +11,15 @@ Module "COG_GTTZ000_SQL.DHOP"
 ;*		Surcharges des procédures standards
 ;*
 
+;*
+;*
+Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+Beginp
+	Standard.Maj_Menu_Boutons
+	Cog_Maj_Menu_Boutons
+EndP
+	
 ;* 01
 procedure ZoomModification	; avant entrée en modif
 beginp
@@ -40,5 +49,13 @@ Procedure ZoomDebut
 Beginp
 	Standard.ZoomDebut
 	Cog_ZoomDebut
+EndP
+
+;*
+Procedure ZoomConsult
+;
+BeginP
+	Standard.ZoomConsult
+	Cog_ZoomConsult
 EndP
 

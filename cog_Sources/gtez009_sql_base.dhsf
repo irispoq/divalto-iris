@@ -1,0 +1,1621 @@
+;>xwin4obj                              7.0       20130213094839      
+[masque]
+ libelle="Décomposition"
+ utilisateur="SN"
+ date_modification="23/03/2012"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=230
+ type_masque=2
+ dernier_id=73
+ dernier_id_page=20
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="gtfaide"
+ [touches]
+  f7=135
+  shift_f6=10000
+[enregistrements]
+ "gtrsart.dhoq",,decomposition,decomposition,1024,1
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=225,280
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=36,360
+  attache_lgx=oui
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=25
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Décomposition à créer"
+ nb_lig=5
+ nb_col=60
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [aide_page]
+  aide=1345
+  fichier="gtfaide"
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,53
+   noms="sref"
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 1"
+ [obj_texte]
+  [presentation]
+   position=18,5
+   taille=9,53
+   noms="sref"
+   id=4
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 2"
+ [obj_texte]
+  [presentation]
+   position=28,5
+   taille=9,53
+   id=5
+   wstyle="STD"
+  [texte]
+   texte="Ligne"
+ [champ]
+  [presentation]
+   position=8,60
+   taille=9,35
+   noms="sref"
+   id=6
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=decomposition,sref1,decomposition
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9008
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_SREF_1_Av"
+   diva_apres="Champ_SREF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=8,96
+   taille=9,144
+   noms="sref"
+   id=7
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,sousref1_lib,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=18,60
+   taille=9,35
+   noms="sref"
+   id=8
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=decomposition,sref2,decomposition
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9008
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_SREF_1_Av"
+   diva_apres="Champ_SREF_2_Av"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=18,96
+   taille=9,144
+   noms="sref"
+   id=9
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,sousref2_lib,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=28,60
+   taille=9,35
+   id=10
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=decomposition,lilg,decomposition
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=3
+ libelle="Sélection"
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=50
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=20
+ [aide_page]
+  aide=1346
+  fichier="gtfaide"
+ [tableau]
+  [presentation]
+   position=0,0
+   taille=225,199
+   attache_lgx=oui
+   attache_lgy=oui
+   id=52
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=6
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   col_fixes=5
+   separation=66
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=87,252
+    taille=19,26
+    id=53
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=decomposition,cenote,decomposition
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CENOTE_1"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [param_colonne]
+    titre="#tblnote"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=57,16
+    taille=8,19
+    noms="sref"
+    id=54
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=decomposition,sref1,decomposition
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Sous-référence 1"
+   [param_colonne]
+    titre="Sref 1"
+    fl_aff=oui
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=72,92
+    taille=8,19
+    noms="sref"
+    id=55
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=decomposition,sref2,decomposition
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Sous-référence 2"
+   [param_colonne]
+    titre="Sref 2"
+    fl_aff=oui
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=75,4
+    taille=8,17
+    id=56
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,lilg,decomposition
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Numéro de ligne"
+   [param_colonne]
+    titre="Ligne"
+    fl_aff=oui
+    largeur_col=20
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=72,208
+    taille=10,105
+    id=57
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,refco,decomposition
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=9000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_REF_1_Ap"
+   [info_bulle]
+   texte="Référence composante"
+   [param_colonne]
+    titre="Référence composante"
+    largeur_col=65
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=15,168
+    taille=8,181
+    id=58
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=decomposition,articlecompose_des,decomposition
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Désignation de l'article composant"
+   [param_colonne]
+    titre="Désignation du composant"
+    fl_aff=oui
+    largeur_col=97
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=81,184
+    taille=10,37
+    noms="sref"
+    id=59
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,sref1co,decomposition
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=9008
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_SREF_3_Av"
+    diva_apres="Champ_SREF_3_Ap"
+   [info_bulle]
+   texte="Sous-référence 1 composante"
+   [param_colonne]
+    titre="Sref1 comp."
+    fl_aff=oui
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=105,176
+    taille=10,37
+    noms="sref"
+    id=60
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,sref2co,decomposition
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=9008
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_SREF_3_Av"
+    diva_apres="Champ_SREF_4_Ap"
+   [info_bulle]
+   texte="Sous-référence 2 composante"
+   [param_colonne]
+    titre="Sref2 comp."
+    fl_aff=oui
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=117,184
+    taille=10,47
+    id=61
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,qte,decomposition
+    format="\FormatMille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Qte_1_Ap"
+   [info_bulle]
+   texte="Quantité"
+   [param_colonne]
+    titre="Quantité"
+    fl_aff=oui
+    largeur_col=42
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=138,220
+    taille=7,65
+    id=62
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,qtetyp,decomposition
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","QTETYP"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Type de quantité"
+   [param_colonne]
+    titre="Type quantité"
+    fl_aff=oui
+    largeur_col=57
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=75,240
+    taille=7,55
+    id=63
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,mvcod,decomposition
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","NONOUI"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Mouvementer le stock"
+   [param_colonne]
+    titre="Mvt stock"
+    fl_aff=oui
+    largeur_col=31
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=150,196
+    taille=10,25
+    id=64
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,edcod,decomposition
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Edcod_1_Ap"
+   [info_bulle]
+   texte="Code impression"
+   [param_colonne]
+    titre="Impression"
+    fl_aff=oui
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=165,196
+    taille=10,25
+    id=65
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=decomposition,op,decomposition
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=9060
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Op_1_Ap"
+   [info_bulle]
+   texte="Code opération"
+   [param_colonne]
+    titre="OP"
+    fl_aff=oui
+    largeur_col=22
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=42,30
+    taille=9,74
+    id=70
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=decomposition,usercr,decomposition
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Auteur de la création"
+   [param_colonne]
+    titre="Créé par"
+    fl_aff=non
+    largeur_col=77
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,30
+    taille=9,56
+    id=71
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=decomposition,usercrdh,decomposition
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Utilisateur date et heure de création"
+   [param_colonne]
+    titre="Créé le"
+    fl_aff=non
+    largeur_col=56
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=42,209
+    taille=9,74
+    id=72
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=decomposition,usermo,decomposition
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Auteur de la modification"
+   [param_colonne]
+    titre="Modifié par"
+    fl_aff=non
+    largeur_col=76
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,209
+    taille=9,56
+    id=73
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=decomposition,usermodh,decomposition
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Utilisateur date et heure de modification"
+   [param_colonne]
+    titre="Modifié le"
+    fl_aff=non
+    largeur_col=56
+    wstyle="ENTETE_COLONNE"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=19
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=18
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=16
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=15
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=14
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=13
+[page]
+ numero=11
+ libelle="Fiche zoom"
+ fond="STD"
+ nature=double
+ titre="Zoom"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ page_fond=1
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="DEFINITION"
+   couleur_fond="STD"
+ [aide_page]
+  aide=1346
+  fichier="gtfaide"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,63
+   noms="sref"
+   id=12
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 1"
+ [obj_texte]
+  [presentation]
+   position=36,5
+   taille=9,63
+   noms="sref"
+   id=13
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 2"
+ [obj_texte]
+  [presentation]
+   position=46,5
+   taille=9,63
+   id=14
+   wstyle="STD"
+  [texte]
+   texte="Numéro de ligne"
+ [obj_texte]
+  [presentation]
+   position=62,5
+   taille=9,63
+   id=15
+   wstyle="STD"
+  [texte]
+   texte="Référence composante"
+ [obj_texte]
+  [presentation]
+   position=82,5
+   taille=9,63
+   noms="srefco"
+   id=16
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 1"
+ [obj_texte]
+  [presentation]
+   position=92,5
+   taille=9,63
+   noms="srefco"
+   id=17
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 2"
+ [obj_texte]
+  [presentation]
+   position=112,5
+   taille=9,21
+   id=18
+   wstyle="STD"
+  [texte]
+   texte="Quantité"
+ [obj_texte]
+  [presentation]
+   position=142,5
+   taille=9,63
+   id=19
+   wstyle="STD"
+  [texte]
+   texte="Code impression"
+ [obj_texte]
+  [presentation]
+   position=152,5
+   taille=9,63
+   id=20
+   wstyle="STD"
+  [texte]
+   texte="Code opération"
+ [champ]
+  [presentation]
+   position=72,91
+   taille=9,184
+   id=21
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,articlecompose_des,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=26,91
+   taille=9,40
+   noms="sref"
+   id=22
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=decomposition,sref1,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=26,132
+   taille=9,143
+   noms="sref"
+   id=23
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,sousref1_lib,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=82,132
+   taille=9,143
+   noms="srefco"
+   id=24
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,sousrefco1_lib,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=92,132
+   taille=9,143
+   noms="srefco"
+   id=25
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,sousrefco2_lib,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=36,132
+   taille=9,143
+   noms="sref"
+   id=26
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,sousref2_lib,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=36,91
+   taille=9,40
+   noms="sref"
+   id=27
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=decomposition,sref2,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=46,91
+   taille=9,40
+   id=28
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=decomposition,lilg,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=152,132
+   taille=9,143
+   id=29
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,codeop_lib,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=62,91
+   taille=9,95
+   id=30
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=decomposition,refco,decomposition
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1439
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   f8=9000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_REF_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=82,91
+   taille=9,40
+   noms="srefco"
+   id=31
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=decomposition,sref1co,decomposition
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1461
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   f8=9008
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_SREF_3_Av"
+   diva_apres="Champ_SREF_3_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=92,91
+   taille=9,40
+   noms="srefco"
+   id=32
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=decomposition,sref2co,decomposition
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1461
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   f8=9008
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_SREF_3_Av"
+   diva_apres="Champ_SREF_4_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=112,31
+   taille=9,55
+   id=34
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=decomposition,qtetyp,decomposition
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","QTETYP"
+  [aide_page]
+   aide=1430
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=112,91
+   taille=9,40
+   id=33
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=decomposition,qte,decomposition
+   format="\FormatMille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=1426
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Qte_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=122,91
+   taille=9,182
+   id=37
+   wstyle="STD"
+  [description]
+   donnee=decomposition,mvcod,decomposition
+   minmaj=majuscules
+  [param_case]
+   texte="Mouvementer le stock"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=1406
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=142,91
+   taille=9,40
+   id=38
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=decomposition,edcod,decomposition
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=1327
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Edcod_1_Ap"
+ [champ]
+  [presentation]
+   position=152,91
+   taille=9,40
+   id=39
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=decomposition,op,decomposition
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1331
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   f8=9060
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Op_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=12
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ prec=11
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [aide_page]
+  aide=1021
+  fichier="gtfaide"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=38,130
+   id=46
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,145
+   taille=38,130
+   id=47
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,18
+   id=42
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=42,150
+   taille=9,18
+   id=43
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=52,10
+   taille=9,18
+   id=44
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=52,150
+   taille=9,18
+   id=45
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=42,30
+   taille=9,74
+   id=48
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,usercr,decomposition
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=52,30
+   taille=9,56
+   id=49
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,usercrdh,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=42,170
+   taille=9,74
+   id=50
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,usermo,decomposition
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=52,170
+   taille=9,56
+   id=51
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=decomposition,usermodh,decomposition
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPL"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="NOTE"
+    wtexte="_Note \TShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wetype_trait=arret
+    warret=8
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wetype_trait=arret
+    warret=9
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#ctrl_insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   nature=case
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__1"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    warret=6
+    wtrait_chaine="#ctrl_p"
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+SetModuleInfo('$Id: gtez009_sql_base.dhsf 8426 2015-07-31 13:32:31Z admin $')
+;*
+;*      Zoom sur décompositions article			  Enregistrement Decomposition de GTRSART
+;*
+
+Include	'GTTC000.dhsp'
+ 
+; TDF
+Public HFile		'GTFDD.dhsd'	GTFTAB			GTFTAB
+Public HFile		'GTFDD.dhsd'	GTFAT				GTFAT
+
+; Enregistrement
+Public RecordSql  'GTRSART.dhoq' Decomposition
+Public Record  	'DDSYS.dhsd' 	ZOOM
+Public Record 		'GTFDD.dhsd' 	ART 	
+Public Record 		'GTFDD.dhsd' 	ART 				ART1
+Public Record  	'GTFDD.dhsd' 	G7
+Public Record  	'GTFDD.dhsd'	XZ					G3XZ
+Public Record 		'GTFDD.dhsd'	T019
+Public Record 		'GTFDD.dhsd'	T020
+Public Record 		'DDSYS.dhsd' 	ROWINFO			ZoomSelection
+
+;*
+;*		Séquences liées au masque
+;*
+
+;*
+Public Procedure Champ_Edcod_1_Ap			; après code impression
+1	i	1,0
+Beginp
+	If Decomposition.EDCOD <> ' '
+		for i = 1 to length(Decomposition.EDCOD)
+			If mid(Decomposition.EDCOD,i,1) not in ('C','F','I',1..5,'*',' ' )
+				Mes_Alert(2115)
+				Harmony.retour = 3
+				preturn
+			EndIf
+		next			 
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Op_1_Ap			; après code opération
+Beginp
+	Decomposition.CodeOp_Lib = ' '
+	If lectab(20, Decomposition.OP,1120) = 0
+		Decomposition.CodeOp_Lib  = T020.LIB
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Qte_1_Ap			; après quantité
+Beginp
+	Controle_Quantite(Decomposition.QTE,2220)
+Endp
+
+;*
+Public Procedure Champ_REF_1_Ap			; controle référence composante
+Beginp
+	Controle_Article (Decomposition.REFCO,2100,0,1) 
+	Decomposition.ArticleCompose_Des = Art.Des
+Endp
+
+;*
+Public Procedure Champ_SREF_1_Av			; gestion des sous-références
+Beginp
+	G3XZ.REF = Decomposition.REF
+	If ART1.SREFCOD = 1
+		Harmony.Retour = Xmenext_Saut_Donnee
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_SREF_1_Ap			; après sous-référence 1
+Beginp
+	If Harmony.key = K_CTRL_S
+		Decomposition.SREF = G3XZ.SREF
+		Decomposition.SousRef2_Lib = ' '
+		If lectab(19, Decomposition.SREF2,1119) = 0
+			Decomposition.SousRef2_Lib = T019.LIB
+		EndIf
+	EndIf
+	G3XZ = ' '
+
+	Decomposition.SousRef1_Lib  = ' '
+	If lectab(19, Decomposition.SREF1,1119) = 0
+		Decomposition.SousRef1_Lib = T019.LIB
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_SREF_2_Av			; après sous-référence 2
+Beginp
+	If Harmony.key = K_CTRL_S
+		Decomposition.SREF = G3XZ.SREF
+		Decomposition.SousRef1_Lib = ' '
+		If lectab(19, Decomposition.SREF1,1119) = 0
+			Decomposition.SousRef1_Lib = T019.LIB
+		EndIf
+	EndIf
+	G3XZ = ' '
+
+	Decomposition.SousRef2_Lib = ' '
+	If lectab(19, Decomposition.SREF2,1119) = 0
+		Decomposition.SousRef2_Lib = T019.LIB
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_SREF_3_Av			; gestion des sous-références composantes
+Beginp
+	G3XZ.REF = Decomposition.REFCO
+	If ART.SREFCOD = 1
+		Harmony.Retour = Xmenext_Saut_Donnee
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_SREF_3_Ap			; après sous-référence composante 1
+Beginp
+	If Harmony.Key = K_CTRL_S
+		Decomposition.SREFCO = G3XZ.SREF
+		Decomposition.SousRefCo2_Lib = ' '
+		If lectab(19, Decomposition.SREF2CO,1119) = 0
+			Decomposition.SousRefCo2_Lib = T019.LIB
+		EndIf
+	EndIf
+	G3XZ = ' '
+
+	Decomposition.SousRefCo1_Lib = ' '
+	If lectab(19, Decomposition.SREF1CO,1119) = 0
+		Decomposition.SousRefCo1_Lib = T019.LIB
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_SREF_4_Ap			; après sous-référence composante 2
+Beginp
+	If Harmony.Key = K_CTRL_S
+		Decomposition.SREF = G3XZ.SREF
+		Decomposition.SousRefCo1_Lib  = ' '
+		If lectab(19, Decomposition.SREF1CO,1119) = 0
+			Decomposition.SousRefCo1_Lib = T019.LIB
+		EndIf
+	EndIf
+	G3XZ = ' '
+
+	Decomposition.SousRefCo2_Lib = ' '
+	If lectab(19, Decomposition.SREF2CO,1119) = 0
+		Decomposition.SousRefCo2_Lib = T019.LIB
+	EndIf
+Endp
+;*
+
+;*
+;*
+;*
+
+[/diva]
+[diva_base]
+[/diva]

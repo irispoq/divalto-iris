@@ -1,0 +1,51 @@
+SetModuleInfo('$Id: gtuz009_sql.dhsp 8426 2015-07-31 13:32:31Z admin $')
+;*
+;*      Zoom sur Accessoires des articles génériques
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF		P205A			Init		08/2015		Contrôles liés à la FE UGIEIRIS_DAVFIN_FE008_GestBundle_V2.1
+;*
+
+;*
+;*		Déclarations;
+;*
+
+OverWrite gttz009_sql.dhop
+
+; 
+Include "GTTCZ00.DHSP"
+
+;
+Public RecordSql	'GTRSART.dhoq'	Decomposition				; Décomposition
+
+; 
+Public Record 		'GTFDD.dhsd' 	DAR			 	DAR_Sel	; Décomposition (sélection)
+Public Record 		'GTFDD.dhsd' 	ART			 				; Article	  (Composant)
+Public Record 		'GTFDD.dhsd'	ART				ART1		; Article bis (Composé)
+
+;*
+;*	P&F
+;*
+
+;*
+Procedure ZoomCreation
+;
+Beginp
+
+	Standard.ZoomCreation
+
+	; Test du retour de la procédure standard 
+	If Zoom.Ok <> 'O'
+		PReturn
+	EndIf
+
+	; Article générique --> création de décomposition interdite
+	If ART1.Cog_Generique = 2
+		MessageBox("Création interdite: l'article est de type générique, il ne peut être un composé.", "Alerte", MB_ICONEXCLAMATION)
+		Zoom.Ok = 'I'
+	EndIF
+
+EndP

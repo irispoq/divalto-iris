@@ -5,8 +5,11 @@ SetModuleInfo('$Id$')
 
 OverWrittenBy "COG_GTUZ000_SQL.dhop"
 
-Include	GTTCZ00.dhsp										; Déclarations communes
+;
+Include	"GTTCZ00.dhsp"										; Déclarations communes
+Include	"COGTC_000.dhsp"
 
+;
 Module 	XZoom7.dhop
 Module 	CCTM000.dhop
 Module 	CCPM000.dhop
@@ -71,6 +74,7 @@ Public Record GTFDD.dhsd 	T036							; Nature produit
 Public Record GTFDD.dhsd 	T046							; Attestation Article tiers
 Public Record GTFDD.dhsd	T073							; Compétence
 
+Public Record GTFDD.dhsd 	XQ			XQ_COG
 Public Record GRFDD.dhsd 	XZ 		GRXZ				; Echange CRM
 Public Record A5DD.dhsd 	XZ 		A5XZ				; Echange commun
 Public Record A5DD.dhsd		MDOS							; Dossier commun
@@ -108,6 +112,26 @@ Const C_Page_InitDuplication	= 23
 1	g_StCod			>gtfdd.dhsd STCOD				; sauvegarde En stock ?
 1	g_GiCod			>gtfdd.dhsd GICOD				; sauvegarde mode de suivi
 1	g_RefUn			>gtfdd.dhsd RefUn				; sauvegarde unité de référence
+
+;*
+;*
+Public Procedure Cog_Maj_Menu_Boutons
+; met à jour le menu et les boutons
+Beginp
+	
+	XmeToolbarEnableButton(IdOutilZoom, "cog_btnacc", FALSE)
+
+	Switch Zoom.Action
+		Case 	Zoom_AFFICHAGE
+			Switch Zoom.TypeInput
+				Case Zoom_S_CONSULT		; avant consultation fiche ou liste
+					If Article.Cog_Generique = 2
+						XmeToolbarEnableButton(IdOutilZoom, "cog_btnacc", TRUE)
+					EndIf
+			EndSwitch
+	EndSwitch
+
+EndP
 
 ;*01
 Public function int cog_Article_Utilisation
@@ -181,6 +205,24 @@ BeginP
 	If Seek_CZ() <> 0
 		CZ.Dos = 0
 	EndIf
+
+EndP
+
+;*
+Public Procedure Cog_ZoomConsult
+;
+BeginP
+
+	Switch Harmony.Key
+		Case Harmony.Dataarret = 1000
+			If Article.Ref <> ' '
+				Init XQ_COG = ' '
+				XQ_COG.RefMsk = Article.Ref
+				Ping("XQ_COG", XQ_COG)
+				Zoom_Call(C_Zoom_ArtGenAcc)
+			EndIf
+
+	EndSwitch
 
 EndP
 

@@ -634,15 +634,15 @@ beginf
 			PRJAP.Cog_ImpDetail = 1
 		endif
 		PRJAP.Cog_ETLDateImport = Time(7)
-		;if prjap.Cog_Facture = 2
+		if prjap.Cog_Facture = 2
 			; YATO 22/08/2014 : FE002_CLASSEAFFAIRE : la classe affaire ne doit plus être mise à jour. Le nouveau champ 'Type moteur facturation' est affecté
 			;prjap.AfrClas = "PSPE"
-		;	PrjAp.Cog_TypMotFac = "PSPE"
-		;else
+			PrjAp.Cog_TypMotFac = "PSPE"
+		else
 			; YATO 22/08/2014 : FE002_CLASSEAFFAIRE :	la classe affaire ne doit plus être mise à jour. Le nouveau champ 'Type moteur facturation' est affecté
 			;prjap.AfrClas = "PIG"
-		;	PrjAp.Cog_TypMotFac = "PIG"
-		;endif
+			PrjAp.Cog_TypMotFac = "PIG"
+		endif
 		If Prjap.AffairePere <> " "
 			if hseek(gtfproj_dev_01,prjap_dev_01,"A" & prjap.Dos & Prjap.AffairePere) = 0
 				Prjap.Cog_Lib_Affaire_Mere = prjap_dev_01.Lib80
@@ -680,17 +680,18 @@ beginf
 				MAJ_Axe_Analytique(SocAfr.AxeNo, PrjAp.Cog_AxeAnael, ori=32, PrjAp.Lib80)
 			Endif
 		endif
-		;Switch Left(prjap.Cog_Prj_Status)
-		;	Case "Démarré"
-		;		prjap.Ce2 = 3
-		;	Case "Arrêté"
-		;		prjap.Ce2 = 3
-		;	Case "Reporté"
-		;		prjap.Ce2 = 3
-		;	Case "Terminé"
-		;		prjap.Ce2 = 4
-		;	Default
-		;		prjap.Ce2 = 1
+		Switch Left(prjap.Cog_Prj_Status)
+			Case "Démarré"
+				prjap.Ce2 = 3
+			Case "Arrêté"
+				prjap.Ce2 = 3
+			Case "Reporté"
+				prjap.Ce2 = 3
+			Case "Terminé"
+				prjap.Ce2 = 4
+			Default
+				prjap.Ce2 = 1
+		EndSwitch
 		if prjap.Tiers <> " "
 			prjap.Ce3 = "1"
 		else

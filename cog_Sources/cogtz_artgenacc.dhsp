@@ -1,0 +1,441 @@
+SetModuleInfo('$Id: cogtz_artgenacc.dhsp 8474 2015-08-21 06:46:02Z admin $')
+;*
+;*      Zoom sur Accessoires des articles génériques
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF		P205A			Init		08/2015		Version initiale selon UGIEIRIS_DAVFIN_FE008_GestBundle_V2.1
+
+
+;*
+;*		Déclarations;
+;*
+
+OverWrittenBy "coguz_artgenacc.dhop"
+
+;
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+;
+Module	"A5PMNoteJoint.dhop"
+Module 	"XZoom7.dhop"
+
+; TDF
+HFileVersion 	GTFDD.dhsd GTFTAB
+
+; Record Sql 
+Public recordSQL  "CogRs_Art.dhoq"  CogRs_ArtAcc									; Table Accessoires des articles génériques
+Public recordSQL  "CogRs_Art.dhoq"  CogRs_ArtAcc		CogRs_Sel		; Table Accessoires des articles génériques pour sélection
+
+; Record
+Public Record		"gtfdd.dhsd"		XQ						XQ_COG
+Public Record		"gtfdd.dhsd"		ART
+Public Record		"gtfdd.dhsd"		ART					ARTGEN
+
+; Variables
+1	nbsel							4,0			; Nombre de lignes sélectionnées
+
+
+;*
+;* procedures 
+;*
+
+;*	Mise à jour des boutons (affichage, grisés, ...)
+Public Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+
+	Switch ZOOM.ACTION
+
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		XmeMenuEnableItem(Zoom.Idmenu,"JOINT",True)
+		
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", "<BITMAP>NOTE_N")
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", "<BITMAP>FICJOINT_N")
+		XmeToolbarEnableButton(idOutilZoom,"JOINT",True)
+
+	Case ZOOM_MODIFICATION
+		; en modification
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		XmeMenuEnableItem(Zoom.Idmenu,"JOINT",True)
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(CogRs_ArtAcc.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(CogRs_ArtAcc.CEJOINT = 2, "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+		XmeToolbarEnableButton(idOutilZoom,"JOINT",True)
+
+
+	Case 	ZOOM_AFFICHAGE
+		switch Zoom.TypeInput
+
+		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(CogRs_ArtAcc.CENOTE = 2, True, False))
+			XmeMenuEnableItem(Zoom.Idmenu,"JOINT",Condition(CogRs_ArtAcc.CEJOINT = 2, True, False))
+
+		endswitch
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(CogRs_ArtAcc.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		xmetoolbarenablebutton(idOutilZoom,"NOTE", Condition(CogRs_ArtAcc.CENOTE = 2, True, False))
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "JOINT", Condition(CogRs_ArtAcc.CEJOINT = 2, "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+		xmetoolbarenablebutton(idOutilZoom,"JOINT", Condition(CogRs_ArtAcc.CEJOINT = 2, True, False))
+
+	EndSwitch
+
+EndP
+
+;*	Recherches complémentaires
+public procedure RechercherLibelle
+beginp
+
+endp
+
+;*
+public procedure Traiter_Selection
+beginp	; Traiter_Selection
+
+	MessageBox("Sélection multiple non autorisée","Alerte", MB_ICONEXCLAMATION)
+	Zoom.Ok = 'N'
+	;nbsel ++
+	;Pong("CogRs_ArtAcc_" & nbsel,CogRs_ArtAcc.Cog_ArtGenRef & CogRs_ArtAcc.GrRef)
+
+endp		; Traiter_Selection
+
+
+;*
+public procedure Envoyer_Selections
+beginp	; Envoyer_Selections
+
+	MessageBox("Sélection multiple non autorisée","Alerte", MB_ICONEXCLAMATION)
+	Zoom.Ok = 'N'
+;	nbsel	= 0
+;	ZoomTraiterSelection("cogtz_std.dhop","Traiter_Selection")			
+;	Pong("CogRs_ArtAcc_nbre",nbsel)
+
+endp		; Envoyer_Selections
+
+;*	envoie l'élément courant si il n'y a pas eu de sélection multiple précédemment
+public procedure Envoyer_Courant
+;
+beginp
+
+	Pong("CogRs_ArtAcc",CogRs_ArtAcc.COG_ARTGENACC)
+	
+endp
+
+;*
+;* procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomEnteteTableau 
+Beginp
+	XmeList_ScanColumn(Zoom.IdTableau)
+Endp
+
+;*
+Public Procedure Construire_Condition_Selection(nom, premier)
+;
+1	Nom					A
+1	premier				1,0 = FALSE
+1 	Valeur_Condition	S
+1  Param					S
+
+Beginp
+	CogRs_ArtAcc.Where.RemoveCondition(Nom)
+
+	if CogRs_Sel.Cog_ArtGenRef  <> ' '
+		CogRs_ArtAcc.Where.Equal_GenRef(CogRs_Sel.Cog_ArtGenRef)
+		Ajouter_condition(Valeur_Condition,'Equal_GenRef')
+	endif
+																						 	
+	If CogRs_Sel.Ref <> ' '
+		Param = banaliser_condition(CogRs_Sel.Ref, premier)
+		CogRs_ArtAcc.where.Like_Ref(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Ref')
+	EndIf
+
+	If CogRs_Sel.SRef1 <> ' '
+		Param = banaliser_condition(CogRs_Sel.SRef1, premier)
+		CogRs_ArtAcc.where.Like_SRef1(Param)
+		Ajouter_condition(Valeur_Condition,'Like_SRef1')
+	EndIf
+
+	If CogRs_Sel.SRef2 <> ' '
+		Param = banaliser_condition(CogRs_Sel.SRef2, premier)
+		CogRs_ArtAcc.where.Like_SRef2(Param)
+		Ajouter_condition(Valeur_Condition,'Like_SRef2')
+	EndIf
+																						 	
+	if Valeur_Condition <> ' '
+		CogRs_ArtAcc.where.AddCondition(Nom, Valeur_Condition)
+	endif
+Endp
+
+;*
+Public Procedure ZoomDebut 
+;
+Beginp
+
+	Init_Zoom(FicheNoBloc = 0)
+	Seek_Soc(MZ.Dos)			; recherche du dossier et T000
+
+	Note_Debut 				;Init de la gestion des notes
+	Joint_Debut																; init de la gestion des fichiers joints
+
+	CogRs_Sel.Init()
+	CogRs_ArtAcc.Orderby.PK()
+
+	If PingReceiveAndDelete("XQ_COG", XQ_COG) = 0
+		CogRs_Sel.Cog_ArtGenRef = XQ_COG.RefMsk
+		CogRs_Sel.GrRef = XQ_COG.GrRef
+		Seek_Art(CogRs_Sel.Cog_ArtGenRef)
+		ARTGEN = ART
+	Else
+		MessageBox("Ce zoom doit être appelé depuis une fiche article ou la saisie de pièce.","Alerte", MB_ICONINFORMATION)
+		ProgramExit()
+ 	Endif
+
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE, TRUE)
+
+	; sauvegarde du mode d'appel
+	g7.pong		= g3xz.pong
+	g3xz.pong 	= false
+
+	If G7.Pong <> TRUE
+		XmeSetAttribut("cog_pilotpiece", AN_VISIBILITE, AV_CACHE)
+	EndIf
+
+Endp
+
+;*
+Public Procedure ZoomAbandon		
+; sortie du zoom par f9
+Beginp
+Endp
+
+;*
+Public Procedure ZoomVAlidation 
+; validation du zoom
+Beginp
+
+	zoom.valretour	= CogRs_ArtAcc.GrRef
+	if g7.pong = true
+		Envoyer_Courant
+	endif
+
+Endp
+
+;*
+Public Procedure ZoomFin			
+; à la sortie du zoom
+Beginp
+Endp					
+
+;*
+;* procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation
+;
+Beginp
+	; initialiser les données 
+	CogRs_ArtAcc.init()
+	CogRs_ArtAcc.Cog_ArtGenRef = ARTGEN.Ref
+	CogRs_ArtAcc.ARTGEN_DES		= ARTGEN.Des
+
+	Zoom.Modelf 		= ZOOM_MODE_FICHE		; pour interdire la création en mode liste
+Endp	  
+
+;*
+Public Procedure ZoomDuplication 
+Beginp
+	CogRs_ArtAcc.UserMoDh 	= ' '
+	CogRs_ArtAcc.UserCrDh 	= ' '
+	CogRs_ArtAcc.Note 		= 0
+	CogRs_ArtAcc.CeNote 		= 1	
+	CogRs_ArtAcc.Joint 		= 0
+	CogRs_ArtAcc.CeJoint		= 1	
+Endp
+
+;*
+Public Procedure ZoomApresCleCreation 
+; après saisie de la clé 
+Beginp
+
+	If Seek_SART(CogRs_ArtAcc.Ref, CogRs_ArtAcc.Sref1, CogRs_ArtAcc.Sref2) <> 0
+		MessageBox("Ces sous-références n'existent pas pour cet article.","Alerte", MB_ICONEXCLAMATION)
+		Zoom.Ok = 'C'
+	EndIf
+
+	CogRs_ArtAcc.Where.Exists(CogRs_ArtAcc.Cog_ArtGenRef, CogRs_ArtAcc.Ref, CogRs_ArtAcc.Sref1, CogRs_ArtAcc.Sref2)
+	Zoom.Res			= [ 'COG_ARTACC' mz.Dos CogRs_ArtAcc.Cog_ArtGenRef CogRs_ArtAcc.Ref CogRs_ArtAcc.Sref1 CogRs_ArtAcc.Sref2 ]
+	Zoom.Titrevar	= CogRs_ArtAcc.Cog_ArtGenRef
+Endp
+
+;*
+Public Procedure ZoomCreationRes		
+; apres réservation en création 
+Beginp
+	Note_Reinit(C_Applic_DAV)
+	Joint_ReInit(C_Applic_DAV)
+Endp
+
+;*
+Public Procedure ZoomAvantWrite 
+Beginp
+	; initialisation des codes enregistrement et mise à jour date et user
+   CogRs_ArtAcc.Dos 			= mz.Dos
+	CogRs_ArtAcc.UserCr 		= SYSTEM.User
+	CogRs_ArtAcc.UserCrDh 	= Time(7)
+	CogRs_ArtAcc.Note 		= Note_Creation_(C_Applic_DAV, 'CogRs_ArtAcc')	
+	CogRs_ArtAcc.CeNote		= Condition(CogRs_ArtAcc.Note = 0, 1, 2)
+	CogRs_ArtAcc.Joint 		= Joint_Creation_(C_Applic_DAV, 'CogRs_ArtAcc')	
+	CogRs_ArtAcc.CeJoint		= Condition(CogRs_ArtAcc.Joint = 0, 1, 2)
+Endp
+
+;*
+Public Procedure ZoomApresCreation ; compte-rendu de création
+Beginp
+	Zoom.Titrevar = [ CogRs_ArtAcc.Cog_ArtGenRef CogRs_ArtAcc.GrRef]
+Endp				 
+
+;*
+Public Procedure ZoomModification ; avant entrée en modif
+Beginp
+	Zoom.Res			= ['COG_ARTACC' mz.Dos CogRs_ArtAcc.Cog_ArtGenRef CogRs_ArtAcc.Ref CogRs_ArtAcc.Sref1 CogRs_ArtAcc.Sref2 ]
+Endp			  
+
+;*
+Public Procedure ZoomModificationRes		; apres réservation enmodif
+Beginp
+	Note_Chargement_(C_Applic_DAV, CogRs_ArtAcc.Note)
+	Joint_Chargement_(C_Applic_DAV, CogRs_ArtAcc.Note)
+Endp					
+
+;*
+Public Procedure ZoomAvantRewrite 
+Beginp
+   CogRs_ArtAcc.UserMo		= SYSTEM.User
+   CogRs_ArtAcc.UserMoDh 	= Time(7)
+	CogRs_ArtAcc.Note 		= Note_Modification_ (C_Applic_DAV, CogRs_ArtAcc.Note, 'CogRs_ArtAcc')
+	CogRs_ArtAcc.CeNote		= Condition(CogRs_ArtAcc.Note = 0, 1, 2)
+	CogRs_ArtAcc.Joint 		= Joint_Modification_ (C_Applic_DAV, CogRs_ArtAcc.Joint, 'CogRs_ArtAcc')
+	CogRs_ArtAcc.CeJoint		= Condition(CogRs_ArtAcc.Joint = 0, 1, 2)
+Endp														 
+
+;*
+Public Procedure ZoomApresModification ; compte rendu de modification
+Beginp
+	Zoom.Titrevar = [ CogRs_ArtAcc.Cog_ArtGenRef]
+Endp				 
+
+;*
+Public Procedure ZoomSuppression ; avant entrée en suppression
+Beginp
+	Zoom.Res			= ['COG_ARTACC' mz.Dos CogRs_ArtAcc.Cog_ArtGenRef CogRs_ArtAcc.Ref CogRs_ArtAcc.Sref1 CogRs_ArtAcc.Sref2 ]
+Endp													  
+
+;*
+Public Procedure ZoomSuppressionRes
+Beginp
+Endp
+														  
+;*
+Public Procedure ZoomAvantDelete 
+Beginp
+	Note_Suppression_(C_Applic_DAV, CogRs_ArtAcc.Note)
+	Joint_Suppression_(C_Applic_DAV, CogRs_ArtAcc.Joint)
+Endp
+
+;*
+Public Procedure ZoomApresSuppression ; compte rendu de suppression
+Beginp
+Endp						
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsult
+Beginp
+	Maj_Menu_Boutons
+Endp				  
+
+;*
+Public Procedure ZoomConsult 	; à utiliser si note
+Beginp
+	Switch Harmony.Key
+		Case K_F7		|	Zoom_Call()
+		Case K_SF6		|	Note_Consultation_ (C_Applic_DAV, CogRs_ArtAcc.Note)
+		Case K_CTRL_F6	|	Joint_Consultation_	(C_Applic_DAV, CogRs_ArtAcc.Joint)
+		case K_F12
+			if G7.PONG = True
+				Envoyer_Courant
+			endif
+	Endswitch 
+Endp
+
+;*
+Public Procedure ZoomAvantInput			; permet de griser les boutons et les choix
+Beginp
+	Maj_Menu_Boutons
+Endp
+
+;*
+Public Procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+Beginp											; pour appel d'un zoom 
+	Switch Harmony.Key
+	Case K_F7	|	Zoom_Call()
+	Case K_F8	|	Zoom_Call(Harmony.Arret)	; Appel de zoom
+	
+	Case K_SF6						; Saisie d'une note
+		Note_Saisie_(C_Applic_DAV, CogRs_ArtAcc.Note, 'CogRs_ArtAcc')				
+		XmeToolbarSetButtonInfo(IdOutilZoom,"NOTE", Condition(Not Note_Empty_(C_Applic_DAV), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		
+	Case 	K_Ctrl_F6												; Fichier joint
+		Joint_Saisie_(C_Applic_DAV, CogRs_ArtAcc.Joint, 'CogRs_ArtAcc')
+		XmeToolbarSetButtonInfo(IdOutilZoom, "JOINT", Condition(Not Joint_Empty_(C_Applic_DAV," "), "<BITMAP>FICJOINT"	,"<BITMAP>FICJOINT_N"))
+	
+	Case Harmony.Dataarret = 8002
+		If Harmony.Sourisbout = RIGHT_BUTTON
+			Zoom_Call()
+		Endif
+
+	Endswitch
+Endp
+
+;*
+Public Procedure ZoomFiltreAvantValeur
+Beginp
+Endp
+
+;*
+Public Procedure ZoomFiltreApresValeur 
+Beginp
+Endp	
+
+;*
+;* procedures liées à la lecture du ficher
+;*
+
+;*
+Public Procedure ZoomApresCle
+Beginp
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE)
+Endp															
+
+;*
+Public Procedure ZoomApresRead
+Beginp
+	Zoom.Titrevar = [ CogRs_ArtAcc.Cog_ArtGenRef]
+Endp															
+
+
+

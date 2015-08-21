@@ -10,6 +10,13 @@ SetModuleInfo('$Id$')
 
 OverWrite	"GTTT150.dhop"
 
+;
+Include "GtTcz00.dhsp"
+
+;
+Module	"CogTm_000.dhop"
+
+;
 public record	gtfdd.dhsd	IPAR								; paramètre d'intégration
 public record	gtfdd.dhsd	ENT								; En-tête
 public record	gtfdd.dhsd 	GTENT	
@@ -19,6 +26,7 @@ public record	gtfdd.dhsd 	G1T1	W3G1T1					; Mouvement de GTFI en validation
 public record	gtfdd.dhsd	ENT	WAENT						; En-têtebl associé
 public record	gtfdd.dhsd	ENT	W1ENT						; En-tête origine en validation
 public record	gtfdd.dhsd	ENT	W3ENT						; En-tête de GTFI en validation
+public record	gtfdd.dhsd	ART
 
 ;*
 Procedure G1T1_Validation_Affectation_Ap
@@ -46,3 +54,23 @@ BeginP
 	EndIf
 
 EndP
+
+;*
+Function char G1T1_Ligne_Validation_Av
+;
+1		wRet		1
+BeginF
+
+	wRet = Standard.G1T1_Ligne_Validation_Av
+
+	If ART.Ref <> G1T1.Ref
+		Seek_ART(G1T1.Ref)
+	EndIf
+	If ART.Cog_Generique = 2
+		Cog_EcritureLivreDeBord("Les articles génériques ne sont pas autorisés en intégration de pièce.")
+		wRet = 'N'
+	EndIf
+
+	FReturn(wRet)
+
+EndF

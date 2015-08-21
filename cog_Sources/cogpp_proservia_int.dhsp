@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8378 2015-07-16 08:05:24Z admin $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8474 2015-08-21 06:46:02Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -7,7 +7,8 @@ SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8378 2015-07-16 08:05:24Z admin $')
 ;*
 ;*		Log	Version		N° modif		Date			Modifications
 ;*		--------------------------------------------------------------------------------------------------------------
-;*
+;*		YLEF	P205A			Init			07/2015		Intégration de csv pour validation de commandes clients en BL
+;*		YLEF	P205A			FE009			07/2015		Intégration de BL internes				
 
 ;*
 ;*		Procédures / Fonctions				Commentaires
@@ -86,6 +87,7 @@ Public Record  "gtfdd.dhsd"			T025										; Nature de stock
 1	lId_CdMouv	L
 1	valeur		256
 1	integ			1,0
+1	flux			1						; flux de l'intégrateur de pièce 
 
 ;*
 ;	Procédures / Fonctions générale
@@ -121,12 +123,12 @@ Function Long	Tri_ENT(&A, &B)
 ;
 Record	"gtfdd.dhsd"		ENT			A
 Record	"gtfdd.dhsd"		ENT			B
-1		cleA		15
-1		cleB		15
+1		cleA		25
+1		cleB		25
 BeginF
 
-	cleA = [A.Dos A.TiCod A.PiCod A.PiNo]
-	cleB = [B.Dos B.TiCod B.PiCod B.PiNo]
+	cleA = [A.Dos A.TiCod A.PiCod A.PiNo A.Tiers]
+	cleB = [B.Dos B.TiCod B.PiCod B.PiNo B.Tiers]
 
 	FReturn(SortCompare(cleA, cleB))
 
@@ -383,24 +385,66 @@ BeginF
 EndF
 
 ;*
-Function int Proservia_ListeTraitement
-; Lecture des éléments à valider
-; Constitution du GTFI de validation de pièce
+Function int Proservia_ListeTraitementC
+; traitement de la liste pour création
+Record	"gtfdd.dhsd"		MVTL			wMVTL_Prec
+1		wErr			1,0  = 0
+BeginF
+
+	Init wMVTL_Prec = ' '
+	ListBegin(lId_csvMVTL)
+	Do While ListNext(lId_csvMVTL, csvMVTL) not in (-1, 0)
+
+		Init MOUV = ' '
+		MOUV.Dos		= csvMVTL.Dos
+		MOUV.GrRef	= csvMVTL.GrRef
+		MOUV.Depo	= csvMVTL.Depo
+		MOUV.Op		= csvMVTL.Op
+		MOUV.Tiers	= csvMVTL.Tiers
+
+		If ListSeek(lId_iMOUV, MOUV, MOUV_Seek) not in (-1, 0)
+			Switch csvMVTL.PiCod
+				Case 1
+				 	MOUV_Seek.DvQte += csvMVTL.Qte
+				Case 2
+					MOUV_Seek.CdQte += csvMVTL.Qte
+				Case 3
+					MOUV_Seek.BlQte += csvMVTL.Qte
+				Case 4
+					MOUV_Seek.FaQte += csvMVTL.Qte
+			EndSwitch
+			ListModify(lId_iMOUV, MOUV_Seek)		
+		Else
+			Switch csvMVTL.PiCod
+				Case 1
+				 	MOUV.DvQte = csvMVTL.Qte
+				Case 2
+					MOUV.CdQte = csvMVTL.Qte
+				Case 3
+					MOUV.BlQte = csvMVTL.Qte
+				Case 4
+					MOUV.FaQte = csvMVTL.Qte
+			EndSwitch
+			ListInsert(lId_iMOUV, MOUV)
+
+		EndIf
+
+		ListInsert(lId_iMVTL, csvMVTL)
+
+	WEnd
+
+	FReturn(wErr)
+
+EndF
+
+;*
+Function int Proservia_ListeTraitementV
+;
 Record	"gtfdd.dhsd"		MVTL			wMVTL_Prec
 1		wBlQte		>gtfdd.dhsd			BlQte
 1		wCdQte		>gtfdd.dhsd			CdQte
+1		wErr			1,0  = 0
 BeginF
-
-	AfficherTraitement("Recherche des mouvts commande à valider", "")
-	Cog_EcritureLivreDeBord("Recherche des mouvts commande à valider")
-
-	;
-	If ListCount(lId_csvMVTL) = 0
-		FReturn(1)
-	EndIf
-
-	ListErase(lId_iMOUV)
-	ListErase(lId_iMVTL)
 
 	; lecture des ventil à intégrer triées par cdno / grref
 	Init wMVTL_Prec = ' '
@@ -464,7 +508,7 @@ BeginF
 		; quantité réceptionnée > quantité restante en commande
 		If wBlQte > 0
 
-			Erreur = TRUE
+			wErr = TRUE
 			Cog_EcritureLivreDeBord("Quantité en surplus: " & NoSpaces(wBlQte) & " pour la référence " & left(csvMVTL.Ref) & " sur la commande N°" & csvMVTL.PiNo & ".")
 
 		EndIf
@@ -472,6 +516,39 @@ BeginF
 		wMVTL_Prec = csvMVTL
 
 	WEnd
+
+	FReturn(wErr)
+
+EndF
+
+;*
+Function int Proservia_ListeTraitement
+; Lecture des éléments à valider
+; Constitution du GTFI de validation de pièce
+BeginF
+
+	AfficherTraitement("Recherche des mouvts commande à valider", "")
+	Cog_EcritureLivreDeBord("Recherche des mouvts commande à valider")
+
+	;
+	If ListCount(lId_csvMVTL) = 0
+		FReturn(1)
+	EndIf
+
+	ListErase(lId_iMOUV)
+	ListErase(lId_iMVTL)
+
+	;
+	Switch flux
+		Case 'V'
+			Erreur = Proservia_ListeTraitementV
+
+		Case 'C'
+			erreur = Proservia_ListeTraitementC
+
+
+	EndSwitch
+
 
 	FReturn(Erreur)
 EndF
@@ -570,6 +647,8 @@ BeginF
 					Cog_ProserviaInd.Cog_IndSref1	= wIndice
 				Case 'SREF2'
 					Cog_ProserviaInd.Cog_IndSref2	= wIndice
+				Case 'TRAIT'
+					Cog_ProserviaInd.Cog_IndTrait = wIndice
 				Default
 					Cog_EcritureLivreDeBord("Mot clé non reconnu:" & wMotCle)
 					FReturn(1)
@@ -597,14 +676,14 @@ BeginF
 		Cog_EcritureLivreDeBord("Mot clé REF absent.")
 		erreur = TRUE
 	EndIf
-	If Cog_ProserviaInd.Cog_IndNst = 0
-		Cog_EcritureLivreDeBord("Mot clé NST absent.")
-		erreur = TRUE
-	EndIf
-	If Cog_ProserviaInd.Cog_IndPiNo = 0
-		Cog_EcritureLivreDeBord("Mot clé PINO absent.")
-		erreur = TRUE
-	EndIf
+	;If Cog_ProserviaInd.Cog_IndNst = 0
+	;	Cog_EcritureLivreDeBord("Mot clé NST absent.")
+	;	erreur = TRUE
+	;EndIf
+	;If Cog_ProserviaInd.Cog_IndPiNo = 0
+	;	Cog_EcritureLivreDeBord("Mot clé PINO absent.")
+	;	erreur = TRUE
+	;EndIf
 	If Cog_ProserviaInd.Cog_IndBlQte = 0
 		Cog_EcritureLivreDeBord("Mot clé QTE absent.")
 		erreur = TRUE
@@ -620,6 +699,9 @@ BeginF
 	If Cog_ProserviaInd.Cog_IndPicod = 0
 		Cog_EcritureLivreDeBord("Mot clé PICOD absent.")
 		erreur = TRUE
+	EndIf
+	If Cog_ProserviaInd.Cog_IndTrait = 0
+		flux = 'V'									; flux par défaut du programme
 	EndIf
 	If erreur
 		FReturn(1)
@@ -648,14 +730,14 @@ BeginF
 	EndIf
 
 	; Ticod
-	If csvMVTL.TiCod <> 'C'
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Ticod " & csvMVTL.Dos & " --> seuls les clients sont gérés.")
+	If csvMVTL.TiCod not IN ('C', 'I')
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Ticod " & csvMVTL.Dos & " --> seuls les clients et tiers internes sont gérés.")
 		wErr = TRUE
 	EndIf
 
 	; Picod
-	If csvMVTL.PiCod <> 2
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Picod " & csvMVTL.Dos & " --> seules les commandes sont gérées.")
+	If flux = 'V' AND csvMVTL.PiCod <> 2
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Picod " & csvMVTL.Dos & " --> seules les commandes sont gérées pour la validation.")
 		wErr = TRUE
 	EndIf
 
@@ -692,20 +774,38 @@ BeginF
 		wErr = TRUE
 	EndIf
 
+	; code OP
+	If csvMVTL.Op <> ' ' AND T020.Op <> csvMVTL.Op AND Lectab(20, csvMVTL.Op) <> 0
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": code opération " & csvMVTL.OP & " inconnu.")
+		wErr = TRUE	
+	ElsIf csvMVTL.Op = ' '
+		If flux = 'C'
+			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": le code opération est obligatoire en création de pièce.")
+			wErr = TRUE
+		Else
+			Init T020 = ' '
+		EndIF
+	EndiF
+
+
 	; nature de stock
 	If csvMVTL.Nst <> ' ' AND T025.Nst <> csvMVTL.Nst AND Lectab(25, csvMVTL.Nst) <> 0
 		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": nature de stock " & csvMVTL.Nst & " inconnue.")
 		wErr = TRUE
 	ElsIf csvMVTL.Nst = ' '
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": nature de stock non renseignée.")
-		wErr = TRUE
+		If T020.NstO <> ' '
+ 			csvMVTL.NST = T020.NstO
+		Else
+			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": impossible de déterminer la nature de stock.")
+			wErr = TRUE
+		EndIf
 	EndIf
 
-	; code OP
-	If csvMVTL.Op <> ' ' AND T020.Op <> csvMVTL.Op AND Lectab(20, csvMVTL.Op) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": code opération " & csvMVTL.OP & " inconnu.")
+	; Nature de stock <--> OP
+	If T025.Nst <> ' 'AND T020.Op <> ' ' AND T025.Nst <> T020.NstO
+		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": code opération " & csvMVTL.OP & " incomptatible avec nature de stock " & csvMVTL.Nst & ".")
 		wErr = TRUE	 
-	EndiF
+	EndIf
 
 	; emplacement
 	If csvMVTL.Lieu <> ' ' AND T018.Lieu <> csvMVTL.Lieu AND Lectab(18, [csvMVTL.Depo csvMVTL.Lieu]) <> 0
@@ -714,15 +814,22 @@ BeginF
 	EndiF
 
 	; Pièce à valider
-	If csvMVTL.PiNo <> ' ' AND ENT.PiNo <> csvMVTL.PiNo AND Seek_ENT(csvMVTL.TiCod, csvMVTL.PiCod, csvMVTL.PiNo) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Pièce " & csvMVTL.PiNo & " inconnue.")
-		wErr = TRUE
-	ElsIf ENT.Ce4 <> '1'
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": la pièce " & csvMVTL.PiNo & " n'est plus active.")
-		wErr = TRUE
-	ElsIf csvMVTL.PiNo = ' '
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": numéro de pièce non renseigné.")
-		wErr = TRUE
+	If flux = 'V'
+		If csvMVTL.PiNo <> ' ' AND ENT.PiNo <> csvMVTL.PiNo AND Seek_ENT(csvMVTL.TiCod, csvMVTL.PiCod, csvMVTL.PiNo) <> 0
+			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Pièce " & csvMVTL.PiNo & " inconnue.")
+			wErr = TRUE
+		ElsIf ENT.Ce4 <> '1'
+			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": la pièce " & csvMVTL.PiNo & " n'est plus active.")
+			wErr = TRUE
+		ElsIf csvMVTL.PiNo = ' '
+			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": numéro de pièce non renseigné.")
+			wErr = TRUE
+		EndIf
+	EndIf
+
+	; création de pièce
+	If flux = 'C' AND csvMVTL.TiCod = 'I'
+		csvMVTL.Tiers = SOC.InNo
 	EndIf
 
 	FReturn(wErr)
@@ -781,9 +888,6 @@ BeginF
 
 		WEnd
 
-		Sleep(1000)
-		;Cog_EcritureLivreDeBord("Affectation à MVTL")
-
 		; 	Affectation des valeurs
 		Init csvMVTL = ' '
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndDos, Cog_ProserviaVal)	not in (-,1,0)		| csvMVTL.Dos		= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf	
@@ -802,7 +906,15 @@ BeginF
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndSref2, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Sref2	= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndLieu, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Lieu		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
 		;ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_Ind, csvMVTL.	)
-		
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndTrait, Cog_ProserviaVal) not in (-,1,0)
+			If	flux <> ' ' AND flux <> Left(Cog_ProserviaVal.Cog_Val256)
+				erreur = TRUE
+				Cog_EcritureLivreDeBord("Flux différents dans le fichier, intégration refusée.")
+			Else
+				flux = Left(Cog_ProserviaVal.Cog_Val256)
+			EndIf
+		EndIf
+
 		If Proservia_MVTLControler = 0
 
 			If ListSeek(lId_csvMVTL, csvMVTL, MVTL_Seek) not in (-1, 0)
@@ -810,7 +922,18 @@ BeginF
 				ListModify(lId_csvMVTL, MVTL_Seek)
 			Else
 				ListInsert(lId_csvMVTL, csvMVTL)
-				; nouvelle ligne --> vérification si l'entête est mémorisée -- ENT a été chargé dans Proservia_MVTLControler
+				; nouvelle ligne --> vérification si l'entête est mémorisée -- ENT a été chargé dans Proservia_MVTLControler dans le cas d'une validation
+				If flux <> 'V'
+					; préparation entête de pièce
+					init ENT = ' '
+					ENT.Dos		= csvMVTL.Dos
+					ENT.TiCod	= csvMVTL.TiCod
+					ENT.PiCod	= csvMVTL.PiCod
+					ENT.Tiers	= csvMVTL.Tiers
+					ENT.Op		= csvMVTL.Op
+					ENT.Etb		= csvMVTL.Etb
+					ENT.Depo		= csvMVTL.Depo
+				EndIf
 				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndLog, Cog_ProserviaVal) not in (-,1,0) | ENT.Cog_LogBlNo= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
 				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndPiDt, Cog_ProserviaVal) not in (-,1,0)| ENT.PiDt= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
 				If ListSeek(lId_ENT, ENT, ENT_Seek) = 0
@@ -835,83 +958,83 @@ EndF
 ;*
 Function int Proservia_EcrireGTFI
 ; Constitution du GTFI avec les listes lId_iMOUV et lId_iMVTL
-Record	"gtfdd.dhsd"		MOUV			wMOUV_P	
 1		txtDebug		S	= ' '	 
 BeginF
 
 	AfficherTraitement("Ecriture du GTFI", "")
 
-	Init wMOUV_P = ' '
+	ListBegin(lId_ENT)
+	Do While ListNext(lId_ENT, ENT_Seek) not in (-1, 0)
 
-	ListBegin(lId_iMOUV)
-	Do While ListNext(lId_iMOUV, iMOUV) not in (-1, 0)
+		; rupture pièce
+		ENT = Condition(Seek_Ent(ENT_Seek.TiCod, ENT_Seek.PiCod, ENT_Seek.PiNo)=0, ENT, ENT_Seek)
+		Init iPAR	= ' '
+		iPAR.Ce1		= 'I'
+		iPAR.Dos		= ENT.Dos
+		iPAR.Etb		= ENT.Etb
+		iPAR.TiCod	= ENT.TiCod
+		iPAR.PiCod	= ENT.PiCod
+		iPAR.PiCodF	= Condition(flux='V', 3, 0)
+		iPAR.PiNo	= ENT.PiNo
+		iPAR.Trait	= flux
+		HWrite(GTFI, iPAR)
 
-		; rupture commande à valider
-		If wMOUV_P.CdNo <> iMOUV.CdNo
-			Seek_Ent(MZ.TiCod, MZ.PiCod, iMOUV.CdNo)
-			Init iPAR	= ' '
-			iPAR.Ce1		= 'I'
-			iPAR.Dos		= ENT.Dos
-			iPAR.Etb		= ENT.Etb
-			iPAR.TiCod	= ENT.TiCod
-			iPAR.PiCod	= ENT.PiCod
-			iPAR.PiCodF	= 3
-			iPAR.PiNo	= ENT.PiNo
-			iPAR.Trait	= 'V'
-			HWrite(GTFI, iPAR)
+		;
+		Init iENT 	= ' '
+		iENT.Ce1		= 'A'
+		iENT.Ce4		= '1'
+		iENT.Tiers 	= ENT_Seek.Tiers
+		iENT.Op		= ENT_Seek.Op
+		iENT.PiDt	= ENT_Seek.PiDt
+		iENT.Depo	= ENT_Seek.Depo
+		Ping("LOGBLNO" & ENT_Seek.TiCod & ENT_Seek.PiCod & ENT_Seek.PiNo, ENT_Seek.Cog_LogBlNo)
+		ListDeleteAndPrevious(lId_ENT)
+	
+		HWrite(GTFI, iENT)
 
-			;txtDebug &= '|IPAR n°' & ENT.PiNo
+		; Mouvements
+		ListBegin(lId_iMOUV)
+		Do While ListNext(lId_iMOUV, iMOUV) not in (-1, 0)
+	
+			If iMOUV.CdNo = iPAR.PiNo AND iMOUV.Tiers = iENT.Tiers
 
-			Init iENT 	= ' '
-			iENT.Ce1		= 'A'
-			iENT.Ce4		= '1'
-			; Champs à enregistrer dans l'entete BL --> ping pour gttt150
-			If ListSeek(lId_ENT, ENT, ENT_Seek) not in (-1, 0)
-				iENT.Tiers 	= ENT_Seek.Tiers
-				iENT.Op		= ENT_Seek.Op
-				iENT.PiDt	= ENT_Seek.PiDt
-				Ping("LOGBLNO" & ENT_Seek.TiCod & ENT_Seek.PiCod & ENT_Seek.PiNo, ENT_Seek.Cog_LogBlNo)
-				ListDelete(lId_ENT)
-			EndIf	
-			HWrite(GTFI, iENT)
-
-		EndIf
-
-		; iMOUV
-		wMOUV_P = iMOUV
-		iMOUV.Ce1	= 'C'
-		iMOUV.Ce2	= '1'
-		iMOUV.CdNo 	= 0
-		HWrite(GTFI, iMOUV)
-		
-		;txtDebug &= '|MOUV n°' & iMOUV.EnrNo & ' Ref:' & iMOUV.Ref & ' qte BL=' & iMOUV.BlQte
-
-		; iMVTL
-		If CogRs_OP.Op <> wMOUV_P.Op
-			CogRs_OP.Init()
-			CogRs_OP.Where.PK(wMOUV_P.Op)
-			CogRs_OP.Select()
-		EndIf
-
-		ListBegin(lId_iMVTL)
-		Do While ListNext(lId_iMVTL, iMVTL) not in (-1, 0)
-
-			If iMVTL.EnrNo = wMOUV_P.EnrNo AND iMVTL.GrRef = wMOUV_P.GrRef AND iMVTL.PiNo = wMOUV_P.CdNo	AND iMVTL.Depo = wMOUV_P.Depo	AND CogRs_OP.NstO = iMVTL.Nst
-
-				iMVTL.Ce1	= 'V'
-				iMVTL.PiNo 	= 0
-				iMVTL.EnrNo	= 0
-				HWrite(GTFI, iMVTL)
+				; iMOUV
+				iMOUV.Ce1	= 'C'
+				iMOUV.Ce2	= '1'
+				iMOUV.CdNo 	= 0
+				HWrite(GTFI, iMOUV)
 				
-				;txtDebug &= '|VTL Qte=' & iMVTL.Qte	& ' série:' & iMVTL.Serie
+		
+				; iMVTL
+				If CogRs_OP.Op <> iMOUV.Op
+					CogRs_OP.Init()
+					CogRs_OP.Where.PK(iMOUV.Op)
+					CogRs_OP.Select()
+				EndIf
+		
+				ListBegin(lId_iMVTL)
+				Do While ListNext(lId_iMVTL, iMVTL) not in (-1, 0)
+		
+					If iMVTL.EnrNo = iMOUV.EnrNo AND iMVTL.GrRef = iMOUV.GrRef AND iMVTL.PiNo = iPAR.PiNo	AND iMVTL.Depo = iMOUV.Depo AND CogRs_OP.NstO = iMVTL.Nst
+		
+						iMVTL.Ce1	= 'V'
+						iMVTL.PiNo 	= 0
+						iMVTL.EnrNo	= 0
+						HWrite(GTFI, iMVTL)
+		
+						ListDeleteAndPrevious(lId_iMVTL)
+		
+					EndIf
+		
+				WEnd
 
-				ListDeleteAndPrevious(lId_iMVTL)
+				ListDeleteAndPrevious(lId_iMOUV)
 
-			EndIf
-
+			EndIf		; test si le mouvement correspond à l'entête
+	
 		WEnd
 
-	WEnd
+	WEnd		; boucle lid_ENT
 
 	;MessageBox(txtDebug, "DEBUG")
 

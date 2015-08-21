@@ -13,8 +13,8 @@ SetModuleInfo('$Id$')
 Include "GTTCZ00.dhsp"
 
 ;
-Module "gttmpce.dhop"
-Module "COG_GTTTPCE000.DHOP""
+Module 	"gttmpce.dhop"
+Module 	"COG_GTTTPCE000.DHOP""
 
 ;
 Public HFile	"gtfdd.dhsd"	GTFPCF		GTFPCF
@@ -59,13 +59,78 @@ define IdTableauLig_XME = G3XT.IDTABLEAU(1)
 ;*
 
 ;*
-Public Procedure Cog_Champ_Cog_ImoFlag_1_Av
+Public Function char Cog_G1T1_Composant_Controler_Qte(wChamp)
 ;
-Beginp
-	
-	; TODO --> controle existence fiche bien? controle statut MOUV?
+Record	"gtfdd.dhsd"		G1T1		wG1T1
+1		wChamp		1,0				; 1: G1T1.DstQte		2:G1T1.StQte
+1		wAdr			L
+1		wDecQte		>gtfdd.dhsd		Qte  = 0
+1		wCompoQte	>gtfdd.dhsd		Qte  = 0
+1		wRet			1		= 'O'
+1		wTrouve		1,0	= FALSE	
+BeginF
 
-Endp
+	; vérification si la ligne courante est un composant
+	Switch2 GTPCE.PiCodDst
+		Case 1
+			If G1T1.DvSlg = 0 | FReturn('O')| EndIf
+		Case 2
+		 	If G1T1.CdSlg = 0 | FReturn('O')| EndIf
+		Case 3					  
+			If G1T1.BlSlg = 0 | FReturn('O')| EndIf
+		Case 4
+			If G1T1.FaSlg = 0 OR wChamp = 1 | FReturn('O')| EndIf
+	EndSwitch
+
+	;
+	If Soc.Cog_DecVerrou = 2  
+
+		wCompoQte = Condition(wChamp=1, G1T1.DstQte, G1T1.StQte)
+
+		; recherche du composé
+		wAdr = XmeListGetAdressCurrent(G3XT.IdTableau(1))
+		XmeListBegin(G3XT.IdTableau(1))
+		Do While not wTrouve AND XmeListNext(G3XT.IdTableau(1), wG1T1) not in (-1, 0) 
+
+			Switch2 GTPCE.PiCodDst
+				Case 1
+					If wG1T1.DvLg = G1T1.DvLg AND wG1T1.DvSlg = 0
+						wDecQte = wG1T1.DstQte
+						wTrouve = TRUE
+					EndIf
+				Case 2
+					If wG1T1.CdLg = G1T1.CdLg AND wG1T1.CdSlg = 0
+						wDecQte = wG1T1.DstQte
+						wTrouve = TRUE
+					EndIf
+				Case 3
+					If wG1T1.BlLg = G1T1.BlLg AND wG1T1.BlSlg = 0
+						wDecQte = wG1T1.DstQte
+						wTrouve = TRUE
+					EndIf
+				Case 4
+					If wG1T1.FaLg = G1T1.FaLg AND wG1T1.FaSlg = 0
+						wDecQte = wG1T1.StQte
+						wTrouve = TRUE
+					EndIf
+	
+			EndSwitch
+
+		WEnd	; XmeListNext(G3XT.IdTableau(1), wG1T1) not in (-1, 0) AND not wTrouve
+
+		;	quantité différente entre composé et composant
+		If wDecQte <> wCompoQte
+		 	wRet = 'N'
+		EndIf
+
+		; repositionnement curseur liste
+		XmeListSetAdressCurrent(G3XT.IdTableau(1) , wAdr)
+
+	EndIF ;	If Soc.Cog_DecVerrou = 2
+
+	FReturn(wRet)
+
+EndF
 
 ;*
 Public Procedure Cog_Champ_Projet_2_Ap

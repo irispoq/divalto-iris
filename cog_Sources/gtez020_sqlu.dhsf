@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150706105258      
+;>xwin4obj                              7.0       20150812152537      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="06/07/2015"
+ date_modification="12/08/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
- dernier_id=1000052
+ dernier_id=1000054
  surcharge=oui
  date_modif_base="20130207143007"
  dernier_id_page=100001
@@ -9644,6 +9644,15 @@
   [param_groupbox]
    texte="Intégration Proservia"
    couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=203,10
+   taille=32,183
+   id=1000053
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Gestion des bundles"
+   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
    position=25,349
@@ -10122,6 +10131,24 @@
    diva_apres="Champ_IntBlErrCh_1_Ap"
   [boutons]
    "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=220,16
+   taille=9,137
+   id=1000054
+   wstyle="STD"
+  [description]
+   donnee=dossier,cog_decverrou,dossier
+  [param_case]
+   texte="Verrouiller les quantités des composants"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
 [page]
  numero=24
  fond="STD"
