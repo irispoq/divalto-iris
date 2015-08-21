@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20150626104341      
+;>xwin4obj     imprimante               6.0       20150818114046      
 [masque]
- utilisateur="UGIE"
- date_modification="26/06/2015"
+ utilisateur="ROOT"
+ date_modification="18/08/2015"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -11,7 +11,7 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=231
+ dernier_id=235
  dernier_id_page=41
  [adresses]
   type_ad1_var=variable
@@ -78,7 +78,7 @@
  [cadre]
   [presentation]
    position=511,1
-   taille=18,312
+   taille=18,311
    id=2
   [param_cadre]
    nature=plein_arrondi
@@ -97,7 +97,43 @@
    wnom_couleurfond="TITRE_ENCADRE_FOND"
  [obj_texte]
   [presentation]
-   position=143,246
+   position=610,261
+   taille=9,50
+   cadrage=droite
+   id=235
+   wstyle="STD"
+  [texte]
+   texte="Page $1/nbpages$"
+ [cadre]
+  [presentation]
+   position=511,246
+   taille=57,1
+   id=234
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=511,210
+   taille=57,1
+   id=233
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=511,193
+   taille=57,1
+   id=232
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_GRISFONCE"
+   wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=143,251
    taille=10,57
    cadrage=centre
    id=218
@@ -106,7 +142,7 @@
    texte="Votre contact"
  [obj_texte]
   [presentation]
-   position=143,181
+   position=143,182
    taille=10,65
    cadrage=centre
    id=219
@@ -124,40 +160,40 @@
    wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
-   position=517,89
+   position=517,96
    taille=10,40
    id=198
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
    texte="Eco-contribution"
  [obj_texte]
   [presentation]
-   position=517,41
+   position=517,44
    taille=10,20
    id=199
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
    texte="% esc."
  [obj_texte]
   [presentation]
-   position=517,62
+   position=517,67
    taille=10,26
    id=200
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
    texte="Escompte"
  [obj_texte]
   [presentation]
-   position=517,20
+   position=517,13
    taille=9,23
    id=201
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
    texte="Total HT"
  [cadre]
   [presentation]
-   position=542,280
-   taille=1,31
+   position=540,246
+   taille=1,65
    id=4
   [param_cadre]
    nature=horizontal_b
@@ -175,7 +211,7 @@
  [cadre]
   [presentation]
    position=180,1
-   taille=405,311
+   taille=398,311
    id=7
   [param_cadre]
    nature=vide_arrondi
@@ -185,7 +221,7 @@
  [cadre]
   [presentation]
    position=180,266
-   taille=403,1
+   taille=332,1
    id=8
   [param_cadre]
    nature=vertical
@@ -194,7 +230,7 @@
  [cadre]
   [presentation]
    position=180,227
-   taille=348,1
+   taille=332,1
    id=10
   [param_cadre]
    nature=vertical
@@ -203,7 +239,7 @@
  [cadre]
   [presentation]
    position=180,193
-   taille=348,1
+   taille=332,1
    id=11
   [param_cadre]
    nature=vertical
@@ -212,7 +248,7 @@
  [cadre]
   [presentation]
    position=180,66
-   taille=348,1
+   taille=332,1
    id=12
   [param_cadre]
    nature=vertical
@@ -221,7 +257,7 @@
  [cadre]
   [presentation]
    position=180,306
-   taille=348,1
+   taille=332,1
    id=13
   [param_cadre]
    nature=vertical
@@ -229,8 +265,8 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=513,129
-   taille=55,1
+   position=511,129
+   taille=57,1
    id=14
   [param_cadre]
    nature=vertical
@@ -238,7 +274,7 @@
    wnom_couleurfond="TRANS"
  [cadre]
   [presentation]
-   position=538,1
+   position=540,1
    taille=1,129
    id=15
   [param_cadre]
@@ -293,10 +329,10 @@
    wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
-   position=538,248
+   position=544,248
    taille=9,31
    id=21
-   wstyle="STD"
+   wstyle="PETIT_GRAS"
   [texte]
    texte="Net à payer"
  [obj_texte]
@@ -317,10 +353,10 @@
    texte="Fax"
  [obj_texte]
   [presentation]
-   position=186,285
+   position=186,279
    taille=9,22
    id=28
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
    texte="Montant"
  [obj_texte]
@@ -349,39 +385,39 @@
    texte="A"
  [obj_texte]
   [presentation]
-   position=517,160
+   position=517,150
    taille=9,43
    id=34
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
-   texte="Base T.V.A"
+   texte="Base T.V.A."
  [obj_texte]
   [presentation]
-   position=517,196
+   position=517,197
    taille=9,19
    id=35
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
    texte="Taux"
  [obj_texte]
   [presentation]
-   position=517,210
+   position=517,214
    taille=9,68
    id=36
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
-   texte="Montant T.V.A"
+   texte="Montant T.V.A."
  [obj_texte]
   [presentation]
-   position=516,277
+   position=516,270
    taille=11,30
    id=37
-   wstyle="STD_GRAS"
+   wstyle="PETIT_GRAS"
   [texte]
    texte="T.T.C."
  [obj_texte]
   [presentation]
-   position=143,5
+   position=143,10
    taille=11,34
    id=39
    wstyle="STD"
@@ -389,15 +425,15 @@
    texte="Date"
  [obj_texte]
   [presentation]
-   position=143,35
+   position=143,40
    taille=11,35
    id=40
    wstyle="STD"
   [texte]
-   texte="Piece"
+   texte="Pièce"
  [obj_texte]
   [presentation]
-   position=143,63
+   position=143,69
    taille=11,31
    id=41
    wstyle="STD"
@@ -405,7 +441,7 @@
    texte="Client"
  [obj_texte]
   [presentation]
-   position=143,95
+   position=143,117
    taille=11,91
    id=42
    wstyle="STD"
@@ -413,31 +449,31 @@
    texte="Votre référence"
  [obj_texte]
   [presentation]
-   position=186,4
+   position=186,22
    taille=11,41
    id=44
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
    texte="Référence"
  [obj_texte]
   [presentation]
-   position=186,79
-   taille=11,113
+   position=186,119
+   taille=11,60
    id=45
-   wstyle="STD"
+   wstyle="PETIT"
   [texte]
    texte="Désignation"
  [obj_texte]
   [presentation]
-   position=186,207
-   taille=8,19
+   position=186,202
+   taille=8,25
    id=46
    wstyle="PETIT"
   [texte]
    texte="Quantité"
  [obj_texte]
   [presentation]
-   position=186,241
+   position=186,236
    taille=8,27
    id=47
    wstyle="PETIT"
@@ -1167,8 +1203,8 @@
  ident_unique=12
  [champ]
   [presentation]
-   position=18,3
-   taille=10,38
+   position=18,1
+   taille=10,35
    id=131
    wstyle="STD"
   [description]
@@ -1189,7 +1225,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=18,58
+   position=18,61
    taille=10,33
    id=133
    wstyle="STD"
@@ -1200,7 +1236,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=18,103
+   position=18,104
    taille=10,24
    id=202
    wstyle="STD"
@@ -1222,7 +1258,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=18,211
+   position=18,214
    taille=10,32
    id=135
    wstyle="STD"
@@ -1288,7 +1324,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=19,296
+   position=39,296
    taille=9,16
    id=136
    wstyle="STD_GRAS"
@@ -1329,13 +1365,14 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=38,253
-   taille=11,39
+   position=41,247
+   taille=11,50
    id=141
-   wstyle="STD"
+   wstyle="GRAND_GRAS"
+   wtaille_fonte=10
   [description]
    donnee=g4,tab,g4,24,12
-   format="\FormatMille"
+   format="*********9V99"
   [param_saisie]
    esp_si_zero=oui
  [champ]
@@ -1362,7 +1399,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=46,211
+   position=46,214
    taille=10,32
    id=145
    wstyle="STD"
@@ -1395,7 +1432,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=39,211
+   position=39,214
    taille=10,32
    id=148
    wstyle="STD"
@@ -1417,7 +1454,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=25,211
+   position=25,214
    taille=8,32
    id=150
    wstyle="STD"
@@ -1428,7 +1465,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=32,211
+   position=32,214
    taille=10,32
    id=151
    wstyle="STD"
@@ -1450,10 +1487,11 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=18,246
+   position=18,247
    taille=12,50
    id=153
    wstyle="GRAND_GRAS"
+   wtaille_fonte=10
   [description]
    donnee=g4,tab,g4,24,13
    format="*********9V99"
@@ -1461,7 +1499,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=29,94
+   position=29,95
    taille=10,33
    id=154
    wstyle="STD"
@@ -1472,7 +1510,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=38,94
+   position=38,95
    taille=10,33
    id=155
    wstyle="STD"
@@ -1483,7 +1521,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=47,94
+   position=47,95
    taille=10,33
    id=156
    wstyle="STD"
@@ -1494,37 +1532,31 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=29,7
+   position=29,6
    taille=9,75
    id=157
    wstyle="STD_GRIS"
   [description]
    donnee=g4,piedlib,g4,1
-  [param_saisie]
-   esp_si_zero=oui
  [champ]
   [presentation]
-   position=38,7
+   position=38,6
    taille=9,75
    id=158
    wstyle="STD_GRIS"
   [description]
    donnee=g4,piedlib,g4,2
-  [param_saisie]
-   esp_si_zero=oui
  [champ]
   [presentation]
-   position=47,7
+   position=47,6
    taille=9,75
    id=159
    wstyle="STD_GRIS"
   [description]
    donnee=g4,piedlib,g4,3
-  [param_saisie]
-   esp_si_zero=oui
  [champ]
   [presentation]
-   position=59,252
+   position=56,252
    taille=9,22
    id=160
    wstyle="PETIT_GRAS"
@@ -1535,7 +1567,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=59,274
+   position=56,274
    taille=8,36
    id=161
    wstyle="PETIT_GRAS"
@@ -1547,7 +1579,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=59,5
+   position=56,5
    taille=8,125
    id=162
    wstyle="PETIT_GRAS"
@@ -1557,7 +1589,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=59,132
+   position=56,132
    taille=9,22
    id=163
    wstyle="PETIT_GRAS"
@@ -1568,7 +1600,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=59,153
+   position=56,153
    taille=8,36
    id=164
    wstyle="PETIT_GRAS"
@@ -1580,7 +1612,7 @@
    esp_si_zero=oui
  [champ]
   [presentation]
-   position=59,192
+   position=56,192
    taille=9,22
    id=165
    wstyle="PETIT_GRAS"
@@ -1591,7 +1623,7 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=59,215
+   position=56,215
    taille=8,36
    id=166
    wstyle="PETIT_GRAS"
