@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20150707094502,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20150730110856,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -255,6 +255,12 @@ DateM=772FD2E7EC5ACF01
 Gel=1
 Nature=4,0
 NomOdbc=Cog_AffectationBudgetaire
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150730110608,UGIE                ,20150730110608,UGIE                
+Nom=Cog_ArtGenRef,Référence de l'article générique,1
+Gel=1
+Nature=25
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110606150452,SYSTEMU_VR          ,20110606150456,SYSTEMU_VR          
@@ -572,6 +578,12 @@ Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20150706121501,UGIE                ,20150706121501,UGIE                
 Nom=Cog_IndTicod,Indice TICOD,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150728104628,UGIE                ,20150728104628,UGIE                
+Nom=Cog_IndTrait,Indice TRAIT,1
 Gel=1
 Nature=4,0
 Flags=n,1,n,n,n,n,n,n
@@ -2239,6 +2251,7 @@ Nom=Cog_IndPiNo,57,0,0,N,1
 Nom=Cog_IndSref1,61,0,0,N,1
 Nom=Cog_IndSref2,65,0,0,N,1
 Nom=Cog_IndLieu,69,0,0,N,1
+Nom=Cog_IndTrait,73,0,0,N,1
 [/CHAMPL]
 nom=Cpostal
 [CHAMPL]
@@ -2371,6 +2384,26 @@ Nom=Filler,61,2,N,0,200,N,1
 Nom=UserCr,261,2,N,0,0,N,1
 Nom=UserMo,281,2,N,0,0,N,1
 Nom=UserTrace,301,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20150730110000,UGIE                ,20150730110703,UGIE                
+Nom=Cog_ArtGenAcc,Accessoires des articles génériques,1
+DateM=04CEBB19A7CAD001
+NomOdbc=Cog_AccArtGen
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+Nom=Dos,1,2,N,0,0,N,1
+Nom=Cog_ArtGenRef,4,2,N,0,0,N,1
+Nom=GrRef,29,2,N,0,0,N,1
+Nom=UserCr,70,2,N,0,0,N,1
+Nom=UserMo,90,2,N,0,0,N,1
+Nom=CeNote,110,2,N,0,0,N,1
+Nom=Note,111,2,N,0,0,N,1
+Nom=CeJoint,119,2,N,0,0,N,1
+Nom=Joint,120,2,N,0,0,N,1
+Nom=UserCrDh,128,2,N,0,0,N,1
+Nom=UserMoDh,142,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110524145128,SYSTEMU_VR          ,20110524171856,SYSTEMU_VR          
@@ -3595,6 +3628,16 @@ Versionbase=6.3a
 Nom=Cog_GrtEvt,0
 [/TABLES]
 [BASE]
+Version=1,20150730105924,UGIE                ,20150730105924,UGIE                
+Nom=CoggtF_Art,Tables complémentaires Articles,1
+DateM=647A0308A6CAD001
+Fichier=I,0,CoggtF_Art.dhfi
+Versionbase=7.2a
+DateMIndex=34503755A7CAD001
+[TABLES]
+Nom=Cog_ArtGenAcc,0
+[/TABLES]
+[BASE]
 Version=1,20150306153324,UGIE                ,20150306153335,UGIE                
 Nom=CogGtf_Dos,Tables complémentaires Dossiers,1
 DateM=B177F6861A58D001
@@ -3888,6 +3931,20 @@ Nom=Classement,20,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
+Version=1,20150730110759,UGIE                ,20150730110805,UGIE                
+Nom=Cog_ArtGenAcc_Pk,PK,1
+DateM=54C1D03EA7CAD001
+CLE=CoggtF_Art, ,,1,032,o,1,n
+Alias=Cog_ArtGenAcc_Pk
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Cog_ArtGenRef,4,0,
+Nom=Ref,29,0,
+Nom=Sref1,54,0,
+Nom=Sref2,62,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
 Version=1,20150306153459,UGIE                ,20150306153500,UGIE                
 Nom=Cog_Soc_Pk,PK,1
 DateM=838D09BA1A58D001
@@ -4110,6 +4167,7 @@ Nom=cogf_tab,Cog_T001,Index_A_T001,0
 Nom=cogf_tab,Cog_T002,Index_A_T002,0
 Nom=cogf_tab,Cog_T003,Index_A_T003,0
 Nom=Coggrf_Tab,Cog_GrtEvt,Index_A,0
+Nom=CoggtF_Art,Cog_ArtGenAcc,Cog_ArtGenAcc_Pk,0
 Nom=CogGtf_Dos,Cog_Soc,Cog_Soc_Pk,0
 Nom=CogGtf_Proj,Cog_PrjAp,Cog_PrjAp_Pk,0
 Nom=Coggtf_Tab,Cog_UT100,Index_UT100,0

@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,,,20150630160726,UGIE                
+Version=6,,,20150812152222,UGIE                
 Nom=gtfdd.dhsd,gtfdd1.dhsd,1
 [CHAMP]
 Version=1,20131006064734,SYSTEMNEW           ,20131006064734,SYSTEMNEW           
@@ -143,6 +143,12 @@ Nature=D8
 NomOdbc=Cog_Date_Fin
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150812152122,UGIE                ,20150812152122,UGIE                
+Nom=Cog_DecVerrou,Verrouiller les quantités des composants,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20110520223251,SYSTEMU             ,20110524191800,SYSTEMU             
 Nom=Cog_Delai_Validite,Délai de validité en devis,1
 Gel=1
@@ -276,6 +282,13 @@ Nom=Cog_FnpFlag,Générer les écritures FNP,1
 Gel=1
 Nature=1,0
 NomOdbc=Cog_FnpFlag
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150731094711,UGIE                ,20150731094717,UGIE                
+Nom=Cog_Generique,Flag article générique,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_Generique
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110811111435,SYSTEMU             ,20110811111501,SYSTEMU             
@@ -432,6 +445,13 @@ DateM=7857E218EC24CC01
 Gel=1
 Nature=10,2
 NomOdbc=Cog_Part_Ca
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150810102321,UGIE                ,20150810102327,UGIE                
+Nom=Cog_PdvFa,Facturation avec moteur PDV,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_PdvFa
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110617163439,SYSTEMU             ,20110822115925,JDT_UGIEIRIS        
@@ -675,6 +695,8 @@ Nom=SU_IS_PARC,1,0,0,N,1
 Nom=NatImmo,2,0,0,N,1
 Nom=Cog_CptIA,10,0,0,N,1
 Nom=Cog_CptIS,18,0,0,N,1
+Nom=Cog_Generique,26,0,0,N,1
+Nom=Cog_PdvFa,27,0,0,N,1
 [/CHAMPL]
 nom=UCli
 [CHAMPL]
@@ -787,6 +809,7 @@ Nom=TvaR,90,0,0,N,1
 Nom=TvaRa,91,0,0,N,1
 Nom=Cog_Flash_CdeF_Valid,92,0,0,N,1
 Nom=Cog_MotFEtaNo,96,0,0,N,1
+Nom=Cog_DecVerrou,97,0,0,N,1
 [/CHAMPL]
 nom=UT006
 [CHAMPL]
