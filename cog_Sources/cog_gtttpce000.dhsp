@@ -1525,7 +1525,7 @@ BeginF
 	; Article générique --> saisie non autorisée
 	If ART.Cog_Generique = 2
 		MessageBox("La saisie d'article générique n'est pas autorisée.", "Alerte", MB_ICONEXCLAMATION)
-		Harmony.Retour = XMENEXT_RESSAISIE
+		Freturn('N')
 	EndIf
 
 	; Composé --> présence article générique autorisée sur pièces clients uniquement
