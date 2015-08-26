@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20150812171720      
+;>xwin4obj                              7.0       20150826093803      
 [masque]
  utilisateur="UGIE"
- date_modification="12/08/2015"
+ date_modification="26/08/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=1000094
@@ -27951,6 +27951,18 @@ BeginP
 		Harmony.Retour = XMENEXT_RESSAISIE
 	EndIf
 
+EndP
+
+;* dstqte en mode liste
+Procedure Champ_Qte_4_Ap	
+; Après quantité destination
+BeginP
+	If Cog_G1T1_Composant_Controler_Qte(wChamp=1) = 'O'
+		Standard.Champ_Qte_4_Ap
+	Else
+		MessageBox("La quantité du composant doit correspondre à celle du composé.", "Alerte")
+		Harmony.Retour = XMENEXT_RESSAISIE
+	EndIf
 EndP
 
 ;*

@@ -89,32 +89,14 @@ BeginF
 
 		; recherche du composé
 		wAdr = XmeListGetAdressCurrent(G3XT.IdTableau(1))
-		XmeListBegin(G3XT.IdTableau(1))
-		Do While not wTrouve AND XmeListNext(G3XT.IdTableau(1), wG1T1) not in (-1, 0) 
+		Do While not wTrouve AND XmeListPrevious(G3XT.IdTableau(1), wG1T1) not in (-1, 0)  ; rewind jusqu'au composé
 
-			Switch2 GTPCE.PiCodDst
-				Case 1
-					If wG1T1.DvLg = G1T1.DvLg AND wG1T1.DvSlg = 0
-						wDecQte = wG1T1.DstQte
-						wTrouve = TRUE
-					EndIf
-				Case 2
-					If wG1T1.CdLg = G1T1.CdLg AND wG1T1.CdSlg = 0
-						wDecQte = wG1T1.DstQte
-						wTrouve = TRUE
-					EndIf
-				Case 3
-					If wG1T1.BlLg = G1T1.BlLg AND wG1T1.BlSlg = 0
-						wDecQte = wG1T1.DstQte
-						wTrouve = TRUE
-					EndIf
-				Case 4
-					If wG1T1.FaLg = G1T1.FaLg AND wG1T1.FaSlg = 0
-						wDecQte = wG1T1.StQte
-						wTrouve = TRUE
-					EndIf
-	
-			EndSwitch
+			If wG1T1.DecCod = 2
+				
+				wDecQte = Condition(GTPCE.PiCodDst=4, wG1T1.StQte  wG1T1.DstQte)
+				wTrouve = TRUE
+					
+			EndIf
 
 		WEnd	; XmeListNext(G3XT.IdTableau(1), wG1T1) not in (-1, 0) AND not wTrouve
 
