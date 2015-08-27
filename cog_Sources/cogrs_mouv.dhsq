@@ -1,0 +1,25 @@
+<DictionarySql DefaultDictionary=GTFDD.dhsd DataBase=DAV OverWrittenBy='cogrs_mouvu.dhoq' ModuleInfo='$Id: cogrs_mouv.dhsq 8498 2015-08-27 07:35:39Z admin $'>
+
+
+;*
+<RecordSql Name=Cogrs_Composant Comment='Mouvement composant'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	MOUV.ENRNO
+<FROM Insert=No Update=No Delete=No>
+	MOUV
+<WHERE>
+	MOUV.DOS = MZ.DOS AND MOUV.CE1 = 'C'
+	Case Equal_Ticod(char ticod)
+		MOUV.TICOD = ticod
+	Case Equal_Picod(int picod)
+		MOUV.PICOD = picod
+	Case Equal_Fano(int pino)
+		MOUV.FANO = pino
+	Case Equal_FaLg(int lg)
+		MOUV.FALG = lg
+	Case FaQte_SupZero
+		MOUV.FAQTE > 0
+	Case Mont_SupZero
+		MOUV.MONT > 0
+ 

@@ -1,0 +1,123 @@
+setmoduleinfo("$Id: cogtm_ipce230.dhsp 8498 2015-08-27 07:35:39Z admin $")
+;>xdiva
+;*
+;*		Objet : Nom du programme / module -- CogTm_iPce230.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF	P205A							08/2015		Non impression des lignes avec quantité facturée = 0
+
+;*
+;*	Déclarations
+;*
+
+;
+Include "gttcZ00.dhsp"
+
+;
+Public Record "gtfdd.dhsd"		MOUV		G4MOUV
+Public Record "gtfdd.dhsd"		G4			
+
+;
+1		lId_DecMouv		L 	  		; liste des mouvements non imprimés
+1		adrF				16
+  
+;*
+;*
+;*
+
+;*
+Public Function Long Tri_DecMouv(&A, &B)
+;
+Record	"gtfdd.dhsd"	MOUV		A
+Record	"gtfdd.dhsd"	MOUV		B
+1		cleA		10
+1		cleB		10
+BeginF
+
+	cleA = [ A.Dos A.Falg ]
+	cleB = [ B.Dos B.Falg ]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;*
+Public Procedure Cog_Masque_Init
+;
+BeginP
+
+	lId_DecMouv = ListGetId("COG_LISTE_MOUV_NIMP")
+	GetAdressFunction('', "Tri_DecMouv", adrF)
+	ListMode(lId_DecMouv, 1, adrF)
+
+EndP
+
+;*
+Public Procedure Cog_Entete_AvGestion
+; avant gestion du bloc 1
+BeginP
+
+	If System.Zpage = 1
+		ListErase(lId_DecMouv)
+	EndIf
+
+EndP
+
+;*
+Public Procedure Cog_BlocLigne_AvGestion
+; avant gestion du bloc 2
+RecordSql	"CogRs_MOUV.dhoq"	CogRs_Composant		wRs_Composant
+Record 		"gtfdd.dhsd"		MOUV		wMOUV_Seek
+BeginP
+
+	; le n° de ligne est listé dans les mouvements non imprimés --> les sous-lignes ne seront pas imprimées également
+	If ListSeek(lId_DecMouv, G4MOUV, wMOUV_Seek) not in (-1, 0)
+		Harmony.Retour = XMINEXT_SAUT_BLOC
+		PReturn
+	EndIf
+
+	If G4MOUV.FaQte = 0 AND G4MOUV.FaSlg = 0 
+
+		If G4MOUV.DecCod = 2
+			wRs_Composant.Init()
+			wRs_Composant.Where.RemoveCondition("")
+			wRs_Composant.Where.Equal_FaLg(G4MOUV.Falg)
+			wRs_Composant.Where.AddCondition("Equal_FaLg")
+			wRs_Composant.Where.FaQte_SupZero()
+			wRs_Composant.Where.AddCondition("FaQte_SupZero")
+			wRs_Composant.Where.Mont_SupZero()
+			wRs_Composant.Where.AddCondition("Mont_SupZero")
+			wRs_Composant.Where.Equal_Ticod(G4MOUV.TiCod)
+			wRs_Composant.Where.AddCondition("Equal_Ticod")
+			wRs_Composant.Where.Equal_Picod(G4MOUV.PiCod)
+			wRs_Composant.Where.AddCondition("Equal_Picod")
+			wRs_Composant.Where.Equal_FaNo(G4MOUV.FaNo)
+			wRs_Composant.Where.AddCondition("Equal_FaNo")
+			If wRs_Composant.GetCount() > 0
+				PReturn			; au moins 1 composant facturé --> ligne non masquée
+			EndIf
+		EndIf
+
+		ListInsert(lId_DecMouv, G4MOUV)
+		Harmony.Retour = XMINEXT_SAUT_BLOC
+
+	EndIf
+
+EndP
+
+;*
+Public Procedure Cog_Bloc_CplBlocLigne_AvGestion
+; avant gestion d'un bloc complémentaire au bloc 2
+Record "gtfdd.dhsd"		MOUV		wMOUV_Seek
+BeginP
+
+	; le n° de ligne est listé dans les mouvements non imprimés
+	If ListSeek(lId_DecMouv, G4MOUV, wMOUV_Seek) not in (-1, 0)
+		Harmony.Retour = XMINEXT_SAUT_BLOC
+		PReturn
+	EndIf
+
+EndP

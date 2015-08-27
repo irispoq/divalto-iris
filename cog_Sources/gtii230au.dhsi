@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20150216111726      
+;>xwin4obj     imprimante               6.0       20150826154114      
 [masque]
- utilisateur="ROOT"
- date_modification="16/02/2015"
+ utilisateur="UGIE"
+ date_modification="26/08/2015"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -2289,13 +2289,32 @@
    type_date=jj/mm/aaaa
 [diva]
 setmoduleinfo("$Id$")
+;>xdiva
+;*
+;*		Traitements surcharges du masque gtii230a
+;*
 
-include gttc000.dhsp
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF	P205A							08/2015		Non impression des lignes avec quantité facturée = 0
 
+;*
+;*	Déclarations
+;*
+
+;
+include "gttc000.dhsp"
+
+;
 HFILE	"cogfdd.dhsd" Cog_FDirCliente	COG_FDIRCLIENTE_01
 HFILE	"gtfdd.dhsd" GTFENT	GTFENT_BL_01
 HFILE	"cogfdd.dhsd" Coggtf_tab	Coggtf_tab
 
+;
+Module	"CogTm_iPce230.dhop"
+
+;
 Public Record "gtfdd.dhsd" art g4art
 Public Record "gtfdd.dhsd" ent ent
 Public Record "gtfdd.dhsd" mouv g4mouv
@@ -2520,13 +2539,34 @@ EndP
 
 ;*
 Private Procedure Cog_ImpDetail
-;
+;	avant gestion du bloc 2
 Beginp
 	; JDT 08/08/2011
 	If ENT.Cog_ImpDetail <> 2 and ENT.Dos = 105
 		Harmony.Retour = XMINEXT_SAUT_BLOC
 	EndIf
 	; JDT 08/08/2011
+
+	Switch Harmony.Ibloc
+		Case 2
+			Cog_BlocLigne_AvGestion()
+		Case 8
+			; impression interrompue
+		Default
+			Cog_Bloc_CplBlocLigne_AvGestion()
+
+	EndSwitch
+
+
+Endp
+
+
+;*
+Procedure Masque_1_Init
+;
+Beginp
+	Standard.Masque_1_Init
+	Cog_Masque_Init()
 Endp
 [/diva]
 [diva_base]
