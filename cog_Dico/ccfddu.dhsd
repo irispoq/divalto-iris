@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20021014173940,hc  ,20150309173910,UGIE                
+Version=5,20021014173940,hc  ,20150901104005,UGIE                
 Nom=ccfdd.dhsd,ccfdd.dhsd,1
 [CHAMP]
 Version=1,20141007161805,UGIE                ,20141007161810,UGIE                
@@ -109,6 +109,14 @@ Gel=1
 Nature=5
 NomOdbc=Cog_Dos_Anael
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1240000,MJV ,20150901103958,UGIE                
+Nom=Cog_EnrNo,No enregistrement,1
+DateM=320BB8C891E4D001
+Gel=1
+Nature=9,0
+NomOdbc=EnregNo
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110811091539,JDT_UGIEIRIS        ,20110811091550,JDT_UGIEIRIS        
 Nom=Cog_ETLDateImport,ETL - Date de la dernière importation,1
@@ -273,14 +281,6 @@ DateM=16FFE5EF28C7CD01
 Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,1989 1240000,MJV ,20060912112155,MARIE JO            
-Nom=EnrNo,No enregistrement,1
-DateM=0C5D01E44CD6C601
-Gel=1
-Nature=9,0
-NomOdbc=EnregNo
-Flags=o,1,n,n,n,n,n,n
 [CHAMPR]
 nom=UC3
 [CHAMPL]
@@ -357,7 +357,7 @@ Nom=Cog_IsilogRef,10,0,0,N,1
 Nom=Cog_CptCes,50,0,0,N,1
 Nom=Cog_CptCesAmo,58,0,0,N,1
 Nom=Cog_BwId,66,0,0,N,1
-Nom=EnrNo,106,0,0,N,1
+Nom=Cog_EnrNo,106,0,0,N,1
 Nom=Cog_CptCesVal,115,0,0,N,1
 Nom=Cog_CesEcrFlag,123,0,0,N,1
 Nom=Cog_AxeAnael,124,0,0,N,1
@@ -412,7 +412,10 @@ DateM=BC2E1EC1833FCB01
 [TABLEU]
 Version=1,1997 1220000,hc  ,20100708162734,VJ                  
 Nom=i1,Immobilisation,1
-DateM=A42E781C5E09D001
+DateM=320BB8C891E4D001
+[PROPLOC]
+Nom=Cog_EnrNo
+[/PROPLOC]
 [BASEU]
 Version=1,20080325171416,MS                  ,20121001183857,MS                  
 Nom=CcfEcr,Ecritures,1
@@ -465,7 +468,7 @@ CLE=CcfImmo, ,Ce1,2,1,n,1,n
 Alias=Cog_Index_EnrNo
 [CHAMPS]
 Nom=Dos,1,0,
-Nom=EnrNo,4,0,
+Nom=Cog_EnrNo,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEXL]
