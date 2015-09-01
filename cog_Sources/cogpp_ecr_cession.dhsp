@@ -470,7 +470,7 @@ BeginF
 	Cog_WriteC0_CCFM	
 
 	;
-	If CogRs_I1.EnrNo = 0  ; pas de mouvement lié
+	If CogRs_I1.Cog_EnrNo = 0  ; pas de mouvement lié
 		CogRs_MOUV.Axe(1) = Condition(CogRs_C3CesVal.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
 		CogRs_MOUV.Axe(2) = Condition(CogRs_C3CesVal.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
 		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3CesVal.AxeSais(3)=2,	CogRs_C3CesVal.Axe(3), '')
@@ -479,7 +479,7 @@ BeginF
 	Cog_WriteC8_CCFM(CogRs_I1.Cog_CptCesVal, C_SENS_DEBIT, CogRs_I1.EcoResMt)	; Débit: Valeur cpt des éléments actifs cédés	 
 	
 	;
-	If CogRs_I1.EnrNo = 0  ; pas de mouvement lié
+	If CogRs_I1.Cog_EnrNo = 0  ; pas de mouvement lié
 		CogRs_MOUV.Axe(1) = Condition(CogRs_C3CesAmo.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
 		CogRs_MOUV.Axe(2) = Condition(CogRs_C3CesAmo.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
 		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3CesAmo.AxeSais(3)=2,	CogRs_C3CesAmo.Axe(3), '')
@@ -488,7 +488,7 @@ BeginF
 	Cog_WriteC8_CCFM(CogRs_I1.Cog_CptCesAmo, C_SENS_DEBIT, CogRs_I1.EcoTotMt)	; Débit: Amortissement des immobilisations
 	
 	;
-	If CogRs_I1.EnrNo = 0  ; pas de mouvement lié
+	If CogRs_I1.Cog_EnrNo = 0  ; pas de mouvement lié
 		CogRs_MOUV.Axe(1) = Condition(CogRs_C3Ces.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
 		CogRs_MOUV.Axe(2) = Condition(CogRs_C3Ces.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
 		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3Ces.AxeSais(3)=2,	CogRs_C3Ces.Axe(3), '')
@@ -563,10 +563,10 @@ BeginP
 		If Cog_Resa_RSQL("CogRs_I1", Formater_Res('C3I1') & CogRs_I1.Dos & CogRs_I1.Immo, 'R') = 0
 
 			; chargement du mouv nécessaire pour lecture des axes analytiques
-			If CogRs_MOUV.Dos <> CogRs_I1.Dos OR CogRs_MOUV.EnrNo <> CogRs_I1.EnrNo
+			If CogRs_MOUV.Dos <> CogRs_I1.Dos OR CogRs_MOUV.EnrNo <> CogRs_I1.Cog_EnrNo
 				CogRs_MOUV.Init()
 				CogRs_MOUV.Join.Deactivate("$All")
-				CogRs_MOUV.Where.PK(CogRs_I1.EnrNo)
+				CogRs_MOUV.Where.PK(CogRs_I1.Cog_EnrNo)
 				CogRs_MOUV.Select() 
 			EndIf
 

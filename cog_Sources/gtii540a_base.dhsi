@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20141104135300      
+;>xwin4obj     imprimante               6.0       20090721084615      
 [masque]
- utilisateur="ROOT"
- date_modification="04/11/2014"
+ utilisateur="LK"
+ date_modification="21/07/2009"
  feuille_style="fstyleimp.dhfi"
  taille_ligne=9
  orientation=paysage
@@ -9,7 +9,7 @@
  nombre_colonnes=132
  nombre_lignes=66
  etat=0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1
- dernier_id=239
+ dernier_id=238
  dernier_id_page=12
  [adresses]
   type_ad1=rien
@@ -17,15 +17,15 @@
   type_ad3=rien
 [defaut]
 [enregistrements]
- "gtfdd.dhsd",,bpent,bpent,700,0
- "gtfdd.dhsd",,bpdet,bpdet,900,0
- "gtfdd.dhsd",,t1,t1,750,0
- "gtfdd.dhsd",,xq,g3xq,8000,0
- "gtfdd.dhsd",,art,art,1700,0
- "gtfdd.dhsd",,mvtl,mvtl,1000,0
- "ddsys.dhsd",,system,system,4160,0
- "gtfdd.dhsd",gtfdos,soc,soc,2800,0
- "gtfdd.dhsd",,t026,t026,400,0
+ "gtfdd.dhsd",,bpent,bpent,500
+ "gtfdd.dhsd",,bpdet,bpdet,1000
+ "gtfdd.dhsd",,t1,t1,850
+ "gtfdd.dhsd",,xq,g3xq,6700
+ "gtfdd.dhsd",,art,art,1700
+ "gtfdd.dhsd",,mvtl,mvtl,1200
+ "ddsys.dhsd",,system,system,4160
+ "gtfdd.dhsd",gtfdos,soc,soc,3300
+ "gtfdd.dhsd",,t026,t026,400
 [bloc]
  numero=1
  taille=1
@@ -454,6 +454,8 @@
    donnee=xq,dos,g3xq
   [param_saisie]
    esp_si_zero=oui
+  [reaffichage]
+   #tous
  [champ]
   [presentation]
    position=98,42
@@ -1224,6 +1226,8 @@
    donnee=xq,dos,g3xq
   [param_saisie]
    esp_si_zero=oui
+  [reaffichage]
+   #tous
  [champ]
   [presentation]
    position=98,45
@@ -1234,6 +1238,8 @@
    donnee=soc,nom,soc
   [param_saisie]
    esp_si_zero=oui
+  [reaffichage]
+   #tous
  [champ]
   [presentation]
    position=42,336
@@ -2388,9 +2394,6 @@ Public Record "gtfdd.dhsd" art art
 Public Record "gtfdd.dhsd" mvtl mvtl
 Public Record "gtfdd.dhsd" soc soc
 Public Record "gtfdd.dhsd" t026 t026
-
-
-
 [/diva]
 [diva_base]
 [/diva]

@@ -97,7 +97,7 @@
 		I1.Immo = immo and I1.ImmoComp = immocomp
 
 	Case Equal_Enrno(int enrno)
-		I1.ENRNO = enrno
+		I1.COG_ENRNO = enrno
 
 	Case Max_Immo
 		I1.IMMO = (SELECT MAX(I1.IMMO) FROM I1 WHERE I1.CE3 = '1' AND I1.DOS = MZ.DOS)

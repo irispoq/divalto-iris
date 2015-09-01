@@ -34,7 +34,7 @@ Public Record	"gtfdd.dhsd"	T000
 	on CptCesVal.Dos = I1.Dos and CptCesVal.Cpt = I1.COG_CptCesVal and CptCesVal.Ce1 = '3'
 <LEFTJOIN Name='Zoom'>
 	GTFDD.DHSD MOUV
-	ON MOUV.DOS = I1.DOS AND MOUV.ENRNO = I1.ENRNO
+	ON MOUV.DOS = I1.DOS AND MOUV.ENRNO = I1.COG_ENRNO
 <LEFTJOIN Name='Zoom'>
 	GTFDD.DHSD ART
 	ON ART.DOS = I1.DOS AND ART.REF = I1.LIB
@@ -47,7 +47,7 @@ Public Record	"gtfdd.dhsd"	T000
 	on AxeAnael.Dos = I1.Dos AND AxeAnael.AxeNo = 2 AND AxeAnael.Axe = I1.COG_AxeANAEL
 <WHERE>
 	Case Equal_Enrno(int enrno)
-		I1.ENRNO = enrno
+		I1.COG_ENRNO = enrno
 	Case BetWeen_Immo(int noD, int noF)
 		I1.IMMO BETWEEN noD AND noF
 	Case Max_Immo
