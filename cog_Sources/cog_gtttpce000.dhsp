@@ -424,6 +424,12 @@ BeginP
 		EndIf
 	EndIf
 
+	; rechargement systématique en cas de modif de la fiche
+	If Seek_ART(G1T1.Ref) <> 0	 
+		MessageBox("Article " & left(G1T1.Ref) & " non trouvé.","Erreur", MB_ICONERROR)
+		PReturn
+	EndIF
+
 	; lecture nature immobilisation
 	If ART.NatImmo <> ' ' AND (HD.Dos <> ART.Dos OR HD.NatImmo <> ART.NatImmo)
 		If Lectab_HD(ART.NatImmo) <> 0
@@ -433,18 +439,14 @@ BeginP
 	EndIf
 
 	;	contrôle compte imo
-	If Seek_ART(G1T1.Ref) <> 0	 ; rechargement systématique en cas de modif de la fiche
-		MessageBox("Article " & left(G1T1.Ref) & " non trouvé.","Erreur", MB_ICONERROR)
+	ART.Cog_CptIA = 	Condition(ART.Cog_CptIA <> ' ', ART.Cog_CptIA, \
+							Condition(HD.Cpt <> ' ', HD.Cpt, \
+							Condition(CD.CptAmoInc <> ' ',CD.CptAmoInc ,ART.Cog_CptIA)))
+	If ART.Cog_CptIA = ' '
+		MessageBox("Le compte d'achat immobilisation n'est pas renseigné sur la fiche article ref " & left(G1T1.Ref),"Erreur", MB_ICONERROR)
 		PReturn
-	Else
-		ART.Cog_CptIA = 	Condition(ART.Cog_CptIA <> ' ', ART.Cog_CptIA, \
-								Condition(HD.Cpt <> ' ', HD.Cpt, \
-								Condition(CD.CptAmoInc <> ' ',CD.CptAmoInc ,ART.Cog_CptIA)))
-		If ART.Cog_CptIA = ' '
-			MessageBox("Le compte d'achat immobilisation n'est pas renseigné sur la fiche article ref " & left(G1T1.Ref),"Erreur", MB_ICONERROR)
-			PReturn
-		EndIf
 	EndIf
+
 
 	; controle piece HT
 	If ENT.HtCod = 2

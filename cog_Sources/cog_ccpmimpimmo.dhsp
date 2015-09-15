@@ -1,5 +1,5 @@
 
-SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 7625 2015-02-23 16:30:28Z admin $')
+SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 8587 2015-09-15 14:13:57Z admin $')
 ;*
 ;* cog_ccpmimpimmo					Procedure de traitement des champs importés (avant ou aprés saisie)
 ;*
@@ -1018,4 +1018,15 @@ beginp	; Champ_Axe_1_Ap
 		endif
 	endif
 endp		; Champ_Axe_1_Ap
+
+;*
+Public Procedure Champ_Cog_AxeAnael_1_Ap
+;
+Beginp
+	
+	If	Controle_Axe(2, I1.Cog_AxeAnael, err=0) <> 0	
+		pinglocal('RetErreur', "I;Axe Anael inconnu.")
+		I1.Cog_AxeAnael = ' '
+	EndIf
+EndP
 

@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 7292 2014-12-23 14:25:53Z admin $')
+SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 8587 2015-09-15 14:13:57Z admin $')
 
 ;*
 ;* Programme qui permet d'intégrer des immos dans Divalto Compta
@@ -9,36 +9,47 @@ SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 7292 2014-12-23 14:25:53Z admin $')
 ;*				09/10/2012		MN			A partir du fichier cogcc_pp_import_immo : Entèrement revu. Alimentation et calcal des données 
 ;*												de l'immobilisation. Ajout du cog_cctmimpimmo qui ne contient
 ;*												que des procédures de calcul en fonction des valeurs importées.
-;*
+;*				09/2015			YLEF		Evolution du programme --> flux de mise à jour des fiches immo
 
 
 ;*
 ;* Déclarations
 ;*
 
+;
 include	"cctc700.dhsp"
+Include	"gttcz00.dhsp"
 
+;
 module	cog_cctmimpimmo.dhop
 module	ccpmfic.dhop
 module	yoffice.dhop
 module	cctm700.dhop
 module	ccpm700.dhop
 module	cctm000.dhop
+Module	CogTm_000.dhop
 
-
+;
 Hfile		Ccfdd.dhsd	CcfDos			CcfDos
 Hfile		Ccfdd.dhsd	CcfImmo			CcfImmo
 Hfile		Ccfdd.dhsd	CcfImmo			CcfImmo_num		OpenOnUse
 Hfile		Ccfdd.dhsd	CcfImmo			ccfimmo_ctrl
 Hfile		A5dd.dhsd	A5FDos			A5FDos			OpenOnUse
 
+;
+Public 	RecordSQL	"COG_CCRSIMMO.dhoq"		CogRs_Immo			
+
+;
 Public	Record		A5dd.dhsd		Mz
 Public	Record		A5dd.dhsd		Muser
 Public	Record		ccfdd.dhsd		CD
 Public	Record		ccfdd.dhsd		CA
 Public	Record		Ccfdd.dhsd		I1
+Public	Record		gtfdd.dhsd		XQ				XQ_Cog
 
+;
 1	nCpt						8,0 = 0							; Compteur 
+1	nMaj						8,0 = 0
 
 1 Bufopen			700 										; zone paramètres	pour ouverure api sélection de fichier windows
 	2 Flags					L 
@@ -66,6 +77,8 @@ Public	Record		Ccfdd.dhsd		I1
 1	nColErr					7,0								; Numéro de la colonne erreur
 1	nEspErr					7,0 = 0							; Espion erreur
 1	aMess						251 = " "						; Message erreur
+1  id_toolbar	L												;ident barre d'outils
+1  id_menu		L												;ident menu
 
 Structure	cog_parazones 									; Enreg détail zones I1
 	1	ce1			1	
@@ -96,7 +109,7 @@ EndStructure
 
 RecordDiva	cog_parazones
 
-
+;
 Const		cNEnreg			= "I1"
 Const		cNMNEMO			= "CCFIMO"
 Const		cNDICO			= "CCFDD.DHSD"
@@ -107,8 +120,61 @@ Const		cNDICO			= "CCFDD.DHSD"
 ;* Proc & Fx
 ;*
 
+;*
+Procedure Cog_AfficherTraitement(wSel, wTrt)
+;
+1		wSel		>gtfdd.dhsd		TitreImp
+1		wTrt		>gtfdd.dhsd		WinTitre
+BeginP
+
+	XQ_Cog.TitreImp = wSel
+	XQ_Cog.WinTitre = wTrt
+	Afficher_Selection()
+	Afficher_Traitement()
+
+EndP
 
 ;*
+Function int InitialiserVariables
+;
+BeginF
+
+	If PingReceive("Zechange", Mz) <> 0
+		If Hseek(A5Fdos, Muser, "B" & system.User) = 0
+			mz.Dos	= muser.Dos
+			mz.Etb	= muser.Etb
+		Else
+			Cog_EcritureLivreDeBord("Utilisateur inconnu.","Alerte", MB_ICONEXCLAMATION)
+			FReturn(False)
+		EndIf
+
+		MZ.MeCle = "cog_cceeimpimmo.dhof"
+		MZ.MtCle
+		MZ.MiCle
+
+	EndIf
+
+	Seek_Ca()
+	Seek_Cd()
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	XmeInfoPage(mz.mecle,1)						;lire la taille de la page
+	XmeSetWindowSize(mz.mecle,1,Harmony.Opara3,Harmony.Opara4)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	FReturn(1)
+
+EndF
+
 ;*
 function char Nom_ColExcel(cl)
 1	cl		N
@@ -132,19 +198,10 @@ endf
 ;* Ouvre le classeur à traiter
 ;* 0 =Ok, 1 = erreur (abandon)
 Function	Int	Cog_FImmos_OpenTableur
+;
 Beginf
-	; Choix du Fichier
-	Bufopen				= " "
-	Filtre				= "Excel|*.xls;*.xlsx|OpenOffice|*.ood|Tous|*.*" 
-	IndexFiltre			= 1
-	aFic					= "C:\Divalto\Cog_Import_Immos"
-	RepertoireInitial	= "C:\Divalto"
-	Titre 				= "Ouverture du fichier d'importation Immo"
-	Flags					= OFN_EXPLORER + OFN_FILEMUSTEXIST
-	ExtensionDefaut	= " "
-	If WinGetOpenFileName(Bufopen, aFic) = False
-		Freturn(1)
-	EndIf
+
+	;
 	If Office_Begin
 		Freturn(1)
 	EndIf
@@ -206,6 +263,8 @@ endf
 
 ;* Fin import
 Procedure	Cog_PImmos_FinTrt
+; fermeture de la page xls si import OK
+; fin du module Office
 Beginp
 	;Pas de fermeture si erreur
 	if nEspErr = 0	and not ModeSimulation
@@ -486,10 +545,93 @@ beginf
 endf
 
 ;*
+Function int CogRs_Immo_SeekBySerie(wI1)
+; recherche un enregistrement I1 par le champ n° de série
+; 0 --> OK	 CogRs_Immo est chargé
+Record	"ccfdd.dhsd"		I1			wI1					
+BeginF
+
+	If wI1.Serie = ' '
+		FReturn(1)
+	EndIf
+
+	CogRs_Immo.Init()
+	CogRs_Immo.Where.Equal_Serie(wI1.Serie)
+	If CogRs_Immo.Select() > 0
+		FReturn(0)
+	EndIf
+
+	FReturn(1)
+
+EndF
+
 ;*
+Function int CogRs_Immo_Update(wI1, wNL)
+; 0 --> OK
+; >0 --> erreur écrite dans le livre de bord
+Record	"ccfdd.dhsd"		I1			wI1
+1		wNL		8,0
+1		wOK		1,0 = TRUE
+BeginF
+
+	If CogRs_Immo.GetId() = 0
+		Cog_EcritureLivreDeBord("Erreur lors de la mise à jour de la fiche immo n°" & NoSpaces(wI1.Immo) & ": RSQL non chargé.")
+		nEspErr++
+		FReturn(1)
+	EndIf
+
+	; réservation
+	If CogRs_Immo.FShare([Formater_Res('C3I1') CogRs_Immo.Dos CogRs_Immo.Immo], 'R')	<> 0
+		Cog_EcritureLivreDeBord("Mise à jour impossible, fiche immo n°" & wI1.Immo & " réservée.")
+		nEspErr++
+		FReturn(1)
+	EndIf
+
+	; relecture après RESA: entre le .Select() et le .Fshare() possibilité d'un .Update() ou .Delete()	depuis l'ERP
+  	CogRs_Immo.Where.Zoom_PK(CogRs_Immo.Immo, CogRs_Immo.ImmoComp)
+	If CogRs_Immo.Select() = 0
+		Cog_EcritureLivreDeBord("Erreur à la relecture de la fiche immo n°" & NoSpaces(wI1.Immo) & ".")
+		nEspErr++
+		wOK = FALSE
+	EndIf
+
+	;
+	CogRs_Immo.Axe(1)			= Condition(wI1.Axe(1) <> ' '			, wI1.Axe(1)		, CogRs_Immo.Axe(1))
+	CogRs_Immo.Axe(2)			= Condition(wI1.Axe(2) <> ' '			, wI1.Axe(2)		, CogRs_Immo.Axe(2))
+	CogRs_Immo.Cog_AxeAnael	= Condition(wI1.Cog_AxeAnael <> ' '	, wI1.Cog_AxeAnael, CogRs_Immo.Cog_AxeAnael)
+	CogRs_Immo.EcoAmDt		= Condition(wI1.EcoAmDt <> ' '		, wI1.EcoAmDt		, CogRs_Immo.EcoAmDt)
+	CogRs_Immo.Cog_AmoFlag	= Condition(wI1.Cog_AmoFlag <> 0		, wI1.Cog_AmoFlag	, CogRs_Immo.Cog_AmoFlag)
+	CogRs_Immo.UserMo			= System.User
+	CogRs_Immo.UserMoDh		= Time(7)
+
+	; contrôles des champs 
+	I1 = CogRs_Immo.I1
+	If not Lancer_Traitement("Champ_EcoAmDt_1_Ap","ECOAMDT", wNL) 				| wOK = FALSE | EndIf
+	PingLocal("dataind",1)
+	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(1)",wNL)		  				| wOK = FALSE | EndIf
+	PingLocal("dataind",2)
+	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(2)",wNL)		  				| wOK = FALSE | EndIf
+	If not Lancer_Traitement("Champ_Cog_AxeAnael_1_Ap", "COG_AXEANAEL", wNL)| wOK = FALSE | EndIf
+
+	; Mise à jour
+	If not ModeSimulation AND wOK
+		CogRs_Immo.Update()
+		nMaj++
+	EndIf
+
+	CogRs_Immo.FShare([Formater_Res('C3I1') CogRs_Immo.Dos CogRs_Immo.Immo], 'L')	
+
+	FReturn(Condition(wOK, 0, 1))
+
+EndF
+
+;*
+;*
+;*
+
 ;*
 procedure cog_pWriteI1(ni)
-1	ni		N
+1	ni		8,0
 record	ccfdd.dhsd	i1		i1_ctrl
 record	ccfdd.dhsd	i1		wi1
 
@@ -695,8 +837,8 @@ endp
 
 ;*	Lance l'import suivant lecture du tableur
 Procedure	Cog_PImmos_Import
-1	nI		7,0
-1	nJ		7,0
+1	nI		8,0
+1	nJ		8,0
 1	arret	B=false
 Beginp
 	; On récupère la structure de I1 dans une liste mémoire
@@ -713,58 +855,125 @@ Beginp
 				Office_Read(nI, nJ, aVal)
 				Cog_PTrans_ValZone(I1, tTabCorColZone(nJ), aVAL)
 			Next
-			Display[=4 2 "Lecture du bien  : " & i1.Immo & left(i1.Lib, 40)]
-			Cog_PWriteI1(nI)
+
+			If CogRs_Immo_SeekBySerie(I1)	<>	0
+				Cog_AfficherTraitement("Lecture du bien  : " & Left(i1.Immo) & " - " & Left(i1.Lib), "Ligne n°" & NoSpaces(nI) & "--> création")
+				Cog_PWriteI1(nI)
+			Else
+				Cog_AfficherTraitement("Lecture du bien  : " & Left(i1.Immo) & " - " & Left(i1.Lib), "Ligne n°" & NoSpaces(nI) & "--> mise à jour")
+				CogRs_Immo_Update(I1, nI)
+			EndIf
+
 		Next
 	EndIf
 Endp
 
+;*
+Public Procedure Cog_SaisiePage1
+;
+1 wFin		1,0	= 0
+1 wBufopen 							700 ; zone paramètres
+	2 wFlags 						L 
+	2 wFiltre 						256 
+	2 wIndexFiltre 				X 
+	2 wIndexNom 					X 
+	2 wIndexExtension 			X 
+	2 wRepertoireInitial			256 
+	2 wTitre 						80 
+	2 wExtensionDefaut 			4
+
+BeginP
+
+	;
+	wBufopen = " "
+	wFiltre = "Excel|*.xls;*.xlsx|OpenOffice|*.ood|Tous|*.*" 
+	wIndexFiltre = 3
+	wRepertoireInitial = xq_cog.Fic
+	wTitre = "Ouverture du fichier d'importation Immo"
+	wFlags = OFN_FILEMUSTEXIST 
+	wExtensionDefaut = " "
+
+	;
+	XmeInput(mz.mecle,1,0,xme_mode_goto)
+
+	Do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+	
+			case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()	
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
+				endif
+			
+			case k_f7                ;zoom généralisé
+				Zoom_Call()
+			
+			case k_f8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			case k_f9                ;abandon
+				wFin = 1
+		
+			case vsw in (k_f10, k_return)
+				If MessageBox(	"Lancer l'intégration?", "Validation", MB_ICONQUESTION+MB_YesNo) = IdYes
+
+					Cog_EcritureLivreDeBord("--> Début import des fiches immo")
+					PingLocal("TraceCompteur",False)
+					G3_OpenTrace(2,3,4, FALSE)
+
+					aMess= ' '
+					aFic = XQ_Cog.Fic
+					If Cog_FImmos_OpenTableur = 0
+						
+						Cog_AfficherTraitement("Import immobilisations", Left(aFic))
+					
+						If Cog_FImmos_VerifTableur = 0
+							Cog_PIMmos_Import
+						Else
+							aMess = "Certains mots clés n'ont pas été trouvés dans le fichier tableur sélectionné ou la feuille n'est pas paramétrée correctement.|"
+						EndIf
+						Cog_PImmos_FinTrt
+
+						aMess&= nospaces(nCpt) & " biens importés.|"
+						aMess&= nospaces(nMaj) & " biens mis à jour."
+						aMess&= "|Pensez à éditer un tableau d'ammortissement sur l'exercice suivant le dernier importé." 
+
+						If nEspErr > 0
+							aMess &= "|" & nospaces(nEspErr) & " erreurs détectées."
+						EndIf
+						MessageBox("Traitement terminé:|" & left(aMess),"Information",MB_ICONINFORMATION)
+
+					Else
+						MessageBox("Impossible d'ouvrir le fichier tableur", "Alerte", MB_ICONSTOP)
+					EndIf
+
+					G3_CloseTrace()
+					Cog_EcritureLivreDeBord("<-- Fin import des fiches immo")
+
+					wFin=1
+				EndIf
+	
+			Case Harmony.Dataarret = 1001
+				WinGetOpenFileName(wBufopen , xq_cog.Fic)
+
+		endswitch
+
+	while wFin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
 
 ;*
 ;* Prog Principal
 ;*
 MAIN
-
-	If PingReceive("Zechange", Mz) = 1
-		If Hseek(A5Fdos, Muser, "B" & system.User) = 0
-			mz.Dos	= muser.Dos
-			mz.Etb	= muser.Etb
-		EndIf
-	EndIf
-	Seek_Ca()
-	Seek_Cd()
-
-	If MessageBox(	"Vous allez lancer le programme d'intégration des immos dans Divalto Comptabilité|Ce programme vous demandera quel classeur tableur utiliser|Confirmez vous le traitement ?" \
-		, "Validation", MB_ICONQUESTION+MB_YesNo) = IdYes
-		If Cog_FImmos_OpenTableur = 0
-			Display[system.Clear]
-			Display[=1 5 "Import immobilisations (" & left(aFic) & ")"]
-			If Cog_FImmos_VerifTableur = 0
-				SetHourGlassCursor
-				Cog_PIMmos_Import
-				SetNormalCurSor
-			Else
-				MessageBox("Certains mots clés n'ont pas été trouvés dans le fichier tableur sélectionné ou la feuille n'est pas paramétrée correctement","Alerte", MB_ICONSTOP)
-				Cog_PImmos_FinTrt
-				programexit
-			EndIf
-			Cog_PImmos_FinTrt
-		Else
-			MessageBox("Impossible d'ouvrir le fichier tableur", "Alerte", MB_ICONSTOP)
-			programexit
-		EndIf
-	else
-		programexit
+;
+	
+	If InitialiserVariables
+		Cog_SaisiePage1
 	EndIf
 
-	If nEspErr > 0
-		if nCpt = 0
-			aMess = "0 biens importés!|" & nospaces(nEspErr) & " erreurs détectées vérifiez la colonne erreur du fichier tableur."
-		else
-			aMess = nospaces(nCpt) & " biens importés, pensez à éditer un tableau d'ammortissement sur l'exercice suivant le dernier importé.|" & nospaces(nEspErr) & \
-						" erreurs détectées vérifiez la colonne erreur du fichier tableur."
-		endif
-	Else
-		aMess = nospaces(nCpt) & " biens importés, pensez à éditer un tableau d'ammortissement sur l'exercice suivant le dernier importé"
-	EndIf
-	messagebox("Traitement terminé:|" & left(aMess),"Information",MB_ICONINFORMATION)

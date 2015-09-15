@@ -101,4 +101,7 @@
 
 	Case Max_Immo
 		I1.IMMO = (SELECT MAX(I1.IMMO) FROM I1 WHERE I1.CE3 = '1' AND I1.DOS = MZ.DOS)
+
+	Case Equal_Serie(char serie)
+		I1.SERIE = SERIE
 		 
