@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20150318155321      
+;>xwin4obj                              7.0       20151002100947      
 [masque]
  utilisateur="ROOT"
- date_modification="18/03/2015"
+ date_modification="02/10/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
- dernier_id=1000052
+ dernier_id=1000054
  surcharge=oui
  date_modif_base="20130227140720"
  dernier_id_page=100000
@@ -2718,6 +2718,14 @@
    texte="N° ID Basware"
  [obj_texte]
   [presentation]
+   position=139,246
+   taille=9,65
+   id=1000053
+   wstyle="STD"
+  [texte]
+   texte="Famille statistique reprise"
+ [obj_texte]
+  [presentation]
    position=149,13
    taille=9,59
    id=1000032
@@ -3045,6 +3053,19 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Cog_BwId_1_Ap"
+ [champ]
+  [presentation]
+   position=149,246
+   taille=9,48
+   id=1000054
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,su_famstat,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
  [multi_choix]
   [presentation]
    position=176,10
