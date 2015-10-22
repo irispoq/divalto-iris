@@ -1,8 +1,8 @@
-;>xwin4obj     imprimante               6.0       20141212091032      
+;>xwin4obj     imprimante               6.0       20151021142541      
 [masque]
  libelle="tableaux d'amortissements"
- utilisateur="UGIE_RCT"
- date_modification="12/12/2014"
+ utilisateur="UGIE"
+ date_modification="21/10/2015"
  feuille_style="fstyleimp.dhfi"
  taille_ligne=9
  orientation=paysage
@@ -13,7 +13,7 @@
  etat=0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1
  dernier_id=1000000
  surcharge=oui
- date_modif_base="20100820164027"
+ date_modif_base="20141209100723"
  dernier_id_page=100000
  niveau_surcharge=1
  [adresses]
@@ -2351,6 +2351,7 @@
  fin=49
  bloc_fond=9
  position_fond=15
+ diva_avant="Bloc_DebutAxeOuGroupe_2_Av"
  ident_unique=7
  [cadre]
   [presentation]
@@ -3519,6 +3520,7 @@
  debut=14
  fin=65531
  debordement=12
+ diva_apres="Bloc_DebutCompte_2_Ap"
  ident_unique=8
  [cadre]
   [presentation]
@@ -3586,6 +3588,7 @@
  debut=15
  fin=65532
  debordement=12
+ diva_apres="Bloc_Bien_2_Ap"
  ident_unique=9
  [cadre]
   [presentation]
@@ -4085,6 +4088,7 @@
  debordement=12
  bloc_fond=9
  position_fond=8
+ diva_apres="Bloc_FinCompte_2_Ap"
  ident_unique=10
  [cadre]
   [presentation]
@@ -11010,103 +11014,94 @@
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
 [diva]
-Public Record "a5dd.dhsd" mz mz
-Public Record "ccfdd.dhsd" ca ca
-Public Record "ccfdd.dhsd" xq c3xq
-Public Record "ccfdd.dhsd" x1 x1
-Public Record "ccfdd.dhsd" i1 i1
-Public Record "ccfdd.dhsd" xj xj
-Public Record "ccfdd.dhsd" i2 i2
+SetModuleInfo('$Id: ccii746u.dhsi 8739 2015-10-22 08:05:51Z admin $')
+;>xdiva
+;*
+;*		Objet : Nom du programme / module - Programme ccii746.dhsp 
+;*
 
-Public Record "gtfdd.dhsd" g7 cog_g7
-1 	B_ExcelOpen 			b =False
-1 	Lig                  6,0
-1  Col                  6,0
+;*
+;*		Log		Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF		P205	 						10/2015		Export des tableaux cession
+;*
 
+;*
+;*	Déclarations
+;*
 
+;
+Include	"CogTc_YOffice.dhsp"
 
+;
 Module	'YOFFICE.dhop'
 
-
-;*
-Public Procedure  Cog_Ecrire_Cellule(lig,col,Valeur,form,couleur,taille)
-1 lig 		6,0
-1 col 		6,0
-1 valeur 	256
-1 form 		A	 ='texte'
-1 couleur 	2,0 =0
-1 taille    6,0 =10
-1 decim     1,0 =2
-Beginp
-	if lig and col
-		 Office_WriteFormat( lig,col, Valeur,form,decim )      
-		 Office_columnWidth(Lig,col,10)
-		 Office_BordersColorIndex(lig,col,1)
-		 Office_InteriorColorIndex(lig,col,couleur)
-	endif													  
-Endp
-
-
-;*
-Private Procedure Bloc_Bien_Ap
 ;
-1 W_Ecotyp 1
-Beginp
-	If cog_g7.Choix(1) = 2
-		Lig++
-		Col= 1
-		Cog_Ecrire_Cellule(Lig,col,I1.Lib, , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,I1.Etb, , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,I1.Immo, , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,I1.ImmoComp, , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,I1.SvcDt,'Date' , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,I1.EcoDur, , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,Xj.Cr(6), , ,30)
-		Col++
-	
-		W_Ecotyp	= ' '
-		Switch I2.EcoTyp
-			Case 1
-				W_Ecotyp = 'L'
-			Case 2
-				W_Ecotyp = 'D'
-			Case 3
-				W_Ecotyp = 'M'
-			Case 4
-				W_Ecotyp = 'S'
-			Case 5
-				W_Ecotyp = 'P'
-		endswitch
-		Cog_Ecrire_Cellule(Lig,col,W_Ecotyp, , ,30)
-		
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,I2.EcoTau, , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,I2.EcoJourNb, , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,Xj.EcoBas(6), , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,Xj.EcoAntMt(6), , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,Xj.EcoTotMt(6), , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,Xj.CumDprec(6), , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,Xj.EcoCumMt(6), , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,Xj.EcoResMt(6), , ,30)
-	Endif
-Endp
+Public Record "a5dd.dhsd" 	mz 	MZ
+Public Record "ccfdd.dhsd" ca 	CA
+Public Record "ccfdd.dhsd" xq 	C3Xq
+Public Record "ccfdd.dhsd" x1 	X1
+Public Record "ccfdd.dhsd" i1 	I1
+Public Record "ccfdd.dhsd" xj 	XJ
+Public Record "ccfdd.dhsd" i2 	I2
+Public Record "gtfdd.dhsd" g7 	Cog_G7
 
+;
+1 	Lig                  9,0
+1  Col                  9,0
+1	nbFeuille				2,0
+1	flagImmoXls				1,0  =	FALSE
+1	flagCessionXls			1,0  =	FALSE
+
+;	tableau des indices de colonnes
+Structure	XlsTabInd
+	1		DesI			3,0
+ 	1		EtbI			3,0
+	1		ImmoI			3,0
+	1		ImmoCompI	3,0
+	1		SvcDtI		3,0
+	1		EcoDurI		3,0
+	1		CrI			3,0
+	1		EcoTypI		3,0
+	1		EcoTauI		3,0
+	1		EcoDurNbI	3,0
+	1		EcoBasI		3,0
+	1		EcoAntMtI	3,0
+	1		EcoTotMtI	3,0
+	1		CumDPrecI	3,0
+	1		EcoCumMtI	3,0
+	1		EcoResMtI	3,0
+	1		CesDtI		3,0			; date de cession
+	1		FisDurI		3,0			; Durée fiscale
+	1		CesMtI		3,0			; Prix de cession
+	1		FisTypI		3,0
+	1		FisTauI		3,0
+	1		FisJrNbI		3,0
+	1		FisBasI		3,0
+	1		FisAntMtI	3,0
+	1		FisTotMtI	3,0
+	1		FisCumMtI	3,0
+	1		AmoPvValueI	3,0
+	1		DerogI		3,0
+	1		FisResMtI	3,0
+EndStructure
+RecordDiva	XlsTabInd
+
+;
+Const	C_TABIMMO_TYPAMO 		= 1
+Const C_TABIMMO_TYPCESSION = 4
+
+;*
+;*	  P&F
+;*
+
+;*
+;*		Fonctions et Procedure pour ecriture Xls
+;*
 
 ;*
 Public Function int Pw_Ole_creer(Nomfeuille)
+;
 1 Nomfeuille 100
 1 NbFeuille  3,0
 1 cpt        3,0
@@ -11117,108 +11112,386 @@ Public Function int Pw_Ole_creer(Nomfeuille)
 ;Retour 0 si pas d'erreur
 ;1 : Erreur de création
 BeginF
-	ret1=Office_Begin
-	ret2=Office_Open()
-	;Désactive les messages de confirmation pour la suppression
-	Office_DisplayAlert(False)
-	Office_RenameSheet (nospaces(NomFeuille))
-	NbFeuille=Office_GetCountSheet
-	If NbFeuille>=1
-		For cpt=NbFeuille to 2 step -1
-			Office_DeleteSheetByIndex(cpt)
-		next
-	Endif
+	
+	If flagImmoXls
+		Office_AddSheet(nospaces(NomFeuille))
+		ret2 = Condition(Office_GotoSheetByIndex(2), 0, 1)
+	Else
+		ret1=Office_Begin()
+		ret2 = Office_Open()
+		;Désactive les messages de confirmation pour la suppression
+		Office_DisplayAlert(False)
+		Office_RenameSheet (nospaces(NomFeuille))
+
+		NbFeuille=Office_GetCountSheet
+		If NbFeuille>=1
+			For cpt=NbFeuille to 2 step -1
+				Office_DeleteSheetByIndex(cpt)
+			next
+		Endif
+
+	EndIf
+
 	if ret1 or ret2
 		ret=1
 	else
 		ret=0
 	endif
-	B_ExcelOpen = True
-	freturn ret
+
+	
+	FReturn(ret)
 	
 EndF
 
 ;*
-Private Procedure Bloc_DebutAxeOuGroupe_Av
+Public Procedure  Cog_Xls_Ecrire_Cellule(wlig,wcol,wValeur,wform,wcouleur)
 ;
+1 wlig 		9,0
+1 wcol 		9,0
+1 wvaleur 	256
+1 wform 		A	 ='texte'
+1 wcouleur 	2,0 =0
+1 wdecim     1,0 =2
 Beginp
- 	If cog_g7.Choix(1) = 2	and B_ExcelOpen = False
-		Pw_OLE_creer('Immobilisation')
-		Lig=1
-		Col=1
-		Cog_Ecrire_Cellule(Lig,col,"Désignation", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Etb.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"N°Composant.", , ,30)
+	if wlig and wcol
+		 Office_WriteFormat( wlig,wcol, wValeur,wform,wdecim )      
+		 Office_BordersColorIndex(wlig,wcol,1)
+		 Office_InteriorColorIndex(wlig,wcol,wcouleur)
+	endif													  
+Endp
 
-		Col++
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Mise en service.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Durée amort..", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Coût de revient.", , ,30)
-		Col++
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Taux.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Durée.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Base.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Antérieur.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Dotation.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Dépréciations.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Total.", , ,30)
-		Col++
-		Cog_Ecrire_Cellule(Lig,col,"Valeur résiduelle.", , ,30)
-		Col++
+;*
+Procedure Cog_Xls_Entete(wTyp)
+;
+1		wTyp		1,0
+1		wValeur	S
+BeginP
+
+	init XlsTabInd = ' '
+	Lig=2
+	Col=1	| XlsTabInd.DesI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Désignation", , )
+	Office_columnWidth(Lig,Col,20)
+	Col++	| XlsTabInd.EtbI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Etb.", , )
+	Col++	| XlsTabInd.ImmoI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"N°Bien.", , )
+
+	Col++	| XlsTabInd.ImmoCompI = Col
+	
+	Switch2 wTyp
+		Case 4
+			Col++	| XlsTabInd.SvcDtI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Acquisition", , )
+			Col++	| XlsTabInd.CesDtI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Cession", , )
+			Col++	| XlsTabInd.EcoDurI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Durée amort..", , )
+			Col++	| XlsTabInd.FisDurI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Durée fiscale.", , )
+			Col++	| XlsTabInd.CrI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Coût de revient.", , )
+			Col++	| XlsTabInd.CesMtI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Prix de cession", , )
+
+		Default
+			Col++	| XlsTabInd.SvcDtI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Mise en service.", , )
+			Col++	| XlsTabInd.EcoDurI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Durée amort..", , )
+			Col++	| XlsTabInd.CrI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"CR", , )
+	EndSwitch
+
+	Col++	| XlsTabInd.EcoTypI = Col 
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Type", , wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	Col++	| XlsTabInd.EcoTauI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Taux.", , wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	Col++	| XlsTabInd.EcoDurNbI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Durée.", , wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	Col++	| XlsTabInd.EcoBasI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Base.", , wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	Col++	| XlsTabInd.EcoAntMtI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Antérieur.", , wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	Col++	| XlsTabInd.EcoTotMtI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Dotation.", , wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	Col++	| XlsTabInd.CumDPrecI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Dépréciations.", , wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	Col++	| XlsTabInd.EcoCumMtI = Col
+	Cog_Xls_Ecrire_Cellule(Lig,col,"Total.", , wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	
+	; cas des cessions --> tableau amortissement fiscal
+	If wTyp = C_TABIMMO_TYPCESSION
+
+		Col++	| XlsTabInd.FisTypI = Col 
+		Cog_Xls_Ecrire_Cellule(Lig,col,"Type", , wCouleur= COULEUR_EXCEL_VERTCALIR)
+		Col++	| XlsTabInd.FisTauI = Col
+		Cog_Xls_Ecrire_Cellule(Lig,col,"Taux.", , wCouleur= COULEUR_EXCEL_VERTCALIR)
+		Col++	| XlsTabInd.FisJrNbI = Col
+		Cog_Xls_Ecrire_Cellule(Lig,col,"Durée.", , wCouleur= COULEUR_EXCEL_VERTCALIR)
+		Col++	| XlsTabInd.FisBasI = Col
+		Cog_Xls_Ecrire_Cellule(Lig,col,"Base.", , wCouleur= COULEUR_EXCEL_VERTCALIR)
+		Col++	| XlsTabInd.FisAntMtI = Col
+		Cog_Xls_Ecrire_Cellule(Lig,col,"Antérieur.", , wCouleur= COULEUR_EXCEL_VERTCALIR)
+		Col++	| XlsTabInd.FisTotMtI = Col
+		Cog_Xls_Ecrire_Cellule(Lig,col,"Dotation.", , wCouleur= COULEUR_EXCEL_VERTCALIR)
+		Col++	| XlsTabInd.FisCumMtI = Col
+		Cog_Xls_Ecrire_Cellule(Lig,col,"Total.", , wCouleur= COULEUR_EXCEL_VERTCALIR)	
+
+		; VNC + ou - value
+		Col++	|XlsTabInd.EcoResMtI = Col
+		Cog_Xls_Ecrire_Cellule(Lig,col,"+ value.")	
+		Col++	|XlsTabInd.AmoPvValueI	= Col
+		Cog_Xls_Ecrire_Cellule(Lig,col,"- value.")	
+
+	EndIf
+
+	Switch2 wTyp
+		Case 4
+			Col++	| XlsTabInd.FisResMtI	= Col	
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Valeur résiduelle fiscale", , )
+			Col++	| XlsTabInd.DerogI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Dérogatoire", , )
+		Default
+			Col++	| XlsTabInd.EcoResMtI = Col
+			Cog_Xls_Ecrire_Cellule(Lig,col,"Valeur résiduelle.", , )
+	EndSwitch
+
+	; formatage ligne 1
+	Lig = 1
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoTypI, "Amortissement économique", wCouleur= COULEUR_EXCEL_JAUNECLAIR)
+	Office_InteriorColorIndex(Lig, XlsTabInd.EcoTauI, COULEUR_EXCEL_JAUNECLAIR)
+	Office_InteriorColorIndex(Lig, XlsTabInd.EcoDurNbI, COULEUR_EXCEL_JAUNECLAIR)
+	Office_InteriorColorIndex(Lig, XlsTabInd.EcoAntMtI, COULEUR_EXCEL_JAUNECLAIR)
+	Office_InteriorColorIndex(Lig, XlsTabInd.EcoBasI, COULEUR_EXCEL_JAUNECLAIR)
+	Office_InteriorColorIndex(Lig, XlsTabInd.EcoCumMtI, COULEUR_EXCEL_JAUNECLAIR)
+	Office_InteriorColorIndex(Lig, XlsTabInd.CumDPrecI, COULEUR_EXCEL_JAUNECLAIR)
+	Office_InteriorColorIndex(Lig, XlsTabInd.EcoTotMtI, COULEUR_EXCEL_JAUNECLAIR)
+
+	If wTyp = C_TABIMMO_TYPCESSION
+		Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisTypI, "Amortissement fiscal", wCouleur= COULEUR_EXCEL_VERTCALIR)
+ 		Office_InteriorColorIndex(Lig, XlsTabInd.FisTauI, COULEUR_EXCEL_VERTCALIR) 
+		Office_InteriorColorIndex(Lig, XlsTabInd.FisJrNbI, COULEUR_EXCEL_VERTCALIR) 
+		Office_InteriorColorIndex(Lig, XlsTabInd.FisBasI, COULEUR_EXCEL_VERTCALIR) 
+		Office_InteriorColorIndex(Lig, XlsTabInd.FisAntMtI , COULEUR_EXCEL_VERTCALIR) 
+		Office_InteriorColorIndex(Lig, XlsTabInd.FisTotMtI 	, COULEUR_EXCEL_VERTCALIR) 
+		Office_InteriorColorIndex(Lig, XlsTabInd.FisCumMtI , COULEUR_EXCEL_VERTCALIR)   
+	EndIf
+
+	;
+	Lig++
+
+EndP
+
+;*
+Procedure Cog_Xls_DebutCompte
+;
+BeginP
+
+	Lig++
+
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.DesI,X1.Lib(8), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EtbI,X1.Cpt, , )
+
+EndP
+
+;*
+Procedure Cog_Xls_FinCompte
+;
+BeginP
+
+	Lig++
+
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.DesI, 		X1.Lib(8), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EtbI, 		X1.Cpt, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.CrI, 		XJ.Cr(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.CesMtI, 		XJ.CesMt(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoAntMtI,	XJ.EcoAntMt(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoTotMtI,	XJ.EcoTotMt(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.CumDPrecI,	XJ.CumDprec(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoCumMtI,	XJ.EcoCumMt(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoResMtI,	XJ.EcoResMt(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.AmoPvValueI,	XJ.AmoPvalue(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisResMtI,	XJ.FisResMt(5), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.DerogI,		XJ.Derog(5), , )
+
+EndP
+
+;*
+Procedure Cog_Xls_Detail_Bien
+;
+1 	wEcotyp 	1
+1	wFistyp	1
+BeginP
+
+	Lig++
+
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.DesI,		I1.Lib, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EtbI,		I1.Etb, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.ImmoI,		I1.Immo, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.ImmoCompI,I1.ImmoComp, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.SvcDtI,	I1.SvcDt,'Date' , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.CesDtI,	I1.CesDt,'Date' , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoDurI,	I1.EcoDur, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisDurI,	I2.FisDur, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.CrI,		Xj.Cr(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.CesMtI,	Xj.CesMt(6), , )
+
+	; tableau amortissement économique
+	wEcotyp	= ' '
+	Switch I2.EcoTyp
+		Case 1
+			wEcotyp = 'L'
+		Case 2
+			wEcotyp = 'D'
+		Case 3
+			wEcotyp = 'M'
+		Case 4
+			wEcotyp = 'S'
+		Case 5
+			wEcotyp = 'P'
+	endswitch
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoTypI,	wEcotyp, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoTauI,	I2.EcoTau, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoDurNbI,	I2.EcoJourNb, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoBasI,	Xj.EcoBas(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoAntMtI,	Xj.EcoAntMt(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoTotMtI,	Xj.EcoTotMt(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.CumDPrecI,	Xj.CumDprec(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoCumMtI,	Xj.EcoCumMt(6), , )
+
+	; tableau amortissement fiscal
+	wFistyp	= ' '
+	Switch I2.Fistyp
+		Case 1
+			wFistyp = 'L'
+		Case 2
+			wFistyp = 'D'
+		Case 3
+			wFistyp = 'M'
+		Case 4
+			wFistyp = 'S'
+		Case 5
+			wFistyp = 'P'
+	endswitch
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisTypI,	wFistyp, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisTauI,	I2.FisTau, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisJrNbI,	I2.FisJourNb, , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisBasI,	Xj.FisBas(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisAntMtI,	Xj.FisAntMt(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisTotMtI,	Xj.FisTotMt(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisCumMtI,	Xj.FisCumMt(6), , )
+
+	;
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.EcoResMtI,	Xj.EcoResMt(6), , )
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.AmoPvValueI,	Xj.AmoPvalue(6), , )
+
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.FisResMtI, XJ.FisResMt(6))
+	Cog_Xls_Ecrire_Cellule(Lig, XlsTabInd.DerogI, XJ.Derog(6))
+
+EndP
+
+;*
+;*	Blocs pour le tableau amortissements economique
+;*
+
+;*	 BLOC 1
+Private Procedure Bloc_DebutAxeOuGroupe_Av
+;	Avant impression du bloc 1	 (tableau amortissement economique)
+Beginp
+ 	If cog_g7.Choix(1) = 2	and flagImmoXls = False
+		If Pw_OLE_creer('Immobilisation') = 0
+			flagImmoXls = TRUE
+		EndIf
+
+		Cog_Xls_Entete(C_TABIMMO_TYPAMO)
+
 	Endif
 Endp
 
+;*	BLOC 2
+Private Procedure Bloc_DebutCompte_Ap
+;	Après impression du bloc 2 (tableau amortissement economique)
+Beginp
+	IF flagImmoXls
+		Cog_Xls_DebutCompte
+	EndIf
+Endp
+
+;*	BLOC 3
+Private Procedure Bloc_Bien_Ap
+;	Après impression du bloc 3	 (tableau amortissement economique)
+Beginp
+	If cog_g7.Choix(1) = 2	and flagImmoXls
+		Cog_Xls_Detail_Bien	
+	Endif
+Endp
+
+;*	 BLOC 4
+Private Procedure Bloc_FinCompte_Ap
+;	Apres impression du bloc 4 (tableau amortissement economique)
+Beginp
+	If flagImmoXls 
+		Cog_Xls_FinCompte
+	EndIf
+Endp
 
 ;*
-Private Procedure Bloc_DebutCompte_Ap
-;
+;*	Blocs pour le tableau cession
+;*
+
+;*
+Private Procedure Bloc_DebutAxeOuGroupe_2_Av
+;	BLOC 7
 Beginp
-	Lig++
-	Col= 1
-	Cog_Ecrire_Cellule(Lig,col,X1.Lib(8), , ,30)
-	Col++
-	Cog_Ecrire_Cellule(Lig,col,X1.Cpt, , ,30)
+
+	If cog_g7.Choix(1) = 2	and flagCessionXls = False
+		If Pw_OLE_creer('Cessions') = 0
+			flagCessionXls = TRUE
+		EndIf
+
+		Cog_Xls_Entete(C_TABIMMO_TYPCESSION)
+
+	Endif
+
 Endp
 
 
 ;*
-Private Procedure Bloc_FinCompte_Ap
-;
+Private Procedure Bloc_DebutCompte_2_Ap
+; BLOC 8
 Beginp
-	Lig++
-	Col= 1
-	Cog_Ecrire_Cellule(Lig,col,X1.Lib(8), , ,30)
-	Col++
-	Cog_Ecrire_Cellule(Lig,col,X1.Cpt, , ,30)
-	Col= Col +5
-	Cog_Ecrire_Cellule(Lig,col,XJ.Cr(5), , ,30)
-	Col= Col +5
-	Cog_Ecrire_Cellule(Lig,col,XJ.EcoAntMt(5), , ,30)
-	Col++
-	Cog_Ecrire_Cellule(Lig,col,XJ.EcoTotMt(5), , ,30)
-	Col++
-	Cog_Ecrire_Cellule(Lig,col,XJ.CumDprec(5), , ,30)
-	Col++
-	Cog_Ecrire_Cellule(Lig,col,XJ.EcoCumMt(5), , ,30)
-	Col++
-	Cog_Ecrire_Cellule(Lig,col,XJ.EcoResMt(5), , ,30)
+
+	IF flagCessionXls
+		Cog_Xls_DebutCompte
+	EndIf
+
+Endp
+
+;*
+Private Procedure Bloc_Bien_2_Ap
+;	BLOC 9
+Beginp
+
+	If cog_g7.Choix(1) = 2	and flagCessionXls
+		Cog_Xls_Detail_Bien	
+	Endif
+
+Endp
+
+;*
+Private Procedure Bloc_FinCompte_2_Ap
+; BLOC 10
+Beginp
+
+	If flagCessionXls 
+		Cog_Xls_FinCompte
+	EndIf
 
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: ccii746u.dhsi 8407 2015-07-28 08:15:56Z admin $')
+SetModuleInfo('$Id: ccii746u.dhsi 8739 2015-10-22 08:05:51Z admin $')
 Public Record "A5DD.dhsd" mz mz
 Public Record "ccfdd.dhsd" ca ca
 Public Record "ccfdd.dhsd" xq c3xq
