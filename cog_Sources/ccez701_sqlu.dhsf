@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20151002100947      
+;>xwin4obj                              7.0       20151022114813      
 [masque]
  utilisateur="ROOT"
- date_modification="02/10/2015"
+ date_modification="22/10/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
- dernier_id=1000054
+ dernier_id=1000055
  surcharge=oui
  date_modif_base="20130227140720"
  dernier_id_page=100000
@@ -2064,6 +2064,26 @@
    texte="Date de démarrage de l'amortissement"
    [param_colonne]
     titre="Date de démarrage de l'amortissement"
+    fl_aff=non
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=125,154
+    taille=9,30
+    id=1000055
+    colonnes_saisie=8
+    wstyle="STD"
+   [description]
+    donnee=immo,su_famstat,immobilisation
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+   [info_bulle]
+   texte="Famille statistique"
+   [param_colonne]
+    titre="Famille statistique"
     fl_aff=non
     largeur_col=30
     wstyle="ENTETE_COLONNE"
