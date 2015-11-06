@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20141223133216      
+;>xwin4obj     imprimante               6.0       20151106121137      
 [masque]
  utilisateur="UGIE"
- date_modification="23/12/2014"
+ date_modification="06/11/2015"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -39,7 +39,6 @@
  "gtfdd.dhsd",,g4t1,g4t1,100,0
  "gtfdd.dhsd",,mvtl,g4mvtl,1000,0
  "gtfdd.dhsd",,t013,t013,300,0
- "gtfdd.dhsd",,soc,socaafficher,2800,0
  "gtfdd.dhsd",,t037,t037,450,0
  "gtfdd.dhsd",,t2,t2,1000,0
 [bloc]
@@ -578,7 +577,6 @@
    wstyle="STD"
   [description]
    donnee=g4,nom,g4,2
-  [param_saisie]
  [champ]
   [presentation]
    position=85,164
@@ -659,7 +657,6 @@
    wstyle="STD"
   [description]
    donnee=g4,loc,g4,2
-  [param_saisie]
  [champ]
   [presentation]
    position=126,192
@@ -668,7 +665,6 @@
    wstyle="STD"
   [description]
    donnee=g4,vil,g4,2
-  [param_saisie]
  [champ]
   [presentation]
    position=105,164
@@ -677,7 +673,6 @@
    wstyle="STD"
   [description]
    donnee=g4,rue,g4,2
-  [param_saisie]
  [champ]
   [presentation]
    position=131,27
@@ -686,7 +681,6 @@
    wstyle="PETIT"
   [description]
    donnee=g4,loc,g4,3
-  [param_saisie]
  [champ]
   [presentation]
    position=138,45
@@ -695,7 +689,6 @@
    wstyle="PETIT"
   [description]
    donnee=g4,vil,g4,3
-  [param_saisie]
  [champ]
   [presentation]
    position=187,255
@@ -728,7 +721,6 @@
    wstyle="PETIT"
   [description]
    donnee=g4,rue,g4,3
-  [param_saisie]
  [champ]
   [presentation]
    position=115,27
@@ -737,7 +729,6 @@
    wstyle="PETIT_GRAS"
   [description]
    donnee=g4,nom,g4,3
-  [param_saisie]
  [multi_choix]
   [presentation]
    position=4,226
@@ -760,7 +751,6 @@
    wstyle="STD"
   [description]
    donnee=ent,pidt,ent
-  [param_saisie]
  [champ]
   [presentation]
    position=187,36
@@ -779,7 +769,6 @@
    wstyle="STD_GRAS"
   [description]
    donnee=ent,tiers,ent
-  [param_saisie]
  [champ]
   [presentation]
    position=187,102
@@ -788,7 +777,6 @@
    wstyle="STD"
   [description]
    donnee=ent,piref,ent
-  [param_saisie]
  [champ]
   [presentation]
    position=147,4
@@ -831,7 +819,6 @@
    wstyle="DAV_DES"
   [description]
    donnee=mouv,des,g4mouv
-  [param_saisie]
  [champ]
   [presentation]
    position=0,177
@@ -851,7 +838,6 @@
    wstyle="PETIT"
   [description]
    donnee=art,tvaart,g4art
-  [param_saisie]
  [champ]
   [presentation]
    position=0,215
@@ -882,7 +868,6 @@
    wstyle="DAV_REF"
   [description]
    donnee=mouv,ref,g4mouv
-  [param_saisie]
 [bloc]
  numero=3
  libelle="Débordement"
@@ -1286,7 +1271,6 @@
    wstyle="STD_GRAS"
   [description]
    donnee=ent,dev,ent
-  [param_saisie]
  [champ]
   [presentation]
    position=49,243
@@ -1955,39 +1939,39 @@ Public Record "gtfdd.dhsd" soc socaafficher
 public record "gtfdd.dhsd" cli
 
 
-;*
-Private Procedure Bloc_EnTete_AvGestion
+;;*
+;Private Procedure Bloc_EnTete_AvGestion
+;;
+;Beginp
+;	;il faut vérifier si ce n'est pas une facturation pour compte
+;	if ent.Cog_Facturation_Compte = 2
+; 		;il faut trouver la centrale avec le code centrale
+;		pingreceive ("clisoc",cli)
+;		Recherche_Client(ent.TiersGrp)
 ;
-Beginp
-	;il faut vérifier si ce n'est pas une facturation pour compte
-	if ent.Cog_Facturation_Compte = 2
- 		;il faut trouver la centrale avec le code centrale
-		pingreceive ("clisoc",cli)
-		Recherche_Client(ent.TiersGrp)
-
-		socAafficher.AdrCpl1 = cli.AdrCpl1 
-		socAafficher.AdrCpl2 = cli.AdrCpl2
- 		socAafficher.loc = cli.loc
- 		socAafficher.vil = cli.Vil  
-		socAafficher.Cpostal = cli.Cpostal
- 		socAafficher.Tel = cli.Tel
-		socAafficher.Fax = cli.Fax 
-
-		pinglocalreceive ("clisoc",cli)
-		Recherche_Client(ent.Tiers)
-		
-	else
-		;rien
-		socAafficher.AdrCpl1 = soc.AdrCpl1 
-		socAafficher.AdrCpl2 = soc.AdrCpl2
- 		socAafficher.loc = soc.loc
- 		socAafficher.vil = soc.Vil  
-		socAafficher.Cpostal = soc.Cpostal
- 		socAafficher.Tel = soc.Tel
-		socAafficher.Fax = soc.Fax 
-
-	endif
-Endp
+;		socAafficher.AdrCpl1 = cli.AdrCpl1 
+;		socAafficher.AdrCpl2 = cli.AdrCpl2
+; 		socAafficher.loc = cli.loc
+; 		socAafficher.vil = cli.Vil  
+;		socAafficher.Cpostal = cli.Cpostal
+; 		socAafficher.Tel = cli.Tel
+;		socAafficher.Fax = cli.Fax 
+;
+;		pinglocalreceive ("clisoc",cli)
+;		Recherche_Client(ent.Tiers)
+;		
+;	else
+;		;rien
+;		socAafficher.AdrCpl1 = soc.AdrCpl1 
+;		socAafficher.AdrCpl2 = soc.AdrCpl2
+; 		socAafficher.loc = soc.loc
+; 		socAafficher.vil = soc.Vil  
+;		socAafficher.Cpostal = soc.Cpostal
+; 		socAafficher.Tel = soc.Tel
+;		socAafficher.Fax = soc.Fax 
+;
+;	endif
+;Endp
 [/diva]
 [diva_base]
 SetModuleInfo('$Id: gtii210a.dhsi 31865 2013-05-28 14:05:36Z sn $')

@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150826093803      
+;>xwin4obj                              7.0       20151106114509      
 [masque]
  utilisateur="UGIE"
- date_modification="26/08/2015"
+ date_modification="06/11/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=1000094
  surcharge=oui
- date_modif_base="20140113103937"
+ date_modif_base="20140912091139"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -24,7 +24,7 @@
  "gtfdd.dhsd",,ets,ets,1500,0
  "gtfdd.dhsd",,eec,eec,1000,0
  "gtfdd.dhsd",,t020,t020_ent,350,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1500,0
  "gtfdd.dhsd",,g1t2,g1t2,2200,0
  "ddsys.dhsd",,rowinfo,rowinfo,120,0
  "gtfdd.dhsd",,g1t3,g1t3,1000,0
@@ -34,8 +34,8 @@
  "gtfdd.dhsd",,ent,entori,1800,0
  "gtfdd.dhsd",,soc,soc,2800,0
  "gtfdd.dhsd",,t025,t025_ori,350,0
- "cogfdd.dhsd",,cog_dircliente,cog_dircliente_01,500,0
  "gtfdd.dhsd",,art,art,1700,0
+ "cogfdd.dhsd",,cog_dircliente,cog_dircliente_01,500,0
 [onglet]
  [presentation]
   position=0,0
@@ -448,23 +448,6 @@
    shift_f5=149
  [champ]
   [presentation]
-   position=40,371
-   taille=9,39
-   id=1000026
-   colonnes_saisie=12
-   wstyle="CHAMP_NON_SAISI_COG"
-  [description]
-   donnee=cli,enac,tiers,1
-   format="\formatmille"
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
    position=17,50
    taille=9,32
    id=963
@@ -487,6 +470,7 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+   diva_avant="Champ_PiDt_1_Av"
    diva_apres="Champ_PiDt_1_Ap"
  [champ]
   [presentation]
@@ -511,6 +495,84 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+ [champ]
+  [presentation]
+   position=15,318
+   taille=9,33
+   id=968
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ent,tiers,ent
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=1
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+ [multi_choix]
+  [presentation]
+   position=4,240
+   taille=9,10
+   id=1217
+   wstyle="CHAMP_AFF_GRAS"
+  [description]
+   donnee=ent,prgcdeflg,ent
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","AFFOUV"
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=23,318
+   taille=9,33
+   id=969
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,cpostal,tiers
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=15,350
+   taille=9,120
+   id=970
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,nom,tiers
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+ [champ]
+  [presentation]
+   position=23,350
+   taille=9,120
+   id=971
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,vil,tiers
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
  [champ]
   [presentation]
    position=27,162
@@ -613,6 +675,46 @@
    microbol_click=8002
  [champ]
   [presentation]
+   position=27,118
+   taille=8,43
+   noms="cog_c1;cog_c2"
+   id=1000001
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gtent,affairelib,gtent
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=27,195
+   taille=9,106
+   noms="cog_c1;cog_c2"
+   id=1000002
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gtent,lib,gtent,4
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
    position=47,50
    taille=9,32
    id=973
@@ -640,6 +742,21 @@
    diva_apres="Champ_Depo_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=57,86
+   taille=9,121
+   id=1000005
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gtent,lib,gtent,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
  [champ]
   [presentation]
    position=47,128
@@ -806,6 +923,74 @@
    diva_apres="Champ_Cog_Validite_1_Ap"
  [champ]
   [presentation]
+   position=40,371
+   taille=9,39
+   id=1000026
+   colonnes_saisie=12
+   wstyle="CHAMP_NON_SAISI_COG"
+  [description]
+   donnee=cli,enac,tiers,1
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=52,371
+   taille=9,39
+   id=1000027
+   colonnes_saisie=12
+   wstyle="CHAMP_NON_SAISI_COG"
+  [description]
+   donnee=cli,enac,tiers,3
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=40,421
+   taille=9,39
+   id=1000028
+   colonnes_saisie=12
+   wstyle="CHAMP_NON_SAISI_COG"
+  [description]
+   donnee=cli,enmax,tiers,1
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=52,421
+   taille=9,39
+   id=1000029
+   colonnes_saisie=12
+   wstyle="CHAMP_NON_SAISI_COG"
+  [description]
+   donnee=cli,enmax,tiers,2
+   format="\formatmille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
    position=77,139
    taille=9,161
    noms="cog_f0"
@@ -847,6 +1032,21 @@
    diva_apres="Champ_AcMt_1_Ap"
  [champ]
   [presentation]
+   position=67,240
+   taille=9,60
+   id=1000063
+   colonnes_saisie=30
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,su_idt_req_iws,ent
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
    position=64,432
    taille=9,40
    noms="accsaisie"
@@ -885,205 +1085,6 @@
    esp_si_zero=oui
   [touches]
    f5=6999
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=40,421
-   taille=9,39
-   id=1000028
-   colonnes_saisie=12
-   wstyle="CHAMP_NON_SAISI_COG"
-  [description]
-   donnee=cli,enmax,tiers,1
-   format="\formatmille"
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=15,318
-   taille=9,33
-   id=968
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=ent,tiers,ent
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f5=1
-   ctrl_p=1
-   ctrl_f6=10300
-   shift_f5=149
- [multi_choix]
-  [presentation]
-   position=4,240
-   taille=9,10
-   id=1217
-   wstyle="CHAMP_AFF_GRAS"
-  [description]
-   donnee=ent,prgcdeflg,ent
-   saisie=non
-  [param_saisie]
-   esp_si_zero=oui
-  [param_multi]
-   choix="gtfdmc.dhfi","AFFOUV"
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=23,318
-   taille=9,33
-   id=969
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cli,cpostal,tiers
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f7=135
-   ctrl_f6=10300
-   shift_f1=1
- [champ]
-  [presentation]
-   position=15,350
-   taille=9,120
-   id=970
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cli,nom,tiers
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   ctrl_p=1
-   ctrl_f6=10300
-   shift_f5=149
- [champ]
-  [presentation]
-   position=23,350
-   taille=9,120
-   id=971
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cli,vil,tiers
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   ctrl_p=1
-   ctrl_f6=10300
-   shift_f5=149
- [champ]
-  [presentation]
-   position=27,118
-   taille=8,43
-   noms="cog_c1;cog_c2"
-   id=1000001
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=gtent,affairelib,gtent
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f5=3499
-   f7=135
-   ctrl_f6=10300
-   shift_f1=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=27,195
-   taille=9,106
-   noms="cog_c1;cog_c2"
-   id=1000002
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=gtent,lib,gtent,4
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=3499
-   f7=135
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f6=5503
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=57,86
-   taille=9,121
-   id=1000005
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=gtent,lib,gtent,1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   ctrl_p=1
-   ctrl_f6=10300
-   shift_f5=149
- [champ]
-  [presentation]
-   position=52,371
-   taille=9,39
-   id=1000027
-   colonnes_saisie=12
-   wstyle="CHAMP_NON_SAISI_COG"
-  [description]
-   donnee=cli,enac,tiers,3
-   format="\formatmille"
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=52,421
-   taille=9,39
-   id=1000029
-   colonnes_saisie=12
-   wstyle="CHAMP_NON_SAISI_COG"
-  [description]
-   donnee=cli,enmax,tiers,2
-   format="\formatmille"
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=67,240
-   taille=9,60
-   id=1000063
-   colonnes_saisie=30
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,su_idt_req_iws,ent
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
    f7=135
    shift_f1=1
 [page]
@@ -1751,6 +1752,7 @@
    f1=1
    f5=6999
    f7=135
+   f8=9887
    ctrl_f6=10300
    shift_f1=1
    shift_f5=145
@@ -1784,7 +1786,7 @@
    shift_f5=145
    shift_f6=5503
   [traitements]
-   microbol_click=4018
+   microbol_click=6022
    diva_avant="Champ_Projet_1_Av"
    diva_apres="Champ_Projet_1_Ap"
   [boutons]
@@ -2031,6 +2033,74 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_PrioCod_1_Ap"
+ [champ]
+  [presentation]
+   position=47,360
+   taille=9,39
+   noms="encours"
+   id=1344
+   colonnes_saisie=12
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gtent,enac,gtent,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=59,360
+   taille=9,39
+   noms="encours"
+   id=1345
+   colonnes_saisie=12
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gtent,enac,gtent,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=47,431
+   taille=9,39
+   noms="encours"
+   id=1346
+   colonnes_saisie=12
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gtent,enmax,gtent,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=59,431
+   taille=9,39
+   noms="encours"
+   id=1347
+   colonnes_saisie=12
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=gtent,enmax,gtent,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
  [case_a_cocher]
   [presentation]
    position=168,155
@@ -2200,6 +2270,77 @@
    diva_apres="Champ_DelDemDt_2_Ap"
  [champ]
   [presentation]
+   position=88,401
+   taille=9,69
+   id=133
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=t020,lib,t020_ent
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   ctrl_f6=10300
+ [champ]
+  [presentation]
+   position=99,360
+   taille=9,39
+   id=135
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ets,etb,ets
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=145
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=99,401
+   taille=9,69
+   id=136
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ets,nom,ets
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=111,360
+   taille=9,39
+   id=1313
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ent,blasno,ent
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+   shift_f5=145
+ [champ]
+  [presentation]
    position=148,311
    taille=9,54
    noms="delais"
@@ -2249,6 +2390,24 @@
    donnee=ent,su_dt_prepa_cible,ent
   [param_saisie]
    type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+ [case_a_cocher]
+  [presentation]
+   position=183,384
+   taille=9,81
+   noms="cog_c3"
+   id=1000036
+   wstyle="CHAMP_NON_SAISI_COG"
+  [description]
+   donnee=ent,cog_bl_moteur,ent
+   saisie=non
+  [param_case]
+   texte="Issu du moteur de facturation"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
   [touches]
    f7=135
    shift_f1=1
@@ -2371,163 +2530,6 @@
    f7=135
    shift_f1=1
    shift_f5=145
- [champ]
-  [presentation]
-   position=47,360
-   taille=9,39
-   noms="encours"
-   id=1344
-   colonnes_saisie=12
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=gtent,enac,gtent,1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=59,360
-   taille=9,39
-   noms="encours"
-   id=1345
-   colonnes_saisie=12
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=gtent,enac,gtent,3
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=47,431
-   taille=9,39
-   noms="encours"
-   id=1346
-   colonnes_saisie=12
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=gtent,enmax,gtent,1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=59,431
-   taille=9,39
-   noms="encours"
-   id=1347
-   colonnes_saisie=12
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=gtent,enmax,gtent,2
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=88,401
-   taille=9,69
-   id=133
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=t020,lib,t020_ent
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=3499
-   ctrl_f6=10300
- [champ]
-  [presentation]
-   position=99,360
-   taille=9,39
-   id=135
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=ets,etb,ets
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=3499
-   f7=135
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f5=145
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=99,401
-   taille=9,69
-   id=136
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=ets,nom,ets
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=3499
-   f7=135
-   ctrl_f6=10300
-   shift_f1=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=111,360
-   taille=9,39
-   id=1313
-   colonnes_saisie=8
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=ent,blasno,ent
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f7=135
-   shift_f1=1
-   shift_f5=145
- [case_a_cocher]
-  [presentation]
-   position=183,384
-   taille=9,81
-   noms="cog_c3"
-   id=1000036
-   wstyle="CHAMP_NON_SAISI_COG"
-  [description]
-   donnee=ent,cog_bl_moteur,ent
-   saisie=non
-  [param_case]
-   texte="Issu du moteur de facturation"
-   cadrage=droite
-   valeur="2","1"
-   choix="gtfdmc.dhfi",""
-  [touches]
-   f7=135
-   shift_f1=1
 [page]
  numero=4
  libelle="Compléments en-tête"
@@ -3410,48 +3412,6 @@
    diva_apres="Champ_NbEx_1_Ap"
  [champ]
   [presentation]
-   position=165,358
-   taille=9,39
-   id=125
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,txtedcodd,ent
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [aide_page]
-   aide=4319
-   fichier="gtfaide"
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   ctrl_f6=10300
-   shift_f1=1
-  [traitements]
-   diva_apres="Champ_EdCod_3_Ap"
- [champ]
-  [presentation]
-   position=175,358
-   taille=9,39
-   id=126
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,txtedcodf,ent
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [aide_page]
-   aide=4319
-   fichier="gtfaide"
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   ctrl_f6=10300
-   shift_f1=1
-  [traitements]
-   diva_apres="Champ_EdCod_4_Ap"
- [champ]
-  [presentation]
    position=147,122
    taille=9,139
    noms="axe1"
@@ -3610,6 +3570,48 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+ [champ]
+  [presentation]
+   position=165,358
+   taille=9,39
+   id=125
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,txtedcodd,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=4319
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+  [traitements]
+   diva_apres="Champ_EdCod_3_Ap"
+ [champ]
+  [presentation]
+   position=175,358
+   taille=9,39
+   id=126
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,txtedcodf,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=4319
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+  [traitements]
+   diva_apres="Champ_EdCod_4_Ap"
  [case_a_cocher]
   [presentation]
    position=186,275
@@ -3628,6 +3630,22 @@
    shift_f1=1
   [traitements]
    microbol_click=8002
+ [champ]
+  [presentation]
+   position=115,100
+   taille=10,98
+   noms="cog_c3;cog_c4"
+   id=1000039
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=cog_dircliente,lib,cog_dircliente_01
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
  [case_a_cocher]
   [presentation]
    position=204,275
@@ -3664,22 +3682,6 @@
    shift_f1=1
   [traitements]
    microbol_click=8002
- [champ]
-  [presentation]
-   position=115,100
-   taille=10,98
-   noms="cog_c3;cog_c4"
-   id=1000039
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=cog_dircliente,lib,cog_dircliente_01
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f1=1
  [case_a_cocher]
   [presentation]
    position=195,378
@@ -11993,6 +11995,7 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+   diva_avant="Champ_RemMt_1_Av"
    diva_apres="Champ_RemMt_1_Ap"
  [champ]
   [presentation]
@@ -12628,64 +12631,6 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=56,7
-   taille=9,92
-   noms="reffo;prix"
-   id=515
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=g1t1,reffo,g1t1
-   sequence=4
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   f8=9010
-   ctrl_r=5502
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f4=4500
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_RefFo_1_Av"
-   diva_apres="Champ_RefFo_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=88,61
-   taille=9,40
-   id=540
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=g1t1,dstqte,g1t1
-   format="\FormatMille"
-   sequence=1
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   f8=4003
-   ctrl_q=50
-   ctrl_r=5502
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f4=4500
-  [traitements]
-   microbol_apres=4002
-   microbol_click=6015
-   diva_apres="Champ_Qte_1_Ap"
-  [boutons]
-   "qte"
-   "zoom"
- [champ]
-  [presentation]
    position=73,214
    taille=9,18
    noms="prix"
@@ -12743,6 +12688,64 @@
    microbol_click=6002
    diva_apres="Champ_Dev_1_Ap"
   [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=56,7
+   taille=9,92
+   noms="reffo;prix"
+   id=515
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,reffo,g1t1
+   sequence=4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9010
+   ctrl_r=5502
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f4=4500
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_RefFo_1_Av"
+   diva_apres="Champ_RefFo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=88,61
+   taille=9,40
+   id=540
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,dstqte,g1t1
+   format="\FormatMille"
+   sequence=1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=4003
+   ctrl_q=50
+   ctrl_r=5502
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f4=4500
+  [traitements]
+   microbol_apres=4002
+   microbol_click=6015
+   diva_apres="Champ_Qte_1_Ap"
+  [boutons]
+   "qte"
    "zoom"
  [champ]
   [presentation]
@@ -12875,6 +12878,22 @@
    "zoom"
  [champ]
   [presentation]
+   position=51,402
+   taille=9,72
+   noms="prix;tacodremcod"
+   id=1573
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g1t1,lib,g1t1,25
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
    position=73,168
    taille=9,40
    noms="prix"
@@ -12918,24 +12937,8 @@
    shift_f4=4500
   [traitements]
    microbol_click=8002
-   diva_avant="Champ_Pub_1_Av"
+   diva_avant="Champ_Ppar_1_Av"
    diva_apres="Champ_Ppar_1_Ap"
- [champ]
-  [presentation]
-   position=51,402
-   taille=9,72
-   noms="prix;tacodremcod"
-   id=1573
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=g1t1,lib,g1t1,25
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f1=1
  [champ]
   [presentation]
    position=85,212
@@ -13002,6 +13005,25 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_PubTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=61,402
+   taille=9,72
+   noms="prix;tacodremcod"
+   id=1575
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g1t1,lib,g1t1,10
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=135
+   ctrl_r=5502
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f4=4500
  [case_a_cocher]
   [presentation]
    position=117,109
@@ -13024,97 +13046,6 @@
    microbol_click=8002
    diva_avant="Champ_Pub_1_Av"
    diva_apres="Champ_PaForf_1_Ap"
- [champ]
-  [presentation]
-   position=128,212
-   taille=9,60
-   noms="numero;cog_c3;cog_c4"
-   id=1000043
-   colonnes_saisie=15
-   wstyle="CHAMP_SAISI_COG"
-  [description]
-   donnee=g1t1,cog_numero,g1t1
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f1=1
- [champ]
-  [presentation]
-   position=51,366
-   taille=9,34
-   noms="promoremcod;prix;tacodremcod"
-   id=1574
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=g1t1,promoremcod,g1t1
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   f8=9916
-   ctrl_r=5502
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f4=4500
-   shift_f8=9910
-  [traitements]
-   microbol_click=6020
-   diva_avant="Champ_RemCod_3_Av"
-   diva_apres="Champ_RemCod_3_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=61,402
-   taille=9,72
-   noms="prix;tacodremcod"
-   id=1575
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=g1t1,lib,g1t1,10
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f7=135
-   ctrl_r=5502
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f4=4500
- [champ]
-  [presentation]
-   position=61,366
-   taille=9,34
-   noms="remcod;prix;tacodremcod"
-   id=1576
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=g1t1,remcod,g1t1
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   f8=9915
-   ctrl_r=5502
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f4=4500
-   shift_f8=9884
-  [traitements]
-   microbol_click=6008
-   diva_avant="Champ_RemCod_2_Av"
-   diva_apres="Champ_RemCod_2_Ap"
-  [boutons]
-   "zoom"
  [champ]
   [presentation]
    position=53,212
@@ -13168,6 +13099,78 @@
    ctrl_f6=10300
    shift_f1=1
    shift_f4=4500
+ [champ]
+  [presentation]
+   position=128,212
+   taille=9,60
+   noms="numero;cog_c3;cog_c4"
+   id=1000043
+   colonnes_saisie=15
+   wstyle="CHAMP_SAISI_COG"
+  [description]
+   donnee=g1t1,cog_numero,g1t1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=51,366
+   taille=9,34
+   noms="promoremcod;prix;tacodremcod"
+   id=1574
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,promoremcod,g1t1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9916
+   ctrl_r=5502
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f4=4500
+   shift_f8=9910
+  [traitements]
+   microbol_click=6020
+   diva_avant="Champ_RemCod_3_Av"
+   diva_apres="Champ_RemCod_3_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=61,366
+   taille=9,34
+   noms="remcod;prix;tacodremcod"
+   id=1576
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,remcod,g1t1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9915
+   ctrl_r=5502
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f4=4500
+   shift_f8=9884
+  [traitements]
+   microbol_click=6008
+   diva_avant="Champ_RemCod_2_Av"
+   diva_apres="Champ_RemCod_2_Ap"
+  [boutons]
+   "zoom"
  [champ]
   [presentation]
    position=71,366
@@ -13268,79 +13271,6 @@
    diva_apres="Champ_Rem_1_Ap"
  [champ]
   [presentation]
-   position=91,366
-   taille=9,33
-   noms="prix;remcod2"
-   id=547
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=g1t1,rem,g1t1,3
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   ctrl_r=5502
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f4=4500
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Pub_1_Av"
-   diva_apres="Champ_Rem_1_Ap"
- [multi_choix]
-  [presentation]
-   position=91,402
-   taille=9,50
-   noms="prix;remcod2"
-   id=548
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=g1t1,remtyp,g1t1,3
-   minmaj=majuscules
-  [param_saisie]
-   esp_si_zero=oui
-  [param_multi]
-   choix="gtfdmc.dhfi","REMTYP"
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   ctrl_r=5502
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f4=4500
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Pub_1_Av"
-   diva_apres="Champ_Rem_1_Ap"
- [champ]
-  [presentation]
-   position=101,366
-   taille=9,34
-   noms="prix;remcod2"
-   id=549
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=g1t1,remmt,g1t1
-   format="\FormatMille"
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=6999
-   f7=135
-   ctrl_r=5502
-   ctrl_f6=10300
-   shift_f1=1
-   shift_f4=4500
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Pub_1_Av"
-   diva_apres="Champ_Rem_1_Ap"
- [champ]
-  [presentation]
    position=96,208
    taille=9,85
    noms="prix"
@@ -13385,6 +13315,29 @@
    microbol_click=8002
  [champ]
   [presentation]
+   position=91,366
+   taille=9,33
+   noms="prix;remcod2"
+   id=547
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,rem,g1t1,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_r=5502
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f4=4500
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Pub_1_Av"
+   diva_apres="Champ_Rem_1_Ap"
+ [champ]
+  [presentation]
    position=129,422
    taille=9,18
    noms="prix"
@@ -13420,6 +13373,32 @@
    shift_f4=4500
   [traitements]
    microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=91,402
+   taille=9,50
+   noms="prix;remcod2"
+   id=548
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,remtyp,g1t1,3
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","REMTYP"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_r=5502
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f4=4500
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Pub_1_Av"
+   diva_apres="Champ_Rem_1_Ap"
  [champ]
   [presentation]
    position=29,62
@@ -13439,6 +13418,30 @@
    shift_f1=1
   [info_bulle]
   texte="Compte comptable d'achat"
+ [champ]
+  [presentation]
+   position=101,366
+   taille=9,34
+   noms="prix;remcod2"
+   id=549
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,remmt,g1t1
+   format="\FormatMille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_r=5502
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f4=4500
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Pub_1_Av"
+   diva_apres="Champ_Rem_1_Ap"
 [page]
  numero=15
  fond="STD"
@@ -24566,6 +24569,39 @@
     "zoom"
   [champ_tableau]
    [presentation]
+    position=57,160
+    taille=8,45
+    id=1175
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=g1t2,qte,g1t2
+    format="\FormatMille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f1=1
+    f7=135
+    f8=4003
+    ctrl_q=50
+    ctrl_r=5502
+    ctrl_f6=10300
+    shift_f1=1
+   [traitements]
+    microbol_click=6015
+    diva_avant="Champ_Qte_2_Av"
+    diva_apres="Champ_Qte_2_Ap"
+   [info_bulle]
+   texte="Quantité de la ventilation"
+   [param_colonne]
+    titre="Quantité"
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "qte"
+    "zoom"
+  [champ_tableau]
+   [presentation]
     position=87,160
     taille=10,50
     noms="lieu"
@@ -24622,39 +24658,6 @@
     titre="Emplacement du bl associé"
     largeur_col=81
     wstyle="ENTETE_COLONNE"
-  [champ_tableau]
-   [presentation]
-    position=57,160
-    taille=8,45
-    id=1175
-    wstyle="TABLEAU_SAISI"
-   [description]
-    donnee=g1t2,qte,g1t2
-    format="\FormatMille"
-   [param_saisie]
-    type_date=jj/mm/aaaa
-    table_associee=oui
-   [touches]
-    f1=1
-    f7=135
-    f8=4003
-    ctrl_q=50
-    ctrl_r=5502
-    ctrl_f6=10300
-    shift_f1=1
-   [traitements]
-    microbol_click=6015
-    diva_avant="Champ_Qte_2_Av"
-    diva_apres="Champ_Qte_2_Ap"
-   [info_bulle]
-   texte="Quantité de la ventilation"
-   [param_colonne]
-    titre="Quantité"
-    largeur_col=43
-    wstyle="ENTETE_COLONNE"
-   [boutons]
-    "qte"
-    "zoom"
   [champ_tableau]
    [presentation]
     position=84,228
@@ -26771,6 +26774,62 @@
    dessin=vide
    [param_bouton]
     wnom=""
+ [menu]
+  ident="POPUP_AFFAIRE_PROPAGATION"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="popup"
+    wid_ressource="MENU11"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom Affaire"
+    wid_ressource="AFFAIRE"
+    wetype_trait=arret
+    warret=9868
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom Projet"
+    wid_ressource="PROJET"
+    wetype_trait=arret
+    warret=9843
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Propager le projet sur les lignes"
+    wid_ressource="MENUPROPPROJET"
+    wetype_trait=arret
+    warret=5528
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="MENU14"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom généralisé"
+    wid_ressource="MENU15"
+    wtrait_chaine="#f7"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
  [toolbar]
   ident="FENETRE_ENT"
   [item]
@@ -27435,6 +27494,10 @@
    [info_bulle]
    texte="Aide"
   [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+  [item]
    type=sep
    dessin=sep
    [param_bouton]
@@ -27470,10 +27533,6 @@
     wid_ressource="U_ENVOIFLASH"
     wetype_trait=arret
     warret=1101
-  [item]
-   dessin=vide
-   [param_bouton]
-    wnom=""
  [toolbar]
   ident="FENETRE_LIG"
   [item]
@@ -28049,7 +28108,7 @@ EndP
 ;*		MJV		4.1						12.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gteepce000.dhsf 36808 2014-01-13 09:42:20Z lk $')
+SetModuleInfo('$Id: gteepce000.dhsf 41631 2014-09-12 07:15:39Z lk $')
 
 include "GTTCPCE000.dhsp"
 include "GTTC000.dhsp"
@@ -30274,7 +30333,12 @@ beginp
 				
 			G1T1.DES = EART.DES
 			if (G1T1.PVCOD = 1 and Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod) = 0) or (G1T1.PVCOD = 2 and Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod) <> 0)
-				G1T1.PUB = EART.PUNET
+				if ENT.Ticod = 'F'
+					G1T1.PUB = EART.PA
+				else
+					G1T1.PUB = EART.PUNET
+				endif
+
 			else
 				G1T1.PUB = 0
 			endif
@@ -30354,7 +30418,7 @@ BeginP
 	if ENT.REM1 not in (0..100)
 			Mes_Alert(2297)
 			Harmony.Retour = XmeNext_Traitement_Avant
-	endif
+	endif	
 EndP
 
 ;*
@@ -31376,6 +31440,17 @@ Endp
 
 
 ;*
+Public Procedure Champ_PiDt_1_Av
+;
+Beginp
+	if LireProgrammeFonction = C_Fonction_Validation
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+ 
+Endp
+
+
+;*
 Public Procedure Champ_PiNo_1_Ap						; après no pièce en création
 1		indicePiece		2,0
 Beginp
@@ -31419,6 +31494,19 @@ Public Procedure Champ_PoiNTot_1_Ap
 ;
 Beginp
 
+Endp
+
+
+;*
+Public Procedure Champ_Ppar_1_Av
+;
+Beginp
+	if G1T1.Saip <> 1
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+	Champ_Pub_1_Av
 Endp
 
 
@@ -31649,6 +31737,16 @@ Beginp
 		Harmony.Retour = XMENEXT_SAUT_DONNEE 
 	Endif
 Endp	  				
+
+;*
+Public Procedure Champ_RemMt_1_Av
+;
+Beginp
+	if LireProgrammeFonction = C_Fonction_Validation
+		Harmony.Retour = XMENEXT_SAUT_DONNEE 
+	endif
+Endp
+
 
 ;*
 Public Procedure Champ_RemMt_2_Ap		; après montant remise en pied supplémentaire

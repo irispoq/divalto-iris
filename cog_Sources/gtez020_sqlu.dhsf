@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20150812152537      
+;>xwin4obj                              7.0       20151106114510      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="12/08/2015"
+ date_modification="06/11/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
  dernier_id=1000054
  surcharge=oui
- date_modif_base="20130207143007"
+ date_modif_base="20140423090133"
  dernier_id_page=100001
  niveau_surcharge=1
 [defaut]
@@ -1980,6 +1980,21 @@
    "zoom"
  [champ]
   [presentation]
+   position=214,220
+   taille=9,248
+   id=666
+   colonnes_saisie=256
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,chemin,g7
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
+ [champ]
+  [presentation]
    position=173,395
    taille=9,75
    id=106
@@ -2001,6 +2016,21 @@
    diva_apres="Champ_Cldcod_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=224,220
+   taille=9,248
+   id=690
+   colonnes_saisie=256
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,chemin,g7bis
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
  [champ]
   [presentation]
    position=176,276
@@ -2046,21 +2076,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=214,220
-   taille=9,248
-   id=666
-   colonnes_saisie=256
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=g7,chemin,g7
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
- [champ]
-  [presentation]
    position=214,128
    taille=9,92
    id=660
@@ -2080,21 +2095,6 @@
    diva_apres="Champ_CheminCod_1_Ap"
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=224,220
-   taille=9,248
-   id=690
-   colonnes_saisie=256
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=g7,chemin,g7bis
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
  [champ]
   [presentation]
    position=224,128
@@ -7427,7 +7427,7 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=123,5
+   position=132,5
    taille=72,470
    id=448
    wstyle="GROUPE"
@@ -7520,13 +7520,21 @@
   [presentation]
    position=96,5
    taille=9,180
+   id=832
+   wstyle="STD"
+  [texte]
+   texte="Gérer l'autoliquidation de TVA"
+ [obj_texte]
+  [presentation]
+   position=106,5
+   taille=9,180
    id=459
    wstyle="STD"
   [texte]
    texte="Différence tolérée entre TTC facturé calculé et TTC fournisseur"
  [obj_texte]
   [presentation]
-   position=106,5
+   position=116,5
    taille=9,180
    id=468
    wstyle="STD"
@@ -7534,7 +7542,7 @@
    texte="L'encours comptable a été réajusté par Divalto Comptabilité le"
  [obj_texte]
   [presentation]
-   position=139,80
+   position=148,80
    taille=9,60
    cadrage=centre
    id=779
@@ -7543,7 +7551,7 @@
    texte="Axe 1"
  [obj_texte]
   [presentation]
-   position=139,160
+   position=148,160
    taille=9,60
    cadrage=centre
    id=780
@@ -7552,7 +7560,7 @@
    texte="Axe 2"
  [obj_texte]
   [presentation]
-   position=139,240
+   position=148,240
    taille=9,60
    cadrage=centre
    id=781
@@ -7561,7 +7569,7 @@
    texte="Axe 3"
  [obj_texte]
   [presentation]
-   position=139,320
+   position=148,320
    taille=9,60
    cadrage=centre
    id=782
@@ -7570,7 +7578,7 @@
    texte="Axe 4"
  [obj_texte]
   [presentation]
-   position=153,10
+   position=162,10
    taille=9,68
    id=464
    wstyle="STD"
@@ -7578,7 +7586,7 @@
    texte="Valeur par défaut"
  [obj_texte]
   [presentation]
-   position=163,10
+   position=172,10
    taille=9,68
    id=465
    wstyle="STD"
@@ -7586,7 +7594,7 @@
    texte="A saisir client"
  [obj_texte]
   [presentation]
-   position=173,10
+   position=182,10
    taille=9,68
    id=466
    wstyle="STD"
@@ -7594,7 +7602,7 @@
    texte="A saisir fournisseur"
  [obj_texte]
   [presentation]
-   position=183,10
+   position=192,10
    taille=9,68
    id=467
    wstyle="STD"
@@ -7800,9 +7808,24 @@
    shift_f7=9040
   [traitements]
    microbol_click=8002
- [champ]
+ [multi_choix]
   [presentation]
    position=96,187
+   taille=9,44
+   id=833
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=dossier,entcodn,dossier,57
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ENTCODN_1"
+  [touches]
+   f7=135
+   shift_f7=9040
+ [champ]
+  [presentation]
+   position=106,187
    taille=9,44
    id=475
    wstyle="CHAMP_SAISI"
@@ -7877,7 +7900,7 @@
    shift_f7=9040
  [champ]
   [presentation]
-   position=106,187
+   position=116,187
    taille=9,44
    id=492
    wstyle="CHAMP_NON_SAISI"
@@ -7893,7 +7916,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=153,80
+   position=162,80
    taille=9,60
    id=476
    wstyle="CHAMP_SAISI"
@@ -7915,7 +7938,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=163,80
+   position=172,80
    taille=9,60
    id=477
    wstyle="CHAMP_SAISI"
@@ -7937,7 +7960,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=173,80
+   position=182,80
    taille=9,60
    id=478
    wstyle="CHAMP_SAISI"
@@ -7959,7 +7982,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=183,80
+   position=192,80
    taille=9,60
    id=479
    wstyle="CHAMP_SAISI"
@@ -7981,7 +8004,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=153,160
+   position=162,160
    taille=9,60
    id=480
    wstyle="CHAMP_SAISI"
@@ -8003,7 +8026,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=163,160
+   position=172,160
    taille=9,60
    id=481
    wstyle="CHAMP_SAISI"
@@ -8025,7 +8048,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=173,160
+   position=182,160
    taille=9,60
    id=482
    wstyle="CHAMP_SAISI"
@@ -8047,7 +8070,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=183,160
+   position=192,160
    taille=9,60
    id=483
    wstyle="CHAMP_SAISI"
@@ -8069,7 +8092,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=153,240
+   position=162,240
    taille=9,60
    id=484
    wstyle="CHAMP_SAISI"
@@ -8091,7 +8114,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=163,240
+   position=172,240
    taille=9,60
    id=485
    wstyle="CHAMP_SAISI"
@@ -8113,7 +8136,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=173,240
+   position=182,240
    taille=9,60
    id=486
    wstyle="CHAMP_SAISI"
@@ -8135,7 +8158,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=183,240
+   position=192,240
    taille=9,60
    id=487
    wstyle="CHAMP_SAISI"
@@ -8157,7 +8180,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=153,320
+   position=162,320
    taille=9,60
    id=488
    wstyle="CHAMP_SAISI"
@@ -8179,7 +8202,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=163,320
+   position=172,320
    taille=9,60
    id=489
    wstyle="CHAMP_SAISI"
@@ -8201,7 +8224,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=173,320
+   position=182,320
    taille=9,60
    id=490
    wstyle="CHAMP_SAISI"
@@ -8223,7 +8246,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=183,320
+   position=192,320
    taille=9,60
    id=491
    wstyle="CHAMP_SAISI"
@@ -9773,21 +9796,6 @@
    wstyle="STD"
   [texte]
    texte="Chemin pour les BL rejetés"
- [champ]
-  [presentation]
-   position=116,285
-   taille=9,188
-   id=1000039
-   colonnes_saisie=80
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_soccomp,art_des,cogrs_soccomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
  [case_a_cocher]
   [presentation]
    position=21,10
@@ -10049,6 +10057,21 @@
    "zoom"
  [champ]
   [presentation]
+   position=116,285
+   taille=9,188
+   id=1000039
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_soccomp,art_des,cogrs_soccomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
+ [champ]
+  [presentation]
    position=149,292
    taille=9,76
    id=1000046
@@ -10248,25 +10271,6 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=86,45
-   taille=9,31
-   id=801
-   colonnes_saisie=9
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=t037,idconnect,t037
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f5=5000
-   f6=5002
-   f7=135
-   shift_f5=5001
-   shift_f6=10000
- [champ]
-  [presentation]
    position=52,30
    taille=9,56
    id=610
@@ -10307,6 +10311,25 @@
    type_date=jj/mm/aaaa+hh:mm:ss
   [touches]
    f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=86,45
+   taille=9,31
+   id=801
+   colonnes_saisie=9
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=t037,idconnect,t037
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
    shift_f6=10000
 [ressources]
  [menu]
@@ -10834,7 +10857,7 @@ Endp
 [/diva]
 [diva_base]
 ;>xdiva
-SetModuleInfo('$Id: gtez020_sql.dhsf 29309 2013-02-07 13:30:49Z lk $')
+SetModuleInfo('$Id: gtez020_sql.dhsf 38908 2014-04-23 07:26:49Z lk $')
 ;*
 ;*      Zoom sur Société  Record SQL Dossier de GTRSDOS                    
 ;*

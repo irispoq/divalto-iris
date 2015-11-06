@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20140701105731      
+;>xwin4obj                              7.0       20151106114510      
 [masque]
  utilisateur="UGIE"
- date_modification="01/07/2014"
+ date_modification="06/11/2015"
  feuille_style="fstylewpf.dhfi"
  noms_boutons="zoom"
  dernier_id=1000003
  surcharge=oui
- date_modif_base="20130821121323"
+ date_modif_base="20140226104834"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -466,19 +466,6 @@
    choix="gtfdmc.dhfi","TICOD"
  [champ]
   [presentation]
-   position=18,98
-   taille=9,137
-   noms="cog_c1;cog_c2"
-   id=1000003
-   colonnes_saisie=38
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=t1,nom,t1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
    position=18,62
    taille=9,32
    noms="cog_c1;cog_c2"
@@ -496,6 +483,26 @@
    diva_apres="Champ_TiersD_2_Ap"
   [boutons]
    "zoom"
+ [multi_choix]
+  [presentation]
+   position=38,10
+   taille=9,50
+   noms="creation"
+   id=31
+   wstyle="ZOOM_AFF"
+  [description]
+   donnee=gtpce,picoddst,gtpce
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","PICOD"
+  [touches]
+   f1=127
+   f7=8000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_PiCod_1_Ap"
  [champ]
   [presentation]
    position=28,62
@@ -521,26 +528,6 @@
    diva_apres="Champ_Tiers_1_Ap"
   [boutons]
    "zoom"
- [multi_choix]
-  [presentation]
-   position=38,10
-   taille=9,50
-   noms="creation"
-   id=31
-   wstyle="ZOOM_AFF"
-  [description]
-   donnee=gtpce,picoddst,gtpce
-   saisie=non
-  [param_saisie]
-   esp_si_zero=oui
-  [param_multi]
-   choix="gtfdmc.dhfi","PICOD"
-  [touches]
-   f1=127
-   f7=8000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_PiCod_1_Ap"
  [champ]
   [presentation]
    position=38,62
@@ -616,30 +603,6 @@
    diva_apres="Champ_OP_3_Ap"
  [champ]
   [presentation]
-   position=103,62
-   taille=9,32
-   id=549
-   wstyle="ZOOM_SAISI"
-  [description]
-   donnee=gtpce,depo,gtpce
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [aide_page]
-   aide=4119
-   fichier="GTFAIDE"
-  [touches]
-   f1=1
-   f7=135
-   f8=9866
-   shift_f1=1
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Depo_3_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
    position=103,96
    taille=9,144
    id=551
@@ -677,6 +640,30 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
+   position=103,62
+   taille=9,32
+   id=549
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=gtpce,depo,gtpce
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4119
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f7=135
+   f8=9866
+   shift_f1=1
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Depo_3_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
    position=113,62
    taille=9,32
    noms="transfertdepot"
@@ -696,6 +683,19 @@
    diva_apres="Champ_BlAsDepo_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=18,98
+   taille=9,137
+   noms="cog_c1;cog_c2"
+   id=1000003
+   colonnes_saisie=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=t1,nom,t1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
 [page]
  numero=4
  libelle="Dupliquer une pièce"
@@ -1428,6 +1428,8 @@
   [traitements]
    diva_avant="Champ_PiNoD_1_Av"
    diva_apres="Champ_PiNoD_1_Ap"
+  [boutons]
+   "zoom"
  [champ]
   [presentation]
    position=34,62
@@ -11176,7 +11178,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtempce000.dhsf 35431 2013-11-15 11:50:30Z jf $')
+SetModuleInfo('$Id: gtempce000.dhsf 37938 2014-03-10 10:28:03Z lk $')
 
 ;*
 ;*		Masque de gestion de pièces

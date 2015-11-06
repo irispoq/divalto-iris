@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20140113103937      
+;>xwin4obj                              7.0       20140912091139      
 [masque]
  utilisateur="LK"
- date_modification="13/01/2014"
+ date_modification="12/09/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=2113
@@ -21,7 +21,7 @@
  "gtfdd.dhsd",,ets,ets,1500,0
  "gtfdd.dhsd",,eec,eec,1000,0
  "gtfdd.dhsd",,t020,t020_ent,350,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1500,0
  "gtfdd.dhsd",,g1t2,g1t2,2200,0
  "ddsys.dhsd",,rowinfo,rowinfo,120,0
  "gtfdd.dhsd",,g1t3,g1t3,1000,0
@@ -336,6 +336,7 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+   diva_avant="Champ_PiDt_1_Av"
    diva_apres="Champ_PiDt_1_Ap"
  [champ]
   [presentation]
@@ -1174,6 +1175,7 @@
    f1=1
    f5=6999
    f7=135
+   f8=9887
    ctrl_f6=10300
    shift_f1=1
    shift_f5=145
@@ -1207,7 +1209,7 @@
    shift_f5=145
    shift_f6=5503
   [traitements]
-   microbol_click=4018
+   microbol_click=6022
    diva_avant="Champ_Projet_1_Av"
    diva_apres="Champ_Projet_1_Ap"
   [boutons]
@@ -10906,6 +10908,7 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+   diva_avant="Champ_RemMt_1_Av"
    diva_apres="Champ_RemMt_1_Ap"
  [champ]
   [presentation]
@@ -11772,7 +11775,7 @@
    shift_f4=4500
   [traitements]
    microbol_click=8002
-   diva_avant="Champ_Pub_1_Av"
+   diva_avant="Champ_Ppar_1_Av"
    diva_apres="Champ_Ppar_1_Ap"
  [champ]
   [presentation]
@@ -23317,6 +23320,39 @@
     "zoom"
   [champ_tableau]
    [presentation]
+    position=57,160
+    taille=8,45
+    id=1175
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=g1t2,qte,g1t2
+    format="\FormatMille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f1=1
+    f7=135
+    f8=4003
+    ctrl_q=50
+    ctrl_r=5502
+    ctrl_f6=10300
+    shift_f1=1
+   [traitements]
+    microbol_click=6015
+    diva_avant="Champ_Qte_2_Av"
+    diva_apres="Champ_Qte_2_Ap"
+   [info_bulle]
+   texte="Quantité de la ventilation"
+   [param_colonne]
+    titre="Quantité"
+    largeur_col=43
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "qte"
+    "zoom"
+  [champ_tableau]
+   [presentation]
     position=87,160
     taille=10,50
     noms="lieu"
@@ -23373,39 +23409,6 @@
     titre="Emplacement du bl associé"
     largeur_col=81
     wstyle="ENTETE_COLONNE"
-  [champ_tableau]
-   [presentation]
-    position=57,160
-    taille=8,45
-    id=1175
-    wstyle="TABLEAU_SAISI"
-   [description]
-    donnee=g1t2,qte,g1t2
-    format="\FormatMille"
-   [param_saisie]
-    type_date=jj/mm/aaaa
-    table_associee=oui
-   [touches]
-    f1=1
-    f7=135
-    f8=4003
-    ctrl_q=50
-    ctrl_r=5502
-    ctrl_f6=10300
-    shift_f1=1
-   [traitements]
-    microbol_click=6015
-    diva_avant="Champ_Qte_2_Av"
-    diva_apres="Champ_Qte_2_Ap"
-   [info_bulle]
-   texte="Quantité de la ventilation"
-   [param_colonne]
-    titre="Quantité"
-    largeur_col=43
-    wstyle="ENTETE_COLONNE"
-   [boutons]
-    "qte"
-    "zoom"
   [champ_tableau]
    [presentation]
     position=84,228
@@ -25522,6 +25525,62 @@
    dessin=vide
    [param_bouton]
     wnom=""
+ [menu]
+  ident="POPUP_AFFAIRE_PROPAGATION"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="popup"
+    wid_ressource="MENU11"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom Affaire"
+    wid_ressource="AFFAIRE"
+    wetype_trait=arret
+    warret=9868
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom Projet"
+    wid_ressource="PROJET"
+    wetype_trait=arret
+    warret=9843
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Propager le projet sur les lignes"
+    wid_ressource="MENUPROPPROJET"
+    wetype_trait=arret
+    warret=5528
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="MENU14"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom généralisé"
+    wid_ressource="MENU15"
+    wtrait_chaine="#f7"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
  [toolbar]
   ident="FENETRE_ENT"
   [item]
@@ -26637,7 +26696,7 @@
 ;*		MJV		4.1						12.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gteepce000.dhsf 36808 2014-01-13 09:42:20Z lk $')
+SetModuleInfo('$Id: gteepce000.dhsf 41631 2014-09-12 07:15:39Z lk $')
 
 include "GTTCPCE000.dhsp"
 include "GTTC000.dhsp"
@@ -28862,7 +28921,12 @@ beginp
 				
 			G1T1.DES = EART.DES
 			if (G1T1.PVCOD = 1 and Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod) = 0) or (G1T1.PVCOD = 2 and Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod) <> 0)
-				G1T1.PUB = EART.PUNET
+				if ENT.Ticod = 'F'
+					G1T1.PUB = EART.PA
+				else
+					G1T1.PUB = EART.PUNET
+				endif
+
 			else
 				G1T1.PUB = 0
 			endif
@@ -28942,7 +29006,7 @@ BeginP
 	if ENT.REM1 not in (0..100)
 			Mes_Alert(2297)
 			Harmony.Retour = XmeNext_Traitement_Avant
-	endif
+	endif	
 EndP
 
 ;*
@@ -29964,6 +30028,17 @@ Endp
 
 
 ;*
+Public Procedure Champ_PiDt_1_Av
+;
+Beginp
+	if LireProgrammeFonction = C_Fonction_Validation
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+ 
+Endp
+
+
+;*
 Public Procedure Champ_PiNo_1_Ap						; après no pièce en création
 1		indicePiece		2,0
 Beginp
@@ -30007,6 +30082,19 @@ Public Procedure Champ_PoiNTot_1_Ap
 ;
 Beginp
 
+Endp
+
+
+;*
+Public Procedure Champ_Ppar_1_Av
+;
+Beginp
+	if G1T1.Saip <> 1
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		preturn
+	endif
+
+	Champ_Pub_1_Av
 Endp
 
 
@@ -30237,6 +30325,16 @@ Beginp
 		Harmony.Retour = XMENEXT_SAUT_DONNEE 
 	Endif
 Endp	  				
+
+;*
+Public Procedure Champ_RemMt_1_Av
+;
+Beginp
+	if LireProgrammeFonction = C_Fonction_Validation
+		Harmony.Retour = XMENEXT_SAUT_DONNEE 
+	endif
+Endp
+
 
 ;*
 Public Procedure Champ_RemMt_2_Ap		; après montant remise en pied supplémentaire

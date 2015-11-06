@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20141016154518      
+;>xwin4obj                              7.0       20151106114510      
 [masque]
  libelle="client"
- utilisateur="ROOT"
- date_modification="16/10/2014"
+ utilisateur="UGIE"
+ date_modification="06/11/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=732
  type_masque=2
  dernier_id=1000044
  surcharge=oui
- date_modif_base="20131120171826"
+ date_modif_base="20140310172038"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -4675,6 +4675,23 @@
    microbol_click=8002
  [champ]
   [presentation]
+   position=189,178
+   taille=9,20
+   cadrage=gauche
+   id=1318
+   colonnes_saisie=4
+   wstyle="CHAMP_AFF_TITREGROUPE"
+  [description]
+   donnee=client,dev,client
+   saisie=non
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=170,56
    taille=9,221
    id=91
@@ -4695,23 +4712,6 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
- [champ]
-  [presentation]
-   position=189,178
-   taille=9,20
-   cadrage=gauche
-   id=1318
-   colonnes_saisie=4
-   wstyle="CHAMP_AFF_TITREGROUPE"
-  [description]
-   donnee=client,dev,client
-   saisie=non
-  [touches]
-   f5=5000
-   f6=5002
-   f7=135
-   shift_f5=5001
-   shift_f6=10000
  [champ]
   [presentation]
    position=203,87
@@ -4842,32 +4842,6 @@
    diva_apres="Champ_Repr_1_Ap"
   [boutons]
    "zoom"
- [case_a_cocher]
-  [presentation]
-   position=26,228
-   taille=9,75
-   id=77
-   wstyle="STD"
-  [description]
-   donnee=client,visa,client
-   minmaj=majuscules
-  [param_case]
-   texte="Visa administratif"
-   cadrage=droite
-   valeur="2","1"
-   choix="gtfdmc.dhfi","NONOUI"
-  [aide_page]
-   aide=1139
-   fichier="gtfaide"
-  [touches]
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f6=10300
-   shift_f5=5001
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
    position=259,48
@@ -4961,6 +4935,32 @@
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f6=10300
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=26,228
+   taille=9,75
+   id=77
+   wstyle="STD"
+  [description]
+   donnee=client,visa,client
+   minmaj=majuscules
+  [param_case]
+   texte="Visa administratif"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi","NONOUI"
+  [aide_page]
+   aide=1139
+   fichier="gtfaide"
   [touches]
    f5=5000
    f6=5002
@@ -7527,7 +7527,7 @@
    id=233
    wstyle="CHAMP_AFF"
   [description]
-   donnee=client,collaborateurgcl_lib,client
+   donnee=client,collaborateurgcl_nom,client
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -13638,7 +13638,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtez021_sql.dhsf 35623 2013-11-20 16:28:07Z jf $')
+SetModuleInfo('$Id: gtez021_sql.dhsf 37959 2014-03-10 16:26:03Z sn $')
 ;*
 ;*      Zoom sur CLIENT  											Record SQL CLIENT de GTRSTIERS.dhoq
 ;*
@@ -13661,7 +13661,7 @@ Public RecordSql "GTRSTIERS.dhoq"	CLIENT
 Public Record  GTFDD.dhsd 		SOC								; Société
 Public Record  GTFDD.dhsd 		ETS								; Etablissement
 Public Record 	GTFDD.dhsd		T1									; Adresse codifiée
-Public Record  GTFDD.dhsd	 	client		CLI_Sel				; CLIENT sélection
+Public Record  GTFDD.dhsd	 	CLI		CLI_Sel				; CLIENT sélection
 Public Record  GTFDD.dhsd	 	VRP								; Commercial
 
 Public Record	GTFDD.dhsd		T001								; Libellé famille de tarif
@@ -13700,7 +13700,7 @@ Public Record  A5DD.dhsd  		MW			CLI_MW
 Public Record  CCFDD.dhsd 		C3
 Public Record  CCFDD.dhsd 		CA
 Public Record	RCFEBCDD.dhsd	D2
-Public Record "gtfdd.dhsd" client client
+Public Record "gtfdd.dhsd" cli cli
 
 ;*
 ;* séquences liées au masque
@@ -14021,7 +14021,7 @@ Endp
 ;*
 Public Procedure Champ_SALCOD_1_Ap		; controle code ADV
 Beginp
-	CLIENT.CollaborateurGCL_Lib = Condition(Lectab(37, CLIENT.AdvCod, 1137) = 0, T037.Nom, ' ')
+	CLIENT.CollaborateurGCL_Nom = Condition(Lectab(37, CLIENT.AdvCod, 1137) = 0, T037.Nom, ' ')
 Endp
 
 ;*
@@ -14085,8 +14085,8 @@ Endp
 Public Procedure Champ_TexCod_1_Ap		;controle texte préenregistré
 Beginp
 	Lectab(41, CLIENT.TexCod(Harmony.Dataind1), 1141)
-	Note_Chargement_('DAV', T041.Note, [ 'client' ToString(Harmony.Dataind1) ])
-	CLI_MW.Rtfnom(Harmony.Dataind1) = Note_Rechercher_Nom_Rtf(C_Applic_DAV, [ 'client' ToString(Harmony.Dataind1) ])	
+	Note_Chargement_('DAV', T041.Note, [ 'CLI' ToString(Harmony.Dataind1) ])
+	CLI_MW.Rtfnom(Harmony.Dataind1) = Note_Rechercher_Nom_Rtf(C_Applic_DAV, [ 'CLI' ToString(Harmony.Dataind1) ])	
 Endp
 
 ;*
@@ -14117,10 +14117,10 @@ Public Procedure Champ_TIERS_2_Ap			; controle code centrale
 Beginp
 	CLIENT.TiersGroupement_Nom = ' '
 
-	Tiers = CLIENT.TiersGrp	 					; enregistrement client est écrasé par controle_CLIENT
-	PingLocal('ZOOM_CLI', client)
+	Tiers = CLIENT.TiersGrp	 					; enregistrement cli est écrasé par controle_CLIENT
+	PingLocal('ZOOM_CLI', CLI)
 	If Controle_CLIENT(Tiers, 2000, 0) = 0	|	CLIENT.TiersGroupement_Nom = CLIENT.Nom	|	EndIf
-	PingLocalReceive('ZOOM_CLI', client)
+	PingLocalReceive('ZOOM_CLI', CLI)
  	CLIENT.TiersGrp = Tiers
 Endp
 
@@ -14130,10 +14130,10 @@ Public Procedure Champ_TIERS_3_Ap			; controle code Tiers statistique
 Beginp
 	CLIENT.TiersStatistique_Nom = ' '
 
-	Tiers = CLIENT.TiersStat	 				; enregistrement client est écrasé par controle_CLIENT
-	PingLocal('ZOOM_CLI', client)
+	Tiers = CLIENT.TiersStat	 				; enregistrement cli est écrasé par controle_CLIENT
+	PingLocal('ZOOM_CLI', CLI)
 	If Controle_CLIENT(Tiers, 2000,0) = 0	|	CLIENT.TiersStatistique_Nom = CLIENT.Nom	|	EndIf
-	PingLocalReceive('ZOOM_CLI', client)
+	PingLocalReceive('ZOOM_CLI', CLI)
 	CLIENT.TiersStat = Tiers
 Endp
 
@@ -14149,8 +14149,8 @@ Beginp
 	Case 5	|	CLIENT.TiersAdresseRlv_Nom	= ' '
 	EndSwitch
 
-	Tiers = CLIENT.AdrTiers(Harmony.Dataind1)		; enregistrement client est écrasé par controle_CLIENT							
-	PingLocal('ZOOM_CLI', client)
+	Tiers = CLIENT.AdrTiers(Harmony.Dataind1)		; enregistrement cli est écrasé par controle_CLIENT							
+	PingLocal('ZOOM_CLI', CLI)
 	If Controle_CLIENT(Tiers, 2000, 0) = 0
 		Switch Harmony.Dataind1
 		Case 1	|	CLIENT.TiersAdresseDv_Nom	= CLIENT.Nom
@@ -14179,7 +14179,7 @@ Beginp
 	
 		endif
 	EndIf
-	PingLocalReceive('ZOOM_CLI', client)
+	PingLocalReceive('ZOOM_CLI', CLI)
  	CLIENT.AdrTiers(Harmony.Dataind1) = Tiers 
 	
 	Tiers = Condition(	CLIENT.AdrTiers(Harmony.Dataind1) = ' ', 	CLIENT.Tiers, \
@@ -14301,7 +14301,7 @@ Endp
 Public Procedure Champ_StLgtGamCod_1_Ap
 ;
 Beginp
-	Controler_WMS_Gamme(client.StLgtGamCod, 20029)
+	Controler_WMS_Gamme(Cli.StLgtGamCod, 20029)
 Endp
 
 
@@ -14318,14 +14318,14 @@ Beginp
 		PReturn
 	EndIf
 
-	PingLocal('ZOOM_CLI', client)
+	PingLocal('ZOOM_CLI', CLI)
 	If Seek_Tiers(CLIENT.Tiers) = 0 	; recherche tout Tiers confondu car code doit être unique
-		PingLocalReceive('ZOOM_CLI', client)
+		PingLocalReceive('ZOOM_CLI', CLI)
 		Lib_Cli(CLIENT.Tiers)
 		Mes_Alert(2011, CLIENT.Tiers)
 		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 	EndIf
-	PingLocalReceive('ZOOM_CLI', client)
+	PingLocalReceive('ZOOM_CLI', CLI)
 	
 Endp
 
@@ -14335,10 +14335,10 @@ Public Procedure Champ_TIERS_6_Ap			; controle code Tiers R3
 Beginp
 	CLIENT.TiersReglement_Nom = ' '
 
-	Tiers = CLIENT.TiersR3	 				; enregistrement client est écrasé par controle_CLIENT
-	PingLocal('ZOOM_CLI', client)
+	Tiers = CLIENT.TiersR3	 				; enregistrement cli est écrasé par controle_CLIENT
+	PingLocal('ZOOM_CLI', CLI)
 	If Controle_CLIENT(Tiers, 2000, 0) = 0	|	CLIENT.TiersReglement_Nom = CLIENT.Nom	|	EndIf
-	PingLocalReceive('ZOOM_CLI', client)
+	PingLocalReceive('ZOOM_CLI', CLI)
  	CLIENT.TiersR3 = Tiers
 Endp
 
@@ -14346,7 +14346,7 @@ Endp
 Public Procedure Champ_TIERS_7_Ap			; à partir du code centrale
 1	Tiers		>GTFDD.dhsd Tiers
 Beginp
-	Tiers = CLI_Sel.TiersGrp	 		; enregistrement client est écrasé par controle_CLIENT
+	Tiers = CLI_Sel.TiersGrp	 		; enregistrement CLI est écrasé par controle_CLIENT
 	Controle_CLIENT(Tiers, conf=FALSE)
  	CLI_Sel.TiersGrp = Tiers
 Endp

@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20131120171826      
+;>xwin4obj                              7.0       20140310172038      
 [masque]
  libelle="client"
- utilisateur="DEMO"
- date_modification="20/11/2013"
+ utilisateur="SN"
+ date_modification="10/03/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=732
  type_masque=2
@@ -7149,7 +7149,7 @@
    id=233
    wstyle="CHAMP_AFF"
   [description]
-   donnee=client,collaborateurgcl_lib,client
+   donnee=client,collaborateurgcl_nom,client
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -12866,7 +12866,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: gtez021_sql.dhsf 35623 2013-11-20 16:28:07Z jf $')
+SetModuleInfo('$Id: gtez021_sql.dhsf 37959 2014-03-10 16:26:03Z sn $')
 ;*
 ;*      Zoom sur CLIENT  											Record SQL CLIENT de GTRSTIERS.dhoq
 ;*
@@ -13249,7 +13249,7 @@ Endp
 ;*
 Public Procedure Champ_SALCOD_1_Ap		; controle code ADV
 Beginp
-	CLIENT.CollaborateurGCL_Lib = Condition(Lectab(37, CLIENT.AdvCod, 1137) = 0, T037.Nom, ' ')
+	CLIENT.CollaborateurGCL_Nom = Condition(Lectab(37, CLIENT.AdvCod, 1137) = 0, T037.Nom, ' ')
 Endp
 
 ;*

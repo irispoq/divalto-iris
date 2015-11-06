@@ -1,8 +1,8 @@
-;>xwin4obj     imprimante               6.0       20151021142541      
+;>xwin4obj     imprimante               6.0       20151106114505      
 [masque]
  libelle="tableaux d'amortissements"
  utilisateur="UGIE"
- date_modification="21/10/2015"
+ date_modification="06/11/2015"
  feuille_style="fstyleimp.dhfi"
  taille_ligne=9
  orientation=paysage
@@ -13,7 +13,7 @@
  etat=0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1
  dernier_id=1000000
  surcharge=oui
- date_modif_base="20141209100723"
+ date_modif_base="20100820164027"
  dernier_id_page=100000
  niveau_surcharge=1
  [adresses]
@@ -24,7 +24,7 @@
 [enregistrements]
  "a5dd.dhsd",,mz,mz,1000,0
  "ddsys.dhsd",,system,system,4160,0
- "ccfdd.dhsd",ccfdos,ca,ca,1350,0
+ "ccfdd.dhsd",ccfdos,ca,ca,1300,0
  "ccfdd.dhsd",,xq,c3xq,4400,0
  "ccfdd.dhsd",,x1,x1,1752,0
  "ccfdd.dhsd",ccfimmo,i1,i1,1900,0
@@ -50,59 +50,6 @@
    nature=plein
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
- [obj_texte]
-  [presentation]
-   position=78,151
-   taille=9,38
-   noms="etbc3"
-   id=1100
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Etablissements"
- [obj_texte]
-  [presentation]
-   position=69,3
-   taille=10,67
-   id=1101
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Localisation"
- [obj_texte]
-  [presentation]
-   position=69,97
-   taille=9,12
-   cadrage=centre
-   id=1102
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=78,3
-   taille=10,64
-   id=1130
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Nature d'immobilisation"
- [obj_texte]
-  [presentation]
-   position=78,97
-   taille=9,12
-   cadrage=centre
-   id=1131
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=110,89
-   taille=8,11
-   noms="EtbC3"
-   cadrage=centre
-   id=1084
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="Etb."
  [cadre]
   [presentation]
    position=101,177
@@ -220,6 +167,59 @@
    nature=vide_arrondi
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=78,151
+   taille=9,38
+   noms="etbc3"
+   id=1100
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Etablissements"
+ [obj_texte]
+  [presentation]
+   position=69,3
+   taille=10,67
+   id=1101
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Localisation"
+ [obj_texte]
+  [presentation]
+   position=69,97
+   taille=9,12
+   cadrage=centre
+   id=1102
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=78,3
+   taille=10,64
+   id=1130
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Nature d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=78,97
+   taille=9,12
+   cadrage=centre
+   id=1131
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=110,89
+   taille=8,11
+   noms="EtbC3"
+   cadrage=centre
+   id=1084
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="Etb."
  [obj_texte]
   [presentation]
    position=102,160
@@ -1451,7 +1451,7 @@
  [champ]
   [presentation]
    position=1,217
-   taille=7,18
+   taille=7,16
    id=131
    wstyle="TRES_PETIT"
   [description]
@@ -1550,15 +1550,6 @@
  position_fond=8
  diva_apres="Bloc_FinCompte_Ap"
  ident_unique=4
- [obj_texte]
-  [presentation]
-   position=36,281
-   taille=7,33
-   noms="ifrs"
-   id=139
-   wstyle="TRES_PETIT"
-  [texte]
-   texte="Plan UO"
  [cadre]
   [presentation]
    position=0,383
@@ -1685,6 +1676,15 @@
    nature=horizontal_b
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=36,281
+   taille=7,33
+   noms="ifrs"
+   id=139
+   wstyle="TRES_PETIT"
+  [texte]
+   texte="Plan UO"
  [obj_texte]
   [presentation]
    position=10,281
@@ -1956,15 +1956,6 @@
  bloc_fond=3
  position_fond=8
  ident_unique=5
- [obj_texte]
-  [presentation]
-   position=37,281
-   taille=7,29
-   noms="ifrs"
-   id=179
-   wstyle="TRES_PETIT_GRAS"
-  [texte]
-   texte="Plan UO"
  [cadre]
   [presentation]
    position=0,383
@@ -2064,6 +2055,15 @@
    nature=horizontal_b
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=37,281
+   taille=7,29
+   noms="ifrs"
+   id=179
+   wstyle="TRES_PETIT_GRAS"
+  [texte]
+   texte="Plan UO"
  [obj_texte]
   [presentation]
    position=10,281
@@ -2362,68 +2362,6 @@
    nature=plein
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
- [obj_texte]
-  [presentation]
-   position=69,239
-   taille=9,12
-   noms="ifrs"
-   cadrage=centre
-   id=1136
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=69,164
-   taille=10,47
-   noms="ifrs"
-   id=1137
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Plan UO"
- [obj_texte]
-  [presentation]
-   position=78,164
-   taille=9,48
-   noms="etbc3"
-   id=1106
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Etablissements"
- [obj_texte]
-  [presentation]
-   position=69,3
-   taille=10,64
-   id=1107
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Localisation"
- [obj_texte]
-  [presentation]
-   position=69,95
-   taille=9,12
-   cadrage=centre
-   id=1108
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=78,3
-   taille=10,61
-   id=1134
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Nature d'immobilisation"
- [obj_texte]
-  [presentation]
-   position=78,95
-   taille=9,12
-   cadrage=centre
-   id=1135
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
  [cadre]
   [presentation]
    position=109,88
@@ -2443,43 +2381,6 @@
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
- [obj_texte]
-  [presentation]
-   position=102,419
-   taille=7,38
-   cadrage=centre
-   id=1050
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="V. resid. fiscale"
- [obj_texte]
-  [presentation]
-   position=110,89
-   taille=7,13
-   noms="etbc3"
-   cadrage=centre
-   id=1087
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="Etb."
- [obj_texte]
-  [presentation]
-   position=110,419
-   taille=7,38
-   cadrage=centre
-   id=1049
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="Dérogatoire"
- [obj_texte]
-  [presentation]
-   position=102,88
-   taille=7,15
-   cadrage=centre
-   id=1079
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="Etat"
  [cadre]
   [presentation]
    position=101,419
@@ -2489,24 +2390,6 @@
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
- [obj_texte]
-  [presentation]
-   position=102,125
-   taille=7,16
-   cadrage=centre
-   id=218
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="Durée"
- [obj_texte]
-  [presentation]
-   position=110,125
-   taille=7,16
-   cadrage=centre
-   id=1039
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="D.fisc."
  [cadre]
   [presentation]
    position=101,139
@@ -2624,6 +2507,123 @@
    nature=vide_arrondi
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=69,239
+   taille=9,12
+   noms="ifrs"
+   cadrage=centre
+   id=1136
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=69,164
+   taille=10,47
+   noms="ifrs"
+   id=1137
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Plan UO"
+ [obj_texte]
+  [presentation]
+   position=78,164
+   taille=9,48
+   noms="etbc3"
+   id=1106
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Etablissements"
+ [obj_texte]
+  [presentation]
+   position=69,3
+   taille=10,64
+   id=1107
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Localisation"
+ [obj_texte]
+  [presentation]
+   position=69,95
+   taille=9,12
+   cadrage=centre
+   id=1108
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=78,3
+   taille=10,61
+   id=1134
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Nature d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=78,95
+   taille=9,12
+   cadrage=centre
+   id=1135
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=102,419
+   taille=7,38
+   cadrage=centre
+   id=1050
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="V. resid. fiscale"
+ [obj_texte]
+  [presentation]
+   position=110,89
+   taille=7,13
+   noms="etbc3"
+   cadrage=centre
+   id=1087
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="Etb."
+ [obj_texte]
+  [presentation]
+   position=110,419
+   taille=7,38
+   cadrage=centre
+   id=1049
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="Dérogatoire"
+ [obj_texte]
+  [presentation]
+   position=102,88
+   taille=7,15
+   cadrage=centre
+   id=1079
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="Etat"
+ [obj_texte]
+  [presentation]
+   position=102,125
+   taille=7,16
+   cadrage=centre
+   id=218
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="Durée"
+ [obj_texte]
+  [presentation]
+   position=110,125
+   taille=7,16
+   cadrage=centre
+   id=1039
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="D.fisc."
  [obj_texte]
   [presentation]
    position=110,311
@@ -4108,32 +4108,6 @@
    nature=vertical_g_i
    wnom_couleurcadre="TRAIT_SIMPLE"
    wnom_couleurfond="TRANS"
- [obj_texte]
-  [presentation]
-   position=28,215
-   taille=7,27
-   id=1051
-   wstyle="TRES_PETIT"
-  [texte]
-   texte="éco."
- [obj_texte]
-  [presentation]
-   position=21,345
-   taille=7,37
-   noms="ifrs"
-   cadrage=centre
-   id=357
-   wstyle="TRES_PETIT"
-  [texte]
-   texte="Plan UO"
- [obj_texte]
-  [presentation]
-   position=36,215
-   taille=7,27
-   id=1052
-   wstyle="TRES_PETIT"
-  [texte]
-   texte="fisc."
  [cadre]
   [presentation]
    position=0,345
@@ -4269,6 +4243,32 @@
    nature=horizontal_b
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=28,215
+   taille=7,27
+   id=1051
+   wstyle="TRES_PETIT"
+  [texte]
+   texte="éco."
+ [obj_texte]
+  [presentation]
+   position=21,345
+   taille=7,37
+   noms="ifrs"
+   cadrage=centre
+   id=357
+   wstyle="TRES_PETIT"
+  [texte]
+   texte="Plan UO"
+ [obj_texte]
+  [presentation]
+   position=36,215
+   taille=7,27
+   id=1052
+   wstyle="TRES_PETIT"
+  [texte]
+   texte="fisc."
  [obj_texte]
   [presentation]
    position=21,242
@@ -4663,22 +4663,6 @@
  bloc_fond=9
  position_fond=8
  ident_unique=11
- [obj_texte]
-  [presentation]
-   position=28,215
-   taille=7,25
-   id=1073
-   wstyle="TRES_PETIT_GRAS"
-  [texte]
-   texte="éco."
- [obj_texte]
-  [presentation]
-   position=36,215
-   taille=7,25
-   id=1074
-   wstyle="TRES_PETIT_GRAS"
-  [texte]
-   texte="fisc."
  [cadre]
   [presentation]
    position=18,381
@@ -4697,16 +4681,6 @@
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
- [obj_texte]
-  [presentation]
-   position=19,345
-   taille=7,37
-   noms="ifrs"
-   cadrage=centre
-   id=402
-   wstyle="TRES_PETIT_GRAS"
-  [texte]
-   texte="Plan UO"
  [cadre]
   [presentation]
    position=0,345
@@ -4815,6 +4789,32 @@
    nature=horizontal_b
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=28,215
+   taille=7,25
+   id=1073
+   wstyle="TRES_PETIT_GRAS"
+  [texte]
+   texte="éco."
+ [obj_texte]
+  [presentation]
+   position=36,215
+   taille=7,25
+   id=1074
+   wstyle="TRES_PETIT_GRAS"
+  [texte]
+   texte="fisc."
+ [obj_texte]
+  [presentation]
+   position=19,345
+   taille=7,37
+   noms="ifrs"
+   cadrage=centre
+   id=402
+   wstyle="TRES_PETIT_GRAS"
+  [texte]
+   texte="Plan UO"
  [obj_texte]
   [presentation]
    position=19,241
@@ -5314,68 +5314,6 @@
    nature=plein
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
- [obj_texte]
-  [presentation]
-   position=69,233
-   taille=9,11
-   noms="ifrs"
-   cadrage=centre
-   id=1144
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=69,155
-   taille=10,47
-   noms="ifrs"
-   id=1145
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Plan UO"
- [obj_texte]
-  [presentation]
-   position=78,155
-   taille=9,38
-   noms="etbc3"
-   id=1112
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Etablissements"
- [obj_texte]
-  [presentation]
-   position=69,3
-   taille=10,67
-   id=1113
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Localisation"
- [obj_texte]
-  [presentation]
-   position=69,99
-   taille=9,12
-   cadrage=centre
-   id=1114
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=78,3
-   taille=10,64
-   id=1142
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Nature d'immobilisation"
- [obj_texte]
-  [presentation]
-   position=78,99
-   taille=9,12
-   cadrage=centre
-   id=1143
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
  [cadre]
   [presentation]
    position=155,312
@@ -5475,6 +5413,68 @@
    nature=vide_arrondi
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=69,233
+   taille=9,11
+   noms="ifrs"
+   cadrage=centre
+   id=1144
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=69,155
+   taille=10,47
+   noms="ifrs"
+   id=1145
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Plan UO"
+ [obj_texte]
+  [presentation]
+   position=78,155
+   taille=9,38
+   noms="etbc3"
+   id=1112
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Etablissements"
+ [obj_texte]
+  [presentation]
+   position=69,3
+   taille=10,67
+   id=1113
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Localisation"
+ [obj_texte]
+  [presentation]
+   position=69,99
+   taille=9,12
+   cadrage=centre
+   id=1114
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=78,3
+   taille=10,64
+   id=1142
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Nature d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=78,99
+   taille=9,12
+   cadrage=centre
+   id=1143
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
  [obj_texte]
   [presentation]
    position=6,0
@@ -6596,6 +6596,69 @@
    nature=plein
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
+ [cadre]
+  [presentation]
+   position=0,136
+   taille=17,1
+   id=568
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=0,160
+   taille=17,1
+   id=569
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=0,213
+   taille=17,1
+   id=570
+  [param_cadre]
+   nature=vertical_d
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=0,419
+   taille=17,1
+   id=571
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=8,214
+   taille=1,206
+   id=572
+  [param_cadre]
+   nature=horizontal_b
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=16,0
+   taille=1,457
+   id=573
+  [param_cadre]
+   nature=horizontal
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=0,177
+   taille=17,1
+   id=577
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
    position=1,214
@@ -6731,60 +6794,6 @@
    wstyle="PETIT_GRAS"
   [texte]
    texte="Etb."
- [cadre]
-  [presentation]
-   position=0,136
-   taille=17,1
-   id=568
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=0,160
-   taille=17,1
-   id=569
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=0,213
-   taille=17,1
-   id=570
-  [param_cadre]
-   nature=vertical_d
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=0,419
-   taille=17,1
-   id=571
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=8,214
-   taille=1,206
-   id=572
-  [param_cadre]
-   nature=horizontal_b
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=16,0
-   taille=1,457
-   id=573
-  [param_cadre]
-   nature=horizontal
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
    position=1,177
@@ -6814,15 +6823,6 @@
    wstyle="PETIT_GRAS"
   [texte]
    texte="Composant"
- [cadre]
-  [presentation]
-   position=0,177
-   taille=17,1
-   id=577
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
  [obj_texte]
   [presentation]
    position=1,160
@@ -6860,78 +6860,6 @@
    nature=plein
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
- [obj_texte]
-  [presentation]
-   position=69,227
-   taille=9,11
-   noms="ifrs"
-   cadrage=centre
-   id=1152
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=69,156
-   taille=10,43
-   noms="ifrs"
-   id=1153
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Plan UO"
- [obj_texte]
-  [presentation]
-   position=78,156
-   taille=9,44
-   noms="etbc3"
-   id=1118
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Etablissements"
- [obj_texte]
-  [presentation]
-   position=69,3
-   taille=10,67
-   id=1119
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Localisation"
- [obj_texte]
-  [presentation]
-   position=69,99
-   taille=9,13
-   cadrage=centre
-   id=1120
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=78,3
-   taille=10,64
-   id=1150
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Nature d'immobilisation"
- [obj_texte]
-  [presentation]
-   position=78,99
-   taille=9,12
-   cadrage=centre
-   id=1151
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=110,89
-   taille=7,11
-   noms="EtbC3"
-   cadrage=centre
-   id=1096
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="Etb."
  [cadre]
   [presentation]
    position=425,0
@@ -7049,6 +6977,78 @@
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=69,227
+   taille=9,11
+   noms="ifrs"
+   cadrage=centre
+   id=1152
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=69,156
+   taille=10,43
+   noms="ifrs"
+   id=1153
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Plan UO"
+ [obj_texte]
+  [presentation]
+   position=78,156
+   taille=9,44
+   noms="etbc3"
+   id=1118
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Etablissements"
+ [obj_texte]
+  [presentation]
+   position=69,3
+   taille=10,67
+   id=1119
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Localisation"
+ [obj_texte]
+  [presentation]
+   position=69,99
+   taille=9,13
+   cadrage=centre
+   id=1120
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=78,3
+   taille=10,64
+   id=1150
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Nature d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=78,99
+   taille=9,12
+   cadrage=centre
+   id=1151
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=110,89
+   taille=7,11
+   noms="EtbC3"
+   cadrage=centre
+   id=1096
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="Etb."
  [obj_texte]
   [presentation]
    position=0,3
@@ -9046,78 +9046,6 @@
    nature=plein
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
- [obj_texte]
-  [presentation]
-   position=69,225
-   taille=9,11
-   noms="ifrs"
-   cadrage=centre
-   id=1160
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=69,154
-   taille=10,43
-   noms="ifrs"
-   id=1161
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Plan UO"
- [obj_texte]
-  [presentation]
-   position=78,154
-   taille=9,44
-   noms="etbc3"
-   id=1124
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Etablissements"
- [obj_texte]
-  [presentation]
-   position=69,3
-   taille=10,67
-   id=1125
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Localisation"
- [obj_texte]
-  [presentation]
-   position=69,99
-   taille=9,13
-   cadrage=centre
-   id=1126
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=78,3
-   taille=10,64
-   id=1158
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="Nature d'immobilisation"
- [obj_texte]
-  [presentation]
-   position=78,100
-   taille=9,11
-   cadrage=centre
-   id=1159
-   wstyle="STD_ITALIQUE"
-  [texte]
-   texte="à"
- [obj_texte]
-  [presentation]
-   position=110,89
-   taille=7,11
-   noms="EtbC3"
-   cadrage=centre
-   id=1099
-   wstyle="PETIT_GRAS"
-  [texte]
-   texte="Etb."
  [cadre]
   [presentation]
    position=109,385
@@ -9262,6 +9190,78 @@
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=69,225
+   taille=9,11
+   noms="ifrs"
+   cadrage=centre
+   id=1160
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=69,154
+   taille=10,43
+   noms="ifrs"
+   id=1161
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Plan UO"
+ [obj_texte]
+  [presentation]
+   position=78,154
+   taille=9,44
+   noms="etbc3"
+   id=1124
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Etablissements"
+ [obj_texte]
+  [presentation]
+   position=69,3
+   taille=10,67
+   id=1125
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Localisation"
+ [obj_texte]
+  [presentation]
+   position=69,99
+   taille=9,13
+   cadrage=centre
+   id=1126
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=78,3
+   taille=10,64
+   id=1158
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="Nature d'immobilisation"
+ [obj_texte]
+  [presentation]
+   position=78,100
+   taille=9,11
+   cadrage=centre
+   id=1159
+   wstyle="STD_ITALIQUE"
+  [texte]
+   texte="à"
+ [obj_texte]
+  [presentation]
+   position=110,89
+   taille=7,11
+   noms="EtbC3"
+   cadrage=centre
+   id=1099
+   wstyle="PETIT_GRAS"
+  [texte]
+   texte="Etb."
  [obj_texte]
   [presentation]
    position=102,386
@@ -11014,7 +11014,7 @@
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
 [diva]
-SetModuleInfo('$Id: ccii746u.dhsi 8739 2015-10-22 08:05:51Z admin $')
+SetModuleInfo('$Id: ccii746u.dhsi 8853 2015-11-06 15:50:56Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme ccii746.dhsp 
@@ -11491,7 +11491,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: ccii746u.dhsi 8739 2015-10-22 08:05:51Z admin $')
+SetModuleInfo('$Id: ccii746u.dhsi 8853 2015-11-06 15:50:56Z admin $')
 Public Record "A5DD.dhsd" mz mz
 Public Record "ccfdd.dhsd" ca ca
 Public Record "ccfdd.dhsd" xq c3xq

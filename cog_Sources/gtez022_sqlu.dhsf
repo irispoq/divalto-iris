@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20140422112514      
+;>xwin4obj                              7.0       20151106114511      
 [masque]
  libelle="fournisseur"
  utilisateur="UGIE"
- date_modification="22/04/2014"
+ date_modification="06/11/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=848
  type_masque=2
  dernier_id=1000013
  surcharge=oui
- date_modif_base="20131120171848"
+ date_modif_base="20140310172038"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -3640,7 +3640,7 @@
    id=76
    wstyle="CHAMP_AFF"
   [description]
-   donnee=fournisseur,acheteur_lib,fournisseur
+   donnee=fournisseur,acheteur_nom,fournisseur
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -8611,7 +8611,7 @@
    id=291
    wstyle="CHAMP_AFF"
   [description]
-   donnee=fournisseur,signatairebap_lib,fournisseur
+   donnee=fournisseur,signatairebap_nom,fournisseur
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -11294,7 +11294,7 @@ Public Record "gtfdd.dhsd" g1t1 g1t1_1
 Public Record "gtfdd.dhsd" g1t1 g1t1_2
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtez022_sql.dhsf 35623 2013-11-20 16:28:07Z jf $')
+SetModuleInfo('$Id: gtez022_sql.dhsf 37959 2014-03-10 16:26:03Z sn $')
 ;*
 ;*      Zoom sur Fournisseur		  			Record SQL Fournisseur de GTRSTIERS.dhoq
 ;*
@@ -11660,13 +11660,13 @@ Endp
 ;*
 Public Procedure Champ_Salcod_1_Ap		; controle code acheteur
 Beginp
-	FOURNISSEUR.Acheteur_Lib = Condition(Lectab(37, FOURNISSEUR.SalCod, 1137) = 0, T037.Nom, ' ')
+	FOURNISSEUR.Acheteur_Nom = Condition(Lectab(37, FOURNISSEUR.SalCod, 1137) = 0, T037.Nom, ' ')
 Endp
 
 ;*
 Public Procedure Champ_SALCOD_2_Ap		; controle signataire bap
 Beginp
-	FOURNISSEUR.SignataireBAP_Lib = Condition(Lectab(37, FOURNISSEUR.BapSalCod, 1137) = 0, T037.Nom, ' ')
+	FOURNISSEUR.SignataireBAP_Nom = Condition(Lectab(37, FOURNISSEUR.BapSalCod, 1137) = 0, T037.Nom, ' ')
 Endp
 
 ;*
@@ -11772,8 +11772,8 @@ Endp
 Public Procedure Champ_TexCod_1_Ap		;controle texte préenregistré
 Beginp
 	Lectab(41, FOURNISSEUR.TexCod(Harmony.Dataind1), 1141)
-	Note_Chargement_('DAV', T041.Note, [ 'fournisseur' ToString(Harmony.Dataind1) ])
-	FOU_mw.Rtfnom(Harmony.Dataind1) = Note_Rechercher_Nom_Rtf(C_Applic_DAV, [ 'fournisseur' ToString(Harmony.Dataind1) ])	
+	Note_Chargement_('DAV', T041.Note, [ 'FOU' ToString(Harmony.Dataind1) ])
+	FOU_mw.Rtfnom(Harmony.Dataind1) = Note_Rechercher_Nom_Rtf(C_Applic_DAV, [ 'FOU' ToString(Harmony.Dataind1) ])	
 Endp
 
 ;*
@@ -11802,10 +11802,10 @@ Public Procedure Champ_TIERS_2_Ap			; controle code centrale
 1	tiers		>GTFDD.dhsd tiers
 Beginp
 	FOURNISSEUR.TiersGroupement_Nom = ' '
-	tiers = FOURNISSEUR.TiersGrp		; enregistrement fournisseur est écrasé par controle_Fournisseur
-	PingLocal('ZOOM_FOU', fournisseur)
+	tiers = FOURNISSEUR.TiersGrp		; enregistrement FOU est écrasé par controle_Fournisseur
+	PingLocal('ZOOM_FOU', FOU)
 	If Controle_Fournisseur (tiers, 1500, 0)  = 0	|	FOURNISSEUR.TiersGroupement_Nom = FOURNISSEUR.Nom	|	EndIf
-	PingLocalReceive('ZOOM_FOU', fournisseur)
+	PingLocalReceive('ZOOM_FOU', FOU)
 	FOURNISSEUR.TiersGrp = tiers
 Endp
 
@@ -11814,10 +11814,10 @@ Public Procedure Champ_TIERS_3_Ap			; controle code tiers statistique
 1	tiers		>GTFDD.dhsd tiers
 Beginp
 	FOURNISSEUR.TiersStatistique_Nom = ' '
-	tiers = FOURNISSEUR.TiersStat		; enregistrement fournisseur est écrasé par controle_fournisseur
-	PingLocal('ZOOM_FOU', fournisseur)
+	tiers = FOURNISSEUR.TiersStat		; enregistrement FOU est écrasé par controle_fournisseur
+	PingLocal('ZOOM_FOU', FOU)
 	If Controle_Fournisseur (tiers, 1500, 0)  = 0	|	FOURNISSEUR.TiersStatistique_Nom = FOURNISSEUR.Nom	|	EndIf
-	PingLocalReceive('ZOOM_FOU', fournisseur)
+	PingLocalReceive('ZOOM_FOU', FOU)
 	FOURNISSEUR.TiersStat = tiers
 Endp
 
@@ -11835,7 +11835,7 @@ Beginp
 	EndSwitch
 
 	Tiers = FOURNISSEUR.AdrTiers(Harmony.Dataind1)
-	PingLocal('ZOOM_FOU', fournisseur)
+	PingLocal('ZOOM_FOU', FOU)
 	If ( x := Controle_Fournisseur(tiers, 0, 0) ) = 0	|	nom = FOURNISSEUR.Nom
 	ElsIf x = 1														|	nom = ' '
 		Mes_Alert(2004, tiers)
@@ -11853,7 +11853,7 @@ Beginp
 	Case 3	|	FOURNISSEUR.TiersAdresseBL_Nom	= nom
 	Case 4	|	FOURNISSEUR.TiersAdresseFac_Nom	= nom
 	EndSwitch
-	PingLocalReceive('ZOOM_FOU', fournisseur)
+	PingLocalReceive('ZOOM_FOU', FOU)
  	FOURNISSEUR.AdrTiers(Harmony.Dataind1) = Tiers 
 Endp
 
@@ -11870,14 +11870,14 @@ Beginp
 		PReturn
 	EndIf
 
-	PingLocal('ZOOM_FOU', fournisseur)
+	PingLocal('ZOOM_FOU', FOU)
 	If Seek_Tiers(FOURNISSEUR.Tiers) = 0 	; recherche tout tiers confondu car code doit être unique
-		PingLocalReceive('ZOOM_FOU', fournisseur)
+		PingLocalReceive('ZOOM_FOU', FOU)
 		Lib_FOU(FOURNISSEUR.Tiers)
 		Mes_Alert(1511, FOURNISSEUR.Tiers)
 		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 	EndIf
-	PingLocalReceive('ZOOM_FOU', fournisseur)	
+	PingLocalReceive('ZOOM_FOU', FOU)	
 Endp
 
 ;*
@@ -11886,9 +11886,9 @@ Public Procedure Champ_TIERS_6_Ap			; controle code tiers payeur
 Beginp
 	FOURNISSEUR.TiersPayeur_Nom = ' '
 	tiers = FOURNISSEUR.TiersPayer
-	PingLocal('ZOOM_FOU', fournisseur)
+	PingLocal('ZOOM_FOU', FOU)
 	If Controle_Fournisseur(tiers, 1500, 0)  = 0	|	FOURNISSEUR.TiersPayeur_Nom = FOURNISSEUR.Nom	|	EndIf
-	PingLocalReceive('ZOOM_FOU', fournisseur)
+	PingLocalReceive('ZOOM_FOU', FOU)
 	FOURNISSEUR.TiersPayer = tiers
 Endp
 
@@ -11898,9 +11898,9 @@ Public Procedure Champ_TIERS_7_Ap			; controle code tiers R3
 Beginp
 	FOURNISSEUR.TiersReglement_Nom = ' '
 	tiers = FOURNISSEUR.TiersR3
-	PingLocal('ZOOM_FOU', fournisseur)
+	PingLocal('ZOOM_FOU', FOU)
 	If Controle_Fournisseur(tiers, 1500, 0)  = 0	|	FOURNISSEUR.TiersReglement_Nom = FOURNISSEUR.Nom	|	EndIf
-	PingLocalReceive('ZOOM_FOU', fournisseur)
+	PingLocalReceive('ZOOM_FOU', FOU)
 	FOURNISSEUR.TiersR3 = tiers
 Endp
 
@@ -11908,7 +11908,7 @@ Endp
 Public Procedure Champ_TIERS_8_Ap			; à partir du code centrale
 1	tiers		>GTFDD.dhsd tiers
 Beginp
-	tiers = FOURNISSEUR.TiersGrp	 ; enregistrement fournisseur est écrasé par controle_fournisseur
+	tiers = FOURNISSEUR.TiersGrp	 ; enregistrement FOU est écrasé par controle_fournisseur
 	Controle_Fournisseur(tiers, conf=FALSE)
 	FOURNISSEUR.TiersGrp = tiers
 Endp

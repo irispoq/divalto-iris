@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20131120171848      
+;>xwin4obj                              7.0       20140310172038      
 [masque]
  libelle="fournisseur"
- utilisateur="DEMO"
- date_modification="20/11/2013"
+ utilisateur="SN"
+ date_modification="10/03/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=848
  type_masque=2
@@ -3536,7 +3536,7 @@
    id=76
    wstyle="CHAMP_AFF"
   [description]
-   donnee=fournisseur,acheteur_lib,fournisseur
+   donnee=fournisseur,acheteur_nom,fournisseur
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -8424,7 +8424,7 @@
    id=291
    wstyle="CHAMP_AFF"
   [description]
-   donnee=fournisseur,signatairebap_lib,fournisseur
+   donnee=fournisseur,signatairebap_nom,fournisseur
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -11056,7 +11056,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: gtez022_sql.dhsf 35623 2013-11-20 16:28:07Z jf $')
+SetModuleInfo('$Id: gtez022_sql.dhsf 37959 2014-03-10 16:26:03Z sn $')
 ;*
 ;*      Zoom sur Fournisseur		  			Record SQL Fournisseur de GTRSTIERS.dhoq
 ;*
@@ -11422,13 +11422,13 @@ Endp
 ;*
 Public Procedure Champ_Salcod_1_Ap		; controle code acheteur
 Beginp
-	FOURNISSEUR.Acheteur_Lib = Condition(Lectab(37, FOURNISSEUR.SalCod, 1137) = 0, T037.Nom, ' ')
+	FOURNISSEUR.Acheteur_Nom = Condition(Lectab(37, FOURNISSEUR.SalCod, 1137) = 0, T037.Nom, ' ')
 Endp
 
 ;*
 Public Procedure Champ_SALCOD_2_Ap		; controle signataire bap
 Beginp
-	FOURNISSEUR.SignataireBAP_Lib = Condition(Lectab(37, FOURNISSEUR.BapSalCod, 1137) = 0, T037.Nom, ' ')
+	FOURNISSEUR.SignataireBAP_Nom = Condition(Lectab(37, FOURNISSEUR.BapSalCod, 1137) = 0, T037.Nom, ' ')
 Endp
 
 ;*

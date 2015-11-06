@@ -1,8 +1,8 @@
-;>xwin4obj     imprimante               6.0       20141209100723      
+;>xwin4obj     imprimante               6.0       20100820164027      
 [masque]
  libelle="tableaux d'amortissements"
- utilisateur="UGIE_RCT"
- date_modification="09/12/2014"
+ utilisateur="MS"
+ date_modification="20/08/2010"
  feuille_style="fstyleimp.dhfi"
  taille_ligne=9
  orientation=paysage
@@ -19,14 +19,14 @@
   type_ad3=rien
 [defaut]
 [enregistrements]
- "a5dd.dhsd",,mz,mz,1000,0
- "ddsys.dhsd",,system,system,4160,0
- "ccfdd.dhsd",ccfdos,ca,ca,1350,0
- "ccfdd.dhsd",,xq,c3xq,4400,0
- "ccfdd.dhsd",,x1,x1,1752,0
- "ccfdd.dhsd",ccfimmo,i1,i1,1900,0
- "ccfdd.dhsd",,xj,xj,3000,0
- "ccfdd.dhsd",,i2,i2,800,0
+ "a5dd.dhsd",,mz,mz,1000
+ "ddsys.dhsd",,system,system,4160
+ "ccfdd.dhsd",ccfdos,ca,ca,1300
+ "ccfdd.dhsd",,xq,c3xq,4400
+ "ccfdd.dhsd",,x1,x1,1752
+ "ccfdd.dhsd",ccfimmo,i1,i1,1900
+ "ccfdd.dhsd",,xj,xj,3000
+ "ccfdd.dhsd",,i2,i2,800
 [bloc]
  numero=1
  libelle="début axe ou groupe"
@@ -1445,7 +1445,7 @@
  [champ]
   [presentation]
    position=1,217
-   taille=7,18
+   taille=7,16
    id=131
    wstyle="TRES_PETIT"
   [description]
@@ -11003,7 +11003,7 @@
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
 [diva]
-SetModuleInfo('$Id: ccii746.dhsi 10634 2010-08-20 15:00:14Z ms $')
+SetModuleInfo('$Id: ccii746_base.dhsi 8853 2015-11-06 15:50:56Z admin $')
 Public Record "A5DD.dhsd" mz mz
 Public Record "ccfdd.dhsd" ca ca
 Public Record "ccfdd.dhsd" xq c3xq

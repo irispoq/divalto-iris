@@ -2,7 +2,7 @@ xwin-s-projet      2.0
 [general]
 nom="divalto modules communs"
 progexec="divalto.dhop"
-date="20140428118110241699"
+date="20151106310511585699"
 util="UGIE"
 filtres="??pp*;??pc*;??pm*;??pz*;??p9*;divalto.dhs*;divaltoweb.dhs*;divaltochoix.dhs*;divaltozoom.dhs*;divaltoimpression.dhs*;divaltochoixweb.dhs*;divaltozoomweb.dhs*"
 flagrelatif=1
@@ -17,6 +17,12 @@ zoomfichiersmodele="modelezoom2.dhsf"
 zoomfichiersmodele="modelezoom.dhsf"
 zoomfichiersmodele="modelezoom1.dhsf"
 zoomfichiersmodele="modelezoom2.dhsf"
+zoomfichiersmodele="modelezoom.dhsf"
+zoomfichiersmodele="modelezoom1.dhsf"
+zoomfichiersmodele="modelezoom2.dhsf"
+zoomfichierstrait="modelezoom.dhsp"
+zoomfichierstrait="modelezoom1.dhsp"
+zoomfichierstrait="modelezoom2.dhsp"
 zoomfichierstrait="modelezoom.dhsp"
 zoomfichierstrait="modelezoom1.dhsp"
 zoomfichierstrait="modelezoom2.dhsp"
@@ -34,14 +40,13 @@ typetransport=3
 [profildefaut]
 [profil]
 nom="ugie_205"
-repobjet="/cd205a/objets"
-debug=0
+repobjet="/cd205c/objets"
 browse=0
 implicites="ugie.txt"
-repbrowse="/cd205a/objets"
+repbrowse="/cd205c/objets"
 repobjetsurcharge="/ugie/cog_objets"
 repbrowsesurcharge="/ugie/cog_browse"
-versioncible="7.2"
+versioncible="7.2a"
 repcouverture="/ugie/cog_ccode"
 [sousprojets]
 [projetsfusion]
