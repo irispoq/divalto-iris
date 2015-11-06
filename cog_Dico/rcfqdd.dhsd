@@ -1,0 +1,366 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=5,20021022162324,PHB ,20140311093448,MS                  
+Nom=rcfqdd.dhsd,,1
+[CHAMP]
+Version=1,199611 50000,EPR3,20061228085146,JLSI                
+Nom=AcNo,Numéro de l'acompte,1
+DateM=FA97EF05552AC701
+Gel=1
+Nature=8,0
+NomOdbc=AcompteNo
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,1999 7 70000,PB
+Nom=Bqc,Banque,1
+Gel=1
+Nature=8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,1999 6150000,PB
+Nom=Ce1,CE,1
+Gel=1
+Nature=1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,20071129162532,MS                  
+Nom=CeNote,Présence note O/N,1
+DateM=72C1D49C652AC701
+Gel=1
+Nature=1,0
+Choix=rcfdmc.dhfi
+NomChoix=CENOTE_2
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1999 6 90000,PB  ,20061228105037,FH                  
+Nom=DebDt,Dates début,1
+DateM=FA5663A0652AC701
+Gel=1
+Nature=D8*11
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,VHR3,1999 4290000,VHR3
+Nom=Dev,devises,1
+Gel=1
+Nature=4*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,20061228105043,FH                  
+Nom=EchDt,Date d'échéance,1
+DateM=5601E6A3652AC701
+Gel=1
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,1999 7 70000,PB
+Nom=Eff,Numéro d'effet,1
+Gel=1
+Nature=8,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,20061228105046,FH                  
+Nom=EffDt,Date d'opération,1
+DateM=16D2D5A5652AC701
+Gel=1
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,1999 7 70000,PB
+Nom=Etat,Code état,1
+Gel=1
+Nature=3
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20090123142045,DEMO                ,20090123142045,DEMO                
+Nom=Etb,Code établissement,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,20061228105058,FH                  
+Nom=FaDt,Date de la pièce,1
+DateM=BA350DAD652AC701
+Gel=1
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 8160000,EPR3,20061228091806,JLSI                
+Nom=FaNo,Numéro de facture,1
+DateM=D20AF8B3582AC701
+Gel=1
+Nature=8,0
+NomOdbc=FactureNo
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6 90000,PB  ,20061228105110,FH                  
+Nom=FinDt,Dates fin,1
+DateM=74163BB4652AC701
+Gel=1
+Nature=D8*11
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120110183403,MS                  ,20120110183403,MS                  
+Nom=Fl_Cont,Indicateur contentieux,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,VHR3,1999 4290000,VHR3
+Nom=Ii1,indice 1,1
+Gel=1
+Nature=3,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,VHR3,20130114145653,MS                  
+Nom=Lib,Libellé,1
+DateM=D28249025FF2CD01
+Gel=1
+Nature=80
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,20061228105115,FH                  
+Nom=LibEtat,Libellé état,1
+DateM=483806B7652AC701
+Gel=1
+Nature=40
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,VHR3,20130114145647,MS                  
+Nom=LibTb,Libellé tableau,1
+DateM=5A3B76FE5EF2CD01
+Gel=1
+Nature=80*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,VH  ,1999 4290000,VH
+Nom=Mt,Montant débit crédit,1
+Gel=1
+Nature=16,2*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,20061228105124,FH                  
+Nom=MtArr,Montants arrondis,1
+DateM=C9E360BC652AC701
+Gel=1
+Nature=14,0*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6 90000,PB  ,20061228105128,FH                  
+Nom=MtImp,Montants imprimés,1
+DateM=FC1FE2BE652AC701
+Gel=1
+Nature=6,0*12*5
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,20130111141811,VJ                  
+Nom=MtTva,Montants / taux,1
+DateM=0D11B01AFEEFCD01
+Gel=1
+Nature=16,2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,20130111141817,VJ                  
+Nom=MtTvaEsc,Montants escompte /Taux,1
+DateM=71E3AD1EFEEFCD01
+Gel=1
+Nature=9,2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,20061228105146,FH                  
+Nom=NomTiers,Nom du tiers,1
+DateM=6C5FC2C9652AC701
+Gel=1
+Nature=40
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,1999 7 70000,PB
+Nom=Note,Numéro note,1
+Gel=1
+Nature=8,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,1999 6150000,PB
+Nom=Piece,Numéro de pièce,1
+Gel=1
+Nature=8,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 7 70000,PB  ,20061228105155,FH                  
+Nom=RelTxtNo,Numéro texte de relance,1
+DateM=5C01ADCE652AC701
+Gel=1
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6110000,VH  ,1999 6110000,VH
+Nom=Repr,représentant,1
+Gel=1
+Nature=8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,1999 6150000,PB
+Nom=Tiers,Code tiers,1
+Gel=1
+Nature=8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,VHR3,20061228105203,FH                  
+Nom=TotGen1,totaux généraux 1,1
+DateM=2CEBE3D3652AC701
+Gel=1
+Nature=16,2*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,PB  ,20061228105206,FH                  
+Nom=TotRup1,totaux rupture 1,1
+DateM=399D8ED5652AC701
+Gel=1
+Nature=16,2*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,PB  ,20061228105209,FH                  
+Nom=TotRup2,totaux rupture 2,1
+DateM=DCDD04D7652AC701
+Gel=1
+Nature=16,2*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 4290000,PB  ,20061228105211,FH                  
+Nom=TotRup3,totaux rupture 3,1
+DateM=A6B6B6D8652AC701
+Gel=1
+Nature=16,2*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20121212095646,SN                  ,20121213094422,SN                  
+Nom=TvaArt,Régime TVA article,1
+Gel=1
+Nature=8
+NomOdbc=TvaArticleVente
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130109150708,SN                  ,20130109150721,SN                  
+Nom=TvaCod,Code TVA,1
+Gel=1
+Nature=16
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,20061228105215,FH                  
+Nom=TvaCpt,Compte de TVA,1
+DateM=1175B2DA652AC701
+Gel=1
+Nature=8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140311093445,MS                  ,20140311093445,MS                  
+Nom=Tvap,Taux de TVA,1
+Gel=1
+Nature=6,3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20121212095625,SN                  ,20121212095636,SN                  
+Nom=TvaTie,Régime TVA tiers,1
+Gel=1
+Nature=8
+NomOdbc=RegTvaTiers
+Flags=n,1,n,n,n,n,n,n
+[CHAMPR]
+nom=LibTb
+[CHAMPL]
+Nom=Lib,1,0,0,N,1
+[/CHAMPL]
+nom=TvaCod
+[CHAMPL]
+Nom=TvaArt,1,0,0,N,1
+Nom=TvaTie,9,0,0,N,1
+[/CHAMPL]
+[/CHAMPR]
+[TABLE]
+Version=1,1999 4290000,PB  ,1999 6110000,PB
+Nom=Rc000,Global,1
+DateM=D28249025FF2CD01
+Taille=2048,2048
+Pack=0,0
+[CHAMPS]
+Nom=LibTb,1,2,N,0,0,N,1
+Nom=Mt,801,2,N,0,0,N,1
+Nom=TotRup1,961,2,N,0,0,N,1
+Nom=TotRup2,1121,2,N,0,0,N,1
+Nom=TotRup3,1281,2,N,0,0,N,1
+Nom=TotGen1,1441,2,N,0,0,N,1
+Nom=Ii1,1601,2,N,0,0,N,1
+Nom=Dev,1604,2,N,0,0,N,1
+Nom=Repr,1644,2,N,0,0,N,1
+Nom=MtArr,1652,2,N,0,0,N,1
+Nom=Tiers,1792,2,N,0,0,N,1
+Nom=Fl_Cont,1800,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+ZoomRes=1
+Nom=Lib
+[/PROPLOC]
+[TABLE]
+Version=1,1999 6 90000,PB  ,1999 6100000,PB
+Nom=Rc221,Echéancier,1
+DateM=FC1FE2BE652AC701
+Taille=1020,1020
+Pack=0,0
+[CHAMPS]
+Nom=DebDt,1,2,N,0,0,N,1
+Nom=FinDt,89,2,N,0,0,N,1
+Nom=MtImp,177,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20100330085903,VJ                  ,20100330085903,VJ                  
+Nom=Rc222,Balance Agée,1
+DateM=448C9F7BD6CFCA01
+Taille=1020,1020
+Pack=0,0
+[CHAMPS]
+Nom=Mt,1,2,N,0,0,N,1
+Nom=MtArr,161,2,N,0,0,N,1
+Nom=Tiers,301,2,N,0,0,N,1
+Nom=FaNo,309,2,N,0,0,N,1
+Nom=AcNo,317,2,N,0,0,N,1
+Nom=FaDt,325,2,N,0,0,N,1
+Nom=Eff,333,2,N,0,0,N,1
+Nom=Ce1,341,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1999 7 70000,PB  ,1999 7 70000,PB
+Nom=Rc224,Encaissements du jour,1
+DateM=6C5FC2C9652AC701
+Taille=1020,1020
+Pack=0,0
+[CHAMPS]
+Nom=Tiers,1,2,N,0,0,N,1
+Nom=NomTiers,9,2,N,0,0,N,1
+Nom=EffDt,49,2,N,0,0,N,1
+Nom=Etat,57,2,N,0,0,N,1
+Nom=LibEtat,60,2,N,0,0,N,1
+Nom=Bqc,100,2,N,0,0,N,1
+Nom=EchDt,108,2,N,0,0,N,1
+Nom=Mt,116,2,N,0,0,N,1
+Nom=CeNote,276,2,N,0,0,N,1
+Nom=Note,277,2,N,0,0,N,1
+Nom=Eff,285,2,N,0,0,N,1
+Nom=Etb,293,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1999 6150000,PB  ,1999 6150000,PB
+Nom=Rc500,Contrôle TVA,1
+DateM=030FA31FFEEFCD01
+Taille=512,512
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Piece,2,2,N,0,0,N,1
+Nom=Tiers,10,2,N,0,0,N,1
+Nom=FaDt,18,2,N,0,0,N,1
+Nom=TvaCod,26,2,N,0,0,N,1
+Nom=TvaCpt,42,2,N,0,0,N,1
+Nom=MtTva,50,2,N,0,0,N,1
+Nom=MtTvaEsc,66,2,N,0,0,N,1
+Nom=Tvap,75,2,N,0,0,N,1
+[/CHAMPS]

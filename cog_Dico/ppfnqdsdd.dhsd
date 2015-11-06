@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20101215165519,DEMO                ,20131115160712,CI                  
+Version=6,20101215165519,DEMO                ,20131202165335,CI                  
 Nom=ppfnqdsdd.dhsd,ppfnqdsdd.dhsd,1
 [CHAMP]
 Version=1,20111016184242,CI                  ,20111016184242,CI                  
@@ -406,6 +406,12 @@ Version=1,20110107115622,DEMO                ,20110201145251,DEMO
 Nom=ExtRub,Extension,1
 Gel=1
 Nature=10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131202165300,CI                  ,20131202165300,CI                  
+Nom=FiltreEtb,Filtre établissements,1
+Gel=1
+Nature=100
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20101217112738,CI                  ,20101217112753,CI                  
@@ -6538,6 +6544,7 @@ Nom=Datefp,123,0,0,N,1
 Nom=RubDS,131,0,0,N,1
 Nom=NivRub,151,0,0,N,1
 Nom=SGrpTop,153,0,0,N,1
+Nom=FiltreEtb,173,0,0,N,1
 [/CHAMPL]
 nom=Siret
 [CHAMPL]
@@ -9006,11 +9013,6 @@ Nom=S65G4010_023004,290,2,N,0,0,N,1
 Nom=S65G4010_023005,292,2,N,0,0,N,1
 Nom=Filler,294,2,N,0,7,N,1
 [/CHAMPS]
-[PROPLOC]
-Nom=S65G4010_023003
-Nom=S65G4010_023002
-Nom=S65G4010_023004
-[/PROPLOC]
 [TABLE]
 Version=1,20101229091104,CI                  ,20110303102027,DEMO                
 Nom=S65G4305,Cotisations normales CNRACL-FSPOEIE,1

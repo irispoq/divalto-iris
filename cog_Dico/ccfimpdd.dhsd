@@ -1,0 +1,872 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=6,20080729142505,MS                  ,20130109145732,MS                  
+Nom=ccfimpdd.dhsd,ccfimpdd.dhsd,1
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050105170213,HC
+Nom=Axe,Axe,1
+Gel=1
+Nature=8
+NomOdbc=Axe
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071123143039,MS                  
+Nom=AxeNo,Numéro d'axe,1
+DateM=D8A846771899C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=AXENO
+NomOdbc=AxeNo
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20080604110445,FH                  ,20080604114152,FH                  
+Nom=AxePere,Axe père,1
+Gel=1
+Nature=8
+NomOdbc=AxePere
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080604110223,FH                  ,20080604114148,FH                  
+Nom=AxePrinc,Axe principal,1
+Gel=1
+Nature=8
+NomOdbc=AxePrincipal
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20071127141859,MS                  
+Nom=AxeSais,Saisir axe,1
+DateM=D896FC401999C601
+Gel=1
+Nature=1,0*4
+Flags=o,1,o,n,n,n,n,n
+presentation=3
+[CHAMP]
+Version=1,20080604110612,FH                  ,20080604114155,FH                  
+Nom=AxeSlg,Numéro d'ordre pour un même niveau,1
+Gel=1
+Nature=8,0
+NomOdbc=SousLigneAxe
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050105170202,HC
+Nom=AxeTb,Axes,1
+DateM=D856A2BD1899C601
+Gel=1
+Nature=8*4
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,199611290000,hc  ,20071123151413,MS                  
+Nom=AxeTyp,Type d'axe,1
+DateM=D80272551999C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=AXETYP
+NomOdbc=IndicNormalTitre
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071123153548,MS                  
+Nom=BqeDtSais,Option de saisie de la date prévue banque,1
+DateM=D8E0EFDF1999C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=BQEDTSAIS
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,c321,20050114095608,HC
+Nom=Ce1,Code enregistrement 1,1
+Gel=1
+Nature=1
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050114095610,HC
+Nom=Ce2,Code enregistrement 2,1
+Gel=1
+Nature=1
+Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20130102095210,MS                  ,20130102095210,MS                  
+Nom=Ce3,Code enregistrement 3,1
+Gel=1
+Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050114155429,HC
+Nom=ChqNo,Numéro de chèque,1
+DateM=D81411C81D99C601
+Gel=1
+Nature=7
+NomOdbc=NoCheque
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021018104819,jsm ,20050114100118,HC
+Nom=Classe,Classe du compte,1
+Gel=1
+Nature=1
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050107111036,HC
+Nom=Cp,Compte de contrepartie,1
+Gel=1
+Nature=8
+NomOdbc=CompteContrePartie
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071126104654,MS                  
+Nom=CpGenCod,Option générer la contrepartie,1
+DateM=2C28B9751F99C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=CPGENCOD
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071126105326,MS                  
+Nom=CpSais,Option de saisie du compte de contrepartie,1
+DateM=48855CD11F99C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=CPSAIS
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050106115011,HC
+Nom=Cpt,Compte,1
+Gel=1
+Nature=8
+NomOdbc=Compte
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050105170143,HC
+Nom=CptCol,Compte collectif,1
+DateM=D8D6AEC51A99C601
+Gel=1
+Nature=8
+NomOdbc=CompteCollectif
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20071126111454,MS                  
+Nom=CptNat,Nature du compte (bilan\v gestion\v auxiliaire),1
+DateM=D8D278031C99C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=CPTNAT
+NomOdbc=IndicBilanGestionAuxiliaire
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,c321,20071126113644,MS                  
+Nom=CptTyp,Type de compte (normal\v collectif),1
+DateM=D8C649071C99C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=CPTTYP
+NomOdbc=IndicNormalCollectif
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,c321,20050105170154,HC
+Nom=Dev,Devise,1
+Gel=1
+Nature=4
+NomOdbc=Devise
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071126140020,MS                  
+Nom=DevCod,Méthode de gestion des devises,1
+DateM=D88EE01B1C99C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=DEVCOD_1
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 4 90000,hc  ,20050114155605,HC
+Nom=DevP,Taux de change,1
+DateM=D8DE857A1D99C601
+Gel=1
+Nature=17,8
+NomOdbc=TxChange
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050114154404,HC
+Nom=Dos,Dossier,1
+Gel=1
+Nature=3,0
+NomOdbc=Dossier
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050107111114,HC
+Nom=EchDt,Date d'échéance,1
+DateM=D8608CC41D99C601
+Gel=1
+Nature=D8
+NomOdbc=DateEcheance
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071126144343,MS                  
+Nom=EchSais,Option de saisie de la date d'échéance,1
+DateM=47F61D21E199C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=ECHSAIS
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,pb  ,20090429181043,MS                  
+Nom=Ecr,Numéro d'écriture,1
+DateM=B9F1770CE5C8C901
+Gel=1
+Nature=15
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050107110949,HC
+Nom=EcrDt,Date d'écriture,1
+DateM=D8FEBB8D1D99C601
+Gel=1
+Nature=D8
+NomOdbc=DateEcriture
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071127095456,MS                  
+Nom=EcrFinCod,Méthode de fin d'écriture,1
+DateM=67E23B74E299C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=ECRFINCOD
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,2002 7 80000,hc  ,20081202174542,MS                  
+Nom=EcrLg,Numéro de ligne,1
+DateM=8CC6FA699D54C901
+Gel=1
+Nature=4,0
+NomOdbc=NoLigne
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,pb  ,20090429181107,MS                  
+Nom=EcrNo,Numéro d'écriture,1
+DateM=399F791AE5C8C901
+Gel=1
+Nature=11,0
+NomOdbc=NoEcriture
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20071127100736,MS                  
+Nom=EcrTyp,Type d'écriture,1
+DateM=4C306B821F99C601
+Gel=1
+Nature=1
+Choix=ccfdmc.dhfi
+NomOdbc=IndicComptableExtraBudgetaire
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,hc  ,20090429181023,MS                  
+Nom=EcrValNo,Numéro d'écriture validée,1
+DateM=FDB61200E5C8C901
+Gel=1
+Nature=14,0
+NomOdbc=NoEcritureValidee
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199612230000,c321,20071127144708,MS                  
+Nom=EpuCod,Indicateur d'épuration,1
+DateM=D8960A261C99C601
+Gel=1
+Nature=1,0
+NomOdbc=IndicExerciceEpure
+Flags=o,1,n,n,n,n,n,n
+presentation=3
+[CHAMP]
+Version=1,20021021153158,hc  ,20080514173324,MS                  
+Nom=Etb,Etablissement,1
+Gel=1
+Nature=3
+NomOdbc=Etablissement
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080227171321,FH                  ,20080228120016,FH                  
+Nom=EtbSais,Etablissements autorisés,1
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=ETBSAIS
+NomOdbc=EtablissementsAutorises
+Flags=n,1,n,n,n,n,n,n
+presentation=4
+[CHAMP]
+Version=1,20120831091354,VJ                  ,20120831150809,VJ                  
+Nom=ExDt,Date d'exigibilité,1
+DateM=F57A07AB7987CD01
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050114154728,HC
+Nom=HsDt,Date de fin de validité,1
+DateM=D88CEAC81B99C601
+Gel=1
+Nature=D8
+NomOdbc=DateFinValid
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050114155139,HC
+Nom=Jnl,Journal,1
+Gel=1
+Nature=3
+NomOdbc=Journal
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20071127115814,MS                  
+Nom=JnlTyp,Type de journal,1
+DateM=6C8CAA41B19AC601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=JNLTYP
+NomOdbc=TypeJournal
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,c321,20050107111044,HC
+Nom=Lett,Code lettrage,1
+Gel=1
+Nature=2
+NomOdbc=CodeLettrage
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071127120755,MS                  
+Nom=LettAppel,Méthode de lettrage,1
+DateM=84549DAAB19AC601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=LETTAPPEL
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,c321,20050107111531,HC
+Nom=LettDt,Date de lettrage,1
+DateM=D8F277651D99C601
+Gel=1
+Nature=D8
+NomOdbc=DateValeurLettrage
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20071127121028,MS                  
+Nom=LettTyp,Méthode de lettrage,1
+DateM=D8E820F51B99C601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=LETTTYP
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,c321,20050113144937,MARIE JO
+Nom=Lib,Libellé,1
+Gel=1
+Nature=40
+NomOdbc=Libelle_$R
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050107111102,HC
+Nom=Lot,Numéro de lot,1
+Gel=1
+Nature=4
+NomOdbc=Lot
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071127151355,MS                  
+Nom=MaskEffCod,Option d'effacement de l'écran,1
+DateM=0730DE48AEACC601
+Gel=1
+Nature=1,0
+Flags=o,1,o,n,n,n,n,n
+presentation=3
+[CHAMP]
+Version=1,1996 2160000,hc  ,20060721121343,FH                  
+Nom=MaskLg,Numéro de  ligne,1
+DateM=6FAF2C58AEACC601
+Gel=1
+Nature=5,0
+NomOdbc=NoLigne
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071127151510,MS                  
+Nom=MaskNo,Numéro du masque de saisie,1
+DateM=5BA7B15BAEACC601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=MASKNO
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050118115244,HC
+Nom=Mt,Montant en devise principale,1
+Gel=1
+Nature=16,D0
+NomOdbc=Mt
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199610310000,hc  ,20050118115253,HC
+Nom=MtBis,Montant en devise secondaire,1
+DateM=D8F68AA91C99C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtSecondaire
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,hc  ,20050114155530,HC
+Nom=MtDev,Montant en devise,1
+DateM=D82CF4401D99C601
+Gel=1
+Nature=16,D0
+NomOdbc=MtDevise
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120831092431,VJ                  ,20120831092431,VJ                  
+Nom=MtHt,Montant hors taxe,1
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120831092513,VJ                  ,20120831092513,VJ                  
+Nom=MtTva, Montant tva,1
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20090429181250,MS                  ,20090429181257,MS                  
+Nom=NatPai,Nature de paiement,1
+Gel=1
+Nature=4
+NomOdbc=NaturePaiement
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050105180148,HC
+Nom=Piece,Pièce comptable,1
+Gel=1
+Nature=8,0
+NomOdbc=PieceComptable
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2002 7 90000,hc  ,20071127162739,MS                  
+Nom=PieceCod,Méthode de numérotation automatique,1
+DateM=00765E9CB5ACC601
+Gel=1
+Nature=1,0
+Flags=o,1,o,n,n,n,n,n
+presentation=4
+[CHAMP]
+Version=1,1996 2160000,hc  ,20071127163040,MS                  
+Nom=PieceSais,Option de saisie du numéro de pièce,1
+DateM=AC45F5ACB5ACC601
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=PIECESAIS
+Flags=o,1,o,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,2001 1240000,hc  ,20050114155456,HC
+Nom=PinoTiers,Numéro de pièce du tiers,1
+DateM=D8A252D01D99C601
+Gel=1
+Nature=15
+NomOdbc=PieceExterne
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050107111049,HC
+Nom=Point,Code pointage,1
+Gel=1
+Nature=2
+NomOdbc=CodePointage
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20050107111525,HC
+Nom=PointDt,Date de pointage,1
+DateM=D86A636B1D99C601
+Gel=1
+Nature=D8
+NomOdbc=DateValeurPointage
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021106154610,HC  ,20071127163854,MS                  
+Nom=PreLoad,Option de pré-chargement,1
+DateM=EFC3BEBB0C25C701
+Gel=1
+Nature=1,0
+Flags=n,1,o,n,n,n,n,n
+presentation=4
+[CHAMP]
+Version=1,20021106154635,HC  ,20060721130824,FH                  
+Nom=PreLoadNb,Nombre d'écritures à pré-charger,1
+DateM=77B39ABE0C25C701
+Gel=1
+Nature=8,0
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1997 6190000,hc  ,20071127164407,MS                  
+Nom=R3cod,Option lier à Divalto Règlements,1
+Gel=1
+Nature=1,0
+Flags=o,1,o,n,n,n,n,n
+presentation=3
+[CHAMP]
+Version=1,1996 2160000,c321,20050114154449,HC
+Nom=Reg,Mode de règlement,1
+Gel=1
+Nature=4
+NomOdbc=ModeRegl
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,mjv ,20050119173241,MARIE JO
+Nom=RegTyp,Type de règlement,1
+DateM=D8469ECC1D99C601
+Gel=1
+Nature=4
+NomOdbc=TypeRegl
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 2160000,c321,20071127170139,MS                  
+Nom=Sens,Sens,1
+Gel=1
+Nature=1,0
+Choix=ccfdmc.dhfi
+NomChoix=SENS_5
+NomOdbc=Sens
+Flags=o,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
+Version=1,20130109145646,MS                  ,20130109145649,MS                  
+Nom=TvaArt,Régime TVA Article,1
+DateM=AD43AF2B71EECD01
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130109145708,MS                  ,20130109145708,MS                  
+Nom=TvaTie,Régime TVA Tiers,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120914174012,MS                  ,20120914174020,MS                  
+Nom=TvaTyp,Tva sur débit ou sur encaissement,1
+Gel=1
+Nature=1,0
+NomOdbc=TypeTVA
+Flags=n,1,n,n,n,n,n,n
+[CHAMPR]
+nom=AxeTb
+[CHAMPL]
+Nom=Axe,1,0,0,N,1
+[/CHAMPL]
+nom=Cpt
+[CHAMPL]
+Nom=Classe,1,0,0,N,1
+[/CHAMPL]
+nom=Ecr
+[CHAMPL]
+Nom=EcrNo,1,0,0,N,1
+Nom=EcrLg,12,0,0,N,1
+[/CHAMPL]
+[/CHAMPR]
+[TABLE]
+Version=1,1996 2160000,hc  ,20110225092316,VJ                  
+Nom=ex_c3,Plan comptable,1
+DateM=B0C36340C5D4CB01
+NomOdbc=Compte
+Taille=119,119
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Cpt,5,2,N,0,0,N,1
+Nom=Lib,13,2,N,0,0,N,1
+Nom=CptCol,53,2,N,0,0,N,1
+Nom=CptNat,61,2,N,0,0,N,1
+Nom=CptTyp,62,2,N,0,0,N,1
+Nom=Sens,63,2,N,0,0,N,1
+Nom=Dev,64,2,N,0,0,N,1
+Nom=AxeSais,68,2,N,0,0,N,1
+Nom=AxeTb,72,2,N,0,0,N,1
+Nom=EtbSais,104,2,N,0,0,N,1
+Nom=Etb,105,2,N,0,0,N,1
+Nom=HsDt,108,2,N,0,0,N,1
+Nom=LettTyp,116,2,N,0,0,N,1
+Nom=DevCod,117,2,N,0,0,N,1
+Nom=EpuCod,118,2,N,0,0,N,1
+Nom=R3cod,119,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Alias=cpt
+Nom=CptCol
+Commentaire=10
+Nom=LettTyp
+Commentaire=18
+Nom=DevCod
+Commentaire=9
+Nom=AxeSais
+Commentaire=13
+Nom=CptNat
+Commentaire=14
+Nom=CptTyp
+Flags=n,1,o,i,i,n,n,n
+Nom=Sens
+[/PROPLOC]
+[TABLE]
+Version=1,20080226102240,FH                  ,20080801085223,MS                  
+Nom=ex_C3Ets,Comptes par établissement,1
+DateM=DEB4D526A3F3C801
+NomOdbc=ComptesEtablissements
+Taille=23,23
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Cpt,5,2,N,0,0,N,1
+Nom=Etb,13,2,N,0,0,N,1
+Nom=HsDt,16,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1996 2160000,hc  ,20080730173749,MS                  
+Nom=ex_c4,Journal,1
+DateM=BDE800395AF2C801
+NomOdbc=Journal
+Taille=69,69
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Jnl,5,2,N,0,0,N,1
+Nom=Lib,8,2,N,0,0,N,1
+Nom=JnlTyp,48,2,N,0,0,N,1
+Nom=DevCod,49,2,N,0,0,N,1
+Nom=LettAppel,50,2,N,0,0,N,1
+Nom=PieceSais,51,2,N,0,0,N,1
+Nom=PieceCod,52,2,N,0,0,N,1
+Nom=MaskNo,53,2,N,0,0,N,1
+Nom=R3cod,54,2,N,0,0,N,1
+Nom=CpGenCod,55,2,N,0,0,N,1
+Nom=EcrFinCod,56,2,N,0,0,N,1
+Nom=MaskEffCod,57,2,N,0,0,N,1
+Nom=EchSais,58,2,N,0,0,N,1
+Nom=CpSais,59,2,N,0,0,N,1
+Nom=BqeDtSais,60,2,N,0,0,N,1
+Nom=PreLoad,61,2,N,0,0,N,1
+Nom=PreLoadNb,62,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Commentaire=24
+Nom=JnlTyp
+Commentaire=32
+Nom=LettAppel
+Commentaire=34
+Nom=PieceSais
+Commentaire=35
+Nom=PieceCod
+[/PROPLOC]
+[TABLE]
+Version=1,20081202092307,MS                  ,20081202092307,MS                  
+Nom=ex_C4Ets,Informations établissement du journal,1
+DateM=7ABD2D345754C901
+Taille=18,18
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Jnl,5,2,N,0,0,N,1
+Nom=Etb,8,2,N,0,0,N,1
+Nom=Cpt,11,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1996 2160000,hc  ,20080729183046,MS                  
+Nom=ex_c5,Axe,1
+DateM=AD8D597498F1C801
+NomOdbc=Axe
+Taille=90,90
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Axe,5,2,N,0,0,N,1
+Nom=Lib,13,2,N,0,0,N,1
+Nom=AxeNo,53,2,N,0,0,N,1
+Nom=EtbSais,54,2,N,0,0,N,1
+Nom=Etb,55,2,N,0,0,N,1
+Nom=AxePrinc,58,2,N,0,0,N,1
+Nom=AxePere,66,2,N,0,0,N,1
+Nom=AxeSlg,74,2,N,0,0,N,1
+Nom=HsDt,82,2,N,0,0,N,1
+Nom=AxeTyp,90,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+NomOdbc=IntituleAxe
+Nom=Lib
+Commentaire=47
+Nom=AxeTyp
+[/PROPLOC]
+[TABLE]
+Version=1,20080507115248,FH                  ,20080801085409,MS                  
+Nom=ex_C5Ets,Axes par établissement,1
+DateM=CB70FA65A3F3C801
+NomOdbc=AxesEtablissements
+Taille=24,24
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=AxeNo,5,2,N,0,0,N,1
+Nom=Axe,6,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=HsDt,17,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1996 2160000,hc  ,20090429181402,MS                  
+Nom=ex_c8,Ecriture,1
+DateM=E517C582E5C8C901
+NomOdbc=Ecriture
+Taille=288,288
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Dos,3,2,N,0,0,N,1
+Nom=Etb,6,2,N,0,0,N,1
+Nom=Cpt,9,2,N,0,0,N,1
+Nom=EcrDt,17,2,N,0,0,N,1
+Nom=Lib,25,2,N,0,0,N,1
+Nom=Jnl,65,2,N,0,0,N,1
+Nom=Ecr,68,2,N,0,0,N,1
+Nom=AxeTb,83,2,N,0,0,N,1
+Nom=Cp,115,2,N,0,0,N,1
+Nom=Reg,123,2,N,0,0,N,1
+Nom=Lett,127,2,N,0,0,N,1
+Nom=Point,129,2,N,0,0,N,1
+Nom=Lot,131,2,N,0,0,N,1
+Nom=Piece,135,2,N,0,0,N,1
+Nom=EchDt,143,2,N,0,0,N,1
+Nom=ChqNo,151,2,N,0,0,N,1
+Nom=Dev,158,2,N,0,0,N,1
+Nom=RegTyp,162,2,N,0,0,N,1
+Nom=PinoTiers,166,2,N,0,0,N,1
+Nom=Mt,181,2,N,0,0,N,1
+Nom=MtDev,197,2,N,0,0,N,1
+Nom=MtBis,213,2,N,0,0,N,1
+Nom=Sens,229,2,N,0,0,N,1
+Nom=LettDt,230,2,N,0,0,N,1
+Nom=PointDt,238,2,N,0,0,N,1
+Nom=DevP,246,2,N,0,0,N,1
+Nom=EcrValNo,263,2,N,0,0,N,1
+Nom=CptCol,277,2,N,0,0,N,1
+Nom=NatPai,285,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Alias=cpt
+Nom=Cp
+[/PROPLOC]
+[TABLE]
+Version=1,1996 2160000,hc  ,20090429181139,MS                  
+Nom=ex_cp,Ventilation sur les pièces et les échéances,1
+DateM=F167742DE5C8C901
+NomOdbc=Ventilation_Piece_Echeance
+Taille=119,119
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Etb,5,2,N,0,0,N,1
+Nom=Ecr,8,2,N,0,0,N,1
+Nom=MaskLg,23,2,N,0,0,N,1
+Nom=Cpt,28,2,N,0,0,N,1
+Nom=Piece,36,2,N,0,0,N,1
+Nom=EchDt,44,2,N,0,0,N,1
+Nom=Lett,52,2,N,0,0,N,1
+Nom=EcrTyp,54,2,N,0,0,N,1
+Nom=Reg,55,2,N,0,0,N,1
+Nom=Dev,59,2,N,0,0,N,1
+Nom=Mt,63,2,N,0,0,N,1
+Nom=Sens,79,2,N,0,0,N,1
+Nom=LettDt,80,2,N,0,0,N,1
+Nom=MtDev,88,2,N,0,0,N,1
+Nom=MtBis,104,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+NomOdbc=NoLigneVentilation
+Nom=MaskLg
+Commentaire=58
+Nom=EcrTyp
+[/PROPLOC]
+[TABLE]
+Version=1,20120917105451,MS                  ,20120917105508,MS                  
+Nom=ex_ctax,Ventilation de TVA,1
+DateM=C22A853B71EECD01
+NomOdbc=Ventilation_Tva
+Taille=200,200
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Ce2,5,2,N,0,0,N,1
+Nom=Ce3,6,2,N,0,0,N,1
+Nom=Etb,7,2,N,0,0,N,1
+Nom=EcrNo,10,2,N,0,0,N,1
+Nom=EcrLg,21,2,N,0,0,N,1
+Nom=TvaArt,25,2,N,0,0,N,1
+Nom=TvaTie,33,2,N,0,0,N,1
+Nom=Piece,41,2,N,0,0,N,1
+Nom=ExDt,49,2,N,0,0,N,1
+Nom=MtHt,57,2,N,0,0,N,1
+Nom=MtTva,73,2,N,0,0,N,1
+Nom=TvaTyp,89,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Nom=TvaArt
+[/PROPLOC]
+[TABLE]
+Version=1,1996 2160000,hc  ,20090429181146,MS                  
+Nom=ex_cx,Ventilation sur les axes,1
+DateM=D964CB31E5C8C901
+NomOdbc=Ventilation_Axe
+Taille=132,132
+Pack=0,0
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=Etb,5,2,N,0,0,N,1
+Nom=Ecr,8,2,N,0,0,N,1
+Nom=MaskLg,23,2,N,0,0,N,1
+Nom=AxeTb,28,2,N,0,0,N,1
+Nom=Cpt,60,2,N,0,0,N,1
+Nom=Jnl,68,2,N,0,0,N,1
+Nom=EcrTyp,71,2,N,0,0,N,1
+Nom=EcrDt,72,2,N,0,0,N,1
+Nom=Dev,80,2,N,0,0,N,1
+Nom=Mt,84,2,N,0,0,N,1
+Nom=Sens,100,2,N,0,0,N,1
+Nom=MtDev,101,2,N,0,0,N,1
+Nom=MtBis,117,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+NomOdbc=NoLigneVentilation
+Nom=MaskLg
+Commentaire=64
+Nom=EcrTyp
+[/PROPLOC]

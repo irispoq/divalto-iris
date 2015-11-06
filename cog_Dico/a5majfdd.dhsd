@@ -1,0 +1,145 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=6,20120802110425,ROOT                ,20120808221227,ROOT                
+Nom=a5majfdd.dhsd,a5fdd.dhsd,1
+[CHAMP]
+Version=1,20120802194638,ROOT                ,20120802194638,ROOT                
+Nom=Applic,Nom application,1
+Gel=1
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120808221224,ROOT                ,20120808221224,ROOT                
+Nom=FlContinu,Flag continuer si erreur de script,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802194702,ROOT                ,20120802194702,ROOT                
+Nom=Ordre,Ordonnancement des scripts,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802110630,ROOT                ,20120802110630,ROOT                
+Nom=RepDestination,Repertoire destination,1
+Gel=1
+Nature=250
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120808190205,ROOT                ,20120808190205,ROOT                
+Nom=RepErp,Repertoire Erp de la base (/divalto/erpdivalto),1
+Gel=1
+Nature=250
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802110604,ROOT                ,20120802110604,ROOT                
+Nom=RepSource,Repertoire source,1
+Gel=1
+Nature=250
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802110648,ROOT                ,20120802110648,ROOT                
+Nom=RepTmp,Repertoire temporaire,1
+Gel=1
+Nature=250
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802194910,ROOT                ,20120802194910,ROOT                
+Nom=ScriptNom,Nom du fichier script à exécuter,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120808213446,ROOT                ,20120808213538,ROOT                
+Nom=StNbScript,Nombre de script exécutés,1
+DateM=FB8ADEFC9C75CD01
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120808213528,ROOT                ,20120808213528,ROOT                
+Nom=StNbScriptOK,Nombre de script correctements exécutés,1
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802194724,ROOT                ,20120802194724,ROOT                
+Nom=TableNom,Nom de la table à traiter,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802110736,ROOT                ,20120802110736,ROOT                
+Nom=VersionCible,N° de version cible,1
+Gel=1
+Nature=5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802194847,ROOT                ,20120802194847,ROOT                
+Nom=VersionTable,N° de version,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802194930,ROOT                ,20120802194930,ROOT                
+Nom=Xinconnu,paramètre inconnu,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802110850,ROOT                ,20120802110850,ROOT                
+Nom=XPhase,Libellé phase de traitement,1
+Gel=1
+Nature=100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802110934,ROOT                ,20120802110934,ROOT                
+Nom=XScript,Nom du script en cours de traitement,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120802110911,ROOT                ,20120802110911,ROOT                
+Nom=XTrt,Libellé traitement en cours dans la phase,1
+Gel=1
+Nature=100
+Flags=n,1,n,n,n,n,n,n
+[CHAMPR]
+[/CHAMPR]
+[TABLE]
+Version=1,20120802110531,ROOT                ,20120808190218,ROOT                
+Nom=A5MAJSQL,Table work pour a5pmmaj_sql,1
+DateM=DE56F31FA275CD01
+Taille=1500,1500
+Pack=0,0
+[CHAMPS]
+Nom=RepSource,1,2,N,0,0,N,1
+Nom=RepDestination,251,2,N,0,0,N,1
+Nom=RepTmp,501,2,N,0,0,N,1
+Nom=RepErp,751,2,N,0,0,N,1
+Nom=VersionCible,1001,2,N,0,0,N,1
+Nom=FlContinu,1006,2,N,0,0,N,1
+Nom=XPhase,1007,2,N,0,0,N,1
+Nom=XTrt,1107,2,N,0,0,N,1
+Nom=XScript,1207,2,N,0,0,N,1
+Nom=StNbScript,1239,2,N,0,0,N,1
+Nom=StNbScriptOK,1243,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Nom=StNbScript
+[/PROPLOC]
+[TABLE]
+Version=1,20120802194613,ROOT                ,20120802194613,ROOT                
+Nom=A5MAJSQLT1,Table work pour les scripts en liste,1
+DateM=FCDA8DB5D670CD01
+Taille=2000,2000
+Pack=0,0
+[CHAMPS]
+Nom=Applic,1,2,N,0,0,N,1
+Nom=Ordre,6,2,N,0,0,N,1
+Nom=TableNom,9,2,N,0,0,N,1
+Nom=VersionTable,41,2,N,0,0,N,1
+Nom=ScriptNom,45,2,N,0,0,N,1
+Nom=Xinconnu,77,2,N,0,0,N,1
+[/CHAMPS]

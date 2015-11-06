@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20100819104148,MCD                 ,20130418135526,MCD                 
+Version=6,20100819104148,MCD                 ,20140102152845,JLF                 
 Nom=gmfdd.dhsd,gmfdd.dhsd,1
 [CHAMP]
 Version=1,20080314141119,JLF                 ,20090313150351,JLF                 
@@ -3303,6 +3303,16 @@ Nature=10
 NomOdbc=ValeurMini
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20020925164027,DEMO,20071128170652,RR                  
+Nom=ValTyp,Flag contenu de ValLst,1
+Gel=1
+Nature=1,0
+Choix=a5fdmc.dhfi
+NomChoix=VALTYP
+NomOdbc=RubriqueSaisie
+Flags=n,1,n,n,n,n,n,n
+presentation=2
+[CHAMP]
 Version=1,2003 4280000,FRO ,20090313150417,JLF                 
 Nom=Version,version programme,1
 DateM=0A3F4D99E4A3C901
@@ -4973,7 +4983,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20101223151544,JLF                 ,20101227165527,JLF                 
 Nom=GmwDes000T2,Ligne liste rubriques pour désignation,1
-DateM=FD9F27C31BF5CB01
+DateM=C0B450EDC607CF01
 Taille=400,400
 Pack=0,0
 [CHAMPS]
@@ -4983,7 +4993,8 @@ Nom=QstRg,36,2,N,0,0,N,1
 Nom=Rubrique,41,2,N,0,0,N,1
 Nom=Lib80,73,2,N,0,0,N,1
 Nom=RbqVal,153,2,N,0,0,N,1
-Nom=UGmwDes000T2,233,2,N,0,0,N,1
+Nom=ValTyp,233,2,N,0,0,N,1
+Nom=UGmwDes000T2,234,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1

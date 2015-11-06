@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20021014162524,PHB ,20130927172013,MS                  
+Version=5,20021014162524,PHB ,20140319182351,MS                  
 Nom=rcfdd.dhsd,rcfdd.dhsd,1
 [CHAMP]
 Version=1,199611270000,SAR3,20071126105215,FH                  
@@ -3402,6 +3402,12 @@ DateM=C29E729D5B2AC701
 Gel=3
 Nature=16,D0
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140319182343,MS                  ,20140319182343,MS                  
+Nom=MtRegleDev,Montant réglé en devise,1
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1996 9100000,PHB ,20061228093902,JLSI                
 Nom=MtSais,Montant saisi,1
@@ -8568,6 +8574,8 @@ Nom=CesFl,578,2,N,0,0,N,1
 Nom=ChqNo,579,2,N,0,0,N,1
 Nom=EchMtTb1,586,2,N,0,0,N,1
 Nom=LibMtChqTb,2986,2,N,0,0,N,1
+Nom=MtRegleDev,3146,2,N,0,0,N,1
+Nom=Dev,3162,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,2002 3270000,PHB ,20061228105903,JLSI                
