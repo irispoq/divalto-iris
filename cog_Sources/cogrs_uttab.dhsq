@@ -1,7 +1,127 @@
-<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 8256 2015-06-30 08:28:37Z admin $'>
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 8901 2015-11-23 08:29:20Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGF_GTFTAB
 ;*
+
+;*
+;*			COG_UT104 Type de cotisation
+;*
+<RecordSQL Name=CogRs_UT104 Comment='Type cotisation' ZoomOptimize=Yes>
+Public Record A5DD.dhsd		MZ
+Public Record GTFDD.dhsd	T000
+<SELECT>
+	COG_UT104.*,
+	ETS.NOM AS ETS_NOM,
+	ART.DES AS ART_DES,
+	C5.LIB AS AXE_LIB
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_UT104
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD ETS
+	ON	ETS.DOS = COG_UT104.DOS AND ETS.ETB = COG_UT104.ETB
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD ART
+	ON	ART.DOS = COG_UT104.DOS AND ART.REF = COG_UT104.REF
+<LEFTJOIN Name='Zoom'>
+	CCFDD.DHSD C5
+	ON	C5.DOS = COG_UT104.DOS AND C5.AXE = COG_UT104.COG_AXEANAEL AND C5.AXENO = 2
+<WHERE>
+	COG_UT104.DOS = MZ.DOS
+	Case PK(char etb, char cod, char ref)
+		COG_UT104.ETB = etb AND COG_UT104.COG_COTISATION_PDV = cod AND COG_UT104.REF = ref
+	Case Exists(char etb, char cod, char ref)
+		COG_UT104.ETB = etb AND COG_UT104.COG_COTISATION_PDV = cod AND COG_UT104.REF = ref
+	Case Like_Etb(char etb)
+		COG_UT104.ETB LIKE etb
+	Case Like_Ref(char ref)
+		COG_UT104.REF LIKE ref
+	Case Like_CotisType(char typ)
+		COG_UT104.COG_COTISATION_PDV LIKE typ
+<ORDERBY>
+	Case PK
+		COG_UT104.ETB,
+		COG_UT104.COG_COTISATION_PDV,
+		COG_UT104.REF 
+
+;*
+;*			COG_UT108 Cotisations PDV
+;*
+
+<RecordSQL Name=CogRs_UT108 Comment='Cotisations PDV' ZoomOptimize=Yes>
+Public Record A5DD.dhsd		MZ
+Public Record GTFDD.dhsd	T000
+<SELECT>
+	COG_UT108.*,
+	T020.LIB AS OP_LIB,
+	PRJAP.LIB80 AS PRJ_LIB,
+	ETS.NOM AS ETS_NOM,
+	ART.DES AS ART_DES,
+	C5.LIB AS AXE_LIB
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_UT108
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD T020
+	ON (T020.DOS = CASE WHEN T000.TABTYP(20) = 2 THEN 999 ELSE MZ.DOS END) AND T020.OP = COG_UT108.COG_OP
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD PRJAP
+	ON PRJAP.DOS = COG_UT108.DOS AND PRJAP.AFFAIRE = COG_UT108.AFFAIRE
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD ETS
+	ON	ETS.DOS = COG_UT108.DOS AND ETS.ETB = COG_UT108.ETB
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD ART
+	ON	ART.DOS = COG_UT108.DOS AND ART.REF = COG_UT108.REF
+<LEFTJOIN Name='Zoom'>
+	CCFDD.DHSD C5
+	ON	C5.DOS = COG_UT108.DOS AND C5.AXE = COG_UT108.COG_AXEANAEL AND C5.AXENO = 2
+<WHERE>
+	COG_UT108.DOS = MZ.DOS
+	Case Equal_Etb(char etb)
+		COG_UT108.ETB = etb
+	Case Like_Etb(char etb)
+		COG_UT108.ETB LIKE etb
+	Case Equal_Ref(char ref)
+		COG_UT108.REF = ref
+	Case Like_Ref(char ref)
+		COG_UT108.REF LIKE ref
+	Case Equal_Affaire(char aff)
+		COG_UT108.AFFAIRE = aff
+	Case Like_Affaire(char aff)
+		COG_UT108.AFFAIRE LIKE aff
+	Case PK(char etb, char aff, char ref, date dt)
+		COG_UT108.ETB = etb AND COG_UT108.AFFAIRE = aff AND COG_UT108.REF = ref AND COG_UT108.COG_DATE_DEBUT = dt
+
+	Case Exists(char etb, char aff, char ref, date dt)
+		COG_UT108.ETB = etb AND COG_UT108.AFFAIRE = aff AND COG_UT108.REF = ref AND COG_UT108.COG_DATE_DEBUT = dt
+
+	Case Equal_DateValide(date dt)
+		(COG_UT108.COG_DATE_DEBUT IS NULL OR COG_UT108.COG_DATE_DEBUT <= dt) AND (COG_UT108.COG_DATE_FIN IS NULL OR COG_UT108.COG_DATE_FIN > dt)
+ 
+	Case SupEgal_DatD(date dt)
+		COG_UT108.COG_DATE_DEBUT >= dt
+
+<ORDERBY>
+
+	Case Par_Affaire
+		COG_UT108.DOS,
+		COG_UT108.AFFAIRE,
+		COG_UT108.REF 
+
+;*
+;*			COG_UT120
+;*
+
+<RecordSQL Name=CogRs_UT120 Comment='Type moteur facturation' ZoomOptimize=Yes>
+Public Record A5DD.dhsd		MZ
+Public Record GTFDD.dhsd	T000
+<SELECT>
+	COG_UT120.*
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	COG_UT120
+<WHERE>
+	COG_UT120.DOS = MZ.DOS
+	Case Pk(char etb, char typ)
+		COG_UT120.ETB = etb AND COG_UT120.COG_TYPMOTFAC = typ
 
 ;*
 ;* 		COG_UT125 Table des cotisations

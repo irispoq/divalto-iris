@@ -12,6 +12,7 @@ Module 	CCPMFIC.dhop
 Module 	CCTM000.dhop
 Module	GTTMPCE.dhop
 Module 	GRTM000.dhop
+Module	"COGGT_CONTROLE_FICHIER.DHOP"
 
 
 public hfile 	gtfdd.dhsd 	gtfpcf 		gtfpcf
@@ -19,7 +20,7 @@ public hfile 	gtfdd.dhsd 	gtfproj 		gtfproj
 ;public hfile 	gtfdd.dhsd 	gtfproj 		lec_gtfproj
 public hfile 	gtfdd.dhsd 	gtfam 		gtfam
 public hfile 	gtfdd.dhsd 	gtfat 		gtfat
-Public Hfile	cogfdd.dhsd	coggtf_tab	coggtf_tab				Noopen
+Public Hfile	cogfdd.dhsd	coggtf_tab	coggtf_tab				
 
 		htmpfile gtfdd.dhsd 	gtfi   		gtfi   					Openonuse	 DeleteOnExit
 
@@ -411,6 +412,18 @@ EndP
 
 ;*
 Main
+;
+
+	;*
+	; Programme obsolète et remplacé par cogpp_facturation - optimisations (lecture SQL) / modification des resa
+	;*
+
+	MessageBox("Ce programme est obsolète, remplacé par CogPP_Facturation.dhop", "Erreur", MB_ICONERROR)
+	ProgramExit()
+
+	;*
+	;
+	;*
 
 If pingreceive ("zechange" , MZ ) <> 0
 	programexit
@@ -440,19 +453,10 @@ Else
 		wcpt = system.esp
 	
 		G3_Saisie_Selections("cog_facturation.dhof",1)
-		tdf.Name = 'CogGtf_Tab.Dhfi'
-		st = Fopen(tdf, "R")
-		Switch st
-		Case 0				; ok -> on ne fait rien (sauf refermer le fichier)
-			Fclose(tdf)
-			Hopen(coggtf_tab,"R")
-		Case $14				; absent -> on bloque 
-			Mes_Alert(1113, left(tdf.Name), fichier = "CogGtf_Tab.Dhfi") 																			 | Programexit
-		Case H_RESERVED	; réservé -> on sort
-			Messagebox ("Le fichier des tables pour la Facturation est réservé par un autre poste.", "Erreur",MB_ICONEXCLAMATION) | Programexit
-		Default				; autre erreur -> on bloque
-			Mes_Alert(1114, binhexa(stx(st)), left(tdf.Name), fichier = "CogGtf_Tab.Dhfi") 													 | Programexit
-		Endswitch
+
+		If Cog_UTTAB_Res('R') <> 0
+			ProgramExit
+		EndIf
 
 		Sethourglasscursor
 		;*
@@ -896,6 +900,7 @@ Endif
 
 ; fin
 Setnormalcursor
+Cog_UTTAB_Lib()
 Programexit
 	
 ;*

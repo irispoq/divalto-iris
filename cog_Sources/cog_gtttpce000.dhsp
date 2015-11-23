@@ -1346,7 +1346,7 @@ BeginP
 			If LireProgrammeMode = C_Mode_Creation 
 				If Res_Prj (ENT.PROJET) = 0
 					If Seek_PRJAV(ENT.PROJET) = 0 
-						PRJAV.CE4 = '3'
+						PRJAV.CE4 = '3'  ; état du projet --> 3 = gagné
 						Hrewrite(GTFPROJ,PRJAV)
 					Endif
 					If Seek_PRJAP(ENT.PROJET) = 0 
@@ -1558,7 +1558,7 @@ BeginF
 	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
 
 		Case 'C4'
-			If LireProgrammefonction = C_fonction_Validation AND ENT.Cog_BL_Moteur <> 2 AND ART.Cog_PdvFa = 2			 
+			If LireProgrammefonction = C_fonction_Validation AND ENTOri.Cog_BL_Moteur <> 2 AND ART.Cog_PdvFa = 2			 
 				G1T1.FaQte = 0
 				G1T1.DstQte= 0
 			EndIf

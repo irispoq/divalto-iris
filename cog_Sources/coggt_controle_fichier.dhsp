@@ -5,24 +5,65 @@
 ;*    Log    version   nPmodif      date     modifications
 ;*    TR       6.3a      01        06.2011 	 Initial
 
+;
+Include "Gttcz00.dhsp"
+
+;
+;Hfileversion   cogfdd.dhsd    COGGTF_TAB
+
+;
+;public hfile   cogfdd.dhsd    COGGTF_TAB	COGGTF_TAB		
+
+;
+Public RecordSQL	"CogRs_UtTab.dhoq"		CogRs_UT120		CogRs_UtRes
+
+;;*
+;Public Procedure Controle_Fichier
+;Record * htdf 		tdf
+;1      st       	X
+;BeginP
+;	tdf.Name = 'CogGtf_Tab.Dhfi'
+;	st = Fopen(tdf, "P")
+;	Switch st
+;	Case 0				; ok -> on ne fait rien (sauf refermer le fichier)
+;		Fclose(tdf)
+;		Hopen(coggtf_tab,"P")
+;	Case $14				; absent -> on bloque 
+;		Mes_Alert(1113, left(tdf.Name), fichier = "CogGtf_Tab.Dhfi") 																			 | Programexit
+;	Case H_RESERVED	; réservé -> on sort
+;		Messagebox ("Le fichier des tables est réservé par un autre poste pour la Facturation.", "Erreur",MB_ICONEXCLAMATION) | Programexit
+;	Default				; autre erreur -> on bloque
+;		Mes_Alert(1114, binhexa(stx(st)), left(tdf.Name), fichier = "CogGtf_Tab.Dhfi") 													 | Programexit
+;	Endswitch
+;
+;EndP	
 
 ;*
-Public Procedure Controle_Fichier
-Record * htdf 		tdf
-1      st       	X
-BeginP
-	tdf.Name = 'CogGtf_Tab.Dhfi'
-	st = Fopen(tdf, "P")
-	Switch st
-	Case 0				; ok -> on ne fait rien (sauf refermer le fichier)
-		Fclose(tdf)
-		Hopen(coggtf_tab,"P")
-	Case $14				; absent -> on bloque 
-		Mes_Alert(1113, left(tdf.Name), fichier = "CogGtf_Tab.Dhfi") 																			 | Programexit
-	Case H_RESERVED	; réservé -> on sort
-		Messagebox ("Le fichier des tables est réservé par un autre poste pour la Facturation.", "Erreur",MB_ICONEXCLAMATION) | Programexit
-	Default				; autre erreur -> on bloque
-		Mes_Alert(1114, binhexa(stx(st)), left(tdf.Name), fichier = "CogGtf_Tab.Dhfi") 													 | Programexit
-	Endswitch
-EndP
+Public Function int Cog_UTTAB_Res(wMode, wMsgErr)
+;
+1		wMode		1		= 'P'
+1		wMsgErr	1,0	= TRUE
+1		wTxtErr	S
+BeginF
 
+	If CogRs_UtRes.FShare(['COG_UTTAB' MZ.Dos], wMode) <> 0
+		CogRs_UtRes.ShareLastError(wTxtErr)
+		Messagebox ("Le fichier des tables est réservé par un autre poste pour la Facturation.", wTxtErr, MB_ICONEXCLAMATION) 	
+		FReturn(1)
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Public Function int Cog_UTTAB_Lib
+;
+1		wMode		1		= 'P'
+1		wMsgErr	1,0	= TRUE
+1		wTxtErr	S
+BeginF
+
+	FReturn(CogRs_UtRes.FShare(['COG_UTTAB' MZ.Dos], 'L'))
+
+EndF

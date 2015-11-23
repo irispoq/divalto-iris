@@ -1,18 +1,17 @@
 ;*
 ;*    Modèle de traitement du générateur de ZOOM
 
+Include "GTTCZ00.dhsp"						; Déclarations communes
 
+;
 module	"Xzoom.dhop"
 ;module	"A5PM000.dhop"
 Module 	"CCTM000.dhop"
 Module	"CCPMFIC.dhop"
 Module A5PMNoteJoint.dhop
 
-Include "GTTCZ00.dhsp"						; Déclarations communes
-
+;
 Hfileversion   cogfdd.dhsd    COGGTF_TAB
-
-public hfile   cogfdd.dhsd    COGGTF_TAB	COGGTF_TAB		noopen
 
 ; Table pour la saisie de la clé de départ
 public		record	cogfdd.dhsd	COG_UT108	COG_UT108_ZZDEP
@@ -28,7 +27,7 @@ public		record	ccfdd.dhsd	C5
 
 Define C_NOTE_NO = 0
 
-include "CogGt_Controle_Fichier.dhsp"
+Module "CogGt_Controle_Fichier.dhop"
 
 ;*
 ;* Procedures
@@ -178,8 +177,14 @@ EndP
 
 ;*
 Public Procedure ZoomDebut																					; Initialisation du zoom
-BeginP																											; ZoomDebut
-	Controle_Fichier
+BeginP
+	
+	; YLEF: remplacé par cogtz_ut108 (version SQL + chaine de resa <> )
+	MessageBox("Ce zoom est obsolète", "Erreur", MB_ICONERROR)
+	ProgramExit()
+	
+	; ZoomDebut
+	
 	Init_Zoom(FicheNoBloc=0)
 	Seek_Soc(MZ.DOS)
 	Seek_CA(mz.Dos)
@@ -189,6 +194,11 @@ BeginP																											; ZoomDebut
 	Note_Debut   				;init de la gestion des notes
 
 	ZOOM.TITREFIXE = `UT108 - Affectations des cotisations PDV`
+
+	If Cog_UTTAB_Res() <> 0
+		ProgramExit
+	EndIf
+
 EndP
 
 ;*

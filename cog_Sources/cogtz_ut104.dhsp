@@ -1,0 +1,440 @@
+SetModuleInfo('$Id: cogtz_cog_std.dhsp 1088 2013-01-24 14:04:20Z r.blouet $')
+;*
+;*      Zoom sur les types de cotisations PDV
+;*
+
+OverWrittenBy "coguz_Ut104.dhop"
+
+;
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+;
+Module 	"CogGt_Controle_Fichier.dhop"
+Module	"A5PMNoteJoint.dhop"
+Module 	"XZoom7.dhop"
+Module 	"CCTM000.dhop"
+Module	"CCPMFIC.dhop"
+Module	"GtTmPce.dhop"
+
+; Record Sql 
+Public recordSQL  "CogRs_uttab.dhoq"  	CogRs_UT104							; Table des cotisations
+Public recordSQL  "CogRs_uttab.dhoq"  	CogRs_UT104		CogRs_Sel		; Table pour sélection
+Public RecordSQL	"COGRS_DOS.DHOQ"		CogRs_SocComp
+
+;
+Public Record	"gtfdd.dhsd"			PRJAP
+Public Record	"gtfdd.dhsd"			CLI
+Public Record	"gtfdd.dhsd"			ART
+
+; Variables
+1	nbsel							4,0			; Nombre de lignes sélectionnées
+
+
+;*
+;* procedures 
+;*
+
+;*	Mise à jour des boutons (affichage, grisés, ...)
+Public Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+
+	Switch ZOOM.ACTION
+
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", "<BITMAP>NOTE_N")
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+
+
+	Case ZOOM_MODIFICATION
+		; en modification
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(CogRs_UT104.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+
+
+	Case 	ZOOM_AFFICHAGE
+		switch Zoom.TypeInput
+
+		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(CogRs_UT104.CENOTE = 2, True, False))
+
+		endswitch
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(CogRs_UT104.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		xmetoolbarenablebutton(idOutilZoom,"NOTE", Condition(CogRs_UT104.CENOTE = 2, True, False))
+
+	EndSwitch
+
+EndP
+
+;*	Recherches complémentaires
+public procedure RechercherLibelle
+beginp
+
+endp
+
+;*
+public procedure Traiter_Selection
+beginp	; Traiter_Selection
+
+	nbsel ++
+	Pong("CogRs_UT104_" & nbsel,CogRs_UT104.Ref)
+
+endp		; Traiter_Selection
+
+
+;*
+public procedure Envoyer_Selections
+beginp	; Envoyer_Selections
+
+	nbsel	= 0
+	ZoomTraiterSelection("cogtz_UT104.dhop","Traiter_Selection")			
+	Pong("CogRs_UT104_nbre",nbsel)
+
+endp		; Envoyer_Selections
+
+;*	envoie l'élément courant si il n'y a pas eu de sélection multiple précédemment
+public procedure Envoyer_Courant
+beginp
+
+	if nbsel = 0
+
+		nbsel	= 1
+		Pong("CogRs_UT104_" & nbsel,CogRs_UT104.Ref)
+		Pong("CogRs_UT104_nbre",nbsel)
+	
+	endif
+
+endp
+
+;*
+;* procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomEnteteTableau 
+Beginp
+	XmeList_ScanColumn(Zoom.IdTableau)
+Endp
+
+;*
+Public Procedure Construire_Condition_Selection(nom, premier)
+;
+1	Nom					A
+1	premier				1,0 = FALSE
+
+1 	Valeur_Condition	S
+1  Param					S
+
+Beginp
+
+	CogRs_UT104.where.RemoveCondition(Nom)
+
+	if CogRs_Sel.Etb <> ' '
+		Param = banaliser_condition(CogRs_Sel.Etb, premier)
+		CogRs_UT104.Where.Like_Etb(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Etb')
+	endif
+
+	if CogRs_Sel.Cog_Cotisation_PDV <> ' '
+		Param = banaliser_condition(CogRs_Sel.Cog_Cotisation_PDV, premier)
+		CogRs_UT104.Where.Like_CotisType(Param)
+		Ajouter_condition(Valeur_Condition,'Like_CotisType')
+	endif
+
+	if CogRs_Sel.Ref <> ' '
+		Param = banaliser_condition(CogRs_Sel.Ref, premier)
+		CogRs_UT104.Where.Like_Ref(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Ref')
+	endif
+														 	
+																						 	
+	if Valeur_Condition <> ' '
+		CogRs_UT104.where.AddCondition(Nom, Valeur_Condition)
+	endif
+Endp
+
+;*
+Public Procedure ZoomDebut 
+;
+Beginp
+
+	Init_Zoom(FicheNoBloc = 0)
+	
+	; dossiers
+	Seek_Soc(MZ.Dos)			; recherche du dossier et T000
+	Seek_CA(mz.Dos)
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(SOC.Dos)
+	CogRs_SocComp.Select()
+
+	;
+	G7.Projet = G3XZ.Projet
+	G3XZ.Projet = system.esp
+
+	Note_Debut 				;Init de la gestion des notes													
+
+	CogRs_Sel.init()
+	CogRs_Sel.Cog_Duree_Limitee = 2			; filtre pour hsdt
+
+	CogRs_UT104.Orderby.PK()
+
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE, TRUE)
+
+	; sauvegarde du mode d'appel
+	g7.pong		= g3xz.pong
+	g3xz.pong 	= false
+
+	ZOOM.TITREFIXE = `UT104 - Type des cotisations PDV`
+
+	If Cog_UTTAB_Res() <> 0
+		ProgramExit
+	EndIf
+
+Endp
+
+;*
+Public Procedure ZoomAbandon		; sortie du zoom par f9
+Beginp
+Endp
+
+;*
+Public Procedure ZoomVAlidation ; validation du zoom
+Beginp
+
+	zoom.valretour	= CogRs_UT104.Ref
+	if g7.pong = true
+		Envoyer_Courant
+	endif
+
+Endp
+
+;*
+Public Procedure ZoomFin			; à la sortie du zoom
+Beginp
+Endp					
+
+;*
+;* procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation
+Beginp
+	; initialiser les données 
+	CogRs_UT104.init()
+
+	CogRs_UT104.CE1 = '4'
+	CogRs_UT104.Dos	= MZ.Dos
+	CogRs_UT104.Etb	= MZ.Etb
+	CogRs_UT104.Cog_Period= 1
+  
+
+	Zoom.Modelf 		= ZOOM_MODE_FICHE		; pour interdire la création en mode liste
+	Zoom.Seq1don 		= 1
+Endp	  
+
+;*
+Public Procedure ZoomDuplication 
+;
+Beginp
+	CogRs_UT104.USERCR		= ' '
+	CogRs_UT104.USERCRDH		= ' '
+	CogRs_UT104.USERMO		= ' '
+	CogRs_UT104.USERMODH		= ' '
+	CogRs_UT104.NOTE			= 0
+	CogRs_UT104.CENOTE		= 1
+Endp
+
+;*
+Public Procedure ZoomApresCleCreation 
+; après saisie de la clé 
+Beginp
+	
+	Zoom.Titrevar	= CogRs_UT104.Ref
+
+	CogRs_UT104.Where.Exists(CogRs_UT104.ETB, CogRs_UT104.Cog_Cotisation_PDV, CogRs_UT104.REF)
+	ZOOM.RES	= ['COG_UT104' CogRs_UT104.DOS CogRs_UT104.ETB CogRs_UT104.Cog_Cotisation_PDV CogRs_UT104.REF ]
+
+	If ZOOM.ACTION = ZOOM_CREATION And Seek_Cli(Prjap.Tiers) = 0
+		CogRs_UT104.Cog_OP = CLI.Cog_Op
+	Endif
+
+Endp
+
+;*
+Public Procedure ZoomCreationRes		; apres réservation en création 
+Beginp
+	Note_Reinit(C_Applic_DAV)
+Endp
+
+;*
+Public Procedure ZoomAvantWrite 
+Beginp
+	; initialisation des codes enregistrement et mise à jour date et user
+   CogRs_UT104.Dos 			= mz.Dos
+	CogRs_UT104.UserCr 		= SYSTEM.User
+	CogRs_UT104.UserCrDh 	= Time(7)
+	CogRs_UT104.Note 			= Note_Creation_(C_Applic_DAV, 'CogRs_UT104')	
+	CogRs_UT104.CeNote		= Condition(CogRs_UT104.Note = 0, 1, 2)
+	CogRs_UT104.CE1 			= '4'
+
+	;
+	If Zoom.Ok = 'O'
+		If Cogrs_UT104.Cog_Duree_Limitee = 2 And Cogrs_UT104.Cog_Nombre_Cotisation = system.esp
+ 			Zoom.Ok = 'S'
+		ElsIf Cogrs_UT104.Cog_Duree_Limitee < 2
+			Cogrs_UT104.Cog_Nombre_Cotisation = system.esp
+		Endif
+	Endif
+
+Endp
+
+;*
+Public Procedure ZoomApresCreation ; compte-rendu de création
+Beginp
+	Zoom.Titrevar = [ CogRs_UT104.Ref *1 CogRs_UT104.Cog_Cotisation_PDV ]
+Endp				 
+
+;*
+Public Procedure ZoomModification 
+; avant entrée en modif
+Beginp
+
+	Zoom.Res			= ['COG_UT104' CogRs_UT104.DOS CogRs_UT104.ETB CogRs_UT104.Cog_Cotisation_PDV CogRs_UT104.REF ]
+Endp			  
+
+;*
+Public Procedure ZoomModificationRes		; apres réservation enmodif
+Beginp
+	Note_Chargement_(C_Applic_DAV, CogRs_UT104.Note)
+Endp					
+
+;*
+Public Procedure ZoomAvantRewrite 
+;
+Beginp
+   CogRs_UT104.UserMo		= SYSTEM.User
+   CogRs_UT104.UserMoDh 	= Time(7)
+	CogRs_UT104.Note 		= Note_Modification_ (C_Applic_DAV, CogRs_UT104.Note, 'CogRs_UT104')
+	CogRs_UT104.CeNote		= Condition(CogRs_UT104.Note = 0, 1, 2)
+
+	;
+	If Zoom.Ok = 'O'
+		If Cogrs_UT104.Cog_Duree_Limitee = 2 And Cogrs_UT104.Cog_Nombre_Cotisation = system.esp
+ 			Zoom.Ok = 'S'
+		ElsIf Cogrs_UT104.Cog_Duree_Limitee < 2
+			Cogrs_UT104.Cog_Nombre_Cotisation = system.esp
+		Endif
+	Endif
+
+Endp														 
+
+;*
+Public Procedure ZoomApresModification ; compte rendu de modification
+Beginp
+	Zoom.Titrevar = [ CogRs_UT104.Ref *1 CogRs_UT104.Cog_Cotisation_PDV ]
+Endp				 
+
+;*
+Public Procedure ZoomSuppression ; avant entrée en suppression
+Beginp
+	Zoom.Res			= ['COG_UT104' CogRs_UT104.DOS CogRs_UT104.ETB CogRs_UT104.Cog_Cotisation_PDV CogRs_UT104.REF ]
+Endp													  
+
+;*
+Public Procedure ZoomSuppressionRes
+Beginp
+Endp
+														  
+;*
+Public Procedure ZoomAvantDelete 
+Beginp
+	Note_Suppression_(C_Applic_DAV, CogRs_UT104.Note)
+Endp
+
+;*
+Public Procedure ZoomApresSuppression ; compte rendu de suppression
+Beginp
+Endp						
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsult
+Beginp
+	Maj_Menu_Boutons
+Endp				  
+
+;*
+Public Procedure ZoomConsult 	; à utiliser si note
+Beginp
+	Switch Harmony.Key
+		Case K_F7		|	Zoom_Call()
+		Case K_SF6		|	Note_Consultation_ (C_Applic_DAV, CogRs_UT104.Note)
+		case K_F12
+			if G7.PONG = True
+				Envoyer_Selections
+			endif
+	Endswitch 
+Endp
+
+;*
+Public Procedure ZoomAvantInput			; permet de griser les boutons et les choix
+Beginp
+	Maj_Menu_Boutons
+Endp
+
+;*
+Public Procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+Beginp											; pour appel d'un zoom 
+	Switch Harmony.Key
+	Case K_F7	|	Zoom_Call()
+	Case K_F8	|	Zoom_Call(Harmony.Arret)	; Appel de zoom
+	
+	Case K_SF6						; Saisie d'une note
+		Note_Saisie_(C_Applic_DAV, CogRs_UT104.Note, 'CogRs_UT104')				
+		XmeToolbarSetButtonInfo(IdOutilZoom,"NOTE", Condition(Not Note_Empty_(C_Applic_DAV), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		
+	Case Harmony.Dataarret = 8002
+		If Harmony.Sourisbout = RIGHT_BUTTON
+			Zoom_Call()
+		Endif
+
+	Endswitch
+Endp
+
+;*
+Public Procedure ZoomFiltreAvantValeur
+Beginp
+Endp
+
+;*
+Public Procedure ZoomFiltreApresValeur 
+Beginp
+Endp	
+
+;*
+;* procedures liées à la lecture du ficher
+;*
+
+;*
+Public Procedure ZoomApresCle
+Beginp
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE)
+Endp															
+
+;*
+Public Procedure ZoomApresRead
+Beginp
+	Zoom.Titrevar = [ CogRs_UT104.Ref *1 CogRs_UT104.Cog_Cotisation_PDV ]
+Endp															
+
+
+

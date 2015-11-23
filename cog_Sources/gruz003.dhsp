@@ -14,18 +14,17 @@ Module GTPMFIC.dhop
 
 include "GRTC000.dhsp"					;déclarations communes
 
+;
+Module "CogGt_Controle_Fichier.dhop"
 Module GTPM000.dhop
 Module GTTM000.dhop
 Module A5PM000.dhop
 Module	'A5TM000.dhop'
 
-HfileVersion 	Cogfdd.dhsd COGGRF_TAB
-
 public hfile	grfdd.dhsd	GRFEVT 		COG_GRFEVT
 public hfile	gtfdd.dhsd	GTFPROJ 		GTFPROJ
 public hfile	gtfdd.dhsd	GTFDOS 		GTFDOS
 Public Hfile 	Cogfdd.dhsd  COGGRF_TAB	COGGRF_TAB
-Public Hfile 	Cogfdd.dhsd  COGGTF_TAB	COGGTF_TAB		noopen
 
 Public record 	Cogfdd.dhsd COG_GRTEVT				; Code événement
 Public record	cogfdd.dhsd	COG_UT108
@@ -40,8 +39,7 @@ public record 	gtfdd.dhsd 	PRJAV
 public record	gtfdd.dhsd	ETS								; établissement
 public record	grfdd.dhsd	GR1 
 public record	gtfdd.dhsd	CLI
-							
-include "CogGt_Controle_Fichier.dhsp"
+						
 
 ;*
 ;* procedures d'initialisation et fin de zoom
@@ -136,7 +134,9 @@ endp
 ;*
 Procedure ZoomDebut 
 Beginp
-	Controle_Fichier
+	If Cog_UTTAB_Res() <> 0
+		ProgramExit
+	EndIf
 	Standard.ZoomDebut
 Endp
 

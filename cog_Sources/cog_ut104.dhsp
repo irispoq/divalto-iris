@@ -1,18 +1,17 @@
 ;*
 ;*    Modèle de traitement du générateur de ZOOM
 
+Include "GTTCZ00.dhsp"						; Déclarations communes
 
 Module	"Xzoom.dhop"
 ;Module	"A5PM000.dhop"
 Module 	"CCTM000.dhop"
 Module	"CCPMFIC.dhop"
 Module A5PMNoteJoint.dhop
+Module "CogGt_Controle_Fichier.dhop"
 
-Include "GTTCZ00.dhsp"						; Déclarations communes
-
+;
 Hfileversion   cogfdd.dhsd    COGGTF_TAB
-
-public hfile   cogfdd.dhsd    COGGTF_TAB	COGGTF_TAB		noopen
 
 ; Table pour la saisie de la clé de départ
 public		record	cogfdd.dhsd	COG_UT104	COG_UT104_ZZDEP
@@ -26,7 +25,7 @@ public		record	ccfdd.dhsd	C5
 
 Define C_NOTE_NO = 0
 
-include "CogGt_Controle_Fichier.dhsp"
+
 
 ;*
 ;* Procedures
@@ -125,7 +124,7 @@ EndP
 ;*
 Public Procedure ZoomDebut																					; Initialisation du zoom
 BeginP																											; ZoomDebut
-	Controle_Fichier
+	
 	Init_Zoom(FicheNoBloc=0)
 	Seek_Soc(MZ.DOS)
 	Seek_CA(mz.Dos)
@@ -135,6 +134,11 @@ BeginP																											; ZoomDebut
 	Note_Debut   				;init de la gestion des notes
 
 	ZOOM.TITREFIXE = `UT104 - Types de cotisations PDV`
+
+	If Cog_UTTAB_Res() <> 0
+		ProgramExit
+	EndIf
+
 EndP
 
 ;*

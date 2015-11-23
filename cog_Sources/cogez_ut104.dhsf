@@ -1,0 +1,1316 @@
+;>xwin4obj                              7.0       20151113161632      
+[masque]
+ libelle="table type cotisation"
+ utilisateur="UGIE"
+ date_modification="13/11/2015"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=46
+ type_masque=2
+ dernier_id=167
+ dernier_id_page=22
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="gtfaide"
+ [touches]
+  f7=135
+  shift_f6=10000
+[enregistrements]
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "cogrs_uttab.dhoq",,cogrs_ut104,cogrs_ut104,1024,1
+ "cogrs_uttab.dhoq",,cogrs_ut104,cogrs_sel,1024,1
+[onglet]
+ [presentation]
+  position=0,0
+  taille=225,280
+  attache_lgx=oui
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=36,320
+  attache_lgx=oui
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nb_lig=25
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Cotisation à créer"
+ nb_lig=6
+ nb_col=50
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [obj_texte]
+  [presentation]
+   position=5,9
+   taille=9,43
+   id=65
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=16,9
+   taille=9,59
+   id=151
+   wstyle="STD"
+  [texte]
+   texte="Type de cotisation"
+ [obj_texte]
+  [presentation]
+   position=27,10
+   taille=9,50
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [champ]
+  [presentation]
+   position=38,59
+   taille=9,140
+   id=153
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut104,art_des,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=5,59
+   taille=9,99
+   id=66
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut104,etb,cogrs_ut104
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9026
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Etb_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=16,59
+   taille=9,99
+   id=152
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut104,cog_cotisation_pdv,cogrs_ut104
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=27,59
+   taille=9,99
+   id=38
+   colonnes_saisie=8
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=cogrs_ut104,ref,cogrs_ut104
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Ref_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=3
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=50
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=12
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=54,199
+   attache_lgx=oui
+   id=27
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="ZOOM"
+ [tableau]
+  [presentation]
+   position=56,0
+   taille=169,200
+   attache_lgx=oui
+   attache_lgy=oui
+   id=31
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=3
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   separation=66
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=0,0
+    taille=16,28
+    id=44
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=cogrs_ut104,cenote,cogrs_ut104
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CENOTE_1"
+    obligatoire=non
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Présence Note"
+   [param_colonne]
+    titre="#tblnote"
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=22,50
+    taille=9,92
+    id=122
+    colonnes_saisie=3
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut104,etb,cogrs_ut104
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Etablissement"
+   [param_colonne]
+    titre="Etablissement"
+    largeur_col=25
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=33,50
+    taille=9,92
+    id=159
+    colonnes_saisie=8
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut104,cog_cotisation_pdv,cogrs_ut104
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Type de cotisation PDV"
+   [param_colonne]
+    titre="Type de cotisation PDV"
+    largeur_col=73
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=44,50
+    taille=9,92
+    id=119
+    colonnes_saisie=8
+    wstyle="CHAMP_NON_SAISI"
+   [description]
+    donnee=cogrs_ut104,ref,cogrs_ut104
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Référence"
+   [param_colonne]
+    titre="Référence"
+    largeur_col=92
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=85,9
+    taille=9,55
+    id=126
+    wstyle="STD"
+   [description]
+    donnee=cogrs_ut104,cog_duree_limitee,cogrs_ut104
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    texte="Durée limitée"
+    valeur="2","1"
+    choix="gtfdmc.dhfi",""
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Cog_Duree_Limitee_1_Ap"
+   [param_colonne]
+    titre="Durée limitée"
+    fl_aff=oui
+    largeur_col=55
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=108,95
+    taille=9,11
+    id=129
+    colonnes_saisie=2
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut104,cog_nombre_cotisation,cogrs_ut104
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Cog_Nombre_Cotisation_1_Av"
+    diva_apres="Champ_Cog_Nombre_Cotisation_1_Ap"
+   [info_bulle]
+   texte="Nombre de Cotisations"
+   [param_colonne]
+    titre="Nombre de Cotisations"
+    fl_aff=oui
+    largeur_col=68
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=131,57
+    taille=9,73
+    id=131
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut104,cog_period,cogrs_ut104
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="cog_gtfdmc.dhfi","PERIODICITE"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Periodicité facturation"
+   [param_colonne]
+    titre="Periodicité facturation"
+    fl_aff=oui
+    largeur_col=73
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=155,57
+    taille=9,35
+    id=133
+    colonnes_saisie=8
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=cogrs_ut104,cog_axeanael,cogrs_ut104
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=19012
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Cog_AxeAnael_1_Ap"
+   [info_bulle]
+   texte="Axe anaël"
+   [param_colonne]
+    titre="Axe anaël"
+    fl_aff=oui
+    largeur_col=35
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=42,33
+    taille=9,74
+    id=164
+    colonnes_saisie=20
+    wstyle="CHAMP_AFF"
+   [description]
+    donnee=cogrs_ut104,usercr,cogrs_ut104
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Auteur de la création"
+   [param_colonne]
+    titre="Auteur de la création"
+    fl_aff=non
+    largeur_col=74
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=42,170
+    taille=9,74
+    id=165
+    colonnes_saisie=20
+    wstyle="CHAMP_AFF"
+   [description]
+    donnee=cogrs_ut104,usermo,cogrs_ut104
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Auteur de la modification"
+   [param_colonne]
+    titre="Auteur de la modification"
+    fl_aff=non
+    largeur_col=74
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,33
+    taille=9,56
+    id=166
+    colonnes_saisie=19
+    wstyle="CHAMP_AFF"
+   [description]
+    donnee=cogrs_ut104,usercrdh,cogrs_ut104
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Utilisateur date et heure de création"
+   [param_colonne]
+    titre="Utilisateur date et heure de création"
+    fl_aff=non
+    largeur_col=56
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,170
+    taille=9,56
+    id=167
+    colonnes_saisie=19
+    wstyle="CHAMP_AFF"
+   [description]
+    donnee=cogrs_ut104,usermodh,cogrs_ut104
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Utilisateur date et heure de modification"
+   [param_colonne]
+    titre="Utilisateur date et heure de modification"
+    fl_aff=non
+    largeur_col=56
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=14,8
+   taille=9,36
+   id=137
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=25,8
+   taille=9,55
+   id=154
+   wstyle="STD"
+  [texte]
+   texte="Type de cotisation"
+ [obj_texte]
+  [presentation]
+   position=36,8
+   taille=9,29
+   id=57
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [champ]
+  [presentation]
+   position=14,55
+   taille=9,97
+   id=138
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut104,etb,cogrs_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9026
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=25,55
+   taille=9,97
+   id=155
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut104,cog_cotisation_pdv,cogrs_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=36,55
+   taille=9,97
+   id=59
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut104,ref,cogrs_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9000
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=16
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=22
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=21
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=20
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=19
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=18
+[page]
+ numero=11
+ libelle="Fiche zoom"
+ fond="STD"
+ titre="Zoom"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="DEFINITION"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=67,4
+   taille=153,272
+   attache_x=oui
+   id=76
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Paramètres"
+   couleur_fond="ZOOM"
+ [obj_texte]
+  [presentation]
+   position=22,6
+   taille=9,38
+   id=67
+   wstyle="STD"
+  [texte]
+   texte="Etablissement"
+ [obj_texte]
+  [presentation]
+   position=33,5
+   taille=9,55
+   id=156
+   wstyle="STD"
+  [texte]
+   texte="Type de cotisation"
+ [obj_texte]
+  [presentation]
+   position=44,6
+   taille=9,35
+   id=47
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [obj_texte]
+  [presentation]
+   position=97,10
+   taille=9,54
+   id=80
+   wstyle="STD"
+  [texte]
+   texte="Cotisations"
+ [obj_texte]
+  [presentation]
+   position=97,58
+   taille=9,41
+   id=78
+   wstyle="STD"
+  [texte]
+   texte="Nombre total"
+ [obj_texte]
+  [presentation]
+   position=109,10
+   taille=9,31
+   id=92
+   wstyle="STD"
+  [texte]
+   texte="Périodicité"
+ [obj_texte]
+  [presentation]
+   position=122,10
+   taille=9,28
+   id=96
+   wstyle="STD"
+  [texte]
+   texte="Axe anaël"
+ [champ]
+  [presentation]
+   position=44,50
+   taille=9,92
+   id=49
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_ut104,ref,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=44,143
+   taille=9,136
+   id=75
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut104,art_des,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=22,143
+   taille=9,135
+   id=73
+   colonnes_saisie=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut104,ets_nom,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=22,50
+   taille=9,92
+   id=68
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_ut104,etb,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=122,93
+   taille=9,144
+   id=98
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut104,axe_lib,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=33,50
+   taille=9,92
+   id=157
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=cogrs_ut104,cog_cotisation_pdv,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=85,9
+   taille=9,55
+   id=77
+   wstyle="STD"
+  [description]
+   donnee=cogrs_ut104,cog_duree_limitee,cogrs_ut104
+   sequence=1
+  [param_case]
+   texte="Durée limitée"
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+   notifier=oui
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_Duree_Limitee_1_Ap"
+ [champ]
+  [presentation]
+   position=97,95
+   taille=9,11
+   id=79
+   colonnes_saisie=2
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut104,cog_nombre_cotisation,cogrs_ut104
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cog_Nombre_Cotisation_1_Av"
+   diva_apres="Champ_Cog_Nombre_Cotisation_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=109,57
+   taille=9,73
+   id=91
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut104,cog_period,cogrs_ut104
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="cog_gtfdmc.dhfi","PERIODICITE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=122,57
+   taille=9,35
+   id=97
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_ut104,cog_axeanael,cogrs_ut104
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=19012
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_AxeAnael_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=12
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ prec=11
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=26,144
+   taille=38,131
+   id=12
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=38,131
+   id=11
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,18
+   id=13
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=42,149
+   taille=9,18
+   id=15
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=52,10
+   taille=9,18
+   id=14
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=52,149
+   taille=9,18
+   id=16
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=42,33
+   taille=9,74
+   id=51
+   colonnes_saisie=20
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut104,usercr,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=42,170
+   taille=9,74
+   id=52
+   colonnes_saisie=20
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut104,usermo,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=52,33
+   taille=9,56
+   id=53
+   colonnes_saisie=19
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut104,usercrdh,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=52,170
+   taille=9,56
+   id=54
+   colonnes_saisie=19
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_ut104,usermodh,cogrs_ut104
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+[ressources]
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wetype_trait=arret
+    warret=8
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wetype_trait=arret
+    warret=9
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="Filtrer"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#ctrl_insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__1"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    warret=6
+    wtrait_chaine="#ctrl_p"
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+SetModuleInfo('$Id: cogez_cog_std.dhsf 53 2012-08-06 08:21:23Z s.renaudineau $')
+;*
+;*
+;*
+
+;
+Include "GTTCZ00.DHSP"
+
+;
+Module "CCTM000.dhop"
+
+;
+Public RecordSql "cogrs_uttab.dhoq" CogRs_UT104 CogRs_UT104
+Public RecordSql "cogrs_uttab.dhoq" CogRs_UT104 cogrs_sel
+
+;
+Public Record "ddsys.dhsd" rowinfo zoomselection
+Public Record	"gtfdd.dhsd"	ETS
+Public Record	"gtfdd.dhsd"	ART
+Public Record	"gtfdd.dhsd"	T020
+Public Record	"ccfdd.dhsd"	C5
+
+;*
+;*
+;*
+
+
+;*
+Public Procedure Champ_Cog_AxeAnael_1_Ap
+;
+1		wAxe >ccfdd.dhsd		Axe
+Beginp
+	CogRs_UT104.AXE_Lib = ' '
+   If CogRs_UT104.Cog_AxeAnael <> ' '
+		wAxe = CogRs_UT104.Cog_AxeAnael
+		If Controle_Axe(2, wAxe, existence = true, conf = false, hsdt = today, axetyp = 1, etablissement = false) < 2
+			CogRs_UT104.AXE_Lib = C5.Lib	
+		Endif
+   Endif
+Endp
+
+;*
+Public Procedure Champ_Cog_Duree_Limitee_1_Ap
+;
+Beginp
+	If Cogrs_UT104.Cog_Duree_Limitee < 2
+		Cogrs_UT104.Cog_Nombre_Cotisation = system.esp
+	Endif
+Endp
+
+
+;*
+Public Procedure Champ_Cog_Nombre_Cotisation_1_Ap
+;
+Beginp
+	If Cogrs_UT104.Cog_Duree_Limitee = 2 And Cogrs_UT104.Cog_Nombre_Cotisation = system.esp
+ 		Harmony.Retour = XMENEXT_RESSAISIE
+	Endif
+Endp
+
+
+;*
+Public Procedure Champ_Cog_Nombre_Cotisation_1_Av
+;
+Beginp
+	If Not Cogrs_UT104.Cog_Duree_Limitee = 2
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	Endif
+Endp
+
+
+;*
+Public Procedure Champ_Etb_1_Ap
+;
+Beginp
+	If Controle_Ets (CogRs_UT104.ETB, 1400) = 0
+ 		CogRs_UT104.ETS_NOM = ETS.NOM
+	EndIf
+Endp
+
+
+;*
+Public Procedure Champ_Ref_1_Ap
+;
+Beginp
+	If Controle_Article(CogRs_UT104.Ref,2100) = 0
+		CogRs_UT104.ART_DES = ART.Des
+		If ART.Cog_PdvFa <> 2
+			MessageBox("Cette référence n'est pas paramétrée pour la facturation PDV.","Alerte", MB_ICONEXCLAMATION)
+			Harmony.Retour = XMENEXT_RESSAISIE
+		EndIf
+	EndIf
+Endp
+[/diva]
+[diva_base]
+[/diva]

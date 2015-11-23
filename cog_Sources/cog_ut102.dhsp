@@ -2,15 +2,15 @@
 ;*    Modèle de traitement du générateur de ZOOM
 ;*		YATO 22/08/2014 : FE002_CLASSEAFFAIRE : remplacement de COG_UT102.afrclas par COG_UT102.Cog_TypMotFac	 (afrclas a été supprimé pour être remplacé par Cog_TypMotFac)
 
+Include "GTTCZ00.dhsp"						; Déclarations communes
+
 module	"Xzoom.dhop"
 ;module	"A5PM000.dhop"
 Module A5PMNoteJoint.dhop
+Module "CogGt_Controle_Fichier.dhop"
 
-Include "GTTCZ00.dhsp"						; Déclarations communes
-
-hfileversion   cogfdd.dhsd    COGGTF_TAB
-
-public hfile   cogfdd.dhsd    COGGTF_TAB	COGGTF_TAB		noopen
+;
+Hfileversion   cogfdd.dhsd    COGGTF_TAB
 
 ; Table pour la saisie de la clé de départ
 public		record	cogfdd.dhsd	COG_UT102	COG_UT102_ZZDEP
@@ -24,7 +24,7 @@ Public		Record	Cogfdd.Dhsd	Cog_UT120
 
 Define C_NOTE_NO = 0
 
-include "CogGt_Controle_Fichier.dhsp"
+
 
 ;*
 ;* Procedures
@@ -127,7 +127,7 @@ EndP
 ;*
 Public Procedure ZoomDebut																					; Initialisation du zoom
 BeginP																											; ZoomDebut
-	Controle_Fichier
+	
 	Init_Zoom(FicheNoBloc=0)
 	Seek_Soc(MZ.DOS)
 	G7.Projet = G3XZ.Projet
@@ -136,6 +136,11 @@ BeginP																											; ZoomDebut
 	Note_Debut   				;init de la gestion des notes
 
 	ZOOM.TITREFIXE = `UT102 - Format des Factures`
+
+	If Cog_UTTAB_Res() <> 0
+		ProgramExit
+	EndIf
+
 EndP
 
 ;*

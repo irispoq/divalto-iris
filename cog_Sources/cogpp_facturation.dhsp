@@ -1,0 +1,1286 @@
+;*======================================================================
+;* Contrat			Programme d'intégration des Contrats à facturer
+;*
+;*		Log	|	 Version		|	 N°modif	|	Date	|	Modifications
+;*	---------|--------------|-----------|--------|----------------------------------------------------
+;*	TR			|	6.3a			| 				|06.2011	| 	Version GIE
+;*	YLEF		|	7.2a/P205C	|				|11/2015	|	DAVFIN_FE010 --> adaptation du moteur PDV pour info U	
+;*======================================================================
+
+;*
+;*	Déclarations
+;*
+
+;
+include 	"GTTCZ00.dhsp" ; déclarations communes
+Include	"CogTc_MoteurPrjSpec.dhsp"
+
+;
+Module 	"CCPMFIC.dhop"
+Module 	"CCTM000.dhop"
+Module	"GTTMPCE.dhop"
+Module 	"GRTM000.dhop"
+Module	"COG_GDIVA.dhop"
+Module	"COGGT_CONTROLE_FICHIER.dhop"
+
+;
+public hfile 	"gtfdd.dhsd" 	gtfpcf 		gtfpcf
+public hfile 	"gtfdd.dhsd" 	gtfproj 		gtfproj
+public hfile 	"gtfdd.dhsd" 	gtfam 		GtfAm
+public hfile 	"gtfdd.dhsd" 	gtfat 		GtfAt
+Public Hfile	"cogfdd.dhsd"	coggtf_tab	CogGtf_Tab				
+
+		htmpfile "gtfdd.dhsd" 	gtfi   		GTFI   					Openonuse	 DeleteOnExit
+
+;
+Public RecordSQL	"CogRs_Proj.dhoq"			CogRs_PrjAp
+
+;
+public record 		"gtfdd.dhsd" 	XQ				XQ_Cog
+public record 		"a5dd.dhsd"   	MZ
+public record 		"gtfdd.dhsd"	T1
+public record 		"gtfdd.dhsd"	T3
+public record 		"ccfdd.dhsd"	C3
+public record 		"gtfdd.dhsd"	Cli
+public record 		"gtfdd.dhsd"	Art
+public record 		"gtfdd.dhsd"	Soc
+public record 		"gtfdd.dhsd"	Ent
+public record 		"gtfdd.dhsd"	G7
+public record 		"gtfdd.dhsd"	T012
+Public Record 		"cogfdd.dhsd" 	Cog_UT100
+Public Record 		"cogfdd.dhsd" 	Cog_UT101
+Public Record 		"cogfdd.dhsd" 	Cog_UT102
+Public Record 		"cogfdd.dhsd" 	Cog_UT105
+Public Record 		"cogfdd.dhsd" 	Cog_UT106
+Public Record 		"cogfdd.dhsd" 	Cog_UT107
+Public Record 		"cogfdd.dhsd" 	Cog_UT108
+Public Record 		"cogfdd.dhsd" 	Cog_UT109
+public record 		"gtfdd.dhsd" 	xz		    	G3XZ
+public record		"gtfdd.dhsd"	ETS								; établissement
+		 record 		"gtfdd.dhsd" 	iPAR
+		 record 		"gtfdd.dhsd" 	iTxt
+		 record 		"gtfdd.dhsd" 	ent		iENT
+		 record 		"gtfdd.dhsd" 	Mouv
+		 Record 		* 					htdf 		tdf
+
+;
+1		ListeCli		L
+1		ListeRef		L
+1		ListeReg		L
+1		ListeMnt		L
+1		ListeFac		L
+1		lId_utGTFI 	L									; liste des UTxxx en cours de facturation
+1		id_toolbar	L
+1		id_Menu		L
+1     fini     	X
+1		PtrFoncPDV 	16	
+1		Cpt			3,0
+1		erreur		9,0 = 0
+1		dernierOp	>gtfdd.dhsd	OP	
+1		derNumero	>gtfdd.dhsd	PINOTIERS
+1		tunnel		1,0
+1		cptPiece		8,0	
+
+;*
+;*		Fonctions de Tri
+;*
+
+;*
+Function Long Tri_MNT (&A ,&B)
+; Tri la liste
+Record	COGFDD.dhsd		COG_UT109		A						
+Record	COGFDD.dhsd		COG_UT109		B
+1	ZoneA	22						
+1	ZoneB	22						
+BeginF	
+	ZoneA	= A.Cog_OP & A.Cog_Numero																							
+	ZoneB	= B.Cog_OP & B.Cog_Numero																							
+	FReturn(SortCompare(ZoneA,ZoneB))
+EndF																											
+
+;*
+Function Long Tri_PDV (&A ,&B)
+; Tri la liste
+Record	COGFDD.dhsd		COG_UT108		A						
+Record	COGFDD.dhsd		COG_UT108		B						
+BeginF																										
+	FReturn(SortCompare(A.Cog_OP,B.Cog_OP))
+EndF																											
+
+;*
+;*	Fonctions générales du programme
+;*
+
+;*
+Function int Cog_InitialiserVariables
+;
+Recordsql	"a5rsuser.dhoq"	Utilisateur						;Utilisateurs
+
+BeginF
+
+	If PingReceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		utilisateur.init()
+		utilisateur.where.exists(system.User)
+		if utilisateur.select() = 0
+
+			If not tunnel
+				messagebox(modify("%1",left(system.user),translate("Utilisateur %1 non défini dans la base Divalto")),translate("Alerte"),mb_iconexclamation)
+			EndIf
+			FReturn(false)
+
+		Else
+
+			mz.dos		= utilisateur.dos
+			mz.etb		= utilisateur.etb
+			mz.depo		= utilisateur.depo
+			mz.mecle		= "Cogee_Facturation.dhof"
+			mz.titre2	= ""
+
+		EndIf
+
+	EndIf
+
+	;commentaire du programme
+	ProgramSetComment(translate("Moteur de facturation PDV"))
+
+	;recherche du dossier et T000	/ ETS / T017 (dépôt)
+	If Seek_Soc(MZ.dos) <> 0
+		Cog_EcritureLivreDeBord("Dossier " & MZ.Dos & " inconnu.")
+		FReturn(0)
+	EndIf
+	If Seek_Ets(MZ.Etb) <> 0		
+		If not tunnel
+			Messagebox ("Etablissement " & MZ.Etb && " non trouvé.", "Erreur",MB_ICONEXCLAMATION) 
+		EndIf
+		Cog_EcritureLivreDeBord("Etablissement " & MZ.Etb && " non trouvé.")
+		FReturn(0)
+	EndIf
+	If Lectab(17,MZ.Etb) <> 0		
+		If not tunnel
+			Messagebox ("Dépôt " & MZ.Etb && " non trouvé, il doit correspondre à l'établissement.", "Erreur",MB_ICONEXCLAMATION)
+		EndIf
+		Cog_EcritureLivreDeBord("Dépôt " & MZ.Etb && " non trouvé, il doit correspondre à l'établissement.")
+		FReturn(0)
+	EndIf
+
+	;	Init des listes mémoires
+	ListeCli = ListCreate
+	ListeRef = ListCreate
+	ListeReg = ListCreate
+	ListeMnt = ListCreate
+	ListeFac = ListCreate
+	GetAdressFunction (' ' , "Tri_MNT" , PtrFoncPDV)
+	ListMode (ListeMnt, 1 , PtrFoncPDV)
+	GetAdressFunction (' ' , "Tri_PDV" , PtrFoncPDV)
+	ListMode (ListeFac, 1 , PtrFoncPDV)
+	lId_utGTFI = ListGetId("LISTE_UTGTFI")
+
+	; Init des critères de sélection
+	G7.ETB	= MZ.ETB
+	G7.Choix(1) = 1
+	G7.DATD = Hdate(Today,"p")
+	Init G7.AfrClas = 'z'
+	Cpt = system.esp
+
+	;chargement du masque écran
+	XmeLoad MZ.MeCle
+	XmeTitle(MZ.Titre2)
+	XmeInfoPage(MZ.MeCle,1)						;lire la taille de la page
+	XmeSetWindowSize(MZ.MeCle,1,Harmony.Opara3,Harmony.Opara4)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	FReturn(true)
+
+endf
+
+;*
+Procedure Cog_FinProgramme
+;
+BeginP
+
+	ListDestroy(ListeCli)
+	ListDestroy(ListeRef)
+	ListDestroy(ListeReg)
+	ListDestroy(ListeMnt)
+	ListDestroy(ListeFac)
+	ListDestroy(lId_utGTFI)
+
+	ProgramExit()
+
+EndP
+
+;*
+Procedure Cog_AfficherTraitement(wSel, wTrt)
+;
+1		wSel		>gtfdd.dhsd		Lib80
+1		wTrt		>gtfdd.dhsd		Lib80
+BeginP
+
+	If not tunnel
+		G7.WinChnC = wSel
+		G7.WinChnC2= wTrt 
+		Afficher_Selection()
+		Afficher_Traitement()
+	EndIf
+
+EndP
+
+;*
+;*
+;*
+
+
+
+;*
+Procedure CogRs_PrjAp_InitialiserRequete(wEtb, wStatut, wCtiers, wCtaux, wCe2, wCPeriod)
+; 0 --> ok
+1		wEtb		>gtfdd.dhsd		Etb
+1		wStatut	>gtfdd.dhsd		Lib			; si <> '' controle si CogRs_PrjAp.Cog_Prj_Status = wStatut
+1		wCtiers	1,0								; controle CLI.Cog_facturation
+1		wCtaux	1,0								; controle si CogRs_PrjAp.Cog_Taux <> ' ' 
+1		wCe2		>gtfdd.dhsd		CE2			; si <> ' ', clause CogRs_PrjAp.CE2 <= wCe2
+	2	wCe2n		>gtfdd.dhsd		CE2n
+1		wCPeriod	1,0 = FALSE						; si true clause CogRs_PrjAp.COG_PERIODICITE BETWEEN 1 AND 5
+BeginP
+
+	CogRs_PrjAp.Init()
+	CogRs_PrjAp.Where.RemoveCondition("")
+	CogRs_PrjAp.Where.Between_Aff(G7.Projet, G7.AfrClas)
+	CogRs_PrjAp.Where.AddCondition("Between_Aff")
+	CogRs_PrjAp.Where.Equal_Facturation()
+	CogRs_PrjAp.Where.AddCondition("Equal_Facturation")
+	If wEtb <> ' '
+		CogRs_PrjAp.Where.Equal_Etb(wEtb)
+		CogRs_PrjAp.Where.AddCondition("Equal_Etb")
+	EndIf
+	If wStatut <> ' '
+		CogRs_PrjAp.Where.Not_Equal_CogStatus(wStatut)
+		CogRs_PrjAp.Where.AddCondition("Not_Equal_CogStatus")
+	EndIF
+	If wCtiers
+		CogRs_PrjAp.Where.Equal_TiersFacturation()
+		CogRs_PrjAp.Where.AddCondition("Equal_TiersFacturation")
+	EndIf
+	If wCtaux
+		CogRs_PrjAp.Where.Not_CogTaux_Null()
+		CogRs_PrjAp.Where.AddCondition("Not_CogTaux_Null")
+	EndIF
+	If wCe2 <> ' '
+		CogRs_PrjAp.Where.InfEgal_Status(wCe2n)
+		CogRs_PrjAp.Where.AddCondition("InfEgal_Status")
+	EndIF
+	If wCPeriod
+		CogRs_PrjAp.Where.Between_Period(1,5)
+		CogRs_PrjAp.Where.AddCondition("Between_Period")
+	EndIF
+
+EndP
+
+;*
+Function char Calcul_Periodicite(wdate,wper)
+1		wdate		8
+1		wper		1,0
+BeginF
+ 	Switch wper
+		Case 1  ; Mensuelle
+			wdate = Hdate(wdate,,1)
+		Case 2  ; Bimestrielle
+			wdate = Hdate(wdate,,2)
+		Case 3  ; Trimestrielle
+			wdate = Hdate(wdate,,3)
+		Case 4  ; Semestrielle
+			wdate = Hdate(wdate,,6)
+		Case 5  ; Annuelle
+			wdate = Hdate(wdate,,12)
+	EndSwitch
+	Freturn(wdate)
+EndF
+
+;* 
+Procedure Genere_Entete_BL(wop,libelle,wtiers)	  
+; valable pour tous les cas de facturation
+1		wOP		8
+1		wTiers	8
+1		Libelle	500
+1		wSt		L
+BeginP
+
+	ListErase(lId_utGTFI)
+
+	iPAR 		  = system.esp
+	ipar.ce1   = "I"
+	ipar.trait = "C"
+	ipar.dos   = CogRs_PrjAp.Dos
+	ipar.etb	  = CogRs_PrjAp.Etb
+	ipar.ticod = "C"
+	ipar.picod = 3
+	Hwrite(gtfi,ipar)
+	Cpt++
+
+	ient 			  	= system.esp
+	ient.ce1 	  	= "A"
+	ient.ce2 	  	= 1
+	ient.ce4 	  	= 1
+	ient.tiers    	= wTiers
+	ient.op 		  	= wOP
+	ient.depo 	  	= MZ.Depo
+	ient.pidt 	  	= Today		;Hdate(g7.datd,"d")
+	ient.projet  	= CogRs_PrjAp.Affaire
+	ient.piref		= Left(GetComboText("Cog_Gtfdmc.dhfi","Typefacturation",G7.Choix(1))) & " - " & Formatd("M0/AAAA",g7.datd)
+	ient.pinotiers = Left(GetComboText("Cog_Gtfdmc.dhfi","Pinofacturation",G7.Choix(1))) & Fstring("0",Cpt) & "-" & Left(g7.datd,6)
+	ient.editcod   = 2
+	ient.trcod     = 1
+	ient.boredicod = 1
+	ient.Cog_BL_Moteur = 2
+	ient.Cog_Facturation_Compte = 1
+	If CogRs_PrjAp.Affaire <> " "
+		ient.Cog_ImpDetail = CogRs_PrjAp.Cog_ImpDetail
+	Else
+		ient.Cog_ImpDetail = CLI.Cog_ImpDetail
+	EndIf
+	ient.Cog_ImpLogo_1 = CLI.Cog_implogo_1
+	ient.Cog_ImpLogo_2 = CLI.Cog_implogo_2
+	ient.Cog_ImpLogo_3 = CLI.Cog_implogo_3
+	ient.Cog_ImpLogo_4 = CLI.Cog_implogo_4
+	If Seek_Cli(wTiers) = 0	 
+		ient.adrcod(3) = Cli.adrcod(3)
+		ient.adrcod(4) = Cli.adrcod(4)
+		ient.Cog_Facturation_Compte = Cli.Cog_Facturation_Compte 
+	Endif
+
+	; YATO 22/08/2014 : FE002_CLASSEAFFAIRE l'accès à la table Cog_UT102 a changé car la classe d'affaire a été supprimé et remplacé par type moteur facturation
+	If Hseek(Coggtf_Tab, Cog_UT102, [ 'C' CogRs_PrjAp.DOS CogRs_PrjAp.ETB Cog_UT100.Tiers CogRs_PrjAp.Cog_TypMotFac ]) = 0
+		ient.Cog_DirCliente = CogRs_PrjAp.Cog_DirCliente
+		If 	Cog_UT102.Cog_Regroupe_Direction = 2
+			ient.Cog_Regroupe_Direction = 2
+		Else
+			ient.Cog_Regroupe_Direction = 1
+		Endif
+		If 	Cog_UT102.Cog_Format_Facture = 1
+			ient.famod  = 3
+		ElsIf Cog_UT102.Cog_Format_Facture = 2
+			ient.famod  = 1
+		Endif
+ 	Endif
+
+	ient.tpvbl = G7.Choix(1) 	  	; on garde en mémoire le type de moteur lancé
+	If ient.ribcod = system.esp
+		gtfpcf.key = 'S' & mz.dos & ient.tiers
+		do | wst = hread(gtfpcf,t3)
+		while wst = 0 and t3.tiers = ient.tiers
+			if t3.ribtyp = system.esp | ient.ribcod = t3.ribcod | exitdo | endif
+		wend
+	Endif
+	Hwrite(gtfi,ient)
+	
+	; chapitre
+	Init Mouv 	= system.esp
+	Mouv.ce1 	= "C"
+	Mouv.ce2 	= 2
+	Mouv.ce7 	= 1
+	Mouv.des		= Left(CogRs_PrjAp.Affaire) & " - " & Left(CogRs_PrjAp.Lib80)			;Libelle
+	Mouv.cog_affaire = CogRs_PrjAp.Affaire
+
+	Hwrite(gtfi,mouv)
+
+EndP
+
+;*
+Procedure Genere_Ligne_BL(wRef, wQte, wPub, wPcod, wAxe, wDes, wNumero)	  
+; valable pour tous les cas de facturation
+1		wRef			>gtfdd.dhsd Ref
+1		wQte			>gtfdd.dhsd	blQte 	
+1		wPub			>gtfdd.dhsd Pub
+1		wPcod			>gtfdd.dhsd Pcod
+1		wAxe			>gtfdd.dhsd Axe
+1		wDes			>gtfdd.dhsd Des		 = " "
+1		wNumero		>gtfdd.dhsd Pinotiers = " " 		; Renseigne MOUV.Cog_Numero
+1		wFamNo		>gtfdd.dhsd	FamNo
+BeginP
+
+	Seek_Art(wRef)
+	Seek_C3(Art.CptV)
+
+	; màj des axes analytiques en compta sinon zone vide apres l'import
+	wFamNo = 2
+	If Not Lectab(12,[wFamNo ART.FAM(2)]) = 0 | T012.Lib = 'Inconnu !' | Endif
+	If Not Seek_C5(1,ART.FAM(2)) = 0	| MAJ_Axe_Analytique(1,ART.FAM(2),ori=32,T012.Lib)	| Endif
+	If Not Seek_C5(2,wAxe) = 0			| MAJ_Axe_Analytique(2,wAxe,ori=32,CogRs_PrjAp.Lib80) 	| Endif
+	
+	;
+	mouv 			 = system.esp
+	mouv.ce1 	 = "C"
+	mouv.ce2 	 = 1
+	mouv.ce7 	 = 1
+	mouv.ref		 = wRef
+	If Not wDes = system.esp | mouv.des = wDes | Endif
+	mouv.pub 	 = wPub
+	mouv.blqte   = wQte
+	mouv.pcod(1) = wPcod 
+	mouv.pcod(2) = wPcod 
+	mouv.pcod(3) = 1 
+	mouv.pcod(4) = 1 
+	mouv.pcod(5) = 1 
+	mouv.tacod 	 = Soc.Tacod
+	If Not wNumero = system.esp | mouv.cog_numero = wNumero | Endif	; facturation des projets spécifiques
+	mouv.projet  = CogRs_PrjAp.Affaire
+	mouv.mvcod   = 1
+	mouv.Axe(1)	 = Art.Fam(2)
+	mouv.Axe(2)	 =	wAxe
+	mouv.Axe(3)	 =	C3.Axe(3)
+	mouv.Axe(4)	 =	C3.Axe(4)
+
+	Hwrite(GTFI, Mouv)
+
+EndP
+
+;* 
+Function int GTFI_Integration
+; 0 --> pas d'erreur
+1	wenrno	>Gtfdd.dhsd	ENRNO
+1	wRet		1,0 = 1
+BeginF
+
+	Hclose(gtfi)	
+
+	Tunnel_Integration_Piece(gtfi.Name)
+	If PongReceiveAndDelete('G3XZ', G3XZ) = 0 
+		If G3XZ.PiNo = system.esp 
+			erreur++ 
+		ElsIf Seek_Ent('C',3,G3XZ.PiNo) = 0
+			wRet = 0
+			cptPiece++
+		   Gtfam.key = 'J' & Ent.Dos & Ent.TiCod & Ent.Pino
+			If Hread(GTFAM,MOUV) = 0 and Mouv.DOS = Ent.dos and Mouv.Ticod = Ent.Ticod and Mouv.Blno = Ent.Pino and Mouv.Ce2 = '2'	
+				wenrno = Mouv.EnrNo
+			   Loop Hread(GTFAM,MOUV) = 0 and Mouv.DOS = Ent.dos and Mouv.Ticod = Ent.Ticod and Mouv.Blno = Ent.Pino	
+					If Mouv.Ce2 = '1' 
+						Mouv.EnrNoC(3) = wenrno | Hrewrite(GTFAM,MOUV) 
+					ElsIf Mouv.Ce2 = '2' | wenrno = Mouv.EnrNo
+					Endif
+			   Endloop
+			Endif
+		Endif
+	Else 
+		erreur++ 
+	Endif
+
+	Hopen(GTFI,"R") 
+	Herase(GTFI)
+
+	FReturn(wRet)
+
+EndF
+
+;* 
+Procedure Genere_Entete_BL_Cotisation
+BeginP
+
+	Genere_Entete_BL(COG_UT101.Cog_OP, CogRs_PrjAp.Lib80, COG_UT100.Tiers)
+
+EndP
+
+;* 																							  
+Procedure Genere_Entete_BL_Regularisation
+BeginP
+
+	Genere_Entete_BL(COG_UT105.Cog_OP, libelle=Condition(COG_UT105.Cog_Regul_Libelle <> ' ', COG_UT105.Cog_Regul_Libelle, CogRs_PrjAp.Lib80), COG_UT100.Tiers)
+
+EndP
+
+;* 																							  
+Procedure Genere_Entete_BL_Projet_Specifique
+BeginP
+
+	Genere_Entete_BL(COG_UT109.Cog_OP, libelle=Condition(COG_UT109.Cog_Montant_Libelle <> ' ', COG_UT109.Cog_Montant_Libelle, CogRs_PrjAp.Lib80), COG_UT100.Tiers)
+
+EndP
+
+;* 
+Procedure Genere_Entete_BL_Cotisation_PDV
+BeginP
+
+	Genere_Entete_BL(COG_UT108.Cog_OP ,CogRs_PrjAp.Lib80, CogRs_PrjAp.Tiers)
+
+EndP
+
+;* 
+Procedure Genere_Ligne_BL_Cotisation
+;
+1		wPuB		>gtfdd.dhsd		PuB
+BeginP
+
+	wpub = (Cog_UT101.Cog_Montant * COG_UT100.Cog_Taux / 100) * COG_UT106.Cog_Taux / 100 A
+	Genere_Ligne_BL(Cog_UT106.Ref, 1, wpub, 4, CogRs_PrjAp.Cog_AxeAnael)
+
+EndP
+
+;* 
+Procedure Genere_Ligne_BL_Regularisation_Par_Reference
+;
+1		wPuB		>gtfdd.dhsd		PuB
+BeginP
+
+	wpub = Cog_UT105.Cog_Montant * COG_UT100.Cog_Taux / 100 A
+	Genere_Ligne_BL(Cog_UT105.Ref, 1, wpub,4,CogRs_PrjAp.Cog_AxeAnael)
+
+EndP
+
+;* 
+Procedure Genere_Ligne_BL_Regularisation_Par_Section
+;
+1		wPuB		>gtfdd.dhsd		PuB
+BeginP
+
+	wpub = (Cog_UT105.Cog_Montant * COG_UT100.Cog_Taux / 100) * COG_UT107.Cog_Taux / 100 A
+	Genere_Ligne_BL(Cog_UT107.Ref, 1, wpub,4,CogRs_PrjAp.Cog_AxeAnael)
+
+EndP
+
+;* 
+Procedure Genere_Ligne_BL_Regularisation_Par_Cotisation
+;
+1		wPuB		>gtfdd.dhsd		PuB
+BeginP
+	
+	wpub = (Cog_UT105.Cog_Montant * COG_UT100.Cog_Taux / 100) * COG_UT106.Cog_Taux / 100 A
+	Genere_Ligne_BL(Cog_UT106.Ref, 1, wpub,4,CogRs_PrjAp.Cog_AxeAnael)
+
+EndP
+
+;* 
+Procedure Genere_Ligne_BL_Projet_Specifique
+; Génération d'une ligne de BL depuis la table UT109 & UT100
+1		wPuB		>gtfdd.dhsd		PuB
+BeginP
+
+	wpub = Cog_UT109.Cog_Montant * COG_UT100.Cog_Taux / 100 A
+	If Not derNumero = COG_UT109.Cog_Numero
+		mouv 			 = system.esp
+		mouv.ce1 	 = "C"
+		mouv.ce2 	 = 2
+		mouv.ce7 	 = 1
+		mouv.des		 = Left(CogRs_PrjAp.Affaire) & " - " & Left(CogRs_PrjAp.Lib80)			;Libelle
+		Hwrite(gtfi,mouv)
+		derNumero = COG_UT109.Cog_Numero
+	Endif
+	Genere_Ligne_BL(Cog_UT109.Ref,wpub,4,CogRs_PrjAp.Cog_AxeAnael,Cog_UT109.Cog_Montant_Libelle,COG_UT109.Cog_Numero)
+EndP
+
+;* 
+Procedure Genere_Ligne_BL_Cotisation_PDV
+; Génération d'une ligne de BL depuis la table UT108
+1		wPuB		>gtfdd.dhsd		PuB
+1		wQte		>gtfdd.dhsd		blQte
+BeginP
+
+	wQte = Condition(Cog_UT108.RefQte > 0, Cog_UT108.RefQte, 1)
+
+	If Cog_UT108.Cog_Duree_Limitee = 2 AND COG_UT108.Cog_Nombre_Cotisation > 0
+		wpub = COG_UT108.Cog_Montant / COG_UT108.Cog_Nombre_Cotisation / wQte
+	Else
+		wpub = COG_UT108.Cog_Montant / wQte
+	Endif
+
+	Genere_Ligne_BL(Cog_UT108.Ref, wQte, wpub, Condition(wpub > 0, 4, 1), Condition(COG_UT108.Cog_AxeAnael <> ' ', COG_UT108.Cog_AxeAnael, CogRs_PrjAp.Cog_AxeAnael))
+
+	ListInsert(lId_utGTFI, Cog_ut108)
+
+EndP
+
+;*
+;*	Filtres
+;*
+
+;*
+Function int Cog_UT100_Filtre
+; Garnit la liste ListeCLi
+; 0 --> OK
+1		wCli		>gtfdd.dhsd		Tiers
+BeginF
+
+	If Left(COG_UT100.Cog_Dateffet,6) > Left(G7.DatD,6) Or Left(COG_UT100.Cog_Date_Fin,6) < Left(G7.DatD,6)
+		Loop Hread(COGGTF_TAB,COG_UT100) = 0 And COG_UT100.Dos = CogRs_PrjAp.Dos And COG_UT100.Etb = CogRs_PrjAp.Etb And COG_UT100.Cog_Id_Refacturation = CogRs_PrjAp.Cog_Taux 
+			If Not Left(COG_UT100.Cog_Dateffet,6) > Left(G7.DatD,6) And Not Left(COG_UT100.Cog_Date_Fin,6) < Left(G7.DatD,6)
+				wcli = COG_UT100.Tiers
+				ListErase(ListeCli)
+				ListAddAfter(ListeCli,COG_UT100)
+				ListLast(ListeCli,COG_UT100)
+				ExitLoop
+			Endif
+		EndLoop
+		If Not ListCount(ListeCli) > system.esp | FReturn(1) | Endif
+	Else
+		wcli = COG_UT100.Tiers
+		ListErase(ListeCli)
+		ListAddAfter(ListeCli,COG_UT100)
+		ListLast(ListeCli,COG_UT100)
+	Endif
+	COGGTF_TAB.Key = 'A' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Cog_Taux
+	Loop Hread(COGGTF_TAB,COG_UT100) = 0 And COG_UT100.Dos = CogRs_PrjAp.Dos And COG_UT100.Etb = CogRs_PrjAp.Etb And COG_UT100.Cog_Id_Refacturation = CogRs_PrjAp.Cog_Taux 
+		If Left(COG_UT100.Cog_Dateffet,6) > Left(G7.DatD,6) Or Left(COG_UT100.Cog_Date_Fin,6) < Left(G7.DatD,6) | RedoLoop | Endif
+		If wcli = COG_UT100.Tiers
+			ListModify(ListeCli,COG_UT100)
+		Else
+			ListAddAfter(ListeCli,COG_UT100)
+			ListLast(ListeCli,COG_UT100)
+			wcli = COG_UT100.Tiers
+		Endif
+	EndLoop
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Cog_UT101_Filtre
+; 0 --> OK
+1		wDate_Prochaine_Facture		>gtfdd.dhsd		FaDt
+BeginF
+
+	If Not Lectab(20,Cog_UT101.Cog_OP) = 0
+		G3_Log_Ano (9009 , 'Code opération non trouvé', ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+		FReturn(1)
+	Elsif MZ.Op <> system.esp And Cog_UT101.Cog_OP <> MZ.Op
+		FReturn(1)
+	Endif
+	If Left(Cog_UT101.Cog_Date_Debut,6) > Left(G7.DatD,6)	| FReturn(1) | Endif
+	If Left(Cog_UT101.Cog_Date_Fin,6)   < Left(G7.DatD,6)	| FReturn(1) | Endif
+	If Isdate(Cog_UT101.Cog_Date_Derniere_Facture) 
+		If Left(Cog_UT101.Cog_Date_Derniere_Facture,6) = Left(G7.DatD,6) 	  | FReturn(1) | Endif
+		wdate_prochaine_facture = Calcul_Periodicite(Cog_UT101.Cog_Date_Derniere_Facture,CogRs_PrjAp.Cog_Periodicite)
+		If Left(wdate_prochaine_facture,6) > Left(Cog_UT101.Cog_Date_Fin,6) | FReturn(1) | Endif
+		If Left(wdate_prochaine_facture,6) > Left(G7.DatD,6) 					  | FReturn(1) | Endif
+	Endif
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Cog_UT105_Filtre
+; 0 --> OK
+1		wDate_Prochaine_Facture		>gtfdd.dhsd		FaDt
+BegiNF
+
+	If Not Lectab(20,Cog_UT105.Cog_OP) = 0
+		G3_Log_Ano (9009 , 'Code opération non trouvé sur régul. pour la référence ' & Cog_UT105.Ref, ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+		FReturn(1)
+	Elsif MZ.Op <> system.esp And Cog_UT105.Cog_OP <> MZ.Op
+		FReturn(1)
+	Endif
+	If Left(COG_UT105.Cog_Date_Debut,6) > Left(G7.DatD,6)	| FReturn(1) | Endif
+	If Left(COG_UT105.Cog_Date_Fin,6)   < Left(G7.DatD,6)	| FReturn(1) | Endif
+	If Isdate(COG_UT105.Cog_Date_Derniere_Facture) 
+		If Left(Cog_UT105.Cog_Date_Derniere_Facture,6) = Left(G7.DatD,6) 	  | FReturn(1) | Endif
+		wdate_prochaine_facture = Calcul_Periodicite(COG_UT105.Cog_Date_Derniere_Facture,CogRs_PrjAp.Cog_Periodicite)
+		If Left(wdate_prochaine_facture,6) > Left(COG_UT105.Cog_Date_Fin,6) | FReturn(1) | Endif
+		If Left(wdate_prochaine_facture,6) > Left(G7.DatD,6) 					  | FReturn(1) | Endif
+	Endif
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Cog_UT106_Filtre
+; 0 --> OK
+1		wPourcent	3,0
+BeginF
+
+	wPourcent = 0
+	ListErase(ListeRef)
+	COGGTF_TAB.Key = 'G' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Affaire
+	Loop Hread(COGGTF_TAB,COG_UT106) = 0 And COG_UT106.Dos = CogRs_PrjAp.Dos And COG_UT106.Etb = CogRs_PrjAp.Etb And COG_UT106.Affaire = CogRs_PrjAp.Affaire
+		If Left(G7.DatD,6) < Left(COG_UT106.Cog_Date_Debut,6) Or Left(G7.DatD,6) >	Left(COG_UT106.Cog_Date_Fin,6) | RedoLoop | Endif								
+		wPourcent += COG_UT106.Cog_Taux
+		ListAddAfter(ListeRef,COG_UT106)
+	EndLoop
+	If Not ListCount(ListeRef) > system.esp
+		FReturn(1)
+	ElsIf Not wPourcent = 100
+		G3_Log_Ano (9009 , 'Somme des répartitions par sections incorrecte', ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+		FReturn(1)
+	Endif
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Cog_UT108_Filtre
+; 0 --> OK
+1		wDate_Prochaine_Facture		>gtfdd.dhsd		FaDt
+BeginF
+
+	If Not COG_UT108.Cog_Period in (1..5) 
+		G3_Log_Ano (9009 , 'Périodicité inconnue pour la référence ' & Cog_UT108.Ref, ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+		FReturn(1)
+	Endif
+	If Not Seek_Art(COG_UT108.Ref) = 0 
+		G3_Log_Ano (9009 , 'Référence inconnue ' & Cog_UT108.Ref, ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+		FReturn(1)
+	Endif
+	If Not Lectab(20,COG_UT108.Cog_OP) = 0
+		G3_Log_Ano (9009 , 'Code opération non trouvé pour la référence ' & Cog_UT108.Ref, ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+		FReturn(1)
+	Elsif MZ.Op <> system.esp And Cog_UT108.Cog_OP <> MZ.Op
+		FReturn(1)
+	Endif
+	If Left(COG_UT108.Cog_Date_Debut,6) > Left(G7.DatD,6)	| FReturn(1) | Endif
+	If Left(COG_UT108.Cog_Date_Fin,6)   < Left(G7.DatD,6)	| FReturn(1) | Endif
+	If Isdate(COG_UT108.Cog_Date_Derniere_Facture) 
+		If Left(Cog_UT108.Cog_Date_Derniere_Facture,6) = Left(G7.DatD,6) 	  | FReturn(1) | Endif
+		wDate_Prochaine_Facture = Calcul_Periodicite(COG_UT108.Cog_Date_Derniere_Facture,COG_UT108.Cog_Period)
+		If Left(wDate_Prochaine_Facture, 6) > Left(COG_UT108.Cog_Date_Fin,6) | FReturn(1) | Endif
+		If Left(wDate_Prochaine_Facture, 6) > Left(G7.DatD,6) 					  | FReturn(1) | Endif
+	Endif
+	If Cog_UT108.Cog_Duree_Limitee = 2 And Not COG_UT108.Cog_Nombre_Cotisation_Restantes > system.esp | FReturn(1) | Endif
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Cog_UT109_Filtre
+; 0 --> OK
+BegInF
+
+	If Not Seek_Art(COG_UT109.Ref) = 0 
+		G3_Log_Ano (9009 , 'Référence inconnue ' & COG_UT109.Ref, ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+		FReturn(1)
+	Endif
+	If Not Lectab(20,COG_UT109.Cog_OP) = 0
+		G3_Log_Ano (9009 , 'Code opération non trouvé pour la référence ' & COG_UT109.Ref, ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+		FReturn(1)
+	Elsif MZ.Op <> system.esp And COG_UT109.Cog_OP <> MZ.Op
+		FReturn(1)
+	Endif
+	If Isdate(COG_UT109.Cog_Date_Facturation) 
+		If Left(COG_UT109.Cog_Date_Facturation,6) > Left(G7.DatD,6) | FReturn(1) | Endif
+	Else | FReturn(1)
+	Endif
+	If Not COG_UT109.Cog_Facturation = 2 	 | FReturn(1) | Endif
+	If COG_UT109.Cog_Indicateur_Facture = 2 | FReturn(1) | Endif
+
+	FReturn(0)
+
+EndF
+
+;*
+;*	Mises à jour après intégration
+;*
+
+;*
+Procedure Cog_UT108_Maj
+; met à jour les informations de facturation sur la table UT108
+RecordSQL	"CogRs_UtTab.dhoq"		CogRs_UT108		wRs_Ut108
+BeginP
+
+	ListBegin(lId_utGTFI)
+	Do While ListNext(lId_utGTFI, Cog_UT108) not in (-1, 0)
+
+		wRs_Ut108.Init()
+		wRs_Ut108.Where.PK(Cog_UT108.Etb, Cog_UT108.Affaire, Cog_UT108.Ref, Cog_UT108.Cog_Date_Debut)
+		If wRs_Ut108.Select() > 0
+
+			wRs_Ut108.Cog_Date_Derniere_Facture = G7.DatD
+			wRs_Ut108.UserMo = System.User
+			wRs_Ut108.UserMoDh = time(7)						
+			If wRs_Ut108.Cog_Nombre_Cotisation_Restantes > system.esp
+				wRs_Ut108.Cog_Nombre_Cotisation_Restantes--
+			Endif
+			wRs_Ut108.Cog_Nombre_Cotisation_Facturees++
+
+			wRs_Ut108.Update()
+
+			ListDeleteAndPrevious(lId_utGTFI)
+
+		Else
+			G3_Log_Ano (9009 , 'Cotisation PDV ' & Cog_UT108.Ref && ' non retrouvée, date dernière facture pas maj', ' Affaire ' & CogRs_PrjAp.Affaire) 
+			erreur++	
+		EndIf
+
+	WEnd
+
+EndP
+
+;*
+;*	Boucles principales de facturation
+;*
+
+;*
+Procedure Cog_Facturation_PDV
+;
+1		wRead		L
+BeginP
+
+	CogRs_PrjAp_InitialiserRequete(G7.Etb, C_STATUT_PRJ_TERMINE, wCtiers=TRUE, wCTaux=FALSE, '')
+	wRead	= CogRs_PrjAp.ReaderOpen()
+	CogRs_PrjAp.ReaderSelect(wRead)
+
+	Do While CogRs_PrjAp.ReaderNext(wRead) > 0
+
+		Cog_AfficherTraitement("Facturation projet", CogRs_PrjAp.Lib80)
+
+		; controle client
+		If Seek_Cli(CogRs_PrjAp.Tiers) = 0 
+			
+			ListErase(ListeFac)
+			; lecture des cotisations PDV	triees par op
+			COGGTF_TAB.Key = 'I' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Affaire
+			Loop Hread(COGGTF_TAB,COG_UT108) = 0 And COG_UT108.Dos = CogRs_PrjAp.Dos And COG_UT108.Etb = CogRs_PrjAp.Etb And COG_UT108.Affaire = CogRs_PrjAp.Affaire
+			
+				If Cog_UT108_Filtre() = 0
+					ListInsert(ListeFac, COG_UT108)
+				EndIf
+					
+			EndLoop
+
+			If ListCount(ListeFac) > 0
+				; generation des BL
+				ListFirst(ListeFac,COG_UT108)
+				Genere_Entete_BL_Cotisation_PDV
+				Genere_Ligne_BL_Cotisation_PDV
+				dernierOp = COG_UT108.Cog_OP
+				Do While ListNext(ListeFac,COG_UT108) not in (-1, 0)
+
+					If dernierOp = COG_UT108.Cog_OP 
+						Genere_Ligne_BL_Cotisation_PDV
+					Else
+						If GTFI_Integration() = 0
+							Cog_UT108_Maj()
+						EndIf
+						Genere_Entete_BL_Cotisation_PDV
+						Genere_Ligne_BL_Cotisation_PDV
+						dernierOp = COG_UT109.Cog_OP
+					Endif
+
+				WEnd
+				If GTFI_Integration() = 0	 ; dernière rupture
+					Cog_UT108_Maj()
+				EndIf 
+				
+				
+			EndIf	 ; If ListCount(ListeFac) > 0
+		Endif	 ; If Seek_Cli(CogRs_PrjAp.Tiers) = 0 
+	
+	WEnd ;  Do While CogRs_PrjAp.ReaderNext(wRead) > 0
+
+	CogRs_PrjAp.ReaderClose(wRead)
+
+EndP
+
+;*
+Procedure Cog_Facturation_Specifique
+;
+1		wRead		L
+1		wOK  		1,0
+BeginP
+
+	CogRs_PrjAp_InitialiserRequete(G7.Etb, ' ', wCtiers=FALSE, wCTaux=TRUE, wCe2='3')
+	wRead	= CogRs_PrjAp.ReaderOpen()
+	CogRs_PrjAp.ReaderSelect(wRead)
+
+	Do While CogRs_PrjAp.ReaderNext(wRead) > 0
+
+		Cog_AfficherTraitement("Facturation projet spécifique", CogRs_PrjAp.Lib80)
+
+		
+		ListErase(ListeMnt)
+		; lecture des montants spécifiques tries par op
+		COGGTF_TAB.Key = 'J' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Affaire
+		Loop Hread(COGGTF_TAB,COG_UT109) = 0 And COG_UT109.Dos = CogRs_PrjAp.Dos And COG_UT109.Etb = CogRs_PrjAp.Etb And COG_UT109.Affaire = CogRs_PrjAp.Affaire
+			
+			If Cog_UT109_Filtre() = 0
+				ListInsert(ListeMnt,COG_UT109)
+			EndIf
+						
+		EndLoop
+
+		; controle taux de refacturation centrale
+		If ListCount(ListeMnt) > 0
+		
+			wOk = TRUE
+			COGGTF_TAB.Key = 'A' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Cog_Taux
+			If Hread(COGGTF_TAB,COG_UT100) = 0 And COG_UT100.Dos = CogRs_PrjAp.Dos And COG_UT100.Etb = CogRs_PrjAp.Etb And COG_UT100.Cog_Id_Refacturation = CogRs_PrjAp.Cog_Taux \
+				AND COG_UT100_Filtre() = 0
+			Else
+				wOK = FALSE
+			Endif
+
+			; generation des BL
+			If wOK
+				ListBegin(ListeCli)
+				Loop ListNext(ListeCli,COG_UT100) > 0
+					ListFirst(ListeMnt,COG_UT109)
+					derNumero = COG_UT109.Cog_Numero
+					Genere_Entete_BL_Projet_Specifique
+					Genere_Ligne_BL_Projet_Specifique
+					dernierOp = COG_UT109.Cog_OP
+					Loop ListNext(ListeMnt,COG_UT109) > 0
+						If dernierOp = COG_UT109.Cog_OP 
+							Genere_Ligne_BL_Projet_Specifique
+						Else
+							GTFI_Integration()
+							Genere_Entete_BL_Projet_Specifique
+							Genere_Ligne_BL_Projet_Specifique
+							dernierOp = COG_UT109.Cog_OP
+						Endif
+					EndLoop
+					GTFI_Integration()				
+				EndLoop
+				; date derniere facture stockee
+				ListBegin(ListeMnt)
+				Loop ListNext(ListeMnt,COG_UT109) > 0
+					If Hseek(Coggtf_Tab, COG_UT109, [ 'J' COG_UT109.DOS COG_UT109.ETB COG_UT109.Affaire COG_UT109.Cog_Numero COG_UT109.Ref COG_UT109.Cog_Date_Facturation COG_UT109.UserCrDh ], "F") = 0
+						COG_UT109.Cog_Date_Derniere_Facture = G7.DatD
+						COG_UT109.Cog_Indicateur_Facture = 2
+						COG_UT109.UserMo = System.User
+						COG_UT109.UserMoDh = time(7)
+						Hrewrite(Coggtf_Tab, COG_UT109)
+					Else
+						G3_Log_Ano (9009 , 'Montant spécifique sur Référence ' & COG_UT109.Ref && ' non retrouvé, date dernière facture pas maj', ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++							
+					Endif
+				EndLoop
+			Endif	 ; If wOK --> génération BL
+
+		EndIf ;If ListCount(ListeMnt) > 0
+
+	WEnd ; Do While CogRs_PrjAp.ReaderNext(wRead) > 0
+
+	CogRs_PrjAp.ReaderClose(wRead)
+
+EndP
+
+;*
+Procedure Cog_Facturation_Regularisations
+;
+1		wRead			L
+1		wContinue	1,0
+1		wOK			1,0
+1		wPourcent	3,0
+BeginP
+
+	wContinue = TRUE
+
+	CogRs_PrjAp_InitialiserRequete(G7.Etb, ' ', wCtiers=FALSE, wCTaux=TRUE, wCe2='3', wCPeriod=TRUE)
+	wRead	= CogRs_PrjAp.ReaderOpen()
+	CogRs_PrjAp.ReaderSelect(wRead)
+
+	Do While CogRs_PrjAp.ReaderNext(wRead) > 0 AND wContinue
+
+		Cog_AfficherTraitement("Facturation régularisation", CogRs_PrjAp.Lib80)
+		wOk = TRUE
+
+		; controle des réguls
+		If Hseek(Coggtf_Tab, Cog_UT105, [ 'F' CogRs_PrjAp.DOS CogRs_PrjAp.ETB CogRs_PrjAp.Affaire ]) = 0 And Cog_UT105.Cog_Montant > 0 AND Cog_UT105_Filtre() = 0
+			
+			; controle taux de refacturation centrale
+			COGGTF_TAB.Key = 'A' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Cog_Taux
+			If Hread(COGGTF_TAB,COG_UT100) = 0 And COG_UT100.Dos = CogRs_PrjAp.Dos And COG_UT100.Etb = CogRs_PrjAp.Etb And COG_UT100.Cog_Id_Refacturation = CogRs_PrjAp.Cog_Taux \
+				AND COG_UT100_Filtre() = 0
+			Else
+				wOk = FALSE
+			Endif
+
+			; chargement/controle des répartitions par section pour réguls
+			If COG_UT105.Ref = system.esp
+				
+				COGGTF_TAB.Key = 'H' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Affaire
+				If Hread(COGGTF_TAB,COG_UT107) = 0 And COG_UT107.Dos = CogRs_PrjAp.Dos And COG_UT107.Etb = CogRs_PrjAp.Etb And COG_UT107.Affaire = CogRs_PrjAp.Affaire
+					wPourcent = 0
+					ListErase(ListeReg)
+					COGGTF_TAB.Key = 'H' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Affaire
+					Loop Hread(COGGTF_TAB,COG_UT107) = 0 And COG_UT107.Dos = CogRs_PrjAp.Dos And COG_UT107.Etb = CogRs_PrjAp.Etb And COG_UT107.Affaire = CogRs_PrjAp.Affaire
+						If Left(G7.DatD,6) < Left(COG_UT107.Cog_Date_Debut,6) Or Left(G7.DatD,6) >	Left(COG_UT107.Cog_Date_Fin,6) | RedoLoop | Endif								
+						wPourcent += COG_UT107.Cog_Taux
+						ListAddAfter(ListeReg,COG_UT107)
+					EndLoop
+					If ListCount(ListeReg) > system.esp And Not wPourcent = 100
+						G3_Log_Ano (9009 , 'Somme des répartitions par sections pour régul. incorrecte', ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+						wOk = FALSE
+					Endif
+				Else
+					ListErase(ListeReg)
+				Endif
+
+				; controle répartition par sections pour cotisation
+				If Not ListCount(ListeReg) > system.esp
+					
+					COGGTF_TAB.Key = 'G' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Affaire
+					If Hread(COGGTF_TAB,COG_UT106) = 0 And COG_UT106.Dos = CogRs_PrjAp.Dos And COG_UT106.Etb = CogRs_PrjAp.Etb And COG_UT106.Affaire = CogRs_PrjAp.Affaire \
+						AND Cog_UT106_Filtre() = 0
+					Else
+						wOk = FALSE
+					Endif
+				Endif
+
+				; generation des BL si Ref <> espace
+				If wOK
+					ListBegin(ListeCli)
+					Loop ListNext(ListeCli,COG_UT100) > 0
+						Genere_Entete_BL_Regularisation
+						If ListCount(ListeReg) > system.esp
+							ListBegin(ListeReg)
+							Loop ListNext(ListeReg,COG_UT107) > 0
+								Genere_Ligne_BL_Regularisation_Par_Section						
+							EndLoop
+						Else
+							ListBegin(ListeRef)
+							Loop ListNext(ListeRef,COG_UT106) > 0
+								Genere_Ligne_BL_Regularisation_Par_Cotisation						
+							EndLoop
+						Endif
+						GTFI_Integration()
+					EndLoop
+				EndIf
+			Else	; If COG_UT105.Ref = system.esp
+				If wOK
+					; generation des BL si Ref = espace
+					ListBegin(ListeCli)
+					Loop ListNext(ListeCli,COG_UT100) > 0
+						Genere_Entete_BL_Regularisation
+						Genere_Ligne_BL_Regularisation_Par_Reference						
+						GTFI_Integration()
+					EndLoop
+				EndIf
+			Endif	; If COG_UT105.Ref = system.esp
+
+			; date derniere facture stockee
+			If wOK
+				If Hseek(Coggtf_Tab, Cog_UT105, [ 'F' CogRs_PrjAp.DOS CogRs_PrjAp.ETB CogRs_PrjAp.Affaire ], "F") = 0
+					Cog_UT105.Cog_Date_Derniere_Facture = G7.DatD
+					Cog_UT105.UserMo = System.User
+					Cog_UT105.UserMoDh = time(7)
+					Hrewrite(Coggtf_Tab, Cog_UT105)
+				Else
+					G3_Log_Ano (9009 , 'Arrêt car Date de dernière facture pas maj sur régul. pour la référence ' & Cog_UT105.Ref, ' Affaire ' & CogRs_PrjAp.Affaire)  
+					erreur++
+					wContinue = FALSE
+				Endif
+			EndIf
+
+		Endif	; fin controle des réguls (UT105)
+
+	WEnd ; Do While CogRs_PrjAp.ReaderNext(wRead) > 0	AND wContinue
+
+	CogRs_PrjAp.ReaderClose(wRead)
+
+EndP
+
+;*
+Procedure Cog_Facturation_Cotisations
+;
+1		wRead			L
+1		wContinue	1,0
+1		wOk			1,0
+BeginP
+
+	wContinue = TRUE
+
+	CogRs_PrjAp_InitialiserRequete(G7.Etb, ' ', wCtiers=FALSE, wCTaux=TRUE, wCe2='3', wCPeriod=TRUE)
+	wRead	= CogRs_PrjAp.ReaderOpen()
+	CogRs_PrjAp.ReaderSelect(wRead)
+
+	Do While CogRs_PrjAp.ReaderNext(wRead) > 0 AND wContinue
+
+		Cog_AfficherTraitement("Facturation cotisations", CogRs_PrjAp.Lib80)
+		wOK = TRUE
+
+		; controle cotisation
+		If Hseek(Coggtf_Tab, Cog_UT101, [ 'B' CogRs_PrjAp.DOS CogRs_PrjAp.ETB CogRs_PrjAp.Affaire ]) = 0 And Cog_UT101.Cog_Montant > 0 AND Cog_UT101_Filtre() = 0
+			
+			; controle taux de refacturation centrale
+			COGGTF_TAB.Key = 'A' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Cog_Taux
+			If Hread(COGGTF_TAB,COG_UT100) = 0 And COG_UT100.Dos = CogRs_PrjAp.Dos And COG_UT100.Etb = CogRs_PrjAp.Etb And COG_UT100.Cog_Id_Refacturation = CogRs_PrjAp.Cog_Taux \
+				AND Cog_UT100_Filtre() = 0	
+			Else
+				wOk = FALSE
+			Endif
+
+			; controle répartition par sections pour cotisation
+			COGGTF_TAB.Key = 'G' & CogRs_PrjAp.Dos	& CogRs_PrjAp.Etb	& CogRs_PrjAp.Affaire
+			If Hread(COGGTF_TAB,COG_UT106) = 0 And COG_UT106.Dos = CogRs_PrjAp.Dos And COG_UT106.Etb = CogRs_PrjAp.Etb And COG_UT106.Affaire = CogRs_PrjAp.Affaire AND Cog_UT106_Filtre() = 0
+				; contrôles faits dans Cog_UT106_Filtre	
+			Else
+				wOk = FALSE
+			Endif
+
+			If wOk
+				; generation des BL
+				ListBegin(ListeCli)
+				Do While ListNext(ListeCli,COG_UT100) not in (-1, 0)
+					Genere_Entete_BL_Cotisation
+					ListBegin(ListeRef)
+					Do While ListNext(ListeRef,COG_UT106) not in (-1, 0)
+						Genere_Ligne_BL_Cotisation						
+					WEnd
+					GTFI_Integration()
+				WEnd
+	
+				; date derniere facture stockee
+				If Hseek(Coggtf_Tab, Cog_UT101, [ 'B' CogRs_PrjAp.DOS CogRs_PrjAp.ETB CogRs_PrjAp.Affaire ], "F") = 0
+					Cog_UT101.Cog_Date_Derniere_Facture = G7.DatD
+					Cog_UT101.UserMo = System.User
+					Cog_UT101.UserMoDh = time(7)
+					Hrewrite(Coggtf_Tab, Cog_UT101)
+				Else
+					G3_Log_Ano (9009 , 'Arrêt car Cotisation non retrouvée, date dernière facture pas maj', ' Affaire ' & CogRs_PrjAp.Affaire) | erreur++
+					wContinue = FALSE
+				Endif
+			EndIf
+
+   	Endif	 ; 	If Hseek(Coggtf_Tab, Cog_UT101,
+
+
+	WEnd	; 	CogRs_PrjAp.ReaderNext() AND wContinue
+
+	CogRs_PrjAp.ReaderClose(wRead)
+
+EndP
+
+;*
+Procedure Cog_Facturation
+;
+BeginP
+
+	cptPiece = 0
+	; 
+	If Cog_UTTAB_Res('R', wMsgErr=Condition(tunnel, FALSE, TRUE)) <> 0
+		PReturn
+	EndIf
+
+	;
+	SetHourGlassCursor
+
+	;
+	Switch2 G7.Choix(1) 
+		Case 1		; facturation des cotisations					
+			Cog_Facturation_Cotisations()
+
+		Case 2		; facturation des régularisations
+			Cog_Facturation_Regularisations()
+
+		Case 3	  	; facturation des projets spécifiques
+			Cog_Facturation_Specifique()
+
+		Case 4	 	; facturation des cotisations PDV
+			Cog_Facturation_PDV()
+			
+	EndSwitch
+
+
+	; fin
+	Cog_UTTAB_Lib()
+	Setnormalcursor
+
+
+EndP
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+Public Function int Cog_SaisiePage1
+;
+1 	wFin		1,0	= 0
+1	wRet		1,0	= 0
+1	wTxt		S
+
+BeginF
+
+	XmeInput(MZ.MeCle,1,0,XME_MODE_GOTO)
+
+	Do
+	                                
+		Switch harmony.key            ;tests des causes de l'interruption
+	
+			Case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
+				endif
+			
+			Case K_F7                ;zoom généralisé
+				Zoom_Call()
+			
+			Case K_F8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			Case K_F9                ;abandon
+				wFin = 1
+				wRet = 1
+		
+			Case vsw in (K_F10,K_RETURN)
+				If MessageBox(translate("Lancer la facturation?"),translate("Confirmation"),mb_yesno+mb_iconquestion)=idyes
+					
+					PingLocal("TraceCompteur",False)
+					G3_OpenTrace(2,3,4)
+					Cog_Facturation
+					G3_CloseTrace()
+					wTxt = "Traitement terminé." & NoSpaces(cptPiece) & " pièce(s) générée(s)."
+
+					if erreur
+						wTxt &= Translate("|Des erreurs ont été détectées.|Consultez le livre de bord")
+					endif
+
+					MessageBox(wTxt, Translate("Information"),MB_ICONEXCLAMATION)
+		
+					wFin=1
+		
+				endif
+	
+		endswitch
+
+	While wFin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	WEnd
+
+	FReturn(wRet)
+	
+EndF
+
+;*
+Main
+;
+1	wSortie	1,0
+	
+	;
+	If PingReceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	EndIf
+
+	;
+	if Cog_InitialiserVariables
+
+		if not tunnel
+	
+			wSortie = FALSE
+
+			Do While not wSortie
+				wSortie = Cog_SaisiePage1
+			WEnd
+	
+		else	;programme piloté
+	
+			Cog_Facturation
+	
+		endif
+
+	endif
+
+
+	Cog_FinProgramme()

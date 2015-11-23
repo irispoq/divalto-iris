@@ -1,16 +1,16 @@
 ;*
 ;*    Modèle de traitement du générateur de ZOOM
 
+Include "GTTCZ00.dhsp"						; Déclarations communes
 
+;
 module	"Xzoom.dhop"
 ;module	"A5PM000.dhop"
 Module A5PMNoteJoint.dhop
+Module "CogGt_Controle_Fichier.dhop"
 
-Include "GTTCZ00.dhsp"						; Déclarations communes
-
+;
 Hfileversion   cogfdd.dhsd    COGGTF_TAB
-
-public hfile   cogfdd.dhsd    COGGTF_TAB	COGGTF_TAB		noopen
 
 ; Table pour la saisie de la clé de départ
 public		record	cogfdd.dhsd	COG_UT109	COG_UT109_ZZDEP
@@ -24,7 +24,7 @@ public		record	gtfdd.dhsd	PRJAP
 
 Define C_NOTE_NO = 0
 
-include "CogGt_Controle_Fichier.dhsp"
+
 
 ;*
 ;* Procedures
@@ -120,7 +120,7 @@ EndP
 ;*
 Public Procedure ZoomDebut																					; Initialisation du zoom
 BeginP																											; ZoomDebut
-	Controle_Fichier
+	
 	Init_Zoom(FicheNoBloc=0)
 	Seek_Soc(MZ.DOS)
 	G7.Projet = G3XZ.Projet
@@ -129,6 +129,11 @@ BeginP																											; ZoomDebut
 	Note_Debut   				;init de la gestion des notes
 
 	ZOOM.TITREFIXE = `UT109 - Montants consommés des Projets spécifiques`
+
+	If Cog_UTTAB_Res() <> 0
+		ProgramExit
+	EndIf
+
 EndP
 
 ;*

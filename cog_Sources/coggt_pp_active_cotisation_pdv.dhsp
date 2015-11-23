@@ -1,34 +1,40 @@
 ;*
-;*    Active les cotisations PDV
+;*    Active les cotisations PDV	 coggt_pp_active_cotisation_pdv
 ;*
 
 ;*    Log    version   nPmodif      date     modifications
 ;*    TR       6.3a      01        06.2011 	 Initial
 
+;
 Include 			"GTQC000.dhsp"
 
-Module	GRPMFIC.dhop
-Module	GRTM000.dhop
-Module	GTTM000.dhop
+;
+Module	"GRPMFIC.dhop"
+Module	"GRTM000.dhop"
+Module	"GTTM000.dhop"
+Module	"COG_GDIVA.dhop"
 
-HfileVersion 	Cogfdd.dhsd 	COGGTF_TAB
+;
+HfileVersion 	"Cogfdd.dhsd" 	COGGTF_TAB
 
-Hfile 	Cogfdd.dhsd 	COGGTF_TAB	COGGTF_TAB
-HFile		GTFDD.DHSD		GTFPROJ		GTFPROJ			; Projet Affaire
-Public HFile	GTFDD.DHSD	GTFPCF		GTFPCF_DEV_01			; Tiers
+;
+		Hfile 	"Cogfdd.dhsd" 	COGGTF_TAB		COGGTF_TAB
+		HFile		"GTFDD.DHSD"	GTFPROJ			GTFPROJ			; Projet Affaire
+Public HFile	"GTFDD.DHSD"	GTFPCF			GTFPCF_DEV_01			; Tiers
 
-Record 	Cogfdd.dhsd 	COG_UT104					
-Record 	Cogfdd.dhsd 	COG_UT108					
-Record 	grfdd.dhsd  	GRTEVT							; Code événement
+;
+Public RecordSQL	"COGRS_DOS.DHOQ"		CogRs_SocComp
+Public RecordSQL	"CogRs_UtTab.dhoq"	CogRs_UT108
 
-Record	GTFDD.DHSD	PRJAP		PRJAP						; Projet apres vente
-Record	GTFDD.DHSD	CLI		CLI						; Client
-Public Record	GTFDD.DHSD	CLI		CLI_DEV_01					; Client
+;
+		Record 	"Cogfdd.dhsd" 	COG_UT104										
+		Record 	"grfdd.dhsd"  	GRTEVT							; Code événement
+		Record	"GTFDD.DHSD"	PRJAP				PRJAP			; Projet apres vente
+Public Record	"GTFDD.DHSD"	CLI				CLI			; Client
 
 ; Variables globales
 1	g_Dossier	>GTFDD.DHSD	Dos
 1	g_Affaire	>GTFDD.DHSD	Affaire
-
 1	t_Ce1_01				>CCFDD.DHSD	Ce1
 1	t_Key_01				255
 1	x_st_01				X
@@ -48,7 +54,8 @@ Public Function int Verifier_Affaire(temp_Dos, temp_Affaire)
 BeginF
 	GTFPROJ.Key = "A" & temp_Dos & temp_Affaire
 	x_st0 = HRead(GTFPROJ, PRJAP)
-	If x_st0 = 0 And PRJAP.Dos = temp_Dos And PRJAP.Affaire = temp_Affaire
+	If x_st0 = 0 And PRJAP.Dos = temp_Dos And PRJAP.Affaire = temp_Affaire AND PRJAP.Cog_Cotisation_PDV <> system.esp 
+
 		FReturn(0)
 	Else
 		FReturn(1)
@@ -56,62 +63,138 @@ BeginF
 EndF
 
 ;*
+Function int Cog_InitialiserVariables
+;
+BeginF
+
+	If PingReceiveAndDelete("ZECHANGE", MZ) = 0 And PingReceiveAndDelete("NumAffaire",g_Affaire) = 0	 
+
+		; Chargement de l'environnement
+		If Seek_Soc(MZ.DOS) <> 0
+			FReturn(0)
+		EndIf
+		g_Dossier = MZ.Dos
+		CogRs_SocComp.Init()
+		CogRs_SocComp.Where.PK(MZ.Dos)
+		CogRs_SocComp.Select()
+
+		; Verification de l'affaire
+		If	Verifier_Affaire(g_Dossier, g_Affaire) = 0
+
+			; Vérification du client 
+			If Seek_Cli(PRJAP.Tiers) <> 0
+				Cog_EcritureLivreDeBord("Code client " & PRJAP.Tiers & " incorrect, activation cotisations PDV impossible pour l'affaire " & g_Affaire & ".")
+				Pong('RETOUR',2)
+				FReturn(0)
+			EndIf
+			If CLI.Cog_OP <> ' ' AND Lectab(20,CLI.COG_OP) <> 0
+			 	Cog_EcritureLivreDeBord("Code opération " & CLI.Cog_OP & " incorrect pour le tiers " & CLI.Tiers & ".")
+				Pong('RETOUR',2)
+				FReturn(0)
+			EndIf
+
+		Else
+			Cog_EcritureLivreDeBord("Code affaire " & g_Affaire & " incorrect, activation cotisations PDV impossible.")
+			Pong('RETOUR',2)
+			FReturn(0)
+		EndIf ; 	Verifier_Affaire(g_Dossier, g_Affaire) = 0
+
+	Else
+
+		Cog_EcritureLivreDeBord("Activation cotisations PDV impossible: code affaire ou utilisateur non transmis au programme.")
+		Pong('RETOUR',2)
+		FReturn(0)
+
+	EndIf	 ; PingReceiveAndDelete("ZECHANGE", MZ) = 0 And PingReceiveAndDelete("NumAffaire",g_Affaire) = 0	 
+
+
+	FReturn(TRUE)
+EndF
+
+;*
 Public Procedure Active_Affaire
+;	Lecture des fiches UT104 pour lesquelles 	COG_UT104.Dos = PRJAP.DOS And COG_UT104.Etb = PRJAP.ETB And COG_UT104.Cog_Cotisation_PDV = PRJAP.Cog_Cotisation_PDV
+; Création des fiches UT108 correspondantes
 1		x_st0				X
 1		Liste				L
 1		wdate				8
 1		note				8,0
 BeginP
-	Liste = ListCreate
+
+	Liste = ListCreate()
+	wdate = Hdate(Today,"p")
+
+	; Lecture de toutes les fiches UT104 associées au projet
 	COGGTF_TAB.Key = 'E' & PRJAP.DOS & PRJAP.ETB & PRJAP.Cog_Cotisation_PDV
 	Loop Hread(COGGTF_TAB,COG_UT104) = 0 And COG_UT104.Dos = PRJAP.DOS And COG_UT104.Etb = PRJAP.ETB And COG_UT104.Cog_Cotisation_PDV = PRJAP.Cog_Cotisation_PDV
 		ListAddEnd(Liste,COG_UT104)
 	EndLoop
+
+	; Traitement de la liste
 	Listbegin(Liste)
-	Loop Listnext(Liste,COG_UT104) > 0
-		COG_UT108 	  		= ' '
-		COG_UT108.CE1 		= '8'
-		COG_UT108.USERCR	= system.User
-		COG_UT108.USERCRDH= Time(7)
-		COG_UT108.CENOTE		= 1
-		COG_UT108.DOS 		= COG_UT104.DOS
-		COG_UT108.ETB 		= COG_UT104.Etb
-		COG_UT108.Affaire = g_Affaire
-		COG_UT108.Ref		= COG_UT104.Ref
-		COG_UT108.Cog_Period 			= COG_UT104.Cog_Period
-;		COG_UT108.Cog_Date_Debut 			= Hdate(Today,"p")
-;		COG_UT108.Cog_Date_Fin   			= '99991231'
-		If CLI_DEV_01.Cog_Op <> " "
-			COG_UT108.Cog_Op	= CLI_DEV_01.Cog_Op
-		Else
-			COG_UT108.Cog_Op	= "C00"	; Code OP par défaut
-		EndIf
-		COG_UT108.Cog_AxeAnael				= COG_UT104.Cog_AxeAnael
-		COG_UT108.Cog_Duree_Limitee 		= COG_UT104.Cog_Duree_Limitee
-		COG_UT108.Cog_Nombre_Cotisation 	= COG_UT104.Cog_Nombre_Cotisation	
-		COG_UT108.Cog_Date_Debut 			= Hdate(Today,"p")
-		If Cog_UT108.Cog_Duree_Limitee 	= 2 
-			If Cog_UT108.Cog_Nombre_Cotisation > system.esp
-				wdate = COG_UT108.Cog_Date_Debut
-			 	Switch COG_UT108.Cog_Period
-					Case 1  ; Mensuelle
-						COG_UT108.Cog_Date_Fin = Hdate(wdate,,(COG_UT108.Cog_Nombre_Cotisation-1))
-					Case 2  ; Bimestrielle
-						COG_UT108.Cog_Date_Fin = Hdate(wdate,,((COG_UT108.Cog_Nombre_Cotisation * 2)-2))
-					Case 3  ; Trimestrielle
-						COG_UT108.Cog_Date_Fin = Hdate(wdate,,((COG_UT108.Cog_Nombre_Cotisation * 3)-3))
-					Case 4  ; Semestrielle
-						COG_UT108.Cog_Date_Fin = Hdate(wdate,,((COG_UT108.Cog_Nombre_Cotisation * 6)-6))
-					Case 5  ; Annuelle
-						COG_UT108.Cog_Date_Fin = Hdate(wdate,,((COG_UT108.Cog_Nombre_Cotisation * 12)-12))
-				EndSwitch
-				COG_UT108.Cog_Nombre_Cotisation_Restantes = Cog_UT108.Cog_Nombre_Cotisation
-			Endif
-	 	Else
-			COG_UT108.Cog_Date_Fin = '99991231'
-		Endif				
-		Hwrite(COGGTF_TAB,COG_UT108)
-	EndLoop
+	Do While Listnext(Liste, COG_UT104) not in (-1, 0)
+
+		CogRs_UT108.Init()
+		CogRs_UT108.Where.PK(COG_UT104.Etb, g_Affaire, COG_UT104.Ref, wdate)
+
+		; controle: l'enreg n'existe pas et n'est pas réservé (en cours de création)
+		If CogRs_UT108.Select() = 0 	\
+			AND CogRs_UT108.FShare(['COG_UT108' COG_UT104.DOS COG_UT104.ETB g_Affaire COG_UT104.REF wdate], 'R') = 0
+
+			CogRs_UT108.Init() 				
+			CogRs_UT108.CE1 							= '8'
+			CogRs_UT108.USERCR						= system.User
+			CogRs_UT108.USERCRDH						= Time(7)
+			CogRs_UT108.CENOTE						= 1
+			CogRs_UT108.DOS 							= COG_UT104.DOS
+			CogRs_UT108.ETB 							= COG_UT104.Etb
+			CogRs_UT108.Affaire 						= g_Affaire
+			CogRs_UT108.Ref							= COG_UT104.Ref
+			CogRs_UT108.Cog_Period 					= COG_UT104.Cog_Period
+			CogRs_UT108.RefQte						= 1
+			CogRs_UT108.Cog_AxeAnael				= COG_UT104.Cog_AxeAnael
+			CogRs_UT108.Cog_Duree_Limitee 		= COG_UT104.Cog_Duree_Limitee
+			CogRs_UT108.Cog_Nombre_Cotisation 	= COG_UT104.Cog_Nombre_Cotisation	
+			CogRs_UT108.Cog_Date_Debut 			= Hdate(Today,"p")
+	
+			; recherche du code OP
+			If CLI.Cog_Op <> " "
+				CogRs_UT108.Cog_Op	= CLI.Cog_Op
+			Else
+				CogRs_UT108.Cog_Op	= CogRs_SocComp.Cog_PDVOp	; Code OP par défaut
+			EndIf
+	
+			; détermination de la date de fin selon la périodicité
+			If CogRs_UT108.Cog_Duree_Limitee 	= 2 
+				If CogRs_UT108.Cog_Nombre_Cotisation > system.esp
+			
+				 	Switch CogRs_UT108.Cog_Period
+						Case 1  ; Mensuelle
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,(CogRs_UT108.Cog_Nombre_Cotisation-1))
+						Case 2  ; Bimestrielle
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,((CogRs_UT108.Cog_Nombre_Cotisation * 2)-2))
+						Case 3  ; Trimestrielle
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,((CogRs_UT108.Cog_Nombre_Cotisation * 3)-3))
+						Case 4  ; Semestrielle
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,((CogRs_UT108.Cog_Nombre_Cotisation * 6)-6))
+						Case 5  ; Annuelle
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,((CogRs_UT108.Cog_Nombre_Cotisation * 12)-12))
+					EndSwitch
+	
+					CogRs_UT108.Cog_Nombre_Cotisation_Restantes = CogRs_UT108.Cog_Nombre_Cotisation
+				Endif
+		 	Else
+				CogRs_UT108.Cog_Date_Fin = '99991231'
+			Endif	  ; If CogRs_UT108.Cog_Duree_Limitee 	= 2 
+			
+			; Création de l'enregistrement + libération
+			CogRs_UT108.Insert()
+			CogRs_UT108.FShare(['COG_UT108' COG_UT104.DOS COG_UT104.ETB g_Affaire COG_UT104.REF wdate], 'L')
+
+		EndIf		; If CogRs_UT108.Where.Exists() = 0	 AND CogRs_UT108.FSHARE() = 0
+
+	WEnd	 ; Listnext(Liste,COG_UT104)
+
 	ListDestroy(Liste)
 EndP
 
@@ -121,33 +204,13 @@ EndP
 
 ;* 
 Main
+;	
+	If Cog_InitialiserVariables()
 
-If PingReceiveAndDelete("ZECHANGE", MZ) = 0 And PingReceiveAndDelete("NumAffaire",g_Affaire) = 0
-	; Chargement de l'environnement
-	Seek_Soc(MZ.DOS)
-	g_Dossier = MZ.Dos
-	; Verification de l'affaire
-	If	Verifier_Affaire(g_Dossier, g_Affaire) = 0
-		; Vérification du client et de son code OP
-		t_Ce1_01 = "3"
-		GTFPCF_DEV_01.Key = "C" & PRJAP.Dos & t_Ce1_01 & PRJAP.Tiers
-		t_Key_01 = PRJAP.Dos & t_Ce1_01 & PRJAP.Tiers
-		x_st_01 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_01)
-		If x_st_01 = 0 And CLI_DEV_01.Dos = PRJAP.Dos And CLI_DEV_01.Ce1 = t_Ce1_01 And CLI_DEV_01.Tiers = PRJAP.Tiers
-			CLI_DEV_01	
-		Else
-			Init CLI_DEV_01 = " "	 
-		EndIf
 		; Traitement
-		If PRJAP.Cog_Cotisation_PDV <> system.esp And CLI_DEV_01.Tiers = PRJAP.Tiers And Lectab(20,CLI_DEV_01.COG_OP) = 0
-			Active_Affaire
-			Pong('RETOUR',0)
-		Else
-			Pong('RETOUR',1)
-		Endif
-	Else
-		Pong('RETOUR',2)
+		Active_Affaire
+		Pong('RETOUR',0)
+	
 	EndIf
-EndIf
 
-ProgramExit
+	ProgramExit()

@@ -4,9 +4,57 @@
 ;*
 
 ;*
-;*		Article						ART
+;*		PROJETS
 ;*
 
+;*
+<RecordSql Name=CogRs_PrjAp Comment='Projet après-vente' ZoomOptimize=yes>
+Public Record A5DD.dhsd		MZ
+Public Record GTFDD.dhsd 	T000
+<SELECT>
+	PRJAP.*	
+<FROM Insert=Yes Update=Yes Delete=Yes>
+	GTFDD.DHSD PRJAP 
+<LeftJoin Name='Zoom'>
+	GTFDD.dhsd CLI as CLI_PRI
+	on CLI_PRI.Dos = PRJAP.Dos and CLI_PRI.Tiers = PRJAP.Tiers and CLI_PRI.CE1 = '3'
+
+
+<WHERE>
+	PRJAP.Dos = MZ.Dos 
+
+	Case Equal_Etb	(char Etb)
+		PRJAP.Etb = Etb
+	Case Equal_Facturation
+		PRJAP.COG_FACTURE = 2
+	Case Equal_TiersFacturation
+		CLI_PRI.COG_FACTURATION = 2
+	Case PK (char Affaire)
+		PRJAP.Affaire = Affaire
+	Case InfEgal_Status(int ce2)
+		PRJAP.CE2 <= ce2
+	Case Not_Equal_CogStatus(char st)
+		PRJAP.COG_PRJ_STATUS <> st
+	Case Not_CogTaux_Null
+		PRJAP.COG_TAUX > 0
+	Case Between_Aff(char ad, char af)
+		PRJAP.AFFAIRE BETWEEN ad AND af
+	Case Between_Period(int pd, int pf)
+		PRJAP.COG_PERIODICITE BETWEEN pd AND pf
+
+<ORDERBY>
+	Case Par_Affaire				"Par Affaire"
+		PRJAP.Affaire ASC
+	Case Par_Tiers_Affaire		"Par Tiers et Affaire"
+		PRJAP.Tiers ASC
+		PRJAP.Affaire ASC
+	Case Par_AfrClas_Affaire 	"Par Classe et N° d'affaire"
+		PRJAP.AfrClas ASC
+		PRJAP.Affaire ASC
+	Case Par_LibAbr				"Par Libellé"
+		PRJAP.LibAbr ASC
+
+;*
 <RecordSql Name=Cogrs_PrjComp Comment='Complément projet' ZoomOptimize=Yes>
 Public Record A5DD.dhsd		MZ
 <SELECT>

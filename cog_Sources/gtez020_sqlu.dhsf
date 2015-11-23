@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20151106114510      
+;>xwin4obj                              7.0       20151116113021      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="06/11/2015"
+ date_modification="16/11/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
- dernier_id=1000054
+ dernier_id=1000061
  surcharge=oui
  date_modif_base="20140423090133"
  dernier_id_page=100001
@@ -9661,11 +9661,20 @@
  [groupbox]
   [presentation]
    position=130,202
-   taille=70,183
+   taille=70,253
    id=1000044
    wstyle="GROUPE"
   [param_groupbox]
    texte="Intégration Proservia"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=203,202
+   taille=48,253
+   id=1000055
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Facturation PDV"
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
@@ -9796,6 +9805,37 @@
    wstyle="STD"
   [texte]
    texte="Chemin pour les BL rejetés"
+ [obj_texte]
+  [presentation]
+   position=228,207
+   taille=9,74
+   id=1000056
+   wstyle="STD"
+  [texte]
+   texte="Seuil de tolérance tarifs PDV"
+ [obj_texte]
+  [presentation]
+   position=239,207
+   taille=9,74
+   id=1000059
+   wstyle="STD"
+  [texte]
+   texte="Code opération par défaut"
+ [champ]
+  [presentation]
+   position=239,309
+   taille=9,147
+   id=1000061
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_soccomp,op_pdv_lib,cogrs_soccomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
  [case_a_cocher]
   [presentation]
    position=21,10
@@ -10057,21 +10097,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=116,285
-   taille=9,188
-   id=1000039
-   colonnes_saisie=80
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_soccomp,art_des,cogrs_soccomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
- [champ]
-  [presentation]
    position=149,292
    taille=9,76
    id=1000046
@@ -10172,6 +10197,77 @@
    shift_f7=9040
   [traitements]
    microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=218,206
+   taille=9,129
+   id=1000058
+   wstyle="STD"
+  [description]
+   donnee=cogrs_soccomp,cog_pdvtarctrl,cogrs_soccomp
+  [param_case]
+   texte="Contrôler les montants des cotisations PDV"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=228,280
+   taille=9,29
+   id=1000057
+   colonnes_saisie=6
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,cog_pdvseuil,cogrs_soccomp
+   format="009V99%"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_PDVseuil_1_Ap"
+ [champ]
+  [presentation]
+   position=239,280
+   taille=9,29
+   id=1000060
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,cog_pdvop,cogrs_soccomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9060
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_PDVOp_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=116,285
+   taille=9,188
+   id=1000039
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_soccomp,art_des,cogrs_soccomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
 [page]
  numero=24
  fond="STD"
@@ -10724,26 +10820,27 @@
 include "gttc000.dhsp"
 
 ;
-Module	A5TM000.dhop
-Module	A5PM000.dhop
-Module	A5PMFIC.dhop
-Module "A5PMFLASH.dhop"
+Module	"A5TM000.dhop"
+Module	"A5PM000.dhop"
+Module	"A5PMFIC.dhop"
+Module 	"A5PMFLASH.dhop"
 
 ;
-Public RecordSql "gtrsdos.dhoq" dossier dossier
-Public RecordSql "gtrsdos.dhoq" dossier dossier_sel
-Public RecordSql "cogrs_dos.dhoq" cogrs_soccomp 		CogRs_SocComp
+Public RecordSql "gtrsdos.dhoq" 		dossier 				dossier
+Public RecordSql "gtrsdos.dhoq" 		dossier 				dossier_sel
+Public RecordSql "cogrs_dos.dhoq" 	cogrs_soccomp 		CogRs_SocComp
 
 ;
-Public Record "gtfdd.dhsd" ART								
-Public Record "gtfdd.dhsd" g7 		g7
-Public Record "gtfdd.dhsd" socno 	socno
-Public Record "ddsys.dhsd" rowinfo 	zoomselection
-Public Record "gtfdd.dhsd" g7 		g7bis
-Public Record "rcfebcdd.dhsd" d2 	d2a
-Public Record "rcfebcdd.dhsd" d2 	d2v
-Public Record "gtfdd.dhsd" t037 		t037
-Public Record "gtfdd.dhsd" soc soc
+Public Record "gtfdd.dhsd" 		ART								
+Public Record "gtfdd.dhsd" 		g7 		g7
+Public Record "gtfdd.dhsd" 		socno 	socno
+Public Record "ddsys.dhsd" 		rowinfo 	zoomselection
+Public Record "gtfdd.dhsd" 		g7 		g7bis
+Public Record "rcfebcdd.dhsd" 	d2 		d2a
+Public Record "rcfebcdd.dhsd" 	d2 		d2v
+Public Record "gtfdd.dhsd" 		t020 		T020
+Public Record "gtfdd.dhsd" 		t037 		t037
+Public Record "gtfdd.dhsd" 		SOC 		SOC
 
 ;*
 ;*
@@ -10784,6 +10881,36 @@ Beginp
 		A5_Mes_Alert(2012,dossier.Cog_Flash_CdeF_Valid)
 		Harmony.Retour=xmenext_traitement_Avant
 	Endif
+Endp
+
+
+;*
+Private Procedure Champ_Cog_PDVOp_1_Ap
+;
+Beginp
+
+	CogRs_SocComp.OP_PDV_LIB = ' '
+
+	If Lectab(20, CogRs_SocComp.Cog_PDVOp, err=1120) = 0
+
+		CogRs_SocComp.OP_PDV_LIB = T020.Lib
+
+		If T020.TICOD <> 'C' or T020.SENS <> 2	OR T020.PiOpt(3) <> 2 OR T020.PiOpt(4) <> 2
+			MessageBox("Le code opération PDV doit être paramétré pour les BL et factures clients en sortie.","Alerte", MB_ICONINFORMATION)
+			Harmony.Retour = XMENEXT_RESSAISIE
+		EndIf
+
+	EndIf
+Endp
+
+
+;*
+Private Procedure Champ_Cog_PDVseuil_1_Ap
+;
+Beginp
+
+	CogRs_SocComp.Cog_PDVseuil = Abs(CogRs_SocComp.Cog_PDVseuil)
+
 Endp
 
 

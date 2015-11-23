@@ -1,4 +1,4 @@
-<DictionarySql DefaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_dosu.dhoq" ModuleInfo='$Id: cogrs_dos.dhsq 8350 2015-07-08 08:27:13Z admin $'>
+<DictionarySql DefaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_dosu.dhoq" ModuleInfo='$Id: cogrs_dos.dhsq 8901 2015-11-23 08:29:20Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGGTF_DOS
 ;*
@@ -7,16 +7,23 @@
 ;*		Article						ART
 ;*
 
-<RecordSql Name=CogRs_SocComp Comment='Complément dossier'>
-Public Record A5DD.dhsd		MZ
+<RecordSql Name=CogRs_SocComp Comment='Complément dossier' ZoomOptimize=Yes>
+Public Record 	A5DD.dhsd		MZ
+Public Record	GTFDD.DHSD		T000
 <SELECT>
 	COG_SOC.*, 
-	ART.DES		AS	ART_DES
+	ART.DES		AS	ART_DES,
+	OP_PDV.LIB	AS OP_PDV_LIB
+<MANDATORYCOLUMNS>
+	COG_SOC.DOS
 <FROM Insert=Yes Update=Yes Delete=Yes>
 	COG_SOC
-<LEFTJOIN>
+<LEFTJOIN Name='Zoom'>
 	GTFDD.DHSD	ART
 	ON ART.DOS = COG_SOC.DOS AND ART.REF = COG_SOC.FRAISFIREF
+<LEFTJOIN Name='Zoom'>
+	GTFDD.DHSD	T020	AS OP_PDV
+	ON (OP_PDV.DOS = CASE WHEN T000.TABTYP(20) = 2 THEN 999 ELSE COG_SOC.DOS END) AND OP_PDV.OP = COG_SOC.COG_PDVOP
 <WHERE>
 	Case PK(int dos)
 		COG_SOC.DOS = dos

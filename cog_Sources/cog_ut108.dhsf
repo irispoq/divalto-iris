@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20140425151819      
+;>xwin4obj                              7.0       20151110121247      
 [masque]
  libelle="Affectations des cotisati"
  utilisateur="UGIE"
- date_modification="25/04/2014"
+ date_modification="10/11/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=428
  type_masque=2
@@ -1831,7 +1831,12 @@ endp
 ;*
 Procedure Champ_Ref_1_Ap			; Vérification de l'existence de la référence article
 Beginp
-	Controle_Article(COG_UT108.Ref,2100) 
+	If Controle_Article(COG_UT108.Ref,2100) = 0
+		If ART.Cog_PdvFa <> 2
+			MessageBox("Cette référence n'est pas paramétrée pour la facturation PDV.","Alerte", MB_ICONEXCLAMATION)
+			Harmony.Retour = XMENEXT_RESSAISIE
+		EndIf
+	EndIf
 Endp
 
 ;*

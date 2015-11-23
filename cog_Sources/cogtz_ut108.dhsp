@@ -1,0 +1,676 @@
+SetModuleInfo('$Id: cogtz_cog_std.dhsp 1088 2013-01-24 14:04:20Z r.blouet $')
+;*
+;*      Zoom sur les cotisations PDV
+;*
+
+OverWrittenBy "coguz_ut108.dhop"
+
+;
+Include "GTTCZ00.dhsp"					; Déclarations communes
+
+;
+Module 	"CogGt_Controle_Fichier.dhop"
+Module	"A5PMNoteJoint.dhop"
+Module 	"XZoom7.dhop"
+Module 	"CCTM000.dhop"
+Module	"CCPMFIC.dhop"
+Module	"GtTmPce.dhop"
+
+; Record Sql 
+Public recordSQL  "CogRs_uttab.dhoq"  	CogRs_UT108							; Table des cotisations
+Public recordSQL  "CogRs_uttab.dhoq"  	CogRs_UT108		CogRs_Sel		; Table pour sélection
+Public RecordSQL	"COGRS_DOS.DHOQ"		CogRs_SocComp
+
+;
+Public Record	"gtfdd.dhsd"			PRJAP
+Public Record	"gtfdd.dhsd"			CLI
+Public Record	"gtfdd.dhsd"			ART
+
+; Variables
+1	nbsel							4,0			; Nombre de lignes sélectionnées
+
+
+;*
+;* procedures 
+;*
+
+;*
+Function int CogRs_UT108_Controler_Ecart_Tarif
+; 0 --> OK
+; 1 --> Ecart de tolérance dépassé
+1		wArtTar		>gtfdd.dhsd		PuB
+1		wEcart		>gtfdd.dhsd		PuB
+1		wTolerance	>gtfdd.dhsd		PuB
+1		wUn			>gtfdd.dhsd		VenUn
+1		wPpar			>gtfdd.dhsd		PPar
+1		wPubUn		>gtfdd.dhsd		PubUn
+1		wPromotyp	>gtfdd.dhsd		Promotyp
+1		wTacod		>gtfdd.dhsd		Tacod
+1		wPromoTacod	>gtfdd.dhsd		PromoTacod
+1		wPubTyp		>gtfdd.dhsd		PubTyp
+1		wPaForf		>gtfdd.dhsd		PaForf
+1		wQte			>gtfdd.dhsd		Qte
+1		wNbCotis		2,0
+BeginF
+
+	; chargement des données complémentaires
+	If PRJAP.Affaire <> CogRs_UT108.Affaire
+		Seek_PRJAP(CogRs_UT108.Affaire)
+	EndIf
+	If CLI.Tiers <> PRJAP.Tiers AND PRJAP.Tiers <> ' '
+		Seek_CLI(PRJAP.Tiers)
+	EndIf
+	If ART.Ref <> CogRs_UT108.Ref
+		Seek_Art(CogRs_UT108.Ref)
+	EndIf
+	wUn = Condition(ART.VenUn <> ' ', ART.VenUn, Condition(ART.RefUn<> ' ',ART.RefUn, SOC.Cog_RefUn))
+	wQte = Condition(CogRs_UT108.RefQte > 0, CogRs_UT108.RefQte, 1)
+	wNbCotis = Condition(CogRs_UT108.Cog_Nombre_Cotisation > 0, CogRs_UT108.Cog_Nombre_Cotisation, 1)
+	CogRs_UT108.Pub 	= CogRs_UT108.Cog_Montant / wQte / wNbCotis
+
+	; gestion de l'écart TAR - UT108?
+	If CogRs_SocComp.Cog_PDVtarCtrl <> 2  
+		FReturn(0)
+	EndIf
+
+	;
+	Recherche_Famille_Tarif_Vente(wArtTar, wPpar, wPubUn, wPromotyp, wTacod, wPromoTacod, pcod=1, wPuBtyp, wPaForf, CogRs_UT108.Ref, '', '', PRJAP.Tiers, \
+												marche='', tacod=CLI.TaCod, CLI.PromoTaCod, wUn, CLI.Dev, '', wQte, CLI.TaFam, CLI.TaFamX, ART.TaFamR, ART.TaFamRx) = 0
+
+	If wArtTar <> 0 AND CogRs_UT108.Cog_Montant > 0
+
+		wTolerance 	= (wArtTar / 100) * CogRs_SocComp.Cog_PDVseuil
+		wEcart = Abs(wArtTar - CogRs_UT108.Pub)
+		If wEcart > wTolerance
+
+			MessageBox("Le montant saisi a un écart supérieur à " & nospaces(CogRs_SocComp.Cog_PDVseuil) & "% du tarif habituel."\
+							& "|Montant unitaire calculé:" & nospaces(CogRs_UT108.Pub) & " " & CLI.Dev\
+							& "|Montant habituel:" & nospaces(wArtTar) & " " & CLI.Dev ,"Alerte", MB_ICONEXCLAMATION)
+			FReturn(1)
+
+		EndIf
+
+	ElsIf wArtTar = 0
+		MessageBox("Il n'y a pas de tarif paramétré pour les critères de facturation.","Alerte", MB_ICONINFORMATION)
+	EndIf
+
+
+	FReturn(0)
+EndF
+
+;*
+Function int CogRs_UT108_SeekFichePosterieure
+; recherche s'il existe des fiches avec Date_Debut >= Date_Fin de la fiche courante
+; retourne le nombre de fiches trouvées
+RecordSQL	"CogRs_UTTAB.dhoq"		CogRs_UT108			wRs_UT108
+BeginF
+
+	wRs_UT108.Init()
+	wRs_UT108.Where.RemoveCondition("")
+	wRs_UT108.Where.Equal_Affaire(CogRs_UT108.AFFAIRE)
+	wRs_UT108.Where.AddCondition("Equal_Affaire")
+	wRs_UT108.Where.Equal_Etb(CogRs_UT108.ETB)
+	wRs_UT108.Where.AddCondition("Equal_Etb")
+	wRs_UT108.Where.Equal_Ref(CogRs_UT108.REF)
+	wRs_UT108.Where.AddCondition("Equal_Ref")
+	wRs_UT108.Where.SupEgal_DatD(CogRs_UT108.Cog_Date_Fin)
+	wRs_UT108.Where.AddCondition("SupEgal_DatD")
+
+	FReturn(wRs_UT108.GetCount())
+
+EndF
+
+;*
+Function int CogRs_UT108_SeekFicheActive(wPerimer)
+; 0 --> aucun résultat
+; 1 --> une fiche trouvée, possible de périmer
+; 2 --> une fiche trouvée avec une date de début > à la date de début de la fiche en cours de création
+; 3 --> ancienne fiche réservée
+RecordSQL	"CogRs_UTTAB.dhoq"		CogRs_UT108			wRs_UT108
+RecordSQL	"CogRs_UTTAB.dhoq"		CogRs_UT108			wRs_UT108_PK
+1		wPerimer		1,0 = FALSE	 		; si retour = 1 et wPerimer = TRUE --> update de la fiche trouvée HSDT = APPLICDT-1J de la nouvelle fiche
+1		wTxterr		S
+BeginF
+
+	wRs_UT108.Init()
+	wRs_UT108.Where.RemoveCondition("")
+	wRs_UT108.Where.Equal_Affaire(CogRs_UT108.AFFAIRE)
+	wRs_UT108.Where.AddCondition("Equal_Affaire")
+	wRs_UT108.Where.Equal_Etb(CogRs_UT108.ETB)
+	wRs_UT108.Where.AddCondition("Equal_Etb")
+	wRs_UT108.Where.Equal_Ref(CogRs_UT108.REF)
+	wRs_UT108.Where.AddCondition("Equal_Ref")
+	wRs_UT108.Where.Equal_DateValide(CogRs_UT108.Cog_Date_Debut)
+	wRs_UT108.Where.AddCondition("Equal_DateValide")
+	If wRs_UT108.Select() > 0
+
+		If wRs_UT108.Cog_Date_Debut >= CogRs_UT108.Cog_Date_Debut
+			MessageBox("Il existe une fiche active pour cette association établissement / affaire / référence"\
+							& " avec une date d'application supérieure ou égale à la fiche en cours de création.", "Alerte", MB_ICONERROR) 
+			FReturn(2)
+		EndIf
+
+		;
+		If wPerimer
+			
+			If wRs_UT108.FShare(['COG_UT108' wRs_UT108.DOS wRs_UT108.ETB wRs_UT108.AFFAIRE wRs_UT108.REF wRs_UT108.Cog_Date_Debut], 'R') = 0
+
+				If wRs_UT108.Select() > 0	; reexecution du select -> l'enreg a pu etre modifié entre le premier select et la resa
+
+					wRs_UT108.Cog_Date_Fin 	= HDate(CogRs_UT108.Cog_Date_Debut, -1)
+					wRs_UT108.UserMO	 		= System.User
+					wRs_UT108.UserMoDh 		= time(7)
+					wRs_UT108.Update()
+					wRs_UT108.FShare(['COG_UT108' wRs_UT108.DOS wRs_UT108.ETB wRs_UT108.AFFAIRE wRs_UT108.REF wRs_UT108.Cog_Date_Debut], 'L')
+
+				EndIf
+
+			Else
+				wRs_UT108.ShareLastError(wTxterr)
+				MessageBox("L'ancienne fiche est réservée et ne peut être périmée.", wTxterr, MB_ICONERROR)
+				FReturn(3)
+			EndIF
+
+		EndIF	 ; If wPerimer
+
+		;
+		FReturn(1)
+
+	EndIf	 ; If wRs_UT108.Select() > 0
+
+	FReturn(0)
+EndF
+
+;*
+Public Procedure Maj_Nbre_Cotisations_Restantes					
+; Met a jour le nbre de cotisations restantes
+1		i			X
+1		wdate		8
+BeginP
+	If Dtsub(CogRs_UT108.Cog_Date_Debut,CogRs_UT108.Cog_Date_Fin) <= 7300
+		wdate = 	CogRs_UT108.Cog_Date_Debut
+		For i = 1 to 240
+			wdate = Hdate(wdate,,1)
+			If Left(wdate,6) > Left(CogRs_UT108.Cog_Date_Fin,6) | Exitfor | Endif
+		Next
+	 	Switch CogRs_UT108.Cog_Period
+			Case 1  ; Mensuelle
+				CogRs_UT108.Cog_Nombre_Cotisation_Restantes = i 
+			Case 2  ; Bimestrielle
+				CogRs_UT108.Cog_Nombre_Cotisation_Restantes = i / 2
+			Case 3  ; Trimestrielle
+				CogRs_UT108.Cog_Nombre_Cotisation_Restantes = i / 3
+			Case 4  ; Semestrielle
+				CogRs_UT108.Cog_Nombre_Cotisation_Restantes = i / 6
+			Case 5  ; Annuelle
+				CogRs_UT108.Cog_Nombre_Cotisation_Restantes = i / 12
+		EndSwitch
+	Endif
+EndP
+
+;*
+Public Procedure Maj_Date_Fin
+;
+BeginP
+	If CogRs_UT108.Cog_Nombre_Cotisation > system.esp
+	 	Switch CogRs_UT108.Cog_Period
+			Case 1  ; Mensuelle
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,(CogRs_UT108.Cog_Nombre_Cotisation-1))
+			Case 2  ; Bimestrielle
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,((CogRs_UT108.Cog_Nombre_Cotisation * 2)-2))
+			Case 3  ; Trimestrielle
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,((CogRs_UT108.Cog_Nombre_Cotisation * 3)-3))
+			Case 4  ; Semestrielle
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,((CogRs_UT108.Cog_Nombre_Cotisation * 6)-6))
+			Case 5  ; Annuelle
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,((CogRs_UT108.Cog_Nombre_Cotisation * 12)-12))
+		EndSwitch
+		CogRs_UT108.Cog_Nombre_Cotisation_Restantes = CogRs_UT108.Cog_Nombre_Cotisation
+	Else
+		Maj_Nbre_Cotisations_Restantes
+		CogRs_UT108.Cog_Nombre_Cotisation = CogRs_UT108.Cog_Nombre_Cotisation_Restantes
+	Endif
+EndP
+
+;*	Mise à jour des boutons (affichage, grisés, ...)
+Public Procedure Maj_Menu_Boutons
+; met à jour le menu et les boutons
+BeginP
+
+	Switch ZOOM.ACTION
+
+	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+		
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", "<BITMAP>NOTE_N")
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+
+
+	Case ZOOM_MODIFICATION
+		; en modification
+		XmeMenuEnableItem(Zoom.Idmenu,"NOTE",True)
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(CogRs_UT108.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		XmeToolbarEnableButton(idOutilZoom,"NOTE",True)
+
+
+	Case 	ZOOM_AFFICHAGE
+		switch Zoom.TypeInput
+
+		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
+			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(CogRs_UT108.CENOTE = 2, True, False))
+
+		endswitch
+
+		XmeToolBarSetButtonInfo(idOutilZoom, "NOTE", Condition(CogRs_UT108.CENOTE = 2, "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		xmetoolbarenablebutton(idOutilZoom,"NOTE", Condition(CogRs_UT108.CENOTE = 2, True, False))
+
+	EndSwitch
+
+EndP
+
+;*	Recherches complémentaires
+public procedure RechercherLibelle
+beginp
+
+endp
+
+;*
+public procedure Traiter_Selection
+beginp	; Traiter_Selection
+
+	nbsel ++
+	Pong("CogRs_UT108_" & nbsel,CogRs_UT108.Ref)
+
+endp		; Traiter_Selection
+
+
+;*
+public procedure Envoyer_Selections
+beginp	; Envoyer_Selections
+
+	nbsel	= 0
+	ZoomTraiterSelection("cogtz_UT108.dhop","Traiter_Selection")			
+	Pong("CogRs_UT108_nbre",nbsel)
+
+endp		; Envoyer_Selections
+
+;*	envoie l'élément courant si il n'y a pas eu de sélection multiple précédemment
+public procedure Envoyer_Courant
+beginp
+
+	if nbsel = 0
+
+		nbsel	= 1
+		Pong("CogRs_UT108_" & nbsel,CogRs_UT108.Ref)
+		Pong("CogRs_UT108_nbre",nbsel)
+	
+	endif
+
+endp
+
+;*
+;* procedures d'initialisation et fin de zoom
+;*
+
+;*
+Public Procedure ZoomEnteteTableau 
+Beginp
+	XmeList_ScanColumn(Zoom.IdTableau)
+Endp
+
+;*
+Public Procedure Construire_Condition_Selection(nom, premier)
+1	Nom					A
+1	premier				1,0 = FALSE
+
+1 	Valeur_Condition	S
+1  Param					S
+
+Beginp
+
+	CogRs_UT108.where.RemoveCondition(Nom)
+
+	if CogRs_Sel.Etb <> ' '
+		Param = banaliser_condition(CogRs_Sel.Etb, premier)
+		CogRs_UT108.Where.Like_Etb(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Etb')
+	endif
+
+	if CogRs_Sel.Affaire <> ' '
+		Param = banaliser_condition(CogRs_Sel.Affaire, premier)
+		CogRs_UT108.Where.Like_Affaire(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Affaire')
+	endif
+
+	if CogRs_Sel.Ref <> ' '
+		Param = banaliser_condition(CogRs_Sel.Ref, premier)
+		CogRs_UT108.Where.Like_Ref(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Ref')
+	endif
+	
+	If CogRs_Sel.Cog_Duree_Limitee = 2
+		CogRs_UT108.Where.Equal_DateValide(today())
+		Ajouter_condition(Valeur_Condition, "Equal_DateValide")
+	EndIf														 	
+																						 	
+	if Valeur_Condition <> ' '
+		CogRs_UT108.where.AddCondition(Nom, Valeur_Condition)
+	endif
+Endp
+
+;*
+Public Procedure ZoomDebut 
+;
+Beginp
+
+	Init_Zoom(FicheNoBloc = 0)
+	
+	; dossiers
+	Seek_Soc(MZ.Dos)			; recherche du dossier et T000
+	Seek_CA(mz.Dos)
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(SOC.Dos)
+	CogRs_SocComp.Select()
+
+	;
+	G7.Projet = G3XZ.Projet
+	G7.Etb = G3XZ.Etb
+	G3XZ.Projet = system.esp
+
+	Note_Debut 				;Init de la gestion des notes													
+
+	CogRs_Sel.init()
+	CogRs_Sel.Cog_Duree_Limitee = 2			; filtre pour hsdt
+	CogRs_Sel.Affaire = G7.Projet
+	CogRs_Sel.Etb = G7.Etb
+	CogRs_UT108.Orderby.Par_Affaire()
+	
+	XmeSetAttribut("pilot_aff", AN_VISIBILITE, Condition(CogRs_Sel.Affaire <> ' ', AV_GRISE, AV_VISIBLE))
+
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE, TRUE)
+
+	; sauvegarde du mode d'appel
+	g7.pong		= g3xz.pong
+	g3xz.pong 	= false
+
+	ZOOM.TITREFIXE = `UT108 - Affectations des cotisations PDV`
+
+	If Cog_UTTAB_Res() <> 0
+		ProgramExit
+	EndIf
+
+Endp
+
+;*
+Public Procedure ZoomAbandon		; sortie du zoom par f9
+Beginp
+Endp
+
+;*
+Public Procedure ZoomVAlidation ; validation du zoom
+Beginp
+
+	zoom.valretour	= CogRs_UT108.Ref
+	if g7.pong = true
+		Envoyer_Courant
+	endif
+
+Endp
+
+;*
+Public Procedure ZoomFin			; à la sortie du zoom
+Beginp
+Endp					
+
+;*
+;* procedures création, duplication, modification et suppression
+;*
+
+;*
+Public Procedure ZoomCreation
+Beginp
+	; initialiser les données 
+	CogRs_UT108.init()
+
+	CogRs_UT108.CE1 = '8'
+	CogRs_UT108.Dos	= MZ.Dos
+	CogRs_UT108.Etb	= MZ.Etb
+	CogRs_UT108.Cog_Date_Debut = Hdate(Today,"p")
+	CogRs_UT108.Cog_Date_Fin   = '99991231'
+	CogRs_UT108.Cog_Period= 1
+
+	If Not G7.Projet = system.esp
+		CogRs_UT108.Affaire = G7.Projet
+		Seek_Prjap(CogRs_UT108.Affaire)
+	Endif
+
+	Zoom.Modelf 		= ZOOM_MODE_FICHE		; pour interdire la création en mode liste
+	Zoom.Seq1don 		= 1
+Endp	  
+
+;*
+Public Procedure ZoomDuplication 
+Beginp
+	CogRs_UT108.USERCR		= ' '
+	CogRs_UT108.USERCRDH		= ' '
+	CogRs_UT108.USERMO		= ' '
+	CogRs_UT108.USERMODH		= ' '
+	CogRs_UT108.NOTE			= 0
+	CogRs_UT108.CENOTE		= 1
+	CogRs_UT108.Cog_Nombre_Cotisation_Restantes = system.esp	
+	CogRs_UT108.Cog_Date_Derniere_Facture = ' '
+	;CogRs_UT108.Cog_Montant = 0
+	CogRs_UT108.Cog_Nombre_Cotisation = 0
+	CogRs_UT108.Cog_Nombre_Cotisation_Facturees = 0
+	CogRs_UT108.Cog_Date_Fin   = '99991231'
+
+Endp
+
+;*
+Public Procedure ZoomApresCleCreation 
+; après saisie de la clé 
+Beginp
+	
+	Zoom.Titrevar	= CogRs_UT108.Ref
+
+	CogRs_UT108.Where.Exists(CogRs_UT108.ETB, CogRs_UT108.AFFAIRE, CogRs_UT108.REF, CogRs_UT108.Cog_Date_Debut)
+	ZOOM.RES	= ['COG_UT108' CogRs_UT108.DOS CogRs_UT108.ETB CogRs_UT108.AFFAIRE CogRs_UT108.REF CogRs_UT108.Cog_Date_Debut]
+
+	If ZOOM.ACTION = ZOOM_CREATION And Seek_Cli(Prjap.Tiers) = 0
+		CogRs_UT108.Cog_OP = CLI.Cog_Op
+	Endif
+
+	;
+	If Zoom.Ok = 'O' 
+		Switch CogRs_UT108_SeekFicheActive()
+			Case 1
+				If MessageBox("Il existe une fiche active pour cette association établissement / affaire / référence."\
+							& "|Elle sera périmée si cette nouvelle fiche est créée.||Continuer?", "Alerte", MB_ICONQUESTION+MB_YESNO) = IDNO
+					Zoom.Ok = 'C'
+				EndIf
+			Case 2
+				Zoom.Ok = 'C'
+
+		EndSwitch
+	EndIf
+
+Endp
+
+;*
+Public Procedure ZoomCreationRes		; apres réservation en création 
+Beginp
+	Note_Reinit(C_Applic_DAV)
+Endp
+
+;*
+Public Procedure ZoomAvantWrite 
+Beginp
+	; initialisation des codes enregistrement et mise à jour date et user
+   CogRs_UT108.Dos 			= mz.Dos
+	CogRs_UT108.UserCr 		= SYSTEM.User
+	CogRs_UT108.UserCrDh 	= Time(7)
+	CogRs_UT108.Note 			= Note_Creation_(C_Applic_DAV, 'CogRs_UT108')	
+	CogRs_UT108.CeNote		= Condition(CogRs_UT108.Note = 0, 1, 2)
+	CogRs_UT108.CE1 			= '8'
+
+	Maj_Date_Fin()
+
+	If CogRs_UT108_Controler_Ecart_Tarif()	<> 0
+		Zoom.Ok = 'S'
+		PReturn
+	EndIf
+
+	If ZOOM.Ok = 'O' AND CogRs_UT108_SeekFicheActive(wPerimer=TRUE) in (2,3)
+		ZOOM.Ok = 'S'
+	EndIf
+
+Endp
+
+;*
+Public Procedure ZoomApresCreation ; compte-rendu de création
+Beginp
+	Zoom.Titrevar = [ CogRs_UT108.Ref *1 CogRs_UT108.Affaire ]
+Endp				 
+
+;*
+Public Procedure ZoomModification 
+; avant entrée en modif
+Beginp
+
+	If CogRs_UT108_SeekFichePosterieure() > 0
+
+		MessageBox("Cette fiche est périmée, il existe un autre enregistrement avec une date d'application supérieure.","Information", MB_ICONEXCLAMATION)
+		Zoom.Ok = 'I'
+
+	EndIf
+
+	Zoom.Res			= ['COG_UT108' CogRs_UT108.DOS CogRs_UT108.ETB CogRs_UT108.AFFAIRE CogRs_UT108.REF CogRs_UT108.Cog_Date_Debut]
+Endp			  
+
+;*
+Public Procedure ZoomModificationRes		; apres réservation enmodif
+Beginp
+	Note_Chargement_(C_Applic_DAV, CogRs_UT108.Note)
+Endp					
+
+;*
+Public Procedure ZoomAvantRewrite 
+;
+Beginp
+   CogRs_UT108.UserMo		= SYSTEM.User
+   CogRs_UT108.UserMoDh 	= Time(7)
+	CogRs_UT108.Note 		= Note_Modification_ (C_Applic_DAV, CogRs_UT108.Note, 'CogRs_UT108')
+	CogRs_UT108.CeNote		= Condition(CogRs_UT108.Note = 0, 1, 2)
+
+	If CogRs_UT108_Controler_Ecart_Tarif()	<> 0
+		Zoom.Ok = 'S'
+		PReturn
+	EndIf
+
+Endp														 
+
+;*
+Public Procedure ZoomApresModification ; compte rendu de modification
+Beginp
+	Zoom.Titrevar = [ CogRs_UT108.Ref *1 CogRs_UT108.Affaire ]
+Endp				 
+
+;*
+Public Procedure ZoomSuppression ; avant entrée en suppression
+Beginp
+	Zoom.Res			= ['COG_UT108' CogRs_UT108.DOS CogRs_UT108.ETB CogRs_UT108.AFFAIRE CogRs_UT108.REF CogRs_UT108.Cog_Date_Debut]
+Endp													  
+
+;*
+Public Procedure ZoomSuppressionRes
+Beginp
+Endp
+														  
+;*
+Public Procedure ZoomAvantDelete 
+Beginp
+	Note_Suppression_(C_Applic_DAV, CogRs_UT108.Note)
+Endp
+
+;*
+Public Procedure ZoomApresSuppression ; compte rendu de suppression
+Beginp
+Endp						
+
+;*
+;* Actions
+;*
+
+;*
+Public Procedure ZoomAvantConsult
+Beginp
+	Maj_Menu_Boutons
+Endp				  
+
+;*
+Public Procedure ZoomConsult 	; à utiliser si note
+Beginp
+	Switch Harmony.Key
+		Case K_F7		|	Zoom_Call()
+		Case K_SF6		|	Note_Consultation_ (C_Applic_DAV, CogRs_UT108.Note)
+		case K_F12
+			if G7.PONG = True
+				Envoyer_Selections
+			endif
+	Endswitch 
+Endp
+
+;*
+Public Procedure ZoomAvantInput			; permet de griser les boutons et les choix
+Beginp
+	Maj_Menu_Boutons
+Endp
+
+;*
+Public Procedure ZoomArret					; exécutée si point d'arrêt en mode fiche ou liste
+Beginp											; pour appel d'un zoom 
+	Switch Harmony.Key
+	Case K_F7	|	Zoom_Call()
+	Case K_F8	|	Zoom_Call(Harmony.Arret)	; Appel de zoom
+	
+	Case K_SF6						; Saisie d'une note
+		Note_Saisie_(C_Applic_DAV, CogRs_UT108.Note, 'CogRs_UT108')				
+		XmeToolbarSetButtonInfo(IdOutilZoom,"NOTE", Condition(Not Note_Empty_(C_Applic_DAV), "<BITMAP>NOTE"	,"<BITMAP>NOTE_N"))
+		
+	Case Harmony.Dataarret = 8002
+		If Harmony.Sourisbout = RIGHT_BUTTON
+			Zoom_Call()
+		Endif
+
+	Endswitch
+Endp
+
+;*
+Public Procedure ZoomFiltreAvantValeur
+Beginp
+Endp
+
+;*
+Public Procedure ZoomFiltreApresValeur 
+Beginp
+Endp	
+
+;*
+;* procedures liées à la lecture du ficher
+;*
+
+;*
+Public Procedure ZoomApresCle
+Beginp
+	Construire_Condition_Selection(ZOOM_SQL_CONDITION_NORMALE)
+Endp															
+
+;*
+Public Procedure ZoomApresRead
+Beginp
+	Zoom.Titrevar = [ CogRs_UT108.Ref *1 CogRs_UT108.Affaire ]
+Endp															
+
+
+

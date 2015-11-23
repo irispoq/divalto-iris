@@ -20,10 +20,10 @@ include "GTTCZ00.dhsp"			;déclarations communes
 Include "COGTC_MOTEURPRJSPEC.DHSP"
 
 ;
-Module	GRPMFIC.dhop
-Module	GRTM000.dhop
-;Module	Cog_Gdiva.dhop
+Module	"GRPMFIC.dhop"
+Module	"GRTM000.dhop"
 Module	"CogTm_MoteurPrjSpec.dhop"
+Module 	"CogGt_Controle_Fichier.dhop"
 
 ;
 public RecordSQL 	"gtrsproj.dhoq" 	Affaire 				Affaire		; Affaire (Enregistrement principal)
@@ -32,9 +32,7 @@ Public RecordSQL	"COGRS_PROJ.DHOQ"	CogRs_PrjComp
 Public recordSQL  "cogrs_tab.dhoq"	TableParametre
 
 ;
-HfileVersion 	Cogfdd.dhsd 	COGGTF_TAB
-
-Public Hfile 	"Cogfdd.dhsd" 	COGGTF_TAB			COGGTF_TAB	 noopen
+public hfile  "cogfdd.dhsd"   COGGTF_TAB			COGGTF_TAB		
 Public Hfile 	"Cogfdd.dhsd" 	COGGRF_TAB			COGGRF_TAB	
 Public Hfile	"cogfdd.dhsd"	Cog_FAffectBudget	Cog_FAffectBudget_01
 Public Hfile	"cogfdd.dhsd"	Cog_FDirCliente	Cog_FDirCliente_01
@@ -78,8 +76,6 @@ define IdMenuZoomBis		= G3XT.IDBARRE(3)
 1	g_Dossier	>GTFDD.DHSD	Dos
 
 
-;
-include "CogGt_Controle_Fichier.dhsp"
 
 ;*
 ;* fonctions et procedures
@@ -221,6 +217,7 @@ Endf
 ;*
 Function int Cog_Affaire_Ctrl_Champs_Obligatoires
 ;
+RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT120			wRS_120
 RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125			wRS_125
 1		wErr		1,0
 1		wTxtErr	S
@@ -228,6 +225,32 @@ BeginF
 
 	werr = FALSE
 
+	;	Controle informations UT120
+	If Affaire.Cog_TypMotFac <> ' ' 
+		
+		wRS_120.Init()
+		wRS_120.Where.Pk(Affaire.Etb, Affaire.Cog_TypMotFac)
+		If wRS_120.Select() > 0
+
+			If Cog_UT120.Cog_CotisationMagActive = 2 And Affaire.Cog_Cotisation_PDV = system.esp
+	
+				MessageBox ("Veuillez saisir le type de cotisation PDV.","Message",MB_OK + MB_ICONEXCLAMATION)	
+				Harmony.Retour = Xmenext_Point_Sequence
+				Harmony.CplRetour = 1000
+				FReturn(1)
+
+			ElsIf Cog_UT120.Cog_CotisationMagActive = 2 And Affaire.Tiers = system.esp
+	
+				MessageBox ("Veuillez saisir le code client.","Message",MB_OK + MB_ICONEXCLAMATION)	
+				Harmony.Retour = Xmenext_Point_Sequence
+				Harmony.CplRetour = 1001
+				FReturn(1)
+
+			EndIf
+		EndIf	 ; If wRS_120.Select() > 0
+	EndIf	 ; If Affaire.Cog_TypMotFac <> ' ' 
+
+	;
 	If Affaire.Cog_Prj_Status = C_STATUT_PRJ_AFACTURER AND Affaire.Cog_Facture = 2
 
 		wtxtErr = 'Informations manquantes pour passer au statut "A facturer":'
@@ -465,7 +488,11 @@ EndF
 Procedure ZoomDebut 
 ;
 Beginp
-	Controle_Fichier
+
+	If Cog_UTTAB_Res() <> 0
+		ProgramExit
+	EndIf
+
 	Standard.ZoomDebut
 	;XmeSetAttribut ("efface", AN_VISIBILITE, AV_CACHE)
 	Affaire.OrderBy.Par_Affaire()
@@ -586,23 +613,12 @@ procedure ZoomAvantReWrite
 beginp 
 	Standard.ZoomAvantReWrite
 	If Zoom.Ok = 'O'
-		; YATO 21/08/2014 FE002_CLASSEAFFAIRE Remplacement de la recherche de Cog_Cotisation dans Cog_UT120 à la place de T064
-		If affaire.Cog_TypMotFac <> system.esp And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  = 0 And Cog_UT120.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
-		;If affaire.AfrClas <> system.esp And LecTab(64,affaire.AfrClas,,today) = 0 And T064.Cog_CotisationMagActive = 2 And affaire.Cog_Cotisation_PDV = system.esp
-			MessageBox ("Veuillez saisir le type de cotisation PDV.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
-			Harmony.Retour = Xmenext_Point_Sequence
-			Harmony.CplRetour = 1000
-		ElsIf affaire.Cog_TypMotFac <> system.esp And Hseek(Coggtf_Tab, Cog_UT120, [ 'L' Affaire.Dos Affaire.Etb Affaire.Cog_TypMotFac ])  = 0 And Cog_UT120.Cog_CotisationMagActive = 2 And affaire.Tiers = system.esp
-		;ElsIf affaire.AfrClas <> system.esp And LecTab(64,affaire.AfrClas,,today) = 0 And T064.Cog_CotisationMagActive = 2 And affaire.Tiers = system.esp
-			MessageBox ("Veuillez saisir le code client.","Message",MB_OK + MB_ICONEXCLAMATION)	| Zoom.Ok = 'S'
-			Harmony.Retour = Xmenext_Point_Sequence
-			Harmony.CplRetour = 1001
-		ElsIf Cog_Affaire_Ctrl_Champs_Obligatoires <> 0
+
+		If Cog_Affaire_Ctrl_Champs_Obligatoires <> 0
 			Zoom.Ok = 'S'
 		ElsIf Cog_Affaire_Reporter_Dates_Sur_UT125 <> 0
 			Zoom.Ok = 'S'
 		ElsIf Cog_Gestion_Activation_Facturation <> 0
-			;MessageBox("","Alerte", MB_ICONERROR)
 			Zoom.Ok = 'S'
 		Else
 
@@ -739,8 +755,8 @@ beginp
 			g3xz.pino=affaire.cog_id_enveloppe
 			Ping( 'zechange', MZ )
 			Zoom_Call(64009)
-		case 	Harmony.DataArret = 65008
-			G3XZ.Projet	= affaire.Affaire
+		case 	Harmony.DataArret = 65008		; Appel UT108
+			G3XZ.Projet	= affaire.Affaire	 | G3XZ.Etb = affaire.Etb
 			Ping( 'zechange', MZ )
 			Zoom_Call(64008)
 		case 	Harmony.DataArret = 65009
