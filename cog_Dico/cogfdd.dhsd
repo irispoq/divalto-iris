@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20150730110856,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20151116103145,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -700,6 +700,24 @@ DateM=AED84397F42CCC01
 Gel=1
 Nature=3
 NomOdbc=Cog_Code_Inutilise
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20151116103143,UGIE                ,20151116103143,UGIE                
+Nom=Cog_PDVOp,Code opération facturation PDV par défaut,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20151110141631,UGIE                ,20151110141631,UGIE                
+Nom=Cog_PDVseuil,Seuil de tolérance tarifs PDV,1
+Gel=1
+Nature=6,2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20151110143402,UGIE                ,20151110143402,UGIE                
+Nom=Cog_PDVtarCtrl,Contrôler les montants des cotisations PDV,1
+Gel=1
+Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20111213141046,ROOT                ,20111213141054,ROOT                
@@ -1853,6 +1871,13 @@ Gel=1
 Nature=D8
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1989 1230000,MJV ,20050105084408,MARIE JO            
+Nom=Pub,Prix unitaire brut,1
+Gel=1
+Nature=12,3
+NomOdbc=PrixUnitaire
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20030128175707,RR                  ,20051019075110,RR                  
 Nom=Question,Questionnaire,1
 Gel=1
@@ -1866,6 +1891,14 @@ Nom=Ref,Référence,1
 Gel=1
 Nature=25
 NomOdbc=Reference
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199010190000,MJV ,20061113161801,MARIE JO            
+Nom=RefQte,Quantité en unité de référence,1
+DateM=0E598FE83607C701
+Gel=1
+Nature=12,D2
+NomOdbc=QteReference_$R
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20050629094811,JLSI                ,20060721131506,FH                  
@@ -2830,6 +2863,9 @@ Nom=IntBlAttCh,29,2,N,0,0,N,1
 Nom=IntBlOkCh,49,2,N,0,0,N,1
 Nom=IntBlErrCh,69,2,N,0,0,N,1
 Nom=IntBlWorkCh,89,2,N,0,0,N,1
+Nom=Cog_PDVseuil,109,2,N,0,0,N,1
+Nom=Cog_PDVtarCtrl,115,2,N,0,0,N,1
+Nom=Cog_PDVOp,116,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1999 4220000,MJV ,20120220114332,ROOT                
@@ -3246,7 +3282,7 @@ Nom=Cog_Taux,147,2,N,0,0,N,1
 [TABLE]
 Version=1,20110617235943,SYSTEMU             ,20110618000746,SYSTEMU             
 Nom=Cog_UT108,Affectations des cotisations PDV,1
-DateM=0B3205250A5BCF01
+DateM=F9818592361DD101
 NomOdbc=Affectations_des_cotisations_PDV
 Taille=300,300
 Pack=0,0
@@ -3291,6 +3327,8 @@ Nom=Cog_Date_Derniere_Facture,167,2,N,0,0,N,1
 Nom=Cog_AxeAnael,175,2,N,0,0,N,1
 Nom=Cog_Nombre_Cotisation_Facturees,183,2,N,0,0,N,1
 Nom=Cog_Date_Bascule,185,2,N,0,0,N,1
+Nom=RefQte,193,2,N,0,0,N,1
+Nom=Pub,205,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110621104427,SYSTEMU             ,20110621105941,SYSTEMU             
@@ -3663,7 +3701,7 @@ Nom=Coggtf_Tab,Tales complémentaires Facturation,1
 DateM=81B39056EC2CCC01
 Fichier=I,0,Coggtf_tab.dhfi
 Versionbase=6.3a
-DateMIndex=A330F6FE0C45D001
+DateMIndex=1A99127F361DD101
 [TABLES]
 Nom=Cog_UT100,0
 Nom=Cog_UT101,0
@@ -4069,6 +4107,7 @@ Nom=Dos,1,0,
 Nom=Etb,4,0,
 Nom=Affaire,7,0,
 Nom=Ref,15,0,
+Nom=Cog_Date_Debut,40,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -4098,10 +4137,10 @@ Nom=Cog_Id_Enveloppe,7,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20140821140237,UGIE                ,20140821140855,UGIE                
+Version=1,20140821140237,UGIE                ,20151110170742,UGIE                
 Nom=Index_UT120,Clé type moteur facturation,1
-DateM=743D20AE38BDCF01
-CLE=Coggtf_Tab,L,Ce1,2,B,n,1,n
+DateM=6A3440EED11BD101
+CLE=Coggtf_Tab,L,Ce1,2,B,o,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=Etb,4,0,
