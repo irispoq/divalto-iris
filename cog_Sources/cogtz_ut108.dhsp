@@ -66,7 +66,7 @@ BeginF
 	wUn = Condition(ART.VenUn <> ' ', ART.VenUn, Condition(ART.RefUn<> ' ',ART.RefUn, SOC.Cog_RefUn))
 	wQte = Condition(CogRs_UT108.RefQte > 0, CogRs_UT108.RefQte, 1)
 	wNbCotis = Condition(CogRs_UT108.Cog_Nombre_Cotisation > 0, CogRs_UT108.Cog_Nombre_Cotisation, 1)
-	CogRs_UT108.Pub 	= CogRs_UT108.Cog_Montant / wQte / wNbCotis
+	CogRs_UT108.Pub 	= CogRs_UT108.Cog_Montant / wQte ;/ wNbCotis	 --> demande U GIE: le montant renseigné n'est pas un montant global 
 
 	; gestion de l'écart TAR - UT108?
 	If CogRs_SocComp.Cog_PDVtarCtrl <> 2  

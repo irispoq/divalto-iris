@@ -584,12 +584,7 @@ Procedure Genere_Ligne_BL_Cotisation_PDV
 BeginP
 
 	wQte = Condition(Cog_UT108.RefQte > 0, Cog_UT108.RefQte, 1)
-
-	If Cog_UT108.Cog_Duree_Limitee = 2 AND COG_UT108.Cog_Nombre_Cotisation > 0
-		wpub = COG_UT108.Cog_Montant / COG_UT108.Cog_Nombre_Cotisation / wQte
-	Else
-		wpub = COG_UT108.Cog_Montant / wQte
-	Endif
+	wpub = COG_UT108.Cog_Montant / wQte
 
 	Genere_Ligne_BL(Cog_UT108.Ref, wQte, wpub, Condition(wpub > 0, 4, 1), Condition(COG_UT108.Cog_AxeAnael <> ' ', COG_UT108.Cog_AxeAnael, CogRs_PrjAp.Cog_AxeAnael))
 
