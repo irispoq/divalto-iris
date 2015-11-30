@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20151116103145,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20151127093226,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -586,6 +586,12 @@ Version=1,20150728104628,UGIE                ,20150728104628,UGIE
 Nom=Cog_IndTrait,Indice TRAIT,1
 Gel=1
 Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20151127093223,UGIE                ,20151127093223,UGIE                
+Nom=Cog_IntBlFlash,Code flash pour les rejets,1
+Gel=1
+Nature=20
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20150109110723,UGIE                ,20150109110727,UGIE                
@@ -2866,6 +2872,7 @@ Nom=IntBlWorkCh,89,2,N,0,0,N,1
 Nom=Cog_PDVseuil,109,2,N,0,0,N,1
 Nom=Cog_PDVtarCtrl,115,2,N,0,0,N,1
 Nom=Cog_PDVOp,116,2,N,0,0,N,1
+Nom=Cog_IntBlFlash,119,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1999 4220000,MJV ,20120220114332,ROOT                
