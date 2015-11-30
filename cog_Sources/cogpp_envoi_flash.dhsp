@@ -1,0 +1,341 @@
+;>xdiva
+;*
+;*		Objet : envoi de flash
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLF	
+;*
+
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*					
+;*
+
+
+;
+include	gttcz00.dhsp						;déclarations communes
+include	cogtc_000.dhsp
+include 	zmapi.dhsp							;envoi de mails
+
+;
+Module 	"COGTM_000.DHOP"
+Module	"A5PMFLASH.dhop"
+
+;RECORDSQL
+
+
+;
+public record	gtfdd.dhsd	xq			xq_cog		;enregistrement de travail
+Public Record	A5dd.dhsd 	A1							; Enregistrement de travail (contient les variables utilisées dans l'envoi de FLASH)
+
+;
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+1	tunnel		1,0	= false
+1	texteMail	S						;corps du mail
+1	txtMSB		S						; texte pour traduction des message box avec variables
+1	txtRefcmd	S						; Piref des commandes d'origine
+
+
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+function int Cog_InitialiserVariables
+;
+recordsql	a5rsuser.dhoq	utilisateur										;Utilisateurs
+recordsql	cogrs_tab.dhoq	TableParametre									;Table des paramètres
+
+beginf
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		utilisateur.init()
+		utilisateur.where.exists(system.User)
+		if utilisateur.select() = 0
+
+			if not tunnel
+				txtMSB =	translate("Utilisateur %1 non défini dans la base Divalto")
+				txtMSB =	Modify("%1", left(system.user), txtMSB)
+				messagebox(txtMSB,Translate("Alerte"),mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= utilisateur.dos
+			mz.etb		= utilisateur.etb
+			mz.depo		= utilisateur.depo
+			mz.mecle		= "Cogee_prise_rdv.dhof"
+			mz.mtcle		= "Cogtt_prise_rdv.dhop"
+			mz.titre2	= "Prise de rendez-vous transporteur"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment("Prise de rendez-vous transporteur")
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	windowshow(sw_maximize)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	freturn(true)
+
+endf
+
+;*
+procedure Cog_FinProgramme
+beginp
+
+	Cog_EcritureLivreDeBord("<-- Prise de rendez-vous transporteur")
+	programexit
+
+endp
+
+;*
+procedure Cog_AfficherTraitement
+beginp
+
+	;test d'abandon du programme en cours de traitement
+	if getchar()=$E8 and messagebox(Translate("Abandon du traitement en cours ?"),Translate("Confirmation"),mb_iconquestion+mb_yesno)=idyes
+		Cog_EcritureLivreDeBord("Abandon utilisateur")
+		Cog_FinProgramme
+	endif
+
+	xmedispv mz.mecle 3 xme_mode_gosub
+	xmeret
+	xmedispv mz.mecle 4 xme_mode_gosub
+	xmeret
+
+endp
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	;if choix non valide
+	;	freturn(false)
+	;endif
+
+	freturn(true)
+
+endf
+
+;*
+; 	Traitements liés à l'envoi de FLASH
+;*
+
+;*
+Public Procedure Cog_A5_Flash_Creation_Message_AV
+;Point d'entrée pour modif de l'objet et corps du message
+BeginP
+	A1.MsgTxt = texteMail
+EndP
+
+;*
+Public Procedure Cog_A5_Flash_Envoi_AV
+; Point d'entrée pour l'ajout de destinataires
+BeginP
+	A5_Flash_Ajouter_Destinataire_Internet_Spe( mailAdresse )
+EndP
+
+;*
+;
+;*
+
+
+;*
+Procedure Cog_Ecriture_Infos_Livraison
+;composition du corps de mail: ajout des informations de livraison sur la commande en cours de lecture
+BeginP
+
+	Cog_Recheche_Commande_Origine
+
+	texteMail &= $0D0A
+	texteMail &= "Numéro de BL: " & Cog_Piece_Entete.PiNo & $0D0A
+	If txtRefcmd <> " "
+		texteMail &= "Commande(s): " & Mid(txtRefcmd,1,Length(txtRefcmd) -1) & $0D0A
+	Endif
+	texteMail &= "Nombre de colis: "	& Cog_Piece_Entete.ColiNb & $0D0A
+	texteMail &= "Nom du client livré: " & ClientLivre.Nom & $0D0A 
+	texteMail &= "Adresse de livraison: " & $0D0A
+	texteMail &= ClientLivre.Rue & $0D0A	
+	texteMail &= left(ClientLivre.AdrCpl1) & " " & left(ClientLivre.AdrCpl2) & $0D0A
+	texteMail &= left(ClientLivre.Loc) & $0D0A
+	texteMail &= ClientLivre.Cpostal & " " & ClientLivre.Vil & " " & ClientLivre.Pay & $0D0A
+	texteMail &= "Téléphone du client livré: " & ClientLivre.Tel & $0D0A
+	texteMail &= "Fax du client livré: " & ClientLivre.Fax & $0D0A
+	texteMail &= "Contact du client lié à l'adresse de livraison: " & Client.TiersAdresseBL_Nom & $0D0A
+	texteMail &= "Date de livraison demandée: " & Cog_Piece_Entete.Cog_DepSouhait & $0D0A
+	If Cog_ComplementT1.Cog_siteinternet <> " " 
+		texteMail &= "Site internet: " & left(Cog_ComplementT1.Cog_siteinternet) & $0D0A
+	Endif
+EndP
+
+;*
+Procedure Cog_Init_Message
+;initialisation du mail
+BeginP
+	texteMail = 'Mode de transport: ' & left(ModeTransport.Lib)	& $0D0A 
+	texteMail = 'Informations de livraison pour le client ' & left(Client.Nom) & $0D0A 
+ENdP
+
+;*
+Procedure Cog_Envoi_Mail
+;
+BeginP
+;	if MapiOpen <> 0
+;		Cog_EcritureLivreDeBord("Erreur : "&MapiErrorText&& " Mail non envoyé au mode de transport " \
+;		& ModeTransport.BlMod & " - " & ModeTransport.Lib & " pour les BL du tiers " & Cog_Piece_Entete.Tiers & ".")
+;      erreur = true
+;	else
+;		if (MapiSend(mapi_mail,"Informations de livraison",texteMail,ModeTransport.T026_SUITE_Email)) <> 0
+;			Cog_EcritureLivreDeBord("Erreur : " & left(MapiErrorText) & " Mail non envoyé au mode de transport " \
+;			& ModeTransport.BlMod & " - " & left(ModeTransport.Lib) & " pour les BL du tiers " & Cog_Piece_Entete.Tiers & ".")
+;		endif
+;   endif
+;	
+;	MapiClose
+
+	Rs_Cog_Soc.Init()
+	Rs_Cog_Soc.Select()
+
+	erreur = A5_Flash_Envoi(Rs_Cog_Soc.Cog_FlashRdvTrs, '', '', C_Entite_Cli)
+
+	switch erreur
+		case 0
+			Cog_EcritureLivreDeBord("Mail envoyé. Transporteur: " & ModeTransport.Lib)
+		case 1
+			Cog_EcritureLivreDeBord("Impossible de lier les destinataires du flash. Transporteur: " & ModeTransport.Lib)
+		case 2
+			Cog_EcritureLivreDeBord("Pas de flash RDV transporteur paramétré. Transporteur: " & ModeTransport.Lib)
+		case 3
+			Cog_EcritureLivreDeBord("Erreur d'ouverture de fonctions MAPI. Transporteur: " & ModeTransport.Lib)
+		case 4
+			Cog_EcritureLivreDeBord("Impossible d'envoyer le message. Transporteur: " & ModeTransport.Lib)
+
+
+	endSwitch
+EndP
+
+;*
+Procedure Cog_Lecture_EntBL
+;lecture des entetes de BL dont le mode de transport = BlMod en cours de lecture et date = today
+1		readerEntBl			L 		= 0
+1		tiers					8	   = ' '					;dernier tiers lu
+1		envoiMail			1,0   = 0					;2:oui
+1 		Cpt_Pce				3,0   = 0
+BeginP
+	readerEntBl = Cog_Piece_Entete.ReaderOpen()
+	Cog_Piece_Entete.Where.BL_TypeClient(today, ModeTransport.BlMod)
+	Cog_Piece_Entete.OrderBy.Par_TiersDate()
+	Cog_Piece_Entete.ReaderSelect(readerEntBl)
+
+	;boucle de lecture sur les entetes de BL du jour associée au mode de transport
+	Do While Cog_Piece_Entete.ReaderNext(readerEntBl) > 0
+		;Informations livraison du BL en cours de lecture
+		Cog_RechercheAdrLivr
+
+		If AdrCodifiee.Cog_CliRdv <> 2
+			RedoDo	
+		Endif
+
+		Cpt_Pce ++
+
+		If tiers <> Cog_Piece_Entete.Tiers 
+			;on est sur une nouvelle lecture de Tiers, on teste si le tiers précédent faisait l'objet d'un mail
+			if Cpt_Pce > 0	And tiers <> " " 
+				;Procedure d'envoi du mail pour le tiers précédent	et réinitialisation du compteur Pce
+				Cog_Envoi_Mail
+				Cpt_Pce = 1
+			endIf
+
+			tiers = Cog_Piece_Entete.Tiers
+			Client.Where.Zoom_pk(tiers)
+			Client.Select()
+
+			if Cpt_Pce = 1
+				;initialisation du mail
+				Cog_Init_Message
+		  	EndIf
+
+			;Informations livraison du BL en cours de lecture
+			Cog_Ecriture_Infos_Livraison
+		Else
+			;on est sur un BL qui appartient au même tiers
+			;Concaténation des informations livraison du BL en cours de lecture dans le message
+				Cog_Ecriture_Infos_Livraison
+		EndIf
+	WEnd
+	if Cpt_Pce > 0
+		;Procedure d'envoi du mail pour le tiers précédent
+		Cog_Envoi_Mail
+	endIf
+
+	Cog_Piece_Entete.ReaderClose(readerEntBl)
+EndP
+
+
+;*
+procedure Cog_Boucle_BlMod
+;lecture des modes de transport
+1		readerBlMod			L = 0
+
+beginp
+	readerBlMod = ModeTransport.ReaderOpen()										;nouveau reader sur Mode de transport
+	ModeTransport.OrderBy.Par_ModeTransport()
+	ModeTransport.ReaderSelect(readerBlMod)
+
+	Cog_EcritureLivreDeBord("--> Prise RDV transporteurs")
+ 
+	;boucle de lecture principale sur les modes de transport
+	Do While ModeTransport.ReaderNext(ReaderBlMod)	> 0						;recherche du résultat suivant 
+		If ModeTransport.T026_SUITE_Email <> ' ' and ModeTransport.Alg_UExpe_uniq=2
+
+			Cog_Lecture_EntBL
+
+		Else
+			erreur = true
+			Cog_EcritureLivreDeBord("Le mode de transport " & ModeTransport.BlMod & " - " & left(ModeTransport.Lib) \
+			& " n'a pas d'adresse mail associée, envoi des informations pour prise de rendez-vous impossible.")
+		EndIf
+	WEnd
+
+	ModeTransport.ReaderClose(readerBlMod)
+
+	Sleep(1000)		;pour l'ordre d'affichage dans le livre de bord 											
+	Cog_EcritureLivreDeBord("<-- Prise RDV transporteurs")
+
+	;messagebox(Condition(erreur = true, Translate("Traitement terminé.|Des erreurs se sont produites, veuillez consulter le livre de bord"),\
+	;Translate("Traitement terminé")),Translate("Message"),mb_iconinformation)
+	
+
+endp
+
+
+

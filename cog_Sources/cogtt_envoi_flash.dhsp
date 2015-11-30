@@ -1,0 +1,40 @@
+;>xdiva
+;*
+;*		Objet : envoi de flash
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLF	
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		ChargementAvant						Avant chargement du masque pour initialisation des variables
+;*
+
+overwrittenby "cogut_envoi_flash.dhop"
+
+Module	"cogpp_envoi_flash.dhop"
+
+public record	gtfdd.dhsd	xq		xq_cog			;enregistrement de travail
+
+;*
+;*	  Procédures standards de l'envoi de FLASH
+;*
+
+;*
+Public Procedure A5_Flash_Creation_Message_AV
+;Point d'entrée pour modif de l'objet et corps du message
+BeginP
+	Cog_A5_Flash_Creation_Message_AV
+EndP
+
+;*
+Public Procedure A5_Flash_Envoi_AV
+; Point d'entrée pour l'ajout de destinataires
+BeginP
+	Cog_A5_Flash_Envoi_AV
+EndP

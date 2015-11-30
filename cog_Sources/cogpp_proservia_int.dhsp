@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8474 2015-08-21 06:46:02Z admin $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8938 2015-11-30 14:25:37Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -28,6 +28,7 @@ Include	"gttcz00.dhsp"						;déclarations communes
 ;
 Module	"A5Tm000.dhop"
 Module	"A5PmWin.dhop"
+Module	"A5PmFlash.dhop"
 Module	"Cogtm_000.dhop"						;module de fonctions communes
 
 ;
@@ -40,6 +41,7 @@ Public RecordSQL	"gtRsppTab.dhoq"					CodeOperation			CogRs_OP
 
 ;
 Public Record	"gtfdd.dhsd"			xq						xq_cog			;enregistrement de travail
+Public Record	"A5dd.dhsd"			 	A1											; Enregistrement de travail (contient les variables utilisées dans l'envoi de FLASH)
 Public Record	"a5dd.dhsd"				MChemin
 Public Record	"a5dd.dhsd"				MChemin				mChemin_Work
 Public Record	"a5dd.dhsd"				MChemin				mChemin_Ok
@@ -85,7 +87,9 @@ Public Record  "gtfdd.dhsd"			T025										; Nature de stock
 1	lId_iMOUV	L
 1	lId_iMVTL	L
 1	lId_CdMouv	L
+1	lId_ErrTxt	L
 1	valeur		256
+1	txtErr		500
 1	integ			1,0
 1	flux			1						; flux de l'intégrateur de pièce 
 
@@ -192,7 +196,7 @@ BeginF
 			mz.depo		= utilisateur.depo
 			mz.mecle		= "Cogee_Proservia_Int.dhof"
 			;mz.micle		= "Cogii_.dhoi"
-			;mz.mtcle		= "Cogtt_.dhop"
+			mz.mtcle		= "Cogtt_proservia_int.dhop"
 			mz.titre2	= "Intégration fichier Proservia"
 
 		endif
@@ -207,7 +211,7 @@ BeginF
 	ProgramSetComment(translate("Intégration fichier Proservia"))
 
 	;recherche du dossier et T000
-	seek_soc(mz.dos)
+	Seek_Soc(MZ.Dos)
 	CogRs_SocComp.Init()
 	CogRs_SocComp.Where.PK(SOC.Dos)
 	CogRs_SocComp.Select()
@@ -273,6 +277,7 @@ BeginF
 	ListMode(lId_iMVTL, Mode=1, AdrFunc)
 
 	lId_CdMouv = ListGetId("LISTE_PROSERVIAMOUV")
+	lId_ErrTxt = ListGetId("LISTE_ERREURS")
 
 	FReturn(true)
 
@@ -283,8 +288,16 @@ Procedure FinProgramme
 ;
 BeginP
 
+	ListDestroy(lId_CdMouv)
+	ListDestroy(lId_csvMvtl)
+	ListDestroy(lId_ENT)
+	ListDestroy(lId_ErrTxt)
+	ListDestroy(lId_iMOUV)
+	ListDestroy(lId_iMVTL)
+	ListDestroy(lId_Valeurs)
+
 	Cog_EcritureLivreDeBord(translate("<-- Fin programme intégration Proservia"))
-	programexit
+	ProgramExit()
 
 EndP
 
@@ -319,6 +332,57 @@ endf
 ;*
 ;	Traitements
 ;*
+
+;*
+Public Procedure Proservia_FlashMessage
+; Modification du corps du message du mail
+1		wMsg		S
+BeginP
+
+	wMsg = ' '
+
+	ListBegin(lId_ErrTxt)
+
+	Do While ListNext(lId_ErrTxt, txtErr) not in (-1, 0)
+
+		wMsg &= $0D0A
+		wMsg &= Left(txtErr)
+
+	WEnd
+
+	A1.MsgTxt = left(A1.MsgTxt) & wMsg
+
+EndP
+
+;*
+Function int Proservia_FlashErreur
+;	Envoi du flash erreur intégration Proservia
+1		wErr		1,0
+1		wTxt		S
+BeginF
+
+	wErr = A5_Flash_Envoi(CogRs_SocComp.Cog_IntBlFlash, '', '', 0)
+	wTxt = "Résultat de l'envoi du flash rapport d'erreur --> "
+
+	Switch wErr
+		Case 0
+			wTxt &= "Mail envoyé."
+		Case 1
+			wTxt &= "Impossible de lier les destinataires du flash."
+		Case 2
+			wTxt &= "Pas de flash erreur intégration Proservia paramétré."
+		Case 3
+			wTxt &= "Erreur d'ouverture de fonctions MAPI."
+		Case 4
+			wTxt &= "Impossible d'envoyer le message."
+
+	EndSwitch
+
+	Cog_EcritureLivreDeBord(wTxt)
+
+	FReturn(0)
+
+EndF
 
 ;*
 Function int Proservia_ChargerMOUV(wTicod, wPiCod, wPiNo, wGrRef, wDepo, wNst)
@@ -508,8 +572,10 @@ BeginF
 		; quantité réceptionnée > quantité restante en commande
 		If wBlQte > 0
 
+			txtErr = "Quantité en surplus: " & NoSpaces(wBlQte) & " pour la référence " & left(csvMVTL.Ref) & " sur la commande N°" & csvMVTL.PiNo & "."
+			Cog_EcritureLivreDeBord(txtErr)
+			ListInsert(lId_ErrTxt, txtErr)
 			wErr = TRUE
-			Cog_EcritureLivreDeBord("Quantité en surplus: " & NoSpaces(wBlQte) & " pour la référence " & left(csvMVTL.Ref) & " sur la commande N°" & csvMVTL.PiNo & ".")
 
 		EndIf
 
@@ -650,7 +716,9 @@ BeginF
 				Case 'TRAIT'
 					Cog_ProserviaInd.Cog_IndTrait = wIndice
 				Default
-					Cog_EcritureLivreDeBord("Mot clé non reconnu:" & wMotCle)
+					txtErr = "Contôle entête fichier: mot clé non reconnu:" & wMotCle
+					Cog_EcritureLivreDeBord(txtErr)
+					ListInsert(lId_ErrTxt, txtErr)
 					FReturn(1)
 
 			EndSwitch
@@ -665,15 +733,21 @@ BeginF
 
 	; contrôle de la présence des mots clés obligatoires
 	If Cog_ProserviaInd.Cog_IndDos = 0
-		Cog_EcritureLivreDeBord("Mot clé DOS absent.")
+		txtErr = "Mot clé DOS absent."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		erreur = TRUE
 	EndIf
 	If Cog_ProserviaInd.Cog_IndOP = 0
-		Cog_EcritureLivreDeBord("Mot clé OP absent.")
+		txtErr = "Mot clé OP absent."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		erreur = TRUE
 	EndIf
 	If Cog_ProserviaInd.Cog_IndRef = 0
-		Cog_EcritureLivreDeBord("Mot clé REF absent.")
+		txtErr = "Mot clé REF absent."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		erreur = TRUE
 	EndIf
 	;If Cog_ProserviaInd.Cog_IndNst = 0
@@ -685,19 +759,27 @@ BeginF
 	;	erreur = TRUE
 	;EndIf
 	If Cog_ProserviaInd.Cog_IndBlQte = 0
-		Cog_EcritureLivreDeBord("Mot clé QTE absent.")
+		txtErr = "Mot clé QTE absent."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		erreur = TRUE
 	EndIf
 	If Cog_ProserviaInd.Cog_IndDepo = 0
-		Cog_EcritureLivreDeBord("Mot clé DEPO absent.")
+		txtErr = "Mot clé DEPO absent."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		erreur = TRUE
 	EndIf
 	If Cog_ProserviaInd.Cog_IndTicod = 0
-		Cog_EcritureLivreDeBord("Mot clé TICOD absent.")
+		txtErr = "Mot clé TICOD absent."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		erreur = TRUE
 	EndIf
 	If Cog_ProserviaInd.Cog_IndPicod = 0
-		Cog_EcritureLivreDeBord("Mot clé PICOD absent.")
+		txtErr = "Mot clé PICOD absent."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		erreur = TRUE
 	EndIf
 	If Cog_ProserviaInd.Cog_IndTrait = 0
@@ -723,7 +805,9 @@ BeginF
 
 	; Dossier
 	If csvMVTL.Dos = ' ' OR (SOC.Dos <> csvMVTL.Dos AND Seek_Soc(csvMVTL.Dos) <> 0)
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": dossier " & csvMVTL.Dos & " inconnu.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": dossier " & csvMVTL.Dos & " inconnu."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	Else
 		MZ.Dos = SOC.Dos		; nécessaire pour les appels de Lectab
@@ -731,56 +815,78 @@ BeginF
 
 	; Ticod
 	If csvMVTL.TiCod not IN ('C', 'I')
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Ticod " & csvMVTL.Dos & " --> seuls les clients et tiers internes sont gérés.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": Ticod " & csvMVTL.Dos & " --> seuls les clients et tiers internes sont gérés."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	EndIf
 
 	; Picod
 	If flux = 'V' AND csvMVTL.PiCod <> 2
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Picod " & csvMVTL.Dos & " --> seules les commandes sont gérées pour la validation.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": Picod " & csvMVTL.Dos & " --> seules les commandes sont gérées pour la validation."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	EndIf
 
 	; Etb
 	If csvMVTL.Etb <> ' ' AND ETS.Etb <> csvMVTL.Etb AND Seek_Ets(csvMVTL.Etb) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": établissement " & csvMVTL.Etb & " inconnu.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": établissement " & csvMVTL.Etb & " inconnu."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	ElsIf csvMVTL.Etb = ' ' AND Soc.EntCodN(22) = 2
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": établissement non renseigné.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": établissement non renseigné."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	EndIf
 
 	; Dépôt 
 	If csvMVTL.Depo <> ' ' AND T017.Depo <> csvMVTL.Depo AND Lectab(17, csvMVTL.Depo) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": dépôt " & csvMVTL.Depo & " inconnu.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": dépôt " & csvMVTL.Depo & " inconnu."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	ElsIf csvMVTL.Depo = ' '
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": dépôt non renseigné.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": dépôt non renseigné."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	EndIf
 
 	; Référence
 	If csvMVTL.Ref <> ' ' AND ART.Ref <> csvMVTL.Ref AND Seek_ART(csvMVTL.Ref) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": référence " & csvMVTL.Ref & " inconnue.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": référence " & csvMVTL.Ref & " inconnue."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	ElsIf csvMVTL.Ref = ' '
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": référence non renseignée.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": référence non renseignée."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	EndIf
 
 	; sous ref
 	If csvMVTL.Sref <> ' ' AND SART.Sref <> csvMVTL.Sref AND Seek_SART(csvMVTL.Ref, csvMVTL.Sref1, csvMVTL.Sref2) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": sous référence " & csvMVTL.SRef & " inconnue.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": sous référence " & csvMVTL.SRef & " inconnue."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	EndIf
 
 	; code OP
 	If csvMVTL.Op <> ' ' AND T020.Op <> csvMVTL.Op AND Lectab(20, csvMVTL.Op) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": code opération " & csvMVTL.OP & " inconnu.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": code opération " & csvMVTL.OP & " inconnu."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE	
 	ElsIf csvMVTL.Op = ' '
 		If flux = 'C'
-			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": le code opération est obligatoire en création de pièce.")
+			txtErr = "Ligne n°" & NoSpaces(ficLg) & ": le code opération est obligatoire en création de pièce."
+			Cog_EcritureLivreDeBord(txtErr)
+			ListInsert(lId_ErrTxt, txtErr)
 			wErr = TRUE
 		Else
 			Init T020 = ' '
@@ -790,39 +896,53 @@ BeginF
 
 	; nature de stock
 	If csvMVTL.Nst <> ' ' AND T025.Nst <> csvMVTL.Nst AND Lectab(25, csvMVTL.Nst) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": nature de stock " & csvMVTL.Nst & " inconnue.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": nature de stock " & csvMVTL.Nst & " inconnue."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE
 	ElsIf csvMVTL.Nst = ' '
 		If T020.NstO <> ' '
  			csvMVTL.NST = T020.NstO
 		Else
-			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": impossible de déterminer la nature de stock.")
+			txtErr = "Ligne n°" & NoSpaces(ficLg) & ": impossible de déterminer la nature de stock."
+			Cog_EcritureLivreDeBord(txtErr)
+			ListInsert(lId_ErrTxt, txtErr)
 			wErr = TRUE
 		EndIf
 	EndIf
 
 	; Nature de stock <--> OP
 	If T025.Nst <> ' 'AND T020.Op <> ' ' AND T025.Nst <> T020.NstO
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": code opération " & csvMVTL.OP & " incomptatible avec nature de stock " & csvMVTL.Nst & ".")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": code opération " & csvMVTL.OP & " incomptatible avec nature de stock " & csvMVTL.Nst & "."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE	 
 	EndIf
 
 	; emplacement
 	If csvMVTL.Lieu <> ' ' AND T018.Lieu <> csvMVTL.Lieu AND Lectab(18, [csvMVTL.Depo csvMVTL.Lieu]) <> 0
-		Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": emplacement " & csvMVTL.Lieu & " inconnu.")
+		txtErr = "Ligne n°" & NoSpaces(ficLg) & ": emplacement " & csvMVTL.Lieu & " inconnu."
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		wErr = TRUE	 
 	EndiF
 
 	; Pièce à valider
 	If flux = 'V'
 		If csvMVTL.PiNo <> ' ' AND ENT.PiNo <> csvMVTL.PiNo AND Seek_ENT(csvMVTL.TiCod, csvMVTL.PiCod, csvMVTL.PiNo) <> 0
-			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": Pièce " & csvMVTL.PiNo & " inconnue.")
+			txtErr = "Ligne n°" & NoSpaces(ficLg) & ": Pièce " & csvMVTL.PiNo & " inconnue."
+			Cog_EcritureLivreDeBord(txtErr)
+			ListInsert(lId_ErrTxt, txtErr)
 			wErr = TRUE
 		ElsIf ENT.Ce4 <> '1'
-			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": la pièce " & csvMVTL.PiNo & " n'est plus active.")
+			txtErr = "Ligne n°" & NoSpaces(ficLg) & ": la pièce " & csvMVTL.PiNo & " n'est plus active."
+			Cog_EcritureLivreDeBord(txtErr)
+			ListInsert(lId_ErrTxt, txtErr)
 			wErr = TRUE
 		ElsIf csvMVTL.PiNo = ' '
-			Cog_EcritureLivreDeBord("Ligne n°" & NoSpaces(ficLg) & ": numéro de pièce non renseigné.")
+			txtErr = "Ligne n°" & NoSpaces(ficLg) & ": numéro de pièce non renseigné."
+			Cog_EcritureLivreDeBord(txtErr)
+			ListInsert(lId_ErrTxt, txtErr)
 			wErr = TRUE
 		EndIf
 	EndIf
@@ -852,6 +972,7 @@ BeginF
 
 	;
 	If Proservia_FichierControlerEntete() <> 0
+		erreur = TRUE
 		FReturn(1)
 	EndIf
 
@@ -908,8 +1029,10 @@ BeginF
 		;ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_Ind, csvMVTL.	)
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndTrait, Cog_ProserviaVal) not in (-,1,0)
 			If	flux <> ' ' AND flux <> Left(Cog_ProserviaVal.Cog_Val256)
+				txtErr =	"Flux différents dans le fichier, intégration refusée."
+				Cog_EcritureLivreDeBord(txtErr)
+				ListInsert(lId_ErrTxt, txtErr)
 				erreur = TRUE
-				Cog_EcritureLivreDeBord("Flux différents dans le fichier, intégration refusée.")
 			Else
 				flux = Left(Cog_ProserviaVal.Cog_Val256)
 			EndIf
@@ -1065,6 +1188,8 @@ BeginP
 					Cog_EcritureLivreDeBord("  Pièce n° " & nospaces(wPino) & " générée.")
 					cptPce++		 
 				Else
+					txtErr = "Rejet de l'intégrateur de pièce. Message tracé dans le livre de bord."
+					ListInsert(lId_ErrTxt, txtErr)
 					erreur = TRUE
 				EndIf
 			EndIf
@@ -1086,7 +1211,7 @@ Procedure Proservia_FichierTraitement
 1		wExt		8
 BeginP
 
-	erreur = FALSE
+	erreur = FALSE	| ListErase(lId_ErrTxt)
 	integ	= FALSE
 
 	Cog_EcritureLivreDeBord(translate("--> Interface Proservia: début intégration fichier"))
@@ -1094,6 +1219,8 @@ BeginP
 	wFic	= Win_ConvertirEnNomWindows(xq_cog.Fic)
 	FileNameAnalyse(Xq_Cog.Fic, wRes, wSrv, wNom, wExt)
 	xq_cog.Fic = Left(mChemin_Work.Chemin) & '/' & left(wNom) & '.' & left(wExt)
+	txtErr = "Nom du fichier traité: " & left(wNom) & '.' & left(wExt) | ListInsert(lId_ErrTxt, txtErr)
+
 	If WinMoveFile(wFic, xq_cog.Fic)	AND Proservia_FichierOuvrir(xq_cog.Fic, ticket)
 
 		Cog_EcritureLivreDeBord("Fichier déplacé: " & Left(xq_cog.Fic))
@@ -1117,9 +1244,16 @@ BeginP
 		WinMoveFile(xq_cog.Fic, wFic)
 
 	Else ; échec déplacement du fichier
-		Cog_EcritureLivreDeBord(WinGetTextError(WinGetLastError))
+		txtErr = WinGetTextError(WinGetLastError)
+		Cog_EcritureLivreDeBord(txtErr)
+		ListInsert(lId_ErrTxt, txtErr)
 		erreur = TRUE
 	EndIf ; test déplacement du fichier
+
+	;
+	If erreur
+		Proservia_FlashErreur()	
+	EndIf
 
 	Cog_EcritureLivreDeBord(translate("<-- Interface Proservia: fin de l'intégration fichier"))
 

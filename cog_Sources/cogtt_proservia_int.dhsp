@@ -1,0 +1,41 @@
+;>xdiva
+;*
+;*		Objet : envoi de flash
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLF	P205C							11/2015		Création d'un module de traitement pour l'interface Proservia: obligatoire pour les points d'entrée des flash
+;*
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		A5_Flash_Creation_Message_AV		Point d'entrée pour modif de l'objet et corps du message
+;*		A5_Flash_Envoi_AV						Point d'entrée pour l'ajout de destinataires
+overwrittenby "cogut_proservia_int.dhop"
+
+;
+Module	"CogPP_Proservia_Int.dhop"
+
+;
+public record	gtfdd.dhsd	xq		xq_cog			;enregistrement de travail
+
+;*
+;*	  Procédures standards de l'envoi de FLASH
+;*
+
+;*
+Public Procedure A5_Flash_Creation_Message_AV
+;Point d'entrée pour modif de l'objet et corps du message
+BeginP
+	Proservia_FlashMessage()
+EndP
+
+;*
+Public Procedure A5_Flash_Envoi_AV
+; Point d'entrée pour l'ajout de destinataires
+BeginP
+	;Proservia_FlashDestinataires()
+EndP

@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20151116113021      
+;>xwin4obj                              7.0       20151127094235      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="16/11/2015"
+ date_modification="27/11/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
- dernier_id=1000061
+ dernier_id=1000063
  surcharge=oui
  date_modif_base="20140423090133"
  dernier_id_page=100001
@@ -9651,21 +9651,21 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=130,9
-   taille=70,183
-   id=1000014
-   wstyle="GROUPE"
-  [param_groupbox]
-   texte="Intégration Artémis"
-   couleur_fond="GROUPE_FOND"
- [groupbox]
-  [presentation]
    position=130,202
    taille=70,253
    id=1000044
    wstyle="GROUPE"
   [param_groupbox]
    texte="Intégration Proservia"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=130,9
+   taille=70,183
+   id=1000014
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Intégration Artémis"
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
@@ -9743,6 +9743,14 @@
    texte="Référence pour facturation des frais financiers"
  [obj_texte]
   [presentation]
+   position=144,209
+   taille=9,85
+   id=1000045
+   wstyle="STD"
+  [texte]
+   texte="Chemin pour les BL en attente"
+ [obj_texte]
+  [presentation]
    position=149,18
    taille=9,91
    id=1000021
@@ -9751,12 +9759,12 @@
    texte="Chemin Harmony du fichier à intégrer"
  [obj_texte]
   [presentation]
-   position=149,209
-   taille=9,85
-   id=1000045
+   position=155,209
+   taille=9,99
+   id=1000051
    wstyle="STD"
   [texte]
-   texte="Chemin pour les BL en attente"
+   texte="Chemin BL en cours de traitement"
  [obj_texte]
   [presentation]
    position=160,18
@@ -9767,12 +9775,12 @@
    texte="Chemin Windows du fichier à intégrer"
  [obj_texte]
   [presentation]
-   position=160,209
-   taille=9,99
-   id=1000051
+   position=166,209
+   taille=9,75
+   id=1000047
    wstyle="STD"
   [texte]
-   texte="Chemin BL en cours de traitement"
+   texte="Chemin pour les BL intégrés"
  [obj_texte]
   [presentation]
    position=171,18
@@ -9783,12 +9791,12 @@
    texte="Format du fichier à intégrer"
  [obj_texte]
   [presentation]
-   position=171,209
-   taille=9,75
-   id=1000047
+   position=177,209
+   taille=9,73
+   id=1000049
    wstyle="STD"
   [texte]
-   texte="Chemin pour les BL intégrés"
+   texte="Chemin pour les BL rejetés"
  [obj_texte]
   [presentation]
    position=182,18
@@ -9799,12 +9807,12 @@
    texte="Numéro de Flash pour le rapport"
  [obj_texte]
   [presentation]
-   position=182,209
-   taille=9,73
-   id=1000049
+   position=188,209
+   taille=9,81
+   id=1000062
    wstyle="STD"
   [texte]
-   texte="Chemin pour les BL rejetés"
+   texte="Code flash pour les rejets"
  [obj_texte]
   [presentation]
    position=228,207
@@ -10097,7 +10105,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=149,292
+   position=144,292
    taille=9,76
    id=1000046
    colonnes_saisie=20
@@ -10118,7 +10126,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=160,292
+   position=155,292
    taille=9,76
    id=1000052
    colonnes_saisie=20
@@ -10139,7 +10147,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=171,292
+   position=166,292
    taille=9,76
    id=1000048
    colonnes_saisie=20
@@ -10160,7 +10168,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=182,292
+   position=177,292
    taille=9,76
    id=1000050
    colonnes_saisie=20
@@ -10177,6 +10185,27 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_IntBlErrCh_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=188,292
+   taille=9,76
+   id=1000063
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,cog_intblflash,cogrs_soccomp
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=12001
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_IntBlFlash_1_Ap"
   [boutons]
    "zoom"
  [case_a_cocher]
@@ -10881,6 +10910,17 @@ Beginp
 		A5_Mes_Alert(2012,dossier.Cog_Flash_CdeF_Valid)
 		Harmony.Retour=xmenext_traitement_Avant
 	Endif
+Endp
+
+
+;*
+Private Procedure Champ_Cog_IntBlFlash_1_Ap
+;
+Beginp
+	If CogRs_SocComp.Cog_IntBlFlash <> ' ' AND Seek_mCodFlash(CogRs_SocComp.Cog_IntBlFlash) <> 0
+		A5_Mes_Alert(2012, CogRs_SocComp.Cog_IntBlFlash)
+		Harmony.Retour = XMENEXT_RESSAISIE
+	EndIf
 Endp
 
 
