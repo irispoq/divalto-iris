@@ -170,15 +170,15 @@ BeginP
 			
 				 	Switch CogRs_UT108.Cog_Period
 						Case 1  ; Mensuelle
-							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,(CogRs_UT108.Cog_Nombre_Cotisation-1))
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,-1,(CogRs_UT108.Cog_Nombre_Cotisation))
 						Case 2  ; Bimestrielle
-							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,((CogRs_UT108.Cog_Nombre_Cotisation * 2)-2))
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,-1,(CogRs_UT108.Cog_Nombre_Cotisation * 2))
 						Case 3  ; Trimestrielle
-							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,((CogRs_UT108.Cog_Nombre_Cotisation * 3)-3))
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,-1,(CogRs_UT108.Cog_Nombre_Cotisation * 3))
 						Case 4  ; Semestrielle
-							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,((CogRs_UT108.Cog_Nombre_Cotisation * 6)-6))
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,-1,(CogRs_UT108.Cog_Nombre_Cotisation * 6))
 						Case 5  ; Annuelle
-							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,,((CogRs_UT108.Cog_Nombre_Cotisation * 12)-12))
+							CogRs_UT108.Cog_Date_Fin = Hdate(wdate,-1,(CogRs_UT108.Cog_Nombre_Cotisation * 12))
 					EndSwitch
 	
 					CogRs_UT108.Cog_Nombre_Cotisation_Restantes = CogRs_UT108.Cog_Nombre_Cotisation

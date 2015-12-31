@@ -161,7 +161,7 @@ EndP
 Public Procedure Cog_A5_Flash_Envoi_AV
 ; Point d'entrée pour l'ajout de destinataires
 BeginP
-	A5_Flash_Ajouter_Destinataire_Internet_Spe( mailAdresse )
+	;A5_Flash_Ajouter_Destinataire_Internet_Spe( mailAdresse )
 EndP
 
 ;*
@@ -174,35 +174,35 @@ Procedure Cog_Ecriture_Infos_Livraison
 ;composition du corps de mail: ajout des informations de livraison sur la commande en cours de lecture
 BeginP
 
-	Cog_Recheche_Commande_Origine
-
-	texteMail &= $0D0A
-	texteMail &= "Numéro de BL: " & Cog_Piece_Entete.PiNo & $0D0A
-	If txtRefcmd <> " "
-		texteMail &= "Commande(s): " & Mid(txtRefcmd,1,Length(txtRefcmd) -1) & $0D0A
-	Endif
-	texteMail &= "Nombre de colis: "	& Cog_Piece_Entete.ColiNb & $0D0A
-	texteMail &= "Nom du client livré: " & ClientLivre.Nom & $0D0A 
-	texteMail &= "Adresse de livraison: " & $0D0A
-	texteMail &= ClientLivre.Rue & $0D0A	
-	texteMail &= left(ClientLivre.AdrCpl1) & " " & left(ClientLivre.AdrCpl2) & $0D0A
-	texteMail &= left(ClientLivre.Loc) & $0D0A
-	texteMail &= ClientLivre.Cpostal & " " & ClientLivre.Vil & " " & ClientLivre.Pay & $0D0A
-	texteMail &= "Téléphone du client livré: " & ClientLivre.Tel & $0D0A
-	texteMail &= "Fax du client livré: " & ClientLivre.Fax & $0D0A
-	texteMail &= "Contact du client lié à l'adresse de livraison: " & Client.TiersAdresseBL_Nom & $0D0A
-	texteMail &= "Date de livraison demandée: " & Cog_Piece_Entete.Cog_DepSouhait & $0D0A
-	If Cog_ComplementT1.Cog_siteinternet <> " " 
-		texteMail &= "Site internet: " & left(Cog_ComplementT1.Cog_siteinternet) & $0D0A
-	Endif
+;	Cog_Recheche_Commande_Origine
+;
+;	texteMail &= $0D0A
+;	texteMail &= "Numéro de BL: " & Cog_Piece_Entete.PiNo & $0D0A
+;	If txtRefcmd <> " "
+;		texteMail &= "Commande(s): " & Mid(txtRefcmd,1,Length(txtRefcmd) -1) & $0D0A
+;	Endif
+;	texteMail &= "Nombre de colis: "	& Cog_Piece_Entete.ColiNb & $0D0A
+;	texteMail &= "Nom du client livré: " & ClientLivre.Nom & $0D0A 
+;	texteMail &= "Adresse de livraison: " & $0D0A
+;	texteMail &= ClientLivre.Rue & $0D0A	
+;	texteMail &= left(ClientLivre.AdrCpl1) & " " & left(ClientLivre.AdrCpl2) & $0D0A
+;	texteMail &= left(ClientLivre.Loc) & $0D0A
+;	texteMail &= ClientLivre.Cpostal & " " & ClientLivre.Vil & " " & ClientLivre.Pay & $0D0A
+;	texteMail &= "Téléphone du client livré: " & ClientLivre.Tel & $0D0A
+;	texteMail &= "Fax du client livré: " & ClientLivre.Fax & $0D0A
+;	texteMail &= "Contact du client lié à l'adresse de livraison: " & Client.TiersAdresseBL_Nom & $0D0A
+;	texteMail &= "Date de livraison demandée: " & Cog_Piece_Entete.Cog_DepSouhait & $0D0A
+;	If Cog_ComplementT1.Cog_siteinternet <> " " 
+;		texteMail &= "Site internet: " & left(Cog_ComplementT1.Cog_siteinternet) & $0D0A
+;	Endif
 EndP
 
 ;*
 Procedure Cog_Init_Message
 ;initialisation du mail
 BeginP
-	texteMail = 'Mode de transport: ' & left(ModeTransport.Lib)	& $0D0A 
-	texteMail = 'Informations de livraison pour le client ' & left(Client.Nom) & $0D0A 
+	;texteMail = 'Mode de transport: ' & left(ModeTransport.Lib)	& $0D0A 
+	;texteMail = 'Informations de livraison pour le client ' & left(Client.Nom) & $0D0A 
 ENdP
 
 ;*
@@ -222,25 +222,25 @@ BeginP
 ;	
 ;	MapiClose
 
-	Rs_Cog_Soc.Init()
-	Rs_Cog_Soc.Select()
-
-	erreur = A5_Flash_Envoi(Rs_Cog_Soc.Cog_FlashRdvTrs, '', '', C_Entite_Cli)
-
-	switch erreur
-		case 0
-			Cog_EcritureLivreDeBord("Mail envoyé. Transporteur: " & ModeTransport.Lib)
-		case 1
-			Cog_EcritureLivreDeBord("Impossible de lier les destinataires du flash. Transporteur: " & ModeTransport.Lib)
-		case 2
-			Cog_EcritureLivreDeBord("Pas de flash RDV transporteur paramétré. Transporteur: " & ModeTransport.Lib)
-		case 3
-			Cog_EcritureLivreDeBord("Erreur d'ouverture de fonctions MAPI. Transporteur: " & ModeTransport.Lib)
-		case 4
-			Cog_EcritureLivreDeBord("Impossible d'envoyer le message. Transporteur: " & ModeTransport.Lib)
-
-
-	endSwitch
+;	Rs_Cog_Soc.Init()
+;	Rs_Cog_Soc.Select()
+;
+;	erreur = A5_Flash_Envoi(Rs_Cog_Soc.Cog_FlashRdvTrs, '', '', C_Entite_Cli)
+;
+;	switch erreur
+;		case 0
+;			Cog_EcritureLivreDeBord("Mail envoyé. Transporteur: " & ModeTransport.Lib)
+;		case 1
+;			Cog_EcritureLivreDeBord("Impossible de lier les destinataires du flash. Transporteur: " & ModeTransport.Lib)
+;		case 2
+;			Cog_EcritureLivreDeBord("Pas de flash RDV transporteur paramétré. Transporteur: " & ModeTransport.Lib)
+;		case 3
+;			Cog_EcritureLivreDeBord("Erreur d'ouverture de fonctions MAPI. Transporteur: " & ModeTransport.Lib)
+;		case 4
+;			Cog_EcritureLivreDeBord("Impossible d'envoyer le message. Transporteur: " & ModeTransport.Lib)
+;
+;
+;	endSwitch
 EndP
 
 ;*
@@ -251,53 +251,53 @@ Procedure Cog_Lecture_EntBL
 1		envoiMail			1,0   = 0					;2:oui
 1 		Cpt_Pce				3,0   = 0
 BeginP
-	readerEntBl = Cog_Piece_Entete.ReaderOpen()
-	Cog_Piece_Entete.Where.BL_TypeClient(today, ModeTransport.BlMod)
-	Cog_Piece_Entete.OrderBy.Par_TiersDate()
-	Cog_Piece_Entete.ReaderSelect(readerEntBl)
-
-	;boucle de lecture sur les entetes de BL du jour associée au mode de transport
-	Do While Cog_Piece_Entete.ReaderNext(readerEntBl) > 0
-		;Informations livraison du BL en cours de lecture
-		Cog_RechercheAdrLivr
-
-		If AdrCodifiee.Cog_CliRdv <> 2
-			RedoDo	
-		Endif
-
-		Cpt_Pce ++
-
-		If tiers <> Cog_Piece_Entete.Tiers 
-			;on est sur une nouvelle lecture de Tiers, on teste si le tiers précédent faisait l'objet d'un mail
-			if Cpt_Pce > 0	And tiers <> " " 
-				;Procedure d'envoi du mail pour le tiers précédent	et réinitialisation du compteur Pce
-				Cog_Envoi_Mail
-				Cpt_Pce = 1
-			endIf
-
-			tiers = Cog_Piece_Entete.Tiers
-			Client.Where.Zoom_pk(tiers)
-			Client.Select()
-
-			if Cpt_Pce = 1
-				;initialisation du mail
-				Cog_Init_Message
-		  	EndIf
-
-			;Informations livraison du BL en cours de lecture
-			Cog_Ecriture_Infos_Livraison
-		Else
-			;on est sur un BL qui appartient au même tiers
-			;Concaténation des informations livraison du BL en cours de lecture dans le message
-				Cog_Ecriture_Infos_Livraison
-		EndIf
-	WEnd
-	if Cpt_Pce > 0
-		;Procedure d'envoi du mail pour le tiers précédent
-		Cog_Envoi_Mail
-	endIf
-
-	Cog_Piece_Entete.ReaderClose(readerEntBl)
+;	readerEntBl = Cog_Piece_Entete.ReaderOpen()
+;	Cog_Piece_Entete.Where.BL_TypeClient(today, ModeTransport.BlMod)
+;	Cog_Piece_Entete.OrderBy.Par_TiersDate()
+;	Cog_Piece_Entete.ReaderSelect(readerEntBl)
+;
+;	;boucle de lecture sur les entetes de BL du jour associée au mode de transport
+;	Do While Cog_Piece_Entete.ReaderNext(readerEntBl) > 0
+;		;Informations livraison du BL en cours de lecture
+;		Cog_RechercheAdrLivr
+;
+;		If AdrCodifiee.Cog_CliRdv <> 2
+;			RedoDo	
+;		Endif
+;
+;		Cpt_Pce ++
+;
+;		If tiers <> Cog_Piece_Entete.Tiers 
+;			;on est sur une nouvelle lecture de Tiers, on teste si le tiers précédent faisait l'objet d'un mail
+;			if Cpt_Pce > 0	And tiers <> " " 
+;				;Procedure d'envoi du mail pour le tiers précédent	et réinitialisation du compteur Pce
+;				Cog_Envoi_Mail
+;				Cpt_Pce = 1
+;			endIf
+;
+;			tiers = Cog_Piece_Entete.Tiers
+;			Client.Where.Zoom_pk(tiers)
+;			Client.Select()
+;
+;			if Cpt_Pce = 1
+;				;initialisation du mail
+;				Cog_Init_Message
+;		  	EndIf
+;
+;			;Informations livraison du BL en cours de lecture
+;			Cog_Ecriture_Infos_Livraison
+;		Else
+;			;on est sur un BL qui appartient au même tiers
+;			;Concaténation des informations livraison du BL en cours de lecture dans le message
+;				Cog_Ecriture_Infos_Livraison
+;		EndIf
+;	WEnd
+;	if Cpt_Pce > 0
+;		;Procedure d'envoi du mail pour le tiers précédent
+;		Cog_Envoi_Mail
+;	endIf
+;
+;	Cog_Piece_Entete.ReaderClose(readerEntBl)
 EndP
 
 
@@ -307,29 +307,29 @@ procedure Cog_Boucle_BlMod
 1		readerBlMod			L = 0
 
 beginp
-	readerBlMod = ModeTransport.ReaderOpen()										;nouveau reader sur Mode de transport
-	ModeTransport.OrderBy.Par_ModeTransport()
-	ModeTransport.ReaderSelect(readerBlMod)
-
-	Cog_EcritureLivreDeBord("--> Prise RDV transporteurs")
- 
-	;boucle de lecture principale sur les modes de transport
-	Do While ModeTransport.ReaderNext(ReaderBlMod)	> 0						;recherche du résultat suivant 
-		If ModeTransport.T026_SUITE_Email <> ' ' and ModeTransport.Alg_UExpe_uniq=2
-
-			Cog_Lecture_EntBL
-
-		Else
-			erreur = true
-			Cog_EcritureLivreDeBord("Le mode de transport " & ModeTransport.BlMod & " - " & left(ModeTransport.Lib) \
-			& " n'a pas d'adresse mail associée, envoi des informations pour prise de rendez-vous impossible.")
-		EndIf
-	WEnd
-
-	ModeTransport.ReaderClose(readerBlMod)
-
-	Sleep(1000)		;pour l'ordre d'affichage dans le livre de bord 											
-	Cog_EcritureLivreDeBord("<-- Prise RDV transporteurs")
+;	readerBlMod = ModeTransport.ReaderOpen()										;nouveau reader sur Mode de transport
+;	ModeTransport.OrderBy.Par_ModeTransport()
+;	ModeTransport.ReaderSelect(readerBlMod)
+;
+;	Cog_EcritureLivreDeBord("--> Prise RDV transporteurs")
+; 
+;	;boucle de lecture principale sur les modes de transport
+;	Do While ModeTransport.ReaderNext(ReaderBlMod)	> 0						;recherche du résultat suivant 
+;		If ModeTransport.T026_SUITE_Email <> ' ' and ModeTransport.Alg_UExpe_uniq=2
+;
+;			Cog_Lecture_EntBL
+;
+;		Else
+;			erreur = true
+;			Cog_EcritureLivreDeBord("Le mode de transport " & ModeTransport.BlMod & " - " & left(ModeTransport.Lib) \
+;			& " n'a pas d'adresse mail associée, envoi des informations pour prise de rendez-vous impossible.")
+;		EndIf
+;	WEnd
+;
+;	ModeTransport.ReaderClose(readerBlMod)
+;
+;	Sleep(1000)		;pour l'ordre d'affichage dans le livre de bord 											
+;	Cog_EcritureLivreDeBord("<-- Prise RDV transporteurs")
 
 	;messagebox(Condition(erreur = true, Translate("Traitement terminé.|Des erreurs se sont produites, veuillez consulter le livre de bord"),\
 	;Translate("Traitement terminé")),Translate("Message"),mb_iconinformation)

@@ -263,8 +263,8 @@ BeginP
 		CogRs_PrjAp.Where.AddCondition("Equal_Etb")
 	EndIf
 	If wStatut <> ' '
-		CogRs_PrjAp.Where.Not_Equal_CogStatus(wStatut)
-		CogRs_PrjAp.Where.AddCondition("Not_Equal_CogStatus")
+		CogRs_PrjAp.Where.Equal_CogStatus(wStatut)
+		CogRs_PrjAp.Where.AddCondition("Equal_CogStatus")
 	EndIF
 	If wCtiers
 		CogRs_PrjAp.Where.Equal_TiersFacturation()

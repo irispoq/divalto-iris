@@ -784,6 +784,7 @@ EndP
 ;*
 Procedure ZoomDuplication 
 BeginP
+	Zoom.Modelf = ZOOM_MODE_FICHE
 	Standard.ZoomDuplication
 	affaire.LibAbr					= " "
 	affaire.Cog_Cotisation_PDV	= " "

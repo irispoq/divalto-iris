@@ -82,7 +82,7 @@ public procedure Traiter_Selection
 beginp	; Traiter_Selection
 
 	nbsel ++
-	Pong("CogRs_UT104_" & nbsel,CogRs_UT104.Ref)
+	Pong("CogRs_UT104_" & nbsel,CogRs_UT104.Cog_Cotisation_PDV)
 
 endp		; Traiter_Selection
 
@@ -206,7 +206,7 @@ Endp
 Public Procedure ZoomVAlidation ; validation du zoom
 Beginp
 
-	zoom.valretour	= CogRs_UT104.Ref
+	zoom.valretour	= CogRs_UT104.Cog_Cotisation_PDV
 	if g7.pong = true
 		Envoyer_Courant
 	endif

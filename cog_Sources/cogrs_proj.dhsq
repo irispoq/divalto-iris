@@ -35,6 +35,8 @@ Public Record GTFDD.dhsd 	T000
 		PRJAP.CE2 <= ce2
 	Case Not_Equal_CogStatus(char st)
 		PRJAP.COG_PRJ_STATUS <> st
+	Case Equal_CogStatus(char st)
+		PRJAP.COG_PRJ_STATUS = st
 	Case Not_CogTaux_Null
 		PRJAP.COG_TAUX > 0
 	Case Between_Aff(char ad, char af)
