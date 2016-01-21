@@ -187,7 +187,7 @@ Public Procedure Maj_Nbre_Cotisations_Restantes
 1		i			X
 1		wdate		8
 BeginP
-	If Dtsub(CogRs_UT108.Cog_Date_Debut,CogRs_UT108.Cog_Date_Fin) <= 7300
+	If Abs(Dtsub(CogRs_UT108.Cog_Date_Debut,CogRs_UT108.Cog_Date_Fin)) <= 7300
 		wdate = 	CogRs_UT108.Cog_Date_Debut
 		For i = 1 to 240
 			wdate = Hdate(wdate,,1)
@@ -212,21 +212,22 @@ EndP
 Public Procedure Maj_Date_Fin
 ;
 BeginP
-	If CogRs_UT108.Cog_Nombre_Cotisation > system.esp
+	If CogRs_UT108.Cog_Nombre_Cotisation > 0
 	 	Switch CogRs_UT108.Cog_Period
 			Case 1  ; Mensuelle
-				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,(CogRs_UT108.Cog_Nombre_Cotisation-1))
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,-1,(CogRs_UT108.Cog_Nombre_Cotisation))
 			Case 2  ; Bimestrielle
-				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,((CogRs_UT108.Cog_Nombre_Cotisation * 2)-2))
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,-1,((CogRs_UT108.Cog_Nombre_Cotisation * 2)))
 			Case 3  ; Trimestrielle
-				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,((CogRs_UT108.Cog_Nombre_Cotisation * 3)-3))
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,-1,((CogRs_UT108.Cog_Nombre_Cotisation * 3)))
 			Case 4  ; Semestrielle
-				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,((CogRs_UT108.Cog_Nombre_Cotisation * 6)-6))
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,-1,((CogRs_UT108.Cog_Nombre_Cotisation * 6)))
 			Case 5  ; Annuelle
-				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,,((CogRs_UT108.Cog_Nombre_Cotisation * 12)-12))
+				CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Debut,-1,((CogRs_UT108.Cog_Nombre_Cotisation * 12)))
 		EndSwitch
 		CogRs_UT108.Cog_Nombre_Cotisation_Restantes = CogRs_UT108.Cog_Nombre_Cotisation
 	Else
+		CogRs_UT108.Cog_Nombre_Cotisation_Restantes = 0	
 		Maj_Nbre_Cotisations_Restantes
 		CogRs_UT108.Cog_Nombre_Cotisation = CogRs_UT108.Cog_Nombre_Cotisation_Restantes
 	Endif
@@ -349,9 +350,9 @@ Beginp
 		Ajouter_condition(Valeur_Condition,'Like_Ref')
 	endif
 	
-	If CogRs_Sel.Cog_Duree_Limitee = 2
-		CogRs_UT108.Where.Equal_DateValide(today())
-		Ajouter_condition(Valeur_Condition, "Equal_DateValide")
+	If CogRs_Sel.Ce1N = 2
+		CogRs_UT108.Where.Non_Perime(today())
+		Ajouter_condition(Valeur_Condition, "Non_Perime")
 	EndIf														 	
 																						 	
 	if Valeur_Condition <> ' '
@@ -381,7 +382,7 @@ Beginp
 	Note_Debut 				;Init de la gestion des notes													
 
 	CogRs_Sel.init()
-	CogRs_Sel.Cog_Duree_Limitee = 2			; filtre pour hsdt
+	CogRs_Sel.Ce1N = 2			; filtre pour hsdt
 	CogRs_Sel.Affaire = G7.Projet
 	CogRs_Sel.Etb = G7.Etb
 	CogRs_UT108.Orderby.Par_Affaire()
@@ -451,7 +452,13 @@ Endp
 
 ;*
 Public Procedure ZoomDuplication 
+;
 Beginp
+
+	;
+	Zoom.Modelf = ZOOM_MODE_FICHE
+
+	;
 	CogRs_UT108.USERCR		= ' '
 	CogRs_UT108.USERCRDH		= ' '
 	CogRs_UT108.USERMO		= ' '
@@ -464,7 +471,6 @@ Beginp
 	CogRs_UT108.Cog_Nombre_Cotisation = 0
 	CogRs_UT108.Cog_Nombre_Cotisation_Facturees = 0
 	CogRs_UT108.Cog_Date_Fin   = '99991231'
-
 Endp
 
 ;*
@@ -540,7 +546,7 @@ Beginp
 
 	If CogRs_UT108_SeekFichePosterieure() > 0
 
-		MessageBox("Cette fiche est périmée, il existe un autre enregistrement avec une date d'application supérieure.","Information", MB_ICONEXCLAMATION)
+		MessageBox("Cette fiche ne peut plus être modifiée, il existe un autre enregistrement avec une date d'application supérieure.","Information", MB_ICONEXCLAMATION)
 		Zoom.Ok = 'I'
 
 	EndIf
@@ -562,6 +568,10 @@ Beginp
    CogRs_UT108.UserMoDh 	= Time(7)
 	CogRs_UT108.Note 		= Note_Modification_ (C_Applic_DAV, CogRs_UT108.Note, 'CogRs_UT108')
 	CogRs_UT108.CeNote		= Condition(CogRs_UT108.Note = 0, 1, 2)
+
+	If CogRs_UT108.Cog_Nombre_Cotisation_Facturees = 0
+		Maj_Date_Fin()
+	EndIf
 
 	If CogRs_UT108_Controler_Ecart_Tarif()	<> 0
 		Zoom.Ok = 'S'

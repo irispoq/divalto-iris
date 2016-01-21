@@ -153,7 +153,6 @@ BeginP
 			CogRs_UT108.Cog_Period 					= COG_UT104.Cog_Period
 			CogRs_UT108.RefQte						= 1
 			CogRs_UT108.Cog_AxeAnael				= COG_UT104.Cog_AxeAnael
-			CogRs_UT108.Cog_Duree_Limitee 		= COG_UT104.Cog_Duree_Limitee
 			CogRs_UT108.Cog_Nombre_Cotisation 	= COG_UT104.Cog_Nombre_Cotisation	
 			CogRs_UT108.Cog_Date_Debut 			= Hdate(Today,"p")
 	
@@ -165,7 +164,7 @@ BeginP
 			EndIf
 	
 			; détermination de la date de fin selon la périodicité
-			If CogRs_UT108.Cog_Duree_Limitee 	= 2 
+			If Cog_UT104.Cog_Duree_Limitee 	= 2 
 				If CogRs_UT108.Cog_Nombre_Cotisation > system.esp
 			
 				 	Switch CogRs_UT108.Cog_Period

@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20141222165152      
+;>xwin4obj                              7.0       20160121095848      
 [masque]
  libelle="journaux"
  utilisateur="UGIE"
- date_modification="22/12/2014"
+ date_modification="21/01/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=108
  type_masque=2
- dernier_id=1000009
+ dernier_id=1000010
  surcharge=oui
  date_modif_base="20130213090335"
  dernier_id_page=100000
@@ -1774,7 +1774,7 @@
    position=61,200
    taille=9,52
    id=1000001
-   wstyle="STD"
+   wstyle="COG_CHAMP_SAISI"
   [description]
    donnee=journal,cog_exportanael,journal
   [param_case]
@@ -1791,7 +1791,7 @@
    position=72,200
    taille=9,72
    id=1000002
-   wstyle="STD"
+   wstyle="COG_CHAMP_SAISI"
   [description]
    donnee=journal,cog_jnlpdv,journal
   [param_case]
@@ -1809,7 +1809,7 @@
    position=83,200
    taille=9,91
    id=1000003
-   wstyle="STD"
+   wstyle="COG_CHAMP_SAISI"
   [description]
    donnee=journal,cog_jnlcen,journal
   [param_case]
@@ -1827,7 +1827,7 @@
    position=94,200
    taille=9,117
    id=1000009
-   wstyle="STD"
+   wstyle="COG_CHAMP_SAISI"
   [description]
    donnee=journal,cog_anaeltranscod,journal
   [param_case]
@@ -1839,6 +1839,21 @@
    f7=8000
   [traitements]
    microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=105,200
+   taille=9,109
+   id=1000010
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=journal,cog_anaeldt,journal
+  [param_case]
+   texte="Date fin de période pour Anael"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f1=1
+   f7=8000
  [champ]
   [presentation]
    position=133,278
@@ -2686,7 +2701,7 @@
    taille=9,30
    id=1000005
    colonnes_saisie=8
-   wstyle="CHAMP_SAISI_COG"
+   wstyle="COG_CHAMP_SAISI"
   [description]
    donnee=journal,cog_pieced,journal
   [param_saisie]

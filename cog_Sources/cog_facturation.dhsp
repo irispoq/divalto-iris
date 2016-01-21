@@ -390,7 +390,7 @@ EndP
 Procedure Genere_Ligne_BL_Cotisation_PDV
 BeginP
 	wref =  Cog_UT108.Ref
-	If Cog_UT108.Cog_Duree_Limitee = 2
+	If Cog_UT108.Cog_Nombre_Cotisation > 0
 		wpub = COG_UT108.Cog_Montant / COG_UT108.Cog_Nombre_Cotisation A
 	Else
 		wpub = COG_UT108.Cog_Montant
@@ -849,7 +849,7 @@ Else
 							If Left(wdate_prochaine_facture,6) > Left(COG_UT108.Cog_Date_Fin,6) | RedoLoop | Endif
 							If Left(wdate_prochaine_facture,6) > Left(G7.DatD,6) 					  | RedoLoop | Endif
 						Endif
-						If Cog_UT108.Cog_Duree_Limitee = 2 And Not COG_UT108.Cog_Nombre_Cotisation_Restantes > system.esp | RedoLoop | Endif
+						If Cog_UT108.Cog_Nombre_Cotisation > 0 And Not COG_UT108.Cog_Nombre_Cotisation_Restantes > system.esp | RedoLoop | Endif
 						ListInsert(ListeFac,COG_UT108)										
 					EndLoop
 					If Not ListCount(ListeFac) > system.esp | RedoLoop | Endif

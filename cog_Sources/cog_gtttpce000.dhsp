@@ -41,6 +41,7 @@ public 	hfile	ccfdd.dhsd	CCFDOS				CCFDOS	noopen; Fichier dossier de C3
 public 	hfile	ccfdd.dhsd	CCFJCA 				CCFJCA	noopen; Fichier dossier de C3
 
 ;public recordsql "gtrsppslr.dhoq" LivRecLigne
+Public RecordSQL	"CogRs_Dos.dhoq"		CogRs_SocComp
 
 ; Enregistrements
 Public Record	GTFDD.dhsd	ETS								; Etablissement
@@ -693,9 +694,15 @@ Procedure Cog_Maj_Journal_Comptable
 
 BeginP
 
+	; YLEF --> ajout d'une option pour gérer la numérotation des factures avec les journaux
+	If CogRs_SocComp.Cog_FaNoJnl <> 2
+		PReturn
+	EndIf
+
+	;
 	If (LireProgrammeMode IN (C_Mode_Creation, C_Mode_Duplication)) 
 
-		Messagebox("N° pièce "&ent.pino,"Création de pièce")
+		;Messagebox("N° pièce "&ent.pino,"Création de pièce")
 
 		If Lectab(20,ENT.OP) = 0	
 			Lib_Ent(ENT.TiCod,ENT.PiCod,ENT.Pino)
@@ -1700,6 +1707,10 @@ Public Procedure Cog_Programme_Debut
 ; en début de programme après l'ouvertue des fichiers et avant la lecture du dossier
 BeginP
 	
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(MZ.Dos)
+	CogRs_SocComp.Select()
+
 	flagInit = TRUE
 	CD			= " "
 	

@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20021014173940,hc  ,20151019143228,UGIE                
+Version=5,20021014173940,hc  ,20160121095502,UGIE                
 Nom=ccfdd.dhsd,ccfdd.dhsd,1
 [CHAMP]
 Version=1,20141007161805,UGIE                ,20141007161810,UGIE                
@@ -8,6 +8,13 @@ Nom=Cog_AmoFlag,Comptabilisation amortissement,1
 Gel=1
 Nature=1,0
 NomOdbc=Cog_AmoFlag
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20160121095452,UGIE                ,20160121095459,UGIE                
+Nom=Cog_AnaelDt,Date de fin de validation pour Anaël,1
+Gel=1
+Nature=1,0
+NomOdbc=Cog_AnaelDt
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20141222164948,UGIE                ,20141222164959,UGIE                
@@ -302,6 +309,7 @@ Nom=Cog_JnlPDV,10,0,0,N,1
 Nom=Cog_PieceD,11,0,0,N,1
 Nom=Cog_JnlCen,19,0,0,N,1
 Nom=Cog_AnaelTranscod,20,0,0,N,1
+Nom=Cog_AnaelDt,21,0,0,N,1
 [/CHAMPL]
 nom=UC5
 [CHAMPL]
@@ -381,6 +389,9 @@ DateM=2845ACCB54EECD01
 Version=1,1996 2160000,hc  ,20100708171529,VJ                  
 Nom=c4,Journal,1
 DateM=3FF25B66B01ECB01
+[PROPLOC]
+Nom=Cog_AnaelDt
+[/PROPLOC]
 [TABLEU]
 Version=1,1996 2160000,hc  ,20100708174003,VJ                  
 Nom=c5,Axe,1

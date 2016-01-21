@@ -21,7 +21,8 @@ Public RecordSQL	"GTRSPPTAB.DHOQ"		TauxTvaN
 Public RecordSQL	"CCRSJCA.DHOQ"			Journal			CogRs_JNL
 
 ;
-public record	ccfdd.dhsd	ca
+public record	ccfdd.dhsd	CA
+public record	ccfdd.dhsd	CD
 public record	ccfdd.dhsd	c3
 public record	ccfdd.dhsd	c4
 public record	ccfdd.dhsd	c8
@@ -30,6 +31,7 @@ public record	gtfdd.dhsd	cli
 public record	gtfdd.dhsd	t006
 
 ;
+1	todaydt		>GTFDD.DHSD	PiDt
 1	pidt			>GTFDD.DHSD	PiDt
 1	echDt			>GTFDD.DHSD	EchDt
 1	regl			>GTFDD.DHSD	Regl
@@ -293,6 +295,7 @@ record	ccfdd.dhsd	cx		cx_loc
  2		moisa		2,0
   3	moisaa	2
 1	wCar			1
+1	wDate			>gtfdd.dhsd		PiDt			
 
 BeginP
 
@@ -348,7 +351,7 @@ BeginP
 	s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(PiDt)))
 	s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(PiDt)))
 
-	s_EcritureAnael.p60_TrtAnnee		= val(year(today))
+	s_EcritureAnael.p60_TrtAnnee		= val(year(todaydt))
 	; JDT DEEBUT 14/09/2011
 	if OrigineAppel <> 2
 		If CX_LOC <> " "
@@ -375,28 +378,28 @@ BeginP
 			t_PiNo = c8_loc.Piece
 		Case 2
 
-			s_EcritureAnael.p26_EcrAn		= val(year(today)) & "0"
-			s_EcritureAnael.p45_EcrAn2		= val(year(today))
-			s_EcritureAnael.p51_EcrMois2	= fstring("0",val(month(today)))
-			s_EcritureAnael.p55_EcrJour2	= fstring("0",val(day(today)))
+			s_EcritureAnael.p26_EcrAn		= val(year(todaydt)) & "0"
+			s_EcritureAnael.p45_EcrAn2		= val(year(todaydt))
+			s_EcritureAnael.p51_EcrMois2	= fstring("0",val(month(todaydt)))
+			s_EcritureAnael.p55_EcrJour2	= fstring("0",val(day(todaydt)))
 			s_EcritureAnael.p57_Cst		= "7"
 			;
 			s_EcritureAnael.p78_EcrNo		= " "
 
 			;
-			s_EcritureAnael.p66_EcrAn		= val(year(today))
-			s_EcritureAnael.p72_EcrMois	= fstring("0",val(month(today)))
-			s_EcritureAnael.p76_EcrJour	= fstring("0",val(day(today)))
+			s_EcritureAnael.p66_EcrAn		= val(year(todaydt))
+			s_EcritureAnael.p72_EcrMois	= fstring("0",val(month(todaydt)))
+			s_EcritureAnael.p76_EcrJour	= fstring("0",val(day(todaydt)))
 			s_EcritureAnael.p86_Jnl			= cx_loc.Jnl
 
 			;
-			anneea	= year(today)
-			moisa		= month(today)
+			anneea	= year(todaydt)
+			moisa		= month(todaydt)
 			pinoa		= fstring("0",pinoa)
 			t_PiNo	= val(pinoa)
 
 			;
-			s_EcritureAnael.p99_Libelle		= "Ecr ana Centrales " & moisaa & right(val(year(today)),2)
+			s_EcritureAnael.p99_Libelle		= "Ecr ana Centrales " & moisaa & right(val(year(todaydt)),2)
 
 		Case 3
 			t_PiNo = c8_loc.Cog_RedNo
@@ -415,7 +418,7 @@ BeginP
 			s_EcritureAnael.p99_Libelle		= "Redd.N " & right(c8_loc.Cog_RedNo) & " de " & Right("00" & fstring("0",val(month(c8_loc.EcrDt))),2) & "/" & right(val(year(c8_loc.EcrDt)),2)
 
 		Case 4
-			s_EcritureAnael.p26_EcrAn			= val(year(today)) & "0"
+			s_EcritureAnael.p26_EcrAn			= val(year(todaydt)) & "0"
 			t_PiNo 									= 0
 			s_EcritureAnael.p45_EcrAn2			= val(year(Condition(cx_loc	<> ' ', cx_loc.EcrDt, c8_loc.EcrDt)))	
 			s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(Condition(cx_loc	<> ' ', cx_loc.EcrDt, c8_loc.EcrDt))))
@@ -484,9 +487,9 @@ BeginP
 
 	s_EcritureAnael.p324_Dev		= condition(cx_loc="",c8_loc.Dev,"EUR")
 	s_EcritureAnael.p330_Cst		= "0"
-	s_EcritureAnael.p348_TrtAn		= val(year(today))
-	s_EcritureAnael.p354_TrtMois	= fstring("0",val(month(today)))
-	s_EcritureAnael.p358_TrtJr		= fstring("0",val(day(today)))
+	s_EcritureAnael.p348_TrtAn		= val(year(todaydt))
+	s_EcritureAnael.p354_TrtMois	= fstring("0",val(month(todaydt)))
+	s_EcritureAnael.p358_TrtJr		= fstring("0",val(day(todaydt)))
 	s_EcritureAnael.p364_Cst		= "0"
 	s_EcritureAnael.p370_Cst		= "0"
 	s_EcritureAnael.p374_Cst		= "0"
@@ -604,6 +607,9 @@ beginp
 	If CA.Dos <> MZ.dos
 		Seek_CA(MZ.dos)
 	EndIf
+	If CD.Dos <> CA.Dos
+		Seek_CD()
+	EndIf
 
 	if cx_loc <> ""
 		Seek_C8(cx_loc.EcrNo,cx_loc.EcrLg)
@@ -625,6 +631,7 @@ beginp
 	endif
 
 	; 
+	todaydt = Condition(C4.Cog_AnaelDt = 2, CD.ExoFDt, Today())
 	PiDt = Condition(c8_loc.EcrDt <> ' ', c8_loc.EcrDt, cx_loc.EcrDt)
 	EchDt= c8_loc.EchDt
 	regl = c8_loc.Reg

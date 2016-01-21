@@ -397,7 +397,8 @@ BeginP
 	C8.CeH		= Condition(C8.Ce3 = 2 AND C8.Etb <> ' ', '1', ' ')		;CEH	= 1 si écriture validée et rattachée à un établissement= espace sinon
 	C8.cpt   	= wCpt
 	C8.cp	   	= ' '												; Pas de contrepartie
-	C8.ecrdt  	= Time(1)
+	C8.ecrdt  	= Time(1)										; par défaut la date du jour
+	C8.ecrdt  	= Condition(C8.ecrdt <= CD.ExoFDt, C8.ecrdt, CD.ExoFDt) 	; vérification que la date du jour est comprise dans la période de validation
 	C8.lib    	= "Fiche immobilisation n°" & nospaces(CogRs_I1.Immo)
 	C8.jnl    	= CD.Cog_CesJnl
 	C8.Pinotiers= ""

@@ -739,7 +739,7 @@ BeginF
 		If Left(wDate_Prochaine_Facture, 6) > Left(COG_UT108.Cog_Date_Fin,6) | FReturn(1) | Endif
 		If Left(wDate_Prochaine_Facture, 6) > Left(G7.DatD,6) 					  | FReturn(1) | Endif
 	Endif
-	If Cog_UT108.Cog_Duree_Limitee = 2 And Not COG_UT108.Cog_Nombre_Cotisation_Restantes > system.esp | FReturn(1) | Endif
+	If Cog_UT108.Cog_Nombre_Cotisation > 0 And Not COG_UT108.Cog_Nombre_Cotisation_Restantes > system.esp | FReturn(1) | Endif
 
 	FReturn(0)
 

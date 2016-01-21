@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20151127094235      
+;>xwin4obj                              7.0       20160119154245      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="27/11/2015"
+ date_modification="19/01/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
- dernier_id=1000063
+ dernier_id=1000064
  surcharge=oui
  date_modif_base="20140423090133"
  dernier_id_page=100001
@@ -3209,7 +3209,7 @@
  [groupbox]
   [presentation]
    position=26,5
-   taille=109,470
+   taille=119,470
    id=168
    wstyle="GROUPE"
   [param_groupbox]
@@ -3217,7 +3217,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=207,5
+   position=215,5
    taille=48,470
    id=169
    wstyle="GROUPE"
@@ -3226,7 +3226,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=258,5
+   position=266,5
    taille=48,470
    id=170
    wstyle="GROUPE"
@@ -3235,7 +3235,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=141,5
+   position=149,5
    taille=62,336
    id=167
    wstyle="GROUPE"
@@ -3244,7 +3244,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=141,344
+   position=149,344
    taille=62,130
    id=807
    wstyle="GROUPE"
@@ -3253,7 +3253,7 @@
    couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=158,84
+   position=166,84
    taille=9,80
    cadrage=centre
    id=173
@@ -3262,7 +3262,7 @@
    texte="Pièces client"
  [obj_texte]
   [presentation]
-   position=158,172
+   position=166,172
    taille=9,80
    cadrage=centre
    id=175
@@ -3271,7 +3271,7 @@
    texte="Pièces fournisseur"
  [obj_texte]
   [presentation]
-   position=158,260
+   position=166,260
    taille=9,80
    cadrage=centre
    id=174
@@ -3280,7 +3280,7 @@
    texte="Pièces internes"
  [obj_texte]
   [presentation]
-   position=172,10
+   position=180,10
    taille=9,72
    id=176
    wstyle="STD"
@@ -3288,7 +3288,7 @@
    texte="Premier critère"
  [obj_texte]
   [presentation]
-   position=182,10
+   position=190,10
    taille=9,72
    id=177
    wstyle="STD"
@@ -3296,7 +3296,7 @@
    texte="Deuxième critère"
  [obj_texte]
   [presentation]
-   position=192,10
+   position=200,10
    taille=9,72
    id=178
    wstyle="STD"
@@ -3304,7 +3304,7 @@
    texte="Troisième critère"
  [obj_texte]
   [presentation]
-   position=223,10
+   position=231,10
    taille=9,88
    id=180
    wstyle="STD"
@@ -3312,7 +3312,7 @@
    texte="Code pied pièce client"
  [obj_texte]
   [presentation]
-   position=223,164
+   position=231,164
    taille=9,55
    id=628
    wstyle="STD"
@@ -3320,7 +3320,7 @@
    texte="Valeur du franco"
  [obj_texte]
   [presentation]
-   position=223,352
+   position=231,352
    taille=9,106
    cadrage=centre
    id=769
@@ -3329,7 +3329,7 @@
    texte="Port pré-calculé"
  [obj_texte]
   [presentation]
-   position=233,10
+   position=241,10
    taille=9,88
    id=182
    wstyle="STD"
@@ -3337,7 +3337,7 @@
    texte="Code pied pièce fournisseur"
  [obj_texte]
   [presentation]
-   position=233,352
+   position=241,352
    taille=9,95
    id=181
    wstyle="STD"
@@ -3345,7 +3345,7 @@
    texte="Code pied de pièce client"
  [obj_texte]
   [presentation]
-   position=243,10
+   position=251,10
    taille=9,88
    id=647
    wstyle="STD"
@@ -3353,7 +3353,7 @@
    texte="Code pied pièce interne"
  [obj_texte]
   [presentation]
-   position=243,352
+   position=251,352
    taille=9,95
    id=183
    wstyle="STD"
@@ -3361,7 +3361,7 @@
    texte="Code pied de pièce fournisseur"
  [obj_texte]
   [presentation]
-   position=274,228
+   position=282,228
    taille=9,123
    id=619
    wstyle="STD"
@@ -3369,7 +3369,7 @@
    texte="Autoriser la gestion des reliquats à la ligne"
  [obj_texte]
   [presentation]
-   position=284,228
+   position=292,228
    taille=9,123
    id=622
    wstyle="STD"
@@ -3765,7 +3765,23 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=157,348
+   position=133,10
+   taille=9,203
+   id=1000064
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,cog_fanojnl,cogrs_soccomp
+  [param_case]
+   texte="Gérer la numérotation des factures avec les journaux"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f7=9040
+ [case_a_cocher]
+  [presentation]
+   position=165,348
    taille=9,117
    id=806
    wstyle="STD"
@@ -3786,7 +3802,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=167,348
+   position=175,348
    taille=9,117
    id=808
    wstyle="STD"
@@ -3807,7 +3823,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=187,348
+   position=195,348
    taille=9,117
    id=809
    wstyle="STD"
@@ -3828,7 +3844,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=172,84
+   position=180,84
    taille=9,80
    id=201
    wstyle="CHAMP_SAISI"
@@ -3850,7 +3866,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=182,84
+   position=190,84
    taille=9,80
    id=202
    wstyle="CHAMP_SAISI"
@@ -3873,7 +3889,7 @@
    diva_apres="Champ_Refsais_1_Ap"
  [case_a_cocher]
   [presentation]
-   position=177,348
+   position=185,348
    taille=9,117
    id=810
    wstyle="STD"
@@ -3894,7 +3910,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=192,84
+   position=200,84
    taille=9,80
    id=203
    wstyle="CHAMP_SAISI"
@@ -3917,7 +3933,7 @@
    diva_avant="Champ_Refsais_1_Av"
  [multi_choix]
   [presentation]
-   position=172,172
+   position=180,172
    taille=9,80
    id=204
    wstyle="CHAMP_SAISI"
@@ -3939,7 +3955,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=182,172
+   position=190,172
    taille=9,80
    id=205
    wstyle="CHAMP_SAISI"
@@ -3962,7 +3978,7 @@
    diva_apres="Champ_Refsais_1_Ap"
  [multi_choix]
   [presentation]
-   position=192,172
+   position=200,172
    taille=9,80
    id=206
    wstyle="CHAMP_SAISI"
@@ -3985,7 +4001,7 @@
    diva_avant="Champ_Refsais_1_Av"
  [multi_choix]
   [presentation]
-   position=172,260
+   position=180,260
    taille=9,80
    id=207
    wstyle="CHAMP_SAISI"
@@ -4007,7 +4023,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=182,260
+   position=190,260
    taille=9,80
    id=208
    wstyle="CHAMP_SAISI"
@@ -4029,7 +4045,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=223,100
+   position=231,100
    taille=9,10
    id=209
    wstyle="CHAMP_SAISI"
@@ -4052,7 +4068,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=223,112
+   position=231,112
    taille=9,10
    id=210
    wstyle="CHAMP_SAISI"
@@ -4075,7 +4091,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=223,124
+   position=231,124
    taille=9,10
    id=211
    wstyle="CHAMP_SAISI"
@@ -4098,7 +4114,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=233,100
+   position=241,100
    taille=9,10
    id=212
    wstyle="CHAMP_SAISI"
@@ -4121,7 +4137,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=233,112
+   position=241,112
    taille=9,10
    id=213
    wstyle="CHAMP_SAISI"
@@ -4144,7 +4160,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=233,124
+   position=241,124
    taille=9,10
    id=214
    wstyle="CHAMP_SAISI"
@@ -4167,7 +4183,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=243,100
+   position=251,100
    taille=9,10
    id=648
    colonnes_saisie=2
@@ -4182,7 +4198,7 @@
    shift_f7=9040
  [champ]
   [presentation]
-   position=243,112
+   position=251,112
    taille=9,10
    id=651
    colonnes_saisie=2
@@ -4197,7 +4213,7 @@
    shift_f7=9040
  [champ]
   [presentation]
-   position=243,124
+   position=251,124
    taille=9,10
    id=652
    colonnes_saisie=2
@@ -4212,7 +4228,7 @@
    shift_f7=9040
  [champ]
   [presentation]
-   position=223,220
+   position=231,220
    taille=9,24
    id=626
    colonnes_saisie=6
@@ -4230,7 +4246,7 @@
    shift_f7=9040
  [multi_choix]
   [presentation]
-   position=223,252
+   position=231,252
    taille=9,48
    id=627
    wstyle="CHAMP_SAISI"
@@ -4248,7 +4264,7 @@
    shift_f7=9040
  [champ]
   [presentation]
-   position=233,448
+   position=241,448
    taille=9,10
    id=215
    wstyle="CHAMP_SAISI"
@@ -4269,7 +4285,7 @@
    diva_apres="Champ_PIEDNO_3_Ap"
  [champ]
   [presentation]
-   position=243,448
+   position=251,448
    taille=9,10
    id=216
    wstyle="CHAMP_SAISI"
@@ -4290,7 +4306,7 @@
    diva_apres="Champ_PIEDNO_4_Ap"
  [case_a_cocher]
   [presentation]
-   position=274,12
+   position=282,12
    taille=9,87
    id=217
    wstyle="STD"
@@ -4311,7 +4327,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=284,12
+   position=292,12
    taille=9,87
    id=218
    wstyle="STD"
@@ -4332,7 +4348,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=294,12
+   position=302,12
    taille=9,87
    id=219
    wstyle="STD"
@@ -4353,7 +4369,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=274,100
+   position=282,100
    taille=9,127
    id=220
    wstyle="STD"
@@ -4374,7 +4390,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=284,100
+   position=292,100
    taille=9,127
    id=221
    wstyle="STD"
@@ -4395,7 +4411,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=294,100
+   position=302,100
    taille=9,127
    id=222
    wstyle="STD"
@@ -4416,7 +4432,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=274,352
+   position=282,352
    taille=9,52
    id=625
    wstyle="CHAMP_SAISI"
@@ -4431,7 +4447,7 @@
    shift_f7=9040
  [multi_choix]
   [presentation]
-   position=284,352
+   position=292,352
    taille=9,52
    id=624
    wstyle="CHAMP_SAISI"
@@ -4446,7 +4462,7 @@
    shift_f7=9040
  [case_a_cocher]
   [presentation]
-   position=294,228
+   position=302,228
    taille=9,246
    id=658
    wstyle="STD"

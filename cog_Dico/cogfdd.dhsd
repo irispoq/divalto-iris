@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20151127093226,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20160119171816,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -416,6 +416,12 @@ Nom=Cog_Facturation,Indicateur de facturation,1
 Gel=1
 Nature=1,0
 NomOdbc=Cog_Facturation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20160119153806,UGIE                ,20160119153806,UGIE                
+Nom=Cog_FaNoJnl,Gérer la numérotation des factures avec les journaux,1
+Gel=1
+Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20111213140827,ROOT                ,20111213140834,ROOT                
@@ -2873,6 +2879,7 @@ Nom=Cog_PDVseuil,109,2,N,0,0,N,1
 Nom=Cog_PDVtarCtrl,115,2,N,0,0,N,1
 Nom=Cog_PDVOp,116,2,N,0,0,N,1
 Nom=Cog_IntBlFlash,119,2,N,0,0,N,1
+Nom=Cog_FaNoJnl,139,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1999 4220000,MJV ,20120220114332,ROOT                
@@ -3289,7 +3296,7 @@ Nom=Cog_Taux,147,2,N,0,0,N,1
 [TABLE]
 Version=1,20110617235943,SYSTEMU             ,20110618000746,SYSTEMU             
 Nom=Cog_UT108,Affectations des cotisations PDV,1
-DateM=F9818592361DD101
+DateM=71630FFFD452D101
 NomOdbc=Affectations_des_cotisations_PDV
 Taille=300,300
 Pack=0,0
@@ -3327,7 +3334,7 @@ Nom=Cog_Date_Fin,139,2,N,0,0,N,1
 Nom=Cog_Montant,147,2,N,0,0,N,1
 Nom=Cog_Period,158,2,N,0,0,N,1
 Nom=Cog_OP,159,2,N,0,0,N,1
-Nom=Cog_Duree_Limitee,162,2,N,0,0,N,1
+Nom=Filler,162,2,N,0,1,N,1
 Nom=Cog_Nombre_Cotisation,163,2,N,0,0,N,1
 Nom=Cog_Nombre_Cotisation_Restantes,165,2,N,0,0,N,1
 Nom=Cog_Date_Derniere_Facture,167,2,N,0,0,N,1

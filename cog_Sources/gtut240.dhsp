@@ -23,6 +23,9 @@ Public HFile	GTFDD.DHSD	GTFENT		GTFENT
 Public HFile	GTFDD.DHSD	GTFAM			GTFAM
 
 ;
+Public RecordSQL	"CogRs_Dos.dhoq"		CogRs_SocComp
+
+;
 public record	a5dd.dhsd	MZ
 public record	gtfdd.dhsd	ENT								; En-tête
 public record	gtfdd.dhsd	ENT			W1ENT				; En-tête origine bl
@@ -105,6 +108,11 @@ EndF
 Procedure Programme_Debut
 ; en début de programme après l'ouvertue des fichiers et avant la lecture du dossier
 BeginP
+
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(MZ.Dos)
+	CogRs_SocComp.Select()
+
 	werr = system.esp
 	Id_Factures = ListGetId("Liste_Factures")
 	ListErase(Id_Factures)
@@ -237,21 +245,23 @@ Endp
 ;*
 Procedure ENT_Creation_Init
 ;
-1		i		X						
-1	t_Ce1_01				>CCFDD.DHSD	Ce1
-1	t_Key_01				255
-1	x_st_01				X
+1	i					>gtfdd.dhsd	PiNo						
+1	t_Ce1_01			>CCFDD.DHSD	Ce1
+1	t_Key_01			255
+1	x_st_01			X
 Beginp
 	Standard.ENT_Creation_Init
-	If Lectab(20,ENT.OP) = 0
+
+	; numérotation de la pièce	/ YLEF --> ajout de l'option dossier [gérer la numérotation facture par les journaux]
+	If CogRs_SocComp.Cog_FaNoJnl = 2 AND Lectab(20,ENT.OP) = 0
 		Lib_Ent(ENT.TiCod,ENT.PiCod,ENT.Pino)
 		W9ENT = ENT
 		Loop Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'R') = H_RESERVED 
 			Messagebox('Journal comptable des compteurs réservé par un autre utilisateur ou par la facturation, veuillez recommencer SVP.','Attention',MB_OK)
 		Endloop			
 		If Seek_C4(T020.Jnl) = 0 And C4.PieceSais = 4 And C4.PieceCod = 3				
-			For i = 1 to 50
-				C4.Piece++
+			For i = C4.Piece to 99999999
+				C4.Piece = i
 				If Res_Ent(W9ENT.TiCod,W9ENT.PiCod,C4.Piece) = 0
 					If Not Seek_Ent(W9ENT.TiCod,W9ENT.PiCod,C4.Piece) = 0 | ExitFor 
 					Else  | Lib_Ent(W9ENT.TiCod,W9ENT.PiCod,C4.Piece)
@@ -259,7 +269,7 @@ Beginp
 				Endif
 			Next
 			ENT = W9ENT
-			If i < 50
+			If i < 99999999
 				Ent.Pino  = C4.Piece
 				Ccfjca.key = "D" & Mz.Dos & '4' & T020.Jnl 
 				If Hseek(Ccfjca,C4,Ccfjca.key,"R") = 0
@@ -272,15 +282,15 @@ Beginp
 					G3_Log_Ano (9009 , 'Journal non retrouvé, la numérotation des factures est fausse', ' Facture No ' & ENT.PINO) | werr++
 				Endif				 
 			Else
-				G3_Log_Ano (9009 , 'Numéro inconnu, la numérotation des factures est fausse', ' Facture No ' & ENT.PINO) | werr++
+				G3_Log_Ano (9009 , 'Numérotation des pièces saturée, Facture No ' & ENT.PINO) | werr++
 			Endif
 		Else
 			G3_Log_Ano (9009 , 'Journal comptable des compteurs inconnu, la numérotation des factures est fausse', ' Facture No ' & ENT.PINO) | werr++
 		Endif
 		Hshare (CCFJCA ,["C3C4" ENT.Dos T020.Jnl],'L')
-	Endif
-	;If G3XQ.CHOIX(20) = 1 | ENT.PIDT = Hdate(W1ENT.PIDT,"d") | Endif
-	;If ENT.Cog_Regroupe_Direction = 1 |	ENT.Cog_DirCliente = system.esp | Endif
+	Endif	 ; CogRs_SocComp.Cog_FaNoJnl = 2 AND If Lectab(20,ENT.OP) = 0
+	
+
 	; Vérification du client et de son code OP
 	Init CLI_DEV_01 = " "
 	t_Ce1_01 = "3"

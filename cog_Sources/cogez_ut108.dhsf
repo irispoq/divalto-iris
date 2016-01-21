@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20151116145009      
+;>xwin4obj                              7.0       20160119182010      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="16/11/2015"
+ date_modification="19/01/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
@@ -401,30 +401,6 @@
     fl_aff=oui
     largeur_col=35
     wstyle="ENTETE_COLONNE"
-  [case_a_cocher_tableau]
-   [presentation]
-    position=85,9
-    taille=9,55
-    id=126
-    wstyle="STD"
-   [description]
-    donnee=cogrs_ut108,cog_duree_limitee,cogrs_ut108
-   [param_saisie]
-    esp_si_zero=oui
-   [param_case]
-    texte="Durée limitée"
-    valeur="2","1"
-    choix="gtfdmc.dhfi",""
-   [touches]
-    f7=135
-    shift_f6=10000
-   [traitements]
-    microbol_click=8002
-   [param_colonne]
-    titre="Durée limitée"
-    fl_aff=oui
-    largeur_col=55
-    wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
     position=97,146
@@ -740,9 +716,9 @@
    id=139
    wstyle="STD"
   [description]
-   donnee=cogrs_ut108,cog_duree_limitee,cogrs_sel
+   donnee=cogrs_ut108,ce1,cogrs_sel
   [param_case]
-   texte="Uniquement les fiches en vigueur"
+   texte="Masquer les fiches périmées"
    cadrage=droite
    valeur="2","1"
    choix="cog_gtfdmc.dhfi",""
@@ -1162,23 +1138,6 @@
   [touches]
    f7=135
    shift_f6=10000
- [case_a_cocher]
-  [presentation]
-   position=85,9
-   taille=9,55
-   id=77
-   wstyle="STD"
-  [description]
-   donnee=cogrs_ut108,cog_duree_limitee,cogrs_ut108
-  [param_case]
-   texte="Durée limitée"
-   valeur="2","1"
-   choix="gtfdmc.dhfi",""
-  [touches]
-   f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
    position=55,50
@@ -1756,7 +1715,8 @@ Endp
 Public Procedure Champ_Cog_Date_Fin_1_Ap
 ;
 Beginp
-	If CogRs_UT108.Cog_Date_Fin < CogRs_UT108.Cog_Date_Debut
+	If CogRs_UT108.Cog_Date_Fin <> ' ' AND CogRs_UT108.Cog_Date_Fin < CogRs_UT108.Cog_Date_Debut
+		MessageBox("La date saisie est inférieure à la date de début.","Alerte", MB_ICONEXCLAMATION)
 		Harmony.Retour = Xmenext_Ressaisie
 	Endif
 Endp
@@ -1766,10 +1726,8 @@ Endp
 Public Procedure Champ_Cog_Date_Fin_1_Av
 ;
 Beginp
-	If CogRs_UT108.Cog_Duree_Limitee = 2 Or CogRs_UT108.Cog_Nombre_Cotisation > system.esp
+	If CogRs_UT108.Cog_Nombre_Cotisation_Facturees > 0
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
-	Else
-		CogRs_UT108.Cog_Date_Fin = Hdate(CogRs_UT108.Cog_Date_Fin,"p")
 	Endif
 Endp
 
@@ -1778,9 +1736,7 @@ Endp
 Public Procedure Champ_Cog_Nombre_Cotisation_1_Ap
 ;
 Beginp
-	If CogRs_UT108.Cog_Duree_Limitee = 2 And CogRs_UT108.Cog_Nombre_Cotisation = system.esp
- 		Harmony.Retour = XMENEXT_RESSAISIE
-	ElsIf Zoom.Action in (ZOOM_CREATION,ZOOM_DUPLICATION) And CogRs_UT108.Cog_Nombre_Cotisation > system.esp
+	If CogRs_UT108.Cog_Nombre_Cotisation > system.esp
 		CogRs_UT108.Cog_Date_Fin = system.esp
 	Endif
 Endp
@@ -1790,7 +1746,7 @@ Endp
 Public Procedure Champ_Cog_Nombre_Cotisation_1_Av
 ;
 Beginp
-	If Not Zoom.Action in (ZOOM_CREATION,ZOOM_DUPLICATION)
+	If CogRs_UT108.Cog_Nombre_Cotisation_Facturees > 0
  		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	Endif
 Endp

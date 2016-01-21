@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20151110121247      
+;>xwin4obj                              7.0       20160119180123      
 [masque]
  libelle="Affectations des cotisati"
  utilisateur="UGIE"
- date_modification="10/11/2015"
+ date_modification="19/01/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=428
  type_masque=2
@@ -441,20 +441,6 @@
    microbol_click=8002
    diva_avant="Champ_Cog_Date_Debut_Av"
    diva_apres="Champ_Cog_Date_Test_Ap"
- [case_a_cocher]
-  [presentation]
-   position=78,130
-   taille=9,8
-   id=105
-   wstyle="STD"
-  [description]
-   donnee=cog_ut108,cog_duree_limitee,cog_ut108
-  [param_case]
-   cadrage=droite
-   valeur="2","1"
-   notifier=oui
-  [traitements]
-   diva_apres="Champ_Cog_Duree_Limitee_1_Ap"
  [champ]
   [presentation]
    position=91,130
@@ -1144,28 +1130,6 @@
     fl_aff=oui
     largeur_col=35
     wstyle="ENTETE_COLONNE"
-  [case_a_cocher_tableau]
-   [presentation]
-    position=102,295
-    taille=7,27
-    id=108
-    wstyle="TABLEAU_SAISI"
-   [description]
-    donnee=cog_ut108,cog_duree_limitee,cog_ut108
-   [param_saisie]
-    esp_si_zero=oui
-   [param_case]
-    cadrage=droite
-    valeur="2","1"
-    choix="gtfdmc.dhfi",""
-    notifier=oui
-   [traitements]
-    diva_apres="Champ_Cog_Duree_Limitee_1_Ap"
-   [param_colonne]
-    titre="Duree Limitée"
-    fl_aff=oui
-    largeur_col=43
-    wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
     position=8,181
@@ -1777,14 +1741,6 @@ beginp
 EndP
 
 ;*
-Public Procedure Champ_Cog_Duree_Limitee_1_Ap
-Beginp
-;	If Cog_UT108.Cog_Duree_Limitee < 2
-;		Cog_UT108.Cog_Nombre_Cotisation = system.esp
-;	Endif
-Endp
-
-;*
 Public Procedure Champ_Cog_Nombre_Cotisation_1_Av
 Beginp
 	If Not Zoom.Action in (ZOOM_CREATION,ZOOM_DUPLICATION)
@@ -1795,9 +1751,7 @@ Endp
 ;*
 Public Procedure Champ_Cog_Nombre_Cotisation_1_Ap
 Beginp
-	If Cog_UT108.Cog_Duree_Limitee = 2 And Cog_UT108.Cog_Nombre_Cotisation = system.esp
- 		Harmony.Retour = XMENEXT_RESSAISIE
-	ElsIf Zoom.Action in (ZOOM_CREATION,ZOOM_DUPLICATION) And Cog_UT108.Cog_Nombre_Cotisation > system.esp
+	If Cog_UT108.Cog_Nombre_Cotisation > 0
 		COG_UT108.Cog_Date_Fin = system.esp
 	Endif
 Endp
@@ -1864,7 +1818,7 @@ Endp
 ;*
 Public Procedure Champ_Cog_Date_Fin_Av
 Beginp
-	If COG_UT108.Cog_Duree_Limitee = 2 Or Cog_UT108.Cog_Nombre_Cotisation > system.esp
+	If Cog_UT108.Cog_Nombre_Cotisation > 0
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	Else
 		COG_UT108.Cog_Date_Fin = Hdate(COG_UT108.Cog_Date_Fin,"p")

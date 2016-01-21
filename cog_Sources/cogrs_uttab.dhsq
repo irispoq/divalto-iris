@@ -1,4 +1,4 @@
-<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 8901 2015-11-23 08:29:20Z admin $'>
+<DictionarySql defaultDictionary=COGFDD.dhsd DataBase=DAV overwrittenby="cogrs_uttabu.dhoq" ModuleInfo='$Id: cogrs_uttab.dhsq 9167 2016-01-21 09:44:05Z admin $'>
 ;*
 ;*		Dictionnaire des définitions des RecordSQL du COGF_GTFTAB
 ;*
@@ -97,6 +97,9 @@ Public Record GTFDD.dhsd	T000
 	Case Equal_DateValide(date dt)
 		(COG_UT108.COG_DATE_DEBUT IS NULL OR COG_UT108.COG_DATE_DEBUT <= dt) AND (COG_UT108.COG_DATE_FIN IS NULL OR COG_UT108.COG_DATE_FIN > dt)
  
+	Case Non_Perime(date dt)
+		COG_UT108.COG_DATE_FIN IS NULL OR COG_UT108.COG_DATE_FIN > dt
+
 	Case SupEgal_DatD(date dt)
 		COG_UT108.COG_DATE_DEBUT >= dt
 
