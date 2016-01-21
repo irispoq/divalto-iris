@@ -1,9 +1,9 @@
-;>xwin4obj                              7.0       20150722120056      
+;>xwin4obj                              7.0       20160121113405      
 [masque]
- utilisateur="ROOT"
- date_modification="22/07/2015"
+ utilisateur="UGIE"
+ date_modification="21/01/2016"
  feuille_style="fstylewpf.dhfi"
- dernier_id=19
+ dernier_id=21
  dernier_id_page=4
 [defaut]
  [aide_page]
@@ -65,6 +65,14 @@
    wstyle="STD"
   [texte]
    texte="à"
+ [obj_texte]
+  [presentation]
+   position=61,31
+   taille=9,82
+   id=20
+   wstyle="STD"
+  [texte]
+   texte="Date des écritures"
  [champ]
   [presentation]
    position=38,116
@@ -131,6 +139,18 @@
    diva_apres="Champ_Immo2_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=61,116
+   taille=9,32
+   id=21
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=xq,ecrdt1,xq
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
 [page]
  numero=2
  libelle="Trace"
