@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20151116120959      
+;>xwin4obj                              7.0       20160122095733      
 [masque]
  libelle="affaire"
  utilisateur="UGIE"
- date_modification="16/11/2015"
+ date_modification="22/01/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=666
  type_masque=2
- dernier_id=1000233
+ dernier_id=1000235
  surcharge=oui
  date_modif_base="20131227150954"
  dernier_id_page=100007
@@ -4859,6 +4859,14 @@
    texte="Cotisation PDV"
  [obj_texte]
   [presentation]
+   position=156,112
+   taille=9,76
+   id=1000234
+   wstyle="STD"
+  [texte]
+   texte="Date de début des cotisations"
+ [obj_texte]
+  [presentation]
    position=170,11
    taille=9,50
    id=1000045
@@ -5108,25 +5116,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=93,165
-   taille=9,66
-   id=1000053
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=g7,lib,g7,35
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f5=5001
-   f6=5005
-   f7=135
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
    position=129,70
    taille=9,40
    cadrage=gauche
@@ -5195,6 +5184,42 @@
    diva_apres="Champ_Cog_Cotisation_PDV_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=156,187
+   taille=9,32
+   id=1000235
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=affaire,cog_ut108ddt,affaire
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=93,165
+   taille=9,66
+   id=1000053
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=g7,lib,g7,35
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5001
+   f6=5005
+   f7=135
+   ctrl_f6=10300
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=170,70

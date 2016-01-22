@@ -122,7 +122,7 @@ Public Procedure Active_Affaire
 BeginP
 
 	Liste = ListCreate()
-	wdate = Hdate(Today,"p")
+	wdate = Condition(PRJAP.Cog_UT108DDt <> ' ', PRJAP.Cog_UT108DDt, Hdate(Today,"p"))
 
 	; Lecture de toutes les fiches UT104 associées au projet
 	COGGTF_TAB.Key = 'E' & PRJAP.DOS & PRJAP.ETB & PRJAP.Cog_Cotisation_PDV
@@ -154,7 +154,7 @@ BeginP
 			CogRs_UT108.RefQte						= 1
 			CogRs_UT108.Cog_AxeAnael				= COG_UT104.Cog_AxeAnael
 			CogRs_UT108.Cog_Nombre_Cotisation 	= COG_UT104.Cog_Nombre_Cotisation	
-			CogRs_UT108.Cog_Date_Debut 			= Hdate(Today,"p")
+			CogRs_UT108.Cog_Date_Debut 			= wdate
 	
 			; recherche du code OP
 			If CLI.Cog_Op <> " "
