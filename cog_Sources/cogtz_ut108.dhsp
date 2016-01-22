@@ -444,6 +444,9 @@ Beginp
 	If Not G7.Projet = system.esp
 		CogRs_UT108.Affaire = G7.Projet
 		Seek_Prjap(CogRs_UT108.Affaire)
+		If PRJAP.Cog_UT108DDt <> ' '
+			CogRs_UT108.Cog_Date_Debut = PRJAP.Cog_UT108DDt
+		EndIf
 	Endif
 
 	Zoom.Modelf 		= ZOOM_MODE_FICHE		; pour interdire la création en mode liste
