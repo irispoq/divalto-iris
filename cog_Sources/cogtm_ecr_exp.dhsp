@@ -320,7 +320,7 @@ BeginP
 					exitloop
 				endif
 			endloop
-		elsif left(s_EcritureAnael.p11_CptCol,1) = "7" and c3.TvaCod not in("","*") and Lectab_(TauxTvaN, C3.TvaArt, C3.TvaTie, Condition(cx_loc <> ' ', cx_loc.EcrDt, c8_loc.EcrDt)) = 0 ;lectab(85,c3.TvaCod) = 0
+		elsif left(s_EcritureAnael.p11_CptCol,1) in ("7", "8") and c3.TvaCod not in("","*") and Lectab_(TauxTvaN, C3.TvaArt, C3.TvaTie, Condition(cx_loc <> ' ', cx_loc.EcrDt, c8_loc.EcrDt)) = 0 ;lectab(85,c3.TvaCod) = 0
 			s_EcritureAnael.p17_CptAnael	= TauxTvaN.Cog_Anael_Corr ; t085.Cog_Anael_Corr
 
 		elsif left(s_EcritureAnael.p11_CptCol,4) in ("4458","4678")
