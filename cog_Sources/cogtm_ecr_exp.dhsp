@@ -344,9 +344,9 @@ BeginP
 	;	commun à C8 et CX
 	s_EcritureAnael.p26_EcrAn		= val(year(c8_loc.EcrDt)) & "0"
 	
-	s_EcritureAnael.p33_EcrMois		= fstring("0",val(month(today)))
-	s_EcritureAnael.p37_EcrJour		= fstring("0",val(month(today)))
-	s_EcritureAnael.p41_MoisCourant	= fstring("0",val(month(today)))
+	s_EcritureAnael.p33_EcrMois		= fstring("0",val(month(todayDt)))
+	s_EcritureAnael.p37_EcrJour		= fstring("0",val(month(todayDt)))
+	s_EcritureAnael.p41_MoisCourant	= fstring("0",val(month(todayDt)))
 	s_EcritureAnael.p45_EcrAn2			= val(year(PiDt))
 	s_EcritureAnael.p51_EcrMois2		= fstring("0",val(month(PiDt)))
 	s_EcritureAnael.p55_EcrJour2		= fstring("0",val(day(PiDt)))
