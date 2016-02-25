@@ -28,11 +28,57 @@ Public Record	"gtfdd.dhsd"			ART
 
 ; Variables
 1	nbsel							4,0			; Nombre de lignes sélectionnées
+1	affichageActualiser		1,0
 
 
 ;*
 ;* procedures 
 ;*
+
+;*
+Public Procedure CogRs_UT108_Stopper_Facturation
+;
+recordSQL  "CogRs_uttab.dhoq"  	CogRs_UT108		wRs_UT108	
+BeginP
+
+	; Facturation débutée?
+	If CogRs_UT108.Cog_Nombre_Cotisation_Facturees = 0
+		MessageBox("Enregistrement " & [CogRs_UT108.DOS CogRs_UT108.ETB CogRs_UT108.AFFAIRE CogRs_UT108.REF CogRs_UT108.Cog_Date_Debut] \
+		& ":|Pas de facturation, l'enregistrement est modifiable.","Alerte", MB_ICONEXCLAMATION)
+		Preturn
+	EndIf
+
+	; RESA enreg
+	If wRs_UT108.FShare(['COG_UT108' CogRs_UT108.DOS CogRs_UT108.ETB CogRs_UT108.AFFAIRE CogRs_UT108.REF CogRs_UT108.Cog_Date_Debut], 'R') <> 0
+		MessageBox("Enregistrement " & [CogRs_UT108.DOS CogRs_UT108.ETB CogRs_UT108.AFFAIRE CogRs_UT108.REF CogRs_UT108.Cog_Date_Debut] & " réservé.","Alerte", MB_ICONEXCLAMATION)
+		PReturn
+	EndIf
+
+	; l'enreg va évoluer --> il faudra actualiser l'affichage
+	affichageActualiser = TRUE
+
+	; reload de UT108 après la resa
+	wRs_UT108.Init()
+	wRs_UT108.Where.PK(CogRs_UT108.Etb, CogRs_UT108.Affaire, CogRs_UT108.Ref, CogRs_UT108.Cog_Date_Debut)
+	
+	If wRs_UT108.Select()
+
+		wRs_UT108.Cog_Nombre_Cotisation = CogRs_UT108.Cog_Nombre_Cotisation_Facturees
+		wRs_UT108.Cog_Nombre_Cotisation_Restantes = 0
+		wRs_UT108.Cog_Date_Fin = Condition(wRs_UT108.Cog_Date_Derniere_Facture <> ' ', wRs_UT108.Cog_Date_Derniere_Facture, Today())
+		wRs_UT108.Cog_Date_Fin = Condition(wRs_UT108.Cog_Date_Fin <= wRs_UT108.Cog_Date_Debut, HDate(wRs_UT108.Cog_Date_Debut, +1), wRs_UT108.Cog_Date_Fin)
+		wRs_UT108.UserMo = System.User
+		wRs_UT108.UserMoDh = Time(7)
+
+		wRs_UT108.Update()
+
+	EndIf
+
+	wRs_UT108.FShare(['COG_UT108' CogRs_UT108.DOS CogRs_UT108.ETB CogRs_UT108.AFFAIRE CogRs_UT108.REF CogRs_UT108.Cog_Date_Debut], 'L')
+
+	PReturn
+
+EndP
 
 ;*
 Function int CogRs_UT108_Controler_Ecart_Tarif
@@ -238,6 +284,8 @@ Public Procedure Maj_Menu_Boutons
 ; met à jour le menu et les boutons
 BeginP
 
+	XmeToolbarEnableButton(idOutilZoom,"cog_btnstop", FALSE)
+
 	Switch ZOOM.ACTION
 
 	Case Vsw In (ZOOM_CREATION, ZOOM_DUPLICATION)
@@ -260,6 +308,7 @@ BeginP
 
 		case ZOOM_S_CONSULT		; avant consultation fiche ou liste
 			XmeMenuEnableItem(Zoom.Idmenu,"NOTE",Condition(CogRs_UT108.CENOTE = 2, True, False))
+			XmeToolbarEnableButton(idOutilZoom,"cog_btnstop", TRUE)
 
 		endswitch
 
@@ -631,6 +680,18 @@ Beginp
 			if G7.PONG = True
 				Envoyer_Selections
 			endif
+		Case Harmony.DataArret = 1001 
+			affichageActualiser = FALSE
+			If ZOOM.Select = 2
+				ZoomTraiterSelection("cogtz_UT108.dhop","CogRs_UT108_Stopper_Facturation")	
+			Else
+				CogRs_UT108_Stopper_Facturation()
+			EndIF
+			If affichageActualiser
+				ZoomReactualiserListe()
+				ZoomReactualiserPage()
+			EndIf
+
 	Endswitch 
 Endp
 

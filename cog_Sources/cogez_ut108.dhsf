@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20160119182010      
+;>xwin4obj                              7.0       20160225155052      
 [masque]
  libelle="table code test"
  utilisateur="UGIE"
- date_modification="19/01/2016"
+ date_modification="25/02/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
- dernier_id=150
+ dernier_id=151
  dernier_id_page=22
 [defaut]
  [aide_page]
@@ -1509,6 +1509,15 @@
    [info_bulle]
    texte="Supprimer <Suppr>"
   [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wfic1="#tblinf",0
+    wid_ressource="COG_BTNSTOP"
+    wetype_trait=arret
+    warret=1001
+   [info_bulle]
+   texte="Stopper la facturation"
+  [item]
    type=sep
    dessin=sep
    [param_bouton]
@@ -1715,8 +1724,8 @@ Endp
 Public Procedure Champ_Cog_Date_Fin_1_Ap
 ;
 Beginp
-	If CogRs_UT108.Cog_Date_Fin <> ' ' AND CogRs_UT108.Cog_Date_Fin < CogRs_UT108.Cog_Date_Debut
-		MessageBox("La date saisie est inférieure à la date de début.","Alerte", MB_ICONEXCLAMATION)
+	If CogRs_UT108.Cog_Date_Fin <> ' ' AND CogRs_UT108.Cog_Date_Fin <= CogRs_UT108.Cog_Date_Debut
+		MessageBox("La date saisie est inférieure ou égale à la date de début.","Alerte", MB_ICONEXCLAMATION)
 		Harmony.Retour = Xmenext_Ressaisie
 	Endif
 Endp
