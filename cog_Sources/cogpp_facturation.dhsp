@@ -689,7 +689,7 @@ EndF
 ;*
 Function int Cog_UT106_Filtre
 ; 0 --> OK
-1		wPourcent	3,0
+1		wPourcent	>cogfdd.dhsd	Cog_Taux
 BeginF
 
 	wPourcent = 0
