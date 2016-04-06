@@ -2,11 +2,11 @@ xwin-s-projet      2.0
 [general]
 nom="divalto modules communs"
 progexec="divalto.dhop"
-date="20151106310511585699"
+date="20160405096216305699"
 util="UGIE"
-filtres="??pp*;??pc*;??pm*;??pz*;??p9*;divalto.dhs*;divaltoweb.dhs*;divaltochoix.dhs*;divaltozoom.dhs*;divaltoimpression.dhs*;divaltochoixweb.dhs*;divaltozoomweb.dhs*"
+filtres="??pp*;??pc*;??pm*;??pz*;??p9*;divalto.dhs*;divaltoweb.dhs*;divaltochoix.dhs*;divaltozoom.dhs*;divaltoimpression.dhs*;divaltochoixweb.dhs*;divaltozoomweb.dhs*;ia.dhsp"
 flagrelatif=1
-cheminbases="/../../../&div72a_cd205a/sources"
+cheminbases="/../../../divapack/p205c/sources"
 zoommenu="Divalto"
 zoomfichiersmodele="modelezoom.dhsf"
 zoomfichiersmodele="modelezoom1.dhsf"
@@ -44,6 +44,16 @@ repobjet="/cd205c/objets"
 browse=0
 implicites="ugie.txt"
 repbrowse="/cd205c/objets"
+repobjetsurcharge="/ugie/cog_objets"
+repbrowsesurcharge="/ugie/cog_browse"
+versioncible="7.2a"
+repcouverture="/ugie/cog_ccode"
+[profil]
+nom="yohann local"
+repobjet="/pack/p205c/objets"
+browse=0
+implicites="ugie.txt"
+repbrowse="/pack/p205c/objets"
 repobjetsurcharge="/ugie/cog_objets"
 repbrowsesurcharge="/ugie/cog_browse"
 versioncible="7.2a"

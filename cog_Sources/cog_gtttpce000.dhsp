@@ -22,7 +22,7 @@ Module	'GTPPPCE000.dhop'
 Module	'GTTMPCE.dhop'
 Module 	'A5PMFIC.dhop'
 Module 	'A5PMFLASH.dhop'
-Module	'COGTM_VALID_CDE.DHOP'
+;Module	'COGTM_VALID_CDE.DHOP'	  --> spécifiques obsolètes
 Module	'COG_CCTZ701_SQL.DHOP'
 Module	'CogTm_Bundle.dhop'
 
@@ -1265,7 +1265,7 @@ BeginP
 	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
 
 		Case 'F2'
-			Cog_ValidCde_Ent_Write_Av
+			;Cog_ValidCde_Ent_Write_Av
 
 		Case 'F4'
 			Cog_MajI1
@@ -1289,13 +1289,19 @@ BeginP
 
 	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
 
-		Case 'F2'
-			Cog_ValidCde_ENT_Principale_Rewrite_Av
-
 		Case 'F4'
 			Cog_MajI1
 
 	EndSwitch
+
+	;
+	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
+
+		Case vsw IN ('F1F2', 'F2F2')
+			;Cog_ValidCde_ENT_Principale_Rewrite_Av
+
+	EndSwitch
+
 
 EndP
 
@@ -1321,7 +1327,7 @@ Beginf
 ;*			Endif
 
 		Case 'F2'
-			FReturn(Cog_ValidCde_ENT_Controle_Fin)
+			;FReturn(;Cog_ValidCde_ENT_Controle_Fin)
 
 	EndSwitch
 	
@@ -1591,15 +1597,17 @@ BeginP
 		Case 'C1'
 			If MOUV.CE2 = '1' And Not MOUV.PROJET = system.esp | MOUV.CE3 = '1' | Endif
 
-		Case 'F2'
-			Cog_ValidCde_Mouv_Write_Av
-
 	EndSwitch
 
 	; validation de pièce
 	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'C1C2'	 AND MOUV.Ce6 = 1
-			MOUV.CdCe4 = ENT.Ce4	 
+		Case 'C1C2'	 
+			If MOUV.Ce6 = 1
+				MOUV.CdCe4 = ENT.Ce4	
+			EndIf
+ 
+		Case vsw IN ('F1F2', 'F2F2')
+			;Cog_ValidCde_Mouv_Write_Av
 
 	EndSwitch
 
@@ -1610,17 +1618,15 @@ Public Procedure Cog_MOUV_ReWrite_Av
 ; avant réécriture du mouvement
 BeginP
 
-	;
-	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'F2'
-			Cog_ValidCde_Mouv_Rewrite_Av	
-
-	EndSwitch
-
 	; validation de pièce
 	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'C1C2'	AND MOUV.Ce6 = 1
-			MOUV.CdCe4 = ENT.Ce4	
+		Case 'C1C2'	
+			If MOUV.Ce6 = 1
+				MOUV.CdCe4 = ENT.Ce4	
+			EndIf
+
+		Case vsw IN ('F1F2', 'F2F2')
+			;Cog_ValidCde_Mouv_Write_Av
 
 	EndSwitch
 
@@ -1631,15 +1637,15 @@ Public Procedure Cog_MVTL_Write_Av
 ; avant écriture de la ventilation
 BeginP
 
-	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'F2'
-			Cog_ValidCde_MVTL_Write_Av
-	EndSwitch
-
 	; validation de pièce
 	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'C1C2'	 AND MVTL.PiCod = 2
-			MVTL.Ce4 = ENT.Ce4
+		Case 'C1C2'	 
+			If MVTL.PiCod = 2
+				MVTL.Ce4 = ENT.Ce4
+			EndIf
+
+		Case vsw IN ('F1F2', 'F2F2')
+			;Cog_ValidCde_MVTL_Write_Av
 
 	EndSwitch
 
@@ -1650,15 +1656,14 @@ Public Procedure Cog_MVTL_Rewrite_Av
 ; avant réécriture de la ventilation
 BeginP
 
-	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'F2'
-			Cog_ValidCde_MVTL_Rewrite_Av
-	EndSwitch
-
 	; validation de pièce
 	Switch GTPCE.TiCodOri & GTPCE.PiCodOri & GTPCE.TiCodDst & GTPCE.PiCodDst
-		Case 'C1C2'	 AND MVTL.PiCod = 2
-			MVTL.Ce4 = ENT.Ce4
+		Case 'C1C2'	 
+			If MVTL.PiCod = 2
+				MVTL.Ce4 = ENT.Ce4
+			EndIf
+		Case vsw IN ('F1F2', 'F2F2')
+			;Cog_ValidCde_MVTL_Write_Av
 
 	EndSwitch
 
@@ -1676,7 +1681,7 @@ Beginp
 
 	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
 		Case 'F2'
-			Cog_ValidCde_U_Traitement
+			;Cog_ValidCde_U_Traitement
 
 	EndSwitch
 
