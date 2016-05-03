@@ -1532,6 +1532,88 @@ BeginP
 
 EndP
 
+;*
+Function int Cog_G1T1_Controler_Qte_Ventilee
+; Quantité ventilée en phase avec quantité mouvement
+; 0 --> OK
+Record "gtfdd.dhsd"	G1T2		_G1T2
+1		_QteM		>gtfdd.dhsd		RefQte
+1		_QteV		>gtfdd.dhsd		RefQte
+1		_AdrCur	L
+BeginF
+
+	;
+	If G1T1.Ce2 <> '1'
+		FReturn(0)
+	EndIf
+
+	; quantité mouvement
+	Switch2 GTPCE.PiCodDst
+		Case 1
+			_QteM = G1T1.DvQte
+		Case 2
+			_QteM = G1T1.CdQte
+		Case 3
+			_QteM = G1T1.BlQte
+		Case 4
+		 	_QteM = G1T1.BlQte
+	EndSwitch
+
+	; quantité ventilée
+	_QteV = 0
+	_AdrCur = ListGetAdressCurrent(G3XT.IdTableau(2))
+	ListBegin(G3XT.IdTableau(2))
+
+	Do While ListNext(G3XT.IdTableau(2), _G1T2) not in (-1, 0)
+
+		If _G1T2.EnrNoV = G1T1.EnrNoV
+
+			_QteV += _G1T2.Qte
+
+		EndIf
+
+	WEnd
+
+	ListSetAdressCurrent(G3XT.IdTableau(2), _AdrCur)
+
+	;
+	If _QteM <> _QteV
+		MessageBox("Référence " & left(G1T1.Ref) & "|Quantité mouvement: " & noSpaces(_QteM) & "|Quantité ventilation: " & noSpaces(_QteV), "Erreur", MB_ICONERROR)
+		FReturn(1)
+	EndIf
+
+	;
+	FReturn(0)
+EndF
+
+;*
+Public Function char Cog_G1T1_Controle_Fin_Sortie
+; 		controle d'une ligne de sortie en phase de validation permet de revenir en saisie
+1		_Ret		1 = 'O'
+Beginf
+
+	If Cog_G1T1_Controler_Qte_Ventilee <> 0
+		_Ret = 'N'
+	EndIf
+
+	FReturn(_Ret)
+
+EndF
+
+;*
+Public Function char Cog_G1T1_Controle_Fin_Entree
+; 		controle d'une ligne de sortie en phase de validation permet de revenir en saisie
+1		_Ret		1 = 'O'
+Beginf
+
+	If Cog_G1T1_Controler_Qte_Ventilee <> 0
+		_Ret = 'N'
+	EndIf
+
+	FReturn(_Ret)
+
+EndF
+
 ;**
 Public Function char Cog_G1T1_Ligne_Validation_Av
 ;

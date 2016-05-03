@@ -45,3 +45,106 @@ Public Record A5DD.dhsd		MZ
 	MVTL.SREF1,
 	MVTL.SREF2,
 	MVTL.DEPO
+
+		<DictionarySql DefaultDictionary=GTFDD.dhsd DataBase=DAV OverWrittenBy='cogrs_mvtlu.dhoq' ModuleInfo='$Id: cogrs_mvtl.dhsq 8018 2015-05-13 08:38:25Z admin $'>
+
+
+;*
+<RecordSql Name=CogRs_MouvErr Comment='Mouvement erreur'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	MOUV.*
+<FROM>
+	MOUV
+<WHERE>
+	MOUV.DOS = MZ.DOS AND MOUV.CE2 = '1'
+	Case ActifBl_Ou_ActifFa
+		(MOUV.PICOD = 3 AND MOUV.BLCE4 = '1') OR (MOUV.PICOD = 4 AND MOUV.FACE4 = '1') 	
+
+	Case BetWeen_Date(date dd, date df)
+ 		(MOUV.PICOD = 3 AND MOUV.BLDT BETWEEN dd AND df) OR (MOUV.PICOD = 4 AND MOUV.FADT BETWEEN dd AND df) 	
+
+	Case Qte_err	'Quantité mouv > quantité mvtl'
+		MOUV.REFQTE	>	 	(SELECT SUM(REFQTE) FROM MVTL
+								 WHERE MVTL.DOS = MOUV.DOS AND MVTL.ENRNO = MOUV.ENRNO)
+		OR						(SELECT SUM(REFQTE) FROM MVTL
+								 WHERE MVTL.DOS = MOUV.DOS AND MVTL.ENRNO = MOUV.ENRNO) IS NULL
+	Case Mouvement_Stock
+		MOUV.MVCOD = 2 AND MOUV.BLQTE > 0
+
+<ORDERBY>
+	Case Tri
+		MOUV.DOS,
+		MOUV.TICOD,
+		MOUV.PICOD, 
+		MOUV.BLNO,
+		MOUV.FANO,
+		MOUV.ENRNO
+
+;*
+<RecordSql Name=CogRs_MvtlErr Comment='Ventilation erreur'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	MVTL.*
+	MOUV.VENUN AS MOUV_VENUN,
+	MOUV.REFUN AS MOUV_REFUN
+<FROM Insert=YES Update=YES>
+	MVTL
+<LEFTJOIN>
+	MOUV
+	ON MOUV.DOS = MVTL.DOS AND MOUV.ENRNO = MVTL.ENRNO
+<WHERE>
+	MVTL.DOS = MZ.DOS
+	Case Equal_VtlNo(int no)
+		MVTL.VTLNO = no
+	Case Equal_Enrno(int no)
+		MVTL.ENRNO = no
+	Case Equal_Ref(char Ref)
+		MVTL.REF = ref
+ 	Case Equal_Sens(int sens)
+		MVTL.SENS = sens
+	Case Equal_Ce4(char ce)
+		MVTL.CE4 = ce 
+	Case Mouvement_Stock	
+		MOUV.CE9 = '1'
+	Case Stock_Err
+		((MVTL.REFQTE - MVTL.STQTE) > (SELECT SUM(SORTIE.REFQTE)	FROM MVTL AS SORTIE
+												WHERE SORTIE.DOS = MVTL.DOS AND SORTIE.SENS = 2
+													AND SORTIE.VTLNA = MVTL.VTLNO
+												GROUP BY SORTIE.DOS, SORTIE.VTLNA))
+		OR ((MVTL.REFQTE - MVTL.STQTE > 0) AND ((SELECT SUM(SORTIE.REFQTE)	FROM MVTL AS SORTIE
+												WHERE SORTIE.DOS = MVTL.DOS AND SORTIE.SENS = 2
+													AND SORTIE.VTLNA = MVTL.VTLNO
+												GROUP BY SORTIE.DOS, SORTIE.VTLNA) IS NULL))
+	Case Sortie_Err
+		MVTL.REFQTE > 0 AND (SELECT STOCK.MVTL_ID FROM MVTL AS STOCK WHERE STOCK.DOS = MVTL.DOS AND STOCK.VTLNO = MVTL.VTLNA) IS NULL
+
+	Case Max_LiLg(int enrno)
+		MVTL.VTLNO = (SELECT TOP 1 v.VTLNO FROM MVTL AS v WHERE v.ENRNO = enrno ORDER BY LILG DESC)
+
+
+;*
+<RecordSql Name=Cogrs_Destock Comment='sortie de Stock'>
+Public Record A5DD.dhsd		MZ
+<SELECT>
+	SUM(MVTL.REFQTE) AS TotSortie(12,3),
+	MVTL.REF,
+	MVTL.SREF1,
+	MVTL.SREF2,
+	MVTL.VTLNA
+<FROM Insert=No Update=No Delete=No>
+	MVTL
+<WHERE>
+	MVTL.DOS = MZ.DOS 
+	Case Equal_Ref(char Ref)
+		MVTL.Ref = ref 
+	Case Equal_VtlNa(int no)
+		MVTL.VTLNA = no
+<GROUPBY>
+	MVTL.REF,
+	MVTL.SREF1,
+	MVTL.SREF2,
+	MVTL.DEPO,
+	Mvtl.VTLNA
+
+

@@ -254,6 +254,38 @@ EndF
 ;*
 
 ;*
+Function char G1T1_Controle_Fin_Sortie
+; 		controle d'une ligne de sortie en phase de validation permet de revenir en saisie
+1		_Ret		1
+Beginf
+
+	If (_Ret := Standard.G1T1_Controle_Fin_Sortie) = 'O'
+
+		_Ret = Cog_G1T1_Controle_Fin_Sortie
+
+	EndIf
+
+	FReturn(_Ret)
+
+EndF
+
+;*
+Function char G1T1_Controle_Fin_Entree
+; 		controle d'une ligne de sortie en phase de validation permet de revenir en saisie
+1		_Ret		1
+Beginf
+
+	If (_Ret := Standard.G1T1_Controle_Fin_Entree) = 'O'
+
+		_Ret = Cog_G1T1_Controle_Fin_Entree 
+
+	EndIf
+
+	FReturn(_Ret)
+
+EndF
+
+;*
 Procedure G1T1_Creation_Init
 ;	pour initialiser une ligne de pièce lors de la création
 ;	appel après la saisie de la référence	

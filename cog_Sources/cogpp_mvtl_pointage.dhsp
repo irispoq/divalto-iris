@@ -1,0 +1,796 @@
+SetModuleInfo('$Id: cogpp_mvtl_pointage.dhsp 7935 2015-04-28 07:09:34Z admin $')
+;>xdiva
+;*
+;*		Objet : Nom du programme / module - Programme Cogpp_mvtl_pointage.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF		205C			INit		04/2015	
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		Mvtl_Pointage			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+;*
+;*	Déclarations
+;*
+
+;
+Include	"gttcz00.dhsp"						;déclarations communes
+
+;
+Module	"gtpmpce.dhop"
+Module	"Cogtm_000.dhop"						;module de fonctions communes
+
+;
+RecordSQL	"COGRS_MVTL.DHOQ"				CogRs_MvtlErr		CogRs_StockErr
+RecordSQL	"COGRS_MVTL.DHOQ"				CogRs_MvtlErr		CogRs_SortieErr
+
+;
+Public Record	"gtfdd.dhsd"	xq				xq_cog		;enregistrement de travail
+Public Record	"gtfdd.dhsd"	ART	
+Public Record	"gtfdd.dhsd"	MVTL			MVTL_Stock
+Public Record	"gtfdd.dhsd"	MVTL			MVTL_Stock_Prec
+Public Record	"gtfdd.dhsd"	MVTL			MVTL_Sortie
+Public Record	"gtfdd.dhsd"	T020
+Public Record	"ddsys.dhsd"	RowInfo		StockRow
+	 	 Record	"ddsys.dhsd"	scrollbar	StockScroll
+Public Record	"ddsys.dhsd"	RowInfo		SortieRow
+		 Record	"ddsys.dhsd"	scrollbar	SortieScroll
+
+;
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrF			16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+1	lId_Stock	L
+1	lId_Sortie	L
+1	lId_Resa		L
+1	lId_StockP	L						; stock pointé pour rapprochement avec sortie
+1	lId_SortieP	L						; sortie pointée pour rapprochement avec stock
+1	Prg_Fin		1,0
+
+;
+Structure Cog_Resa
+	1		Ticod		>gtfdd.dhsd		Ticod
+	1		PiCod		>GTFDD.dhsd		PiCod
+	1		PiNo		>gtfdd.dhsd		PiNo
+EndStructure
+
+Public RecordDiva		Cog_Resa		Cog_Resa
+Public RecordDiva		Cog_Resa		Cog_ResaSeek
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;*
+Function Long Tri_Resa(&A, &B)
+;
+RecordDiva		Cog_Resa		A
+RecordDiva		Cog_Resa		B
+1		cleA		10
+1		cleB		10
+BeginF
+
+	cleA = [ A.TiCod A.PiCod A.PiNo ]
+	cleB = [ B.TiCod B.PiCod B.PiNo ]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;*
+Function Long Tri_Tab(&A, &B)
+;
+Record	"gtfdd.dhsd"		MVTL		A
+Record	"gtfdd.dhsd"		MVTL		B
+1		cleA		50
+1		cleB		50
+BeginF
+
+	cleA = [ A.Dos A.TiCod A.PiCod A.PiNo A.VtlNo ]
+	cleB = [ B.Dos B.TiCod B.PiCod B.PiNo B.VtlNo ]
+
+	FReturn(SortCompare(cleA, cleB))
+
+EndF
+
+;* Initialisation des variables
+Function int InitialiserVariables
+;
+Recordsql	a5rsuser.dhoq	utilisateur						;Utilisateurs
+
+BeginF
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		utilisateur.init()
+		utilisateur.where.exists(system.User)
+		if utilisateur.select() = 0
+
+			if not tunnel
+				MessageBox(modify("%1",left(system.user),translate("Utilisateur %1 non défini dans la base Divalto")),translate("Alerte"),mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= utilisateur.dos
+			mz.etb		= utilisateur.etb
+			mz.depo		= utilisateur.depo
+			mz.mecle		= "Cogee_mvtl_pointage.dhof"
+			;mz.micle		= "Cogii_.dhoi"
+			;mz.mtcle		= "Cogtt_mvtl_pointage.dhop"
+			mz.titre2	= "Pointage des ventilations"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment(translate("Pointage des ventilations"))
+
+	;recherche du dossier et T000
+	Seek_Soc(mz.dos)
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	XmeInfoPage(mz.mecle,1)						;lire la taille de la page
+	XmeSetWindowSize(mz.mecle,1,Harmony.Opara3,Harmony.Opara4)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	;chargement du masque d'impression
+	;xmiload mz.micle
+	;Xmi_Preparation
+
+	; init xq
+	Init xq_cog = ' '
+	
+	;initialisation du tableau stock
+	lId_Stock	= XmeListGetId(MZ.MeCle, 5, "TAB_STOCK", MVTL_Stock)
+	init StockRow			= $00
+	StockRow					= ""
+	StockRow.Bitmap 		= 1
+	StockRow.Selection	= false
+	GetAdressFunction("","Tri_Tab",AdrF)
+ 	XmeListMode(lId_Stock, 1, AdrF)
+
+	;initialisation du tableau sorties
+	lId_Sortie	= XmeListGetId(MZ.MeCle, 5, "TAB_SORTIE", MVTL_Sortie)
+	init SortieRow			= $00
+	SortieRow				= ""
+	SortieRow.Bitmap 		= 1
+	SortieRow.Selection	= false
+	GetAdressFunction("","Tri_Tab",AdrF)
+ 	XmeListMode(lId_Sortie, 1, AdrF)
+
+	;
+	lId_Resa = ListGetId("COG_RESA")
+	GetAdressFunction("","Tri_Resa",AdrF)
+	ListMode(lId_Resa, 1, AdrF)
+
+	lId_StockP = ListGetId("COG_STOCK")
+	GetAdressFunction("","Tri_Tab",AdrF)
+ 	XmeListMode(lId_StockP, 1, AdrF)
+
+	lId_SortieP = ListGetId("COG_SORTIE")
+	GetAdressFunction("","Tri_Tab",AdrF)
+ 	XmeListMode(lId_SortieP, 1, AdrF)
+
+	FReturn(true)
+
+endf
+
+;*
+Procedure FinProgramme
+;
+BeginP
+
+	Cog_EcritureLivreDeBord(translate("<-- Fin regen ventilations"))
+	programexit
+
+EndP
+
+;*
+Procedure AfficherTraitement
+;
+BeginP
+
+	
+
+EndP
+
+;*
+function int FiltresOk
+beginf
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Traitements
+;*
+
+;*
+Procedure Liberer_Pieces
+;
+BeginP
+
+	ListBegin(lId_Resa)
+
+	Do While ListNext(lId_Resa, Cog_Resa) not in (-1, 0)
+		Lib_ENT(Cog_Resa.Ticod, Cog_Resa.PiCod, Cog_Resa.PiNo)
+	WEnd
+
+	ListErase(lId_Resa)
+
+EndP
+
+;*
+Function int Gestion_Resa_Piece(wTicod, wPicod, wPiNo)
+;
+1		wPicod		>gtfdd.dhsd		Picod
+1		wTicod		>gtfdd.dhsd		Ticod
+1		wPiNo			>gtfdd.dhsd		PiNo
+BeginF
+
+	Cog_Resa.PiCod	= wPiCod
+	Cog_Resa.Ticod	= wTiCod
+	Cog_Resa.PiNo	= wPiNo
+
+	If ListSeek(lId_Resa, Cog_Resa, Cog_ResaSeek) = 0
+		If Res_ENT(wTiCod, wPiCod, wPiNo, 0) = 0
+			ListInsert(lId_Resa, Cog_Resa)
+		Else
+			MessageBox("Pièce " & wPiNo & " réservée, traitement impossible.", "Alerte", MB_ICONINFORMATION)
+			FReturn(1)
+		EndIf
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int VtlNo_Next_LiLg(&wLiLg , wEnrNo)
+;
+RecordSQL	"COGRS_MVTL.DHOQ"				CogRs_MvtlErr 		wRs_Mvtl
+1		wLiLg		>gtfdd.dhsd		LiLg
+1		wEnrno	>gtfdd.dhsd		EnrNo
+BeginF
+
+	wRs_Mvtl.Init()
+	wRs_Mvtl.Where.RemoveCondition("")
+	wRs_Mvtl.Where.Max_LiLg(wEnrno)
+	If wRs_Mvtl.Select()
+		wLiLg = wRs_Mvtl.LiLg++
+	Else
+		FReturn(1)
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Function int Valider_Pointage
+;
+RecordSQL	"COGRS_MVTL.DHOQ"				CogRs_MvtlErr 		wRs_MvtlPrinc
+RecordSQL	"COGRS_MVTL.DHOQ"				CogRs_MvtlErr 		wRs_MvtlNew
+1		wQteSortie	>gtfdd.dhsd		Qte
+BeginF
+
+	ListBegin(lId_SortieP)
+
+	Do While ListNext(lId_SortieP, MVTL_Sortie) not in (-1, 0)
+
+		wQteSortie = MVTL_Sortie.RefQte
+		ListBegin(lId_StockP)
+		wRs_MvtlPrinc.Init()
+		wRs_MvtlPrinc.Where.RemoveCondition("")
+		wRs_MvtlPrinc.Where.Equal_VtlNo(MVTL_Sortie.VtlNo)
+		If wRs_MvtlPrinc.Select() = 0
+			MessageBox("Ventilation n°" & MVTL_Sortie.VtlNo & " non retrouvée. Arrêt du traitement.", "Erreur", MB_ICONERROR)
+			FReturn(1)
+		EndIf
+
+		;
+		Do While wQteSortie > 0 AND ListCount(lId_StockP) > 0 ; le controle qté a été fait en amont on ne doit pas trouver la situation ou wQteSortie > 0 et QteStock = 0
+
+			; Prochaine ventilation de stock pointée
+			ListNext(lId_StockP, MVTL_Stock)
+
+			; La quantité disponible est suffisante - Mise à jour de la ventilation de sortie initiale
+			If MVTL_Stock.Resqte	>= MVTL_Sortie.RefQte 
+
+				wRs_MvtlPrinc.RefQte = wQteSortie
+				If Convertir_Refqte_Qte(wRs_MvtlPrinc.Qte, wRs_MvtlPrinc.Ref, wRs_MvtlPrinc.Sref1, wRs_MvtlPrinc.Sref2, wRs_MvtlPrinc.RefQte, wRs_MvtlPrinc.MOUV_VENUN, wRs_MvtlPrinc.MOUV_REFUN) <> 0
+					wRs_MvtlPrinc.Qte = wRs_MvtlPrinc.RefQte
+				EndIf
+				wRs_MvtlPrinc.VtlNa 	= MVTL_Stock.VtlNo
+				wRs_MvtlPrinc.Depo 	= MVTL_Stock.Depo
+				wRs_MvtlPrinc.Lieu	= MVTL_Stock.Lieu
+				wRs_MvtlPrinc.Ce4		= '1'
+				wRs_MvtlPrinc.Update()
+
+				; Déduction du stock réattribué de la ventilation de stock en erreur
+				MVTL_Stock.Resqte -= wQteSortie
+				wQteSortie = 0
+
+			; Quantité de la ventilation de stock non suffisante, éclatement de la ventilation de sortie
+			Else
+
+				wRs_MvtlNew.Init()
+				wRs_MvtlNew.MVTL				= wRs_MvtlPrinc.MVTL
+				wRs_MvtlNew.Ce4				= '1'
+				wRs_MvtlNew.Ce5				= ' '		; pas de ticketres
+				wRs_MvtlNew.Ce6				= ' '		; pas de n° de colis
+				wRs_MvtlNew.Ce9 				= ' '		; pas de serie
+				wRs_MvtlNew.CeA				= ' '		; pas de stock
+				wRs_MvtlNew.ColiNo			= 0
+				wRs_MvtlNew.TicketRes		= 0
+				wRs_MvtlNew.Serie				= ' '
+				Enrno_Vtlno_Next_Numero(wRs_MvtlPrinc.EnrNo, wRs_MvtlNew.VtlNo, 0, 1)
+				If VtlNo_Next_LiLg(wRs_MvtlNew.LiLg , wRs_MvtlNew.EnrNo) <> 0
+					wRs_MvtlNew.LiLg = 1					; normalement impossible puisqu'il existe à minima la ventilation principale
+				EndIf
+
+				wRs_MvtlNew.RefQte			= MVTL_Stock.Resqte
+				If Convertir_Refqte_Qte(wRs_MvtlNew.Qte, wRs_MvtlNew.Ref, wRs_MvtlNew.Sref1, wRs_MvtlNew.Sref2, wRs_MvtlNew.RefQte, wRs_MvtlPrinc.MOUV_VENUN, wRs_MvtlPrinc.MOUV_REFUN)	<> 0
+					wRs_MvtlNew.Qte = wRs_MvtlNew.RefQte
+				EndIf
+				wRs_MvtlNew.StRes			= 0
+				wRs_MvtlNew.VtlNa			= MVTL_Stock.VtlNo
+				wRs_MvtlNew.Depo 			= MVTL_Stock.Depo
+				wRs_MvtlNew.Lieu			= MVTL_Stock.Lieu
+
+				wRs_MvtlNew.Insert()
+
+				;
+				wQteSortie -= 	MVTL_Stock.Resqte
+				MVTL_Stock.Resqte = 0
+
+			EndIf
+
+			; suppression de l'élément stock pointé si plus de quantité en erreur à réattribuer
+			If MVTL_Stock.Resqte = 0
+				ListDeleteAndPrevious(lId_StockP)
+			Else
+				ListModify(lId_StockP, MVTL_Stock)
+			EndIf
+
+		WEnd
+
+	WEnd
+
+	FReturn(0)
+
+ENdF
+
+;*
+Function int Controler_Pointage
+;
+1		wQteStock	>gtfdd.dhsd		Qte
+1		wQteSortie	>gtfdd.dhsd		Qte
+1		wOK			1,0
+BeginF
+
+	ListErase(lId_Resa)
+	ListErase(lId_StockP)
+	ListErase(lId_SortieP)
+	wOk	= TRUE			; toute erreur est bloquante pour l'exécution du traitement
+	Init MVTL_Stock_Prec = ' '
+	
+	; lecture des lignes de stock pointées
+	XmeListBegin(lId_Stock)
+	Do While XmeListNext(lId_Stock, MVTL_Stock) not in (-1, 0) AND wOk
+
+		If StockRow.Selection = TRUE
+			
+			If Gestion_Resa_Piece(MVTL_Stock.TiCod, MVTL_Stock.PiCod, MVTL_Stock.PiNo) <> 0
+				wOk = FALSE
+			EndIf
+
+			If MVTL_Stock_Prec.Ref <> ' '	 AND MVTL_Stock.Nst <> MVTL_Stock_Prec.Nst 
+				wOk = False
+				MessageBox("Rapprochement de nature de stock différentes impossible.", "Alerte", MB_ICONERROR)	
+			EndIf
+
+			ListInsert(lId_StockP, MVTL_Stock)
+			MVTL_Stock_Prec = MVTL_Stock
+			wQteStock += MVTL_Stock.Resqte
+
+		EndIf
+
+	WEnd
+
+	If ListCount(lId_StockP) = 0
+		wOk = False
+		MessageBox("Rapprochement de nature de stock différentes impossible.", "Alerte", MB_ICONERROR)	
+	EndIf
+
+	; lecture des lignes de sortie pointées
+	XmeListBegin(lId_Sortie)
+	Do While XmeListNext(lId_Sortie, MVTL_Sortie) not in (-1, 0) AND wOk
+
+		If SortieRow.Selection = TRUE
+			
+			If Gestion_Resa_Piece(MVTL_Sortie.TiCod, MVTL_Sortie.PiCod, MVTL_Sortie.PiNo) <> 0
+				wOk = FALSE
+			EndIf
+
+			If MVTL_Sortie.Nst <> MVTL_Stock_Prec.Nst  	; 	 MVTL_Stock_Prec obligatoirement chargé sinon wOK serait = FALSE
+				wOk = False
+				MessageBox("Rapprochement de nature de stock différentes impossible.", "Alerte", MB_ICONERROR)	
+			EndIf
+
+			ListInsert(lId_SortieP, MVTL_Sortie)
+			wQteSortie += MVTL_Sortie.RefQte
+
+		EndIf		
+
+	WEnd
+
+	If ListCount(lId_SortieP) = 0
+		wOk = False
+		MessageBox("Aucune ventilation de sortie n'est pointée.", "Alerte", MB_ICONERROR)	
+	EndIf
+	If wQteSortie > wQteStock
+		wOk = False
+		MessageBox("Quantité sortie pointée supérieure à la quantité stock.", "Alerte", MB_ICONERROR)	
+	EndIf
+
+	If wOK
+		Valider_Pointage
+	EndIf
+
+	Liberer_Pieces
+
+	FReturn(0)
+EndF
+
+;*
+Function int ReStocker
+;
+RecordSQL	"COGRS_MVTL.DHOQ"				CogRs_MvtlErr 		wRs_MvtlUpdate
+1		wResaOK		1,0
+BeginF
+
+	If XmeList_Count(lId_Sortie) > 0 AND MessageBox("Attention il reste des sorties qui ne pointent pas vers du stock! Continuer?","Question", MB_ICONQUESTION+MB_YESNO) = IDNO
+		FReturn(1)
+	EndIf
+
+	ListErase(lId_Resa)
+	XmeListBegin(lId_Stock)
+
+	Do While XmeListNext(lId_Stock, MVTL_Stock) not in (-1, 0)
+
+		If StockRow.Selection = TRUE
+
+			Cog_Resa.PiCod	= MVTL_Stock.PiCod
+			Cog_Resa.Ticod	= MVTL_Stock.TiCod
+			Cog_Resa.PiNo	= MVTL_Stock.PiNo
+
+			If ListSeek(lId_Resa, Cog_Resa, Cog_ResaSeek) = 0
+				If Res_ENT(MVTL_Stock.TiCod, MVTL_Stock.PiCod, MVTL_Stock.PiNo, 0) = 0
+					ListInsert(lId_Resa, Cog_Resa)
+					wResaOK = TRUE
+				Else
+					MessageBox("Pièce " & MVTL_Stock.PiNo & " réservée, traitement impossible.", "Alerte", MB_ICONINFORMATION)
+				EndIf
+			Else
+				wResaOK = TRUE
+			EndIf
+
+			If wResaOK
+
+				wRs_MvtlUpdate.Init()
+				wRs_MvtlUpdate.Where.RemoveCondition("")
+				wRs_MvtlUpdate.Where.Equal_VtlNo(MVTL_Stock.VtlNo)
+				If wRs_MvtlUpdate.Select() > 0
+					wRs_MvtlUpdate.StQte += MVTL_Stock.Resqte
+					wRs_MvtlUpdate.CeA	= '1'
+					wRs_MvtlUpdate.Update()
+				EndIf
+
+			EndIf
+
+		EndIf
+
+	WEnd
+
+	Liberer_Pieces
+
+	FReturn(0)
+EndF
+
+;*
+Procedure Raffraichir
+;
+BeginP
+
+	XmeListDisplay(lId_Stock)
+	XmeListScrollbarInit(lId_Stock, StockScroll)
+	XmeListDisplay(lId_Sortie)
+	XmeListScrollbarInit(lId_Sortie, SortieScroll)
+
+EndP
+
+;*
+Procedure Charger_TabStock
+;
+RecordSQL	"COGRS_MVTL.DHOQ"				CogRs_Destock		wRs_Sortie
+1		wRead		L
+BeginP
+
+	XmeListErase(lId_Stock)
+
+	CogRs_StockErr.Init()
+	CogRs_StockErr.Where.RemoveCondition("")
+	CogRs_StockErr.Where.Equal_Ce4('1')
+	CogRs_StockErr.Where.AddCondition("Equal_Ce4")
+	CogRs_StockErr.Where.Equal_Ref(xq_cog.Ref)
+	CogRs_StockErr.Where.AddCondition("Equal_Ref")
+	CogRs_StockErr.Where.Equal_Sens(1)
+	CogRs_StockErr.Where.AddCondition("Equal_Sens")
+	CogRs_StockErr.Where.Mouvement_Stock()
+	CogRs_StockErr.Where.AddCondition("Mouvement_Stock")
+	CogRs_StockErr.Where.Stock_Err()
+	CogRs_StockErr.Where.AddCondition("Stock_Err")
+
+	wRead = CogRs_StockErr.ReaderOpen()
+	CogRs_StockErr.ReaderSelect(wRead)
+
+	Do While CogRs_StockErr.ReaderNext(wRead) > 0
+
+		wRs_Sortie.Init()
+		wRs_Sortie.Where.RemoveCondition("")
+		wRs_Sortie.Where.Equal_VtlNa(CogRs_StockErr.VtlNo)
+		wRs_Sortie.Select()
+
+		Init MVTL_Stock 		= ' '
+		MVTL_Stock 				= CogRs_StockErr.MVTL
+		MVTL_Stock.Qte			= wRs_Sortie.TotSortie
+		MVTL_Stock.Resqte		= (MVTL_Stock.RefQte - MVTL_Stock.StQte) - wRs_Sortie.TotSortie ; différence entre sorties théoriques et sorties réelles
+		StockRow.Selection = FALSE
+		XmeListInsert(lId_Stock, MVTL_Stock)
+
+	WEnd
+
+	CogRs_StockErr.ReaderClose(wRead)
+
+	XmeListFirst(lId_Stock, MVTL_Stock)
+
+EndP
+
+;*
+Procedure Charger_TabSortie
+;
+1		wRead		L
+BeginP
+
+	XmeListErase(lId_Sortie)
+
+	CogRs_SortieErr.Init()
+	CogRs_SortieErr.Where.RemoveCondition("")
+	CogRs_SortieErr.Where.Equal_Ce4('6')
+	CogRs_SortieErr.Where.AddCondition("Equal_Ce4")
+	CogRs_SortieErr.Where.Equal_Ref(xq_cog.Ref)
+	CogRs_SortieErr.Where.AddCondition("Equal_Ref")
+	CogRs_SortieErr.Where.Equal_Sens(2)
+	CogRs_SortieErr.Where.AddCondition("Equal_Sens")
+	CogRs_SortieErr.Where.Mouvement_Stock()
+	CogRs_SortieErr.Where.AddCondition("Mouvement_Stock")
+	CogRs_SortieErr.Where.Sortie_Err()
+	CogRs_SortieErr.Where.AddCondition("Sortie_Err")
+
+	wRead = CogRs_SortieErr.ReaderOpen()
+	CogRs_SortieErr.ReaderSelect(wRead)
+
+	Do While CogRs_SortieErr.ReaderNext(wRead) > 0
+
+		Init MVTL_Sortie = ' '
+		MVTL_Sortie = CogRs_SortieErr.MVTL
+		SortieRow.Selection = FALSE
+		XmeListInsert(lId_Sortie, MVTL_Sortie)
+
+	WEnd
+
+	CogRs_SortieErr.ReaderClose(wRead)
+
+	XmeListFirst(lId_Sortie, MVTL_Sortie)
+
+EndP
+
+;*
+Procedure Mvtl_Pointage
+;
+1 	fin		1,0	= 0
+1	focus		4,0	= 0
+
+BeginP
+
+
+	XmeDispV(MZ.MeCle, 5, XME_MODE_GOTO)
+	focus = 1000
+	Charger_TabStock
+	Charger_TabSortie
+
+	If XmeListCount(lId_Stock) = 0
+ 		MessageBox("Pas de stock en erreur pour cette référence.","Information", MB_ICONINFORMATION)
+		PReturn
+	EndIf
+
+	Raffraichir
+	XmeListConsult(lId_Stock) 
+
+
+	Do
+	   
+      ;focus = 0                       
+		Switch harmony.key            ;tests des causes de l'interruption
+	
+
+			Case Harmony.Dataarret	= 1000
+				focus = 1000
+				XmeListConsultDefault(lId_Stock, MVTL_Stock, StockScroll, zoom_privilege_consultation, Selection=TRUE) 
+		
+	
+			Case Harmony.Dataarret	= 1001
+				focus = 1001
+				XmeListConsultDefault(lId_Sortie, MVTL_Sortie, SortieScroll, zoom_privilege_consultation, Selection=TRUE) 
+
+			Case Harmony.Dataarret	= 1010
+				ReStocker
+				Charger_TabStock
+				Raffraichir
+
+		  	Case Harmony.Dataarret	= 1011
+				Controler_Pointage
+				Charger_TabStock
+				Charger_TabSortie
+				Raffraichir
+
+			Case harmony.dataarret = 8002
+				if Harmony.Sourisbout = Right_Button
+					Zoom_Call()
+				elsif Harmony.Sourisclic = Double_Click
+					Harmony.Retour = Xmenext_Simulation_Touche
+					Harmony.Cplretour = k_f8
+				endif
+			
+			Case k_f7                ;zoom généralisé
+				Zoom_Call()
+			
+			Case k_f8                ;zooms
+				Zoom_Call(harmony.arret)
+		
+			Case vsw IN (k_f9, K_f12)                ;abandon
+				fin = 1
+
+			Default
+				If Harmony.SourisSeq
+					focus = 0 
+					Harmony.Retour    = xmenext_point_sequence 
+					Harmony.cplRetour = Harmony.sourisSeq
+				elsif focus = 1000
+					XmeListConsultDefault(lId_Stock, MVTL_Stock, StockScroll, zoom_privilege_consultation, Selection=TRUE)
+				elsif focus = 1001 
+					XmeListConsultDefault(lId_Sortie, MVTL_Sortie, SortieScroll, zoom_privilege_consultation, Selection=TRUE)  
+				Endif
+
+		endswitch
+
+	While fin = 0         ;suite de la saisie
+		Switch focus
+			Case 1000
+				XmeListConsult(lId_Stock) 
+
+			Case 1001
+				XmeListConsult(lId_Sortie) 
+
+			Default
+				XmeNext(harmony.retour,harmony.cplretour)
+		EndSwitch
+	wend
+		
+EndP
+
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+Public Function int SaisiePage1
+;
+1 wFin		1,0	= 0
+
+BeginF
+
+	XmeInput(mz.mecle,1,0,xme_mode_goto)
+
+	Do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+	
+		case harmony.dataarret = 8002
+			if Harmony.Sourisbout = Right_Button
+				Zoom_Call()
+			elsif Harmony.Sourisclic = Double_Click
+				Harmony.Retour = Xmenext_Simulation_Touche
+				Harmony.Cplretour = k_f8
+			endif
+		
+		case k_f7                ;zoom généralisé
+			Zoom_Call()
+		
+		case k_f8                ;zooms
+			Zoom_Call(harmony.arret)
+	
+		case k_f9                ;abandon
+			FReturn(1)
+	
+		case vsw in (k_f10,k_tab,k_return,k_down)
+			
+			If Seek_ARt(xq_cog.Ref) = 0
+				Mvtl_Pointage
+			Else
+				MessageBox("Référence article non trouvée.",Translate("Alerte"),MB_ICONEXCLAMATION)
+			EndIf
+							 
+			if erreur
+				MessageBox(translate("Des erreurs ont été détectées.|Consultez le livre de bord"),translate("Alerte"),MB_ICONEXCLAMATION)
+			endif
+	
+			FReturn(0)
+
+		endswitch
+
+	while wFin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+
+	FReturn(1)
+		
+EndF
+
+
+;*
+;	Programme principal
+;*
+Main
+;	
+
+	if InitialiserVariables
+	
+		;GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+		;procedurecall(AdrProc)
+		Do While Prg_Fin = FALSE
+			Prg_Fin = SaisiePage1
+		WEnd
+	
+	endif
+

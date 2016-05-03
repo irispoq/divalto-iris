@@ -1,0 +1,474 @@
+SetModuleInfo('$Id: cogpp_mvtl_regen.dhsp 8018 2015-05-13 08:38:25Z admin $')
+;>xdiva
+;*
+;*		Objet : Nom du programme / module - Programme Cogpp_mvtl_regen.dhsp 
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLEF		205C			INit		04/2015	
+
+;*
+;*		Procédures / Fonctions				Commentaires
+;*		--------------------------------------------------------------------------------------------------------------
+;*		InitialiserVariables					Initialisation des variables
+;*		MvtlRegen			
+;*		SaisiePage1								Saisie de la première page du masque
+;*
+
+;*
+;*	Déclarations
+;*
+
+;
+Include	"gttcz00.dhsp"						;déclarations communes
+
+;
+Module	"gtpmpce.dhop"
+Module	"CogTm_000.dhop"						;module de fonctions communes
+
+;
+Public RecordSQL	"COGRS_MVTL.DHOQ"		CogRs_MouvErr
+Public RecordSQL	"COGRS_MVTL.DHOQ"		CogRs_MvtlErr
+Public RecordSQL	"COGRS_MVTL.DHOQ"		CogRs_MvtlErr		CogRs_MvtlNew
+Public RecordSQL	"GTRSPPART.DHOQ"		InfoDepo				
+Public RecordSQL	"GTRSPPTAB.DHOQ"		Depot
+
+;
+Public Record	"gtfdd.dhsd"	xq			xq_cog		;enregistrement de travail
+Public Record	"gtfdd.dhsd"	T020
+
+;
+1  id_toolbar	L						;ident barre d'outils
+1  id_menu		L						;ident menu
+
+1	AdrProc		16						;adresse des procédures appelées dans le module associé
+1	erreur		x		= false		;détermine s'il y a eu des erreurs lors de l'exécution du programme
+
+1	tunnel		1,0	= false
+1	lId_Merr		L
+1	lId_Verr		L
+
+;*
+;	Procédures / Fonctions générale
+;*
+
+;* Initialisation des variables
+Function int Cog_InitialiserVariables
+;
+Recordsql	a5rsuser.dhoq	utilisateur						;Utilisateurs
+
+BeginF
+
+	if pingreceive("zechange",mz) <> 0
+
+		;le programme n'a pas été lancé à partir du menu, on recherche l'utilisateur
+		utilisateur.init()
+		utilisateur.where.exists(system.User)
+		if utilisateur.select() = 0
+
+			if not tunnel
+				MessageBox(modify("%1",left(system.user),translate("Utilisateur %1 non défini dans la base Divalto")),translate("Alerte"),mb_iconexclamation)
+			endif
+			freturn(false)
+
+		else
+
+			mz.dos		= utilisateur.dos
+			mz.etb		= utilisateur.etb
+			mz.depo		= utilisateur.depo
+			mz.mecle		= "Cogee_mvtl_regen.dhof"
+			mz.micle		= "Cogii_mvtl_regen.dhoi"
+			;mz.mtcle		= "Cogtt_mvtl_regen.dhop"
+			mz.titre2	= "Régénération des ventilations supprimées"
+
+		endif
+
+	endif
+
+	;commentaire du programme
+	ProgramSetComment(translate("Régénération des ventilations supprimées"))
+
+	;recherche du dossier et T000
+	seek_soc(mz.dos)
+
+	;chargement du masque écran
+	xmeload mz.mecle
+	xmetitle(mz.titre2)
+	XmeInfoPage(mz.mecle,1)						;lire la taille de la page
+	XmeSetWindowSize(mz.mecle,1,Harmony.Opara3,Harmony.Opara4)
+
+	;chargement des barres d'outils
+	id_toolbar = XmeToolbarGetId (mz.mecle,"MAIN")
+	XmeToolbarSetWindow (id_toolbar,mz.mecle,1)
+
+	;chargement du menu
+	id_menu = XmeMenuGetId (mz.mecle,"MAIN")
+	XmeMenuSetWindow (id_menu,mz.mecle,1)
+
+	;chargement du masque d'impression
+	xmiload mz.micle
+	Xmi_Preparation
+
+	; init xq
+	If not tunnel
+		Init xq_cog = ' '
+		xq_cog.DatD = '19000101'
+		xq_cog.DatF = '99991231'
+	EndIf
+
+	; listes mémoires
+	lId_Merr = ListGetId("LISTE_MOUV_ERR")
+	lId_Verr = ListGetId("LISTE_MVTL_ERR")
+
+	FReturn(true)
+
+endf
+
+;*
+Procedure Cog_FinProgramme
+;
+BeginP
+
+	Cog_EcritureLivreDeBord(translate("<-- Fin regen ventilations"))
+	programexit
+
+EndP
+
+;*
+Procedure Cog_AfficherTraitement
+;
+BeginP
+
+	
+
+EndP
+
+;*
+function int Cog_FiltresOk
+beginf
+
+	freturn(true)
+
+endf
+
+
+;*
+;	Traitements
+;*
+
+;*
+Procedure Impression_Recap
+;
+BeginP
+
+	; MOUV
+	ListBegin(lId_Merr)
+	PrintBegin
+	XmiPrint(MZ.MiCle, 1)
+
+	Do While	ListNext(lId_Merr, CogRs_MouvErr.MOUV) not in (-1, 0)
+		XmiPrint(MZ.MiCle, 2)
+	WEnd
+
+	PrintEnd
+	ListErase(lId_Merr)
+
+	; MVTL
+	ListBegin(lId_Verr)
+	PrintBegin
+	XmiPrint(MZ.MiCle, 5)
+
+	Do While	ListNext(lId_Verr, CogRs_MvtlNew.MVTL) not in (-1, 0)
+		XmiPrint(MZ.MiCle, 4)
+	WEnd
+
+	PrintEnd
+	ListErase(lId_Verr)
+
+EndP
+
+;*
+Function int VtlNo_Associe(&wMVTL, wEnrno)
+; retourne le vtlno associé si une correspondance est trouvée avec wEnrno, wQte et wLiLg
+RecordSQL	"COGRS_MVTL.DHOQ"		CogRs_MvtlErr		wRs_MVTLassoc
+Record		"gtfdd.dhsd"			MVTL					wMVTL
+1		wRead			L
+1		wEnrno		>gtfdd.dhsd		Enrno
+BeginF
+
+	wRs_MVTLassoc.Init()
+	wRs_MVTLassoc.Where.RemoveCondition("")
+	wRs_MVTLassoc.Where.Equal_Enrno(wEnrNo)
+	wRead = wRs_MVTLassoc.ReaderOpen()
+	wRs_MVTLassoc.ReaderSelect(wRead)
+
+	Do While	wRs_MVTLassoc.ReaderNext(wRead) > 0
+
+		If wRs_MVTLassoc.RefQte = wMVTL.RefQte AND wRs_MVTLassoc.LiLg = wMVTL.LiLg
+			wMVTL.BlAsVtlNo = wRs_MVTLassoc.VtlNo
+			wMVTL.BlAsLieu	 = wRs_MVTLassoc.Lieu
+		EndIf
+
+	WEnd
+
+	wRs_MVTLassoc.ReaderClose(wRead)
+
+	FReturn(0)
+
+EndF
+
+
+;*
+Procedure Mvtl_Insert(wQte)
+;
+1		wQte		>gtfdd.dhsd			Qte
+BeginP
+
+	CogRs_MvtlNew.Init()
+
+	If CogRs_MvtlErr.EnrNo = CogRs_MouvErr.EnrNo	 ; on a un enrno chargé, signifie qu'une ventilation existe déjà pour le mouvement, on reprend une partie de ses informations
+		CogRs_MvtlNew.MVTL = CogRs_MvtlErr.MVTL
+		CogRs_MvtlNew.LiLg++
+	Else
+
+		CogRs_MvtlNew.Dos			= CogRs_MouvErr.Dos
+		CogRs_MvtlNew.Ce1 		= 'V'
+		CogRs_MvtlNew.GrRef		= CogRs_MouvErr.GrRef
+		CogRs_MvtlNew.TiCod		= CogRs_MouvErr.TiCod
+		CogRs_MvtlNew.PiCod		= CogRs_MouvErr.PiCod
+		CogRs_MvtlNew.PiNo		= Condition(CogRs_MouvErr.PiCod=3, CogRs_MouvErr.BlNo, CogRs_MouvErr.FaNo)
+		CogRs_MvtlNew.Tiers		= CogRs_MouvErr.Tiers
+		CogRs_MvtlNew.Op			= CogRs_MouvErr.Op
+		CogRs_MvtlNew.UserCr		= CogRs_MouvErr.UserCr
+		CogRs_MvtlNew.UserCrDh	= Time(7)
+		CogRs_MvtlNew.EnrNo		= CogRs_MouvErr.EnrNo
+		CogRs_MvtlNew.LiLg		= 1
+		CogRs_MvtlNew.Etb			= CogRs_MouvErr.Etb
+		CogRs_MvtlNew.Depo		= CogRs_MouvErr.Depo
+		CogRs_MvtlNew.Lieu		= ' '							; sera mis à jour en phase 2 pour les sorties
+		CogRs_MvtlNew.Nst			= Condition(Lectab(20, CogRs_MouvErr.Op) = 0, T020.NstO, SOC.Nst)
+		CogRs_MvtlNew.Sens		= CogRs_MouvErr.Sens
+		CogRs_MvtlNew.BlDt		= CogRs_MouvErr.BlDt
+		CogRs_MvtlNew.Cr			= CogRs_MouvErr.CrTotMt / wQTe
+		CogRs_MvtlNew.Cncr		= 0
+		CogRs_MvtlNew.Cmp			= CogRs_MouvErr.CmpTotMt/ wQte
+		CogRs_MvtlNew.Status		= 2
+		CogRs_MvtlNew.OfResCod	= 1
+		CogRs_MvtlNew.PrevFlg	= 1
+
+		If CogRs_MvtlNew.Sens = 1
+
+			Depot.Init()
+			Depot.Where.PK(CogRs_MvtlNew.Depo)
+			Depot.Select()
+			  
+			If Depot.LieuCod = 2
+
+				InfoDepo.Init()
+				InfoDepo.Where.PK(CogRs_MvtlNew.Ref, CogRs_MvtlNew.Depo, CogRs_MvtlNew.Sref1, CogRs_MvtlNew.Sref2, CogRs_MvtlNew.Nst)
+				If InfoDepo.Select() > 0 AND InfoDepo.Lieu <> ' '
+					CogRs_MvtlNew.Lieu = InfoDepo.Lieu
+				Else
+					CogRs_MvtlNew.Lieu = Depot.BpLieu
+				EndIf
+
+			EndIf
+
+		EndIf
+
+	EndIf
+
+	CogRs_MvtlNew.Ce4				= Condition(CogRs_MouvErr.MvCod = 2 AND CogRs_MvtlNew.Sens = 2, '6', '1')	; on met la ventilation en attente si sortie
+	CogRs_MvtlNew.Ce5				= ' '		; pas de ticketres
+	CogRs_MvtlNew.Ce6				= ' '		; pas de n° de colis
+	CogRs_MvtlNew.Ce9 			= ' '		; pas de serie
+	CogRs_MvtlNew.CeA				= ' '		; pas de stock
+	CogRs_MvtlNew.ColiNo			= ' '
+	CogRs_MvtlNew.TicketRes		= 0
+	CogRs_MvtlNew.Serie			= ' '
+	Enrno_Vtlno_Next_Numero(CogRs_MouvErr.EnrNo, CogRs_MvtlNew.VtlNo, 0, 1)
+	CogRs_MvtlNew.VtlNa			= Condition(CogRs_MvtlNew.Sens = 2 AND CogRs_MouvErr.MvCod = 2, -1, 0)		; mis à jour en phase 2
+	CogRs_MvtlNew.CdVtlNo		= Condition(CogRs_MouvErr.Ce6='1', CogRs_MvtlNew.VtlNo, 0)
+	CogRs_MvtlNew.RefQte			= wQte
+	If Convertir_Refqte_Qte(CogRs_MvtlNew.Qte, CogRs_MvtlNew.Ref, CogRs_MvtlNew.Sref1, CogRs_MvtlNew.Sref2, CogRs_MvtlNew.RefQte, CogRs_MouvErr.VenUn, CogRs_MouvErr.RefUn)	<> 0
+		CogRs_MvtlNew.Qte = CogRs_MvtlNew.RefQte
+	EndIf
+	CogRs_MvtlNew.StQte			= 0
+	CogRs_MvtlNew.StRes			= 0
+
+	If CogRs_MouvErr.BlAsEnrNo > 0
+		VtlNo_Associe(CogRs_MvtlNew.MVTL, CogRs_MouvErr.BlAsEnrNo)
+	EndIf
+
+	;
+	CogRs_MvtlNew.Insert()
+
+EndP
+
+;*
+Procedure Mvtl_Regen
+;
+1		wRead		L
+1		wR2		L
+1		wQteM		>gtfdd.dhsd		QTe
+1		wQteDif	>gtfdd.dhsd		Qte
+BeginP
+
+	Cog_EcritureLivreDeBord(translate("--> Début regen ventilations"))
+
+	ListErase(lId_Merr)
+	ListErase(lId_Verr)
+
+	; init requête
+	CogRs_MouvErr.Init()
+	CogRs_MouvErr.Where.RemoveCondition("")
+	CogRs_MouvErr.Where.ActifBl_Ou_ActifFa()
+	CogRs_MouvErr.Where.AddCondition("ActifBl_Ou_ActifFa")
+	CogRs_MouvErr.Where.BetWeen_Date(xq_cog.DatD, xq_cog.DatF)
+	CogRs_MouvErr.Where.AddCondition("BetWeen_Date")
+	CogRs_MouvErr.Where.Qte_err()
+	CogRs_MouvErr.Where.AddCondition("Qte_err")
+	;CogRs_MouvErr.Where.Mouvement_Stock()
+	;CogRs_MouvErr.Where.AddCondition("Mouvement_Stock")
+	CogRs_MouvErr.OrderBy.Tri()
+	wRead = CogRs_MouvErr.ReaderOpen()
+	CogRs_MouvErr.ReaderSelect(wRead)
+
+	; Lecture
+	Do While	CogRs_MouvErr.ReaderNext(wRead) > 0
+
+		If Res_ENT(CogRs_MouvErr.TiCod, CogRs_MouvErr.PiCod, Condition(CogRs_MouvErr.PiCod=3, CogRs_MouvErr.BlNo, CogRs_MouvErr.FaNo)) = 0
+			
+			If CogRs_MouvErr.BlQte > 0
+				If Convertir_Qte_Refqte(CogRs_MouvErr.Ref, CogRs_MouvErr.Sref1, CogRs_MouvErr.Sref2, CogRs_MouvErr.BlQte, CogRs_MouvErr.RefQte, CogRs_MouvErr.VenUn, CogRs_MouvErr.RefUn)	<> 0
+					CogRs_MouvErr.RefQte = CogRs_MouvErr.BlQte
+				EndIf
+			EndIf
+
+			wQteDif = CogRs_MouvErr.RefQte
+	
+			; Lecture des ventilations
+			CogRs_MvtlErr.Init()
+			CogRs_MvtlErr.Where.RemoveCondition("")
+			CogRs_MvtlErr.Where.Equal_Enrno(CogRs_MouvErr.EnrNo)
+			wR2 = CogRs_MvtlErr.ReaderOpen()
+			CogRs_MvtlErr.ReaderSelect(wR2)
+	
+			Do While	CogRs_MvtlErr.ReaderNext(wR2) > 0
+				wQteDif -= CogRs_MvtlErr.RefQte
+			WEnd
+	
+			CogRs_MvtlErr.ReaderClose(wR2)
+	
+			If wQteDif <> 0
+				;
+				CogRs_MouvErr.FaQte = wQteDif
+				ListInsert(lId_Merr, CogRs_MouvErr.MOUV)
+	
+				;
+				Mvtl_Insert(wQteDif)
+				ListInsert(lId_Verr, CogRs_MvtlNew.MVTL)
+			EndIf
+
+			;
+			Lib_ENT(CogRs_MouvErr.TiCod, CogRs_MouvErr.PiCod, Condition(CogRs_MouvErr.PiCod=3, CogRs_MouvErr.BlNo, CogRs_MouvErr.FaNo))
+
+		Else
+			erreur = TRUE
+		EndIf
+
+	WEnd
+
+	CogRs_MouvErr.ReaderClose(wRead)
+	
+	;
+	Impression_Recap
+
+	;
+	Cog_EcritureLivreDeBord(translate("<-- Fin regen ventilations"))
+
+endp
+
+
+;*
+;	Saisie des pages du masque
+;*
+
+;* Saisie du masque page 1
+Public Procedure Cog_SaisiePage1
+;
+1 wFin		1,0	= 0
+
+BeginP
+
+	XmeInput(mz.mecle,1,0,xme_mode_goto)
+
+	Do
+	                                
+		switch harmony.key            ;tests des causes de l'interruption
+	
+		case harmony.dataarret = 8002
+			if Harmony.Sourisbout = Right_Button
+				Zoom_Call()
+			elsif Harmony.Sourisclic = Double_Click
+				Harmony.Retour = Xmenext_Simulation_Touche
+				Harmony.Cplretour = k_f8
+			endif
+		
+		case k_f7                ;zoom généralisé
+			Zoom_Call()
+		
+		case k_f8                ;zooms
+			Zoom_Call(harmony.arret)
+	
+		case k_f9                ;abandon
+			wFin = 1
+	
+		case vsw in (k_f10,k_tab,k_return,k_down)
+			if messagebox(translate("Lancer le traitement ?"),translate("Confirmation"),mb_yesno+mb_iconquestion)=idyes
+				
+				Mvtl_Regen
+	
+				if erreur
+					messagebox(translate("Des erreurs ont été détectées.|Consultez le livre de bord"),translate("Alerte"),mb_iconexclamation)
+				endif
+	
+				wFin=1
+	
+			endif
+
+		endswitch
+
+	while wFin = 0         ;suite de la saisie
+		xmenext(harmony.retour,harmony.cplretour)
+	wend
+		
+endp
+
+
+;*
+;	Programme principal
+;*
+Main
+;	
+	If PingReceive("xq_cog",xq_cog) = 0
+		tunnel	= true
+	EndIf
+
+	if Cog_InitialiserVariables
+
+		if not tunnel
+	
+			;GetAdressProcedure(mz.MtCle,"ChargementAvant",AdrProc)
+			;procedurecall(AdrProc)
+			Cog_SaisiePage1
+	
+		else	;programme piloté
+	
+			Mvtl_Regen
+	
+		endif
+
+	endif
