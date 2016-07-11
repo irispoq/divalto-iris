@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20150826154114      
+;>xwin4obj     imprimante               6.0       20160616113009      
 [masque]
- utilisateur="UGIE"
- date_modification="26/08/2015"
+ utilisateur="ROOT"
+ date_modification="16/06/2016"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -11,7 +11,7 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000240
+ dernier_id=1000250
  surcharge=oui
  date_modif_base="20140911112351"
  dernier_id_page=100000
@@ -44,6 +44,8 @@
  "gtfdd.dhsd",,t2,t2,1000,0
  "gtfdd.dhsd",,cli,cli,2450,0
  "a5dd.dhsd",,muser,muser,2000,0
+ "gtrstiers.dhoq",,client,client,1024,1
+ "gtfdd.dhsd",,soc,socenseigne,2800,0
 [bloc]
  numero=1
  libelle="En-tête"
@@ -618,6 +620,18 @@
   [texte]
  [champ]
   [presentation]
+   position=83,164
+   taille=8,132
+   id=1000250
+   colonnes_saisie=239
+   wstyle="STD_GRAS"
+  [description]
+   donnee=soc,adr,socenseigne
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
    position=73,164
    taille=10,139
    id=1000240
@@ -646,16 +660,6 @@
    wnom_police="STD_ITALIQUE"
   [description]
    donnee=cli,cog_responsable,cli
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
-   position=83,164
-   taille=10,139
-   id=1000148
-   wstyle="STD_GRAS"
-  [description]
-   donnee=g4,adrcpl1,g4,4
   [param_saisie]
    type_date=jj/mm/aaaa
  [champ]
@@ -2327,6 +2331,7 @@ Public Record "gtfdd.dhsd" mvtl g4mvtl
 Public Record "gtfdd.dhsd" eec eec
 Public Record "gtfdd.dhsd" t013 t013
 Public Record "gtfdd.dhsd" soc socaafficher
+Public Record "gtfdd.dhsd" soc socenseigne
 Public Record "gtfdd.dhsd" t037 t037
 Public Record "gtfdd.dhsd" t2 t2
 public record "gtfdd.dhsd"	cli
@@ -2335,6 +2340,7 @@ Public Record "gtfdd.dhsd" ent ent_bl_01
 Public Record "cogfdd.dhsd" Cog_UT110
 Public Record "a5dd.dhsd" muser muser
 Public Record "gtfdd.dhsd" t1 t1
+Public RecordSql "gtrstiers.dhoq" client client
 
 1		wenveloppe	>gtfdd.dhsd	COG_ID_ENVELOPPE
 
@@ -2488,6 +2494,20 @@ Beginp
 		XmiSetAttribut("faxsoc",AN_VISIBILITE,AV_CACHE)
 		XmiSetAttribut("pied",AN_VISIBILITE,AV_CACHE)
 	endif
+
+	If cli.stat(1) = "SU"
+		socenseigne.Adr = "Super U " & cli.AdrCpl1
+	ElsIf	cli.stat(1) = "HU"
+		socenseigne.Adr = "Hyper U " & cli.AdrCpl1
+	ElsIf	cli.stat(1) = "TM"
+		socenseigne.Adr = "Marché U "	& cli.AdrCpl1
+	ElsIf	cli.stat(1) = "UE"
+		socenseigne.Adr = "U Express " & cli.AdrCpl1
+	ElsIf	cli.stat(1) = "UT"
+		socenseigne.Adr = "Utile "	& cli.AdrCpl1
+	Else
+		socenseigne.Adr = cli.AdrCpl1
+	Endif
 		
 Endp
 

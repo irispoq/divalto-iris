@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20151106121034      
+;>xwin4obj     imprimante               6.0       20160518102443      
 [masque]
- utilisateur="UGIE"
- date_modification="06/11/2015"
+ utilisateur="ROOT"
+ date_modification="18/05/2016"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -11,7 +11,7 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000154
+ dernier_id=1000159
  surcharge=oui
  date_modif_base="20130528154524"
  dernier_id_page=100000
@@ -366,7 +366,7 @@
    id=1000026
    wstyle="PETIT_GRAS_ITALIQUE"
   [texte]
-   texte="Facturé à"
+   texte="Livré à"
  [obj_texte]
   [presentation]
    position=159,257
@@ -683,16 +683,46 @@
    type_date=jj/mm/aaaa
  [champ]
   [presentation]
-   position=107,29
-   taille=8,101
-   id=1000154
-   colonnes_saisie=38
-   wstyle="STD_GRAS"
-   wtaille_fonte=7
+   position=107,27
+   taille=8,96
+   id=1000155
+   wstyle="PETIT_GRAS"
   [description]
-   donnee=cli,nom,cli
+   donnee=g4,nom,g4,3
+ [champ]
+  [presentation]
+   position=115,27
+   taille=8,96
+   id=1000156
+   wstyle="PETIT"
+  [description]
+   donnee=g4,rue,g4,3
+ [champ]
+  [presentation]
+   position=130,27
+   taille=8,18
+   id=1000157
+   wstyle="PETIT"
+  [description]
+   donnee=g4,cpostal,g4,3
   [param_saisie]
    type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=123,27
+   taille=8,96
+   id=1000158
+   wstyle="PETIT"
+  [description]
+   donnee=g4,loc,g4,3
+ [champ]
+  [presentation]
+   position=130,45
+   taille=8,77
+   id=1000159
+   wstyle="PETIT"
+  [description]
+   donnee=g4,vil,g4,3
  [champ]
   [presentation]
    position=115,164
@@ -737,40 +767,6 @@
    wstyle="STD"
   [description]
    donnee=g4,rue,g4,1
- [champ]
-  [presentation]
-   position=131,29
-   taille=8,18
-   id=1000060
-   wstyle="PETIT"
-  [description]
-   donnee=g4,cpostal,g4,4
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
-   position=123,29
-   taille=8,101
-   id=1000064
-   wstyle="PETIT"
-  [description]
-   donnee=g4,loc,g4,4
- [champ]
-  [presentation]
-   position=131,48
-   taille=8,80
-   id=1000065
-   wstyle="PETIT"
-  [description]
-   donnee=g4,vil,g4,4
- [champ]
-  [presentation]
-   position=115,29
-   taille=9,101
-   id=1000066
-   wstyle="PETIT"
-  [description]
-   donnee=g4,rue,g4,4
  [multi_choix]
   [presentation]
    position=3,232
