@@ -1,0 +1,179 @@
+;*
+;*		Objet : 	 Module de contrôle sur les numéros de série
+;*
+
+;*
+;*		Log	Version		N° modif		Date			Modifications
+;*		--------------------------------------------------------------------------------------------------------------
+;*		YLF	P205C					01		08/2016		Version Initiale
+;*
+
+;*
+;*		Déclarations
+;*
+
+;
+Include	"gtTcz00.dhsp"
+
+;
+Module	"gtPmFicSQL.dhop"
+
+;
+Public Record	"GTFDD.dhsd"	G1T2								; Enregistrement gestion tableau ventilations
+
+;*
+;*
+;*
+
+;*
+Public Function Long Cog_Tri_Serie(&A, &B)
+;
+Record	"gtfdd.dhsd"	G1T2		A
+Record	"gtfdd.dhsd"	G1T2		B
+1		_cleA		100
+1		_cleB		100
+BeginF
+
+	_cleA = [A.Serie A.GrRef]
+	_cleB = [B.Serie B.GrRef]
+
+	FReturn(SortCompare(_cleA, _cleB))
+
+EndF
+
+;*
+Public Function Long Cog_Serie_List_Init(&_lid)
+;
+1		_lid		L
+1		_AdrF		16
+BeginF
+
+	_lid = ListGetId("COG_LISTE_SERIE")
+	GetAdressFunction("", "Cog_Tri_Serie", _AdrF)
+	ListMode(_lid, Mode=1, _AdrF)
+
+	FReturn(0)
+
+endF
+
+;*
+Public Function int Cog_G1T2_Serie_Resa(_G1T2, &_lId)
+; Test si G1T2 peut être réservé
+; Insertion dans la liste lId_Serie
+RecordSQL	"gtRsppPce.dhoq"		Ventilation		_RS_MVTL
+Record		"gtfdd.dhsd"			G1T2				_G1T2	= ' '	; si non renseigné --> est égal au G1T2 courant
+1				_lId						L
+BeginF
+
+	;
+	If _G1T2 = ' '
+		_G1T2 = G1T2
+	EndIf
+
+	;
+	If _RS_MVTL.FShare([_G1T2.Dos _G1T2.Serie _G1T2.GrRef] , 'R')	<> 0
+		FReturn(1)
+	EndIf
+	ListInsert(_lId, _G1T2)
+
+	FReturn(0)
+
+EndF
+
+;*
+Public Function int Cog_G1T2_Serie_Lib(_G1T2, _lId, _majList)
+;	libération de _G1T2.SERIE
+RecordSQL	"gtRsppPce.dhoq"		Ventilation		_RS_MVTL
+Record		"gtfdd.dhsd"			G1T2				_G1T2	= ' '	; si non renseigné --> est égal au G1T2 courant
+Record		"gtfdd.dhsd"			G1T2				_lG1T2
+1				_lid						L
+1				_majList					1,0 = TRUE
+BeginF
+
+	;
+	If _G1T2 = ' '
+		_G1T2 = G1T2
+	EndIf
+
+	;
+	_RS_MVTL.FShare([_G1T2.Dos _G1T2.Serie _G1T2.GrRef] , 'L')
+
+	;
+	If _majList
+		If ListSeek(_lid, _G1T2, _lG1T2) not in (-1, 0)
+ 			ListDelete(_lid)
+		EndIf
+	EndIf
+
+	FReturn(0)
+
+EndF
+
+;*
+Public Function int Cog_Serie_Liste_Vider(_lId)
+;
+1		_lId		L
+BeginF
+
+	ListBegin(_lId)
+	Do While ListNext(_lId, G1T2) not in (-1, 0)
+		Cog_G1T2_Serie_Lib(G1T2 , _lId, _majlist=FALSE)
+		ListDeleteAndPrevious(_lId)
+	WEnd
+
+	FReturn(0)
+
+EndF
+
+;*
+Public Function int Cog_G1T2_Serie_ControlerUnicite(_lId_Serie)
+; contrôle la disponibilité de G1T2.Serie dans la table MVTL
+; + dans la liste des G1T2 en cours de saisie
+; 0 --> OK
+RecordSQL	"gtRsppPce.dhoq"		Ventilation			_RS_MVTL
+RecordSQL	"gtRsppTab.dhoq"		CodeOperation		_RS_T020
+1		_lId_Serie		L
+BeginF
+
+	If G1T2.Sens = 0
+		If _RS_T020.Op <> G1T2.Op 
+			_RS_T020.Join.Deactivate("$All")
+			_RS_T020.Column.DeActivate("$All")
+			_RS_T020.Column.Activate("T020.OP;T020.SENS")
+			Lectab_(_RS_T020, G1T2.Op)
+		EndIf
+		G1T2.Sens = _RS_T020.Sens
+	EndIf
+	If G1T2.Sens <> 1
+		FReturn(0)
+	EndIf
+
+	; table MVTL
+	_RS_MVTL.Init()
+	_RS_MVTL.Where.RemoveCondition("")
+	_RS_MVTL.Join.Deactivate("$All")
+	_RS_MVTL.Column.DeActivate("$All")
+	_RS_MVTL.Column.Activate("MVTL.DOS;MVTL.REF;MVTL.SREF1;MVTL.SREF2;MVTL.SERIE;MVTL.VTLNO")
+	_RS_MVTL.Where.Equal_Ref(G1T2.Ref)
+	_RS_MVTL.Where.AddCondition("Equal_Ref")
+	_RS_MVTL.Where.Equal_Sref1(G1T2.SRef1)
+	_RS_MVTL.Where.AddCondition("Equal_Sref1")
+	_RS_MVTL.Where.Equal_Sref2(G1T2.SRef2)
+	_RS_MVTL.Where.AddCondition("Equal_Sref2")
+	_RS_MVTL.Where.Equal_Sens(1)
+	_RS_MVTL.Where.AddCondition("Equal_Sens")
+	_RS_MVTL.Where.Equal_Serie(G1T2.Serie)
+	_RS_MVTL.Where.AddCondition("Equal_Serie")
+	If _RS_MVTL.Select() > 0 AND _RS_MVTL.VtlNo <> G1T2.VtlNo
+		FReturn(1)
+	EndIf
+
+	;
+	If Cog_G1T2_Serie_Resa(_lId=_lId_Serie) <> 0
+		FReturn(1)
+	EndIF
+
+
+	FReturn(0)
+
+EndF

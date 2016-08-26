@@ -14,11 +14,12 @@ include "GTTC000.dhsp"
 
 ;									
 Module	"CCPMFIC.dhop"		
-Module	"CogTm_000.dhop"							  
+Module	"CogTm_000.dhop"	
+Module	"GtPmFicSQL.dhop"	
+Module	"GtPmPce.dhop"					  
 
 ;
 public hfile	ccfdd.dhsd	CCFJCA 		CCFJCA			; Fichier dossier de C3
-Public HFile	GTFDD.DHSD	GTFPCF		GTFPCF_DEV_01			; Tiers
 Public HFile	GTFDD.DHSD	GTFENT		GTFENT
 Public HFile	GTFDD.DHSD	GTFAM			GTFAM
 
@@ -47,7 +48,6 @@ Public Record	GTFDD.dhsd	XT				G3XT				; Enregistrement identifiants tableaux
 public record	gtfdd.dhsd  G1T1								; Enregistrement gestion tableau lignes
 Public Record	gtfdd.dhsd  G1T6								; Liste des en-têtes à facturer	
 Public Record	gtfdd.dhsd	G1T6			W1G1T6			; élément de la liste précédent
-Public Record	GTFDD.DHSD	CLI		CLI_DEV_01					; Client
 
 Public Record "gtfdd.dhsd" g6 g6
 
@@ -55,8 +55,9 @@ Public Record "gtfdd.dhsd" g6 g6
 1		werr			5,0
 1		Id_Factures	L
 1		Id_Lignes	L
-1		 PtrFoncPDV 16	
+1		PtrFoncPDV 	16	
 1		lId_FaMotFa	L
+1		lId_FaNbPg	L
 
 ;*
 ;* Séquences début de programme
@@ -86,6 +87,12 @@ Function int Cog_Factures_MotFac_Traiter_Liste
 1		wErr_Loc		1,0 	= FALSE
 BeginF
 
+	;
+	If ListCount(lId_FaMotFa) = 0
+		FReturn(0)
+	EndIf
+
+	;
 	ListBegin(lId_FaMotFa)
 	Do While ListNext(lId_FaMotFa, ENT) not in (-1, 0)
 
@@ -101,39 +108,17 @@ BeginF
 EndF
 
 ;*
-;*		Fonctions sur les en-têtes
-;*
+Function int Cog_Factures_PDV_Traiter_Liste
+; Tri des lignes par ID enveloppe budgétaire / Affaire
+1		_i		X
+1		_err	1,0 = FALSE
+BeginF
+	Sethourglasscursor()
+	G3_OpenTrace(2,3,4,false)
 
-;*
-Procedure Programme_Debut
-; en début de programme après l'ouvertue des fichiers et avant la lecture du dossier
-BeginP
-
-	CogRs_SocComp.Init()
-	CogRs_SocComp.Where.PK(MZ.Dos)
-	CogRs_SocComp.Select()
-
-	werr = system.esp
-	Id_Factures = ListGetId("Liste_Factures")
-	ListErase(Id_Factures)
-	Id_Lignes 	= ListGetId("Liste_Lignes")
-	GetAdressFunction (' ' , "Tri_LIG" , PtrFoncPDV)
-	ListMode (Id_Lignes, 1 , PtrFoncPDV)
-
-	lId_FaMotFa = ListGetId("COG_FACTURES_MOTFA")
-	ListErase(lId_FaMotFa)
-
-EndP
-
-
-;*
-Procedure Programme_Fin
-; en fin de programme
-1		i		X
-BeginP
-	Sethourglasscursor
+	; liste des factures issue du moteur PDV
 	If ListCount(Id_Factures) > 0
-		g3_OpenTrace(2,3,4,false)
+		
 		ListBegin(Id_Factures)
 		Loop ListNext(Id_Factures,Ent) > 0
 			g3_Afficher_selection(3,false)
@@ -148,10 +133,10 @@ BeginP
 				G1T1 = Rmouv
 				If G1T1.Ce2N = 1 | G1T1.Cog_Affaire = G1T1.Projet | Endif
 				If G1T1.Ce2N = 2 And G1T1.Cog_Affaire = system.esp
-					i = 1
-					Loop i < 9
- 						If Mid(G1T1.Des,i,1) = '-' | Exitloop
-						Else | Mid(G1T1.Cog_Affaire,i,1) = Mid(G1T1.Des,i,1) | i++
+					_i = 1
+					Loop _i < 9
+ 						If Mid(G1T1.Des, _i, 1) = '-' | Exitloop
+						Else | Mid(G1T1.Cog_Affaire, _i, 1) = Mid(G1T1.Des, _i, 1) | _i++
 						Endif
 					Endloop
 				Endif
@@ -159,34 +144,150 @@ BeginP
 				ListInsert(Id_Lignes,G1T1)			
 			Endloop
 			If ListCount(Id_Lignes) > 0
-				i = 1
+				_i = 1
 				ListBegin(Id_Lignes)
 				Loop ListNext(Id_Lignes,Rmouv) > 0
 					If Hseek(Gtfam,G1T1,"M" & MZ.Dos & Rmouv.EnrNo) = 0
-						Rmouv.Falg = i | i++
+						Rmouv.Falg = _i | _i++
 						Hrewrite(Gtfam,Rmouv)
 					Else
-						G3_Log_Ano (9009 , 'Ligne non retrouvée No ' & Rmouv.Falg, ' Facture No ' & ENT.PINO) | werr++
+						G3_Log_Ano (9009 , 'Ligne non retrouvée No ' & Rmouv.Falg, ' Facture No ' & ENT.PINO) | _err = TRUE
 					Endif
 				Endloop
 				Hpclose(Gtfam)
 			Endif
 			Lib_ENT(Ent.Ticod,Ent.Picod,Ent.Pino)
 		Endloop
- 	Endif
+ 	Endif	 ; If ListCount(Id_Factures) > 0
+
+	;
 	ListDestroy(Id_Factures)
 	ListDestroy(Id_Lignes)
 	Setnormalcursor
-	g3_closeTrace
-	If werr > system.esp
-		Messagebox("Des erreurs ont été constatées lors de la facturation.||Veuillez consulter le livre de bord.",'Erreur')
-	Endif
+	G3_CloseTrace()
+
+	FReturn(_err)
+EndF
+
+;*
+Function int Cog_NombrePages_TraiterListe
+; affecte le nombre de pages aux entetes de factures
+RecordSQL	"gtRsppPce.dhoq"		EntetePiece		_RS_ENT
+Record	"gtfdd.dhsd"				ENT				_ENT
+1	_Ret		1,0 = 0
+1	_NbPages	2,0
+1	_Fichier	Har_Max_Path
+1	_fano		>gtfdd.dhsd		FaNo	
+1	_imp		1,0	
+1	_flag		B										
+BeginF
+
+	G3_OpenTrace(2,3,4)
+
+	ListBegin(lId_FaNbPg)
+	Do While ListNext(lId_FaNbPg, ENT) not in (-1, 0)
+
+		; affichage traitement
+
+		G1T6 = Ent
+		G1T6.Tiers = 'Nb Pages'
+		G3_Afficher_Traitement
+		
+		; génération du dhvw
+		MZ.Micle6 = '*09230'
+		G3_Xmi_Preparation(Condition(ent.ETANO = ' ',SOC.ENTCOD(2),ent.ETANO))
+		PingLocal("COG_NBPAGES", TRUE)
+		_imp = Piece_Imprimer(ent.ticod,ent.picod,ent.pino,0, Choixpresentation=FALSE,Reimpression=FALSE,Archivage=FALSE)
+		
+		; récupération du nombre de pages et affectation à l'entête
+		If PingLocalReceiveAndDelete("COG_NBPAGES_RET", _NbPages) = 0
+
+			If Res_ENT(Ent.TiCod,Ent.PiCod,Ent.PiNo) = 0
+
+				_RS_ENT.Init()
+				_RS_ENT.Where.RemoveCondition("")
+				_RS_ENT.Join.Deactivate("$All")
+
+				If Seek_EntetePiece(_RS_ENT ,Ent.TiCod,Ent.PiCod,Ent.PiNo) = 0
+					_RS_ENT.EditCod 		= 1
+					_RS_ENT.Cog_NbPages 	= _NbPages
+
+					UpDate_EntetePiece(_RS_ENT)
+				Endif
+
+				Lib_ENT(Ent.TiCod,Ent.PiCod,Ent.PiNo)
+
+			Else
+
+				Cog_EcritureLivreDeBord("Calcul nombre de pages: facture n°" & ENT.PiNo & " réservée.")
+				_ret = 1
+
+			EndIf
+			
+		Endif
+
+	WEnd
+
+	G3_CloseTrace()
+	ListErase(lId_FaNbPg)
+
+	FReturn(_ret)
+
+EndF
+
+;*
+;*		Fonctions sur les en-têtes
+;*
+
+;*
+Procedure Programme_Debut
+; en début de programme après l'ouvertue des fichiers et avant la lecture du dossier
+BeginP
+
+	; complément dossier
+	CogRs_SocComp.Init()
+	CogRs_SocComp.Where.PK(MZ.Dos)
+	CogRs_SocComp.Select()
+
+	; init var
+	werr = system.esp
+
+	; listes
+	Id_Factures = ListGetId("Liste_Factures")
+	ListErase(Id_Factures)
+	Id_Lignes 	= ListGetId("Liste_Lignes")
+	GetAdressFunction (' ' , "Tri_LIG" , PtrFoncPDV)
+	ListMode (Id_Lignes, 1 , PtrFoncPDV)
+
+	lId_FaMotFa = ListGetId("COG_FACTURES_MOTFA")
+	ListErase(lId_FaMotFa)
+
+	lId_FaNbPg	= ListGetId("COG_FACTURES_NBPG")
+	ListErase(lId_FaNbPg)
+
+	PingLocal("SAUVE",G3XQ)
+
+EndP
+
+
+;*
+Procedure Programme_Fin
+; en fin de programme
+BeginP
+	
+	;
+	If Cog_Factures_PDV_Traiter_Liste()	<> 0
+		Messagebox("Des erreurs ont été constatées lors de la facturation.||Veuillez consulter le livre de bord.",'Erreur', MB_ICONERROR)
+	EndIf
 
 	;
-	If ListCount(lId_FaMotFa) > 0
-		If Cog_Factures_MotFac_Traiter_Liste <> 0
-			MessageBox("Erreur lors du tri des lignes de facture.|Veuillez consulter le livre de bord.","Erreur", MB_ICONERROR)
-		EndIf
+	If Cog_Factures_MotFac_Traiter_Liste <> 0
+		MessageBox("Erreur lors du tri des lignes de factures.|Veuillez consulter le livre de bord.","Erreur", MB_ICONERROR)
+	EndIf
+
+	; Nombre de pages
+	If Cog_NombrePages_TraiterListe() <> 0
+		MessageBox("Erreur lors du calcul du nombre de pages.|Veuillez consulter le livre de bord.","Erreur", MB_ICONERROR)	
 	EndIf
 
 EndP
@@ -197,8 +298,13 @@ Procedure Menu_Chargement_Ap
 ; permet de rajouter des choix
 BeginP
 	Standard.Menu_Chargement_Ap
-	XmeMenuCheckItem(G3XT.IDMENU(1),"Imp",False)
+	XmeMenuCheckItem(G3XT.IDMENU(1),"Imp",False)		  		
 	XmeMenuCheckItem(G3XT.IDMENU(1),"Blpointe",True)
+
+	If SOC.Cog_ImpParNbPage = 2
+		XmeMenuValidateItem(G3XT.IDMENU(1),"Imp",False)	; interdiction de modifier ce choix
+	EndIf
+
 EndP
 
 ;*
@@ -245,6 +351,7 @@ Endp
 ;*
 Procedure ENT_Creation_Init
 ;
+RecordSQL	"gtRsppTiers.dhoq"		Client		_RS_CLI
 1	i					>gtfdd.dhsd	PiNo						
 1	t_Ce1_01			>CCFDD.DHSD	Ce1
 1	t_Key_01			255
@@ -292,16 +399,15 @@ Beginp
 	
 
 	; Vérification du client et de son code OP
-	Init CLI_DEV_01 = " "
-	t_Ce1_01 = "3"
-	GTFPCF_DEV_01.Key = "C" & ENT.Dos & t_Ce1_01 & ENT.Tiers
-	t_Key_01 = ENT.Dos & t_Ce1_01 & ENT.Tiers
-	x_st_01 = IRead(GTFPCF_DEV_01, CLI_DEV_01, "C", t_Key_01)
-	If x_st_01 = 0 And CLI_DEV_01.Dos = ENT.Dos And CLI_DEV_01.Ce1 = t_Ce1_01 And CLI_DEV_01.Tiers = ENT.Tiers
-		ENT.Cog_ImpLogo_1 = CLI.Cog_implogo_1
-		ENT.Cog_ImpLogo_2 = CLI.Cog_implogo_2
-		ENT.Cog_ImpLogo_3 = CLI.Cog_implogo_3
-		ENT.Cog_ImpLogo_4 = CLI.Cog_implogo_4
+	_RS_CLI.Init()
+	_RS_CLI.Where.RemoveCondition("")
+	_RS_CLI.Join.Deactivate("$All")
+	
+	If Seek_Client(_RS_CLI, ENT.Tiers) = 0
+		ENT.Cog_ImpLogo_1 = _RS_CLI.Cog_implogo_1
+		ENT.Cog_ImpLogo_2 = _RS_CLI.Cog_implogo_2
+		ENT.Cog_ImpLogo_3 = _RS_CLI.Cog_implogo_3
+		ENT.Cog_ImpLogo_4 = _RS_CLI.Cog_implogo_4
 	Else
 		ENT.Cog_ImpLogo_1 = SOC.Cog_implogo_1
 		ENT.Cog_ImpLogo_2 = SOC.Cog_implogo_2
@@ -335,6 +441,11 @@ BeginP
 		EndIf
 		ENT.PiRef = "Facturation projets"
 		ListInsert(lId_FaMotFa, ENT)
+	EndIf
+
+	; liste des factures pour calcul du nombre de pages
+	If SOC.Cog_ImpParNbPage = 2
+		ListInsert(lId_FaNbPg, ENT)	
 	EndIf
 
 EndP

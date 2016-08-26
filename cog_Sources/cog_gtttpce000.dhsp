@@ -18,13 +18,13 @@ Include	'COGTC_000.dhsp'
 Module 	'CCTM000.DHOP'
 Module	'CCPMFIC.DHOP'
 Module	'GTPMPCE000.dhop'
-Module	'GTPPPCE000.dhop'
+Module	'GTPPPCE000.dhop'	
 Module	'GTTMPCE.dhop'
 Module 	'A5PMFIC.dhop'
 Module 	'A5PMFLASH.dhop'
-;Module	'COGTM_VALID_CDE.DHOP'	  --> spécifiques obsolètes
 Module	'COG_CCTZ701_SQL.DHOP'
 Module	'CogTm_Bundle.dhop'
+Module	'CogTm_Serie.dhop'
 
 ; Fichiers
 			Hfile	a5dd.dhsd	A5FFLASH				A5FFLASH
@@ -44,6 +44,7 @@ public 	hfile	ccfdd.dhsd	CCFJCA 				CCFJCA	noopen; Fichier dossier de C3
 Public RecordSQL	"CogRs_Dos.dhoq"		CogRs_SocComp
 
 ; Enregistrements
+Public Record	DDSYS.dhsd	ROWINFO	ROWINFO
 Public Record	GTFDD.dhsd	ETS								; Etablissement
 Public Record	GTFDD.dhsd	CLI								; Client
 ;Public Record	GTFDD.dhsd	PRO								; Prospect
@@ -53,21 +54,9 @@ Public Record	GTFDD.dhsd	CLI		TIERS
 Public Record 	a5dd.dhsd 	MUSER
 Public Record 	a5dd.dhsd 	MUSER		TRMUSER
 Public Record  a5dd.dhsd	MFLASH
-;
-;Public Record	GTFDD.dhsd	RFO								; Référencement fournisseur
-;
-;Public Record	GTFDD.dhsd	VRP								; Représentant
 Public Record	GTFDD.dhsd 	T1
-;Public Record	GTFDD.dhsd 	T2									; Contact
-;Public Record	GTFDD.dhsd 	T3
-;
 Public Record	GTFDD.dhsd 	ART								; Articles
 Public Record	GTFDD.dhsd 	SART
-
-;
-;Public Record GTFDD.dhsd 	G4
-;Public Record GTFDD.dhsd 	XZ				G3XZ
-;
 Public Record	GTFDD.dhsd	ENT								; En-tête
 Public Record	GTFDD.dhsd	ENT	ENTOri					; En-tête origine en duplication
 Public Record	GTFDD.dhsd	ENT	W1ENT						; En-tête
@@ -83,6 +72,8 @@ Public Record	GTFDD.dhsd 	GTPCE								; Enregistrement de travail
 Public Record	GTFDD.dhsd 	GTENT								; Enregistrement de travail
 Public Record	GTFDD.dhsd 	G1T1								; Enregistrement gestion tableau lignes
 Public Record	GTFDD.dhsd	G1T2								; Enregistrement gestion tableau ventilations
+Public Record	GTFDD.dhsd	G1T2		G1T2_COGSAVE
+Public Record	GTFDD.dhsd	G1T2		G1T2_COGSAVE2
 Public Record	GTFDD.dhsd 	MOUV								; Mouvement en suppression de pièce
 Public Record	GTFDD.dhsd	MVTL								; ventilation
 
@@ -102,10 +93,11 @@ Public Record cogfdd.dhsd 	Cog_DirCliente		Cog_DirCliente_01
 
 ;	Var
 1		SavCE4			>gtfdd.dhsd		Ce4
-1		flagInit			1,0
+1		lId_Serie		L
 1		lId_ListImmo	L
 1		txtMSB			S
 1		adrFunct			16
+1		Cog_Phase		2,0
 
 ; Constantes pour les Pcod(1) et Pcod(2)
 Const C_Prix_Auto					= 1							; Recherche complète
@@ -116,6 +108,16 @@ Const C_Prix_Manuel				= 4							; Prix manuel
 ; Constantes pour les Ce4 de ENT
 Const C_STATUT_PROVISOIRE			= '7'
 
+; Structures 
+Structure G1T1_ChapitrePoste
+	1		Ce2		>gtfdd.dhsd		Ce2
+	1		EnrNo		>gtfdd.dhsd		EnrNo
+	1		Mont		>gtfdd.dhsd		Mont
+	1		CrTot		>gtfdd.dhsd		CrTotMt
+	1		CmpTot	>gtfdd.dhsd		CmpTotMt
+	1		Recalcul	1,0				
+EndStructure
+														
 
 ;*
 ;*	  Traitements liés à l'envoi de mails / flash
@@ -954,6 +956,8 @@ BeginF
 	XmeToolbarValidateButton(IdBoutonMain, "Cog_Valideur", FALSE)
 	XmeToolbarValidateButton(IdBoutonMain, "Cog_btnbien", FALSE)
 	XmeToolbarValidateButton(IdBoutonMain, "Cog_sepabien", FALSE)
+	XmeToolbarValidateButton(IdBoutonMain, "Cog_sepafaqte", FALSE)
+	XmeToolbarValidateButton(IdBoutonMain, "Cog_btnfaqte", FALSE)
 
 	; grisage ou dégrisage
 	XmeToolbarEnableButton(IdBoutonMain, "Cog_btnbien", FALSE) 
@@ -964,6 +968,17 @@ BeginF
 			If Left(MZ.PARAM) = 'CmdA' 	;	ajout v7 --> le bouton est inactif sans ce paramètre, inutile de l'afficher
 				;XmeMenuCheckItem(IdMenuMain, "Aff_Etat_Pr", TRUE)
 				XmeToolbarValidateButton(IdBoutonMain, "U_envoiflash", TRUE, aff=TRUE)
+			EndIf
+
+		Case 'C4'
+			If CogRs_SocComp.Cog_ConfFaQte <> ' ' AND G3_Protection(CogRs_SocComp.Cog_ConfFaQte) = 0 
+				XmeToolbarValidateButton(IdBoutonMain, "Cog_sepafaqte", TRUE, aff=FALSE)
+				XmeToolbarValidateButton(IdBoutonMain, "Cog_btnfaqte", TRUE)
+				If (wMode IN (C_Mode_Modification, C_Mode_Creation)) AND (wphase = C_Phase_Ligne)
+					XmeToolbarEnableButton(IdBoutonMain, "Cog_btnfaqte", TRUE)
+				Else
+					XmeToolbarEnableButton(IdBoutonMain, "Cog_btnfaqte", FALSE)
+				EndIf
 			EndIf
 
 		Case 'F2'
@@ -984,7 +999,6 @@ BeginF
 				AND G1T1.FaCe4 = '1'	AND G1T1.BlQte > 0 
 			 	XmeToolbarEnableButton(IdBoutonMain, "Cog_btnbien", TRUE) 
 			EndIf
-
 
 	EndSwitch
 													
@@ -1046,7 +1060,7 @@ BeginP
 	Switch ENT.TiCod
 		Case "C"
 			ENT.Cog_Facturation_Compte = CLI.Cog_Facturation_Compte
-			ENT.Cog_BL_Moteur = 1
+			ENT.Cog_BL_Moteur = Condition(ENT.Cog_BL_Moteur = 0, 1, ENT.Cog_BL_Moteur)
 			ENT.Cog_ImpDetail	= 2 ;PRJAP.Cog_ImpDetail
 			ENT.Cog_implogo_1	= CLI.Cog_implogo_1
 			ENT.Cog_implogo_2	= CLI.Cog_implogo_2
@@ -1334,6 +1348,15 @@ Beginf
 	Freturn('O')
 Endf
 
+;*
+Public Procedure Cog_Ent_Abandon_Ap
+;
+BeginP
+
+	;
+	Cog_Serie_Liste_Vider(lId_Serie)
+
+endP
 
 ;*
 Public Procedure Cog_ENT_Liberation_Av	
@@ -1380,6 +1403,9 @@ BeginP
 			Cog_Maj_Journal_Comptable
 
 	EndSwitch
+
+	;
+	Cog_Serie_Liste_Vider(lId_Serie)
 
 EndP
 
@@ -1430,6 +1456,138 @@ Endf
 ;*
 
 ;*
+Function Long Cog_Tri_ChapitrePoste(&A, &B)
+;
+RecordDiva	G1T1_ChapitrePoste		A
+RecordDiva	G1T1_ChapitrePoste		B
+BeginF
+	FReturn(SortCompare(A.EnrNo, B.EnrNo))
+EndF
+
+
+;*
+Public Function int Cog_G1T1_RAZ_FaQte
+; parcourt la liste G1T1, pour chaque ligne sélectionnée passage de la quantité facturée à 0
+; 0 --> pas d'erreur
+RecordDiva						G1T1_ChapitrePoste	_ChapitrePoste
+RecordDiva						G1T1_ChapitrePoste	_CP_Seek
+1		_tri						16
+1		_adr						L
+1		_lId_ChapitrePoste	L
+1		_count					L
+1		_TabEnrno				>gtfdd.dhsd				Enrno * 2
+1		_i							1,0
+1		_flag_raz				1,0 	= FALSE
+BeginF
+
+	; confirmation utilisateur
+	If MessageBox("Passer les quantités facturées des lignes sélectionnées à 0?", "Question", MB_ICONQUESTION+MB_YESNO) = IDNO
+		FReturn(1)
+	EndIf
+
+	; Sauvegarde contexte
+	_adr = XmeListGetAdressCurrent(G3XT.IdTableau(1))
+
+	; Init listes mémoires
+	_lId_ChapitrePoste = ListGetId("COG_LISTE_CHAPITREPOSTE")
+	GetAdressFunction(" ", "COG_TRI_CHAPITREPOSTE", _tri)
+	ListMode(_lId_ChapitrePoste, 1, _tri)
+	ListErase(_lId_ChapitrePoste)
+
+	; Lecture des lignes
+	Piece_Recap_Init()
+	XmeListBegin(G3XT.IdTableau(1))
+	Do While XmeListNext(G3XT.IdTableau(1), G1T1) not in (1, 0)
+
+		If ROWINFO.Selection AND G1T1.FaQte > 0
+
+			G1T1.FaQte 	= 0
+			G1T1.DstQte	= 0
+			_flag_raz	= TRUE
+			
+			If Controle_Quantite_G1T1(G1T1.FAQTE,2220) = 0
+				; calcul HT d'une ligne
+				Calculer_HT_G1T1(G1T1.FAQTE)
+			endif
+
+			XmeListModify(G3XT.IdTableau(1), G1T1)
+
+		EndIf
+
+		; Gestion des chapitres et postes
+		If G1T1.Ce2 <> '1' AND G1T1.EnrNo > 0
+			Init _ChapitrePoste = ' '
+			_ChapitrePoste.Ce2 	= G1T1.Ce2
+			_ChapitrePoste.EnrNo = G1T1.EnrNo
+			ListInsert(_lId_ChapitrePoste, _ChapitrePoste)
+		Else ; test si la ligne appartient à un chapitre ou un poste
+
+			_TabEnrno(1) = Condition(GTPCE.TiCodOri & GTPCE.PiCodOri = 'C3' , G1T1.EnrNoC(3), G1T1.EnrNoC(4))
+			_TabEnrno(2) = Condition(GTPCE.TiCodOri & GTPCE.PiCodOri = 'C3' , G1T1.EnrNoP(3), G1T1.EnrNoP(4))
+
+			For _i = 1 to 2
+				If _TabEnrno(_i) > 0
+					_CP_Seek.EnrNo = _TabEnrno(_i)
+					If ListSeek(_lId_ChapitrePoste, _CP_Seek, _ChapitrePoste) not in (-1, 0)
+						_ChapitrePoste.CmpTot 	+= G1T1.CmpTotMt
+						_ChapitrePoste.CrTot		+= G1T1.CrTotMt
+						_ChapitrePoste.Mont		+= G1T1.Mont
+						_ChapitrePoste.Recalcul	= Condition(ROWINFO.Selection, TRUE, _ChapitrePoste.Recalcul)
+						ListModify(_lId_ChapitrePoste, _ChapitrePoste)
+					EndIf
+				EndIf
+			Next
+		EndIf
+
+		;
+		Piece_Recap_Cumul(G1T1.MOUV, FALSE, G1T1.TiCod, G1T1.PiCod)		  
+
+	WEnd
+
+	Piece_Recap_Fin()
+
+	; Mise à jour des cumuls sur les chapitres & postes
+	_count = ListCount(_lId_ChapitrePoste) 
+	XmeListBegin(G3XT.IdTableau(1))
+	Do While XmeListNext(G3XT.IdTableau(1), G1T1) not in (1, 0) AND _count not in (-1, 0)
+
+		If G1T1.Ce2 <> '1'
+
+			_CP_Seek.EnrNo = G1T1.EnrNo
+			If ListSeek(_lId_ChapitrePoste, _CP_Seek, _ChapitrePoste) not in (-1, 0)
+				If _ChapitrePoste.Recalcul
+
+					G1T1.Mont	 	= _ChapitrePoste.Mont 
+					G1T1.CrTotMt	= _ChapitrePoste.CrTot
+					G1T1.CmpTotMt	= _ChapitrePoste.CmpTot
+					XmeListModify(G3XT.IdTableau(1), G1T1)
+
+				EndIf
+
+				ListDelete(_lId_ChapitrePoste)
+				_count = ListCount(_lId_ChapitrePoste) 
+
+			EndIf
+
+		EndIf	; If G1T1.Ce2 <> '1'
+
+	WEnd
+
+	; Actualisation pied de pièce pour réaffichage des montants
+	If _flag_raz
+		XmedispV(MZ.MeCle, 12, XME_MODE_GOSUB)
+		XmeRet()
+	EndIf
+
+	; Restauration contexte
+	XmeListSetAdressCurrent(G3XT.IdTableau(1), _adr)
+	ListDestroy(_lId_ChapitrePoste)
+
+	FReturn(0)
+
+EndF
+
+;*
 Public Procedure Cog_G1T1_AffecterAffaire_Axe2
 ;
 BeginP
@@ -1468,6 +1626,30 @@ BeginP
 EndP
 
 ;*
+Public Function Char Cog_G1T1_Creation_Av
+;
+BeginF
+
+	; LireProgrammePhase renvoit C_Phase_LigneModif une fois passé en création de ventilations
+	Cog_Phase = C_Phase_LigneCreat
+
+	FReturn('O')
+
+EndF
+
+;*
+Public Function Char Cog_G1T1_Modification_Av
+;
+BeginF
+
+	; LireProgrammePhase renvoit C_Phase_LigneModif une fois passé en création de ventilations
+	Cog_Phase = C_Phase_LigneModif
+
+	FReturn('O')
+
+EndF
+
+;*
 Public Procedure COG_G1T1_Creation_Init
 ;
 1	t_key_01	255
@@ -1475,6 +1657,8 @@ Public Procedure COG_G1T1_Creation_Init
 1	t_Ce1		>CCFDD.DHSD	Ce1
 1	t_Cpt		>CCFDD.DHSD	Cpt
 BeginP
+
+	;
 	If G1T1.TiCod in ("P","C","F")
 		Switch G1T1.TiCod
 			Case "F"
@@ -1614,6 +1798,38 @@ Beginf
 
 EndF
 
+;*
+Public Procedure Cog_G1T1_Ligne_Abandon_OK
+;
+BeginP
+
+	If GTPCE.TiCodDst & GTPCE.PiCodDst IN ("F3", "F4")	AND Cog_Phase = C_Phase_LigneCreat
+	
+		XmeListBegin(G3XT.IdTableau(3))
+		Do While XmeListNext(G3XT.IdTableau(3), G1T2) not in (-1, 0)
+			Cog_G1T2_Serie_Lib(_lId=lId_Serie)
+		WEnd
+
+	EndIf
+
+EndP
+
+;*
+Public Procedure Cog_G1T1_Suppression_OK
+;
+BeginP
+
+	If GTPCE.TiCodDst & GTPCE.PiCodDst IN ("F3", "F4")	
+	
+		XmeListBegin(G3XT.IdTableau(3))
+		Do While XmeListNext(G3XT.IdTableau(3), G1T2) not in (-1, 0)
+			Cog_G1T2_Serie_Lib(_lId=lId_Serie)
+		WEnd
+
+	EndIf
+
+EndP
+
 ;**
 Public Function char Cog_G1T1_Ligne_Validation_Av
 ;
@@ -1646,6 +1862,101 @@ BeginF
 EndF
 
 ;*
+;*		G1T2
+;*
+
+;*
+Public Function char Cog_Champ_Serie_1_Av
+;
+BeginF
+
+	G1T2_COGSAVE2 = G1T2
+
+	FReturn('O')
+
+EndF
+
+;*
+Public Function char Cog_Champ_Serie_1_Ap
+;
+BeginF
+
+	If GTPCE.TiCodDst & GTPCE.PiCodDst IN ("F3","F4")
+
+		; n° de série modifié
+		If G1T2_COGSAVE2.Serie <> ' ' AND G1T2.Serie <> G1T2_COGSAVE2.Serie
+			Cog_G1T2_Serie_Lib(G1T2_COGSAVE2, lId_Serie)
+		EndIf
+	
+		;
+		If G1T2.Serie <> ' ' AND Harmony.Datamodif
+	
+			If Cog_G1T2_Serie_ControlerUnicite(lId_Serie) <> 0
+				Harmony.Retour = XMENEXT_RESSAISIE
+				MessageBox("Ce numéro de série est déjà utilisé.", "Alerte", MB_ICONEXCLAMATION)
+				FReturn('N')
+			EndIf
+	
+		EndIf
+
+	EndIf
+
+	FReturn('O')
+EndF
+
+;*
+Public Procedure Cog_G1T2_Suppression_OK
+; juste avant suppression de G1T2
+BeginP
+
+	Cog_G1T2_Serie_Lib(_lId=lId_Serie)
+
+EndP
+
+;*
+Public Procedure Cog_G1T2_Abandon_OK
+; abandon saisie de G1T2
+BeginP
+
+	If GTPCE.TiCodDst & GTPCE.PiCodDst in ("F3","F4")
+
+		If G1T2_COGSAVE.Serie <> G1T2.Serie
+			Cog_G1T2_Serie_Lib(_lId=lId_Serie)
+
+			; réservation du numéro de série avant modif qui a été libéré lors du changement
+			If G1T2_COGSAVE.Serie <> ' '
+				Cog_G1T2_Serie_Resa(G1T2_COGSAVE, _lId=lId_Serie)
+			EndIf
+
+		EndIF
+
+	EndIf
+
+EndP
+
+;*
+Public Procedure Cog_G1T2_Creation_OK
+; création d'une ventilation au moment de l'appui sur Inser
+BeginP
+
+	init G1T2_COGSAVE = ' '
+
+EndP
+
+;*
+Public Procedure Cog_G1T2_Modification_OK
+; modificationd'une ventilation au moment de l'appui sur F4
+BeginP
+
+	G1T2_COGSAVE = G1T2
+
+EndP
+
+;*
+;*		Traitements MOUV
+;*
+
+;*
 Public Function char Cog_MOUV_Chargement_Ap 
 ;
 BeginF
@@ -1664,10 +1975,6 @@ BeginF
 	FReturn('O')
 
 EndF
-
-;*
-;*		Traitements lignes
-;*
 
 ;*
 Public Procedure Cog_MOUV_Write_Av		
@@ -1785,6 +2092,9 @@ Beginp
 		Case 1200
 			Cog_Generer_I1(ENT.PiCod, ENT.PiNo)
 
+		Case 1300		; passage des quantités facturée à 0
+			Cog_G1T1_RAZ_FaQte()
+
 	Endswitch
 
 Endp
@@ -1792,14 +2102,16 @@ Endp
 ;*
 Public Procedure Cog_Programme_Debut							
 ; en début de programme après l'ouvertue des fichiers et avant la lecture du dossier
+1	_AdrF	16
 BeginP
 	
 	CogRs_SocComp.Init()
 	CogRs_SocComp.Where.PK(MZ.Dos)
 	CogRs_SocComp.Select()
 
-	flagInit = TRUE
-	CD			= " "
+	init CD	= " "
+
+	Cog_Serie_List_Init(lId_Serie)
 	
 EndP
 

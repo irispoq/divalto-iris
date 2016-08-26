@@ -9,98 +9,36 @@
 ;*																+ remise montant affecté apres remise %
 SetModuleInfo('$Id$')
 
+;
 include "GTTCZ00.dhsp"
 
+;
 OverWrite "GTTMPCE.dhop"
-
 
 ;
 Module 	"A5TM000.dhop"
 Module	"GTPMPCE.DHOP"
-;
-;extern hfile		gtfdd.dhsd	GTFAT		GTFAT			openonuse; fichier des articles
-;
-;public record 	a5dd.dhsd 	MZ 								; zone échange
-public record	A5DD.DHSD	MUSER									; Utilisateur
-;
-;;extern record	GTFDD.dhsd 	SOC								; société
-;extern record	GTFDD.dhsd	ETS								; établissement
-;
-extern record	GTFDD.dhsd	ENT								; en-tête
-;extern record	gtfdd.dhsd	EEC								; échéances multiples
-;extern record	GTFDD.dhsd 	MOUV								; mouvement
-;extern record	GTFDD.dhsd	MVTL								; ventilation
-;
-;extern record	GTFDD.dhsd	CLI								; client
-;extern record	GTFDD.dhsd	FOU								; fournisseur
-;public record	gtfdd.dhsd 	TIA
-;public record	gtfdd.dhsd 	T1
-;
-;extern record	GTFDD.dhsd	ART								; article
-;extern record	GTFDD.dhsd	ART		G4ART					; article
-;extern record 	GTFDD.dhsd	SART								; sous-référence
-;extern record	GTFDD.dhsd	TAR								; tarif de vente
-;extern record	GTFDD.dhsd	TRE								; remise de vente
-;extern record 	GTFDD.dhsd 	TFO								; tarif d'achat
-;extern record	GTFDD.dhsd 	RFO								; conditions fournisseur
-;extern record	GTFDD.dhsd 	RCL								; référencement client
-;extern record	gtfdd.dhsd	T003								; tva
-;extern record	gtfdd.dhsd	T005								; coefficient unité
-;extern record	gtfdd.dhsd  T006								; mode de règlement
-;extern record	gtfdd.dhsd	T010								; coefficient
-;public record	gtfdd.dhsd 	T013
-;extern record	gtfdd.dhsd 	T024								; table pied de pièce
-public record	gtfdd.dhsd 	T037
-;public record	gtfdd.dhsd 	T061
-;public record	gtfdd.dhsd 	T062
-;public record	gtfdd.dhsd	G4	G4TRI							; Montant pour le tri des lignes
-;public record	gtfdd.dhsd 	G7	G7IMP
-;	
-;extern record	GTFDD.dhsd 	GTENT									; enregistrement de travail lié à l'en-tête de pièce
-;extern record	gtfdd.dhsd	G4									; enregistrement de travail TTC et impression de pièces
-;extern record	GTFDD.dhsd	G1T1								; enregistrment tableau ligne de pièce		
-;extern record	GTFDD.dhsd	G1T2								; enregistrment tableau ligne de ventilation
-;extern record	gtfdd.dhsd	MOUV	G4MOUV					; mouvement pour impression
-;record			gtfdd.dhsd	G1T1	savG1T1
-;
-;;extern record 	GTFDD.dhsd	XT		G3XT						; identifiant des listes
-;public record	gtfdd.dhsd 	G7
-;public record	gtfdd.dhsd 	T017
-;
-;public record gtfdd.dhsd gTENT cog_g1
-;
-;define IdTableauImpVtl 	= G3XT.IDTABLEAU(50)
-;define IdTableauImpT045	= G3XT.IDTABLEAU(49)
-;
-;const C_Bloc_Nomencl 		= 32
-;const	C_Mode_Modification	= 2
-;const	C_Mode_Creation		= 3
-;const	C_Mode_Duplication	= 4
-;const C_Phase_LigneCreat 	= 4
-;
-;1		 idsav	L
-;1		 savadr	L
-;1		 idtri	L
-;1		 adrtri	16
-;1		 i			X
-;1		 j			X
-;1		 k			X
-;1		 l			X
-;1		 m			X
-1		 n			X
-;1		 nblig	X
-;1		 nolig	4,0
-;1		 triok	1
-;
-;1	OldProDnat	2
+Module	"COGTM_000.dhop"
 
+;								; zone échange
+public record	A5DD.DHSD	MUSER									; Utilisateur
+extern record	GTFDD.dhsd	ENT								; en-tête
+public record	gtfdd.dhsd 	T037
+
+;
+1		 n			X
 1	bXharV		B = False
 1	ModApXharV	X
+
+;*
+;*
+;*
 
 ;* PS 27/06/2011
 Procedure Piece_Imp_Document_Av
 ; avant debut document - correspond à la réservation de l'imprimante
-1	t_Test	1,0 = 1
+1	t_Test		1,0 = 1
+1	_pingR		1,0
 BeginP
 	Standard.Piece_Imp_Document_Av
 
@@ -133,7 +71,7 @@ BeginP
 			t_Test = 1
 	EndSwitch
 
-
+	;
 	if t_Test = 2 
 		xmisetattribut('logo',an_visibilite,av_visible)
 		xmisetattribut('Pied',an_visibilite,av_visible)
@@ -142,7 +80,37 @@ BeginP
 		xmisetattribut('Pied',an_visibilite,av_cache)
 	endif
 
+	;
+	If PingLocalReceive("COG_NBPAGES", _pingR) = 0
+		XharviewBeginFileJoint()	 
+		XharviewNoRunXharview() 
+	EndIF
+
 EndP 
+
+;*
+Procedure Piece_Imp_Document_Ap
+; après fin document - correspond à la libération de l'imprimante
+1		_dhvw_tmp		HAR_MAX_PATH
+1		_nbPg				4,0
+1		_PingR			1,0
+BeginP
+
+	Standard.Piece_Imp_Document_Ap()
+
+	; récupération du fichier tmp
+	If PingLocalReceiveAndDelete("COG_NBPAGES", _pingR) = 0
+		Xharviewcancelfilejoint	
+		XharviewGetCancelFileJoint	
+		printend
+		XharviewGetFileXharview(_dhvw_tmp)
+		_nbPg = GetNombreDePageDuFichierHVW(_dhvw_tmp)
+		Windeletefile(_dhvw_tmp)
+		XharviewRunXharview()
+		PingLocal("COG_NBPAGES_RET", _nbPg)
+	EndIf
+
+EndP
 
 ;*
 Procedure Piece_Imp_Entete_Av(ticod,picod)

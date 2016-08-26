@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 8938 2015-11-30 14:25:37Z admin $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 10211 2016-08-26 10:35:07Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -593,9 +593,6 @@ Function int Proservia_ListeTraitement
 ; Constitution du GTFI de validation de pièce
 BeginF
 
-	AfficherTraitement("Recherche des mouvts commande à valider", "")
-	Cog_EcritureLivreDeBord("Recherche des mouvts commande à valider")
-
 	;
 	If ListCount(lId_csvMVTL) = 0
 		FReturn(1)
@@ -607,6 +604,8 @@ BeginF
 	;
 	Switch flux
 		Case 'V'
+			AfficherTraitement("Recherche des mouvts commande à valider", "")
+			Cog_EcritureLivreDeBord("Recherche des mouvts commande à valider")
 			Erreur = Proservia_ListeTraitementV
 
 		Case 'C'
@@ -614,6 +613,7 @@ BeginF
 
 
 	EndSwitch
+
 
 
 	FReturn(Erreur)
@@ -715,6 +715,8 @@ BeginF
 					Cog_ProserviaInd.Cog_IndSref2	= wIndice
 				Case 'TRAIT'
 					Cog_ProserviaInd.Cog_IndTrait = wIndice
+				Case 'IDTISILOG'
+					Cog_ProserviaInd.Cog_IndIsilog= wIndice
 				Default
 					txtErr = "Contôle entête fichier: mot clé non reconnu:" & wMotCle
 					Cog_EcritureLivreDeBord(txtErr)
@@ -1043,6 +1045,16 @@ BeginF
 			If ListSeek(lId_csvMVTL, csvMVTL, MVTL_Seek) not in (-1, 0)
 				MVTL_Seek.Qte += csvMVTL.Qte
 				ListModify(lId_csvMVTL, MVTL_Seek)
+
+				; contrôle série --> le champ fait parti du tri, si le seek renvoit un résultat cela signifie que le numéro est déjà présent 
+				If flux = 'C' AND T020.Sens = 1 AND MVTL_Seek.Serie <> ' '
+					txtErr =	"Numéro de série %1 en doublon pour la référence %2."
+					txtErr = Modify("%1", MVTL_Seek.Serie, txtErr)
+					txtErr = Modify("%2", MVTL_Seek.Ref, txtErr)
+					Cog_EcritureLivreDeBord(txtErr)
+					ListInsert(lId_ErrTxt, txtErr)
+					erreur = TRUE
+				EndIf
 			Else
 				ListInsert(lId_csvMVTL, csvMVTL)
 				; nouvelle ligne --> vérification si l'entête est mémorisée -- ENT a été chargé dans Proservia_MVTLControler dans le cas d'une validation
@@ -1059,6 +1071,7 @@ BeginF
 				EndIf
 				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndLog, Cog_ProserviaVal) not in (-,1,0) | ENT.Cog_LogBlNo= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
 				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndPiDt, Cog_ProserviaVal) not in (-,1,0)| ENT.PiDt= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndIsilog, Cog_ProserviaVal) not in (-,1,0)| ENT.SU_IDT_REQ_IWS = NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
 				If ListSeek(lId_ENT, ENT, ENT_Seek) = 0
 					ListInsert(lId_ENT, ENT)
 				EndIf
@@ -1110,6 +1123,7 @@ BeginF
 		iENT.Op		= ENT_Seek.Op
 		iENT.PiDt	= ENT_Seek.PiDt
 		iENT.Depo	= ENT_Seek.Depo
+		iENT.SU_IDT_REQ_IWS = ENT_Seek.SU_IDT_REQ_IWS
 		Ping("LOGBLNO" & ENT_Seek.TiCod & ENT_Seek.PiCod & ENT_Seek.PiNo, ENT_Seek.Cog_LogBlNo)
 		ListDeleteAndPrevious(lId_ENT)
 	

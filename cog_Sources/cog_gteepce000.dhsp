@@ -14,7 +14,8 @@ Include "GTTCZ00.dhsp"
 
 ;
 Module 	"gttmpce.dhop"
-Module 	"COG_GTTTPCE000.DHOP""
+Module 	"COG_GTTTPCE000.DHOP"
+Module	"cogTm_Serie.dhop"
 
 ;
 Public HFile	"gtfdd.dhsd"	GTFPCF		GTFPCF
@@ -29,7 +30,8 @@ Public Record "gtfdd.dhsd" 	ets 		ets
 Public Record "gtfdd.dhsd" 	eec 		eec
 Public Record "gtfdd.dhsd" 	t020 		w2t020
 Public Record "ccfdd.dhsd" 	ca 		ca
-Public Record "gtfdd.dhsd" 	g1t2 		g1t2
+Public Record "gtfdd.dhsd" 	g1t2 		G1T2
+Public Record "gtfdd.dhsd" 	g1t2 		G1T2_COG
 Public Record "ddsys.dhsd" 	rowinfo 	rowinfo
 Public Record "gtfdd.dhsd" 	g1t3 		g1t3
 Public Record "gtfdd.dhsd" 	soc 		soc
@@ -364,19 +366,3 @@ Beginp
 	EndIf
 
 Endp
-
-
-;;*	  #FLAG MIGRATION --> point d'entrée à vérifier
-;Public Procedure Cog_Page_2_Av
-;;
-;Beginp
-;
-;	;PS 27/06/2011
-;	if cli.Cog_implogo_1 in (1,2)
-;		ent.Cog_implogo_1 = cli.Cog_implogo_1
-;	else
-;		ent.Cog_implogo_1 = soc.Cog_implogo_1
-;	endif
-;	GTPCE.EditCod = 2
-;
-;Endp

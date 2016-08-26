@@ -279,6 +279,46 @@ beginf
 endf
 
 ;*
+;*	 calcul du nombre de pages d'un dhvw
+;*
+
+;*
+Public Function long GetNombreDePageDuFichierHVW(fic)
+;
+1	i				L
+1	fic			A
+1	hh				L
+1	st			  	L
+1  nblus      	L
+
+1	art		  	200			;entete , toujours de 200 
+  2 nbpages   	37.4	   	;nb de page , c'est la seule info vraiment interessante
+  									;c'est un int sur 4 octets poid faible -> poid fort
+1	tt			4
+ 2 ttb		B*4
+
+BeginF
+
+	hh = WinCreateFile(fic,GENERIC_READ,FILE_SHARE_READ,0,OPEN_EXISTING,0,0)                   
+	if hh = -1
+		freturn  1				;au moins 1 page
+	endif
+
+	init art = $00
+   st = WinReadFile(hh,art,200,nblus)
+	WinCloseHandle(hh)
+
+	tt = nbpages
+	i = ttb(1) + ttb(2)*256 + ttb(3)*256*256 + ttb(4)*256*256*256
+	if i = 0						;normalement c'est impossible
+		i = 1
+	endif
+
+	FReturn(i)
+
+EndF
+
+;*
 ;*		Tri des lignes de pièce
 ;*
 
@@ -337,7 +377,7 @@ EndF
 
 ;*
 Public Function int Cog_Facture_Trier_Ligne(wTicod, wPiNo, wParamTri)
-;	Tri des lignes de facture en fonction de 
+;	Tri des lignes de facture en fonction de wParamTri
 1		wTicod		>gtfdd.dhsd			Ticod
 1		wPicod		>gtfdd.dhsd			PiCod
 1		wPiNo			>gtfdd.dhsd			PiNo

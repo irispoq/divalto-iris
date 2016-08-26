@@ -539,19 +539,19 @@ Beginp
 		CogRs_UT108.Cog_OP = CLI.Cog_Op
 	Endif
 
-	;
-	If Zoom.Ok = 'O' 
-		Switch CogRs_UT108_SeekFicheActive()
-			Case 1
-				If MessageBox("Il existe une fiche active pour cette association établissement / affaire / référence."\
-							& "|Elle sera périmée si cette nouvelle fiche est créée.||Continuer?", "Alerte", MB_ICONQUESTION+MB_YESNO) = IDNO
-					Zoom.Ok = 'C'
-				EndIf
-			Case 2
-				Zoom.Ok = 'C'
-
-		EndSwitch
-	EndIf
+	;	 Désactivation: possibilité d'avoir des chevauchements de date pour une même affaire / même ref
+;	If Zoom.Ok = 'O' 
+;		Switch CogRs_UT108_SeekFicheActive()
+;			Case 1
+;				If MessageBox("Il existe une fiche active pour cette association établissement / affaire / référence."\
+;							& "|Elle sera périmée si cette nouvelle fiche est créée.||Continuer?", "Alerte", MB_ICONQUESTION+MB_YESNO) = IDNO
+;					Zoom.Ok = 'C'
+;				EndIf
+;			Case 2
+;				Zoom.Ok = 'C'
+;
+;		EndSwitch
+;	EndIf
 
 Endp
 
@@ -579,9 +579,10 @@ Beginp
 		PReturn
 	EndIf
 
-	If ZOOM.Ok = 'O' AND CogRs_UT108_SeekFicheActive(wPerimer=TRUE) in (2,3)
-		ZOOM.Ok = 'S'
-	EndIf
+	;	 Désactivation: possibilité d'avoir des chevauchements de date pour une même affaire / même ref
+;	If ZOOM.Ok = 'O' AND CogRs_UT108_SeekFicheActive(wPerimer=TRUE) in (2,3)
+;		ZOOM.Ok = 'S'
+;	EndIf
 
 Endp
 

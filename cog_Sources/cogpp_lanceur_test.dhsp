@@ -134,4 +134,11 @@ Main
 		; test de la fonction renumérotation facture
 		Cog_Facture_Trier_Ligne('C', 16900016)
 
+			;
+	; Test comptage du nombre de pages
+	;
+;	Seek_Ent('C', 4, 13638)
+;	ListInsert(lId_FaNbPg, ENT)
+;	Cog_NombrePages_TraiterListe()
+
 	EndIf

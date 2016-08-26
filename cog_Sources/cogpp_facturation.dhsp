@@ -20,6 +20,7 @@ Module 	"CCPMFIC.dhop"
 Module 	"CCTM000.dhop"
 Module	"GTTMPCE.dhop"
 Module 	"GRTM000.dhop"
+Module	"GTPMFICSQL.dhop"
 Module	"COG_GDIVA.dhop"
 Module	"COGGT_CONTROLE_FICHIER.dhop"
 
@@ -395,8 +396,10 @@ BeginP
 EndP
 
 ;*
-Procedure Genere_Ligne_BL(wRef, wQte, wPub, wPcod, wAxe, wDes, wNumero)	  
+Procedure Genere_Ligne_BL(wRef, wQte, wPub, wPcod, wAxe, wDes, wNumero, _dtD, _dtF)	  
 ; valable pour tous les cas de facturation
+RecordSQL	"gtRsppArt.dhoq"	Article	_RS_ART
+Record		"gtfdd.dhsd"		MOUV		_iMOUV
 1		wRef			>gtfdd.dhsd Ref
 1		wQte			>gtfdd.dhsd	blQte 	
 1		wPub			>gtfdd.dhsd Pub
@@ -405,9 +408,19 @@ Procedure Genere_Ligne_BL(wRef, wQte, wPub, wPcod, wAxe, wDes, wNumero)
 1		wDes			>gtfdd.dhsd Des		 = " "
 1		wNumero		>gtfdd.dhsd Pinotiers = " " 		; Renseigne MOUV.Cog_Numero
 1		wFamNo		>gtfdd.dhsd	FamNo
+1		_dtD			>gtfdd.dhsd	DatD		= " "
+1		_dtF			>gtfdd.dhsd	DatF		= " "
 BeginP
 
-	Seek_Art(wRef)
+	;
+	If ART.Ref <> wRef
+		_RS_ART.Init()
+		_RS_ART.Where.RemoveCondition("")
+		_RS_ART.Join.Deactivate("$All")
+		Seek_Article(_RS_ART ,wRef)
+		ART = _RS_ART.ART
+	EndIf
+
 	Seek_C3(Art.CptV)
 
 	; màj des axes analytiques en compta sinon zone vide apres l'import
@@ -417,29 +430,31 @@ BeginP
 	If Not Seek_C5(2,wAxe) = 0			| MAJ_Axe_Analytique(2,wAxe,ori=32,CogRs_PrjAp.Lib80) 	| Endif
 	
 	;
-	mouv 			 = system.esp
-	mouv.ce1 	 = "C"
-	mouv.ce2 	 = 1
-	mouv.ce7 	 = 1
-	mouv.ref		 = wRef
-	If Not wDes = system.esp | mouv.des = wDes | Endif
-	mouv.pub 	 = wPub
-	mouv.blqte   = wQte
-	mouv.pcod(1) = wPcod 
-	mouv.pcod(2) = wPcod 
-	mouv.pcod(3) = 1 
-	mouv.pcod(4) = 1 
-	mouv.pcod(5) = 1 
-	mouv.tacod 	 = Soc.Tacod
-	If Not wNumero = system.esp | mouv.cog_numero = wNumero | Endif	; facturation des projets spécifiques
-	mouv.projet  = CogRs_PrjAp.Affaire
-	mouv.mvcod   = 1
-	mouv.Axe(1)	 = Art.Fam(2)
-	mouv.Axe(2)	 =	wAxe
-	mouv.Axe(3)	 =	C3.Axe(3)
-	mouv.Axe(4)	 =	C3.Axe(4)
+	Init _iMOUV 		= system.esp
+	_iMOUV.ce1 	 		= "C"
+	_iMOUV.ce2 	 		= 1
+	_iMOUV.ce7 	 		= 1
+	_iMOUV.ref		 	= wRef
+	If Not wDes 		= system.esp | _iMOUV.des = wDes | Endif
+	_iMOUV.pub 	 		= wPub
+	_iMOUV.blqte   	= wQte
+	_iMOUV.pcod(1) 	= wPcod 
+	_iMOUV.pcod(2) 	= wPcod 
+	_iMOUV.pcod(3) 	= 1 
+	_iMOUV.pcod(4) 	= 1 
+	_iMOUV.pcod(5) 	= 1 
+	_iMOUV.tacod 	 	= Soc.Tacod
+	If Not wNumero 	= system.esp | _iMOUV.cog_numero = wNumero | Endif	; facturation des projets spécifiques
+	_iMOUV.projet  	= CogRs_PrjAp.Affaire
+	_iMOUV.mvcod   	= 1
+	_iMOUV.Axe(1)	 	= Art.Fam(2)
+	_iMOUV.Axe(2)	 	=	wAxe
+	_iMOUV.Axe(3)	 	=	C3.Axe(3)
+	_iMOUV.Axe(4)	 	=	C3.Axe(4)
+	_iMOUV.Cog_Date_Debut 	= _dtD
+	_iMOUV.Cog_Date_Fin		= _dtF 
 
-	Hwrite(GTFI, Mouv)
+	Hwrite(GTFI, _iMOUV)
 
 EndP
 
@@ -586,7 +601,9 @@ BeginP
 	wQte = Condition(Cog_UT108.RefQte > 0, Cog_UT108.RefQte, 1)
 	wpub = COG_UT108.Cog_Montant / wQte
 
-	Genere_Ligne_BL(Cog_UT108.Ref, wQte, wpub, Condition(wpub > 0, 4, 1), Condition(COG_UT108.Cog_AxeAnael <> ' ', COG_UT108.Cog_AxeAnael, CogRs_PrjAp.Cog_AxeAnael))
+	Genere_Ligne_BL(Cog_UT108.Ref, wQte, wpub, Condition(wpub > 0, 4, 1), \
+							Condition(COG_UT108.Cog_AxeAnael <> ' ', COG_UT108.Cog_AxeAnael, CogRs_PrjAp.Cog_AxeAnael), \
+							_dtD=Cog_UT108.Cog_Date_Debut, _dtF=Cog_UT108.Cog_Date_Fin)
 
 	ListInsert(lId_utGTFI, Cog_ut108)
 

@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20160616113009      
+;>xwin4obj     imprimante               6.0       20160810165205      
 [masque]
- utilisateur="ROOT"
- date_modification="16/06/2016"
+ utilisateur="UGIE"
+ date_modification="10/08/2016"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -11,10 +11,10 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000250
+ dernier_id=1000254
  surcharge=oui
  date_modif_base="20140911112351"
- dernier_id_page=100000
+ dernier_id_page=100006
  niveau_surcharge=1
  [adresses]
   type_ad1_var=variable
@@ -44,7 +44,6 @@
  "gtfdd.dhsd",,t2,t2,1000,0
  "gtfdd.dhsd",,cli,cli,2450,0
  "a5dd.dhsd",,muser,muser,2000,0
- "gtrstiers.dhoq",,client,client,1024,1
  "gtfdd.dhsd",,soc,socenseigne,2800,0
 [bloc]
  numero=1
@@ -2291,6 +2290,88 @@
    format="\FormatMille"
   [param_saisie]
    type_date=jj/mm/aaaa
+[bloc]
+ numero=36
+ taille=1
+ debut=0
+ fin=0
+ ident_unique=100001
+[bloc]
+ numero=37
+ taille=1
+ debut=0
+ fin=0
+ ident_unique=100002
+[bloc]
+ numero=38
+ taille=1
+ debut=0
+ fin=0
+ ident_unique=100003
+[bloc]
+ numero=39
+ taille=1
+ debut=0
+ fin=0
+ ident_unique=100004
+[bloc]
+ numero=40
+ taille=1
+ debut=0
+ fin=0
+ ident_unique=100005
+[bloc]
+ numero=41
+ libelle="Période facturation"
+ taille=1
+ type_bloc=mobile
+ debut=27
+ fin=65521
+ debordement=3
+ bloc_fond=2
+ position_fond=2
+ diva_apres="Bloc_PeriodeFacturation_Ap"
+ ident_unique=100006
+ [obj_texte]
+  [presentation]
+   position=0,47
+   taille=9,70
+   id=1000251
+   wstyle="TRES_PETIT_ITALIQUE"
+  [texte]
+   texte="Période de facturation: du"
+ [obj_texte]
+  [presentation]
+   position=0,118
+   taille=9,20
+   id=1000253
+   wstyle="TRES_PETIT_ITALIQUE"
+  [texte]
+   texte="au"
+ [champ]
+  [presentation]
+   position=0,126
+   taille=9,29
+   id=1000254
+   colonnes_saisie=10
+   wstyle="TRES_PETIT_ITALIQUE"
+  [description]
+   donnee=mouv,cog_date_fin,g4mouv
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=0,95
+   taille=9,29
+   id=1000252
+   colonnes_saisie=10
+   wstyle="TRES_PETIT_ITALIQUE"
+  [description]
+   donnee=mouv,cog_date_debut,g4mouv
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
 [diva]
 setmoduleinfo("$Id$")
 ;>xdiva
@@ -2316,6 +2397,7 @@ HFILE	"gtfdd.dhsd" GTFENT	GTFENT_BL_01
 HFILE	"cogfdd.dhsd" Coggtf_tab	Coggtf_tab
 
 ;
+Module	"GtTmPce.dhop"
 Module	"CogTm_iPce230.dhop"
 
 ;
@@ -2342,7 +2424,15 @@ Public Record "a5dd.dhsd" muser muser
 Public Record "gtfdd.dhsd" t1 t1
 Public RecordSql "gtrstiers.dhoq" client client
 
+;
 1		wenveloppe	>gtfdd.dhsd	COG_ID_ENVELOPPE
+
+;
+Const	C_BLOC_PERIODE_FACTURE	= 41
+
+;*
+;*
+;*
 
 ;*
 Private Procedure Bloc_ChapitreDebut_AvGestion
@@ -2534,6 +2624,20 @@ Endp
 
 
 ;*
+Procedure BLOC_LIGNEARTICLE_1_AP
+;
+Beginp
+
+	If ENT.Cog_BL_Moteur = 2 AND G4MOUV.Cog_Date_Fin <> ' ' AND Year(G4MOUV.Cog_Date_Fin) <> '9999'
+		Harmony.Retour 	= XMINEXT_AUTRE_BLOC
+		Harmony.Cplretour = C_BLOC_PERIODE_FACTURE
+	Else
+		Standard.BLOC_LIGNEARTICLE_1_AP
+	EndIf
+Endp
+
+
+;*
 Procedure BLOC_LIGNEARTICLE_1_AV
 ;
 Beginp
@@ -2542,6 +2646,14 @@ Beginp
 	if G4MOUV.cog_numero<>" "
 		G4MOUV.ref=G4MOUV.cog_numero
 	endif
+Endp
+
+
+;*
+Private Procedure Bloc_PeriodeFacturation_Ap
+; Après impression du BLOC 41
+Beginp
+	Piece_Imp_Ligne_Cpl()
 Endp
 
 

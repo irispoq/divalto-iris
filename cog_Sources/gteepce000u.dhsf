@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20151106114509      
+;>xwin4obj                              7.0       20160817102436      
 [masque]
  utilisateur="UGIE"
- date_modification="06/11/2015"
+ date_modification="17/08/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=1000094
@@ -24,7 +24,7 @@
  "gtfdd.dhsd",,ets,ets,1500,0
  "gtfdd.dhsd",,eec,eec,1000,0
  "gtfdd.dhsd",,t020,t020_ent,350,0
- "ccfdd.dhsd",,ca,ca,1500,0
+ "ccfdd.dhsd",,ca,ca,1350,0
  "gtfdd.dhsd",,g1t2,g1t2,2200,0
  "ddsys.dhsd",,rowinfo,rowinfo,120,0
  "gtfdd.dhsd",,g1t3,g1t3,1000,0
@@ -27494,9 +27494,21 @@
    [info_bulle]
    texte="Aide"
   [item]
-   dessin=vide
+   type=sep
+   dessin=sep
    [param_bouton]
     wnom=""
+    wid_ressource="COG_SEPAFAQTE"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="0"
+    wfic1="#dregred",0
+    wid_ressource="COG_BTNFAQTE"
+    wetype_trait=arret
+    warret=1300
+   [info_bulle]
+   texte="Passer les quantités facturées à 0"
   [item]
    type=sep
    dessin=sep
@@ -27533,6 +27545,10 @@
     wid_ressource="U_ENVOIFLASH"
     wetype_trait=arret
     warret=1101
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
  [toolbar]
   ident="FENETRE_LIG"
   [item]
@@ -27972,6 +27988,7 @@
     wnom=""
 [diva]
 Module "COG_GTEEPCE000.DHOP"
+Module "COG_GTTTPCE000.DHOP"
 
 Public Record "gtfdd.dhsd" ent ent
 Public Record "gtfdd.dhsd" g1t1 g1t1
@@ -28095,7 +28112,28 @@ BeginP
 EndP
 
 
-;Cog_Traitement_Initial
+;*
+;*		Champs de G1T2
+;*
+
+;*
+Procedure Champ_Serie_1_Av						
+; avant no de série ou lot
+BeginP
+	Standard.Champ_Serie_1_Av
+	cog_gtttpce000.Cog_Champ_Serie_1_Av()
+EndP
+
+;*	G1T2.SERIE
+Procedure Champ_Serie_1_Ap	
+;
+BeginP
+
+	If cog_gtttpce000.Cog_Champ_Serie_1_Ap()	= 'O'
+		Standard.Champ_Serie_1_Ap	
+	EndIf
+
+EndP
 [/diva]
 [diva_base]
 ;>xdiva

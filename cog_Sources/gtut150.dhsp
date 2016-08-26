@@ -8,6 +8,9 @@
 
 SetModuleInfo('$Id$')
 
+;*
+;*	Déclarations
+;*
 OverWrite	"GTTT150.dhop"
 
 ;
@@ -15,6 +18,7 @@ Include "GtTcz00.dhsp"
 
 ;
 Module	"CogTm_000.dhop"
+Module	"CogTm_Serie.dhop"
 
 ;
 public record	gtfdd.dhsd	IPAR								; paramètre d'intégration
@@ -23,23 +27,51 @@ public record	gtfdd.dhsd 	GTENT
 public record	gtfdd.dhsd 	GTPCE
 public record	gtfdd.dhsd 	G1T1								; Enregistrement gestion tableau lignes
 public record	gtfdd.dhsd 	G1T1	W3G1T1					; Mouvement de GTFI en validation
+public record	gtfdd.dhsd 	G1T2
 public record	gtfdd.dhsd	ENT	WAENT						; En-têtebl associé
 public record	gtfdd.dhsd	ENT	W1ENT						; En-tête origine en validation
 public record	gtfdd.dhsd	ENT	W3ENT						; En-tête de GTFI en validation
 public record	gtfdd.dhsd	ART
 
+;
+1		lId_Serie		L
+
 ;*
-Procedure G1T1_Validation_Affectation_Ap
-; après l'affectation d'une quantité à une ligne de la pièce origine en validation partielle
+;*	P&F
+;*
+
+;*
+;* Séquences début et fin de programme
+;*
+
+;*
+Procedure Programme_Debut
+; en début de programme après l'ouvertue des fichiers et avant la lecture du dossier
 BeginP
-	Standard.G1T1_Validation_Affectation_Ap
-	Switch ENT.PICOD
-		case	3
-			g1t1.Pub		= w3g1t1.Pub
-			g1t1.Axe(1)	= w3g1t1.Axe(1)
-			g1t1.Des		= w3g1t1.Des
-	Endswitch
+
+	Standard.Programme_Debut
+
+	;
+	Cog_Serie_List_Init(lId_Serie)
+
 EndP
+
+;*
+Procedure Programme_Fin
+; en fin de programme
+BeginP
+	
+	Standard.Programme_Fin
+
+	;
+	Cog_Serie_Liste_Vider(lId_Serie)
+	ListDestroy(lId_Serie)
+
+EndP
+
+;*
+;*	ENT
+;*
 
 ;*
 Procedure Ent_Fournisseur_Validation_Init	
@@ -53,6 +85,23 @@ BeginP
 		ENT.Cog_LogBlNo = W1ENT.Cog_LogBlNo
 	EndIf
 
+EndP
+
+;*
+;*	G1T1
+;*
+
+;*
+Procedure G1T1_Validation_Affectation_Ap
+; après l'affectation d'une quantité à une ligne de la pièce origine en validation partielle
+BeginP
+	Standard.G1T1_Validation_Affectation_Ap
+	Switch ENT.PICOD
+		case	3
+			g1t1.Pub		= w3g1t1.Pub
+			g1t1.Axe(1)	= w3g1t1.Axe(1)
+			g1t1.Des		= w3g1t1.Des
+	Endswitch
 EndP
 
 ;*
@@ -73,4 +122,24 @@ BeginF
 
 	FReturn(wRet)
 
+EndF
+
+;*
+;*	G1T2
+;*
+
+;*
+Function char G1T2_Controle_Fin_Entree
+; 		controle d'une ventilation sortie en phase de màj de pièce
+1		_Ret		1
+Beginf
+
+	If (_Ret := Standard.G1T2_Controle_Fin_Entree) = 'O'
+		If G1T2.TiCod & G1T2.PiCod IN ("F3","F4")	AND G1T2.Serie <> ' ' AND Cog_G1T2_Serie_ControlerUnicite(lId_Serie) <> 0
+			Cog_EcritureLivreDeBord("Ref. " & G1T2.Ref & ": le n° de série " & G1T2.Serie & " est déjà utilisé.")
+			_Ret = 'N'
+		EndIf
+	EndIf
+
+	FReturn(_ret)
 EndF

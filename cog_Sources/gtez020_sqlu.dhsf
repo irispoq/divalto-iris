@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20160119154245      
+;>xwin4obj                              7.0       20160825141308      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="19/01/2016"
+ date_modification="25/08/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
- dernier_id=1000064
+ dernier_id=1000067
  surcharge=oui
  date_modif_base="20140423090133"
  dernier_id_page=100001
@@ -5235,7 +5235,7 @@
  [case_a_cocher]
   [presentation]
    position=26,5
-   taille=9,469
+   taille=9,160
    id=307
    wstyle="STD"
   [description]
@@ -5253,6 +5253,22 @@
    shift_f7=9040
   [traitements]
    microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=25,174
+   taille=9,139
+   id=1000067
+   wstyle="STD"
+  [description]
+   donnee=dossier,cog_impparnbpage,dossier
+  [param_case]
+   texte="Impression des factures par nombre de pages"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f7=9040
  [champ]
   [presentation]
    position=36,174
@@ -8974,6 +8990,14 @@
    wstyle="STD"
   [texte]
    texte="Annuler un bon de préparation prêt"
+ [obj_texte]
+  [presentation]
+   position=208,5
+   taille=9,100
+   id=1000065
+   wstyle="STD"
+  [texte]
+   texte="Modifier les quantités facturées"
  [champ]
   [presentation]
    position=26,106
@@ -9310,6 +9334,66 @@
    "zoom"
  [champ]
   [presentation]
+   position=176,106
+   taille=9,20
+   noms="izy"
+   id=599
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=dossier,conffct,dossier,20
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11010
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CONF_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=186,106
+   taille=9,20
+   noms="izy"
+   id=600
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=dossier,conffct,dossier,21
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11010
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CONF_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=208,106
+   taille=9,20
+   id=1000066
+   colonnes_saisie=4
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=cogrs_soccomp,cog_conffaqte,cogrs_soccomp
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11010
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_ConfFaQte_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
    position=86,242
    taille=9,20
    id=589
@@ -9506,46 +9590,6 @@
    wstyle="CHAMP_SAISI"
   [description]
    donnee=dossier,conffct,dossier,22
-  [param_saisie]
-   table_associee=oui
-  [touches]
-   f7=135
-   f8=11010
-   shift_f7=9040
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_CONF_2_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=176,106
-   taille=9,20
-   noms="izy"
-   id=599
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=dossier,conffct,dossier,20
-  [param_saisie]
-   table_associee=oui
-  [touches]
-   f7=135
-   f8=11010
-   shift_f7=9040
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_CONF_2_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=186,106
-   taille=9,20
-   noms="izy"
-   id=600
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=dossier,conffct,dossier,21
   [param_saisie]
    table_associee=oui
   [touches]
@@ -10915,6 +10959,14 @@ Beginp
 		A5_Mes_Alert(2012,dossier.Cog_ArtemisFlash)
 		Harmony.Retour=xmenext_traitement_Avant
 	Endif
+Endp
+
+
+;*
+Private Procedure Champ_Cog_ConfFaQte_1_Ap
+;
+Beginp
+	Controler_Confidentialite(CogRs_SocComp.Cog_ConfFaQte, 4000)
 Endp
 
 

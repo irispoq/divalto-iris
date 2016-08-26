@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110524144859,SYSTEMU_VR          ,20160119171816,UGIE                
+Version=6,20110524144859,SYSTEMU_VR          ,20160822114419,UGIE                
 Nom=cogfdd.dhsd,cogfdd.dhsd,1
 [CHAMP]
 Version=1,20050429090616,RR                  ,20050429090616,RR                  
@@ -304,6 +304,12 @@ Nature=20
 NomOdbc=Cog_CodZone
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20160811101227,UGIE                ,20160811101227,UGIE                
+Nom=Cog_ConfFaQte,Modifier les quantités facturées,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20110617163221,SYSTEMU             ,20110617163224,SYSTEMU             
 Nom=Cog_Cotisation_PDV,Type de cotisation PDV,1
 Gel=1
@@ -500,6 +506,12 @@ Flags=n,1,n,n,n,n,n,n
 Version=1,20150706145850,UGIE                ,20150706145915,UGIE                
 Nom=Cog_Indice,Indice de la donnée,1
 DateM=FD2C1290EBB7D001
+Gel=1
+Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20160822114346,UGIE                ,20160822114409,UGIE                
+Nom=Cog_IndIsilog,Indice IDTISILOG,1
 Gel=1
 Nature=4,0
 Flags=n,1,n,n,n,n,n,n
@@ -2297,6 +2309,7 @@ Nom=Cog_IndSref1,61,0,0,N,1
 Nom=Cog_IndSref2,65,0,0,N,1
 Nom=Cog_IndLieu,69,0,0,N,1
 Nom=Cog_IndTrait,73,0,0,N,1
+Nom=Cog_IndIsilog,77,0,0,N,1
 [/CHAMPL]
 nom=Cpostal
 [CHAMPL]
@@ -2718,6 +2731,9 @@ Pack=0,0
 [CHAMPS]
 Nom=Cog_csvIndices,1,2,N,0,0,N,1
 [/CHAMPS]
+[PROPLOC]
+Nom=Cog_IndIsilog
+[/PROPLOC]
 [TABLE]
 Version=1,20150706145835,UGIE                ,20150706145835,UGIE                
 Nom=Cog_ProserviaVal,Enreg pour intégration Proservia,1
@@ -2880,6 +2896,7 @@ Nom=Cog_PDVtarCtrl,115,2,N,0,0,N,1
 Nom=Cog_PDVOp,116,2,N,0,0,N,1
 Nom=Cog_IntBlFlash,119,2,N,0,0,N,1
 Nom=Cog_FaNoJnl,139,2,N,0,0,N,1
+Nom=Cog_ConfFaQte,140,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1999 4220000,MJV ,20120220114332,ROOT                

@@ -1,15 +1,49 @@
 setmoduleinfo("$Id$")
-
+;*
+;*
+;*
 OverWrite gttt420.dhop
 
+;
+Include "gttcz00.dhsp"
+
+;
 Public		Record	GTFDD.dhsd		ENT																; Entêtes
 Public		Record	a5dd.dhsd		MZ																	; Enreg paramètre
+Public		Record	GTFDD.dhsd		XQ				XQ_COG
 
+;*
+;*
+;*
+
+;*
+Procedure PROGRAMME_INIT
+;
+BeginP	
+
+	Standard.PROGRAMME_INIT
+
+	;
+	init XQ_COG 	= ' '
+	XQ_COG.NbrEti 	= 1
+
+	; option impression par nombre de pages
+	If SOC.Cog_ImpParNbPage = 2 AND GTPCE.TiCodDst & GTPCE.PiCodDst = 'C4'
+		XmeSetAttribut("cog_nbpg", AN_VISIBILITE, AV_VISIBLE)
+	Else
+		XmeSetAttribut("cog_nbpg", AN_VISIBILITE, AV_CACHE)
+	EndIf
+
+EndP
 
 ;*
 Function Char ENT_Critere
+;
 BeginF																									
 	If not ENT.ETB = MZ.ETB | Freturn('N') 
+	ElsIf (SOC.Cog_ImpParNbPage = 2) AND (GTPCE.TiCodDst & GTPCE.PiCodDst = 'C4') AND (ENT.Cog_NbPages > 0) AND (ENT.Cog_NbPages <> XQ_COG.NbrEti OR (ENT.Cog_NbPages > 10 AND XQ_COG.NbrEti < 11))
+		Freturn('N') 
 	Else | Freturn(Standard.ENT_Critere)
 	Endif
-EndF																											
+EndF	
+																							

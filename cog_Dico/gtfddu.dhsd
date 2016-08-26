@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,,,20160122095605,UGIE                
+Version=6,,,20160825104701,UGIE                
 Nom=gtfdd.dhsd,gtfdd1.dhsd,1
 [CHAMP]
 Version=1,20131006064734,SYSTEMNEW           ,20131006064734,SYSTEMNEW           
@@ -354,6 +354,12 @@ Nature=1,0
 NomOdbc=Cog_implogo_4
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20160825095704,UGIE                ,20160825095704,UGIE                
+Nom=Cog_ImpParNbPage,Option impression par nombre de pages,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20110618001915,SYSTEMU             ,20110810145857,JDT_SYSTEMU         
 Nom=Cog_Lib_Affaire_Mere,Libellé Affaire Mère/Père,1
 DateM=E69A83325D57CC01
@@ -422,6 +428,12 @@ DateM=28836AAE9B34D001
 Gel=1
 Nature=1,0
 NomOdbc=Cog_MotPrjFlux
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20160825104658,UGIE                ,20160825104658,UGIE                
+Nom=Cog_NbPages,Nombre de pages de l'édition,1
+Gel=1
+Nature=4,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20130521140454,ROOT                ,20130521140502,ROOT                
@@ -747,6 +759,7 @@ Nom=SU_DEMANDEUR,101,0,0,N,1
 Nom=SU_DESTINATAIRE,151,0,0,N,1
 Nom=Cog_BwId,201,0,0,N,1
 Nom=Cog_LogBlNo,241,0,0,N,1
+Nom=Cog_NbPages,271,0,0,N,1
 [/CHAMPL]
 nom=UFou
 [CHAMPL]
@@ -817,6 +830,7 @@ Nom=TvaRa,91,0,0,N,1
 Nom=Cog_Flash_CdeF_Valid,92,0,0,N,1
 Nom=Cog_MotFEtaNo,96,0,0,N,1
 Nom=Cog_DecVerrou,97,0,0,N,1
+Nom=Cog_ImpParNbPage,98,0,0,N,1
 [/CHAMPL]
 nom=UT006
 [CHAMPL]

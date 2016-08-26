@@ -48,6 +48,16 @@ endp
 ;*
 
 ;*
+Procedure Programme_Debut
+;
+BeginP
+
+	Standard.Programme_Debut
+	Cog_Programme_Debut()
+
+EndP
+
+;*
 function char Menu_Maj_Boutons_Ap
 ;
 beginf
@@ -79,6 +89,56 @@ BeginP
 	Standard.G1T1_Modification_Globale
 	Cog_G1T1_Modification_Globale(G1T1_SAVE)
 EndP
+
+;*
+Function char G1T2_Creation_Av
+; pour interdire la création d'une ventilation au moment de l'appui sur Inser
+1	_ret	1
+BeginF
+	If (_ret :=	Standard.G1T2_Creation_Av) = 'O'
+		Cog_G1T2_Creation_OK
+	EndIf
+
+	FReturn(_ret)
+EndF
+
+;*
+Function char G1T2_Modification_Av
+; pour interdire la modificationd'une ventilation au moment de l'appui sur F4
+1	_ret	1
+BeginF
+	If (_ret :=	Standard.G1T2_Modification_Av) = 'O'
+		Cog_G1T2_Modification_OK
+	EndIf
+
+	FReturn(_ret)
+EndF
+
+;*
+Function char G1T2_Ventilation_Abandon_Av
+1	_ret	1
+BeginF
+
+	If (_ret :=	Standard.G1T2_Suppression_Av) = 'O'
+		Cog_G1T2_Abandon_OK
+	EndIf
+
+	FReturn(_ret)
+
+EndF
+
+;*
+Function char G1T2_Suppression_Av
+; avant suppression d'une ventilation dans la liste permet d'interdire le delete
+1	_ret	1
+BeginF
+
+	If (_ret :=	Standard.G1T2_Suppression_Av) = 'O'
+		Cog_G1T2_Suppression_OK
+	EndIf
+
+	FReturn(_ret)
+EndF
 
 ;*
 Function char Piece_Impression_Avec_Parametre_origine
@@ -220,6 +280,14 @@ Beginf
 EndF
 
 ;*
+Procedure ENT_Abandon_Ap
+;
+BeginP
+	Standard.ENT_Abandon_Ap
+	Cog_ENT_Abandon_Ap
+EndP
+
+;*
 Procedure ENT_Liberation_Av	
 ;
 BeginP
@@ -305,6 +373,20 @@ BeginP
 EndP
 
 ;*
+Function char G1T1_Ligne_Abandon_Av
+;
+1	_Ret	1
+BeginF
+
+	If (_Ret := Standard.G1T1_Ligne_Abandon_Av) = 'O'
+		Cog_G1T1_Ligne_Abandon_OK
+	EndIf
+
+	FReturn(_ret)
+
+EndF
+
+;*
 Function char G1T1_Ligne_Validation_Av
 ;
 1		wRet		1
@@ -317,6 +399,46 @@ BeginF
 
 	FReturn(wRet)
 
+EndF
+
+;*
+Function char G1T1_Creation_Av
+; pour interdire la création d'une ligne au moment de l'appui sur Inser
+1		_ret		1
+BeginF
+
+	If (_ret := Standard.G1T1_Creation_Av) = 'O'
+		Cog_G1T1_Creation_Av
+	EndIf
+
+	freturn(_ret)
+EndF
+
+;*
+Function char G1T1_Modification_Av
+; pour interdire la modification d'une ligne au moment de l'appui sur F4
+1		_ret		1
+BeginF
+
+	If (_ret := Standard.G1T1_Modification_Av) = 'O'
+		Cog_G1T1_Modification_Av
+	EndIf
+
+	freturn(_ret)
+EndF
+
+
+;*
+Function char G1T1_Suppression_Av
+; avant suppression d'une ligne dans la liste permet d'interdire le delete d'une ligne
+1		_ret		1
+BeginF
+
+	If (_ret := Standard.G1T1_Suppression_Av) = 'O'
+		Cog_G1T1_Suppression_OK
+	EndIf
+
+	FReturn(_ret)	
 EndF
 
 ;*
