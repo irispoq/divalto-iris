@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20160810165205      
+;>xwin4obj     imprimante               6.0       20160909170024      
 [masque]
  utilisateur="UGIE"
- date_modification="10/08/2016"
+ date_modification="09/09/2016"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -2435,6 +2435,23 @@ Const	C_BLOC_PERIODE_FACTURE	= 41
 ;*
 
 ;*
+Procedure Masque_1_Init
+;
+Beginp
+	;G4.VTLEDITTYP = 0	; pas d'impressions des ventilations (bloc 2 uiquement)
+	; G4.VTLEDITTYP = 1	; 1ere ventilation avec le mouvement (bloc 2) ventilations suivantes (bloc 5)
+	; G4.VTLEDITTYP = 2	; si une seule ventilation impression bloc 2 si plusieurs ventilations impression blocs 4-5-6
+	G4.VTLEDITTYP = 3	; toutes les ventilations sont imprimées par le bloc 5 avec bloc début 4 et bloc de fin 6
+	
+	G4.RELEDITTYP = False	; on n'imprime pas les lignes non livrées en pied de bl =true pour imprimer
+
+
+	;
+	Cog_Masque_Init()
+
+Endp
+
+;*
 Private Procedure Bloc_ChapitreDebut_AvGestion
 ;
 Beginp
@@ -2690,15 +2707,6 @@ Beginp
 	EndSwitch
 
 
-Endp
-
-
-;*
-Procedure Masque_1_Init
-;
-Beginp
-	Standard.Masque_1_Init
-	Cog_Masque_Init()
 Endp
 [/diva]
 [diva_base]
