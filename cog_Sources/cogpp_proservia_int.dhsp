@@ -1047,7 +1047,7 @@ BeginF
 				ListModify(lId_csvMVTL, MVTL_Seek)
 
 				; contrôle série --> le champ fait parti du tri, si le seek renvoit un résultat cela signifie que le numéro est déjà présent 
-				If flux = 'C' AND T020.Sens = 1 AND MVTL_Seek.Serie <> ' '
+				If MVTL_Seek.Serie <> ' '
 					txtErr =	"Numéro de série %1 en doublon pour la référence %2."
 					txtErr = Modify("%1", MVTL_Seek.Serie, txtErr)
 					txtErr = Modify("%2", MVTL_Seek.Ref, txtErr)
