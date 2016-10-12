@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20140422113723      
+;>xwin4obj                              7.0       20161011110512      
 [masque]
  libelle="zoom mouvement"
  utilisateur="UGIE"
- date_modification="22/04/2014"
+ date_modification="11/10/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=388
  type_masque=2
- dernier_id=1000011
+ dernier_id=1000014
  surcharge=oui
  date_modif_base="20130902164945"
  dernier_id_page=100000
@@ -243,6 +243,27 @@
    [param_colonne]
     titre="Numéro de pièce"
     largeur_col=39
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=176,165
+    taille=9,43
+    id=1000012
+    wstyle="STD"
+   [description]
+    donnee=piece_mouv,cog_traitemtop,piece_mouv
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","TRAITOP"
+   [touches]
+    f7=135
+   [info_bulle]
+   texte="Traitement opérationnel"
+   [param_colonne]
+    titre="Traitement opérationnel"
+    fl_aff=non
+    largeur_col=36
     wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
@@ -3685,8 +3706,8 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=62,5
-   taille=102,310
+   position=57,5
+   taille=115,310
    id=1851
    wstyle="GROUPE"
   [param_groupbox]
@@ -3694,7 +3715,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=168,5
+   position=173,5
    taille=68,310
    id=21
    wstyle="GROUPE"
@@ -3728,7 +3749,7 @@
    texte="Désignation"
  [obj_texte]
   [presentation]
-   position=78,76
+   position=76,76
    taille=9,45
    cadrage=centre
    id=1847
@@ -3737,7 +3758,7 @@
    texte="Devis"
  [obj_texte]
   [presentation]
-   position=78,136
+   position=76,136
    taille=9,45
    cadrage=centre
    id=1848
@@ -3746,7 +3767,7 @@
    texte="Commande"
  [obj_texte]
   [presentation]
-   position=78,196
+   position=76,196
    taille=9,45
    cadrage=centre
    id=1849
@@ -3755,7 +3776,7 @@
    texte="Bon de livraison"
  [obj_texte]
   [presentation]
-   position=78,256
+   position=76,256
    taille=9,45
    cadrage=centre
    id=1850
@@ -3764,7 +3785,7 @@
    texte="Facture"
  [obj_texte]
   [presentation]
-   position=92,10
+   position=90,10
    taille=9,64
    id=27
    wstyle="STD_AFF"
@@ -3772,7 +3793,7 @@
    texte="Etat"
  [obj_texte]
   [presentation]
-   position=102,10
+   position=100,10
    taille=9,64
    id=28
    wstyle="STD_AFF"
@@ -3780,7 +3801,7 @@
    texte="Pièce no"
  [obj_texte]
   [presentation]
-   position=112,10
+   position=110,10
    taille=9,64
    id=29
    wstyle="STD_AFF"
@@ -3788,7 +3809,7 @@
    texte="Date"
  [obj_texte]
   [presentation]
-   position=122,10
+   position=120,10
    taille=9,37
    id=30
    wstyle="STD_AFF"
@@ -3796,7 +3817,7 @@
    texte="Quantité en"
  [obj_texte]
   [presentation]
-   position=142,10
+   position=140,10
    taille=9,64
    id=31
    wstyle="STD_AFF"
@@ -3804,7 +3825,7 @@
    texte="Remise pied totale"
  [obj_texte]
   [presentation]
-   position=152,10
+   position=150,10
    taille=9,64
    id=32
    wstyle="STD_AFF"
@@ -3812,7 +3833,15 @@
    texte="Remise part en mt"
  [obj_texte]
   [presentation]
-   position=184,10
+   position=163,10
+   taille=9,64
+   id=1000014
+   wstyle="STD_AFF"
+  [texte]
+   texte="Traitement opérationnel"
+ [obj_texte]
+  [presentation]
+   position=189,10
    taille=9,64
    id=35
    wstyle="STD_AFF"
@@ -3820,7 +3849,7 @@
    texte="Prix unitaire"
  [obj_texte]
   [presentation]
-   position=184,131
+   position=189,131
    taille=9,20
    id=36
    wstyle="STD"
@@ -3828,7 +3857,7 @@
    texte="par"
  [obj_texte]
   [presentation]
-   position=204,10
+   position=209,10
    taille=9,64
    id=39
    wstyle="STD_AFF"
@@ -3836,7 +3865,7 @@
    texte="Unité du prix"
  [obj_texte]
   [presentation]
-   position=214,10
+   position=219,10
    taille=9,64
    id=40
    wstyle="STD_AFF"
@@ -3844,7 +3873,7 @@
    texte="% de remise"
  [obj_texte]
   [presentation]
-   position=224,10
+   position=229,10
    taille=9,64
    id=45
    wstyle="STD_AFF"
@@ -3860,7 +3889,7 @@
    texte="Montant de la ligne"
  [champ]
   [presentation]
-   position=204,112
+   position=209,112
    taille=9,142
    id=2044
    colonnes_saisie=40
@@ -3950,7 +3979,7 @@
    f7=135
  [multi_choix]
   [presentation]
-   position=92,76
+   position=90,76
    taille=9,45
    id=67
    wstyle="CHAMP_NON_SAISI"
@@ -3968,7 +3997,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=152,76
+   position=150,76
    taille=9,45
    id=68
    wstyle="CHAMP_NON_SAISI"
@@ -3982,7 +4011,7 @@
    f7=135
  [champ]
   [presentation]
-   position=152,136
+   position=150,136
    taille=9,45
    id=69
    wstyle="CHAMP_NON_SAISI"
@@ -3996,7 +4025,7 @@
    f7=135
  [champ]
   [presentation]
-   position=152,196
+   position=150,196
    taille=9,45
    id=70
    wstyle="CHAMP_NON_SAISI"
@@ -4010,7 +4039,7 @@
    f7=135
  [champ]
   [presentation]
-   position=152,256
+   position=150,256
    taille=9,45
    id=71
    wstyle="CHAMP_NON_SAISI"
@@ -4024,7 +4053,7 @@
    f7=135
  [multi_choix]
   [presentation]
-   position=92,256
+   position=90,256
    taille=9,45
    id=81
    wstyle="CHAMP_NON_SAISI"
@@ -4042,7 +4071,7 @@
    shift_f1=1
  [multi_choix]
   [presentation]
-   position=92,196
+   position=90,196
    taille=9,45
    id=82
    wstyle="CHAMP_NON_SAISI"
@@ -4060,7 +4089,7 @@
    shift_f1=1
  [multi_choix]
   [presentation]
-   position=92,136
+   position=90,136
    taille=9,45
    id=83
    wstyle="CHAMP_NON_SAISI"
@@ -4078,7 +4107,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=102,136
+   position=100,136
    taille=9,45
    id=84
    wstyle="CHAMP_NON_SAISI"
@@ -4093,7 +4122,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=102,196
+   position=100,196
    taille=9,45
    id=85
    wstyle="CHAMP_NON_SAISI"
@@ -4108,7 +4137,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=102,256
+   position=100,256
    taille=9,45
    id=86
    wstyle="CHAMP_NON_SAISI"
@@ -4123,7 +4152,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=112,136
+   position=110,136
    taille=9,45
    id=87
    wstyle="CHAMP_NON_SAISI"
@@ -4138,7 +4167,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=112,256
+   position=110,256
    taille=9,45
    id=88
    wstyle="CHAMP_NON_SAISI"
@@ -4153,7 +4182,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=122,136
+   position=120,136
    taille=9,45
    id=89
    wstyle="CHAMP_NON_SAISI"
@@ -4169,7 +4198,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=122,196
+   position=120,196
    taille=9,45
    id=90
    wstyle="CHAMP_NON_SAISI"
@@ -4185,7 +4214,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=122,256
+   position=120,256
    taille=9,45
    id=91
    wstyle="CHAMP_NON_SAISI"
@@ -4201,7 +4230,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=102,76
+   position=100,76
    taille=9,45
    id=92
    wstyle="CHAMP_NON_SAISI"
@@ -4216,7 +4245,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=112,76
+   position=110,76
    taille=9,45
    id=93
    wstyle="CHAMP_NON_SAISI"
@@ -4297,7 +4326,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=122,49
+   position=120,49
    taille=9,18
    id=100
    wstyle="CHAMP_AFF"
@@ -4321,7 +4350,7 @@
    microbol_click=6011
  [champ]
   [presentation]
-   position=204,76
+   position=209,76
    taille=9,35
    id=101
    wstyle="CHAMP_NON_SAISI"
@@ -4345,7 +4374,7 @@
    microbol_click=6011
  [champ]
   [presentation]
-   position=122,76
+   position=120,76
    taille=9,45
    id=102
    wstyle="CHAMP_NON_SAISI"
@@ -4369,7 +4398,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=184,76
+   position=189,76
    taille=9,48
    noms="prix"
    id=104
@@ -4393,7 +4422,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=184,153
+   position=189,153
    taille=9,40
    noms="prix"
    id=105
@@ -4416,7 +4445,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=214,76
+   position=219,76
    taille=9,35
    noms="prix"
    id=106
@@ -4439,7 +4468,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=214,111
+   position=219,111
    taille=9,39
    noms="prix"
    id=107
@@ -4465,7 +4494,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=214,154
+   position=219,154
    taille=9,35
    noms="prix"
    id=108
@@ -4488,7 +4517,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=214,189
+   position=219,189
    taille=9,39
    noms="prix"
    id=109
@@ -4514,7 +4543,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=214,232
+   position=219,232
    taille=9,35
    noms="prix"
    id=110
@@ -4537,7 +4566,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=214,267
+   position=219,267
    taille=9,39
    noms="prix"
    id=111
@@ -4563,7 +4592,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=225,76
+   position=230,76
    taille=9,35
    noms="prix"
    id=112
@@ -4587,7 +4616,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=184,210
+   position=189,210
    taille=9,40
    id=113
    wstyle="CHAMP_AFF"
@@ -4612,7 +4641,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=112,196
+   position=110,196
    taille=9,45
    id=114
    wstyle="CHAMP_NON_SAISI"
@@ -4643,7 +4672,7 @@
    f7=135
  [champ]
   [presentation]
-   position=142,76
+   position=140,76
    taille=9,45
    id=120
    wstyle="CHAMP_NON_SAISI"
@@ -4657,7 +4686,7 @@
    f7=135
  [champ]
   [presentation]
-   position=142,136
+   position=140,136
    taille=9,45
    id=121
    wstyle="CHAMP_NON_SAISI"
@@ -4671,7 +4700,7 @@
    f7=135
  [champ]
   [presentation]
-   position=142,196
+   position=140,196
    taille=9,45
    id=122
    wstyle="CHAMP_NON_SAISI"
@@ -4685,7 +4714,7 @@
    f7=135
  [champ]
   [presentation]
-   position=142,256
+   position=140,256
    taille=9,45
    id=123
    wstyle="CHAMP_NON_SAISI"
@@ -4695,6 +4724,21 @@
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+ [multi_choix]
+  [presentation]
+   position=163,76
+   taille=9,45
+   id=1000013
+   wstyle="CHAMP_SAISI"
+   wcouleur_fonte=0,0,255,0,0,0
+  [description]
+   donnee=piece_mouv,cog_traitemtop,piece_mouv
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TRAITOP"
   [touches]
    f7=135
 [page]

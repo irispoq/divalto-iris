@@ -133,6 +133,7 @@ Public Procedure Cog_GTPCEEXP_MOUV_Chargement_Av
 ; Avant chargement d'une ligne de mouvement
 Beginp
 	GTPCEEXP.Cog_ImoFlag = MOUV.Cog_ImoFlag
+	GTPCEEXP.cog_TraitemtOp = MOUV.cog_TraitemtOp
 Endp
 
 ;*

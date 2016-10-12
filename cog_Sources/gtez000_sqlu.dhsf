@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20160610143237      
+;>xwin4obj                              7.0       20161011151411      
 [masque]
  libelle="Article"
- utilisateur="ROOT"
- date_modification="10/06/2016"
+ utilisateur="UGIE"
+ date_modification="11/10/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=882
  type_masque=2
- dernier_id=1000024
+ dernier_id=1000026
  surcharge=oui
  date_modif_base="20131126145259"
  dernier_id_page=100000
@@ -320,6 +320,32 @@
     titre="Désignation"
     fl_aff=oui
     largeur_col=112
+    wstyle="ENTETE_COLONNE"
+  [case_a_cocher_tableau]
+   [presentation]
+    position=131,134
+    taille=9,30
+    id=1000025
+    wstyle="STD"
+   [description]
+    donnee=article,cog_suiviop,article
+   [param_saisie]
+    esp_si_zero=oui
+   [param_case]
+    cadrage=droite
+    valeur="2","1"
+    choix="gtfdmc.dhfi",""
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [param_colonne]
+    titre="Suivi opérationnel"
+    fl_aff=non
+    largeur_col=30
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -4491,6 +4517,27 @@
   [traitements]
    microbol_click=6500
    diva_apres="Champ_Media_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=88,177
+   taille=9,51
+   id=1000026
+   wstyle="STD"
+   wcouleur_fonte=0,0,255,0,0,0
+  [description]
+   donnee=article,cog_suiviop,article
+  [param_case]
+   texte="Suivi opérationnel"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
  [champ]
   [presentation]
    position=98,70

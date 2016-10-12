@@ -1,13 +1,13 @@
-;>xwin4obj                              7.0       20160817102436      
+;>xwin4obj                              7.0       20161012092753      
 [masque]
  utilisateur="UGIE"
- date_modification="17/08/2016"
+ date_modification="12/10/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
- dernier_id=1000094
+ dernier_id=1000102
  surcharge=oui
  date_modif_base="20140912091139"
- dernier_id_page=100000
+ dernier_id_page=100005
  niveau_surcharge=1
 [defaut]
  [aide_page]
@@ -8885,6 +8885,31 @@
     titre="Désignation"
     largeur_col=107
     wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=86,453
+    taille=9,43
+    noms="cog_c2"
+    id=1000102
+    wstyle="STD"
+    wcouleur_fonte=0,0,255,0,0,0
+   [description]
+    donnee=g1t1,cog_traitemtop,g1t1
+   [param_saisie]
+    defaut="2"
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","TRAITOP"
+   [touches]
+    f7=135
+    shift_f1=1
+   [info_bulle]
+   texte="Traitement opérationnel"
+   [param_colonne]
+    titre="Traitement opérationnel"
+    fl_aff=non
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
     position=27,272
@@ -12308,6 +12333,7 @@
  position_fond=27
  attache_lgx=oui
  arret_dem_saisie=3141
+ diva_avant="Page_2_Av"
  ident_unique=12
  [onglet_page]
   [param_onglet_page]
@@ -12386,6 +12412,16 @@
    texte="Compte achat"
   [info_bulle]
   texte="Compte comptable achat"
+ [obj_texte]
+  [presentation]
+   position=30,158
+   taille=9,79
+   noms="cog_c2"
+   id=1000099
+   wstyle="STD"
+   wcouleur_fonte=0,0,255,0,0,0
+  [texte]
+   texte="Traitement opérationnel"
  [obj_texte]
   [presentation]
    position=51,306
@@ -12612,8 +12648,8 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=29,108
-   taille=9,56
+   position=29,103
+   taille=9,45
    noms="cog_f0"
    id=1000092
    wstyle="COG_CHAMP_SAISI"
@@ -13442,6 +13478,23 @@
    microbol_click=8002
    diva_avant="Champ_Pub_1_Av"
    diva_apres="Champ_Rem_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=30,253
+   taille=9,45
+   noms="cog_c2"
+   id=1000100
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,cog_traitemtop,g1t1
+  [param_saisie]
+   defaut="2"
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TRAITOP"
+  [touches]
+   f7=135
+   shift_f1=1
 [page]
  numero=15
  fond="STD"
@@ -24728,6 +24781,42 @@
    diva_apres="Champ_Pino_1_Ap"
   [boutons]
    "zoom"
+[page]
+ numero=43
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=100001
+[page]
+ numero=44
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=100002
+[page]
+ numero=45
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=100003
+[page]
+ numero=46
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=100004
 [ressources]
  [menu]
   ident="MAIN"
@@ -28134,6 +28223,34 @@ BeginP
 	EndIf
 
 EndP
+
+
+;*
+Private Procedure Page_2_Av
+; Affichage ou saisie du traitement opérationnelle selon paramétrage nature du produit
+recordSQL	"gtrstab.dhoq"	NatureProduit	loc_NtPrd
+recordSQL	"gtrsart.dhoq"	Article			loc_ART
+
+Beginp
+	
+	loc_NtPrd.Init()
+	loc_ART.Init()
+
+	loc_ART.Where.Zoom_pk(g1t1.Ref)
+	if loc_ART.Select() = 1
+		loc_NtPrd.Where.Zoom_pk(loc_ART.ProdNat)
+
+		if loc_NtPrd.Select() = 1
+			if loc_NtPrd.Cog_TraitOp < 2
+				XmeSetAttribut("cog_TraitemtOp", AN_VISIBILITE, AV_GRISE)
+			else
+				XmeSetAttribut("cog_TraitemtOp", AN_VISIBILITE, AV_VISIBLE)
+			endif
+		endif
+
+	endif
+
+Endp
 [/diva]
 [diva_base]
 ;>xdiva

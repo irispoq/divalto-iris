@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20150409111416      
+;>xwin4obj                              7.0       20161010172710      
 [masque]
  libelle="table nature produit"
  utilisateur="UGIE"
- date_modification="09/04/2015"
+ date_modification="10/10/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=52
  type_masque=2
- dernier_id=1000012
+ dernier_id=1000015
  surcharge=oui
  date_modif_base="20130213094839"
  dernier_id_page=100000
@@ -377,6 +377,21 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_PRODNAT_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=16,127
+   taille=11,71
+   id=1000015
+   wstyle="STD"
+  [description]
+   donnee=natureproduit,cog_traitop,natureproduit_sel
+  [param_case]
+   texte="Traitement opérationnel"
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f6=10000
  [champ]
   [presentation]
    position=26,61
@@ -636,6 +651,21 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=93,4
+   taille=9,150
+   id=1000013
+   wstyle="STD"
+  [description]
+   donnee=natureproduit,cog_traitop,natureproduit
+  [param_case]
+   texte="Traitement opérationnel en saisie de commandes"
+   valeur="2","1"
+   choix="cog_gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f6=10000
 [page]
  numero=12
  fond="STD"
@@ -973,7 +1003,7 @@ Endp
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez076_sqlu.dhsf 7873 2015-04-13 15:52:13Z admin $')
+SetModuleInfo('$Id: gtez076_sqlu.dhsf 10353 2016-10-12 08:05:51Z admin $')
 
 
 include 'GTTC000.dhsp'

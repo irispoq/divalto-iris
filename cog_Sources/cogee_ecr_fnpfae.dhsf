@@ -1,9 +1,9 @@
-;>xwin4obj                              7.0       20150304153049      
+;>xwin4obj                              7.0       20160829112746      
 [masque]
  utilisateur="UGIE"
- date_modification="04/03/2015"
+ date_modification="29/08/2016"
  feuille_style="fstylewpf.dhfi"
- dernier_id=34
+ dernier_id=38
  dernier_id_page=4
 [defaut]
  [aide_page]
@@ -125,6 +125,46 @@
     wstyle="STD"
    [param_radio]
     texte="Générer les écritures comptables"
+    cadrage=droite
+    valeur="2"
+ [groupe_radio]
+  [presentation]
+   position=60,219
+   taille=44,111
+   id=35
+   wstyle="STD"
+  [description]
+   donnee=xq,choix,xq_cog,2
+  [param_groupe]
+   titre="Rapport de traitement"
+  [radio_bouton]
+   [presentation]
+    position=72,224
+    taille=9,31
+    id=36
+    wstyle="STD"
+   [param_radio]
+    texte="Sans"
+    cadrage=droite
+    valeur="0"
+  [radio_bouton]
+   [presentation]
+    position=81,224
+    taille=9,47
+    id=37
+    wstyle="STD"
+   [param_radio]
+    texte="Impression"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=90,224
+    taille=9,47
+    id=38
+    wstyle="STD"
+   [param_radio]
+    texte="Export Excel"
     cadrage=droite
     valeur="2"
 [page]
