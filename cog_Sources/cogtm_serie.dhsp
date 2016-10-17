@@ -133,6 +133,10 @@ Public Function int Cog_G1T2_Serie_ControlerUnicite(_lId_Serie)
 RecordSQL	"gtRsppPce.dhoq"		Ventilation			_RS_MVTL
 RecordSQL	"gtRsppTab.dhoq"		CodeOperation		_RS_T020
 1		_lId_Serie		L
+1		_read				L
+1		_resa				1,0 = TRUE
+1		_mvtStock		1,0 = FALSE
+1		_ret				1,0 = 0
 BeginF
 
 	If G1T2.Sens = 0
@@ -153,7 +157,7 @@ BeginF
 	_RS_MVTL.Where.RemoveCondition("")
 	_RS_MVTL.Join.Deactivate("$All")
 	_RS_MVTL.Column.DeActivate("$All")
-	_RS_MVTL.Column.Activate("MVTL.DOS;MVTL.REF;MVTL.SREF1;MVTL.SREF2;MVTL.SERIE;MVTL.VTLNO")
+	_RS_MVTL.Column.Activate("MVTL.DOS;MVTL.REF;MVTL.SREF1;MVTL.SREF2;MVTL.SERIE;MVTL.VTLNO; MVTL.STQTE; MVTL.REFQTE")
 	_RS_MVTL.Where.Equal_Ref(G1T2.Ref)
 	_RS_MVTL.Where.AddCondition("Equal_Ref")
 	_RS_MVTL.Where.Equal_Sref1(G1T2.SRef1)
@@ -164,16 +168,32 @@ BeginF
 	_RS_MVTL.Where.AddCondition("Equal_Sens")
 	_RS_MVTL.Where.Equal_Serie(G1T2.Serie)
 	_RS_MVTL.Where.AddCondition("Equal_Serie")
-	If _RS_MVTL.Select() > 0 AND _RS_MVTL.VtlNo <> G1T2.VtlNo
-		FReturn(1)
-	EndIf
+	_read = _RS_MVTL.ReaderOpen()
+	_RS_MVTL.ReaderSelect(_read)
+
+	Do While _RS_MVTL.ReaderNext(_read) > 0 
+		
+		If _RS_MVTL.VtlNo <> G1T2.VtlNo			; ventilation différente de celle en cours de saisie
+
+			_resa = FALSE								; une ventil existe déjà en base, pas besoin de réserver le n° de série
+			_ret	= 1
+									
+			If _RS_MVTL.STQTE <> _RS_MVTL.RefQte	; il y a déjà eu des mouvements de stock pour ce n° de série, réutilisation autorisée
+				_mvtStock = TRUE
+			EndIf
+		EndIf
+
+	WEnd
+
+	_RS_MVTL.ReaderClose(_read)
+	_ret = Condition(_ret = 0 OR _mvtStock = TRUE, 0, 1)
 
 	;
-	If Cog_G1T2_Serie_Resa(_lId=_lId_Serie) <> 0
+	If _resa AND Cog_G1T2_Serie_Resa(_lId=_lId_Serie) <> 0
 		FReturn(1)
 	EndIF
 
-
-	FReturn(0)
+	;
+	FReturn(_ret)
 
 EndF
