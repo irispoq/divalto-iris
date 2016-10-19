@@ -23,14 +23,12 @@
 ;*
 
 ;
-Include	"gttcz00.dhsp"										;déclarations communes
-Include	"CogTc_YOffice.dhsp"
+Include	gttcz00.dhsp										;déclarations communes
 
 ;
 Module	'CCpmFic.dhop'
 Module	'CCpm000.dhop'
 Module	'CogTm_000.dhop'								;module de fonctions communes
-Module	'YOffice.dhop'
 
 ;
 Hfile	gtfdd.dhsd	GTFENT	GTFENT
@@ -418,89 +416,6 @@ beginf
 endf
 
 ;*
-Procedure Cog_ExportXls_Rapport_CCFM(_EcrTyp, _IdLst, _SansErreur)
-;	routine d'impression adaptée pour un export sur fichier Excel
-1		_EcrTyp			1,0							; 1: compta gen		2: Ecr analytiques
-1		_IdLst			L								; ID de la liste à imprimer
-1		_cptPrec			>ccfdd.dhsd		Cpt
-1		_TotalDeb		>ccfdd.dhsd		MtDev
-1		_TotalCre		>ccfdd.dhsd		MtDev
-1		_Trait			1,0
-1		_SansErreur		1,0							; active l'information de présence d'erreur 
-1		_BlocFond		3,0
-1		_ligne			9,0 = 0		
-BeginP
-
-	; nombre d'éléments dans la liste
-	If ListCount(_IdLst) = 0	
-		PReturn
-	EndIf
-
-	; Ouverture module office
-	If Office_Begin <> 0
-		MessageBox("Echec à l'ouverture du module Office.", "Erreur", MB_ICONERROR)
-		PReturn
-	EndIf
-
-	If Office_OpenCalc() = 0
-
-		_Trait 		= Cog_LireProgrammeTypeTrt
-		_BlocFond	= Condition(_EcrTyp=2, C_BLOC_ANA_FOND, C_BLOC_PAGEFOND)
-	
-		ListBegin(_IdLst)
-		XmiPrint(MZ.MiCle, _BlocFond)
-	
-		Do While ListNext(_IdLst, COG_IMP_FNPFAE) not in (-1, 0)
-	
-			If _EcrTyp <> 2
-				; rupture compte
-				If (_Trait = C_TRAITEMENT_FNP AND CA.Cog_FnpRgpFlag = 2) OR	(_Trait = C_TRAITEMENT_FAE AND CA.Cog_FaeRgpFlag = 2)
-					If COG_IMP_FNPFAE.CptA <> _cptPrec AND _cptPrec <> ' '
-						XmiPrint(MZ.MiCle, C_BLOC_CPTF)
-						_cptPrec = ' '
-						COG_IMP_TOTALCPT = ' '
-					EndIf
-				EndIf
-			EndIf
-	
-			Switch COG_IMP_FNPFAE.Cog_BlocNo
-				Case C_BLOC_ETB
-					XmiPrint(MZ.MiCle, C_BLOC_ETB)
-	
-				Case C_BLOC_TVA
-					XmiPrint(MZ.MiCle, C_BLOC_TVA)
-	
-				Case C_BLOC_CP
-					XmiPrint(MZ.MiCle, C_BLOC_CP)
-	
-				Case C_BLOC_C8
-					If (_Trait = C_TRAITEMENT_FNP AND CA.Cog_FnpRgpFlag = 2) OR	(_Trait = C_TRAITEMENT_FAE AND CA.Cog_FaeRgpFlag = 2)
-						If COG_IMP_FNPFAE.CptA <> _cptPrec
-							XmiPrint(MZ.MiCle, C_BLOC_CPTD)
-							_cptPrec 					= COG_IMP_FNPFAE.CptA 
-							COG_IMP_TOTALCPT.CptA 	= COG_IMP_FNPFAE.CptA
-							COG_IMP_TOTALCPT.Dev		= COG_IMP_FNPFAE.Dev
-							COG_IMP_TOTALCPT.Etb		= COG_IMP_FNPFAE.Etb
-							COG_IMP_TOTALCPT.Sens	= COG_IMP_FNPFAE.Sens
-						EndIf
-					EndIf
-	
-					XmiPrint(MZ.MiCle, C_BLOC_C8)
-					COG_IMP_TOTALCPT.Mt		+=	COG_IMP_FNPFAE.Mt
-					COG_IMP_TOTALCPT.MtBis	+=	COG_IMP_FNPFAE.MtBis
-	
-				Case C_BLOC_CX
-					XmiPrint(MZ.MiCle, C_BLOC_CX)
-	
-			EndSwitch
-	
-		WEnd
-
-	EndIf
-
-EndP
-
-;*
 Procedure Cog_Print_Rapport_CCFM(wEcrTyp, wIdLst, wSansErreur)
 ;
 1		wEcrTyp			1,0							; 1: compta gen		2: Ecr analytiques
@@ -578,7 +493,7 @@ BeginP
 EndP
 
 ;*
-Procedure Cog_Insert_List_Impression(iIdList, iBlocNo, iCpt, iDev, iEtb, iLib, iMt, iSens, iAxe1, iAxe2, iAxe3, iAxe4, iTvaMt)
+Procedure Cog_Insert_List_Impression(iIdList, iBlocNo, iCpt, iDev, iEtb, iLib, iMt, iSens, iAxe1, iAxe2,iAxe3,iAxe4)
 ;
 1	iIdList	L
 1 	iBlocNo 	>cogfdd.dhsd		Cog_BlocNo
@@ -1341,13 +1256,8 @@ Beginp
 	WEnd
 
 	; Impression
-	Switch XQ_Cog.Choix(2)
-		Case 1
-			Cog_Print_Rapport_CCFM( wEcrTyp=1, lId_IMP, wRet)
-			Cog_Print_Rapport_CCFM( wEcrTyp=2, lId_IMP_Ana, wRet)
-		Case 2
-
-	EndSwitch
+	Cog_Print_Rapport_CCFM( wEcrTyp=1, lId_IMP, wRet)
+	Cog_Print_Rapport_CCFM( wEcrTyp=2, lId_IMP_Ana, wRet)
 
 	;------
 	ListDestroy(idl_ent)
