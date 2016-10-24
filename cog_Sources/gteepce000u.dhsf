@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20161014101653      
+;>xwin4obj                              7.0       20161024101153      
 [masque]
  utilisateur="UGIE"
- date_modification="14/10/2016"
+ date_modification="24/10/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=1000102
@@ -8902,6 +8902,8 @@
    [touches]
     f7=135
     shift_f1=1
+   [traitements]
+    diva_avant="Champ_cog_TraitemtOp_1_Av"
    [info_bulle]
    texte="Traitement opérationnel"
    [param_colonne]
@@ -12332,7 +12334,6 @@
  position_fond=27
  attache_lgx=oui
  arret_dem_saisie=3141
- diva_avant="Page_2_Av"
  ident_unique=12
  [onglet_page]
   [param_onglet_page]
@@ -13494,6 +13495,8 @@
   [touches]
    f7=135
    shift_f1=1
+  [traitements]
+   diva_avant="Champ_cog_TraitemtOp_1_Av"
 [page]
  numero=15
  fond="STD"
@@ -28167,6 +28170,32 @@ Beginp
 EndP
 
 ;*
+Private Procedure Champ_cog_TraitemtOp_1_Av
+;
+recordSQL	"gtrstab.dhoq"	NatureProduit	loc_NtPrd
+recordSQL	"gtrsart.dhoq"	Article			loc_ART
+
+Beginp
+
+	; Affichage ou saisie du traitement opérationnelle selon paramétrage nature du produit
+	loc_NtPrd.Init()
+	loc_ART.Init()
+
+	loc_ART.Where.Zoom_pk(g1t1.Ref)
+	if loc_ART.Select() = 1
+		loc_NtPrd.Where.Zoom_pk(loc_ART.ProdNat)
+
+		if loc_NtPrd.Select() = 1
+			if loc_NtPrd.Cog_TraitOp < 2
+				Harmony.Retour = XMENEXT_DONNEE_SUIVANTE
+			endif
+		endif
+	endif
+
+Endp
+
+
+;*
 Private Procedure Champ_Cog_Validite_1_Ap
 ;
 Beginp
@@ -28222,34 +28251,6 @@ BeginP
 	EndIf
 
 EndP
-
-
-;*
-Private Procedure Page_2_Av
-; Affichage ou saisie du traitement opérationnelle selon paramétrage nature du produit
-recordSQL	"gtrstab.dhoq"	NatureProduit	loc_NtPrd
-recordSQL	"gtrsart.dhoq"	Article			loc_ART
-
-Beginp
-	
-	loc_NtPrd.Init()
-	loc_ART.Init()
-
-	loc_ART.Where.Zoom_pk(g1t1.Ref)
-	if loc_ART.Select() = 1
-		loc_NtPrd.Where.Zoom_pk(loc_ART.ProdNat)
-
-		if loc_NtPrd.Select() = 1
-			if loc_NtPrd.Cog_TraitOp < 2
-				XmeSetAttribut("cog_TraitemtOp", AN_VISIBILITE, AV_GRISE)
-			else
-				XmeSetAttribut("cog_TraitemtOp", AN_VISIBILITE, AV_VISIBLE)
-			endif
-		endif
-
-	endif
-
-Endp
 [/diva]
 [diva_base]
 ;>xdiva

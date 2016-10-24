@@ -1204,6 +1204,7 @@ EndP
 ;*
 Public Function char Cog_ENT_Creation_Av		 
 ; avant de passer en création
+
 Beginf
 
 	Switch GTPCE.TiCodDst & GTPCE.PiCodDst
@@ -1229,6 +1230,7 @@ Public Function char Cog_ENT_Modification_Av
 ; avant de passer en modification
 1		flag			1		= 'O'					; flag retour
 1		wAdr			16
+
 Beginf
 
 ; JCH : Suppression du test interdisant de modifier un devis que l'on n'a pas créé
@@ -1640,6 +1642,7 @@ EndF
 ;*
 Public Function Char Cog_G1T1_Modification_Av
 ;
+
 BeginF
 
 	; LireProgrammePhase renvoit C_Phase_LigneModif une fois passé en création de ventilations
@@ -1683,6 +1686,9 @@ BeginP
 		EndIf
 		Cog_G1T1_AffecterAffaire_Axe2
 	EndIf
+
+	; Chargement traitement opérationnel à Achat
+	G1T1.cog_TraitemtOp = 2
 
 EndP
 
