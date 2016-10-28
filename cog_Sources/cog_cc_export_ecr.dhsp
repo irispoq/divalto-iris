@@ -28,7 +28,8 @@ Public HFile	CCFDD.DHSD	CCFVTL		CCFVTL_DEV_01			; Imputations et ventilations
 
 ;
 Public RecordSQL	"COG_CCRSECR.DHOQ"	CogRs_C8					; Non utilisation du STD car BIND
-Public RecordSQL	"CCRSVTL.DHOQ"	 		VTLAXE			CogRs_CX
+Public RecordSQL	"CCRSVTL.DHOQ"	 		VTLAXE			CogRs_CX				; ventilations analytiques
+Public RecordSQL	"CCRSVTL.DHOQ"	 		VTLPIECE			CogRs_CP				; ventilations échéances
 Public RecordSQL	"CCRSJCA.DHOQ"			Journal			CogRs_JNL
 Public RecordSQL	"GTRSPPPROJ.DHOQ"		Affaire			CogRs_PrjAp
 
@@ -63,6 +64,7 @@ Public Record	* HTDF		TDF_02							; table définition fichier
 1	x_st_00		X
 1	readC8		L
 1	readCX		L
+1	readCP		L
 1	list_EcrVtl	L
 1	fonc_EcrVtl	16
 1	lig_VTL_Mt	>CCFDD.dhsd	mt
@@ -186,7 +188,7 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 1	t_SeparateurC		8						; Séparateur champ
 1	t_SeparateurL		8						; Séparateur ligne
 1	t_Jnl					>CCFDD.DHSD	JNL		=		''
-1	t_CX					1,0						= FALSE
+1	t_CX					1,0						= FALSE		; export des ventilations analytiques TRUE / FALSE
 1	t_OA					2,0						= 0			; forcer origine appel (voir fonction générer ligne)
 
 1	t_Ce1_01				>CCFDD.DHSD	Ce1
@@ -207,6 +209,7 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 1	t_trace				1,0	= FALSE							; si TRUE, activation de opentrace sur pages 2,3,4 de MZ.mecle
 
 1	a_numfic				1
+1	_cptCP				>ccfdd.dhsd		MaskLg
 
 BeginF
 
@@ -441,9 +444,38 @@ BeginF
 				EndIf
 			EndIf
 
+			; recherche d'échéances
+			CogRs_CP.Init()
+			CogRs_CP.Where.RemoveCondition("")
+			CogRs_CP.Join.Deactivate("$All")
+			CogRs_CP.Where.Zoom_EcrNo(CogRs_C8.EcrNo)
+			CogRs_CP.Where.AddCondition("Zoom_EcrNo")
+			CogRs_CP.Where.Zoom_EcrLg(CogRs_C8.EcrLg)
+			CogRs_CP.Where.AddCondition("Zoom_EcrLg")
+			CogRs_CP.OrderBy.Par_NumeroEcriture()
+			_cptCP = CogRs_CP.GetCount()
+
 			; Ecriture dans le fichier
-			Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false), CogRs_C8.C8,"", Condition(t_OA > 0, t_OA, 4))
-			x_st_02 = FWritSt(TDF_01, Left(t_ligne))
+			If _cptCP > 0
+				readCP = CogRs_CP.ReaderOpen()
+				CogRs_CP.ReaderSelect(readCP)
+				Do While CogRs_CP.ReaderNext(readCP) > 0
+
+					CogRs_C8.Mt 	= CogRs_CP.Mt
+					CogRs_C8.EchDt	= CogRs_CP.EchDt
+
+					Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false), CogRs_C8.C8,"", Condition(t_OA > 0, t_OA, 4))
+					x_st_02 = FWritSt(TDF_01, Left(t_ligne))
+
+				WEnd
+				CogRs_CP.ReaderClose(readCP)
+
+			Else
+
+				Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false), CogRs_C8.C8,"", Condition(t_OA > 0, t_OA, 4))
+				x_st_02 = FWritSt(TDF_01, Left(t_ligne))
+
+			EndIf
 	
 		 	;on prépare le cumul des ventilations analytiques
 			CogRs_CX.Init()
