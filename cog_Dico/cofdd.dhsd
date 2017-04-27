@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,,,20121221164343,JLF                 
+Version=6,,,20160504103718,JLF                 
 Nom=cofdd.dhsd,/erpdivalto/version 6.3/controle/source/cofdd.dhsd,1
 [CHAMP]
 Version=1,20080314141119,JLF                 ,20090313150351,JLF
@@ -52,6 +52,15 @@ Nom=ActTotNb,Nombre événements,1
 Gel=1
 Nature=8,0
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 8 40000,MJV ,20061107110030,MARIE JO            
+Nom=AdrCod,Code adresse,1
+DateM=1C718C8E5302C701
+Gel=1
+Nature=8
+Attribut=PARAM
+NomOdbc=CodeAdresse
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090624162557,JLF                 ,20090624162606,JLF                 
 Nom=AjustFlg,Indicateur pour test ajustement avec loi,1
@@ -620,6 +629,21 @@ Nature=D8
 NomOdbc=DateDebut
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,2002 2220000,MJV ,20130722151047,JLF                 
+Nom=DebHm,Heure Minute début,1
+DateM=37708CE1DC86CE01
+Gel=1
+Nature=H4
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021105111215,LM  ,20110926171537,DEMO                
+Nom=DebHms,Heure début,1
+DateM=A0292305B684C201
+Gel=1
+Nature=H6
+NomOdbc=HeureDebutReelle
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
 Version=1,20090623174212,JLF                 ,20090623174212,JLF                 
 Nom=Dec5,Valeur Zdec5 pour valeurs mesure,1
 Gel=1
@@ -656,12 +680,31 @@ Nature=6,0
 NomOdbc=CritereAcceptation
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130628161028,JLF                 ,20130628161122,JLF                 
+Nom=DefNbATb,Table critères d'acceptation,1
+Gel=1
+Nature=6,0*7
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20090629124654,VB                  ,20090629124704,VB                  
 Nom=DefNbR,Critère de refus,1
 Gel=1
 Nature=6,0
 NomOdbc=CritereRefus
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130628160757,JLF                 ,20130628160846,JLF                 
+Nom=DefNbRTb,Table critères de refus,1
+Gel=1
+Nature=6,0*7
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130726101044,JLF                 ,20130726102706,JLF                 
+Nom=DefNbTb,Nombre de défectueux pour plans multiples,1
+DateM=B54DD3E9D989CE01
+Gel=1
+Nature=8,0*8
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,1990 4180000,MJV ,20041222172414,MARIE JO            
 Nom=Depo,Dépôt,1
@@ -693,6 +736,13 @@ Gel=1
 Nature=80
 NomOdbc=DesignationTech
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130709091710,MCD                 ,20130709091720,MCD                 
+Nom=DestructifFlg,Indicateur de destruction des quantités prélevées,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiDestruction
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090827154454,JLF                 ,20090827154503,JLF                 
 Nom=DiffNiv,Niveau de difficulté,1
@@ -847,6 +897,13 @@ Nature=1,0
 NomOdbc=IndicateurSiArchivage
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130930110648,MCD                 ,20130930110657,MCD                 
+Nom=EditRCOFlg,Indicateur édition sur rapport de contrôle,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiEditionRCO
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,200010110000,MJV ,20071127113251,MARIE JO            
 Nom=EditTyp,Type d'impression,1
 DateM=B6FCB8AD2307C701
@@ -953,6 +1010,14 @@ Nature=80
 NomOdbc=EMail
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1999 6230000,MJV ,20061113140107,MARIE JO            
+Nom=EmbUn,Unité emballage,1
+DateM=4A5AEEC82307C701
+Gel=1
+Nature=4
+NomOdbc=UniteEmbal
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1989 1240000,MJV ,20060912112155,MARIE JO            
 Nom=EnrNo,No enregistrement,1
 DateM=0C5D01E44CD6C601
@@ -961,10 +1026,11 @@ Nature=9,0
 NomOdbc=EnregNo
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20090904110832,JLF                 ,20090904110844,JLF                 
+Version=1,20090904110832,JLF                 ,20150119110859,JLF                 
 Nom=EntNb,Nombre d'entêtes de contrôle,1
+DateM=9C4946F1CF33D001
 Gel=1
-Nature=3,0
+Nature=8,0
 NomOdbc=NombreEntetes
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
@@ -1046,6 +1112,13 @@ Version=1,20100128112605,VB                  ,20100128112605,VB
 Nom=Fabqte,Quantité produite,1
 Gel=1
 Nature=12,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20050701102753,MARIE JO            ,20050701113346,MARIE JO            
+Nom=FctCod,Code fonction,1
+Gel=1
+Nature=8
+NomOdbc=Fonction
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1989 1240000,MJV ,20071127113914,MARIE JO            
@@ -1315,6 +1388,107 @@ Gel=1
 Nature=41
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20130902154227,MCD                 ,20130902154246,MCD                 
+Nom=GuideChoixFlg,Indicateur si utilisation guide de choix processus,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiGuideChoix
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112035,DEMO                
+Nom=HabDDt,Date début habilitation,1
+DateM=52A5A75B0D07C701
+Gel=1
+Nature=D8
+NomOdbc=DateHabilitationDebut
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112110,DEMO                
+Nom=HabDDtA,Date déb. habilit. année,1
+DateM=2623AF700D07C701
+Gel=1
+Nature=4,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112128,DEMO                
+Nom=HabDDtJ,Date déb. habilit. jour,1
+DateM=6295057B0D07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112119,DEMO                
+Nom=HabDDtM,Date déb. habilit. mois,1
+DateM=ACE5E3750D07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112030,DEMO                
+Nom=HabDt,Date obtention habilit.,1
+DateM=328F86580D07C701
+Gel=1
+Nature=D8
+NomOdbc=DateObtentionHabilitation
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112050,DEMO                
+Nom=HabDtA,Date obtent. hab. année,1
+DateM=5A8F2F640D07C701
+Gel=1
+Nature=4,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112102,DEMO                
+Nom=HabDtJ,Date obtent. hab. jour,1
+DateM=325F996B0D07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112057,DEMO                
+Nom=HabDtM,Date obtent. hab. mois,1
+DateM=6CAB7A680D07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112040,DEMO                
+Nom=HabFDt,Date fin habilitation,1
+DateM=2449755E0D07C701
+Gel=1
+Nature=D8
+NomOdbc=DateHabilitationFin
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112135,DEMO                
+Nom=HabFDtA,Date fin habilit. année,1
+DateM=B2C5447F0D07C701
+Gel=1
+Nature=4,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112150,DEMO                
+Nom=HabFDtJ,Date fin habilit. jour,1
+DateM=D83433880D07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113112143,DEMO                
+Nom=HabFDtM,Date fin habilit. mois,1
+DateM=D43FEF830D07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130919104622,MCD                 ,20130919104637,MCD                 
+Nom=HabFlg,Indicateur de gestion des habilitations,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSIHabilitation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20091110164848,JLF                 ,20091110164848,JLF                 
 Nom=HistoFrq,Frequence classe histogramme,1
 Gel=1
@@ -1534,18 +1708,26 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20040428100029,BGX                 ,20090702093334,JLF                 
-Nom=ImpFlgTb,Flags sélections pour impression,1
-DateM=096BC667E7FAC901
+Version=1,20130708105059,MCD                 ,20130708105124,MCD                 
+Nom=ImpFlg2,Flag sélection supplémentaire,1
+DateM=95E2C453B87BCE01
 Gel=1
-Nature=1*8
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20040428100029,BGX                 ,20130722155559,JLF                 
+Nom=ImpFlgTb,Flags sélections pour impression,1
+DateM=63202A32E386CE01
+Gel=1
+Nature=1*10
 NomOdbc=SelectionEdition
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20090717113314,JLF                 ,20090717113314,JLF                 
+Version=1,20090717113314,JLF                 ,20160504103714,JLF                 
 Nom=ImpVal,Valeur pour impression,1
+DateM=74368A28E0A5D101
 Gel=1
-Nature=10,D5
+Nature=10
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090717113146,JLF                 ,20090717113441,JLF                 
@@ -1796,6 +1978,12 @@ Gel=1
 Nature=40*4
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20130711110528,MCD                 ,20130711110528,MCD                 
+Nom=LibDoc,Libellé document,1
+Gel=1
+Nature=80
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20090702091514,JLF                 ,20090702091533,JLF                 
 Nom=LibEchan,Libellé plan échantillonnage,1
 Gel=1
@@ -1871,6 +2059,12 @@ Nature=40
 NomOdbc=LibelleTolerances
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130711110507,MCD                 ,20130711110507,MCD                 
+Nom=LibUnit,Libellé unité,1
+Gel=1
+Nature=40
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20100208155620,JLF                 ,20100208155628,JLF                 
 Nom=LibVal,Libellé valeur,1
 Gel=1
@@ -1898,6 +2092,14 @@ Gel=1
 Nature=10,D5
 NomOdbc=LimiteControleInferieure
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1240000,MJV ,20130515173932,SN                  
+Nom=Lieu,Emplacement,1
+Gel=1
+Nature=12
+Attribut=PARAM
+NomOdbc=Emplacement
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20081029173633,JLF                 ,20090312182852,JLF                 
 Nom=LigCod,Identifiant ligne,1
@@ -2299,6 +2501,13 @@ Gel=1
 Nature=8
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20160208105303,MCD                 ,20160208105332,MCD                 
+Nom=MsgHTolFlg,Indicateur activation message hors tolérance,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiMessageHtol
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20041122114851,RR                  ,20050330143919,RR                  
 Nom=Msq,Masque,1
 Gel=1
@@ -2339,6 +2548,13 @@ Gel=1
 Nature=8,0
 NomOdbc=NombreValeursNeutres
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20090623111847,CI                  
+Nom=Nom,Nom,1
+Gel=1
+Nature=38
+NomOdbc=Nom_$R
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090709171019,JLF                 ,20090709171100,JLF                 
 Nom=Nominal,Valeur nominale,1
@@ -2672,6 +2888,13 @@ Gel=1
 Nature=2,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130704133715,MCD                 ,20130704133726,MCD                 
+Nom=ProcTyp,Type processus : standard\v normalisé\v spécifique,1
+Gel=1
+Nature=1,0
+NomOdbc=TypeProcessus
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,199911 50000,MJV ,20090326181430,JLF
 Nom=ProdInd,Indice production,1
 DateM=7682255336AEC901
@@ -2693,6 +2916,18 @@ Gel=1
 Nature=9,5
 NomOdbc=ProportionDefectueuxEstimee
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130724182738,JLF                 ,20130724182738,JLF                 
+Nom=PropDef2,Proportion défectueux estimées dans plan multiple,1
+Gel=1
+Nature=9,5
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130724182601,JLF                 ,20130724182610,JLF                 
+Nom=PropDef2Tb,Proportions défectueux pour plans multiples,1
+Gel=1
+Nature=9,5*2*6
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20090717100147,JLF                 ,20090724161134,JLF                 
 Nom=PropDefTb,Proportions de défectueux estimées,1
@@ -2750,11 +2985,26 @@ Nature=10,D5
 NomOdbc=Etendue
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130712094125,MCD                 ,20130712094152,MCD                 
+Nom=RatioIT,Ratio calculé entre IT et valeurs tolérances,1
+Gel=1
+Nature=6,2
+NomOdbc=RationCalculeIT
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20090623174822,JLF                 ,20090623174834,JLF                 
 Nom=RcoNo,Numéro rapport de contrôle,1
 Gel=1
 Nature=8,0
 NomOdbc=NumeroRapportControle
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131008093823,MCD                 ,20131008104531,MCD                 
+Nom=RcoTexCod,Code texte préenregistré pour rapport,1
+DateM=D169D8BE02C4CE01
+Gel=1
+Nature=11
+NomOdbc=TextePourRapport
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1989 1230000,MJV ,20061103083125,BGX
@@ -3032,6 +3282,13 @@ Nom=SgNo,Numéro de sous-groupe prélèvement,1
 Gel=1
 Nature=8,0
 NomOdbc=NumeroSousGroupe
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130704110516,MCD                 ,20130704110531,MCD                 
+Nom=SigImpFlg,Indicateur si impression de la signature électronique,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiSignature
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090702093435,JLF                 ,20090702093439,JLF                 
@@ -3333,6 +3590,12 @@ Gel=1
 Nature=10*2
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20130725112756,JLF                 ,20130725112756,JLF                 
+Nom=TourNb,Nombre de tours de prélèvements,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20100316085541,JLF                 ,20100330093953,JLF                 
 Nom=TpsLogOut,Durée de connexion maxi sans événement utilisateur,1
 DateM=41A00E30DCCFCA01
@@ -3496,10 +3759,22 @@ Gel=1
 Nature=50
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20130802104213,JLF                 ,20130802104223,JLF                 
+Nom=UcoCarmes,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20090709171355,JLF                 ,20090827152021,JLF                 
 Nom=UcoCart,Réservé distributeur,1
 Gel=1
 Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130930110852,MCD                 ,20130930110859,MCD                 
+Nom=UCoCcli,Réservé distributeur,1
+Gel=1
+Nature=50
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20091110181946,JLF                 ,20091110181951,JLF                 
@@ -3540,6 +3815,13 @@ Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20090827160503,JLF                 ,20090827160508,JLF                 
 Nom=UcoGseq,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130920093733,MCD                 ,20131217170213,JLF                 
+Nom=UCoHabmes,Réservé distributeur,1
+DateM=C9C15A5941FBCE01
 Gel=1
 Nature=100
 Flags=n,1,o,o,n,n,n,n
@@ -3677,6 +3959,18 @@ Gel=1
 Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20130930143524,MCD                 ,20130930143532,MCD                 
+Nom=UCowBas100T1,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130930143329,MCD                 ,20130930143338,MCD                 
+Nom=UCowBas100T2,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20100303095952,JLF                 ,20100303095959,JLF                 
 Nom=UcowCapa,Réservé distributeur,1
 Gel=1
@@ -3738,6 +4032,13 @@ Nom=UCowGraph,Réservé distributeur,1
 DateM=2A28FD69B2E6CA01
 Gel=1
 Nature=200
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130711093139,MCD                 ,20130711093207,MCD                 
+Nom=UCowInt008T1,Réservé distributeur,1
+DateM=C5455CBF087ECE01
+Gel=1
+Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20100315134905,MCD                 ,20100503112621,JLF                 
@@ -3942,6 +4243,27 @@ Gel=1
 Nature=DH
 Flags=n,1,o,n,n,n,n,n
 [CHAMP]
+Version=1,1999 9230000,LM  ,20061113110440,DEMO                
+Nom=UserCrDtA,Date de création : année,1
+DateM=6AAC64220B07C701
+Gel=1
+Nature=4,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113110501,DEMO                
+Nom=UserCrDtJ,Date de création : jour,1
+DateM=2E91B42E0B07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113110451,DEMO                
+Nom=UserCrDtM,Date de création : mois,1
+DateM=D44DBC280B07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20021015170117,LM  ,20061103083203,BGX
 Nom=UserMo,Auteur de la modification,1
 Gel=1
@@ -3955,6 +4277,27 @@ DateM=7D51BF870F9CC901
 Gel=1
 Nature=DH
 Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113110514,DEMO                
+Nom=UserMoDtA,Date de modif. : année,1
+DateM=46AC6A360B07C701
+Gel=1
+Nature=4,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113110534,DEMO                
+Nom=UserMoDtJ,Date de modif : jour,1
+DateM=70E36B420B07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1999 9230000,LM  ,20061113110527,DEMO                
+Nom=UserMoDtM,Date de modif. : mois,1
+DateM=C0D8523E0B07C701
+Gel=1
+Nature=2,0
+Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20100111141917,JLF                 ,20100111141927,JLF                 
 Nom=UserNo,Numéro utilisateur ,1
@@ -4284,6 +4627,18 @@ nom=Ce4
 [CHAMPL]
 Nom=Ce4N,1,0,0,N,1
 [/CHAMPL]
+nom=DefNbATb
+[CHAMPL]
+Nom=DefNbA,1,0,0,N,1
+[/CHAMPL]
+nom=DefNbRTb
+[CHAMPL]
+Nom=DefNbR,1,0,0,N,1
+[/CHAMPL]
+nom=DefNbTb
+[CHAMPL]
+Nom=DefNb,1,0,0,N,1
+[/CHAMPL]
 nom=DocCod
 [CHAMPL]
 Nom=DocCodN,1,0,0,N,1
@@ -4361,6 +4716,24 @@ nom=GrSpec
 [CHAMPL]
 Nom=Spec,1,0,0,N,1
 Nom=Sspec,26,0,0,N,1
+[/CHAMPL]
+nom=HabDDt
+[CHAMPL]
+Nom=HabDDtA,1,0,0,N,1
+Nom=HabDDtM,5,0,0,N,1
+Nom=HabDDtJ,7,0,0,N,1
+[/CHAMPL]
+nom=HabDt
+[CHAMPL]
+Nom=HabDtA,1,0,0,N,1
+Nom=HabDtM,5,0,0,N,1
+Nom=HabDtJ,7,0,0,N,1
+[/CHAMPL]
+nom=HabFDt
+[CHAMPL]
+Nom=HabFDtA,1,0,0,N,1
+Nom=HabFDtM,5,0,0,N,1
+Nom=HabFDtJ,7,0,0,N,1
 [/CHAMPL]
 nom=HistoFrqTb
 [CHAMPL]
@@ -4478,6 +4851,10 @@ nom=PourcentTb
 [CHAMPL]
 Nom=Pourcent,1,0,0,N,1
 [/CHAMPL]
+nom=PropDef2Tb
+[CHAMPL]
+Nom=PropDef2,1,0,0,N,1
+[/CHAMPL]
 nom=PropDefTb
 [CHAMPL]
 Nom=PropDef,1,0,0,N,1
@@ -4538,6 +4915,9 @@ Nom=Atelier,2177,0,0,N,1
 Nom=DcoNo,2185,0,0,N,1
 Nom=RcoNo,2193,0,0,N,1
 Nom=Serie,2201,0,0,N,1
+Nom=DebHm,2221,0,0,N,1
+Nom=ValMinA,2225,0,0,N,1
+Nom=ValMaxA,2235,0,0,N,1
 [/CHAMPL]
 nom=SerieFlgTb
 [CHAMPL]
@@ -4759,6 +5139,37 @@ Nom=Filler,57,2,N,0,94,N,1
 Nom=UcoCapteur,151,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
+Version=1,20130802103159,JLF                 ,20130802104105,JLF                 
+Nom=CoCarmes,Caractéristique mesure standard,1
+DateM=5877FE4F5C8FCE01
+NomOdbc=Car_Mes_Std
+Taille=400,400
+Pack=0,0
+CE=Ce1,2
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=OpMesCod,14,2,N,0,0,N,1
+Nom=CarCod,22,2,N,0,0,N,1
+Nom=UserCr,30,2,N,0,0,N,1
+Nom=UserMo,50,2,N,0,0,N,1
+Nom=UserTrace,70,2,N,0,0,N,1
+Nom=ValMinA,98,2,N,0,0,N,1
+Nom=ValMaxA,108,2,N,0,0,N,1
+Nom=ItMiniA,118,2,N,0,0,N,1
+Nom=Filler,128,2,N,0,173,N,1
+Nom=UcoCarmes,301,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
 Version=1,20091106115004,JLF                 ,20091119150347,JLF                 
 Nom=CoCarNo,Compteur caractéristique gamme de contrôle,1
 DateM=8C4524132169CA01
@@ -4828,6 +5239,37 @@ Nom=UcoCart,901,2,N,0,0,N,1
 NomOdbc=StatutCaracteristique
 Nom=Status
 [/PROPLOC]
+[TABLE]
+Version=1,20130930110247,MCD                 ,20130930110829,MCD                 
+Nom=CoCcli,Caractéristique exigence client ,1
+DateM=DD004BD875BECE01
+NomOdbc=Caracteristique_Exigence
+Taille=200,200
+Pack=0,0
+CE=Ce1,2
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=GrSpec,14,2,N,0,0,N,1
+Nom=CarNo,55,2,N,0,0,N,1
+Nom=Tiers,58,2,N,0,0,N,1
+Nom=AdrCod,66,2,N,0,0,N,1
+Nom=UserCr,74,2,N,0,0,N,1
+Nom=UserMo,94,2,N,0,0,N,1
+Nom=UserTrace,114,2,N,0,0,N,1
+Nom=EditRCOFlg,142,2,N,0,0,N,1
+Nom=Filler,143,2,N,0,8,N,1
+Nom=UCoCcli,151,2,N,0,0,N,1
+[/CHAMPS]
 [TABLE]
 Version=1,20091110173607,JLF                 ,20091110173636,JLF                 
 Nom=CoCent,Entête tâche de contrôle,1
@@ -4957,7 +5399,7 @@ Nom=K2maxi,69,2,N,0,0,N,1
 [TABLE]
 Version=1,20091112085712,JLF                 ,20091231101658,JLF                 
 Nom=CoCseq,Séquence tâche de contrôle,1
-DateM=8B08ED0AFA89CA01
+DateM=891D41231C89CE01
 NomOdbc=Tache_SequenceControle
 Taille=300,300
 Pack=0,0
@@ -4987,15 +5429,15 @@ Nom=MmCod,60,2,N,0,0,N,1
 Nom=MmCod2,80,2,N,0,0,N,1
 Nom=StatusCont,100,2,N,0,0,N,1
 Nom=EchanNb,101,2,N,0,0,N,1
-Nom=DefNbR,107,2,N,0,0,N,1
-Nom=DefNbA,113,2,N,0,0,N,1
-Nom=Cp,119,2,N,0,0,N,1
-Nom=Cpk,125,2,N,0,0,N,1
-Nom=Pp,131,2,N,0,0,N,1
-Nom=Ppk,137,2,N,0,0,N,1
-Nom=CarNo,143,2,N,0,0,N,1
-Nom=ValNb,146,2,N,0,0,N,1
-Nom=Filler,154,2,N,0,97,N,1
+Nom=DefNbRTb,107,2,N,0,0,N,1
+Nom=DefNbATb,149,2,N,0,0,N,1
+Nom=Cp,191,2,N,0,0,N,1
+Nom=Cpk,197,2,N,0,0,N,1
+Nom=Pp,203,2,N,0,0,N,1
+Nom=Ppk,209,2,N,0,0,N,1
+Nom=CarNo,215,2,N,0,0,N,1
+Nom=ValNb,218,2,N,0,0,N,1
+Nom=Filler,226,2,N,0,25,N,1
 Nom=UcoCseq,251,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
@@ -5200,9 +5642,44 @@ Nom=Filler,256,2,N,0,245,N,1
 Nom=UcoGseq,501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
+Version=1,20130920093439,MCD                 ,20130920094925,MCD                 
+Nom=CoHabmes,Habilitation pour opération mesure,1
+DateM=C9C15A5941FBCE01
+NomOdbc=Hab_Op_Mesure_std
+Taille=400,400
+Pack=0,0
+CE=Ce1,3
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=OpMesCod,14,2,N,0,0,N,1
+Nom=SalCod,22,2,N,0,0,N,1
+Nom=HabDt,42,2,N,0,0,N,1
+Nom=HabDDt,50,2,N,0,0,N,1
+Nom=HabFDt,58,2,N,0,0,N,1
+Nom=CeJoint,66,2,N,0,0,N,1
+Nom=Joint,67,2,N,0,0,N,1
+Nom=CeNote,75,2,N,0,0,N,1
+Nom=Note,76,2,N,0,0,N,1
+Nom=UserTrace,84,2,N,0,0,N,1
+Nom=UserCr,112,2,N,0,0,N,1
+Nom=UserMo,132,2,N,0,0,N,1
+Nom=Filler,152,2,N,0,149,N,1
+Nom=UCoHabmes,301,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
 Version=1,20090707113437,JLF                 ,20110816160552,JLF                 
 Nom=CoOpmes,Opération mesure standard,1
-DateM=335293005F70CB01
+DateM=FA11E05414B5CE01
 NomOdbc=Operation_Controle_Std
 Taille=1500,1500
 Pack=0,0
@@ -5226,24 +5703,23 @@ Nom=UserTrace,62,2,N,0,0,N,1
 Nom=CeNote,90,2,N,0,0,N,1
 Nom=Note,91,2,N,0,0,N,1
 Nom=Lib,99,2,N,0,0,N,1
-Nom=CarCod,139,2,N,0,0,N,1
-Nom=MmDesTb,147,2,N,0,0,N,1
-Nom=LibSurv,387,2,N,0,0,N,1
-Nom=LibMes,427,2,N,0,0,N,1
-Nom=TxtNote,507,2,N,0,0,N,1
-Nom=Lib80,515,2,N,0,0,N,1
-Nom=ResuTyp,595,2,N,0,0,N,1
-Nom=ValMinA,596,2,N,0,0,N,1
-Nom=ValMaxA,606,2,N,0,0,N,1
-Nom=TpsMes,616,2,N,0,0,N,1
-Nom=TdocCod,624,2,N,0,0,N,1
-Nom=DocCod,632,2,N,0,0,N,1
-Nom=Media,640,2,N,0,0,N,1
-Nom=HsDt,680,2,N,0,0,N,1
-Nom=CeJoint,688,2,N,0,0,N,1
-Nom=Joint,689,2,N,0,0,N,1
-Nom=ItMiniA,697,2,N,0,0,N,1
-Nom=Filler,707,2,N,0,594,N,1
+Nom=MmDesTb,139,2,N,0,0,N,1
+Nom=LibSurv,379,2,N,0,0,N,1
+Nom=LibMes,419,2,N,0,0,N,1
+Nom=TxtNote,499,2,N,0,0,N,1
+Nom=Lib80,507,2,N,0,0,N,1
+Nom=ResuTyp,587,2,N,0,0,N,1
+Nom=TpsMes,588,2,N,0,0,N,1
+Nom=TdocCod,596,2,N,0,0,N,1
+Nom=DocCod,604,2,N,0,0,N,1
+Nom=Media,612,2,N,0,0,N,1
+Nom=HsDt,652,2,N,0,0,N,1
+Nom=CeJoint,660,2,N,0,0,N,1
+Nom=Joint,661,2,N,0,0,N,1
+Nom=ProcTyp,669,2,N,0,0,N,1
+Nom=DestructifFlg,670,2,N,0,0,N,1
+Nom=HabFlg,671,2,N,0,0,N,1
+Nom=Filler,672,2,N,0,629,N,1
 Nom=UcoOpmes,1301,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -5507,7 +5983,7 @@ Nom=UcoSg,351,2,N,0,0,N,1
 [TABLE]
 Version=1,20080303102806,JLF                 ,20090623145844,JLF                 
 Nom=CoSoc,Dossier pour module controle,1
-DateM=335293005F70CB01
+DateM=BC39DA0420C4CE01
 NomOdbc=Dossier_Controle
 Taille=1000,1000
 Pack=0,0
@@ -5563,12 +6039,14 @@ Nom=Poste2,737,2,N,0,0,N,1
 Nom=CmmEchanNb,745,2,N,0,0,N,1
 Nom=TdocCod,751,2,N,0,0,N,1
 Nom=FabCtrlFlg,759,2,N,0,0,N,1
-Nom=Filler,760,2,N,0,141,N,1
+Nom=SigImpFlg,760,2,N,0,0,N,1
+Nom=GuideChoixFlg,761,2,N,0,0,N,1
+Nom=FctCod,762,2,N,0,0,N,1
+Nom=RcoTexCod,770,2,N,0,0,N,1
+Nom=Media,781,2,N,0,0,N,1
+Nom=Filler,821,2,N,0,80,N,1
 Nom=UcoSoc,901,2,N,0,0,N,1
 [/CHAMPS]
-[PROPLOC]
-Nom=FabCtrlFlg
-[/PROPLOC]
 [TABLE]
 Version=1,20080303111708,JLF                 ,20090623145918,JLF                 
 Nom=CoSocno,Dossier pour numérotation,1
@@ -5722,11 +6200,11 @@ Nom=Serie,146,2,N,0,0,N,1
 Nom=ActCod,166,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20090715164401,JLF                 ,20090715170019,JLF                 
+Version=1,20090715164401,JLF                 ,20140204173530,JLF                 
 Nom=CoStaTb,Tableau coefficients statistiques,1
-DateM=039C5FF85C05CA01
-Taille=500,1200
-Pack=19,350
+DateM=588A451EC721CF01
+Taille=1200,1200
+Pack=0,0
 CE=Ce1,1
 [CHAMPS]
 Nom=Ce1,1,2,N,0,0,N,1
@@ -5740,8 +6218,7 @@ Nom=Ce8,8,2,N,0,0,N,1
 Nom=Ce9,9,2,N,0,0,N,1
 Nom=CeA,10,2,N,0,0,N,1
 Nom=StaCod,11,2,N,0,0,N,1
-Nom=pack,1
-Nom=StaCoefTb,501,2,O,0,0,N,1
+Nom=StaCoefTb,19,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20090624161304,JLF                 ,20111014140318,JLF                 
@@ -6002,7 +6479,7 @@ Nom=UcotMat,301,2,N,0,0,N,1
 [TABLE]
 Version=1,20080623173947,JLF                 ,20111014151307,JLF                 
 Nom=CotMsurv,Mode de surveillance,1
-DateM=335293005F70CB01
+DateM=0CE1F4EAD97BCE01
 NomOdbc=Table_Mode_Surveillance
 Taille=1000,1000
 Pack=0,0
@@ -6043,7 +6520,8 @@ Nom=DefNbA,275,2,N,0,0,N,1
 Nom=LibAct,281,2,N,0,0,N,1
 Nom=TdocCod,321,2,N,0,0,N,1
 Nom=DocCod,329,2,N,0,0,N,1
-Nom=Filler,337,2,N,0,464,N,1
+Nom=EmbUn,337,2,N,0,0,N,1
+Nom=Filler,341,2,N,0,460,N,1
 Nom=UcotMsurv,801,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -6166,7 +6644,7 @@ Nom=UcowAjustT1,57,2,N,0,0,N,1
 [TABLE]
 Version=1,20050303151507,FRO                 ,20090326181826,JLF
 Nom=CowArt,Travail sur article,1
-DateM=35954B2473F3CB01
+DateM=3D2EB1423177CE01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -6185,12 +6663,42 @@ Nom=DesFo,543,2,N,0,0,N,1
 Nom=Tiers,623,2,N,0,0,N,1
 Nom=GrSpec,631,2,N,0,0,N,1
 Nom=LoiNoTb,672,2,N,0,0,N,1
-Nom=UCowArt,681,2,N,0,0,N,1
+Nom=OfNo,681,2,N,0,0,N,1
+Nom=PiNo,689,2,N,0,0,N,1
+Nom=UCowArt,697,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1
 Nom=Lib
 [/PROPLOC]
+[TABLE]
+Version=1,20130930143213,MCD                 ,20130930143541,MCD                 
+Nom=CowBas100T1,Ligne tableau client spec exigence,1
+DateM=0371D369E1BDCE01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+Nom=treeinfo,1,2,N,0,0,N,1
+Nom=Tiers,257,2,N,0,0,N,1
+Nom=AdrCod,265,2,N,0,0,N,1
+Nom=Nom,273,2,N,0,0,N,1
+Nom=Lib,311,2,N,0,0,N,1
+Nom=Lib80,351,2,N,0,0,N,1
+Nom=UCowBas100T1,431,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130930143149,MCD                 ,20130930155257,MCD                 
+Nom=CowBas100T2,Ligne tableau spec exigence client,1
+DateM=3837BEB2A1BECE01
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+TableInsere=CoCcli,1,200,0,1
+Nom=CarCod,201,2,N,0,0,N,1
+Nom=UnCod,209,2,N,0,0,N,1
+Nom=Lib,217,2,N,0,0,N,1
+Nom=UCowBas100T2,257,2,N,0,0,N,1
+[/CHAMPS]
 [TABLE]
 Version=1,20100128135035,JLF                 ,20100128135035,JLF                 
 Nom=CowCapa,Travail sur capabilités,1
@@ -6251,7 +6759,7 @@ Nom=UcowCarte,37,2,N,0,0,N,1
 [TABLE]
 Version=1,20100111135641,JLF                 ,20100309163059,JLF                 
 Nom=CowCmm,Travail sur capabilité moyen de mesure,1
-DateM=67D8A454CCD7CA01
+DateM=A7C3598EF328D101
 Taille=3200,3200
 Pack=0,0
 [CHAMPS]
@@ -6313,7 +6821,7 @@ Nom=UcowFene,1659,2,N,0,0,N,1
 [TABLE]
 Version=1,20031010100437,FRO                 ,20091112142812,JLF                 
 Nom=CowGam,Travail sur gammes controle,1
-DateM=301F7F3866DFCC01
+DateM=9C4946F1CF33D001
 Taille=4000,4000
 Pack=0,0
 [CHAMPS]
@@ -6323,43 +6831,45 @@ Nom=SurvTyp,1561,2,N,0,0,N,1
 Nom=NQA,1563,2,N,0,0,N,1
 Nom=ContNiv,1569,2,N,0,0,N,1
 Nom=LotQte,1570,2,N,0,0,N,1
-Nom=DefNbR,1578,2,N,0,0,N,1
-Nom=DefNbA,1584,2,N,0,0,N,1
-Nom=EchanNb,1590,2,N,0,0,N,1
-Nom=LibEchanTb,1596,2,N,0,0,N,1
-Nom=CarCod,1676,2,N,0,0,N,1
-Nom=UnCod,1684,2,N,0,0,N,1
-Nom=LibCar,1692,2,N,0,0,N,1
-Nom=TolerTb,1732,2,N,0,0,N,1
-Nom=IfctCod,1752,2,N,0,0,N,1
-Nom=LsigmaTb,1760,2,N,0,0,N,1
-Nom=IdlSeq,1780,2,N,0,0,N,1
-Nom=IdlCar,1784,2,N,0,0,N,1
-Nom=SeqNo,1788,2,N,0,0,N,1
-Nom=WinChnC,1793,2,N,0,0,N,1
-Nom=ImpFlgTb,2049,2,N,0,0,N,1
-Nom=Sigma,2057,2,N,0,0,N,1
-Nom=IdlEnt,2067,2,N,0,0,N,1
-Nom=CarNo,2071,2,N,0,0,N,1
-Nom=CarFam,2074,2,N,0,0,N,1
-Nom=IfctNo,2078,2,N,0,0,N,1
-Nom=IntTyp,2080,2,N,0,0,N,1
-Nom=PiNo,2081,2,N,0,0,N,1
-Nom=Poste,2089,2,N,0,0,N,1
-Nom=LibToler,2097,2,N,0,0,N,1
-Nom=Pourcent,2137,2,N,0,0,N,1
-Nom=PresenceQualite,2144,2,N,0,0,N,1
-Nom=RtfNomTb,2145,2,N,0,0,N,1
-Nom=PresenceDocumentation,3425,2,N,0,0,N,1
-Nom=PresenceGPAO,3426,2,N,0,0,N,1
-Nom=EntNb,3427,2,N,0,0,N,1
-Nom=FrqNb,3430,2,N,0,0,N,1
-Nom=LibMat,3436,2,N,0,0,N,1
-Nom=WinChnC2,3516,2,N,0,0,N,1
-Nom=PresenceAV,3772,2,N,0,0,N,1
-Nom=PresenceProduction,3773,2,N,0,0,N,1
-Nom=IntCod,3774,2,N,0,0,N,1
-Nom=UcowGam,3794,2,N,0,0,N,1
+Nom=DefNbRTb,1578,2,N,0,0,N,1
+Nom=DefNbATb,1620,2,N,0,0,N,1
+Nom=EchanNb,1662,2,N,0,0,N,1
+Nom=LibEchanTb,1668,2,N,0,0,N,1
+Nom=CarCod,1748,2,N,0,0,N,1
+Nom=UnCod,1756,2,N,0,0,N,1
+Nom=LibCar,1764,2,N,0,0,N,1
+Nom=TolerTb,1804,2,N,0,0,N,1
+Nom=IfctCod,1824,2,N,0,0,N,1
+Nom=LsigmaTb,1832,2,N,0,0,N,1
+Nom=IdlSeq,1852,2,N,0,0,N,1
+Nom=IdlCar,1856,2,N,0,0,N,1
+Nom=SeqNo,1860,2,N,0,0,N,1
+Nom=WinChnC,1865,2,N,0,0,N,1
+Nom=ImpFlgTb,2121,2,N,0,0,N,1
+Nom=Sigma,2131,2,N,0,0,N,1
+Nom=IdlEnt,2141,2,N,0,0,N,1
+Nom=CarNo,2145,2,N,0,0,N,1
+Nom=CarFam,2148,2,N,0,0,N,1
+Nom=IfctNo,2152,2,N,0,0,N,1
+Nom=IntTyp,2154,2,N,0,0,N,1
+Nom=PiNo,2155,2,N,0,0,N,1
+Nom=Poste,2163,2,N,0,0,N,1
+Nom=LibToler,2171,2,N,0,0,N,1
+Nom=Pourcent,2211,2,N,0,0,N,1
+Nom=PresenceQualite,2218,2,N,0,0,N,1
+Nom=RtfNomTb,2219,2,N,0,0,N,1
+Nom=PresenceDocumentation,3499,2,N,0,0,N,1
+Nom=PresenceGPAO,3500,2,N,0,0,N,1
+Nom=EntNb,3501,2,N,0,0,N,1
+Nom=FrqNb,3509,2,N,0,0,N,1
+Nom=LibMat,3515,2,N,0,0,N,1
+Nom=WinChnC2,3595,2,N,0,0,N,1
+Nom=PresenceAV,3851,2,N,0,0,N,1
+Nom=PresenceProduction,3852,2,N,0,0,N,1
+Nom=IntCod,3853,2,N,0,0,N,1
+Nom=TourNb,3873,2,N,0,0,N,1
+Nom=HabFlg,3874,2,N,0,0,N,1
+Nom=UcowGam,3875,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1
@@ -6368,7 +6878,7 @@ Nom=Lib
 [TABLE]
 Version=1,20090910173355,JLF                 ,20090910180017,JLF                 
 Nom=CowGam000T1,Ligne tableau caractéristiques gamme,1
-DateM=956F7D1E7845CD01
+DateM=E40257C155B8CE01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -6385,12 +6895,16 @@ Nom=Status,735,2,N,0,0,N,1
 Nom=WinChnC,736,2,N,0,0,N,1
 Nom=WinChnC2,992,2,N,0,0,N,1
 Nom=ContTypTri,1248,2,N,0,0,N,1
-Nom=UCowGam000T1,1250,2,N,0,0,N,1
+Nom=ProcTyp,1250,2,N,0,0,N,1
+Nom=DestructifFlg,1251,2,N,0,0,N,1
+Nom=RatioIT,1252,2,N,0,0,N,1
+Nom=HabFlg,1258,2,N,0,0,N,1
+Nom=UCowGam000T1,1259,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20090910173549,JLF                 ,20090915100304,JLF                 
 Nom=CowGam000T2,Ligne tableau séquence contrôle,1
-DateM=905A73ED4ED4CC01
+DateM=8FAB56F81BB9CE01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -6400,12 +6914,14 @@ Nom=CarNo,857,2,N,0,0,N,1
 Nom=WinChnC,860,2,N,0,0,N,1
 Nom=WinChnC2,1116,2,N,0,0,N,1
 Nom=TxtCod,1372,2,N,0,0,N,1
-Nom=UCowGam000T2,1373,2,N,0,0,N,1
+Nom=DestructifFlg,1373,2,N,0,0,N,1
+Nom=HabFlg,1374,2,N,0,0,N,1
+Nom=UCowGam000T2,1375,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20091113090020,JLF                 ,20091113090020,JLF                 
 Nom=CowGam001T1,Ligne tableau caractéristiques préparation,1
-DateM=EF45CF583764CA01
+DateM=8A15A668D37ECE01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -6463,6 +6979,25 @@ Pack=0,0
 [CHAMPS]
 Nom=GraphTb,1,2,N,0,0,N,1
 Nom=UCowGraph,3073,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130711093102,MCD                 ,20130711093102,MCD                 
+Nom=CowInt008T1,Ligne tableau processus,1
+DateM=2F1FF8B932B5CE01
+Taille=2000,2000
+Pack=0,0
+[CHAMPS]
+TableInsere=CoCarmes,1,400,0,1
+Nom=TdocCod,401,2,N,0,0,N,1
+Nom=DocCod,409,2,N,0,0,N,1
+Nom=ProcTyp,417,2,N,0,0,N,1
+Nom=Lib,418,2,N,0,0,N,1
+Nom=UnCod,458,2,N,0,0,N,1
+Nom=LibUnit,466,2,N,0,0,N,1
+Nom=LibDoc,506,2,N,0,0,N,1
+Nom=LibCar,586,2,N,0,0,N,1
+Nom=RatioIT,626,2,N,0,0,N,1
+Nom=UCowInt008T1,632,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20100315134545,MCD                 ,20100326095727,MCD                 
@@ -6622,7 +7157,7 @@ Nom=UcowInt050T4,1598,2,N,0,0,N,1
 [TABLE]
 Version=1,20090716155936,JLF                 ,20100107172737,JLF                 
 Nom=CowMes,Travail sur mesures,1
-DateM=8B74A2CACEA8CA01
+DateM=74368A28E0A5D101
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -6667,10 +7202,13 @@ Nom=MmCod,1504,2,N,0,0,N,1
 Nom=UserCont,1524,2,N,0,0,N,1
 Nom=UserContDh,1544,2,N,0,0,N,1
 [/CHAMPS]
+[PROPLOC]
+Nom=ImpVal
+[/PROPLOC]
 [TABLE]
 Version=1,20091208141834,JLF                 ,20091208141834,JLF                 
 Nom=CowMes000,Travail sur acquisition mesures,1
-DateM=654B7B013CB1CA01
+DateM=1644AE00DA89CE01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -6682,32 +7220,32 @@ Nom=MesVal,8,2,N,0,0,N,1
 Nom=PosteNb,18,2,N,0,0,N,1
 Nom=PosteNo,22,2,N,0,0,N,1
 Nom=EchanNo,26,2,N,0,0,N,1
-Nom=DefNb,32,2,N,0,0,N,1
-Nom=ValMin,40,2,N,0,0,N,1
-Nom=ValMax,50,2,N,0,0,N,1
-Nom=IdlAcq,60,2,N,0,0,N,1
-Nom=IdlMes,64,2,N,0,0,N,1
-Nom=MatCod,68,2,N,0,0,N,1
-Nom=SurvTyp,76,2,N,0,0,N,1
-Nom=MesNb,78,2,N,0,0,N,1
-Nom=FormulVarTb,84,2,N,0,0,N,1
-Nom=FormulVarNb,93,2,N,0,0,N,1
-Nom=InstrTypTb,96,2,N,0,0,N,1
-Nom=InstrNo,116,2,N,0,0,N,1
-Nom=InstrValTb,118,2,N,0,0,N,1
-Nom=MesTyp,318,2,N,0,0,N,1
-Nom=WinChnC,319,2,N,0,0,N,1
-Nom=MmCod,575,2,N,0,0,N,1
-Nom=IdlAcqMulti,595,2,N,0,0,N,1
-Nom=MesNb2,599,2,N,0,0,N,1
-Nom=ValAbsFlg,605,2,N,0,0,N,1
-Nom=EchanNb,606,2,N,0,0,N,1
-Nom=UcowMes000,612,2,N,0,0,N,1
+Nom=ValMin,32,2,N,0,0,N,1
+Nom=ValMax,42,2,N,0,0,N,1
+Nom=IdlAcq,52,2,N,0,0,N,1
+Nom=IdlMes,56,2,N,0,0,N,1
+Nom=MatCod,60,2,N,0,0,N,1
+Nom=SurvTyp,68,2,N,0,0,N,1
+Nom=MesNb,70,2,N,0,0,N,1
+Nom=FormulVarTb,76,2,N,0,0,N,1
+Nom=FormulVarNb,85,2,N,0,0,N,1
+Nom=InstrTypTb,88,2,N,0,0,N,1
+Nom=InstrNo,108,2,N,0,0,N,1
+Nom=InstrValTb,110,2,N,0,0,N,1
+Nom=MesTyp,310,2,N,0,0,N,1
+Nom=WinChnC,311,2,N,0,0,N,1
+Nom=MmCod,567,2,N,0,0,N,1
+Nom=IdlAcqMulti,587,2,N,0,0,N,1
+Nom=MesNb2,591,2,N,0,0,N,1
+Nom=ValAbsFlg,597,2,N,0,0,N,1
+Nom=EchanNb,598,2,N,0,0,N,1
+Nom=DefNbTb,604,2,N,0,0,N,1
+Nom=UcowMes000,668,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20091209163240,JLF                 ,20091209163240,JLF                 
 Nom=CowMes000T1,Ligne tableau acquistition caractéristique,1
-DateM=B11D8BD899E0CA01
+DateM=E49F93805662D101
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -6733,13 +7271,15 @@ Nom=WinChnC,785,2,N,0,0,N,1
 Nom=WinChnC2,1041,2,N,0,0,N,1
 Nom=Lib,1297,2,N,0,0,N,1
 Nom=ActNo,1337,2,N,0,0,N,1
-Nom=UcowMes000T1,1345,2,N,0,0,N,1
+Nom=MmCodTb,1345,2,N,0,0,N,1
+Nom=MsgHTolFlg,1405,2,N,0,0,N,1
+Nom=UcowMes000T1,1406,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20100315170513,JLF                 ,20100315170513,JLF                 
+Version=1,20100315170513,JLF                 ,20130725142549,JLF                 
 Nom=CowMes000T2,Ligne tableau contrôle en fabrication,1
-DateM=436BFA004FD4CC01
-Taille=1600,1600
+DateM=307279511FB9CE01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 TableInsere=CogSeq,1,600,0,1
@@ -6761,15 +7301,16 @@ Nom=DefNb,967,2,N,0,0,N,1
 Nom=DecisionTyp,975,2,N,0,0,N,1
 Nom=WinChnC,976,2,N,0,0,N,1
 Nom=WinChnC2,1232,2,N,0,0,N,1
-Nom=DefNbA,1488,2,N,0,0,N,1
-Nom=DefNbR,1494,2,N,0,0,N,1
-Nom=TxtCod,1500,2,N,0,0,N,1
-Nom=UcowMes000T2,1501,2,N,0,0,N,1
+Nom=DefNbRTb,1488,2,N,0,0,N,1
+Nom=DefNbATb,1530,2,N,0,0,N,1
+Nom=TxtCod,1572,2,N,0,0,N,1
+Nom=HabFlg,1573,2,N,0,0,N,1
+Nom=UcowMes000T2,1574,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20100428111803,JLF                 ,20100428112515,JLF                 
 Nom=CowMes005T1,Ligne tableau acquisition multicote,1
-DateM=5F7C227E82E8CA01
+DateM=A02B26217162D101
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -6802,10 +7343,10 @@ Nom=Graph,1375,2,N,0,0,N,1
 Nom=UcowMes005T1,1887,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20100309111913,JLF                 ,20100309111913,JLF                 
+Version=1,20100309111913,JLF                 ,20130725142816,JLF                 
 Nom=CowMes010T2,Ligne tableau capabilité machine,1
-DateM=C2514A204FD4CC01
-Taille=1600,1600
+DateM=1F2BCD763289CE01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 TableInsere=CogSeq,1,600,0,1
@@ -6827,16 +7368,16 @@ Nom=DefNb,967,2,N,0,0,N,1
 Nom=DecisionTyp,975,2,N,0,0,N,1
 Nom=WinChnC,976,2,N,0,0,N,1
 Nom=WinChnC2,1232,2,N,0,0,N,1
-Nom=DefNbA,1488,2,N,0,0,N,1
-Nom=DefNbR,1494,2,N,0,0,N,1
-Nom=TxtCod,1500,2,N,0,0,N,1
-Nom=UcowMes010T2,1501,2,N,0,0,N,1
+Nom=DefNbRTb,1488,2,N,0,0,N,1
+Nom=DefNbATb,1530,2,N,0,0,N,1
+Nom=TxtCod,1572,2,N,0,0,N,1
+Nom=UcowMes010T2,1573,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20100402174201,JLF                 ,20100402174201,JLF                 
+Version=1,20100402174201,JLF                 ,20130725142847,JLF                 
 Nom=CowMes011T2,Ligne tableau capabilité moyen de mesure,1
-DateM=FF4986284FD4CC01
-Taille=1600,1600
+DateM=F8C8B68B3289CE01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 TableInsere=CogSeq,1,600,0,1
@@ -6858,16 +7399,16 @@ Nom=DefNb,967,2,N,0,0,N,1
 Nom=DecisionTyp,975,2,N,0,0,N,1
 Nom=WinChnC,976,2,N,0,0,N,1
 Nom=WinChnC2,1232,2,N,0,0,N,1
-Nom=DefNbA,1488,2,N,0,0,N,1
-Nom=DefNbR,1494,2,N,0,0,N,1
-Nom=TxtCod,1500,2,N,0,0,N,1
-Nom=UcowMes011T2,1501,2,N,0,0,N,1
+Nom=DefNbRTb,1488,2,N,0,0,N,1
+Nom=DefNbATb,1530,2,N,0,0,N,1
+Nom=TxtCod,1572,2,N,0,0,N,1
+Nom=UcowMes011T2,1573,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20100125154535,JLF                 ,20100125163619,JLF                 
+Version=1,20100125154535,JLF                 ,20130725142915,JLF                 
 Nom=CowMes400T2,Ligne tableau contrôle final,1
-DateM=E75679134FD4CC01
-Taille=1600,1600
+DateM=A5654A8036B9CE01
+Taille=2000,1600
 Pack=0,0
 [CHAMPS]
 TableInsere=CogSeq,1,600,0,1
@@ -6889,15 +7430,16 @@ Nom=DefNb,967,2,N,0,0,N,1
 Nom=DecisionTyp,975,2,N,0,0,N,1
 Nom=WinChnC,976,2,N,0,0,N,1
 Nom=WinChnC2,1232,2,N,0,0,N,1
-Nom=DefNbA,1488,2,N,0,0,N,1
-Nom=DefNbR,1494,2,N,0,0,N,1
-Nom=TxtCod,1500,2,N,0,0,N,1
-Nom=UcowMes002T2,1501,2,N,0,0,N,1
+Nom=DefNbRTb,1488,2,N,0,0,N,1
+Nom=DefNbATb,1530,2,N,0,0,N,1
+Nom=TxtCod,1572,2,N,0,0,N,1
+Nom=HabFlg,1573,2,N,0,0,N,1
+Nom=UcowMes002T2,1574,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20100503110925,MCD                 ,20120703134520,JLF                 
 Nom=CowMes405T1,Ligne tableau lots à contrôler,1
-DateM=5B2E816C1159CD01
+DateM=002588B4B980CF01
 Taille=800,800
 Pack=0,0
 [CHAMPS]
@@ -6914,13 +7456,20 @@ Nom=Qte,361,2,N,0,0,N,1
 Nom=ColiNo,373,2,N,0,0,N,1
 Nom=Des,382,2,N,0,0,N,1
 Nom=Lib,462,2,N,0,0,N,1
-Nom=UCowMes405T1,502,2,N,0,0,N,1
+Nom=Lieu,502,2,N,0,0,N,1
+Nom=DebHms,514,2,N,0,0,N,1
+Nom=StatusCont,520,2,N,0,0,N,1
+Nom=UserCont,521,2,N,0,0,N,1
+Nom=UserContDh,541,2,N,0,0,N,1
+Nom=RcoNo,555,2,N,0,0,N,1
+Nom=Status,563,2,N,0,0,N,1
+Nom=UCowMes405T1,564,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20100329164520,JLF                 ,20100329164520,JLF                 
+Version=1,20100329164520,JLF                 ,20130725142956,JLF                 
 Nom=CowMes500T2,Ligne tableau contrôle initial,1
-DateM=222F01424FD4CC01
-Taille=1600,1600
+DateM=A635A1228CBACE01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 TableInsere=CogSeq,1,600,0,1
@@ -6942,15 +7491,16 @@ Nom=DefNb,967,2,N,0,0,N,1
 Nom=DecisionTyp,975,2,N,0,0,N,1
 Nom=WinChnC,976,2,N,0,0,N,1
 Nom=WinChnC2,1232,2,N,0,0,N,1
-Nom=DefNbA,1488,2,N,0,0,N,1
-Nom=DefNbR,1494,2,N,0,0,N,1
-Nom=TxtCod,1500,2,N,0,0,N,1
-Nom=UcowMes500T2,1501,2,N,0,0,N,1
+Nom=DefNbRTb,1488,2,N,0,0,N,1
+Nom=DefNbATb,1530,2,N,0,0,N,1
+Nom=TxtCod,1572,2,N,0,0,N,1
+Nom=HabFlg,1573,2,N,0,0,N,1
+Nom=UcowMes500T2,1574,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20100119135742,JLF                 ,20100119135928,JLF                 
 Nom=CowReport,Travail sur rapports de contrôle,1
-DateM=E54388ED72F3CB01
+DateM=63202A32E386CE01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -6969,16 +7519,16 @@ Nom=LotQte,1502,2,N,0,0,N,1
 Nom=ContNo,1510,2,N,0,0,N,1
 Nom=Serie,1518,2,N,0,0,N,1
 Nom=ImpFlgTb,1538,2,N,0,0,N,1
-Nom=RtfNom,1546,2,N,0,0,N,1
-Nom=Depo,1802,2,N,0,0,N,1
-Nom=EnrNo,1805,2,N,0,0,N,1
-Nom=VtlNo,1814,2,N,0,0,N,1
-Nom=BlNo,1823,2,N,0,0,N,1
-Nom=PiNoTiers,1831,2,N,0,0,N,1
-Nom=PiDt,1846,2,N,0,0,N,1
-Nom=ContMode,1854,2,N,0,0,N,1
-Nom=CdNo,1855,2,N,0,0,N,1
-Nom=UcowReport,1863,2,N,0,0,N,1
+Nom=RtfNom,1548,2,N,0,0,N,1
+Nom=Depo,1804,2,N,0,0,N,1
+Nom=EnrNo,1807,2,N,0,0,N,1
+Nom=VtlNo,1816,2,N,0,0,N,1
+Nom=BlNo,1825,2,N,0,0,N,1
+Nom=PiNoTiers,1833,2,N,0,0,N,1
+Nom=PiDt,1848,2,N,0,0,N,1
+Nom=ContMode,1856,2,N,0,0,N,1
+Nom=CdNo,1857,2,N,0,0,N,1
+Nom=UcowReport,1865,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1
@@ -7092,7 +7642,7 @@ Nom=UcowSui300T2,1041,2,N,0,0,N,1
 [TABLE]
 Version=1,20090812173802,JLF                 ,20090812173802,JLF                 
 Nom=CowTache,Travail sur tâche de contrôle,1
-DateM=5FDEAB12C00BCB01
+DateM=536AA53CD380CF01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -7124,13 +7674,16 @@ Nom=PrgAccesMode,235,2,N,0,0,N,1
 Nom=IntCod,236,2,N,0,0,N,1
 Nom=Status,256,2,N,0,0,N,1
 Nom=ImpFlgTb,257,2,N,0,0,N,1
-Nom=EchanNb,265,2,N,0,0,N,1
-Nom=BlNo,271,2,N,0,0,N,1
-Nom=PiNoTiers,279,2,N,0,0,N,1
-Nom=PiDt,294,2,N,0,0,N,1
-Nom=EvalNiv,302,2,N,0,0,N,1
-Nom=QualFlg,303,2,N,0,0,N,1
-Nom=UcowTache,304,2,N,0,0,N,1
+Nom=EchanNb,267,2,N,0,0,N,1
+Nom=BlNo,273,2,N,0,0,N,1
+Nom=PiNoTiers,281,2,N,0,0,N,1
+Nom=PiDt,296,2,N,0,0,N,1
+Nom=EvalNiv,304,2,N,0,0,N,1
+Nom=QualFlg,305,2,N,0,0,N,1
+Nom=PropDef2Tb,306,2,N,0,0,N,1
+Nom=EnrNo,414,2,N,0,0,N,1
+Nom=VtlNo,423,2,N,0,0,N,1
+Nom=UcowTache,432,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20090804154621,VB                  ,20090827092924,JLF                 
@@ -7160,7 +7713,7 @@ Nom=CleHfilter,8063,2,N,0,0,N,1
 [TABLE]
 Version=1,2003 4280000,FRO ,20080314141544,JLF
 Nom=Xq,Zone d'échange pour HQL,1
-DateM=B11D8BD899E0CA01
+DateM=37708CE1DC86CE01
 Taille=6100,6100
 Pack=0,0
 [CHAMPS]
@@ -7219,6 +7772,8 @@ Attribut=PARAM
 Nom=Atelier
 Attribut=PARAM
 Nom=JrNb
+Attribut=PARAM
+Nom=DebHm
 [/PROPLOC]
 [TABLE]
 Version=1,2000 1240000,LM  ,20080421143033,VB
@@ -7233,10 +7788,10 @@ Nom=IdMenuTb,601,2,N,0,0,N,1
 Nom=IdlImpr,801,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,2003 2110000,FRO ,2003 2110000,FRO
+Version=1,2003 2110000,FRO ,20140107134749,JLF                 
 Nom=Xz,Zone échange pour zooms,1
-DateM=9810623E6557CC01
-Taille=1020,1020
+DateM=8248B4B1A60BCF01
+Taille=1500,1500
 Pack=0,0
 [CHAMPS]
 Nom=Pong,1,2,N,0,0,N,1
@@ -7290,7 +7845,10 @@ Nom=EnrNo,572,2,N,0,0,N,1
 Nom=VtlNo,581,2,N,0,0,N,1
 Nom=ContMode,590,2,N,0,0,N,1
 Nom=ActFam,591,2,N,0,0,N,1
-Nom=UXz,599,2,N,0,0,N,1
+Nom=OpMesCod,599,2,N,0,0,N,1
+Nom=SurvCod,607,2,N,0,0,N,1
+Nom=WinChnC,615,2,N,0,0,N,1
+Nom=UXz,871,2,N,0,0,N,1
 [/CHAMPS]
 [BASE]
 Version=1,20091106105427,JLF                 ,20100326172038,JLF                 
@@ -7314,22 +7872,22 @@ DateMIndex=107B64EB1BABCA01
 Nom=CoDconf,0
 [/TABLES]
 [BASE]
-Version=1,20090715164226,JLF                 ,20100326172050,JLF                 
+Version=1,20090715164226,JLF                 ,20140204173642,JLF                 
 Nom=CofCoef,Tables coefficients statistiques,1
-DateM=0095C04C00CDCA01
+DateM=F9583949C721CF01
 Fichier=I,0,cofcoef.dhfi
-Versionbase=6.3
+Versionbase=7.3
 DateMIndex=0035415BFECCCA01
 [TABLES]
 Nom=CoCoef,0
 Nom=CoStaTb,0
 [/TABLES]
 [BASE]
-Version=1,20080623164448,JLF                 ,20111004170653,JLF                 
+Version=1,20080623164448,JLF                 ,20131008103739,MCD                 
 Nom=CofDos,Paramètres dossier contrôle,1
-DateM=D77D0B40A782CC01
+DateM=81D6FEA501C4CE01
 Fichier=I,0,cofdos.dhfi
-Versionbase=7.0 
+Versionbase=7.3 
 DateMIndex=20230967FECCCA01
 [TABLES]
 Nom=CoSoc,0
@@ -7413,13 +7971,15 @@ Nom=CoPent,0
 Nom=CoPseq,0
 [/TABLES]
 [BASE]
-Version=1,20090707113150,JLF                 ,20100617111359,JLF                 
+Version=1,20090707113150,JLF                 ,20151116105728,JLF                 
 Nom=CofProcMes,Processus de mesurage,1
-DateM=353D906BFD0DCB01
+DateM=773A29345520D101
 Fichier=I,0,cofprocmes.dhfi
-Versionbase=6.3 
-DateMIndex=A07E8A63FFCCCA01
+Versionbase=7.3
+DateMIndex=E9F5B6D8D4B5CE01
 [TABLES]
+Nom=CoCarmes,0
+Nom=CoHabmes,0
 Nom=CoOpmes,0
 [/TABLES]
 [BASE]
@@ -7434,14 +7994,15 @@ Nom=CoRcar,0
 Nom=CoRent,0
 [/TABLES]
 [BASE]
-Version=1,20090709154412,JLF                 ,20100326172143,JLF                 
+Version=1,20090709154412,JLF                 ,20131001161450,MCD                 
 Nom=CofSpec,Spécifications articles,1
-DateM=6044736C00CDCA01
+DateM=9E32BF97B0BECE01
 Fichier=I,0,cofspec.dhfi
-Versionbase=6.3
-DateMIndex=7304EB152A9ACC01
+Versionbase=7.3 
+DateMIndex=8AC2F48FB0BECE01
 [TABLES]
 Nom=CoCart,0
+Nom=CoCcli,0
 [/TABLES]
 [BASE]
 Version=1,20100128110450,VB                  ,20100326172149,JLF                 
@@ -8018,14 +8579,36 @@ Nom=OpMesCod,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20090709152332,JLF                 ,20100510175230,JLF                 
+Version=1,20090709152332,JLF                 ,20130802105210,JLF                 
 Nom=Index_B,Par code caractéristique,1
-DateM=055A51CC58F0CA01
-CLE=CofProcMes,B,Ce1,2,1,n,1,n
+DateM=3C1532935D8FCE01
+CLE=CofProcMes,B,Ce1,2,2,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=CarCod,4,0,
 Nom=OpMesCod,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130802104746,JLF                 ,20130802104816,JLF                 
+Nom=Index_C,Par code opération,1
+DateM=2C69A5075D8FCE01
+CLE=CofProcMes,C,Ce1,2,2,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=OpMesCod,4,0,
+Nom=CarCod,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130920094048,MCD                 ,20130920094052,MCD                 
+Nom=Index_D,Par opération de mesure,1
+DateM=9E6C8ABBD4B5CE01
+CLE=CofProcMes,D,Ce1,2,3,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=OpMesCod,4,0,
+Nom=SalCod,12,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -8093,6 +8676,19 @@ CLE=CofSpec,B,Ce1,2,1,n,1,n
 Nom=Dos,1,0,
 Nom=GrSpec,4,0,
 Nom=PlanRep,45,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130930111002,MCD                 ,20130930111006,MCD                 
+Nom=Index_C,Par spécification\v caractéristique\vtiers,1
+DateM=86C22ADBBCBDCE01
+CLE=CofSpec,C,Ce1,2,2,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=GrSpec,4,0,
+Nom=CarNo,45,0,
+Nom=Tiers,48,0,
+Nom=AdrCod,56,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -8377,13 +8973,16 @@ Nom=CofPrepa,CoCapteur,Index_E_Capteur,0
 Nom=CofPrepa,CoPcar,Index_F,0
 Nom=CofPrepa,CoCapteur,Index_G,0
 Nom=CofProcMes,CoOpmes,Index_A,0
-Nom=CofProcMes,CoOpmes,Index_B,0
+Nom=CofProcMes,CoCarmes,Index_B,0
+Nom=CofProcMes,CoCarmes,Index_C,0
+Nom=CofProcMes,CoHabmes,Index_D,0
 Nom=CofReport,CoRent,Index_A,0
 Nom=CofReport,CoRent,Index_B,0
 Nom=CofReport,CoRent,Index_C,0
 Nom=CofReport,CoRcar,Index_D,0
 Nom=CofSpec,CoCart,Index_A,0
 Nom=CofSpec,CoCart,Index_B,0
+Nom=CofSpec,CoCcli,Index_C,0
 Nom=CofStat,CoSta1,Index_A,0
 Nom=CofStat,CoSta2,Index_B,0
 Nom=CofStat,CoSta3,Index_C,0
@@ -9422,7 +10021,7 @@ lienpos=180;25;-20;95
 lienskip=2
 lienpos=180;25;-20;5
 remp=DOS;DOS
-remp=CARCOD;CARCOD
+remp=CARCOD;;0,0
 table=COFCERTIF;CODCONF
 lien=;COFREPORT;CORENT;INDEX_A;1
 lienpos=-20;25;180;5

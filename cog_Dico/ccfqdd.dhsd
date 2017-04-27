@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,2003 122103431,HC  ,20130110170343,VJ                  
+Version=5,2003 122103431,HC  ,20100415104801,VJ                  
 Nom=ccfqdd.dhsd,,1
 [CHAMP]
 Version=1,2002 2270000,HC  ,20071129163043,MS                  
@@ -28,12 +28,6 @@ Choix=ccfdmc.dhfi
 NomChoix=AXENO
 Flags=o,1,n,n,n,n,n,n
 presentation=2
-[CHAMP]
-Version=1,1999 6150000,PB  ,1999 6150000,PB
-Nom=Ce1,CE,1
-Gel=1
-Nature=1
-Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1999 1130000,CH4 ,1999 1130000,CH4
 Nom=Cpt,compte,1
@@ -74,13 +68,6 @@ DateM=95ECE690642AC701
 Gel=1
 Nature=8
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20111201164418,VJ                  ,20111201164510,VJ                  
-Nom=Delais,Délais,1
-DateM=979C0E3540B0CC01
-Gel=1
-Nature=3,0*3
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,199812220000,CH4 ,20061228104305,FH                  
 Nom=EchDt,date échéance,1
@@ -129,13 +116,6 @@ Nom=Etb,Code établissement,1
 Gel=1
 Nature=3
 Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,1999 6150000,PB  ,20061228105058,FH                  
-Nom=FaDt,Date de la pièce,1
-DateM=BA350DAD652AC701
-Gel=1
-Nature=D8
-Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090114143027,PP                  ,20090114143027,PP                  
 Nom=FlEtbConf,Flag établissement confidentiel rencontré,1
@@ -212,20 +192,6 @@ Gel=1
 Nature=16,D0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1999 6150000,PB  ,20061228105135,FH                  
-Nom=MtTva,Montants / taux,1
-DateM=FDAB0BC3652AC701
-Gel=1
-Nature=16,2*10
-Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,1999 6150000,PB  ,20061228105143,FH                  
-Nom=MtTvaEsc,Montants escompte /Taux,1
-DateM=0518BDC7652AC701
-Gel=1
-Nature=9,2*10
-Flags=o,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,199812220000,CH4 ,199812220000,CH4
 Nom=Nbj,nombre de jours,1
 Gel=1
@@ -236,18 +202,6 @@ Version=1,1999 1130000,CH4 ,1999 1130000,CH4
 Nom=Nbr,nombre postes,1
 Gel=1
 Nature=2,0
-Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,1999 6150000,PB  ,1999 6150000,PB
-Nom=Piece,Numéro de pièce,1
-Gel=1
-Nature=8,0
-Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,1999 6150000,PB  ,1999 6150000,PB
-Nom=Tiers,Code tiers,1
-Gel=1
-Nature=8
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,199812220000,HC  ,20061228104409,FH                  
@@ -291,32 +245,6 @@ Gel=1
 Nature=16,D0*5
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20130108151945,MS                  ,20130108151945,MS                  
-Nom=TvaArt,Régime TVA Article,1
-Gel=1
-Nature=8
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130109113240,MS                  ,20130109142959,MS                  
-Nom=TvaCod,Code TVA,1
-Gel=1
-Nature=16
-NomOdbc=CodeTva
-Flags=n,1,o,o,n,n,n,n
-[CHAMP]
-Version=1,1999 6150000,PB  ,20061228105215,FH                  
-Nom=TvaCpt,Compte de TVA,1
-DateM=1175B2DA652AC701
-Gel=1
-Nature=8
-Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130108151932,MS                  ,20130108151932,MS                  
-Nom=TvaTie,Régime TVA Tiers,1
-Gel=1
-Nature=8
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,199812 80000,CH4 ,20071129163357,MS                  
 Nom=Valide,* si écriture non validé,1
 Gel=1
@@ -339,11 +267,6 @@ Nom=Cpt_pos,11,0,0,N,1
 nom=LibTb
 [CHAMPL]
 Nom=Lib,1,0,0,N,1
-[/CHAMPL]
-nom=TvaCod
-[CHAMPL]
-Nom=TvaArt,1,0,0,N,1
-Nom=TvaTie,9,0,0,N,1
 [/CHAMPL]
 [/CHAMPR]
 [TABLE]
@@ -412,7 +335,7 @@ Nom=FlEtbConf,375,2,N,0,0,N,1
 [TABLE]
 Version=1,20100412145618,VJ                  ,20100415104758,VJ                  
 Nom=Cc047,Etat créance fournisseur loi lme,1
-DateM=979C0E3540B0CC01
+DateM=08651B8B3FDACA01
 Taille=500,500
 Pack=0,0
 [CHAMPS]
@@ -420,7 +343,6 @@ Nom=Mt1,1,2,N,0,0,N,1
 Nom=TotGen,131,2,N,0,0,N,1
 Nom=MtSansDec,261,2,N,0,0,N,1
 Nom=FlEtbConf,351,2,N,0,0,N,1
-Nom=Delais,352,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1999 1140000,CH4 ,20090323175252,DEMO                
@@ -439,23 +361,6 @@ Taille=300,300
 Pack=0,0
 [CHAMPS]
 Nom=EnrEcr,1,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
-Version=1,20121106160714,SN                  ,20121106160714,SN                  
-Nom=Cc500,Contrôle TVA,1
-DateM=525F440C4CEFCD01
-Taille=512,512
-Pack=0,0
-[CHAMPS]
-Nom=Ce1,1,2,N,0,0,N,1
-Nom=Piece,2,2,N,0,0,N,1
-Nom=Tiers,10,2,N,0,0,N,1
-Nom=FaDt,18,2,N,0,0,N,1
-Nom=Filler,26,2,N,0,2,N,1
-Nom=TvaCpt,28,2,N,0,0,N,1
-Nom=MtTva,36,2,N,0,0,N,1
-Nom=MtTvaEsc,196,2,N,0,0,N,1
-Nom=TvaCod,286,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1999 1130000,CH4 ,1999 1130000,CH4

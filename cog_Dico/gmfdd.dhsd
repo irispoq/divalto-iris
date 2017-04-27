@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20100819104148,MCD                 ,20140102152845,JLF                 
+Version=6,20100819104148,MCD                 ,20151116105952,JLF                 
 Nom=gmfdd.dhsd,gmfdd.dhsd,1
 [CHAMP]
 Version=1,20080314141119,JLF                 ,20090313150351,JLF                 
@@ -36,6 +36,13 @@ DateM=0353C5C7CF5ECA01
 Gel=1
 Nature=8,0
 NomOdbc=NumeroAction
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131219143717,MCD                 ,20131219143829,MCD                 
+Nom=ActTermFlg,Indicateur si d'action à terminer,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiActionaTerminer
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20021220135600,MJV ,20050106141652,MARIE JO            
@@ -232,6 +239,14 @@ Nature=2,0*20
 Attribut=PARAM
 Flags=n,1,o,n,n,n,n,n
 [CHAMP]
+Version=1,20131218112235,JLF                 ,20131218112310,JLF                 
+Nom=ChoixAgenda,Options pour agenda,1
+DateM=A50EF61FDBFBCE01
+Gel=1
+Nature=2,0*20
+Attribut=PARAM
+Flags=n,1,o,n,n,n,n,n
+[CHAMP]
 Version=1,20110623092038,JLF                 ,20110623094148,JLF                 
 Nom=ChoixCar,Choix caractéristique,1
 DateM=B6D96FFD7831CC01
@@ -306,6 +321,22 @@ Nature=4
 NomOdbc=CodeConfidentialite
 Flags=o,1,o,n,n,n,n,n
 [CHAMP]
+Version=1,20131231152616,JLF                 ,20131231153032,JLF                 
+Nom=ConfirmeFlg,Indicateur si intervention confirmée,1
+DateM=E977DDBA3406CF01
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiConfirmee
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131231150650,JLF                 ,20131231154057,JLF                 
+Nom=ConfirmerFlg,Indicateur si gestion des confirmations,1
+DateM=C74803513606CF01
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiConfirmation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20100106091140,JLF                 ,20100106091150,JLF                 
 Nom=Conforme,Etat de conformité,1
 Gel=1
@@ -342,12 +373,6 @@ Nature=8,0
 NomOdbc=NumeroContrat
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120724172452,JLF                 ,20120724172452,JLF                 
-Nom=ContratTyp,Type de contrat,1
-Gel=1
-Nature=2,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,20021023210946,RR  ,20100520103957,DEMO                
 Nom=Couleur,Couleur d'affichage de l'événement,1
 DateM=F0F97D53CB7AC201
@@ -374,8 +399,15 @@ Nature=13,D0
 NomOdbc=CoutExterne
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20100819154008,MCD                 ,20101119084742,MCD                 
-Nom=CoutIntMt,Coût interne de l'action,1
+Version=1,20140417105117,JLF                 ,20140417105126,JLF                 
+Nom=CoutInt2Mt,Coût interne de l'action (composants),1
+Gel=1
+Nature=13,D0
+NomOdbc=CoutInterne2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100819154008,MCD                 ,20140417105152,JLF                 
+Nom=CoutIntMt,Coût interne de l'action (ressources),1
 DateM=A36BF80BBE87CB01
 Gel=1
 Nature=13,D0
@@ -748,22 +780,6 @@ Nom=EvtNoA,Numéro d'événement alpha,1
 Gel=1
 Nature=8
 Flags=n,1,o,o,n,n,n,n
-[CHAMP]
-Version=1,1989 1230000,MJV ,20061113140631,MARIE JO            
-Nom=FaDt,Date de facture,1
-DateM=2AACB5892407C701
-Gel=1
-Nature=D8
-NomOdbc=DateFacture
-Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,1989 1230000,MJV ,20061113140744,MARIE JO            
-Nom=FaNo,Facture no,1
-DateM=7A4990B52407C701
-Gel=1
-Nature=8,0
-NomOdbc=FactureNo
-Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200210 40000,BGX ,20090312173325,JLF
 Nom=FicAvi,bitmap animation,1
@@ -1244,7 +1260,7 @@ Nature=3,0
 NomOdbc=NbreJour
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,2003 1310000,FRO ,20110405114107,MCD                 
+Version=1,2003 1310000,FRO ,20130426102932,MCD                 
 Nom=Lib,Libellé,1
 Gel=1
 Nature=40
@@ -1258,7 +1274,7 @@ Gel=1
 Nature=40*10
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,2002 2200000,MJV ,20110405113945,MCD                 
+Version=1,2002 2200000,MJV ,20130426102946,MCD                 
 Nom=Lib80,Libellé sur 80 caractères,1
 Gel=1
 Nature=80
@@ -1523,13 +1539,6 @@ Nom=ModifFlg,Indicateur modification zoom,1
 DateM=3D5977773FA3C901
 Gel=1
 Nature=1,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20040917094715,AM                  ,20040929175257,MARIE JO
-Nom=MoisNb,Nombre de mois,1
-DateM=9092E1633CA6C401
-Gel=1
-Nature=3,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,199912230000,MJV ,20090312192145,JLF
@@ -2020,6 +2029,13 @@ Nature=1,0
 NomOdbc=TypeSaisieResultat
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20131230141904,JLF                 ,20131230141944,JLF                 
+Nom=RhResFlg,Indicateur de réservation des ressources humaines,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiReservationRH
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20100819133617,MCD                 ,20110208092019,MCD                 
 Nom=RmCod,Code matériel,1
 DateM=018B9F089B3FCB01
@@ -2033,6 +2049,13 @@ Nom=RmNo,Numéro chrono ressource matériel,1
 Gel=1
 Nature=8,0
 NomOdbc=NoChronoRessourceMateriel
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131231110603,JLF                 ,20131231110631,JLF                 
+Nom=RmResFlg,Indicateur de réservation des ressources matérielles,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiReservationMateriel
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090713143029,VB                  ,20090713143029,VB                  
@@ -2636,6 +2659,12 @@ Gel=1
 Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20131014151015,MCD                 ,20131014151023,MCD                 
+Nom=UGmCarMes,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20110322131336,MCD                 ,20110322131341,MCD                 
 Nom=UGmClasse,Réservé distributeur,1
 Gel=1
@@ -2645,12 +2674,6 @@ Flags=n,1,o,o,n,n,n,n
 Version=1,20090709171355,JLF                 ,20100910091452,MCD                 
 Nom=UGmCmat,Réservé distributeur,1
 DateM=0760BDDCB750CB01
-Gel=1
-Nature=100
-Flags=n,1,o,o,n,n,n,n
-[CHAMP]
-Version=1,20120724172927,JLF                 ,20120724172938,JLF                 
-Nom=UGmCont,Réservé distributeur,1
 Gel=1
 Nature=100
 Flags=n,1,o,o,n,n,n,n
@@ -2763,12 +2786,6 @@ Flags=n,1,o,o,n,n,n,n
 Version=1,20090629171959,JLF                 ,20100903103124,MCD                 
 Nom=UGmtCarSt,Réservé distributeur,1
 DateM=C7D51665424BCB01
-Gel=1
-Nature=100
-Flags=n,1,o,o,n,n,n,n
-[CHAMP]
-Version=1,20120724172147,JLF                 ,20120724172158,JLF                 
-Nom=UGmtContFam,Réservé distributeur,1
 Gel=1
 Nature=100
 Flags=n,1,o,o,n,n,n,n
@@ -3264,28 +3281,12 @@ Gel=1
 Nature=200
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20031106135125,FRO                 ,20090326145923,JLF
-Nom=ValDebDt,Date début validité,1
-DateM=16CD29111BAEC901
-Gel=1
-Nature=D8
-NomOdbc=DateDebutValidite
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,20060117111440,FRO                 ,20090304104637,ROOT                
 Nom=ValDt,Date validation action,1
 DateM=98F1851CAE9CC901
 Gel=1
 Nature=D8
 NomOdbc=DateValidationAction
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20031106135148,FRO                 ,20090326145935,JLF
-Nom=ValFinDt,Date fin validité,1
-DateM=96B4C9181BAEC901
-Gel=1
-Nature=D8
-NomOdbc=DateFinValidite
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090709142831,JLF                 ,20090709142931,JLF                 
@@ -3532,6 +3533,7 @@ Nom=FrqPlanTb,1924,0,0,N,1
 Nom=CptValJr,1942,0,0,N,1
 Nom=ContratNo,1957,0,0,N,1
 Nom=CompetDomCod,1965,0,0,N,1
+Nom=ChoixAgenda,1967,0,0,N,1
 [/CHAMPL]
 nom=Sgam
 [CHAMPL]
@@ -3618,7 +3620,7 @@ Nom=UserMoDh,15,0,0,N,1
 [TABLE]
 Version=1,20100819152421,MCD                 ,20101119092222,JLF                 
 Nom=GmAct,Action réalisée sur la ressource matérielle,1
-DateM=706C4297D429CD01
+DateM=E977DDBA3406CF01
 NomOdbc=Action_Materiel
 Taille=1000,1000
 Pack=0,0
@@ -3691,7 +3693,11 @@ Nom=Poste,738,2,N,0,0,N,1
 Nom=ContratNo,746,2,N,0,0,N,1
 Nom=BrNo,754,2,N,0,0,N,1
 Nom=FinActNo,762,2,N,0,0,N,1
-Nom=Filler,770,2,N,0,131,N,1
+Nom=RhResFlg,770,2,N,0,0,N,1
+Nom=RmResFlg,771,2,N,0,0,N,1
+Nom=ConfirmeFlg,772,2,N,0,0,N,1
+Nom=CoutInt2Mt,773,2,N,0,0,N,1
+Nom=Filler,786,2,N,0,115,N,1
 Nom=UGmAct,901,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -3703,6 +3709,37 @@ Libelle=Numéro bon de remise
 NomOdbc=BondeRemise
 Nom=BrNo
 [/PROPLOC]
+[TABLE]
+Version=1,20131014150844,MCD                 ,20131014150936,MCD                 
+Nom=GmCarMes,Caractérisitique mesure standard,1
+DateM=B9AECA8BDEC8CE01
+NomOdbc=Car_Mes_Std
+Taille=400,400
+Pack=0,0
+CE=Ce1,2
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=OpMesCod,14,2,N,0,0,N,1
+Nom=CarCod,22,2,N,0,0,N,1
+Nom=UserCr,30,2,N,0,0,N,1
+Nom=UserMo,50,2,N,0,0,N,1
+Nom=UserTrace,70,2,N,0,0,N,1
+Nom=ValMinA,98,2,N,0,0,N,1
+Nom=ValMaxA,108,2,N,0,0,N,1
+Nom=ItMiniA,118,2,N,0,0,N,1
+Nom=Filler,128,2,N,0,173,N,1
+Nom=UGmCarMes,301,2,N,0,0,N,1
+[/CHAMPS]
 [TABLE]
 Version=1,20100916105713,MCD                 ,20100916110030,MCD                 
 Nom=GmClasse,Classe de tolérances,1
@@ -3782,51 +3819,6 @@ ZoomRes=1
 Nom=Lib
 [/PROPLOC]
 [TABLE]
-Version=1,20120724110403,JLF                 ,20120724171106,JLF                 
-Nom=GmCont,Contrat sur matériel,1
-DateM=4DB0082DB169CD01
-NomOdbc=Contrat_Materiel
-Taille=500,500
-Pack=0,0
-CE=Ce1,1
-[CHAMPS]
-Nom=Ce1,1,2,N,0,0,N,1
-Nom=Ce2,2,2,N,0,0,N,1
-Nom=Ce3,3,2,N,0,0,N,1
-Nom=Ce4,4,2,N,0,0,N,1
-Nom=Ce5,5,2,N,0,0,N,1
-Nom=Ce6,6,2,N,0,0,N,1
-Nom=Ce7,7,2,N,0,0,N,1
-Nom=Ce8,8,2,N,0,0,N,1
-Nom=Ce9,9,2,N,0,0,N,1
-Nom=CeA,10,2,N,0,0,N,1
-Nom=Dos,11,2,N,0,0,N,1
-Nom=ContratNo,14,2,N,0,0,N,1
-Nom=UserCr,22,2,N,0,0,N,1
-Nom=UserMo,42,2,N,0,0,N,1
-Nom=UserTrace,62,2,N,0,0,N,1
-Nom=CeNote,90,2,N,0,0,N,1
-Nom=Note,91,2,N,0,0,N,1
-Nom=CeJoint,99,2,N,0,0,N,1
-Nom=Joint,100,2,N,0,0,N,1
-Nom=TiersTyp,108,2,N,0,0,N,1
-Nom=TiersIndividu,109,2,N,0,0,N,1
-Nom=Contrat,129,2,N,0,0,N,1
-Nom=Lib80,154,2,N,0,0,N,1
-Nom=ContratFam,234,2,N,0,0,N,1
-Nom=ValDebDt,242,2,N,0,0,N,1
-Nom=ValFinDt,250,2,N,0,0,N,1
-Nom=TtcMt,258,2,N,0,0,N,1
-Nom=FaDt,271,2,N,0,0,N,1
-Nom=FaNo,279,2,N,0,0,N,1
-Nom=Filler,287,2,N,0,114,N,1
-Nom=UGmCont,401,2,N,0,0,N,1
-[/CHAMPS]
-[PROPLOC]
-Flags=i,i,i,o,i,i,i,i
-Nom=Tiers
-[/PROPLOC]
-[TABLE]
 Version=1,20101022084928,MCD                 ,20101022093621,MCD                 
 Nom=GmCpt,Compteurs matériel,1
 DateM=D6F5190A4ACFCB01
@@ -3896,7 +3888,7 @@ Nom=UgmFcar,301,2,N,0,0,N,1
 [TABLE]
 Version=1,20110614114310,JLF                 ,20110614145005,JLF                 
 Nom=GmFent,Entête fiche de mesure,1
-DateM=3E18B195912ACC01
+DateM=CA1C22441AFCD001
 Taille=400,400
 Pack=0,0
 CE=Ce1,1
@@ -3920,10 +3912,11 @@ Nom=DocNo,90,2,N,0,0,N,1
 Nom=DocInd,98,2,N,0,0,N,1
 Nom=UserMesDh,100,2,N,0,0,N,1
 Nom=UserMes,114,2,N,0,0,N,1
-Nom=Classe,134,2,N,0,0,N,1
-Nom=TxtNote,142,2,N,0,0,N,1
-Nom=RmNo,150,2,N,0,0,N,1
-Nom=Filler,158,2,N,0,143,N,1
+Nom=GrSpec,134,2,N,0,0,N,1
+Nom=Classe,175,2,N,0,0,N,1
+Nom=TxtNote,183,2,N,0,0,N,1
+Nom=RmNo,191,2,N,0,0,N,1
+Nom=Filler,199,2,N,0,102,N,1
 Nom=UgmFent,301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
@@ -4210,7 +4203,7 @@ Nom=UGmLigMat,201,2,N,0,0,N,1
 [TABLE]
 Version=1,20100819143303,MCD                 ,20100819151638,MCD                 
 Nom=GmMat,Fiche matériel,1
-DateM=F047EDCD38D0CC01
+DateM=1268EC11CC8BD001
 NomOdbc=RessourceMateriel
 Taille=1000,1000
 Pack=0,0
@@ -4256,8 +4249,7 @@ Nom=GrSpec,448,2,N,0,0,N,1
 Nom=Classe,489,2,N,0,0,N,1
 Nom=GarantieFinDt,497,2,N,0,0,N,1
 Nom=CleFlg,505,2,N,0,0,N,1
-Nom=ContratNo,506,2,N,0,0,N,1
-Nom=Filler,514,2,N,0,387,N,1
+Nom=Filler,506,2,N,0,395,N,1
 Nom=UGmMat,901,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -4267,7 +4259,7 @@ Nom=Tiers
 [TABLE]
 Version=1,20110127133222,MCD                 ,20110127134531,MCD                 
 Nom=GmOpMes,Opération mesure standard,1
-DateM=2C0655BE72F3CB01
+DateM=E0A220DEDEC8CE01
 NomOdbc=Operation_Mesure_Std
 Taille=1500,1500
 Pack=0,0
@@ -4291,23 +4283,19 @@ Nom=UserTrace,62,2,N,0,0,N,1
 Nom=CeNote,90,2,N,0,0,N,1
 Nom=Note,91,2,N,0,0,N,1
 Nom=Lib,99,2,N,0,0,N,1
-Nom=CarCod,139,2,N,0,0,N,1
-Nom=MmDesTb,147,2,N,0,0,N,1
-Nom=LibMes,387,2,N,0,0,N,1
-Nom=TxtNote,467,2,N,0,0,N,1
-Nom=Lib80,475,2,N,0,0,N,1
-Nom=ResuTyp,555,2,N,0,0,N,1
-Nom=ValMinA,556,2,N,0,0,N,1
-Nom=ValMaxA,566,2,N,0,0,N,1
-Nom=TpsMes,576,2,N,0,0,N,1
-Nom=TdocCod,584,2,N,0,0,N,1
-Nom=DocCod,592,2,N,0,0,N,1
-Nom=Media,600,2,N,0,0,N,1
-Nom=HsDt,640,2,N,0,0,N,1
-Nom=CeJoint,648,2,N,0,0,N,1
-Nom=Joint,649,2,N,0,0,N,1
-Nom=ItMiniA,657,2,N,0,0,N,1
-Nom=Filler,667,2,N,0,634,N,1
+Nom=MmDesTb,139,2,N,0,0,N,1
+Nom=LibMes,379,2,N,0,0,N,1
+Nom=TxtNote,459,2,N,0,0,N,1
+Nom=Lib80,467,2,N,0,0,N,1
+Nom=ResuTyp,547,2,N,0,0,N,1
+Nom=TpsMes,548,2,N,0,0,N,1
+Nom=TdocCod,556,2,N,0,0,N,1
+Nom=DocCod,564,2,N,0,0,N,1
+Nom=Media,572,2,N,0,0,N,1
+Nom=HsDt,612,2,N,0,0,N,1
+Nom=CeJoint,620,2,N,0,0,N,1
+Nom=Joint,621,2,N,0,0,N,1
+Nom=Filler,629,2,N,0,672,N,1
 Nom=UGmOpMes,1301,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -4358,7 +4346,8 @@ Nom=RealFinDt,270,2,N,0,0,N,1
 Nom=CptVal,278,2,N,0,0,N,1
 Nom=CptDelai,293,2,N,0,0,N,1
 Nom=ContratNo,308,2,N,0,0,N,1
-Nom=Filler,316,2,N,0,585,N,1
+Nom=RhResFlg,316,2,N,0,0,N,1
+Nom=Filler,317,2,N,0,584,N,1
 Nom=UGmPlan,901,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -4440,7 +4429,7 @@ Nom=UGmSoc,901,2,N,0,0,N,1
 [TABLE]
 Version=1,20080303111708,JLF                 ,20100820110247,MCD                 
 Nom=GmSocno,Dossier pour numérotation,1
-DateM=349532852D90CD01
+DateM=B7D34785C593D001
 NomOdbc=Dossier_GRM_Numerotation
 Taille=500,500
 Pack=0,0
@@ -4459,9 +4448,8 @@ Nom=CeA,10,2,N,0,0,N,1
 Nom=Dos,11,2,N,0,0,N,1
 Nom=ActNo,14,2,N,0,0,N,1
 Nom=RmNo,22,2,N,0,0,N,1
-Nom=ContratNo,30,2,N,0,0,N,1
-Nom=BrNo,38,2,N,0,0,N,1
-Nom=CptMajDt,46,2,N,0,0,N,1
+Nom=BrNo,30,2,N,0,0,N,1
+Nom=CptMajDt,38,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20101019105853,JLF                 ,20101021105840,MCD                 
@@ -4566,39 +4554,6 @@ ZoomRes=1
 Nom=Lib
 [/PROPLOC]
 [TABLE]
-Version=1,20120724171422,JLF                 ,20120725172926,JLF                 
-Nom=GmtContFam,Famille contrat,1
-DateM=06ED22EEB169CD01
-NomOdbc=Table_Famille_Contrat
-Taille=400,400
-Pack=0,0
-CE=Ce1,8
-[CHAMPS]
-Nom=Ce1,1,2,N,0,0,N,1
-Nom=Ce2,2,2,N,0,0,N,1
-Nom=Ce3,3,2,N,0,0,N,1
-Nom=Ce4,4,2,N,0,0,N,1
-Nom=Ce5,5,2,N,0,0,N,1
-Nom=Ce6,6,2,N,0,0,N,1
-Nom=Ce7,7,2,N,0,0,N,1
-Nom=Ce8,8,2,N,0,0,N,1
-Nom=Ce9,9,2,N,0,0,N,1
-Nom=CeA,10,2,N,0,0,N,1
-Nom=Dos,11,2,N,0,0,N,1
-Nom=ContratFam,14,2,N,0,0,N,1
-Nom=UserCr,22,2,N,0,0,N,1
-Nom=UserMo,42,2,N,0,0,N,1
-Nom=UserTrace,62,2,N,0,0,N,1
-Nom=CeNote,90,2,N,0,0,N,1
-Nom=Note,91,2,N,0,0,N,1
-Nom=Lib,99,2,N,0,0,N,1
-Nom=ContratTyp,139,2,N,0,0,N,1
-Nom=MoisNb,141,2,N,0,0,N,1
-Nom=HsDt,144,2,N,0,0,N,1
-Nom=Filler,152,2,N,0,149,N,1
-Nom=UGmtContFam,301,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
 Version=1,20101021150557,MCD                 ,20101116111841,MCD                 
 Nom=GmtCpt,Compteur,1
 DateM=AC314F4672F3CB01
@@ -4636,7 +4591,7 @@ Nom=Lib
 [TABLE]
 Version=1,20100819111201,MCD                 ,20120724171618,JLF                 
 Nom=GmtInt,Code intervention sur matériel,1
-DateM=2CE4CF6572F3CB01
+DateM=C74803513606CF01
 NomOdbc=Table_CodeIntervention_Materiel
 ChConf=Conf
 ConfPP=DGRM
@@ -4672,7 +4627,10 @@ Nom=GrRef,200,2,N,0,0,N,1
 Nom=UtilTyp,241,2,N,0,0,N,1
 Nom=Lib80,242,2,N,0,0,N,1
 Nom=LibAbr,322,2,N,0,0,N,1
-Nom=Filler,347,2,N,0,354,N,1
+Nom=RhResFlg,347,2,N,0,0,N,1
+Nom=RmResFlg,348,2,N,0,0,N,1
+Nom=ConfirmerFlg,349,2,N,0,0,N,1
+Nom=Filler,350,2,N,0,351,N,1
 Nom=UGmtInt,701,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -4983,7 +4941,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20101223151544,JLF                 ,20101227165527,JLF                 
 Nom=GmwDes000T2,Ligne liste rubriques pour désignation,1
-DateM=C0B450EDC607CF01
+DateM=7AE688C6D307CF01
 Taille=400,400
 Pack=0,0
 [CHAMPS]
@@ -5149,7 +5107,7 @@ Nom=Lib
 [TABLE]
 Version=1,20110103105043,MCD                 ,20110103105104,MCD                 
 Nom=GmwInt001T2,Ligne tableau inventaire détail matériel ,1
-DateM=F047EDCD38D0CC01
+DateM=1268EC11CC8BD001
 Taille=1200,1200
 Pack=0,0
 [CHAMPS]
@@ -5177,7 +5135,7 @@ Nom=Lib
 [TABLE]
 Version=1,20110103143801,MCD                 ,20110103143801,MCD                 
 Nom=GmwInt002T2,Ligne tableau inventaire détail par localisation ,1
-DateM=AEC29A87A106CD01
+DateM=1268EC11CC8BD001
 Taille=1200,1200
 Pack=0,0
 [CHAMPS]
@@ -5207,7 +5165,7 @@ Nom=Lib
 [TABLE]
 Version=1,20110104162214,MCD                 ,20110104162214,MCD                 
 Nom=GmwInt003T2,Ligne tableau inventaire détail emprunt,1
-DateM=F047EDCD38D0CC01
+DateM=1268EC11CC8BD001
 Taille=1200,1200
 Pack=0,0
 [CHAMPS]
@@ -5234,7 +5192,7 @@ Nom=LibInt
 [TABLE]
 Version=1,20110114114620,MCD                 ,20110114114620,MCD                 
 Nom=GmwInt004T2,Ligne tableau interventions en cours détail action,1
-DateM=706C4297D429CD01
+DateM=E977DDBA3406CF01
 Taille=1200,1200
 Pack=0,0
 [CHAMPS]
@@ -5265,10 +5223,10 @@ ZoomRes=1
 Nom=Lib
 [/PROPLOC]
 [TABLE]
-Version=1,20110118140436,MCD                 ,20110118140436,MCD                 
+Version=1,20110118140436,MCD                 ,20140626090701,MCD                 
 Nom=GmwInt005T2,Ligne tableau historique interventions detail action,1
-DateM=706C4297D429CD01
-Taille=1200,1200
+DateM=4F5B8B3A0D91CF01
+Taille=1500,1500
 Pack=0,0
 [CHAMPS]
 TableInsere=GmAct,1,1000,0,1
@@ -5277,7 +5235,9 @@ Nom=TypeCod,1009,2,N,0,0,N,1
 Nom=TiersTyp,1017,2,N,0,0,N,1
 Nom=TiersIndividu2,1018,2,N,0,0,N,1
 Nom=IntFam,1038,2,N,0,0,N,1
-Nom=UGmwInt005T2,1046,2,N,0,0,N,1
+Nom=DesRm,1046,2,N,0,0,N,1
+Nom=Lib,1126,2,N,0,0,N,1
+Nom=UGmwInt005T2,1166,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 NomOdbc=TiersProprietaire
@@ -5307,7 +5267,7 @@ Nom=Lib
 [TABLE]
 Version=1,20110120134414,MCD                 ,20110120134414,MCD                 
 Nom=GmwInt006T2,Ligne tableau inventaire anomalies détail action,1
-DateM=706C4297D429CD01
+DateM=E977DDBA3406CF01
 Taille=1200,1200
 Pack=0,0
 [CHAMPS]
@@ -5321,7 +5281,7 @@ Nom=UGmwInt006T2,1038,2,N,0,0,N,1
 [TABLE]
 Version=1,20110228143431,MCD                 ,20110301112006,MCD                 
 Nom=GmwInt007T1,Ligne tableau inventaire utilisation production,1
-DateM=706C4297D429CD01
+DateM=E977DDBA3406CF01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -5338,7 +5298,7 @@ Nom=UGmwInt007T1,1164,2,N,0,0,N,1
 [TABLE]
 Version=1,20110301111957,MCD                 ,20110301111957,MCD                 
 Nom=GmwInt008T1,Ligne tableau inventaire utilisation CRM,1
-DateM=706C4297D429CD01
+DateM=E977DDBA3406CF01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -5374,7 +5334,7 @@ Nom=UGmwInt009T1,345,2,N,0,0,N,1
 [TABLE]
 Version=1,20120828151316,MCD                 ,20120911110807,MCD                 
 Nom=GmwInt009T2,Ligne tableau suivi contrat détail,1
-DateM=E79286FD2190CD01
+DateM=BAAB97B71A5ACF01
 Taille=800,800
 Pack=0,0
 [CHAMPS]
@@ -5393,11 +5353,12 @@ Nom=Contrat,137,2,N,0,0,N,1
 Nom=FrqNb,162,2,N,0,0,N,1
 Nom=FrqTyp,170,2,N,0,0,N,1
 Nom=CoutIntMt,171,2,N,0,0,N,1
-Nom=CoutExtMt,184,2,N,0,0,N,1
-Nom=RealTps,197,2,N,0,0,N,1
-Nom=Lib,204,2,N,0,0,N,1
-Nom=LibInt,244,2,N,0,0,N,1
-Nom=UGmwInt009T2,324,2,N,0,0,N,1
+Nom=CoutInt2Mt,184,2,N,0,0,N,1
+Nom=CoutExtMt,197,2,N,0,0,N,1
+Nom=RealTps,210,2,N,0,0,N,1
+Nom=Lib,217,2,N,0,0,N,1
+Nom=LibInt,257,2,N,0,0,N,1
+Nom=UGmwInt009T2,337,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110107120403,MCD                 ,20110107120426,MCD                 
@@ -5443,7 +5404,7 @@ Nom=UGmwInt010T2,640,2,N,0,0,N,1
 [TABLE]
 Version=1,20110107120505,MCD                 ,20110107120604,MCD                 
 Nom=GmwInt010T3,Ligne tableau de bord action,1
-DateM=706C4297D429CD01
+DateM=E977DDBA3406CF01
 Taille=1200,1200
 Pack=0,0
 [CHAMPS]
@@ -5455,7 +5416,7 @@ Nom=UGmwInt010T3,1017,2,N,0,0,N,1
 [TABLE]
 Version=1,20110328150004,MCD                 ,20110328150004,MCD                 
 Nom=GmwInt011T1,Ligne tableau de bord maintenance,1
-DateM=C1A50F45AB7BCD01
+DateM=9DB781AA1A5ACF01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -5470,11 +5431,12 @@ Nom=TotNbTb,165,2,N,0,0,N,1
 Nom=CoutArretMt,183,2,N,0,0,N,1
 Nom=CoutExtMt,196,2,N,0,0,N,1
 Nom=CoutIntMt,209,2,N,0,0,N,1
-Nom=CoutTotal,222,2,N,0,0,N,1
-Nom=TotTps,235,2,N,0,0,N,1
-Nom=PourCentTb,247,2,N,0,0,N,1
-Nom=Graph,268,2,N,0,0,N,1
-Nom=UGmwInt011T1,780,2,N,0,0,N,1
+Nom=CoutInt2Mt,222,2,N,0,0,N,1
+Nom=CoutTotal,235,2,N,0,0,N,1
+Nom=TotTps,248,2,N,0,0,N,1
+Nom=PourCentTb,260,2,N,0,0,N,1
+Nom=Graph,281,2,N,0,0,N,1
+Nom=UGmwInt011T1,793,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1
@@ -5483,7 +5445,7 @@ Nom=LibInt
 [TABLE]
 Version=1,20110328150612,MCD                 ,20110328150612,MCD                 
 Nom=GmwInt011T2,Ligne tableau  de bord maintenance groupe,1
-DateM=BE83661F8F7BCD01
+DateM=91648D961A5ACF01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -5497,11 +5459,12 @@ Nom=TotNbTb,169,2,N,0,0,N,1
 Nom=CoutArretMt,187,2,N,0,0,N,1
 Nom=CoutExtMt,200,2,N,0,0,N,1
 Nom=CoutIntMt,213,2,N,0,0,N,1
-Nom=CoutTotal,226,2,N,0,0,N,1
-Nom=TotTps,239,2,N,0,0,N,1
-Nom=PourCentTb,251,2,N,0,0,N,1
-Nom=Graph,272,2,N,0,0,N,1
-Nom=UGmwInt011T2,784,2,N,0,0,N,1
+Nom=CoutInt2Mt,226,2,N,0,0,N,1
+Nom=CoutTotal,239,2,N,0,0,N,1
+Nom=TotTps,252,2,N,0,0,N,1
+Nom=PourCentTb,264,2,N,0,0,N,1
+Nom=Graph,285,2,N,0,0,N,1
+Nom=UGmwInt011T2,797,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1
@@ -5510,7 +5473,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20110328151018,MCD                 ,20120816113131,MCD                 
 Nom=GmwInt011T3,Ligne tableau de bord maintenance action,1
-DateM=14AB70EB917BCD01
+DateM=E977DDBA3406CF01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -5599,7 +5562,7 @@ Nom=Lib
 [TABLE]
 Version=1,20101029120614,JLF                 ,20101029120838,JLF                 
 Nom=GmwMat010T1,Ligne tableau désignations matériels,1
-DateM=F047EDCD38D0CC01
+DateM=1268EC11CC8BD001
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -5649,7 +5612,7 @@ Nom=UGmwMat202T1,1718,2,N,0,0,N,1
 [TABLE]
 Version=1,20120301145610,MCD                 ,20120301145719,MCD                 
 Nom=GmwMat202T2,Ligne tableau matériel explorateur matériel,1
-DateM=1AD56CD881FBCC01
+DateM=1268EC11CC8BD001
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -5660,7 +5623,7 @@ Nom=UGmwMat202T2,1002,2,N,0,0,N,1
 [TABLE]
 Version=1,20101209090020,MCD                 ,20101209090214,MCD                 
 Nom=GmwMat300T1,Ligne tableau interventions en cours,1
-DateM=706C4297D429CD01
+DateM=E977DDBA3406CF01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -5686,13 +5649,14 @@ Nom=UgmwMat300T2,748,2,N,0,0,N,1
 [TABLE]
 Version=1,20110428113908,MCD                 ,20110429091840,MCD                 
 Nom=GmwMat302T1,Ligne tableau matériel utilisé,1
-DateM=F047EDCD38D0CC01
+DateM=1268EC11CC8BD001
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
 TableInsere=GmMat,1,1000,0,1
 Nom=ActNo,1001,2,N,0,0,N,1
-Nom=UGmwMat302T1,1009,2,N,0,0,N,1
+Nom=ActTermFlg,1009,2,N,0,0,N,1
+Nom=UGmwMat302T1,1010,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110623114533,JLF                 ,20110623114533,JLF                 
@@ -5849,7 +5813,7 @@ Nom=UGmwPla010T2,1182,2,N,0,0,N,1
 [TABLE]
 Version=1,20110107095024,JLF                 ,20110107095024,JLF                 
 Nom=GmwUti002T1,Ligne tableau désignations matériels,1
-DateM=F047EDCD38D0CC01
+DateM=1268EC11CC8BD001
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -5876,7 +5840,7 @@ Nom=CleHfilter,8063,2,N,0,0,N,1
 [TABLE]
 Version=1,2003 4280000,FRO ,20090922091643,JLF                 
 Nom=Xq,Zone d'échange pour HQL,1
-DateM=0FB59D6447E2CB01
+DateM=A50EF61FDBFBCE01
 FlagOdbc=o
 Taille=6100,6100
 Pack=0,0
@@ -6030,35 +5994,27 @@ Nom=Contrat,633,2,N,0,0,N,1
 Nom=ContratFam,658,2,N,0,0,N,1
 Nom=PrevDebDH,666,2,N,0,0,N,1
 Nom=User,680,2,N,0,0,N,1
-Nom=Filler,700,2,N,0,121,N,1
+Nom=OpMesCod,700,2,N,0,0,N,1
+Nom=ContratNo,708,2,N,0,0,N,1
+Nom=Filler,716,2,N,0,105,N,1
 Nom=UXz,821,2,N,0,0,N,1
 [/CHAMPS]
 [BASE]
-Version=1,20100819152351,MCD                 ,20110929135407,MCD                 
+Version=1,20100819152351,MCD                 ,20131230142358,JLF                 
 Nom=GmfAction,Actions réalisées,1
-DateM=5B8E4F7E9E7ECC01
+DateM=1A7D46656205CF01
 Fichier=I,0,gmfaction.dhfi
-Versionbase=7.0 
+Versionbase=7.3
 DateMIndex=07D37F1C9E7ECC01
 [TABLES]
 Nom=GmAct,0
 [/TABLES]
 [BASE]
-Version=1,20120724110111,JLF                 ,20120724110455,JLF                 
-Nom=GmfCont,Contrats matériel,1
-DateM=1FDC53DF7A69CD01
-Fichier=I,0,gmfcont.dhfi
-Versionbase=7.2
-DateMIndex=0BEFCD9CB269CD01
-[TABLES]
-Nom=GmCont,0
-[/TABLES]
-[BASE]
-Version=1,20100819105914,MCD                 ,20111004152536,MCD                 
+Version=1,20100819105914,MCD                 ,20150521145657,JLF                 
 Nom=GmfDos,Paramètres dossier GRM,1
-DateM=513E051A9982CC01
+DateM=E7870A9FC593D001
 Fichier=I,0,gmfdos.dhfi
-Versionbase=7.0 
+Versionbase=7.4
 DateMIndex=F0326D5ABA4DCB01
 [TABLES]
 Nom=GmSoc,0
@@ -6066,11 +6022,11 @@ Nom=GmSocno,0
 Nom=GmSocxp,0
 [/TABLES]
 [BASE]
-Version=1,20110614113955,JLF                 ,20111004152540,MCD                 
+Version=1,20110614113955,JLF                 ,20151001092538,JLF                 
 Nom=GmfFicMes,Fiches de mesure,1
-DateM=22FF851C9982CC01
+DateM=363AFB5E1AFCD001
 Fichier=I,0,gmfficmes.dhfi
-Versionbase=7.0 
+Versionbase=7.5
 DateMIndex=B6CA6E9AEC30CC01
 [TABLES]
 Nom=GmFcar,0
@@ -6118,22 +6074,22 @@ Nom=GmLig,0
 Nom=GmLigMat,0
 [/TABLES]
 [BASE]
-Version=1,20100819143240,MCD                 ,20111004152604,MCD                 
+Version=1,20100819143240,MCD                 ,20150511113556,MCD                 
 Nom=GmfMat,Fiche ressource matériel,1
-DateM=3A7B9A2A9982CC01
+DateM=49EAC8E1CD8BD001
 Fichier=I,0,gmfmat.dhfi
-Versionbase=7.0 
+Versionbase=7.4 
 DateMIndex=674F8FE331D4CB01
 [TABLES]
 Nom=GmCpt,0
 Nom=GmMat,0
 [/TABLES]
 [BASE]
-Version=1,20100820084502,MCD                 ,20111004152609,MCD                 
+Version=1,20100820084502,MCD                 ,20131230142437,JLF                 
 Nom=GmfPlan,Interventions à planifier,1
-DateM=1B629F2D9982CC01
+DateM=B410FA7C6205CF01
 Fichier=I,0,gmfplan.dhfi
-Versionbase=7.0 
+Versionbase=7.3
 DateMIndex=A0D85751227CCB01
 [TABLES]
 Nom=GmPlan,0
@@ -6149,13 +6105,14 @@ DateMIndex=5F8F45CC3ED4CB01
 Nom=GmGent,0
 [/TABLES]
 [BASE]
-Version=1,20110127133144,MCD                 ,20111004152617,MCD                 
+Version=1,20110127133144,MCD                 ,20131014152018,MCD                 
 Nom=GmfProcMes,Processus de mesurage,1
-DateM=27FFAF329982CC01
+DateM=A91CD920E0C8CE01
 Fichier=I,0,gmfprocmes.dhfi
-Versionbase=7.0 
-DateMIndex=3EAA295020BECB01
+Versionbase=7.3 
+DateMIndex=4A3C35E8EF78CF01
 [TABLES]
+Nom=GmCarMes,0
 Nom=GmOpMes,0
 [/TABLES]
 [BASE]
@@ -6179,16 +6136,15 @@ DateMIndex=8BB19DFCC49ACC01
 Nom=GmCmat,0
 [/TABLES]
 [BASE]
-Version=1,20100819110259,MCD                 ,20111004152630,MCD                 
+Version=1,20100819110259,MCD                 ,20151116105930,JLF                 
 Nom=GmfTab,Tables de base GRM,1
-DateM=25BA273A9982CC01
+DateM=8EA1957C5520D101
 Fichier=I,0,gmftab.dhfi
-Versionbase=7.0 
-DateMIndex=18128E31B269CD01
+Versionbase=7.4
+DateMIndex=A375C3B6A188D001
 [TABLES]
 Nom=GmtCar,0
 Nom=GmtCarSt,0
-Nom=GmtContFam,0
 Nom=GmtCpt,0
 Nom=GmtInt,0
 Nom=GmtIntFam,0
@@ -6346,16 +6302,6 @@ CLE=GmfAction,L,Ce2,2,1,n,1,n
 Nom=Dos,1,0,
 Nom=LocaCod,4,0,
 Nom=RmCod,24,0,
-[/CHAMPS]
-[/INDEX]
-[INDEX]
-Version=1,20120724173805,JLF                 ,20120724173900,JLF                 
-Nom=Index_A,Clé A sur numéro contrat,1
-DateM=4E3A6F72B269CD01
-CLE=GmfCont,A,Ce1,2,1,o,1,n
-[CHAMPS]
-Nom=Dos,1,0,
-Nom=ContratNo,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -6764,14 +6710,24 @@ Nom=OpMesCod,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20110127134626,MCD                 ,20110127134626,MCD                 
+Version=1,20110127134626,MCD                 ,20140526163640,JLF                 
 Nom=Index_B,Par code caractéristique,1
-DateM=7EC7F53520BECB01
-CLE=GmfProcMes,B,Ce1,2,1,n,1,n
+DateM=4A3C35E8EF78CF01
+CLE=GmfProcMes,B,Ce1,2,2,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
-Nom=CarCod,4,0,
-Nom=OpMesCod,12,0,
+Nom=OpMesCod,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130802104746,JLF                 ,20130802104816,JLF                 
+Nom=Index_C,Par code opération,1
+DateM=2C69A5075D8FCE01
+CLE=GmfProcMes,C,Ce1,2,2,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=OpMesCod,4,0,
+Nom=CarCod,12,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -6892,16 +6848,6 @@ Nom=CptCod,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20120724173438,JLF                 ,20120724173624,JLF                 
-Nom=Index_I,Clé I sur famille contrat,1
-DateM=5CA851FAB169CD01
-CLE=GmfTab,I,Ce1,2,8,o,1,n
-[CHAMPS]
-Nom=Dos,1,0,
-Nom=ContratFam,4,0,
-[/CHAMPS]
-[/INDEX]
-[INDEX]
 Version=1,20100916111410,MCD                 ,20101130152335,MCD                 
 Nom=Index_B,Par spécification\v carac\v désig\v classe,1
 DateM=3A2B8E2C9A90CB01
@@ -6969,7 +6915,6 @@ Nom=GmfAction,GmAct,Index_I,0
 Nom=GmfAction,GmAct,Index_J,0
 Nom=GmfAction,GmAct,Index_K,0
 Nom=GmfAction,GmAct,Index_L,0
-Nom=GmfCont,GmCont,Index_A,0
 Nom=GmfDos,GmSoc,Index_A,0
 Nom=GmfDos,GmSocno,Index_B,0
 Nom=GmfDos,GmSocxp,Index_C,0
@@ -7007,7 +6952,8 @@ Nom=GmfPlanMes,GmGent,Index_A,0
 Nom=GmfPlanMes,GmGent,Index_B,0
 Nom=GmfPlanMes,GmGent,Index_C,0
 Nom=GmfProcMes,GmOpMes,Index_A,0
-Nom=GmfProcMes,GmOpMes,Index_B,0
+Nom=GmfProcMes,GmCarMes,Index_B,0
+Nom=GmfProcMes,GmCarMes,Index_C,0
 Nom=GmfRub,GmQstRbq,Index_A,0
 Nom=GmfRub,GmQstRbq,Index_B,0
 Nom=GmfSpec,GmCmat,Index_A,0
@@ -7019,7 +6965,6 @@ Nom=GmfTab,GmtCarSt,Index_D,0
 Nom=GmfTab,GmtNiv,Index_E,0
 Nom=GmfTab,GmtCar,Index_F,0
 Nom=GmfTab,GmtCpt,Index_H,0
-Nom=GmfTab,GmtContFam,Index_I,0
 Nom=GmfToler,GmToler,Index_B,0
 Nom=GmfToler,GmClasse,Index_A,0
 Nom=GmfToler,GmClasse,Index_C,0

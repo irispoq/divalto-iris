@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20021014173940,hc  ,20131104185713,JLF                 
+Version=5,20021014173940,hc  ,20160506094940,DEMO                
 Nom=ccfdd.dhsd,ccfdd.dhsd,1
 [CHAMP]
 Version=1,20081212190515,ROOT                ,20081212190951,ROOT                
@@ -106,11 +106,11 @@ Gel=3
 Nature=1,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1996 2160000,c321,20120319141133,MS                  
+Version=1,1996 2160000,c321,20150902104939,MS                  
 Nom=Adr,Adresse,1
-DateM=B8333FCED105CD01
+DateM=E33DC34D5CE5D001
 Gel=3
-Nature=139
+Nature=141
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20070430183614,FH                  ,20070430183614,FH                  
@@ -570,6 +570,34 @@ DateM=D8DCC9CE1899C601
 Gel=3
 Nature=1,0*4*4
 Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20130807171743,JLF                 ,20130807171743,JLF                 
+Nom=AxeDeb,Axe début,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807170422,JLF                 ,20130807170438,JLF                 
+Nom=AxeDebTb,Tableau d'axes début,1
+DateM=7719D3F88093CE01
+Gel=1
+Nature=8*20
+NomOdbc=AxeDebut
+Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,20130807171819,JLF                 ,20130807171819,JLF                 
+Nom=AxeFin,Axe fin,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807170459,JLF                 ,20130807170523,JLF                 
+Nom=AxeFinTb,Tableau d'axes fin,1
+DateM=78269B018193CE01
+Gel=1
+Nature=8*20
+NomOdbc=AxeFin
+Flags=n,1,n,o,n,n,n,n
 [CHAMP]
 Version=1,1996 2160000,hc  ,20090622175900,CI                  
 Nom=AxeLib,Nom de l'axe,1
@@ -1602,6 +1630,13 @@ Gel=3
 Nature=1,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20160415165752,MS                  ,20160415170022,MS                  
+Nom=ClotAnCod,Indicateur clôture avec à nouveaux,1
+DateM=47E5ED882797D101
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,199610300000,c321,20071123171032,MS                  
 Nom=ClotCod,Indicateur de clôture,1
 DateM=D89050571E99C601
@@ -1613,12 +1648,41 @@ NomOdbc=IndicExerciceClot
 Flags=o,1,n,n,n,n,n,n
 presentation=2
 [CHAMP]
+Version=1,20160415165832,MS                  ,20160415170017,MS                  
+Nom=ClotLettCod,Indicateur clôture avec ou sans détail des écritures non lettrées,1
+DateM=E5A2B8852797D101
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20160415170033,MS                  ,20160422113004,MS                  
+Nom=ClotPointCod,Indicateur clôture avec ou sans détail des écritures non pointées,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1999 3 40000,vh  ,20050114100246,HC
 Nom=CocheTab,Impression case à cocher,1
 DateM=D844D55A1E99C601
 Gel=3
 Nature=1*2
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130423185508,VJ                  ,20130423185923,VJ                  
+Nom=CoeAdm,Coefficient d'admission,1
+DateM=919EDEE74340CE01
+Gel=1
+Nature=7,5
+NomOdbc=CoeAdm
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130423185420,VJ                  ,20130423185911,VJ                  
+Nom=CoeAss,Coefficient d'assujettissement,1
+DateM=86AB8EE04340CE01
+Gel=1
+Nature=7,5
+NomOdbc=CoeAss
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2002 6140000,hc  ,20050114100249,HC
 Nom=Coef,Coefficient,1
@@ -1632,6 +1696,14 @@ DateM=D82E745E1E99C601
 Gel=3
 Nature=7,2*24
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130423185451,VJ                  ,20130423185917,VJ                  
+Nom=CoeTax,Coefficient de taxation,1
+DateM=8F98FCE34340CE01
+Gel=1
+Nature=7,5
+NomOdbc=CoeTax
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2002 9260000,hc  ,20050114100257,HC
 Nom=ColCum,Cumuls collectif,1
@@ -1984,10 +2056,11 @@ Gel=3
 Nature=8
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120319141217,MS                  ,20120319141235,MS                  
+Version=1,20120319141217,MS                  ,20150902104932,MS                  
 Nom=CPostal,Code Postal,1
+DateM=82E757495CE5D001
 Gel=1
-Nature=8
+Nature=10
 NomOdbc=CodePostal
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
@@ -2115,6 +2188,12 @@ Nature=8*2
 Attribut=PARAM
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130604175957,MS                  ,20130604181557,MS                  
+Nom=CptColTb,Comptes collectifs par défaut,1
+Gel=1
+Nature=8*6
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,1996 4220000,c3ch,20050114101227,HC
 Nom=CptCour,Compte courant,1
 DateM=5B224F052099C601
@@ -2142,6 +2221,14 @@ DateM=D833A9592199C601
 Gel=3
 Nature=8
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807170132,JLF                 ,20130807170325,JLF                 
+Nom=CptDebTb,Tableau de comptes début,1
+DateM=7940CFCE8093CE01
+Gel=1
+Nature=8*20
+NomOdbc=CompteDebut
+Flags=n,1,n,o,n,n,n,n
 [CHAMP]
 Version=1,2002 9170000,hc  ,20050114101240,HC
 Nom=CptDev,Devise du cumul,1
@@ -2291,6 +2378,20 @@ DateM=168B72262199C601
 Gel=3
 Nature=256
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807171516,JLF                 ,20130807171516,JLF                 
+Nom=CptFin,Compte fin,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807170219,JLF                 ,20130807170335,JLF                 
+Nom=CptFinTb,Tableau de comptes fin,1
+DateM=D51A2AD98093CE01
+Gel=1
+Nature=8*20
+NomOdbc=CompteFin
+Flags=n,1,n,o,n,n,n,n
 [CHAMP]
 Version=1,1996 2160000,hc  ,20050114155123,HC
 Nom=CptGen,Compte de génération,1
@@ -2513,6 +2614,14 @@ Gel=3
 Nature=16,D0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1989 7190000,MJV ,20041222154137,MARIE JO            
+Nom=CptS,Compte de stock,1
+DateM=203437BBB2C7C401
+Gel=1
+Nature=8
+NomOdbc=CompteStock
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,2000 9220000,hc  ,20071126113309,MS                  
 Nom=CptSais,Option saisie du compte,1
 DateM=D8A2EFD41C99C601
@@ -2622,6 +2731,12 @@ Nature=16,D0
 NomOdbc=CoutRevient
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20041111070548,MARIE JO            ,20041111070548,MARIE JO            
+Nom=CrCnMt,Montant provision,1
+Gel=1
+Nature=17,6
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20030514175753,JPS                 ,20090609115002,CI                  
 Nom=CrDDh,Date de création début,1
 DateM=245D70492299C601
@@ -2714,6 +2829,14 @@ DateM=389834122399C601
 Gel=3
 Nature=4
 Attribut=PARAM
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2000 1250000,MJV ,20050106105732,MARIE JO            
+Nom=CrTotMt,Montant total coût de revient vtl,1
+DateM=F02B8F9EB4C7C401
+Gel=1
+Nature=17,6
+NomOdbc=MtCR
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20120903163527,VJ                  ,20120907162333,VJ                  
@@ -2991,6 +3114,14 @@ Nom=Depar,Département,1
 Gel=1
 Nature=2
 Flags=n,1,n,o,n,n,n,n
+[CHAMP]
+Version=1,1990 4180000,MJV ,20100727153955,SN                  
+Nom=Depo,Dépôt,1
+Gel=1
+Nature=3
+Attribut=PARAM
+NomOdbc=Depot
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1997 1220000,hc  ,20050114161615,HC
 Nom=Derog,Amortissement dérogatoire,1
@@ -3272,6 +3403,13 @@ Gel=3
 Nature=8,D0
 Flags=o,1,o,n,n,n,n,n
 [CHAMP]
+Version=1,20130807150434,JLF                 ,20130807150447,JLF                 
+Nom=DstAxeNo,Numéro axe destination,1
+Gel=1
+Nature=1,0
+NomOdbc=AxeDestination
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,2002 9170000,hc  ,20060627135801,DEMO                
 Nom=DtTab,Dates,1
 DateM=A71AB2F0E099C601
@@ -3286,6 +3424,79 @@ Gel=3
 Nature=12,2
 Attribut=PARAM
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130826143254,JLF                 ,20130826143303,JLF                 
+Nom=DvAnCheminCod,Code chemin pour export csv déversement analytique,1
+DateM=F401426858A2CE01
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807151839,JLF                 ,20130807152122,JLF                 
+Nom=DvAnCleCalcFlg,Indicateur si clé calculée,1
+DateM=271E6E027193CE01
+Gel=1
+Nature=1,0
+NomOdbc=CleCalculee
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807120209,JLF                 ,20130807120224,JLF                 
+Nom=DvAnCleCod,Code régle clé de répartition pour déversement analytique,1
+Gel=1
+Nature=8
+NomOdbc=CleRepartition
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807111615,JLF                 ,20130807111658,JLF                 
+Nom=DvAnDDt,Date de début recherche ecritures pour déversement analytique,1
+Gel=1
+Nature=D8
+NomOdbc=DateDebutDeversement
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807113601,JLF                 ,20130807113611,JLF                 
+Nom=DvAnDH,Date + Heure déversement analytique,1
+Gel=1
+Nature=DH
+NomOdbc=DateHeureDeversement
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807112009,JLF                 ,20130807152150,JLF                 
+Nom=DvAnFlg,Indicateur si section analytique à redéverser,1
+DateM=8E7F79137193CE01
+Gel=1
+Nature=1,0
+NomOdbc=EstARedeverser
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807160040,JLF                 ,20130807160302,JLF                 
+Nom=DvAnPerCod,Code période modèle pour calcul clés de répartition,1
+DateM=B26696CF7693CE01
+Gel=1
+Nature=8
+NomOdbc=CodePeriodeCalcul
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807170800,JLF                 ,20130807170813,JLF                 
+Nom=DvAnPerFlg,Indicateur si période saisie ou selon modèle,1
+Gel=1
+Nature=1,0
+NomOdbc=PeriodeSaisie
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807161625,JLF                 ,20130807161630,JLF                 
+Nom=DvAnPerTyp,Type de période,1
+Gel=1
+Nature=1,0
+NomOdbc=TypePeriode
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807113126,JLF                 ,20130807113358,JLF                 
+Nom=DvAnStatus,Statut déversement analytique,1
+Gel=1
+Nature=1,0
+NomOdbc=StatutDeversement
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1998 3200000,hc  ,20050114103412,HC
 Nom=Ecart,Ecart budget / réalisé en montant,1
@@ -4056,6 +4267,14 @@ Gel=3
 Nature=2
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1989 1240000,MJV ,20060912112155,MARIE JO            
+Nom=EnrNo,No enregistrement,1
+DateM=0C5D01E44CD6C601
+Gel=1
+Nature=9,0
+NomOdbc=EnregNo
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,199612230000,c321,20100708172223,VJ                  
 Nom=EpuCod,Indicateur d'épuration,1
 DateM=D8960A261C99C601
@@ -4071,6 +4290,25 @@ DateM=471A5233E399C601
 Gel=3
 Nature=8
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199610300000,C321,20061228091537,JLSI                
+Nom=ErrNb,Nombre d'erreurs,1
+DateM=0EBDDB5A582AC701
+Gel=1
+Nature=5,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140416092523,VJ                  ,20140416100709,VJ                  
+Nom=EscAccCpt,Compte escompte accordé,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140416092557,VJ                  ,20140416100713,VJ                  
+Nom=EscObtCpt,Compte escompte obtenue,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1997 1220000,hc  ,20071127102849,MS                  
 Nom=Etat,Etat du bien immobilisé,1
@@ -4164,11 +4402,12 @@ Gel=3
 Nature=1,0
 Flags=o,1,o,n,n,n,n,n
 [CHAMP]
-Version=1,20120831091354,VJ                  ,20120831150809,VJ                  
+Version=1,20120831091354,VJ                  ,20130308160021,MS                  
 Nom=ExDt,Date d'exigibilité,1
 DateM=F57A07AB7987CD01
 Gel=1
 Nature=D8
+NomOdbc=DateExigibilite
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2001 1290000,pb  ,20060627141434,DEMO                
@@ -4381,6 +4620,21 @@ Choix=ccfdmc.dhfi
 NomChoix=FAFL
 Flags=o,1,n,n,n,n,n,n
 presentation=2
+[CHAMP]
+Version=1,1989 1230000,MJV ,20100727153822,SN                  
+Nom=Fam,Famille statistique article,1
+Gel=1
+Nature=8
+Attribut=PARAM
+NomOdbc=FamilleStat
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6230000,MJV ,20061113140737,MARIE JO            
+Nom=FamTb,Tableau famille statistique article,1
+DateM=AA745AB12407C701
+Gel=1
+Nature=8*3
+Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,199612 30000,hc  ,20060627141928,DEMO                
 Nom=FCle,Clé utilisée lors de la lecture par intitulé,1
@@ -4764,6 +5018,13 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130308155929,MS                  ,20130308160000,MS                  
+Nom=FlTvaAL,Indicateur auto-liquidation de TVA,1
+Gel=1
+Nature=1,0
+NomOdbc=FlagAutoLiquidation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20080818105336,MS                  ,20081104153123,MS                  
 Nom=FlZero,Indicateur montants de la ligne nuls,1
 DateM=1FC7A5101A01C901
@@ -4799,6 +5060,19 @@ Gel=3
 Nature=120
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20131023165350,VJ                  ,20131023165350,VJ                  
+Nom=GenTvacod,Option de génération de tva,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130220113153,FOCAL_AME           ,20130220121228,FOCAL_AME           
+Nom=GroupId,GroupId,1
+DateM=2DAA5D2B5B0FCE01
+Gel=1
+Nature=150
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1997 1280000,c321,20071127112515,MS                  
 Nom=GrpCptCod,Indicateur de compte inter-groupe,1
 DateM=D814082D1C99C601
@@ -4807,6 +5081,13 @@ Nature=1,0
 NomOdbc=IndicCompteInterGroupe
 Flags=o,1,n,n,n,n,n,n
 presentation=3
+[CHAMP]
+Version=1,198910130000,MJV ,20061113152925,MARIE JO            
+Nom=GrRef,Référence sous-référence1 sous-référence2,1
+DateM=3E98871E3007C701
+Gel=1
+Nature=41
+Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20111021144653,MS                  ,20111021144653,MS                  
 Nom=HAAxeSais,Option saisie de l'axe du modèle,1
@@ -4849,6 +5130,18 @@ DateM=D252BC81AE9AC601
 Gel=3
 Nature=1800
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131009085626,MS                  ,20131009085626,MS                  
+Nom=Ics,Identifiant de créancier SEPA,1
+Gel=1
+Nature=13
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120125090638,DEMO                ,20120910180228,DEMO                
+Nom=ID,Identifiant du record sql,1
+Gel=1
+Nature=10,0
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200210 90000,hc  ,20060628142939,DEMO                
 Nom=IdBarre,Identifiant barre de boutons,1
@@ -4906,19 +5199,19 @@ Gel=3
 Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20130220180740,MS                  ,20130220180740,MS                  
+Version=1,20130220180559,MS                  ,20130220180559,MS                  
 Nom=IdRTAXAp,Identifiant liste tva "après",1
 Gel=1
 Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20130220180727,MS                  ,20130220180727,MS                  
+Version=1,20130220180544,MS                  ,20130220180544,MS                  
 Nom=IdRTAXAv,Identifiant liste tva "avant",1
 Gel=1
 Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20130220180756,MS                  ,20130220180756,MS                  
+Version=1,20130220180620,MS                  ,20130220180620,MS                  
 Nom=IdRTAXNow,Identifiant liste tva "maintenant",1
 Gel=1
 Nature=L
@@ -5473,6 +5766,13 @@ Gel=3
 Nature=3*2
 Flags=o,1,o,n,n,n,n,n
 [CHAMP]
+Version=1,20150521145541,SN                  ,20150521145556,SN                  
+Nom=JnlTreTyp,Type de journal de trésorerie,1
+Gel=1
+Nature=1,0
+NomOdbc=TypeJournalTresorerie
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1996 2160000,c321,20100709092035,VJ                  
 Nom=JnlTyp,Type de journal,1
 DateM=6C8CAA41B19AC601
@@ -5723,7 +6023,7 @@ Gel=3
 Nature=2,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1996 2160000,c321,20090807095931,MS                  
+Version=1,1996 2160000,c321,20130422120322,MS                  
 Nom=Lib,Libellé,1
 Gel=3
 Nature=40
@@ -6350,6 +6650,12 @@ Nature=16,D0
 NomOdbc=Mt
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,199611200000,PHB ,20050118104245,HC
+Nom=Mt1,Montant attendu échu,1
+Gel=1
+Nature=16,D0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1996 2160000,epc3,20050114155542,HC
 Nom=Mt2,Montant 2,1
 Gel=3
@@ -6546,6 +6852,18 @@ Gel=1
 Nature=16,D0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1997 7250000,PHB ,200112170000,PHB
+Nom=Mt4,Montant 4,1
+Gel=1
+Nature=16,D0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 7300000,PHB ,200112170000,PHB
+Nom=Mt5,Montant 5,1
+Gel=1
+Nature=16,D0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1996 8230000,hc  ,20050114120327,HC
 Nom=MtA,Montant en devise principale et en alphanumérique,1
 DateM=D872C2961C99C601
@@ -6703,6 +7021,13 @@ Nature=1,0
 NomOdbc=CodeMontant
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1996 2160000,hc  ,20130221121731,FOCAL_AME           
+Nom=MtCompta,Montant en devise principale,1
+DateM=02E7D2042510CE01
+Gel=1
+Nature=16,D0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1996 2160000,hc  ,20060721123628,FH                  
 Nom=MtCr,Montant crédit,1
 DateM=951C1D86B1ACC601
@@ -6759,6 +7084,13 @@ Nom=MtDbTb,Montants débits,1
 DateM=83BC209DB1ACC601
 Gel=3
 Nature=16,D0*14
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 7170000,PHB ,20061228093449,JLSI                
+Nom=MtDecTb,Bases TVA déclarées,1
+DateM=559DB1095B2AC701
+Gel=1
+Nature=16,D0*10
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1996 2160000,hc  ,20050114155530,HC
@@ -6850,6 +7182,27 @@ Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20120831092431,VJ                  ,20120831092431,VJ                  
 Nom=MtHt,Montant hors taxe,1
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150410134521,TP                  ,20150410140727,TP                  
+Nom=MtHtRes,Montant HT restant,1
+DateM=290456E98673D001
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 8160000,PHB ,20061228093814,JLSI                
+Nom=MtHtTb,Bases TVA en devise du dossier,1
+DateM=B032BA835B2AC701
+Gel=1
+Nature=16,D0*10
+NomOdbc=HT
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150424094856,MS                  ,20150424094856,MS                  
+Nom=MtHtVtl,Montant HT à ventiler,1
 Gel=1
 Nature=16,D0
 Flags=n,1,n,n,n,n,n,n
@@ -7045,6 +7398,19 @@ Gel=1
 Nature=16,D0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20150410134541,TP                  ,20150410140730,TP                  
+Nom=MtTvaRes,Montant TVA restant,1
+DateM=ED6473EB8673D001
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150424094913,MS                  ,20150424094913,MS                  
+Nom=MtTvaVtl,Montant TVA à ventiler,1
+Gel=1
+Nature=16,D0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20060630151203,DEMO                ,20071127155854,MS                  
 Nom=MtUnit,Unité des montants,1
 DateM=4C77126440A0C601
@@ -7170,10 +7536,11 @@ Nature=5
 NomOdbc=Nic
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1996 4240000,epc3,20050114141543,HC
+Version=1,1996 4240000,epc3,20130807150738,JLF                 
 Nom=Niv,Niveau,1
 Gel=3
 Nature=2,0
+NomOdbc=Niveau
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,199611280000,ep  ,20050114141549,HC
@@ -7194,6 +7561,13 @@ DateM=D894FB861C99C601
 Gel=3
 Nature=1,0
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807114245,JLF                 ,20130807114302,JLF                 
+Nom=NivCle,Niveau de la clé,1
+Gel=1
+Nature=2,0
+NomOdbc=NiveauCleCalcul
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200210140000,jsm ,20050114141913,HC
 Nom=NivCleCro,Niveau dans la clé croisée,1
@@ -7299,6 +7673,14 @@ Gel=3
 Nature=1,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1989 1230000,MJV ,20060306181801,MARIE JO            
+Nom=Nst,Nature du stock,1
+Gel=1
+Nature=2
+Attribut=PARAM
+NomOdbc=NatureStock
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20060131120350,JLSI                ,20060721125644,FH                  
 Nom=NumAxeC,Numéro axe ou n° axe croisé,1
 DateM=D260AC5AB4ACC601
@@ -7352,6 +7734,20 @@ Nom=OriFl,Indicateur origine écriture,1
 DateM=9FC30F8AB4ACC601
 Gel=3
 Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807150336,JLF                 ,20130807150345,JLF                 
+Nom=OrigAxe,Section origine,1
+Gel=1
+Nature=8
+NomOdbc=SectionOrigine
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130807150232,JLF                 ,20130807150254,JLF                 
+Nom=OrigAxeNo,Numéro axe origine,1
+Gel=1
+Nature=1,0
+NomOdbc=AxeOrigine
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1996 2160000,c321,20071127161200,MS                  
@@ -7702,6 +8098,12 @@ Nature=1,0
 Flags=o,1,o,n,n,n,n,n
 presentation=4
 [CHAMP]
+Version=1,20160404093939,TP                  ,20160404093939,TP                  
+Nom=PieceDt,Date de la pièce,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20030114152740,HC  ,20071127162829,MS                  
 Nom=PieceFl,Indicateur de numéro de pièce forcé,1
 DateM=BD599A9FB5ACC601
@@ -7955,6 +8357,13 @@ Nature=DH
 Attribut=PARAM
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,198910130000,MJV ,20050109094810,MARIE JO            
+Nom=Qte,Quantité,1
+Gel=1
+Nature=12,D2
+NomOdbc=Qte_$R
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1997 6190000,hc  ,20100708172519,VJ                  
 Nom=R3cod,Option lier à Divalto Règlements,1
 Gel=3
@@ -7969,6 +8378,14 @@ Gel=3
 Nature=1,0
 Flags=o,1,o,n,n,n,n,n
 presentation=3
+[CHAMP]
+Version=1,1989 1230000,MJV ,20100727153802,SN                  
+Nom=Ref,Référence,1
+Gel=1
+Nature=25
+Attribut=PARAM
+NomOdbc=Reference
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1996 2160000,c321,20050114154449,HC
 Nom=Reg,Mode de règlement,1
@@ -8138,6 +8555,18 @@ DateM=45D54BFFB6ACC601
 Gel=3
 Nature=8
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140123142534,MS                  ,20140123142603,MS                  
+Nom=RTvaJnl,Journal de régularisation de tva,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140123144648,MS                  ,20140123144648,MS                  
+Nom=RTvaLib,Libellé de la régularisation de tva,1
+Gel=1
+Nature=40
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1996 2160000,c321,20050107113932,HC
 Nom=Rue,Rue,1
@@ -8368,6 +8797,28 @@ Gel=3
 Nature=256
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,198910130000,MJV ,20040616174929,MARIE JO            
+Nom=Sref,Sous-références 1 et 2,1
+Gel=1
+Nature=16
+Flags=o,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20100727153807,SN                  
+Nom=Sref1,Sous-référence 1,1
+Gel=1
+Nature=8
+Attribut=PARAM
+NomOdbc=Sreference1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20100727153812,SN                  
+Nom=Sref2,Sous-référence 2,1
+Gel=1
+Nature=8
+Attribut=PARAM
+NomOdbc=Sreference2
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1999 5210000,pb  ,20061221153604,JLSI                
 Nom=SuDev,Devise,1
 DateM=47F536580D25C701
@@ -8441,11 +8892,11 @@ Nature=D8
 Attribut=PARAM
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20060707181713,FH                  ,20060824154734,FH                  
+Version=1,20060707181713,FH                  ,20140708112713,MCD                 
 Nom=TabCelTg,Tableau de cellules d'un tableau de gestion,1
-DateM=87D52ADA83C7C601
+DateM=6B2AE6CC8E9ACF01
 Gel=3
-Nature=452*30
+Nature=452*60
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20081212190838,ROOT                ,20081213085930,ROOT                
@@ -8703,7 +9154,7 @@ Gel=3
 Nature=40
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20030114142059,HC  ,20050114150357,HC
+Version=1,20030114142059,HC  ,20130807113504,JLF                 
 Nom=Transac,Numéro de transaction,1
 Gel=3
 Nature=8,0
@@ -8867,6 +9318,18 @@ Gel=3
 Nature=2,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140416092335,VJ                  ,20140416100701,VJ                  
+Nom=TvaAlCpt1,Compte de debit autoliquidation,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140416092358,VJ                  ,20140416100705,VJ                  
+Nom=TvaAlCpt2,Compte de crédit autoliquidation,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20130108151945,MS                  ,20130108151945,MS                  
 Nom=TvaArt,Régime TVA Article,1
 Gel=1
@@ -8880,6 +9343,53 @@ Nature=16
 NomOdbc=CodeTva
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20130711094759,MS                  ,20130711094759,MS                  
+Nom=TvaCpt,Compte de TVA,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140416091912,VJ                  ,20140416100647,VJ                  
+Nom=TvaCpt1,Compte de tva collecté,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140416092138,VJ                  ,20140416100651,VJ                  
+Nom=TvaCpt2,Compte de tva récupérable,1
+DateM=A7A2AF864459CF01
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 7100000,EPR3,20061228104525,JLSI                
+Nom=TvaDecDt,Date déclaration TVA,1
+DateM=C49258E6642AC701
+Gel=1
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199710 90000,EPR3,20061228104556,JLSI                
+Nom=TvaDecDtA,Année,1
+DateM=3C70A5F8642AC701
+Gel=1
+Nature=4,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199710 90000,EPR3,20061228104549,JLSI                
+Nom=TvaDecDtJ,Jour,1
+DateM=2477FCF4642AC701
+Gel=1
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,199710 90000,EPR3,20130422170942,VJ                  
+Nom=TvaDecDtM,Mois,1
+DateM=2FDCDA6A6B3FCE01
+Gel=1
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1997 6110000,EPR3,20061228104644,JLSI                
 Nom=TvaDt,Date de déclaration de la TVA,1
 DateM=F4C69915652AC701
@@ -8887,12 +9397,40 @@ Gel=1
 Nature=DM
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,1997 7250000,SAR3,20061228104650,JLSI                
+Nom=TvaDt1,Date de déclaration de la TVA 1,1
+DateM=5489EA18652AC701
+Gel=1
+Nature=DM
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 7250000,SAR3,20061228104654,JLSI                
+Nom=TvaDt2,Date de déclaration de la TVA 2,1
+DateM=FC7E4A1B652AC701
+Gel=1
+Nature=DM
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1997 7100000,EPR3,20061228104700,JLSI                
 Nom=TvaDtA,Année,1
 DateM=6C25421F652AC701
 Gel=1
 Nature=4,0
 NomOdbc=Annee_$R
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 7250000,SAR3,20070115112116,FH                  
+Nom=TvaDtA1,Année,1
+DateM=A033E5E38E38C701
+Gel=1
+Nature=4,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 7250000,SAR3,20061228104716,JLSI                
+Nom=TvaDtA2,Année,1
+DateM=BC757A28652AC701
+Gel=1
+Nature=4,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1997 7100000,EPR3,20061228104726,JLSI                
@@ -8903,12 +9441,39 @@ Nature=2,0
 NomOdbc=Mois_$R
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1997 7250000,SAR3,20070115112123,FH                  
+Nom=TvaDtM1,Mois,1
+DateM=D84269E88E38C701
+Gel=1
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 7250000,SAR3,20061228104742,JLSI                
+Nom=TvaDtM2,Mois,1
+DateM=644FF737652AC701
+Gel=1
+Nature=2,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 8190000,EPR3,20061228104751,JLSI                
+Nom=TvaFDt,Date fin de validité TVA,1
+DateM=A4CD8D3D652AC701
+Gel=1
+Nature=D8
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1999 1 40000,hc  ,20061221153941,JLSI                
 Nom=TvaFl,Méthode de gestion de la tva,1
 DateM=CF1C6FD90D25C701
 Gel=3
 Nature=1,0
 Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20140416092220,VJ                  ,20140416100655,VJ                  
+Nom=TvaImmo,Compte de tva immobilisation,1
+Gel=1
+Nature=8
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1996 8230000,hc  ,20050114150932,HC
 Nom=TvaMt,Montant de la tva,1
@@ -8938,6 +9503,13 @@ Gel=3
 Nature=6,3
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1997 3260000,EPR3,20061228104820,JLSI                
+Nom=TvaPTb,Tableau taux TVA,1
+DateM=FC2DD94E652AC701
+Gel=1
+Nature=6,3*10
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20130108151932,MS                  ,20130108151932,MS                  
 Nom=TvaTie,Régime TVA Tiers,1
 Gel=1
@@ -8950,6 +9522,13 @@ Gel=1
 Nature=1,0
 NomOdbc=TypeTVA
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 8120000,EPR3,20061228104908,JLSI                
+Nom=TvaTypTb,Tableau type de TVA,1
+DateM=3CF0156B652AC701
+Gel=1
+Nature=1,0*10
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1997 2140000,c321,20090622160204,CI                  
 Nom=Txt,Texte,1
@@ -9006,11 +9585,11 @@ Gel=3
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,2001 6190000,hc  ,20061221154231,JLSI                
+Version=1,2001 6190000,hc  ,20150902100801,MS                  
 Nom=UC3,Réservé distributeur,1
-DateM=5FE1AA3E0E25C701
+DateM=B1B8D17C56E5D001
 Gel=3
-Nature=150
+Nature=300
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20021018115340,jsm ,20061221154235,JLSI                
@@ -9039,11 +9618,11 @@ Gel=1
 Nature=100
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,2002 6270000,hc  ,20061221154243,JLSI                
+Version=1,2002 6270000,hc  ,20150902101146,MS                  
 Nom=UC4,Réservé distributeur,1
-DateM=57C2CA450E25C701
+DateM=448EF90257E5D001
 Gel=3
-Nature=100
+Nature=200
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20081105172813,MS                  ,20081105172813,MS                  
@@ -9065,11 +9644,11 @@ Gel=3
 Nature=50
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,2001 1240000,hc  ,20061221154251,JLSI                
+Version=1,2001 1240000,hc  ,20150902100255,MS                  
 Nom=UC8,Réservé distributeur,1
-DateM=3F48C64A0E25C701
+DateM=4E3B35C655E5D001
 Gel=3
-Nature=200
+Nature=400
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20030303150127,HC                  ,20061221154256,JLSI                
@@ -9092,11 +9671,11 @@ Gel=3
 Nature=400
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,2002 7 80000,hc  ,20121010144014,MS                  
+Version=1,2002 7 80000,hc  ,20150902095021,MS                  
 Nom=UCa,Réservé distributeur,1
-DateM=A1A6F764E4A6CD01
+DateM=242AB40454E5D001
 Gel=3
-Nature=100
+Nature=300
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20081213131339,ROOT                ,20081213131606,ROOT                
@@ -9113,11 +9692,11 @@ Gel=3
 Nature=100
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,2002 7 80000,hc  ,20061221154124,JLSI                
+Version=1,2002 7 80000,hc  ,20150902095101,MS                  
 Nom=UCc,Réservé distributeur,1
-DateM=7FF08B160E25C701
+DateM=190A861C54E5D001
 Gel=3
-Nature=100
+Nature=200
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20080705110113,ROOT                ,20080705110113,ROOT                
@@ -9151,6 +9730,19 @@ Gel=3
 Nature=200
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130819114401,JLF                 ,20130819114524,JLF                 
+Nom=Uccdvan061T1,Réservé distributeur,1
+DateM=D5AF07D4C09CCE01
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140729105342,DEMO                ,20140729105349,DEMO                
+Nom=UCCRS,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,2002 7 80000,hc  ,20061221154135,JLSI                
 Nom=UCd,Réservé distributeur,1
 DateM=E7122B1D0E25C701
@@ -9158,10 +9750,24 @@ Gel=3
 Nature=100
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20080221182443,FH                  ,20080221182607,FH                  
+Version=1,20130807152719,JLF                 ,20130808100541,JLF                 
+Nom=UCDvAnDet,Réservé distributeur,1
+DateM=7DE65D130E94CE01
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130807152356,JLF                 ,20130807152405,JLF                 
+Nom=UCDvAnEnt,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20080221182443,FH                  ,20150902095402,MS                  
 Nom=UCEts,Réservé distributeur,1
+DateM=896D5B8854E5D001
 Gel=3
-Nature=50
+Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,2002 7 80000,hc  ,20061221154140,JLSI                
@@ -9213,12 +9819,6 @@ Gel=3
 Nature=50
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20120831115734,VJ                  ,20120831120003,VJ                  
-Nom=UCTAT1,Réservé distributeur,1
-Gel=1
-Nature=100
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,20120831145420,VJ                  ,20130124173207,VJ                  
 Nom=UCtax,Réservé distributeur,1
 Gel=1
@@ -9252,12 +9852,19 @@ Gel=3
 Nature=400
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120831100409,VJ                  ,20130124173155,VJ                  
+Version=1,20120831100409,VJ                  ,20150513140941,MS                  
 Nom=UCtva,Réservé distributeur,1
-DateM=82BF1C474F87CD01
+DateM=E1DBD4B0758DD001
 Gel=1
-Nature=50
+Nature=100
 Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20120831115734,VJ                  ,20130719085853,VJ                  
+Nom=UCTVAT1,Réservé distributeur,1
+DateM=DD40316E4D84CE01
+Gel=1
+Nature=100
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2002 7 80000,hc  ,20061221154316,JLSI                
 Nom=UCx,Réservé distributeur,1
@@ -9362,18 +9969,31 @@ Gel=3
 Nature=100
 Flags=o,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20090423091327,MS                  ,20090423091327,MS                  
+Version=1,20090423091327,MS                  ,20130808101120,TP                  
 Nom=UHC,Réservé distributeur,1
 Gel=1
 Nature=56
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20100818160645,MS                  ,20100819114828,MS                  
+Version=1,20100818160645,MS                  ,20130808101139,TP                  
 Nom=UHD,Réservé distributeur,1
 DateM=A21A24AD833FCB01
 Gel=1
 Nature=100
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130807161724,JLF                 ,20130807161738,JLF                 
+Nom=Uhg,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130807171922,JLF                 ,20130808100628,JLF                 
+Nom=Uhh,Réservé distributeur,1
+DateM=EBA0602F0E94CE01
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,2002 6110000,hc  ,20061221154428,JLSI                
 Nom=UI1,Réservé distributeur,1
@@ -9735,6 +10355,12 @@ NomOdbc=OriginePointage
 Flags=o,1,n,n,n,n,n,n
 presentation=2
 [CHAMP]
+Version=1,20021015174750,LM  ,20021016105758,LM
+Nom=UserTrace,Traçabilité utilisateur,1
+Gel=1
+Nature=28
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20030401191804,PHB                 ,20061221154654,JLSI                
 Nom=USuTa,Réservé distributeur,1
 DateM=478657DB0E25C701
@@ -9789,6 +10415,12 @@ Gel=3
 Nature=D8
 NomOdbc=DateValeurBanque
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20160504172001,MS                  ,20160504172001,MS                  
+Nom=ValidDt,Date de validation de l'écriture,1
+Gel=1
+Nature=D8
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1998 5140000,c3ch,20071129163642,MS                  
 Nom=Valide,Indicateur brouillard ou validé,1
@@ -10062,6 +10694,14 @@ nom=AxeCumTb
 [CHAMPL]
 Nom=AxeCum,1,0,0,N,3
 [/CHAMPL]
+nom=AxeDebTb
+[CHAMPL]
+Nom=AxeDeb,1,0,0,N,1
+[/CHAMPL]
+nom=AxeFinTb
+[CHAMPL]
+Nom=AxeFin,1,0,0,N,1
+[/CHAMPL]
 nom=AxeLibTb
 [CHAMPL]
 Nom=AxeLib,1,0,0,N,3
@@ -10264,7 +10904,8 @@ Nom=OpeDt,505,0,0,N,1
 Nom=DevP,513,0,0,N,1
 Nom=SaisCod,530,0,0,N,1
 Nom=PointMt,536,0,0,N,1
-Nom=Filler,552,0,49,N,1
+Nom=PieceDt,552,0,0,N,1
+Nom=Filler,560,0,41,N,1
 Nom=UC8,601,0,0,N,1
 [/CHAMPL]
 nom=C8InfoCpl
@@ -10403,6 +11044,10 @@ nom=Cpt
 [CHAMPL]
 Nom=Classe,1,0,0,N,3
 [/CHAMPL]
+nom=CptColTb
+[CHAMPL]
+Nom=CptCol,1,0,0,N,1
+[/CHAMPL]
 nom=CptCum
 [CHAMPL]
 Nom=CptSld,1,0,0,N,3
@@ -10410,6 +11055,10 @@ Nom=CptDevSld,17,0,0,N,3
 Nom=CptRep,21,0,0,N,3
 Nom=CptPerTab,257,0,0,N,3
 Nom=CptExo,3841,0,0,N,3
+[/CHAMPL]
+nom=CptDebTb
+[CHAMPL]
+Nom=CptDeb,1,0,0,N,1
 [/CHAMPL]
 nom=CptExo
 [CHAMPL]
@@ -10423,6 +11072,10 @@ Nom=CptETc,82,0,0,N,3
 Nom=CptTTd,98,0,0,N,3
 Nom=CptTTc,114,0,0,N,3
 Nom=Filler,130,0,127,N,1
+[/CHAMPL]
+nom=CptFinTb
+[CHAMPL]
+Nom=CptFin,1,0,0,N,1
 [/CHAMPL]
 nom=CptPerTab
 [CHAMPL]
@@ -10547,7 +11200,10 @@ Nom=DevLib,406,0,0,N,3
 Nom=MtDevTb,446,0,0,N,3
 Nom=MtTb,606,0,0,N,3
 Nom=MtBisTb,766,0,0,N,3
-Nom=Filler,926,0,55,N,1
+Nom=Transac,926,0,0,N,1
+Nom=Niv,934,0,0,N,1
+Nom=ID,936,0,0,N,1
+Nom=Filler,946,0,35,N,1
 [/CHAMPL]
 nom=Cxzd
 [CHAMPL]
@@ -10584,16 +11240,19 @@ Nom=Cej,19,0,0,N,3
 Nom=Cek,20,0,0,N,3
 Nom=Filler,21,0,3,N,1
 Nom=Etb,24,0,0,N,3
-Nom=Filler,27,0,16,N,1
-Nom=AxeTb,43,0,0,N,3
-Nom=Cpt,75,0,0,N,3
-Nom=Jnl,83,0,0,N,3
-Nom=EcrTyp,86,0,0,N,3
-Nom=EcrDt,87,0,0,N,3
-Nom=Dev,95,0,0,N,3
-Nom=UserCr,99,0,0,N,3
-Nom=UserMo,119,0,0,N,3
-Nom=Filler,139,0,12,N,1
+Nom=AxeTb,27,0,0,N,3
+Nom=Cpt,59,0,0,N,3
+Nom=Jnl,67,0,0,N,3
+Nom=EcrTyp,70,0,0,N,3
+Nom=EcrDt,71,0,0,N,3
+Nom=Dev,79,0,0,N,3
+Nom=UserCr,83,0,0,N,3
+Nom=UserMo,103,0,0,N,3
+Nom=DvAnStatus,123,0,0,N,1
+Nom=DvAnDH,124,0,0,N,1
+Nom=NivCle,138,0,0,N,1
+Nom=DvAnCleCod,140,0,0,N,1
+Nom=Filler,148,0,3,N,1
 [/CHAMPL]
 nom=Cxzu
 [CHAMPL]
@@ -10797,6 +11456,10 @@ Nom=ExoPFDtA,1,0,0,N,3
 Nom=ExoPFDtM,5,0,0,N,3
 Nom=ExoPFDtJ,7,0,0,N,3
 [/CHAMPL]
+nom=FamTb
+[CHAMPL]
+Nom=Fam,1,0,0,N,1
+[/CHAMPL]
 nom=Filtre
 [CHAMPL]
 Nom=ExoDDt,1,0,0,N,3
@@ -10888,6 +11551,11 @@ Nom=Filler,159,0,50,N,1
 nom=Flags
 [CHAMPL]
 Nom=Flag,1,0,0,N,3
+[/CHAMPL]
+nom=GrRef
+[CHAMPL]
+Nom=Ref,1,0,0,N,1
+Nom=Sref,26,0,0,N,1
 [/CHAMPL]
 nom=I2InfoCpl
 [CHAMPL]
@@ -11326,7 +11994,8 @@ Nom=Local1,1668,0,0,N,1
 Nom=Local2,1708,0,0,N,1
 Nom=NatImmo1,1748,0,0,N,1
 Nom=NatImmo2,1756,0,0,N,1
-Nom=Filler,1764,0,1237,N,1
+Nom=LibTb,1764,0,0,N,1
+Nom=Filler,2164,0,837,N,1
 [/CHAMPL]
 nom=SelX8
 [CHAMPL]
@@ -11444,6 +12113,11 @@ nom=SoldTb
 Nom=SoldMt,1,0,0,N,3
 Nom=SoldMtBis,129,0,0,N,3
 [/CHAMPL]
+nom=Sref
+[CHAMPL]
+Nom=Sref1,1,0,0,N,1
+Nom=Sref2,9,0,0,N,1
+[/CHAMPL]
 nom=SuEcrDt
 [CHAMPL]
 Nom=SuEcrDtA,1,0,0,N,3
@@ -11521,10 +12195,26 @@ nom=TvaCod
 Nom=TvaArt,1,0,0,N,1
 Nom=TvaTie,9,0,0,N,1
 [/CHAMPL]
+nom=TvaDecDt
+[CHAMPL]
+Nom=TvaDecDtA,1,0,0,N,1
+Nom=TvaDecDtM,5,0,0,N,1
+Nom=TvaDecDtJ,7,0,0,N,1
+[/CHAMPL]
 nom=TvaDt
 [CHAMPL]
 Nom=TvaDtA,1,0,0,N,1
 Nom=TvaDtM,5,0,0,N,1
+[/CHAMPL]
+nom=TvaDt1
+[CHAMPL]
+Nom=TvaDtA1,1,0,0,N,1
+Nom=TvaDtM1,5,0,0,N,1
+[/CHAMPL]
+nom=TvaDt2
+[CHAMPL]
+Nom=TvaDtA2,1,0,0,N,1
+Nom=TvaDtM2,5,0,0,N,1
 [/CHAMPL]
 nom=UoQteTb
 [CHAMPL]
@@ -11549,6 +12239,11 @@ Nom=UserMoDt,1,0,0,N,3
 nom=UserPtDh
 [CHAMPL]
 Nom=UserPtDt,1,0,0,N,3
+[/CHAMPL]
+nom=UserTrace
+[CHAMPL]
+Nom=UserCrDh,1,0,0,N,1
+Nom=UserMoDh,15,0,0,N,1
 [/CHAMPL]
 nom=VtlCoe
 [CHAMPL]
@@ -11632,13 +12327,13 @@ Nom=Dev,14,2,N,0,0,N,3
 Nom=Filler,18,2,N,0,33,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,1996 2160000,hc  ,20100708165540,VJ                  
+Version=1,1996 2160000,hc  ,20150902100753,MS                  
 Nom=c3,Plan comptable,1
-DateM=2845ACCB54EECD01
+DateM=3671EE7E56E5D001
 NomOdbc=Compte
 ChConf=Conf
 ConfPP=DCPT
-Taille=1000,1000
+Taille=1200,1200
 Pack=0,0
 CE=Ce1,3
 [CHAMPS]
@@ -11705,8 +12400,8 @@ Nom=GrpCptCod,788,2,N,0,0,N,1
 Nom=TblNo,789,2,N,0,0,N,1
 Nom=R3cod,790,2,N,0,0,N,1
 Nom=TvaCod,791,2,N,0,0,N,1
-Nom=Filler,807,2,N,0,44,N,1
-Nom=UC3,851,2,N,0,0,N,3
+Nom=Filler,807,2,N,0,94,N,1
+Nom=UC3,901,2,N,0,0,N,3
 [/CHAMPS]
 [PROPLOC]
 Commentaire=32
@@ -11752,6 +12447,8 @@ Flags=n,1,o,i,i,n,n,n
 Nom=EpuCod
 Commentaire=48
 Nom=TblNo
+ZoomRes=1
+Nom=Lib
 [/PROPLOC]
 [TABLE]
 Version=1,20021018103357,jsm ,20050113153931,HC
@@ -11851,13 +12548,13 @@ Nom=MtBisSld,85,2,N,0,0,N,1
 Nom=TscDt,101,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,1996 2160000,hc  ,20100708171529,VJ                  
+Version=1,1996 2160000,hc  ,20150902101140,MS                  
 Nom=c4,Journal,1
-DateM=3FF25B66B01ECB01
+DateM=448EF90257E5D001
 NomOdbc=Journal
 ChConf=Conf
 ConfPP=DCPT
-Taille=500,500
+Taille=600,600
 Pack=0,0
 CE=Ce1,4
 [CHAMPS]
@@ -11918,7 +12615,9 @@ Nom=LotSais,354,2,N,0,0,N,1
 Nom=ChqSais,355,2,N,0,0,N,1
 Nom=PreLoad,356,2,N,0,0,N,1
 Nom=PreLoadNb,357,2,N,0,0,N,1
-Nom=Filler,365,2,N,0,36,N,1
+Nom=GenTvacod,365,2,N,0,0,N,1
+Nom=JnlTreTyp,366,2,N,0,0,N,1
+Nom=Filler,367,2,N,0,34,N,1
 Nom=UC4,401,2,N,0,0,N,3
 [/CHAMPS]
 [PROPLOC]
@@ -12010,7 +12709,7 @@ Nom=UC4Ets,251,2,N,0,0,N,1
 [TABLE]
 Version=1,1996 2160000,hc  ,20100708174003,VJ                  
 Nom=c5,Axe,1
-DateM=8B3EE6D4B31ECB01
+DateM=8E7F79137193CE01
 NomOdbc=Axe
 ChConf=Conf
 ConfPP=DCPT
@@ -12054,7 +12753,8 @@ Nom=CeNote,244,2,N,0,0,N,1
 Nom=HsDt,245,2,N,0,0,N,1
 Nom=PerTb,253,2,N,0,0,N,1
 Nom=AxeTyp,637,2,N,0,0,N,1
-Nom=Filler,638,2,N,0,13,N,1
+Nom=DvAnFlg,638,2,N,0,0,N,1
+Nom=Filler,639,2,N,0,12,N,1
 Nom=UC5,651,2,N,0,0,N,3
 [/CHAMPS]
 [PROPLOC]
@@ -12105,13 +12805,13 @@ Nom=Filler,495,2,N,0,76,N,1
 Nom=UC5Ets,571,2,N,0,0,N,3
 [/CHAMPS]
 [TABLE]
-Version=1,1996 2160000,hc  ,20100708151408,VJ                  
+Version=1,1996 2160000,hc  ,20150902100046,MS                  
 Nom=c8,Ecriture,1
-DateM=9572D6CC75CCCD01
+DateM=4E3B35C655E5D001
 NomOdbc=Ecriture
 ChConf=Conf
 ConfPP=DCPT
-Taille=800,800
+Taille=1000,1000
 Pack=0,0
 CE=Ce1,8
 [CHAMPS]
@@ -12193,7 +12893,9 @@ Nom=OpeDt,509,2,N,0,0,N,1
 Nom=DevP,517,2,N,0,0,N,1
 Nom=SaisCod,534,2,N,0,0,N,1
 Nom=PointMt,540,2,N,0,0,N,1
-Nom=Filler,556,2,N,0,45,N,1
+Nom=PieceDt,556,2,N,0,0,N,1
+Nom=ValidDt,564,2,N,0,0,N,1
+Nom=Filler,572,2,N,0,29,N,1
 Nom=UC8,601,2,N,0,0,N,3
 [/CHAMPS]
 [PROPLOC]
@@ -12274,7 +12976,7 @@ Nom=MtBis,47,2,N,0,0,N,1
 [TABLE]
 Version=1,2000 7 80000,hc  ,20090428161117,MS                  
 Nom=c8t1,Saisie des écritures,1
-DateM=44E48D5F6DEECD01
+DateM=4E3B35C655E5D001
 Taille=3800,3800
 Pack=0,0
 [CHAMPS]
@@ -12293,7 +12995,7 @@ Nom=Flags
 [TABLE]
 Version=1,2002 9190000,hc  ,20050113154144,HC
 Nom=c8t2,Extrait de compte,1
-DateM=9572D6CC75CCCD01
+DateM=4E3B35C655E5D001
 Taille=1700,1700
 Pack=0,0
 [CHAMPS]
@@ -12308,24 +13010,24 @@ Nom=EcrCum,1490,2,N,0,0,N,1
 Nom=Filler,1658,2,N,0,43,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20070430183506,FH                  ,20100708151707,VJ                  
+Version=1,20070430183506,FH                  ,20150902100208,MS                  
 Nom=C8T3,Pointage extraits etebac,1
-DateM=9572D6CC75CCCD01
-Taille=1204,1204
+DateM=4E3B35C655E5D001
+Taille=1404,1404
 Pack=0,0
 [CHAMPS]
-TableInsere=C8,1,800,0,1
-Nom=AdrC8,801,2,N,0,0,N,1
-Nom=UC8T3,805,2,N,0,0,N,1
+TableInsere=C8,1,1000,0,1
+Nom=AdrC8,1001,2,N,0,0,N,1
+Nom=UC8T3,1005,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,1996 2160000,hc  ,20121010143952,MS                  
+Version=1,1996 2160000,hc  ,20150902094959,MS                  
 Nom=ca,Dossier - paramètres généraux,1
-DateM=A1A6F764E4A6CD01
+DateM=E33DC34D5CE5D001
 NomOdbc=Dossier_Comptable
 ChConf=Conf
 ConfPP=DCPT
-Taille=1350,1350
+Taille=1700,1700
 Pack=0,0
 CE=Ce1,1
 [CHAMPS]
@@ -12342,66 +13044,75 @@ Nom=Cea,10,2,N,0,0,N,3
 Nom=Dos,11,2,N,0,0,N,3
 Nom=Nom,14,2,N,0,0,N,3
 Nom=Adr,46,2,N,0,0,N,3
-Nom=Siret,185,2,N,0,0,N,3
-Nom=Naf,199,2,N,0,0,N,3
-Nom=Capi,204,2,N,0,0,N,3
-Nom=CptBenef,210,2,N,0,0,N,3
-Nom=CptPerte,218,2,N,0,0,N,3
-Nom=Conf,226,2,N,0,0,N,3
-Nom=ConfFct,230,2,N,0,0,N,3
-Nom=Mt2LibTb,310,2,N,0,0,N,3
-Nom=DRegJnl,400,2,N,0,0,N,3
-Nom=DRegLib,403,2,N,0,0,N,3
-Nom=DRegCpt,443,2,N,0,0,N,3
-Nom=DDevJnl,459,2,N,0,0,N,3
-Nom=DDevCpt,462,2,N,0,0,N,3
-Nom=DDevLib,478,2,N,0,0,N,3
-Nom=AxeLibTb,518,2,N,0,0,N,3
-Nom=AxeVtlTb,558,2,N,0,0,N,3
-Nom=Dev,562,2,N,0,0,N,3
-Nom=DevCod,566,2,N,0,0,N,3
-Nom=AuxCptTb,567,2,N,0,0,N,3
-Nom=DevBis,663,2,N,0,0,N,3
-Nom=AxeLibDcTb,667,2,N,0,0,N,3
-Nom=CptEur,827,2,N,0,0,N,3
-Nom=DarrJnl,835,2,N,0,0,N,3
-Nom=DarrLib,838,2,N,0,0,N,3
-Nom=DarrCpt,878,2,N,0,0,N,3
-Nom=UserCr,886,2,N,0,0,N,3
-Nom=UserMo,906,2,N,0,0,N,3
-Nom=UserDOp,926,2,N,0,0,N,3
-Nom=InhiberCtrl,946,2,N,0,0,N,3
-Nom=EtbCod,947,2,N,0,0,N,3
-Nom=Etb,948,2,N,0,0,N,3
-Nom=EtbLettTyp,951,2,N,0,0,N,3
-Nom=UserCrDh,952,2,N,0,0,N,1
-Nom=UserMoDh,966,2,N,0,0,N,1
-Nom=UserDOpDh,980,2,N,0,0,N,1
-Nom=UserCrOri,994,2,N,0,0,N,1
-Nom=UserMoOri,996,2,N,0,0,N,1
-Nom=UserDOpOri,998,2,N,0,0,N,1
-Nom=CeNote,1000,2,N,0,0,N,1
-Nom=Note,1001,2,N,0,0,N,1
-Nom=ProtDDt,1009,2,N,0,0,N,1
-Nom=ProtFDt,1017,2,N,0,0,N,1
-Nom=ExoDDt,1025,2,N,0,0,N,1
-Nom=PerDDt,1033,2,N,0,0,N,1
-Nom=PerFDt,1041,2,N,0,0,N,1
-Nom=Mt2DecNb,1049,2,N,0,0,N,1
-Nom=BalRupt,1058,2,N,0,0,N,1
-Nom=DRegMt,1060,2,N,0,0,N,1
-Nom=CapiMt,1068,2,N,0,0,N,1
-Nom=AxeRepCod,1080,2,N,0,0,N,1
-Nom=ConfEnr,1084,2,N,0,0,N,1
-Nom=PointSais,1094,2,N,0,0,N,1
-Nom=AxeDcTb,1095,2,N,0,0,N,1
-Nom=ExtSais,1111,2,N,0,0,N,1
-Nom=BalRupt1,1112,2,N,0,0,N,1
-Nom=ConfEnr2,1115,2,N,0,0,N,1
-Nom=PointNbJ,1125,2,N,0,0,N,1
-Nom=R3cod,1127,2,N,0,0,N,1
-Nom=Filler,1128,2,N,0,123,N,1
-Nom=UCa,1251,2,N,0,0,N,3
+Nom=Siret,187,2,N,0,0,N,3
+Nom=Naf,201,2,N,0,0,N,3
+Nom=Capi,206,2,N,0,0,N,3
+Nom=CptBenef,212,2,N,0,0,N,3
+Nom=CptPerte,220,2,N,0,0,N,3
+Nom=Conf,228,2,N,0,0,N,3
+Nom=ConfFct,232,2,N,0,0,N,3
+Nom=Mt2LibTb,312,2,N,0,0,N,3
+Nom=DRegJnl,402,2,N,0,0,N,3
+Nom=DRegLib,405,2,N,0,0,N,3
+Nom=DRegCpt,445,2,N,0,0,N,3
+Nom=DDevJnl,461,2,N,0,0,N,3
+Nom=DDevCpt,464,2,N,0,0,N,3
+Nom=DDevLib,480,2,N,0,0,N,3
+Nom=AxeLibTb,520,2,N,0,0,N,3
+Nom=AxeVtlTb,560,2,N,0,0,N,3
+Nom=Dev,564,2,N,0,0,N,3
+Nom=DevCod,568,2,N,0,0,N,3
+Nom=AuxCptTb,569,2,N,0,0,N,3
+Nom=DevBis,665,2,N,0,0,N,3
+Nom=AxeLibDcTb,669,2,N,0,0,N,3
+Nom=CptEur,829,2,N,0,0,N,3
+Nom=DarrJnl,837,2,N,0,0,N,3
+Nom=DarrLib,840,2,N,0,0,N,3
+Nom=DarrCpt,880,2,N,0,0,N,3
+Nom=UserCr,888,2,N,0,0,N,3
+Nom=UserMo,908,2,N,0,0,N,3
+Nom=UserDOp,928,2,N,0,0,N,3
+Nom=InhiberCtrl,948,2,N,0,0,N,3
+Nom=EtbCod,949,2,N,0,0,N,3
+Nom=Etb,950,2,N,0,0,N,3
+Nom=EtbLettTyp,953,2,N,0,0,N,3
+Nom=UserCrDh,954,2,N,0,0,N,1
+Nom=UserMoDh,968,2,N,0,0,N,1
+Nom=UserDOpDh,982,2,N,0,0,N,1
+Nom=UserCrOri,996,2,N,0,0,N,1
+Nom=UserMoOri,998,2,N,0,0,N,1
+Nom=UserDOpOri,1000,2,N,0,0,N,1
+Nom=CeNote,1002,2,N,0,0,N,1
+Nom=Note,1003,2,N,0,0,N,1
+Nom=ProtDDt,1011,2,N,0,0,N,1
+Nom=ProtFDt,1019,2,N,0,0,N,1
+Nom=ExoDDt,1027,2,N,0,0,N,1
+Nom=PerDDt,1035,2,N,0,0,N,1
+Nom=PerFDt,1043,2,N,0,0,N,1
+Nom=Mt2DecNb,1051,2,N,0,0,N,1
+Nom=BalRupt,1060,2,N,0,0,N,1
+Nom=DRegMt,1062,2,N,0,0,N,1
+Nom=CapiMt,1070,2,N,0,0,N,1
+Nom=AxeRepCod,1082,2,N,0,0,N,1
+Nom=ConfEnr,1086,2,N,0,0,N,1
+Nom=PointSais,1096,2,N,0,0,N,1
+Nom=AxeDcTb,1097,2,N,0,0,N,1
+Nom=ExtSais,1113,2,N,0,0,N,1
+Nom=BalRupt1,1114,2,N,0,0,N,1
+Nom=ConfEnr2,1117,2,N,0,0,N,1
+Nom=PointNbJ,1127,2,N,0,0,N,1
+Nom=R3cod,1129,2,N,0,0,N,1
+Nom=CptColTb,1130,2,N,0,0,N,1
+Nom=TvaCod,1178,2,N,0,0,N,1
+Nom=TvaCpt,1194,2,N,0,0,N,1
+Nom=DvAnDDt,1202,2,N,0,0,N,1
+Nom=DvAnCheminCod,1210,2,N,0,0,N,1
+Nom=RTvaJnl,1230,2,N,0,0,N,1
+Nom=RTvaLib,1233,2,N,0,0,N,1
+Nom=TvaFl,1273,2,N,0,0,N,1
+Nom=Cp,1274,2,N,0,0,N,1
+Nom=Filler,1282,2,N,0,119,N,1
+Nom=UCa,1401,2,N,0,0,N,3
 [/CHAMPS]
 [PROPLOC]
 Commentaire=11
@@ -12469,7 +13180,7 @@ Nom=Ucabo,301,2,N,0,0,N,1
 [TABLE]
 Version=1,1996 2160000,hc  ,20100708141445,VJ                  
 Nom=cb,Dossier - exercice,1
-DateM=7D1F5327971ECB01
+DateM=CF1B74C654A5D101
 NomOdbc=Exercice_Comptable
 Taille=300,300
 Pack=0,0
@@ -12502,7 +13213,10 @@ Nom=CeNote,139,2,N,0,0,N,1
 Nom=Note,140,2,N,0,0,N,1
 Nom=ClotCod,148,2,N,0,0,N,1
 Nom=EpuCod,149,2,N,0,0,N,1
-Nom=Filler,150,2,N,0,51,N,1
+Nom=ClotAnCod,150,2,N,0,0,N,1
+Nom=ClotLettCod,151,2,N,0,0,N,1
+Nom=ClotPointCod,152,2,N,0,0,N,1
+Nom=Filler,153,2,N,0,48,N,1
 Nom=UCb,201,2,N,0,0,N,3
 [/CHAMPS]
 [PROPLOC]
@@ -12510,10 +13224,10 @@ Commentaire=23
 Nom=Ce1
 [/PROPLOC]
 [TABLE]
-Version=1,1996 8290000,hc  ,20091027152337,MS                  
+Version=1,1996 8290000,hc  ,20150902095046,MS                  
 Nom=cc,Dossier - paramètres de Divalto Règlements,1
-DateM=3613068CC4EDCD01
-Taille=400,400
+DateM=190A861C54E5D001
+Taille=500,500
 Pack=0,0
 CE=Ce1,3
 [CHAMPS]
@@ -12548,7 +13262,8 @@ Nom=Note,209,2,N,0,0,N,1
 Nom=EmeNo,217,2,N,0,0,N,1
 Nom=ComptaImmCod,223,2,N,0,0,N,1
 Nom=TvaArt,224,2,N,0,0,N,1
-Nom=Filler,232,2,N,0,69,N,1
+Nom=Ics,232,2,N,0,0,N,1
+Nom=Filler,245,2,N,0,56,N,1
 Nom=UCc,301,2,N,0,0,N,3
 [/CHAMPS]
 [PROPLOC]
@@ -12587,7 +13302,7 @@ Nom=Lib
 [TABLE]
 Version=1,20080601144019,ROOT                ,20080601144019,ROOT                
 Nom=cc011T1,Arborescence des Axes C5,1
-DateM=BF50ACC2B31ECB01
+DateM=8E7F79137193CE01
 Taille=4000,4000
 Pack=0,0
 [CHAMPS]
@@ -12817,24 +13532,24 @@ Nom=FilEtb,489,2,N,0,0,N,1
 [TABLE]
 Version=1,20060203083008,JLSI                ,20060908141053,JLSI                
 Nom=cc060t1,Ligne Interrogation axes analytiques,1
-DateM=ACAEC0A55B3EC901
+DateM=BB43521C06C9CF01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
 Nom=TriArbre,1,2,N,0,0,N,1
 Nom=TreeInfo,42,2,N,0,0,N,1
-Nom=Lib,193,2,N,0,0,N,1
-Nom=Note,233,2,N,0,0,N,1
-Nom=EltConf,241,2,N,0,0,N,1
-Nom=CeNote,242,2,N,0,0,N,1
-Nom=AxeCroise,243,2,N,0,0,N,1
-Nom=AxeNum,275,2,N,0,0,N,1
-Nom=EltCourant,276,2,N,0,0,N,1
-Nom=Filler,661,2,N,0,1,N,1
-Nom=SNivTrt,662,2,N,0,0,N,1
-Nom=CumulMtTb,663,2,N,0,0,N,1
-Nom=Adrpere,1239,2,N,0,0,N,1
-Nom=Filler,1243,2,N,0,46,N,1
+Nom=Filler,193,2,N,0,14,N,1
+Nom=Lib,207,2,N,0,0,N,1
+Nom=Note,247,2,N,0,0,N,1
+Nom=EltConf,255,2,N,0,0,N,1
+Nom=CeNote,256,2,N,0,0,N,1
+Nom=AxeCroise,257,2,N,0,0,N,1
+Nom=AxeNum,289,2,N,0,0,N,1
+Nom=EltCourant,290,2,N,0,0,N,1
+Nom=SNivTrt,675,2,N,0,0,N,1
+Nom=CumulMtTb,676,2,N,0,0,N,1
+Nom=Adrpere,1252,2,N,0,0,N,1
+Nom=Filler,1256,2,N,0,33,N,1
 Nom=UCc060T1,1289,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
@@ -12906,6 +13621,26 @@ Pack=0,0
 [CHAMPS]
 Nom=TotRappTb,1,2,N,0,0,N,1
 Nom=InterTyp,1801,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130806095024,TP                  ,20130806095024,TP                  
+Nom=cc308,Table temporaire pour l'inventaire comptable diffféré,1
+DateM=9502240C7C92CE01
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+Nom=GroupId,1,2,N,0,0,N,1
+Nom=GrRef,151,2,N,0,0,N,1
+Nom=CptS,192,2,N,0,0,N,1
+Nom=Depo,200,2,N,0,0,N,1
+Nom=Nst,203,2,N,0,0,N,1
+Nom=FamTb,205,2,N,0,0,N,1
+Nom=Etb,229,2,N,0,0,N,1
+Nom=Qte,232,2,N,0,0,N,1
+Nom=CrTotMt,244,2,N,0,0,N,1
+Nom=CrCnMt,261,2,N,0,0,N,1
+Nom=EnrNo,278,2,N,0,0,N,1
+Nom=MtCompta,287,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,2000 9290000,pb  ,20050113154301,HC
@@ -13026,6 +13761,18 @@ Nom=ChxTb,8193,2,N,0,0,N,1
 Nom=Filler,8293,2,N,0,1708,N,1
 [/CHAMPS]
 [TABLE]
+Version=1,20130819114203,JLF                 ,20130819114642,JLF                 
+Nom=ccdvan061T1,Ligne paramètre déversement,1
+DateM=30C7A9174B9ECE01
+Taille=600,600
+Pack=0,0
+[CHAMPS]
+TableInsere=CDvAnDet,1,400,0,1
+Nom=Lib,401,2,N,0,0,N,1
+Nom=ID,441,2,N,0,0,N,1
+Nom=Uccdvan061T1,451,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
 Version=1,20021017152639,hc  ,20050113154358,HC
 Nom=ccecr,Fonctions communes sur les écritures,1
 DateM=D83C44351E99C601
@@ -13036,6 +13783,17 @@ Nom=ChxTxtTb,1,2,N,0,0,N,1
 Nom=Action,5121,2,N,0,0,N,1
 Nom=Transac,5122,2,N,0,0,N,1
 Nom=Filler,5130,2,N,0,871,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140729105249,DEMO                ,20140729105249,DEMO                
+Nom=CCRS,Communication RS,1
+DateM=DF4D8F890AABCF01
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+Nom=Cpt,1,2,N,0,0,N,1
+Nom=Filler,9,2,N,0,392,N,1
+Nom=UCCRS,401,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1997 1170000,hc  ,20100708142510,VJ                  
@@ -13104,13 +13862,85 @@ ValInit=Old$Record.exoddt
 Nom=ValDDt
 [/PROPLOC]
 [TABLE]
-Version=1,20080221175207,FH                  ,20080226103047,FH                  
+Version=1,20130807144210,JLF                 ,20130807154503,JLF                 
+Nom=CDvAnDet,Détail déversement,1
+DateM=7DE65D130E94CE01
+NomOdbc=Deverse_Det
+Taille=400,400
+Pack=0,0
+CE=Ce1,2
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=Cea,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Jnl,14,2,N,0,0,N,1
+Nom=MaskLg,17,2,N,0,0,N,1
+Nom=UserCr,22,2,N,0,0,N,1
+Nom=UserMo,42,2,N,0,0,N,1
+Nom=UserTrace,62,2,N,0,0,N,1
+Nom=OrigAxeNo,90,2,N,0,0,N,1
+Nom=OrigAxe,91,2,N,0,0,N,1
+Nom=DstAxeNo,99,2,N,0,0,N,1
+Nom=DvAnCleCod,100,2,N,0,0,N,1
+Nom=Niv,108,2,N,0,0,N,1
+Nom=DvAnCleCalcFlg,110,2,N,0,0,N,1
+Nom=Filler,111,2,N,0,190,N,1
+Nom=UCDvAnDet,301,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Libelle=Niveau de recherche
+Nom=Niv
+[/PROPLOC]
+[TABLE]
+Version=1,20130807143923,JLF                 ,20130807154547,JLF                 
+Nom=CDvAnEnt,Entête déversement,1
+DateM=6790E96B7493CE01
+NomOdbc=Deverse_Ent
+Taille=300,300
+Pack=0,0
+CE=Ce1,1
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=Cea,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=Jnl,14,2,N,0,0,N,1
+Nom=EcrTyp,17,2,N,0,0,N,1
+Nom=UserCr,18,2,N,0,0,N,1
+Nom=UserMo,38,2,N,0,0,N,1
+Nom=UserTrace,58,2,N,0,0,N,1
+Nom=Niv,86,2,N,0,0,N,1
+Nom=Filler,88,2,N,0,113,N,1
+Nom=UCDvAnEnt,201,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+Libelle=Niveau de recherche
+NomOdbc=NiveauRecherche
+Nom=Niv
+[/PROPLOC]
+[TABLE]
+Version=1,20080221175207,FH                  ,20150902095420,MS                  
 Nom=CEts,Dossier - Etablissements,1
-DateM=610B166FD205CD01
+DateM=E33DC34D5CE5D001
 NomOdbc=Dossier_Etablissements_CC
 ChConf=Conf
 ConfPP=DCPT
-Taille=500,500
+Taille=550,550
 Pack=0,0
 CE=Ce1,E
 [CHAMPS]
@@ -13128,17 +13958,17 @@ Nom=Dos,11,2,N,0,0,N,3
 Nom=Etb,14,2,N,0,0,N,3
 Nom=Nom,17,2,N,0,0,N,3
 Nom=Adr,49,2,N,0,0,N,3
-Nom=HsDt,188,2,N,0,0,N,3
-Nom=Piece,196,2,N,0,0,N,3
-Nom=Conf,204,2,N,0,0,N,3
-Nom=UserCr,208,2,N,0,0,N,3
-Nom=UserCrDh,228,2,N,0,0,N,3
-Nom=UserMo,242,2,N,0,0,N,3
-Nom=UserMoDh,262,2,N,0,0,N,3
-Nom=CeNote,276,2,N,0,0,N,3
-Nom=Note,277,2,N,0,0,N,3
-Nom=R3cod,285,2,N,0,0,N,1
-Nom=Filler,286,2,N,0,165,N,1
+Nom=HsDt,190,2,N,0,0,N,3
+Nom=Piece,198,2,N,0,0,N,3
+Nom=Conf,206,2,N,0,0,N,3
+Nom=UserCr,210,2,N,0,0,N,3
+Nom=UserCrDh,230,2,N,0,0,N,3
+Nom=UserMo,244,2,N,0,0,N,3
+Nom=UserMoDh,264,2,N,0,0,N,3
+Nom=CeNote,278,2,N,0,0,N,3
+Nom=Note,279,2,N,0,0,N,3
+Nom=R3cod,287,2,N,0,0,N,1
+Nom=Filler,288,2,N,0,163,N,1
 Nom=UCEts,451,2,N,0,0,N,3
 [/CHAMPS]
 [TABLE]
@@ -13351,48 +14181,48 @@ Nom=EcrValNo,25,2,N,0,0,N,3
 Nom=Piece,39,2,N,0,0,N,3
 [/CHAMPS]
 [TABLE]
-Version=1,1996 2160000,hc  ,20100709100749,VJ                  
+Version=1,1996 2160000,hc  ,20150513140842,MS                  
 Nom=cp,Ventilation sur les pièces et les échéances,1
-DateM=3E50A7D23D1FCB01
+DateM=1F637FD1758DD001
 NomOdbc=Ventilation_Piece_Echeance
-Taille=400,400
+Taille=600,600
 Pack=0,0
 CE=Ce1,1
 [CHAMPS]
-Nom=Ce1,1,2,N,0,0,N,3
-Nom=Ce2,2,2,N,0,0,N,3
-Nom=Ce3,3,2,N,0,0,N,3
-Nom=Ce4,4,2,N,0,0,N,3
-Nom=Ce5,5,2,N,0,0,N,3
-Nom=Ce6,6,2,N,0,0,N,3
-Nom=Ce7,7,2,N,0,0,N,3
-Nom=Ce8,8,2,N,0,0,N,3
-Nom=Ce9,9,2,N,0,0,N,3
-Nom=Cea,10,2,N,0,0,N,3
-Nom=Ceb,11,2,N,0,0,N,3
-Nom=Cec,12,2,N,0,0,N,3
-Nom=Ced,13,2,N,0,0,N,3
-Nom=Cee,14,2,N,0,0,N,3
-Nom=Cef,15,2,N,0,0,N,3
-Nom=Ceg,16,2,N,0,0,N,3
-Nom=Ceh,17,2,N,0,0,N,3
-Nom=Cei,18,2,N,0,0,N,3
-Nom=Cej,19,2,N,0,0,N,3
-Nom=Cek,20,2,N,0,0,N,3
-Nom=Dos,21,2,N,0,0,N,3
-Nom=Etb,24,2,N,0,0,N,3
-Nom=Ecr,27,2,N,0,0,N,3
-Nom=MaskLg,42,2,N,0,0,N,3
-Nom=Cpt,47,2,N,0,0,N,3
-Nom=Piece,55,2,N,0,0,N,3
-Nom=EchDt,63,2,N,0,0,N,3
-Nom=Lett,71,2,N,0,0,N,3
-Nom=EcrTyp,73,2,N,0,0,N,3
-Nom=Reg,74,2,N,0,0,N,3
-Nom=Dev,78,2,N,0,0,N,3
-Nom=UserCr,82,2,N,0,0,N,3
-Nom=UserMo,102,2,N,0,0,N,3
-Nom=UserLt,122,2,N,0,0,N,3
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=Cea,10,2,N,0,0,N,1
+Nom=Ceb,11,2,N,0,0,N,1
+Nom=Cec,12,2,N,0,0,N,1
+Nom=Ced,13,2,N,0,0,N,1
+Nom=Cee,14,2,N,0,0,N,1
+Nom=Cef,15,2,N,0,0,N,1
+Nom=Ceg,16,2,N,0,0,N,1
+Nom=Ceh,17,2,N,0,0,N,1
+Nom=Cei,18,2,N,0,0,N,1
+Nom=Cej,19,2,N,0,0,N,1
+Nom=Cek,20,2,N,0,0,N,1
+Nom=Dos,21,2,N,0,0,N,1
+Nom=Etb,24,2,N,0,0,N,1
+Nom=Ecr,27,2,N,0,0,N,1
+Nom=MaskLg,42,2,N,0,0,N,1
+Nom=Cpt,47,2,N,0,0,N,1
+Nom=Piece,55,2,N,0,0,N,1
+Nom=EchDt,63,2,N,0,0,N,1
+Nom=Lett,71,2,N,0,0,N,1
+Nom=EcrTyp,73,2,N,0,0,N,1
+Nom=Reg,74,2,N,0,0,N,1
+Nom=Dev,78,2,N,0,0,N,1
+Nom=UserCr,82,2,N,0,0,N,1
+Nom=UserMo,102,2,N,0,0,N,1
+Nom=UserLt,122,2,N,0,0,N,1
 Nom=UserCrDh,142,2,N,0,0,N,1
 Nom=UserMoDh,156,2,N,0,0,N,1
 Nom=UserLtDh,170,2,N,0,0,N,1
@@ -13404,8 +14234,8 @@ Nom=Sens,206,2,N,0,0,N,1
 Nom=LettDt,207,2,N,0,0,N,1
 Nom=MtDev,215,2,N,0,0,N,1
 Nom=MtBis,231,2,N,0,0,N,1
-Nom=Filler,247,2,N,0,54,N,1
-Nom=UCp,301,2,N,0,0,N,3
+Nom=Filler,247,2,N,0,254,N,1
+Nom=UCp,501,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Commentaire=92
@@ -13521,11 +14351,11 @@ Commentaire=171
 Nom=Ce6
 [/PROPLOC]
 [TABLE]
-Version=1,20120831141851,VJ                  ,20120914115758,MS                  
+Version=1,20120831141851,VJ                  ,20150513140848,MS                  
 Nom=ctax,Ventilation sur la tva,1
-DateM=B53D3A6B6EEECD01
+DateM=AE4109D8758DD001
 NomOdbc=Ventilation_Tva
-Taille=400,400
+Taille=600,600
 Pack=0,0
 CE=Ce1,9
 [CHAMPS]
@@ -13559,28 +14389,47 @@ Nom=ExDt,71,2,N,0,0,N,1
 Nom=MtHt,79,2,N,0,0,N,1
 Nom=MtTva,95,2,N,0,0,N,1
 Nom=TvaTyp,111,2,N,0,0,N,1
-Nom=UserCr,112,2,N,0,0,N,1
-Nom=UserMo,132,2,N,0,0,N,1
-Nom=UserCrDh,152,2,N,0,0,N,1
-Nom=UserMoDh,166,2,N,0,0,N,1
-Nom=UserCrOri,180,2,N,0,0,N,1
-Nom=UserMoOri,182,2,N,0,0,N,1
-Nom=Filler,184,2,N,0,117,N,1
-Nom=UCtax,301,2,N,0,0,N,1
+Nom=Sens,112,2,N,0,0,N,1
+Nom=FlTvaAL,113,2,N,0,0,N,1
+Nom=CoeAss,114,2,N,0,0,N,1
+Nom=CoeTax,121,2,N,0,0,N,1
+Nom=CoeAdm,128,2,N,0,0,N,1
+Nom=UserCr,135,2,N,0,0,N,1
+Nom=UserMo,155,2,N,0,0,N,1
+Nom=UserCrDh,175,2,N,0,0,N,1
+Nom=UserMoDh,189,2,N,0,0,N,1
+Nom=UserCrOri,203,2,N,0,0,N,1
+Nom=UserMoOri,205,2,N,0,0,N,1
+Nom=EffetDt,207,2,N,0,0,N,1
+Nom=MtHtVtl,215,2,N,0,0,N,1
+Nom=MtTvaVtl,231,2,N,0,0,N,1
+Nom=MtHtRes,247,2,N,0,0,N,1
+Nom=MtTvaRes,263,2,N,0,0,N,1
+Nom=Filler,279,2,N,0,222,N,1
+Nom=UCtax,501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120831144722,VJ                  ,20120831144722,VJ                  
 Nom=CtaxT1,Ventilation Tva,1
-DateM=B53D3A6B6EEECD01
+DateM=AE4109D8758DD001
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
-TableInsere=ctax,1,400,0,1
-Nom=TvaP,401,2,N,0,0,N,1
-Nom=Flags,407,2,N,0,0,N,1
-Nom=MtTb,447,2,N,0,0,N,1
-Nom=Sens,607,2,N,0,0,N,1
-Nom=UCTAXT1,608,2,N,0,0,N,1
+TableInsere=ctax,1,600,0,1
+Nom=TvaP,601,2,N,0,0,N,1
+Nom=Flags,607,2,N,0,0,N,1
+Nom=MtTb,647,2,N,0,0,N,1
+Nom=MaskLg,807,2,N,0,0,N,1
+Nom=AffCe2,812,2,N,0,0,N,1
+Nom=AffCe3,813,2,N,0,0,N,1
+Nom=TvaCpt1,814,2,N,0,0,N,1
+Nom=TvaCpt2,822,2,N,0,0,N,1
+Nom=TvaImmo,830,2,N,0,0,N,1
+Nom=TvaAlCpt1,838,2,N,0,0,N,1
+Nom=TvaAlCpt2,846,2,N,0,0,N,1
+Nom=EscAccCpt,854,2,N,0,0,N,1
+Nom=EscObtCpt,862,2,N,0,0,N,1
+Nom=UCTAXT1,870,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20060630150855,DEMO                ,20060712164134,FH                  
@@ -13648,22 +14497,22 @@ Nom=Filler,360,2,N,0,150,N,1
 Nom=UCTgLig,510,2,N,0,0,N,3
 [/CHAMPS]
 [TABLE]
-Version=1,20060707172552,FH                  ,20060824154824,FH                  
+Version=1,20060707172552,FH                  ,20140708112657,MCD                 
 Nom=CTgLigT1,Saisie paramétrage tableau de gestion,1
-DateM=EFA1DB46C822C701
-Taille=13964,13964
+DateM=6B2AE6CC8E9ACF01
+Taille=27524,27524
 Pack=0,0
 [CHAMPS]
 Nom=TgLig,1,2,N,0,0,N,1
 Nom=TabCelTg,5,2,N,0,0,N,1
-Nom=UCTgLigT1,13565,2,N,0,0,N,1
+Nom=UCTgLigT1,27125,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20120831090122,VJ                  ,20120831141806,VJ                  
+Version=1,20120831090122,VJ                  ,20150513140813,MS                  
 Nom=ctva,Tva,1
-DateM=DB841F0273EECD01
+DateM=E2C77629709CD001
 NomOdbc=ctva
-Taille=400,400
+Taille=600,600
 Pack=0,0
 CE=Ce1,1
 [CHAMPS]
@@ -13691,76 +14540,88 @@ Nom=Dos,21,2,N,0,0,N,1
 Nom=Etb,24,2,N,0,0,N,1
 Nom=EcrNo,27,2,N,0,0,N,1
 Nom=TvaCod,38,2,N,0,0,N,1
-Nom=Piece,54,2,N,0,0,N,1
-Nom=ExDt,62,2,N,0,0,N,1
-Nom=MtHt,70,2,N,0,0,N,1
-Nom=MtTva,86,2,N,0,0,N,1
-Nom=TvaDt,102,2,N,0,0,N,1
-Nom=TvaTyp,108,2,N,0,0,N,1
-Nom=UserCr,109,2,N,0,0,N,1
-Nom=UserMo,129,2,N,0,0,N,1
-Nom=UserCrDh,149,2,N,0,0,N,1
-Nom=UserMoDh,163,2,N,0,0,N,1
-Nom=UserCrOri,177,2,N,0,0,N,1
-Nom=UserMoOri,179,2,N,0,0,N,1
-Nom=Filler,181,2,N,0,170,N,1
-Nom=UCtva,351,2,N,0,0,N,1
+Nom=ExDt,54,2,N,0,0,N,1
+Nom=MtHt,62,2,N,0,0,N,1
+Nom=MtTva,78,2,N,0,0,N,1
+Nom=TvaDt,94,2,N,0,0,N,1
+Nom=TvaTyp,100,2,N,0,0,N,1
+Nom=Sens,101,2,N,0,0,N,1
+Nom=FlTvaAL,102,2,N,0,0,N,1
+Nom=CoeAss,103,2,N,0,0,N,1
+Nom=CoeTax,110,2,N,0,0,N,1
+Nom=CoeAdm,117,2,N,0,0,N,1
+Nom=UserCr,124,2,N,0,0,N,1
+Nom=UserMo,144,2,N,0,0,N,1
+Nom=UserCrDh,164,2,N,0,0,N,1
+Nom=UserMoDh,178,2,N,0,0,N,1
+Nom=UserCrOri,192,2,N,0,0,N,1
+Nom=UserMoOri,194,2,N,0,0,N,1
+Nom=EffetDt,196,2,N,0,0,N,1
+Nom=Filler,204,2,N,0,297,N,1
+Nom=UCtva,501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120831113813,VJ                  ,20120831144744,VJ                  
 Nom=ctvaT1,Tva,1
-DateM=DB841F0273EECD01
+DateM=1B6E39B6758DD001
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
-TableInsere=ctva,1,400,0,1
-Nom=TvaP,401,2,N,0,0,N,1
-Nom=Flags,407,2,N,0,0,N,1
-Nom=Sens,447,2,N,0,0,N,1
-Nom=Filler,448,2,N,0,53,N,1
-Nom=UCTAT1,501,2,N,0,0,N,1
+TableInsere=ctva,1,600,0,1
+Nom=TvaP,601,2,N,0,0,N,1
+Nom=Flags,607,2,N,0,0,N,1
+Nom=AffCe2,647,2,N,0,0,N,1
+Nom=AffCe3,648,2,N,0,0,N,1
+Nom=TvaCpt1,649,2,N,0,0,N,1
+Nom=TvaCpt2,657,2,N,0,0,N,1
+Nom=TvaImmo,665,2,N,0,0,N,1
+Nom=TvaAlCpt1,673,2,N,0,0,N,1
+Nom=TvaAlCpt2,681,2,N,0,0,N,1
+Nom=EscAccCpt,689,2,N,0,0,N,1
+Nom=EscObtCpt,697,2,N,0,0,N,1
+Nom=UCTVAT1,705,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,1996 2160000,hc  ,20100709112324,VJ                  
+Version=1,1996 2160000,hc  ,20150513140854,MS                  
 Nom=cx,Ventilation sur les axes,1
-DateM=27B2C861481FCB01
+DateM=19C1B2E0758DD001
 NomOdbc=Ventilation_Axe
-Taille=350,350
+Taille=600,600
 Pack=0,0
 CE=Ce1,2
 [CHAMPS]
-Nom=Ce1,1,2,N,0,0,N,3
-Nom=Ce2,2,2,N,0,0,N,3
-Nom=Ce3,3,2,N,0,0,N,3
-Nom=Ce4,4,2,N,0,0,N,3
-Nom=Ce5,5,2,N,0,0,N,3
-Nom=Ce6,6,2,N,0,0,N,3
-Nom=Ce7,7,2,N,0,0,N,3
-Nom=Ce8,8,2,N,0,0,N,3
-Nom=Ce9,9,2,N,0,0,N,3
-Nom=Cea,10,2,N,0,0,N,3
-Nom=Ceb,11,2,N,0,0,N,3
-Nom=Cec,12,2,N,0,0,N,3
-Nom=Ced,13,2,N,0,0,N,3
-Nom=Cee,14,2,N,0,0,N,3
-Nom=Cef,15,2,N,0,0,N,3
-Nom=Ceg,16,2,N,0,0,N,3
-Nom=Ceh,17,2,N,0,0,N,3
-Nom=Cei,18,2,N,0,0,N,3
-Nom=Cej,19,2,N,0,0,N,3
-Nom=Cek,20,2,N,0,0,N,3
-Nom=Dos,21,2,N,0,0,N,3
-Nom=Etb,24,2,N,0,0,N,3
-Nom=Ecr,27,2,N,0,0,N,3
-Nom=MaskLg,42,2,N,0,0,N,3
-Nom=AxeTb,47,2,N,0,0,N,3
-Nom=Cpt,79,2,N,0,0,N,3
-Nom=Jnl,87,2,N,0,0,N,3
-Nom=EcrTyp,90,2,N,0,0,N,3
-Nom=EcrDt,91,2,N,0,0,N,3
-Nom=Dev,99,2,N,0,0,N,3
-Nom=UserCr,103,2,N,0,0,N,3
-Nom=UserMo,123,2,N,0,0,N,3
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=Cea,10,2,N,0,0,N,1
+Nom=Ceb,11,2,N,0,0,N,1
+Nom=Cec,12,2,N,0,0,N,1
+Nom=Ced,13,2,N,0,0,N,1
+Nom=Cee,14,2,N,0,0,N,1
+Nom=Cef,15,2,N,0,0,N,1
+Nom=Ceg,16,2,N,0,0,N,1
+Nom=Ceh,17,2,N,0,0,N,1
+Nom=Cei,18,2,N,0,0,N,1
+Nom=Cej,19,2,N,0,0,N,1
+Nom=Cek,20,2,N,0,0,N,1
+Nom=Dos,21,2,N,0,0,N,1
+Nom=Etb,24,2,N,0,0,N,1
+Nom=Ecr,27,2,N,0,0,N,1
+Nom=MaskLg,42,2,N,0,0,N,1
+Nom=AxeTb,47,2,N,0,0,N,1
+Nom=Cpt,79,2,N,0,0,N,1
+Nom=Jnl,87,2,N,0,0,N,1
+Nom=EcrTyp,90,2,N,0,0,N,1
+Nom=EcrDt,91,2,N,0,0,N,1
+Nom=Dev,99,2,N,0,0,N,1
+Nom=UserCr,103,2,N,0,0,N,1
+Nom=UserMo,123,2,N,0,0,N,1
 Nom=UserCrDh,143,2,N,0,0,N,1
 Nom=UserMoDh,157,2,N,0,0,N,1
 Nom=UserCrOri,171,2,N,0,0,N,1
@@ -13769,8 +14630,14 @@ Nom=Mt,175,2,N,0,0,N,1
 Nom=Sens,191,2,N,0,0,N,1
 Nom=MtDev,192,2,N,0,0,N,1
 Nom=MtBis,208,2,N,0,0,N,1
-Nom=Filler,224,2,N,0,27,N,1
-Nom=UCx,251,2,N,0,0,N,3
+Nom=DvAnStatus,224,2,N,0,0,N,1
+Nom=DvAnDH,225,2,N,0,0,N,1
+Nom=Transac,239,2,N,0,0,N,1
+Nom=Niv,247,2,N,0,0,N,1
+Nom=NivCle,249,2,N,0,0,N,1
+Nom=DvAnCleCod,251,2,N,0,0,N,1
+Nom=Filler,259,2,N,0,242,N,1
+Nom=UCx,501,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Commentaire=94
@@ -13787,11 +14654,15 @@ Commentaire=100
 Nom=EcrTyp
 NomOdbc=NoLigneVentilation
 Nom=MaskLg
+NomOdbc=TransactionDeversement
+Nom=Transac
+Libelle=Niveau de recherche
+Nom=Niv
 [/PROPLOC]
 [TABLE]
 Version=1,2000 7 90000,hc  ,20090422175317,MS                  
 Nom=cxt1,Saisie des ventilations sur les axes,1
-DateM=A93C18C163C3C901
+DateM=F2B5511A125ACF01
 Taille=1510,1510
 Pack=0,0
 [CHAMPS]
@@ -14244,7 +15115,7 @@ Nom=Lib
 [TABLE]
 Version=1,20100818155706,MS                  ,20100819114902,MS                  
 Nom=hd,Nature d'immobilisation,1
-DateM=BC2E1EC1833FCB01
+DateM=7974459F403FCE01
 Taille=400,400
 Pack=0,0
 CE=Ce1,D
@@ -14272,6 +15143,69 @@ Nom=UserMoDh,240,2,N,0,0,N,1
 Nom=UserMoOri,254,2,N,0,0,N,1
 Nom=Filler,256,2,N,0,45,N,1
 Nom=UHD,301,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+ZoomRes=1
+Nom=Lib
+[/PROPLOC]
+[TABLE]
+Version=1,20130807154316,JLF                 ,20130807154847,JLF                 
+Nom=hg,Périodes de calcul pour déversement analytique,1
+DateM=3D76573C7993CE01
+NomOdbc=Table_Periode_Calcul
+Taille=500,500
+Pack=0,0
+CE=Ce1,G
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=DvAnPerCod,5,2,N,0,0,N,1
+Nom=UserCr,13,2,N,0,0,N,1
+Nom=UserMo,33,2,N,0,0,N,1
+Nom=UserTrace,53,2,N,0,0,N,1
+Nom=UserCrOri,81,2,N,0,0,N,1
+Nom=UserMoOri,83,2,N,0,0,N,1
+Nom=CeNote,85,2,N,0,0,N,1
+Nom=Note,86,2,N,0,0,N,1
+Nom=Lib,94,2,N,0,0,N,1
+Nom=DebDt,134,2,N,0,0,N,1
+Nom=FinDt,142,2,N,0,0,N,1
+Nom=DvAnPerTyp,150,2,N,0,0,N,1
+Nom=Filler,151,2,N,0,250,N,1
+Nom=Uhg,401,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130807154808,JLF                 ,20130807175911,JLF                 
+Nom=hh,Règles de calcul pour déversement analytique,1
+DateM=EBA0602F0E94CE01
+NomOdbc=Table_Regle_Calcul
+Taille=1000,1000
+Pack=0,0
+CE=Ce1,H
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Dos,2,2,N,0,0,N,1
+Nom=DvAnCleCod,5,2,N,0,0,N,1
+Nom=AxeNo,13,2,N,0,0,N,1
+Nom=UserCr,14,2,N,0,0,N,1
+Nom=UserMo,34,2,N,0,0,N,1
+Nom=UserTrace,54,2,N,0,0,N,1
+Nom=UserCrOri,82,2,N,0,0,N,1
+Nom=UserMoOri,84,2,N,0,0,N,1
+Nom=CeNote,86,2,N,0,0,N,1
+Nom=Note,87,2,N,0,0,N,1
+Nom=Lib,95,2,N,0,0,N,1
+Nom=DebDt,135,2,N,0,0,N,1
+Nom=FinDt,143,2,N,0,0,N,1
+Nom=Niv,151,2,N,0,0,N,1
+Nom=DvAnPerFlg,153,2,N,0,0,N,1
+Nom=DvAnPerCod,154,2,N,0,0,N,1
+Nom=CptDebTb,162,2,N,0,0,N,1
+Nom=CptFinTb,322,2,N,0,0,N,1
+Nom=AxeDebTb,482,2,N,0,0,N,1
+Nom=AxeFinTb,642,2,N,0,0,N,1
+Nom=Filler,802,2,N,0,99,N,1
+Nom=Uhh,901,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1997 1220000,hc  ,20100708162734,VJ                  
@@ -14777,7 +15711,11 @@ Nom=NbEcrMax,1251,2,N,0,0,N,1
 Nom=EcrFinCod,1255,2,N,0,0,N,1
 Nom=Param,1256,2,N,0,0,N,1
 Nom=ResFac,1331,2,N,0,0,N,1
-Nom=Filler,1332,2,N,0,169,N,1
+Nom=EcrTyp,1332,2,N,0,0,N,1
+Nom=MaskLg,1333,2,N,0,0,N,1
+Nom=Niv,1338,2,N,0,0,N,1
+Nom=PieceDt,1340,2,N,0,0,N,1
+Nom=Filler,1348,2,N,0,153,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1996 3 50000,c321,20060504152750,JLSI
@@ -14864,7 +15802,8 @@ Nom=ValDt,655,2,N,0,0,N,1
 Nom=FlLib,663,2,N,0,0,N,1
 Nom=FCle,664,2,N,0,0,N,1
 Nom=FiltreEtb,920,2,N,0,0,N,1
-Nom=Filler,1020,2,N,0,81,N,1
+Nom=EcrTyp,1020,2,N,0,0,N,1
+Nom=Filler,1021,2,N,0,80,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1996 4160000,c321,20090422174526,MS                  
@@ -15290,7 +16229,7 @@ Nom=NomFic40,816,2,N,0,0,N,1
 [TABLE]
 Version=1,1996 3 50000,hc  ,20070618115446,FH                  
 Nom=xq,Traitement job queue,1
-DateM=C7B0CA414CEFCD01
+DateM=A6B66E83B570CE01
 Taille=4400,4400
 Pack=0,0
 [CHAMPS]
@@ -15362,6 +16301,35 @@ Nom=FlConf,6865,2,N,0,0,N,1
 Nom=FlDce,6866,2,N,0,0,N,1
 Nom=FlTsc,6867,2,N,0,0,N,1
 Nom=FlEtbConf,6868,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130422164433,VJ                  ,20130422164433,VJ                  
+Nom=xtva,Work tva,1
+DateM=2FDCDA6A6B3FCE01
+Taille=2000,2000
+Pack=0,0
+[CHAMPS]
+Nom=TvaDecDt,1,2,N,0,0,N,1
+Nom=PerDDt,9,2,N,0,0,N,1
+Nom=ErrNb,17,2,N,0,0,N,1
+Nom=Phase,22,2,N,0,0,N,1
+Nom=Lib,23,2,N,0,0,N,1
+Nom=MtHtTb,63,2,N,0,0,N,1
+Nom=MtDecTb,223,2,N,0,0,N,1
+Nom=TvaDt1,383,2,N,0,0,N,1
+Nom=TvaDt2,389,2,N,0,0,N,1
+Nom=TvaP,395,2,N,0,0,N,1
+Nom=Mt1,401,2,N,0,0,N,1
+Nom=Mt2,417,2,N,0,0,N,1
+Nom=Mt3,431,2,N,0,0,N,1
+Nom=Mt4,447,2,N,0,0,N,1
+Nom=Mt5,463,2,N,0,0,N,1
+Nom=TvaTypTb,479,2,N,0,0,N,1
+Nom=TvaPTb,489,2,N,0,0,N,1
+Nom=TvaFDt,549,2,N,0,0,N,1
+Nom=ChxDev,557,2,N,0,0,N,1
+Nom=ChxDevTab,558,2,N,0,0,N,1
+Nom=TvaTie,566,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1998 3200000,c322,20050113155406,HC
@@ -15572,11 +16540,11 @@ Nom=cg,0
 Nom=ch,0
 [/TABLES]
 [BASE]
-Version=1,1996 2160000,hc  ,20120319141812,MS                  
+Version=1,1996 2160000,hc  ,20160503180057,DEMO                
 Nom=CcfDos,Dossiers,1
-DateM=55A632BCD205CD01
+DateM=88C414FB54A5D101
 Fichier=I,0,ccfdos.dhfi
-Versionbase=7.2
+Versionbase=7.5a
 DateMIndex=481B86ED838EC801
 [TABLES]
 Nom=ca,0
@@ -15588,11 +16556,22 @@ Nom=cn,0
 Nom=cz,0
 [/TABLES]
 [BASE]
-Version=1,20080325171416,MS                  ,20121001183857,MS                  
+Version=1,20130807143755,JLF                 ,20130807153840,JLF                 
+Nom=CcfDvAn,Paramètres déversement analytique,1
+DateM=97844D6D7393CE01
+Fichier=I,0,CcfDvAn.dhfi
+Versionbase=7.3
+DateMIndex=5CE47A347393CE01
+[TABLES]
+Nom=CDvAnDet,0
+Nom=CDvAnEnt,0
+[/TABLES]
+[BASE]
+Version=1,20080325171416,MS                  ,20160503180102,DEMO                
 Nom=CcfEcr,Ecritures,1
-DateM=CABECB40F39FCD01
+DateM=FC6BF5FD54A5D101
 Fichier=I,0,ccfecr.dhfi
-Versionbase=7.2
+Versionbase=7.5a
 DateMIndex=FCDE636FF39FCD01
 [TABLES]
 Nom=c8,0
@@ -15610,11 +16589,11 @@ Nom=i2,0
 Nom=i3,0
 [/TABLES]
 [BASE]
-Version=1,20080226101941,FH                  ,20130108151911,MS                  
+Version=1,20080226101941,FH                  ,20150902095930,MS                  
 Nom=CcfJCA,Intitulés journal compte axe,1
-DateM=37A80121ABEDCD01
+DateM=A49D554C55E5D001
 Fichier=I,0,ccfjca.dhfi
-Versionbase=7.2
+Versionbase=7.5
 DateMIndex=73E6C7CDCE2FCB01
 [TABLES]
 Nom=c3,0
@@ -15657,12 +16636,12 @@ Nom=ctax,0
 Nom=cx,0
 [/TABLES]
 [BASE]
-Version=1,1996 2160000,hc  ,20111003121225,MS                  
+Version=1,1996 2160000,hc  ,20130807092308,MS                  
 Nom=CcfTab,Tables,1
-DateM=C227BEF2B481CC01
+DateM=F6A860F73E93CE01
 Fichier=I,0,ccftab.dhfi
-Versionbase=7.0
-DateMIndex=8629E9EFDE3ECB01
+Versionbase=7.3
+DateMIndex=13A3F49A729DCE01
 [TABLES]
 Nom=h1,0
 Nom=h2,0
@@ -15677,6 +16656,8 @@ Nom=h9,0
 Nom=ha,0
 Nom=hc,0
 Nom=hd,0
+Nom=hg,0
+Nom=hh,0
 [/TABLES]
 [BASE]
 Version=1,20060630150810,DEMO                ,20070313081732,JLSI                
@@ -15690,32 +16671,40 @@ Nom=CTgEnt,0
 Nom=CTgLig,0
 [/TABLES]
 [BASE]
+Version=1,20140410172119,MS                  ,20140410172119,MS                  
+Nom=CcfTmp,Fichier temporaire,1
+DateM=411ECC85D054CF01
+Fichier=U,0,
+DateMIndex=411ECC85D054CF01
+[TABLES]
+[/TABLES]
+[BASE]
 Version=1,1996 2160000,hc  ,20120530165029,MS                  
 Nom=CcfTsc,Statistiques,1
 DateM=D470738E733ECD01
 Fichier=I,0,ccftsc.dhfi
 Versionbase=7.2
-DateMIndex=1B8585543B08CE01
+DateMIndex=1B9C02504108CE01
 [TABLES]
 Nom=cs,0
 [/TABLES]
 [BASE]
-Version=1,20120831090012,VJ                  ,20120831141827,VJ                  
+Version=1,20120831090012,VJ                  ,20150513140610,MS                  
 Nom=CcfTva,Tva,1
-DateM=2C46FF434687CD01
+DateM=E75E8733758DD001
 Fichier=I,0,ccftva.dhfi
-Versionbase=7.2
-DateMIndex=2C3F49511809CE01
+Versionbase=7.4
+DateMIndex=FCADCA73D79DD001
 [TABLES]
 Nom=ctva,0
 [/TABLES]
 [BASE]
-Version=1,1996 2160000,hc  ,20120530165033,MS                  
+Version=1,1996 2160000,hc  ,20150513140621,MS                  
 Nom=CcfVtl,Imputations et ventilations,1
-DateM=B0D70F91733ECD01
+DateM=9AD1B639758DD001
 Fichier=I,0,ccfvtl.dhfi
-Versionbase=7.2
-DateMIndex=5E747AA71709CE01
+Versionbase=7.4
+DateMIndex=22A60D0AD8CCCF01
 [TABLES]
 Nom=cp,0
 Nom=ctax,0
@@ -15939,6 +16928,48 @@ CLE=CcfDos,D,Ce1,2,2,o,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=Ce1,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130807153045,JLF                 ,20130807153118,JLF                 
+Nom=Index_A,Par journal,1
+DateM=15FFF1657293CE01
+CLE=CcfDvAn,A,Ce1,2,1,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=EcrTyp,4,0,
+Nom=Jnl,5,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130807153231,JLF                 ,20130807153231,JLF                 
+Nom=Index_B,Par journal,1
+DateM=596F84917293CE01
+CLE=CcfDvAn,B,Ce1,2,2,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Jnl,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130807153309,JLF                 ,20130809151717,JLF                 
+Nom=Index_C,Par numéro ligne et journal,1
+DateM=045644B07293CE01
+CLE=CcfDvAn,C,Ce1,2,2,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=MaskLg,4,0,
+Nom=Jnl,9,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130807153408,JLF                 ,20130807153408,JLF                 
+Nom=Index_D,Par code clé de répartition,1
+DateM=C6B17BCB7293CE01
+CLE=CcfDvAn,D,Ce1,2,2,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=DvAnCleCod,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -17112,9 +18143,9 @@ Nom=Ce1,15,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,2000 5 50000,hc  ,20110909111553,MS                  
+Version=1,2000 5 50000,hc  ,20130807094720,MS                  
 Nom=index_A_h1,comptes abrégés par code,1
-DateM=522C5D13D16ECC01
+DateM=4D2C93584293CE01
 CLE=CcfTab,A,,1,032,o,5,n
 [CHAMPS]
 Nom=Ce1,1,0,
@@ -17319,6 +18350,39 @@ Nom=NatImmo,5,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
+Version=1,20130807172213,JLF                 ,20130807172649,JLF                 
+Nom=Index_A_hg,Par code période modèle,1
+DateM=C90908898293CE01
+CLE=CcfTab,A,,1,032,o,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Dos,2,0,
+Nom=DvAnPerCod,5,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130807172902,JLF                 ,20130807175941,JLF                 
+Nom=Index_A_hh,Par clé de répartition,1
+DateM=71BDB9208793CE01
+CLE=CcfTab,A,,1,032,n,5,n
+[CHAMPS]
+Nom=Ce1,1,0,
+Nom=Dos,2,0,
+Nom=DvAnCleCod,5,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130807173007,JLF                 ,20130807180009,JLF                 
+Nom=Index_G_hh,Par clé de répartition et numéro axe,1
+DateM=978638318793CE01
+CLE=CcfTab,G,Ce1,2,H,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=DvAnCleCod,4,0,
+Nom=AxeNo,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
 Version=1,20060630152210,DEMO                ,20060630152210,DEMO                
 Nom=index_A_ctgent,Tableau par code,1
 DateM=01906E31489CC601
@@ -17503,9 +18567,9 @@ Nom=TscDt,23,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,2000 5 50000,pb  ,20130211103612,MS                  
+Version=1,2000 5 50000,pb  ,20130211111918,MS                  
 Nom=index_L,statistiques par axe1 axe2 axe3 axe4 et date,1
-DateM=6679303B3B08CE01
+DateM=A9C874404108CE01
 CLE=CcfTsc, ,Ce7,2,1,n,4,n
 Alias=IDX_L
 [CHAMPS]
@@ -17518,9 +18582,9 @@ Nom=TscDt,36,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080514173548,MS                  ,20130211103624,MS                  
+Version=1,20080514173548,MS                  ,20130211111925,MS                  
 Nom=index_lmini,statistiques par établissement axe1 axe2 axe3 axe4 et date,1
-DateM=41A82F423B08CE01
+DateM=EF5C72444108CE01
 CLE=CcfTsc, ,Ceb,2,1,n,4,n
 Alias=IDX_L_mini
 [CHAMPS]
@@ -17534,9 +18598,9 @@ Nom=TscDt,39,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20021022100353,HC  ,20130211103631,MS                  
+Version=1,20021022100353,HC  ,20130211111929,MS                  
 Nom=index_M,statistiques par axe2 axe1 et date,1
-DateM=769671463B08CE01
+DateM=7BC901474108CE01
 CLE=CcfTsc, ,Ce8,2,1,n,4,n
 Alias=IDX_M
 [CHAMPS]
@@ -17547,9 +18611,9 @@ Nom=TscDt,20,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080514173621,MS                  ,20130211103643,MS                  
+Version=1,20080514173621,MS                  ,20130211111934,MS                  
 Nom=index_mmini,statistiques par établissement axe2 axe1 et date,1
-DateM=DD2B7D4D3B08CE01
+DateM=3F4AC8494108CE01
 CLE=CcfTsc, ,Cec,2,1,n,4,n
 Alias=IDX_M_mini
 [CHAMPS]
@@ -17561,9 +18625,9 @@ Nom=TscDt,23,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20021022100421,HC  ,20130211103650,MS                  
+Version=1,20021022100421,HC  ,20130211111939,MS                  
 Nom=index_N,statistiques par axe3 axe2 et date,1
-DateM=E73B59513B08CE01
+DateM=3391134D4108CE01
 CLE=CcfTsc, ,Ce9,2,1,n,4,n
 Alias=IDX_N
 [CHAMPS]
@@ -17574,9 +18638,9 @@ Nom=TscDt,20,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080514173650,MS                  ,20130211103655,MS                  
+Version=1,20080514173650,MS                  ,20130211111944,MS                  
 Nom=index_nmini,statistiques par établissement axe3 axe2 et date,1
-DateM=1B8585543B08CE01
+DateM=1B9C02504108CE01
 CLE=CcfTsc, ,Ced,2,1,n,4,n
 Alias=IDX_N_mini
 [CHAMPS]
@@ -17737,6 +18801,8 @@ Nom=Dos,1,0,
 Nom=EcrNo,4,0,
 Nom=TvaArt,15,0,
 Nom=TvaTie,23,0,
+Nom=EffetDt,31,0,
+Nom=Ce3,39,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -17748,31 +18814,49 @@ CLE=CcfTva,B,Ce1,2,1,n,1,n
 Nom=Dos,1,0,
 Nom=TvaArt,4,0,
 Nom=TvaTie,12,0,
-Nom=EcrNo,20,0,
+Nom=EffetDt,20,0,
+Nom=EcrNo,28,0,
+Nom=Ce3,39,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20121212104331,VJ                  ,20130108105940,VJ                  
+Version=1,20121212104331,VJ                  ,20150414094235,TP                  
 Nom=Index_C,Non validée par numéro d'écriture,1
-DateM=71DFE4DF86EDCD01
-CLE=CcfTva,C,Ce2,3,4,n,4,n
+DateM=ABCC0B938676D001
+CLE=CcfTva,C,Ce6,2,1,n,4,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=EcrNo,4,0,
 Nom=TvaArt,15,0,
 Nom=TvaTie,23,0,
+Nom=EffetDt,31,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20130212125830,MS                  ,20130212125830,MS                  
-Nom=Index_D,Par date d'exigibilité,1
-DateM=365B28461809CE01
+Version=1,20130212125736,MS                  ,20130313112148,MS                  
+Nom=Index_D,Par type et date d'exigibilité,1
+DateM=11B0EE251809CE01
 CLE=CcfTva,D,Ce1,2,1,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
-Nom=ExDt,4,0,
-Nom=TvaArt,12,0,
-Nom=TvaTie,20,0,
+Nom=Ce3,4,0,
+Nom=ExDt,5,0,
+Nom=TvaArt,13,0,
+Nom=TvaTie,21,0,
+Nom=EffetDt,29,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130422154252,VJ                  ,20130422163928,VJ                  
+Nom=Index_E,Par date et declaration,1
+DateM=43421F495F3FCE01
+CLE=CcfTva,E,Ce1,2,1,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=TvaDtA,4,0,
+Nom=TvaDtM,8,0,
+Nom=Ce3,10,0,
+Nom=Ce2,11,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -17987,9 +19071,9 @@ Nom=EcrDt,23,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,2000 5 50000,hc  ,20130211110935,MS                  
+Version=1,2000 5 50000,hc  ,20130211112034,MS                  
 Nom=index_L_cx,imputations par axe1 axe2 axe3 axe4 et date,1
-DateM=D3FCBDE43F08CE01
+DateM=77819F6D4108CE01
 CLE=CcfVtl, ,Ce7,2,1,n,4,n
 Alias=IDX_L
 [CHAMPS]
@@ -18002,9 +19086,9 @@ Nom=EcrDt,36,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080515114405,MS                  ,20130211110944,MS                  
+Version=1,20080515114405,MS                  ,20130211112039,MS                  
 Nom=index_lmini_cx,imputations par établissement axe1 axe2 axe3 axe4 et date,1
-DateM=531C56EA3F08CE01
+DateM=416AE0704108CE01
 CLE=CcfVtl, ,Ceb,2,1,n,4,n
 Alias=IDX_L_mini
 [CHAMPS]
@@ -18018,9 +19102,9 @@ Nom=EcrDt,39,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20021022103536,HC  ,20130211110954,MS                  
+Version=1,20021022103536,HC  ,20130211112044,MS                  
 Nom=index_M_cx,imputations par axe2 axe1 et date,1
-DateM=8F2815F03F08CE01
+DateM=3BE796734108CE01
 CLE=CcfVtl, ,Ce8,2,1,n,4,n
 Alias=IDX_M
 [CHAMPS]
@@ -18031,9 +19115,9 @@ Nom=EcrDt,20,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080515114452,MS                  ,20130211111001,MS                  
+Version=1,20080515114452,MS                  ,20130211112050,MS                  
 Nom=index_mmini_cx,imputations par établissement axe2 axe1 et date,1
-DateM=538B47F43F08CE01
+DateM=A6C2D7764108CE01
 CLE=CcfVtl, ,Cec,2,1,n,4,n
 Alias=IDX_M_mini
 [CHAMPS]
@@ -18045,9 +19129,9 @@ Nom=EcrDt,23,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20021022103612,HC  ,20130211111008,MS                  
+Version=1,20021022103612,HC  ,20130211112054,MS                  
 Nom=index_N_cx,imputations par axe3 axe2 et date,1
-DateM=961D7AF83F08CE01
+DateM=7A46AF794108CE01
 CLE=CcfVtl, ,Ce9,2,1,n,4,n
 Alias=IDX_N
 [CHAMPS]
@@ -18058,9 +19142,9 @@ Nom=EcrDt,20,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080515114521,MS                  ,20130211111014,MS                  
+Version=1,20080515114521,MS                  ,20130211112059,MS                  
 Nom=index_nmini_cx,imputations par établissement axe3 axe2 et date,1
-DateM=BA12EFFB3F08CE01
+DateM=7E28727C4108CE01
 CLE=CcfVtl, ,Ced,2,1,n,4,n
 Alias=IDX_N_mini
 [CHAMPS]
@@ -18177,8 +19261,8 @@ Nom=Filler,20,0,5
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20120911114711,VJ                  ,20120914115945,MS                  
-Nom=index_U_ctax,ventilation tva par numéro d'écriture compte et date d'exigibilité,1
+Version=1,20120911114711,VJ                  ,20140910111611,MS                  
+Nom=index_U_ctax,ventilation tva par numéro d'écriture et code tva,1
 DateM=9E4B3FAB5F92CD01
 CLE=CcfVtl,U,Ce1,2,9,n,1,n
 [CHAMPS]
@@ -18187,35 +19271,38 @@ Nom=EcrNo,4,0,
 Nom=EcrLg,15,0,
 Nom=TvaArt,19,0,
 Nom=TvaTie,27,0,
+Nom=EffetDt,35,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20130212124447,MS                  ,20130212124447,MS                  
+Version=1,20130212124529,MS                  ,20130212124529,MS                  
 Nom=index_V_ctax,ventilation tva par code tva,1
-DateM=77579B5B1609CE01
+DateM=60D0CE741609CE01
 CLE=CcfVtl,V,Ce1,2,9,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=TvaArt,4,0,
 Nom=TvaTie,12,0,
+Nom=EffetDt,20,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20130212124620,MS                  ,20130212124620,MS                  
+Version=1,20130212124701,MS                  ,20130212124701,MS                  
 Nom=index_W_ctax,ventilation tva par pièce et code tva,1
-DateM=377206931609CE01
+DateM=6C92F4AB1609CE01
 CLE=CcfVtl,W,Ce1,2,9,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=Piece,4,0,
 Nom=TvaArt,12,0,
 Nom=TvaTie,20,0,
+Nom=EffetDt,28,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20130212125131,MS                  ,20130212125131,MS                  
+Version=1,20130212125236,MS                  ,20130212125236,MS                  
 Nom=index_X_ctax,ventilation tva par pièce et numéro d'écriture,1
-DateM=D0ECA74C1709CE01
+DateM=DD4E4A731709CE01
 CLE=CcfVtl,X,Ce1,2,9,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
@@ -18224,12 +19311,13 @@ Nom=EcrNo,12,0,
 Nom=EcrLg,23,0,
 Nom=TvaArt,27,0,
 Nom=TvaTie,35,0,
+Nom=EffetDt,43,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20130212125337,MS                  ,20130212125337,MS                  
+Version=1,20130212125442,MS                  ,20130212125442,MS                  
 Nom=index_Y_ctax,ventilation tva par date d'exigibilité,1
-DateM=1DDAE0971709CE01
+DateM=688BA0BE1709CE01
 CLE=CcfVtl,Y,Ce1,2,9,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
@@ -18238,6 +19326,17 @@ Nom=EcrNo,12,0,
 Nom=EcrLg,23,0,
 Nom=TvaArt,27,0,
 Nom=TvaTie,35,0,
+Nom=EffetDt,43,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130807142410,JLF                 ,20130807142410,JLF                 
+Nom=index_Z_cx,imputations par transaction déversement,1
+DateM=73A5CD046993CE01
+CLE=CcfVtl,Z,Ce1,2,2,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Transac,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEXL]
@@ -18262,6 +19361,10 @@ Nom=CcfDos,cz,index_H,0
 Nom=CcfDos,cd,index_F,0
 Nom=CcfDos,cc,index_E,0
 Nom=CcfDos,cb,index_D,0
+Nom=CcfDvAn,CDvAnEnt,Index_A,0
+Nom=CcfDvAn,CDvAnDet,Index_B,0
+Nom=CcfDvAn,CDvAnDet,Index_C,0
+Nom=CcfDvAn,CDvAnDet,Index_D,0
 Nom=CcfEcr,c8,index_A,0
 Nom=CcfEcr,c8,index_amini,0
 Nom=CcfEcr,c8,index_C,0
@@ -18379,6 +19482,9 @@ Nom=CcfTab,h7,index_F_h7,0
 Nom=CcfTab,h5,Index_A_H5,0
 Nom=CcfTab,hc,Index_A_hc,0
 Nom=CcfTab,hd,Index_A_hd,0
+Nom=CcfTab,hg,Index_A_hg,0
+Nom=CcfTab,hh,Index_A_hh,0
+Nom=CcfTab,hh,Index_G_hh,0
 Nom=CcfTg,CTgEnt,index_A_ctgent,0
 Nom=CcfTg,CTgLig,index_C_ctglig,0
 Nom=CcfTsc,cs,index_A,0
@@ -18415,6 +19521,7 @@ Nom=CcfTva,ctva,Index_A,0
 Nom=CcfTva,ctva,Index_B,0
 Nom=CcfTva,ctva,Index_C,0
 Nom=CcfTva,ctva,Index_D,0
+Nom=CcfTva,ctva,Index_E,0
 Nom=CcfVtl,cp,index_A_cp,0
 Nom=CcfVtl,cp,index_B_cp,0
 Nom=CcfVtl,cp,index_C_cp,0
@@ -18452,6 +19559,7 @@ Nom=CcfVtl,ctax,index_V_ctax,0
 Nom=CcfVtl,ctax,index_W_ctax,0
 Nom=CcfVtl,ctax,index_X_ctax,0
 Nom=CcfVtl,ctax,index_Y_ctax,0
+Nom=CcfVtl,cx,index_Z_cx,0
 [/INDEXL]
 [LienDico]
 BeginFile

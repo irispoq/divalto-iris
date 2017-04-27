@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20021023,RR  ,20130905144830,SN                  
+Version=6,20021023,RR  ,20140505120320,JF                  
 Nom=grfdd.dhsd,grfdd.dhsd,1
 [CHAMP]
 Version=1,20030313211424,RR                  ,20030313211424,RR                  
@@ -2227,6 +2227,13 @@ Nature=1,0
 Attribut=PARAM
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130729144130,SN                  ,20130729144137,SN                  
+Nom=IntPaieDt,Date d'intégration en Paie,1
+Gel=1
+Nature=D8
+NomOdbc=DateIntegrationPaie
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20021023221019,RR  ,20021023221019,RR
 Nom=Job,Job,1
 Gel=3
@@ -2902,19 +2909,19 @@ Attribut=PARAM
 NomOdbc=NomFin
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140505105202,CI                  ,20140505120215,SN                  
+Nom=NomFamille,Nom de famille,1
+DateM=9ACD645A3F68CF01
+Gel=1
+Nature=80
+NomOdbc=NomFamille
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20100115091037,DEMO                ,20100520153913,DEMO                
 Nom=NomFichier,Nom de fichier (sans le chemin),1
 Gel=1
 Nature=80
 NomOdbc=NomFichier
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20060309173030,CN                  ,20100129155346,DEMO                
-Nom=NomPat,Nom de jeune fille,1
-DateM=395F3B784E5AC601
-Gel=1
-Nature=30
-NomOdbc=NomPatronymique
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030225150923,RR                  ,20030225150923,RR                  
@@ -4072,6 +4079,12 @@ Gel=3
 Nature=300
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20140115115523,SN                  ,20140115115544,SN                  
+Nom=UGR001,Réservé distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20031030141919,RR                  ,20031030141919,RR                  
 Nom=UGR001T3,Réservé distributeur,1
 Gel=3
@@ -4085,6 +4098,24 @@ Gel=1
 Nature=25
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140115175441,SN                  ,20140115175446,SN                  
+Nom=UGR001T7,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115175512,SN                  ,20140115175517,SN                  
+Nom=UGR002,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115115705,SN                  ,20140115115710,SN                  
+Nom=UGR003,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20031013103018,RR                  ,20040616111051,RR                  
 Nom=UGR003T6,Réservé distributeur,1
 DateM=60ED21D28153C401
@@ -4092,75 +4123,185 @@ Gel=3
 Nature=200
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140115115733,SN                  ,20140115115740,SN                  
+Nom=UGR003T7,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115115751,SN                  ,20140115175614,SN                  
+Nom=UGR004,Réservé distributeur,1
+DateM=C52D69B31212CF01
+Gel=1
+Nature=200
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115115805,SN                  ,20140115115809,SN                  
+Nom=UGR005,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115115817,SN                  ,20140115115821,SN                  
+Nom=UGR007,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115115829,SN                  ,20140115115833,SN                  
+Nom=UGR009,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115115848,SN                  ,20140115115853,SN                  
+Nom=UGR010,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115115921,SN                  ,20140115115926,SN                  
+Nom=UGR019T1,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20060322155401,RR                  ,20060322155401,RR                  
 Nom=UGR023T1,Réservé distributeur,1
 Gel=3
 Nature=50
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20050906132149,RR                  ,20050906132149,RR                  
+Version=1,20140115115949,SN                  ,20140115175805,SN                  
+Nom=UGR024,Réservé distributeur,1
+DateM=A90B7AF51212CF01
+Gel=1
+Nature=200
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115120006,SN                  ,20140115175814,SN                  
+Nom=UGR024T1,Réservé distributeur,1
+DateM=1F7411FB1212CF01
+Gel=1
+Nature=500
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20050906132149,RR                  ,20140115175823,SN                  
 Nom=UGR024T3,Réservé distributeur,1
+DateM=57DCFCFF1212CF01
 Gel=3
-Nature=100
-Flags=n,1,n,n,n,n,n,n
+Nature=50
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20060606172433,RR                  ,20060606172433,RR                  
+Version=1,20140115175837,SN                  ,20140115175842,SN                  
+Nom=UGR024T4,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115175859,SN                  ,20140115175903,SN                  
+Nom=UGR024T5,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115175925,SN                  ,20140115175932,SN                  
+Nom=UGR024T6,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115175956,SN                  ,20140115180001,SN                  
+Nom=UGR024T8,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20060606172433,RR                  ,20140115180037,SN                  
 Nom=Ugr026,Réservé distributeur,1
+DateM=150762501312CF01
 Gel=3
-Nature=100
-Flags=n,1,n,n,n,n,n,n
+Nature=250
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20060214170513,RR                  ,20060214170513,RR                  
+Version=1,20060214170513,RR                  ,20140115120110,SN                  
 Nom=UGR026T1,Réservé distributeur,1
 Gel=3
 Nature=100
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20091120091929,DEMO                ,20101222085458,DEMO                
+Version=1,20140115120121,SN                  ,20140115180048,SN                  
+Nom=UGR026T2,Réservé distributeur,1
+DateM=90A99B561312CF01
+Gel=1
+Nature=200
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115180102,SN                  ,20140115180105,SN                  
+Nom=UGR026T3,Réservé distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20091120091929,DEMO                ,20140115120139,SN                  
 Nom=UGR034T1,Réservé distributeur,1
 DateM=87826387ADA1CB01
 Gel=1
 Nature=500
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20031013102801,RR                  ,20101222085514,DEMO                
+Version=1,20031013102801,RR                  ,20140115120152,SN                  
 Nom=UGR034T2,Réservé distributeur,1
 DateM=0FCF2A91ADA1CB01
 Gel=3
 Nature=500
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20031013102907,RR                  ,20101222085525,DEMO                
+Version=1,20031013102907,RR                  ,20140115120203,SN                  
 Nom=UGR034T3,Réservé distributeur,1
 DateM=6398BB97ADA1CB01
 Gel=3
 Nature=200
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20031013102946,RR                  ,20101222085538,DEMO                
+Version=1,20031013102946,RR                  ,20140115120214,SN                  
 Nom=UGR034T4,Réservé distributeur,1
 DateM=9355259FADA1CB01
 Gel=3
 Nature=200
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20031013103053,RR                  ,20101222085543,DEMO                
+Version=1,20031013103053,RR                  ,20140115120236,SN                  
 Nom=UGR034T5,Réservé distributeur,1
 DateM=2F783AA2ADA1CB01
 Gel=3
 Nature=200
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20110628213528,DEMO                ,20110628213528,DEMO                
+Version=1,20110628213528,DEMO                ,20140115120246,SN                  
 Nom=UGR034T6,Réservé distributeur,1
 Gel=1
 Nature=200
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20110628214642,DEMO                ,20110628214642,DEMO                
+Version=1,20110628214642,DEMO                ,20140115120300,SN                  
 Nom=UGR034T7,Réservé distributeur,1
 Gel=1
 Nature=200
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115140016,SN                  ,20140115180201,SN                  
+Nom=UGR1,Réservé distributeur,1
+DateM=C4B0F0811312CF01
+Gel=1
+Nature=500
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20140115180221,SN                  ,20140115180229,SN                  
+Nom=UGRNOTE,Réservé distributeur,1
+DateM=19D3E1921312CF01
+Gel=1
+Nature=40
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030401141344,RR                  ,20051031085049,RR                  
@@ -5232,7 +5373,8 @@ Nom=Libre,551,2,N,0,0,N,1
 Nom=LienSt,552,2,N,0,0,N,1
 Nom=EvtExtNo,553,2,N,0,0,N,1
 Nom=CouleurFond,567,2,N,0,0,N,1
-Nom=Filler,569,2,N,0,132,N,1
+Nom=IntPaieDt,569,2,N,0,0,N,1
+Nom=Filler,577,2,N,0,124,N,1
 Nom=UEvtTiers,701,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -5247,7 +5389,7 @@ Nom=Tiers
 [TABLE]
 Version=1,20021029152133,RR  ,20090423150414,DEMO                
 Nom=GR001,Enregistrement de travail du programme de maintenance tiers,1
-DateM=B601E1525F50CC01
+DateM=973F49DD1212CF01
 Taille=36000,36000
 Pack=0,0
 [CHAMPS]
@@ -5339,6 +5481,7 @@ Nom=MapiFax,35424,2,N,0,0,N,1
 Nom=MapiMail,35426,2,N,0,0,N,1
 Nom=MapiInternet,35428,2,N,0,0,N,1
 Nom=MapiAutre,35430,2,N,0,0,N,1
+Nom=UGR001,35432,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Flags=n,1,n,i,i,n,n,n
@@ -5369,7 +5512,7 @@ Nom=TiersF
 [TABLE]
 Version=1,20021205090051,RR  ,20030401141220,RR                  
 Nom=GR001T3,Evénements d'un tiers,1
-DateM=F3C441AB4408CE01
+DateM=E7EB2BE01212CF01
 Taille=4000,4000
 Pack=0,0
 [CHAMPS]
@@ -5382,8 +5525,7 @@ Nom=Cle,2404,2,N,0,0,N,1
 Nom=CalDhAff,2660,2,N,0,0,N,1
 Nom=PereSt,2674,2,N,0,0,N,1
 Nom=ID,2675,2,N,0,0,N,1
-Nom=Filler,2679,2,N,0,322,N,1
-Nom=UGR001T3,3001,2,N,0,0,N,1
+Nom=UGR001T3,2679,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1
@@ -5409,15 +5551,16 @@ Flags=i,i,i,o,i,i,i,i
 Nom=Tiers
 [/PROPLOC]
 [TABLE]
-Version=1,20090206105912,DEMO                ,20100216231630,DEMO                
+Version=1,20090206105912,DEMO                ,20140115175454,SN                  
 Nom=GR001T7,Liste intermédiaire pour filtres sur rubriques\v pour visualisation,1
-DateM=B4C968CF55AFCA01
-Taille=150,150
+DateM=7861AE831212CF01
+Taille=200,200
 Pack=0,0
 [CHAMPS]
 TableInsere=GR001T6,1,70,0,1
 Nom=Nom,71,2,N,0,0,N,1
 Nom=CNom,109,2,N,0,0,N,1
+Nom=UGR001T7,147,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030117102713,RR  ,20030401141226,RR                  
@@ -5432,6 +5575,7 @@ Nom=TreeInfo,501,2,N,0,0,N,1
 Nom=HierarchieNouvTb,652,2,N,0,0,N,1
 Nom=ModifCod,692,2,N,0,0,N,1
 Nom=Cle,693,2,N,0,0,N,1
+Nom=UGR002,949,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030319183109,RR                  ,20030319183850,RR                  
@@ -5453,11 +5597,12 @@ Nom=MapiFax,8890,2,N,0,0,N,1
 Nom=MapiMail,8892,2,N,0,0,N,1
 Nom=MapiInternet,8894,2,N,0,0,N,1
 Nom=MapiAutre,8896,2,N,0,0,N,1
+Nom=UGR003,8898,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20050715141631,RR                  ,20050715141631,RR                  
 Nom=GR003T7,Tableau des tâches à réaliser,1
-DateM=EEE10B05B39ACA01
+DateM=999A41E51212CF01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -5469,11 +5614,12 @@ Nom=Contact,123,2,N,0,0,N,1
 Nom=EvtNo,131,2,N,0,0,N,1
 Nom=EvtDh,139,2,N,0,0,N,1
 Nom=Conf,153,2,N,0,0,N,1
+Nom=UGR003T7,157,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030227104203,RR                  ,20030227104203,RR                  
 Nom=GR004,Enregistrement étiquettes tiers,1
-DateM=60D5E409FDDAC501
+DateM=1B2469BE1212CF01
 Taille=8000,8000
 Pack=0,0
 [CHAMPS]
@@ -5482,6 +5628,7 @@ Nom=EtiNlig,2,2,N,0,0,N,1
 Nom=Col004,4,2,N,0,0,N,1
 Nom=Lib80,7004,2,N,0,0,N,1
 Nom=Colonne,7084,2,N,0,0,N,1
+Nom=UGR004,7086,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20031128160410,RR                  ,20031128160410,RR                  
@@ -5491,6 +5638,7 @@ Taille=500,500
 Pack=0,0
 [CHAMPS]
 Nom=Document,1,2,N,0,0,N,1
+Nom=UGR005,257,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20070125092819,RR                  ,20070125092819,RR                  
@@ -5502,6 +5650,7 @@ Pack=0,0
 Nom=ChampNom,1,2,N,0,0,N,1
 Nom=ChampValeur,131,2,N,0,0,N,1
 Nom=Fichier,1131,2,N,0,0,N,1
+Nom=UGR007,1387,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030611093412,RR                  ,20030611093910,RR                  
@@ -5513,18 +5662,20 @@ Pack=0,0
 Nom=WinChn,1,2,N,0,0,N,1
 Nom=FicIdx,81,2,N,0,0,N,1
 Nom=FicIdxSt,161,2,N,0,0,N,1
+Nom=UGR009,162,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20030528101548,RR                  ,20030528102513,RR                  
+Version=1,20030528101548,RR                  ,20140115115903,SN                  
 Nom=GR010,Enregistrement de travail de la copie des tables de base,1
-DateM=A4BCE1B721F8CA01
-Taille=1500,1500
+DateM=B8CF33CDE011CF01
+Taille=1600,1600
 Pack=0,0
 [CHAMPS]
 Nom=Choix,1,2,N,0,0,N,1
 Nom=DosOrig,81,2,N,0,0,N,1
 Nom=DosDest,84,2,N,0,0,N,1
 Nom=LibTb,87,2,N,0,0,N,1
+Nom=UGR010,1487,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20040331144025,RR                  ,20040526110206,RR                  
@@ -5558,6 +5709,7 @@ Nom=CFax,515,2,N,0,0,N,1
 Nom=CEmail,535,2,N,0,0,N,1
 Nom=CTit,615,2,N,0,0,N,1
 Nom=CServcod,619,2,N,0,0,N,1
+Nom=UGR019T1,627,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Flags=i,i,i,o,i,i,i,i
@@ -5566,19 +5718,18 @@ Nom=Tiers
 [TABLE]
 Version=1,20060322155145,RR                  ,20060322155145,RR                  
 Nom=GR023T1,Tableau lignes,1
-DateM=7AB39A7AC04DC601
+DateM=9B0AA9F01212CF01
 Taille=100,100
 Pack=0,0
 [CHAMPS]
 Nom=PrefixeNbCti,1,2,N,0,0,N,1
 Nom=PrefixeCti,6,2,N,0,0,N,1
-Nom=Filler,38,2,N,0,13,N,1
-Nom=UGR023T1,51,2,N,0,0,N,1
+Nom=UGR023T1,38,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20050906131351,RR                  ,20071107152208,RR                  
 Nom=GR024,Planning,1
-DateM=A4BCE1B721F8CA01
+DateM=A90B7AF51212CF01
 Taille=9500,9500
 Pack=0,0
 [CHAMPS]
@@ -5603,6 +5754,7 @@ Nom=JourLibTb,8963,2,N,0,0,N,1
 Nom=MoisLibTb,9033,2,N,0,0,N,1
 Nom=DateDebTb,9153,2,N,0,0,N,1
 Nom=DateFinTb,9201,2,N,0,0,N,1
+Nom=UGR024,9249,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Flags=n,1,n,i,i,n,n,n
@@ -5615,7 +5767,7 @@ Nom=HorSt
 [TABLE]
 Version=1,20050906131931,RR                  ,20090113113153,RR                  
 Nom=GR024T1,Tableau mémoire,1
-DateM=809FA6226D75C901
+DateM=1F7411FB1212CF01
 Taille=64000,64000
 Pack=0,0
 [CHAMPS]
@@ -5624,6 +5776,7 @@ Nom=IdEvtNo,21,2,N,0,0,N,1
 Nom=DebHe,861,2,N,0,0,N,1
 Nom=Coltb,867,2,N,0,0,N,1
 Nom=DtTb,62307,2,N,0,0,N,1
+Nom=UGR024T1,62363,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Flags=n,1,n,i,i,n,n,n
@@ -5640,7 +5793,7 @@ Nom=Horaire
 [TABLE]
 Version=1,20050906132104,RR                  ,20050906132104,RR                  
 Nom=GR024T3,Tableau des collaborateurs,1
-DateM=D02B451ED5B2C501
+DateM=57DCFCFF1212CF01
 Taille=300,300
 Pack=0,0
 [CHAMPS]
@@ -5659,49 +5812,53 @@ Taille=1200,1200
 Pack=0,0
 [CHAMPS]
 TableInsere=EvtTiers,1,1000,0,1
+Nom=UGR024T4,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20050906132558,RR                  ,20091013134835,ROOT                
+Version=1,20050906132558,RR                  ,20140115175912,SN                  
 Nom=GR024T5,Tableau des événements,1
-DateM=F3C441AB4408CE01
-Taille=1300,1300
+DateM=2B789C1D1312CF01
+Taille=1400,1400
 Pack=0,0
 [CHAMPS]
 TableInsere=EvtTiers,1,1000,0,1
 Nom=Filler,1001,2,N,0,200,N,1
 Nom=Nom,1201,2,N,0,0,N,1
 Nom=EvtSt,1239,2,N,0,0,N,1
+Nom=UGR024T5,1240,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Flags=n,1,n,i,i,n,n,n
 Nom=EvtSt
 [/PROPLOC]
 [TABLE]
-Version=1,20050906133921,RR                  ,20121214150636,SN                  
+Version=1,20050906133921,RR                  ,20140115175939,SN                  
 Nom=GR024T6,Tableau des codes événements,1
-DateM=1E62C83A04DACD01
-Taille=350,350
+DateM=FF24452D1312CF01
+Taille=400,400
 Pack=0,0
 [CHAMPS]
 TableInsere=grtevt,1,350,0,1
+Nom=UGR024T6,351,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20071120204146,RR                  ,20091013135019,ROOT                
+Version=1,20071120204146,RR                  ,20140115180013,SN                  
 Nom=GR024T8,Enregistrement de travail ,1
-DateM=F3C441AB4408CE01
-Taille=1350,1350
+DateM=1BEBAD411312CF01
+Taille=1550,1550
 Pack=0,0
 [CHAMPS]
 Nom=EvtCelNo,1,2,N,0,0,N,1
 Nom=EvtCelLig,9,2,N,0,0,N,1
 Nom=EvtCelCol,12,2,N,0,0,N,1
 Nom=EVtCelId,15,2,N,0,0,N,1
-TableInsere=GR024T5,19,1300,0,1
+TableInsere=GR024T5,19,1400,0,1
+Nom=UGR024T8,1419,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20060606103406,RR                  ,20060614120201,RR                  
 Nom=GR026,Table mémoire du planning HTML,1
-DateM=A4BCE1B721F8CA01
+DateM=150762501312CF01
 Taille=9000,9000
 Pack=0,0
 [CHAMPS]
@@ -5735,7 +5892,7 @@ Nom=UGR026T1,179,2,N,0,0,N,1
 [TABLE]
 Version=1,20060609104715,RR                  ,20060609104840,RR                  
 Nom=GR026T2,Table mémoire planning HTML,1
-DateM=04F05F7CF18EC601
+DateM=90A99B561312CF01
 Taille=6500,6500
 Pack=0,0
 [CHAMPS]
@@ -5746,6 +5903,7 @@ Nom=ListeTb,16,2,N,0,0,N,1
 Nom=NbHrsTravTb,416,2,N,0,0,N,1
 Nom=HeureDebTb,616,2,N,0,0,N,1
 Nom=HeureFinTb,1016,2,N,0,0,N,1
+Nom=UGR026T2,1416,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20060613154059,RR                  ,20060613154059,RR                  
@@ -5760,11 +5918,12 @@ Nom=Nom,1201,2,N,0,0,N,1
 Nom=HeureDeb,1239,2,N,0,0,N,1
 Nom=HeureFin,1243,2,N,0,0,N,1
 Nom=Lib,1247,2,N,0,0,N,1
+Nom=UGR026T3,1287,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030128182104,RR                  ,20101222085449,DEMO                
 Nom=GR034T1,Enregistrement de travail des manifestations,1
-DateM=9C517D21B910CC01
+DateM=F4C655711312CF01
 Taille=3000,3000
 Pack=0,0
 [CHAMPS]
@@ -5772,13 +5931,12 @@ TableInsere=manif,1,900,0,1
 Nom=TreeInfo,901,2,N,0,0,N,1
 Nom=ModeleSt,1052,2,N,0,0,N,1
 Nom=EpurableSt,1053,2,N,0,0,N,1
-Nom=Filler,1054,2,N,0,1447,N,1
-Nom=UGR034T1,2501,2,N,0,0,N,1
+Nom=UGR034T1,1054,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030130082830,RR                  ,20101222085507,DEMO                
 Nom=GR034T2,Enregistrement de travail des étapes des manifestations,1
-DateM=C6A943F5AB72CC01
+DateM=39911B701312CF01
 Taille=3500,3500
 Pack=0,0
 [CHAMPS]
@@ -5786,24 +5944,22 @@ TableInsere=ManifEtape,1,1600,0,1
 Nom=TreeInfo,1601,2,N,0,0,N,1
 Nom=ModeleSt,1752,2,N,0,0,N,1
 Nom=Feu,1753,2,N,0,0,N,1
-Nom=Filler,1754,2,N,0,1247,N,1
-Nom=UGR034T2,3001,2,N,0,0,N,1
+Nom=UGR034T2,1754,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030131152759,RR                  ,20110328221937,DEMO                
 Nom=GR034T3,Enregistrement de travail des conditions d'entrée pour une étape de manif,1
-DateM=8C313DEC7968CC01
+DateM=544CCC6E1312CF01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 TableInsere=ManifEtapeCondition,1,600,0,1
-Nom=Filler,601,2,N,0,1200,N,1
-Nom=UGR034T3,1801,2,N,0,0,N,1
+Nom=UGR034T3,601,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030225150336,RR                  ,20110610172141,DEMO                
 Nom=GR034T4,Enregistrement de travail des tiers d'une étape de manifestation,1
-DateM=EE761A84B3B9CC01
+DateM=79977F104968CF01
 Taille=3500,3500
 Pack=0,0
 [CHAMPS]
@@ -5811,60 +5967,62 @@ TableInsere=ManifEtapeTiers,1,500,0,1
 Nom=LibTb,501,2,N,0,0,N,1
 Nom=NomAbrTot,1901,2,N,0,0,N,1
 Nom=Nom,1939,2,N,0,0,N,1
-Nom=NomPat,1977,2,N,0,0,N,1
-Nom=Prenom,2007,2,N,0,0,N,1
-Nom=Tit,2027,2,N,0,0,N,1
-Nom=Civilite,2031,2,N,0,0,N,1
-Nom=AdrCpl1,2033,2,N,0,0,N,1
-Nom=AdrCpl2,2071,2,N,0,0,N,1
-Nom=Rue,2109,2,N,0,0,N,1
-Nom=Loc,2147,2,N,0,0,N,1
-Nom=Vil,2185,2,N,0,0,N,1
-Nom=Pay,2223,2,N,0,0,N,1
-Nom=CPostal,2226,2,N,0,0,N,1
-Nom=Tel,2234,2,N,0,0,N,1
-Nom=Telgsm,2254,2,N,0,0,N,1
-Nom=Fax,2274,2,N,0,0,N,1
-Nom=Email,2294,2,N,0,0,N,1
-Nom=Web,2374,2,N,0,0,N,1
-Nom=SelCod,2414,2,N,0,0,N,1
-Nom=Naf,2494,2,N,0,0,N,1
-Nom=OrigCod,2499,2,N,0,0,N,1
-Nom=ReprTb,2507,2,N,0,0,N,1
-Nom=StatTb,2531,2,N,0,0,N,1
-Nom=CaMt,2555,2,N,0,0,N,1
-Nom=SalNb,2565,2,N,0,0,N,1
-Nom=Siret,2569,2,N,0,0,N,1
-Nom=TiersNat,2584,2,N,0,0,N,1
-Nom=QualCod,2585,2,N,0,0,N,1
-Nom=Regl,2586,2,N,0,0,N,1
-Nom=Dev,2590,2,N,0,0,N,1
-Nom=Lang,2594,2,N,0,0,N,1
-Nom=SalCod,2596,2,N,0,0,N,1
-Nom=TiersGrp,2616,2,N,0,0,N,1
-Nom=CeNote,2624,2,N,0,0,N,1
-Nom=Note,2625,2,N,0,0,N,1
-Nom=CeJoint,2633,2,N,0,0,N,1
-Nom=Joint,2634,2,N,0,0,N,1
-Nom=CibleCod,2642,2,N,0,0,N,1
-Nom=UGR034T4,2650,2,N,0,0,N,1
+Nom=NomFamille,1977,2,N,0,0,N,1
+Nom=Prenom,2057,2,N,0,0,N,1
+Nom=Tit,2077,2,N,0,0,N,1
+Nom=Civilite,2081,2,N,0,0,N,1
+Nom=AdrCpl1,2083,2,N,0,0,N,1
+Nom=AdrCpl2,2121,2,N,0,0,N,1
+Nom=Rue,2159,2,N,0,0,N,1
+Nom=Loc,2197,2,N,0,0,N,1
+Nom=Vil,2235,2,N,0,0,N,1
+Nom=Pay,2273,2,N,0,0,N,1
+Nom=CPostal,2276,2,N,0,0,N,1
+Nom=Tel,2284,2,N,0,0,N,1
+Nom=Telgsm,2304,2,N,0,0,N,1
+Nom=Fax,2324,2,N,0,0,N,1
+Nom=Email,2344,2,N,0,0,N,1
+Nom=Web,2424,2,N,0,0,N,1
+Nom=SelCod,2464,2,N,0,0,N,1
+Nom=Naf,2544,2,N,0,0,N,1
+Nom=OrigCod,2549,2,N,0,0,N,1
+Nom=ReprTb,2557,2,N,0,0,N,1
+Nom=StatTb,2581,2,N,0,0,N,1
+Nom=CaMt,2605,2,N,0,0,N,1
+Nom=SalNb,2615,2,N,0,0,N,1
+Nom=Siret,2619,2,N,0,0,N,1
+Nom=TiersNat,2634,2,N,0,0,N,1
+Nom=QualCod,2635,2,N,0,0,N,1
+Nom=Regl,2636,2,N,0,0,N,1
+Nom=Dev,2640,2,N,0,0,N,1
+Nom=Lang,2644,2,N,0,0,N,1
+Nom=SalCod,2646,2,N,0,0,N,1
+Nom=TiersGrp,2666,2,N,0,0,N,1
+Nom=CeNote,2674,2,N,0,0,N,1
+Nom=Note,2675,2,N,0,0,N,1
+Nom=CeJoint,2683,2,N,0,0,N,1
+Nom=Joint,2684,2,N,0,0,N,1
+Nom=CibleCod,2692,2,N,0,0,N,1
+Nom=UGR034T4,2700,2,N,0,0,N,1
 [/CHAMPS]
+[PROPLOC]
+Nom=NomFamille
+[/PROPLOC]
 [TABLE]
 Version=1,20030225164108,RR                  ,20101222085558,DEMO                
 Nom=GR034T5,Enregistrement de travail des cibles de tiers d'une étape de manifestation,1
-DateM=E927D6F87968CC01
+DateM=6E30E76A1312CF01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
 TableInsere=ManifEtapeCible,1,500,0,1
 Nom=Lib,501,2,N,0,0,N,1
-Nom=Filler,541,2,N,0,260,N,1
-Nom=UGR034T5,801,2,N,0,0,N,1
+Nom=UGR034T5,541,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20030203200228,RR                  ,20101222085603,DEMO                
 Nom=GR034T6,Enregistrement de travail collaborateurs d'une manifestation,1
-DateM=80E9A3FE7336CC01
+DateM=A3E950781312CF01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -5874,13 +6032,12 @@ Nom=Tel,389,2,N,0,0,N,1
 Nom=Telgsm,409,2,N,0,0,N,1
 Nom=Fax,429,2,N,0,0,N,1
 Nom=Email,449,2,N,0,0,N,1
-Nom=Filler,529,2,N,0,272,N,1
-Nom=UGR034T6,801,2,N,0,0,N,1
+Nom=UGR034T6,529,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110628214104,DEMO                ,20110628214104,DEMO                
 Nom=GR034T7,Enregistrement de travail statistiques,1
-DateM=7B123ED42A36CC01
+DateM=B497D37B1312CF01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -5895,7 +6052,7 @@ Nom=UGR034T7,61,2,N,0,0,N,1
 [TABLE]
 Version=1,20021119101741,RR  ,20110628163957,SN                  
 Nom=GR1,Enregistrement de travail Type d'affichage,1
-DateM=EE5630541467CC01
+DateM=C4B0F0811312CF01
 Taille=12000,12000
 Pack=0,0
 [CHAMPS]
@@ -6006,6 +6163,7 @@ Nom=ZonIdx,11191,2,N,0,0,N,1
 Nom=Priorite,11231,2,N,0,0,N,1
 Nom=ScenarioCod,11232,2,N,0,0,N,1
 Nom=EtapeNum,11240,2,N,0,0,N,1
+Nom=UGR1,11243,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Flags=n,1,n,n,i,n,n,n
@@ -6020,12 +6178,13 @@ Nom=NomAbr
 [TABLE]
 Version=1,20100827112043,DEMO                ,20100827112052,DEMO                
 Nom=GRNOTE,Table des notes,1
-DateM=C5D44742C945CB01
+DateM=19D3E1921312CF01
 NomOdbc=GrNote
 Taille=300,300
 Pack=0,0
 [CHAMPS]
 Nom=Fichier,1,2,N,0,0,N,1
+Nom=UGRNOTE,257,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20021129103552,RR  ,20050111103126,RR                  
@@ -6148,7 +6307,6 @@ Nom=UGrtEfa,251,2,N,0,0,N,3
 [PROPLOC]
 ZoomRes=1
 Nom=Lib
-Nom=NatureJointCod
 [/PROPLOC]
 [TABLE]
 Version=1,20091109155432,DEMO                ,20100104160637,DEMO                
@@ -7317,12 +7475,12 @@ Flags=i,i,i,o,i,i,i,i
 Nom=Tiers
 [/PROPLOC]
 [BASE]
-Version=1,20021023205906,RR  ,20111004093719,DEMO                
+Version=1,20021023205906,RR  ,20130729144108,SN                  
 Nom=Grfevt,Evénement,1
-DateM=F183B6726882CC01
+DateM=4193D1E5588CCE01
 Fichier=I,0,grfevt.dhfi
-Versionbase=7.0
-DateMIndex=9FBD1B153F95CC01
+Versionbase=7.3
+DateMIndex=75C9C31A598CCE01
 [TABLES]
 Nom=EvtCol,0
 Nom=EvtContact,0
@@ -7963,6 +8121,16 @@ Nom=Dos,1,0,
 Nom=Etb,4,0,
 Nom=EvtUser,7,0,
 Nom=EvtFinDh,27,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130729144223,SN                  ,20130729144223,SN                  
+Nom=Index_U,Dossier N° événement externe,1
+DateM=CA18D512598CCE01
+CLE=Grfevt,U,Ce1,2,1,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=EvtExtNo,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -8697,6 +8865,7 @@ Nom=Grfevt,EvtTiers,Index_S,0
 Nom=Grfevt,EvtTiers,Index_smini,0
 Nom=Grfevt,EvtTiers,Index_T,0
 Nom=Grfevt,EvtTiers,Index_tmini,0
+Nom=Grfevt,EvtTiers,Index_U,0
 Nom=GrfEvtTmp,SelEvt,Index_A,0
 Nom=Grfjq,XQ,Index_A,0
 Nom=Grfmanif,Manif,Index_A,0

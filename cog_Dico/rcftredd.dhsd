@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20100721150923,ROOT                ,20130214162711,TP                  
+Version=6,20100721150923,ROOT                ,20150521092800,TP                  
 Nom=rcftredd.dhsd,prtrfdd.dhsd,1
 [CHAMP]
 Version=1,20110916160003,ROOT                ,20110916160003,ROOT                
@@ -321,12 +321,12 @@ Gel=1
 Nature=34
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20110803154346,ROOT                ,20110927161917,TP                  
+Version=1,20110803154346,ROOT                ,20150324112035,TP                  
 Nom=idTreREnt,TreREnt - clé primaire,1
 DateM=A0042A04E451CC01
 Gel=1
 Nature=8
-Flags=n,1,o,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20110803154252,ROOT                ,20110927161909,TP                  
 Nom=idTreRLigCum,TreRLigCum - clé primaire,1
@@ -378,6 +378,18 @@ Nom=LibRequete,Libellé du critère,1
 DateM=8F45B396E773CC01
 Gel=1
 Nature=40
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150325114710,TP                  ,20150325114710,TP                  
+Nom=LstCpt,Liste des comptes sélectionnés,1
+Gel=1
+Nature=L
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20150325114724,TP                  ,20150325114724,TP                  
+Nom=LstEtb,Liste des établissements sélectionnés,1
+Gel=1
+Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110913150628,ROOT                ,20110913150628,ROOT                
@@ -453,35 +465,6 @@ Version=1,20110914112645,ROOT                ,20110914112645,ROOT
 Nom=PageTraceTraitement,N° de la page de trace du traitement,1
 Gel=1
 Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110824090656,ROOT                ,20110824090757,ROOT                
-Nom=ParamLstCpt,Liste finie des comptes,1
-Gel=1
-Nature=8*20
-NomOdbc=ParamLstCpt
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110824090514,ROOT                ,20110824090534,ROOT                
-Nom=ParamLstEtb,Liste finie des établissements,1
-DateM=1AB3D4332C62CC01
-Gel=1
-Nature=3*20
-NomOdbc=ParamLstEtb
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110824090616,ROOT                ,20110824090624,ROOT                
-Nom=ParamTousCpt,Tous les comptes O/N,1
-Gel=1
-Nature=1,0
-NomOdbc=ParamTousCpt
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110824090418,ROOT                ,20110824090447,ROOT                
-Nom=ParamTousEtb,Tous les établissements O/N,1
-Gel=1
-Nature=1,0
-NomOdbc=ParamTousEtb
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110729145547,ROOT                ,20110729171627,ROOT                
@@ -596,10 +579,11 @@ Nature=D8*20
 NomOdbc=TableauDateJalon
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110915223820,ROOT                ,20110915223820,ROOT                
+Version=1,20110915223820,ROOT                ,20130627144427,TP                  
 Nom=TabRequetes,Tableau des requêtes,1
+DateM=5E22980F3473CE01
 Gel=1
-Nature=200*4
+Nature=400*4
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110728165619,ROOT                ,20110728170113,ROOT                
@@ -729,6 +713,18 @@ Gel=1
 Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20150324110609,TP                  ,20150324110716,TP                  
+Nom=UTreREntCpt,Réservé distirbuteur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20150324110805,TP                  ,20150324110825,TP                  
+Nom=UTreREntEtb,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20110728160644,ROOT                ,20110816163930,ROOT                
 Nom=UTreRLigCum,Zone utilisateur,1
 DateM=121D714E225CCC01
@@ -774,11 +770,11 @@ Nature=80
 NomOdbc=ValeurMasque
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110915223703,ROOT                ,20110915223945,ROOT                
+Version=1,20110915223703,ROOT                ,20130627144457,TP                  
 Nom=ValRequete,Requête générée,1
-DateM=4A30A19AE773CC01
+DateM=943118213473CE01
 Gel=1
-Nature=160
+Nature=360
 Flags=n,1,n,n,n,n,n,n
 [CHAMPR]
 nom=CellulesTableau
@@ -927,10 +923,10 @@ Nom=OrdreNo,1458,2,N,0,0,N,1
 Nom=TypeDonnee,1461,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110915221704,ROOT                ,20110915223913,ROOT                
+Version=1,20110915221704,ROOT                ,20130703085712,TP                  
 Nom=AffichageZoom613,Données d'affichage pour le zoom 613,1
-DateM=4A30A19AE773CC01
-Taille=800,800
+DateM=67D6008BBA77CE01
+Taille=3000,3000
 Pack=0,0
 [CHAMPS]
 Nom=TabRequetes,1,2,N,0,0,N,1
@@ -1135,9 +1131,9 @@ Flags=i,i,o,o,i,i,i,i
 Nom=idTrePEnt
 [/PROPLOC]
 [TABLE]
-Version=1,20110728150141,ROOT                ,20110824090717,ROOT                
+Version=1,20110728150141,ROOT                ,20150324105747,TP                  
 Nom=TreREnt,Entête d'un résultat de calcul,1
-DateM=E677DA2D2D62CC01
+DateM=7B5127FB1866D001
 Taille=700,700
 Pack=0,0
 CE=Ce1,1
@@ -1158,14 +1154,10 @@ Nom=idTrePEnt,22,2,N,0,0,N,1
 Nom=Etb,30,2,N,0,0,N,1
 Nom=CalculDt,33,2,N,0,0,N,1
 Nom=LibEntete,41,2,N,0,0,N,1
-Nom=ParamTousEtb,81,2,N,0,0,N,1
-Nom=ParamLstEtb,82,2,N,0,0,N,1
-Nom=ParamTousCpt,142,2,N,0,0,N,1
-Nom=ParamLstCpt,143,2,N,0,0,N,1
-Nom=TabDateJalon,303,2,N,0,0,N,1
-Nom=Identifiants,463,2,N,0,0,N,1
-Nom=TypeCalcul_Dates,543,2,N,0,0,N,1
-Nom=Filler,544,2,N,0,57,N,1
+Nom=TabDateJalon,81,2,N,0,0,N,1
+Nom=Identifiants,241,2,N,0,0,N,1
+Nom=TypeCalcul_Dates,321,2,N,0,0,N,1
+Nom=Filler,322,2,N,0,279,N,1
 Nom=UTreREnt,601,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -1174,6 +1166,38 @@ Nom=idTreREnt
 Flags=i,i,o,o,i,i,i,i
 Nom=idTrePEnt
 [/PROPLOC]
+[TABLE]
+Version=1,20150324104912,TP                  ,20150324110529,TP                  
+Nom=TreREntCpt,Paramètres Cpt du résultat ,1
+DateM=DF8287541A66D001
+Taille=100,100
+Pack=0,0
+CE=Ce1,6
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Dos,3,2,N,0,0,N,1
+Nom=idTreREnt,6,2,N,0,0,N,1
+Nom=CptBqc,14,2,N,0,0,N,1
+Nom=Filler,22,2,N,0,29,N,1
+Nom=UTreREntCpt,51,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20150324104833,TP                  ,20150324110533,TP                  
+Nom=TreREntEtb,Paramètres Etb du résultat,1
+DateM=8EA0F37F1A66D001
+Taille=100,100
+Pack=0,0
+CE=Ce1,5
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Dos,3,2,N,0,0,N,1
+Nom=idTreREnt,6,2,N,0,0,N,1
+Nom=Etb,14,2,N,0,0,N,1
+Nom=Filler,17,2,N,0,34,N,1
+Nom=UTreREntEtb,51,2,N,0,0,N,1
+[/CHAMPS]
 [TABLE]
 Version=1,20110728150204,ROOT                ,20110729172933,ROOT                
 Nom=TreRLigCum,Ligne de cumul,1
@@ -1264,20 +1288,21 @@ Nom=estGestionEtb,1,2,N,0,0,N,1
 Nom=chModeleExcel,2,2,N,0,0,N,1
 Nom=estLancementResultatApresCalcul,258,2,N,0,0,N,1
 Nom=chDestination,259,2,N,0,0,N,1
+Nom=LstCpt,515,2,N,0,0,N,1
+Nom=LstEtb,519,2,N,0,0,N,1
 [/CHAMPS]
-[PROPLOC]
-Nom=chModeleExcel
-[/PROPLOC]
 [BASE]
-Version=1,20110728110142,ROOT                ,20111220141601,TP                  
+Version=1,20110728110142,ROOT                ,20150521092730,TP                  
 Nom=RCFTRERES,Résultat du calcul du prévisionnel,1
-DateM=A42D248519BFCC01
+DateM=0920F8989793D001
 Fichier=I,0,RCFTRERES.dhfi
-Versionbase=7.1
-DateMIndex=ABCB9FA2F971CC01
+Versionbase=7.4
+DateMIndex=D63ADDD21966D001
 [TABLES]
 Nom=TreRDet,0
 Nom=TreREnt,0
+Nom=TreREntCpt,0
+Nom=TreREntEtb,0
 Nom=TreRLigCum,0
 Nom=TreRSolde,0
 [/TABLES]
@@ -1427,6 +1452,48 @@ Nom=CptBqc,15,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
+Version=1,20150324105825,TP                  ,20150324110112,TP                  
+Nom=Index_K,Clé primaire,1
+DateM=BA9C74751966D001
+CLE=RCFTRERES,K,Ce1,2,6,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=REntNo,4,0,
+Nom=CptBqc,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20150324110102,TP                  ,20150324110102,TP                  
+Nom=Index_L,Par entête,1
+DateM=CC72866F1966D001
+CLE=RCFTRERES,L,Ce1,2,6,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=REntNo,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20150324110234,TP                  ,20150324110401,TP                  
+Nom=Index_M,Clé primaire,1
+DateM=90CE16DA1966D001
+CLE=RCFTRERES,M,Ce1,2,5,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=REntNo,4,0,
+Nom=Etb,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20150324110249,TP                  ,20150324110249,TP                  
+Nom=Index_N,Par entête ,1
+DateM=677C62AF1966D001
+CLE=RCFTRERES,N,Ce1,2,5,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=REntNo,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
 Version=1,20110728170819,ROOT                ,20110729165241,ROOT                
 Nom=Index_B,Par clé primaire,1
 DateM=CCBDF42AFF4DCC01
@@ -1518,6 +1585,10 @@ Nom=RCFTRERES,TreREnt,Index_C_ETB,0
 Nom=RCFTRERES,TreRLigCum,Index_F,0
 Nom=RCFTRERES,TreRSolde,Index_I,0
 Nom=RCFTRERES,TreRSolde,Index_J,0
+Nom=RCFTRERES,TreREntCpt,Index_K,0
+Nom=RCFTRERES,TreREntCpt,Index_L,0
+Nom=RCFTRERES,TreREntEtb,Index_M,0
+Nom=RCFTRERES,TreREntEtb,Index_N,0
 Nom=RCFTRETAB,TrePLigCum,Index_B,0
 Nom=RCFTRETAB,TrePLigCum,Index_C,0
 Nom=RCFTRETAB,TrePLigCum,Index_C_ETB,0

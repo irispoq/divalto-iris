@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20110822112410,BEL                 ,20130513102135,DEMO                
+Version=6,20110822112410,BEL                 ,20120405143406,DEMO                
 Nom=bifdd.dhsd,bifdd.dhsd,1
 [CHAMP]
 Version=1,20110905172107,DEMO                ,20110906145313,DEMO                
@@ -58,13 +58,6 @@ Flags=n,1,n,n,n,n,n,n
 Version=1,20110818180237,BEL                 ,20110822141448,BEL                 
 Nom=Annee,Numéro année,1
 DateM=4FE17516C560CC01
-Gel=1
-Nature=4,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130116111403,DEMO                ,20130116151709,DEMO                
-Nom=Annee_semaine,Numéro année de la semaine,1
-DateM=6715CB2BF4F3CD01
 Gel=1
 Nature=4,0
 Flags=n,1,n,n,n,n,n,n
@@ -857,7 +850,7 @@ Nature=2,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110826175159,SN                  ,20120315112531,DEMO                
-Nom=Montant_bon_livraison,Montant de la ligne HT,1
+Nom=Montant_bon_livraison,Montant de la ligne,1
 DateM=92990BF39502CD01
 Gel=1
 Nature=24,10
@@ -871,7 +864,7 @@ Nature=24,10
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110826175159,SN                  ,20120315112536,DEMO                
-Nom=Montant_commande,Montant de la ligne HT,1
+Nom=Montant_commande,Montant de la ligne,1
 DateM=182AC2F59502CD01
 Gel=1
 Nature=24,10
@@ -885,7 +878,7 @@ Nature=24,10
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110826175159,SN                  ,20120315112540,DEMO                
-Nom=Montant_devis,Montant de la ligne HT,1
+Nom=Montant_devis,Montant de la ligne,1
 DateM=805862F89502CD01
 Gel=1
 Nature=24,10
@@ -898,8 +891,8 @@ Gel=1
 Nature=24,10
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110826175159,SN                  ,20130131110319,DEMO                
-Nom=Montant_facture,Montant de la ligne HT,1
+Version=1,20110826175159,SN                  ,20120315112545,DEMO                
+Nom=Montant_facture,Montant de la ligne,1
 DateM=162737FB9502CD01
 Gel=1
 Nature=24,10
@@ -913,21 +906,7 @@ Nature=24,10
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110822174914,DEMO                ,20120104112434,DEMO                
-Nom=Montant_frais_1,Montant frais 1,1
-DateM=1787B80DCBCACC01
-Gel=1
-Nature=24,10
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110822174914,DEMO                ,20120104112434,DEMO                
 Nom=Montant_frais_1_dev,Montant frais 1 en devise pièce,1
-DateM=1787B80DCBCACC01
-Gel=1
-Nature=24,10
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110822174914,DEMO                ,20120104112434,DEMO                
-Nom=Montant_frais_2,Montant frais 2,1
 DateM=1787B80DCBCACC01
 Gel=1
 Nature=24,10
@@ -936,13 +915,6 @@ Flags=n,1,n,n,n,n,n,n
 Version=1,20110822174922,DEMO                ,20120104112440,DEMO                
 Nom=Montant_frais_2_dev,Montant frais 2 en devise pièce,1
 DateM=CDBD5811CBCACC01
-Gel=1
-Nature=24,10
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110822174914,DEMO                ,20120104112434,DEMO                
-Nom=Montant_frais_3,Montant frais 3,1
-DateM=1787B80DCBCACC01
 Gel=1
 Nature=24,10
 Flags=n,1,n,n,n,n,n,n
@@ -1027,19 +999,6 @@ Flags=n,1,n,n,n,n,n,n
 Version=1,20120104113952,DEMO                ,20120315113929,DEMO                
 Nom=Montant_remise_facture_dev,Montant de la remise de la ligne en devise pièce,1
 DateM=8BDFBDE69702CD01
-Gel=1
-Nature=24,10
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130117155837,DEMO                ,20130131110415,DEMO                
-Nom=Montant_taxe_dev,Montant des taxes en devise pièce,1
-DateM=87329F539AFFCD01
-Gel=1
-Nature=24,10
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130131110628,DEMO                ,20130131110628,DEMO                
-Nom=Montant_ttc_dev,Montant TTC en devise pièce,1
 Gel=1
 Nature=24,10
 Flags=n,1,n,n,n,n,n,n
@@ -2749,25 +2708,24 @@ Nom=UD_SousReference,401,2,N,0,0,N,1
 [TABLE]
 Version=1,20110822112851,BEL                 ,20111215154324,DEMO                
 Nom=D_Temps,Dimension temps,1
-DateM=6715CB2BF4F3CD01
+DateM=6ABF35ED39BBCC01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
 Nom=Date_ID,1,2,N,0,0,N,1
 Nom=DtDate,11,2,N,0,0,N,1
 Nom=Semaine,19,2,N,0,0,N,1
-Nom=Annee_semaine,21,2,N,0,0,N,1
-Nom=Mois_numero,25,2,N,0,0,N,1
-Nom=Annee,27,2,N,0,0,N,1
-Nom=Trimestre,31,2,N,0,0,N,1
-Nom=Quadrimestre,32,2,N,0,0,N,1
-Nom=Semestre,33,2,N,0,0,N,1
-Nom=Jour_semaine,34,2,N,0,0,N,1
-Nom=Jour_mois,35,2,N,0,0,N,1
-Nom=Jour_annee,37,2,N,0,0,N,1
-Nom=Jour_nom,40,2,N,0,0,N,1
-Nom=Mois,60,2,N,0,0,N,1
-Nom=Filler,80,2,N,0,321,N,1
+Nom=Mois_numero,21,2,N,0,0,N,1
+Nom=Annee,23,2,N,0,0,N,1
+Nom=Trimestre,27,2,N,0,0,N,1
+Nom=Quadrimestre,28,2,N,0,0,N,1
+Nom=Semestre,29,2,N,0,0,N,1
+Nom=Jour_semaine,30,2,N,0,0,N,1
+Nom=Jour_mois,31,2,N,0,0,N,1
+Nom=Jour_annee,33,2,N,0,0,N,1
+Nom=Jour_nom,36,2,N,0,0,N,1
+Nom=Mois,56,2,N,0,0,N,1
+Nom=Filler,76,2,N,0,325,N,1
 Nom=UD_Temps,401,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
@@ -2820,10 +2778,10 @@ Nom=Filler,865,2,N,0,536,N,1
 Nom=UD_Tiers,1401,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110906161228,DEMO                ,20130131112437,DEMO                
+Version=1,20110906161228,DEMO                ,20111215155952,DEMO                
 Nom=F_Bon_livraison_Achat,Fait bon de livraison achat,1
-DateM=6EBB94F39DFFCD01
-Taille=2500,2500
+DateM=CB180D8176F0CC01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 Nom=Source_ID,1,2,N,0,0,N,1
@@ -2853,25 +2811,19 @@ Nom=Collaborateur_ID,415,2,N,0,0,N,1
 Nom=Acheteur_code,425,2,N,0,0,N,1
 Nom=Acheteur,433,2,N,0,0,N,1
 Nom=Etat,473,2,N,0,0,N,1
-Nom=Montant_bon_livraison,493,2,N,0,0,N,1
-Nom=Montant_bon_livraison_dev,517,2,N,0,0,N,1
-Nom=Montant_taxe_dev,541,2,N,0,0,N,1
-Nom=Montant_ttc_dev,565,2,N,0,0,N,1
-Nom=Montant_frais_1,589,2,N,0,0,N,1
-Nom=Montant_frais_2,613,2,N,0,0,N,1
-Nom=Montant_frais_3,637,2,N,0,0,N,1
-Nom=Montant_frais_1_dev,661,2,N,0,0,N,1
-Nom=Montant_frais_2_dev,685,2,N,0,0,N,1
-Nom=Montant_frais_3_dev,709,2,N,0,0,N,1
-Nom=Montant_marge_bon_livraison,733,2,N,0,0,N,1
-Nom=Montant_remise_bon_livraison,757,2,N,0,0,N,1
-Nom=Nombre_bon_livraison,781,2,N,0,0,N,1
-Nom=Devise_dossier,785,2,N,0,0,N,1
-Nom=Devise_piece,789,2,N,0,0,N,1
-Nom=Coefficient_conversion,793,2,N,0,0,N,1
-Nom=Numero_Piece,817,2,N,0,0,N,1
-Nom=Filler,825,2,N,0,676,N,1
-Nom=UF_Bon_livraison_Achat,1501,2,N,0,0,N,1
+Nom=Montant_bon_livraison_dev,493,2,N,0,0,N,1
+Nom=Montant_frais_1_dev,517,2,N,0,0,N,1
+Nom=Montant_frais_2_dev,541,2,N,0,0,N,1
+Nom=Montant_frais_3_dev,565,2,N,0,0,N,1
+Nom=Nombre_bon_livraison,589,2,N,0,0,N,1
+Nom=Montant_marge_bon_livraison,593,2,N,0,0,N,1
+Nom=Montant_remise_bon_livraison,617,2,N,0,0,N,1
+Nom=Devise_dossier,641,2,N,0,0,N,1
+Nom=Devise_piece,645,2,N,0,0,N,1
+Nom=Coefficient_conversion,649,2,N,0,0,N,1
+Nom=Numero_Piece,673,2,N,0,0,N,1
+Nom=Filler,681,2,N,0,320,N,1
+Nom=UF_Bon_livraison_Achat,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110906161249,DEMO                ,20120315133516,DEMO                
@@ -2934,10 +2886,10 @@ Nom=Filler,1016,2,N,0,485,N,1
 Nom=UF_Bon_livraison_Achat_Ligne,1501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110906161228,DEMO                ,20130131112433,DEMO                
+Version=1,20110906161228,DEMO                ,20111215155954,DEMO                
 Nom=F_Bon_livraison_Vente,Fait bon de livraison achat,1
-DateM=9AD1E6FE9DFFCD01
-Taille=2500,2500
+DateM=29565F2011E7CC01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 Nom=Source_ID,1,2,N,0,0,N,1
@@ -2976,25 +2928,19 @@ Nom=Collaborateur_ID,589,2,N,0,0,N,1
 Nom=Adv_code,599,2,N,0,0,N,1
 Nom=Adv,619,2,N,0,0,N,1
 Nom=Etat,659,2,N,0,0,N,1
-Nom=Montant_bon_livraison,679,2,N,0,0,N,1
-Nom=Montant_bon_livraison_dev,703,2,N,0,0,N,1
-Nom=Montant_ttc_dev,727,2,N,0,0,N,1
-Nom=Montant_taxe_dev,751,2,N,0,0,N,1
-Nom=Montant_frais_1,775,2,N,0,0,N,1
-Nom=Montant_frais_2,799,2,N,0,0,N,1
-Nom=Montant_frais_3,823,2,N,0,0,N,1
-Nom=Montant_frais_1_dev,847,2,N,0,0,N,1
-Nom=Montant_frais_2_dev,871,2,N,0,0,N,1
-Nom=Montant_frais_3_dev,895,2,N,0,0,N,1
-Nom=Montant_marge_bon_livraison,919,2,N,0,0,N,1
-Nom=Montant_remise_bon_livraison,943,2,N,0,0,N,1
-Nom=Nombre_bon_livraison,967,2,N,0,0,N,1
-Nom=Devise_dossier,971,2,N,0,0,N,1
-Nom=Devise_piece,975,2,N,0,0,N,1
-Nom=Coefficient_conversion,979,2,N,0,0,N,1
-Nom=Numero_Piece,1003,2,N,0,0,N,1
-Nom=Filler,1011,2,N,0,490,N,1
-Nom=UF_Bon_livraison_Vente,1501,2,N,0,0,N,1
+Nom=Montant_bon_livraison_dev,679,2,N,0,0,N,1
+Nom=Montant_frais_1_dev,703,2,N,0,0,N,1
+Nom=Montant_frais_2_dev,727,2,N,0,0,N,1
+Nom=Montant_frais_3_dev,751,2,N,0,0,N,1
+Nom=Nombre_bon_livraison,775,2,N,0,0,N,1
+Nom=Montant_marge_bon_livraison,779,2,N,0,0,N,1
+Nom=Montant_remise_bon_livraison,803,2,N,0,0,N,1
+Nom=Devise_dossier,827,2,N,0,0,N,1
+Nom=Devise_piece,831,2,N,0,0,N,1
+Nom=Coefficient_conversion,835,2,N,0,0,N,1
+Nom=Numero_Piece,859,2,N,0,0,N,1
+Nom=Filler,867,2,N,0,134,N,1
+Nom=UF_Bon_livraison_Vente,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110906161249,DEMO                ,20120315133520,DEMO                
@@ -3066,10 +3012,10 @@ Nom=Filler,1190,2,N,0,311,N,1
 Nom=UF_Bon_livraison_Vente_Ligne,1501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110906160812,DEMO                ,20130131112429,DEMO                
+Version=1,20110906160812,DEMO                ,20111215155957,DEMO                
 Nom=F_Commande_Achat,Fait commande achat,1
-DateM=C7E92D039EFFCD01
-Taille=2500,2500
+DateM=DB08F58976F0CC01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 Nom=Source_ID,1,2,N,0,0,N,1
@@ -3099,25 +3045,19 @@ Nom=Collaborateur_ID,415,2,N,0,0,N,1
 Nom=Acheteur_code,425,2,N,0,0,N,1
 Nom=Acheteur,433,2,N,0,0,N,1
 Nom=Etat,473,2,N,0,0,N,1
-Nom=Montant_commande,493,2,N,0,0,N,1
-Nom=Montant_commande_dev,517,2,N,0,0,N,1
-Nom=Montant_ttc_dev,541,2,N,0,0,N,1
-Nom=Montant_taxe_dev,565,2,N,0,0,N,1
-Nom=Montant_frais_1,589,2,N,0,0,N,1
-Nom=Montant_frais_2,613,2,N,0,0,N,1
-Nom=Montant_frais_3,637,2,N,0,0,N,1
-Nom=Montant_frais_1_dev,661,2,N,0,0,N,1
-Nom=Montant_frais_2_dev,685,2,N,0,0,N,1
-Nom=Montant_frais_3_dev,709,2,N,0,0,N,1
-Nom=Montant_marge_commande,733,2,N,0,0,N,1
-Nom=Montant_remise_commande,757,2,N,0,0,N,1
-Nom=Nombre_commande,781,2,N,0,0,N,1
-Nom=Devise_dossier,785,2,N,0,0,N,1
-Nom=Devise_piece,789,2,N,0,0,N,1
-Nom=Coefficient_conversion,793,2,N,0,0,N,1
-Nom=Numero_Piece,817,2,N,0,0,N,1
-Nom=Filler,825,2,N,0,676,N,1
-Nom=UF_Commande_Achat,1501,2,N,0,0,N,1
+Nom=Montant_commande_dev,493,2,N,0,0,N,1
+Nom=Montant_frais_1_dev,517,2,N,0,0,N,1
+Nom=Montant_frais_2_dev,541,2,N,0,0,N,1
+Nom=Montant_frais_3_dev,565,2,N,0,0,N,1
+Nom=Nombre_commande,589,2,N,0,0,N,1
+Nom=Montant_marge_commande,593,2,N,0,0,N,1
+Nom=Montant_remise_commande,617,2,N,0,0,N,1
+Nom=Devise_dossier,641,2,N,0,0,N,1
+Nom=Devise_piece,645,2,N,0,0,N,1
+Nom=Coefficient_conversion,649,2,N,0,0,N,1
+Nom=Numero_Piece,673,2,N,0,0,N,1
+Nom=Filler,681,2,N,0,320,N,1
+Nom=UF_Commande_Achat,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110906160826,DEMO                ,20120104115012,DEMO                
@@ -3180,10 +3120,10 @@ Nom=Filler,1016,2,N,0,485,N,1
 Nom=UF_Commande_Achat_Ligne,1501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110822173219,DEMO                ,20130131112425,DEMO                
+Version=1,20110822173219,DEMO                ,20111215160001,DEMO                
 Nom=F_Commande_Vente,Fait Commande de vente,1
-DateM=CE7361A39DFFCD01
-Taille=2500,2500
+DateM=03AF85ED64D0CC01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 Nom=Source_ID,1,2,N,0,0,N,1
@@ -3222,25 +3162,19 @@ Nom=Collaborateur_ID,589,2,N,0,0,N,1
 Nom=Adv_code,599,2,N,0,0,N,1
 Nom=Adv,619,2,N,0,0,N,1
 Nom=Etat,659,2,N,0,0,N,1
-Nom=Montant_commande,679,2,N,0,0,N,1
-Nom=Montant_commande_dev,703,2,N,0,0,N,1
-Nom=Montant_taxe_dev,727,2,N,0,0,N,1
-Nom=Montant_ttc_dev,751,2,N,0,0,N,1
-Nom=Montant_frais_1,775,2,N,0,0,N,1
-Nom=Montant_frais_2,799,2,N,0,0,N,1
-Nom=Montant_frais_3,823,2,N,0,0,N,1
-Nom=Montant_frais_1_dev,847,2,N,0,0,N,1
-Nom=Montant_frais_2_dev,871,2,N,0,0,N,1
-Nom=Montant_frais_3_dev,895,2,N,0,0,N,1
-Nom=Montant_marge_commande,919,2,N,0,0,N,1
-Nom=Montant_remise_commande,943,2,N,0,0,N,1
-Nom=Nombre_commande,967,2,N,0,0,N,1
-Nom=Devise_dossier,971,2,N,0,0,N,1
-Nom=Devise_piece,975,2,N,0,0,N,1
-Nom=Coefficient_conversion,979,2,N,0,0,N,1
-Nom=Numero_Piece,1003,2,N,0,0,N,1
-Nom=Filler,1011,2,N,0,490,N,1
-Nom=UF_Commande_Vente,1501,2,N,0,0,N,1
+Nom=Montant_commande_dev,679,2,N,0,0,N,1
+Nom=Montant_frais_1_dev,703,2,N,0,0,N,1
+Nom=Montant_frais_2_dev,727,2,N,0,0,N,1
+Nom=Montant_frais_3_dev,751,2,N,0,0,N,1
+Nom=Nombre_commande,775,2,N,0,0,N,1
+Nom=Montant_marge_commande,779,2,N,0,0,N,1
+Nom=Montant_remise_commande,803,2,N,0,0,N,1
+Nom=Devise_dossier,827,2,N,0,0,N,1
+Nom=Devise_piece,831,2,N,0,0,N,1
+Nom=Coefficient_conversion,835,2,N,0,0,N,1
+Nom=Numero_Piece,859,2,N,0,0,N,1
+Nom=Filler,867,2,N,0,134,N,1
+Nom=UF_Commande_Vente,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110826152550,SN                  ,20111215160021,DEMO                
@@ -3312,10 +3246,10 @@ Nom=Filler,1190,2,N,0,311,N,1
 Nom=UF_Commande_Vente_Ligne,1501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110906160655,DEMO                ,20130131112421,DEMO                
+Version=1,20110906160655,DEMO                ,20111215160022,DEMO                
 Nom=F_Devis_Achat,Fait devis achat,1
-DateM=082F1FEF9DFFCD01
-Taille=2500,2500
+DateM=2BF1B68F76F0CC01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 Nom=Source_ID,1,2,N,0,0,N,1
@@ -3345,25 +3279,19 @@ Nom=Collaborateur_ID,415,2,N,0,0,N,1
 Nom=Acheteur_code,425,2,N,0,0,N,1
 Nom=Acheteur,433,2,N,0,0,N,1
 Nom=Etat,473,2,N,0,0,N,1
-Nom=Montant_devis,493,2,N,0,0,N,1
-Nom=Montant_devis_dev,517,2,N,0,0,N,1
-Nom=Montant_ttc_dev,541,2,N,0,0,N,1
-Nom=Montant_taxe_dev,565,2,N,0,0,N,1
-Nom=Montant_frais_1,589,2,N,0,0,N,1
-Nom=Montant_frais_2,613,2,N,0,0,N,1
-Nom=Montant_frais_3,637,2,N,0,0,N,1
-Nom=Montant_frais_1_dev,661,2,N,0,0,N,1
-Nom=Montant_frais_2_dev,685,2,N,0,0,N,1
-Nom=Montant_frais_3_dev,709,2,N,0,0,N,1
-Nom=Montant_marge_devis,733,2,N,0,0,N,1
-Nom=Montant_remise_devis,757,2,N,0,0,N,1
-Nom=Nombre_devis,781,2,N,0,0,N,1
-Nom=Devise_dossier,785,2,N,0,0,N,1
-Nom=Devise_piece,789,2,N,0,0,N,1
-Nom=Coefficient_conversion,793,2,N,0,0,N,1
-Nom=Numero_Piece,817,2,N,0,0,N,1
-Nom=Filler,825,2,N,0,676,N,1
-Nom=UF_Devis_Achat,1501,2,N,0,0,N,1
+Nom=Montant_devis_dev,493,2,N,0,0,N,1
+Nom=Montant_frais_1_dev,517,2,N,0,0,N,1
+Nom=Montant_frais_2_dev,541,2,N,0,0,N,1
+Nom=Montant_frais_3_dev,565,2,N,0,0,N,1
+Nom=Nombre_devis,589,2,N,0,0,N,1
+Nom=Montant_marge_devis,593,2,N,0,0,N,1
+Nom=Montant_remise_devis,617,2,N,0,0,N,1
+Nom=Devise_dossier,641,2,N,0,0,N,1
+Nom=Devise_piece,645,2,N,0,0,N,1
+Nom=Coefficient_conversion,649,2,N,0,0,N,1
+Nom=Numero_Piece,673,2,N,0,0,N,1
+Nom=Filler,681,2,N,0,320,N,1
+Nom=UF_Devis_Achat,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110906160715,DEMO                ,20120104115020,DEMO                
@@ -3426,10 +3354,10 @@ Nom=Filler,1016,2,N,0,485,N,1
 Nom=UF_Devis_Achat_Ligne,1501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110906160743,DEMO                ,20130131112418,DEMO                
+Version=1,20110906160743,DEMO                ,20111215160014,DEMO                
 Nom=F_Devis_Vente,Fait devis vente,1
-DateM=DB259A1E9EFFCD01
-Taille=2500,2500
+DateM=7724EF5A2813CD01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 Nom=Source_ID,1,2,N,0,0,N,1
@@ -3469,25 +3397,19 @@ Nom=Adv_code,599,2,N,0,0,N,1
 Nom=Adv,619,2,N,0,0,N,1
 Nom=Etat,659,2,N,0,0,N,1
 Nom=Qualification,679,2,N,0,0,N,1
-Nom=Montant_devis,699,2,N,0,0,N,1
-Nom=Montant_devis_dev,723,2,N,0,0,N,1
-Nom=Montant_ttc_dev,747,2,N,0,0,N,1
-Nom=Montant_taxe_dev,771,2,N,0,0,N,1
-Nom=Montant_frais_1,795,2,N,0,0,N,1
-Nom=Montant_frais_2,819,2,N,0,0,N,1
-Nom=Montant_frais_3,843,2,N,0,0,N,1
-Nom=Montant_frais_1_dev,867,2,N,0,0,N,1
-Nom=Montant_frais_2_dev,891,2,N,0,0,N,1
-Nom=Montant_frais_3_dev,915,2,N,0,0,N,1
-Nom=Montant_marge_devis,939,2,N,0,0,N,1
-Nom=Montant_remise_devis,963,2,N,0,0,N,1
-Nom=Nombre_devis,987,2,N,0,0,N,1
-Nom=Devise_dossier,991,2,N,0,0,N,1
-Nom=Devise_piece,995,2,N,0,0,N,1
-Nom=Coefficient_conversion,999,2,N,0,0,N,1
-Nom=Numero_Piece,1023,2,N,0,0,N,1
-Nom=Filler,1031,2,N,0,470,N,1
-Nom=UF_Devis_Vente,1501,2,N,0,0,N,1
+Nom=Montant_devis_dev,699,2,N,0,0,N,1
+Nom=Montant_frais_1_dev,723,2,N,0,0,N,1
+Nom=Montant_frais_2_dev,747,2,N,0,0,N,1
+Nom=Montant_frais_3_dev,771,2,N,0,0,N,1
+Nom=Nombre_devis,795,2,N,0,0,N,1
+Nom=Montant_marge_devis,799,2,N,0,0,N,1
+Nom=Montant_remise_devis,823,2,N,0,0,N,1
+Nom=Devise_dossier,847,2,N,0,0,N,1
+Nom=Devise_piece,851,2,N,0,0,N,1
+Nom=Coefficient_conversion,855,2,N,0,0,N,1
+Nom=Numero_Piece,879,2,N,0,0,N,1
+Nom=Filler,887,2,N,0,114,N,1
+Nom=UF_Devis_Vente,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110906160757,DEMO                ,20111215160009,DEMO                
@@ -3560,10 +3482,10 @@ Nom=Filler,1210,2,N,0,291,N,1
 Nom=UF_Devis_Vente_Ligne,1501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110822173219,DEMO                ,20130131112414,DEMO                
+Version=1,20110822173219,DEMO                ,20111215160016,DEMO                
 Nom=F_Facture_Achat,Fait facture de achat,1
-DateM=FDC1BF4A9EFFCD01
-Taille=2500,2500
+DateM=1BC1CC9676F0CC01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 Nom=Source_ID,1,2,N,0,0,N,1
@@ -3593,25 +3515,19 @@ Nom=Collaborateur_ID,415,2,N,0,0,N,1
 Nom=Acheteur_code,425,2,N,0,0,N,1
 Nom=Acheteur,433,2,N,0,0,N,1
 Nom=Etat,473,2,N,0,0,N,1
-Nom=Montant_facture,493,2,N,0,0,N,1
-Nom=Montant_facture_dev,517,2,N,0,0,N,1
-Nom=Montant_ttc_dev,541,2,N,0,0,N,1
-Nom=Montant_taxe_dev,565,2,N,0,0,N,1
-Nom=Montant_frais_1,589,2,N,0,0,N,1
-Nom=Montant_frais_2,613,2,N,0,0,N,1
-Nom=Montant_frais_3,637,2,N,0,0,N,1
-Nom=Montant_frais_1_dev,661,2,N,0,0,N,1
-Nom=Montant_frais_2_dev,685,2,N,0,0,N,1
-Nom=Montant_frais_3_dev,709,2,N,0,0,N,1
-Nom=Montant_marge_facture,733,2,N,0,0,N,1
-Nom=Montant_remise_facture,757,2,N,0,0,N,1
-Nom=Nombre_facture,781,2,N,0,0,N,1
-Nom=Devise_dossier,785,2,N,0,0,N,1
-Nom=Devise_piece,789,2,N,0,0,N,1
-Nom=Coefficient_conversion,793,2,N,0,0,N,1
-Nom=Numero_Piece,817,2,N,0,0,N,1
-Nom=Filler,825,2,N,0,676,N,1
-Nom=UF_Facture_Achat,1501,2,N,0,0,N,1
+Nom=Montant_facture_dev,493,2,N,0,0,N,1
+Nom=Montant_frais_1_dev,517,2,N,0,0,N,1
+Nom=Montant_frais_2_dev,541,2,N,0,0,N,1
+Nom=Montant_frais_3_dev,565,2,N,0,0,N,1
+Nom=Nombre_facture,589,2,N,0,0,N,1
+Nom=Montant_marge_facture,593,2,N,0,0,N,1
+Nom=Montant_remise_facture,617,2,N,0,0,N,1
+Nom=Devise_dossier,641,2,N,0,0,N,1
+Nom=Devise_piece,645,2,N,0,0,N,1
+Nom=Coefficient_conversion,649,2,N,0,0,N,1
+Nom=Numero_Piece,673,2,N,0,0,N,1
+Nom=Filler,681,2,N,0,320,N,1
+Nom=UF_Facture_Achat,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110826152550,SN                  ,20120104115025,DEMO                
@@ -3674,10 +3590,10 @@ Nom=UF_Facture_Achat_Ligne,1016,2,N,0,0,N,1
 Nom=Filler,2016,2,N,0,485,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110822173219,DEMO                ,20130131112410,DEMO                
+Version=1,20110822173219,DEMO                ,20111215160011,DEMO                
 Nom=F_Facture_Vente,Fait facture de vente,1
-DateM=26D50B619EFFCD01
-Taille=2500,2500
+DateM=267B0241CBCACC01
+Taille=2000,2000
 Pack=0,0
 [CHAMPS]
 Nom=Source_ID,1,2,N,0,0,N,1
@@ -3716,25 +3632,19 @@ Nom=Collaborateur_ID,589,2,N,0,0,N,1
 Nom=Adv_code,599,2,N,0,0,N,1
 Nom=Adv,619,2,N,0,0,N,1
 Nom=Etat,659,2,N,0,0,N,1
-Nom=Montant_facture,679,2,N,0,0,N,1
-Nom=Montant_facture_dev,703,2,N,0,0,N,1
-Nom=Montant_ttc_dev,727,2,N,0,0,N,1
-Nom=Montant_taxe_dev,751,2,N,0,0,N,1
-Nom=Montant_frais_1,775,2,N,0,0,N,1
-Nom=Montant_frais_2,799,2,N,0,0,N,1
-Nom=Montant_frais_3,823,2,N,0,0,N,1
-Nom=Montant_frais_1_dev,847,2,N,0,0,N,1
-Nom=Montant_frais_2_dev,871,2,N,0,0,N,1
-Nom=Montant_frais_3_dev,895,2,N,0,0,N,1
-Nom=Montant_marge_facture,919,2,N,0,0,N,1
-Nom=Montant_remise_facture,943,2,N,0,0,N,1
-Nom=Nombre_facture,967,2,N,0,0,N,1
-Nom=Devise_dossier,971,2,N,0,0,N,1
-Nom=Devise_piece,975,2,N,0,0,N,1
-Nom=Coefficient_conversion,979,2,N,0,0,N,1
-Nom=Numero_Piece,1003,2,N,0,0,N,1
-Nom=Filler,1011,2,N,0,490,N,1
-Nom=UF_Facture_Vente,1501,2,N,0,0,N,1
+Nom=Montant_facture_dev,679,2,N,0,0,N,1
+Nom=Montant_frais_1_dev,703,2,N,0,0,N,1
+Nom=Montant_frais_2_dev,727,2,N,0,0,N,1
+Nom=Montant_frais_3_dev,751,2,N,0,0,N,1
+Nom=Nombre_facture,775,2,N,0,0,N,1
+Nom=Montant_marge_facture,779,2,N,0,0,N,1
+Nom=Montant_remise_facture,803,2,N,0,0,N,1
+Nom=Devise_dossier,827,2,N,0,0,N,1
+Nom=Devise_piece,831,2,N,0,0,N,1
+Nom=Coefficient_conversion,835,2,N,0,0,N,1
+Nom=Numero_Piece,859,2,N,0,0,N,1
+Nom=Filler,867,2,N,0,134,N,1
+Nom=UF_Facture_Vente,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110826152550,SN                  ,20111215160004,DEMO                
@@ -3819,13 +3729,13 @@ Nom=UserStartDh,67,2,N,0,0,N,1
 Nom=SYS_CHANGE_VERSION,81,2,N,0,0,N,1
 [/CHAMPS]
 [BASE]
-Version=1,20110822112607,BEL                 ,20130116114335,DEMO                
+Version=1,20110822112607,BEL                 ,20111215164515,DEMO                
 Nom=BICommun,Business Intelligence Commun,1
-DateM=CE3A3C56D6F3CD01
+DateM=A476D68940BBCC01
 Fichier=I,0,bicommun.dhfi
-Versionbase=7.2
+Versionbase=7.1
 SansRepriseDonnee=O
-DateMIndex=95C52FE1B24FCE01
+DateMIndex=DCB81E9E95E1CC01
 [TABLES]
 Nom=D_Affaire,0
 Nom=D_Article,0
@@ -3858,11 +3768,11 @@ Nom=D_Compte,0
 Nom=D_Journal,0
 [/TABLES]
 [BASE]
-Version=1,20110822112734,BEL                 ,20121026101625,DEMO                
+Version=1,20110822112734,BEL                 ,20111215164522,DEMO                
 Nom=BIGescom,Business Intelligence Gestion commerciale,1
-DateM=97924B3152B3CD01
+DateM=C63A0A8E40BBCC01
 Fichier=I,0,bigescom.dhfi
-Versionbase=7.2
+Versionbase=7.1
 SansRepriseDonnee=O
 DateMIndex=C2A5A6D83FBBCC01
 [TABLES]
@@ -4097,11 +4007,11 @@ Nom=Fournisseur_code,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20110906095032,DEMO                ,20130513102134,DEMO                
+Version=1,20110906095032,DEMO                ,20111215155347,DEMO                
 Nom=Index_Fournisseur_ID,Par id fournisseur,1
-DateM=95C52FE1B24FCE01
+DateM=97EC8F5939BBCC01
 CLE=BICommun, ,,1,032,o,1,n
-Alias=FournisseurID
+Alias=Fournisseur
 [CHAMPS]
 Nom=Fournisseur_ID,1,0,
 [/CHAMPS]

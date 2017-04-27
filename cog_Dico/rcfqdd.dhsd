@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20021022162324,PHB ,20140311093448,MS                  
+Version=5,20021022162324,PHB ,20100922145839,MS                  
 Nom=rcfqdd.dhsd,,1
 [CHAMP]
 Version=1,199611 50000,EPR3,20061228085146,JLSI                
@@ -100,23 +100,16 @@ Gel=1
 Nature=D8*11
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120110183403,MS                  ,20120110183403,MS                  
-Nom=Fl_Cont,Indicateur contentieux,1
-Gel=1
-Nature=1,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,1999 4290000,VHR3,1999 4290000,VHR3
 Nom=Ii1,indice 1,1
 Gel=1
 Nature=3,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1999 4290000,VHR3,20130114145653,MS                  
+Version=1,1999 4290000,VHR3,20090625100031,CI                  
 Nom=Lib,Libellé,1
-DateM=D28249025FF2CD01
 Gel=1
-Nature=80
+Nature=40
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1999 7 70000,PB  ,20061228105115,FH                  
@@ -126,11 +119,11 @@ Gel=1
 Nature=40
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1999 4290000,VHR3,20130114145647,MS                  
+Version=1,1999 4290000,VHR3,20061228105121,FH                  
 Nom=LibTb,Libellé tableau,1
-DateM=5A3B76FE5EF2CD01
+DateM=D87273BA652AC701
 Gel=1
-Nature=80*10
+Nature=40*10
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1999 4290000,VH  ,1999 4290000,VH
@@ -153,18 +146,18 @@ Gel=1
 Nature=6,0*12*5
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1999 6150000,PB  ,20130111141811,VJ                  
+Version=1,1999 6150000,PB  ,20061228105135,FH                  
 Nom=MtTva,Montants / taux,1
-DateM=0D11B01AFEEFCD01
+DateM=FDAB0BC3652AC701
 Gel=1
-Nature=16,2
+Nature=16,2*10
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1999 6150000,PB  ,20130111141817,VJ                  
+Version=1,1999 6150000,PB  ,20061228105143,FH                  
 Nom=MtTvaEsc,Montants escompte /Taux,1
-DateM=71E3AD1EFEEFCD01
+DateM=0518BDC7652AC701
 Gel=1
-Nature=9,2
+Nature=9,2*10
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1999 7 70000,PB  ,20061228105146,FH                  
@@ -233,19 +226,6 @@ Gel=1
 Nature=16,2*10
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20121212095646,SN                  ,20121213094422,SN                  
-Nom=TvaArt,Régime TVA article,1
-Gel=1
-Nature=8
-NomOdbc=TvaArticleVente
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130109150708,SN                  ,20130109150721,SN                  
-Nom=TvaCod,Code TVA,1
-Gel=1
-Nature=16
-Flags=n,1,o,o,n,n,n,n
-[CHAMP]
 Version=1,1999 6150000,PB  ,20061228105215,FH                  
 Nom=TvaCpt,Compte de TVA,1
 DateM=1175B2DA652AC701
@@ -253,48 +233,55 @@ Gel=1
 Nature=8
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20140311093445,MS                  ,20140311093445,MS                  
-Nom=Tvap,Taux de TVA,1
+Version=1,1999 6150000,PB  ,20061228105233,FH                  
+Nom=TvaR,Code tva article,1
+DateM=E0CE48E5652AC701
 Gel=1
-Nature=6,3
-Flags=n,1,n,n,n,n,n,n
+Nature=1,0
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20121212095625,SN                  ,20121212095636,SN                  
-Nom=TvaTie,Régime TVA tiers,1
+Version=1,1999 6150000,PB  ,20100922145838,MS                  
+Nom=TvaT,Régime tva tiers,1
+DateM=3FC3FCDF555ACB01
 Gel=1
-Nature=8
-NomOdbc=RegTvaTiers
-Flags=n,1,n,n,n,n,n,n
+Nature=1
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1999 6150000,PB  ,20061228105241,FH                  
+Nom=TvaTx,Code TVA,1
+DateM=EBA38BEA652AC701
+Gel=1
+Nature=2
+Flags=o,1,n,n,n,n,n,n
 [CHAMPR]
 nom=LibTb
 [CHAMPL]
 Nom=Lib,1,0,0,N,1
 [/CHAMPL]
-nom=TvaCod
+nom=TvaTx
 [CHAMPL]
-Nom=TvaArt,1,0,0,N,1
-Nom=TvaTie,9,0,0,N,1
+Nom=TvaR,1,0,0,N,1
+Nom=TvaT,2,0,0,N,1
 [/CHAMPL]
 [/CHAMPR]
 [TABLE]
 Version=1,1999 4290000,PB  ,1999 6110000,PB
 Nom=Rc000,Global,1
-DateM=D28249025FF2CD01
+DateM=A6B6B6D8652AC701
 Taille=2048,2048
 Pack=0,0
 [CHAMPS]
 Nom=LibTb,1,2,N,0,0,N,1
-Nom=Mt,801,2,N,0,0,N,1
-Nom=TotRup1,961,2,N,0,0,N,1
-Nom=TotRup2,1121,2,N,0,0,N,1
-Nom=TotRup3,1281,2,N,0,0,N,1
-Nom=TotGen1,1441,2,N,0,0,N,1
-Nom=Ii1,1601,2,N,0,0,N,1
-Nom=Dev,1604,2,N,0,0,N,1
-Nom=Repr,1644,2,N,0,0,N,1
-Nom=MtArr,1652,2,N,0,0,N,1
-Nom=Tiers,1792,2,N,0,0,N,1
-Nom=Fl_Cont,1800,2,N,0,0,N,1
+Nom=Mt,401,2,N,0,0,N,1
+Nom=TotRup1,561,2,N,0,0,N,1
+Nom=TotRup2,721,2,N,0,0,N,1
+Nom=TotRup3,881,2,N,0,0,N,1
+Nom=TotGen1,1041,2,N,0,0,N,1
+Nom=Ii1,1201,2,N,0,0,N,1
+Nom=Dev,1204,2,N,0,0,N,1
+Nom=Repr,1244,2,N,0,0,N,1
+Nom=MtArr,1252,2,N,0,0,N,1
+Nom=Tiers,1392,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1
@@ -350,7 +337,7 @@ Nom=Etb,293,2,N,0,0,N,1
 [TABLE]
 Version=1,1999 6150000,PB  ,1999 6150000,PB
 Nom=Rc500,Contrôle TVA,1
-DateM=030FA31FFEEFCD01
+DateM=3FC3FCDF555ACB01
 Taille=512,512
 Pack=0,0
 [CHAMPS]
@@ -358,9 +345,11 @@ Nom=Ce1,1,2,N,0,0,N,1
 Nom=Piece,2,2,N,0,0,N,1
 Nom=Tiers,10,2,N,0,0,N,1
 Nom=FaDt,18,2,N,0,0,N,1
-Nom=TvaCod,26,2,N,0,0,N,1
-Nom=TvaCpt,42,2,N,0,0,N,1
-Nom=MtTva,50,2,N,0,0,N,1
-Nom=MtTvaEsc,66,2,N,0,0,N,1
-Nom=Tvap,75,2,N,0,0,N,1
+Nom=TvaTx,26,2,N,0,0,N,1
+Nom=TvaCpt,28,2,N,0,0,N,1
+Nom=MtTva,36,2,N,0,0,N,1
+Nom=MtTvaEsc,196,2,N,0,0,N,1
 [/CHAMPS]
+[PROPLOC]
+Nom=TvaT
+[/PROPLOC]

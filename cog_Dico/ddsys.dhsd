@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,2003 2 7091314,SYS,20140509131907,FA                  
+Version=5,2003 2 7091314,SYS,20110330102250,DEMO                
 Nom=ddsys.dhsd,ddsys.hsd,1
 [CHAMP]
 Version=1,20100303135943,DEMO                ,20100303135943,DEMO                
@@ -51,12 +51,6 @@ Gel=1
 Nature=L
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20131002134531,JS                  ,20131002134531,JS                  
-Nom=Affichage,Valeur de la propriété affichage,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,2003 1310000,JS  ,2003 1310000,JS
 Nom=Aidepgfic,Fichier d'aides page,1
 Gel=1
@@ -80,24 +74,6 @@ Nom=Arret,Point d'arrêt,1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140213142814,FA                  ,20140213142814,FA                  
-Nom=ArretApres,apres saisie,1
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140213142801,FA                  ,20140213142801,FA                  
-Nom=ArretAvant,point d'arret avant saisie,1
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140213142904,FA                  ,20140213142904,FA                  
-Nom=ArretClic,arret sur clic (bouton ou champ),1
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2000 5 20000,JS  ,2000 5 20000,JS
 Nom=Attribut,Attribut d'objet,1
@@ -198,62 +174,6 @@ Nom=Cadrage,cadrage,1
 Gel=1
 Nature=B
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120312153937,JS                  ,20120312153937,JS                  
-Nom=CalendarClic,Type de clic agenda,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130605163243,XG                  ,20130605163252,XG                  
-Nom=CalendarDropMultiple,Flag qui indique si on a effectué un drop sur plusieurs rdv,1
-DateM=28BFE08FF961CE01
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130325161026,XG                  ,20130325161026,XG                  
-Nom=CalendarIndiceRessource1,Indice dans la liste des ressources de la ressource issue du drag,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130325161104,XG                  ,20130325161104,XG                  
-Nom=CalendarIndiceRessource2,Indice dans la liste des ressources des la ressource issue du drop,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120404172544,XG                  ,20120404172628,XG                  
-Nom=CalendarPlageDebut,Date de début de la plage,1
-DateM=7A00104E7712CD01
-Gel=1
-Nature=D8
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120404172620,XG                  ,20120404172620,XG                  
-Nom=CalendarPlageFin,Date de fin de la plage,1
-Gel=1
-Nature=D8
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120416150614,XG                  ,20120416150614,XG                  
-Nom=CalendarRdvDateDebut,Date de début de la cellule cliquée / du rendez-vous,1
-Gel=1
-Nature=DH
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120416150633,XG                  ,20120416150633,XG                  
-Nom=CalendarRdvDateFin,Date de fin de la cellule cliquée / du rendez-vous,1
-Gel=1
-Nature=DH
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120416150527,XG                  ,20120416150527,XG                  
-Nom=CalendarRdvId,Identifiant du rendez-vous concerné,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2000 9220000,GN  ,2000 9220000,GN
 Nom=Cdutil,Code utilisateur,1
@@ -359,12 +279,6 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120326092433,BHOUVER             ,20120326092433,BHOUVER             
-Nom=ChoixServeur,mc pour choisir serveur,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,200011 70000,JS  ,200011 70000,JS
 Nom=Chxbitmap,Flag multi-choix bitmap,1
 Gel=1
@@ -395,23 +309,11 @@ Gel=1
 Nature=256
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20111129110818,XG                  ,20111129110818,XG                  
-Nom=ClePassePartout,Valeur de la clé du passe-partout,1
-Gel=1
-Nature=4
-Flags=o,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,1999 4260000,JS  ,1999 4260000,JS
 Nom=Cliconglet,Arrêt onglet trt après,1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130930135805,JS                  ,20130930135805,JS                  
-Nom=ClicOuTabkey,Flag clic ou touche Tab en input,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200010300000,SYS,200011 70000,SYS
 Nom=Cobmpactio,action bitmap,1
@@ -457,25 +359,11 @@ Gel=1
 Nature=X
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120307171843,JS                  ,20120308102128,JS                  
-Nom=CodePageMultiChoix,Code page des choix d'un multi-choix,1
-DateM=704364D70CFDCC01
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,2000 9 60000,GN  ,2000 9 60000,GN
 Nom=Coderr,Code Erreur,1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110607142532,XG                  ,20110829165331,XG                  
-Nom=CodeSqlFiltre,Code SQL du filtre,1
-DateM=12681B6B5B66CC01
-Gel=1
-Nature=1000
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200011 80000,SYS,200011 80000,SYS
 Nom=Cofeubmp,feuille pour bmp var,1
@@ -531,11 +419,11 @@ Gel=1
 Nature=32
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,199810160000,JS  ,20131002134328,JS                  
+Version=1,199810160000,JS  ,20110330101744,DEMO                
 Nom=Colfiller,filler,1
-DateM=E08EDC9C64BFCE01
+DateM=452C74F2B2EECB01
 Gel=1
-Nature=97
+Nature=102
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2001 3 80000,TL  ,2001 3 80000,TL
@@ -610,13 +498,6 @@ Gel=1
 Nature=B*10
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110608153918,XG                  ,20110608153957,XG                  
-Nom=ConditionFiltre,Condition,1
-DateM=E4E84B8EE125CC01
-Gel=1
-Nature=B*10
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,2000 9220000,GN  ,2000 9220000,GN
 Nom=Conf1,Confidentialités aff/imp,1
 Gel=1
@@ -628,12 +509,6 @@ Nom=Conf2,Confidentialités mod/sup,1
 Gel=1
 Nature=2
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20111107141453,XG                  ,20111107141453,XG                  
-Nom=ContexteDefaut,Chargement du contexte par défaut,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200011 70000,SYS,200011 70000,SYS
 Nom=Conucolcol,couleur colonne,1
@@ -728,19 +603,6 @@ Nom=Cumulable,colonne cumulable,1
 Gel=1
 Nature=1,0
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130912083939,ROOT                ,20130912083939,ROOT                
-Nom=CurrentNumber,Rang de la ligne courante,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20101126115337,JS                  ,20101126123100,JS                  
-Nom=CurrentPosition,Position courante,1
-DateM=DE3FEC665D8DCB01
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1998 9210000,JS  ,20050426104828,JS                  
 Nom=Currentval,Pour  XmeloadCurrentData,1
@@ -867,12 +729,6 @@ Nom=Dataseq,Point de séquence,1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130606102151,JS                  ,20130606163758,JS                  
-Nom=DataTableAssociee,2 si propriété "Table associée"\v 1 sinon,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,199711120000,SYS,199711120000,SYS
 Nom=Datatype,Type A/N/D/Bin,1
@@ -1206,12 +1062,6 @@ Gel=1
 Nature=1
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20130912084042,ROOT                ,20130912084042,ROOT                
-Nom=ETA,Estimate time of arrival,1
-Gel=1
-Nature=H6
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,20030423155438,ADMINISTRATEUR      ,20030423155438,ADMINISTRATEUR      
 Nom=Etendu,J si séquentiel indexé étendu,1
 Gel=1
@@ -1404,13 +1254,6 @@ Gel=1
 Nature=256
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110903170621,XG                  ,20120710180214,XG                  
-Nom=FiltreRecordSql,Filtre du RecordSql,1
-DateM=AE3F1F5FB55ECD01
-Gel=1
-Nature=80
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,20080918134500,ROOT                ,20080918134500,ROOT                
 Nom=FlagBarre,Flag qui indique si valeur origine non initialisée,1
 Gel=1
@@ -1421,12 +1264,6 @@ Version=1,20060206164646,ROOT                ,20060206164646,ROOT
 Nom=FlagBtn,Flag avec liste des boutons valides,1
 Gel=1
 Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120828095005,XG                  ,20120828095005,XG                  
-Nom=FlagComboZoom,Flag Combo Zoom,1
-Gel=1
-Nature=B
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2000 9 70000,SYS,2000 9 70000,SYS
@@ -1440,12 +1277,6 @@ Nom=FlagErreur,Flag type d'erreur,1
 DateM=F8E26AB1D44CC601
 Gel=1
 Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120910150639,XG                  ,20120910150639,XG                  
-Nom=FlagGlobal,Contexte global (Search),1
-Gel=1
-Nature=B
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20080918134419,ROOT                ,20080918134419,ROOT                
@@ -1624,12 +1455,6 @@ Gel=1
 Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120319100022,BHOUVER             ,20120319100022,BHOUVER             
-Nom=IdDoc,Identifiant du document,1
-Gel=1
-Nature=8,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,199711120000,SYS,199711120000,SYS
 Nom=Ideborde,Effectuer débordement,1
 Gel=1
@@ -1678,32 +1503,6 @@ Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110616110821,JS                  ,20110616110821,JS                  
-Nom=ImageFiltre,TRUE affiche une icone "filtre" dans l'en-tête,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110616110905,JS                  ,20110616110905,JS                  
-Nom=ImageTri,TRUE affiche une icone "tri" dans l'en-tête,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110616111020,JS                  ,20110616111351,JS                  
-Nom=ImageTriNumeroOrdre,Numéro d'ordre affiché dans l'image "tri",1
-DateM=26694AB5052CCC01
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110616111117,JS                  ,20110616111358,JS                  
-Nom=ImageTriSens,Sens du tri dans l'image "tri",1
-DateM=C4008FB9052CCC01
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,2000 9 40000,JS  ,2000 9 40000,JS
 Nom=Imasque,Nom masque impr (long),1
 Gel=1
@@ -1722,30 +1521,11 @@ Gel=1
 Nature=B
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120109174343,XG                  ,20120109174343,XG                  
-Nom=ImpFicheListe,Mode d'impression,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,199711120000,SYS,199711120000,SYS
 Nom=Inblignes,Nbre de lignes,1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140206101211,FA                  ,20140206101223,FA                  
-Nom=indice,indice pour la donnée de l'objet créé,1
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20111108105921,XG                  ,20111108105930,XG                  
-Nom=IndiceImpression,Indice de l'impression,1
-DateM=5E43AF1BFD9DCC01
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2001 1 20000,JS  ,2001 1 20000,JS
 Nom=Indices,indices donnée,1
@@ -1758,19 +1538,6 @@ Nom=Info,INFORMATIONS,1
 Gel=1
 Nature=500
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140206101254,FA                  ,20140206101254,FA                  
-Nom=Infobulle,infobulle,1
-Gel=1
-Nature=256
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140206103944,FA                  ,20140213123227,FA                  
-Nom=Invite,invite,1
-DateM=4BB91746AF28CF01
-Gel=1
-Nature=40
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200012 70000,SYS,200012 70000,SYS
 Nom=Isadresse,adresse ip ou chemin,1
@@ -1844,12 +1611,6 @@ Nom=Keyn,Clé numérique,1
 Gel=1
 Nature=8,0
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120709090429,JS                  ,20120709090429,JS                  
-Nom=KeyZoomCombo,Drapeau clic zoom combo (ou F9),1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2000 1180000,SYS,2000 1180000,SYS
 Nom=Lettrecle,lettre clé,1
@@ -1935,50 +1696,10 @@ Gel=1
 Nature=256
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120904145526,XG                  ,20120905165454,XG                  
-Nom=LibelleRes,Libellé,1
-DateM=76521B69768BCD01
-Gel=1
-Nature=156
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120710180205,XG                  ,20131114145808,XG                  
-Nom=libre1,Zone libre 1,1
-DateM=6269518C41E1CE01
-Gel=1
-Nature=13
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120710180222,XG                  ,20120710180222,XG                  
-Nom=libre2,Zone libre 2,1
-Gel=1
-Nature=400
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,20100505142118,ROOT                ,20100505142118,ROOT                
 Nom=LibVersion,Libelle de la version,1
 Gel=1
 Nature=80
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20101126115317,JS                  ,20101126123026,JS                  
-Nom=LineStep,Pas "flèche",1
-DateM=86DD3D525D8DCB01
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110921161908,XG                  ,20120305150553,XG                  
-Nom=ListeContexte,Liste des contextes,1
-DateM=45051114D9FACC01
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120326084102,BHOUVER             ,20120326084102,BHOUVER             
-Nom=ListeServeurs,liste des serveurs search,1
-Gel=1
-Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1999 1 40000,SYS,1999 1 40000,SYS
@@ -2010,12 +1731,6 @@ Nom=Logcomm,Commentaire,1
 Gel=1
 Nature=80
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20131122102201,DEMO                ,20131122102201,DEMO                
-Nom=LogDomaine,nom de domaine en 7.3,1
-Gel=1
-Nature=20
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200212100000,BH,200212100000,BH
 Nom=Logdroits,Table des droits,1
@@ -2065,12 +1780,6 @@ Gel=1
 Nature=20
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20131121095152,DEMO                ,20131121095152,DEMO                
-Nom=LogNouveauCrypt,NouveauCryptage,1
-Gel=1
-Nature=1,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,200212100000,BH,200212100000,BH
 Nom=Logoldprot,Protections avant 5.2,1
 Gel=1
@@ -2107,20 +1816,6 @@ Gel=1
 Nature=1,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20111018154853,XG                  ,20120302163415,XG                  
-Nom=LstFiltres,Id de la liste des filtres,1
-DateM=8074C4EC89F8CC01
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20111018154835,XG                  ,20120302163412,XG                  
-Nom=LstTris,Id de la liste des tris,1
-DateM=F83F14EB89F8CC01
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,2000 9 40000,JS  ,2000 9 40000,JS
 Nom=Masque,Nom masque écran (long),1
 Gel=1
@@ -2138,13 +1833,6 @@ Nom=Maxelt,Nbre max élements,1
 Gel=1
 Nature=L
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140212181220,FA                  ,20140213123359,FA                  
-Nom=MemeLigne,flag de non "retour à la ligne",1
-DateM=67AB157DAF28CF01
-Gel=1
-Nature=1,0
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1998 5150000,TL  ,1998 5150000,TL
 Nom=Menu,Menu du zoom,1
@@ -2199,12 +1887,6 @@ Nom=Mode,Goto=0  Gosub=2,1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140206101005,FA                  ,20140206101005,FA                  
-Nom=Modele,nom de l'objet modèle,1
-Gel=1
-Nature=32
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1998 5150000,TL  ,1998 5150000,TL
 Nom=Modelf,Mode en cours,1
@@ -2402,8 +2084,8 @@ Gel=1
 Nature=256
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,1999 9160000,JS  ,199910120000,JS
-Nom=Niveau,niveau,1
+Version=1,199910 70000,JS  ,199910 70000,JS
+Nom=Niveau,Niveau dans l'arbre,1
 Gel=1
 Nature=2,0
 Flags=o,1,n,n,n,n,n,n
@@ -2420,13 +2102,6 @@ Gel=1
 Nature=2,0
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110608153851,XG                  ,20111011162124,XG                  
-Nom=NoChamp,Numéro du champ,1
-DateM=321E480E2188CC01
-Gel=1
-Nature=X*10
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,1998 9110000,TL  ,1998 9110000,TL
 Nom=Nocle,Numéro de clé en cours,1
 Gel=1
@@ -2439,18 +2114,16 @@ Gel=1
 Nature=X
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,200011150000,TL ,20111004164145,XG                  
+Version=1,200011150000,TL ,200011150000,TL
 Nom=Nocolonne,numéro de la colonne,1
-DateM=376715BDA382CC01
 Gel=1
-Nature=X
+Nature=B
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,200011290000,TL ,20111004164152,XG                  
+Version=1,200011290000,TL ,200011290000,TL
 Nom=Nocolsel,Numéro de colonne,1
-DateM=A31A6FC1A382CC01
 Gel=1
-Nature=X
+Nature=B
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2001 9190000,JPT ,2001 9190000,JPT
@@ -2471,33 +2144,17 @@ Gel=1
 Nature=32
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,200011 80000,TL ,20110523143903,XG                  
-Nom=Nomcolonne,Nom du champ,1
+Version=1,200011 80000,TL ,200011290000,TL
+Nom=Nomcolonne,nom des colonnes,1
 Gel=1
 Nature=32
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110927150430,XG                  ,20110927150430,XG                  
-Nom=NomContexte,Nom du contexte,1
-Gel=1
-Nature=32
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2001 1 20000,JS  ,2001 1 20000,JS
 Nom=Nomdonnee,nom de donnée,1
 Gel=1
 Nature=32
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110606091815,XG                  ,20110823100558,XG                  
-Nom=NomDuChamp,Nom du champ,1
-DateM=CC59877D6B61CC01
-Gel=1
-Nature=X
-Choix=utilmc.dhfi
-NomChoix=ZOOMCHAMPS_V6
-Flags=n,1,n,n,n,n,n,n
-presentation=2
 [CHAMP]
 Version=1,2001 1 20000,JS  ,2001 1 20000,JS
 Nom=Nomenreg,nom de l'enreg,1
@@ -2511,12 +2168,6 @@ Gel=1
 Nature=32
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110903165816,XG                  ,20110903165816,XG                  
-Nom=NomFiltreRecordSql,Filtre prédéfinis,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,200111210000,JS  ,20050922175433,JS                  
 Nom=Nomligne,nom pour ListSetAttribut,1
 DateM=F23120ED8DBFC501
@@ -2524,33 +2175,11 @@ Gel=1
 Nature=32
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20140213112124,FA                  ,20140213112124,FA                  
-Nom=NomListe,nom de liste pour les multichoix,1
-Gel=1
-Nature=32
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20111129110753,XG                  ,20111129110753,XG                  
-Nom=NomPassePartout,Nom du passe-partout,1
-Gel=1
-Nature=32
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,200011 80000,TL  ,200011 80000,TL
 Nom=Nomsel,nom de la colonne,1
 Gel=1
 Nature=32
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110824115139,XG                  ,20110824145224,XG                  
-Nom=NomTriRecordSql,Tri définis dans le RecordSql,1
-DateM=5AC48FAB5C62CC01
-Gel=1
-Nature=B
-Choix=utilmc.dhfi
-NomChoix=ZOOMTRIRECORDSQL
-Flags=n,1,n,n,n,n,n,n
-presentation=2
 [CHAMP]
 Version=1,1998 4200000,SYS  ,1998 4200000,SYS
 Nom=Norm,NORM,1
@@ -2564,27 +2193,11 @@ Gel=1
 Nature=8,0
 Flags=n,1,o,n,n,n,n,n
 [CHAMP]
-Version=1,20140509130413,FA                  ,20140509131110,FA                  
-Nom=NoZoom,numéro du zoom associé au champ,1
-DateM=7E799E61776BCF01
-Gel=1
-Nature=5,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,200111280000,TL  ,200111280000,TL
 Nom=Npage,Numéro de page,1
 Gel=1
 Nature=6,0
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110606163229,XG                  ,20110823100547,XG                  
-Nom=NumChamp,Champ : ,1
-DateM=F6A832776B61CC01
-Gel=1
-Nature=X
-Choix=utilmc.dhfi
-NomChoix=ZOOMCHAMPS_V6
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2002 3 50000,SYS,2002 3 50000,SYS
 Nom=Numcol,numero de colonne,1
@@ -2603,12 +2216,6 @@ Nom=Oblig,Flag donnée non garnie,1
 Gel=1
 Nature=B
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140206101104,FA                  ,20140206101104,FA                  
-Nom=Obligatoire,flag obligatoire,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,199812 90000,JS  ,199812100000,JS
 Nom=Obligpage,No de page donnée,1
@@ -2754,32 +2361,6 @@ Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110606163440,XG                  ,20110606163951,XG                  
-Nom=Operateur,Opérateur :,1
-DateM=475CF5975724CC01
-Gel=1
-Nature=B
-Choix=utilmc.dhfi
-NomChoix=ZOOMCOND
-Flags=n,1,n,n,n,n,n,n
-presentation=2
-[CHAMP]
-Version=1,20140205165640,FA                  ,20140205165640,FA                  
-Nom=Ordre,Ordre,1
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110606093917,XG                  ,20110606101057,XG                  
-Nom=OrdreDeTri,Ordre de tri,1
-DateM=43AA75432124CC01
-Gel=1
-Nature=4
-Choix=utilmc.dhfi
-NomChoix=TRI
-Flags=n,1,n,n,n,n,n,n
-presentation=2
-[CHAMP]
 Version=1,200011240000,TL ,2001 2160000,TL
 Nom=P1,Police titre,1
 Gel=1
@@ -2816,31 +2397,11 @@ Gel=1
 Nature=X
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20140205165709,FA                  ,20140206100929,FA                  
-Nom=PageFond,page du modèle à utiliser,1
-DateM=396122241B23CF01
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,2000 3270000,JS  ,2000 3270000,JS
 Nom=Pagelength,Nombre de lignes / page,1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130408171524,XG                  ,20130408171524,XG                  
-Nom=PageListe,Numéro de page de la liste,1
-Gel=1
-Nature=2,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20101126115325,JS                  ,20101126123036,JS                  
-Nom=PageStep,Pas "page",1
-DateM=BF5666585D8DCB01
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200012 70000,SYS,200012 70000,SYS
 Nom=Panom,nom du chemin,1
@@ -2853,14 +2414,6 @@ Nom=Papath,chemin,1
 Gel=1
 Nature=256
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110927150442,XG                  ,20111018115445,XG                  
-Nom=ParDefaut,Par défaut,1
-DateM=BF983E651D7DCC01
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-presentation=3
 [CHAMP]
 Version=1,2000 9 60000,GN  ,2000 9 60000,GN
 Nom=Partage,Fichier partagé ou non,1
@@ -2891,12 +2444,6 @@ Nom=pcbErrorMsg,réservé,1
 DateM=5EDB546DFB42C401
 Gel=1
 Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130912084021,ROOT                ,20130912084021,ROOT                
-Nom=Percent,Pourcentage d'avancement,1
-Gel=1
-Nature=3,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,200011230000,SYS,200011230000,SYS
@@ -2978,20 +2525,6 @@ Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20101126115307,JS                  ,20101126123011,JS                  
-Nom=PositionMax,Position maxi,1
-DateM=69AB43495D8DCB01
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20101126115256,JS                  ,20101126122955,JS                  
-Nom=PositionMin,Position mini,1
-DateM=EE34B73F5D8DCB01
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,2000 1180000,SYS,2000 1180000,SYS
 Nom=Poslg,positions/longueurs,1
 Gel=1
@@ -3015,13 +2548,6 @@ Nom=Prefixe,Prefixe fichier,1
 Gel=1
 Nature=256
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140206103958,FA                  ,20140213123256,FA                  
-Nom=PresLib,flag présence libellé,1
-DateM=2CEC0057AF28CF01
-Gel=1
-Nature=1,0
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1998 5150000,TL  ,1998 5150000,TL
 Nom=Priv,Privilège,1
@@ -3119,19 +2645,6 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120313160937,BHOUVER             ,20120313161023,BHOUVER             
-Nom=Requete,la requete,1
-DateM=D27A1F6A2B01CD01
-Gel=1
-Nature=256
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120319092134,BHOUVER             ,20120319092134,BHOUVER             
-Nom=RequeteParsee,la requete vue par le moteur,1
-Gel=1
-Nature=256
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,1998 5150000,TL  ,20060703100205,DEMO                
 Nom=Res,Entité à réserver,1
 DateM=1DB366F9769EC601
@@ -3181,12 +2694,6 @@ Nom=Rtaillef,Taille réelle fichier,1
 Gel=1
 Nature=8
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20140206101047,FA                  ,20140206101047,FA                  
-Nom=Saisie,flag champ en saisie,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1998 5150000,TL  ,1998 5150000,TL
 Nom=Sceaction,Action du scénario,1
@@ -3267,111 +2774,11 @@ Gel=1
 Nature=256
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120319100050,BHOUVER             ,20120319100050,BHOUVER             
-Nom=Score,score de la recherche,1
-Gel=1
-Nature=6,3
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,199810150000,JS  ,199810150000,JS
 Nom=Scrollbar,Ascenseur,1
 Gel=1
 Nature=10
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20101126115027,JS                  ,20101126115027,JS                  
-Nom=Scrollbar32,Ascenseur tableau 32 bits,1
-Gel=1
-Nature=20
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20111109083248,JS                  ,20111109084107,JS                  
-Nom=ScrollbarClickBeginEnd,Drapeau clic ascenseur en position début/fin,1
-DateM=9A057FF1B29ECC01
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20111109083125,JS                  ,20111109084102,JS                  
-Nom=ScrollbarClickType,Type de clic ascenseur,1
-DateM=3AB523EEB29ECC01
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20101126122500,JS                  ,20101126122513,JS                  
-Nom=ScrollbarPositionNew,Nouvelle position de l'ascenseur,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20101126122443,JS                  ,20101126122443,JS                  
-Nom=ScrollbarPositionOld,Ancienne position de l'ascenseur,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20130930093534,XG                  ,20130930093534,XG                  
-Nom=Search,Zone de recherche,1
-Gel=1
-Nature=256
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20131021144442,XG                  ,20131021144442,XG                  
-Nom=SearchDefaultOperator,Opérateur de liaison par défaut,1
-Gel=1
-Nature=1,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120710180141,XG                  ,20120710180141,XG                  
-Nom=SearchDico,Nom du dictionnaire Search,1
-Gel=1
-Nature=32
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120319092548,BHOUVER             ,20120319092548,BHOUVER             
-Nom=SearchDuree,durée requete,1
-Gel=1
-Nature=13,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120323160520,BHOUVER             ,20120910121008,XG                  
-Nom=SearchDureeAff,nb + durée,1
-DateM=C68EBA743C8FCD01
-Gel=1
-Nature=50
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120319092526,BHOUVER             ,20120319092526,BHOUVER             
-Nom=SearchNbTrouve,nbre trouvé,1
-Gel=1
-Nature=13,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120319100141,BHOUVER             ,20120319100141,BHOUVER             
-Nom=SearchParamsDoc,paramètres du document,1
-Gel=1
-Nature=255
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20131114145803,XG                  ,20131114145803,XG                  
-Nom=SearchRechercheZoom,Indique le contexte de recherche (standard ou zoom),1
-Gel=1
-Nature=1,0
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120710180154,XG                  ,20120710180154,XG                  
-Nom=SearchReference,Nom de la référence Search,1
-Gel=1
-Nature=32
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120322172705,BHOUVER             ,20120905162735,XG                  
-Nom=SearchTabResult,Résultat,1
-DateM=69DF1C98728BCD01
-Gel=1
-Nature=256
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2001 9 30000,SYS,2001 9 30000,SYS
 Nom=Select,selection en cours,1
@@ -3671,12 +3078,6 @@ Gel=1
 Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20140206101400,FA                  ,20140206101400,FA                  
-Nom=Style,nom du style,1
-Gel=1
-Nature=32
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,1998 4200000,SYS  ,1998 4200000,SYS
 Nom=Sysdate,sysdate,1
 Gel=1
@@ -3786,12 +3187,6 @@ Gel=1
 Nature=X*4
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20130607104327,XG                  ,20130607104428,XG                  
-Nom=TableAssociee,ZOOM_OUI : double-clic renvoie la donnée,1
-Gel=1
-Nature=B
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,199810120000,JS  ,199810150000,JS
 Nom=Tablg,longueur pour tableau,1
 Gel=1
@@ -3858,12 +3253,6 @@ Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20111003144329,XG                  ,20111003144329,XG                  
-Nom=TailleCol,Taille de la colonne,1
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,2000 9220000,GN  ,2000 9220000,GN
 Nom=Tailleelem,Taille d'un élément,1
 Gel=1
@@ -3912,19 +3301,6 @@ Nom=Testce,test a effectuer,1
 Gel=1
 Nature=B
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110902142542,XG                  ,20110902142542,XG                  
-Nom=TexteFiltre,Texte du filtre,1
-Gel=1
-Nature=128*10
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110902142104,XG                  ,20110902142546,XG                  
-Nom=TexteFiltreAffiche,Texte filtre affiche,1
-DateM=C97C07716B69CC01
-Gel=1
-Nature=150*10
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20050823085639,TL                  ,20050823155004,TL                  
 Nom=TexteValeur,Valeur ou texte pour les multichoix,1
@@ -3988,12 +3364,6 @@ Gel=1
 Nature=50*100
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20130912084001,ROOT                ,20130912084001,ROOT                
-Nom=TotalNumber,Nombre total à lire,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,199910 70000,SYS,2001 6190000,SYS
 Nom=Treeinfo,Exemple de donnée arbre,1
 Gel=1
@@ -4005,13 +3375,6 @@ Nom=Tri,tri (1 par nom ...),1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110903132121,XG                  ,20120710180039,XG                  
-Nom=TriRecordSql,Tri du RecordSql,1
-DateM=821BC626B55ECD01
-Gel=1
-Nature=80
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2000 9220000,GN  ,2000 9220000,GN
 Nom=Type,Type D ou R,1
@@ -4042,16 +3405,6 @@ Nom=Typeinput,Phase de saisie,1
 Gel=1
 Nature=1,0
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20110606163510,XG                  ,20110606163957,XG                  
-Nom=TypeLien,Lien,1
-DateM=FEC9A99B5724CC01
-Gel=1
-Nature=B
-Choix=utilmc.dhfi
-NomChoix=LIENFILTRE
-Flags=n,1,n,n,n,n,n,n
-presentation=4
 [CHAMP]
 Version=1,2002 9160000,JS  ,2002 9160000,JS
 Nom=Typemsqecr,Type masque écran,1
@@ -4197,36 +3550,10 @@ Gel=1
 Nature=1
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110606163448,XG                  ,20110606163801,XG                  
-Nom=ValeurFiltre,Valeur : ,1
-DateM=7A4357565724CC01
-Gel=1
-Nature=128
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120221174442,XG                  ,20120221174442,XG                  
-Nom=ValeurMCBM,Valeur distinctes BitMap dans un multichoix,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,20050826115353,TL                  ,20050826115353,TL                  
 Nom=ValeurMultichoix,Valeur du multichoix pour filtre,1
 Gel=1
 Nature=256
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20111110084342,XG                  ,20111110095516,XG                  
-Nom=ValeursDistinct,Valeurs distinctes,1
-DateM=8B197B77869FCC01
-Gel=1
-Nature=X
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120221094038,XG                  ,20120221174451,XG                  
-Nom=ValeursMC,Valeurs distinctes dans un multichoix,1
-Gel=1
-Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,199810150000,JS  ,199810150000,JS
@@ -4342,18 +3669,6 @@ Nom=Ymeglg2,Longueur 2,1
 Gel=1
 Nature=X
 Flags=o,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120927154652,JS                  ,20120927154652,JS                  
-Nom=YmegLong1,Variable de travail 1 de type L,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20120927154705,JS                  ,20120927154721,JS                  
-Nom=YmegLong2,Variable de travail 2 de type L,1
-Gel=1
-Nature=L
-Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2002 7100000,JS  ,2002 7120000,JS
 Nom=Ymegmasque,Nom masque,1
@@ -4709,12 +4024,6 @@ Gel=1
 Nature=64
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120710180128,XG                  ,20120710180128,XG                  
-Nom=ZoomComboRetour,Nom du champ à retourner via le ZoomCombo,1
-Gel=1
-Nature=64
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
 Version=1,1999 8300000,JS  ,1999 8300000,JS
 Nom=Zoominput,Flag donnée saisie zoom,1
 Gel=1
@@ -4895,13 +4204,12 @@ Nom=Nomsel,1,0,0,N,1
 Nom=Separation,33,0,0,N,1
 Nom=Cumulable,34,0,0,N,1
 Nom=Nocolsel,35,0,0,N,1
-Nom=Colenreg,37,0,0,N,1
-Nom=Colchamp,69,0,0,N,1
-Nom=Coli1,101,0,0,N,1
-Nom=Coli2,103,0,0,N,1
-Nom=Coli3,105,0,0,N,1
-Nom=Coli4,107,0,0,N,1
-Nom=TailleCol,109,0,0,N,1
+Nom=Colenreg,36,0,0,N,1
+Nom=Colchamp,68,0,0,N,1
+Nom=Coli1,100,0,0,N,1
+Nom=Coli2,102,0,0,N,1
+Nom=Coli3,104,0,0,N,1
+Nom=Coli4,106,0,0,N,1
 [/CHAMPL]
 nom=Columninfo
 [CHAMPL]
@@ -4939,12 +4247,7 @@ Nom=CodePageEntete,891,0,0,N,1
 Nom=CodePageColonne,893,0,0,N,1
 Nom=CodePageBulle,895,0,0,N,1
 Nom=CodePageDuMasque,897,0,0,N,1
-Nom=ImageFiltre,899,0,0,N,1
-Nom=ImageTri,900,0,0,N,1
-Nom=ImageTriNumeroOrdre,901,0,0,N,1
-Nom=ImageTriSens,902,0,0,N,1
-Nom=Affichage,903,0,0,N,1
-Nom=Colfiller,904,0,0,N,1
+Nom=Colfiller,899,0,0,N,1
 [/CHAMPL]
 nom=Expend
 [CHAMPL]
@@ -4995,12 +4298,6 @@ Nom=DropLocal,361,0,0,N,1
 Nom=DropMode,362,0,0,N,1
 Nom=DropMemory,363,0,0,N,1
 Nom=DropId,365,0,0,N,1
-Nom=ScrollbarPositionOld,369,0,0,N,1
-Nom=ScrollbarPositionNew,373,0,0,N,1
-Nom=ScrollbarClickType,377,0,0,N,1
-Nom=ScrollbarClickBeginEnd,378,0,0,N,1
-Nom=KeyZoomCombo,379,0,0,N,1
-Nom=DataTableAssociee,380,0,0,N,1
 [/CHAMPL]
 nom=Logmpw
 [CHAMPL]
@@ -5054,24 +4351,6 @@ Nom=Valfin,3,0,0,N,1
 Nom=Pasfleche,5,0,0,N,1
 Nom=Paspage,7,0,0,N,1
 Nom=Valcour,9,0,0,N,1
-[/CHAMPL]
-nom=Scrollbar32
-[CHAMPL]
-Nom=PositionMin,1,0,0,N,1
-Nom=PositionMax,5,0,0,N,1
-Nom=LineStep,9,0,0,N,1
-Nom=PageStep,13,0,0,N,1
-Nom=CurrentPosition,17,0,0,N,1
-[/CHAMPL]
-nom=SearchTabResult
-[CHAMPL]
-Nom=Niveau,1,0,0,N,1
-Nom=Gesinterne,3,0,0,N,1
-Nom=Sousniveau,35,0,0,N,1
-Nom=Expanse,36,0,0,N,1
-Nom=Bitmapred,37,0,0,N,1
-Nom=Bitmapexp,69,0,0,N,1
-Nom=LibelleRes,101,0,0,N,1
 [/CHAMPL]
 nom=Sqlparam
 [CHAMPL]
@@ -5308,21 +4587,15 @@ Nom=tabcles,1,2,N,0,0,N,1
 [TABLE]
 Version=1,199810150000,JS  ,199810150000,JS
 Nom=Columninfo,Infos colonne tableau,1
-DateM=C0E4D5E564BFCE01
+DateM=452C74F2B2EECB01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
 Nom=Columninfo,1,2,N,0,0,N,1
 [/CHAMPS]
-[TABLE]
-Version=1,20110921161844,XG                  ,20120305150557,XG                  
-Nom=Contexte,Contextes du Zoom,1
-DateM=3D955F16D9FACC01
-Taille=4,4
-Pack=0,0
-[CHAMPS]
-Nom=ListeContexte,1,2,N,0,0,N,1
-[/CHAMPS]
+[PROPLOC]
+Nom=Colfiller
+[/PROPLOC]
 [TABLE]
 Version=1,2000 9220000,SYS,2000 9220000,SYS
 Nom=Datainfo,Informations donnée,1
@@ -5406,7 +4679,7 @@ Nom=Zcnblpay,82,2,N,0,0,N,1
 [TABLE]
 Version=1,200212100000,BH,200212100000,BH
 Nom=Elogf,Utilisateur,1
-DateM=A0D3C72C019DCB01
+DateM=C0D2AE27009DCB01
 Taille=4096,4096
 Pack=0,0
 [CHAMPS]
@@ -5424,7 +4697,6 @@ Nom=Lognomsai,347,2,N,0,0,N,1
 Nom=LogimpliOdbc,367,2,N,0,0,N,1
 Nom=LogLicences,399,2,N,0,0,N,1
 Nom=LogUserXlan,409,2,N,0,0,N,1
-Nom=LogDomaine,429,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,200212100000,BH,200212100000,BH
@@ -5435,17 +4707,6 @@ Pack=0,0
 Nom=Logce,1,2,N,0,0,N,1
 Nom=Lognom,2,2,N,0,0,N,1
 Nom=Logdroits,22,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
-Version=1,20131121095101,DEMO                ,20131121095101,DEMO                
-Nom=Elogfp,Parametres,1
-DateM=0F7BADCD96E6CE01
-Taille=4096,4096
-Pack=0,0
-[CHAMPS]
-Nom=Logce,1,2,N,0,0,N,1
-Nom=Lognom,2,2,N,0,0,N,1
-Nom=LogNouveauCrypt,22,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,2000 9 60000,SYS,2000 9 60000,SYS
@@ -5480,18 +4741,6 @@ Nom=FichierDonnees,263,2,N,0,0,N,1
 Nom=LgEnreg,519,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110608153647,XG                  ,20110608153647,XG                  
-Nom=Filtrage,Filtrage,1
-DateM=321E480E2188CC01
-Taille=3000,3000
-Pack=0,0
-[CHAMPS]
-Nom=NoChamp,1,2,N,0,0,N,1
-Nom=ConditionFiltre,21,2,N,0,0,N,1
-Nom=TexteFiltreAffiche,31,2,N,0,0,N,1
-Nom=TexteFiltre,1531,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
 Version=1,20090810151203,GN                  ,20090810151203,GN                  
 Nom=GenzoomIdent,Champs onglet identifiants generateur zoom,1
 DateM=371288EEBC19CA01
@@ -5521,7 +4770,7 @@ Nom=Joint,103,2,N,0,0,N,1
 [TABLE]
 Version=1,199711120000,TL  ,20060203124409,JS                  
 Nom=Harmony,Harmony,1
-DateM=28BFE08FF961CE01
+DateM=FCFBCA59F92BC601
 Taille=4096,4096
 Pack=0,0
 [CHAMPS]
@@ -5587,19 +4836,6 @@ Nom=DataValComp,1674,2,N,0,0,N,1
 Nom=harmony_libre1,1930,2,N,0,0,N,1
 Nom=Key,1931,2,N,0,0,N,1
 Nom=AbandonRichedit,1933,2,N,0,0,N,1
-Nom=CodePageMultiChoix,1934,2,N,0,0,N,1
-Nom=CalendarClic,1936,2,N,0,0,N,1
-Nom=CalendarPlageDebut,1937,2,N,0,0,N,1
-Nom=CalendarPlageFin,1945,2,N,0,0,N,1
-Nom=CalendarRdvId,1953,2,N,0,0,N,1
-Nom=CalendarRdvDateDebut,1957,2,N,0,0,N,1
-Nom=CalendarRdvDateFin,1971,2,N,0,0,N,1
-Nom=YmegLong1,1985,2,N,0,0,N,1
-Nom=YmegLong2,1989,2,N,0,0,N,1
-Nom=CalendarIndiceRessource1,1993,2,N,0,0,N,1
-Nom=CalendarIndiceRessource2,1997,2,N,0,0,N,1
-Nom=CalendarDropMultiple,2001,2,N,0,0,N,1
-Nom=ClicOuTabkey,2002,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,200111280000,TL  ,200111280000,TL
@@ -5706,36 +4942,6 @@ Nom=Pnom,43,2,N,0,0,N,1
 Nom=Pul,75,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20140205165544,FA                  ,20140429091820,FA                  
-Nom=MaskGenObjDesc,Descritpion d'objet pour la génération de masque,1
-DateM=7E799E61776BCF01
-Taille=1024,1024
-Pack=0,0
-[CHAMPS]
-Nom=Page,1,2,N,0,0,N,1
-Nom=Ordre,3,2,N,0,0,N,1
-Nom=PageFond,5,2,N,0,0,N,1
-Nom=Modele,7,2,N,0,0,N,1
-Nom=Saisie,39,2,N,0,0,N,1
-Nom=Obligatoire,40,2,N,0,0,N,1
-Nom=Sequence,41,2,N,0,0,N,1
-Nom=indice,43,2,N,0,0,N,1
-Nom=Titre,45,2,N,0,0,N,1
-Nom=Infobulle,125,2,N,0,0,N,1
-Nom=Style,381,2,N,0,0,N,1
-Nom=Invite,413,2,N,0,0,N,1
-Nom=PresLib,453,2,N,0,0,N,1
-Nom=MemeLigne,454,2,N,0,0,N,1
-Nom=NomListe,455,2,N,0,0,N,1
-Nom=ArretAvant,487,2,N,0,0,N,1
-Nom=ArretApres,489,2,N,0,0,N,1
-Nom=ArretClic,491,2,N,0,0,N,1
-Nom=NoZoom,493,2,N,0,0,N,1
-[/CHAMPS]
-[PROPLOC]
-Nom=NoZoom
-[/PROPLOC]
-[TABLE]
 Version=1,200011230000,SYS,200011230000,SYS
 Nom=Newprint,Ouverture imprimante,1
 Taille=50,50
@@ -5767,16 +4973,6 @@ Nom=TestAttributs,551,2,N,0,0,N,1
 Nom=MontrerCaches,552,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20111129110255,XG                  ,20111129111028,XG                  
-Nom=PassePartout,Passe-partout,1
-DateM=DA94E81E7FAECC01
-Taille=36,36
-Pack=0,0
-[CHAMPS]
-Nom=NomPassePartout,1,2,N,0,0,N,1
-Nom=ClePassePartout,33,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
 Version=1,200012 70000,SYS,200012 70000,SYS
 Nom=Path,Un chemin,1
 Taille=288,288
@@ -5784,18 +4980,6 @@ Pack=0,0
 [CHAMPS]
 Nom=Panom,1,2,N,0,0,N,1
 Nom=Papath,33,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
-Version=1,20130909101535,ROOT                ,20130909101535,ROOT                
-Nom=ProgressBar,Barre de progression,1
-DateM=A0C0080A83AFCE01
-Taille=100,100
-Pack=0,0
-[CHAMPS]
-Nom=CurrentNumber,1,2,N,0,0,N,1
-Nom=TotalNumber,5,2,N,0,0,N,1
-Nom=Percent,9,2,N,0,0,N,1
-Nom=ETA,12,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,1998 8180000,JS  ,199810150000,JS
@@ -5820,79 +5004,12 @@ Pack=0,0
 Nom=Rowinfo,1,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110927150417,XG                  ,20111018154841,XG                  
-Nom=SaisieContexte,Saisie des contextes,1
-DateM=52F1170B528FCD01
-Taille=50,50
-Pack=0,0
-[CHAMPS]
-Nom=NomContexte,1,2,N,0,0,N,1
-Nom=ParDefaut,33,2,N,0,0,N,1
-Nom=LstTris,34,2,N,0,0,N,1
-Nom=LstFiltres,38,2,N,0,0,N,1
-Nom=NomFiltreRecordSql,42,2,N,0,0,N,1
-Nom=IndiceImpression,43,2,N,0,0,N,1
-Nom=FlagGlobal,45,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
-Version=1,20110606091739,XG                  ,20120221174457,XG                  
-Nom=SaisieFiltrage,SaisieFiltrage,1
-DateM=C3CB290A29F5CC01
-Taille=300,300
-Pack=0,0
-[CHAMPS]
-Nom=NumChamp,1,2,N,0,0,N,1
-Nom=Operateur,3,2,N,0,0,N,1
-Nom=ValeurFiltre,4,2,N,0,0,N,1
-Nom=TypeLien,132,2,N,0,0,N,1
-Nom=NomFiltreRecordSql,133,2,N,0,0,N,1
-Nom=ValeursDistinct,134,2,N,0,0,N,1
-Nom=ValeursMC,136,2,N,0,0,N,1
-Nom=ValeurMCBM,140,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
 Version=1,199810150000,JS  ,199810150000,JS
 Nom=Scrollbar,Ascenseur,1
 Taille=10,10
 Pack=0,0
 [CHAMPS]
 Nom=Scrollbar,1,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
-Version=1,20101126114724,JS                  ,20101126114724,JS                  
-Nom=Scrollbar32,Ascenseur tableau 32 bits,1
-DateM=DE3FEC665D8DCB01
-Taille=20,20
-Pack=0,0
-[CHAMPS]
-Nom=Scrollbar32,1,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
-Version=1,20120313160915,BHOUVER             ,20120313160915,BHOUVER             
-Nom=SearchSaisie,pour la saisie de search,1
-DateM=C68EBA743C8FCD01
-Taille=2000,2000
-Pack=0,0
-[CHAMPS]
-Nom=Requete,1,2,N,0,0,N,1
-Nom=RequeteParsee,257,2,N,0,0,N,1
-Nom=SearchNbTrouve,513,2,N,0,0,N,1
-Nom=SearchDuree,526,2,N,0,0,N,1
-Nom=SearchDureeAff,539,2,N,0,0,N,1
-Nom=ListeServeurs,589,2,N,0,0,N,1
-Nom=ChoixServeur,593,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
-Version=1,20120319095940,BHOUVER             ,20120322172740,BHOUVER             
-Nom=SearchUnResultat,un résultat de search,1
-DateM=76521B69768BCD01
-Taille=2000,2000
-Pack=0,0
-[CHAMPS]
-Nom=IdDoc,1,2,N,0,0,N,1
-Nom=Score,9,2,N,0,0,N,1
-Nom=SearchParamsDoc,15,2,N,0,0,N,1
-Nom=SearchTabResult,270,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,200012 70000,SYS,200012 70000,SYS
@@ -6031,17 +5148,6 @@ Pack=0,0
 Nom=Treeinfo,1,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110606093737,XG                  ,20110607150333,XG                  
-Nom=Triage,Triage,1
-DateM=5AC48FAB5C62CC01
-Taille=50,500
-Pack=0,0
-[CHAMPS]
-Nom=NomDuChamp,1,2,N,0,0,N,1
-Nom=OrdreDeTri,3,2,N,0,0,N,1
-Nom=NomTriRecordSql,7,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
 Version=1,2000 1180000,SYS,2000 1180000,SYS
 Nom=v5Cle,Une clé du séq-indexé,1
 DateM=9E025B3414F4C601
@@ -6080,9 +5186,9 @@ Pack=0,0
 Nom=Zonez,1,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,1998 5150000,TL  ,20110903170756,XG                  
+Version=1,1998 5150000,TL  ,199812 90000,TL
 Nom=Zoom,Paramètres du zoom,1
-DateM=6535D18D41E1CE01
+DateM=DC3811A20DC8C901
 Taille=12000,12000
 Pack=0,0
 [CHAMPS]
@@ -6151,21 +5257,6 @@ Nom=ModificationEnSerie,10997,2,N,0,0,N,1
 Nom=SceModifEnSerie,10998,2,N,0,0,N,1
 Nom=Revision,10999,2,N,0,0,N,1
 Nom=CodeLangue,11013,2,N,0,0,N,1
-Nom=TriRecordSql,11021,2,N,0,0,N,1
-Nom=ZoomComboRetour,11101,2,N,0,0,N,1
-Nom=SearchDico,11165,2,N,0,0,N,1
-Nom=SearchReference,11197,2,N,0,0,N,1
-Nom=FlagComboZoom,11229,2,N,0,0,N,1
-Nom=Search,11230,2,N,0,0,N,1
-Nom=SearchDefaultOperator,11486,2,N,0,0,N,1
-Nom=SearchRechercheZoom,11487,2,N,0,0,N,1
-Nom=libre1,11488,2,N,0,0,N,1
-Nom=FiltreRecordSql,11501,2,N,0,0,N,1
-Nom=libre2,11581,2,N,0,0,N,1
-Nom=ContexteDefaut,11981,2,N,0,0,N,1
-Nom=ImpFicheListe,11982,2,N,0,0,N,1
-Nom=PageListe,11983,2,N,0,0,N,1
-Nom=TableAssociee,11985,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Flags=n,1,n,n,i,n,n,n
@@ -6191,7 +5282,6 @@ Nom=Id_Tchamps,11128,2,N,0,0,N,1
 [TABLE]
 Version=1,200011150000,TL  ,2001 3 90000,TL
 Nom=Zoom2,impression personnalisée,1
-DateM=A31A6FC1A382CC01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -6310,12 +5400,11 @@ Version=1,200212100000,BH,20081120171630,DEMO
 Nom=Xlogf,Utilisateurs,1
 DateM=2E41C5582B4BC901
 Fichier=I,4096,XLOG.DHFI
-DateMIndex=38C02FA5A1E6CE01
+DateMIndex=40AA8F37716DC301
 [TABLES]
 Nom=Elogf,0
 Libelle=Droits de l'utilisateur
 Nom=Elogfd,0
-Nom=Elogfp,0
 [/TABLES]
 [INDEX]
 Version=1,1993 6280000,STR ,1993 6280000,STR
@@ -6343,18 +5432,8 @@ CLE=Xlogf,B,Logce,2,2,o,1,n
 Nom=Lognom,1,0,
 [/CHAMPS]
 [/INDEX]
-[INDEX]
-Version=1,20131121110717,DEMO                ,20131121110837,DEMO                
-Nom=index_D,parametres,1
-DateM=38C02FA5A1E6CE01
-CLE=Xlogf,D,Logce,2,4,n,4,n
-[CHAMPS]
-Nom=Lognom,1,0,
-[/CHAMPS]
-[/INDEX]
 [INDEXL]
 Nom=Fimp,Eimp,Fimpa,0
 Nom=Xlogf,Elogf,index_A,0
 Nom=Xlogf,Elogfd,index_B,0
-Nom=Xlogf,Elogfp,index_D,0
 [/INDEXL]

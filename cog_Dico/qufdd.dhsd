@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20031009113514,FRO                 ,20130201150743,JLF                 
+Version=6,20031009113514,FRO                 ,20140519111645,JF                 
 Nom=qufdd.dhsd,qufdd.dhsd,1
 [CHAMP]
 Version=1,20080314141119,JLF                 ,20090313150351,JLF                 
@@ -172,6 +172,14 @@ Nature=20
 NomOdbc=NumeroAvisDebitFournisseur
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1989 1230000,MJV ,20061107110458,MARIE JO            
+Nom=BlDt,Date de BL,1
+DateM=FCC8A32E5402C701
+Gel=1
+Nature=D8
+NomOdbc=DateBL
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1989 1230000,MJV ,20090304132757,ROOT                
 Nom=BlNo,No de Bl,1
 DateM=C37F33A6C49CC901
@@ -211,6 +219,14 @@ Gel=1
 Nature=1,0
 NomOdbc=RechercheCauseDe
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2000 6190000,MJV ,20061107111052,MARIE JO            
+Nom=CdVtlNo,No ventilation commande,1
+DateM=5C6EBB015502C701
+Gel=1
+Nature=9,0
+NomOdbc=VtlCde
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030929082939,FRO                 ,20090313145947,JLF                 
 Nom=Ce,Code enregistrement,1
@@ -368,6 +384,14 @@ Gel=1
 Nature=5,0
 NomOdbc=NombreColis
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2000 1270000,MJV ,20050708125823,MARIE JO            
+Nom=ColiNo,Numéro de colis,1
+DateM=D0A6F3F5AB83C501
+Gel=1
+Nature=9
+NomOdbc=Colis
+Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090305120811,ROOT                ,20090317172254,JLF                 
 Nom=CompetCod,Code compétence,1
@@ -846,6 +870,12 @@ Nature=3
 NomOdbc=Depot
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140516144515,JLF                 ,20140516144515,JLF                 
+Nom=DepoWMSFlg,Indicateur si dépot WMS,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20090330134506,JLF                 ,20090330134538,JLF                 
 Nom=DerogCheminCod,Chemin formulaire demande de dérogation,1
 DateM=B69AB40B2DB1C901
@@ -892,6 +922,22 @@ DateM=1D4FC1653BA3C901
 Gel=1
 Nature=1
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030925173834,FRO                 ,20090326144041,JLF
+Nom=DocCod,Code document,1
+DateM=9662DF8116AEC901
+Gel=1
+Nature=8
+NomOdbc=CodeDocument
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030925173904,FRO                 ,20090326142738,JLF
+Nom=DocCodN,Code document en numérique,1
+DateM=B61FE79C16AEC901
+Gel=1
+Nature=8,0
+NomOdbc=NumeroDocument
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,2003 1210000,FRO ,20090305121847,ROOT                
 Nom=Dos,Dossier,1
@@ -1042,6 +1088,13 @@ Nature=1,0
 NomOdbc=NiveauConformite
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130910093128,JLF                 ,20130910093146,JLF                 
+Nom=EvalDelCalcFlg,Indicateur si calcul évaluation délai ,1
+Gel=1
+Nature=1,0
+NomOdbc=CalculEvaluationDelai
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20060307092132,DNT                 ,20090312154601,JLF                 
 Nom=EvalDelNiv,Niveau respect délais,1
 DateM=3D530C4321A3C901
@@ -1109,12 +1162,26 @@ Nature=1,0*5
 NomOdbc=TableDesNiveaux
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130513141844,JLF                 ,20130513141917,JLF                 
+Nom=EvalNo,Numéro évaluation,1
+Gel=1
+Nature=8,0
+NomOdbc=NumeroEvaluation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20060302112343,DNT                 ,20090312154737,JLF                 
 Nom=EvalReacDt,Date dernière évaluation réactivité,1
 DateM=DD1D777C21A3C901
 Gel=1
 Nature=D8
 NomOdbc=DateEvaluationReactivite
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130910090754,JLF                 ,20130910090942,JLF                 
+Nom=EvalReacFlg,Indicateur si évaluation réactivité à partir du constat,1
+Gel=1
+Nature=1,0
+NomOdbc=SaisieReactiviteDansConstat
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20060307092141,DNT                 ,20090312154616,JLF                 
@@ -1336,6 +1403,22 @@ Nature=D8
 NomOdbc=DateFin
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130910154215,MCD                 ,20130912094147,MCD                 
+Nom=FouFaTyp,Indicateur facturation fournisseur,1
+DateM=8088CC888BAFCE01
+Gel=1
+Nature=1,0
+NomOdbc=IndicationFacturationFourn
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2000 1 70000,MJV ,20061113140948,MARIE JO            
+Nom=FouHtMt,HT du fournisseur,1
+DateM=06F379FF2407C701
+Gel=1
+Nature=13,D0
+NomOdbc=HTFour
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,199410260000,MJV ,20090312153133,JLF                 
 Nom=Gamme,Gamme,1
 DateM=7DDA373E1FA3C901
@@ -1433,6 +1516,19 @@ DateM=3DF004BB40A3C901
 Gel=1
 Nature=1,0
 NomOdbc=IndicateurSortieHTML
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130604095507,MCD                 ,20130604095623,MCD                 
+Nom=HuitdCheminCod,Chemin formulaire rapport Huitd,1
+Gel=1
+Nature=20
+NomOdbc=CheminRapportHuitD
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120125090638,DEMO                ,20120910180228,DEMO                
+Nom=ID,Identifiant du record sql,1
+Gel=1
+Nature=10,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20021009155610,MJV ,20090312191945,JLF                 
@@ -1541,6 +1637,20 @@ Nature=1*6
 NomOdbc=SelectionEdition
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130517103109,MCD                 ,20130517103129,MCD                 
+Nom=ImpliciteFlg,Indicateur si chargement modèle implicite,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiChargementImplicite
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140225085727,JLF                 ,20140225085830,JLF                 
+Nom=IncFouCheminCod,Chemin formulaire fiche incident fournisseur,1
+Gel=1
+Nature=20
+NomOdbc=CheminIncidentFournisseur
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,2003 4280000,FRO ,20090313150403,JLF                 
 Nom=Job,job queue demandé = 2,1
 DateM=0A43AC90E4A3C901
@@ -1564,7 +1674,7 @@ Nature=40
 NomOdbc=Libelle_$R
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,2002 2200000,MJV ,20110405111140,JLF                 
+Version=1,2002 2200000,MJV ,20130521153644,MCD                 
 Nom=Lib80,Libellé sur 80 caractères,1
 Gel=1
 Nature=80
@@ -1677,6 +1787,14 @@ Gel=1
 Nature=80
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,1989 1240000,MJV ,20130515173932,SN                  
+Nom=Lieu,Emplacement,1
+Gel=1
+Nature=12
+Attribut=PARAM
+NomOdbc=Emplacement
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20081029173633,JLF                 ,20090312182852,JLF                 
 Nom=LigCod,Identifiant ligne,1
 DateM=3DF77C0338A3C901
@@ -1711,6 +1829,12 @@ Nom=Logo,Nom fichier logo pour impression,1
 DateM=9D5D50ED40A3C901
 Gel=1
 Nature=120
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021217151428,MJV ,20021217151428,MJV 
+Nom=Marque,Ligne marquée,1
+Gel=1
+Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20050302083004,FRO                 ,20090317174428,JLF                 
@@ -1787,6 +1911,20 @@ Gel=1
 Nature=8,0
 Flags=o,1,o,n,n,n,n,n
 [CHAMP]
+Version=1,200010100000,MJV ,20061113155940,MARIE JO            
+Nom=NoteEtat,Etat de la note,1
+DateM=06924C583407C701
+Gel=1
+Nature=1,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20040331174726,RR                  ,20110309152548,JLF                 
+Nom=NoteOld,Ancienne note,1
+DateM=94A69BE265DECB01
+Gel=1
+Nature=8,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,1989 1230000,MJV ,20090304132558,ROOT                
 Nom=Nst,Nature du stock,1
 DateM=C360255FC49CC901
@@ -1794,6 +1932,30 @@ Gel=1
 Nature=2
 NomOdbc=NatureStock
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 7 30000,CO  ,20050106160955,MARIE JO            
+Nom=NstD,Nature stock destination,1
+DateM=70529B9BB853C401
+Gel=1
+Nature=2
+NomOdbc=NatureStockDest
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1989 1230000,MJV ,20060306182003,MARIE JO            
+Nom=Op,Code opération,1
+Gel=1
+Nature=3
+Attribut=PARAM
+NomOdbc=CodeOperation
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130506172743,JLF                 ,20130507175905,JLF                 
+Nom=PactCod,Code modèle plan d'actions,1
+DateM=A420446A2E4BCE01
+Gel=1
+Nature=8
+NomOdbc=CodeModelePlanAction
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20060208100828,WEB                 ,20060904162824,MARIE JO            
 Nom=PagNo,Numéro de la page à afficher,1
@@ -1886,6 +2048,13 @@ DateM=042BB75CA59DC901
 Gel=1
 Nature=8
 NomOdbc=FamilleProblemeEnReception
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130422143635,MCD                 ,20130422143650,MCD                 
+Nom=PbleFamTps,Temps passé par catégorie,1
+Gel=1
+Nature=12,3*3
+NomOdbc=TempsPasseCategorie
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20081013142248,JLF                 ,20090317174925,JLF                 
@@ -2055,6 +2224,12 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20090818130606,VB                  ,20090818130606,VB                  
+Nom=PresenceDocumentation,Indicateur présence module documentation,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20110801142045,JLF                 ,20110801142045,JLF                 
 Nom=PresenceGRM,Indicateur présence GRM,1
 Gel=1
@@ -2162,6 +2337,13 @@ Nature=4
 NomOdbc=IndiceProduction
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,198910130000,MJV ,20050109094810,MARIE JO            
+Nom=Qte,Quantité,1
+Gel=1
+Nature=12,D2
+NomOdbc=Qte_$R
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20100616105319,JLF                 ,20100616105330,JLF                 
 Nom=QteNo,Numéro quantité constat,1
 Gel=1
@@ -2183,14 +2365,6 @@ DateM=84026B88629EC901
 Gel=1
 Nature=1,0
 NomOdbc=IndicateurQualifFournisseur
-Flags=n,1,n,n,n,n,n,n
-[CHAMP]
-Version=1,20060223144729,DNT                 ,20090317174048,JLF                 
-Nom=QualIncFlg,Indicateur incidence sur la qualité ,1
-DateM=85F7ACD8A29DC901
-Gel=1
-Nature=1,0
-NomOdbc=IndicateurIncidenceQualite
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20060206145906,FRO                 ,20090317135615,JLF                 
@@ -2216,6 +2390,13 @@ Gel=1
 Nature=4
 NomOdbc=Rebut
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140306160725,JLF                 ,20140306160808,JLF                 
+Nom=RebuFlg,Indicateur si rebut,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurRebut
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20060104090534,FRO                 ,20090304133033,ROOT                
 Nom=RebuQte,Quantité rebutée,1
@@ -2319,6 +2500,20 @@ DateM=5E8D4AE53607C701
 Gel=1
 Nature=25
 NomOdbc=ReferenceMasque
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131022132559,MCD                 ,20131022132612,MCD                 
+Nom=ResFlg,Indicateur si réservation,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurSiReservation
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2001 2 20000,MJV ,20050106114324,MARIE JO            
+Nom=Resqte,Quantité réservée,1
+Gel=1
+Nature=12,D2
+NomOdbc=QteReserve
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20060116172518,FRO                 ,20090304132442,ROOT                
@@ -2575,6 +2770,13 @@ Nature=1,0
 NomOdbc=EtatActionPourPlanning
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20131206152204,JLF                 ,20131206152235,JLF                 
+Nom=StkVtlFlg,Indicateur si ventilation de stock associée,1
+Gel=1
+Nature=1,0
+NomOdbc=IndicateurVtlStock
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,2001 1140000,MJV ,20061113165210,MARIE JO            
 Nom=TabTyp,Type de gestion table,1
 DateM=584129AE3B07C701
@@ -2595,6 +2797,15 @@ DateM=E894282C839DC901
 Gel=1
 Nature=5,0
 NomOdbc=JoursRetard
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20030925170647,FRO                 ,20090320162539,JLF
+Nom=TdocCod,Type document,1
+DateM=99735C1770A9C901
+Gel=1
+Nature=8
+Attribut=PARAM
+NomOdbc=TypeDocument
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,1999 7260000,MJV ,20101116160739,JLF                 
@@ -2673,6 +2884,13 @@ Gel=1
 Nature=8
 Attribut=PARAM
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20080725095002,DEMO                ,20100430160619,DEMO                
+Nom=TiersStock,Tiers de Stock,1
+Gel=1
+Nature=8
+NomOdbc=TiersStock
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20021029173529,RR  ,20110818163114,JLF                 
 Nom=TiersTyp,Sélection du type du tiers,1
@@ -2772,6 +2990,12 @@ Nature=B
 NomOdbc=SousNiveau
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20120306105713,MCD                 ,20120306105713,MCD                 
+Nom=treesnivtrtflg,Pointeur sous-niveau traité,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20060207151210,DNT                 ,20090313161555,JLF                 
 Nom=TriCod,Identifiant de tri,1
 DateM=BAF3BE9AEEA3C901
@@ -2786,6 +3010,13 @@ DateM=6A3067A6E4A3C901
 Gel=1
 Nature=2,0
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2000 1250000,MJV ,20061113170402,MARIE JO            
+Nom=TxtCod,Indicateur texte lié,1
+DateM=9C1C8F563D07C701
+Gel=1
+Nature=1,0
+Flags=o,1,o,n,n,n,n,n
 [CHAMP]
 Version=1,20060112111110,FRO                 ,20090317140937,JLF                 
 Nom=TxtNote,Numéro texte note,1
@@ -2883,6 +3114,20 @@ Nom=UquMmcoq,Réservé distributeur,1
 DateM=47376BA8F09CC901
 Gel=1
 Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130506174613,JLF                 ,20130507162407,JLF                 
+Nom=UquPact,Réservé distributeur,1
+DateM=3AF4D6882E4BCE01
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130506172608,JLF                 ,20130507162425,JLF                 
+Nom=UquPactEnt,Réservé distributeur,1
+DateM=05C783932E4BCE01
+Gel=1
+Nature=50
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20060828113220,FRO                 ,20090317154727,JLF                 
@@ -3003,6 +3248,25 @@ DateM=DDC1ED4E20A3C901
 Gel=1
 Nature=100
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130513152924,MCD                 ,20130513153356,MCD                 
+Nom=UQuwBas101T1,Réservé distributeur,1
+DateM=6EC96203DE4FCE01
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130513153234,MCD                 ,20130513153423,MCD                 
+Nom=UQuwBas101T2,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130527110922,MCD                 ,20130527110930,MCD                 
+Nom=UQuwBas102T1,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20080411100924,VB                  ,20090312172736,JLF                 
 Nom=UQuwCoq,Réservé distributeur,1
@@ -3173,6 +3437,12 @@ Gel=1
 Nature=50
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20131018085513,MCD                 ,20131018085519,MCD                 
+Nom=UQuwPbe000T4,Réservé distributeur,1
+Gel=1
+Nature=50
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
 Version=1,20081027155428,JLF                 ,20090312182919,JLF                 
 Nom=UQuwPbe006T1,Réservé distributeur,1
 DateM=5D37491338A3C901
@@ -3214,6 +3484,25 @@ DateM=5D1223E53DA3C901
 Gel=1
 Nature=100
 Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130812114101,MCD                 ,20130812114107,MCD                 
+Nom=UQuwSfo002,Réservé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130812110025,MCD                 ,20130812110042,MCD                 
+Nom=UQuwSfo002T1,Réservé distributeur,1
+DateM=4A44486C3A97CE01
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130812110148,MCD                 ,20130812110153,MCD                 
+Nom=UQuwSfo002T2,Résevé distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20081107092434,JLF                 ,20090313145700,JLF                 
 Nom=UQuwSfo006T1,Réservé distributeur,1
@@ -3421,6 +3710,14 @@ DateM=0AA42D9FE4A3C901
 Gel=1
 Nature=120
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20120601105434,DEMO                ,20130226164351,DEMO                
+Nom=WmContNo,Numéro de contenant,1
+DateM=28FB96133814CE01
+Gel=1
+Nature=9,0
+NomOdbc=Contenant
+Flags=n,1,n,n,n,n,n,n
 [CHAMPR]
 nom=AffCeTb
 [CHAMPL]
@@ -3470,6 +3767,10 @@ Nom=DemeritePts,1,0,0,N,1
 nom=DemeriteSeuilTb
 [CHAMPL]
 Nom=DemeriteSeuil,1,0,0,N,1
+[/CHAMPL]
+nom=DocCod
+[CHAMPL]
+Nom=DocCodN,1,0,0,N,1
 [/CHAMPL]
 nom=EvalFouTb
 [CHAMPL]
@@ -3703,7 +4004,9 @@ Nom=RealSalNb,523,2,N,0,0,N,1
 Nom=TxtNoteReal,526,2,N,0,0,N,1
 Nom=TxtNoteVal,534,2,N,0,0,N,1
 Nom=LiNo,542,2,N,0,0,N,1
-Nom=Filler,546,2,N,0,255,N,1
+Nom=TdocCod,546,2,N,0,0,N,1
+Nom=DocCod,554,2,N,0,0,N,1
+Nom=Filler,562,2,N,0,239,N,1
 Nom=UquAct,801,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -3889,7 +4192,7 @@ Nom=Status
 [TABLE]
 Version=1,20060227084210,DNT                 ,20090317114242,JLF                 
 Nom=QuEvalf,Evaluation fournisseur,1
-DateM=E4962B1F629EC901
+DateM=F5232C53D44FCE01
 NomOdbc=EvaluationFournisseur
 Taille=500,500
 Pack=0,0
@@ -3910,18 +4213,19 @@ Nom=Tiers,14,2,N,0,0,N,1
 Nom=Evalcod,22,2,N,0,0,N,1
 Nom=CompetCod,23,2,N,0,0,N,1
 Nom=EvalDt,31,2,N,0,0,N,1
-Nom=UserCr,39,2,N,0,0,N,1
-Nom=UserMo,59,2,N,0,0,N,1
-Nom=UserTrace,79,2,N,0,0,N,1
-Nom=CeNote,107,2,N,0,0,N,1
-Nom=Note,108,2,N,0,0,N,1
-Nom=EvalTyp,116,2,N,0,0,N,1
-Nom=EvalNiv,117,2,N,0,0,N,1
-Nom=EvalRef,118,2,N,0,0,N,1
-Nom=TxtNote,138,2,N,0,0,N,1
-Nom=User,146,2,N,0,0,N,1
-Nom=EchDt,166,2,N,0,0,N,1
-Nom=Filler,174,2,N,0,227,N,1
+Nom=EvalNo,39,2,N,0,0,N,1
+Nom=UserCr,47,2,N,0,0,N,1
+Nom=UserMo,67,2,N,0,0,N,1
+Nom=UserTrace,87,2,N,0,0,N,1
+Nom=CeNote,115,2,N,0,0,N,1
+Nom=Note,116,2,N,0,0,N,1
+Nom=EvalTyp,124,2,N,0,0,N,1
+Nom=EvalNiv,125,2,N,0,0,N,1
+Nom=EvalRef,126,2,N,0,0,N,1
+Nom=TxtNote,146,2,N,0,0,N,1
+Nom=User,154,2,N,0,0,N,1
+Nom=EchDt,174,2,N,0,0,N,1
+Nom=Filler,182,2,N,0,219,N,1
 Nom=UquEvalf,401,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -4077,9 +4381,86 @@ NomOdbc=EffectifMois
 Nom=SalNb
 [/PROPLOC]
 [TABLE]
+Version=1,20130506172246,JLF                 ,20130507162437,JLF                 
+Nom=QuPact,Modèle plan d'actions,1
+DateM=C82AB33B2856CE01
+NomOdbc=Plan_Act
+Taille=600,600
+Pack=0,0
+CE=Ce1,2
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=PbleFam,14,2,N,0,0,N,1
+Nom=PactCod,22,2,N,0,0,N,1
+Nom=LiNo,30,2,N,0,0,N,1
+Nom=UserCr,34,2,N,0,0,N,1
+Nom=UserMo,54,2,N,0,0,N,1
+Nom=UserTrace,74,2,N,0,0,N,1
+Nom=ActCod,102,2,N,0,0,N,1
+Nom=Lib80Tb,122,2,N,0,0,N,1
+Nom=TxtCod,282,2,N,0,0,N,1
+Nom=TxtNote,283,2,N,0,0,N,1
+Nom=StatusPlan,291,2,N,0,0,N,1
+Nom=Tiers,292,2,N,0,0,N,1
+Nom=UserPlan,300,2,N,0,0,N,1
+Nom=PbleJrnb,320,2,N,0,0,N,1
+Nom=Filler,323,2,N,0,178,N,1
+Nom=UquPact,501,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+ZoomRes=1
+Nom=Lib80
+[/PROPLOC]
+[TABLE]
+Version=1,20130506171958,JLF                 ,20130507162449,JLF                 
+Nom=QuPactEnt,Entête modèle plan d'actions,1
+DateM=F7D2EC132856CE01
+NomOdbc=Plan_Act_Ent
+Taille=300,300
+Pack=0,0
+CE=Ce1,1
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Ce6,6,2,N,0,0,N,1
+Nom=Ce7,7,2,N,0,0,N,1
+Nom=Ce8,8,2,N,0,0,N,1
+Nom=Ce9,9,2,N,0,0,N,1
+Nom=CeA,10,2,N,0,0,N,1
+Nom=Dos,11,2,N,0,0,N,1
+Nom=PbleFam,14,2,N,0,0,N,1
+Nom=PactCod,22,2,N,0,0,N,1
+Nom=UserCr,30,2,N,0,0,N,1
+Nom=UserMo,50,2,N,0,0,N,1
+Nom=UserTrace,70,2,N,0,0,N,1
+Nom=CeNote,98,2,N,0,0,N,1
+Nom=Note,99,2,N,0,0,N,1
+Nom=Lib80,107,2,N,0,0,N,1
+Nom=ImpliciteFlg,187,2,N,0,0,N,1
+Nom=Filler,188,2,N,0,63,N,1
+Nom=UquPactEnt,251,2,N,0,0,N,1
+[/CHAMPS]
+[PROPLOC]
+ZoomRes=1
+Nom=Lib80
+[/PROPLOC]
+[TABLE]
 Version=1,20051228145251,FRO                 ,20130122145433,MCD                 
 Nom=QuPble,Problème constaté,1
-DateM=093FBEB7A4F8CD01
+DateM=8088CC888BAFCE01
 NomOdbc=ConstatProbleme
 ChConf=Conf
 ConfPP=DQUAL
@@ -4160,7 +4541,9 @@ Nom=AvisFou,879,2,N,0,0,N,1
 Nom=CoutPrevMt,899,2,N,0,0,N,1
 Nom=Affaire,912,2,N,0,0,N,1
 Nom=Conf,920,2,N,0,0,N,1
-Nom=Filler,924,2,N,0,177,N,1
+Nom=FouHtMt,924,2,N,0,0,N,1
+Nom=FouFaTyp,937,2,N,0,0,N,1
+Nom=Filler,938,2,N,0,163,N,1
 Nom=UquPble,1101,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -4186,7 +4569,7 @@ Nom=Lib
 [TABLE]
 Version=1,20060223142503,DNT                 ,20090317114324,JLF                 
 Nom=QuPrestf,Compétence fournisseur,1
-DateM=84026B88629EC901
+DateM=B762E0252F47CE01
 NomOdbc=CompetenceFournisseur
 Taille=300,300
 Pack=0,0
@@ -4212,8 +4595,8 @@ Nom=CeNote,98,2,N,0,0,N,1
 Nom=Note,99,2,N,0,0,N,1
 Nom=QualFlg,107,2,N,0,0,N,1
 Nom=QualDt,108,2,N,0,0,N,1
-Nom=QualIncFlg,116,2,N,0,0,N,1
-Nom=Filler,117,2,N,0,134,N,1
+Nom=HsDt,116,2,N,0,0,N,1
+Nom=Filler,124,2,N,0,127,N,1
 Nom=UquPrestf,251,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
@@ -4302,7 +4685,7 @@ Nom=User
 [TABLE]
 Version=1,20060104085122,FRO                 ,20090317113854,JLF                 
 Nom=QuQte,Quantité constatée,1
-DateM=2BD9285E310DCB01
+DateM=F79C48363A70CF01
 NomOdbc=QuantiteConstat
 Taille=500,500
 Pack=0,0
@@ -4340,7 +4723,12 @@ Nom=Status,126,2,N,0,0,N,1
 Nom=VtlNo,127,2,N,0,0,N,1
 Nom=PiRef,136,2,N,0,0,N,1
 Nom=ActNo,176,2,N,0,0,N,1
-Nom=Filler,181,2,N,0,220,N,1
+Nom=CdVtlNo,181,2,N,0,0,N,1
+Nom=Lieu,190,2,N,0,0,N,1
+Nom=TiersStock,202,2,N,0,0,N,1
+Nom=WmContNo,210,2,N,0,0,N,1
+Nom=NstD,219,2,N,0,0,N,1
+Nom=Filler,221,2,N,0,180,N,1
 Nom=UquQte,401,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -4445,13 +4833,17 @@ Nom=PbleFamQual,624,2,N,0,0,N,1
 Nom=DerogCheminCod,632,2,N,0,0,N,1
 Nom=RebuCod,652,2,N,0,0,N,1
 Nom=FctCod,656,2,N,0,0,N,1
-Nom=Filler,664,2,N,0,237,N,1
+Nom=HuitdCheminCod,664,2,N,0,0,N,1
+Nom=EvalReacFlg,684,2,N,0,0,N,1
+Nom=EvalDelCalcFlg,685,2,N,0,0,N,1
+Nom=IncFouCheminCod,686,2,N,0,0,N,1
+Nom=Filler,706,2,N,0,195,N,1
 Nom=UquSoc,901,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20080303111708,JLF                 ,20090317114024,JLF                 
 Nom=QuSocno,Dossier pour numérotation,1
-DateM=1F6589ACA09DC901
+DateM=07486903D44FCE01
 NomOdbc=DossierQualiteNumerotation
 Taille=500,500
 Pack=0,0
@@ -4472,7 +4864,8 @@ Nom=EvtQualNo,14,2,N,0,0,N,1
 Nom=ConstNo,22,2,N,0,0,N,1
 Nom=DerogNo,30,2,N,0,0,N,1
 Nom=RecptNo,38,2,N,0,0,N,1
-Nom=CoutDt,46,2,N,0,0,N,1
+Nom=EvalNo,46,2,N,0,0,N,1
+Nom=CoutDt,54,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 NomOdbc=DateDerniereCollecte
@@ -4651,7 +5044,8 @@ Nom=EvtQualTyp,139,2,N,0,0,N,1
 Nom=Evenement,140,2,N,0,0,N,1
 Nom=HsDt,148,2,N,0,0,N,1
 Nom=ActionCod,156,2,N,0,0,N,1
-Nom=Filler,176,2,N,0,75,N,1
+Nom=TexCod,176,2,N,0,0,N,1
+Nom=Filler,187,2,N,0,64,N,1
 Nom=UqutEvt,251,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -4830,6 +5224,49 @@ Nom=Tiers,583,2,N,0,0,N,1
 Nom=UQuwArt,591,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
+Version=1,20130513152742,MCD                 ,20130513153037,MCD                 
+Nom=QuwBas101T1,Ligne tableau entete modèle action,1
+DateM=249DF60DDE4FCE01
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+TableInsere=QuPactEnt,1,300,0,1
+Nom=UQuwBas101T1,301,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130513152819,MCD                 ,20130513152819,MCD                 
+Nom=QuwBas101T2,Ligne tableau ligne modèle action,1
+DateM=5AB969D98357CE01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+TableInsere=QuPact,1,600,0,1
+Nom=ID,601,2,N,0,0,N,1
+Nom=NoteOld,611,2,N,0,0,N,1
+Nom=NoteEtat,619,2,N,0,0,N,1
+Nom=ServCod,620,2,N,0,0,N,1
+Nom=Nom,628,2,N,0,0,N,1
+Nom=Lib,666,2,N,0,0,N,1
+Nom=UQuwBas101T2,706,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130527110709,MCD                 ,20130527111015,MCD                 
+Nom=QuwBas102T1,Ligne tableau explorateur modèle,1
+DateM=76CF715ABA5ACE01
+Taille=1200,1200
+Pack=0,0
+[CHAMPS]
+TableInsere=QuPact,1,600,0,1
+Nom=Note,601,2,N,0,0,N,1
+Nom=CeNote,609,2,N,0,0,N,1
+Nom=ImpliciteFlg,610,2,N,0,0,N,1
+Nom=Nom,611,2,N,0,0,N,1
+Nom=Lib,649,2,N,0,0,N,1
+Nom=treeinfo,689,2,N,0,0,N,1
+Nom=Marque,945,2,N,0,0,N,1
+Nom=UQuwBas102T1,946,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
 Version=1,20070222100619,BGX                 ,20090312154946,JLF                 
 Nom=QuwCoq,Travail COQ,1
 DateM=27D657704550CC01
@@ -4954,7 +5391,7 @@ Nom=UQuwInt002T1,93,2,N,0,0,N,1
 [TABLE]
 Version=1,20111121153625,MCD                 ,20111121153719,MCD                 
 Nom=QuwInt002T2,Ligne tableau détail inventaire problème en cours,1
-DateM=3B6FA96D5DA8CC01
+DateM=8088CC888BAFCE01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -4970,7 +5407,7 @@ Nom=UQuwInt002T2,1486,2,N,0,0,N,1
 [TABLE]
 Version=1,20060314134342,BGX                 ,20090313163544,JLF                 
 Nom=QuwInt003T1,Ligne tableau historique problemes,1
-DateM=C56929CF71F3CB01
+DateM=30BE3CA592AFCE01
 Taille=300,300
 Pack=0,0
 [CHAMPS]
@@ -4981,12 +5418,13 @@ Nom=Lib,41,2,N,0,0,N,1
 Nom=PbleTotMt,81,2,N,0,0,N,1
 Nom=Tiers,94,2,N,0,0,N,1
 Nom=Ref,102,2,N,0,0,N,1
-Nom=UQwInt003T1,127,2,N,0,0,N,1
+Nom=FouHtMt,127,2,N,0,0,N,1
+Nom=UQwInt003T1,140,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20081120152848,VB                  ,20090313163600,JLF                 
 Nom=QuwInt003T2,Ligne DETAIL historique problemes,1
-DateM=7955BCB819A9CC01
+DateM=8088CC888BAFCE01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -5073,7 +5511,7 @@ Nom=UQuwInt006T1,110,2,N,0,0,N,1
 [TABLE]
 Version=1,20081119105409,VB                  ,20090313163658,JLF                 
 Nom=QuwInt006T2,Ligne DETAIL tableau historique defauts,1
-DateM=C56929CF71F3CB01
+DateM=8088CC888BAFCE01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -5127,7 +5565,7 @@ Nom=UQuwInt008T1,102,2,N,0,0,N,1
 [TABLE]
 Version=1,20081120103814,VB                  ,20090313163729,JLF                 
 Nom=QuwInt008T2,Ligne DETAIL tableau inventaire causes,1
-DateM=C56929CF71F3CB01
+DateM=8088CC888BAFCE01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -5217,7 +5655,7 @@ Nom=UQuwPbe000T1,1060,2,N,0,0,N,1
 [TABLE]
 Version=1,20060202172036,FRO                 ,20090312182604,JLF                 
 Nom=QuwPbe000T2,Ligne tableau actions mises en oeuvre,1
-DateM=5A02DFB2B6FACC01
+DateM=DBF1E1EB2440CE01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -5226,7 +5664,9 @@ Nom=StatusPlan2,1001,2,N,0,0,N,1
 Nom=ActTyp,1002,2,N,0,0,N,1
 Nom=Nom,1003,2,N,0,0,N,1
 Nom=LibUserPlan,1041,2,N,0,0,N,1
-Nom=UQuwPbe000T2,1121,2,N,0,0,N,1
+Nom=Centre,1121,2,N,0,0,N,1
+Nom=CrH,1129,2,N,0,0,N,1
+Nom=UQuwPbe000T2,1139,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Libelle=Nom fournisseur
@@ -5236,14 +5676,40 @@ Nom=Nom
 [TABLE]
 Version=1,20060206151016,FRO                 ,20090312155500,JLF                 
 Nom=QuwPbe000T3,Ligne tableau quantités en litige,1
-DateM=EA8D1829E2A3C901
+DateM=F79C48363A70CF01
 Taille=800,800
 Pack=0,0
 [CHAMPS]
 TableInsere=QuQte,1,500,0,1
 Nom=LibNst,501,2,N,0,0,N,1
 Nom=LibDepo,541,2,N,0,0,N,1
-Nom=UQuwPbe000T3,581,2,N,0,0,N,1
+Nom=StkVtlFlg,581,2,N,0,0,N,1
+Nom=Op,582,2,N,0,0,N,1
+Nom=UQuwPbe000T3,585,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20131018085059,MCD                 ,20131018085059,MCD                 
+Nom=QuwPbe000T4,Ligne tableau ventilation stock,1
+DateM=BBE3BEAF0471CF01
+Taille=200,200
+Pack=0,0
+[CHAMPS]
+Nom=VtlNo,1,2,N,0,0,N,1
+Nom=Serie,10,2,N,0,0,N,1
+Nom=ColiNo,30,2,N,0,0,N,1
+Nom=Nst,39,2,N,0,0,N,1
+Nom=Qte,41,2,N,0,0,N,1
+Nom=BlDt,53,2,N,0,0,N,1
+Nom=Depo,61,2,N,0,0,N,1
+Nom=Lieu,64,2,N,0,0,N,1
+Nom=ResFlg,76,2,N,0,0,N,1
+Nom=Resqte,77,2,N,0,0,N,1
+Nom=RebuFlg,89,2,N,0,0,N,1
+Nom=Op,90,2,N,0,0,N,1
+Nom=WmContNo,93,2,N,0,0,N,1
+Nom=TiersStock,102,2,N,0,0,N,1
+Nom=DepoWMSFlg,110,2,N,0,0,N,1
+Nom=UQuwPbe000T4,111,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20081027154503,JLF                 ,20090312155514,JLF                 
@@ -5325,7 +5791,7 @@ Nom=UQuwPbe410T1,7652,2,N,0,0,N,1
 [TABLE]
 Version=1,20130107141801,MCD                 ,20130107141801,MCD                 
 Nom=QuwPbe411T1,Ligne tableau quantité en litige,1
-DateM=F1C2AAA3D9ECCD01
+DateM=F79C48363A70CF01
 Taille=800,800
 Pack=0,0
 [CHAMPS]
@@ -5337,7 +5803,7 @@ Nom=UQuwPbe411T1,581,2,N,0,0,N,1
 [TABLE]
 Version=1,20060120144337,FRO                 ,20090312190330,JLF                 
 Nom=QuwPble,Travail sur constats problèmes,1
-DateM=F583FB998D44CD01
+DateM=E0D115B64810CF01
 Taille=6000,6000
 Pack=0,0
 [CHAMPS]
@@ -5405,8 +5871,10 @@ Nom=ActNo,4815,2,N,0,0,N,1
 Nom=RecptNo,4820,2,N,0,0,N,1
 Nom=PbleQteNb,4828,2,N,0,0,N,1
 Nom=Choix,4832,2,N,0,0,N,1
-Nom=Lib80,4872,2,N,0,0,N,1
-Nom=UQuwPble,4952,2,N,0,0,N,1
+Nom=Lib80Tb,4872,2,N,0,0,N,1
+Nom=PbleFamTps,5032,2,N,0,0,N,1
+Nom=PresenceDocumentation,5068,2,N,0,0,N,1
+Nom=UQuwPble,5069,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 ZoomRes=1
@@ -5440,6 +5908,45 @@ Nom=UQuwSf,4084,2,N,0,0,N,1
 ZoomRes=1
 Nom=Lib
 [/PROPLOC]
+[TABLE]
+Version=1,20130812114031,MCD                 ,20130812114031,MCD                 
+Nom=QuwSfo002,Travail évaluation fournisseur,1
+DateM=2C9414AF5397CE01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+TableInsere=QuEvalf,1,500,0,1
+Nom=Nom,501,2,N,0,0,N,1
+Nom=Lib,539,2,N,0,0,N,1
+Nom=LibUserPlan,579,2,N,0,0,N,1
+Nom=UQuwSfo002,659,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130812105735,MCD                 ,20130813153859,MCD                 
+Nom=QuwSfo002T1,Ligne tableau éval fournisseur,1
+DateM=84CFE9DC2A98CE01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+TableInsere=QuQfou,1,500,0,1
+Nom=treesnivtrtflg,501,2,N,0,0,N,1
+Nom=Nom,502,2,N,0,0,N,1
+Nom=UQuwSfo002T1,540,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130812105818,MCD                 ,20130813113207,MCD                 
+Nom=QuwSfo002T2,Ligne tableau éval fournisseur compétence,1
+DateM=2542A17D0898CE01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+TableInsere=QuEvalf,1,500,0,1
+Nom=QualFlg,501,2,N,0,0,N,1
+Nom=QualDt,502,2,N,0,0,N,1
+Nom=Lib,510,2,N,0,0,N,1
+Nom=treeinfo,550,2,N,0,0,N,1
+Nom=UQuwSfo002T2,806,2,N,0,0,N,1
+[/CHAMPS]
 [TABLE]
 Version=1,20081107092059,JLF                 ,20090312155633,JLF                 
 Nom=QuwSfo006T1,Ligne tableau classement fournisseur,1
@@ -5633,7 +6140,7 @@ Nom=Erreur,861,2,N,0,0,N,1
 [TABLE]
 Version=1,2003 2110000,FRO ,2003 2110000,FRO
 Nom=Xz,Zone échange pour zooms,1
-DateM=BD9C719F440ECD01
+DateM=E947B7D76710CF01
 Taille=1020,1020
 Pack=0,0
 [CHAMPS]
@@ -5685,24 +6192,27 @@ Nom=Depo,387,2,N,0,0,N,1
 Nom=Nst,390,2,N,0,0,N,1
 Nom=TiersTyp,392,2,N,0,0,N,1
 Nom=EvtNo,393,2,N,0,0,N,1
-Nom=UXz,401,2,N,0,0,N,1
+Nom=PactCod,401,2,N,0,0,N,1
+Nom=TdocCod,409,2,N,0,0,N,1
+Nom=DocCod,417,2,N,0,0,N,1
+Nom=UXz,425,2,N,0,0,N,1
 [/CHAMPS]
 [BASE]
-Version=1,20060117102858,FRO                 ,20111004165008,JLF                 
+Version=1,20060117102858,FRO                 ,20131017150403,JLF                 
 Nom=QufAction,Actions gestion qualité,1
-DateM=9F69F4E8A482CC01
+DateM=E5FAE75A39CBCE01
 Fichier=I,0,qufaction.dhfi
-Versionbase=7.0
+Versionbase=7.3
 DateMIndex=716E9C5D119AC801
 [TABLES]
 Nom=QuAct,0
 [/TABLES]
 [BASE]
-Version=1,20051228145158,FRO                 ,20130121104736,JLF                 
+Version=1,20051228145158,FRO                 ,20130910160144,MCD                 
 Nom=QufConstat,Constats problèmes,1
-DateM=B6F53158BCF7CD01
+DateM=3E5936482EAECE01
 Fichier=I,0,qufconstat.dhfi
-Versionbase=7.2
+Versionbase=7.3 
 DateMIndex=A945BA7C8500CE01
 [TABLES]
 Nom=QuCause,0
@@ -5731,11 +6241,11 @@ DateMIndex=4B59AE60809DC901
 Nom=QuDerog,0
 [/TABLES]
 [BASE]
-Version=1,20080303101839,JLF                 ,20111004165023,JLF                 
+Version=1,20080303101839,JLF                 ,20130910092228,JLF                 
 Nom=QufDos,Dossier qualité,1
-DateM=3A9E1AF2A482CC01
+DateM=24636881F6ADCE01
 Fichier=I,0,qufdos.dhfi
-Versionbase=7.0 
+Versionbase=7.3
 DateMIndex=F755E69E716FCB01
 [TABLES]
 Nom=QuSoc,0
@@ -5772,6 +6282,17 @@ Versionbase=6.2
 Nom=QuMmcoq,0
 [/TABLES]
 [BASE]
+Version=1,20130507142442,JLF                 ,20130507142442,JLF                 
+Nom=QufPaction,Modèles plans d'action,1
+DateM=91A014DA1D4BCE01
+Fichier=I,0,qufpaction.dhfi
+Versionbase=7.3
+DateMIndex=D372F0D51E4BCE01
+[TABLES]
+Nom=QuPact,0
+Nom=QuPactEnt,0
+[/TABLES]
+[BASE]
 Version=1,20060103151652,FRO                 ,20090304094412,ROOT                
 Nom=QufProc,Processus entreprise,1
 DateM=4464A464A59CC901
@@ -5782,12 +6303,12 @@ DateMIndex=0400020001000F00
 Nom=QuProc,0
 [/TABLES]
 [BASE]
-Version=1,20060227084138,DNT                 ,20090304200412,ROOT                
+Version=1,20060227084138,DNT                 ,20130502135827,JLF                 
 Nom=QufQfou,Evaluation fournisseur,1
-DateM=297A3201FC9CC901
+DateM=8303025B2C47CE01
 Fichier=I,0,qufqfou.dhfi
-Versionbase=6.2
-DateMIndex=8D04BA98AA9DC901
+Versionbase=7.3
+DateMIndex=430D0A3DD84FCE01
 [TABLES]
 Nom=QuEvalf,0
 Nom=QuPrestf,0
@@ -5804,12 +6325,12 @@ DateMIndex=04880641639EC901
 Nom=QuRecf,0
 [/TABLES]
 [BASE]
-Version=1,20031009113643,FRO                 ,20130108114226,JLF                 
+Version=1,20031009113643,FRO                 ,20130506085212,JLF                 
 Nom=QufTab,Tables Qualité,1
-DateM=50737DD98CEDCD01
+DateM=4B2EB83C264ACE01
 Fichier=I,0,quftab.dhfi
-Versionbase=7.2
-DateMIndex=904E7C1EA89CC901
+Versionbase=7.3
+DateMIndex=178857271E4BCE01
 [TABLES]
 Nom=QutCause,0
 Nom=QutCoq,0
@@ -6221,6 +6742,29 @@ Nom=StaDt,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
+Version=1,20130507140451,JLF                 ,20130507142745,JLF                 
+Nom=Index_A,Code modèle plan d'actions,1
+DateM=F33A35471E4BCE01
+CLE=QufPaction,A,Ce1,2,1,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=PbleFam,4,0,
+Nom=PactCod,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130507140657,JLF                 ,20130507142857,JLF                 
+Nom=Index_B,Code modèle plan d'actions + numéro ligne,1
+DateM=94D01E721E4BCE01
+CLE=QufPaction,B,Ce1,2,2,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=PbleFam,4,0,
+Nom=PactCod,12,0,
+Nom=LiNo,20,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
 Version=1,20060202163235,BGX                 ,20060202163235,BGX                 
 Nom=Index_A,Clé A,1
 DateM=D29CEAE30D28C601
@@ -6242,10 +6786,10 @@ Nom=Tiers,5,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080227153647,VB                  ,20090318093412,JLF                 
+Version=1,20080227153647,VB                  ,20130514095706,JLF                 
 Nom=index_D,Clé sur fournisseur + évaluation,1
-DateM=191A9050A4A7C901
-CLE=QufQfou,D,Ce1,2,3,o,1,n
+DateM=E259FEA07850CE01
+CLE=QufQfou,D,Ce1,2,3,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=Tiers,4,0,
@@ -6306,6 +6850,16 @@ CLE=QufQfou,C,Ce1,2,2,o,1,n
 Nom=Dos,1,0,
 Nom=Tiers,4,0,
 Nom=CompetCod,12,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130513144753,JLF                 ,20130513144829,JLF                 
+Nom=Index_F,Clé sur numéro évaluation,1
+DateM=B616402BD84FCE01
+CLE=QufQfou,F,Ce1,2,3,o,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=EvalNo,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -6462,6 +7016,8 @@ Nom=QufEvt,QuEvt,Index_B,0
 Nom=QufEvt,QuEvt,Index_C,0
 Nom=qufjq,Xq,Index_A,0
 Nom=QufMois,QuMmcoq,Index_A,0
+Nom=QufPaction,QuPactEnt,Index_A,0
+Nom=QufPaction,QuPact,Index_B,0
 Nom=QufProc,QuProc,Index_A,0
 Nom=QufQfou,QuEvalf,index_A_evalf,0
 Nom=QufQfou,QuEvalf,index_D,0
@@ -6470,6 +7026,7 @@ Nom=QufQfou,QuQfou,index_A_qfou,0
 Nom=QufQfou,QuPrestf,index_A_prestf,0
 Nom=QufQfou,QuPrestf,Index_B,0
 Nom=QufQfou,QuPrestf,Index_C,0
+Nom=QufQfou,QuEvalf,Index_F,0
 Nom=QufRecept,QuRecf,Index_A,0
 Nom=QufRecept,QuRecf,Index_B,0
 Nom=QufRecept,QuRecf,Index_C,0

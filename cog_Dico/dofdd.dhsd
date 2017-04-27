@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=5,20030923153439,FRO                 ,20130625095439,MCD                 
+Version=5,20030923153439,FRO                 ,20140114111443,JF                 
 Nom=dofdd.dhsd,logfdd.dhsd,1
 [CHAMP]
 Version=1,20080314141119,JLF                 ,20090313150351,JLF
@@ -200,6 +200,13 @@ Gel=1
 Nature=4
 NomOdbc=CodeConfidentialite
 Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130404141517,MCD                 ,20130404141535,MCD                 
+Nom=ConfM,Code confidentiel modification,1
+Gel=1
+Nature=4
+NomOdbc=CodeConfidentialiteModification
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090421163636,JLF                 ,20090421163700,JLF                 
 Nom=ConvertToURLFlg,Indicateur si conversion en format URL,1
@@ -1282,6 +1289,12 @@ Nom=PresenceControle,Indicateur si présence module contrôle,1
 Gel=1
 Nature=1,0
 NomOdbc=PresenceControle
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20090706140828,JLF                 ,20090706140828,JLF                 
+Nom=PresenceQualite,Indicateur présence module qualité,1
+Gel=1
+Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,2003 4280000,FRO ,20090313150410,JLF
@@ -3073,7 +3086,8 @@ Nom=PubFlg,379,2,N,0,0,N,1
 Nom=PubLocaCod,380,2,N,0,0,N,1
 Nom=PubFmtTyp,400,2,N,0,0,N,1
 Nom=PubAliasFlg,402,2,N,0,0,N,1
-Nom=Filler,403,2,N,0,398,N,1
+Nom=ConfM,403,2,N,0,0,N,1
+Nom=Filler,407,2,N,0,394,N,1
 Nom=UdoTdoc,801,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
@@ -3372,7 +3386,7 @@ Nom=Treeinfo
 [TABLE]
 Version=1,20031010100437,FRO                 ,20090401093331,VB                  
 Nom=DowDoc,Travail document,1
-DateM=D7A6EA3E6D4DCA01
+DateM=EFCBF8481111CF01
 Taille=4000,4000
 Pack=0,0
 [CHAMPS]
@@ -3417,7 +3431,8 @@ Nom=UserApprob,2498,2,N,0,0,N,1
 Nom=RtfNom,2518,2,N,0,0,N,1
 Nom=PrgContenuAuto,2774,2,N,0,0,N,1
 Nom=PresenceControle,2775,2,N,0,0,N,1
-Nom=UDowDoc,2776,2,N,0,0,N,1
+Nom=PresenceQualite,2776,2,N,0,0,N,1
+Nom=UDowDoc,2777,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Attribut=PARAM
@@ -3933,7 +3948,7 @@ Nom=DofAnot,Annotations documents,1
 DateM=9622BFBF24AEC901
 Fichier=I,0,dofanot.dhfi
 Versionbase=6.2
-DateMIndex=9036A0C70CE1C801
+DateMIndex=DBEECDF025F7CE01
 [TABLES]
 Nom=DoAnot,0
 [/TABLES]
@@ -4071,6 +4086,7 @@ Nom=TdocCod,4,0,
 Nom=DocCod,12,0,
 Nom=DocInd,20,0,
 Nom=Userint,22,0,
+Nom=DebDt,42,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]

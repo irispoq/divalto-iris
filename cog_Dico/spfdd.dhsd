@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,20071113141831,RR                  ,20111011171547,CI                  
+Version=6,20071113141831,RR                  ,20140929092622,CI                  
 Nom=spfdd.dhsd,spfdd.dhsd,1
 [CHAMP]
 Version=1,20021023221011,RR  ,20021023221011,RR
@@ -59,17 +59,30 @@ Gel=1
 Nature=8
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20100122160943,RR                  ,20100122161107,RR                  
+Version=1,20100122160943,RR                  ,20140305085851,CI                  
 Nom=AffSt,Status affichage de la donnée dans la tâche,1
 Gel=1
 Nature=1,0
+bulle=Donnée affichée
 NomOdbc=StatusAffichage
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140512170326,CI                  ,20140512170326,CI                  
+Nom=AgileoId,Identifiant AGILEO,1
+Gel=1
+Nature=10,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20050906131542,RR                  ,20051110151739,RR                  
 Nom=Annee,Année,1
 Gel=1
 Nature=4,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140829161402,CI                  ,20140829161412,CI                  
+Nom=AnnulSt,Status d'annulation,1
+Gel=1
+Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030512104513,JSM                 ,20060130205012,RR                  
@@ -187,11 +200,24 @@ Nature=2,0*40
 Attribut=PARAM
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130808102001,CI                  ,20130808102228,CI                  
+Nom=ChoixTb,Tableau d'options,1
+DateM=428DB76B1094CE01
+Gel=1
+Nature=1,0*10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20101012114348,CI                  ,20101012115442,CI                  
 Nom=ChoixValid,Choix du user pour validation,1
 Gel=1
 Nature=1,0
 NomOdbc=Choix_user_valid
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130808102259,CI                  ,20130808102259,CI                  
+Nom=ChoixZ,Choix,1
+Gel=1
+Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20060614120140,RR                  ,20060614120140,RR                  
@@ -207,11 +233,23 @@ Nature=20
 NomOdbc=Code20
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140204155356,CI                  ,20140204155356,CI                  
+Nom=Code20Tb,Tableau des champs Code 20,1
+Gel=1
+Nature=20*100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20080415163015,RR                  ,20090914184843,RR                  
 Nom=Code8,Code de 8 alpha,1
 Gel=1
 Nature=8
 NomOdbc=Code8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204155340,CI                  ,20140204155340,CI                  
+Nom=Code8Tb,Tableau des champs Code 8,1
+Gel=1
+Nature=8*100
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20071113143941,RR                  ,20090914180747,RR                  
@@ -366,27 +404,27 @@ Gel=1
 Nature=D8
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20080402103607,RR                  ,20090915092228,RR                  
+Version=1,20080402103607,RR                  ,20140521105815,ROOT                
 Nom=DateDebutDh,Date de début,1
 Gel=1
 Nature=DH
-Flags=n,1,o,o,n,n,n,n
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20080206165104,RR                  ,20090915092218,RR                  
+Version=1,20080206165104,RR                  ,20140521105843,ROOT                
 Nom=DateDebutDt,Date début,1
 DateM=4287BB1AD868C801
 Gel=1
 Nature=D8
 NomOdbc=DateDebut
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20080206165133,RR                  ,20090915092222,RR                  
+Version=1,20080206165133,RR                  ,20140521105910,ROOT                
 Nom=DateDebutHe,Heure de début,1
 DateM=86B38AA45C0BCA01
 Gel=1
 Nature=H6
 NomOdbc=HeureDebut
-Flags=n,1,n,n,n,n,n,n
+Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20080415163026,RR                  ,20090915093134,RR                  
 Nom=DateDH,Date et heure de saisie,1
@@ -430,32 +468,51 @@ Nature=D8
 NomOdbc=Date
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140204155019,CI                  ,20140204155107,CI                  
+Nom=DateDtTb,Tableau deschamps Date,1
+Gel=1
+Nature=D8*100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20030515085522,RR                  ,20060126163108,RR                  
 Nom=DateF,Date fin de sélection,1
 Gel=1
 Nature=D8
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20080513154211,RR                  ,20090915092236,RR                  
+Version=1,20080513154211,RR                  ,20140521102545,CI                  
 Nom=DateFinDh,Date de fin,1
 DateM=BE5C6E765F0BCA01
 Gel=1
 Nature=DH
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20080513154331,RR                  ,20090915092241,RR                  
+Version=1,20080513154331,RR                  ,20140521102556,CI                  
 Nom=DateFinDt,Date de fin,1
 Gel=1
 Nature=D8
 NomOdbc=DateFin
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20080513154354,RR                  ,20090914182318,RR                  
+Version=1,20080513154354,RR                  ,20140521102601,CI                  
 Nom=DateFinHe,Heure de fin,1
 DateM=A6992C335F0BCA01
 Gel=1
 Nature=H6
 NomOdbc=HeureFin
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204171617,CI                  ,20140204171617,CI                  
+Nom=DateHeureDH,Date Heure,1
+Gel=1
+Nature=DH
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204171324,CI                  ,20140204171520,CI                  
+Nom=DateHeureTB,Tableau des champs DATE-HEURE,1
+DateM=2DB2A54CC421CF01
+Gel=1
+Nature=DH*100
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090512004711,RR                  ,20090512004711,RR                  
@@ -647,11 +704,25 @@ Nature=4,0
 NomOdbc=EntierCourt
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140204155230,CI                  ,20140204161743,CI                  
+Nom=EntierLgTb,Tableau des champs Entier Long,1
+DateM=B04CA740BC21CF01
+Gel=1
+Nature=10,0*100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20080506154144,RR                  ,20090914184642,RR                  
 Nom=EntierLong,Entier long,1
 Gel=1
 Nature=10,0
 NomOdbc=EntierLong
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204155208,CI                  ,20140204161049,CI                  
+Nom=EntierTb,Tableau des champs Entier Court,1
+DateM=213D7B49BB21CF01
+Gel=1
+Nature=4,0*100
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030303152857,RR                  ,20030303152857,RR                  
@@ -860,6 +931,12 @@ Nature=H6
 NomOdbc=Heure
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140204155056,CI                  ,20140204155056,CI                  
+Nom=HeureHeTb,Tableau des champs Heure,1
+Gel=1
+Nature=H6*100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20090415094508,RR                  ,20090415094508,RR                  
 Nom=HtmlSt,1 Mode Html ou 2 Mode Texte,1
 Gel=1
@@ -930,6 +1007,12 @@ Gel=1
 Nature=8
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140212085021,CI                  ,20140212085021,CI                  
+Nom=Indice,Indice dans le masque,1
+Gel=1
+Nature=3,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20060207110007,CN                  ,20100930154240,CI                  
 Nom=Individu,Code individu,1
 DateM=345AF0977E5CC601
@@ -938,8 +1021,8 @@ Nature=20
 NomOdbc=Individu
 Flags=n,1,n,o,n,n,n,n
 [CHAMP]
-Version=1,20100203143942,RR                  ,20100203144723,RR                  
-Nom=InitSt,Status d'initialisation des données en aval,1
+Version=1,20100203143942,RR                  ,20140309151136,CI                  
+Nom=InitSt,Status d'initialisation,1
 Gel=1
 Nature=1,0
 NomOdbc=InitialisationStatus
@@ -986,12 +1069,36 @@ Nature=40
 NomOdbc=Libelle_$R
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140204162134,CI                  ,20140204162134,CI                  
+Nom=Lib250,Libellé 250,1
+Gel=1
+Nature=250
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204162103,CI                  ,20140204162103,CI                  
+Nom=Lib250Tb,Tableau des libellés 250,1
+Gel=1
+Nature=250*100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20021126004520,RR  ,20050118140908,MARIE JO            
 Nom=Lib80,Libelle,1
 DateM=400B19E55EFDC401
 Gel=1
 Nature=80
 NomOdbc=Libelle_$R
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140520155849,CI                  ,20140520155849,CI                  
+Nom=Lib80Tb,Libellé 80,1
+Gel=1
+Nature=80*10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140512151815,CI                  ,20140512151815,CI                  
+Nom=LibChoix,Libellé du choix,1
+Gel=1
+Nature=250
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20080506154000,RR                  ,20090914184724,RR                  
@@ -1007,6 +1114,18 @@ Nom=LibelleLong,Libellé long,1
 Gel=1
 Nature=250
 NomOdbc=LibelleLong
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204154830,CI                  ,20140204154830,CI                  
+Nom=LibelleLongTb,Tableau des champs LibelleLong,1
+Gel=1
+Nature=250*100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204154706,CI                  ,20140204154836,CI                  
+Nom=LibelleTb,Tableau des champs Libelle,1
+Gel=1
+Nature=80*100
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20021029134644,RR  ,20050331091756,RR                  
@@ -1067,6 +1186,12 @@ Gel=1
 Nature=8,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140213142738,CI                  ,20140213142738,CI                  
+Nom=MasqueModele,Nom du masque modèle,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20070215093223,RR                  ,20081126162320,RR                  
 Nom=MenuLigne,Ligne de menu,1
 DateM=68EDCAE9DA4FC901
@@ -1074,10 +1199,17 @@ Gel=1
 Nature=400
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20100122161047,RR                  ,20100122161057,RR                  
+Version=1,20030415110841,RR                  ,20030415110841,RR                  
+Nom=Modifflg,Indicateur modification zoom,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20100122161047,RR                  ,20140305085902,CI                  
 Nom=ModSt,Status de modification,1
 Gel=1
 Nature=1,0
+bulle=Donnée modifiable
 NomOdbc=StatusModification
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
@@ -1107,6 +1239,12 @@ Nom=Montant,Montant,1
 Gel=1
 Nature=16,2
 NomOdbc=Montant
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204155249,CI                  ,20140204155249,CI                  
+Nom=MontantTb,Tableau des champs Montant,1
+Gel=1
+Nature=16,2*100
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20021025152425,RR  ,20030515094304,RR                  
@@ -1143,6 +1281,26 @@ Nom=MultiChoixListe,Liste des valeurs du multi-choix ou fonction de chargement,1
 Gel=1
 Nature=250
 NomOdbc=ListeMultiChoix
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140214171718,CI                  ,20140214171718,CI                  
+Nom=MultichoixTb,Tableau des multichoix,1
+Gel=1
+Nature=30*100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204155513,CI                  ,20140214171818,CI                  
+Nom=MultiligneTb,Tableau des champs MultiLignes,1
+DateM=8013665FA029CF01
+Gel=1
+Nature=256*100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130913112116,CI                  ,20130913112231,CI                  
+Nom=MultiSelect,Zoom en multi selection,1
+DateM=18A2C9C562B0CE01
+Gel=1
+Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20021029153325,RR  ,20071001075542,RR                  
@@ -1279,6 +1437,18 @@ Nature=38
 Attribut=PARAM
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140213155017,CI                  ,20140213155017,CI                  
+Nom=NomMasque,Nom du masque du formulaire,1
+Gel=1
+Nature=32
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140214172033,CI                  ,20140214172033,CI                  
+Nom=NomMultiLigne,Nom du BLOB,1
+Gel=1
+Nature=256
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20060614115634,RR                  ,20060614115753,RR                  
 Nom=NomUserSelTb,Noms des collaborateurs sélectionnés,1
 DateM=4292AD00998FC601
@@ -1291,6 +1461,13 @@ Nom=Note,Numéro de la note,1
 Gel=1
 Nature=8,0
 Flags=o,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20140305084958,CI                  ,20140305085831,CI                  
+Nom=ObligSt,Status d'obligation,1
+Gel=1
+Nature=1,0
+bulle=Donnée obligatoire
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090512004839,RR                  ,20090512004839,RR                  
 Nom=OpAnnee,Opération année,1
@@ -1329,6 +1506,12 @@ Nom=Ouv,Ouvert ,1
 DateM=64D9E2126575C801
 Gel=1
 Nature=1
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140212085107,CI                  ,20140212085107,CI                  
+Nom=PageId,N° de la page dans le masque,1
+Gel=1
+Nature=3,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20080205175551,RR                  ,20090914184144,RR                  
@@ -1437,6 +1620,12 @@ Nom=PinoA,Numéroe de pièce alpha,1
 Gel=1
 Nature=8
 Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20060906093706,CN                  ,20060906093722,CN                  
+Nom=Pong,Demande de pong en sortie du zoom,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030303145817,RR                  ,20050331091819,RR                  
 Nom=Preview,Prévisualisation,1
@@ -1700,10 +1889,11 @@ Gel=1
 Nature=8*3
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20021023221139,RR  ,20021023221139,RR
+Version=1,20021023221139,RR  ,20140520160027,CI                  
 Nom=Sel,Sel,1
+DateM=537F34DA3374CF01
 Gel=1
-Nature=4500
+Nature=5000
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030410084409,JSM                 ,20050817111310,RR                  
@@ -1987,10 +2177,11 @@ Nature=1,0
 NomOdbc=UniteDureeTache
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20080402170140,RR                  ,20090914184923,RR                  
+Version=1,20080402170140,RR                  ,20140922145556,CI                  
 Nom=TacheEtat,Etat de la tâche,1
+DateM=274D058D64D6CF01
 Gel=1
-Nature=1,0
+Nature=2,0
 NomOdbc=EtatTache
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
@@ -2157,6 +2348,13 @@ Version=1,20081105091924,RR                  ,20081105091924,RR
 Nom=TitrePage,Titre de page,1
 Gel=1
 Nature=250
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140204154432,CI                  ,20140204154729,CI                  
+Nom=TitreTb,Tableau des champs Titre,1
+DateM=2A41A7DDB721CF01
+Gel=1
+Nature=80*100
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20101028171236,DEMO                ,20101028171411,DEMO                
@@ -2370,6 +2568,18 @@ Gel=1
 Nature=200
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140902163207,CI                  ,20140902163207,CI                  
+Nom=UspCTRL,Reserve distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140210165120,CI                  ,20140210165120,CI                  
+Nom=UspTacheMan,Reserve distributeur,1
+Gel=1
+Nature=100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20071113152319,RR                  ,20071113152319,RR                  
 Nom=Usptcon,Réservé distributeur,1
 Gel=1
@@ -2418,6 +2628,12 @@ Version=1,20081216163340,RR                  ,20081216163340,RR
 Nom=Usrpl,Réservé distributeur,1
 Gel=1
 Nature=100
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140512151801,CI                  ,20140512151801,CI                  
+Nom=ValChoix,Valeur du choix,1
+Gel=1
+Nature=50
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20090812212358,RR                  ,20090812221241,RR                  
@@ -2535,6 +2751,18 @@ Nom=Ce8,8,0,0,N,1
 Nom=Ce9,9,0,0,N,1
 Nom=Cea,10,0,0,N,1
 [/CHAMPL]
+nom=ChoixTb
+[CHAMPL]
+Nom=ChoixZ,1,0,0,N,1
+[/CHAMPL]
+nom=Code20Tb
+[CHAMPL]
+Nom=Code20,1,0,0,N,1
+[/CHAMPL]
+nom=Code8Tb
+[CHAMPL]
+Nom=Code8,1,0,0,N,1
+[/CHAMPL]
 nom=Contrat
 [CHAMPL]
 Nom=Individu,1,0,0,N,1
@@ -2562,10 +2790,23 @@ nom=DateDhF
 [CHAMPL]
 Nom=DateF,1,0,0,N,1
 [/CHAMPL]
+nom=DateDtTb
+[CHAMPL]
+Nom=DateDt,1,0,0,N,1
+[/CHAMPL]
 nom=DateFinDh
 [CHAMPL]
 Nom=DateFinDt,1,0,0,N,1
 Nom=DateFinHe,9,0,0,N,1
+[/CHAMPL]
+nom=DateHeureDH
+[CHAMPL]
+Nom=DateDHDt,1,0,0,N,1
+Nom=DateDHHe,9,0,0,N,1
+[/CHAMPL]
+nom=DateHeureTB
+[CHAMPL]
+Nom=DateHeureDH,1,0,0,N,1
 [/CHAMPL]
 nom=DateRelDH
 [CHAMPL]
@@ -2576,6 +2817,14 @@ nom=DerOpDh
 [CHAMPL]
 Nom=DerOpDt,1,0,0,N,1
 Nom=DerOpHe,9,0,0,N,1
+[/CHAMPL]
+nom=EntierLgTb
+[CHAMPL]
+Nom=EntierLong,1,0,0,N,1
+[/CHAMPL]
+nom=EntierTb
+[CHAMPL]
+Nom=EntierCourt,1,0,0,N,1
 [/CHAMPL]
 nom=EvtNo
 [CHAMPL]
@@ -2595,9 +2844,29 @@ nom=GrRefF
 Nom=RefF,1,0,0,N,1
 Nom=SRefF,26,0,0,N,1
 [/CHAMPL]
+nom=HeureHeTb
+[CHAMPL]
+Nom=HeureHe,1,0,0,N,1
+[/CHAMPL]
 nom=IdMenuTb
 [CHAMPL]
 Nom=IdMenu,1,0,0,N,1
+[/CHAMPL]
+nom=Lib250Tb
+[CHAMPL]
+Nom=Lib250,1,0,0,N,1
+[/CHAMPL]
+nom=Lib80Tb
+[CHAMPL]
+Nom=Lib80,1,0,0,N,1
+[/CHAMPL]
+nom=LibelleLongTb
+[CHAMPL]
+Nom=LibelleLong,1,0,0,N,1
+[/CHAMPL]
+nom=LibelleTb
+[CHAMPL]
+Nom=Libelle,1,0,0,N,1
 [/CHAMPL]
 nom=LibTb
 [CHAMPL]
@@ -2606,6 +2875,18 @@ Nom=Lib,1,0,0,N,1
 nom=MoisTb
 [CHAMPL]
 Nom=Mois,1,0,0,N,1
+[/CHAMPL]
+nom=MontantTb
+[CHAMPL]
+Nom=Montant,1,0,0,N,1
+[/CHAMPL]
+nom=MultichoixTb
+[CHAMPL]
+Nom=MultiChoix,1,0,0,N,1
+[/CHAMPL]
+nom=MultiligneTb
+[CHAMPL]
+Nom=NomMultiLigne,1,0,0,N,1
 [/CHAMPL]
 nom=PiNo
 [CHAMPL]
@@ -2626,72 +2907,78 @@ Nom=Repr,1,0,0,N,1
 nom=Sel
 [CHAMPL]
 Nom=LibTb,1,0,0,N,1
-Nom=NbrEti,1401,0,0,N,1
-Nom=Choix,1404,0,0,N,1
-Nom=NbEx,1484,0,0,N,1
-Nom=Preview,1486,0,0,N,1
-Nom=DateDhD,1487,0,0,N,1
-Nom=DateDhF,1501,0,0,N,1
-Nom=CEvts,1515,0,0,N,1
-Nom=CUser,1615,0,0,N,1
-Nom=CTiers,1715,0,0,N,1
-Nom=CRepr,1815,0,0,N,1
-Nom=CPrj,1915,0,0,N,1
-Nom=ProjetD,2015,0,0,N,1
-Nom=ProjetF,2023,0,0,N,1
-Nom=AffaireD,2031,0,0,N,1
-Nom=AffaireF,2039,0,0,N,1
-Nom=ManifD,2047,0,0,N,1
-Nom=ManifF,2055,0,0,N,1
-Nom=IncidentD,2063,0,0,N,1
-Nom=IncidentF,2071,0,0,N,1
-Nom=ZonIdxD,2079,0,0,N,1
-Nom=ZonIdxF,2119,0,0,N,1
-Nom=PrioriteD,2159,0,0,N,1
-Nom=PrioriteF,2160,0,0,N,1
-Nom=EvtFamD,2161,0,0,N,1
-Nom=EvtFamF,2169,0,0,N,1
-Nom=SelTypeTiers,2177,0,0,N,1
-Nom=GrRefD,2182,0,0,N,1
-Nom=GrRefF,2223,0,0,N,1
-Nom=SerieD,2264,0,0,N,1
-Nom=SerieF,2289,0,0,N,1
-Nom=EvtNoD,2314,0,0,N,1
-Nom=EvtNoF,2322,0,0,N,1
-Nom=NomD,2330,0,0,N,1
-Nom=NomF,2368,0,0,N,1
-Nom=PayD,2406,0,0,N,1
-Nom=PayF,2409,0,0,N,1
-Nom=CPostalD,2412,0,0,N,1
-Nom=CPostalF,2420,0,0,N,1
-Nom=TelD,2428,0,0,N,1
-Nom=TelF,2448,0,0,N,1
-Nom=EmailD,2468,0,0,N,1
-Nom=EmailF,2548,0,0,N,1
-Nom=NafD,2628,0,0,N,1
-Nom=NafF,2633,0,0,N,1
-Nom=VilD,2638,0,0,N,1
-Nom=VilF,2676,0,0,N,1
-Nom=DatCalc,2714,0,0,N,1
-Nom=FctTyp,2722,0,0,N,1
-Nom=SigndtD,2762,0,0,N,1
-Nom=SigndtF,2770,0,0,N,1
-Nom=ProjetEtatDtD,2778,0,0,N,1
-Nom=ProjetEtatDtF,2786,0,0,N,1
-Nom=MtD,2794,0,0,N,1
-Nom=MtF,2804,0,0,N,1
-Nom=CProj,2814,0,0,N,1
-Nom=CColl,2914,0,0,N,1
-Nom=CstatTb,3014,0,0,N,1
-Nom=FctCodTb,3314,0,0,N,1
-Nom=TiersD,3394,0,0,N,1
-Nom=TiersF,3402,0,0,N,1
-Nom=ContactD,3410,0,0,N,1
-Nom=ContactF,3418,0,0,N,1
-Nom=NomContactD,3426,0,0,N,1
-Nom=NomContactF,3464,0,0,N,1
-Nom=Titreimp,3502,0,0,N,1
-Nom=Chemin,3562,0,0,N,1
+Nom=Lib80Tb,1401,0,0,N,1
+Nom=ProcCod,2201,0,0,N,1
+Nom=NbrEti,2221,0,0,N,1
+Nom=Choix,2224,0,0,N,1
+Nom=NbEx,2304,0,0,N,1
+Nom=Preview,2306,0,0,N,1
+Nom=DateDhD,2307,0,0,N,1
+Nom=DateDhF,2321,0,0,N,1
+Nom=CEvts,2335,0,0,N,1
+Nom=CUser,2435,0,0,N,1
+Nom=CTiers,2535,0,0,N,1
+Nom=CRepr,2635,0,0,N,1
+Nom=CPrj,2735,0,0,N,1
+Nom=ProjetD,2835,0,0,N,1
+Nom=ProjetF,2843,0,0,N,1
+Nom=AffaireD,2851,0,0,N,1
+Nom=AffaireF,2859,0,0,N,1
+Nom=ManifD,2867,0,0,N,1
+Nom=ManifF,2875,0,0,N,1
+Nom=IncidentD,2883,0,0,N,1
+Nom=IncidentF,2891,0,0,N,1
+Nom=ZonIdxD,2899,0,0,N,1
+Nom=ZonIdxF,2939,0,0,N,1
+Nom=PrioriteD,2979,0,0,N,1
+Nom=PrioriteF,2980,0,0,N,1
+Nom=EvtFamD,2981,0,0,N,1
+Nom=EvtFamF,2989,0,0,N,1
+Nom=SelTypeTiers,2997,0,0,N,1
+Nom=GrRefD,3002,0,0,N,1
+Nom=GrRefF,3043,0,0,N,1
+Nom=SerieD,3084,0,0,N,1
+Nom=SerieF,3109,0,0,N,1
+Nom=EvtNoD,3134,0,0,N,1
+Nom=EvtNoF,3142,0,0,N,1
+Nom=NomD,3150,0,0,N,1
+Nom=NomF,3188,0,0,N,1
+Nom=PayD,3226,0,0,N,1
+Nom=PayF,3229,0,0,N,1
+Nom=CPostalD,3232,0,0,N,1
+Nom=CPostalF,3240,0,0,N,1
+Nom=TelD,3248,0,0,N,1
+Nom=TelF,3268,0,0,N,1
+Nom=EmailD,3288,0,0,N,1
+Nom=EmailF,3368,0,0,N,1
+Nom=NafD,3448,0,0,N,1
+Nom=NafF,3453,0,0,N,1
+Nom=VilD,3458,0,0,N,1
+Nom=VilF,3496,0,0,N,1
+Nom=DatCalc,3534,0,0,N,1
+Nom=FctTyp,3542,0,0,N,1
+Nom=SigndtD,3582,0,0,N,1
+Nom=SigndtF,3590,0,0,N,1
+Nom=ProjetEtatDtD,3598,0,0,N,1
+Nom=ProjetEtatDtF,3606,0,0,N,1
+Nom=MtD,3614,0,0,N,1
+Nom=MtF,3624,0,0,N,1
+Nom=CProj,3634,0,0,N,1
+Nom=CColl,3734,0,0,N,1
+Nom=CstatTb,3834,0,0,N,1
+Nom=FctCodTb,4134,0,0,N,1
+Nom=TiersD,4214,0,0,N,1
+Nom=TiersF,4222,0,0,N,1
+Nom=ContactD,4230,0,0,N,1
+Nom=ContactF,4238,0,0,N,1
+Nom=NomContactD,4246,0,0,N,1
+Nom=NomContactF,4284,0,0,N,1
+Nom=Titreimp,4322,0,0,N,1
+Nom=Chemin,4382,0,0,N,1
+Nom=UserRealise,4638,0,0,N,1
+Nom=TacheUser,4678,0,0,N,1
+Nom=InitSt,4698,0,0,N,1
+Nom=Filler,4699,0,301,N,1
 [/CHAMPL]
 nom=SemTb
 [CHAMPL]
@@ -2741,6 +3028,10 @@ nom=TacheFinTheoDh
 Nom=TacheFinTheoDt,1,0,0,N,1
 Nom=TacehFinTheoHe,9,0,0,N,1
 [/CHAMPL]
+nom=TitreTb
+[CHAMPL]
+Nom=Titre,1,0,0,N,1
+[/CHAMPL]
 nom=User
 [CHAMPL]
 Nom=userx,1,0,0,N,1
@@ -2767,7 +3058,7 @@ Nom=VersionHe,9,0,0,N,1
 [TABLE]
 Version=1,20071113145339,RR                  ,20090914175704,RR                  
 Nom=sModEnt,Entête de processus modèle,1
-DateM=6C48EC8AFA35CA01
+DateM=7A2C5EEEF36DCF01
 NomOdbc=Processus_Modele_Entetes
 Taille=1000,1000
 Pack=0,0
@@ -2807,15 +3098,17 @@ Nom=RepetitionDureeTyp,323,2,N,0,0,N,1
 Nom=RepetitionFinDureeNbHr,324,2,N,0,0,N,1
 Nom=RepetitionFinDureeNbMn,328,2,N,0,0,N,1
 Nom=DateFinDh,330,2,N,0,0,N,1
-Nom=Filler,344,2,N,0,389,N,1
+Nom=MasqueModele,344,2,N,0,0,N,1
+Nom=NomMasque,376,2,N,0,0,N,1
+Nom=Filler,408,2,N,0,325,N,1
 Nom=UserCr,733,2,N,0,0,N,1
 Nom=UserMo,753,2,N,0,0,N,1
 Nom=Usertrace,773,2,N,0,0,N,1
 Nom=Usmodent,801,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20080109162424,RR                  ,20100903092023,CI                  
-Nom=sModForm,Formulaire de processus modèle,1
+Version=1,20080109162424,RR                  ,20140509094426,CI                  
+Nom=sModForm,Donnée de processus modèle,1
 DateM=A8C4499D9C60CB01
 NomOdbc=Processus_Modele_Formulaires
 Taille=3000,3000
@@ -2840,7 +3133,8 @@ Nom=FonctionApresChamp,1845,2,N,0,0,N,1
 Nom=ParamApresChamp,2084,2,N,0,0,N,1
 Nom=InitSt,2334,2,N,0,0,N,1
 Nom=ParamMultiChoix,2335,2,N,0,0,N,1
-Nom=Filler,2585,2,N,0,139,N,1
+Nom=Indice,2585,2,N,0,0,N,1
+Nom=Filler,2588,2,N,0,136,N,1
 Nom=CeNote,2724,2,N,0,0,N,1
 Nom=Note,2725,2,N,0,0,N,1
 Nom=UserCr,2733,2,N,0,0,N,1
@@ -2849,9 +3143,9 @@ Nom=Usertrace,2773,2,N,0,0,N,1
 Nom=Usmodform,2801,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20080109162608,RR                  ,20101028171034,DEMO                
-Nom=sModForTac,Tâches en input de la donnée du formulaire modèle,1
-DateM=7624B456B276CB01
+Version=1,20080109162608,RR                  ,20140509094308,CI                  
+Nom=sModForTac,Formulaire de processus modèle,1
+DateM=DB027A814738CF01
 NomOdbc=Processus_Modele_Donnees_Taches
 Taille=1500,1500
 Pack=0,0
@@ -2863,12 +3157,13 @@ Nom=DonneeIdent,31,2,N,0,0,N,1
 Nom=TacheCod,51,2,N,0,0,N,1
 Nom=AffSt,71,2,N,0,0,N,1
 Nom=ModSt,72,2,N,0,0,N,1
-Nom=InitSt,73,2,N,0,0,N,1
-Nom=TraiteAvFct,74,2,N,0,0,N,1
-Nom=TraiteAvParam,313,2,N,0,0,N,1
-Nom=TraiteApFct,563,2,N,0,0,N,1
-Nom=TraiteApParam,802,2,N,0,0,N,1
-Nom=Filler,1052,2,N,0,172,N,1
+Nom=ObligSt,73,2,N,0,0,N,1
+Nom=InitSt,74,2,N,0,0,N,1
+Nom=TraiteAvFct,75,2,N,0,0,N,1
+Nom=TraiteAvParam,314,2,N,0,0,N,1
+Nom=TraiteApFct,564,2,N,0,0,N,1
+Nom=TraiteApParam,803,2,N,0,0,N,1
+Nom=Filler,1053,2,N,0,171,N,1
 Nom=CeNote,1224,2,N,0,0,N,1
 Nom=Note,1225,2,N,0,0,N,1
 Nom=UserCr,1233,2,N,0,0,N,1
@@ -2877,8 +3172,8 @@ Nom=Usertrace,1273,2,N,0,0,N,1
 Nom=usmodfortac,1301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20071113145400,RR                  ,20090914175931,RR                  
-Nom=sModTache,Tâches de processus modèle,1
+Version=1,20071113145400,RR                  ,20140509094440,CI                  
+Nom=sModTache,Tâche de processus modèle,1
 DateM=D4D1F691FA35CA01
 NomOdbc=Processus_Modele_Taches
 Taille=2000,2000
@@ -2915,15 +3210,16 @@ Nom=DureeJalonUnite,1163,2,N,0,0,N,1
 Nom=Critique,1164,2,N,0,0,N,1
 Nom=ValidGen,1165,2,N,0,0,N,1
 Nom=ChoixValid,1166,2,N,0,0,N,1
-Nom=Filler,1167,2,N,0,66,N,1
+Nom=PageId,1167,2,N,0,0,N,1
+Nom=Filler,1170,2,N,0,63,N,1
 Nom=UserCr,1233,2,N,0,0,N,1
 Nom=UserMo,1253,2,N,0,0,N,1
 Nom=Usertrace,1273,2,N,0,0,N,1
 Nom=Usmodtache,1301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20080130152315,RR                  ,20090914180000,RR                  
-Nom=sModTacRel,Relances de tâche de processus modèle,1
+Version=1,20080130152315,RR                  ,20140509094444,CI                  
+Nom=sModTacRel,Relance de tâche de processus modèle,1
 DateM=966A3097FA35CA01
 NomOdbc=Processus_Modele_Taches_Relances
 Taille=1000,1000
@@ -2975,8 +3271,8 @@ Nom=Usertrace,773,2,N,0,0,N,1
 Nom=usmodtacSui,801,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20080326082525,RR                  ,20090914180215,RR                  
-Nom=sOpeEnt,Entête de processus opérationnels,1
+Version=1,20080326082525,RR                  ,20140509094512,CI                  
+Nom=sOpeEnt,Entête de processus opérationnel,1
 DateM=746F97A4FA35CA01
 NomOdbc=Processus_Operation_Entetes
 Taille=1000,1000
@@ -3023,7 +3319,9 @@ Nom=EntierLong,403,2,N,0,0,N,1
 Nom=Montant,413,2,N,0,0,N,1
 Nom=TestSt,429,2,N,0,0,N,1
 Nom=Critique,430,2,N,0,0,N,1
-Nom=Filler,431,2,N,0,302,N,1
+Nom=NomMasque,431,2,N,0,0,N,1
+Nom=AgileoId,463,2,N,0,0,N,1
+Nom=Filler,473,2,N,0,260,N,1
 Nom=UserCr,733,2,N,0,0,N,1
 Nom=UserMo,753,2,N,0,0,N,1
 Nom=Usertrace,773,2,N,0,0,N,1
@@ -3034,8 +3332,8 @@ Flags=i,i,i,n,i,i,i,i
 Nom=Individu
 [/PROPLOC]
 [TABLE]
-Version=1,20080326082651,RR                  ,20100903092503,CI                  
-Nom=sOpeForm,Formulaire de processus opérationnel,1
+Version=1,20080326082651,RR                  ,20140509094452,CI                  
+Nom=sOpeForm,Donnée de processus opérationnel,1
 DateM=1DD59AA59C60CB01
 NomOdbc=Processus_Operation_Formulaires
 Taille=3500,3500
@@ -3074,7 +3372,8 @@ Nom=FonctionApresChamp,2370,2,N,0,0,N,1
 Nom=ParamApresChamp,2609,2,N,0,0,N,1
 Nom=InitSt,2859,2,N,0,0,N,1
 Nom=ParamMultiChoix,2860,2,N,0,0,N,1
-Nom=Filler,3110,2,N,0,114,N,1
+Nom=Indice,3110,2,N,0,0,N,1
+Nom=Filler,3113,2,N,0,111,N,1
 Nom=CeNote,3224,2,N,0,0,N,1
 Nom=Note,3225,2,N,0,0,N,1
 Nom=UserCr,3233,2,N,0,0,N,1
@@ -3083,9 +3382,9 @@ Nom=Usertrace,3273,2,N,0,0,N,1
 Nom=Usopeform,3301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20080326083620,RR                  ,20101028171809,DEMO                
-Nom=sOpeForTac,Tâches en input du processus opérationnel,1
-DateM=90F5D363B376CB01
+Version=1,20080326083620,RR                  ,20140509094456,CI                  
+Nom=sOpeForTac,Formulaire de processus opérationnel,1
+DateM=442E50AE4738CF01
 NomOdbc=Processus_Operation_Donnees_Tac
 Taille=1500,1500
 Pack=0,0
@@ -3101,21 +3400,22 @@ Nom=CeNote,63,2,N,0,0,N,1
 Nom=Note,64,2,N,0,0,N,1
 Nom=AffSt,72,2,N,0,0,N,1
 Nom=ModSt,73,2,N,0,0,N,1
-Nom=InitSt,74,2,N,0,0,N,1
-Nom=TraiteAvFct,75,2,N,0,0,N,1
-Nom=TraiteAvParam,314,2,N,0,0,N,1
-Nom=TraiteApFct,564,2,N,0,0,N,1
-Nom=TraiteApParam,803,2,N,0,0,N,1
-Nom=Filler,1053,2,N,0,180,N,1
+Nom=ObligSt,74,2,N,0,0,N,1
+Nom=InitSt,75,2,N,0,0,N,1
+Nom=TraiteAvFct,76,2,N,0,0,N,1
+Nom=TraiteAvParam,315,2,N,0,0,N,1
+Nom=TraiteApFct,565,2,N,0,0,N,1
+Nom=TraiteApParam,804,2,N,0,0,N,1
+Nom=Filler,1054,2,N,0,179,N,1
 Nom=UserCr,1233,2,N,0,0,N,1
 Nom=UserMo,1253,2,N,0,0,N,1
 Nom=Usertrace,1273,2,N,0,0,N,1
 Nom=Usopefortac,1301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20080326083256,RR                  ,20090914180255,RR                  
-Nom=sOpeTache,Tâches de processus opérationnel,1
-DateM=7A8B95B1FA35CA01
+Version=1,20080326083256,RR                  ,20140509094500,CI                  
+Nom=sOpeTache,Tâche de processus opérationnel,1
+DateM=274D058D64D6CF01
 NomOdbc=Processus_Operation_Taches
 Taille=2000,2000
 Pack=0,0
@@ -3128,55 +3428,56 @@ Nom=ProcNo,17,2,N,0,0,N,1
 Nom=TacheNo,30,2,N,0,0,N,1
 Nom=TacheCod,43,2,N,0,0,N,1
 Nom=TacheEtat,63,2,N,0,0,N,1
-Nom=Lib80,64,2,N,0,0,N,1
-Nom=Etape,144,2,N,0,0,N,1
-Nom=ConditionCod,164,2,N,0,0,N,1
-Nom=ActionTyp,184,2,N,0,0,N,1
-Nom=EtapeTermine,186,2,N,0,0,N,1
-Nom=Priorite,206,2,N,0,0,N,1
-Nom=TacheDuree,207,2,N,0,0,N,1
-Nom=TacheDureeUnite,217,2,N,0,0,N,1
-Nom=Note,218,2,N,0,0,N,1
-Nom=CeNote,226,2,N,0,0,N,1
-Nom=Joint,227,2,N,0,0,N,1
-Nom=CeJoint,235,2,N,0,0,N,1
-Nom=Evenement,236,2,N,0,0,N,1
-Nom=Sujet,244,2,N,0,0,N,1
-Nom=Destinataire,494,2,N,0,0,N,1
-Nom=Image,744,2,N,0,0,N,1
-Nom=Param,784,2,N,0,0,N,1
-Nom=Replyto,1034,2,N,0,0,N,1
-Nom=UserRealise,1114,2,N,0,0,N,1
-Nom=TacheUser,1154,2,N,0,0,N,1
-Nom=TacheNoSuite,1174,2,N,0,0,N,1
-Nom=JointAttachSt,1187,2,N,0,0,N,1
-Nom=DureeTheorique,1188,2,N,0,0,N,1
-Nom=DureeTheoriqueUnite,1198,2,N,0,0,N,1
-Nom=DureeJalon,1199,2,N,0,0,N,1
-Nom=DureeJalonUnite,1209,2,N,0,0,N,1
-Nom=TacheDemDH,1210,2,N,0,0,N,1
-Nom=TacheActDh,1224,2,N,0,0,N,1
-Nom=TacheActUser,1238,2,N,0,0,N,1
-Nom=TacheAffDh,1258,2,N,0,0,N,1
-Nom=TacheAffUser,1272,2,N,0,0,N,1
-Nom=TacheFinTheoDh,1292,2,N,0,0,N,1
-Nom=TacheDebDH,1306,2,N,0,0,N,1
-Nom=TacheDebUser,1320,2,N,0,0,N,1
-Nom=TacheFinDh,1340,2,N,0,0,N,1
-Nom=TacheFinUser,1354,2,N,0,0,N,1
-Nom=SuiteCod,1374,2,N,0,0,N,1
-Nom=Critique,1394,2,N,0,0,N,1
-Nom=ValidGen,1395,2,N,0,0,N,1
-Nom=ChoixValid,1396,2,N,0,0,N,1
-Nom=Filler,1397,2,N,0,336,N,1
+Nom=Lib80,65,2,N,0,0,N,1
+Nom=Etape,145,2,N,0,0,N,1
+Nom=ConditionCod,165,2,N,0,0,N,1
+Nom=ActionTyp,185,2,N,0,0,N,1
+Nom=EtapeTermine,187,2,N,0,0,N,1
+Nom=Priorite,207,2,N,0,0,N,1
+Nom=TacheDuree,208,2,N,0,0,N,1
+Nom=TacheDureeUnite,218,2,N,0,0,N,1
+Nom=Note,219,2,N,0,0,N,1
+Nom=CeNote,227,2,N,0,0,N,1
+Nom=Joint,228,2,N,0,0,N,1
+Nom=CeJoint,236,2,N,0,0,N,1
+Nom=Evenement,237,2,N,0,0,N,1
+Nom=Sujet,245,2,N,0,0,N,1
+Nom=Destinataire,495,2,N,0,0,N,1
+Nom=Image,745,2,N,0,0,N,1
+Nom=Param,785,2,N,0,0,N,1
+Nom=Replyto,1035,2,N,0,0,N,1
+Nom=UserRealise,1115,2,N,0,0,N,1
+Nom=TacheUser,1155,2,N,0,0,N,1
+Nom=TacheNoSuite,1175,2,N,0,0,N,1
+Nom=JointAttachSt,1188,2,N,0,0,N,1
+Nom=DureeTheorique,1189,2,N,0,0,N,1
+Nom=DureeTheoriqueUnite,1199,2,N,0,0,N,1
+Nom=DureeJalon,1200,2,N,0,0,N,1
+Nom=DureeJalonUnite,1210,2,N,0,0,N,1
+Nom=TacheDemDH,1211,2,N,0,0,N,1
+Nom=TacheActDh,1225,2,N,0,0,N,1
+Nom=TacheActUser,1239,2,N,0,0,N,1
+Nom=TacheAffDh,1259,2,N,0,0,N,1
+Nom=TacheAffUser,1273,2,N,0,0,N,1
+Nom=TacheFinTheoDh,1293,2,N,0,0,N,1
+Nom=TacheDebDH,1307,2,N,0,0,N,1
+Nom=TacheDebUser,1321,2,N,0,0,N,1
+Nom=TacheFinDh,1341,2,N,0,0,N,1
+Nom=TacheFinUser,1355,2,N,0,0,N,1
+Nom=SuiteCod,1375,2,N,0,0,N,1
+Nom=Critique,1395,2,N,0,0,N,1
+Nom=ValidGen,1396,2,N,0,0,N,1
+Nom=ChoixValid,1397,2,N,0,0,N,1
+Nom=PageId,1398,2,N,0,0,N,1
+Nom=Filler,1401,2,N,0,332,N,1
 Nom=UserCr,1733,2,N,0,0,N,1
 Nom=UserMo,1753,2,N,0,0,N,1
 Nom=Usertrace,1773,2,N,0,0,N,1
 Nom=Usopetache,1801,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20080326083407,RR                  ,20090914180329,RR                  
-Nom=sOpeTacRel,Relances de tâches de processus opérationnel,1
+Version=1,20080326083407,RR                  ,20140509094504,CI                  
+Nom=sOpeTacRel,Relance de tâches de processus opérationnel,1
 DateM=EA727DB4FA35CA01
 NomOdbc=Processus_Operation_Taches_Rel
 Taille=1000,1000
@@ -3276,7 +3577,7 @@ Nom=ValDataCompute,4088,2,N,0,0,N,1
 [TABLE]
 Version=1,20080207164857,RR                  ,20080207164857,RR                  
 Nom=spctrl,Table pour les contrôles,1
-DateM=D12DD390DA5FCB01
+DateM=6B3A5A95B1C7CF01
 Taille=3000,3000
 Pack=0,0
 [CHAMPS]
@@ -3301,11 +3602,152 @@ Nom=DateInit,211,2,N,0,0,N,1
 Nom=OpJour,219,2,N,0,0,N,1
 Nom=OpMois,227,2,N,0,0,N,1
 Nom=OpAnnee,235,2,N,0,0,N,1
-Nom=Typeabs,243,2,N,0,0,N,1
-Nom=Libelle,244,2,N,0,0,N,1
-Nom=Contrat,324,2,N,0,0,N,1
-Nom=DateDebutDh,547,2,N,0,0,N,1
-Nom=DateFinDh,561,2,N,0,0,N,1
+Nom=TiCod,243,2,N,0,0,N,1
+Nom=PiNo,244,2,N,0,0,N,1
+Nom=PiCod,252,2,N,0,0,N,1
+Nom=User,253,2,N,0,0,N,1
+Nom=Typeabs,273,2,N,0,0,N,1
+Nom=Libelle,274,2,N,0,0,N,1
+Nom=Contrat,354,2,N,0,0,N,1
+Nom=DateDebutDh,577,2,N,0,0,N,1
+Nom=DateFinDh,591,2,N,0,0,N,1
+Nom=UspCTRL,605,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140512151738,CI                  ,20140512151738,CI                  
+Nom=speltchoix,Element multi-choix,1
+DateM=A44F33A2E46DCF01
+Taille=300,300
+Pack=0,0
+[CHAMPS]
+Nom=LibChoix,1,2,N,0,0,N,1
+Nom=ValChoix,251,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204162008,CI                  ,20140204162444,CI                  
+Nom=spLib,Libellés des objets,1
+DateM=1006A796BC21CF01
+Taille=25000,25000
+Pack=0,0
+[CHAMPS]
+Nom=Lib250Tb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204161214,CI                  ,20140204162452,CI                  
+Nom=spOCode20,Objets CODE 20,1
+DateM=CD5BC1DFBB21CF01
+Taille=2000,2000
+Pack=0,0
+[CHAMPS]
+Nom=Code20Tb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204160746,CI                  ,20140204162459,CI                  
+Nom=spOCode8,Objets CODE 8,1
+DateM=738D38E2BB21CF01
+Taille=800,800
+Pack=0,0
+[CHAMPS]
+Nom=Code8Tb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204160644,CI                  ,20140204162529,CI                  
+Nom=spODate,Objets DATE,1
+DateM=209EEBE6BB21CF01
+Taille=800,800
+Pack=0,0
+[CHAMPS]
+Nom=DateDtTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204171209,CI                  ,20140204171209,CI                  
+Nom=spoDateHeure,Objets DATE-HEURE,1
+DateM=57F16A93C421CF01
+Taille=1400,1400
+Pack=0,0
+[CHAMPS]
+Nom=DateHeureTB,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204160942,CI                  ,20140204162536,CI                  
+Nom=spOEntier,Objets ENTIER COURT,1
+DateM=C9375EE9BB21CF01
+Taille=400,400
+Pack=0,0
+[CHAMPS]
+Nom=EntierTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204161010,CI                  ,20140204162831,CI                  
+Nom=spOEntierLg,Objets ENTIER LONG,1
+DateM=12505CC2BD21CF01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+Nom=EntierLgTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204160300,CI                  ,20140204162547,CI                  
+Nom=spOHeure,Objets HEURE,1
+DateM=D9E926EFBB21CF01
+Taille=600,600
+Pack=0,0
+[CHAMPS]
+Nom=HeureHeTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204160005,CI                  ,20140204162554,CI                  
+Nom=spOLib,Objets LIBELLE,1
+DateM=31297DF2BB21CF01
+Taille=8000,8000
+Pack=0,0
+[CHAMPS]
+Nom=LibelleTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204160109,CI                  ,20140204162604,CI                  
+Nom=spOLibLg,Objets LIBELLE LONG,1
+DateM=76AD2FF5BB21CF01
+Taille=25000,25000
+Pack=0,0
+[CHAMPS]
+Nom=LibelleLongTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204161139,CI                  ,20140204162611,CI                  
+Nom=spOMontant,Objets MONTANT,1
+DateM=1B65FEF6BB21CF01
+Taille=1600,1600
+Pack=0,0
+[CHAMPS]
+Nom=MontantTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204161305,CI                  ,20140204162618,CI                  
+Nom=spOMultiChoix,Objets MULTICHOIX,1
+DateM=282D0518A029CF01
+Taille=3000,3000
+Pack=0,0
+[CHAMPS]
+Nom=MultichoixTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204161403,CI                  ,20140214171519,CI                  
+Nom=spOMultiligne,Objets MULTILIGNES,1
+DateM=8013665FA029CF01
+Taille=25600,25600
+Pack=0,0
+[CHAMPS]
+Nom=MultiligneTb,1,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140204155851,CI                  ,20140204162628,CI                  
+Nom=spOTitre,Objets TITRE,1
+DateM=6D2D80FDBB21CF01
+Taille=8000,8000
+Pack=0,0
+[CHAMPS]
+Nom=TitreTb,1,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20080414174928,RR                  ,20080414174928,RR                  
@@ -3342,6 +3784,18 @@ Nom=Ligne,284,2,N,0,0,N,1
 Nom=User,287,2,N,0,0,N,1
 Nom=UserRealise,307,2,N,0,0,N,1
 Nom=Lib80,347,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20140210164923,CI                  ,20140210164923,CI                  
+Nom=spTacheMan,Elt liste des tâches manuelles,1
+DateM=4F9E50AB7726CF01
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+Nom=ProcCod,1,2,N,0,0,N,1
+Nom=TacheCod,21,2,N,0,0,N,1
+Nom=OrdreNo,41,2,N,0,0,N,1
+Nom=UspTacheMan,44,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20090505142344,RR                  ,20090505142354,RR                  
@@ -3511,8 +3965,8 @@ Nom=Usertrace,273,2,N,0,0,N,1
 Nom=Uspteta,301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20090301162620,RR                  ,20090914180435,RR                  
-Nom=SptFct,Fonctions,1
+Version=1,20090301162620,RR                  ,20140507133220,CI                  
+Nom=SptFct,Actions de tâches,1
 DateM=522508C4839AC901
 NomOdbc=Table_Fonction
 Taille=600,600
@@ -3549,7 +4003,7 @@ Nom=TitrePage,81,2,N,0,0,N,1
 [TABLE]
 Version=1,20080514081616,RR                  ,20080514081749,RR                  
 Nom=SpWeb100T1,Tableau des tâches,1
-DateM=86B38AA45C0BCA01
+DateM=274D058D64D6CF01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -3559,11 +4013,11 @@ Nom=TacheNo,34,2,N,0,0,N,1
 Nom=TacheCod,47,2,N,0,0,N,1
 Nom=LibTb,67,2,N,0,0,N,1
 Nom=TacheEtat,1467,2,N,0,0,N,1
-Nom=Image,1468,2,N,0,0,N,1
-Nom=Priorite,1508,2,N,0,0,N,1
-Nom=UserRealise,1509,2,N,0,0,N,1
-Nom=TacheUser,1549,2,N,0,0,N,1
-Nom=DateDebutDh,1569,2,N,0,0,N,1
+Nom=Image,1469,2,N,0,0,N,1
+Nom=Priorite,1509,2,N,0,0,N,1
+Nom=UserRealise,1510,2,N,0,0,N,1
+Nom=TacheUser,1550,2,N,0,0,N,1
+Nom=DateDebutDh,1570,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20070328154832,RR                  ,20070328154953,RR                  
@@ -3588,7 +4042,7 @@ Nom=USpweb101,8380,2,N,0,0,N,1
 [TABLE]
 Version=1,20090527142932,RR                  ,20090527143043,RR                  
 Nom=spweb101T1,Tableau des tâches par collaborateur,1
-DateM=7A8B95B1FA35CA01
+DateM=274D058D64D6CF01
 Taille=2100,2100
 Pack=0,0
 [CHAMPS]
@@ -3611,6 +4065,15 @@ Nom=NbHrsTravTb,416,2,N,0,0,N,1
 Nom=HeureDebTb,616,2,N,0,0,N,1
 Nom=HeureFinTb,1016,2,N,0,0,N,1
 Nom=ListeTacTb,1416,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130808101907,CI                  ,20130808101907,CI                  
+Nom=spzoom,Enreg de travail pour ZOOM,1
+DateM=428DB76B1094CE01
+Taille=500,500
+Pack=0,0
+[CHAMPS]
+Nom=ChoixTb,1,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20081216162957,RR                  ,20090914180403,RR                  
@@ -3640,11 +4103,21 @@ Nom=UserMo,253,2,N,0,0,N,1
 Nom=Usertrace,273,2,N,0,0,N,1
 Nom=Usrpl,301,2,N,0,0,N,1
 [/CHAMPS]
+[PROPLOC]
+Libelle= 
+Nom=DateDebutDh
+Flags=i,i,i,n,i,i,i,i
+Nom=DateFinDh
+Flags=i,i,i,o,i,i,i,i
+Nom=DateFinDt
+Flags=i,i,i,o,i,i,i,i
+Nom=DateFinHe
+[/PROPLOC]
 [TABLE]
-Version=1,20021023220913,RR  ,20021023220913,RR
+Version=1,20021023220913,RR  ,20140520160019,CI                  
 Nom=XQ,Job queue,1
-DateM=D0C3DFB8EF03C801
-Taille=5500,5500
+DateM=C8D37EE93374CF01
+Taille=6000,6000
 Pack=0,0
 [CHAMPS]
 Nom=LogDh,1,2,N,0,0,N,1
@@ -3807,19 +4280,37 @@ Nom=IdMenuTb,463,2,N,0,0,N,1
 [TABLE]
 Version=1,20080123165141,RR                  ,20080123165141,RR                  
 Nom=xz,Communication zoom,1
-DateM=C63637FD8AD2C901
+DateM=274D058D64D6CF01
 Taille=800,800
 Pack=0,0
 [CHAMPS]
-Nom=Domaine,1,2,N,0,0,N,1
-Nom=ProcCod,9,2,N,0,0,N,1
-Nom=TacheCod,29,2,N,0,0,N,1
-Nom=ProcNo,49,2,N,0,0,N,1
-Nom=TacheNo,62,2,N,0,0,N,1
-Nom=Tunnel,75,2,N,0,0,N,1
-Nom=MotCle,77,2,N,0,0,N,1
-Nom=User,85,2,N,0,0,N,1
-Nom=UserGrp,105,2,N,0,0,N,1
+Nom=Etb,1,2,N,0,0,N,1
+Nom=Domaine,4,2,N,0,0,N,1
+Nom=Etape,12,2,N,0,0,N,1
+Nom=ConditionCod,32,2,N,0,0,N,1
+Nom=Donnee,52,2,N,0,0,N,1
+Nom=FonctionCtrl,84,2,N,0,0,N,1
+Nom=FonctionTyp,323,2,N,0,0,N,1
+Nom=FonctionAction,324,2,N,0,0,N,1
+Nom=ProcCod,563,2,N,0,0,N,1
+Nom=TacheCod,583,2,N,0,0,N,1
+Nom=ActionTyp,603,2,N,0,0,N,1
+Nom=DonneeIdent,605,2,N,0,0,N,1
+Nom=ProcNo,625,2,N,0,0,N,1
+Nom=ProcEtat,638,2,N,0,0,N,1
+Nom=TacheNo,639,2,N,0,0,N,1
+Nom=TacheEtat,652,2,N,0,0,N,1
+Nom=Tunnel,654,2,N,0,0,N,1
+Nom=Pong,656,2,N,0,0,N,1
+Nom=MultiSelect,657,2,N,0,0,N,1
+Nom=Modifflg,658,2,N,0,0,N,1
+Nom=MotCle,659,2,N,0,0,N,1
+Nom=User,667,2,N,0,0,N,1
+Nom=UserGrp,687,2,N,0,0,N,1
+Nom=RemplUser,707,2,N,0,0,N,1
+Nom=InitSt,727,2,N,0,0,N,1
+Nom=ModSt,728,2,N,0,0,N,1
+Nom=AnnulSt,729,2,N,0,0,N,1
 [/CHAMPS]
 [BASE]
 Version=1,20080326115037,RR                  ,20080326115037,RR                  
@@ -3831,11 +4322,11 @@ DateMIndex=1432E8392F8FC801
 [TABLES]
 [/TABLES]
 [BASE]
-Version=1,20071113145136,RR                  ,20111011171520,CI                  
+Version=1,20071113145136,RR                  ,20140212084940,CI                  
 Nom=SpfModele,Modèles de processus,1
-DateM=CD3C2D972888CC01
+DateM=7D4C48FCC627CF01
 Fichier=I,0,SPFMODELE.dhfi
-Versionbase=7.0
+Versionbase=7.3 
 DateMIndex=B3B240D50A9CC901
 [TABLES]
 Nom=sModEnt,0
@@ -3846,12 +4337,12 @@ Nom=sModTacRel,0
 Nom=sModTacSui,0
 [/TABLES]
 [BASE]
-Version=1,20080326082358,RR                  ,20111011171534,CI                  
+Version=1,20080326082358,RR                  ,20140929092611,CI                  
 Nom=SpfOperationnel,Processus opérationnels,1
-DateM=DC98599F2888CC01
+DateM=952535A5B6DBCF01
 Fichier=I,0,SPFOPERATIONNEL.dhfi
-Versionbase=7.0
-DateMIndex=FE705B19766CCB01
+Versionbase=7.3a
+DateMIndex=274D058D64D6CF01
 [TABLES]
 Nom=sOpeEnt,0
 Nom=sOpeForm,0
@@ -3861,11 +4352,11 @@ Nom=sOpeTacRel,0
 Nom=sOpeTacSui,0
 [/TABLES]
 [BASE]
-Version=1,20081216162921,RR                  ,20081218214036,RR                  
+Version=1,20081216162921,RR                  ,20140520175456,CI                  
 Nom=SpfRpl,Remplacement,1
-DateM=7269C0E15061C901
+DateM=7C51ABD84374CF01
 Fichier=I,0,SPFRPL.dhfi
-Versionbase=6.2 
+Versionbase=7.3 
 DateMIndex=50BBB524CEA3C901
 [TABLES]
 Nom=SRpl,0
@@ -3915,10 +4406,10 @@ Nom=ProcCod,9,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080129174836,RR                  ,20080212090627,RR                  
+Version=1,20080129174836,RR                  ,20140121143250,CI                  
 Nom=Index_D,Par processus et ordre,1
-DateM=EAC3002B4E6DC801
-CLE=SpfModele,D,Ce1,2,3,o,1,n
+DateM=5358C447AD16CF01
+CLE=SpfModele,D,Ce1,2,3,n,1,n
 [CHAMPS]
 Nom=ProcCod,1,0,
 Nom=OrdreNo,21,0,
@@ -3926,10 +4417,10 @@ Nom=DonneeIdent,24,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080129174946,RR                  ,20080129174946,RR                  
+Version=1,20080129174946,RR                  ,20140121143245,CI                  
 Nom=Index_E,Par processus et donnée,1
-DateM=B6AC76F49662C801
-CLE=SpfModele,E,Ce1,2,3,n,1,n
+DateM=C3D90045AD16CF01
+CLE=SpfModele,E,Ce1,2,3,o,1,n
 [CHAMPS]
 Nom=ProcCod,1,0,
 Nom=DonneeIdent,21,0,
@@ -4057,10 +4548,10 @@ Nom=ProcNo,2,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20080402153216,RR                  ,20090916083329,RR                  
+Version=1,20080402153216,RR                  ,20140121141831,CI                  
 Nom=Index_F,Par Numéro de processus,1
-DateM=48AC749A9736CA01
-CLE=SpfOperationnel,F,Ce1,2,3,o,1,n
+DateM=5344EF47AB16CF01
+CLE=SpfOperationnel,F,Ce1,2,3,n,1,n
 [CHAMPS]
 Nom=ProcNo,1,0,
 Nom=OrdreNo,14,0,
@@ -4126,8 +4617,8 @@ DateM=BCD171C19FB1C801
 CLE=SpfOperationnel,L,Ce1,2,2,n,1,n
 [CHAMPS]
 Nom=TacheEtat,1,0,
-Nom=Priorite,2,0,
-Nom=TacheNo,3,0,
+Nom=Priorite,3,0,
+Nom=TacheNo,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -4157,9 +4648,9 @@ DateM=6E47CE0B5DB7C801
 CLE=SpfOperationnel,O,Ce1,2,2,n,1,n
 [CHAMPS]
 Nom=TacheEtat,1,0,
-Nom=TacheUser,2,0,
-Nom=Priorite,22,0,
-Nom=TacheNo,23,0,
+Nom=TacheUser,3,0,
+Nom=Priorite,23,0,
+Nom=TacheNo,24,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -4171,7 +4662,7 @@ CLE=SpfOperationnel,P,Ce1,2,2,n,1,n
 Nom=ProcNo,1,0,
 Nom=Etape,14,0,
 Nom=TacheEtat,34,0,
-Nom=TacheNo,35,0,
+Nom=TacheNo,36,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -4181,9 +4672,9 @@ DateM=20E381B000B9C801
 CLE=SpfOperationnel,Q,Ce1,2,2,n,1,n
 [CHAMPS]
 Nom=TacheEtat,1,0,
-Nom=UserRealise,2,0,
-Nom=Priorite,42,0,
-Nom=TacheNo,43,0,
+Nom=UserRealise,3,0,
+Nom=Priorite,43,0,
+Nom=TacheNo,44,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -4206,10 +4697,10 @@ Nom=ProcNo,1,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
-Version=1,20081216181459,RR                  ,20081216181702,RR                  
+Version=1,20081216181459,RR                  ,20140520172901,CI                  
 Nom=Index_A,Par collaborateur domaine date début,1
-DateM=98FE40F7A15FC901
-CLE=SpfRpl,A,Ce1,2,1,n,1,n
+DateM=A375A4394074CF01
+CLE=SpfRpl,A,Ce1,2,1,o,1,n
 [CHAMPS]
 Nom=User,1,0,
 Nom=Domaine,21,0,

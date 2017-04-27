@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,,,20130411162650,TP                  
+Version=6,,,20140619151047,TP                  
 Nom=gafdd.dhsd,/v72/affaires/source/gafdd.dhsd,1
 [CHAMP]
 Version=1,20021023221011,RR  ,20021023221011,RR
@@ -97,6 +97,12 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20131119150328,TP                  ,20131119150328,TP                  
+Nom=AffUn,Unité de la quantité affectée,1
+Gel=1
+Nature=4
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20040702085226,SC                  ,20050321080956,RR                  
 Nom=AfrClas,Code classe d'affaire,1
 DateM=50A8FA83D57EC401
@@ -119,10 +125,11 @@ Nature=8
 Attribut=PARAM
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20121015160944,TP                  ,20121015160944,TP                  
+Version=1,20121015160944,TP                  ,20130321104239,TP                  
 Nom=AfrFactFlux,Flux d'entrée pour la facturation,1
+DateM=D066346D1826CE01
 Gel=1
-Nature=1,0*3
+Nature=1,0*5
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20060104115736,RR                  ,20060104115736,RR                  
@@ -202,6 +209,18 @@ Gel=3
 Nature=32*50
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140110155939,TP                  ,20140110155939,TP                  
+Nom=BorneD,Borne de début,1
+Gel=1
+Nature=14,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140110155954,TP                  ,20140110155954,TP                  
+Nom=BorneF,Borne de fin,1
+Gel=1
+Nature=14,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20041001164610,RR                  ,20050920101631,RR                  
 Nom=CCategorie,Filtre sur le code catégorie,1
 Gel=3
@@ -275,6 +294,12 @@ Nom=Cea,Code enregstrement 10,1
 Gel=3
 Nature=1
 Flags=n,1,o,n,n,n,n,n
+[CHAMP]
+Version=1,20131107163414,TP                  ,20131107163414,TP                  
+Nom=CeDocWeb,Indicateur d'état de la présence de lien web,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030111152620,MJV ,20071127110103,MARIE JO            
 Nom=CeJoint,CE si fichier joint =2 si joint <> 0,1
@@ -512,13 +537,13 @@ Nature=200
 NomOdbc=Designation
 Flags=o,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20121116171234,TP                  ,20121116171403,TP                  
+Version=1,20121116171234,TP                  ,20130422141746,TP                  
 Nom=DES_1,Première partie de la désignation,1
 Gel=1
 Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20121116171247,TP                  ,20121116171409,TP                  
+Version=1,20121116171247,TP                  ,20130422141751,TP                  
 Nom=DES_2,Seconde partie de la désignation,1
 Gel=1
 Nature=100
@@ -665,14 +690,14 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20121218110229,TP                  ,20121218110229,TP                  
-Nom=estFactPartiel,Le temps est-il facturé partiellement,1
+Version=1,20121218110229,TP                  ,20130425164221,TP                  
+Nom=estFactPartiel,L'élement est-il facturé partiellement ?,1
 Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110415183051,GN                  ,20130117112956,ROOT                
-Nom=estFacturable,Temps facturable (1=NON\v 2=OUI\v 0=Ne sait pas),1
+Version=1,20110415183051,GN                  ,20130425163841,TP                  
+Nom=estFacturable,Element facturable (1=NON\v 2=OUI\v 0=Ne sait pas),1
 DateM=D982434F09DDCD01
 Gel=1
 Nature=1,0
@@ -814,6 +839,12 @@ Nature=256
 NomOdbc=Filtre
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20140603152250,TP                  ,20140603152250,TP                  
+Nom=FiltrerMouvPerime,Flag : Filter les mouvements périmés,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20121128170107,TP                  ,20121128170107,TP                  
 Nom=FiltrerNonFact,Flag : filtrage des temps non-facturable (O/N),1
 Gel=1
@@ -882,6 +913,13 @@ Gel=3
 Nature=L*50
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20120928105729,TP                  ,20131112144557,TP                  
+Nom=idElemFact,Identifiant unique de l'élément facturable,1
+DateM=2090CE83ADDFCE01
+Gel=1
+Nature=14,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20120925114653,TP                  ,20120925114708,TP                  
 Nom=idFactLigne,Identifiant unique de ligne de détail de facturation,1
 DateM=02D6B4BA029BCD01
@@ -915,8 +953,8 @@ Gel=1
 Nature=14,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120928105729,TP                  ,20120928105729,TP                  
-Nom=IdPrestation,Identifiant unique de la prestation,1
+Version=1,20130703141656,TP                  ,20130703141656,TP                  
+Nom=idRacine,Identitant du point racine,1
 Gel=1
 Nature=14,0
 Flags=n,1,n,n,n,n,n,n
@@ -984,7 +1022,7 @@ Gel=1
 Nature=8,0
 Flags=n,1,o,n,n,n,n,n
 [CHAMP]
-Version=1,20040702083919,SC                  ,20120918153058,TP                  
+Version=1,20040702083919,SC                  ,20130422141828,TP                  
 Nom=Lib,Libellé,1
 DateM=62EB7AD6A195CD01
 Gel=3
@@ -1004,7 +1042,7 @@ Gel=3
 Nature=40
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20040702090023,SC                  ,20090626095338,CI                  
+Version=1,20040702090023,SC                  ,20130422141848,TP                  
 Nom=Lib80,Libellé sur 80,1
 Gel=3
 Nature=80
@@ -1152,6 +1190,18 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20131001105334,TP                  ,20131001105334,TP                  
+Nom=Modif_Arbitrage,Modiifcation de l'arbitrage O/N,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131001105304,TP                  ,20131001105342,TP                  
+Nom=Modif_Saisies,Modification des saisies O/N,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20021025152409,RR  ,20030515094255,RR
 Nom=ModifFlg,Indicateur modif zoom,1
 DateM=407C3399B51AC301
@@ -1219,6 +1269,19 @@ Gel=1
 Nature=4,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130328133443,TP                  ,20130328133443,TP                  
+Nom=NbBL,Nombre de bons de livraison,1
+Gel=1
+Nature=3,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130328133422,TP                  ,20130328133454,TP                  
+Nom=NbCde,Nombre de commandes ,1
+DateM=94871AA6B02BCE01
+Gel=1
+Nature=3,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20070918170359,DEMO                ,20070918170359,DEMO                
 Nom=NbDeci,Nombre de décimales,1
 Gel=1
@@ -1230,6 +1293,12 @@ Nom=NbEx,Nombre d'exemplaire,1
 DateM=3045AACDB91AC301
 Gel=3
 Nature=2,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130328133514,TP                  ,20130328133514,TP                  
+Nom=NbIndep,Nombre de ligne indépendantes,1
+Gel=1
+Nature=3,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20030227115028,RR                  ,20030227115028,RR
@@ -1380,14 +1449,20 @@ Gel=3
 Nature=2,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110914112450,ROOT                ,20110914112532,ROOT                
-Nom=PageTraceSelection,N° de la page detrace de la sélection,1
+Version=1,20130924114524,TP                  ,20130924114524,TP                  
+Nom=PageTrace,N° de la page de trace,1
 Gel=1
 Nature=L
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20110914112645,ROOT                ,20110914112645,ROOT                
-Nom=PageTraceTraitement,N° de la page de trace du traitement,1
+Version=1,20110914112450,ROOT                ,20130924114543,TP                  
+Nom=PageTraceSelection,N° de la page de sélection de la trace,1
+Gel=1
+Nature=L
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20110914112645,ROOT                ,20130924114604,TP                  
+Nom=PageTraceTraitement,N° de la page de traitement de la trace,1
 Gel=1
 Nature=L
 Flags=n,1,n,n,n,n,n,n
@@ -1443,6 +1518,13 @@ Nom=Pino,Numéro de pièce,1
 Gel=3
 Nature=8,0
 NomOdbc=NumeroPiece
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130523143413,TP                  ,20130523143432,TP                  
+Nom=Pino_H,N° de commande hérité,1
+DateM=F43B38E0B157CE01
+Gel=1
+Nature=8,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20121111215220,TP                  ,20121111215220,TP                  
@@ -1661,6 +1743,12 @@ Gel=1
 Nature=D8
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130315095159,TP                  ,20130315095159,TP                  
+Nom=QteAFact,Quantité à facturer,1
+Gel=1
+Nature=12,D2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20120920114149,TP                  ,20121024142502,TP                  
 Nom=QteAff,Quantité Affectée,1
 DateM=0AD63E97E2B1CD01
@@ -1682,6 +1770,13 @@ Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20121030090047,TP                  ,20121030090047,TP                  
 Nom=QteFact,Quantité facturée ,1
+Gel=1
+Nature=12,D2
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130425163145,TP                  ,20130425163204,TP                  
+Nom=QteFacture,Quantité déjà facturée,1
+DateM=D094DEA7C141CE01
 Gel=1
 Nature=12,D2
 Flags=n,1,n,n,n,n,n,n
@@ -1887,6 +1982,18 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130604093547,TP                  ,20130604093547,TP                  
+Nom=StatusTemps,Statut pour la saisie des temps ,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130604093926,TP                  ,20130604093926,TP                  
+Nom=StatusTemps_H,Statut de saisie des temps hérité,1
+Gel=1
+Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20041006164828,RR                  ,20050321082609,RR                  
 Nom=SuiCod,Code suivi,1
 Gel=3
@@ -1941,11 +2048,11 @@ Gel=1
 Nature=40
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20120326182919,TP                  ,20130411162627,TP                  
+Version=1,20120326182919,TP                  ,20131219091112,TP                  
 Nom=Tab_Donnees,Tableau des données de la matrice,1
-DateM=3969878DC036CE01
+DateM=562D9EE191FCCE01
 Gel=1
-Nature=400*30
+Nature=500*30
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20120518153729,TP                  ,20121205170426,TP                  
@@ -2015,6 +2122,19 @@ Gel=1
 Nature=T10
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130604103448,TP                  ,20130604103610,TP                  
+Nom=TpsAFact_Arbo,Temps facturable à facturer en tenant compte de l'arborescence,1
+DateM=28358090FE60CE01
+Gel=1
+Nature=T10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130604103658,TP                  ,20130604103658,TP                  
+Nom=TpsAFactNonFact_Arbo,Temps non-facturable à traiter en facturation en tenant compte de l'arborescence,1
+Gel=1
+Nature=T10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20040901173603,RR                  ,20050905170533,RR                  
 Nom=TpsCalc,Temps calculé,1
 DateM=7C5BA9432BB2C501
@@ -2047,6 +2167,24 @@ Nom=TpsDtFin,Date de fin,1
 DateM=01CA578C67F5CB01
 Gel=1
 Nature=D8
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20140619150321,TP                  ,20140619150321,TP                  
+Nom=TpsFact,Temps Facturé,1
+Gel=1
+Nature=T10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130604103743,TP                  ,20130604103743,TP                  
+Nom=TpsFact_Arbo,Temps facturé en tenant compte de l'arborescence,1
+Gel=1
+Nature=T10
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20130604103833,TP                  ,20130604103833,TP                  
+Nom=TpsFactNonFact_Arbo,Temps traité en facturation mais non-facturé\v en tenant compte de l'arborescence,1
+Gel=1
+Nature=T10
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20121218113244,TP                  ,20130102094134,TP                  
@@ -2235,8 +2373,9 @@ Attribut=PARAM
 NomOdbc=TypePeriode
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20121015154042,TP                  ,20121015154042,TP                  
-Nom=TypFacturationPresta,Type d'éléments à facturer - pour les prestations,1
+Version=1,20121015154042,TP                  ,20131112151620,TP                  
+Nom=TypFacturationElemFact,Type d'éléments à facturer - pour les éléments facturables,1
+DateM=3E8494C2B1DFCE01
 Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
@@ -2248,10 +2387,11 @@ Gel=1
 Nature=1,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
-Version=1,20121015143542,TP                  ,20121211111055,TP                  
+Version=1,20121015143542,TP                  ,20130322115535,TP                  
 Nom=TypLigne,Type de la ligne ,1
+DateM=7629C1C7EB26CE01
 Gel=1
-Nature=1,0
+Nature=2,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20121204171059,TP                  ,20121204171059,TP                  
@@ -2260,10 +2400,24 @@ Gel=1
 Nature=2,0
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20130315113457,TP                  ,20131112151550,TP                  
+Nom=TypRuptureElemFact,Méthode de détermination des ruptures pour les élements facturables,1
+DateM=6A3AC1B0B1DFCE01
+Gel=1
+Nature=2,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20121112142914,TP                  ,20121112142914,TP                  
 Nom=TypTransfert,Type de transfert (total ou partiel),1
 Gel=1
 Nature=1,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205150217,TP                  ,20131205150550,TP                  
+Nom=UAffichageMatrice,reservé distributeur,1
+DateM=9BAE7D1AC3F1CE01
+Gel=1
+Nature=1000
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20040831202428,RR                  ,20050420174331,RR                  
@@ -2280,8 +2434,16 @@ Gel=3
 Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
-Version=1,20130115161240,TP                  ,20130115182637,TP                  
-Nom=UAfrFactLgnPresta,Réservé distributeur,1
+Version=1,20120928111138,TP                  ,20131112144652,TP                  
+Nom=UAfrElemFact,Réservé distributeur,1
+DateM=90F578A4ADDFCE01
+Gel=1
+Nature=100
+Flags=n,1,o,o,n,n,n,n
+[CHAMP]
+Version=1,20130115161240,TP                  ,20131217170319,TP                  
+Nom=UAfrFactLgnElem,Réservé distributeur,1
+DateM=7271E88041FBCE01
 Gel=1
 Nature=50
 Flags=n,1,o,o,n,n,n,n
@@ -2312,18 +2474,18 @@ Gel=1
 Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
+Version=1,20131205150411,TP                  ,20131205153819,TP                  
+Nom=UAFRPOINT_Ext,Reservé distributeur,1
+DateM=0BB62EA4C7F1CE01
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20120627144056,TP                  ,20130115182921,TP                  
 Nom=UAfrPointModel,Réservé distributeur,1
 DateM=809E94D245F3CD01
 Gel=1
 Nature=150
-Flags=n,1,o,o,n,n,n,n
-[CHAMP]
-Version=1,20120928111138,TP                  ,20130115161803,TP                  
-Nom=UAfrPresta,Réservé distributeur,1
-DateM=C4AB698333F3CD01
-Gel=1
-Nature=100
 Flags=n,1,o,o,n,n,n,n
 [CHAMP]
 Version=1,20040921111218,RR                  ,20050321082309,RR                  
@@ -2458,10 +2620,135 @@ Gel=1
 Nature=400
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
+Version=1,20131205150540,TP                  ,20131205150540,TP                  
+Nom=UGA017,Reservé Distributeur,1
+Gel=1
+Nature=400
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205150955,TP                  ,20131205153028,TP                  
+Nom=UGA017T1,Reservé Distributeur,1
+DateM=B1DB1B8BC6F1CE01
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
 Version=1,20120213152954,TP                  ,20120213152954,TP                  
 Nom=UGA018T1,Zone de surcharge,1
 Gel=1
 Nature=400
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151147,TP                  ,20131205151147,TP                  
+Nom=UGA020T1,Reservé Distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151320,TP                  ,20131205151320,TP                  
+Nom=UGA020T11,Reservé Distributeur,1
+Gel=1
+Nature=80
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151421,TP                  ,20131205151421,TP                  
+Nom=UGA020T12,Reservé Distributeur,1
+Gel=1
+Nature=120
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151508,TP                  ,20131205151508,TP                  
+Nom=UGA020T2,Reservé Distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151554,TP                  ,20131205151554,TP                  
+Nom=UGA020T4,Reservé distributeur,1
+Gel=1
+Nature=300
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151637,TP                  ,20131205151637,TP                  
+Nom=UGA020T5,Reservé Distributeur,1
+Gel=1
+Nature=28
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151707,TP                  ,20131205151707,TP                  
+Nom=UGA021,Reservé Disitributeur,1
+Gel=1
+Nature=60
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151754,TP                  ,20131217104357,TP                  
+Nom=UGA022,Reservé Distributeur,1
+DateM=E5BDA1810CFBCE01
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205151855,TP                  ,20131205151855,TP                  
+Nom=UGA023,Reservé Distributeur,1
+Gel=1
+Nature=250
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152015,TP                  ,20131205152159,TP                  
+Nom=UGA023T2,Reservé Distributeur,1
+DateM=A915C45BC5F1CE01
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152353,TP                  ,20131205152353,TP                  
+Nom=UGA023T3,Reservé Distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152439,TP                  ,20131205152439,TP                  
+Nom=UGA023T4,Reservé Distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152512,TP                  ,20131205153121,TP                  
+Nom=UGA023T5,Reservé Distributeur,1
+DateM=C10F1CABC6F1CE01
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152548,TP                  ,20131205153215,TP                  
+Nom=UGA023T6,Reservé Distributeur,1
+DateM=1BD8E9CAC6F1CE01
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152806,TP                  ,20131205152806,TP                  
+Nom=UGA024T1,Reservé Distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152843,TP                  ,20131205152843,TP                  
+Nom=UGA024T2,Reservé Distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152925,TP                  ,20131205152925,TP                  
+Nom=UGA024T3,Reservé Distributeur,1
+Gel=1
+Nature=200
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205152627,TP                  ,20131205152627,TP                  
+Nom=UGA23T7,Reservé Distributeur,1
+Gel=1
+Nature=200
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20041130155119,DEMO                ,20050321082334,RR                  
@@ -2587,6 +2874,13 @@ Version=1,20031202092248,TL                  ,20031202092248,TL
 Nom=userx,User pour sql,1
 Gel=3
 Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20131205150139,TP                  ,20131205150730,TP                  
+Nom=UTab_Donnees,Reservé distributeur,1
+DateM=10E53E56C3F1CE01
+Gel=1
+Nature=150
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20040901140015,RR                  ,20050321082003,RR                  
@@ -2793,10 +3087,10 @@ Nom=FullPtsCod,1,0,0,N,1
 Nom=IdPoint,201,0,0,N,1
 Nom=TpsPrev,215,0,0,N,1
 Nom=TpsReal,225,0,0,N,1
-Nom=TpsPrev_Arbo,235,0,0,N,1
-Nom=TpsReal_Arbo,245,0,0,N,1
-Nom=Lib80,255,0,0,N,1
-Nom=TpsPrev_Jour,335,0,0,N,1
+Nom=Lib80,235,0,0,N,1
+Nom=TpsPrev_Jour,315,0,0,N,1
+Nom=Filler,322,0,28,N,1
+Nom=UTab_Donnees,350,0,0,N,1
 [/CHAMPL]
 nom=TpsDH
 [CHAMPL]
@@ -2855,18 +3149,16 @@ Nom=Valeur,1,0,0,N,3
 [/CHAMPL]
 [/CHAMPR]
 [TABLE]
-Version=1,20120326182446,TP                  ,20130411162642,TP                  
+Version=1,20120326182446,TP                  ,20131219091123,TP                  
 Nom=AffichageMatrice,Table d'affichage pour une matrice issue des Points,1
-DateM=84903D96C036CE01
-Taille=15000,15000
+DateM=C72168E891FCCE01
+Taille=20000,20000
 Pack=0,0
 [CHAMPS]
 Nom=PtsCod,1,2,N,0,0,N,1
 Nom=Tab_Donnees,21,2,N,0,0,N,1
+Nom=UAffichageMatrice,15021,2,N,0,0,N,1
 [/CHAMPS]
-[PROPLOC]
-Nom=Tab_Donnees
-[/PROPLOC]
 [TABLE]
 Version=1,20040831202143,RR                  ,20050513170428,RR                  
 Nom=AfrCel,Résultat d'une cellule,1
@@ -2894,7 +3186,7 @@ Nom=UAfrCel,301,2,N,0,0,N,3
 [TABLE]
 Version=1,20040921105208,RR                  ,20050513170435,RR                  
 Nom=AfrDet,Détail du calcul,1
-DateM=2C0A31B0E725CC01
+DateM=EB2FA28A533FCE01
 NomOdbc=Affaire_Details
 Taille=700,700
 Pack=0,0
@@ -2937,72 +3229,121 @@ Alias=Heure
 Nom=TpsHe
 [/PROPLOC]
 [TABLE]
-Version=1,20120928105006,TP                  ,20120928110710,TP                  
-Nom=AfrFactLgnPresta,Table de liaison entre Ligne de détail et Prestation,1
-DateM=ADEBAEC732F3CD01
+Version=1,20120928105214,TP                  ,20131112144633,TP                  
+Nom=AfrElemFact,Elements facturables,1
+DateM=90F578A4ADDFCE01
+Taille=500,500
+Pack=0,0
+CE=Ce1,3
+[CHAMPS]
+Nom=Ce1,1,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Dos,6,2,N,0,0,N,1
+Nom=idElemFact,9,2,N,0,0,N,1
+Nom=Affaire,23,2,N,0,0,N,1
+Nom=Grref,31,2,N,0,0,N,1
+Nom=EnrNo,72,2,N,0,0,N,1
+Nom=VenUn,81,2,N,0,0,N,1
+Nom=Lib80,85,2,N,0,0,N,1
+Nom=QteReal,165,2,N,0,0,N,1
+Nom=QteAFact,177,2,N,0,0,N,1
+Nom=DebutDt,189,2,N,0,0,N,1
+Nom=FinDt,197,2,N,0,0,N,1
+Nom=TpsDt,205,2,N,0,0,N,1
+Nom=SalCod,213,2,N,0,0,N,1
+Nom=IdPoint,233,2,N,0,0,N,1
+Nom=StatusFact,247,2,N,0,0,N,1
+Nom=estFacturable,248,2,N,0,0,N,1
+Nom=Note,249,2,N,0,0,N,1
+Nom=CeNote,257,2,N,0,0,N,1
+Nom=Joint,258,2,N,0,0,N,1
+Nom=CeJoint,266,2,N,0,0,N,1
+Nom=UserInfoCommun,267,2,N,0,0,N,1
+Nom=QteFact,335,2,N,0,0,N,1
+Nom=Filler,347,2,N,0,54,N,1
+Nom=UAfrElemFact,401,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20120928105006,TP                  ,20131112144453,TP                  
+Nom=AfrFactLgnElem,Table de liaison entre Ligne de détail et éléments facturables,1
+DateM=7271E88041FBCE01
 Taille=100,100
 Pack=0,0
 CE=Ce1,5
 [CHAMPS]
 Nom=Ce1,1,2,N,0,0,N,1
-Nom=Dos,2,2,N,0,0,N,1
-Nom=idFactLigne,5,2,N,0,0,N,1
-Nom=IdPrestation,19,2,N,0,0,N,1
-Nom=QteAff,33,2,N,0,0,N,1
-Nom=Filler,45,2,N,0,6,N,1
-Nom=UAfrFactLgnPresta,51,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Dos,6,2,N,0,0,N,1
+Nom=idFactLigne,9,2,N,0,0,N,1
+Nom=idElemFact,23,2,N,0,0,N,1
+Nom=QteAff,37,2,N,0,0,N,1
+Nom=UAfrFactLgnElem,49,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120928104800,TP                  ,20120928105053,TP                  
 Nom=AfrFactLgnTps,Table de liaison entre  Ligne de détail et Temps,1
-DateM=E9EA1D6654F9CD01
+DateM=50233F32ADDFCE01
 Taille=100,100
 Pack=0,0
 CE=Ce1,4
 [CHAMPS]
 Nom=Ce1,1,2,N,0,0,N,1
-Nom=Dos,2,2,N,0,0,N,1
-Nom=idFactLigne,5,2,N,0,0,N,1
-Nom=idTemps,19,2,N,0,0,N,1
-Nom=QteAff,33,2,N,0,0,N,1
-Nom=DureeFact,45,2,N,0,0,N,1
-Nom=UAfrFactLgnTps,55,2,N,0,0,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Dos,6,2,N,0,0,N,1
+Nom=idFactLigne,9,2,N,0,0,N,1
+Nom=idTemps,23,2,N,0,0,N,1
+Nom=QteAff,37,2,N,0,0,N,1
+Nom=DureeFact,49,2,N,0,0,N,1
+Nom=UAfrFactLgnTps,59,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120925111129,TP                  ,20130115161420,TP                  
 Nom=AfrFactLigne,Lignes de détail de facturation,1
-DateM=8895425F33F3CD01
+DateM=B01C2241ADDFCE01
 Taille=600,600
 Pack=0,0
 CE=Ce1,3
 [CHAMPS]
 Nom=Ce1,1,2,N,0,0,N,1
-Nom=Dos,2,2,N,0,0,N,1
-Nom=CleLigneDetail,5,2,N,0,0,N,1
-Nom=FaNo,46,2,N,0,0,N,1
-Nom=Des,54,2,N,0,0,N,1
-Nom=QteFact,254,2,N,0,0,N,1
-Nom=QteNonFact,266,2,N,0,0,N,1
-Nom=TypLigne,278,2,N,0,0,N,1
-Nom=Grref,279,2,N,0,0,N,1
-Nom=ActCod,320,2,N,0,0,N,1
-Nom=Domaine,328,2,N,0,0,N,1
-Nom=SalCod,338,2,N,0,0,N,1
-Nom=TpsDt,358,2,N,0,0,N,1
-Nom=Periode,366,2,N,0,0,N,1
-Nom=estFacturable,386,2,N,0,0,N,1
-Nom=IdPoint,387,2,N,0,0,N,1
-Nom=RefUn,401,2,N,0,0,N,1
-Nom=TxtCod,405,2,N,0,0,N,1
-Nom=txtNote,406,2,N,0,0,N,1
-Nom=UserInfoCommun,414,2,N,0,0,N,1
-Nom=Filler,482,2,N,0,19,N,1
+Nom=Ce2,2,2,N,0,0,N,1
+Nom=Ce3,3,2,N,0,0,N,1
+Nom=Ce4,4,2,N,0,0,N,1
+Nom=Ce5,5,2,N,0,0,N,1
+Nom=Dos,6,2,N,0,0,N,1
+Nom=CleLigneDetail,9,2,N,0,0,N,1
+Nom=FaNo,50,2,N,0,0,N,1
+Nom=Des,58,2,N,0,0,N,1
+Nom=QteFact,258,2,N,0,0,N,1
+Nom=QteNonFact,270,2,N,0,0,N,1
+Nom=TypLigne,282,2,N,0,0,N,1
+Nom=Grref,284,2,N,0,0,N,1
+Nom=ActCod,325,2,N,0,0,N,1
+Nom=Domaine,333,2,N,0,0,N,1
+Nom=SalCod,343,2,N,0,0,N,1
+Nom=TpsDt,363,2,N,0,0,N,1
+Nom=Periode,371,2,N,0,0,N,1
+Nom=estFacturable,391,2,N,0,0,N,1
+Nom=IdPoint,392,2,N,0,0,N,1
+Nom=RefUn,406,2,N,0,0,N,1
+Nom=TxtCod,410,2,N,0,0,N,1
+Nom=txtNote,411,2,N,0,0,N,1
+Nom=UserInfoCommun,419,2,N,0,0,N,1
+Nom=Filler,487,2,N,0,14,N,1
 Nom=UAfrFactLigne,501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120925111054,TP                  ,20120925134855,TP                  
 Nom=AfrFactTpsArt,Paramétrage de la correspondance Temps - Article,1
-DateM=E296DC6733F3CD01
+DateM=8AE7A84F4B39CF01
 Taille=300,300
 Pack=0,0
 CE=Ce1,1
@@ -3016,15 +3357,16 @@ Nom=Affaire,35,2,N,0,0,N,1
 Nom=Domaine,43,2,N,0,0,N,1
 Nom=SalCod,53,2,N,0,0,N,1
 Nom=SalGrp,73,2,N,0,0,N,1
-Nom=Grref,81,2,N,0,0,N,1
-Nom=UserInfoCommun,122,2,N,0,0,N,1
-Nom=Filler,190,2,N,0,11,N,1
+Nom=Etb,81,2,N,0,0,N,1
+Nom=Grref,84,2,N,0,0,N,1
+Nom=UserInfoCommun,125,2,N,0,0,N,1
+Nom=Filler,193,2,N,0,8,N,1
 Nom=UAfrFactTpsArt,201,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20110201180359,GN                  ,20121116135836,TP                  
 Nom=AfrPoint,Points,1
-DateM=0CFF91EF33F3CD01
+DateM=AEF6B49AFE36CF01
 NomOdbc=Points
 Taille=900,900
 Pack=0,0
@@ -3059,14 +3401,19 @@ Nom=Joint,528,2,N,0,0,N,1
 Nom=OrdreNo,536,2,N,0,0,N,1
 Nom=refDocWeb,539,2,N,0,0,N,1
 Nom=UserInfoCommun,553,2,N,0,0,N,1
-Nom=Filler,621,2,N,0,180,N,1
+Nom=Pino,621,2,N,0,0,N,1
+Nom=StatusTemps,629,2,N,0,0,N,1
+Nom=idRacine,630,2,N,0,0,N,1
+Nom=BorneD,644,2,N,0,0,N,1
+Nom=BorneF,658,2,N,0,0,N,1
+Nom=Filler,672,2,N,0,129,N,1
 Nom=UAfrPoint,801,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20120529093910,TP                  ,20121116135851,TP                  
+Version=1,20120529093910,TP                  ,20131205153809,TP                  
 Nom=AFRPOINT_Ext,Extension pour les données AFRPOINT,1
-DateM=82CC4C044A09CE01
-Taille=1400,1400
+DateM=AEF6B49AFE36CF01
+Taille=1600,1600
 Pack=0,0
 [CHAMPS]
 TableInsere=AfrPoint,1,900,0,1
@@ -3074,24 +3421,31 @@ Nom=TpsPrev,901,2,N,0,0,N,1
 Nom=TpsReal,911,2,N,0,0,N,1
 Nom=TpsPrev_Arbo,921,2,N,0,0,N,1
 Nom=TpsReal_Arbo,931,2,N,0,0,N,1
-Nom=PRJAP_Lib80,941,2,N,0,0,N,1
-Nom=T039_Lib,1021,2,N,0,0,N,1
-Nom=GATDOM_Lib,1061,2,N,0,0,N,1
-Nom=Activite_H_Code,1101,2,N,0,0,N,1
-Nom=Activite_H_Lib,1109,2,N,0,0,N,1
-Nom=Affaire_H_Code,1149,2,N,0,0,N,1
-Nom=Affaire_H_Lib,1157,2,N,0,0,N,1
-Nom=Domaine_H_Code,1237,2,N,0,0,N,1
-Nom=Domaine_H_Lib,1247,2,N,0,0,N,1
-Nom=Status_H,1287,2,N,0,0,N,1
-Nom=Tiers_Code,1288,2,N,0,0,N,1
-Nom=Tiers_Nom,1296,2,N,0,0,N,1
-Nom=Facturable_H,1334,2,N,0,0,N,1
+Nom=TpsAFact_Arbo,941,2,N,0,0,N,1
+Nom=TpsAFactNonFact_Arbo,951,2,N,0,0,N,1
+Nom=TpsFact_Arbo,961,2,N,0,0,N,1
+Nom=TpsFactNonFact_Arbo,971,2,N,0,0,N,1
+Nom=PRJAP_Lib80,981,2,N,0,0,N,1
+Nom=T039_Lib,1061,2,N,0,0,N,1
+Nom=GATDOM_Lib,1101,2,N,0,0,N,1
+Nom=Activite_H_Code,1141,2,N,0,0,N,1
+Nom=Activite_H_Lib,1149,2,N,0,0,N,1
+Nom=Affaire_H_Code,1189,2,N,0,0,N,1
+Nom=Affaire_H_Lib,1197,2,N,0,0,N,1
+Nom=Domaine_H_Code,1277,2,N,0,0,N,1
+Nom=Domaine_H_Lib,1287,2,N,0,0,N,1
+Nom=Status_H,1327,2,N,0,0,N,1
+Nom=StatusTemps_H,1328,2,N,0,0,N,1
+Nom=Tiers_Code,1329,2,N,0,0,N,1
+Nom=Tiers_Nom,1337,2,N,0,0,N,1
+Nom=Facturable_H,1375,2,N,0,0,N,1
+Nom=Filler,1376,2,N,0,25,N,1
+Nom=UAFRPOINT_Ext,1401,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120627142537,TP                  ,20120627142643,TP                  
 Nom=AfrPointModel,Modèles de point,1
-DateM=809E94D245F3CD01
+DateM=6BEBEA7E533FCE01
 NomOdbc=PointModel
 Taille=300,300
 Pack=0,0
@@ -3106,29 +3460,9 @@ Nom=nivColonnes,60,2,N,0,0,N,1
 Nom=modeSaisie,61,2,N,0,0,N,1
 Nom=RefUn,62,2,N,0,0,N,1
 Nom=UserInfoCommun,66,2,N,0,0,N,1
-Nom=Filler,134,2,N,0,17,N,1
+Nom=AfrClas,134,2,N,0,0,N,1
+Nom=Filler,142,2,N,0,9,N,1
 Nom=UAfrPointModel,151,2,N,0,0,N,1
-[/CHAMPS]
-[TABLE]
-Version=1,20120928105214,TP                  ,20120928111216,TP                  
-Nom=AfrPresta,Prestations,1
-DateM=7CEB838633F3CD01
-Taille=300,300
-Pack=0,0
-CE=Ce1,3
-[CHAMPS]
-Nom=Ce1,1,2,N,0,0,N,1
-Nom=Dos,2,2,N,0,0,N,1
-Nom=IdPrestation,5,2,N,0,0,N,1
-Nom=Affaire,19,2,N,0,0,N,1
-Nom=Grref,27,2,N,0,0,N,1
-Nom=QteReal,68,2,N,0,0,N,1
-Nom=DebutDt,80,2,N,0,0,N,1
-Nom=FinDt,88,2,N,0,0,N,1
-Nom=TpsDt,96,2,N,0,0,N,1
-Nom=SalCod,104,2,N,0,0,N,1
-Nom=Filler,124,2,N,0,77,N,1
-Nom=UAfrPresta,201,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20040921111050,RR                  ,20050513170410,RR                  
@@ -3178,7 +3512,7 @@ Nom=UAfrSal,201,2,N,0,0,N,1
 [TABLE]
 Version=1,20040803173321,SC                  ,20120306100413,TP                  
 Nom=AfrTps,Temps,1
-DateM=BCB0038C33F3CD01
+DateM=EB2FA28A533FCE01
 NomOdbc=Affaire_Temps
 Taille=700,700
 Pack=0,0
@@ -3209,13 +3543,16 @@ Nom=estFacturable,457,2,N,0,0,N,1
 Nom=StatusFact,458,2,N,0,0,N,1
 Nom=TpsDhFin,459,2,N,0,0,N,1
 Nom=UserInfoCommun,473,2,N,0,0,N,1
-Nom=Filler,541,2,N,0,60,N,1
+Nom=CeJoint,541,2,N,0,0,N,1
+Nom=Joint,542,2,N,0,0,N,1
+Nom=TpsFact,550,2,N,0,0,N,1
+Nom=Filler,560,2,N,0,41,N,1
 Nom=Uafrtps,601,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120411134602,TP                  ,20120424164912,TP                  
 Nom=AfrTpsPrev,Temps Prévisionnel,1
-DateM=CC48810A34F3CD01
+DateM=6BEBEA7E533FCE01
 Taille=250,250
 Pack=0,0
 CE=Ce1,3
@@ -3234,7 +3571,7 @@ Nom=UAfrTpsPrev,186,2,N,0,0,N,1
 [TABLE]
 Version=1,20040803174531,SC                  ,20051201184006,RR                  
 Nom=AfrVal,Valeurs manuelles,1
-DateM=B0E2C1449EF6C501
+DateM=EB2FA28A533FCE01
 NomOdbc=Affaire_Valeurs
 Taille=500,500
 Pack=0,0
@@ -3271,7 +3608,7 @@ Nom=CsvData,1,2,N,0,0,N,1
 [TABLE]
 Version=1,20040707164857,SC                  ,20050513165528,RR                  
 Nom=GA001T1,Tableau Postes,1
-DateM=BAA6B377DF01C801
+DateM=EB2FA28A533FCE01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -3301,7 +3638,7 @@ Nom=DerOrdre,3,2,N,0,0,N,1
 [TABLE]
 Version=1,20040818104151,RR                  ,20050513165543,RR                  
 Nom=GA002T1,Enregistrement tableau de GAPP002,1
-DateM=DC41DCAB58F3C501
+DateM=EB2FA28A533FCE01
 Taille=1200,1200
 Pack=0,0
 [CHAMPS]
@@ -3320,7 +3657,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20040819103613,RR                  ,20050418142348,RR                  
 Nom=GA002T2,Cellules,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 Taille=3000,3000
 Pack=0,0
 [CHAMPS]
@@ -3346,7 +3683,7 @@ Nom=LibCol
 [TABLE]
 Version=1,20040818183401,RR                  ,20050418142422,RR                  
 Nom=GA003T1,Cellules,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 Taille=2500,2500
 Pack=0,0
 [CHAMPS]
@@ -3359,7 +3696,7 @@ Nom=UGA003T1,2281,2,N,0,0,N,1
 [TABLE]
 Version=1,20040827110826,RR                  ,20050513165602,RR                  
 Nom=GA003T2,Enregistrement tableau,1
-DateM=BAA6B377DF01C801
+DateM=EB2FA28A533FCE01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -3370,7 +3707,7 @@ Nom=UGA003T2,757,2,N,0,0,N,1
 [TABLE]
 Version=1,20040830105707,RR                  ,20050513165612,RR                  
 Nom=GA003T3,Enregistrement tableau de GAPP003,1
-DateM=DC41DCAB58F3C501
+DateM=EB2FA28A533FCE01
 Taille=2600,2600
 Pack=0,0
 [CHAMPS]
@@ -3384,7 +3721,7 @@ Nom=UGA003T3,2317,2,N,0,0,N,1
 [TABLE]
 Version=1,20040901160358,RR                  ,20040901160658,RR                  
 Nom=GA006,Table mémoire du programme GA006,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -3397,7 +3734,7 @@ Nom=Choix,1408,2,N,0,0,N,1
 [TABLE]
 Version=1,20040831105636,RR                  ,20050513165627,RR                  
 Nom=GA007T1,Enregistrement tableau GAPP007,1
-DateM=DC41DCAB58F3C501
+DateM=EB2FA28A533FCE01
 Taille=2600,2600
 Pack=0,0
 [CHAMPS]
@@ -3411,7 +3748,7 @@ Nom=UGA007T1,2317,2,N,0,0,N,1
 [TABLE]
 Version=1,20040819103613,RR                  ,20050513165640,RR                  
 Nom=GA007T2,Cellules,1
-DateM=2C0A31B0E725CC01
+DateM=EB2FA28A533FCE01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -3431,7 +3768,7 @@ Nom=LibPst
 [TABLE]
 Version=1,20040920114509,RR                  ,20050513165649,RR                  
 Nom=GA008T1,Enregistrement impression paramétrage,1
-DateM=DC41DCAB58F3C501
+DateM=EB2FA28A533FCE01
 Taille=1600,1600
 Pack=0,0
 [CHAMPS]
@@ -3450,7 +3787,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20040921163826,RR                  ,20050513165656,RR                  
 Nom=GA009T1,Enregistrement Impression du résultat,1
-DateM=DC41DCAB58F3C501
+DateM=EB2FA28A533FCE01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -3470,7 +3807,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20040928083857,RR                  ,20050831110057,RR                  
 Nom=GA010T1,Enregistrement mémoire,1
-DateM=BAA6B377DF01C801
+DateM=EB2FA28A533FCE01
 Taille=2400,2400
 Pack=0,0
 [CHAMPS]
@@ -3496,7 +3833,7 @@ Nom=TotalReal
 [TABLE]
 Version=1,20040927074611,RR                  ,20120306100453,TP                  
 Nom=GA010T2,Table mémoire,1
-DateM=D982434F09DDCD01
+DateM=EB2FA28A533FCE01
 Taille=1200,1200
 Pack=0,0
 [CHAMPS]
@@ -3508,7 +3845,7 @@ Nom=UGA010T2,997,2,N,0,0,N,1
 [TABLE]
 Version=1,20041025084949,RR                  ,20050513165715,RR                  
 Nom=GA012T1,Enregistrement mémoire comparatif de résultat,1
-DateM=DC41DCAB58F3C501
+DateM=EB2FA28A533FCE01
 Taille=4200,4200
 Pack=0,0
 [CHAMPS]
@@ -3526,7 +3863,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20041025085219,RR                  ,20050418142832,RR                  
 Nom=GA012T2,Enregistrement mémoire,1
-DateM=62EB7AD6A195CD01
+DateM=EB2FA28A533FCE01
 Taille=2800,2800
 Pack=0,0
 [CHAMPS]
@@ -3547,7 +3884,7 @@ Nom=LibAffaire
 [TABLE]
 Version=1,20041007100546,RR                  ,20041007100830,RR                  
 Nom=GA013T1,Enregistrement mémoire suivi budgétaire,1
-DateM=D45CCDDB840CC501
+DateM=EB2FA28A533FCE01
 Taille=2000,2000
 Pack=0,0
 [CHAMPS]
@@ -3562,7 +3899,7 @@ Nom=TreeInfo,1683,2,N,0,0,N,3
 [TABLE]
 Version=1,20041110094747,RR                  ,20050418142859,RR                  
 Nom=GA014T1,Enregistrement tableau de GAPP014,1
-DateM=62EB7AD6A195CD01
+DateM=EB2FA28A533FCE01
 Taille=5900,5900
 Pack=0,0
 [CHAMPS]
@@ -3578,7 +3915,7 @@ Nom=UGA014T1,5685,2,N,0,0,N,1
 [TABLE]
 Version=1,20070918172205,DEMO                ,20110203233214,GN                  
 Nom=GA016T1,Prog Export points Table Entete,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -3598,7 +3935,7 @@ Nom=UGA016T1,601,2,N,0,0,N,1
 [TABLE]
 Version=1,20110217155858,GN                  ,20110217155858,GN                  
 Nom=GA017,Table mémoire du programme GA017,1
-DateM=42F8CDA1D6E8CD01
+DateM=BC9F798CC3F1CE01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -3624,12 +3961,14 @@ Nom=ChargerSsNiveaux,840,2,N,0,0,N,1
 Nom=ChargeToutPeriode,841,2,N,0,0,N,1
 Nom=ChargeNonFact,842,2,N,0,0,N,1
 Nom=Pong,843,2,N,0,0,N,1
+Nom=Filler,844,2,N,0,257,N,1
+Nom=UGA017,1101,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20110217165141,GN                  ,20120412165814,TP                  
+Version=1,20110217165141,GN                  ,20131205153017,TP                  
 Nom=GA017T1,Table saisie des temps affaire,1
-DateM=D982434F09DDCD01
-Taille=1600,1600
+DateM=E040058EC6F1CE01
+Taille=1700,1700
 Pack=0,0
 [CHAMPS]
 TableInsere=AFRTPS,1,700,0,1
@@ -3646,11 +3985,13 @@ Nom=GATDOM_Lib,1260,2,N,0,0,N,1
 Nom=ART_DES,1300,2,N,0,0,N,1
 Nom=TpsPrev_Arbo,1380,2,N,0,0,N,1
 Nom=TpsReal_Arbo,1390,2,N,0,0,N,1
+Nom=Filler,1400,2,N,0,101,N,1
+Nom=UGA017T1,1501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120213151850,TP                  ,20120413103019,TP                  
 Nom=GA018T1,Table mémoire pour l'application de gestion des points,1
-DateM=229D31251FC7CD01
+DateM=AEF6B49AFE36CF01
 Taille=2500,2500
 Pack=0,0
 [CHAMPS]
@@ -3682,6 +4023,10 @@ Nom=LibAff,2072,2,N,0,0,N,1
 Nom=LibAff_H,2112,2,N,0,0,N,1
 Nom=Tiers_Code,2152,2,N,0,0,N,1
 Nom=Tiers_Nom,2160,2,N,0,0,N,1
+Nom=Pino_H,2198,2,N,0,0,N,1
+Nom=StatusTemps_H,2206,2,N,0,0,N,1
+Nom=CeDocWeb,2207,2,N,0,0,N,1
+Nom=Filler,2208,2,N,0,293,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120425161556,TP                  ,20120518153553,TP                  
@@ -3695,7 +4040,7 @@ Nom=TextePage,1,2,N,0,0,N,1
 [TABLE]
 Version=1,20120425161005,TP                  ,20120425180125,TP                  
 Nom=GA020T1,Liste des points traités ,1
-DateM=229D31251FC7CD01
+DateM=AEF6B49AFE36CF01
 Taille=1500,1500
 Pack=0,0
 [CHAMPS]
@@ -3708,33 +4053,39 @@ Nom=EstModifTpsPrev,1107,2,N,0,0,N,1
 Nom=TpsPrev,1108,2,N,0,0,N,1
 Nom=SalCod,1118,2,N,0,0,N,1
 Nom=TreeInfo,1138,2,N,0,0,N,1
+Nom=Filler,1289,2,N,0,12,N,1
+Nom=UGA020T1,1301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120522164427,TP                  ,20120524131348,TP                  
 Nom=GA020T11,Traitement des affectations liées à un point,1
-DateM=3225E2E245F3CD01
+DateM=00049E2AC4F1CE01
 Taille=600,600
 Pack=0,0
 [CHAMPS]
 TableInsere=AfrSal,1,300,0,1
 Nom=TypeModif,301,2,N,0,0,N,1
 Nom=FullPtsCod,302,2,N,0,0,N,1
+Nom=Filler,502,2,N,0,19,N,1
+Nom=UGA020T11,521,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120522164457,TP                  ,20120524131352,TP                  
 Nom=GA020T12,Traitement des temps prévisionnels lés à un point,1
-DateM=62EB7AD6A195CD01
+DateM=B9862D4FC4F1CE01
 Taille=600,600
 Pack=0,0
 [CHAMPS]
 TableInsere=AfrTpsPrev,1,250,0,1
 Nom=TypeModif,251,2,N,0,0,N,1
 Nom=FullPtsCod,252,2,N,0,0,N,1
+Nom=Filler,452,2,N,0,29,N,1
+Nom=UGA020T12,481,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120425180109,TP                  ,20120425180213,TP                  
 Nom=GA020T2,Liste des onglets à importer,1
-DateM=9AC01CA1FC22CD01
+DateM=3CD3E769C4F1CE01
 Taille=500,500
 Pack=0,0
 [CHAMPS]
@@ -3742,17 +4093,21 @@ Nom=NomOnglet,1,2,N,0,0,N,1
 Nom=Noeud,81,2,N,0,0,N,1
 Nom=NB_points,281,2,N,0,0,N,1
 Nom=est_sel,285,2,N,0,0,N,1
+Nom=Filler,286,2,N,0,15,N,1
+Nom=UGA020T2,301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120503171522,TP                  ,20120503171533,TP                  
 Nom=GA020T4,Liste des colonnes du modèle,1
-DateM=7ECECADE5337CD01
+DateM=757C4286C4F1CE01
 Taille=500,500
 Pack=0,0
 [CHAMPS]
 Nom=NomColonne,1,2,N,0,0,N,1
 Nom=idxLigne,81,2,N,0,0,N,1
 Nom=idxColonne,85,2,N,0,0,N,1
+Nom=Filler,89,2,N,0,112,N,1
+Nom=UGA020T4,201,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120608143746,TP                  ,20120625142600,TP                  
@@ -3766,23 +4121,26 @@ Nom=estExportee,2,2,N,0,0,N,1
 Nom=nomExcel,3,2,N,0,0,N,1
 Nom=nomDataCompute,43,2,N,0,0,N,1
 Nom=nomDMC,83,2,N,0,0,N,1
+Nom=UGA020T5,123,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120605154245,TP                  ,20120605154245,TP                  
 Nom=GA021,Paramètres pour l'affiche de la matrice des points,1
-DateM=FAFED3CE2543CD01
+DateM=D6EF4DB3C4F1CE01
 Taille=100,100
 Pack=0,0
 [CHAMPS]
 Nom=idPointParent,1,2,N,0,0,N,1
 Nom=nivParent,15,2,N,0,0,N,1
 Nom=nivColonnes,16,2,N,0,0,N,1
+Nom=Filler,17,2,N,0,24,N,1
+Nom=UGA021,41,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20120627095432,TP                  ,20130114180254,TP                  
+Version=1,20120627095432,TP                  ,20131217104340,TP                  
 Nom=GA022,Paramètres pour l'initialisation des points ,1
-DateM=809E94D245F3CD01
-Taille=1000,1000
+DateM=4DBE9D860CFBCE01
+Taille=1200,1200
 Pack=0,0
 [CHAMPS]
 Nom=Affaire,1,2,N,0,0,N,1
@@ -3791,43 +4149,53 @@ Nom=PtsCod,89,2,N,0,0,N,1
 Nom=FullPtsCod,109,2,N,0,0,N,1
 Nom=Des,309,2,N,0,0,N,1
 TableInsere=AFRPOINTMODEL,509,300,0,1
+Nom=TitreFenetre,809,2,N,0,0,N,1
+Nom=Filler,909,2,N,0,92,N,1
+Nom=UGA022,1001,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20120918152206,TP                  ,20130108102803,TP                  
 Nom=GA023,Paramètres pour la facturation,1
-DateM=9B40787582EDCD01
+DateM=835B06F2C4F1CE01
 Taille=500,500
 Pack=0,0
 [CHAMPS]
 Nom=TypFacturationTps,1,2,N,0,0,N,1
-Nom=TypFacturationPresta,2,2,N,0,0,N,1
+Nom=TypFacturationElemFact,2,2,N,0,0,N,1
 Nom=AfrFactFlux,3,2,N,0,0,N,1
-Nom=FiltrerNonFact,6,2,N,0,0,N,1
-Nom=AutoriserModifSaisies,7,2,N,0,0,N,1
-Nom=AutoriserLgnSansCde,8,2,N,0,0,N,1
-Nom=TitreFenetre,9,2,N,0,0,N,1
-Nom=TypRupture,109,2,N,0,0,N,1
-Nom=Affaire,111,2,N,0,0,N,1
-Nom=Tiers_Nom,119,2,N,0,0,N,1
-Nom=Filler,157,2,N,0,344,N,1
+Nom=FiltrerNonFact,8,2,N,0,0,N,1
+Nom=AutoriserModifSaisies,9,2,N,0,0,N,1
+Nom=AutoriserLgnSansCde,10,2,N,0,0,N,1
+Nom=TitreFenetre,11,2,N,0,0,N,1
+Nom=TypRupture,111,2,N,0,0,N,1
+Nom=TypRuptureElemFact,113,2,N,0,0,N,1
+Nom=Affaire,115,2,N,0,0,N,1
+Nom=Tiers_Nom,123,2,N,0,0,N,1
+Nom=FiltrerMouvPerime,161,2,N,0,0,N,1
+Nom=Filler,162,2,N,0,89,N,1
+Nom=UGA023,251,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20121010114540,TP                  ,20121010114540,TP                  
+Version=1,20121010114540,TP                  ,20131205152124,TP                  
 Nom=GA023T2,Affaires traitées par la facturation,1
-DateM=ED12C7A23FADCD01
-Taille=300,300
+DateM=B9BF826DC5F1CE01
+Taille=500,500
 Pack=0,0
 [CHAMPS]
 Nom=Affaire_Code,1,2,N,0,0,N,1
 Nom=Affaire_Libelle,9,2,N,0,0,N,1
 Nom=Tiers_Code,89,2,N,0,0,N,1
 Nom=Tiers_Nom,97,2,N,0,0,N,1
+Nom=Modif_Saisies,135,2,N,0,0,N,1
+Nom=Modif_Arbitrage,136,2,N,0,0,N,1
+Nom=Filler,137,2,N,0,164,N,1
+Nom=UGA023T2,301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20120920091153,TP                  ,20121204222310,TP                  
+Version=1,20120920091153,TP                  ,20131205152110,TP                  
 Nom=GA023T3,Ramasse des saisies ,1
-DateM=D982434F09DDCD01
-Taille=1500,1500
+DateM=63EA8E3EC5F1CE01
+Taille=1700,1700
 Pack=0,0
 [CHAMPS]
 Nom=Etat,1,2,N,0,0,N,1
@@ -3837,17 +4205,21 @@ Nom=FullPtsCod,706,2,N,0,0,N,1
 Nom=QteReal,906,2,N,0,0,N,1
 Nom=QteEnSus,918,2,N,0,0,N,1
 Nom=idTemps,930,2,N,0,0,N,1
-Nom=Domaine_H_Lib,944,2,N,0,0,N,1
-Nom=Activite_H_Lib,984,2,N,0,0,N,1
-Nom=P_Des,1024,2,N,0,0,N,1
-Nom=T037_Nom,1224,2,N,0,0,N,1
-Nom=TreeInfo,1262,2,N,0,0,N,1
+Nom=idElemFact,944,2,N,0,0,N,1
+Nom=Domaine_H_Lib,958,2,N,0,0,N,1
+Nom=Activite_H_Lib,998,2,N,0,0,N,1
+Nom=P_Des,1038,2,N,0,0,N,1
+Nom=T037_Nom,1238,2,N,0,0,N,1
+Nom=TreeInfo,1276,2,N,0,0,N,1
+Nom=Pino,1427,2,N,0,0,N,1
+Nom=Filler,1435,2,N,0,66,N,1
+Nom=UGA023T3,1501,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20120919094143,TP                  ,20121018155645,TP                  
+Version=1,20120919094143,TP                  ,20131205152119,TP                  
 Nom=GA023T4,Détail des factures générées,1
-DateM=EC84C0C488F8CD01
-Taille=300,300
+DateM=E7AB4144C5F1CE01
+Taille=500,500
 Pack=0,0
 [CHAMPS]
 Nom=Affaire_Code,1,2,N,0,0,N,1
@@ -3855,12 +4227,18 @@ Nom=Affaire_Libelle,9,2,N,0,0,N,1
 Nom=Facture_No,89,2,N,0,0,N,1
 Nom=Commentaire,97,2,N,0,0,N,1
 Nom=Etat,197,2,N,0,0,N,1
+Nom=NbCde,202,2,N,0,0,N,1
+Nom=NbBL,205,2,N,0,0,N,1
+Nom=NbIndep,208,2,N,0,0,N,1
+Nom=Indice,211,2,N,0,0,N,1
+Nom=Filler,213,2,N,0,88,N,1
+Nom=UGA023T4,301,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20121111215128,TP                  ,20121111215335,TP                  
+Version=1,20121111215128,TP                  ,20131205153110,TP                  
 Nom=GA023T5,Actions des menus popup dynamiques,1
-DateM=CE148AAB24C7CD01
-Taille=200,200
+DateM=C10F1CABC6F1CE01
+Taille=300,300
 Pack=0,0
 [CHAMPS]
 Nom=PointArret,1,2,N,0,0,N,1
@@ -3869,15 +4247,18 @@ Nom=Section,17,2,N,0,0,N,1
 Nom=EnrNo,25,2,N,0,0,N,1
 Nom=idFactLigne,34,2,N,0,0,N,1
 Nom=TypLigne,48,2,N,0,0,N,1
-Nom=TypTransfert,49,2,N,0,0,N,1
-Nom=QteAff_Ven,50,2,N,0,0,N,1
-Nom=VenUn,62,2,N,0,0,N,1
+Nom=TypTransfert,50,2,N,0,0,N,1
+Nom=QteAff_Ven,51,2,N,0,0,N,1
+Nom=VenUn,63,2,N,0,0,N,1
+Nom=AffUn,67,2,N,0,0,N,1
+Nom=Filler,71,2,N,0,30,N,1
+Nom=UGA023T5,101,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20121205161357,TP                  ,20121210164516,TP                  
+Version=1,20121205161357,TP                  ,20131205153205,TP                  
 Nom=GA023T6,Temps individuels,1
-DateM=4A4FE8A42FF2CD01
-Taille=1500,1500
+DateM=1BD8E9CAC6F1CE01
+Taille=1800,1800
 Pack=0,0
 [CHAMPS]
 TableInsere=AFRTPS,1,700,0,1
@@ -3885,22 +4266,44 @@ Nom=TreeInfo,701,2,N,0,0,N,1
 Nom=CleRupture,852,2,N,0,0,N,1
 Nom=FullPtsCod,952,2,N,0,0,N,1
 Nom=TypLigne,1152,2,N,0,0,N,1
-Nom=estFactPartiel,1153,2,N,0,0,N,1
-Nom=TpsFacture,1154,2,N,0,0,N,1
-Nom=Ref_tmp,1164,2,N,0,0,N,1
-Nom=SRef1_tmp,1189,2,N,0,0,N,1
-Nom=SRef2_tmp,1197,2,N,0,0,N,1
+Nom=estFactPartiel,1154,2,N,0,0,N,1
+Nom=TpsFacture,1155,2,N,0,0,N,1
+Nom=Ref_tmp,1165,2,N,0,0,N,1
+Nom=SRef1_tmp,1190,2,N,0,0,N,1
+Nom=SRef2_tmp,1198,2,N,0,0,N,1
+Nom=T037_Nom,1206,2,N,0,0,N,1
+Nom=P_Des,1244,2,N,0,0,N,1
+Nom=Activite_H_Lib,1444,2,N,0,0,N,1
+Nom=Domaine_H_Lib,1484,2,N,0,0,N,1
+Nom=Filler,1524,2,N,0,77,N,1
+Nom=UGA023T6,1601,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
-Version=1,20121203160508,TP                  ,20121203160508,TP                  
-Nom=GA024,Paramètres pour le détail de la facturation,1
-DateM=E9E2599567D1CD01
-Taille=100,100
+Version=1,20130423114748,TP                  ,20130423114748,TP                  
+Nom=GA023T7,Prestations,1
+DateM=2090CE83ADDFCE01
+Taille=1500,1500
 Pack=0,0
+[CHAMPS]
+TableInsere=AfrElemFact,1,500,0,1
+Nom=TreeInfo,501,2,N,0,0,N,1
+Nom=CleRupture,652,2,N,0,0,N,1
+Nom=TypLigne,752,2,N,0,0,N,1
+Nom=QteFacture,754,2,N,0,0,N,1
+Nom=FullPtsCod,766,2,N,0,0,N,1
+Nom=estFactPartiel,966,2,N,0,0,N,1
+Nom=Ref_tmp,967,2,N,0,0,N,1
+Nom=SRef1_tmp,992,2,N,0,0,N,1
+Nom=SRef2_tmp,1000,2,N,0,0,N,1
+Nom=T037_Nom,1008,2,N,0,0,N,1
+Nom=P_Des,1046,2,N,0,0,N,1
+Nom=Filler,1246,2,N,0,55,N,1
+Nom=UGA23T7,1301,2,N,0,0,N,1
+[/CHAMPS]
 [TABLE]
 Version=1,20121030134252,TP                  ,20121030134252,TP                  
 Nom=GA024T1,Ligne de détail de la facturation périodique,1
-DateM=D982434F09DDCD01
+DateM=F1EC9D040A61CE01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -3911,11 +4314,13 @@ Nom=Art_SRef2,634,2,N,0,0,N,1
 Nom=ART_DES,642,2,N,0,0,N,1
 Nom=NumLigne,722,2,N,0,0,N,1
 Nom=VenUn,726,2,N,0,0,N,1
+Nom=Filler,730,2,N,0,71,N,1
+Nom=UGA024T1,801,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20121030134334,TP                  ,20121030134334,TP                  
 Nom=GA024T2,Lien Détail-Temps,1
-DateM=E9EA1D6654F9CD01
+DateM=0BBCBD68533FCE01
 Taille=1000,1000
 Pack=0,0
 [CHAMPS]
@@ -3926,11 +4331,32 @@ Nom=TpsDt,131,2,N,0,0,N,1
 Nom=FullPtsCod,139,2,N,0,0,N,1
 Nom=Des,339,2,N,0,0,N,1
 Nom=RefUn,539,2,N,0,0,N,1
+Nom=CeNote,543,2,N,0,0,N,1
+Nom=Note,544,2,N,0,0,N,1
+Nom=Filler,552,2,N,0,249,N,1
+Nom=UGA024T2,801,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,20130318145145,TP                  ,20130318145156,TP                  
+Nom=GA024T3,Lien Détail - Prestation,1
+DateM=7271E88041FBCE01
+Taille=1000,1000
+Pack=0,0
+[CHAMPS]
+TableInsere=AfrFactLgnElem,1,100,0,1
+Nom=FullPtsCod,101,2,N,0,0,N,1
+Nom=Des,301,2,N,0,0,N,1
+Nom=QteReal,501,2,N,0,0,N,1
+Nom=SalCod,513,2,N,0,0,N,1
+Nom=TpsDt,533,2,N,0,0,N,1
+Nom=Lib80,541,2,N,0,0,N,1
+Nom=Filler,621,2,N,0,180,N,1
+Nom=UGA024T3,801,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20040810175401,RR                  ,20041210142812,RR                  
 Nom=GA1,Enregistrement de travail,1
-DateM=62EB7AD6A195CD01
+DateM=EB2FA28A533FCE01
 Taille=3000,3000
 Pack=0,0
 [CHAMPS]
@@ -4006,7 +4432,7 @@ Nom=UserEstAdmin,1,2,N,0,0,N,1
 [TABLE]
 Version=1,20041130154733,DEMO                ,20051117151800,RR                  
 Nom=GatBmp,Images,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 NomOdbc=Affaire_Images
 Taille=300,300
 Pack=0,0
@@ -4033,7 +4459,7 @@ Nom=Lib
 [TABLE]
 Version=1,20040701180400,SC                  ,20051117151809,RR                  
 Nom=GatCat,Catégories de postes,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 NomOdbc=Affaire_Categories
 Taille=300,300
 Pack=0,0
@@ -4092,7 +4518,7 @@ Nom=ChifCleLib
 [TABLE]
 Version=1,20110215111147,GN                  ,20110215115906,GN                  
 Nom=GatDom,Domaines,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 NomOdbc=Affaire_Domaines
 Taille=300,300
 Pack=0,0
@@ -4115,7 +4541,7 @@ Nom=Ugatdom,251,2,N,0,0,N,1
 [TABLE]
 Version=1,20040810142126,RR                  ,20050513170534,RR                  
 Nom=GatPst,Postes,1
-DateM=DC41DCAB58F3C501
+DateM=EB2FA28A533FCE01
 NomOdbc=Affaire_Poste_Libelle
 Taille=350,350
 Pack=0,0
@@ -4143,7 +4569,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20041006165802,RR                  ,20050513170543,RR                  
 Nom=GatSui,Suivi budgétaire des factures,1
-DateM=DC41DCAB58F3C501
+DateM=EB2FA28A533FCE01
 NomOdbc=Affaire_Suivi
 Taille=350,350
 Pack=0,0
@@ -4170,7 +4596,7 @@ Nom=Lib80
 [TABLE]
 Version=1,20041006164741,RR                  ,20050513170558,RR                  
 Nom=GatSuiEnt,Entêtes suivi budgétaire des factures,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 NomOdbc=Affaire_Sui_Colonne
 Taille=700,700
 Pack=0,0
@@ -4203,19 +4629,20 @@ ZoomRes=1
 Nom=Lib
 [/PROPLOC]
 [TABLE]
-Version=1,20110914111438,ROOT                ,20120529094914,TP                  
-Nom=ParamTraceCalcul,Paramétrage de la trace pour le calcul du prévisionnel,1
-DateM=3EA7A78A6F3DCD01
+Version=1,20110914111438,ROOT                ,20130924112327,TP                  
+Nom=ParamTraceCalcul,Paramétrage de la trace,1
+DateM=7049D8CA0AB9CE01
 Taille=60,60
 Pack=0,0
 [CHAMPS]
 Nom=EstTraceActive,1,2,N,0,0,N,1
-Nom=PageTraceSelection,2,2,N,0,0,N,1
-Nom=PageTraceTraitement,6,2,N,0,0,N,1
-Nom=PtrTexteSelection,10,2,N,0,0,N,1
-Nom=PtrTexteTraitement,14,2,N,0,0,N,1
-Nom=CountTraitement,18,2,N,0,0,N,1
-Nom=PasTraitement,27,2,N,0,0,N,1
+Nom=PageTrace,2,2,N,0,0,N,1
+Nom=PageTraceSelection,6,2,N,0,0,N,1
+Nom=PageTraceTraitement,10,2,N,0,0,N,1
+Nom=PtrTexteSelection,14,2,N,0,0,N,1
+Nom=PtrTexteTraitement,18,2,N,0,0,N,1
+Nom=CountTraitement,22,2,N,0,0,N,1
+Nom=PasTraitement,31,2,N,0,0,N,1
 [/CHAMPS]
 [TABLE]
 Version=1,20040702084912,SC                  ,20050513170318,RR                  
@@ -4265,7 +4692,7 @@ Nom=UserMoDt
 [TABLE]
 Version=1,20040702084753,SC                  ,20050513170323,RR                  
 Nom=PstEnt,Entêtes de colonnes,1
-DateM=62EB7AD6A195CD01
+DateM=6BEBEA7E533FCE01
 NomOdbc=Poste_Colonnes
 Taille=500,500
 Pack=0,0
@@ -4359,7 +4786,7 @@ Nom=PopupCoche,6070,2,N,0,0,N,1
 [TABLE]
 Version=1,20021023220913,RR  ,20021023220913,RR
 Nom=XQ,Job queue,1
-DateM=712DBEB035D9CD01
+DateM=6BEBEA7E533FCE01
 Taille=5500,5500
 Pack=0,0
 [CHAMPS]
@@ -4419,7 +4846,7 @@ Nom=XTxtTxt,6,2,N,0,0,N,1
 [TABLE]
 Version=1,20040811152424,RR                  ,20040811152424,RR                  
 Nom=XZ,Tables mémoire,1
-DateM=A3F781706DCDCD01
+DateM=0BBCBD68533FCE01
 Taille=1020,1020
 Pack=0,0
 [CHAMPS]
@@ -4451,6 +4878,7 @@ Nom=nivParent,840,2,N,0,0,N,1
 Nom=nivColonnes,841,2,N,0,0,N,1
 Nom=Pino,842,2,N,0,0,N,1
 Nom=UserEstAdmin,850,2,N,0,0,N,1
+Nom=Choix,851,2,N,0,0,N,1
 [/CHAMPS]
 [PROPLOC]
 Flags=n,1,n,i,i,n,n,n
@@ -4466,22 +4894,22 @@ FichierTemporaire=O
 Nom=Csv,0
 [/TABLES]
 [BASE]
-Version=1,20120925110650,TP                  ,20120925110650,TP                  
+Version=1,20120925110650,TP                  ,20140619092836,TP                  
 Nom=Gaffact,Facturation ,1
-DateM=A1976F19FD9ACD01
+DateM=AA150015908BCF01
 Fichier=I,0,GAFFACT.dhfi
-Versionbase=7.2
-DateMIndex=41C06A7847F7CD01
+Versionbase=7.3a
+DateMIndex=797A9A1CED7BCE01
 [TABLES]
-Nom=AfrFactLgnPresta,0
+Nom=AfrFactLgnElem,0
 Nom=AfrFactLgnTps,0
 Nom=AfrFactLigne,0
 Nom=AfrFactTpsArt,0
 [/TABLES]
 [BASE]
-Version=1,20021025152739,RR  ,20070313081448,RR                  
+Version=1,20021025152739,RR  ,20140619092828,TP                  
 Nom=Gafjq,Job queue,1
-DateM=F66345493F65C701
+DateM=DD43C010908BCF01
 Fichier=I,0,gafjq.dhfi
 Versionbase=6.1
 FichierTemporaire=O
@@ -4489,12 +4917,12 @@ FichierTemporaire=O
 Nom=XQ,0
 [/TABLES]
 [BASE]
-Version=1,20110201180131,GN                  ,20111213145631,TP                  
+Version=1,20110201180131,GN                  ,20140619092759,TP                  
 Nom=Gafpoint,Points,1
-DateM=93EF5F049FB9CC01
+DateM=D1DA2DFF8F8BCF01
 Fichier=I,0,GAFPOINT.dhfi
-Versionbase=7.1
-DateMIndex=8AB89EC947F7CD01
+Versionbase=7.3a
+DateMIndex=9C1027CAF5C3CE01
 [TABLES]
 Nom=AfrPoint,0
 Nom=AfrPointModel,0
@@ -4502,11 +4930,11 @@ Nom=AfrSal,0
 Nom=AfrTpsPrev,0
 [/TABLES]
 [BASE]
-Version=1,20040702084645,SC                  ,20070313081453,RR                  
+Version=1,20040702084645,SC                  ,20140619092709,TP                  
 Nom=Gafpst,Postes d'affaires,1
-DateM=B83ADF4B3F65C701
+DateM=7FAA64E18F8BCF01
 Fichier=I,0,GAFPST.dhfi
-Versionbase=6.1
+Versionbase=7.3a
 DateMIndex=FEEFA721E208CD01
 [TABLES]
 Nom=PstCel,0
@@ -4514,11 +4942,11 @@ Nom=PstEnt,0
 Nom=PstLig,0
 [/TABLES]
 [BASE]
-Version=1,20040831202106,RR                  ,20110608164809,SN                  
+Version=1,20040831202106,RR                  ,20140619092649,TP                  
 Nom=Gafres,Fichier des résulatst,1
-DateM=C03DC615EB25CC01
+DateM=556BA6D58F8BCF01
 Fichier=I,0,GAFRES.dhfi
-Versionbase=7.0
+Versionbase=7.3a
 DateMIndex=B4350F46E208CD01
 [TABLES]
 Nom=AfrCel,0
@@ -4526,11 +4954,11 @@ Nom=AfrDet,0
 Nom=AfrRes,0
 [/TABLES]
 [BASE]
-Version=1,20040701175250,SC                  ,20070313081503,RR                  
+Version=1,20040701175250,SC                  ,20140619092642,TP                  
 Nom=Gaftab,tables,1
-DateM=3E2CDA513F65C701
+DateM=643102D18F8BCF01
 Fichier=I,0,GAFTAB.dhfi
-Versionbase=6.1
+Versionbase=7.3a
 DateMIndex=3F35784F181ECD01
 [TABLES]
 Nom=GatBmp,0
@@ -4552,14 +4980,14 @@ DateMIndex=86988A2BE90CC501
 Nom=GA013T1,0
 [/TABLES]
 [BASE]
-Version=1,20040803173146,SC                  ,20070313081522,RR                  
+Version=1,20040803173146,SC                  ,20140619092555,TP                  
 Nom=Gafval,Valeurs saisies manuellement,1
-DateM=1791675D3F65C701
+DateM=CA1D00B58F8BCF01
 Fichier=I,0,GAFVAL.dhfi
-Versionbase=6.1
-DateMIndex=E67EA50448F7CD01
+Versionbase=7.3a
+DateMIndex=9D223290EB44CE01
 [TABLES]
-Nom=AfrPresta,0
+Nom=AfrElemFact,0
 Nom=AfrTps,0
 Nom=AfrVal,0
 [/TABLES]
@@ -4618,7 +5046,7 @@ CLE=Gaffact,G,Ce1,2,5,o,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=idFactLigne,4,0,
-Nom=IdPrestation,18,0,
+Nom=idElemFact,18,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -4630,6 +5058,26 @@ CLE=Gaffact,H,Ce1,2,4,o,1,n
 Nom=Dos,1,0,
 Nom=idFactLigne,4,0,
 Nom=idTemps,18,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130708170829,TP                  ,20130708170829,TP                  
+Nom=Index_I,Par Ligne,1
+DateM=F6EC3C01ED7BCE01
+CLE=Gaffact,I,Ce1,2,4,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=idFactLigne,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130708170848,TP                  ,20130708170848,TP                  
+Nom=Index_J,Par Temps,1
+DateM=BF561B0CED7BCE01
+CLE=Gaffact,J,Ce1,2,4,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=idTemps,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -4743,6 +5191,17 @@ CLE=Gafpoint,K,Ce1,2,2,n,1,n
 [CHAMPS]
 Nom=Dos,1,0,
 Nom=IdPoint,4,0,
+[/CHAMPS]
+[/INDEX]
+[INDEX]
+Version=1,20130703143002,TP                  ,20131008091132,TP                  
+Nom=Index_L,Par Référence et référence parent,1
+DateM=95C7410AE977CE01
+CLE=Gafpoint,L,Ce1,2,1,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=idRacine,4,0,
+Nom=idPointParent,18,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -5140,7 +5599,8 @@ Nom=Index_I,Par identifiant unique,1
 DateM=7FEB61DF5F9DCD01
 CLE=Gafval,I,Ce1,2,3,o,1,n
 [CHAMPS]
-Nom=IdPrestation,1,0,
+Nom=Dos,1,0,
+Nom=idElemFact,4,0,
 [/CHAMPS]
 [/INDEX]
 [INDEX]
@@ -5163,14 +5623,26 @@ Nom=Dos,1,0,
 Nom=TpsDt,4,0,
 [/CHAMPS]
 [/INDEX]
+[INDEX]
+Version=1,20130429170903,TP                  ,20130429170903,TP                  
+Nom=Index_L,Par Affaire,1
+DateM=16AB347CEB44CE01
+CLE=Gafval,L,Ce1,2,3,n,1,n
+[CHAMPS]
+Nom=Dos,1,0,
+Nom=Affaire,4,0,
+[/CHAMPS]
+[/INDEX]
 [INDEXL]
 Nom=Gaffact,AfrFactTpsArt,Index_A,0
 Nom=Gaffact,AfrFactTpsArt,Index_B,0
 Nom=Gaffact,AfrFactTpsArt,Index_C,0
 Nom=Gaffact,AfrFactTpsArt,Index_D,0
 Nom=Gaffact,AfrFactLigne,index_F,0
-Nom=Gaffact,AfrFactLgnPresta,Index_G,0
+Nom=Gaffact,AfrFactLgnElem,Index_G,0
 Nom=Gaffact,AfrFactLgnTps,Index_H,0
+Nom=Gaffact,AfrFactLgnTps,Index_I,0
+Nom=Gaffact,AfrFactLgnTps,Index_J,0
 Nom=Gafjq,XQ,Index_A,0
 Nom=Gafpoint,AfrSal,Index_B,0
 Nom=Gafpoint,AfrSal,Index_D,0
@@ -5182,6 +5654,7 @@ Nom=Gafpoint,AfrTpsPrev,Index_C,0
 Nom=Gafpoint,AfrPointModel,Index_H,0
 Nom=Gafpoint,AfrPoint,Index_J,0
 Nom=Gafpoint,AfrSal,Index_K,0
+Nom=Gafpoint,AfrPoint,Index_L,0
 Nom=Gafpst,PstEnt,index_A,0
 Nom=Gafpst,PstLig,index_B,0
 Nom=Gafpst,PstLig,index_C,0
@@ -5216,7 +5689,8 @@ Nom=Gafval,AfrTps,Index_E,0
 Nom=Gafval,AfrTps,Index_F,0
 Nom=Gafval,AfrTps,Index_G,0
 Nom=Gafval,AfrTps,Index_H,0
-Nom=Gafval,AfrPresta,Index_I,0
+Nom=Gafval,AfrElemFact,Index_I,0
 Nom=Gafval,AfrTps,Index_J,0
 Nom=Gafval,AfrTps,Index_K,0
+Nom=Gafval,AfrElemFact,Index_L,0
 [/INDEXL]
