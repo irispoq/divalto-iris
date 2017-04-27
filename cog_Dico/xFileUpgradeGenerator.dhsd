@@ -1,0 +1,141 @@
+;>xwinobj      dictionnaire
+[Dictionnaire]
+Version=4,20040503170406,ROOT                ,20090731170202,ROOT                
+Nom=xfileupgradegenerator.dhsd,xFileUpgradeGenerator.dhsd,1
+[CHAMP]
+Version=1,2001 1310000,ROOT,20030519160438,ROOT
+Nom=Dos,Dossier,1
+Gel=1
+Nature=3,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021021153158,hc  ,20021021153158,hc
+Nom=etb,établissement,1
+Gel=1
+Nature=3
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2001 1310000,ROOT,20030401110419,ROOT
+Nom=LogDh,Livre de bord,1
+DateM=7047CFAA2DF8C201
+Gel=1
+Nature=DH
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2001 1310000,ROOT,20040216164553,ROOT
+Nom=LogTxt,texte du log,1
+DateM=D0F7B5F5A3F4C301
+Gel=1
+Nature=150
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2001 1310000,ROOT,2001 1310000,ROOT
+Nom=Nivalerte,niveau d'alerte,1
+Gel=1
+Nature=1,0
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20090731170138,ROOT                ,20090731170138,ROOT                
+Nom=NumCle,Numéro clé libre,1
+Gel=1
+Nature=3,0
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2001 1310000,ROOT,2001 1310000,ROOT
+Nom=Prg,programme,1
+Gel=1
+Nature=32
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20031030110403,ROOT                ,20031030110403,ROOT
+Nom=RepAncVersionFic,Répertoire de l'ancienne version du fichier,1
+Gel=1
+Nature=256
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20031030110437,ROOT                ,20031030110437,ROOT
+Nom=RepNvVersionFic,Répertoire de la nouvelle version du fichier,1
+Gel=1
+Nature=256
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1997 1140000,hc  ,20021212114413,JPS
+Nom=selxl,selections xql,1
+DateM=CE6E3769CBA1C201
+Gel=1
+Nature=3906
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1995 2 80000,ROOT,1995 2 80000,ROOT
+Nom=Tache,Numéro de tâche,1
+Gel=1
+Nature=3
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,2000 5160000,hc  ,2000 5160000,hc
+Nom=texte,texte trace,1
+Gel=1
+Nature=256*4
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,1996 3 50000,epc3,1996 3120000,epc3
+Nom=titre,titre du programme,1
+Gel=1
+Nature=50
+Flags=o,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20031030114846,XTO4                ,20031030114846,XTO4
+Nom=Titre1,titre,1
+Gel=1
+Nature=90
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20021015132441,DEMO,20021015132441,DEMO
+Nom=User,Utilisateur,1
+DateM=603786963D74C201
+Gel=1
+Nature=20
+Flags=n,1,n,n,n,n,n,n
+[CHAMPR]
+[/CHAMPR]
+[TABLE]
+Version=1,2001 1310000,ROOT,20040216164911,ROOT
+Nom=LogInfo,livre de bord,1
+DateM=0048AA6BA4F4C301
+Taille=250,250
+Pack=0,0
+[CHAMPS]
+Nom=Nivalerte,1,2,N,0,0,N,1
+Nom=LogDh,2,2,N,0,0,N,1
+Nom=User,16,2,N,0,0,N,1
+Nom=Tache,36,2,N,0,0,N,1
+Nom=Prg,39,2,N,0,0,N,1
+Nom=Dos,71,2,N,0,0,N,1
+Nom=LogTxt,74,2,N,0,0,N,1
+[/CHAMPS]
+[TABLE]
+Version=1,1997 1140000,hc  ,20031030110603,ROOT
+Nom=xl,sélections hql,1
+DateM=A0FE79865FEAC301
+Taille=7000,7000
+Pack=0,0
+[CHAMPS]
+Nom=texte,1,2,N,0,0,N,1
+Nom=titre,1025,2,N,0,0,N,1
+Nom=Dos,1075,2,N,0,0,N,1
+Nom=etb,1078,2,N,0,0,N,1
+Nom=LogDh,1081,2,N,0,0,N,1
+Nom=selxl,1095,2,N,0,0,N,1
+Nom=RepAncVersionFic,5001,2,N,0,0,N,1
+Nom=RepNvVersionFic,5257,2,N,0,0,N,1
+Nom=Titre1,5513,2,N,0,0,N,1
+Nom=NumCle,5603,2,N,0,0,N,1
+[/CHAMPS]
+[BASE]
+Version=1,2001 1310000,ROOT,20040504095154,ROOT                
+Nom=Dicoflog,livre de bord,1
+DateM=C0FBE2AAAC31C401
+Fichier=N,254,xFileUpgradeGenerator.dhfd
+[TABLES]
+Nom=LogInfo,0
+[/TABLES]
