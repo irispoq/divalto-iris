@@ -1,5 +1,5 @@
 
-SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 8587 2015-09-15 14:13:57Z admin $')
+SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 10572 2016-12-08 08:25:54Z admin $')
 ;*
 ;* cog_ccpmimpimmo					Procedure de traitement des champs importés (avant ou aprés saisie)
 ;*
@@ -386,7 +386,7 @@ beginp	; Champ_EcoBas_1_Ap
 
 	if I1.EcoBas <> I1.Cr
 		if	Calcul_Possible
-			Dotations_Cumuls
+			Dotations_Cumuls_RSQL
 		endif
 	endif
 
@@ -451,7 +451,7 @@ beginp	; Champ_EcoDur_1_Ap
 	endif
 
 	if	Reglage_Parametres(C_Plan_Eco, I1.ECOTYP, I1.ECODUR, I1.ECOCOE, I1.ECOTAU, I1.DOTECO, I1.UOCODE, I1.ACQDT, I1.SVCDT) and I1.ECOBAS and I1.ECOTYP <> 3 and I1.FISTYP <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_EcoDur_1_Ap
@@ -474,7 +474,7 @@ beginp	; Champ_UoCode_1_Ap
 	endif
 
 	if	Reglage_Parametres(C_Plan_Eco, I1.ECOTYP, I1.ECODUR, I1.ECOCOE, I1.ECOTAU, I1.DOTECO, I1.UOCODE, I1.ACQDT, I1.SVCDT) and I1.ECOBAS and I1.ECOTYP <> 3 and I1.FISTYP <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 
@@ -509,7 +509,7 @@ beginp	; Champ_FisBas_1_Ap
 
 	if I1.FisBas <> I1.EcoBas
 		if	Calcul_Possible
-			Dotations_Cumuls
+			Dotations_Cumuls_RSQL
 		endif
 	endif
 
@@ -539,7 +539,7 @@ beginp	; Champ_FisTyp_1_Ap
 	if I1.FISTYP = 4	|	I1.FISDUR = ' '	|	endif
 
 	if	Reglage_Parametres(C_Plan_Fiscal, I1.FISTYP, I1.FISDUR, I1.FISCOE, I1.FISTAU, I1.DOTFIS, I1.UOCODE, I1.ACQDT, I1.SVCDT) and I1.FISBAS and I1.ECOTYP <> 3 and I1.FISTYP <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_FisTyp_1_Ap
@@ -580,7 +580,7 @@ beginp
 	endif
 
 	if	Reglage_Parametres(C_Plan_Fiscal, I1.FISTYP, I1.FISDUR, I1.FISCOE, I1.FISTAU, I1.DOTFIS, I1.UOCODE, I1.ACQDT, I1.SVCDT) and I1.FISBAS and I1.ECOTYP <> 3 and I1.FISTYP <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp

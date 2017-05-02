@@ -60,7 +60,7 @@ endF
 Public Function int Cog_G1T2_Serie_Resa(_G1T2, &_lId)
 ; Test si G1T2 peut être réservé
 ; Insertion dans la liste lId_Serie
-RecordSQL	"gtRsppPce.dhoq"		Ventilation		_RS_MVTL
+RecordSQL	"gtRsPce.dhoq"			Ventilation		_RS_MVTL
 Record		"gtfdd.dhsd"			G1T2				_G1T2	= ' '	; si non renseigné --> est égal au G1T2 courant
 1				_lId						L
 BeginF
@@ -83,7 +83,7 @@ EndF
 ;*
 Public Function int Cog_G1T2_Serie_Lib(_G1T2, _lId, _majList)
 ;	libération de _G1T2.SERIE
-RecordSQL	"gtRsppPce.dhoq"		Ventilation		_RS_MVTL
+RecordSQL	"gtRsPce.dhoq"			Ventilation		_RS_MVTL
 Record		"gtfdd.dhsd"			G1T2				_G1T2	= ' '	; si non renseigné --> est égal au G1T2 courant
 Record		"gtfdd.dhsd"			G1T2				_lG1T2
 1				_lid						L
@@ -130,7 +130,7 @@ Public Function int Cog_G1T2_Serie_ControlerUnicite(_lId_Serie)
 ; contrôle la disponibilité de G1T2.Serie dans la table MVTL
 ; + dans la liste des G1T2 en cours de saisie
 ; 0 --> OK
-RecordSQL	"gtRsppPce.dhoq"		Ventilation			_RS_MVTL
+RecordSQL	"gtRsPce.dhoq"			Ventilation			_RS_MVTL
 RecordSQL	"gtRsppTab.dhoq"		CodeOperation		_RS_T020
 1		_lId_Serie		L
 1		_read				L

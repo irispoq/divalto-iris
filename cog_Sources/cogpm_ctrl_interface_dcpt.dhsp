@@ -5,11 +5,13 @@
 
 include gttc000.dhsp
 include	"zmapi.dhsp"
+
+;
 module	"a5pmflash.dhop"
 Module CCTM000.dhop
 Module CCPM000.dhop
 Module A5TM000.dhop
-Module LcTm000.Dhop
+Module CogTm_000.dhop
 
 hfile	"ccfdd.dhsd"	ccfdos	ccfdos
 hfile	"ccfdd.dhsd"	ccfjca		ccfjca

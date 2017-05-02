@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20140912105131      
+;>xwin4obj     imprimante               6.0       20130930104326      
 [masque]
- utilisateur="PLASSON_DEV_205"
- date_modification="12/09/2014"
+ utilisateur="LK"
+ date_modification="30/09/2013"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -1522,6 +1522,8 @@
    wstyle="STD_GRIS"
   [description]
    donnee=g4,piedlib,g4,1
+  [param_saisie]
+   esp_si_zero=oui
  [champ]
   [presentation]
    position=45,7
@@ -1530,6 +1532,8 @@
    wstyle="STD_GRIS"
   [description]
    donnee=g4,piedlib,g4,2
+  [param_saisie]
+   esp_si_zero=oui
  [champ]
   [presentation]
    position=54,7
@@ -1538,6 +1542,8 @@
    wstyle="STD_GRIS"
   [description]
    donnee=g4,piedlib,g4,3
+  [param_saisie]
+   esp_si_zero=oui
 [bloc]
  numero=13
  libelle="Traite en facture"
@@ -2023,7 +2029,7 @@
   [param_saisie]
    type_date=jj/mm/aaaa
 [diva]
-SetModuleInfo('$Id: gtii210a.dhsi 31865 2013-05-28 14:05:36Z sn $')
+SetModuleInfo('$Id: gtii210a.dhsi 37150 2014-01-30 09:55:42Z lk $')
 
 Module	'GTPM000.dhop'
 Module	'GTTMPCE.dhop'
@@ -2038,7 +2044,7 @@ Public Record "a5dd.dhsd" mw mw
 Public Record "gtfdd.dhsd" g4t1 g4t1
 Public Record "gtfdd.dhsd" mvtl g4mvtl
 Public Record "gtfdd.dhsd" t013 t013
-
+public hfile gtfdd.dhsd GTFAT GTFAT
 ;*
 Public Procedure Bloc_ArticleComposant_Ap		; Après une ligne de composant
 Beginp

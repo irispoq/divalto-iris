@@ -1,13 +1,13 @@
-;>xwin4obj                              7.0       20151022114813      
+;>xwin4obj                              7.0       20170228120941      
 [masque]
  utilisateur="ROOT"
- date_modification="22/10/2015"
+ date_modification="28/02/2017"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
  dernier_id=1000055
  surcharge=oui
- date_modif_base="20130227140720"
+ date_modif_base="20150729121936"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -19,7 +19,7 @@
 [enregistrements]
  "ccfdd.dhsd",,x1,x1,1752,0
  "ccfdd.dhsd",,cd,cd,400,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1700,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "ccrsimmo.dhoq",,immo,immobilisation,1024,1
  "ccfdd.dhsd",,i1,i1_sel,1900,0
@@ -468,7 +468,7 @@
    texte="Etablissement"
    [param_colonne]
     titre="Etablissement"
-    fl_aff=oui
+    fl_aff=non
     largeur_col=43
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -541,7 +541,7 @@
    texte="Compte d'immobilisation du bien"
    [param_colonne]
     titre="Compte"
-    fl_aff=oui
+    fl_aff=non
     largeur_col=35
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
@@ -2727,7 +2727,7 @@
    id=1000014
    wstyle="STD"
   [texte]
-   texte="Référence ISILOG"
+   texte="Compétence"
  [obj_texte]
   [presentation]
    position=139,13
@@ -2853,98 +2853,6 @@
    defaut="            0,0000000000"
   [param_multi]
    choix="ccfdmc.dhfi","POSITION"
-  [touches]
-   f1=1
- [champ]
-  [presentation]
-   position=60,271
-   taille=9,40
-   cadrage=gauche
-   id=1000030
-   colonnes_saisie=12
-   wstyle="STD_GRAS"
-   wnom_encadr="CHAMP_AFF"
-  [description]
-   donnee=immo,cog_qtetot,immobilisation
-   format="00000000000"
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f1=1
- [champ]
-  [presentation]
-   position=60,228
-   taille=9,40
-   cadrage=droite
-   id=1000029
-   colonnes_saisie=12
-   wstyle="STD_GRAS"
-   wnom_encadr="CHAMP_AFF"
-  [description]
-   donnee=immo,cog_qteimmo,immobilisation
-   format="00000000000"
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [touches]
-   f1=1
- [champ]
-  [presentation]
-   position=149,99
-   taille=9,144
-   id=1000034
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=immo,famstat1_lib,immobilisation
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
- [champ]
-  [presentation]
-   position=149,66
-   taille=9,32
-   id=1000033
-   colonnes_saisie=8
-   wstyle="COG_CHAMP_NON_SAISI"
-  [description]
-   donnee=immo,famstat1_fam,immobilisation
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
- [champ]
-  [presentation]
-   position=298,123
-   taille=9,148
-   id=1000035
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=immo,axeanael_lib,immobilisation
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
- [champ]
-  [presentation]
-   position=70,66
-   taille=9,247
-   id=1000036
-   colonnes_saisie=80
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=immo,des,immobilisation
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
   [touches]
    f1=1
  [champ]
@@ -3075,6 +2983,90 @@
    diva_apres="Champ_Cog_BwId_1_Ap"
  [champ]
   [presentation]
+   position=38,66
+   taille=9,15
+   noms="etbc3"
+   id=963
+   colonnes_saisie=3
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,etb,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f7=8000
+   f8=19004
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Etb_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=38,82
+   taille=9,232
+   noms="etbc3"
+   id=964
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,8
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
+   position=26,159
+   taille=9,19
+   noms="ifrs"
+   id=84
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,immocomp,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=26,277
+   taille=9,34
+   id=85
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,immodt,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=257,123
+   taille=9,190
+   noms="axe1"
+   id=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,3
+   saisie=non
+ [champ]
+  [presentation]
+   position=267,123
+   taille=9,190
+   noms="axe2"
+   id=39
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,4
+   saisie=non
+ [champ]
+  [presentation]
    position=149,246
    taille=9,48
    id=1000054
@@ -3135,6 +3127,74 @@
    microbol_click=8002
    diva_avant="Champ_CesDt_1_Av"
    diva_apres="Champ_CesDt_1_Ap"
+ [champ]
+  [presentation]
+   position=277,123
+   taille=9,190
+   noms="axe3"
+   id=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,5
+   saisie=non
+ [champ]
+  [presentation]
+   position=287,123
+   taille=9,190
+   noms="axe4"
+   id=41
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,6
+   saisie=non
+ [champ]
+  [presentation]
+   position=257,10
+   taille=9,74
+   noms="axe1"
+   id=43
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,1
+   saisie=non
+ [champ]
+  [presentation]
+   position=277,10
+   taille=9,74
+   noms="axe3"
+   id=45
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,3
+   saisie=non
+ [champ]
+  [presentation]
+   position=287,10
+   taille=9,74
+   noms="axe4"
+   id=46
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ca,axelib,ca,4
+   saisie=non
+ [champ]
+  [presentation]
+   position=221,123
+   taille=9,190
+   id=36
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,1
+   saisie=non
+ [champ]
+  [presentation]
+   position=233,123
+   taille=9,190
+   id=37
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,lib,x1,2
+   saisie=non
  [champ]
   [presentation]
    position=186,86
@@ -3369,51 +3429,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=287,86
-   taille=9,36
-   noms="axe4"
-   id=83
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=immo,axe,immobilisation,4
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=767
-   fichier="CCIMAIDE"
-  [touches]
-   f7=8000
-   f8=19010
-   ctrl_f6=10300
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Axe_1_Av"
-   diva_apres="Champ_Axe_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=298,86
-   taille=9,36
-   id=1000028
-   colonnes_saisie=8
-   wstyle="COG_CHAMP_SAISI"
-  [description]
-   donnee=immo,cog_axeanael,immobilisation
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f1=1
-   f8=19012
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Cog_AxeAnael_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
    position=119,66
    taille=9,30
    id=1000024
@@ -3444,49 +3459,41 @@
    f1=1
  [champ]
   [presentation]
-   position=38,66
-   taille=9,15
-   noms="etbc3"
-   id=963
-   colonnes_saisie=3
-   wstyle="CHAMP_NON_SAISI"
+   position=287,86
+   taille=9,36
+   noms="axe4"
+   id=83
+   wstyle="CHAMP_SAISI"
   [description]
-   donnee=immo,etb,immobilisation
-   saisie=non
+   donnee=immo,axe,immobilisation,4
   [param_saisie]
-   type_date=jj/mm/aaaa
    table_associee=oui
+  [aide_page]
+   aide=767
+   fichier="CCIMAIDE"
   [touches]
-   f1=1
    f7=8000
-   f8=19004
+   f8=19010
+   ctrl_f6=10300
+   shift_f6=10000
   [traitements]
    microbol_click=8002
-   diva_apres="Champ_Etb_2_Ap"
+   diva_avant="Champ_Axe_1_Av"
+   diva_apres="Champ_Axe_1_Ap"
   [boutons]
    "zoom"
  [champ]
   [presentation]
-   position=38,82
-   taille=9,232
-   noms="etbc3"
-   id=964
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
+   position=60,228
+   taille=9,40
+   cadrage=droite
+   id=1000029
+   colonnes_saisie=12
+   wstyle="STD_GRAS"
+   wnom_encadr="CHAMP_AFF"
   [description]
-   donnee=x1,lib,x1,8
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
- [champ]
-  [presentation]
-   position=26,159
-   taille=9,19
-   noms="ifrs"
-   id=84
-   wstyle="CHAMP_NON_SAISI"
-  [description]
-   donnee=immo,immocomp,immobilisation
+   donnee=immo,cog_qteimmo,immobilisation
+   format="00000000000"
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3495,12 +3502,31 @@
    f1=1
  [champ]
   [presentation]
-   position=26,277
-   taille=9,34
-   id=85
-   wstyle="CHAMP_NON_SAISI"
+   position=60,271
+   taille=9,40
+   cadrage=gauche
+   id=1000030
+   colonnes_saisie=12
+   wstyle="STD_GRAS"
+   wnom_encadr="CHAMP_AFF"
   [description]
-   donnee=immo,immodt,immobilisation
+   donnee=immo,cog_qtetot,immobilisation
+   format="00000000000"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=149,66
+   taille=9,32
+   id=1000033
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_NON_SAISI"
+  [description]
+   donnee=immo,famstat1_fam,immobilisation
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3508,92 +3534,66 @@
    f1=1
  [champ]
   [presentation]
-   position=257,123
-   taille=9,190
-   noms="axe1"
-   id=38
-   wstyle="CHAMP_AFF"
+   position=149,99
+   taille=9,144
+   id=1000034
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
   [description]
-   donnee=x1,lib,x1,3
+   donnee=immo,famstat1_lib,immobilisation
    saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
  [champ]
   [presentation]
-   position=267,123
-   taille=9,190
-   noms="axe2"
-   id=39
-   wstyle="CHAMP_AFF"
+   position=298,123
+   taille=9,148
+   id=1000035
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
   [description]
-   donnee=x1,lib,x1,4
+   donnee=immo,axeanael_lib,immobilisation
    saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
  [champ]
   [presentation]
-   position=277,123
-   taille=9,190
-   noms="axe3"
-   id=40
+   position=70,66
+   taille=9,247
+   id=1000036
+   colonnes_saisie=80
    wstyle="CHAMP_AFF"
   [description]
-   donnee=x1,lib,x1,5
+   donnee=immo,des,immobilisation
    saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
  [champ]
   [presentation]
-   position=287,123
-   taille=9,190
-   noms="axe4"
-   id=41
-   wstyle="CHAMP_AFF"
+   position=298,86
+   taille=9,36
+   id=1000028
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
   [description]
-   donnee=x1,lib,x1,6
-   saisie=non
- [champ]
-  [presentation]
-   position=257,10
-   taille=9,74
-   noms="axe1"
-   id=43
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=ca,axelib,ca,1
-   saisie=non
- [champ]
-  [presentation]
-   position=277,10
-   taille=9,74
-   noms="axe3"
-   id=45
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=ca,axelib,ca,3
-   saisie=non
- [champ]
-  [presentation]
-   position=287,10
-   taille=9,74
-   noms="axe4"
-   id=46
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=ca,axelib,ca,4
-   saisie=non
- [champ]
-  [presentation]
-   position=221,123
-   taille=9,190
-   id=36
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,lib,x1,1
-   saisie=non
- [champ]
-  [presentation]
-   position=233,123
-   taille=9,190
-   id=37
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,lib,x1,2
-   saisie=non
+   donnee=immo,cog_axeanael,immobilisation
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f8=19012
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cog_AxeAnael_1_Ap"
+  [boutons]
+   "zoom"
 [page]
  numero=12
  libelle="Elements financiers"
@@ -5676,48 +5676,6 @@
    texte="Valeur comptable des éléments d'actifs cédés"
  [champ]
   [presentation]
-   position=245,171
-   taille=9,144
-   id=1000009
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=immo,cptcesamo_lib,immobilisation
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
- [champ]
-  [presentation]
-   position=233,171
-   taille=9,144
-   id=1000008
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=immo,cptces_lib,immobilisation
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
- [champ]
-  [presentation]
-   position=257,171
-   taille=9,144
-   id=1000020
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=immo,cptcesval_lib,immobilisation
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
- [champ]
-  [presentation]
    position=43,133
    taille=9,36
    id=934
@@ -5739,6 +5697,42 @@
    "zoom"
  [champ]
   [presentation]
+   position=43,170
+   taille=9,140
+   id=935
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=79,170
+   taille=9,140
+   id=938
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
    position=79,133
    taille=9,36
    id=940
@@ -5758,6 +5752,79 @@
    diva_apres="Champ_CptDotAmo_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=116,170
+   taille=9,140
+   id=941
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=128,170
+   taille=9,140
+   id=943
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,4
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=140,170
+   taille=9,140
+   id=944
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,5
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=174,170
+   taille=9,140
+   noms="ifrs"
+   id=945
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,6
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=116,133
@@ -5802,6 +5869,25 @@
    "zoom"
  [champ]
   [presentation]
+   position=186,170
+   taille=9,140
+   noms="ifrs"
+   id=949
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,7
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
    position=140,133
    taille=9,36
    id=950
@@ -5821,6 +5907,25 @@
    diva_apres="Champ_CptRepDro_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=198,170
+   taille=9,140
+   noms="ifrs"
+   id=951
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=x1,cpllib,x1,8
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=174,133
@@ -5929,6 +6034,34 @@
    "zoom"
  [champ]
   [presentation]
+   position=233,171
+   taille=9,144
+   id=1000008
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=immo,cptces_lib,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
+   position=245,171
+   taille=9,144
+   id=1000009
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=immo,cptcesamo_lib,immobilisation
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+ [champ]
+  [presentation]
    position=257,132
    taille=9,37
    id=1000019
@@ -5946,151 +6079,18 @@
    diva_apres="Champ_Cog_CptCesVal_1_Ap"
  [champ]
   [presentation]
-   position=43,170
-   taille=9,140
-   id=935
-   wstyle="CHAMP_AFF"
+   position=257,171
+   taille=9,144
+   id=1000020
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
   [description]
-   donnee=x1,cpllib,x1,1
+   donnee=immo,cptcesval_lib,immobilisation
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
-   table_associee=oui
   [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=79,170
-   taille=9,140
-   id=938
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,cpllib,x1,2
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=116,170
-   taille=9,140
-   id=941
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,cpllib,x1,3
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=128,170
-   taille=9,140
-   id=943
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,cpllib,x1,4
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=140,170
-   taille=9,140
-   id=944
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,cpllib,x1,5
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=174,170
-   taille=9,140
-   noms="ifrs"
-   id=945
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,cpllib,x1,6
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=186,170
-   taille=9,140
-   noms="ifrs"
-   id=949
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,cpllib,x1,7
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=198,170
-   taille=9,140
-   noms="ifrs"
-   id=951
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=x1,cpllib,x1,8
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
+   f1=1
 [ressources]
  [menu]
   ident="ZOOMAPPEND"
@@ -6226,6 +6226,14 @@
     warret=5100
    [info_bulle]
    texte="Historique des biens immobilisés"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Amortissements"
+    wid_ressource="ZOOMECR"
+    wtrait_chaine="#F6"
+   [info_bulle]
+   texte="Consulter les amortissements <F6>"
   [item]
    [param_bouton]
     wnom=".TOOLBAR"
@@ -6629,7 +6637,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: ccez701_sql.dhsf 29928 2013-02-27 13:04:42Z ms $')
+SetModuleInfo('$Id: ccez701_sql.dhsf 48399 2015-07-29 11:38:54Z als $')
 ;>xdiva
 ;*
 ;*		zoom sur les biens																													cctez701.dhsp
@@ -6903,7 +6911,7 @@ beginp	; Champ_AcqDt_1_Ap
 	IMMOBILISATION.ExoPDt = Debut_Exercice(IMMOBILISATION.AcqDt)
 
 	if ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION or IMMOBILISATION.SvcDt < IMMOBILISATION.AcqDt
-		if Verifier_Bien_Amortissable
+		if Verifier_Bien_Amortissable_RSQL
 			IMMOBILISATION.SvcDt 	= IMMOBILISATION.AcqDt
 			IMMOBILISATION.EcoAmDt  = IMMOBILISATION.AcqDt
 		else
@@ -6920,7 +6928,7 @@ beginp	; Champ_AcqDt_1_Ap
 	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
 	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
 	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_AcqDt_1_Ap
@@ -6954,7 +6962,7 @@ beginp	; Champ_SvcDt_1_Ap
 	endif
 
 	if IMMOBILISATION.SvcDt < CD.ExoFDt \
-		and Verifier_Bien_Amortissable = false
+		and Verifier_Bien_Amortissable_RSQL = false
 		;"Le bien n'est pas amortissable, il ne peut pas être mis en service durant l'exercice courant"
 		Mes_Alert(19727)
 		Harmony.Retour = XmeNext_Traitement_Avant
@@ -6974,7 +6982,7 @@ beginp	; Champ_SvcDt_1_Ap
 	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
 	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
 	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_SvcDt_1_Ap
@@ -7032,7 +7040,7 @@ public procedure Champ_CrelTMt_1_Ap
 ; apres composition valeur initiale
 beginp	; Champ_CrelTMt_1_Ap
 
-	X1.MtCr = Calcul_valeur_entree_initiale(I1)
+	X1.MtCr = Calcul_valeur_entree_initiale(IMMOBILISATION.I1)
 
 	if ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION or (ZOOM.ACTION = ZOOM_MODIFICATION and IMMOBILISATION.Cr = 0)
 		IMMOBILISATION.Cr = X1.MtCr
@@ -7100,7 +7108,7 @@ beginp	; Champ_Cr_1_Ap
 	if not Harmony.DataModif	|	preturn	|	endif
 
 	if Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_Cr_1_Ap
@@ -7184,7 +7192,7 @@ beginp	; Champ_Etat_1_Ap
 		; Cession ou mise au rebut
 		if IMMOBILISATION.Etat <> ETAT and IMMOBILISATION.Etat in (2,3)
 			; Pour un bien composé : controler la cession (ou mise au rebut) de tous les composants
-			if Controler_Bien_CessionCompose(I1) <> 0
+			if Controler_Bien_CessionCompose(IMMOBILISATION.I1) <> 0
 				; au moins un composant est actif
 				Harmony.Retour = XmeNext_Traitement_Avant
 				preturn
@@ -7194,7 +7202,7 @@ beginp	; Champ_Etat_1_Ap
 		; Réactivation d'un bien cédé ou mis au rebut
 		if IMMOBILISATION.Etat <> ETAT and IMMOBILISATION.Etat not in (2,3) and ETAT in (2,3)
 			; Pour un bien composant : controler si son composé 'père' est actif
-			if Controler_Bien_Reactiver(I1) <> 0
+			if Controler_Bien_Reactiver(IMMOBILISATION.I1) <> 0
 				; le composé 'père' est inactif
 				Harmony.Retour = XmeNext_Traitement_Avant
 				preturn
@@ -7232,7 +7240,7 @@ beginp	; Champ_Etat_1_Ap
 	endif
 		
 	if	Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 	Harmony.Retour = XMENEXT_DONNEE_SUIVANTE
@@ -7271,7 +7279,7 @@ beginp	; Champ_CesDt_1_Ap
 	if not Harmony.DataModif	|	preturn	|	endif
 
 	if	Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_CesDt_1_Ap
@@ -7337,7 +7345,7 @@ beginp	; Champ_EcoBas_1_Ap
 	if not Harmony.DataModif	|	preturn	|	endif
 
 	if	Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_EcoBas_1_Ap
@@ -7367,7 +7375,7 @@ beginp	; Champ_EcoTyp_1_Ap
 
 	if Harmony.DataModif
 
-		if I1.EcoTyp = 5 and CD.IfrsFl = 1
+		if IMMOBILISATION.EcoTyp = 5 and CD.IfrsFl = 1
 			Mes_Alert(7137)
 			Harmony.Retour = XMENEXT_DEBUT_DONNEE
 			preturn
@@ -7392,7 +7400,7 @@ beginp	; Champ_EcoTyp_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)	\
 	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_EcoTyp_1_Ap
@@ -7457,7 +7465,7 @@ beginp	; Champ_EcoDur_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
 	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_EcoDur_1_Ap
@@ -7494,7 +7502,7 @@ beginp	; Champ_UoCode_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)	\
 	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 
@@ -7533,7 +7541,7 @@ beginp	; Champ_ResFinMt_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
 	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 	if not X1.Choix(2) and not X1.Choix(1)									; saisie paramètres et cumuls interdits
@@ -7575,7 +7583,7 @@ beginp	; Champ_FisBas_1_Ap
 	if not Harmony.DataModif	|	preturn	|	endif
 
 	if	Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_FisBas_1_Ap
@@ -7633,7 +7641,7 @@ beginp	; Champ_FisTyp_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
 	and IMMOBILISATION.FisBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 	if Harmony.Key = K_TAB \													; Tabulation
@@ -7705,7 +7713,7 @@ beginp	; Champ_FisDur_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
 	and IMMOBILISATION.FisBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_FisDur_1_Ap
@@ -8407,7 +8415,7 @@ Beginp	; Champ_NatImmo_1_Ap
 	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
 	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
 	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 Endp		; Champ_NatImmo_1_Ap

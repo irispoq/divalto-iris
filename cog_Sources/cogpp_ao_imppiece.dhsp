@@ -825,7 +825,7 @@ EndF
 ;*
 Function int ValidationPiece_Charger_MOUV(wTicod, wPiCod, wPiNo, wGrRef, wDepo, wNst)
 ;
-RecordSQL		"GTRSPPPCE.Dhoq"		Mouvement		wRs_MOUV
+RecordSQL		"GTRSPCE.Dhoq"		Mouvement		wRs_MOUV
 1		wTicod		>gtfdd.dhsd 		Ticod
 1		wPicod		>gtfdd.dhsd			PiCod
 1		wPiNo			>gtfdd.dhsd			PiNo

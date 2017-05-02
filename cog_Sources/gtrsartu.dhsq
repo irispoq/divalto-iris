@@ -55,7 +55,13 @@ Public 	Record 	CCFDD.dhsd	CZ
 
 <RecordSql Name=Decomposition>
 <SELECT>
-	DAR.*,
+	DAR.*
+<LEFTJOIN NoActivate Name="COG_ART">
+	ART AS Compo_Spec
+	ON Compo_Spec.DOS = DAR.DOS AND Compo_Spec.REF = DAR.REFCO
+<WHERE>
+	Case Composant_Generique DEPENDENCIES="Compo_Spec"
+		Compo_Spec.COG_GENERIQUE = 2
 
 ;*
 ;*		Libellé complémentaire					LART

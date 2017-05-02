@@ -32,7 +32,7 @@ Module	"CogTm_000.dhop"						;module de fonctions communes
 Public RecordSQL	"COGRS_MVTL.DHOQ"		CogRs_MouvErr
 Public RecordSQL	"COGRS_MVTL.DHOQ"		CogRs_MvtlErr
 Public RecordSQL	"COGRS_MVTL.DHOQ"		CogRs_MvtlErr		CogRs_MvtlNew
-Public RecordSQL	"GTRSPPART.DHOQ"		InfoDepo				
+Public RecordSQL	"GTRSART.DHOQ"			InfoDepo				
 Public RecordSQL	"GTRSPPTAB.DHOQ"		Depot
 
 ;
@@ -57,7 +57,7 @@ Public Record	"gtfdd.dhsd"	T020
 ;* Initialisation des variables
 Function int Cog_InitialiserVariables
 ;
-Recordsql	a5rsuser.dhoq	utilisateur						;Utilisateurs
+Recordsql	a5rsdos.dhoq	utilisateur						;Utilisateurs
 
 BeginF
 

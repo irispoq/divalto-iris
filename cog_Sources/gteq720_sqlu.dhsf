@@ -1,13 +1,13 @@
-;>xwin4obj                              7.0       20161209115600      
+;>xwin4obj                              7.0       20170103115224      
 [masque]
- utilisateur="UGIE_205C"
- date_modification="09/12/2016"
+ utilisateur="UGIE"
+ date_modification="03/01/2017"
  feuille_style="fstylewpf.dhfi"
  id_traitements=384
  diva_init="Masque_Init"
  dernier_id=1000004
  surcharge=oui
- date_modif_base="20110627153919"
+ date_modif_base="20150311145940"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -19,9 +19,9 @@
   f7=135
 [enregistrements]
  "gtfdd.dhsd",,xq,g3xq,8000,0
- "gtfdd.dhsd",gtfdos,soc,soc,2800,0
+ "gtfdd.dhsd",gtfdos,soc,soc,3500,0
  "gtfqdd.dhsd",,gt600,gt600,300,0
- "gtfdd.dhsd",gtfvtl,mvtl,mvtl,1000,0
+ "gtfdd.dhsd",gtfvtl,mvtl,mvtl,1350,0
  "gtfdd.dhsd",,xp,xp,100,0
 [onglet]
  [presentation]
@@ -213,7 +213,7 @@
   [presentation]
    position=146,194
    taille=9,18
-   id=1000004
+   id=1000002
    wstyle="STD"
   [texte]
    texte="à"
@@ -645,7 +645,7 @@
   [presentation]
    position=146,92
    taille=9,46
-   id=1000002
+   id=1000003
    colonnes_saisie=8
    wstyle="CHAMP_SAISI"
   [description]
@@ -659,12 +659,11 @@
    f8=9500
   [traitements]
    microbol_click=8002
-   diva_apres="Champ_ProjetD_1_Ap"
  [champ]
   [presentation]
    position=146,214
    taille=9,46
-   id=1000003
+   id=1000004
    colonnes_saisie=8
    wstyle="CHAMP_SAISI"
   [description]
@@ -970,6 +969,51 @@
    diva_apres="Champ_FamF_1_Ap"
  [champ]
   [presentation]
+   position=218,10
+   taille=9,75
+   noms="fam1"
+   id=69
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=soc,famlib,soc,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=129
+   f7=135
+ [champ]
+  [presentation]
+   position=242,10
+   taille=9,75
+   noms="fam3"
+   id=70
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=soc,famlib,soc,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=129
+   f7=135
+ [champ]
+  [presentation]
+   position=230,10
+   taille=9,75
+   noms="fam2"
+   id=71
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=soc,famlib,soc,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=129
+   f7=135
+ [champ]
+  [presentation]
    position=242,360
    taille=9,46
    noms="fam3"
@@ -1025,51 +1069,6 @@
     texte="Uniquement le stock périmé"
     cadrage=droite
     valeur="3"
-  [touches]
-   f1=129
-   f7=135
- [champ]
-  [presentation]
-   position=218,10
-   taille=9,75
-   noms="fam1"
-   id=69
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=soc,famlib,soc,1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=129
-   f7=135
- [champ]
-  [presentation]
-   position=242,10
-   taille=9,75
-   noms="fam3"
-   id=70
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=soc,famlib,soc,3
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=129
-   f7=135
- [champ]
-  [presentation]
-   position=230,10
-   taille=9,75
-   noms="fam2"
-   id=71
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=soc,famlib,soc,2
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
   [touches]
    f1=129
    f7=135
@@ -1502,27 +1501,12 @@ Public Record "gtfqdd.dhsd" gt600 gt600
 Public Record "gtfdd.dhsd" mvtl mvtl
 Public Record "gtfdd.dhsd" xp xp
 
-1	err	5,0
-
-
-;*
-Private Procedure Champ_ProjetD_1_Ap
-;
-Beginp
-
-	if g3xq.ProjetD <> System.Esp
-		if Controle_Affaire(g3xq.ProjetD) <> 0
-			MessageBox("Code affaire inexistant ou non sélectionnable", "")
-			Harmony.Retour = XMENEXT_RESSAISIE
-		endif
-	endif
-
-Endp
-
 ;*
 Private Procedure Champ_ProjetF_1_Ap
 ;
 Beginp
+
+	Controle_DonneeFin(G3XQ.ProjetD, G3XQ.ProjetF, 1, 7911)
 
 Endp
 
@@ -1534,178 +1518,148 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-;>XMT
-SetModuleInfo('$Id: gteq720.dhsf 16168 2011-06-27 13:47:52Z sn $')
-
+SetModuleInfo('$Id: gteq720_sql.dhsf 51516 2015-11-19 12:34:13Z als $')
 ;*
-;*   Inventaire comptable ce jour            													gtte720
+;*   Inventaire comptable ce jour
 ;*
-
-;*		Log	 Version	  NPmodif		Date		Modifications
-;*
-;*		ch 		4.1						10.1999	Version initiale en Diva 
 
 ;*
 ;*		Déclarations
 ;*
 
-include "GTTC000.dhsp"
+Include	'GTTC000.dhsp'
 
-public record 	GTFDD.dhsd 		XQ 		G3XQ
-public record  GTFQDD.dhsd 	GT000 
-public hfile 	GTFDD.dhsd		GTFAT   	GTFAT	
-public hfile 	GTFDD.dhsd		GTFDOS  	GTFDOS 	
-public record  GTFDD.dhsd  	SOC
-public hfile 	GTFDD.dhsd 		GTFVTL	GTFVTL			; fichier ventilation
-public record	"A5DD.dhsd"		MZ			MZ					; Sauvegarde MZ pour double xmiload.
-Public Record 	"gtfqdd.dhsd" 	gt600 gt600
-Public Record 	"gtfdd.dhsd" 	mvtl mvtl
+; TDF
+Public HFile 	GTFDD.dhsd		GTFAT   	GTFAT	
+Public HFile 	GTFDD.dhsd		GTFDOS  	GTFDOS
+Public HFile 	GTFDD.dhsd 		GTFVTL	GTFVTL
 
-1 		i 		3,0
-1		j		3,0
-1		car 	1
+; Record Sql
+Public RecordSql 'gtrsdos.dhoq'	Dossier	Dossier	; Dossier
+; Record
+Public Record	'A5DD.dhsd'		MZ			MZ					; Sauvegarde MZ pour double xmiload.
+Public Record 	'GTFDD.dhsd' 	XQ 		G3XQ
+Public Record 	'GTFDD.dhsd' 	MVTL
 
-;*
-;*			Séquences appelées par les données du masque
-;*
-
+Public Record  'GTFQDD.dhsd' 	GT000 
+Public Record 	'GTFQDD.dhsd' 	GT600
 
 ;*
-public procedure    Page_Boutons_1_Ap ; après page 1
-beginp
-	if G3XQ.REFF		< G3XQ.REFD
-	   Mes_Alert(7903)
- 		harmony.retour = xmenext_Traitement_Avant 
-	endif
-	if G3XQ.SREF1F 	< G3XQ.SREF1D
-	   Mes_Alert(7904)
- 		harmony.retour = xmenext_Traitement_Avant 
-	endif
-	if G3XQ.SREF2F 	< G3XQ.SREF2D
-	   Mes_Alert(7905)
- 		harmony.retour = xmenext_Traitement_Avant 
-	endif
-
-	for i = 1 to 3
-		if G3XQ.FAMF(i) 	< G3XQ.FAMD(i)
-	   	Mes_Alert(7908)
- 			harmony.retour = xmenext_Traitement_Avant 
-		endif
-	next
-
-	if G3XQ.DEPOF 		< G3XQ.DEPOD
-	   Mes_Alert(7909)
- 		harmony.retour = xmenext_Traitement_Avant 
-	endif
-	if G3XQ.ETBF 		< G3XQ.ETBD
-	   Mes_Alert(7910)
- 		harmony.retour = xmenext_Traitement_Avant 
-	endif
-	if G3XQ.NSTFin		< G3XQ.NSTDeb
-	   Mes_Alert(7935)
- 		harmony.retour = xmenext_Traitement_Avant 
-	endif
-	if G3XQ.LIEUF < G3XQ.LIEUD
-		Mes_Alert(7936)
- 		harmony.retour = xmenext_Traitement_Avant 
-	endif
-
-endp 
+;*			Procedures & fonctions
+;*
 
 ;*
-public procedure Champ_DepoD_1_Av
-beginp
-	if SOC.ENTCOD(1) = 1
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Page_Boutons_1_Ap		; Après page 1
+1		cpt			3,0		; Compteur
+
+Beginp
+	Controle_DonneeFin(G3XQ.RefD	, G3XQ.RefF		, 1, 7903)
+	Controle_DonneeFin(G3XQ.Sref1D, G3XQ.Sref1F	, 1, 7904)
+	Controle_DonneeFin(G3XQ.Sref2D, G3XQ.Sref2F	, 1, 7905)
+	Controle_DonneeFin(G3XQ.DepoD	, G3XQ.DepoF	, 1, 7909)
+	Controle_DonneeFin(G3XQ.EtbD	, G3XQ.EtbF		, 1, 7910)
+	Controle_DonneeFin(G3XQ.NstDeb, G3XQ.NstFin	, 1, 7935)
+	Controle_DonneeFin(G3XQ.LieuD	, G3XQ.LieuF	, 1, 7936)
+	
+	For cpt = 1 to 3
+		Controle_DonneeFin(G3XQ.FamD(cpt), G3XQ.FamF(cpt), 1, 7908)
+	Next
+Endp 
 
 ;*
-public procedure Champ_DepoF_1_Av
-beginp
-	if SOC.ENTCOD(1) = 1
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Champ_DepoD_1_Av
+Beginp
+	If not Soc_Gerer_Depots
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_DepoF_1_Ap
-beginp
-	Controle_DonneeFin(G3XQ.DEPOD, G3XQ.DEPOF, 1, 7909)
-endp 
+Public Procedure Champ_DepoF_1_Av
+Beginp
+	If not Soc_Gerer_Depots
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_RefD_1_Ap
-beginp
-	Controle_Article(G3XQ.REFD)
-endp 
+Public Procedure Champ_DepoF_1_Ap
+Beginp
+	Controle_DonneeFin(G3XQ.DepoD, G3XQ.DepoF, 1, 7909)
+Endp 
 
 ;*
-public procedure Champ_RefF_1_Ap
-beginp
-	if G3XQ.REFF <> " "
-		Controle_Article(G3XQ.REFF)
-	endif
-	Controle_DonneeFin(G3XQ.REFD, G3XQ.REFF, 1, 7903)
-endp 
+Public Procedure Champ_RefD_1_Ap
+Beginp
+	Controle_Article(G3XQ.RefD)
+Endp 
 
 ;*
-public procedure Champ_Refmsk_1_Ap
-beginp
-	 Controle_Masquage (G3XQ.REFMSK,7916,1)     ;1893
-endp 
+Public Procedure Champ_RefF_1_Ap
+Beginp
+	If G3XQ.RefF <> " "
+		Controle_Article(G3XQ.RefF)
+	EndIf
+	Controle_DonneeFin(G3XQ.RefD, G3XQ.RefF, 1, 7903)
+Endp 
+
+;*
+Public Procedure Champ_Refmsk_1_Ap
+Beginp
+	Controle_Masquage(G3XQ.RefMsk, 7916, 1)
+Endp 
  
 ;*
-public procedure Champ_Sref1d_1_Av
-beginp
-	if SOC.ENTCOD(17) = 1
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Champ_Sref1d_1_Av
+Beginp
+	If not Soc_Gerer_SousReferences
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_Sref1F_1_Av
-beginp
-	if SOC.ENTCOD(17) = 1
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Champ_Sref1F_1_Av
+Beginp
+	If not Soc_Gerer_SousReferences
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_Sref1F_1_Ap
-beginp
-	Controle_DonneeFin(G3XQ.SREF1D, G3XQ.SREF1F, 1, 7904)
-endp 
+Public Procedure Champ_Sref1F_1_Ap
+Beginp
+	Controle_DonneeFin(G3XQ.Sref1D, G3XQ.Sref1F, 1, 7904)
+Endp 
 
 ;*
-public procedure Champ_Sref1msk_1_Av
-beginp
-	if SOC.ENTCOD(17) = 1
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Champ_Sref1msk_1_Av
+Beginp
+	If not Soc_Gerer_SousReferences
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_Sref1msk_1_Ap
-beginp
-	 Controle_Masquage (G3XQ.SREF1MSK,7916,1)     ;1893
-endp 
+Public Procedure Champ_Sref1msk_1_Ap
+Beginp
+	Controle_Masquage(G3XQ.Sref1Msk, 7916, 1)
+Endp 
 
 ;*
-public procedure Champ_Sref2d_1_Av
-beginp
-	if SOC.ENTCOD(17) = 1
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Champ_Sref2d_1_Av
+Beginp
+	If not Soc_Gerer_SousReferences
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_Sref2F_1_Av
-beginp
-	if SOC.ENTCOD(17) = 1
- 		harmony.retour = xmenext_Saut_Donnee 
-	endif
-endp 
+Public Procedure Champ_Sref2F_1_Av
+Beginp
+	If not Soc_Gerer_SousReferences
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE 
+	EndIf
+Endp 
 
 ;*
 Public Procedure Champ_Sref2F_1_Ap
@@ -1714,106 +1668,102 @@ Beginp
 Endp 
 
 ;*
-public procedure Champ_Sref2msk_1_Av
-beginp
-	if SOC.ENTCOD(17) = 1
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Champ_Sref2msk_1_Av
+Beginp
+	If not Soc_Gerer_SousReferences
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_Sref2msk_1_Ap
-beginp
-	 Controle_Masquage (G3XQ.SREF2MSK,7916,1)     ;1893
-endp 
+Public Procedure Champ_Sref2msk_1_Ap
+Beginp
+	Controle_Masquage(G3XQ.Sref2Msk, 7916, 1)
+Endp 
 
 ;*
-public procedure Champ_Cptsf_1_Ap
-beginp
+Public Procedure Champ_Cptsf_1_Ap
+Beginp
 	Controle_DonneeFin(G3XQ.CPTSD, G3XQ.CPTSF, 1, 7937)
-endp 
+Endp 
 
 ;*
-public procedure Champ_Cptsmsk_1_Ap
-beginp
-	 Controle_Masquage (G3XQ.CPTSMSK,7916,1)     ;1893
-endp 
+Public Procedure Champ_Cptsmsk_1_Ap
+Beginp
+	Controle_Masquage(G3XQ.CptSMsk, 7916, 1)
+Endp 
 
 ;*
-public procedure Champ_NstFin_1_Ap
-beginp
-	Controle_DonneeFin(G3XQ.NSTDEB, G3XQ.NSTFIN, 1, 7935)
-endp 
+Public Procedure Champ_NstFin_1_Ap
+Beginp
+	Controle_DonneeFin(G3XQ.NstDeb, G3XQ.NstFin, 1, 7935)
+Endp 
 
 ;*
-public procedure Champ_Nstmsk_1_Ap
-beginp
-	 Controle_Masquage (G3XQ.NSTMSK,7916,1)     ;1893
-endp 
+Public Procedure Champ_Nstmsk_1_Ap
+Beginp
+	Controle_Masquage(G3XQ.NstMsk, 7916, 1)
+Endp 
 
 ;*
-public procedure Champ_Etbd_1_Av
-beginp
-	if SOC.ENTCOD(22) = 1
- 		harmony.retour = xmenext_Saut_Donnee 
-	endif
-endp 
+Public Procedure Champ_Etbd_1_Av
+Beginp
+	If not Soc_Gerer_Etablissements
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE 
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_Etbf_1_Ap
-beginp
-	Controle_DonneeFin(G3XQ.ETBD, G3XQ.ETBF, 1, 7910)
-endp 
+Public Procedure Champ_Etbf_1_Ap
+Beginp
+	Controle_DonneeFin(G3XQ.EtbD, G3XQ.EtbF, 1, 7910)
+Endp 
 
 ;*
-public procedure Champ_LieuF_1_Ap
-beginp
-	Controle_DonneeFin(G3XQ.LIEUD, G3XQ.LIEUF, 1, 7936)
-endp 
+Public Procedure Champ_LieuF_1_Ap
+Beginp
+	Controle_DonneeFin(G3XQ.LieuD, G3XQ.LieuF, 1, 7936)
+Endp 
 
 ;*
-public procedure Champ_LieuMsk_1_Ap
-beginp
-	 Controle_Masquage (G3XQ.LIEUMSK,7916,1)     ;1893
-endp 
+Public Procedure Champ_LieuMsk_1_Ap
+Beginp
+	Controle_Masquage(G3XQ.LieuMsk, 7916, 1)
+Endp 
 
 ;*
-public procedure Champ_FamD_1_Av
-beginp
-	if SOC.FAMLIB(HARMONY.DATAIND1) = ' '
- 		harmony.retour = xmenext_Saut_Donnee 
-	endif
-endp 
+Public Procedure Champ_FamD_1_Av
+Beginp
+	If Dossier.FamLib(Harmony.DataInd1) = ' '
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE 
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_FamF_1_Av
-beginp
-	if SOC.FAMLIB(HARMONY.DATAIND1) = ' '
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Champ_FamF_1_Av
+Beginp
+	If Dossier.FamLib(Harmony.DataInd1) = ' '
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_FamF_1_Ap
-beginp
-	Controle_DonneeFin(G3XQ.FAMD(harmony.dataind1), G3XQ.FAMF(harmony.dataind1), 1, 7908)
-endp 
+Public Procedure Champ_FamF_1_Ap
+Beginp
+	Controle_DonneeFin(G3XQ.FamD(Harmony.DataInd1), G3XQ.FamF(Harmony.DataInd1), 1, 7908)
+Endp 
 
 ;*
-public procedure Champ_FamMsk_1_Av
-beginp
-	if SOC.FAMLIB(HARMONY.DATAIND1) = ' '
- 		harmony.retour = xmenext_Saut_Donnee
-	endif
-endp 
+Public Procedure Champ_FamMsk_1_Av
+Beginp
+	If Dossier.FamLib(Harmony.DataInd1) = ' '
+ 		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp 
 
 ;*
-public procedure Champ_FamMsk_1_Ap
-beginp
-	 Controle_Masquage (G3XQ.FAMMSK(HARMONY.DATAIND1),7916,1)     ;1893
-endp 
-
-
-;* fin gtte720
-
+Public Procedure Champ_FamMsk_1_Ap
+Beginp
+	Controle_Masquage(G3XQ.FamMsk(Harmony.DataInd1), 7916, 1)
+Endp
 [/diva]

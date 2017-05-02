@@ -1,0 +1,23 @@
+<DictionarySql OverWrite='gtrshqinv.dhoq' ModuleInfo='$Id$'>
+;*
+;*		Dictionnaire des définitions des RecordSQL liés aux inventaires
+;*
+
+;*
+;*		Inventaire comptable	ce jour / Préparation inventaire
+;*
+
+<RecordSql Name=InvVtl>
+<SELECT>
+	MVTL.*
+<LEFTJOIN>
+	GTFDD.dhsd MOUV AS MOUV
+	ON MOUV.Dos = MVTL.Dos AND MOUV.EnrNo = MVTL.EnrNo	AND MOUV.Ce2 = '1'
+<WHERE>
+
+	Case COG_Equal_Affaire(char affaire)
+		MOUV.Ce3 = '1' AND MOUV.Projet = affaire
+
+	Case COG_Between_Affaire(char affaireD, char affaireF)
+		MOUV.Ce3 = '1' AND MOUV.Projet BETWEEN affaireD AND affaireF
+	

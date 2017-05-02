@@ -53,7 +53,7 @@ Public Record	A5dd.dhsd 	A1							; Enregistrement de travail (contient les vari
 ;* Initialisation des variables
 function int Cog_InitialiserVariables
 ;
-recordsql	a5rsuser.dhoq	utilisateur										;Utilisateurs
+recordsql	a5rsdos.dhoq	utilisateur										;Utilisateurs
 recordsql	cogrs_tab.dhoq	TableParametre									;Table des paramètres
 
 beginf

@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20151106121137      
+;>xwin4obj     imprimante               6.0       20161207110838      
 [masque]
  utilisateur="UGIE"
- date_modification="06/11/2015"
+ date_modification="07/12/2016"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -14,7 +14,7 @@
  diva_init="Masque_1_Init"
  dernier_id=1000134
  surcharge=oui
- date_modif_base="20140912105131"
+ date_modif_base="20130930104326"
  dernier_id_page=100000
  niveau_surcharge=1
  [adresses]
@@ -577,6 +577,7 @@
    wstyle="STD"
   [description]
    donnee=g4,nom,g4,2
+  [param_saisie]
  [champ]
   [presentation]
    position=85,164
@@ -657,6 +658,7 @@
    wstyle="STD"
   [description]
    donnee=g4,loc,g4,2
+  [param_saisie]
  [champ]
   [presentation]
    position=126,192
@@ -665,6 +667,7 @@
    wstyle="STD"
   [description]
    donnee=g4,vil,g4,2
+  [param_saisie]
  [champ]
   [presentation]
    position=105,164
@@ -673,6 +676,7 @@
    wstyle="STD"
   [description]
    donnee=g4,rue,g4,2
+  [param_saisie]
  [champ]
   [presentation]
    position=131,27
@@ -681,6 +685,7 @@
    wstyle="PETIT"
   [description]
    donnee=g4,loc,g4,3
+  [param_saisie]
  [champ]
   [presentation]
    position=138,45
@@ -689,6 +694,7 @@
    wstyle="PETIT"
   [description]
    donnee=g4,vil,g4,3
+  [param_saisie]
  [champ]
   [presentation]
    position=187,255
@@ -721,6 +727,7 @@
    wstyle="PETIT"
   [description]
    donnee=g4,rue,g4,3
+  [param_saisie]
  [champ]
   [presentation]
    position=115,27
@@ -729,6 +736,7 @@
    wstyle="PETIT_GRAS"
   [description]
    donnee=g4,nom,g4,3
+  [param_saisie]
  [multi_choix]
   [presentation]
    position=4,226
@@ -751,6 +759,7 @@
    wstyle="STD"
   [description]
    donnee=ent,pidt,ent
+  [param_saisie]
  [champ]
   [presentation]
    position=187,36
@@ -769,6 +778,7 @@
    wstyle="STD_GRAS"
   [description]
    donnee=ent,tiers,ent
+  [param_saisie]
  [champ]
   [presentation]
    position=187,102
@@ -777,6 +787,7 @@
    wstyle="STD"
   [description]
    donnee=ent,piref,ent
+  [param_saisie]
  [champ]
   [presentation]
    position=147,4
@@ -819,6 +830,7 @@
    wstyle="DAV_DES"
   [description]
    donnee=mouv,des,g4mouv
+  [param_saisie]
  [champ]
   [presentation]
    position=0,177
@@ -838,6 +850,7 @@
    wstyle="PETIT"
   [description]
    donnee=art,tvaart,g4art
+  [param_saisie]
  [champ]
   [presentation]
    position=0,215
@@ -868,6 +881,7 @@
    wstyle="DAV_REF"
   [description]
    donnee=mouv,ref,g4mouv
+  [param_saisie]
 [bloc]
  numero=3
  libelle="Débordement"
@@ -1271,6 +1285,7 @@
    wstyle="STD_GRAS"
   [description]
    donnee=ent,dev,ent
+  [param_saisie]
  [champ]
   [presentation]
    position=49,243
@@ -1974,7 +1989,7 @@ public record "gtfdd.dhsd" cli
 ;Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtii210a.dhsi 31865 2013-05-28 14:05:36Z sn $')
+SetModuleInfo('$Id: gtii210a.dhsi 37150 2014-01-30 09:55:42Z lk $')
 
 Module	'GTPM000.dhop'
 Module	'GTTMPCE.dhop'
@@ -1989,7 +2004,7 @@ Public Record "a5dd.dhsd" mw mw
 Public Record "gtfdd.dhsd" g4t1 g4t1
 Public Record "gtfdd.dhsd" mvtl g4mvtl
 Public Record "gtfdd.dhsd" t013 t013
-
+public hfile gtfdd.dhsd GTFAT GTFAT
 ;*
 Public Procedure Bloc_ArticleComposant_Ap		; Après une ligne de composant
 Beginp

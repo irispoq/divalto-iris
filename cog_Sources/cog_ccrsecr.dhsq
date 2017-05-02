@@ -2,7 +2,7 @@
 ;*		Dictionnaire des définitions des RecordSQL du CCFECR
 ;*
 
-<DictionarySql defaultDictionary=ccfdd.dhsd DataBase=DCPT overwrittenby="cog_ccrsecru.dhoq" ModuleInfo='$Id: cog_ccrsecr.dhsq 7151 2014-12-01 14:42:24Z admin $'>
+<DictionarySql defaultDictionary=ccfdd.dhsd DataBase=DCPT overwrittenby="cog_ccrsecru.dhoq" ModuleInfo='$Id: cog_ccrsecr.dhsq 10673 2016-12-26 11:25:10Z admin $'>
 
 ;*
 ;*		Ecriture
@@ -29,6 +29,9 @@ public 	record 	GTFDD.dhsd	T000
 		
 	case Equal_EcrNo(int ecrno)
 		C8.EcrNo = ecrno
+
+	case Equal_EcrLg(int ecrlg)
+		C8.EcrLG = ecrlg
 
 	case A_partir_EcrNo(int ecrno)
 		C8.EcrNo >= ecrno

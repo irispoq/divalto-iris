@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20120113093220      
+;>xwin4obj                              7.0       20140612074313      
 [masque]
  libelle="table classe d'affaire"
- utilisateur="SN"
- date_modification="13/01/2012"
+ utilisateur="TP"
+ date_modification="28/10/2013"
  feuille_style="fstylewpf.dhfi"
  id_traitements=46
  type_masque=2
@@ -17,7 +17,7 @@
   shift_f6=10000
 [enregistrements]
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "gtfdd.dhsd",,g7,g7,4500,0
+ "gtfdd.dhsd",,g7,g7,4550,0
  "gtrstab.dhoq",,classeaffaire,clasaffaire,1024,1
  "gtrstab.dhoq",,classeaffaire,clasaffaire_sel,1024,1
 [onglet]
@@ -866,6 +866,14 @@
     wid_ressource="SEPARATEUR_7__1"
   [item]
    [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=6
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
     wnom="AIDE"
     wid_ressource="AIDE"
     wtrait_chaine="#shift_f1"
@@ -904,7 +912,7 @@
     wnom=""
 [diva]
 
-SetModuleInfo('$Id: gtez104_sql.dhsf 20646 2012-01-13 08:32:40Z sn $')
+SetModuleInfo('$Id: gtez104_sql.dhsf 51516 2015-11-19 12:34:13Z als $')
 
 
 

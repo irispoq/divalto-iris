@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20140310172038      
+;>xwin4obj                              7.0       20151007174401      
 [masque]
  libelle="client"
- utilisateur="SN"
- date_modification="10/03/2014"
+ utilisateur="LK"
+ date_modification="07/10/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=732
  type_masque=2
- dernier_id=1353
+ dernier_id=1368
  dernier_id_page=34
 [defaut]
  [aide_page]
@@ -20,15 +20,15 @@
   shift_f6=10000
 [enregistrements]
  "gtrstiers.dhoq",,client,client,1024,1
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1700,0
  "a5dd.dhsd",,mw,cli_mw,3000,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "gtfdd.dhsd",,g1t1,g1t1_1,4700,0
- "gtfdd.dhsd",,cli,cli_sel,2450,0
- "gtfdd.dhsd",,g1t1,g1t1_2,4700,0
- "gtfdd.dhsd",,g1t1,g1t1_sel,4700,0
- "gtfdd.dhsd",,soc,soc,2800,0
- "gtfdd.dhsd",,g7,g7,4510,0
+ "gtfdd.dhsd",,g1t1,g1t1_1,5500,0
+ "gtfdd.dhsd",,cli,cli_sel,3000,0
+ "gtfdd.dhsd",,g1t1,g1t1_2,5500,0
+ "gtfdd.dhsd",,g1t1,g1t1_sel,5500,0
+ "gtfdd.dhsd",,soc,soc,3500,0
+ "gtfdd.dhsd",,g7,g7,4550,0
 [onglet]
  [presentation]
   position=0,0
@@ -145,6 +145,35 @@
    donnee=rowinfo,rowinfo,zoomselection
    minmaj=majuscules
    saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=73,5
+    taille=18,36
+    noms="icpfl"
+    id=1367
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=client,icpfl,client
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG"
+   [touches]
+    f5=5000
+    f6=5002
+    f7=135
+    shift_f5=5001
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#tblicp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
     position=111,112
@@ -2649,6 +2678,7 @@
    [description]
     donnee=client,cpt,client
    [param_saisie]
+    obligatoire=oui
     table_associee=oui
    [touches]
     f1=1
@@ -2666,7 +2696,6 @@
    texte="Compte comptable"
    [param_colonne]
     titre="Compte"
-    fl_aff=non
     largeur_col=39
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -3140,9 +3169,9 @@
    [traitements]
     microbol_click=8002
    [info_bulle]
-   texte="Montant plafond pour préparation"
+   texte="Montant pour déblocage de la préparation hors jours de livraison"
    [param_colonne]
-    titre="Montant plafond"
+    titre="Montant déblocage"
     fl_aff=non
     largeur_col=51
     wstyle="ENTETE_COLONNE"
@@ -4002,6 +4031,25 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=26,94
+   taille=9,18
+   id=1368
+   wstyle="STD"
+  [description]
+   donnee=client,icpfl,client
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
  [champ]
   [presentation]
    position=40,56
@@ -8091,6 +8139,15 @@
   [param_groupbox]
    texte="Adresse d'une fiche tiers"
    couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=243,5
+   taille=29,310
+   id=1354
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Code lieu-fonction"
+   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
    position=42,10
@@ -8173,8 +8230,8 @@
    texte="Relevé"
  [obj_texte]
   [presentation]
-   position=243,5
-   taille=9,53
+   position=259,10
+   taille=9,88
    id=1337
    wstyle="STD"
   [texte]
@@ -8756,8 +8813,8 @@
    "zoom"
  [champ]
   [presentation]
-   position=243,64
-   taille=9,50
+   position=259,100
+   taille=9,135
    id=1338
    colonnes_saisie=13
    wstyle="CHAMP_SAISI"
@@ -9989,41 +10046,177 @@
    nom="FICHE"
    libelle="WMS"
    couleur_fond="STD"
- [obj_texte]
+ [groupbox]
+  [presentation]
+   position=135,5
+   taille=108,310
+   id=1359
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Textes préenregistrés"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
   [presentation]
    position=26,5
-   taille=9,69
+   taille=103,310
+   id=1366
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Paramétrage"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=44,10
+   taille=9,151
    id=1326
    wstyle="STD"
   [texte]
    texte="Gamme emballage"
  [obj_texte]
   [presentation]
-   position=38,5
-   taille=9,69
+   position=56,10
+   taille=9,151
    id=1332
    wstyle="STD"
   [texte]
    texte="Emplacement document"
  [obj_texte]
   [presentation]
-   position=50,5
-   taille=9,82
+   position=68,10
+   taille=9,151
    id=1334
    wstyle="STD"
   [texte]
-   texte="Montant plafond pour préparation"
+   texte="Montant pour déblocage de la préparation"
+  [info_bulle]
+  texte="Montant pour déblocage de la préparation hors jours de livraison"
  [obj_texte]
   [presentation]
-   position=62,5
-   taille=9,69
+   position=80,10
+   taille=9,151
    id=1335
    wstyle="STD"
   [texte]
    texte="Calendrier de fermeture"
+ [obj_texte]
+  [presentation]
+   position=92,10
+   taille=9,151
+   id=1355
+   wstyle="STD"
+  [texte]
+   texte="Plan de transport"
+ [obj_texte]
+  [presentation]
+   position=153,10
+   taille=9,52
+   id=1360
+   wstyle="STD"
+  [texte]
+   texte="Préparation"
+ [obj_texte]
+  [presentation]
+   position=195,10
+   taille=9,52
+   id=1361
+   wstyle="STD"
+  [texte]
+   texte="EDI"
  [champ]
   [presentation]
-   position=26,90
+   position=163,10
+   taille=9,48
+   id=1362
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=client,texcod,client,6
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1893
+   fichier="gtfaide"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   f8=9081
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TexCod_1_Ap"
+  [boutons]
+   "zoom"
+ [rich_edit]
+  [presentation]
+   position=153,64
+   taille=38,246
+   id=1363
+   wstyle="STD"
+  [description]
+   donnee=mw,rtfnom,cli_mw,6
+   minmaj=majuscules
+   saisie=non
+  [param_rich_edit]
+   largeur=177
+  [touches]
+   f5=5000
+   f6=5002
+   ctrl_f6=10300
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=205,10
+   taille=9,48
+   id=1364
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=client,texcod,client,7
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1893
+   fichier="gtfaide"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   f8=9081
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TexCod_1_Ap"
+  [boutons]
+   "zoom"
+ [rich_edit]
+  [presentation]
+   position=195,64
+   taille=38,246
+   id=1365
+   wstyle="STD"
+  [description]
+   donnee=mw,rtfnom,cli_mw,7
+   minmaj=majuscules
+   saisie=non
+  [param_rich_edit]
+   largeur=177
+  [touches]
+   f5=5000
+   f6=5002
+   ctrl_f6=10300
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=44,163
    taille=9,50
    id=1328
    colonnes_saisie=4
@@ -10043,9 +10236,11 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_StLgtGamCod_1_Ap"
+  [boutons]
+   "zoom"
  [multi_choix]
   [presentation]
-   position=38,90
+   position=56,163
    taille=9,50
    id=1333
    wstyle="CHAMP_SAISI"
@@ -10063,9 +10258,49 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [champ]
+  [presentation]
+   position=93,163
+   taille=9,32
+   id=1356
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=client,transplancod,client
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   f8=9131
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TransPlanCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=93,197
+   taille=9,117
+   id=1358
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=client,libplantrans_lib,client
+   saisie=non
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=74,5
+   position=104,10
    taille=9,160
    id=1329
    wstyle="STD"
@@ -10085,7 +10320,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=50,90
+   position=68,163
    taille=9,50
    id=1330
    colonnes_saisie=12
@@ -10105,7 +10340,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=62,90
+   position=80,163
    taille=9,76
    id=1331
    colonnes_saisie=20
@@ -10125,9 +10360,11 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_CldCod_1_Ap"
+  [boutons]
+   "zoom"
  [case_a_cocher]
   [presentation]
-   position=84,5
+   position=114,10
    taille=9,160
    id=1351
    wstyle="STD"
@@ -12081,6 +12318,14 @@
     wetype_trait=arret
     warret=5040
   [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Evénements qualité"
+    wid_ressource="QUALITE"
+    wetype_trait=arret
+    warret=40303
+  [item]
    type=sep
    dessin=sep
    niveau=2
@@ -12196,6 +12441,14 @@
     wnom=""
     wtexte="_Interrogations"
     wid_ressource="INTERRO"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Offres de prix"
+    wid_ressource="OFFREPRIX"
+    wetype_trait=arret
+    warret=5005
   [item]
    niveau=2
    [param_bouton]
@@ -12781,6 +13034,13 @@
   [item]
    [param_bouton]
     wnom=".TOOLBAR"
+    wtexte="Offres de prix"
+    wid_ressource="OFFREPRIX"
+    wetype_trait=arret
+    warret=5005
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
     wtexte="Dernières ventes"
     wid_ressource="MOUV"
     wetype_trait=arret
@@ -12866,7 +13126,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: gtez021_sql.dhsf 37959 2014-03-10 16:26:03Z sn $')
+SetModuleInfo('$Id: gtez021_sql.dhsf 50314 2015-10-07 15:44:37Z lk $')
 ;*
 ;*      Zoom sur CLIENT  											Record SQL CLIENT de GTRSTIERS.dhoq
 ;*
@@ -12878,7 +13138,7 @@ Module 'A5PMNoteJoint.dhop'
 Module 'A5TM000.dhop'
 Module "RCTM000.dhop"
 Module "WMTM000.dhop"
- 
+
 ; TDF
 Public HFile	GTFDD.dhsd	GTFTAB	GTFTAB
 
@@ -12929,6 +13189,8 @@ Public Record  CCFDD.dhsd 		C3
 Public Record  CCFDD.dhsd 		CA
 Public Record	RCFEBCDD.dhsd	D2
 Public Record "gtfdd.dhsd" cli cli
+Public RecordSql "gtrstiers.dhoq" fournisseur fournisseur
+Public Record "a5dd.dhsd" mw fou_mw
 
 ;*
 ;* séquences liées au masque
@@ -13041,7 +13303,7 @@ Beginp
 	Else
 		If CLIENT.Cpt <> ' '
 			If SOC.EntCodN(20) = 2
-				If SOC.EntCod(14) not in (1, 3)
+				If SOC.EntCodN(14) not in (1, 3)
 					; controle demandé et pas de création automatique
 					If Controle_Compte(CLIENT.Cpt, conf=FALSE, cptnat=3) <= 1
 						CLIENT.CompteClient_Lib = C3.Lib
@@ -13243,7 +13505,7 @@ Endp
 ;*
 Public Procedure Champ_Rfcctrcod_1_Av			; avant référencement CLIENT selon flag dossier
 Beginp
-	If SOC.EntCod(31) <> 2	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf	
+	If SOC.EntCodN(31) <> 2	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf	
 Endp
 
 ;*
@@ -13341,33 +13603,39 @@ Endp
 
 ;*
 Public Procedure Champ_TIERS_2_Ap			; controle code centrale
-1	Tiers		>GTFDD.dhsd Tiers
+1		tiers			>GTFDD.dhsd Tiers
+RecordSql 'GTRSPPTIERS.dhoq'	Client	CliLoc
+
 Beginp
 	CLIENT.TiersGroupement_Nom = ' '
 
-	Tiers = CLIENT.TiersGrp	 					; enregistrement cli est écrasé par controle_CLIENT
-	PingLocal('ZOOM_CLI', CLI)
-	If Controle_CLIENT(Tiers, 2000, 0) = 0	|	CLIENT.TiersGroupement_Nom = CLIENT.Nom	|	EndIf
-	PingLocalReceive('ZOOM_CLI', CLI)
- 	CLIENT.TiersGrp = Tiers
+	Tiers = CLIENT.TiersGrp
+	If Controler_Client_Sql(CliLoc, Tiers, 2000, 0) = 0
+		CLIENT.TiersGroupement_Nom	= CliLoc.Nom
+	EndIf
+	CLIENT.TiersGrp = Tiers
 Endp
 
 ;*
 Public Procedure Champ_TIERS_3_Ap			; controle code Tiers statistique
-1	Tiers		>GTFDD.dhsd Tiers
+1		tiers			>GTFDD.dhsd Tiers
+RecordSql 'GTRSPPTIERS.dhoq'	Client	CliLoc
+
 Beginp
 	CLIENT.TiersStatistique_Nom = ' '
 
-	Tiers = CLIENT.TiersStat	 				; enregistrement cli est écrasé par controle_CLIENT
-	PingLocal('ZOOM_CLI', CLI)
-	If Controle_CLIENT(Tiers, 2000,0) = 0	|	CLIENT.TiersStatistique_Nom = CLIENT.Nom	|	EndIf
-	PingLocalReceive('ZOOM_CLI', CLI)
+	Tiers = CLIENT.TiersStat
+	If Controler_Client_Sql(CliLoc, Tiers, 2000, 0) = 0
+		CLIENT.TiersStatistique_Nom	= CliLoc.Nom
+	EndIf
 	CLIENT.TiersStat = Tiers
 Endp
 
 ;*
 Public Procedure Champ_TIERS_4_Ap			; controle Tiers adresse
-1	Tiers		>GTFDD.dhsd Tiers
+1		tiers			>GTFDD.dhsd Tiers
+RecordSql 'GTRSPPTIERS.dhoq'	Client	CliLoc
+
 Beginp
 	Switch Harmony.Dataind1
 	Case 1	|	CLIENT.TiersAdresseDv_Nom	= ' '
@@ -13377,15 +13645,14 @@ Beginp
 	Case 5	|	CLIENT.TiersAdresseRlv_Nom	= ' '
 	EndSwitch
 
-	Tiers = CLIENT.AdrTiers(Harmony.Dataind1)		; enregistrement cli est écrasé par controle_CLIENT							
-	PingLocal('ZOOM_CLI', CLI)
-	If Controle_CLIENT(Tiers, 2000, 0) = 0
+	Tiers = CLIENT.AdrTiers(Harmony.Dataind1)
+	If Controler_Client_Sql(CliLoc, tiers, 2000, 0) = 0
 		Switch Harmony.Dataind1
-		Case 1	|	CLIENT.TiersAdresseDv_Nom	= CLIENT.Nom
-		Case 2	|	CLIENT.TiersAdresseCde_Nom	= CLIENT.Nom
-		Case 3	|	CLIENT.TiersAdresseBL_Nom	= CLIENT.Nom
-		Case 4	|	CLIENT.TiersAdresseFac_Nom	= CLIENT.Nom
-		Case 5	|	CLIENT.TiersAdresseRlv_Nom	= CLIENT.Nom
+		Case 1	|	CLIENT.TiersAdresseDv_Nom	= CliLoc.Nom
+		Case 2	|	CLIENT.TiersAdresseCde_Nom	= CliLoc.Nom
+		Case 3	|	CLIENT.TiersAdresseBL_Nom	= CliLoc.Nom
+		Case 4	|	CLIENT.TiersAdresseFac_Nom	= CliLoc.Nom
+		Case 5	|	CLIENT.TiersAdresseRlv_Nom	= CliLoc.Nom
 		EndSwitch
 		if Client.ADRCOD(Harmony.DataInd1) <> '' and Recherche_Adresse(TIERS,Client.ADRCOD(Harmony.DataInd1),0) <> 0
 			
@@ -13407,11 +13674,12 @@ Beginp
 	
 		endif
 	EndIf
-	PingLocalReceive('ZOOM_CLI', CLI)
  	CLIENT.AdrTiers(Harmony.Dataind1) = Tiers 
-	
-	Tiers = Condition(	CLIENT.AdrTiers(Harmony.Dataind1) = ' ', 	CLIENT.Tiers, \
+		Tiers = Condition(	CLIENT.AdrTiers(Harmony.Dataind1) = ' ', 	CLIENT.Tiers, \
 																							CLIENT.AdrTiers(Harmony.Dataind1 ) )
+	if Recherche_Adresse(TIERS,CLIENT.ADRCOD(Harmony.DataInd1),0) <> 0
+		CLIENT.AdrCod(Harmony.Dataind1) = ' '
+	endif
 Endp
 
 ;*
@@ -13529,9 +13797,8 @@ Endp
 Public Procedure Champ_StLgtGamCod_1_Ap
 ;
 Beginp
-	Controler_WMS_Gamme(Cli.StLgtGamCod, 20029)
+	Controler_WMS_Gamme(Client.StLgtGamCod, 20029)
 Endp
-
 
 ;*
 Public Procedure Champ_Tiers_5_Ap			; controle code Tiers si création automatique a échouée
@@ -13559,23 +13826,27 @@ Endp
 
 ;*
 Public Procedure Champ_TIERS_6_Ap			; controle code Tiers R3
-1	Tiers		>GTFDD.dhsd Tiers
+1		tiers			>GTFDD.dhsd Tiers
+RecordSql 'GTRSPPTIERS.dhoq'	Client	CliLoc
+
 Beginp
 	CLIENT.TiersReglement_Nom = ' '
 
-	Tiers = CLIENT.TiersR3	 				; enregistrement cli est écrasé par controle_CLIENT
-	PingLocal('ZOOM_CLI', CLI)
-	If Controle_CLIENT(Tiers, 2000, 0) = 0	|	CLIENT.TiersReglement_Nom = CLIENT.Nom	|	EndIf
-	PingLocalReceive('ZOOM_CLI', CLI)
- 	CLIENT.TiersR3 = Tiers
+	tiers = CLIENT.TiersR3
+	If Controler_Client_Sql(CliLoc, Tiers, 2000, 0) = 0
+		CLIENT.TiersReglement_Nom = CliLoc.Nom
+	EndIf
+ 	CLIENT.TiersR3 = tiers
 Endp
 
 ;*
 Public Procedure Champ_TIERS_7_Ap			; à partir du code centrale
-1	Tiers		>GTFDD.dhsd Tiers
+1		tiers			>GTFDD.dhsd Tiers
+RecordSql 'GTRSPPTIERS.dhoq'	Client	CliLoc
+
 Beginp
-	Tiers = CLI_Sel.TiersGrp	 		; enregistrement CLI est écrasé par controle_CLIENT
-	Controle_CLIENT(Tiers, conf=FALSE)
+	Tiers = CLI_Sel.TiersGrp
+	Controler_Client_Sql(CliLoc, tiers, conf=FALSE)
  	CLI_Sel.TiersGrp = Tiers
 Endp
 
@@ -13583,6 +13854,14 @@ Endp
 Public Procedure Champ_Tit_1_Ap			; contrôle titre
 Beginp
 	Lectab(48, CLIENT.Tit, 1148) 
+Endp
+
+;*
+Public Procedure Champ_TransPlanCod_1_Ap	; Contrôle du plan de transport
+RecordSql 'GTRSPPTAB.dhoq'	LibPlanTrans	LibPlanTrans_Loc
+
+Beginp
+	Client.LibPlanTrans_Lib = Condition(Lectab_(LibPlanTrans_Loc, Client.TransPlanCod, err=1191) = 0, LibPlanTrans_Loc.Lib, ' ')
 Endp
 
 ;*
@@ -13634,12 +13913,14 @@ Endp
 ;*
 ;*
 ;*
-
+											 
 ;*
 Public Procedure PositionnerTicod
 Beginp
 	G3XZ.TiCod = 'C'
 Endp
+
+
 [/diva]
 [diva_base]
 [/diva]

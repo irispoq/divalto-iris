@@ -67,11 +67,15 @@ Beginp
 Endp
 
 ;*
-Procedure	Cog_PGest_ZoneTableau(Nom_Donnee, Position, nMode, NbDimensions)
+Procedure	Cog_PGest_ZoneTableau(Nom_Donnee, Position, nMode, NbDimensions, _phase)
+;
+Record	"cog_echange.dhsd"	cog_parazones 		_R_PARAZONES
 1	Position				6,0		;Position de la donnée
 1	Nom_Donnee			32			;Nom de la donnée
 1	aNomDonneeFinal	32
 1	nMode					1,0 = 1	; Mode 1 = chargement multi choix, 2 = chargement table ou info zones
+1	_phase				1,0
+1	_st					X
 
 1	NbDimensions		2,0	;nombre de dimensions
 1	Dico_Dimensions	4,0*4	;Dimensions
@@ -101,7 +105,18 @@ Beginp
 				aENRLST = left(aNomDonneeFinal) & ";" & aNomDonneeFinal
 				listinsert(lIdCHAMP,aENRLST)
 			Elsif nMode = 2
-				HWrite(Cog_ParDivEch, cog_parazones)
+
+				_st = HSeek(Cog_ParDivEch, _R_PARAZONES, "B" & nIdNum & cog_parazones.dico & aNomDonneeFinal)
+
+				If _phase = 1 AND _st <> 0
+					HWrite(Cog_ParDivEch, cog_parazones)
+				ElsIf _phase = 2 AND _st = 0
+					
+					_R_PARAZONES.position	= Position + (i-1) * Dico_Enjambees(1)
+					HReWrite(Cog_ParDivEch, _R_PARAZONES)
+
+				EndIf
+
 			EndIf
 		next
 	
@@ -115,7 +130,18 @@ Beginp
 					aENRLST = left(aNomDonneeFinal) & ";" & aNomDonneeFinal
 					listinsert(lIdCHAMP,aENRLST)
 				Elsif nMode = 2
-					HWrite(Cog_ParDivEch, cog_parazones)
+
+					_st = HSeek(Cog_ParDivEch, _R_PARAZONES, "B" & nIdNum & cog_parazones.dico & aNomDonneeFinal)
+
+					If _phase = 1 AND _st <> 0
+						HWrite(Cog_ParDivEch, cog_parazones)
+					ElsIf _phase = 2 AND _st = 0
+						
+						_R_PARAZONES.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2)
+						HReWrite(Cog_ParDivEch, _R_PARAZONES)
+	
+					EndIf
+
 				EndIf
 			next
 		next
@@ -131,7 +157,18 @@ Beginp
 						aENRLST = left(aNomDonneeFinal) & ";" & aNomDonneeFinal
 						listinsert(lIdCHAMP,aENRLST)
 					Elsif nMode = 2
-						HWrite(Cog_ParDivEch, cog_parazones)
+
+						_st = HSeek(Cog_ParDivEch, _R_PARAZONES, "B" & nIdNum & cog_parazones.dico & aNomDonneeFinal)
+
+						If _phase = 1 AND _st <> 0
+							HWrite(Cog_ParDivEch, cog_parazones)
+						ElsIf _phase = 2 AND _st = 0
+						
+							_R_PARAZONES.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2) + (k-1) * Dico_Enjambees(3)
+							HReWrite(Cog_ParDivEch, _R_PARAZONES)
+		
+						EndIf
+
 					EndIf
 				next
 			next
@@ -149,7 +186,18 @@ Beginp
 							aENRLST = left(aNomDonneeFinal) & ";" & aNomDonneeFinal
 							listinsert(lIdCHAMP,aENRLST)
 						Elsif nMode = 2
-							HWrite(Cog_ParDivEch, cog_parazones)
+
+							_st = HSeek(Cog_ParDivEch, _R_PARAZONES, "B" & nIdNum & cog_parazones.dico & aNomDonneeFinal)
+
+							If _phase = 1 AND _st <> 0
+								HWrite(Cog_ParDivEch, cog_parazones)
+							ElsIf _phase = 2 AND _st = 0
+								
+								_R_PARAZONES.position	= Position + (i-1) * Dico_Enjambees(1) + (j-1) * Dico_Enjambees(2) + (k-1) * Dico_Enjambees(3) + (l-1) * Dico_Enjambees(4)
+								HReWrite(Cog_ParDivEch, _R_PARAZONES)
+
+							EndIf
+
 						EndIf
 					next
 				next
@@ -171,7 +219,7 @@ Beginp
 			nPosit  = HmpSeek(aREPONSE, "Position")
 			If aENRLST <> " "
 				If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
-					Cog_PGest_ZoneTableau(aENRLST, nPosit, 1, nNbDimensions)
+					Cog_PGest_ZoneTableau(aENRLST, nPosit, 1, nNbDimensions, _phase=1)
 				Else
 					aENRLST = left(aENRLST) & ";" & aENRLST
 					ListInsert(lIdCHAMP, aENRLST)
@@ -181,7 +229,7 @@ Beginp
 				aENRLST = HmpSeek(aREPONSE, "Nom")
 				nPosit  = HmpSeek(aREPONSE, "Position")
 				If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
-					Cog_PGest_ZoneTableau(aENRLST, nPosit, 1, nNbDimensions)
+					Cog_PGest_ZoneTableau(aENRLST, nPosit, 1, nNbDimensions, _phase=1)
 				Else
 					If aENRLST <> " "
 						aENRLST = left(aENRLST) & ";" & aENRLST
@@ -219,14 +267,14 @@ Beginp
 			If nNiveau = 1
 				cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
 				If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0 Or nNbDimPar > 0
-					Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+					Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions, _phase=1)
 				ENdIf
 				cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
 			Else
 				DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP, aREPONSE, 2)
 				cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
 				If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0  Or nNbDimPar > 0
-					Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
+					Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions, _phase=1)
 				EndIf
 				cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
 			EndIf
@@ -260,81 +308,87 @@ Beginp
 Endp
 
 ;*
-Public Procedure COG_Genere_Table
+Procedure Cog_PARAZONE_Insert_ou_Update(cog_parazonesL, _phase)
+;
 Record	cog_echange.dhsd	cog_parazones	cog_parazonesL
+1	_phase				1,0	 ; 1: création		2: mise à jour 
 1	nNiveau				1,0
 1	nNbDimensions		2,0	;nombre de dimensions
+1	_st					X
+BeginP
+
+	_st = Hseek(Cog_ParDivEch, cog_parazones, "B" & nIdNum & cog_parazonesl.dico & cog_parazonesl.champ)
+
+
+	If _phase = 1 OR (_phase = 2 AND _st <> 0)
+		cog_parazones.ce1			= "1"
+		cog_parazones.idnum		= nIdNum
+		cog_parazones.idlib		= aIdLib
+		cog_parazones.dico		= cog_parazonesl.dico
+		cog_parazones.enreg		= cog_parazonesl.enreg
+		cog_parazones.mnemo		= cog_parazonesl.mnemo
+		cog_parazones.UserCr		= system.User
+		cog_parazones.UserCrDh	= Time(7)
+		cog_parazones.champ		= cog_parazonesl.champ		
+		cog_parazones.Lib			= HmpSeek(aREPONSE, "Libelle")
+		cog_parazones.natur		= HmpSeek(aREPONSE, "Nature")
+		cog_parazones.vdec		= HmpSeek(aREPONSE, "NbDecimales")
+	EndIf
+
+	nNiveau = HmpSeek(aREPONSE, "Niveau")
+	If nNiveau = 1
+		cog_parazones.POSITION	= HmpSeek(aREPONSE, "Position")
+		cog_parazones.LONGUEUR	= HmpSeek(aREPONSE, "LONGUEUR")
+		If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+			Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions, _phase)
+		ENdIf
+	Else
+		DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP , aREPONSE, 2)
+		cog_parazones.LONGUEUR	= HmpSeek(aREPONSE, "LONGUEUR")
+		cog_parazones.POSITION	= HmpSeek(aREPONSE, "Position")
+		If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
+			Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions, _phase)
+		ENdIf
+	EndIf
+
+	;
+	If nNbDimensions = 0
+
+		If _phase = 1 AND _st <> 0
+			HWrite(Cog_ParDivEch, cog_parazones)
+		ElsIf _phase = 2 AND _st = 0
+			HReWrite(Cog_ParDivEch, cog_parazones)
+		EndIf
+
+	EndIf			
+
+EndP
+
+;*
+Public Procedure COG_Genere_Table(_phase)
+;
+Record	cog_echange.dhsd	cog_parazones	cog_parazonesL
+1	_phase				1,0	= 1 ; 1: création		2: mise à jour 
+1	nNiveau				1,0
+1	nNbDimensions		2,0	;nombre de dimensions
+1	_st					X
 Beginp
+	
+	; recherche table
 	If DDInterface(DD_TABLEFIND, lTicDico, cog_parazones.ENREG , aREPONSE) = 0
-		If DDInterface(DD_DATABEGIN, lTicDico, , aREPONSE) = 0
+		 
+		; début lecture	DD_DATABEGIN: premier champ de la table en cours
+		If DDInterface(DD_DATABEGIN, lTicDico, , aREPONSE) = 0								
 			cog_parazonesl				= cog_parazones
 			cog_parazonesl.champ 	= HmpSeek(aREPONSE, "Nom")
-			If Hseek(Cog_ParDivEch, cog_parazones, "B" & nIdNum & cog_parazonesl.dico & cog_parazonesl.champ)
-				cog_parazones.ce1			= "1"
-				cog_parazones.idnum		= nIdNum
-				cog_parazones.idlib		= aIdLib
-				cog_parazones.dico		= cog_parazonesl.dico
-				cog_parazones.enreg		= cog_parazonesl.enreg
-				cog_parazones.mnemo		= cog_parazonesl.mnemo
-				cog_parazones.UserCr		= system.User
-				cog_parazones.UserCrDh	= Time(7)
-				cog_parazones.champ		= cog_parazonesl.champ		
-				cog_parazones.Lib			= HmpSeek(aREPONSE, "Libelle")
-				cog_parazones.natur		= HmpSeek(aREPONSE, "Nature")
-				cog_parazones.vdec		= HmpSeek(aREPONSE, "NbDecimales")
-				nNiveau = HmpSeek(aREPONSE, "Niveau")
-				If nNiveau = 1
-					cog_parazones.POSITION	= HmpSeek(aREPONSE, "Position")
-					cog_parazones.LONGUEUR	= HmpSeek(aREPONSE, "LONGUEUR")
-					If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
-						Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
-					ENdIf
-				Else
-					DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP , aREPONSE, 2)
-					cog_parazones.LONGUEUR	= HmpSeek(aREPONSE, "LONGUEUR")
-					cog_parazones.POSITION	= HmpSeek(aREPONSE, "Position")
-					If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
-						Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
-					ENdIf
-				EndIf
-				If nNbDimensions = 0
-					HWrite(Cog_ParDivEch, cog_parazones)
-				EndIf
-			EndIf
+			
+			Cog_PARAZONE_Insert_ou_Update(cog_parazonesl, _phase)
+
 			Loop DDInterface(DD_DATANEXT, lTicDico, , aREPONSE) = 0 
+
 				cog_parazonesl.champ 			= HmpSeek(aREPONSE, "Nom")
-				If Hseek(Cog_ParDivEch, cog_parazones, "B" & nIdNum & cog_parazonesl.dico & cog_parazonesl.champ)
-					cog_parazones.ce1			= "1"
-					cog_parazones.idnum		= nIdNum
-					cog_parazones.idlib		= aIdLib
-					cog_parazones.dico		= cog_parazonesl.dico
-					cog_parazones.enreg		= cog_parazonesl.enreg
-					cog_parazones.mnemo		= cog_parazonesl.mnemo
-					cog_parazones.UserCr		= system.User
-					cog_parazones.UserCrDh	= Time(7)
-					cog_parazones.champ		= cog_parazonesl.champ		
-					cog_parazones.Lib			= HmpSeek(aREPONSE, "Libelle")
-					cog_parazones.natur		= HmpSeek(aREPONSE, "Nature")
-					cog_parazones.vdec		= HmpSeek(aREPONSE, "NbDecimales")
-					nNiveau = HmpSeek(aREPONSE, "Niveau")
-					If nNiveau = 1
-						cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
-						cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
-						If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
-							Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
-						ENdIf
-					Else
-						DDInterface(DD_DATAFIND, lTicDico, cog_parazones.CHAMP , aREPONSE, 2)
-						cog_parazones.LONGUEUR = HmpSeek(aREPONSE, "LONGUEUR")
-						cog_parazones.POSITION = HmpSeek(aREPONSE, "Position")
-						If (nNbDimensions := hmpseek(aREPONSE,"NbDimensions")) > 0
-							Cog_PGest_ZoneTableau(cog_parazones.champ, cog_parazones.POSITION , 2, nNbDimensions)
-						ENdIf
-					EndIf
-					If nNbDimensions = 0
-						HWrite(Cog_ParDivEch, cog_parazones)
-					EndIf
-				EndIf
+				Cog_PARAZONE_Insert_ou_Update(cog_parazonesl, _phase)
+
 			EndLoop
 			cog_parazones				= cog_parazonesl
 		EndIf
@@ -342,8 +396,10 @@ Beginp
 Endp
 
 ;* Pt arret 200 : génération table
-Procedure COG_P200_GT
+Procedure COG_P200_GT(_phase)
+;
 1	sPARRUN	S
+1	_phase	1,0 = 1		
 Beginp
 	If nIdNum = " "
 		MessageBox("Vous devez associer le paramétrage de zone à une table identifiée pour celà appelez ce zoom depuis le paramétrage des tables", "Info")
@@ -355,7 +411,7 @@ Beginp
 		cog_parazones = GeneTblSaveParZone
 	EndIf
 	If Cog_XmeInput(zoom.Msqecran, 2, , "ZOOMCREATION") = 0
-		COG_Genere_Table
+		COG_Genere_Table(_phase)
 		ZoomReactualiserListe
 	EndIf
 	Xmeret
@@ -571,6 +627,8 @@ BeginP																											; ZoomConsultFiche
 		Switch2 harmony.DataArret
 			Case 200					; Générer une table
 				COG_P200_GT
+			Case 201					; MAJ table
+				COG_P200_GT(_phase=2)
 		EndSwitch
 	
 EndP																												; ZoomConsultFiche
@@ -586,6 +644,8 @@ BeginP
 		Switch2 harmony.DataArret
 			Case 200					; Générer une table
 				COG_P200_GT
+			Case 201					; MAJ table
+				COG_P200_GT(_phase=2)
 		EndSwitch
 EndP																												
 

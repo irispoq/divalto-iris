@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 10353 2016-10-12 08:05:51Z admin $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 10572 2016-12-08 08:25:54Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -173,7 +173,7 @@ EndF
 ;* Initialisation des variables
 Function int InitialiserVariables
 ;
-Recordsql	a5rsuser.dhoq	utilisateur						;Utilisateurs
+Recordsql	a5rsdos.dhoq	utilisateur						;Utilisateurs
 
 BeginF
 
@@ -387,7 +387,7 @@ EndF
 ;*
 Function int Proservia_ChargerMOUV(wTicod, wPiCod, wPiNo, wGrRef, wDepo, wNst)
 ;
-RecordSQL		"GTRSPPPCE.Dhoq"		Mouvement		wRs_MOUV
+RecordSQL		"GTRSPCE.Dhoq"			Mouvement		wRs_MOUV
 1		wTicod		>gtfdd.dhsd 		Ticod
 1		wPicod		>gtfdd.dhsd			PiCod
 1		wPiNo			>gtfdd.dhsd			PiNo

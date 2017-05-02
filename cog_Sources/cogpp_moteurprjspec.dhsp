@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 8256 2015-06-30 08:28:37Z admin $')
+SetModuleInfo('$Id: cogpp_moteurprjspec.dhsp 10572 2016-12-08 08:25:54Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Moteur de facturation des projets spécifiques / module - Programme Cogpp_moteurprjspec.dhsp 
@@ -35,7 +35,7 @@ Module	"GTPMPCE.DHOP"
 HTmpFile	"gtfdd.dhsd"	gtfi		GTFI		OpenOnUse	DeleteOnExit
 
 ;
-Public 	RecordSQL	"GTRSPPPROJ.DHOQ"			Affaire
+Public 	RecordSQL	"GTRSPROJ.DHOQ"			Affaire
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT125
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT126
 Public 	RecordSQL	"COGRS_UTTAB.DHOQ"		CogRs_UT126		Rs_UT126_Prec
@@ -135,7 +135,7 @@ EndF
 
 ;* Initialisation des variables
 function int Cog_InitialiserVariables
-recordsql	a5rsuser.dhoq	utilisateur						;Utilisateurs
+recordsql	a5rsdos.dhoq	utilisateur						;Utilisateurs
 
 beginf
 
@@ -403,7 +403,7 @@ BeginP
 			Seek_ENT('C', 3, wPiNo)	 
 			MZ.MiCle		= "*09220"
 			mz.EtaNoTyp = oui
-			Xmi_Preparation(Condition(ENT.EtaNo = " ", SOC.EntCod(2), ENT.EtaNo))
+			Xmi_Preparation(Condition(ENT.EtaNo = " ", SOC.EntCodA(2), ENT.EtaNo))
 			Piece_Imprimer('C', 3, wPINO, choixpresentation=FALSE)
 		WEnd
 	EndIf

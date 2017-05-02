@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20140416151132      
+;>xwin4obj                              7.0       20161207110836      
 [masque]
  libelle="code statistique tiers"
  utilisateur="UGIE"
- date_modification="16/04/2014"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=55
  type_masque=2
  dernier_id=1000005
  surcharge=oui
- date_modif_base="20130213094839"
+ date_modif_base="20150209112018"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -19,7 +19,7 @@
   f7=135
   shift_f6=10000
 [enregistrements]
- "gtfdd.dhsd",,soc,soc,2800,0
+ "gtfdd.dhsd",,soc,soc,3500,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "gtrstab.dhoq",,codestatistiquetiers,codestattiers,1024,1
  "gtrstab.dhoq",,codestatistiquetiers,codestattiers_sel,1024,1
@@ -515,7 +515,7 @@
 [page]
  numero=12
  fond="STD"
- efface=complet
+ efface=partiel
  nb_lig=25
  nb_col=70
  offset_lig=1
@@ -854,7 +854,7 @@ Endp
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez069_sql.dhsf 35431 2013-11-15 11:50:30Z jf $')
+SetModuleInfo('$Id: gtez069_sql.dhsf 44641 2015-02-09 10:19:43Z bel $')
 
 
 include 'GTTC000.dhsp'

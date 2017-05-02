@@ -64,7 +64,7 @@ EndF
 Function Int Init_Reservation
 ;	Initialise l'indicateur réservation
 BeginF
-	If soc.EntCod(10) = Non Or soc.EntCod(5) = Non
+	If soc.EntCodN(10) = Non Or soc.EntCodN(5) = Non
 		FReturn(Non)
 	EndIf
 	If Lectab(17,mouv.Depo) <> 0

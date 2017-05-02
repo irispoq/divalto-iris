@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20121211091434      
+;>xwin4obj                              7.0       20150603155055      
 [masque]
  libelle="ZOOM DOSSIER"
- utilisateur="VJ"
- date_modification="11/12/2012"
+ utilisateur="DEMO"
+ date_modification="03/06/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=551
  type_masque=2
- dernier_id=786
+ dernier_id=819
  dernier_id_page=20
 [defaut]
  [aide_page]
@@ -22,12 +22,12 @@
   shift_f7=19009
 [enregistrements]
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "ccfdd.dhsd",,ca,ca_sel,1350,0
+ "ccfdd.dhsd",,ca,ca_sel,1500,0
  "ccrsdos.dhoq",,doscpt,dossier,1024,1
 [onglet]
  [presentation]
   position=0,0
-  taille=315,340
+  taille=297,340
   attache_lgx=oui
   attache_lgy=oui
   id=1
@@ -704,6 +704,34 @@
     titre="Montant du capital"
     fl_aff=non
     largeur_col=56
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=95,87
+    taille=9,36
+    noms="version_izy"
+    id=817
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=doscpt,tvafl,dossier
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","NONOUI"
+   [touches]
+    f7=8000
+    ctrl_b=19002
+    ctrl_d=19003
+    ctrl_n=19006
+    ctrl_q=19005
+    shift_f6=10000
+    shift_f7=19009
+   [info_bulle]
+   texte="Méthode de gestion de la tva"
+   [param_colonne]
+    titre="Gestion Tva"
+    fl_aff=non
+    largeur_col=44
     wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
@@ -2394,6 +2422,90 @@
     "zoom"
   [champ_tableau]
    [presentation]
+    position=134,95
+    taille=9,15
+    noms="version_izy"
+    id=813
+    colonnes_saisie=3
+    wstyle="CHAMP_AFF"
+   [description]
+    donnee=doscpt,rtvajnl,dossier
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=8000
+    ctrl_b=19002
+    ctrl_d=19003
+    ctrl_n=19006
+    ctrl_q=19005
+    shift_f6=10000
+    shift_f7=19009
+   [info_bulle]
+   texte="Journal de régularisation de tva"
+   [param_colonne]
+    titre="Jnl. régul. Tva"
+    fl_aff=non
+    largeur_col=53
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=135,42
+    taille=9,144
+    noms="version_izy"
+    id=814
+    colonnes_saisie=40
+    wstyle="CHAMP_AFF"
+   [description]
+    donnee=doscpt,rtvalib,dossier
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=8000
+    ctrl_b=19002
+    ctrl_d=19003
+    ctrl_n=19006
+    ctrl_q=19005
+    shift_f6=10000
+    shift_f7=19009
+   [info_bulle]
+   texte="Libellé de la régularisation de tva"
+   [param_colonne]
+    titre="Libellé régularisation de Tva"
+    fl_aff=non
+    largeur_col=163
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=132,86
+    taille=9,32
+    noms="version_izy"
+    id=815
+    colonnes_saisie=8
+    wstyle="CHAMP_AFF"
+   [description]
+    donnee=doscpt,tvacpt,dossier
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=8000
+    ctrl_b=19002
+    ctrl_d=19003
+    ctrl_n=19006
+    ctrl_q=19005
+    shift_f6=10000
+    shift_f7=19009
+   [info_bulle]
+   texte="Compte de régularisation de Tva"
+   [param_colonne]
+    titre="Compte régul. Tva"
+    fl_aff=non
+    largeur_col=70
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
     position=133,80
     taille=10,16
     noms="6.2"
@@ -2994,7 +3106,7 @@
    [presentation]
     position=84,192
     taille=8,115
-    noms="etbc3"
+    noms="etbc3;version_izy"
     id=733
     wstyle="TABLEAU_SAISI"
    [description]
@@ -3028,7 +3140,7 @@
    [presentation]
     position=96,296
     taille=8,13
-    noms="etbc3"
+    noms="etbc3;version_izy"
     id=734
     colonnes_saisie=3
     wstyle="TABLEAU_SAISI"
@@ -3066,6 +3178,7 @@
    [presentation]
     position=90,256
     taille=8,83
+    noms="etbc3;version_izy"
     id=735
     wstyle="TABLEAU_SAISI"
    [description]
@@ -3728,7 +3841,7 @@
    [presentation]
     position=87,320
     taille=8,32
-    noms="etbc3"
+    noms="etbc3;version_izy"
     id=757
     wstyle="TABLEAU_SAISI"
    [description]
@@ -3982,7 +4095,7 @@
    [presentation]
     position=99,288
     taille=8,17
-    noms="etbc3"
+    noms="etbc3;version_izy"
     id=765
     colonnes_saisie=4
     wstyle="TABLEAU_SAISI"
@@ -4016,7 +4129,7 @@
    [presentation]
     position=55,395
     taille=8,17
-    noms="etbc3"
+    noms="etbc3;version_izy"
     id=766
     colonnes_saisie=4
     wstyle="TABLEAU_SAISI"
@@ -4356,12 +4469,30 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
+   position=204,5
+   taille=54,186
+   id=597
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Codification"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
    position=116,5
    taille=42,186
    id=12
    wstyle="GROUPE"
   [param_groupbox]
    texte="Période de la balance courante"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=204,199
+   taille=54,136
+   id=167
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Comptes de résultat"
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
@@ -4389,15 +4520,6 @@
    wstyle="GROUPE"
   [param_groupbox]
    texte="Capital"
-   couleur_fond="GROUPE_FOND"
- [groupbox]
-  [presentation]
-   position=204,5
-   taille=30,186
-   id=597
-   wstyle="GROUPE"
-  [param_groupbox]
-   texte="Codification"
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
@@ -4562,6 +4684,30 @@
    wstyle="STD"
   [texte]
    texte="Devise secondaire"
+ [obj_texte]
+  [presentation]
+   position=220,204
+   taille=9,61
+   id=177
+   wstyle="STD"
+  [texte]
+   texte="Bénéfice"
+ [obj_texte]
+  [presentation]
+   position=232,204
+   taille=9,61
+   id=181
+   wstyle="STD"
+  [texte]
+   texte="Déficit"
+ [obj_texte]
+  [presentation]
+   position=244,204
+   taille=9,57
+   id=818
+   wstyle="STD"
+  [texte]
+   texte="Contrepartie"
  [champ]
   [presentation]
    position=26,41
@@ -4867,6 +5013,29 @@
    shift_f7=19009
   [traitements]
    microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=232,11
+   taille=9,176
+   noms="version_izy"
+   id=816
+   wstyle="STD"
+  [description]
+   donnee=doscpt,tvafl,dossier
+  [param_case]
+   texte="Gestion de la Tva par Divalto Comptabilité"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f7=8000
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=58,256
@@ -4935,7 +5104,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=108,241
+   position=108,267
    taille=9,27
    id=48
    wstyle="CHAMP_SAISI"
@@ -4957,7 +5126,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=120,241
+   position=120,267
    taille=9,45
    id=49
    wstyle="CHAMP_SAISI"
@@ -5065,6 +5234,88 @@
    diva_apres="Champ_DevBis_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=220,267
+   taille=9,36
+   id=214
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,cptbenef,dossier
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=7
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19032
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   ctrl_r=19001
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_5_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=232,267
+   taille=9,36
+   id=215
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,cptperte,dossier
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=7
+   fichier="CCFAID"
+  [touches]
+   f7=8000
+   f8=19032
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   ctrl_r=19001
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_6_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=244,267
+   taille=9,36
+   id=819
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,cp,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19032
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cp_1_Ap"
+  [boutons]
+   "zoom"
 [page]
  numero=12
  fond="STD"
@@ -5092,6 +5343,16 @@
    wstyle="GROUPE"
   [param_groupbox]
    texte="Découpage des axes sur 4 niveaux"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=223,5
+   taille=42,330
+   noms="version_izy"
+   id=801
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Déversement analytique"
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
@@ -5217,6 +5478,24 @@
    wstyle="STD_GRAS"
   [texte]
    texte="Niveaux"
+ [obj_texte]
+  [presentation]
+   position=239,10
+   taille=9,56
+   noms="version_izy"
+   id=802
+   wstyle="STD"
+  [texte]
+   texte="Date début"
+ [obj_texte]
+  [presentation]
+   position=251,10
+   taille=9,56
+   noms="version_izy"
+   id=804
+   wstyle="STD"
+  [texte]
+   texte="Répertoire des CSV"
  [champ]
   [presentation]
    position=61,57
@@ -6413,6 +6692,53 @@
   [traitements]
    microbol_click=8002
    diva_avant="Champ_AxeLibDc_1_Av"
+ [champ]
+  [presentation]
+   position=239,68
+   taille=9,36
+   noms="version_izy"
+   id=803
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,dvanddt,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+ [champ]
+  [presentation]
+   position=251,68
+   taille=9,90
+   noms="version_izy"
+   id=805
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,dvanchemincod,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=11102
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_DvAnCheminCod_1_Ap"
+  [boutons]
+   "zoom"
 [page]
  numero=13
  libelle="OD"
@@ -6437,7 +6763,7 @@
  [groupbox]
   [presentation]
    position=26,5
-   taille=66,330
+   taille=60,330
    id=133
    wstyle="GROUPE"
   [param_groupbox]
@@ -6445,17 +6771,8 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=100,5
-   taille=54,330
-   id=132
-   wstyle="GROUPE"
-  [param_groupbox]
-   texte="Différence de change"
-   couleur_fond="GROUPE_FOND"
- [groupbox]
-  [presentation]
-   position=162,5
-   taille=54,330
+   position=204,5
+   taille=50,330
    noms="6.2"
    id=130
    wstyle="GROUPE"
@@ -6464,7 +6781,26 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=224,5
+   position=92,5
+   taille=50,330
+   id=132
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Différence de change"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=148,5
+   taille=50,330
+   noms="version_izy"
+   id=808
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Régularisation de TVA"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=260,5
    taille=30,330
    noms="6.2"
    id=131
@@ -6482,7 +6818,7 @@
    texte="Journal"
  [obj_texte]
   [presentation]
-   position=54,10
+   position=52,10
    taille=9,73
    id=136
    wstyle="STD"
@@ -6490,7 +6826,7 @@
    texte="Libellé de l'écriture"
  [obj_texte]
   [presentation]
-   position=66,10
+   position=62,10
    taille=9,73
    id=137
    wstyle="STD"
@@ -6498,7 +6834,7 @@
    texte="Montant maximum autorisé"
  [obj_texte]
   [presentation]
-   position=78,10
+   position=72,10
    taille=9,73
    id=138
    wstyle="STD"
@@ -6506,7 +6842,7 @@
    texte="Compte débit / crédit"
  [obj_texte]
   [presentation]
-   position=78,123
+   position=72,123
    taille=9,8
    cadrage=centre
    id=139
@@ -6515,7 +6851,7 @@
    texte="/"
  [obj_texte]
   [presentation]
-   position=116,10
+   position=108,10
    taille=9,73
    id=141
    wstyle="STD"
@@ -6523,7 +6859,7 @@
    texte="Journal"
  [obj_texte]
   [presentation]
-   position=128,10
+   position=118,10
    taille=9,73
    id=142
    wstyle="STD"
@@ -6531,7 +6867,7 @@
    texte="Libellé de l'écriture"
  [obj_texte]
   [presentation]
-   position=140,10
+   position=128,10
    taille=9,73
    id=143
    wstyle="STD"
@@ -6539,7 +6875,7 @@
    texte="Compte débit / crédit"
  [obj_texte]
   [presentation]
-   position=140,123
+   position=128,123
    taille=9,8
    cadrage=centre
    id=144
@@ -6548,7 +6884,34 @@
    texte="/"
  [obj_texte]
   [presentation]
-   position=178,10
+   position=164,10
+   taille=9,73
+   noms="version_izy"
+   id=809
+   wstyle="STD"
+  [texte]
+   texte="Journal"
+ [obj_texte]
+  [presentation]
+   position=174,10
+   taille=9,73
+   noms="version_izy"
+   id=812
+   wstyle="STD"
+  [texte]
+   texte="Libellé de l'écriture"
+ [obj_texte]
+  [presentation]
+   position=184,10
+   taille=9,73
+   noms="version_izy"
+   id=800
+   wstyle="STD"
+  [texte]
+   texte="Compte"
+ [obj_texte]
+  [presentation]
+   position=220,10
    taille=9,73
    noms="6.2"
    id=146
@@ -6557,7 +6920,7 @@
    texte="Journal"
  [obj_texte]
   [presentation]
-   position=190,10
+   position=230,10
    taille=9,73
    noms="6.2"
    id=147
@@ -6566,7 +6929,7 @@
    texte="Libellé de l'écriture"
  [obj_texte]
   [presentation]
-   position=202,10
+   position=240,10
    taille=9,73
    noms="6.2"
    id=148
@@ -6575,7 +6938,7 @@
    texte="Compte"
  [obj_texte]
   [presentation]
-   position=240,10
+   position=276,10
    taille=9,73
    noms="6.2"
    id=150
@@ -6611,7 +6974,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=54,85
+   position=52,85
    taille=9,163
    id=152
    wstyle="CHAMP_SAISI"
@@ -6633,7 +6996,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=66,85
+   position=62,85
    taille=9,36
    id=153
    wstyle="CHAMP_SAISI"
@@ -6659,7 +7022,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=66,124
+   position=62,124
    taille=9,18
    id=154
    wstyle="CHAMP_AFF"
@@ -6671,7 +7034,7 @@
    shift_f7=19009
  [champ]
   [presentation]
-   position=78,85
+   position=72,85
    taille=9,36
    id=155
    wstyle="CHAMP_SAISI"
@@ -6699,7 +7062,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=78,133
+   position=72,133
    taille=9,36
    id=156
    wstyle="CHAMP_SAISI"
@@ -6727,7 +7090,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=116,85
+   position=108,85
    taille=9,15
    id=157
    wstyle="CHAMP_SAISI"
@@ -6754,7 +7117,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=128,85
+   position=118,85
    taille=9,163
    id=158
    wstyle="CHAMP_SAISI"
@@ -6776,7 +7139,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=140,85
+   position=128,85
    taille=9,36
    id=159
    wstyle="CHAMP_SAISI"
@@ -6804,7 +7167,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=140,133
+   position=128,133
    taille=9,36
    id=160
    wstyle="CHAMP_SAISI"
@@ -6832,7 +7195,84 @@
    "zoom"
  [champ]
   [presentation]
-   position=178,85
+   position=164,85
+   taille=9,15
+   noms="version_izy"
+   id=810
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,rtvajnl,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19042
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   ctrl_r=19001
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=174,85
+   taille=9,163
+   noms="version_izy"
+   id=811
+   colonnes_saisie=40
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,rtvalib,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   ctrl_r=19001
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=184,85
+   taille=9,36
+   noms="version_izy"
+   id=799
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,tvacpt,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19032
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_8_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=220,85
    taille=9,15
    noms="6.2"
    id=161
@@ -6860,7 +7300,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=190,85
+   position=230,85
    taille=9,163
    noms="6.2"
    id=162
@@ -6883,7 +7323,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=202,85
+   position=240,85
    taille=9,35
    noms="6.2"
    id=163
@@ -6912,7 +7352,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=240,85
+   position=276,85
    taille=9,35
    noms="6.2"
    id=164
@@ -6961,8 +7401,17 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=84,231
-   taille=138,104
+   position=26,5
+   taille=50,330
+   id=166
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Paramétrage des auxiliaires"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=144,231
+   taille=147,104
    id=169
    wstyle="GROUPE"
   [param_groupbox]
@@ -6989,15 +7438,6 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=26,5
-   taille=50,217
-   id=166
-   wstyle="GROUPE"
-  [param_groupbox]
-   texte="Paramétrage des auxiliaires"
-   couleur_fond="GROUPE_FOND"
- [groupbox]
-  [presentation]
    position=144,5
    taille=40,217
    id=171
@@ -7016,12 +7456,12 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=26,231
+   position=84,231
    taille=50,104
-   id=167
+   id=794
    wstyle="GROUPE"
   [param_groupbox]
-   texte="Comptes de résultat"
+   texte="Régularisation de TVA"
    couleur_fond="GROUPE_FOND"
  [cadre]
   [presentation]
@@ -7060,12 +7500,12 @@
    texte="à"
  [obj_texte]
   [presentation]
-   position=42,236
-   taille=9,46
-   id=177
+   position=42,223
+   taille=9,63
+   id=788
    wstyle="STD"
   [texte]
-   texte="Bénéfice"
+   texte="Collectif par défaut"
  [obj_texte]
   [presentation]
    position=52,10
@@ -7093,12 +7533,12 @@
    texte="à"
  [obj_texte]
   [presentation]
-   position=52,236
-   taille=9,46
-   id=181
+   position=52,223
+   taille=9,63
+   id=789
    wstyle="STD"
   [texte]
-   texte="Déficit"
+   texte="Collectif par défaut"
  [obj_texte]
   [presentation]
    position=62,10
@@ -7126,6 +7566,14 @@
    texte="à"
  [obj_texte]
   [presentation]
+   position=62,223
+   taille=9,63
+   id=791
+   wstyle="STD"
+  [texte]
+   texte="Collectif par défaut"
+ [obj_texte]
+  [presentation]
    position=100,10
    taille=9,80
    id=187
@@ -7142,31 +7590,12 @@
    texte="Totaux auxiliaires client"
  [obj_texte]
   [presentation]
-   position=100,234
-   taille=9,22
-   cadrage=centre
-   id=189
+   position=100,236
+   taille=9,50
+   id=796
    wstyle="STD"
   [texte]
-   texte="Nature"
- [obj_texte]
-  [presentation]
-   position=100,256
-   taille=9,46
-   cadrage=centre
-   id=190
-   wstyle="STD"
-  [texte]
-   texte="Libellé"
- [obj_texte]
-  [presentation]
-   position=100,304
-   taille=9,27
-   cadrage=centre
-   id=191
-   wstyle="STD"
-  [texte]
-   texte="Décimales"
+   texte="Régime TVA Tiers"
  [obj_texte]
   [presentation]
    position=110,10
@@ -7185,12 +7614,12 @@
    texte="Totaux auxiliaires fournisseur"
  [obj_texte]
   [presentation]
-   position=112,243
-   taille=9,10
-   id=194
+   position=110,236
+   taille=9,50
+   id=798
    wstyle="STD"
   [texte]
-   texte="1"
+   texte="Régime TVA Article"
  [obj_texte]
   [presentation]
    position=120,122
@@ -7201,7 +7630,42 @@
    texte="Totaux auxiliaires personnel"
  [obj_texte]
   [presentation]
-   position=122,243
+   position=160,234
+   taille=9,22
+   cadrage=centre
+   id=189
+   wstyle="STD"
+  [texte]
+   texte="Nature"
+ [obj_texte]
+  [presentation]
+   position=160,256
+   taille=9,46
+   cadrage=centre
+   id=190
+   wstyle="STD"
+  [texte]
+   texte="Libellé"
+ [obj_texte]
+  [presentation]
+   position=160,304
+   taille=9,27
+   cadrage=centre
+   id=191
+   wstyle="STD"
+  [texte]
+   texte="Décimales"
+ [obj_texte]
+  [presentation]
+   position=172,243
+   taille=9,10
+   id=194
+   wstyle="STD"
+  [texte]
+   texte="1"
+ [obj_texte]
+  [presentation]
+   position=182,243
    taille=9,10
    id=196
    wstyle="STD"
@@ -7209,7 +7673,7 @@
    texte="2"
  [obj_texte]
   [presentation]
-   position=132,243
+   position=192,243
    taille=9,10
    id=197
    wstyle="STD"
@@ -7217,52 +7681,12 @@
    texte="3"
  [obj_texte]
   [presentation]
-   position=142,243
+   position=202,243
    taille=9,10
    id=198
    wstyle="STD"
   [texte]
    texte="4"
- [obj_texte]
-  [presentation]
-   position=152,243
-   taille=9,10
-   id=200
-   wstyle="STD"
-  [texte]
-   texte="5"
- [obj_texte]
-  [presentation]
-   position=162,243
-   taille=9,10
-   id=202
-   wstyle="STD"
-  [texte]
-   texte="6"
- [obj_texte]
-  [presentation]
-   position=172,243
-   taille=9,10
-   id=204
-   wstyle="STD"
-  [texte]
-   texte="7"
- [obj_texte]
-  [presentation]
-   position=182,243
-   taille=9,10
-   id=205
-   wstyle="STD"
-  [texte]
-   texte="8"
- [obj_texte]
-  [presentation]
-   position=192,243
-   taille=9,10
-   id=207
-   wstyle="STD"
-  [texte]
-   texte="9"
  [obj_texte]
   [presentation]
    position=208,10
@@ -7271,6 +7695,46 @@
    wstyle="STD"
   [texte]
    texte="Contrôle date pointage (en jours)"
+ [obj_texte]
+  [presentation]
+   position=212,243
+   taille=9,10
+   id=200
+   wstyle="STD"
+  [texte]
+   texte="5"
+ [obj_texte]
+  [presentation]
+   position=222,243
+   taille=9,10
+   id=202
+   wstyle="STD"
+  [texte]
+   texte="6"
+ [obj_texte]
+  [presentation]
+   position=232,243
+   taille=9,10
+   id=204
+   wstyle="STD"
+  [texte]
+   texte="7"
+ [obj_texte]
+  [presentation]
+   position=242,243
+   taille=9,10
+   id=205
+   wstyle="STD"
+  [texte]
+   texte="8"
+ [obj_texte]
+  [presentation]
+   position=252,243
+   taille=9,10
+   id=207
+   wstyle="STD"
+  [texte]
+   texte="9"
  [obj_texte]
   [presentation]
    position=257,10
@@ -7328,6 +7792,32 @@
    diva_apres="Champ_AuxCptF_1_Ap"
  [champ]
   [presentation]
+   position=42,288
+   taille=9,36
+   id=787
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,cptcol,dossier,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19032
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_7_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
    position=52,122
    taille=9,35
    id=210
@@ -7374,6 +7864,32 @@
    diva_apres="Champ_AuxCptF_1_Ap"
  [champ]
   [presentation]
+   position=52,288
+   taille=9,36
+   id=790
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,cptcol,dossier,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19032
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_7_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
    position=62,122
    taille=9,35
    id=212
@@ -7418,6 +7934,32 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_AuxCptF_1_Ap"
+ [champ]
+  [presentation]
+   position=62,288
+   taille=9,36
+   id=792
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,cptcol,dossier,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19032
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Cpt_7_Ap"
+  [boutons]
+   "zoom"
  [champ]
   [presentation]
    position=100,92
@@ -7545,6 +8087,57 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_BalRupt1_1_Ap"
+ [champ]
+  [presentation]
+   position=100,288
+   taille=9,36
+   id=795
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,tvatie,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=9126
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TvaTie_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=110,288
+   taille=9,36
+   id=797
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,tvaart,dossier
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TvaArt_1_Ap"
+  [boutons]
+   "zoom"
  [case_a_cocher]
   [presentation]
    position=160,10
@@ -7746,63 +8339,7 @@
    diva_avant="Champ_EtbLettTyp_1_Av"
  [champ]
   [presentation]
-   position=42,284
-   taille=9,40
-   id=214
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=doscpt,cptbenef,dossier
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=7
-   fichier="CCFAID"
-  [touches]
-   f7=8000
-   f8=19032
-   ctrl_b=19002
-   ctrl_d=19003
-   ctrl_n=19006
-   ctrl_q=19005
-   ctrl_r=19001
-   shift_f6=10000
-   shift_f7=19009
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Cpt_5_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=52,284
-   taille=9,40
-   id=215
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=doscpt,cptperte,dossier
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=7
-   fichier="CCFAID"
-  [touches]
-   f7=8000
-   f8=19032
-   ctrl_b=19002
-   ctrl_d=19003
-   ctrl_n=19006
-   ctrl_q=19005
-   ctrl_r=19001
-   shift_f6=10000
-   shift_f7=19009
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Cpt_6_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=112,256
+   position=172,256
    taille=9,48
    id=223
    wstyle="CHAMP_SAISI"
@@ -7824,7 +8361,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=112,311
+   position=172,311
    taille=9,11
    id=224
    wstyle="CHAMP_SAISI"
@@ -7849,7 +8386,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=122,256
+   position=182,256
    taille=9,48
    id=225
    wstyle="CHAMP_SAISI"
@@ -7871,7 +8408,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=122,311
+   position=182,311
    taille=9,11
    id=226
    wstyle="CHAMP_SAISI"
@@ -7896,7 +8433,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=132,256
+   position=192,256
    taille=9,48
    id=229
    wstyle="CHAMP_SAISI"
@@ -7918,7 +8455,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=132,311
+   position=192,311
    taille=9,11
    id=230
    wstyle="CHAMP_SAISI"
@@ -7943,7 +8480,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=142,256
+   position=202,256
    taille=9,48
    id=231
    wstyle="CHAMP_SAISI"
@@ -7965,7 +8502,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=142,311
+   position=202,311
    taille=9,11
    id=232
    wstyle="CHAMP_SAISI"
@@ -7990,7 +8527,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=152,256
+   position=212,256
    taille=9,48
    id=233
    wstyle="CHAMP_SAISI"
@@ -8012,7 +8549,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=152,311
+   position=212,311
    taille=9,11
    id=234
    wstyle="CHAMP_SAISI"
@@ -8037,7 +8574,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=162,256
+   position=222,256
    taille=9,48
    id=235
    wstyle="CHAMP_SAISI"
@@ -8059,7 +8596,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=162,311
+   position=222,311
    taille=9,11
    id=236
    wstyle="CHAMP_SAISI"
@@ -8084,7 +8621,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=172,256
+   position=232,256
    taille=9,48
    id=237
    wstyle="CHAMP_SAISI"
@@ -8106,7 +8643,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=172,311
+   position=232,311
    taille=9,11
    id=238
    wstyle="CHAMP_SAISI"
@@ -8131,7 +8668,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=182,256
+   position=242,256
    taille=9,48
    id=239
    wstyle="CHAMP_SAISI"
@@ -8153,7 +8690,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=182,311
+   position=242,311
    taille=9,11
    id=240
    wstyle="CHAMP_SAISI"
@@ -8178,7 +8715,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=192,256
+   position=252,256
    taille=9,48
    id=241
    wstyle="CHAMP_SAISI"
@@ -8200,7 +8737,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=192,311
+   position=252,311
    taille=9,11
    id=242
    wstyle="CHAMP_SAISI"
@@ -8245,7 +8782,7 @@
  [groupbox]
   [presentation]
    position=100,5
-   taille=90,330
+   taille=102,330
    id=244
    wstyle="GROUPE"
   [param_groupbox]
@@ -8354,6 +8891,15 @@
    wstyle="STD"
   [texte]
    texte="Modification des filtres établissements"
+ [obj_texte]
+  [presentation]
+   position=188,10
+   taille=9,283
+   noms="version_izy"
+   id=806
+   wstyle="STD"
+  [texte]
+   texte="Déclaration de TVA"
  [champ]
   [presentation]
    position=42,130
@@ -8757,6 +9303,30 @@
    ctrl_n=19006
    ctrl_q=19005
    ctrl_r=19009
+   shift_f6=10000
+   shift_f7=19009
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_ConfFct_1_Ap"
+ [champ]
+  [presentation]
+   position=188,295
+   taille=9,18
+   noms="version_izy"
+   id=807
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=doscpt,conffct,dossier,9
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=11010
+   ctrl_b=19002
+   ctrl_d=19003
+   ctrl_n=19006
+   ctrl_q=19005
    shift_f6=10000
    shift_f7=19009
   [traitements]
@@ -9237,7 +9807,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: ccez000_sql.dhsf 27838 2012-12-11 08:20:23Z vj $')
+SetModuleInfo('$Id: ccez000_sql.dhsf 47193 2015-06-03 14:02:54Z ms $')
 ;>xdiva
 ;*
 ;*		Module écran du zoom sur les dossiers (renseignements généraux)															scctz000
@@ -9262,11 +9832,15 @@ public	hfile		CCFDD.dhsd		CCFECR	CCFECR		; écritures
 
 ; record SQL
 public	recordSQL	'CCRSDOS.dhoq'		DOSCPT			DOSSIER
+public	recordSQL	'CCRSJCA.dhoq'		COMPTE			COMPTE
 
 ; enregistrements
 public	record	CCFDD.dhsd		C8							; ligne d'écriture
 public	record	CCFDD.dhsd		CA			CA_SEL		; dossier (sélection)
+public	record	CCFDD.dhsd		C3							; compte
 public	record	CCFDD.dhsd		C4							; journal
+
+public	record	GTFDD.dhsd		XZ			G3XZ
 
 public	record	DDSYS.dhsd		ZOOM						; variables de contrôle du zoom
 public	record	DDSYS.dhsd		ROWINFO	ZOOMSELECTION
@@ -9427,6 +10001,34 @@ beginp	; Champ_Cpt_6_Ap
 	Controle_Compte(DOSSIER.CptPerte, nonvide = false, existence = false, cptnat = 1, etablissement = false)
 
 endp		; Champ_Cpt_6_Ap
+
+
+;*
+public procedure Champ_Cpt_7_Ap
+
+; contrôle numéro compte collectif par défaut
+
+beginp	; Champ_Cpt_7_Ap	
+
+	if Controle_Compte(DOSSIER.CptCol(Harmony.Dataind1), creation = true, conf = false, cptnat = 1, collectif = true, etablissement = false) < 2 and C3.CptTyp <> 2
+		Mes_Alert(19034, DOSSIER.CptCol(Harmony.Dataind1))										; pas collectif
+		Harmony.Retour = XmeNext_Traitement_Avant
+	endif
+
+
+endp		; Champ_Cpt_7_Ap
+
+
+;*
+public procedure Champ_Cpt_8_Ap
+
+; contrôle numéro compte de TVA de régularisation
+
+beginp	; Champ_Cpt_8_Ap	
+
+	Controle_Compte(DOSSIER.TvACpt, creation = true, cptnat = 1, etablissement = false)
+
+endp		; Champ_Cpt_8_Ap
 
 
 ;*
@@ -9677,6 +10279,18 @@ endp		; Champ_ConfFct_1_Ap
 
 
 ;*
+Public Procedure Champ_Cp_1_Ap
+
+;contrôle de validité du compte de contrepartie
+
+Beginp	; Champ_Cp_1_Ap
+
+	Controle_Compte(DOSSIER.Cp, existence = false, etablissement = false)
+
+Endp		; Champ_Cp_1_Ap 
+
+
+;*
 Public Procedure Champ_EtbCod_1_Ap
 
 ; Flag gestion des établissements
@@ -9735,6 +10349,47 @@ Endp		; Champ_Etb_1_Ap
 
 
 ;*
+Public Procedure Champ_TvaArt_1_Ap
+
+; après régime tva article
+
+recordsql	'GTRSPPTAB.dhoq'	TauxTvaN	TvaArticle
+
+beginp	; Champ_TvaArt_1_Ap
+
+	if Dossier.TvaTie <> ' ' and Dossier.TvaArt <> ' '
+		if Lectab_(TvaArticle, Dossier.TvaArt, Dossier.TvaTie, err = 1185) = 0 and TvaArticle.TvaP <> 0
+			Mes_Alert(6780, left(Dossier.TvaArt), left(Dossier.TvaTie))
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endif
+	endif
+
+	if Harmony.Key = K_F8
+		G3XZ.TvaTie = Dossier.TvaTie
+		ping('G3XZ', G3XZ)
+		Zoom_Call(9946)
+	endif
+
+endp		; Champ_TvaArt_1_Ap
+
+
+;*
+Public Procedure Champ_TvaTie_1_Ap
+
+; après régime tva article
+
+recordsql	'GTRSPPTAB.dhoq'	RegimeTvaTiersN	TvaTiers
+
+beginp	; Champ_TvaTie_1_Ap
+
+	if Dossier.TvaTie <> ' '
+		Lectab_(TvaTiers, Dossier.TvaTie, err = 1186)
+	endif
+
+endp		; Champ_TvaTie_1_Ap
+
+
+;*
 Public Procedure Page_Od_Av
 
 Beginp	; Page_Od_Av
@@ -9745,6 +10400,12 @@ Endp		; Page_Od_Av
 
 
 ;*
+Public Procedure Champ_DvAnCheminCod_1_Ap
+;
+Beginp
+	Controler_Chemin(Dossier.Dos, ' ', Dossier.DvAnCheminCod, 3501)
+Endp
+
 [/diva]
 [diva_base]
 [/diva]

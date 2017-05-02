@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20140422171233      
+;>xwin4obj                              7.0       20161214121738      
 [masque]
  libelle="ZOOM DES ZOOMS"
  utilisateur="UGIE"
- date_modification="22/04/2014"
+ date_modification="14/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=428
  type_masque=2
@@ -2004,9 +2004,18 @@
    [param_bouton]
     wnom="GENERER"
     wtexte="Générer une table"
-    wid_ressource="GENERER"
+    wid_ressource="GENERER__1"
     wetype_trait=arret
     warret=200
+  [item]
+   [param_bouton]
+    wnom="GENERER"
+    wfic1="#tbllec",0
+    wid_ressource="GENERER"
+    wetype_trait=arret
+    warret=201
+   [info_bulle]
+   texte="Contrôler les champs"
   [item]
    [param_bouton]
     wnom="DUPLIQ"

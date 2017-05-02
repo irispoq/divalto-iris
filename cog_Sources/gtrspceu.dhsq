@@ -8,29 +8,69 @@
 ;*		Entete ENT
 ;*
 
-<RecordSql Name=Piece_Entete>
+<RecordSql Name=EntetePiece>
 <SELECT>
 	ENT.*,
+<WHERE>
+	Case Equal_CE1(char ce)
+		ENT.CE1 = ce
+	Case Equal_BlAsNo(int pino)
+		ENT.BLASNO = pino
 
 ;* 
 ;*   Mouvements		MOUV
 ;*
 
-<RecordSql Name=Piece_Mouv>
+<RecordSql Name=Mouvement>
 <SELECT>
-	MOUV.*,
+	MOUV.*
+<WHERE>
+	Case Equal_Ce2(char ce2)
+		MOUV.CE2 = ce2
+	Case Not_Equal_Ce2(char ce2)
+		MOUV.CE2 <> ce2
+	Case Equal_Nst(char nst) DEPENDENCIES="CodeOperation"
+		CodeOperation.NSTO = nst
+<ORDERBY>
+	Case Ordre_FNP_FAE
+		MOUV.DOS,
+		MOUV.SENS,
+		MOUV.OP,
+		MOUV.REF,
+		MOUV.TIERS,
+		MOUV.AXE(1),
+		MOUV.AXE(2),
+		MOUV.AXE(3),
+		MOUV.AXE(4),
+		MOUV.BLNO
+	Case Fa_AffaireBldt
+		MOUV.DOS,
+		MOUV.PROJET,
+		MOUV.BLDT,
+		MOUV.FALG,
+		MOUV.FASLG,
+		MOUV.REF
 
 ;* 
 ;*   Ventilations		MVTL
 ;*
-<RecordSql Name=Piece_Vtl>
+
+<RecordSql Name=Ventilation>
 <SELECT>
-	MVTL.*,
+	MVTL.*
+<WHERE>
+
+	Case COG_Equal_Affaire(char affaire)											DEPENDENCIES="MOUV"
+		MOUV.Ce3 = '1' AND MOUV.Projet = affaire
+
+	Case COG_Between_Affaire(char affaireD, char affaireF)						DEPENDENCIES="MOUV"
+		MOUV.Ce3 = '1' AND MOUV.Projet BETWEEN affaireD AND affaireF
 
 ;* 
 ;*   Reservations MRES
 ;*
-<RecordSql Name=Piece_Res>
+
+<RecordSql Name=Reservation>
 <SELECT>
 	MRES.*,
 

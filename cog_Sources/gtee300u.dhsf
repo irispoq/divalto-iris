@@ -1,13 +1,13 @@
-;>xwin4obj                              7.0       20141010135408      
+;>xwin4obj                              7.0       20161207110833      
 [masque]
  libelle="Interro tiers"
  utilisateur="UGIE"
- date_modification="10/10/2014"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=543
  dernier_id=1000004
  surcharge=oui
- date_modif_base="20130213094839"
+ date_modif_base="20150127111936"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -19,8 +19,8 @@
   f7=8000
   f8=8000
 [enregistrements]
- "ccfdd.dhsd",,ca,ca,1350,0
- "gtfdd.dhsd",,soc,soc,2800,0
+ "ccfdd.dhsd",,ca,ca,1500,0
+ "gtfdd.dhsd",,soc,soc,3500,0
  "gtfdd.dhsd",,g8t1,g8t1,4100,0
  "gtfdd.dhsd",,gtpce,gtpce,500,0
  "gtfdd.dhsd",,mvtl,mvtl,1000,0
@@ -2131,7 +2131,7 @@
    [param_colonne]
     titre="Transport"
     fl_aff=non
-    largeur_col=31
+    largeur_col=33
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -2142,8 +2142,6 @@
    [description]
     donnee=g5t1,regl,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -2164,8 +2162,6 @@
    [description]
     donnee=g5t1,tour,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -4060,7 +4056,7 @@
    [param_colonne]
     titre="Transport"
     fl_aff=non
-    largeur_col=31
+    largeur_col=32
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -4071,8 +4067,6 @@
    [description]
     donnee=g5t1,regl,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -5989,7 +5983,7 @@
    [param_colonne]
     titre="Transport"
     fl_aff=non
-    largeur_col=31
+    largeur_col=32
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -6000,8 +5994,6 @@
    [description]
     donnee=g5t1,regl,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -7918,7 +7910,7 @@
    [param_colonne]
     titre="Transport"
     fl_aff=non
-    largeur_col=31
+    largeur_col=33
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -7929,8 +7921,6 @@
    [description]
     donnee=g5t1,regl,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -20423,7 +20413,7 @@ Public Record "gtfdd.dhsd" g1t2 g1t2
 ;*		LM			5.2						01.2003	version initiale en diva
 
 
-SetModuleInfo('$Id: gtee300.dhsf 35431 2013-11-15 11:50:30Z jf $')
+SetModuleInfo('$Id: gtee300.dhsf 44338 2015-01-27 14:53:43Z sn $')
 
 Include		"GTTC000.dhsp"																					
 
@@ -21044,13 +21034,13 @@ BeginP																											; Page_4_Av
 		XmeReSetAttribut('SERIE',AN_VISIBILITE)
 	EndIf
 	
-	If SOC.ENTCOD(28) = Oui And T017.LIEUCOD = Oui
+	If SOC.ENTCODN(28) = Oui And T017.LIEUCOD = Oui
 		XmeReSetAttribut('LIEU',AN_VISIBILITE)
 	Else
 		XmeSetAttribut('LIEU',AN_VISIBILITE,AV_CACHE)
 	EndIf
 
-	If G8T1.SENS = 1 And ((SOC.ENTCOD(29) = 3 And G8T1.STSORCOD = 9) Or G8T1.STSORCOD = 3)
+	If G8T1.SENS = 1 And ((SOC.ENTCODN(29) = 3 And G8T1.STSORCOD = 9) Or G8T1.STSORCOD = 3)
 		XmeResetAttribut('DATEPERIME',AN_VISIBILITE)
 	Else
 		XmeSetAttribut('DATEPERIME',AN_VISIBILITE,AV_CACHE)

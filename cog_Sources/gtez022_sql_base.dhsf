@@ -1,13 +1,13 @@
-;>xwin4obj                              7.0       20140310172038      
+;>xwin4obj                              7.0       20151109082912      
 [masque]
  libelle="fournisseur"
- utilisateur="SN"
- date_modification="10/03/2014"
+ utilisateur="LK"
+ date_modification="07/10/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=848
  type_masque=2
- dernier_id=1187
- dernier_id_page=34
+ dernier_id=1213
+ dernier_id_page=35
 [defaut]
  [aide_page]
   aide=0
@@ -20,15 +20,15 @@
   shift_f6=10000
 [enregistrements]
  "gtrstiers.dhoq",,fournisseur,fournisseur,1024,1
- "gtfdd.dhsd",,fou,fou_sel,2250,0
- "gtfdd.dhsd",,g7,g7,4510,0
- "ccfdd.dhsd",,ca,ca,1350,0
- "gtfdd.dhsd",,soc,soc,2800,0
+ "gtfdd.dhsd",,fou,fou_sel,3000,0
+ "gtfdd.dhsd",,g7,g7,4550,0
+ "ccfdd.dhsd",,ca,ca,1700,0
+ "gtfdd.dhsd",,soc,soc,3500,0
  "a5dd.dhsd",,mw,fou_mw,3000,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "gtfdd.dhsd",,g1t1,g1t1_sel,4700,0
- "gtfdd.dhsd",,g1t1,g1t1_1,4700,0
- "gtfdd.dhsd",,g1t1,g1t1_2,4700,0
+ "gtfdd.dhsd",,g1t1,g1t1_sel,5500,0
+ "gtfdd.dhsd",,g1t1,g1t1_1,5500,0
+ "gtfdd.dhsd",,g1t1,g1t1_2,5500,0
 [onglet]
  [presentation]
   position=0,0
@@ -144,6 +144,36 @@
    donnee=rowinfo,rowinfo,zoomselection
    minmaj=majuscules
    saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=86,4
+    taille=18,36
+    noms="icpfl"
+    id=1212
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=fournisseur,icpfl,fournisseur
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#tblicp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
     position=153,212
@@ -2372,6 +2402,7 @@
    [description]
     donnee=fournisseur,cpt,fournisseur
    [param_saisie]
+    obligatoire=oui
     table_associee=oui
    [touches]
     f1=1
@@ -2389,7 +2420,6 @@
    texte="Compte comptable"
    [param_colonne]
     titre="Compte"
-    fl_aff=non
     largeur_col=39
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -2504,7 +2534,6 @@
    texte="Régime TVA tiers"
    [param_colonne]
     titre="TVA"
-    fl_aff=non
     largeur_col=34
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -4039,6 +4068,25 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=26,94
+   taille=9,18
+   id=1213
+   wstyle="STD"
+  [description]
+   donnee=fournisseur,icpfl,fournisseur
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
 [page]
  numero=12
  libelle="Fiche zoom"
@@ -5606,7 +5654,7 @@
    texte="Délai de sécurité"
  [champ]
   [presentation]
-   position=42,111
+   position=42,119
    taille=9,150
    id=134
    wstyle="CHAMP_AFF"
@@ -5626,7 +5674,7 @@
  [champ]
   [presentation]
    position=42,85
-   taille=9,25
+   taille=9,32
    id=135
    wstyle="CHAMP_SAISI"
   [description]
@@ -5652,7 +5700,7 @@
  [champ]
   [presentation]
    position=54,85
-   taille=9,25
+   taille=9,32
    id=136
    wstyle="CHAMP_SAISI"
   [description]
@@ -5673,7 +5721,7 @@
  [champ]
   [presentation]
    position=66,85
-   taille=9,25
+   taille=9,32
    id=137
    wstyle="CHAMP_SAISI"
   [description]
@@ -5693,7 +5741,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=66,112
+   position=66,119
    taille=9,49
    id=138
    wstyle="CHAMP_SAISI"
@@ -5718,7 +5766,7 @@
  [champ]
   [presentation]
    position=102,85
-   taille=9,25
+   taille=9,32
    id=143
    wstyle="CHAMP_SAISI"
   [description]
@@ -5744,7 +5792,7 @@
  [champ]
   [presentation]
    position=114,85
-   taille=9,25
+   taille=9,32
    id=144
    wstyle="CHAMP_SAISI"
   [description]
@@ -5770,7 +5818,7 @@
  [champ]
   [presentation]
    position=126,85
-   taille=9,25
+   taille=9,32
    id=145
    wstyle="CHAMP_SAISI"
   [description]
@@ -5796,7 +5844,7 @@
  [champ]
   [presentation]
    position=138,85
-   taille=9,25
+   taille=9,32
    id=146
    wstyle="CHAMP_SAISI"
   [description]
@@ -5818,7 +5866,7 @@
  [champ]
   [presentation]
    position=150,85
-   taille=9,25
+   taille=9,32
    id=147
    wstyle="CHAMP_SAISI"
   [description]
@@ -5865,7 +5913,7 @@
  [champ]
   [presentation]
    position=198,85
-   taille=9,25
+   taille=9,32
    id=139
    wstyle="CHAMP_SAISI"
   [description]
@@ -5883,7 +5931,7 @@
  [champ]
   [presentation]
    position=210,85
-   taille=9,25
+   taille=9,32
    id=140
    wstyle="CHAMP_SAISI"
   [description]
@@ -5950,7 +5998,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=114,111
+   position=114,119
    taille=9,150
    id=170
    wstyle="CHAMP_AFF"
@@ -5969,7 +6017,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=126,111
+   position=126,119
    taille=9,150
    id=171
    wstyle="CHAMP_AFF"
@@ -5988,7 +6036,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=102,111
+   position=102,119
    taille=9,150
    id=172
    wstyle="CHAMP_AFF"
@@ -6014,7 +6062,7 @@
  offset_lig=1
  offset_col=1
  prec=14
- suiv=17
+ suiv=16
  attache_x=oui
  attache_lgy=oui
  ident_unique=33
@@ -6777,6 +6825,15 @@
   [param_groupbox]
    texte="Adresse d'une fiche tiers"
    couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=202,5
+   taille=29,310
+   id=1188
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Code lieu-fonction"
+   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
    position=42,10
@@ -6843,7 +6900,7 @@
    texte="Facture"
  [obj_texte]
   [presentation]
-   position=200,5
+   position=218,10
    taille=9,53
    id=1179
    wstyle="STD"
@@ -7240,6 +7297,8 @@
    f7=135
    shift_f5=5001
    shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=174,99
@@ -7259,8 +7318,8 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=200,65
-   taille=9,50
+   position=218,99
+   taille=9,135
    id=1176
    colonnes_saisie=13
    wstyle="CHAMP_SAISI"
@@ -8208,6 +8267,26 @@
    diva_apres="Champ_EscCod_1_Ap"
  [champ]
   [presentation]
+   position=148,96
+   taille=9,55
+   id=283
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=fournisseur,tvapay,fournisseur
+  [aide_page]
+   aide=2021
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
    position=158,96
    taille=9,55
    id=282
@@ -8227,26 +8306,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_TvaNo_1_Ap"
- [champ]
-  [presentation]
-   position=148,96
-   taille=9,55
-   id=283
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=fournisseur,tvapay,fournisseur
-  [aide_page]
-   aide=2021
-   fichier="GTFAIDE"
-  [touches]
-   f1=1
-   f5=5000
-   f6=5002
-   f7=135
-   shift_f5=5001
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
    position=168,96
@@ -8345,6 +8404,31 @@
    diva_apres="Champ_SALCOD_2_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=260,96
+   taille=9,55
+   id=289
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=fournisseur,conf,fournisseur
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=2024
+   fichier="GTFAIDE"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   f8=11010
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Conf_1_Ap"
+  [boutons]
+   "zoom"
  [multi_choix]
   [presentation]
    position=270,96
@@ -8371,31 +8455,6 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
- [champ]
-  [presentation]
-   position=260,96
-   taille=9,55
-   id=289
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=fournisseur,conf,fournisseur
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=2024
-   fichier="GTFAIDE"
-  [touches]
-   f5=5000
-   f6=5002
-   f7=135
-   f8=11010
-   shift_f5=5001
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_Conf_1_Ap"
-  [boutons]
-   "zoom"
  [champ]
   [presentation]
    position=260,278
@@ -8443,6 +8502,300 @@
  offset_lig=1
  offset_col=1
  prec=19
+ suiv=21
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=35
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="WMS"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=110,5
+   taille=108,310
+   id=1202
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Textes préenregistrés"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=78,310
+   id=1211
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Paramétrage"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=43,10
+   taille=9,151
+   id=1189
+   wstyle="STD"
+  [texte]
+   texte="Gamme emballage"
+ [obj_texte]
+  [presentation]
+   position=55,10
+   taille=9,151
+   id=1190
+   wstyle="STD"
+  [texte]
+   texte="Emplacement document"
+ [obj_texte]
+  [presentation]
+   position=66,10
+   taille=9,151
+   id=1193
+   wstyle="STD"
+  [texte]
+   texte="Plan de transport"
+ [obj_texte]
+  [presentation]
+   position=128,10
+   taille=9,52
+   id=1203
+   wstyle="STD"
+  [texte]
+   texte="Préparation"
+ [obj_texte]
+  [presentation]
+   position=170,10
+   taille=9,52
+   id=1206
+   wstyle="STD"
+  [texte]
+   texte="EDI"
+ [champ]
+  [presentation]
+   position=138,10
+   taille=9,48
+   id=1204
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=fournisseur,texcod,fournisseur,6
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1893
+   fichier="gtfaide"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   f8=9081
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TexCod_1_Ap"
+  [boutons]
+   "zoom"
+ [rich_edit]
+  [presentation]
+   position=128,64
+   taille=38,246
+   id=1205
+   wstyle="STD"
+  [description]
+   donnee=mw,rtfnom,fou_mw,6
+   minmaj=majuscules
+   saisie=non
+  [param_rich_edit]
+   largeur=177
+  [touches]
+   f5=5000
+   f6=5002
+   ctrl_f6=10300
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=180,10
+   taille=9,48
+   id=1207
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=fournisseur,texcod,fournisseur,7
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1893
+   fichier="gtfaide"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   f8=9081
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TexCod_1_Ap"
+  [boutons]
+   "zoom"
+ [rich_edit]
+  [presentation]
+   position=170,64
+   taille=38,246
+   id=1208
+   wstyle="STD"
+  [description]
+   donnee=mw,rtfnom,fou_mw,7
+   minmaj=majuscules
+   saisie=non
+  [param_rich_edit]
+   largeur=177
+  [touches]
+   f5=5000
+   f6=5002
+   ctrl_f6=10300
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=43,163
+   taille=9,50
+   id=1194
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=fournisseur,stlgtgamcod,fournisseur
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   f8=46053
+   shift_f5=5001
+   shift_f6=10000
+   shift_f8=46054
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_StLgtGamCod_1_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=55,163
+   taille=9,50
+   id=1195
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=fournisseur,wmdocemp,fournisseur
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","EMPLDOC"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=67,163
+   taille=9,32
+   id=1196
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=fournisseur,transplancod,fournisseur
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   f8=9131
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TransPlanCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=67,197
+   taille=9,117
+   id=1197
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=fournisseur,libplantrans_lib,fournisseur
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=78,10
+   taille=9,160
+   id=1198
+   wstyle="STD"
+  [description]
+   donnee=fournisseur,wmauditfl,fournisseur
+  [param_case]
+   texte="Audit colis"
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=88,10
+   taille=9,160
+   id=1201
+   wstyle="STD"
+  [description]
+   donnee=fournisseur,wmresaimpfl,fournisseur
+  [param_case]
+   texte="Accepte la méthode d’affectation des résa en vol. important"
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=21
+ fond="STD"
+ efface=partiel
+ nb_lig=33
+ nb_col=80
+ offset_lig=1
+ offset_col=1
+ prec=20
  attache_x=oui
  attache_lgy=oui
  ident_unique=8
@@ -8870,7 +9223,7 @@
    f7=135
    shift_f6=10000
 [page]
- numero=21
+ numero=22
  fond="STD"
  efface=complet
  nb_lig=23
@@ -8879,7 +9232,7 @@
  offset_col=1
  ident_unique=16
 [page]
- numero=22
+ numero=23
  fond="ZOOM"
  type=fenetre
  titre="Introduisez un code fournisseur"
@@ -8925,7 +9278,7 @@
   [traitements]
    diva_apres="Champ_Tiers_5_Ap"
 [page]
- numero=23
+ numero=24
  fond="STD"
  type=fenetre
  titre="Duplication des fiches"
@@ -8961,11 +9314,7 @@
    choix="gtfdmc.dhfi",""
   [touches]
    f1=1
-   f5=5003
-   f6=5000
    f7=135
-   shift_f5=5005
-   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=28,10
@@ -8982,11 +9331,7 @@
    choix="gtfdmc.dhfi",""
   [touches]
    f1=1
-   f5=5003
-   f6=5000
    f7=135
-   shift_f5=5005
-   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=18,70
@@ -9003,11 +9348,7 @@
    choix="gtfdmc.dhfi",""
   [touches]
    f1=1
-   f5=5003
-   f6=5000
    f7=135
-   shift_f5=5005
-   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=48,10
@@ -9024,11 +9365,7 @@
    choix="gtfdmc.dhfi",""
   [touches]
    f1=1
-   f5=5003
-   f6=5000
    f7=135
-   shift_f5=5005
-   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=58,10
@@ -9045,11 +9382,7 @@
    choix="gtfdmc.dhfi",""
   [touches]
    f1=1
-   f5=5003
-   f6=5000
    f7=135
-   shift_f5=5005
-   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=48,70
@@ -9066,11 +9399,7 @@
    choix="gtfdmc.dhfi",""
   [touches]
    f1=1
-   f5=5003
-   f6=5000
    f7=135
-   shift_f5=5005
-   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=78,10
@@ -9087,11 +9416,7 @@
    choix="gtfdmc.dhfi",""
   [touches]
    f1=1
-   f5=5003
-   f6=5000
    f7=135
-   shift_f5=5005
-   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=78,70
@@ -9114,7 +9439,7 @@
    shift_f5=5005
    shift_f6=10000
 [page]
- numero=24
+ numero=25
  libelle="Recherche du prix"
  fond="ZOOM"
  nature=double
@@ -10245,6 +10570,14 @@
     wetype_trait=arret
     warret=5040
   [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Evénements qualité"
+    wid_ressource="QUALITE__1"
+    wetype_trait=arret
+    warret=40303
+  [item]
    type=sep
    dessin=sep
    niveau=2
@@ -11056,7 +11389,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: gtez022_sql.dhsf 37959 2014-03-10 16:26:03Z sn $')
+SetModuleInfo('$Id: gtez022_sql.dhsf 57145 2016-05-12 07:40:35Z sn $')
 ;*
 ;*      Zoom sur Fournisseur		  			Record SQL Fournisseur de GTRSTIERS.dhoq
 ;*
@@ -11067,6 +11400,7 @@ Module	'CCTM000.dhop'
 Module	'A5PMNoteJoint.dhop'
 Module	'A5TM000.dhop'
 Module	'RCTM000.dhop'
+Module	'WMTM000.dhop'
 
 ; TDF 
 Public HFile	GTFDD.dhsd		GTFTAB	GTFTAB
@@ -11210,7 +11544,7 @@ Beginp
 	Else
 		If FOURNISSEUR.CPT <> ' '
 				If SOC.EntCodN(20) = 2
-					If SOC.ENTCOD(14) not in (2,3)
+					If SOC.ENTCODN(14) not in (2,3)
 						If Controle_Compte(FOURNISSEUR.Cpt, conf=FALSE, cptnat=4) <= 1		; Controle demandé et pas de création automatique
 							FOURNISSEUR.CompteFournisseur_Lib = C3.Lib
 						EndIf
@@ -11221,12 +11555,6 @@ Beginp
 				Else		
 					Controle_Compte (FOURNISSEUR.Cpt, nonvide=FALSE, existence=FALSE)  ; alphanumérique + complétion
 				EndIf
-		else
-			if FOURNISSEUR.Cpt =' '
-				Harmony.Retour = XMENEXT_TRAITEMENT_AVANT	
-				preturn
-			endif
-
 		EndIf 
 	EndIf
 Endp
@@ -11376,7 +11704,7 @@ Endp
 ;*
 Public Procedure Champ_Quacod_1_Av			; avant controle qualité
 Beginp
-	If SOC.EntCod(19) = 1
+	If SOC.EntCodN(19) = 1
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	EndIf
 Endp
@@ -11414,7 +11742,7 @@ Endp
 ;*
 Public Procedure Champ_Rfcctrcod_1_Av			; avant référencement selon flag dossier
 Beginp
-	If SOC.EntCod(32) <> 2
+	If SOC.EntCodN(32) <> 2
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	EndIf 
 Endp
@@ -11513,6 +11841,14 @@ Beginp
 Endp
 
 ;*
+Public Procedure Champ_StLgtGamCod_1_Ap
+;
+Beginp
+	Controler_WMS_Gamme(FOURNISSEUR.StLgtGamCod, 20029)
+Endp
+
+
+;*
 Public Procedure Champ_Tacod_1_Ap			;controle tarIf ht
 Beginp
 	FOURNISSEUR.CodeTarif_Lib = Condition(Lectab(14, [ 'F' FOURNISSEUR.TaCod ], 1114) = 0, T014.lib, ' ')
@@ -11550,7 +11886,7 @@ Beginp
 		EndIf
 	Else
 		Controle_Syntaxe_Tiers (FOURNISSEUR.Tiers, 2004) 
-		If SOC.EntCodN(22) = 2 And SOC.EntCod(24) = 2	; gère-t-on les établissements ?
+		If SOC.EntCodN(22) = 2 And SOC.EntCodN(24) = 2	; gère-t-on les établissements ?
 			If FOURNISSEUR.Tiers < ETS.Tiers1(3) Or FOURNISSEUR.Tiers > ETS.Tiers2(3)
 				Mes_Alert(1506, MZ.Etb, ETS.Tiers1(3), ETS.Tiers2(3))
 				Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
@@ -11680,6 +12016,15 @@ Public Procedure Champ_Tit_1_Ap			; contrôle titre
 Beginp
 	Lectab(48, FOURNISSEUR.Tit, 1148) 
 Endp
+
+;*
+Public Procedure Champ_TransPlanCod_1_Ap	; Contrôle du plan de transport
+RecordSql 'GTRSPPTAB.dhoq'	LibPlanTrans	LibPlanTrans_Loc
+
+Beginp
+	FOURNISSEUR.LibPlanTrans_Lib = Condition(Lectab_(LibPlanTrans_Loc, FOURNISSEUR.TransPlanCod, err=1191) = 0, LibPlanTrans_Loc.Lib, ' ')
+Endp
+
 
 ;*
 Public Procedure Champ_TvaNo_1_Ap

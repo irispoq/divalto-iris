@@ -1,18 +1,18 @@
-;>xwin4obj                              7.0       20131016170203      
+;>xwin4obj                              7.0       20160510175931      
 [masque]
  libelle="écritures"
- utilisateur="ROOT"
- date_modification="16/10/2013"
+ utilisateur="DEMO"
+ date_modification="10/05/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=377
  type_masque=2
- dernier_id=1294
+ dernier_id=1302
  dernier_id_page=31
 [defaut]
  [aide_page]
   aide=0
 [enregistrements]
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1500,0
  "ccfdd.dhsd",,x1,x1,1752,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "ccrsecr.dhoq",,ecriture,ecriture,1024,1
@@ -20,7 +20,7 @@
 [onglet]
  [presentation]
   position=0,0
-  taille=315,300
+  taille=297,280
   attache_lgx=oui
   attache_lgy=oui
   id=1
@@ -101,7 +101,7 @@
    hauteur_entete=10
    largeur_controle=8
    var_controle=oui
-   col_fixes=7
+   col_fixes=8
    separation=80
    zonagecolonne=12345
    zonageauto=non
@@ -156,7 +156,7 @@
   [multi_choix_tableau]
    [presentation]
     position=107,55
-    taille=10,14
+    taille=16,28
     noms="typecr"
     id=158
     wstyle="TABLEAU_AFF_ETAT"
@@ -183,7 +183,7 @@
     id=159
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=x1,affce7,x1
+    donnee=ecriture,cevtl,ecriture
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -199,13 +199,34 @@
     wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
+    position=203,158
+    taille=18,36
+    noms="typecr;tvadcpt"
+    id=1295
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=ecriture,vtlcod,ecriture,7
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","VTLCOD_12"
+   [info_bulle]
+   texte="Présence ventilation de Tva"
+   [param_colonne]
+    titre="#tblventilt"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
     position=177,245
     taille=7,65
     noms="typecr"
     id=160
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=x1,affce3,x1
+    donnee=ecriture,ce3,ecriture
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -227,7 +248,7 @@
     id=161
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=x1,choix,x1,2
+    donnee=ecriture,celett,ecriture
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -249,7 +270,7 @@
     id=162
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=x1,choix,x1,3
+    donnee=ecriture,affce7,ecriture
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -696,6 +717,31 @@
     titre="Pièce"
     fl_aff=non
     largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=158,173
+    taille=9,30
+    noms="typecr"
+    id=1296
+    colonnes_saisie=10
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=ecriture,piecedt,ecriture
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f1=1
+    f7=8000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_Piecedt_1_Av"
+   [info_bulle]
+   texte="Date de la pièce justificative"
+   [param_colonne]
+    titre="Date pièce"
+    fl_aff=non
+    largeur_col=34
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -1324,7 +1370,7 @@
     id=205
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=x1,affce2,x1
+    donnee=ecriture,ce2,ecriture
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1357,6 +1403,26 @@
     titre="Numéro écriture validée"
     fl_aff=non
     largeur_col=43
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=198,113
+    taille=9,30
+    noms="typecr"
+    id=1297
+    colonnes_saisie=10
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=ecriture,validdt,ecriture
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="Date de validation de l'écriture"
+   [param_colonne]
+    titre="Date Validation"
+    fl_aff=non
+    largeur_col=34
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -2024,6 +2090,16 @@
    texte="ligne"
  [obj_texte]
   [presentation]
+   position=36,141
+   taille=9,17
+   noms="brouillard"
+   cadrage=droite
+   id=1299
+   wstyle="STD"
+  [texte]
+   texte="le"
+ [obj_texte]
+  [presentation]
    position=66,10
    taille=9,50
    id=20
@@ -2066,7 +2142,6 @@
   [presentation]
    position=126,10
    taille=9,50
-   noms="etbc3"
    id=1024
    wstyle="STD_CADRE3D"
   [texte]
@@ -2151,6 +2226,14 @@
    texte="Pièce"
  [obj_texte]
   [presentation]
+   position=238,176
+   taille=9,59
+   id=1301
+   wstyle="STD"
+  [texte]
+   texte="Date de la pièce"
+ [obj_texte]
+  [presentation]
    position=250,10
    taille=9,50
    id=40
@@ -2173,6 +2256,23 @@
    wstyle="STD"
   [texte]
    texte="Echéance"
+ [champ]
+  [presentation]
+   position=238,237
+   taille=9,33
+   noms="r3cod;saisie;vtlpiece"
+   id=1302
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,piecedt,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+  [traitements]
+   diva_avant="Champ_PieceDt_1_Av"
  [champ]
   [presentation]
    position=26,161
@@ -2219,7 +2319,7 @@
    id=58
    wstyle="CHAMP_AFF"
   [description]
-   donnee=x1,affce2,x1
+   donnee=ecriture,ce2,ecriture
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -2233,7 +2333,7 @@
    id=59
    wstyle="CHAMP_AFF"
   [description]
-   donnee=x1,affce3,x1
+   donnee=ecriture,ce3,ecriture
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -2499,6 +2599,19 @@
    choix="ccfdmc.dhfi","AFFCE8_1"
  [champ]
   [presentation]
+   position=36,161
+   taille=9,36
+   noms="brouillard"
+   id=1300
+   colonnes_saisie=10
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=ecriture,validdt,ecriture
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+ [champ]
+  [presentation]
    position=102,62
    taille=9,170
    noms="conff;saisie"
@@ -2630,6 +2743,22 @@
   [traitements]
    microbol_click=8002
    diva_avant="Champ_EchDt_1_Av"
+ [champ]
+  [presentation]
+   position=238,237
+   taille=9,33
+   noms="r3cod;saisie;vtlpiece"
+   id=1298
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ecriture,piecedt,ecriture
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+  [traitements]
+   diva_avant="Champ_PieceDt_1_Av"
  [champ]
   [presentation]
    position=126,62
@@ -3498,7 +3627,7 @@
  [multi_choix]
   [presentation]
    position=152,206
-   taille=9,41
+   taille=9,66
    id=68
    wstyle="CHAMP_AFF_CADRE3D"
   [description]
@@ -3532,7 +3661,7 @@
  [multi_choix]
   [presentation]
    position=152,67
-   taille=9,40
+   taille=9,65
    id=67
    wstyle="CHAMP_AFF_CADRE3D"
   [description]
@@ -3881,6 +4010,15 @@
   [item]
    niveau=2
    [param_bouton]
+    wnom="VENTILTVA"
+    wtexte="Ventilation TVA\tCtrl+B"
+    wid_ressource="VENTILATIONTVA"
+    wtrait_chaine="#ctrl_b"
+   [info_bulle]
+   texte="Afficher les ventilations tva<Ctrl+B>"
+  [item]
+   niveau=2
+   [param_bouton]
     wnom="DETAIL"
     wtexte="Détail de la ligne _centralisée\tF6"
     wid_ressource="DETAIL"
@@ -4107,6 +4245,13 @@
    texte="Ventilation par axe <Ctrl+F4>"
   [item]
    [param_bouton]
+    wnom="VENTILTVA"
+    wid_ressource="VENTILATIONTVA"
+    wtrait_chaine="#ctrl_b"
+   [info_bulle]
+   texte="Ventilation de tva<Ctrl+B>"
+  [item]
+   [param_bouton]
     wnom="DETAIL"
     wid_ressource="DETAIL"
     wtrait_chaine="#f6"
@@ -4195,7 +4340,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: ccez100_sql.dhsf 34533 2013-10-16 15:06:46Z als $')
+SetModuleInfo('$Id: ccez100_sql.dhsf 57093 2016-05-10 16:06:00Z vj $')
 ;>xdiva
 ;*
 ;*		Zoom écritures																															cctez100.dhsp
@@ -4266,7 +4411,7 @@ public procedure Champ_Jnl_1_Ap
 beginp	; Champ_Jnl_1_Ap
 
 	X1.Lib(8) = ' '
-	if Controle_Journal(C8_SEL.Jnl, err = 0) = 0
+	if Controle_Journal(C8_SEL.Jnl, jnltyp = "1234  789", err = 0) = 0
 		X1.Lib(8) = C4.Lib
 		if Jnl_Lie_A_Reglement(MZ.EtbC3, C4.Jnl) = 'O'              
 			XmeSetAttribut("r3cod", AN_STYLE, "CHAMP_NON_SAISI")
@@ -4624,6 +4769,16 @@ beginp	; Champ_Mt2_1_Av
 endp		; Champ_Mt2_1_Av
 
 
+
+
+;*
+Public Procedure Champ_PieceDt_1_Av
+;
+Beginp
+	if Zoom.SceNoCle in (9, 10) or ECRITURE.VtlCod(5) = 2 or Cpt_Lie_A_Reglement(ECRITURE.Etb, ECRITURE.Jnl, ECRITURE.Cpt) = 'O'
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	endif
+Endp
 [/diva]
 [diva_base]
 [/diva]

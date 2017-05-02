@@ -1,0 +1,65 @@
+;*
+;*		Inventaire comptable différé
+;*
+OverWrite gttq721_sql.dhop
+;*
+;* Module & Include
+;*
+module	'xhql.dhop'
+module  	'A5PMPAR.dhop'
+
+include	'GTQC000.dhsp'
+
+;*
+;* Record & RecordSQL
+;*
+
+;
+Public Record		'GTFDD.dhsd'	GT721
+Public Record		'GTFDD.dhsd'	GT721		GT721Trouve
+
+Public record 		gtfdd.dhsd 	MVTL
+Public record		gtfdd.dhsd	MOUV
+Public record		gtfdd.dhsd	PRJAP
+Public Record		'GTFDD.dhsd'	XQ			G3XQ_INIT		; Copie du G3XQ initial
+
+;
+Public RecordSql	'GTRSHQINV.dhoq'	InvArtMouv	_ART
+Public RecordSql	GTRSPCE.dhoq		Ventilation	Ventilation
+
+; Variables
+1		ModeValorisation 			1,0								; Mode de valorisation
+1     CrPourValorisation      >GTFDD.dhsd Cr					; Coût pour valorisation au dernier CR ou CMP
+1		EnrNoPourValorisation   >GTFDD.dhsd EnrNo				; Numéro d'enregistrement utilisé pour valoriser au dernier cr ou cmp   
+1		SrefEnCours	 				>GTFDD.dhsd Sref				; Sous-référence courante
+1		PremiereSref	 			1,0								; TRUE si première sous-référence traitée, FALSE sinon
+
+; Constantes
+Const	C_Ventilation	= 1											; Ventilation
+Const C_Mouvement		= 2											; Mouvement
+
+Const C_AuDernierCR	= 1											; Valorisation au dernier CR
+Const C_AuDernierCMP	= 2											; Valorisation au dernier CMP
+Const C_CoutReel		= 3											; Valorisation au coût réel
+
+;*
+;*
+;*
+
+;*
+procedure MettreEnPlace_FiltreVentilation(&vCondition)
+;
+1		vCondition			S		; Condition Sql
+
+BeginP
+
+	standard.MettreEnPlace_FiltreVentilation(vCondition)	
+	If G3XQ.ProjetD <> ' '
+		Ventilation.Where.COG_Between_Affaire(G3XQ.ProjetD, G3XQ.ProjetF)
+		Ventilation.Where.AddCondition('COG_Between_Affaire')
+	Elsif G3XQ.ProjetD = G3XQ.ProjetF
+		Ventilation.Where.COG_Equal_Affaire(G3XQ.ProjetD)
+		Ventilation.Where.AddCondition('COG_Equal_Affaire')
+	Endif
+
+EndP

@@ -15,7 +15,7 @@
 ;* 		Dossier pour Production
 ;*
 
-<RecordSql Name=Dos_Prod>
+<RecordSql Name=DossierProd>
 <SELECT>
 	SocGP.*,
 
@@ -23,7 +23,7 @@
 ;* 		Dossier pour le module CRM
 ;*
 
-<RecordSql Name=Dos_RT>
+<RecordSql Name=DossierCRM>
 <SELECT>
 	SocCRM.*,
 
@@ -31,7 +31,7 @@
 ;* 		Dossier pour le module Affaire
 ;*
 
-<RecordSql Name=Dos_Aff>
+<RecordSql Name=DossierAff>
 <SELECT>
 	SocAfr.*,
 
@@ -39,7 +39,7 @@
 ;* 		Dossier pour Numérotation
 ;*
 
-<RecordSql Name=Dos_Num>
+<RecordSql Name=DossierNum>
 <SELECT>
 	SocNo.*,
 
@@ -47,6 +47,6 @@
 ;* 		Etablissement
 ;*
 
-<RecordSql Name=Etb>
+<RecordSql Name=Etablissement>
 <SELECT>
 	Ets.*,

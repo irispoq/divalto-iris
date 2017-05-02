@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20110819094619      
+;>xwin4obj                              7.0       20130513113905      
 [masque]
  utilisateur="SN"
- date_modification="19/08/2011"
+ date_modification="13/05/2013"
  feuille_style="fstylewpf.dhfi"
  id_traitements=166
  dernier_id=76
@@ -14,9 +14,9 @@
   f7=8000
   f8=8000
 [enregistrements]
- "gtfdd.dhsd",,xq,g3xq,7200,0
- "gtfdd.dhsd",,ent,ent,1600,0
- "gtfdd.dhsd",,gtpce,gtpce,300,0
+ "gtfdd.dhsd",,xq,g3xq,8000,0
+ "gtfdd.dhsd",,ent,ent,1800,0
+ "gtfdd.dhsd",,gtpce,gtpce,500,0
 [page]
  numero=1
  libelle="boutons sélections"
@@ -152,8 +152,6 @@
    microbol_click=8002
    diva_avant="Champ_PinoF_1_Av"
    diva_apres="Champ_PinoF_1_Ap"
-  [reaffichage]
-   xq,pinof,g3xq
   [boutons]
    "zoom"
  [champ]
@@ -174,8 +172,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_TiersD_1_Ap"
-  [reaffichage]
-   xq,tiersd,g3xq
   [boutons]
    "zoom"
  [champ]
@@ -196,8 +192,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_TiersF_1_Ap"
-  [reaffichage]
-   xq,tiersf,g3xq
   [boutons]
    "zoom"
  [champ]
@@ -218,8 +212,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Tiersmsk_1_Ap"
-  [reaffichage]
-   xq,tiersmsk,g3xq
  [champ]
   [presentation]
    position=32,56
@@ -258,8 +250,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Datf_1_Ap"
-  [reaffichage]
-   xq,datf,g3xq
   [boutons]
    "zoom"
  [champ]
@@ -280,9 +270,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_ReprD_1_Ap"
-  [reaffichage]
-   xq,reprd,g3xq
-   xq,libtb,g3xq,2
   [boutons]
    "zoom"
  [champ]
@@ -319,8 +306,6 @@
    f8=9077
   [traitements]
    diva_apres="Champ_SalCodD_1_Ap"
-  [reaffichage]
-   xq,libtb,g3xq,3
  [case_a_cocher]
   [presentation]
    position=70,5
@@ -383,9 +368,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Choix_2_Ap"
-  [reaffichage]
-   xq,op,g3xq
-   xq,libtb,g3xq,1
  [champ]
   [presentation]
    position=90,105
@@ -407,9 +389,6 @@
    microbol_click=8002
    diva_avant="Champ_Op_1_Av"
    diva_apres="Champ_Op_1_Ap"
-  [reaffichage]
-   xq,libtb,g3xq,1
-   xq,op,g3xq
   [boutons]
    "zoom"
  [case_a_cocher]
@@ -434,8 +413,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Choix_5_Ap"
-  [reaffichage]
-   xq,user,g3xq
  [champ]
   [presentation]
    position=100,105
@@ -476,8 +453,6 @@
    shift_f7=10101
   [traitements]
    microbol_click=8002
-  [reaffichage]
-   xq,user,g3xq
  [groupe_radio]
   [presentation]
    position=132,5
@@ -899,8 +874,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Deparf_1_Ap"
-  [reaffichage]
-   xq,deparf,g3xq
 [page]
  numero=6
  libelle="Critères tri cli+prospect"
@@ -975,8 +948,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_ReprF_1_Ap"
-  [reaffichage]
-   xq,reprf,g3xq
   [boutons]
    "zoom"
 [page]
@@ -1003,7 +974,7 @@
    texte="Mode de transport"
  [obj_texte]
   [presentation]
-   position=8,83
+   position=8,97
    taille=9,9
    id=56
    wstyle="STD"
@@ -1012,7 +983,7 @@
  [champ]
   [presentation]
    position=8,56
-   taille=9,20
+   taille=9,32
    id=57
    wstyle="CHAMP_SAISI"
   [description]
@@ -1033,8 +1004,8 @@
    "zoom"
  [champ]
   [presentation]
-   position=8,95
-   taille=9,20
+   position=8,109
+   taille=9,32
    id=58
    wstyle="CHAMP_SAISI"
   [description]
@@ -1051,8 +1022,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_BLMOD_1_Ap"
-  [reaffichage]
-   xq,blmodf,g3xq
   [boutons]
    "zoom"
 [page]
@@ -1148,8 +1117,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Deparf_1_Ap"
-  [reaffichage]
-   xq,deparf,g3xq
 [page]
  numero=10
  libelle="Critères tri fou+interne"
@@ -1224,8 +1191,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_ReprF_1_Ap"
-  [reaffichage]
-   xq,reprf,g3xq
   [boutons]
    "zoom"
 [page]
@@ -1252,7 +1217,7 @@
    texte="Mode de transport"
  [obj_texte]
   [presentation]
-   position=8,85
+   position=8,98
    taille=9,10
    id=69
    wstyle="STD"
@@ -1261,7 +1226,7 @@
  [champ]
   [presentation]
    position=8,56
-   taille=9,20
+   taille=9,32
    id=70
    wstyle="CHAMP_SAISI"
   [description]
@@ -1282,8 +1247,8 @@
    "zoom"
  [champ]
   [presentation]
-   position=8,97
-   taille=9,20
+   position=8,110
+   taille=9,32
    id=71
    wstyle="CHAMP_SAISI"
   [description]
@@ -1300,8 +1265,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_BLMOD_1_Ap"
-  [reaffichage]
-   xq,blmodf,g3xq
   [boutons]
    "zoom"
 [page]
@@ -1574,7 +1537,7 @@
 ;*    Lm       5.1      1726        07.2001  gestion tiret fournisseur
 
 
-SetModuleInfo('$Id: gtee420.dhsf 17048 2011-08-19 09:45:13Z sn $')
+SetModuleInfo('$Id: gtee420.dhsf 31550 2013-05-13 12:34:30Z sn $')
 
 Include		"GTTC000.dhsp"																					
 

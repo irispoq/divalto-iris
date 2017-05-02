@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20150618100316      
+;>xwin4obj     imprimante               6.0       20161207160316      
 [masque]
- utilisateur="ROOT"
- date_modification="18/06/2015"
+ utilisateur="UGIE"
+ date_modification="07/12/2016"
  feuille_style="fstyleimp.dhfi"
  id_traitements=10
  taille_ligne=9
@@ -29,19 +29,19 @@
   donnee=g4,email,g4
 [defaut]
 [enregistrements]
- "gtfdd.dhsd",gtfat,art,g4art,1700,0
- "gtfdd.dhsd",gtfent,ent,ent,1800,0
- "gtfdd.dhsd",,mouv,g4mouv,1900,0
- "gtfdd.dhsd",,g4,g4,8000,0
- "gtfdd.dhsd",gtfdos,soc,soc,2800,0
+ "gtfdd.dhsd",gtfat,art,g4art,2500,0
+ "gtfdd.dhsd",gtfent,ent,ent,2500,0
+ "gtfdd.dhsd",,mouv,g4mouv,2700,0
+ "gtfdd.dhsd",,g4,g4,8300,0
+ "gtfdd.dhsd",gtfdos,soc,soc,3500,0
  "ddsys.dhsd",,system,system,4160,0
  "a5dd.dhsd",,mw,mw,3000,0
  "gtfdd.dhsd",,g4t1,g4t1,100,0
- "gtfdd.dhsd",,mvtl,g4mvtl,1000,0
+ "gtfdd.dhsd",,mvtl,g4mvtl,1350,0
  "gtfdd.dhsd",gtfat,rfo,rfo,650,0
- "gtfdd.dhsd",,t013,t013,300,0
- "gtfdd.dhsd",,t2,t2,1000,0
- "gtfdd.dhsd",,t037,t037_cog,450,0
+ "gtfdd.dhsd",,t013,t013,400,0
+ "gtfdd.dhsd",,t2,t2,1200,0
+ "gtfdd.dhsd",,t037,t037_cog,500,0
 [bloc]
  numero=1
  libelle="En-tête"
@@ -1602,8 +1602,13 @@
 [diva]
 setmoduleinfo("$Id$")
 
+;
 include gttc000.dhsp
 
+;
+Module	'GTTMPCE.dhop'
+
+;
 Public Record "gtfdd.dhsd" art g4art
 Public Record "gtfdd.dhsd" ent ent
 Public Record "gtfdd.dhsd" mouv g4mouv
@@ -1630,9 +1635,21 @@ Beginp
 		t037_cog.Nom = ENT.SALCOD
 	EndIf
 Endp
+
+;*
+Public Procedure BLOC_COMPLEMENTLIGNE_1_AP
+Beginp
+	Piece_Imp_Ligne_CplSousRef
+Endp
+
+;*
+Public Procedure BLOC_FACTUREFINBL_1_AP
+Beginp
+	Piece_Imp_Bl_Fin
+Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtii260a.dhsi 31865 2013-05-28 14:05:36Z sn $')
+SetModuleInfo('$Id: gtii260c.dhsi 29711 2013-02-15 13:34:27Z bel $')
 
 Module	'GTPM000.dhop'
 Module	'GTTMPCE.dhop'
@@ -1641,6 +1658,7 @@ Public Record "gtfdd.dhsd" ent ent
 Public Record "gtfdd.dhsd" mouv g4mouv
 Public Record "gtfdd.dhsd" g4 g4
 Public Record "gtfdd.dhsd" soc soc
+Public Record "gtfdd.dhsd" t020 w2t020
 Public Record "a5dd.dhsd" mw mw
 Public Record "gtfdd.dhsd" g4t1 g4t1
 Public Record "gtfdd.dhsd" mvtl g4mvtl
@@ -1671,16 +1689,16 @@ Endp
 
 Public Procedure BLOC_LIGNEARTICLE_1_AP
 Beginp
-	;Piece_Imp_Ligne_Ap
+	;Piece_Imp_Ligne__Ap
 	Piece_Imp_Ligne_Cpl
 Endp
 
-Public Procedure BLOC_COMPLEMENTLIGNE_1_AP
+Public Procedure BLOC_SOUSREFERENCES_1_AP
 Beginp
 	Piece_Imp_Ligne_CplSousRef
 Endp
 
-Public Procedure BLOC_FACTUREFINBL_1_AP
+Public Procedure BLOC_FACTUREFINDEBL_1_AP
 Beginp
 	Piece_Imp_Bl_Fin
 Endp

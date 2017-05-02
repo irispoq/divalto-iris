@@ -24,13 +24,6 @@ module	CCPMFIC.dhop
 
 module wmpm000.dhop
 
-; TDF
-HFileVersion  GTFDD.dhsd 	GTFAT
-
-Public HFile	GTFDD.dhsd 	GTFAT 	GTFAT
-Public HFile	GTFDD.dhsd 	GTFTARIF	GTFTARIF
-Public HFile	GTFDD.dhsd 	GTFPCF 	GTFPCF
-
 ; Record SQL
 Public RecordSql 'GTRSART.dhoq'		Article
 
@@ -139,9 +132,9 @@ Public function int cog_Article_Utilisation
 ;						=1 pas d'utilisation
 beginf
 	if Zoom.Action = ZOOM_Modification
-		if G3_Controle_Utilisation_Gamme(ART.REF,err=false) = true
+		if G3_Controle_Utilisation_Gamme(ARTICLE.REF,err=false) = true
 			freturn(0)
-		elsif G3_Controle_Utilisation_Article(ART.REF,err=false) <> 0
+		elsif G3_Controle_Utilisation_Article(ARTICLE.REF,err=false) <> 0
 			freturn(0)
 		endif
 	endif
@@ -152,12 +145,12 @@ endf
 Public procedure Cog_ZoomModification	
 ; avant entrée en modif
 beginp
-	g_srefcod	= ART.SREFCOD
-	g_gricod		= ART.GRICOD
-	g_grisais	= ART.GRISAIS
-	g_StCod		= ART.StCod
-	g_GiCod		= ART.GiCod
-	g_RefUn		= ART.RefUn
+	g_srefcod	= ARTICLE.SREFCOD
+	g_gricod		= ARTICLE.GRICOD
+	g_grisais	= ARTICLE.GRISAIS
+	g_StCod		= ARTICLE.StCod
+	g_GiCod		= ARTICLE.GiCod
+	g_RefUn		= ARTICLE.RefUn
 
 endp
 
@@ -166,17 +159,17 @@ Public procedure Cog_ZoomAvantRewrite
 ;
 beginp
 
-	If g_srefcod <> ART.SREFCOD or g_gricod <> ART.GRICOD or g_StCod <> ART.StCod or g_GiCod <> ART.GiCod or g_RefUn <> ART.RefUn
+	If g_srefcod <> ARTICLE.SREFCOD or g_gricod <> ARTICLE.GRICOD or g_StCod <> ARTICLE.StCod or g_GiCod <> ARTICLE.GiCod or g_RefUn <> ARTICLE.RefUn
 		; Si pas de mouvement de stock alors éxécution du standard
 		If	cog_Article_Utilisation = 1
 			; ZoomApresModification
 		Else	; sinon restauration des anciennes valeurs
-			ART.SREFCOD	= g_srefcod
-			ART.GRICOD	= g_gricod
-			ART.GRISAIS	= g_grisais
-			ART.StCod	= g_StCod
-			ART.GiCod	= g_GiCod
-			ART.RefUn	= g_RefUn
+			ARTICLE.SREFCOD	= g_srefcod
+			ARTICLE.GRICOD		= g_gricod
+			ARTICLE.GRISAIS	= g_grisais
+			ARTICLE.StCod		= g_StCod
+			ARTICLE.GiCod		= g_GiCod
+			ARTICLE.RefUn		= g_RefUn
 		EndIf
 	endif
 
@@ -187,13 +180,13 @@ Public Procedure Cog_ZoomCreation
 ;
 Beginp
 
-	ART.RefUn		 	= SOC.Cog_RefUn
-	ART.AchUn 			= SOC.Cog_RefUn
-	ART.StUn 			= SOC.Cog_RefUn
-	ART.VenUn 			= SOC.Cog_RefUn
-	ART.TvaUn 			= SOC.Cog_RefUn
-	ART.TvaaRt			= SOC.TvaR
-	ART.TvaaRta			= SOC.TvaRa
+	ARTICLE.RefUn		 	= SOC.Cog_RefUn
+	ARTICLE.AchUn 			= SOC.Cog_RefUn
+	ARTICLE.StUn 			= SOC.Cog_RefUn
+	ARTICLE.VenUn 			= SOC.Cog_RefUn
+	ARTICLE.TvaUn 			= SOC.Cog_RefUn
+	ARTICLE.TvaaRt			= SOC.TvaR
+	ARTICLE.TvaaRta		= SOC.TvaRa
 
 EndP
 

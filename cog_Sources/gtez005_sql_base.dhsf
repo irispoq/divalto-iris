@@ -1,0 +1,2764 @@
+;>xwin4obj                              7.0       20151007173858      
+[masque]
+ libelle="Tarif de vente"
+ utilisateur="LK"
+ date_modification="07/10/2015"
+ feuille_style="fstylewpf.dhfi"
+ id_traitements=196
+ type_masque=2
+ dernier_id=310
+ dernier_id_page=23
+[defaut]
+ [aide_page]
+  aide=0
+  fichier="gtfaide"
+ [touches]
+  f7=135
+  shift_f6=10000
+[enregistrements]
+ "gtrstarif.dhoq",,tarifvente,tarifvente,1024,1
+ "gtfdd.dhsd",,g7,g7,4550,0
+ "ddsys.dhsd",,rowinfo,zoomselection,120,0
+[onglet]
+ [presentation]
+  position=0,0
+  taille=225,280
+  attache_lgy=oui
+  id=1
+ [param_onglet]
+  nom="FICHE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[onglet]
+ [presentation]
+  position=0,0
+  taille=40,360
+  attache_lgx=oui
+  id=2
+ [param_onglet]
+  nom="LISTE"
+  multi_lignes=non
+  arret=2
+  wnom_police="ONGLET"
+  wnom_padding="ONGLET"
+[page]
+ numero=1
+ fond="STD"
+ nature=double
+ nb_lig=25
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ ident_unique=1
+[page]
+ numero=2
+ libelle="Saisie clé/création"
+ fond="ZOOM"
+ nature=double
+ type=fenetre
+ titre="Tarif de vente à créer"
+ nb_lig=15
+ nb_col=62
+ offset_lig=8
+ offset_col=20
+ ident_unique=2
+ [aide_page]
+  aide=1470
+  fichier="gtfaide"
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,53
+   id=3
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [obj_texte]
+  [presentation]
+   position=28,5
+   taille=9,53
+   noms="sref"
+   id=4
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 1"
+ [obj_texte]
+  [presentation]
+   position=38,5
+   taille=9,53
+   noms="sref"
+   id=5
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 2"
+ [obj_texte]
+  [presentation]
+   position=58,5
+   taille=9,53
+   noms="PasTIA"
+   id=7
+   wstyle="STD"
+  [texte]
+   texte="Marché"
+ [obj_texte]
+  [presentation]
+   position=68,5
+   taille=9,53
+   id=8
+   wstyle="STD"
+  [texte]
+   texte="Code tarif"
+ [obj_texte]
+  [presentation]
+   position=78,5
+   taille=9,53
+   id=9
+   wstyle="STD"
+  [texte]
+   texte="Unité de vente"
+ [obj_texte]
+  [presentation]
+   position=88,5
+   taille=9,53
+   id=10
+   wstyle="STD"
+  [texte]
+   texte="Devise"
+ [obj_texte]
+  [presentation]
+   position=98,5
+   taille=9,53
+   id=11
+   wstyle="STD"
+  [texte]
+   texte="Dépôt"
+ [obj_texte]
+  [presentation]
+   position=108,5
+   taille=9,53
+   id=285
+   wstyle="STD"
+  [texte]
+   texte="Date d'effet"
+ [obj_texte]
+  [presentation]
+   position=118,5
+   taille=9,53
+   id=12
+   wstyle="STD"
+  [texte]
+   texte="Quantité seuil"
+ [champ]
+  [presentation]
+   position=8,60
+   taille=9,92
+   noms="ref"
+   id=13
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,ref,tarifvente
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Ref_1_Av"
+   diva_apres="Champ_Ref_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=18,60
+   taille=9,186
+   id=14
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,article_des,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=28,60
+   taille=9,40
+   noms="sref"
+   id=15
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,sref1,tarifvente
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9008
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Sref_1_Av"
+   diva_apres="Champ_Sref_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=28,102
+   taille=9,144
+   noms="sref"
+   id=16
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,sousref1_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=38,60
+   taille=9,40
+   noms="sref"
+   id=17
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,sref2,tarifvente
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9008
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_SREF_1_Av"
+   diva_apres="Champ_Sref_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=38,102
+   taille=9,144
+   noms="sref"
+   id=18
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,sousref2_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [multi_choix]
+  [presentation]
+   position=48,5
+   taille=9,52
+   id=264
+   wstyle="STD"
+  [description]
+   donnee=g7,ticod,g7
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TICOD_5"
+   obligatoire=non
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=48,102
+   taille=9,144
+   id=19
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,tiers_nom,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=48,60
+   taille=9,40
+   noms="tiers"
+   id=20
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,tiers,tarifvente
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9021
+   shift_f6=10000
+   shift_f8=9025
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Tiers_1_Av"
+   diva_apres="Champ_Tiers_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=58,102
+   taille=9,144
+   noms="PasTIA"
+   id=21
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,marche_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=58,60
+   taille=9,40
+   noms="PasTIA;marche"
+   id=22
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,marche,tarifvente
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2873
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   f8=9887
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Marche_1_Av"
+   diva_apres="Champ_Marche_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=68,102
+   taille=9,144
+   id=23
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,codetarif_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=68,60
+   taille=9,40
+   noms="tiers"
+   id=24
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,tacod,tarifvente
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=2960
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   f8=9054
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Tacod_1_Av"
+   diva_apres="Champ_Tacod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=78,60
+   taille=9,40
+   id=27
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,venun,tarifvente
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9063
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_UN_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=88,60
+   taille=9,40
+   id=28
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,dev,tarifvente
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9047
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Dev_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=98,60
+   taille=9,40
+   id=30
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,depo,tarifvente
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9057
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Depo_1_Av"
+   diva_apres="Champ_Depo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=108,60
+   taille=9,40
+   id=286
+   colonnes_saisie=10
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,tadt,tarifvente
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_TaDt_1_Ap"
+ [champ]
+  [presentation]
+   position=88,102
+   taille=9,144
+   id=25
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,devise_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=78,102
+   taille=9,144
+   id=26
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,unitevente_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=98,102
+   taille=9,144
+   id=29
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,depot_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=118,60
+   taille=9,40
+   id=31
+   wstyle="ZOOM_SAISI"
+  [description]
+   donnee=tarifvente,qte,tarifvente
+   format="\FormatMille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=1537
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+[page]
+ numero=3
+ libelle="Sélection"
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=50
+ offset_lig=1
+ offset_col=1
+ attache_lgx=oui
+ attache_lgy=oui
+ ident_unique=23
+ [aide_page]
+  aide=1386
+  fichier="gtfaide"
+ [groupbox]
+  [presentation]
+   position=0,0
+   taille=38,199
+   attache_lgx=oui
+   attache_lgy=oui
+   id=307
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Sélection"
+   couleur_fond="ZOOM"
+ [tableau]
+  [presentation]
+   position=40,0
+   taille=185,199
+   attache_lgx=oui
+   attache_lgy=oui
+   id=198
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="zoom"
+   point_arret=3
+   fl_trait_lig=non
+   col_depl=2
+   hauteur_lig=11
+   hauteur_entete=10
+   largeur_controle=8
+   var_controle=oui
+   separation=66
+  [description]
+   donnee=rowinfo,rowinfo,zoomselection
+   minmaj=majuscules
+   saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=86,4
+    taille=18,36
+    noms="icpfl"
+    id=309
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=tarifvente,icpfl,tarifvente
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#tblicp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=99,280
+    taille=19,26
+    id=199
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=tarifvente,cenote,tarifvente
+    minmaj=majuscules
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","CENOTE_1"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Présence note"
+   [param_colonne]
+    titre="#tblnote"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=72,24
+    taille=8,103
+    id=200
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,ref,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Référence"
+   [param_colonne]
+    titre="Référence"
+    largeur_col=56
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=141,196
+    taille=8,165
+    id=201
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,article_des,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Désignation"
+   [param_colonne]
+    titre="Désignation"
+    fl_aff=oui
+    largeur_col=48
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=57,16
+    taille=8,19
+    noms="sref"
+    id=202
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,sref1,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Sous-référence 1"
+   [param_colonne]
+    titre="Sref 1"
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=72,92
+    taille=8,19
+    noms="sref"
+    id=203
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,sref2,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Sous-référence 2"
+   [param_colonne]
+    titre="Sref 2"
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=60,88
+    taille=8,35
+    id=204
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,tiers,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Client"
+   [param_colonne]
+    titre="Client"
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=171,132
+    taille=8,165
+    id=205
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,tiers_nom,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Nom du client"
+   [param_colonne]
+    titre="Nom"
+    fl_aff=oui
+    largeur_col=47
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=75,100
+    taille=8,11
+    id=206
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,tacod,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Code tarif"
+   [param_colonne]
+    titre="Code tarif"
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=90,96
+    taille=8,19
+    id=207
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,venun,tarifvente
+    saisie=non
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Unité de vente"
+   [param_colonne]
+    titre="Unité"
+    largeur_col=19
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=102,96
+    taille=8,19
+    id=208
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,dev,tarifvente
+    saisie=non
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Devise"
+   [param_colonne]
+    titre="Devise"
+    largeur_col=27
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=93,88
+    taille=8,15
+    id=209
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,depo,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Dépôt"
+   [param_colonne]
+    titre="Dépôt"
+    largeur_col=33
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=48,320
+    taille=10,33
+    id=281
+    colonnes_saisie=10
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,tadt,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Date d'application du tarif"
+   [param_colonne]
+    titre="Date d'effet"
+    largeur_col=37
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=111,88
+    taille=8,45
+    id=215
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,qte,tarifvente
+    format="\FormatMille"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Quantité seuil"
+   [param_colonne]
+    titre="Quantité"
+    largeur_col=42
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=66,192
+    taille=10,45
+    id=210
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,pub,tarifvente
+    format="\FormatMille"
+   [param_saisie]
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Prix de vente"
+   [param_colonne]
+    titre="Prix de vente"
+    fl_aff=oui
+    largeur_col=42
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=84,32
+    taille=10,19
+    id=211
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,ppar,tarifvente
+   [param_saisie]
+    esp_si_zero=oui
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Prix par"
+   [param_colonne]
+    titre="Prix par"
+    fl_aff=oui
+    largeur_col=42
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=0,284
+    taille=8,32
+    id=273
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,pubtyp,tarifvente
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","PUBTYP"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Type de prix (Brut/Net)"
+   [param_colonne]
+    titre="Type de prix"
+    fl_aff=oui
+    largeur_col=39
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=198,64
+    taille=10,33
+    id=297
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,htcod,tarifvente
+    minmaj=majuscules
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","HTCOD"
+   [aide_page]
+    aide=1480
+    fichier="GTFAIDE"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Type de tarif (HT ou TTC)"
+   [param_colonne]
+    titre="Type de tarif"
+    fl_aff=oui
+    largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=87,40
+    taille=10,25
+    id=213
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,coe,tarifvente
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Coefficient sur prix d'achat"
+   [param_colonne]
+    titre="Coef."
+    fl_aff=oui
+    largeur_col=30
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=21,216
+    taille=8,32
+    id=291
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,paforf,tarifvente
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","NONOUI"
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Prix de vente forfaitaire"
+   [param_colonne]
+    titre="Forfait"
+    fl_aff=oui
+    largeur_col=29
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=159,316
+    taille=10,33
+    id=305
+    colonnes_saisie=10
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,hsdt,tarifvente
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_HsDt_1_Ap"
+   [info_bulle]
+   texte="Date de fin de validité"
+   [param_colonne]
+    titre="Date fin"
+    fl_aff=oui
+    largeur_col=34
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=102,8
+    taille=10,25
+    id=222
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,pubun,tarifvente
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=9063
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_UN_2_Ap"
+   [info_bulle]
+   texte="Unité du prix unitaire"
+   [param_colonne]
+    titre="Unité prix"
+    fl_aff=oui
+    largeur_col=31
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=96,64
+    taille=8,35
+    id=214
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,marche,tarifvente
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Marché"
+   [param_colonne]
+    titre="Marché"
+    fl_aff=oui
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=90,36
+    taille=10,47
+    id=223
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,marqte,tarifvente
+    format="\FormatMille"
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_QTE_1_Av"
+   [info_bulle]
+   texte="Quantité engagement pour ce marché"
+   [param_colonne]
+    titre="Quantité marché"
+    fl_aff=oui
+    largeur_col=51
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=108,60
+    taille=10,13
+    id=224
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=tarifvente,conf,tarifvente
+   [param_saisie]
+    table_associee=oui
+   [touches]
+    f7=135
+    f8=11010
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_Conf_1_Ap"
+   [info_bulle]
+   texte="Confidentialité"
+   [param_colonne]
+    titre="Confidentialité"
+    fl_aff=oui
+    largeur_col=44
+    wstyle="ENTETE_COLONNE"
+   [boutons]
+    "zoom"
+  [champ_tableau]
+   [presentation]
+    position=177,48
+    taille=8,19
+    id=225
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,usercr,tarifvente
+    format="1"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Utilisateur qui a créé la fiche"
+   [param_colonne]
+    titre="Créé par"
+    fl_aff=non
+    largeur_col=74
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=129,32
+    taille=8,39
+    id=226
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,usercrdh,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Créé le"
+   [param_colonne]
+    titre="Créé le"
+    fl_aff=non
+    largeur_col=59
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=102,300
+    taille=8,73
+    id=227
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,usermo,tarifvente
+    format="1"
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f6=10000
+   [info_bulle]
+   texte="Utilisateur qui a modifié la fiche"
+   [param_colonne]
+    titre="Modifié par"
+    fl_aff=non
+    largeur_col=76
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=138,16
+    taille=8,39
+    id=228
+    wstyle="TABLEAU_AFF"
+   [description]
+    donnee=tarifvente,usermodh,tarifvente
+    saisie=non
+   [param_saisie]
+    type_date=jj/mm/aaaa+hh:mm:ss
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Modifié le"
+   [param_colonne]
+    titre="Modifié le"
+    fl_aff=non
+    largeur_col=60
+    wstyle="ENTETE_COLONNE"
+ [obj_texte]
+  [presentation]
+   position=16,5
+   taille=9,48
+   id=229
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,48
+   id=262
+   wstyle="STD"
+  [texte]
+   texte="Code tarif"
+ [champ]
+  [presentation]
+   position=16,55
+   taille=9,92
+   noms="ref"
+   id=230
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g7,ref,g7
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1471
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   f8=9000
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=26,55
+   taille=9,92
+   noms="tarif"
+   id=263
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g7,tacod,g7
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1472
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   f8=9054
+   insert=1
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_TaCod_2_Av"
+  [boutons]
+   "zoom"
+[page]
+ numero=4
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=22
+[page]
+ numero=5
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=21
+[page]
+ numero=6
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=20
+[page]
+ numero=7
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=19
+[page]
+ numero=8
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=18
+[page]
+ numero=9
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=17
+[page]
+ numero=10
+ fond="STD"
+ efface=complet
+ nb_lig=25
+ nb_col=90
+ offset_lig=1
+ offset_col=1
+ ident_unique=16
+[page]
+ numero=11
+ libelle="Fiche zoom"
+ fond="STD"
+ titre="Zoom"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ suiv=12
+ page_fond=1
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=3
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="DEFINITION"
+   couleur_fond="STD"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,85
+   id=36
+   wstyle="STD"
+  [texte]
+   texte="Référence"
+ [obj_texte]
+  [presentation]
+   position=46,5
+   taille=9,85
+   noms="sref"
+   id=37
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 1"
+ [obj_texte]
+  [presentation]
+   position=56,5
+   taille=9,85
+   noms="sref"
+   id=38
+   wstyle="STD"
+  [texte]
+   texte="Sous-référence 2"
+ [obj_texte]
+  [presentation]
+   position=66,5
+   taille=9,85
+   noms="LibClient"
+   id=39
+   wstyle="STD"
+  [texte]
+   texte="Client"
+ [obj_texte]
+  [presentation]
+   position=76,5
+   taille=9,85
+   noms="PasTIA"
+   id=40
+   wstyle="STD"
+  [texte]
+   texte="Marché"
+ [obj_texte]
+  [presentation]
+   position=86,5
+   taille=9,85
+   noms="PasTIA"
+   id=41
+   wstyle="STD"
+  [texte]
+   texte="Code tarif"
+ [obj_texte]
+  [presentation]
+   position=96,5
+   taille=9,85
+   id=42
+   wstyle="STD"
+  [texte]
+   texte="Unité de vente"
+ [obj_texte]
+  [presentation]
+   position=106,5
+   taille=9,85
+   id=43
+   wstyle="STD"
+  [texte]
+   texte="Devise"
+ [obj_texte]
+  [presentation]
+   position=116,5
+   taille=9,85
+   id=44
+   wstyle="STD"
+  [texte]
+   texte="Dépôt"
+ [obj_texte]
+  [presentation]
+   position=126,5
+   taille=9,85
+   id=275
+   wstyle="STD"
+  [texte]
+   texte="Date d'effet"
+ [obj_texte]
+  [presentation]
+   position=136,5
+   taille=9,85
+   id=45
+   wstyle="STD"
+  [texte]
+   texte="Quantité seuil"
+ [obj_texte]
+  [presentation]
+   position=152,5
+   taille=9,85
+   id=48
+   wstyle="STD"
+  [texte]
+   texte="Prix de vente"
+ [obj_texte]
+  [presentation]
+   position=152,137
+   taille=9,15
+   id=49
+   wstyle="STD"
+  [texte]
+   texte="par"
+ [obj_texte]
+  [presentation]
+   position=162,5
+   taille=9,85
+   id=56
+   wstyle="STD"
+  [texte]
+   texte="Unité du prix unitaire"
+ [obj_texte]
+  [presentation]
+   position=172,5
+   taille=9,85
+   id=283
+   wstyle="STD"
+  [texte]
+   texte="Type de prix"
+ [obj_texte]
+  [presentation]
+   position=182,5
+   taille=9,85
+   id=57
+   wstyle="STD"
+  [texte]
+   texte="Type de tarif"
+ [obj_texte]
+  [presentation]
+   position=192,5
+   taille=9,85
+   id=52
+   wstyle="STD"
+  [texte]
+   texte="Coefficient calculé sur prix d'achat"
+ [obj_texte]
+  [presentation]
+   position=202,5
+   taille=9,85
+   noms="PasTIA"
+   id=58
+   wstyle="STD"
+  [texte]
+   texte="Quantité du marché"
+ [obj_texte]
+  [presentation]
+   position=202,163
+   taille=9,72
+   id=300
+   wstyle="STD"
+  [texte]
+   texte="Date de fin de validité"
+ [champ]
+  [presentation]
+   position=26,92
+   taille=9,92
+   id=59
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,ref,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=46,92
+   taille=9,41
+   noms="sref"
+   id=60
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,sref1,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=46,135
+   taille=9,140
+   noms="sref"
+   id=61
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,sousref1_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=36,92
+   taille=9,183
+   id=62
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,article_des,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=56,135
+   taille=9,140
+   noms="sref"
+   id=63
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,sousref2_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=56,92
+   taille=9,41
+   noms="sref"
+   id=64
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,sref2,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=66,135
+   taille=9,140
+   id=65
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,tiers_nom,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=76,135
+   taille=9,140
+   noms="PasTIA"
+   id=66
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,marche_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=86,135
+   taille=9,140
+   noms="PasTIA"
+   id=67
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,codetarif_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=96,135
+   taille=9,140
+   id=68
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,unitevente_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=106,135
+   taille=9,140
+   id=69
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,devise_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=116,135
+   taille=9,140
+   id=70
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,depot_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=162,135
+   taille=9,140
+   id=71
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,uniteprix_lib,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=66,92
+   taille=9,41
+   id=72
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,tiers,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=76,92
+   taille=9,41
+   noms="PasTIA"
+   id=73
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,marche,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=86,92
+   taille=9,41
+   noms="PasTIA"
+   id=74
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,tacod,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=96,92
+   taille=9,41
+   id=75
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,venun,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=106,92
+   taille=9,41
+   id=76
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,dev,tarifvente
+   saisie=non
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=116,92
+   taille=9,41
+   id=77
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,depo,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=136,92
+   taille=9,41
+   id=78
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,qte,tarifvente
+   format="\FormatMille"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=126,92
+   taille=9,41
+   id=276
+   colonnes_saisie=10
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=tarifvente,tadt,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=152,92
+   taille=9,41
+   id=79
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,pub,tarifvente
+   format="\FormatMille"
+  [param_saisie]
+   esp_si_zero=oui
+  [aide_page]
+   aide=1421
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=152,153
+   taille=9,41
+   id=80
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,ppar,tarifvente
+  [param_saisie]
+   esp_si_zero=oui
+  [aide_page]
+   aide=1424
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=152,201
+   taille=9,74
+   id=287
+   wstyle="STD"
+  [description]
+   donnee=tarifvente,paforf,tarifvente
+  [param_case]
+   texte="Tarif forfaitaire"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [aide_page]
+   aide=1510
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=162,92
+   taille=9,41
+   id=89
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,pubun,tarifvente
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=1484
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   f8=9063
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_UN_2_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=172,92
+   taille=9,41
+   id=284
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,pubtyp,tarifvente
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","PUBTYP"
+  [aide_page]
+   aide=1511
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=182,92
+   taille=9,41
+   id=90
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,htcod,tarifvente
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","HTCOD"
+  [aide_page]
+   aide=1480
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=192,92
+   taille=9,41
+   id=82
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,coe,tarifvente
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=1334
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=202,92
+   taille=9,41
+   noms="MarQte;PasTIA"
+   id=91
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,marqte,tarifvente
+   format="\FormatMille"
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=1428
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_QTE_1_Av"
+ [champ]
+  [presentation]
+   position=202,237
+   taille=9,32
+   id=299
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,hsdt,tarifvente
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=1363
+   fichier="gtfaide"
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_HsDt_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=26,257
+   taille=9,18
+   noms="icpfl"
+   id=310
+   wstyle="STD"
+  [description]
+   donnee=tarifvente,icpfl,tarifvente
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+   obligatoire=non
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [info_bulle]
+  texte="Synchronisé en inter-compagnies"
+[page]
+ numero=12
+ fond="STD"
+ efface=partiel
+ nb_lig=25
+ nb_col=70
+ offset_lig=1
+ offset_col=1
+ prec=11
+ attache_x=oui
+ attache_lgy=oui
+ ident_unique=4
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="IDENTIFIANTS"
+   couleur_fond="STD"
+ [aide_page]
+  aide=1021
+  fichier="gtfaide"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=28,270
+   id=101
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Protection"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=62,5
+   taille=38,131
+   id=93
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Création"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=62,144
+   taille=38,131
+   id=92
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Dernière modification"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=42,10
+   taille=9,50
+   id=102
+   wstyle="STD"
+  [texte]
+   texte="Confidentialité"
+ [obj_texte]
+  [presentation]
+   position=78,10
+   taille=9,18
+   id=97
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=78,149
+   taille=9,18
+   id=98
+   wstyle="STD"
+  [texte]
+   texte="Par"
+ [obj_texte]
+  [presentation]
+   position=88,10
+   taille=9,18
+   id=99
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=88,149
+   taille=9,18
+   id=100
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [champ]
+  [presentation]
+   position=78,30
+   taille=9,74
+   id=103
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,usercr,tarifvente
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=88,30
+   taille=9,56
+   id=104
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,usercrdh,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=78,169
+   taille=9,74
+   id=105
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,usermo,tarifvente
+   format="1"
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=88,169
+   taille=9,56
+   id=106
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tarifvente,usermodh,tarifvente
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa+hh:mm:ss
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=42,61
+   taille=9,20
+   id=107
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tarifvente,conf,tarifvente
+  [param_saisie]
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=11010
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Conf_1_Ap"
+  [boutons]
+   "zoom"
+[ressources]
+ [menu]
+  ident="ZOOMAPPEND"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Compléments"
+    wid_ressource="COMPL"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="NOTE"
+    wtexte="_Note \TShift+F6"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [menu]
+  ident="POPUP_TIERS"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="popup"
+    wid_ressource="MENU12"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Autre tiers"
+    wid_ressource="MENU14"
+    wtrait_chaine="#shift_f8"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Client"
+    wid_ressource="MENU13"
+    wtrait_chaine="#f8"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="MENU15"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom généralisé"
+    wid_ressource="MENU16"
+    wtrait_chaine="#f7"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOM"
+  [item]
+   [param_bouton]
+    wnom="PREMIER"
+    wid_ressource="PREMIER"
+    wetype_trait=arret
+    warret=8
+   [info_bulle]
+   texte="Première fiche <Home>"
+  [item]
+   [param_bouton]
+    wnom="PRECEDENT"
+    wid_ressource="PRECEDENT"
+    wtrait_chaine="#shift_f2"
+   [info_bulle]
+   texte="Fiche précédente <Shift+F2>"
+  [item]
+   [param_bouton]
+    wnom="SUIVANT"
+    wid_ressource="SUIVANT"
+    wtrait_chaine="#f2"
+   [info_bulle]
+   texte="Fiche suivante <F2>"
+  [item]
+   [param_bouton]
+    wnom="DERNIER"
+    wid_ressource="DERNIER"
+    wetype_trait=arret
+    warret=9
+   [info_bulle]
+   texte="Dernière fiche <End>"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="filtre"
+    wetype_trait=arret
+    warret=10
+   [info_bulle]
+   texte="filtre"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_1"
+  [item]
+   [param_bouton]
+    wnom="DUPLIQ"
+    wid_ressource="DUPLIQ"
+    warret=5
+    wtrait_chaine="#ctrl_insert"
+   [info_bulle]
+   texte="Dupliquer <Ctrl+Inser>"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier <F4>"
+  [item]
+   [param_bouton]
+    wnom="SUPP"
+    wid_ressource="SUPP"
+    wtrait_chaine="#delete"
+   [info_bulle]
+   texte="Supprimer <Suppr>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_3"
+  [item]
+   [param_bouton]
+    wnom="NOTE"
+    wid_ressource="NOTE"
+    wtrait_chaine="#shift_f6"
+   [info_bulle]
+   texte="Note <Shift+F6>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_6"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="SORTIR"
+    wid_ressource="SORTIR"
+    wtrait_chaine="#f12"
+   [info_bulle]
+   texte="Renvoyer les données <F12>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR_7__1"
+  [item]
+   [param_bouton]
+    wnom="IMPRIMER"
+    wid_ressource="IMPRIMER"
+    wetype_trait=arret
+    warret=6
+   [info_bulle]
+   texte="Imprimer <Ctrl+P>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="ZOOMCREATION"
+  [item]
+   [param_bouton]
+    wnom="ZOOM"
+    wid_ressource="ZOOM"
+    wnom_sel="zoom"
+    wtrait_chaine="#f8"
+   [info_bulle]
+   texte="Zoom <F8>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide <Shift+F1>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+[diva]
+SetModuleInfo('$Id: gtez005_sql.dhsf 50314 2015-10-07 15:44:37Z lk $')
+;*
+;*      Zoom sur Tarif de vente		  Enregistrement TarifVente de GTRSTARIF
+;*
+
+Include	'GTTC000.dhsp'
+Module 	'A5TM000.dhop'
+
+; TDF
+Public HFile		'GTFDD.dhsd'		GTFTAB		GTFTAB
+Public HFile		'GTFDD.dhsd'		GTFAT			GTFAT
+Public HFile		'GTFDD.dhsd'		GTFTARIf 	GTFTARIf 		; Fichiers des tarifs
+Public HFile		'GTFDD.dhsd'		GTFPCF		GTFPCF
+
+; Enregistrements
+Public RecordSql	'GTRSTARIF.dhoq'	TarifVente
+Public Record  	'A5DD.dhsd'			MZ
+Public Record  	'A5DD.dhsd'			M4
+Public Record  	'DDSYS.dhsd' 		ZOOM
+Public Record 		'DDSYS.dhsd' 		ROWINFO 		ZoomSelection
+Public Record  	'GTFDD.dhsd' 		SOC
+Public Record		'GTFDD.dhsd'		CLI
+Public Record		'GTFDD.dhsd'		TIA
+Public Record 		'GTFDD.dhsd' 		ART 	
+Public Record  	'GTFDD.dhsd' 		G7
+Public Record  	'GTFDD.dhsd'		XZ				G3XZ
+Public Record  	'GTFDD.dhsd' 		T007
+Public Record  	'GTFDD.dhsd' 		T014
+Public Record  	'GTFDD.dhsd' 		T017
+Public Record 		'GTFDD.dhsd'		T019
+Public Record 		'GTFDD.dhsd'		T023
+Public Record 		'GTFDD.dhsd'		T034
+
+
+; Constantes
+Const	C_Pilote_ParArticle_Client	= 1
+Const	C_Pilote_ParTiers_Client	= 2
+Const	C_Pilote_ParMarche_Client  = 3
+Const	C_Pilote_ParTiers_ATiers	= 4
+Const	C_Pilote_ParAction			= 5							; Pilotage pour action : création, modification, duplication, suppression
+
+;*
+;* fonctions
+;*
+
+
+;*
+;*		Séquences liées au masque
+;*
+
+;*
+Public Procedure Champ_Conf_1_Ap					; Contrôle code de confidentialité
+Beginp
+	Controler_Confidentialite(TarifVente.Conf, 4000)
+Endp
+
+;*
+Public Procedure Champ_Depo_1_Av					; Avant dépôt
+Beginp
+	If SOC.EntCodN(1) = 1 Or SOC.EntCodN(33) = 1	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
+Endp
+
+;*
+Public Procedure Champ_Depo_1_Ap					; Après dépôt
+Beginp
+	TarifVente.Depot_Lib = Condition(Lectab(17, TarifVente.Depo, 1117) = 0, T017.Lib, ' ')
+Endp
+
+;*
+Public Procedure Champ_Dev_1_Ap					; Après devise
+Beginp
+	TarifVente.Dev				= Condition(TarifVente.Dev = ' ', SOC.Dev, TarifVente.Dev)
+	TarifVente.Devise_Lib	= Condition(Lectab(7, TarifVente.Dev, 1107) = 0, T007.Lib, ' ')
+Endp
+
+;*
+Public Procedure Champ_HsDt_1_Ap					; Contrôle de période de validité
+Beginp
+	If TarifVente.HsDt <> ' '
+		Controle_DonneeFin(TarifVente.TaDt, TarifVente.HsDt, 3, 7914)
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Marche_1_Av				; Avant marché
+Beginp
+	If ( 	G7.ZoomPar			= C_Pilote_ParMarche_Client And TarifVente.Marche <> ' ' )  Or \
+			G7.TiCod				= 'I'																			Or \
+			TarifVente.Tiers	= ' '
+		Harmony.Retour = XmeNext_Saut_Donnee
+	Else
+		G3XZ.TiCod = 'C'
+		G3XZ.Tiers = TarifVente.Tiers
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Marche_1_Ap				; Contrôle marché
+Beginp
+	TarifVente.Marche_Lib = ' '
+	If TarifVente.Marche <> ' ' And Lectab(34, [ 'C' TarifVente.Tiers TarifVente.Marche ], 1134) = 0
+		TarifVente.Marche_Lib	= T034.Lib
+		TarifVente.TaDt			= T034.MarDDt
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_QTE_1_Av					; Avant quantité marché
+Beginp
+	If TarifVente.Marche = ' '
+		XmeSetAttribut('MARQTE', AN_STYLE, 'CHAMP_NON_SAISI')
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	Else
+		XmeSetAttribut('MARQTE', AN_STYLE, 'CHAMP_SAISI')
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Ref_1_Av					; Avant référence
+Beginp
+	If G7.ZoomPar in (C_Pilote_ParArticle_Client, C_Pilote_ParAction)	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf 	
+Endp
+
+;*
+Public Procedure Champ_Ref_1_Ap					; Contrôle de la référence
+Beginp
+	Controle_Article(TarifVente.Ref, 2100, 0, 1)
+	TarifVente.Article_Des = ART.Des
+	If Soc.EntCodN(17) = Non Or ART.SrefCod = Non
+		TarifVente.Sref			= ' '
+		TarifVente.SousRef1_Lib	= ' '
+		TarifVente.SousRef2_Lib	= ' '
+	EndIf
+	If TarifVente.VenUn = ' '
+		TarifVente.VenUn				= Art.VenUn
+		TarifVente.UniteVente_Lib	= ' '
+		If Lectab_Unite(TarifVente.Ref, TarifVente.Sref1, TarifVente.Sref2, TarifVente.VenUn, 1123) = 0
+			TarifVente.UniteVente_Lib = T023.Lib
+		EndIf
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Sref_1_Av					; Gestion des sous-références
+Beginp
+	G3XZ.Ref = TarifVente.Ref
+	If ART.SrefCod = 1 Or ( G7.ZoomPar = C_Pilote_ParAction And ( TarifVente.Sref1 <> ' ' Or TarifVente.Sref2 <> ' ' ) )
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_SREF_1_Ap					; Après sous-référence 1
+Beginp
+	If Harmony.Key = K_CTRL_S 
+		TarifVente.Sref			= G3XZ.Sref
+		TarifVente.SousRef2_Lib	= Condition(Lectab(19, TarifVente.Sref2, 1119) = 0, T019.Lib, ' ')
+	EndIf
+	G3XZ = ' '
+
+	TarifVente.SousRef1_Lib = Condition(Lectab(19, TarifVente.Sref1, 1119) = 0, T019.Lib, ' ')
+Endp
+
+;*
+Public Procedure Champ_SREF_2_Ap					; Après sous-référence 2
+Beginp
+	If Harmony.Key = K_CTRL_S
+		TarifVente.Sref			= G3XZ.Sref
+		TarifVente.SousRef1_Lib	= Condition(Lectab(19, TarifVente.Sref1, 1119) = 0, T019.Lib, ' ')
+	EndIf
+	G3XZ = ' '
+
+	TarifVente.SousRef2_Lib	= Condition(Lectab(19, TarifVente.Sref2, 1119) = 0, T019.Lib, ' ')
+Endp
+
+;*
+Public Procedure Champ_Tacod_1_Av				; Avant code tarif
+Beginp
+	If TarifVente.Tiers <> ' '
+		TarifVente.TaCod	= '99'
+		Harmony.Retour		= XMENEXT_SAUT_DONNEE
+	EndIf 	
+Endp
+
+;*
+Public Procedure Champ_Tacod_1_Ap				; Contrôle code tarif
+Beginp
+	If TarifVente.TaCod in (90..98)				; Code réservé à la facture au coût de revient
+		Mes_Alert(1386)
+		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
+	ElsIf TarifVente.TaCod = '99' And TarifVente.Tiers = ' '
+		Mes_Alert(1388)
+		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
+	Else
+		TarifVente.CodeTarif_Lib = Condition(Lectab(14, [ 'C' TarifVente.TaCod ], 1114) = 0, T014.Lib, ' ')
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_TaCod_2_Av
+Beginp
+	G3XZ.TiCod = 'C'
+Endp
+
+;*
+Public Procedure Champ_TaDt_1_Ap					; Contrôle date d'effet
+Beginp
+	If TarifVente.Marche <> ' ' And ( TarifVente.TaDt < T034.MarDDt Or TarifVente.TaDt > T034.MarFDt )
+		Mes_Alert(3111)
+	EndIf
+Endp	  
+
+;*
+Public Procedure Champ_Tiers_1_Av
+Beginp
+	If G7.ZoomPar In (C_Pilote_ParTiers_Client, C_Pilote_ParMarche_Client, C_Pilote_ParTiers_ATiers) And TarifVente.Tiers <> ' '
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_Tiers_1_Ap
+Beginp
+	TarifVente.Tiers_Nom = ' '
+	If TarifVente.Tiers <> ' '
+		If Controle_Client(TarifVente.Tiers, conf=0, ctretb=FALSE)  = 0
+			G7.TiCod							= 'C'
+			TarifVente.Tiers_Nom			= CLI.Nom
+			TarifVente.TaCod				= '99'
+			TarifVente.CodeTarif_Lib	= ' '
+			TarifVente.Dev					= CLI.Dev
+		ElsIf Controle_Tiers_Autre(TarifVente.Tiers, 1900, 0)  = 0
+			G7.TiCod							= 'I'
+			TarifVente.Tiers_Nom			= TIA.Nom
+			TarifVente.TaCod				= '99'
+			TarifVente.CodeTarif_Lib	= ' '
+			TarifVente.Dev					= TIA.Dev
+		EndIf
+		TarifVente.Devise_Lib			= Condition(Lectab(7, TarifVente.Dev, 1107) = 0, T007.Lib, ' ')
+	Else
+		If TarifVente.TaCod = '99'	|	TarifVente.TaCod = ' '	|	EndIf
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_UN_1_Ap					; Contrôle unité de vente
+Beginp
+	TarifVente.UniteVente_Lib = ' '
+	If Lectab_Unite(TarifVente.Ref, TarifVente.Sref1, TarifVente.Sref2, TarifVente.VenUn, 1123) = 0
+		TarifVente.UniteVente_Lib = T023.Lib
+	EndIf
+Endp
+
+;*
+Public Procedure Champ_UN_2_Ap					; Contrôle unité du prix
+Beginp
+	TarifVente.UnitePrix_Lib = ' '
+	If Lectab_Unite(TarifVente.Ref, TarifVente.Sref1, TarifVente.Sref2, TarifVente.PubUn, 1123) = 0
+		TarifVente.UnitePrix_Lib = T023.Lib
+	EndIf
+Endp
+[/diva]
+[diva_base]
+[/diva]

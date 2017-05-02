@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20141007161419      
+;>xwin4obj                              7.0       20161207110826      
 [masque]
  libelle="ZOOM DES ZOOMS"
  utilisateur="UGIE"
- date_modification="07/10/2014"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=52
  type_masque=2
  dernier_id=1000028
  surcharge=oui
- date_modif_base="20121029183211"
+ date_modif_base="20151006110405"
  dernier_id_page=100003
  niveau_surcharge=1
 [defaut]
@@ -21,7 +21,7 @@
 [enregistrements]
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "ccfdd.dhsd",,x1,x1,1752,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1500,0
  "ccrstab.dhoq",,natimmo,natimmo,1024,1
 [onglet]
  [presentation]
@@ -1492,6 +1492,21 @@
    "zoom"
  [champ]
   [presentation]
+   position=186,154
+   taille=9,121
+   id=1000011
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptdotdeprec_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=128,122
    taille=9,32
    id=1000012
@@ -1534,6 +1549,21 @@
    "zoom"
  [champ]
   [presentation]
+   position=116,155
+   taille=9,121
+   id=1000014
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptproamoderog_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=174,122
    taille=9,32
    id=1000015
@@ -1555,6 +1585,21 @@
    "zoom"
  [champ]
   [presentation]
+   position=174,155
+   taille=9,121
+   id=1000016
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=natimmo,cptprodeprec_lib,natimmo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=186,122
    taille=9,32
    id=1000010
@@ -1574,72 +1619,6 @@
    diva_apres="Champ_CptDotDep_1_Ap"
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=186,154
-   taille=9,121
-   id=1000011
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=natimmo,cptdotdeprec_lib,natimmo
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=8000
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=198,122
-   taille=9,32
-   id=1000013
-   colonnes_saisie=8
-   wstyle="COG_CHAMP_SAISI"
-  [description]
-   donnee=natimmo,cptdotrep,natimmo
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_CptDotRep_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=116,155
-   taille=9,121
-   id=1000014
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=natimmo,cptproamoderog_lib,natimmo
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=8000
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=174,155
-   taille=9,121
-   id=1000016
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=natimmo,cptprodeprec_lib,natimmo
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=8000
-   shift_f6=10000
  [champ]
   [presentation]
    position=140,155
@@ -1670,6 +1649,27 @@
   [touches]
    f7=8000
    shift_f6=10000
+ [champ]
+  [presentation]
+   position=198,122
+   taille=9,32
+   id=1000013
+   colonnes_saisie=8
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=natimmo,cptdotrep,natimmo
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CptDotRep_1_Ap"
+  [boutons]
+   "zoom"
 [ressources]
  [toolbar]
   ident="ZOOM"
@@ -1979,7 +1979,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: ccez214_sql.dhsf 26704 2012-10-29 17:43:00Z ms $')
+SetModuleInfo('$Id: ccez214_sql.dhsf 50250 2015-10-06 09:08:06Z ms $')
 ;>xdiva
 ;*
 ;*		Zoom natures d'immobilisation																											ccez214
@@ -2197,12 +2197,12 @@ beginp	; Champ_FisTyp_1_Ap
 			preturn
 		endif
 
-		if NatImmo.FisTyp <> NatImmo.EcoTyp and NatImmo.EcoTyp <> 2
-			NatImmo.FisTyp = NatImmo.EcoTyp
-			Mes_Alert(7139)
-			Harmony.Retour = XmeNext_Debut_Donnee
-			preturn
-		endif
+;		if NatImmo.FisTyp <> NatImmo.EcoTyp and NatImmo.EcoTyp <> 2
+;			NatImmo.FisTyp = NatImmo.EcoTyp
+;			Mes_Alert(7139)
+;			Harmony.Retour = XmeNext_Debut_Donnee
+;			preturn
+;		endif
 
 		Regler_Acces_Fistyp
 

@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20161024101153      
+;>xwin4obj                              7.0       20161207161332      
 [masque]
  utilisateur="UGIE"
- date_modification="24/10/2016"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
  dernier_id=1000102
  surcharge=oui
- date_modif_base="20140912091139"
+ date_modif_base="20160122094110"
  dernier_id_page=100005
  niveau_surcharge=1
 [defaut]
@@ -17,24 +17,24 @@
   f7=135
   shift_f1=1
 [enregistrements]
- "gtfdd.dhsd",,ent,ent,1800,0
- "gtfdd.dhsd",,g1t1,g1t1,4700,0
+ "gtfdd.dhsd",,ent,ent,2500,0
+ "gtfdd.dhsd",,g1t1,g1t1,5500,0
  "gtfdd.dhsd",,gtent,gtent,4000,0
- "gtfdd.dhsd",,cli,tiers,2450,0
- "gtfdd.dhsd",,ets,ets,1500,0
+ "gtfdd.dhsd",,cli,tiers,3000,0
+ "gtfdd.dhsd",,ets,ets,1700,0
  "gtfdd.dhsd",,eec,eec,1000,0
- "gtfdd.dhsd",,t020,t020_ent,350,0
- "ccfdd.dhsd",,ca,ca,1350,0
- "gtfdd.dhsd",,g1t2,g1t2,2200,0
+ "gtfdd.dhsd",,t020,t020_ent,450,0
+ "ccfdd.dhsd",,ca,ca,1700,0
+ "gtfdd.dhsd",,g1t2,g1t2,2500,0
  "ddsys.dhsd",,rowinfo,rowinfo,120,0
  "gtfdd.dhsd",,g1t3,g1t3,1000,0
  "gtfdd.dhsd",,gtpce,gtpce,500,0
- "gtfdd.dhsd",,g4,g4,8000,0
- "rcfebcdd.dhsd",,d2,d2pce,508,0
- "gtfdd.dhsd",,ent,entori,1800,0
- "gtfdd.dhsd",,soc,soc,2800,0
+ "gtfdd.dhsd",,g4,g4,8300,0
+ "rcfebcdd.dhsd",,d2,d2pce,608,0
+ "gtfdd.dhsd",,ent,entori,2500,0
+ "gtfdd.dhsd",,soc,soc,3500,0
  "gtfdd.dhsd",,t025,t025_ori,350,0
- "gtfdd.dhsd",,art,art,1700,0
+ "gtfdd.dhsd",,art,art,2500,0
  "cogfdd.dhsd",,cog_dircliente,cog_dircliente_01,500,0
 [onglet]
  [presentation]
@@ -673,6 +673,30 @@
    shift_f1=1
   [traitements]
    microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=4,227
+   taille=9,11
+   noms="icpfl"
+   id=2350
+   wstyle="STD"
+  [description]
+   donnee=ent,icpfl,ent
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+   obligatoire=non
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [info_bulle]
+  texte="Synchronisé en inter-compagnies"
  [champ]
   [presentation]
    position=27,118
@@ -1106,6 +1130,7 @@
   [param_onglet_page]
    nom="ENTETE"
    libelle="COMPLEMENT"
+   ordre=1
    couleur_fond="STD"
  [aide_page]
   aide=4114
@@ -1177,7 +1202,7 @@
   [presentation]
    position=43,10
    taille=9,75
-   noms="paiement;titmobileo"
+   noms="paiement"
    id=1315
    wstyle="STD_AFF"
   [texte]
@@ -1353,7 +1378,7 @@
    texte="Tournée"
  [obj_texte]
   [presentation]
-   position=160,102
+   position=160,107
    taille=11,32
    id=75
    wstyle="STD"
@@ -1380,7 +1405,7 @@
   [presentation]
    position=180,10
    taille=9,60
-   noms="emballage"
+   noms="emballage;izy"
    id=2101
    wstyle="STD"
   [texte]
@@ -1413,8 +1438,8 @@
    texte="Formulaire"
  [champ]
   [presentation]
-   position=140,99
-   taille=9,144
+   position=140,105
+   taille=9,137
    id=92
    wstyle="CHAMP_AFF"
   [description]
@@ -1690,7 +1715,7 @@
   [presentation]
    position=43,50
    taille=9,32
-   noms="paiement;noMobileo"
+   noms="paiement"
    id=1318
    colonnes_saisie=20
    wstyle="CHAMP_SAISI"
@@ -1786,7 +1811,7 @@
    shift_f5=145
    shift_f6=5503
   [traitements]
-   microbol_click=6022
+   microbol_click=4018
    diva_avant="Champ_Projet_1_Av"
    diva_apres="Champ_Projet_1_Ap"
   [boutons]
@@ -1917,7 +1942,7 @@
  [champ]
   [presentation]
    position=140,72
-   taille=9,25
+   taille=9,32
    id=103
    wstyle="CHAMP_SAISI"
   [description]
@@ -1945,7 +1970,7 @@
  [champ]
   [presentation]
    position=150,72
-   taille=9,25
+   taille=9,32
    id=104
    wstyle="CHAMP_SAISI"
   [description]
@@ -1968,7 +1993,7 @@
  [champ]
   [presentation]
    position=160,72
-   taille=9,25
+   taille=9,32
    id=105
    wstyle="CHAMP_SAISI"
   [description]
@@ -1988,7 +2013,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=160,121
+   position=160,125
    taille=9,25
    id=106
    wstyle="CHAMP_SAISI"
@@ -2012,7 +2037,7 @@
  [champ]
   [presentation]
    position=170,72
-   taille=9,25
+   taille=9,32
    id=107
    wstyle="CHAMP_SAISI"
   [description]
@@ -2126,8 +2151,8 @@
  [champ]
   [presentation]
    position=180,72
-   taille=9,25
-   noms="emballage"
+   taille=9,32
+   noms="emballage;izy"
    id=2102
    colonnes_saisie=4
    wstyle="CHAMP_SAISI"
@@ -2359,6 +2384,54 @@
   [traitements]
    microbol_click=4011
    diva_apres="Champ_DelAccDt_2_Ap"
+ [groupe_radio]
+  [presentation]
+   position=136,381
+   taille=47,90
+   noms="statusbp"
+   id=2020
+   wstyle="STD"
+  [description]
+   donnee=ent,status,ent
+   saisie=non
+  [param_groupe]
+   titre="Status"
+  [radio_bouton]
+   [presentation]
+    position=147,386
+    taille=9,70
+    noms="statusbp"
+    id=2021
+    wstyle="STD"
+   [param_radio]
+    texte="A Préparer"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=159,386
+    taille=9,70
+    noms="statusbp"
+    id=2022
+    wstyle="STD"
+   [param_radio]
+    texte="En cours de préparation"
+    cadrage=droite
+    valeur="3"
+  [radio_bouton]
+   [presentation]
+    position=172,386
+    taille=9,70
+    noms="statusbp"
+    id=2023
+    wstyle="STD"
+   [param_radio]
+    texte="Préparée"
+    cadrage=droite
+    valeur="2"
+  [touches]
+   f7=135
+   shift_f1=1
  [champ]
   [presentation]
    position=157,311
@@ -2379,20 +2452,6 @@
   [traitements]
    microbol_click=4012
    diva_apres="Champ_DelRepDt_2_Ap"
- [champ]
-  [presentation]
-   position=171,311
-   taille=9,54
-   id=1000069
-   colonnes_saisie=10
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,su_dt_prepa_cible,ent
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f1=1
  [case_a_cocher]
   [presentation]
    position=183,384
@@ -2408,6 +2467,20 @@
    cadrage=droite
    valeur="2","1"
    choix="gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=171,311
+   taille=9,54
+   id=1000069
+   colonnes_saisie=10
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,su_dt_prepa_cible,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
   [touches]
    f7=135
    shift_f1=1
@@ -2445,53 +2518,6 @@
   [traitements]
    diva_avant="Champ_ConfigurateurFormulaire_1_Av"
    diva_apres="Champ_ConfigurateurFormulaire_1_Ap"
- [groupe_radio]
-  [presentation]
-   position=136,381
-   taille=47,90
-   noms="statusbp"
-   id=2020
-   wstyle="STD"
-  [description]
-   donnee=ent,status,ent
-  [param_groupe]
-   titre="Status"
-  [radio_bouton]
-   [presentation]
-    position=147,386
-    taille=9,70
-    noms="statusbp"
-    id=2021
-    wstyle="STD"
-   [param_radio]
-    texte="A Préparer"
-    cadrage=droite
-    valeur="1"
-  [radio_bouton]
-   [presentation]
-    position=159,386
-    taille=9,70
-    noms="statusbp"
-    id=2022
-    wstyle="STD"
-   [param_radio]
-    texte="En cours de préparation"
-    cadrage=droite
-    valeur="3"
-  [radio_bouton]
-   [presentation]
-    position=172,386
-    taille=9,70
-    noms="statusbp"
-    id=2023
-    wstyle="STD"
-   [param_radio]
-    texte="Provisoire"
-    cadrage=droite
-    valeur="2"
-  [touches]
-   f7=135
-   shift_f1=1
  [case_a_cocher]
   [presentation]
    position=193,384
@@ -2515,7 +2541,7 @@
  [case_a_cocher]
   [presentation]
    position=203,384
-   taille=9,86
+   taille=8,86
    noms="dvstatus"
    id=2041
    wstyle="STD"
@@ -2550,6 +2576,7 @@
   [param_onglet_page]
    nom="ENTETE"
    libelle="FACTURATION/IMPRESSION"
+   ordre=2
    couleur_fond="STD"
  [groupbox]
   [presentation]
@@ -2829,6 +2856,7 @@
    shift_f8=9068
   [traitements]
    microbol_click=6001
+   diva_avant="Champ_Regl_1_Av"
    diva_apres="Champ_Regl_1_Ap"
   [boutons]
    "zoom"
@@ -3358,6 +3386,7 @@
    f1=1
    f5=3499
    f7=135
+   f8=9061
    ctrl_f6=10300
    shift_f1=1
    shift_f6=5503
@@ -3720,6 +3749,7 @@
   [param_onglet_page]
    nom="ENTETE"
    libelle="TARIFICATION/COMMISSIONNEMENT"
+   ordre=3
    couleur_fond="STD"
    noms="Ent_Tarification"
  [aide_page]
@@ -3925,6 +3955,7 @@
    shift_f8=9048
   [traitements]
    microbol_click=6004
+   diva_avant="PositionnerTiCod"
    diva_apres="Champ_TaFam_1_Ap"
   [boutons]
    "zoom"
@@ -3986,6 +4017,7 @@
    shift_f8=9048
   [traitements]
    microbol_click=6004
+   diva_avant="PositionnerTiCod"
    diva_apres="Champ_TaFam_2_Ap"
   [boutons]
    "zoom"
@@ -4043,6 +4075,7 @@
    shift_f8=9005
   [traitements]
    microbol_click=6005
+   diva_avant="PositionnerTiCod"
    diva_apres="Champ_TaCod_1_Ap"
   [boutons]
    "zoom"
@@ -4793,7 +4826,7 @@
  offset_lig=11
  offset_col=1
  prec=5
- suiv=7
+ suiv=44
  page_fond=12
  position_fond=31
  attache_lgx=oui
@@ -4804,7 +4837,9 @@
   [param_onglet_page]
    nom="ENTETE"
    libelle="ADRESSES"
+   ordre=4
    couleur_fond="STD"
+   noms="entete_adresse"
  [aide_page]
   aide=4392
   fichier="gtfaide"
@@ -5023,7 +5058,7 @@
   [presentation]
    position=134,152
    taille=9,45
-   noms="adrtiers"
+   noms="adrtiers;adrliv"
    id=228
    wstyle="STD"
   [texte]
@@ -5050,7 +5085,7 @@
   [presentation]
    position=143,152
    taille=9,45
-   noms="adrtiers"
+   noms="adrtiers;adrliv"
    id=231
    wstyle="STD"
   [texte]
@@ -5199,12 +5234,13 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+   diva_avant="Champ_AdrTyp_1_Av"
    diva_apres="Champ_AdrTyp_1_Ap"
  [champ]
   [presentation]
    position=35,199
    taille=9,32
-   noms="adrtiers"
+   noms="adrtiers1"
    id=248
    wstyle="CHAMP_SAISI"
   [description]
@@ -5233,7 +5269,7 @@
   [presentation]
    position=44,199
    taille=9,32
-   noms="adrtiers"
+   noms="adrtiers1"
    id=249
    wstyle="CHAMP_SAISI"
   [description]
@@ -5263,7 +5299,7 @@
   [presentation]
    position=54,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr1"
    id=250
    wstyle="CHAMP_SAISI"
   [description]
@@ -5285,7 +5321,7 @@
   [presentation]
    position=63,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr1"
    id=251
    wstyle="CHAMP_SAISI"
   [description]
@@ -5307,7 +5343,7 @@
   [presentation]
    position=72,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr1"
    id=252
    wstyle="CHAMP_SAISI"
   [description]
@@ -5329,7 +5365,7 @@
   [presentation]
    position=81,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr1"
    id=253
    wstyle="CHAMP_SAISI"
   [description]
@@ -5351,7 +5387,7 @@
   [presentation]
    position=90,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr1"
    id=254
    wstyle="CHAMP_SAISI"
   [description]
@@ -5373,7 +5409,7 @@
   [presentation]
    position=99,47
    taille=9,32
-   noms="adrtiers"
+   noms="adr1"
    id=255
    wstyle="CHAMP_SAISI"
   [description]
@@ -5399,7 +5435,7 @@
   [presentation]
    position=99,79
    taille=9,137
-   noms="adrtiers"
+   noms="adr1"
    id=256
    wstyle="CHAMP_SAISI"
   [description]
@@ -5421,7 +5457,7 @@
   [presentation]
    position=99,216
    taille=9,15
-   noms="adrtiers"
+   noms="adr1"
    id=257
    wstyle="CHAMP_SAISI"
   [description]
@@ -5467,12 +5503,13 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+   diva_avant="Champ_AdrTyp_1_Av"
    diva_apres="Champ_AdrTyp_1_Ap"
  [champ]
   [presentation]
    position=35,438
    taille=9,32
-   noms="adrtiers"
+   noms="adrtiers;adrtiers2"
    id=259
    wstyle="CHAMP_SAISI"
   [description]
@@ -5498,7 +5535,7 @@
   [presentation]
    position=44,438
    taille=9,32
-   noms="adrtiers"
+   noms="adrtiers;adrtiers2"
    id=260
    wstyle="CHAMP_SAISI"
   [description]
@@ -5528,7 +5565,7 @@
   [presentation]
    position=54,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr2"
    id=261
    wstyle="CHAMP_SAISI"
   [description]
@@ -5550,7 +5587,7 @@
   [presentation]
    position=63,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr2"
    id=262
    wstyle="CHAMP_SAISI"
   [description]
@@ -5572,7 +5609,7 @@
   [presentation]
    position=72,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr2"
    id=263
    wstyle="CHAMP_SAISI"
   [description]
@@ -5594,7 +5631,7 @@
   [presentation]
    position=81,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr2"
    id=264
    wstyle="CHAMP_SAISI"
   [description]
@@ -5616,7 +5653,7 @@
   [presentation]
    position=90,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr2"
    id=265
    wstyle="CHAMP_SAISI"
   [description]
@@ -5638,7 +5675,7 @@
   [presentation]
    position=99,286
    taille=9,32
-   noms="adrtiers"
+   noms="adr2"
    id=266
    wstyle="CHAMP_SAISI"
   [description]
@@ -5664,7 +5701,7 @@
   [presentation]
    position=99,318
    taille=9,137
-   noms="adrtiers"
+   noms="adr2"
    id=267
    wstyle="CHAMP_SAISI"
   [description]
@@ -5686,7 +5723,7 @@
   [presentation]
    position=99,455
    taille=9,15
-   noms="adrtiers"
+   noms="adr2"
    id=268
    wstyle="CHAMP_SAISI"
   [description]
@@ -5713,7 +5750,7 @@
   [presentation]
    position=134,47
    taille=9,70
-   noms="adrtiers"
+   noms="adrtiers;adrliv"
    id=269
    wstyle="CHAMP_SAISI"
   [description]
@@ -5733,12 +5770,13 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+   diva_avant="Champ_AdrTyp_1_Av"
    diva_apres="Champ_AdrTyp_1_Ap"
  [champ]
   [presentation]
    position=134,199
    taille=9,32
-   noms="adrtiers"
+   noms="adrtiers3;adrliv"
    id=270
    wstyle="CHAMP_SAISI"
   [description]
@@ -5764,7 +5802,7 @@
   [presentation]
    position=143,199
    taille=9,32
-   noms="adrtiers"
+   noms="adrtiers3;adrliv"
    id=271
    wstyle="CHAMP_SAISI"
   [description]
@@ -5794,7 +5832,7 @@
   [presentation]
    position=153,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr3;adrliv"
    id=272
    wstyle="CHAMP_SAISI"
   [description]
@@ -5816,7 +5854,7 @@
   [presentation]
    position=162,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr3;adrliv"
    id=273
    wstyle="CHAMP_SAISI"
   [description]
@@ -5838,7 +5876,7 @@
   [presentation]
    position=171,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr3;adrliv"
    id=274
    wstyle="CHAMP_SAISI"
   [description]
@@ -5860,7 +5898,7 @@
   [presentation]
    position=180,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr3;adrliv"
    id=275
    wstyle="CHAMP_SAISI"
   [description]
@@ -5882,7 +5920,7 @@
   [presentation]
    position=189,47
    taille=9,184
-   noms="adrtiers"
+   noms="adr3;adrliv"
    id=276
    wstyle="CHAMP_SAISI"
   [description]
@@ -5904,7 +5942,7 @@
   [presentation]
    position=198,47
    taille=9,32
-   noms="adrtiers"
+   noms="adr3;adrliv"
    id=277
    wstyle="CHAMP_SAISI"
   [description]
@@ -5930,7 +5968,7 @@
   [presentation]
    position=198,79
    taille=9,137
-   noms="adrtiers"
+   noms="adr3;adrliv"
    id=278
    wstyle="CHAMP_SAISI"
   [description]
@@ -5952,7 +5990,7 @@
   [presentation]
    position=198,216
    taille=9,15
-   noms="adrtiers"
+   noms="adr3;adrliv"
    id=279
    wstyle="CHAMP_SAISI"
   [description]
@@ -5999,12 +6037,13 @@
    shift_f6=5503
   [traitements]
    microbol_click=8002
+   diva_avant="Champ_AdrTyp_1_Av"
    diva_apres="Champ_AdrTyp_1_Ap"
  [champ]
   [presentation]
    position=134,438
    taille=9,32
-   noms="adrtiers"
+   noms="adrtiers4"
    id=281
    wstyle="CHAMP_SAISI"
   [description]
@@ -6030,7 +6069,7 @@
   [presentation]
    position=143,438
    taille=9,32
-   noms="adrtiers"
+   noms="adrtiers4"
    id=282
    wstyle="CHAMP_SAISI"
   [description]
@@ -6060,7 +6099,7 @@
   [presentation]
    position=153,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr4"
    id=283
    wstyle="CHAMP_SAISI"
   [description]
@@ -6082,7 +6121,7 @@
   [presentation]
    position=162,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr4"
    id=284
    wstyle="CHAMP_SAISI"
   [description]
@@ -6104,7 +6143,7 @@
   [presentation]
    position=171,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr4"
    id=285
    wstyle="CHAMP_SAISI"
   [description]
@@ -6126,7 +6165,7 @@
   [presentation]
    position=180,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr4"
    id=286
    wstyle="CHAMP_SAISI"
   [description]
@@ -6148,7 +6187,7 @@
   [presentation]
    position=189,286
    taille=9,184
-   noms="adrtiers"
+   noms="adr4"
    id=287
    wstyle="CHAMP_SAISI"
   [description]
@@ -6170,7 +6209,7 @@
   [presentation]
    position=198,286
    taille=9,32
-   noms="adrtiers"
+   noms="adr4"
    id=288
    wstyle="CHAMP_SAISI"
   [description]
@@ -6196,7 +6235,7 @@
   [presentation]
    position=198,318
    taille=9,137
-   noms="adrtiers"
+   noms="adr4"
    id=289
    wstyle="CHAMP_SAISI"
   [description]
@@ -6218,7 +6257,7 @@
   [presentation]
    position=198,455
    taille=9,15
-   noms="adrtiers"
+   noms="adr4"
    id=290
    wstyle="CHAMP_SAISI"
   [description]
@@ -6251,8 +6290,8 @@
  nb_col=120
  offset_lig=11
  offset_col=1
- prec=6
- suiv=8
+ prec=44
+ suiv=45
  attache_lgx=oui
  attache_lgy=oui
  arret_dem_saisie=3103
@@ -6261,7 +6300,9 @@
   [param_onglet_page]
    nom="ENTETE"
    libelle="RELEVE"
+   ordre=6
    couleur_fond="STD"
+   noms="entete_adresse"
  [aide_page]
   aide=4215
   fichier="gtfaide"
@@ -6674,6 +6715,7 @@
   [param_onglet_page]
    nom="ENTETE"
    libelle="ECHEANCES MULTIPLES"
+   ordre=8
    couleur_fond="STD"
  [groupbox]
   [presentation]
@@ -7834,6 +7876,7 @@
   [param_onglet_page]
    nom="ENTETE"
    libelle="IDENTIFIANTS"
+   ordre=9
    couleur_fond="STD"
    noms="entete_identifiants"
  [groupbox]
@@ -7993,6 +8036,14 @@
    wstyle="STD"
   [texte]
    texte="Configuration monoligne"
+ [obj_texte]
+  [presentation]
+   position=131,10
+   taille=9,59
+   id=2340
+   wstyle="STD"
+  [texte]
+   texte="Elément de facturation"
  [obj_texte]
   [presentation]
    position=131,249
@@ -8540,6 +8591,22 @@
    f7=135
  [champ]
   [presentation]
+   position=131,71
+   taille=9,35
+   id=2341
+   colonnes_saisie=9
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=g1t1,pfcno,g1t1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
    position=36,366
    taille=10,52
    id=1000061
@@ -8585,7 +8652,7 @@
    hauteur_entete=15
    largeur_controle=8
    var_controle=oui
-   col_fixes=6
+   col_fixes=7
    separation=156
   [description]
    donnee=rowinfo,rowinfo,rowinfo
@@ -8668,7 +8735,7 @@
    [traitements]
     microbol_click=8002
    [info_bulle]
-   texte="Ligne en erreur"
+   texte="Ligne verrouillée"
    [param_colonne]
     titre="#tblcadf"
     fl_trait_col=non
@@ -8720,6 +8787,31 @@
     titre="#tblventila"
     fl_trait_col=non
     largeur_col=12
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=44,69
+    taille=18,36
+    noms="ctmres"
+    id=2337
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=g1t1,ctmaffetat,g1t1
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","AFFETAT_11"
+   [touches]
+    f7=135
+    shift_f1=1
+   [info_bulle]
+   texte="Etat de la contremarque"
+   [param_colonne]
+    titre="#tblctmr"
+    fl_aff=oui
+    fl_trait_col=non
+    largeur_col=13
     wstyle="ENTETE_COLONNE"
   [arbre]
    [presentation]
@@ -10138,7 +10230,6 @@
    [description]
     donnee=g1t1,cofamr,g1t1
    [param_saisie]
-    type_date=jj/mm/aaaa
     table_associee=oui
    [touches]
     f1=1
@@ -10203,7 +10294,6 @@
    [description]
     donnee=g1t1,cofamv,g1t1,1
    [param_saisie]
-    type_date=jj/mm/aaaa
     table_associee=oui
    [touches]
     f1=1
@@ -10330,7 +10420,6 @@
    [description]
     donnee=g1t1,cofamv,g1t1,2
    [param_saisie]
-    type_date=jj/mm/aaaa
     table_associee=oui
    [touches]
     f1=1
@@ -10458,7 +10547,6 @@
    [description]
     donnee=g1t1,cofamv,g1t1,3
    [param_saisie]
-    type_date=jj/mm/aaaa
     table_associee=oui
    [touches]
     f1=1
@@ -10687,7 +10775,6 @@
    [description]
     donnee=g1t1,embun,g1t1
    [param_saisie]
-    type_date=jj/mm/aaaa
     table_associee=oui
    [touches]
     f1=1
@@ -10927,6 +11014,30 @@
     titre="Montant total CMP"
     fl_aff=non
     largeur_col=76
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=85,212
+    taille=9,13
+    noms="Deprec"
+    id=2339
+    colonnes_saisie=3
+    wstyle="CHAMP_SAISI"
+   [description]
+    donnee=g1t1,cncr,g1t1
+   [param_saisie]
+    type_date=jj/mm/aaaa
+    esp_si_zero=oui
+   [touches]
+    f5=6999
+    f7=135
+    shift_f1=1
+   [info_bulle]
+   texte="% dépréciation"
+   [param_colonne]
+    titre="% dépréciation"
+    fl_aff=non
+    largeur_col=17
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -11299,6 +11410,8 @@
    [touches]
     f7=135
     shift_f1=1
+   [traitements]
+    diva_apres="Champ_PrevFlg_1_Ap"
    [info_bulle]
    texte="Ventilation prévisionnelle"
    [param_colonne]
@@ -13508,7 +13621,7 @@
  prec=14
  suiv=16
  page_fond=11
- position_fond=25
+ position_fond=28
  attache_lgx=oui
  arret_dem_saisie=3142
  ident_unique=13
@@ -13607,6 +13720,15 @@
    wstyle="STD"
   [texte]
    texte="Priorité en livraison"
+ [obj_texte]
+  [presentation]
+   position=64,374
+   taille=9,54
+   noms="Contremarque"
+   id=2336
+   wstyle="STD"
+  [texte]
+   texte="Contremarque"
  [obj_texte]
   [presentation]
    position=94,10
@@ -13828,6 +13950,24 @@
   [traitements]
    microbol_click=8002
    diva_avant="Champ_StRes_2_Av"
+ [multi_choix]
+  [presentation]
+   position=64,430
+   taille=9,40
+   noms="Contremarque"
+   id=2335
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=g1t1,ctmfl,g1t1
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","NONOUI_3"
+  [touches]
+   f7=135
+   shift_f1=1
+  [traitements]
+   diva_avant="Champ_CtmFl_1_Av"
  [champ]
   [presentation]
    position=94,66
@@ -14199,6 +14339,15 @@
   [param_groupbox]
    texte="Familles de tarif"
    couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=100,5
+   taille=38,231
+   id=2343
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Contrat"
+   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
    position=24,5
@@ -14271,6 +14420,22 @@
    wstyle="STD"
   [texte]
    texte="Code remise"
+ [obj_texte]
+  [presentation]
+   position=114,10
+   taille=9,65
+   id=2344
+   wstyle="STD"
+  [texte]
+   texte="Contrat"
+ [obj_texte]
+  [presentation]
+   position=124,10
+   taille=9,65
+   id=2345
+   wstyle="STD"
+  [texte]
+   texte="Element de facturation"
  [champ]
   [presentation]
    position=24,62
@@ -14703,6 +14868,38 @@
    diva_apres="Champ_RemCod_2_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=114,76
+   taille=9,31
+   id=2346
+   colonnes_saisie=8
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=g1t1,contratno,g1t1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=124,76
+   taille=9,31
+   id=2347
+   colonnes_saisie=9
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=g1t1,pfcno,g1t1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [touches]
+   f7=135
+   shift_f1=1
 [page]
  numero=17
  fond="STD"
@@ -16466,8 +16663,8 @@
    noms="ligne_programme"
  [groupbox]
   [presentation]
-   position=51,4
-   taille=64,128
+   position=51,5
+   taille=46,112
    id=1614
    wstyle="GROUPE"
   [param_groupbox]
@@ -16491,7 +16688,7 @@
    texte="Référence fournisseur"
  [obj_texte]
   [presentation]
-   position=74,6
+   position=69,7
    taille=9,60
    id=1218
    wstyle="STD"
@@ -16499,7 +16696,7 @@
    texte="Quantité ferme"
  [obj_texte]
   [presentation]
-   position=86,6
+   position=81,7
    taille=9,60
    id=1220
    wstyle="STD"
@@ -16603,7 +16800,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=74,69
+   position=69,70
    taille=9,40
    id=1219
    wstyle="CHAMP_SAISI"
@@ -16633,7 +16830,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=87,69
+   position=82,70
    taille=9,40
    id=2028
    colonnes_saisie=12
@@ -20743,7 +20940,7 @@
    id=1417
    wstyle="GROUPE"
   [param_groupbox]
-   texte="Comissionnement"
+   texte="Commissionnement"
    couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
@@ -21763,7 +21960,7 @@
    texte="Titre du chapitre"
  [obj_texte]
   [presentation]
-   position=34,10
+   position=36,10
    taille=9,60
    id=1306
    wstyle="STD"
@@ -21779,7 +21976,7 @@
    texte="Montant"
  [obj_texte]
   [presentation]
-   position=84,10
+   position=86,10
    taille=9,60
    noms="cr"
    id=1302
@@ -21788,7 +21985,7 @@
    texte="Coût de revient"
  [obj_texte]
   [presentation]
-   position=94,10
+   position=98,10
    taille=9,60
    noms="cr"
    id=1303
@@ -21815,7 +22012,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=34,72
+   position=36,72
    taille=9,55
    id=1308
    wstyle="CHAMP_SAISI"
@@ -21838,7 +22035,7 @@
    position=74,72
    taille=9,55
    id=1309
-   wstyle="CHAMP_AFF_CADRE3D"
+   wstyle="CHAMP_NON_SAISI"
   [description]
    donnee=g1t1,mont,g1t1
    format="\FormatMille"
@@ -21850,11 +22047,11 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=84,72
+   position=86,72
    taille=9,55
    noms="cr"
    id=1310
-   wstyle="CHAMP_AFF_CADRE3D"
+   wstyle="CHAMP_NON_SAISI"
   [description]
    donnee=g1t1,crtotmt,g1t1
    format="\FormatMille"
@@ -21866,11 +22063,11 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=94,72
+   position=98,72
    taille=9,55
    noms="cr"
    id=1311
-   wstyle="CHAMP_AFF_CADRE3D"
+   wstyle="CHAMP_NON_SAISI"
   [description]
    donnee=g1t1,cmptotmt,g1t1
    format="\FormatMille"
@@ -24577,7 +24774,7 @@
     taille=9,31
     id=1448
     colonnes_saisie=9
-    wstyle="CHAMP_AFF"
+    wstyle="TABLEAU_SAISI"
    [description]
     donnee=g1t2,vtlno2,g1t2
     saisie=non
@@ -24591,8 +24788,9 @@
    texte="No de ventilation 2"
    [param_colonne]
     titre="No de vtl"
+    fl_aff=oui
     largeur_col=31
-    wstyle="STD"
+    wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
     position=51,24
@@ -24785,6 +24983,2355 @@
    "zoom"
 [page]
  numero=43
+ libelle="Entete Cpostal20"
+ fond="STD"
+ efface=partiel
+ nb_lig=6
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ arret_dem_saisie=3105
+ ident_unique=56
+ [aide_page]
+  aide=4128
+  fichier="gtfaide"
+ [groupbox]
+  [presentation]
+   position=2,5
+   taille=51,300
+   noms="TitrePiece"
+   id=2114
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Titre de piece"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=2,313
+   taille=51,162
+   noms="TicodPiece"
+   id=2115
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Tiers"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=18,10
+   taille=9,42
+   id=2116
+   wstyle="STD"
+  [texte]
+   texte="Date"
+ [obj_texte]
+  [presentation]
+   position=18,97
+   taille=9,42
+   id=2117
+   wstyle="STD"
+  [texte]
+   texte="Votre pièce"
+ [obj_texte]
+  [presentation]
+   position=28,10
+   taille=9,42
+   id=2118
+   wstyle="STD"
+  [texte]
+   texte="Votre référence"
+ [obj_texte]
+  [presentation]
+   position=38,10
+   taille=9,42
+   id=2119
+   wstyle="STD"
+  [texte]
+   texte="Dépôt"
+ [obj_texte]
+  [presentation]
+   position=38,126
+   taille=9,38
+   noms="depodest"
+   id=2120
+   wstyle="STD"
+  [texte]
+   texte="Dépôt Dest"
+ [obj_texte]
+  [presentation]
+   position=38,219
+   taille=9,61
+   id=2121
+   wstyle="STD"
+  [texte]
+   texte="Devise"
+ [multi_choix]
+  [presentation]
+   position=4,250
+   taille=9,10
+   id=2122
+   wstyle="CHAMP_AFF_GRAS"
+  [description]
+   donnee=ent,txtcodd,ent
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TXTCOD_1G"
+  [touches]
+   f7=135
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+ [multi_choix]
+  [presentation]
+   position=4,279
+   taille=9,10
+   id=2123
+   wstyle="ETAT"
+  [description]
+   donnee=ent,ascod,ent
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ASCOD"
+  [touches]
+   f7=135
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f1=1
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=18,217
+   taille=9,83
+   id=2124
+   wstyle="CHAMP_AFF_GRAS"
+  [description]
+   donnee=ent,status,ent
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","STATUSENT"
+  [touches]
+   f7=135
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f1=1
+  [traitements]
+   microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=4,270
+   taille=9,10
+   id=2125
+   wstyle="CHAMP_AFF_GRAS"
+  [description]
+   donnee=ent,cenote,ent
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","CENOTE_1G"
+  [touches]
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+ [multi_choix]
+  [presentation]
+   position=28,217
+   taille=9,83
+   id=2126
+   wstyle="CHAMP_AFF_GRAS"
+  [description]
+   donnee=gtent,etatp,gtent
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","CE4_ENT"
+  [touches]
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+ [multi_choix]
+  [presentation]
+   position=4,290
+   taille=9,12
+   id=2127
+   wstyle="CHAMP_AFF_GRAS"
+  [description]
+   donnee=ent,pirelcod,ent
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","PIRELCOD_G"
+  [touches]
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+ [multi_choix]
+  [presentation]
+   position=4,260
+   taille=9,10
+   id=2128
+   wstyle="CHAMP_AFF_GRAS"
+  [description]
+   donnee=ent,txtcodf,ent
+   minmaj=majuscules
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","TXTCOD_2G"
+  [touches]
+   f7=135
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+ [champ]
+  [presentation]
+   position=18,54
+   taille=9,32
+   id=2129
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,pidt,ent
+  [param_saisie]
+   obligatoire=oui
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=4118
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_PiDt_1_Av"
+   diva_apres="Champ_PiDt_1_Ap"
+ [champ]
+  [presentation]
+   position=18,141
+   taille=9,57
+   id=2130
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,pinotiers,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=4144
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=15,318
+   taille=9,33
+   id=2131
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=ent,tiers,ent
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f5=1
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+ [multi_choix]
+  [presentation]
+   position=4,240
+   taille=9,10
+   id=2132
+   wstyle="CHAMP_AFF_GRAS"
+  [description]
+   donnee=ent,prgcdeflg,ent
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","AFFOUV"
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=25,318
+   taille=9,137
+   id=2133
+   colonnes_saisie=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,adrcpl1,tiers
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=35,318
+   taille=9,137
+   id=2134
+   colonnes_saisie=38
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,rue,tiers
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=45,318
+   taille=9,33
+   id=2135
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,cpostal,tiers
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+ [champ]
+  [presentation]
+   position=15,350
+   taille=9,120
+   id=2136
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,nom,tiers
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+ [champ]
+  [presentation]
+   position=45,350
+   taille=9,120
+   id=2137
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cli,vil,tiers
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+ [champ]
+  [presentation]
+   position=28,54
+   taille=9,144
+   id=2138
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,piref,ent
+   sequence=1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=4150
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=38,54
+   taille=9,32
+   id=2139
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,depo,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4119
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9866
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Depo_1_Av"
+   diva_apres="Champ_Depo_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=38,166
+   taille=9,32
+   noms="depodest"
+   id=2140
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,blasdepo,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=6999
+   f7=3499
+   f8=9866
+   shift_f1=1
+  [traitements]
+   diva_avant="Champ_Depo_3_Av"
+   diva_apres="Champ_Depo_4_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=38,282
+   taille=9,18
+   id=2141
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,dev,ent
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=4111
+   fichier="GTFAIDE"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9047
+   ctrl_p=1
+   ctrl_f6=10300
+   shift_f5=149
+   shift_f6=5503
+   shift_f8=9061
+  [traitements]
+   microbol_click=6002
+   diva_apres="Champ_Dev_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=44
+ libelle="Adresse CPostal20"
+ fond="STD"
+ titre="ADDRESSES2"
+ efface=partiel
+ nb_lig=24
+ nb_col=120
+ offset_lig=7
+ offset_col=1
+ prec=6
+ suiv=7
+ arret_dem_saisie=3103
+ ident_unique=57
+ [onglet_page]
+  [param_onglet_page]
+   nom="ENTETE"
+   libelle="ADDRESSES2"
+   ordre=5
+   couleur_fond="STD"
+   noms="entete_adressebis"
+ [groupbox]
+  [presentation]
+   position=19,244
+   taille=95,231
+   noms="adrtiers"
+   id=2226
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Commande"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=19,5
+   taille=95,231
+   noms="adrtiers"
+   id=2227
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Devis 20"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=118,244
+   taille=93,231
+   noms="adrtiers"
+   id=2228
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Facture"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=118,5
+   taille=93,231
+   noms="adrtiers"
+   id=2229
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Livraison"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=35,9
+   taille=9,36
+   noms="adrtiers"
+   id=2230
+   wstyle="STD"
+  [texte]
+   texte="Type"
+ [obj_texte]
+  [presentation]
+   position=35,152
+   taille=9,45
+   noms="adrtiers"
+   id=2231
+   wstyle="STD"
+  [texte]
+   texte="Tiers adresse"
+ [obj_texte]
+  [presentation]
+   position=35,249
+   taille=9,35
+   noms="adrtiers"
+   id=2232
+   wstyle="STD"
+  [texte]
+   texte="Type"
+ [obj_texte]
+  [presentation]
+   position=35,391
+   taille=9,45
+   noms="adrtiers"
+   id=2233
+   wstyle="STD"
+  [texte]
+   texte="Tiers adresse"
+ [obj_texte]
+  [presentation]
+   position=44,152
+   taille=9,45
+   noms="adrtiers"
+   id=2234
+   wstyle="STD"
+  [texte]
+   texte="Code adresse"
+ [obj_texte]
+  [presentation]
+   position=44,391
+   taille=9,45
+   noms="adrtiers"
+   id=2235
+   wstyle="STD"
+  [texte]
+   texte="Code adresse"
+ [obj_texte]
+  [presentation]
+   position=54,9
+   taille=9,36
+   noms="adrtiers"
+   id=2236
+   wstyle="STD"
+  [texte]
+   texte="Nom"
+ [obj_texte]
+  [presentation]
+   position=54,249
+   taille=9,35
+   noms="adrtiers"
+   id=2237
+   wstyle="STD"
+  [texte]
+   texte="Nom"
+ [obj_texte]
+  [presentation]
+   position=63,9
+   taille=9,36
+   noms="adrtiers"
+   id=2238
+   wstyle="STD"
+  [texte]
+   texte="Complément 1"
+ [obj_texte]
+  [presentation]
+   position=63,249
+   taille=9,35
+   noms="adrtiers"
+   id=2239
+   wstyle="STD"
+  [texte]
+   texte="Complément 1"
+ [obj_texte]
+  [presentation]
+   position=72,9
+   taille=9,36
+   noms="adrtiers"
+   id=2240
+   wstyle="STD"
+  [texte]
+   texte="Complément 2"
+ [obj_texte]
+  [presentation]
+   position=72,249
+   taille=9,35
+   noms="adrtiers"
+   id=2241
+   wstyle="STD"
+  [texte]
+   texte="Complément 2"
+ [obj_texte]
+  [presentation]
+   position=81,9
+   taille=9,36
+   noms="adrtiers"
+   id=2242
+   wstyle="STD"
+  [texte]
+   texte="Rue"
+ [obj_texte]
+  [presentation]
+   position=81,249
+   taille=9,35
+   noms="adrtiers"
+   id=2243
+   wstyle="STD"
+  [texte]
+   texte="Rue"
+ [obj_texte]
+  [presentation]
+   position=90,9
+   taille=9,36
+   noms="adrtiers"
+   id=2244
+   wstyle="STD"
+  [texte]
+   texte="Localité"
+ [obj_texte]
+  [presentation]
+   position=90,249
+   taille=9,35
+   noms="adrtiers"
+   id=2245
+   wstyle="STD"
+  [texte]
+   texte="Localité"
+ [obj_texte]
+  [presentation]
+   position=99,9
+   taille=9,36
+   noms="adrtiers"
+   id=2246
+   wstyle="STD"
+  [texte]
+   texte="Ville / Pays"
+ [obj_texte]
+  [presentation]
+   position=99,249
+   taille=9,35
+   noms="adrtiers"
+   id=2247
+   wstyle="STD"
+  [texte]
+   texte="Ville / Pays"
+ [obj_texte]
+  [presentation]
+   position=134,10
+   taille=9,35
+   noms="adrtiers"
+   id=2248
+   wstyle="STD"
+  [texte]
+   texte="Type"
+ [obj_texte]
+  [presentation]
+   position=134,152
+   taille=9,45
+   noms="adrtiers"
+   id=2249
+   wstyle="STD"
+  [texte]
+   texte="Tiers adresse"
+ [obj_texte]
+  [presentation]
+   position=134,249
+   taille=9,35
+   noms="adrtiers"
+   id=2250
+   wstyle="STD"
+  [texte]
+   texte="Type"
+ [obj_texte]
+  [presentation]
+   position=134,391
+   taille=9,45
+   noms="adrtiers"
+   id=2251
+   wstyle="STD"
+  [texte]
+   texte="Tiers adresse"
+ [obj_texte]
+  [presentation]
+   position=143,152
+   taille=9,45
+   noms="adrtiers"
+   id=2252
+   wstyle="STD"
+  [texte]
+   texte="Code adresse"
+ [obj_texte]
+  [presentation]
+   position=143,391
+   taille=9,45
+   noms="adrtiers"
+   id=2253
+   wstyle="STD"
+  [texte]
+   texte="Code adresse"
+ [obj_texte]
+  [presentation]
+   position=153,10
+   taille=9,35
+   noms="adrtiers"
+   id=2254
+   wstyle="STD"
+  [texte]
+   texte="Nom"
+ [obj_texte]
+  [presentation]
+   position=153,249
+   taille=9,35
+   noms="adrtiers"
+   id=2255
+   wstyle="STD"
+  [texte]
+   texte="Nom"
+ [obj_texte]
+  [presentation]
+   position=162,10
+   taille=9,35
+   noms="adrtiers"
+   id=2256
+   wstyle="STD"
+  [texte]
+   texte="Complément 1"
+ [obj_texte]
+  [presentation]
+   position=162,249
+   taille=9,35
+   noms="adrtiers"
+   id=2257
+   wstyle="STD"
+  [texte]
+   texte="Complément 1"
+ [obj_texte]
+  [presentation]
+   position=171,10
+   taille=9,35
+   noms="adrtiers"
+   id=2258
+   wstyle="STD"
+  [texte]
+   texte="Complément 2"
+ [obj_texte]
+  [presentation]
+   position=171,249
+   taille=9,35
+   noms="adrtiers"
+   id=2259
+   wstyle="STD"
+  [texte]
+   texte="Complément 2"
+ [obj_texte]
+  [presentation]
+   position=180,10
+   taille=9,35
+   noms="adrtiers"
+   id=2260
+   wstyle="STD"
+  [texte]
+   texte="Rue"
+ [obj_texte]
+  [presentation]
+   position=180,249
+   taille=9,35
+   noms="adrtiers"
+   id=2261
+   wstyle="STD"
+  [texte]
+   texte="Rue"
+ [obj_texte]
+  [presentation]
+   position=189,10
+   taille=9,35
+   noms="adrtiers"
+   id=2262
+   wstyle="STD"
+  [texte]
+   texte="Localité"
+ [obj_texte]
+  [presentation]
+   position=189,249
+   taille=9,35
+   noms="adrtiers"
+   id=2263
+   wstyle="STD"
+  [texte]
+   texte="Localité"
+ [obj_texte]
+  [presentation]
+   position=198,10
+   taille=9,35
+   noms="adrtiers"
+   id=2264
+   wstyle="STD"
+  [texte]
+   texte="Ville / Pays"
+ [obj_texte]
+  [presentation]
+   position=198,249
+   taille=9,35
+   noms="adrtiers"
+   id=2265
+   wstyle="STD"
+  [texte]
+   texte="Ville / Pays"
+ [multi_choix]
+  [presentation]
+   position=35,47
+   taille=9,70
+   noms="adrtiers"
+   id=2266
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtyp,ent,1
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ADRTYP"
+  [aide_page]
+   aide=4394
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrTyp_1_Av"
+   diva_apres="Champ_AdrTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=35,199
+   taille=9,32
+   noms="adrtiers"
+   id=2267
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtiers,ent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4391
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=6014
+   diva_avant="Champ_Tiers_2_Av"
+   diva_apres="Champ_Tiers_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=44,199
+   taille=9,32
+   noms="adrtiers"
+   id=2268
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrcod,ent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4311
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9027
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrCod_1_Av"
+   diva_apres="Champ_AdrCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=54,47
+   taille=9,184
+   noms="adrtiers"
+   id=2269
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,nom,gtent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=63,47
+   taille=9,184
+   noms="adrtiers"
+   id=2270
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl1,gtent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=72,47
+   taille=9,184
+   noms="adrtiers"
+   id=2271
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl2,gtent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=81,47
+   taille=9,184
+   noms="adrtiers"
+   id=2272
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,rue,gtent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=90,47
+   taille=9,184
+   noms="adrtiers"
+   id=2273
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,loc,gtent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=99,47
+   taille=9,32
+   noms="adrtiers"
+   id=2274
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,cpostal,gtent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=3499
+   f7=135
+   f8=9097
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cpostal_1_Av"
+   diva_apres="Champ_Cpostal_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=99,79
+   taille=9,137
+   noms="adrtiers"
+   id=2275
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,vil,gtent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=99,216
+   taille=9,15
+   noms="adrtiers"
+   id=2276
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,pay,gtent,1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   f8=9053
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+   diva_apres="Champ_Pay_1_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=35,286
+   taille=9,70
+   noms="adrtiers"
+   id=2277
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtyp,ent,2
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ADRTYP"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrTyp_1_Av"
+   diva_apres="Champ_AdrTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=35,438
+   taille=9,32
+   noms="adrtiers"
+   id=2278
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtiers,ent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=6014
+   diva_avant="Champ_Tiers_2_Av"
+   diva_apres="Champ_Tiers_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=44,438
+   taille=9,32
+   noms="adrtiers"
+   id=2279
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrcod,ent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4311
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9027
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrCod_1_Av"
+   diva_apres="Champ_AdrCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=54,286
+   taille=9,184
+   noms="adrtiers"
+   id=2280
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,nom,gtent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=63,286
+   taille=9,184
+   noms="adrtiers"
+   id=2281
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl1,gtent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=72,286
+   taille=9,184
+   noms="adrtiers"
+   id=2282
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl2,gtent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=81,286
+   taille=9,184
+   noms="adrtiers"
+   id=2283
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,rue,gtent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=90,286
+   taille=9,184
+   noms="adrtiers"
+   id=2284
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,loc,gtent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=99,286
+   taille=9,32
+   noms="adrtiers"
+   id=2285
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,cpostal,gtent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=3499
+   f7=135
+   f8=9097
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cpostal_1_Av"
+   diva_apres="Champ_Cpostal_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=99,318
+   taille=9,137
+   noms="adrtiers"
+   id=2286
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,vil,gtent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=99,455
+   taille=9,15
+   noms="adrtiers"
+   id=2287
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,pay,gtent,2
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   f8=9053
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+   diva_apres="Champ_Pay_1_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=134,47
+   taille=9,70
+   noms="adrtiers"
+   id=2288
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtyp,ent,3
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ADRTYP"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrTyp_1_Av"
+   diva_apres="Champ_AdrTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=134,199
+   taille=9,32
+   noms="adrtiers"
+   id=2289
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtiers,ent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=6014
+   diva_avant="Champ_Tiers_2_Av"
+   diva_apres="Champ_Tiers_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=143,199
+   taille=9,32
+   noms="adrtiers"
+   id=2290
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrcod,ent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4311
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9027
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrCod_1_Av"
+   diva_apres="Champ_AdrCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=153,47
+   taille=9,184
+   noms="adrtiers"
+   id=2291
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,nom,gtent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=162,47
+   taille=9,184
+   noms="adrtiers"
+   id=2292
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl1,gtent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=171,47
+   taille=9,184
+   noms="adrtiers"
+   id=2293
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl2,gtent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=180,47
+   taille=9,184
+   noms="adrtiers"
+   id=2294
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,rue,gtent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=189,47
+   taille=9,184
+   noms="adrtiers"
+   id=2295
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,loc,gtent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=198,47
+   taille=9,32
+   noms="adrtiers"
+   id=2296
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,cpostal,gtent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=3499
+   f7=135
+   f8=9097
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cpostal_1_Av"
+   diva_apres="Champ_Cpostal_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=198,79
+   taille=9,137
+   noms="adrtiers"
+   id=2297
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,vil,gtent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=198,216
+   taille=9,15
+   noms="adrtiers"
+   id=2298
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,pay,gtent,3
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   f8=9053
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+   diva_apres="Champ_Pay_1_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=134,286
+   taille=9,70
+   noms="adrtiers"
+   id=2299
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtyp,ent,4
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ADRTYP"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrTyp_1_Av"
+   diva_apres="Champ_AdrTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=134,438
+   taille=9,32
+   noms="adrtiers"
+   id=2300
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtiers,ent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=6014
+   diva_avant="Champ_Tiers_2_Av"
+   diva_apres="Champ_Tiers_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=143,438
+   taille=9,32
+   noms="adrtiers"
+   id=2301
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrcod,ent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4311
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9027
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrCod_1_Av"
+   diva_apres="Champ_AdrCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=153,286
+   taille=9,184
+   noms="adrtiers"
+   id=2302
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,nom,gtent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=162,286
+   taille=9,184
+   noms="adrtiers"
+   id=2303
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl1,gtent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=171,286
+   taille=9,184
+   noms="adrtiers"
+   id=2304
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl2,gtent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=180,286
+   taille=9,184
+   noms="adrtiers"
+   id=2305
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,rue,gtent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=189,286
+   taille=9,184
+   noms="adrtiers"
+   id=2306
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,loc,gtent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=198,286
+   taille=9,32
+   noms="adrtiers"
+   id=2307
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,cpostal,gtent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=3499
+   f7=135
+   f8=9097
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cpostal_1_Av"
+   diva_apres="Champ_Cpostal_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=198,318
+   taille=9,137
+   noms="adrtiers"
+   id=2308
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,vil,gtent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=198,455
+   taille=9,15
+   noms="adrtiers"
+   id=2309
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,pay,gtent,4
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   f8=9053
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+   diva_apres="Champ_Pay_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=45
+ libelle="RELEVE2"
+ fond="STD"
+ efface=partiel
+ nb_lig=24
+ nb_col=120
+ offset_lig=7
+ offset_col=1
+ prec=7
+ suiv=8
+ attache_lgx=oui
+ attache_lgy=oui
+ arret_dem_saisie=3103
+ ident_unique=58
+ [onglet_page]
+  [param_onglet_page]
+   nom="ENTETE"
+   libelle="RELEVE2"
+   ordre=7
+   couleur_fond="STD"
+   noms="entete_adressebis"
+ [groupbox]
+  [presentation]
+   position=52,5
+   taille=98,231
+   noms="adrtiers"
+   id=2310
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Adresse"
+   couleur_fond="GROUPE_FOND"
+ [obj_texte]
+  [presentation]
+   position=26,5
+   taille=9,45
+   id=2311
+   wstyle="STD"
+  [texte]
+   texte="Tiers relevé"
+ [obj_texte]
+  [presentation]
+   position=68,10
+   taille=9,35
+   noms="adrtiers"
+   id=2312
+   wstyle="STD"
+  [texte]
+   texte="Type"
+ [obj_texte]
+  [presentation]
+   position=68,152
+   taille=9,45
+   noms="adrtiers"
+   id=2313
+   wstyle="STD"
+  [texte]
+   texte="Tiers adresse"
+ [obj_texte]
+  [presentation]
+   position=78,152
+   taille=9,45
+   noms="adrtiers"
+   id=2314
+   wstyle="STD"
+  [texte]
+   texte="Code adresse"
+ [obj_texte]
+  [presentation]
+   position=88,10
+   taille=9,35
+   noms="adrtiers"
+   id=2315
+   wstyle="STD"
+  [texte]
+   texte="Nom"
+ [obj_texte]
+  [presentation]
+   position=98,10
+   taille=9,35
+   noms="adrtiers"
+   id=2316
+   wstyle="STD"
+  [texte]
+   texte="Complément 1"
+ [obj_texte]
+  [presentation]
+   position=108,10
+   taille=9,35
+   noms="adrtiers"
+   id=2317
+   wstyle="STD"
+  [texte]
+   texte="Complément 2"
+ [obj_texte]
+  [presentation]
+   position=118,10
+   taille=9,35
+   noms="adrtiers"
+   id=2318
+   wstyle="STD"
+  [texte]
+   texte="Rue"
+ [obj_texte]
+  [presentation]
+   position=128,10
+   taille=9,35
+   noms="adrtiers"
+   id=2319
+   wstyle="STD"
+  [texte]
+   texte="Localité"
+ [obj_texte]
+  [presentation]
+   position=138,10
+   taille=9,35
+   noms="adrtiers"
+   id=2320
+   wstyle="STD"
+  [texte]
+   texte="Ville / Pays"
+ [champ]
+  [presentation]
+   position=26,52
+   taille=9,32
+   id=2321
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,tiersrlv,ent
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=4392
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   f8=9021
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_Tiers_5_Ap"
+  [boutons]
+   "zoom"
+ [multi_choix]
+  [presentation]
+   position=68,47
+   taille=9,60
+   noms="adrtiers"
+   id=2322
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtyp,ent,5
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ADRTYP"
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_AdrTyp_1_Ap"
+ [champ]
+  [presentation]
+   position=68,199
+   taille=9,32
+   noms="adrtiers"
+   id=2323
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrtiers,ent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Tiers_2_Av"
+   diva_apres="Champ_Tiers_2_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=78,199
+   taille=9,32
+   noms="adrtiers"
+   id=2324
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,adrcod,ent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=6999
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_AdrCod_1_Av"
+   diva_apres="Champ_AdrCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=88,47
+   taille=9,184
+   noms="adrtiers"
+   id=2325
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,nom,gtent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=98,47
+   taille=9,184
+   noms="adrtiers"
+   id=2326
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl1,gtent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=108,47
+   taille=9,184
+   noms="adrtiers"
+   id=2327
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,adrcpl2,gtent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=118,47
+   taille=9,184
+   noms="adrtiers"
+   id=2328
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,rue,gtent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=128,47
+   taille=9,184
+   noms="adrtiers"
+   id=2329
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,loc,gtent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=138,47
+   taille=9,32
+   noms="adrtiers"
+   id=2330
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,cpostal,gtent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f5=3499
+   f7=135
+   f8=9097
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Cpostal_1_Av"
+   diva_apres="Champ_Cpostal_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=138,79
+   taille=9,137
+   noms="adrtiers"
+   id=2331
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,vil,gtent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+ [champ]
+  [presentation]
+   position=138,216
+   taille=9,15
+   noms="adrtiers"
+   id=2332
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtent,pay,gtent,5
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f1=1
+   f5=3499
+   f7=135
+   f8=9053
+   ctrl_f6=10300
+   shift_f1=1
+   shift_f5=149
+   shift_f6=5503
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Adr_1_Av"
+   diva_apres="Champ_Pay_1_Ap"
+  [boutons]
+   "zoom"
+[page]
+ numero=46
  fond="STD"
  efface=complet
  nb_lig=25
@@ -24793,7 +27340,7 @@
  offset_col=1
  ident_unique=100001
 [page]
- numero=44
+ numero=47
  fond="STD"
  efface=complet
  nb_lig=25
@@ -24802,7 +27349,7 @@
  offset_col=1
  ident_unique=100002
 [page]
- numero=45
+ numero=48
  fond="STD"
  efface=complet
  nb_lig=25
@@ -24811,7 +27358,7 @@
  offset_col=1
  ident_unique=100003
 [page]
- numero=46
+ numero=49
  fond="STD"
  efface=complet
  nb_lig=25
@@ -25108,7 +27655,7 @@
    niveau=3
    [param_bouton]
     wnom=".MENU"
-    wtexte="Options du client"
+    wtexte="Options du tiers"
     wid_ressource="LIGNES_CLIENT"
     wetype_trait=arret
     warret=5209
@@ -25421,6 +27968,45 @@
    niveau=2
    [param_bouton]
     wnom=""
+    wid_ressource="SEPARATEUR__14"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="CTMT"
+    wtexte="Affecter / désaffecter la contremarque"
+    wid_ressource="CONTREMARQUE_AFFECTER"
+    wetype_trait=arret
+    warret=5409
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="CTMC"
+    wtexte="Générer la contremarque"
+    wid_ressource="CONTREMARQUE_GENERER"
+    wetype_trait=arret
+    warret=5408
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="CTMD"
+    wtexte="Arbitrer la contremarque"
+    wid_ressource="CONTREMARQUE_ARBITRER"
+    wetype_trait=arret
+    warret=5411
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="CTM"
+    wtexte="Assistant de livraison de contremarque"
+    wid_ressource="CONTREMARQUE_BL"
+    wetype_trait=arret
+    warret=5410
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
     wid_ressource="SEPARATEUR__8"
   [item]
    niveau=2
@@ -25469,6 +28055,51 @@
     wid_ressource="VALIDCONFIG"
     wetype_trait=arret
     warret=5210
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__17"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générer une pièce inter-compagnie"
+    wid_ressource="ICP"
+    wetype_trait=arret
+    warret=5562
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__13"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Intégration en comptabilité"
+    wid_ressource="INTEGR_CPT"
+    wetype_trait=arret
+    warret=5535
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__12"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Constat qualité"
+    wid_ressource="QUCONSTINTER"
+    wetype_trait=arret
+    warret=5560
   [item]
    dessin=vide
    niveau=2
@@ -25568,7 +28199,7 @@
     wtexte="Note Pièce"
     wid_ressource="NOTE_ENT"
     wetype_trait=arret
-    warret=5500
+    warret=5503
   [item]
    niveau=2
    [param_bouton]
@@ -25617,6 +28248,44 @@
     wid_ressource="FICHE_ARTICLE"
     wetype_trait=arret
     warret=5513
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__15"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Superviseur logistique"
+    wid_ressource="SUPERVISEUR_LOGISTIQUE"
+    wetype_trait=arret
+    warret=5561
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__16"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Eléments de facturation"
+    wid_ressource="PFC"
+    wetype_trait=arret
+    warret=5538
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Contrat"
+    wid_ressource="CONTRAT"
+    wetype_trait=arret
+    warret=5539
   [item]
    dessin=vide
    niveau=2
@@ -25686,6 +28355,21 @@
     wid_ressource="AIDE_S"
     wetype_trait=arret
     warret=5997
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEP__3"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Légende"
+    wid_ressource="LEGENDE"
+    wetype_trait=arret
+    warret=5537
   [item]
    type=sep
    dessin=sep
@@ -26430,7 +29114,7 @@
    [param_bouton]
     wnom=".MENU"
     wtexte="Zoom Client"
-    wid_ressource="MENU12"
+    wid_ressource="POPUPADRCLI"
     wetype_trait=arret
     warret=9021
   [item]
@@ -26438,7 +29122,7 @@
    [param_bouton]
     wnom=".MENU"
     wtexte="Zoom Autre Tiers"
-    wid_ressource="MENU13__1"
+    wid_ressource="POPUPADRTIA"
     wetype_trait=arret
     warret=9025
   [item]
@@ -26446,7 +29130,7 @@
    [param_bouton]
     wnom=".MENU"
     wtexte="Zoom Fournisseur"
-    wid_ressource="MENU13"
+    wid_ressource="POPUPADRFOU"
     wetype_trait=arret
     warret=9022
   [item]
@@ -26485,18 +29169,66 @@
    niveau=2
    [param_bouton]
     wnom=".MENU"
-    wtexte="Disponible"
-    wid_ressource="MENU12"
+    wtexte="Superviseur logistique"
+    wid_ressource="SUPERVISEUR_LOGISTIQUE"
+    wetype_trait=arret
+    warret=5561
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="MENU14__1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="STOCK"
+    wetype_trait=arret
+    warret=6116
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="DISPONIBLE1"
     wetype_trait=arret
     warret=6115
   [item]
    niveau=2
    [param_bouton]
     wnom=".MENU"
-    wtexte="Stock"
-    wid_ressource="MENU13__1"
+    wtexte="Générique"
+    wid_ressource="DISPONIBLE2"
     wetype_trait=arret
-    warret=6116
+    warret=6115
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="DISPONIBLE3"
+    wetype_trait=arret
+    warret=6115
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="DISPONIBLE4"
+    wetype_trait=arret
+    warret=6115
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="DISPONIBLE5"
+    wetype_trait=arret
+    warret=6115
   [item]
    type=sep
    dessin=sep
@@ -26833,14 +29565,6 @@
     wid_ressource="MENUPROPMARCHE"
     wetype_trait=arret
     warret=5527
-  [item]
-   niveau=2
-   [param_bouton]
-    wnom=".MENU"
-    wtexte="Propager le projet sur les lignes"
-    wid_ressource="MENUPROPPROJET"
-    wetype_trait=arret
-    warret=5528
   [item]
    type=sep
    dessin=sep
@@ -27463,7 +30187,7 @@
     wetype_trait=arret
     warret=5503
    [info_bulle]
-   texte="Note <Shift+F6>"
+   texte="Note"
   [item]
    [param_bouton]
     wnom="FICJOINT"
@@ -27641,140 +30365,6 @@
    [param_bouton]
     wnom=""
  [toolbar]
-  ident="FENETRE_LIG"
-  [item]
-   [param_bouton]
-    wnom="PRECEDENT"
-    wid_ressource="PREC"
-    wtrait_chaine="#shift_f2"
-   [info_bulle]
-   texte="Ligne précédente <Shift+F2>"
-  [item]
-   [param_bouton]
-    wnom="SUIVANT"
-    wid_ressource="SUIVANT"
-    wtrait_chaine="#f2"
-   [info_bulle]
-   texte="Ligne suivante <F2>"
-  [item]
-   type=sep
-   dessin=sep
-   [param_bouton]
-    wnom=""
-    wid_ressource="SEPARATEUR__1"
-  [item]
-   [param_bouton]
-    wnom=".TOOLBAR"
-    wtexte="Affecter"
-    wid_ressource="RES_AFFECTER"
-    wetype_trait=arret
-    warret=5800
-    wnom_sel="reserver"
-   [info_bulle]
-   texte="Affecter une réservation"
-  [item]
-   [param_bouton]
-    wnom=".TOOLBAR"
-    wtexte="Libérer"
-    wid_ressource="RES_LIBERER"
-    wetype_trait=arret
-    warret=5801
-    wnom_sel="reserver"
-   [info_bulle]
-   texte="Libérer des réservations"
-  [item]
-   [param_bouton]
-    wnom=".TOOLBAR"
-    wtexte="OF"
-    wid_ressource="OF"
-    wetype_trait=arret
-    warret=5805
-   [info_bulle]
-   texte="Générer un ordre de fabrication"
-  [item]
-   [param_bouton]
-    wnom=".TOOLBAR"
-    wtexte="BP"
-    wid_ressource="BP"
-    wetype_trait=arret
-    warret=5405
-   [info_bulle]
-   texte="Administrer le bon de préparation"
-  [item]
-   type=sep
-   dessin=sep
-   [param_bouton]
-    wnom=""
-    wid_ressource="SEPARATEUR__8"
-  [item]
-   [param_bouton]
-    wnom=".TOOLBAR"
-    wtexte="S. Traitance"
-    wid_ressource="STRAITANCE"
-    wetype_trait=arret
-    warret=5804
-    wnom_sel="reserver"
-   [info_bulle]
-   texte="Administration de la sous-traitance"
-  [item]
-   [param_bouton]
-    wnom="SEQ_NOM"
-    wid_ressource="STRT_AFFECTER"
-    wetype_trait=arret
-    warret=5803
-   [info_bulle]
-   texte="Affecter une séquence"
-  [item]
-   type=sep
-   dessin=sep
-   [param_bouton]
-    wnom=""
-    wid_ressource="SEPARATEUR__9"
-  [item]
-   [param_bouton]
-    wnom="NC"
-    wid_ressource="QUALITE"
-    wetype_trait=arret
-    warret=5802
-   [info_bulle]
-   texte="Déclarer une non-conformité"
-  [item]
-   [param_bouton]
-    wnom="SOM0"
-    wid_ressource="SOMME"
-    wnom_sel="qte"
-    wtrait_chaine="#ctrl_q"
-   [info_bulle]
-   texte="Affecter automatiquement la quantité <Ctrl+Q>"
-  [item]
-   [param_bouton]
-    wnom="NOTETIERS"
-    wid_ressource="NOTE_TIERS"
-    wetype_trait=arret
-    warret=5504
-   [info_bulle]
-   texte="Note du client"
-  [item]
-   [param_bouton]
-    wnom="NOTEART"
-    wid_ressource="NOTE_ART"
-    wetype_trait=arret
-    warret=5505
-   [info_bulle]
-   texte="Note de l'article"
-  [item]
-   [param_bouton]
-    wnom="LART"
-    wid_ressource="LIB_COMP"
-    wetype_trait=arret
-    warret=5509
-   [info_bulle]
-   texte="Libellés complémentaires de l'article"
-  [item]
-   dessin=vide
-   [param_bouton]
-    wnom=""
- [toolbar]
   ident="ONGLET"
   [item]
    [param_bouton]
@@ -27852,24 +30442,18 @@
   ident="MAIN2"
   [item]
    [param_bouton]
-    wnom="PRECEDENT"
+    wnom="PRECEDENT_G"
     wid_ressource="PREC"
     wtrait_chaine="#shift_f2"
    [info_bulle]
-   texte="Ligne précédente <Shift+F2>"
+   texte="Pièce précédente <Shift+F2>"
   [item]
    [param_bouton]
-    wnom="SUIVANT"
+    wnom="SUIVANT_G"
     wid_ressource="SUIVANT"
     wtrait_chaine="#f2"
    [info_bulle]
-   texte="Ligne suivante <F2>"
-  [item]
-   type=sep
-   dessin=sep
-   [param_bouton]
-    wnom=""
-    wid_ressource="SEPARATEUR__1"
+   texte="Pièce suivante <F2>"
   [item]
    [param_bouton]
     wnom=".TOOLBAR"
@@ -27919,6 +30503,39 @@
    texte="Administrer le bon de préparation"
   [item]
    [param_bouton]
+    wnom="CTMC_G"
+    wid_ressource="CONTREMARQUE_GENERER"
+    wetype_trait=arret
+    warret=5408
+   [info_bulle]
+   texte="Générer contremarque"
+  [item]
+   [param_bouton]
+    wnom="CTM_G"
+    wid_ressource="CONTREMARQUE_BL"
+    wetype_trait=arret
+    warret=5410
+   [info_bulle]
+   texte="Assistant livraison contremarque"
+  [item]
+   [param_bouton]
+    wnom="CTMD_G"
+    wid_ressource="CONTREMARQUE_ARBITRER"
+    wetype_trait=arret
+    warret=5411
+   [info_bulle]
+   texte="Arbitrer contremarque"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Preparation"
+    wid_ressource="PREPARATION"
+    wetype_trait=arret
+    warret=5407
+   [info_bulle]
+   texte="Administrer la préparation"
+  [item]
+   [param_bouton]
     wnom=".TOOLBAR"
     wtexte="Detail"
     wid_ressource="DETAIL"
@@ -27950,6 +30567,14 @@
     warret=5803
    [info_bulle]
    texte="Affecter une séquence"
+  [item]
+   [param_bouton]
+    wnom="CTMT_G"
+    wid_ressource="CONTREMARQUE_AFFECTER"
+    wetype_trait=arret
+    warret=5409
+   [info_bulle]
+   texte="Affecter/désaffecter la contremarque"
   [item]
    type=sep
    dessin=sep
@@ -27998,7 +30623,7 @@
    texte="Libellés complémentaires de l'article"
   [item]
    [param_bouton]
-    wnom="PREMIER"
+    wnom="PREMIER_G"
     wid_ressource="PREMIER"
     warret=5100
     wtrait_chaine="#ctrl_home"
@@ -28006,21 +30631,7 @@
    texte="Première pièce <Ctrl+Home>"
   [item]
    [param_bouton]
-    wnom="PRECEDENT"
-    wid_ressource="PREC__1"
-    wtrait_chaine="#shift_f2"
-   [info_bulle]
-   texte="Pièce précédente <Shift+F2>"
-  [item]
-   [param_bouton]
-    wnom="SUIVANT"
-    wid_ressource="SUIVANT__1"
-    wtrait_chaine="#f2"
-   [info_bulle]
-   texte="Pièce suivante <F2>"
-  [item]
-   [param_bouton]
-    wnom="DERNIER"
+    wnom="DERNIER_G"
     wid_ressource="DERNIER"
     warret=5101
     wtrait_chaine="#ctrl_end"
@@ -28028,7 +30639,7 @@
    texte="Dernière pièce <Ctrl+Fin>"
   [item]
    [param_bouton]
-    wnom="REFRESH2"
+    wnom="REFRESH_G"
     wid_ressource="RAFRAICHIR"
     wetype_trait=arret
     warret=5215
@@ -28037,11 +30648,17 @@
    texte="Rafraichir"
   [item]
    [param_bouton]
-    wnom="ALLER"
+    wnom="ALLER_G"
     wid_ressource="ALLER"
     wtrait_chaine="#f11"
    [info_bulle]
    texte="Aller à la pièce <F11>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR__10"
   [item]
    type=sep
    dessin=sep
@@ -28073,6 +30690,20 @@
     wid_ressource="PIED"
     wetype_trait=arret
     warret=3102
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="PFC"
+    wid_ressource="PFC"
+    wetype_trait=arret
+    warret=5538
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Contrat"
+    wid_ressource="CONTRAT"
+    wetype_trait=arret
+    warret=5539
   [item]
    dessin=vide
    [param_bouton]
@@ -28181,7 +30812,7 @@ Beginp
 	loc_NtPrd.Init()
 	loc_ART.Init()
 
-	loc_ART.Where.Zoom_pk(g1t1.Ref)
+	loc_ART.Where.pk(g1t1.Ref)
 	if loc_ART.Select() = 1
 		loc_NtPrd.Where.Zoom_pk(loc_ART.ProdNat)
 
@@ -28263,7 +30894,7 @@ EndP
 ;*		MJV		4.1						12.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gteepce000.dhsf 41631 2014-09-12 07:15:39Z lk $')
+SetModuleInfo('$Id: gteepce000.dhsf 52962 2016-01-22 08:39:19Z lk $')
 
 include "GTTCPCE000.dhsp"
 include "GTTC000.dhsp"
@@ -28279,6 +30910,8 @@ Module gtpmpceliste.dhop
 Module GTPPPCE000.dhop
 Module GTTTPCE000.dhop
 Module WMTM000.dhop
+
+
 
 
 public hfile	gtfdd.dhsd	GTFDOS		GTFDOS			; Fichier des dossiers
@@ -28311,6 +30944,8 @@ public record	gtfdd.dhsd	EEC
 public record	gtfdd.dhsd 	ART								; Articles
 public record	gtfdd.dhsd 	SART								; sous-références
 public record	gtfdd.dhsd 	EART								; référence externe
+public record	gtfdd.dhsd	ArtDepo		ArtDepo_Dst		; info depot destination
+Public record	gtfdd.dhsd	ArtDepo		ArtDepo_Ori		; info depot origine
 public record	gtfdd.dhsd 	ARTDEPO							; information depôt
 public record	gtfdd.dhsd 	RSO								; réappro
 public record	gtfdd.dhsd 	RFO								; référencement fournisseur
@@ -28325,7 +30960,6 @@ public record  gtfdd.dhsd 	T020								; table des codes opération
 public record  gtfdd.dhsd 	T023								; table des libellés unité
 public record  gtfdd.dhsd 	T025	T025_Ori					; table des natures de stock
 public record  gtfdd.dhsd 	T026								; table des modes de transport
-public record 	gtfdd.dhsd 	T030								; table des régimes tva
 public record	gtfdd.dhsd	T032								; table des libellés d'emballage
 public record	gtfdd.dhsd	T033								; table des coefficients d'emballage
 public record 	gtfdd.dhsd 	T034								; table des marchés
@@ -28427,6 +31061,36 @@ Endp
 ;*					traitements
 ;*
 
+procedure Adresse_Contremarque_Controler
+; Contrôler l'accès en modification de l'adresse en cas de contremarque directe 
+1	AdresseModifiable 1,0	 = True
+beginP
+	if GtEnt.CtmFl = C_ContreMarque_Directe and LireProgrammeMode() <> C_Mode_Creation
+		 ; on doit interdire l'accès à l'adresse en contremarque directe
+		 ; en modification commande fournisseur et client
+		switch Harmony.Dataind1
+		case 1	; Devis
+			if ENT.AdrTyp (3) = 3
+				AdresseModifiable = False
+			endif
+		case 2	; Commande
+			if ENT.AdrTyp (3) = 4
+				AdresseModifiable = False
+			endif
+		case 3	; Livraison
+			AdresseModifiable = False
+		default
+	
+		endswitch
+	
+	
+		if not AdresseModifiable
+			Harmony.Retour = XMENEXT_SAUT_DONNEE
+		endif
+	endif
+EndP
+
+
 ;*
 Public Procedure Champ_AcMt_1_Ap		; après montant acompte
 BeginP
@@ -28442,6 +31106,7 @@ beginp
 	if	ENT.ADRTYP(Harmony.DataInd1) <> 2
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	endif
+	Adresse_Contremarque_Controler
 endp
 
 ;*
@@ -28457,6 +31122,7 @@ beginp
 		; pas de saisie si manuelle
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	endif
+	Adresse_Contremarque_Controler
 
 endp
 
@@ -28562,6 +31228,15 @@ beginp
 	endif
 
 endp
+
+;*
+Public Procedure Champ_AdrTyp_1_Av
+;
+
+Beginp
+	Adresse_Contremarque_Controler
+Endp
+
 
 ;*
 public procedure Champ_AdrTyp_1_Ap				;initialisation en fonction du type d'adresse
@@ -28758,7 +31433,7 @@ public procedure Champ_Avenant_2_Ap				; contrôle de l'avenant
 BeginP
 	G1T1.LIB(21)	= ' '
 	if Controle_Avenant(G1T1.Projet,G1T1.Avenant,5200) = 0
-		G1T1.LIB(21) = PrjAvt.Lib80
+		G1T1.LIB(21) = TranslateData(PrjAvt.Lib80)
 	endif
 EndP
 
@@ -28804,7 +31479,7 @@ beginp
 	GTENT.Lib(7+Harmony.DataInd1) = ' ' 
 	if ENT.AXE(Harmony.DataInd1) <> ' ' and Soc_Controle_Donnees_comptables
 		if Controle_Axe(Harmony.DataInd1, ENT.AXE(Harmony.DataInd1),conf=false,hsdt=ENT.PIDT) = 0
-			GTENT.Lib(7+Harmony.DataInd1) = C5.LIB
+			GTENT.Lib(7+Harmony.DataInd1) = TranslateData(C5.LIB)
 		endif
 	endif
 Endp
@@ -28834,7 +31509,7 @@ beginp
 	G1T1.LIB(15+Harmony.DataInd1) = ' ' 
 	if G1T1.AXE(Harmony.DataInd1) <> ' ' and Soc_Controle_Donnees_comptables
 		if Controle_Axe(Harmony.DataInd1, G1T1.AXE(Harmony.DataInd1),conf=false,hsdt=ENT.PIDT) = 0
-			G1T1.LIB(15+Harmony.DataInd1) = C5.LIB
+			G1T1.LIB(15+Harmony.DataInd1) = TranslateData(C5.LIB)
 		endif
 	endif
 Endp
@@ -28887,7 +31562,7 @@ beginp
 	GTENT.Lib(29+Harmony.DataInd1) = ' '
 	if GTENT.Axe(Harmony.DataInd1) <> ' ' and Soc_Controle_Donnees_comptables
 		if Controle_Axe(Harmony.DataInd1, GTENT.Axe(Harmony.DataInd1),conf=false,hsdt=ENT.PIDT) = 0
-			GTENT.Lib(29+Harmony.DataInd1) = C5.LIB
+			GTENT.Lib(29+Harmony.DataInd1) = TranslateData(C5.LIB)
 		endif
 	endif
 Endp
@@ -28899,7 +31574,7 @@ beginp
 	if Harmony.DataModif
 		GTENT.Lib(7) = ' '
 		if Recherche_Transport(1126) = 0
-			GTENT.Lib(7) = T026.LIB
+			GTENT.Lib(7) = TranslateData(T026.LIB)
 		endif
 	endif
 Endp
@@ -29069,6 +31744,17 @@ endp
 
 
 ;*
+Public Procedure Champ_CtmFl_1_Av
+;
+Beginp
+	if ENT.PiCod <> 2 or ENT.Ticod not in ('C','F')
+		; si ce n'est pas une commande client ou fournisseur
+		Harmony.Retour = XmeNext_Saut_Donnee
+	endif
+Endp
+
+
+;*
 Public Procedure Champ_DelAccDt_1_Av
 ;
 Beginp
@@ -29113,10 +31799,10 @@ beginp
 endp
 
 ;*
-public procedure Champ_Depo_3_Av						;controle dépôt de l'en-tête
+public procedure Champ_Depo_3_Av						;controle dépôt destination de l'en-tête
 beginp
 	G3XZ.PONG	= False
-		Harmony.Retour = Xmenext_Saut_Donnee
+	Harmony.Retour = Xmenext_Saut_Donnee
 endp
 
 ;*
@@ -29157,7 +31843,7 @@ beginp
 			XmeSetAttribut('RESERVER2',AN_VISIBILITE,AV_CACHE)
 		endif
 
-		G1T1.LIB(2) = T017_Ori.LIB
+		G1T1.LIB(2) = TranslateData(T017_Ori.LIB)
 
 		If Harmony.Datamodif And Soc_Gerer_Tarifs_Par_Depot And G1T1.Pcod(1) <> C_Prix_Manuel
 			Recherche_Prix_G1T1(G1T1.DstQte,Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod),2225)
@@ -29175,7 +31861,7 @@ beginp
 			else
 				lieu = ' '
 			endif
-
+			G1T1.Lieu = lieu
 			Maj_Vtl_Stres(true,lieu)
 		endif
 
@@ -29185,7 +31871,7 @@ EndP
 ;*
 Public Procedure Champ_Depo_2_Av		
 Beginp
-	if T025_Ori.Depo <> ' ' or ENT.BLAsDepo <> ' '
+	if T025_Ori.Depo <> ' '	or ENT.BLAsDepo <> ' '
 		; Le champ dépôt n'est pas saisissable si la nature origine est assignée à un dépôt
 		Harmony.Retour = Xmenext_Saut_Donnee
 	endif
@@ -29201,6 +31887,7 @@ beginp
 	
 	GTENT.LIB(26) = ' '
  	if Controle_Depo(ENT.BLASDEPO,1117) = 0
+		GTPCE.BlAsDepo = ENT.BLASDEPO
 		T017_Dst	= T017
 		GTENT.LIB(26) = T017_Dst.LIB
 		Piece_Charger_Adresse (GTENT.ADRTB(),GTPCE.TiCodDst,GTPCE.PiCodDst,ENT.PINO,ENT.PIDT,GTENT.SENS,MajTour=true)
@@ -29388,13 +32075,9 @@ public procedure Champ_EdCod_1_Ap			; après code impression
 1	i	1,0
 beginp
 	if G1T1.EDCOD <> ' '
-		for i = 1 to length(G1T1.EDCOD)
-			if mid(G1T1.EDCOD,i,1) not in ('C','F','I',1..5,'*',' ' )
-				Mes_Alert(2115)
-				Harmony.retour = XmeNext_Traitement_Avant
-				preturn
-			endif
-		next			 
+		if Controler_EdCod(G1T1.EdCod,2115)<> 0
+			preturn
+		endif
 	endif
 endp
 
@@ -29403,13 +32086,9 @@ public procedure Champ_EdCod_2_Ap			; après code impression du texte lié
 1	i	1,0
 beginp
 	if G1T1.TXTEDCOD <> ' '
-		for i = 1 to length(G1T1.TXTEDCOD)
-			if mid(G1T1.TXTEDCOD,i,1) not in ('C','F','I',1..5,'*',' ' )
-				Mes_Alert(2115)
-				Harmony.retour = XmeNext_Traitement_Avant
-				preturn
-			endif
-		next			 
+		if Controler_EdCod(G1T1.TxtEdCod,2115)<> 0
+			preturn
+		endif
 	endif
 endp
 
@@ -29418,13 +32097,9 @@ public procedure Champ_EdCod_3_Ap			; après code impression du texte lié en-tête
 1	i	1,0
 beginp
 	if ENT.TXTEDCODD <> ' '
-		for i = 1 to length(ENT.TXTEDCODD)
-			if mid(ENT.TXTEDCODD,i,1) not in ('C','F','I',1..5,'*',' ' )
-				Mes_Alert(2115)
-				Harmony.retour = XmeNext_Traitement_Avant
-				preturn
-			endif
-		next			 
+		if Controler_EdCod(ENT.TxTEdCodD,2115)<> 0
+			preturn
+		endif
 	endif
 endp
 
@@ -29433,13 +32108,9 @@ public procedure Champ_EdCod_4_Ap			; après code impression du texte lié pied
 1	i	1,0
 beginp
 	if ENT.TXTEDCODF <> ' '
-		for i = 1 to length(ENT.TXTEDCODF)
-			if mid(ENT.TXTEDCODF,i,1) not in ('C','F','I',1..5,'*',' ' )
-				Mes_Alert(2115)
-				Harmony.retour = XmeNext_Traitement_Avant
-				preturn
-			endif
-		next			 
+		if Controler_EdCod(ENT.TXTEDCODF,2115)<> 0
+			preturn
+		endif
 	endif
 endp
 
@@ -29698,7 +32369,7 @@ public procedure Champ_Marche_2_Ap						; contrôle le marché de la ligne
 beginp
 	G1T1.LIB(3) = ' '
 	if G1T1.MARCHE <> ' ' and Lectab(34,[GTPCE.TiCodDst ENT.TIERS G1T1.MARCHE],1134) = 0
-		G1T1.LIB(3) = T034.LIB		
+		G1T1.LIB(3) = TranslateData(T034.LIB)
 		if Soc_Gerer_Prix_Specifiques_Client
 			If G1T1.Pcod(1) = C_Prix_Standard_Saisi And G1T1.TaCod = '99'
 				Recherche_Prix_G1T1(G1T1.DstQte,Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod),2225)
@@ -29735,7 +32406,7 @@ public procedure Champ_Marche_3_Ap						; contrôle le marché de la modification 
 beginp
 	GTENT.LIB(34) = ' '
 	if GTENT.MARCHE <> ' ' and Lectab(34,[GTPCE.TiCodDst ENT.TIERS GTENT.MARCHE],1134) = 0
-		GTENT.LIB(34) = T034.LIB
+		GTENT.LIB(34) = TranslateData(T034.LIB)
 	endif
 endp
 
@@ -29772,7 +32443,14 @@ beginp
 				Harmony.Retour = XmeNext_Traitement_Avant
 				preturn
 			endif
-
+			if	T020_Ent.PRGTRTTYP(4) = 2 and T020.PRGTRTTYP(4) <> Oui
+				Mes_Alert(1365,G1T1.OP)
+				G1T1.SENS	= sens
+				G1T1.SAIP	= saip
+				pinglocalreceive ('GTTE220_T020',T020) 				
+				Harmony.Retour = XmeNext_Traitement_Avant	
+				preturn
+			endif
 			if sens <> G1T1.SENS 
 				if LireProgrammePhase() <> C_Phase_LigneCreat
 					; modification du sens interdite en dehors de la création de ligne
@@ -29818,7 +32496,7 @@ beginp
 				Maj_Vtl_Stres
 			endif
 
-			G1T1.LIB(1) = T020.LIB	
+			G1T1.LIB(1) = TranslateData(T020.LIB)
 		endif
 	endif
 endp
@@ -30025,14 +32703,14 @@ EndP
 
 ;*
 public procedure Champ_Projet_1_Ap						; controle du projet de l'en-tête
-1		i	2,0
+1		i	2,0																  
 1		Tiers	>gtfdd.dhsd Tiers
 1		rz			L			; Résultat zoom
 1		TypeProjetAffaire	1,0		; retour de fonction pour identifier code projet ou affaire
 beginp
 	If Harmony.Key = K_F8
 		Switch GTPCE.PiCodDst
-		case GTPCE.TicodDst = 'F' 	|rz = Zoom_Call(9500)
+		case GTPCE.TicodDst in ('F','I') 	|rz = Zoom_Call(9500)
 		Case 1	|	rz = Zoom_Call(9843)
 		Default	|	rz = Zoom_Call(9868)
  		EndSwitch
@@ -30098,9 +32776,9 @@ public procedure Champ_Projet_2_Ap						; controle du projet de la ligne
 beginp
 	If Harmony.Key = K_F8
 			Switch GTPCE.PiCodDst
-			case GTPCE.TicodDst = 'F'     |rz = Zoom_Call(9500)
-			Case 1								|	rz = Zoom_Call(9843)
-			Default								|	rz = Zoom_Call(9868)
+			case GTPCE.TicodDst in  ('I','F')	|rz = Zoom_Call(9500)
+			Case 1										|	rz = Zoom_Call(9843)
+			Default										|	rz = Zoom_Call(9868)
 	 		EndSwitch
 			If rz <> E_ZOOM_OK	|	PReturn	|	EndIf
 	EndIf
@@ -30119,9 +32797,9 @@ beginp
 	if ((GTPCE.PicodDst = 1) and (Controle_Projet_Ou_Affaire(G1T1.PROJET,5005,tiers,conf=false,niv=1,TypeTable=TypeProjetAffaire) = 0))	 \
 		or ((GTPCE.PicodDst <> 1) and (Controle_Affaire(G1T1.PROJET, 5000, tiers, conf=false,niv=1) = 0))
 		if TypeProjetAffaire = 1
-			G1T1.LIB(4) = PRJAV.LIB80
+			G1T1.LIB(4) = TranslateData(PRJAV.LIB80)
 		else	
-			G1T1.LIB(4) = PRJAP.LIB80
+			G1T1.LIB(4) = TranslateData(PRJAP.LIB80)
 		endif
 				
 		; recherche si axe par défaut = projet
@@ -30131,7 +32809,7 @@ beginp
 
 				; controle axe dans C3
 				if Soc_Controle_Donnees_comptables and Recherche_Axe(i, G1T1.AXE(i),false) = 0
-					G1T1.LIB(15+i) = C5.LIB
+					G1T1.LIB(15+i) = TranslateData(C5.LIB)
 				else
 					G1T1.AXE(i) = ' '
 					G1T1.LIB(15+i) = ' '
@@ -30141,7 +32819,7 @@ beginp
 		; contrôle avenant valide
 		G1T1.LIB(21)	= ' '
 		if Recherche_Avenant(G1T1.Projet,G1T1.Avenant) = 0
-			G1T1.LIB(21) = PrjAvt.Lib80
+			G1T1.LIB(21) = TranslateData(PrjAvt.Lib80)
 		else
 			G1T1.Avenant = ' '
 		endif
@@ -30186,12 +32864,10 @@ beginp
 	if ((GTPCE.PicodDst = 1) and (Controle_Projet_Ou_Affaire(GTENT.PROJET,5005,tiers,conf=false,niv=1,TypeTable=TypeProjetAffaire) = 0))	 \
 		or ((GTPCE.PicodDst <> 1) and (Controle_Affaire(GTENT.PROJET, 5000, tiers, conf=false,niv=1) = 0))
 		if TypeProjetAffaire = 1
-			GTENT.LIB(35) = PRJAV.LIB80
+			GTENT.LIB(35) = TranslateData(PRJAV.LIB80)
 		else	
-			GTENT.LIB(35) = PRJAP.LIB80
+			GTENT.LIB(35) = TranslateData(PRJAP.LIB80)
 		endif
-		
-		GTENT.LIB(35) = PRJAP.LIB80
 	endif
 EndP
 
@@ -30219,6 +32895,7 @@ beginp
 	Endif
 	Piece_Calculer_HT_G1T1
 	Maj_Champs_Tarifs
+
 Endp
 
 
@@ -30278,7 +32955,12 @@ beginp
 		if G1T1.StQte <> G1T1.DstQte
 			Mes_Alert(2286)
 		endif
-	
+		if LireProgrammeFonction = C_Fonction_Validation	and GTPCE.PiCodOri = 2 and GTPCE.PiCodDst = 4 
+			if G1T1.DstQte <> 0
+				G1T1.DstQte = G1T1.StQte 
+			endif
+		endif
+
 		if Harmony.DataModif
 			; recherche du tarif par quantité
 			If G1T1.Pcod(1) <> C_Prix_Manuel	|	Recherche_Famille_Tarif_G1T1(G1T1.FaQte, G1T1.FaSlg, 2225)	|	Endif
@@ -30364,7 +33046,8 @@ EndP
 ;*
 public procedure Champ_Ref_1_Av
 beginp
-		; sauvegarder l'ancienne valeur en cas de modification de la référence
+	
+	; sauvegarder l'ancienne valeur en cas de modification de la référence
 	G1T1.GRREFD = G1T1.GRREF
 	G3XZ.TIERS	= ENT.TIERS		; pour piloté zoom référencement client
 	G3XZ.TICOD	= GTPCE.TiCodDst
@@ -30389,7 +33072,6 @@ Public Procedure Champ_Ref_1_Ap
 1		RfcCtrCod	>GTFDD.dhsd RfcCtrCod
 1		Niv			1,0
 1		TvaArt		>GTFDD.dhsd TvaArt
-RecordSql 'GTRSPPTAB.dhoq'	TauxTvaN	TauxTva_Loc
 
 beginp
 	If Harmony.Key = K_SF8
@@ -30420,7 +33102,7 @@ beginp
 	Default 	|	Niv = 1
 	EndSwitch
 
-	If Controle_Article(G1T1.Ref, 2100, Niv, TRUE, ENT.PiDt, ENT.Tiers, TRUE, rfcctrcod=RfcCtrCod) = 0
+	If Controle_Article(G1T1.Ref, 2100, Niv, TRUE, ENT.PiDt, ENT.Tiers, TRUE, depo=ENT.depo,rfcctrcod=RfcCtrCod) = 0
 		TvaArt = Condition(GTPCE.TicodDst <> 'F', ART.TvaArt, ART.TvaArtA)
 
 		If ENT.Ticod = 'I'
@@ -30433,9 +33115,9 @@ beginp
 					Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 				EndIf
 			EndIf
-		ElsIf Seek_TauxTvaN(TauxTva_Loc, TvaArt, ENT.TvaTie, ENT.PiDt) = 0		; Contrôle code TVA
-			If Soc_Utiliser_TPF																	; Pas de contrôle pour les pièces internes
-				For i = 1 to 3																		; Contrôle code TPF
+		ElsIf Controler_ExistenceTauxTaxe(TvaArt, ENT.TvaTie, ENT.PiDt, afficherErreur=TRUE) = 0		; Contrôle d'existence d'un taux
+			If Soc_Utiliser_TPF																								; Pas de contrôle pour les pièces internes
+				For i = 1 to 3																									; Contrôle code TPF
 					If ART.TpfR(i) <> 0  and GTPCE.TicodDst = 'C'
 						If Lectab(4, [ ART.TpfR(i) ENT.TpfT ], 1104) <> 0 
 							i = 3
@@ -30444,7 +33126,6 @@ beginp
 				Next
 			EndIf
 		Else
-			Mes_Alert(1185, [ TvaArt *1 ENT.TvaTie *1 ENT.PiDt ])
 			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 		EndIf
 
@@ -30493,7 +33174,6 @@ beginp
 				else
 					G1T1.PUB = EART.PUNET
 				endif
-
 			else
 				G1T1.PUB = 0
 			endif
@@ -30514,7 +33194,7 @@ beginp
 	elsif Harmony.DataModif
 		; lecture uniquement en cas de modification de la zone à cause des échéances multiples
 		if Lectab(6 , ENT.REGL , 1106) = 0
-			GTENT.LIB(1) = T006.LIB
+			GTENT.LIB(1) = TranslateData(T006.LIB)
 			if T006.REG9 <> 2
 				; échéance calculée
 				ENT.ECHDT = ' '
@@ -30564,6 +33244,11 @@ BeginP
 		G1T1.Pcod(2) = C_Prix_Manuel
 		Maj_Champs_Tarifs
 	Endif
+	if Harmony.Dataind1 <> 0
+		if G1T1.RemTyp(Harmony.Dataind1) = ' '
+			G1T1.RemTyp(Harmony.Dataind1)	= 1
+		endif
+	endif
 	Piece_Calculer_HT_G1T1
 Endp
 
@@ -30581,7 +33266,7 @@ public procedure Champ_ReFam_1_Ap				; après classe de remise en-tête
 beginp
 	GTENT.LIB(15) = ' '
 	if Lectab(2,Piece_Ticod_Tarif  &  ENT.REFAM,1102)= 0
-		GTENT.LIB(15) = T002.LIB
+		GTENT.LIB(15) = TranslateData(T002.LIB)
 	endif
 endp
 
@@ -30590,7 +33275,7 @@ public procedure Champ_ReFam_2_Ap				; après classe de remise exceptionnelle en-
 beginp
 	GTENT.LIB(16) = ' '
 	if Lectab(2,Piece_Ticod_Tarif & ENT.REFAMX,1102)= 0
-		GTENT.LIB(16) = T002.LIB
+		GTENT.LIB(16) = TranslateData(T002.LIB)
 	endif
 endp
 
@@ -30611,7 +33296,7 @@ beginp
 	
 		if Lectab(2,Piece_Ticod_Tarif  & G1T1.REFAMR,1102) = 0
 	
-			G1T1.LIB(8) = T002.LIB
+			G1T1.LIB(8) = TranslateData(T002.LIB)
 	
 			; classe de remise existe
 			Recherche_Classe_Remise_G1T1(G1T1.DstQte,Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod))
@@ -30619,7 +33304,7 @@ beginp
 	
 			; le code remise a pu être modifié recharger le libellé
 			if Lectab(35,Piece_Ticod_Tarif  & G1T1.REMCOD) = 0
-				G1T1.LIB(10) = T035.LIB
+				G1T1.LIB(10) = TranslateData(T035.LIB)
 			endif
 	
 			; calcul HT d'une ligne
@@ -30637,7 +33322,7 @@ beginp
 	
 		if Lectab(2,Piece_Ticod_Tarif  & G1T1.REFAMRX,1102) = 0
 	
-			G1T1.LIB(9) = T002.LIB
+			G1T1.LIB(9) = TranslateData(T002.LIB)
 	
 			; classe de remise existe
 			Recherche_Classe_Remise_G1T1(G1T1.DstQte,Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod))
@@ -30646,7 +33331,7 @@ beginp
 				
 			; le code remise a pu être modifié recharger le libellé
 			if Lectab(35,Piece_Ticod_Tarif  & G1T1.REMCOD) = 0
-				G1T1.LIB(10) = T035.LIB
+				G1T1.LIB(10) = TranslateData(T035.LIB)
 			endif
 	
 			; calcul HT d'une ligne
@@ -30661,7 +33346,7 @@ public procedure Champ_RemCod_1_Ap				; après code remise en-tête
 beginp
 	GTENT.LIB(17) = ' '
 	if Lectab(35,Piece_Ticod_Tarif  & ENT.REMCOD,1135)= 0
-		GTENT.LIB(17) = T035.LIB
+		GTENT.LIB(17) = TranslateData(T035.LIB)
 	endif
 endp
 
@@ -30688,7 +33373,7 @@ beginp
 				Mes_Alert(2224)
 				Harmony.Retour = XmeNext_Traitement_Avant
 			Elsif Lectab(35,Piece_Ticod_Tarif  & G1T1.RemCod,1135) = 0
-				G1T1.Lib(10) = T035.Lib
+				G1T1.Lib(10) = TranslateData(T035.Lib)
 				; code remise existe
 				If Harmony.DataModif	|	G1T1.Pcod(2)	= C_Prix_Standard_Saisi	|	Endif
 	
@@ -31035,14 +33720,19 @@ beginp
 			; recherche ArtDepo pour initialiser emplacement même si saisie en grille
 			; sera pris en compte pour les prochaines créations de ventilation
 			Recherche_ArtDepo(G1T1.REF, T017_Dst.DEPO,G1T1.SREF1, G1T1.SREF2,G1T1.NST )
-			G1T1.BLASLIEU = ARTDEPO.LIEU
+			ArtDepo_Dst	= ArtDepo
+			Recherche_EmplacementImplicite (G1T1.REF,T017_Dst.DEPO,G1T1.SREF1,G1T1.SREF2,G1T1.NST,AvecLectureArtDepo=False) 
+			G1T1.BlAsLieu = T018.Lieu
 		endif	
 
 		if Soc_Gerer_Emplacements and T017_Ori.LIEUCOD = Oui
 			; recherche ArtDepo pour initialiser emplacement même si saisie en grille
 			; sera pris en compte pour les prochaines créations de ventilation
 			Recherche_ArtDepo(G1T1.REF, T017_Ori.DEPO,G1T1.SREF1, G1T1.SREF2,G1T1.NST )
-			G1T1.LIEU = ARTDEPO.LIEU
+			ArtDepo_Ori	= ArtDepo
+			Recherche_EmplacementImplicite (G1T1.REF,T017_Ori.DEPO,G1T1.SREF1,G1T1.SREF2,G1T1.NST,AvecLectureArtDepo=False) 
+			; emplacement implicite existe ou espace
+			G1T1.Lieu = T018.Lieu
 		endif	
 
 	endif
@@ -31080,7 +33770,7 @@ EndP
 ;*
 public procedure Champ_StRes_2_Av				; avant réserver le stock sur la ligne
 beginp
-	if (not Soc_Gerer_Reservation) or (not Soc_Gerer_Stock) or T017_Ori.STRES = Non or ART.STRES = Non or G1T1.SENS = 1 or G1T1.MVCOD = Non
+	if (not Soc_Gerer_Reservation) or (not Soc_Gerer_Stock) or T017_Ori.STRES = Non or ART.STRES = Non or G1T1.SENS = 1 or G1T1.MVCOD = Non or G1T2.PrevFlg = 2 
 		Harmony.Retour = Xmenext_Saut_Donnee
 	endif
 EndP
@@ -31098,7 +33788,7 @@ beginp
 
 	GTENT.LIB(14) = ' '
 	if Lectab(14, Piece_Ticod_Tarif & ENT.TACOD,1114)= 0
-		GTENT.LIB(14) = T014.LIB
+		GTENT.LIB(14) = TranslateData(T014.LIB)
 	endif
 endp
 
@@ -31135,7 +33825,7 @@ beginp
 		
 			elsif Lectab(14,Piece_Ticod_Tarif & G1T1.TACOD,1114) = 0
 			
-				G1T1.LIB(7) = T014.LIB
+				G1T1.LIB(7) = TranslateData(T014.LIB)
 	
 				; code tarif existe
 				If Harmony.Datamodif	|	G1T1.Pcod(1) 	= C_Prix_Standard_Saisi	|	Endif
@@ -31163,7 +33853,7 @@ public procedure Champ_TaFam_1_Ap				; après famille tarif en-tête
 beginp
 	GTENT.LIB(12) = ' '
 	if Lectab(1, Piece_Ticod_Tarif  & ENT.TAFAM,1101)= 0
-		GTENT.LIB(12) = T001.LIB
+		GTENT.LIB(12) = TranslateData(T001.LIB)
 	endif
 endp
 
@@ -31172,13 +33862,21 @@ public procedure Champ_TaFam_2_Ap				; après famille tarif exceptionnelle en-têt
 beginp
 	GTENT.LIB(13) = ' '
 	if Lectab(1, Piece_Ticod_Tarif  & ENT.TAFAMX,1101)= 0
-		GTENT.LIB(13) = T001.LIB
+		GTENT.LIB(13) = TranslateData(T001.LIB)
 	endif
 endp
 
 ;*
+Public Procedure PositionnerTiCod
+;
+Beginp
+	G3XZ.TiCod = GTPCE.TiCodDst
+Endp
+
+;*
 public procedure Champ_TaFam_3_Av				; avant famille tarif générale ligne
 beginp
+	PositionnerTiCod
 	If G1T1.Pcod(1) <> C_Prix_Auto
 		Harmony.Retour = XMENEXT_SAUT_DONNEE 
 	endif
@@ -31200,7 +33898,7 @@ beginp
 	If Harmony.DataModif
 		G1T1.LIB(5) = ' '
 		if Lectab(1, Piece_Ticod_Tarif  & G1T1.TAFAMR,1101) = 0
-			G1T1.LIB(5) = T001.LIB
+			G1T1.LIB(5) = TranslateData(T001.LIB)
 	
 			; famille tarification existe
 			Recherche_Famille_Tarif_G1T1(G1T1.DstQte,Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod),2225)
@@ -31208,7 +33906,7 @@ beginp
 	
 			; le code tarif a pu être modifié recharger le libellé
 			if Lectab(14,Piece_Ticod_Tarif  & G1T1.TACOD) = 0
-				G1T1.LIB(7) = T014.LIB
+				G1T1.LIB(7) = TranslateData(T014.LIB)
 			endif
 				
 			; calcul HT d'une ligne
@@ -31225,7 +33923,7 @@ beginp
 		G1T1.LIB(6) = ' '
 	
 		if Lectab(1, Piece_Ticod_Tarif  &  G1T1.TAFAMRX,1101) = 0
-			G1T1.LIB(6) = T001.LIB
+			G1T1.LIB(6) = TranslateData(T001.LIB)
 	
 			; famille tarification existe
 			Recherche_Famille_Tarif_G1T1(G1T1.DstQte,Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod),2225)
@@ -31233,7 +33931,7 @@ beginp
 	
 			; le code tarif a pu être modifié recharger le libellé
 			if Lectab(14,Piece_Ticod_Tarif  & G1T1.TACOD) = 0
-				G1T1.LIB(7) = T014.LIB
+				G1T1.LIB(7) = TranslateData(T014.LIB)
 			endif
 						
 			; calcul HT d'une ligne
@@ -31266,6 +33964,8 @@ beginp
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	endif
 	TiersLivreAvantSaisie	= ENT.AdrTiers(3) 
+	Adresse_Contremarque_Controler
+
 endp
 
 ;*
@@ -31457,7 +34157,7 @@ RecordSql 'GTRSPPTAB.dhoq' RegimeTvaTiersN	RegTvaTiers_Loc
 Beginp
 	GTENT.Lib(6) = ' '
 	If Lectab_(RegTvaTiers_Loc, ENT.TvaTie, err=1186) = 0
-		GTENT.Lib(6) = RegTvaTiers_Loc.Lib
+		GTENT.Lib(6) = TranslateData(RegTvaTiers_Loc.Lib)
 		Piece_TTC_Taux_Chargement
 	endif
 Endp
@@ -31499,8 +34199,9 @@ BeginP
 				; si prix n'est pas manuel recherche du code tarif
 				Recherche_Famille_Tarif_G1T1(G1T1.DstQte,Piece_Ligne_LireSlg(G1T1.MOUV,ENT.PiCod),2225)			
 				Maj_Promotyp
-				Piece_Calculer_HT_G1T1
+				
 			endif
+			Piece_Calculer_HT_G1T1
 			; convertir les ventilations
 			Convertir_Qte_Refqte_Tous_Vtl
 
@@ -31546,8 +34247,11 @@ BeginP
 			; prix manuel on n'effectue plus de recherche tarifaire
 			G1T1.Pcod(1) = C_Prix_Manuel
 			Maj_Champs_Tarifs
+			G1T1.Lib(12) = TranslateData(T023.Lib)
+		else
+			G1T1.Lib(12) = ' '
 		Endif
-		G1T1.Lib(12) = T023.Lib
+		
 		
 		Piece_Calculer_HT_G1T1
 	Endif
@@ -31559,7 +34263,7 @@ BeginP
 	if Harmony.DataModif
 		G1T1.LIB(20) = ' '
 		if Lectab(32,G1T1.EMBUN,1132) = 0 
-			G1T1.LIB(20) = T032.LIB
+			G1T1.LIB(20) = TranslateData(T032.LIB)
 		endif
 	endif
 EndP
@@ -31576,7 +34280,7 @@ BeginP
 				preturn
 			endif
 
-			G1T1.LIB(22) = T023.LIB
+			G1T1.LIB(22) = TranslateData(T023.LIB)
 		
 		endif
 	endif
@@ -31601,7 +34305,6 @@ Beginp
 	if LireProgrammeFonction = C_Fonction_Validation
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	endif
- 
 Endp
 
 
@@ -31648,7 +34351,10 @@ Endp
 Public Procedure Champ_PoiNTot_1_Ap
 ;
 Beginp
-
+	if Harmony.DataModif
+		; si le poids a été saisi
+		ENT.POINCOD = 2
+	endif
 Endp
 
 
@@ -31662,6 +34368,15 @@ Beginp
 	endif
 
 	Champ_Pub_1_Av
+Endp
+
+
+Public Procedure Champ_PrevFlg_1_Ap
+;
+Beginp
+	if G1T2.PrevFlg = 2
+		G1T2.StRes = 1
+	endif
 Endp
 
 
@@ -31698,7 +34413,6 @@ Beginp
 	QteLivreAvantSaisie	= G1T1.BLQTE
 Endp
 
-
 ;*
 Public Procedure Champ_Qte_4_Ap	
 ; Après quantité destination
@@ -31719,7 +34433,6 @@ Beginp
 		; Validation en facture, spécifique
 		Traitement_Champ_Qte_4_Ap
 	endswitch
-
 Endp
 
 ;*
@@ -31745,6 +34458,10 @@ Beginp
 		G1T1.DstQTE	= G1T1.BLQTE
 		G1T1.FAQTE	= G1T1.BLQTE
 	endif
+	if LireProgrammeFonction = C_Fonction_Validation	and GTPCE.PiCodOri = 2 and GTPCE.PiCodDst = 4
+		G1T1.DstQte = G1T1.StQte 
+	endif
+
 	G1T1_Traitement_Champ_Qte_1_Ap
 Endp
 
@@ -31791,6 +34508,14 @@ beginp
 	endif
 
 Endp
+
+;*
+Public Procedure Champ_Regl_1_Av
+;
+Beginp
+	G3XZ.Pong = False
+Endp
+
 
 ;*
 public procedure Champ_Status_1_Av						; avant controle qualité ventilation
@@ -31866,7 +34591,7 @@ Beginp
 				Mes_Alert(2224)
 				Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 			Elsif Lectab(72,Piece_Ticod_Tarif  &  G1T1.PromoRemCod,1172) = 0
-				G1T1.Lib(25) = T072.Lib
+				G1T1.Lib(25) = TranslateData(T072.Lib)
 	
 				; code remise existe
 				If Harmony.Datamodif	|	G1T1.Pcod(2) 	= C_Prix_Promotion_Saisi	|	Endif
@@ -31946,7 +34671,7 @@ Beginp
 				Mes_Alert(2224)
 				Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 			Elsif Lectab(72,Piece_Ticod_Tarif  &  G1T1.PromoTaCod,1172) = 0
-					G1T1.Lib(24) = T072.Lib
+					G1T1.Lib(24) = TranslateData(T072.Lib)
 		
 				; code tarif promotion existe
 				If Harmony.Datamodif	|	G1T1.Pcod(1) 	= C_Prix_Promotion_Saisi	|	Endif
@@ -32105,12 +34830,6 @@ EndP
 						
 
 
-;*
-Public Procedure PositionnerTiCod
-;
-Beginp
-	G3XZ.TiCod = GTPCE.TiCodDst
-Endp
 
 
 

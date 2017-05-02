@@ -31,7 +31,7 @@ Include	"gtTCz00.dhsp"
 include	"Cogtc_000.dhsp"		;fichiers constantes
 
 ;
-Public RecordSQL	"GTRSPPPCE.DHOQ"		Mouvement			CogRs_MOUV
+Public RecordSQL	"GTRSPCE.DHOQ"		Mouvement			CogRs_MOUV
 
 ;
 public record	gtfdd.dhsd	T020			;code opérations
@@ -456,4 +456,27 @@ BeginF
 	FReturn(Condition(wOK, 0, 1))
 
 EndF
+
+;*
+;*
+public function char Nom_Abrege (nom)
+
+; convertit un nom en nom abrégé par la suppression des blancs et des caractères spéciaux + majuscules 
+
+1			nom						A						; nom à convertir
+
+1			i							3,0
+
+beginf	; nom_abrege
+
+	nom = fstring('U', nom)
+	for i = 1 to length(nom)
+		if not isalpha(mid(nom, i, 1))
+			mid(nom, i, 1) = ' '
+		endif
+	next
+	nom = fstring('A', nom)
+	freturn(left(nom))
+
+endf		; nom_abrege
 

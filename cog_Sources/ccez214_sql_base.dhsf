@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20121029183211      
+;>xwin4obj                              7.0       20151006110405      
 [masque]
  libelle="ZOOM DES ZOOMS"
  utilisateur="MS"
- date_modification="29/10/2012"
+ date_modification="06/10/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=52
  type_masque=2
@@ -18,7 +18,7 @@
 [enregistrements]
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "ccfdd.dhsd",,x1,x1,1752,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1500,0
  "ccrstab.dhoq",,natimmo,natimmo,1024,1
 [onglet]
  [presentation]
@@ -1436,7 +1436,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: ccez214_sql.dhsf 26704 2012-10-29 17:43:00Z ms $')
+SetModuleInfo('$Id: ccez214_sql.dhsf 50250 2015-10-06 09:08:06Z ms $')
 ;>xdiva
 ;*
 ;*		Zoom natures d'immobilisation																											ccez214
@@ -1654,12 +1654,12 @@ beginp	; Champ_FisTyp_1_Ap
 			preturn
 		endif
 
-		if NatImmo.FisTyp <> NatImmo.EcoTyp and NatImmo.EcoTyp <> 2
-			NatImmo.FisTyp = NatImmo.EcoTyp
-			Mes_Alert(7139)
-			Harmony.Retour = XmeNext_Debut_Donnee
-			preturn
-		endif
+;		if NatImmo.FisTyp <> NatImmo.EcoTyp and NatImmo.EcoTyp <> 2
+;			NatImmo.FisTyp = NatImmo.EcoTyp
+;			Mes_Alert(7139)
+;			Harmony.Retour = XmeNext_Debut_Donnee
+;			preturn
+;		endif
 
 		Regler_Acces_Fistyp
 

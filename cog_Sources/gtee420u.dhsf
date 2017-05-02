@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20160826103147      
+;>xwin4obj                              7.0       20161207110833      
 [masque]
  utilisateur="UGIE"
- date_modification="26/08/2016"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=166
  dernier_id=1000002
  surcharge=oui
- date_modif_base="20110819094619"
+ date_modif_base="20130513113905"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -1004,7 +1004,7 @@
    texte="Mode de transport"
  [obj_texte]
   [presentation]
-   position=8,83
+   position=8,97
    taille=9,9
    id=56
    wstyle="STD"
@@ -1013,7 +1013,7 @@
  [champ]
   [presentation]
    position=8,56
-   taille=9,20
+   taille=9,32
    id=57
    wstyle="CHAMP_SAISI"
   [description]
@@ -1034,8 +1034,8 @@
    "zoom"
  [champ]
   [presentation]
-   position=8,95
-   taille=9,20
+   position=8,109
+   taille=9,32
    id=58
    wstyle="CHAMP_SAISI"
   [description]
@@ -1247,7 +1247,7 @@
    texte="Mode de transport"
  [obj_texte]
   [presentation]
-   position=8,85
+   position=8,98
    taille=9,10
    id=69
    wstyle="STD"
@@ -1256,7 +1256,7 @@
  [champ]
   [presentation]
    position=8,56
-   taille=9,20
+   taille=9,32
    id=70
    wstyle="CHAMP_SAISI"
   [description]
@@ -1277,8 +1277,8 @@
    "zoom"
  [champ]
   [presentation]
-   position=8,97
-   taille=9,20
+   position=8,110
+   taille=9,32
    id=71
    wstyle="CHAMP_SAISI"
   [description]
@@ -1573,7 +1573,7 @@ Public Record "gtfdd.dhsd" xq xq_cog
 ;*    Lm       5.1      1726        07.2001  gestion tiret fournisseur
 
 
-SetModuleInfo('$Id: gtee420.dhsf 17048 2011-08-19 09:45:13Z sn $')
+SetModuleInfo('$Id: gtee420.dhsf 31550 2013-05-13 12:34:30Z sn $')
 
 Include		"GTTC000.dhsp"																					
 

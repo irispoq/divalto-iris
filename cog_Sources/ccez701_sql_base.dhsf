@@ -1,7 +1,7 @@
-;>xwin4obj                              7.0       20130227140720      
+;>xwin4obj                              7.0       20150729121936      
 [masque]
- utilisateur="MS"
- date_modification="27/02/2013"
+ utilisateur="ROOT"
+ date_modification="29/07/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=486
  type_masque=2
@@ -16,7 +16,7 @@
 [enregistrements]
  "ccfdd.dhsd",,x1,x1,1752,0
  "ccfdd.dhsd",,cd,cd,400,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1500,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "ccrsimmo.dhoq",,immo,immobilisation,1024,1
  "ccfdd.dhsd",,i1,i1_sel,1900,0
@@ -465,7 +465,7 @@
    texte="Etablissement"
    [param_colonne]
     titre="Etablissement"
-    fl_aff=oui
+    fl_aff=non
     largeur_col=43
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -538,7 +538,7 @@
    texte="Compte d'immobilisation du bien"
    [param_colonne]
     titre="Compte"
-    fl_aff=oui
+    fl_aff=non
     largeur_col=35
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
@@ -5582,6 +5582,14 @@
    [info_bulle]
    texte="Historique des biens immobilisés"
   [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Amortissements"
+    wid_ressource="ZOOMECR"
+    wtrait_chaine="#F6"
+   [info_bulle]
+   texte="Consulter les amortissements <F6>"
+  [item]
    type=sep
    dessin=sep
    [param_bouton]
@@ -5730,7 +5738,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: ccez701_sql.dhsf 29928 2013-02-27 13:04:42Z ms $')
+SetModuleInfo('$Id: ccez701_sql.dhsf 48399 2015-07-29 11:38:54Z als $')
 ;>xdiva
 ;*
 ;*		zoom sur les biens																													cctez701.dhsp
@@ -6004,7 +6012,7 @@ beginp	; Champ_AcqDt_1_Ap
 	IMMOBILISATION.ExoPDt = Debut_Exercice(IMMOBILISATION.AcqDt)
 
 	if ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION or IMMOBILISATION.SvcDt < IMMOBILISATION.AcqDt
-		if Verifier_Bien_Amortissable
+		if Verifier_Bien_Amortissable_RSQL
 			IMMOBILISATION.SvcDt 	= IMMOBILISATION.AcqDt
 			IMMOBILISATION.EcoAmDt  = IMMOBILISATION.AcqDt
 		else
@@ -6021,7 +6029,7 @@ beginp	; Champ_AcqDt_1_Ap
 	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
 	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
 	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_AcqDt_1_Ap
@@ -6055,7 +6063,7 @@ beginp	; Champ_SvcDt_1_Ap
 	endif
 
 	if IMMOBILISATION.SvcDt < CD.ExoFDt \
-		and Verifier_Bien_Amortissable = false
+		and Verifier_Bien_Amortissable_RSQL = false
 		;"Le bien n'est pas amortissable, il ne peut pas être mis en service durant l'exercice courant"
 		Mes_Alert(19727)
 		Harmony.Retour = XmeNext_Traitement_Avant
@@ -6075,7 +6083,7 @@ beginp	; Champ_SvcDt_1_Ap
 	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
 	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
 	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_SvcDt_1_Ap
@@ -6133,7 +6141,7 @@ public procedure Champ_CrelTMt_1_Ap
 ; apres composition valeur initiale
 beginp	; Champ_CrelTMt_1_Ap
 
-	X1.MtCr = Calcul_valeur_entree_initiale(I1)
+	X1.MtCr = Calcul_valeur_entree_initiale(IMMOBILISATION.I1)
 
 	if ZOOM.ACTION = ZOOM_CREATION or ZOOM.ACTION = ZOOM_DUPLICATION or (ZOOM.ACTION = ZOOM_MODIFICATION and IMMOBILISATION.Cr = 0)
 		IMMOBILISATION.Cr = X1.MtCr
@@ -6201,7 +6209,7 @@ beginp	; Champ_Cr_1_Ap
 	if not Harmony.DataModif	|	preturn	|	endif
 
 	if Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_Cr_1_Ap
@@ -6285,7 +6293,7 @@ beginp	; Champ_Etat_1_Ap
 		; Cession ou mise au rebut
 		if IMMOBILISATION.Etat <> ETAT and IMMOBILISATION.Etat in (2,3)
 			; Pour un bien composé : controler la cession (ou mise au rebut) de tous les composants
-			if Controler_Bien_CessionCompose(I1) <> 0
+			if Controler_Bien_CessionCompose(IMMOBILISATION.I1) <> 0
 				; au moins un composant est actif
 				Harmony.Retour = XmeNext_Traitement_Avant
 				preturn
@@ -6295,7 +6303,7 @@ beginp	; Champ_Etat_1_Ap
 		; Réactivation d'un bien cédé ou mis au rebut
 		if IMMOBILISATION.Etat <> ETAT and IMMOBILISATION.Etat not in (2,3) and ETAT in (2,3)
 			; Pour un bien composant : controler si son composé 'père' est actif
-			if Controler_Bien_Reactiver(I1) <> 0
+			if Controler_Bien_Reactiver(IMMOBILISATION.I1) <> 0
 				; le composé 'père' est inactif
 				Harmony.Retour = XmeNext_Traitement_Avant
 				preturn
@@ -6333,7 +6341,7 @@ beginp	; Champ_Etat_1_Ap
 	endif
 		
 	if	Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 	Harmony.Retour = XMENEXT_DONNEE_SUIVANTE
@@ -6372,7 +6380,7 @@ beginp	; Champ_CesDt_1_Ap
 	if not Harmony.DataModif	|	preturn	|	endif
 
 	if	Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_CesDt_1_Ap
@@ -6438,7 +6446,7 @@ beginp	; Champ_EcoBas_1_Ap
 	if not Harmony.DataModif	|	preturn	|	endif
 
 	if	Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_EcoBas_1_Ap
@@ -6468,7 +6476,7 @@ beginp	; Champ_EcoTyp_1_Ap
 
 	if Harmony.DataModif
 
-		if I1.EcoTyp = 5 and CD.IfrsFl = 1
+		if IMMOBILISATION.EcoTyp = 5 and CD.IfrsFl = 1
 			Mes_Alert(7137)
 			Harmony.Retour = XMENEXT_DEBUT_DONNEE
 			preturn
@@ -6493,7 +6501,7 @@ beginp	; Champ_EcoTyp_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)	\
 	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_EcoTyp_1_Ap
@@ -6558,7 +6566,7 @@ beginp	; Champ_EcoDur_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
 	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_EcoDur_1_Ap
@@ -6595,7 +6603,7 @@ beginp	; Champ_UoCode_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)	\
 	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 
@@ -6634,7 +6642,7 @@ beginp	; Champ_ResFinMt_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
 	and IMMOBILISATION.EcoBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 	if not X1.Choix(2) and not X1.Choix(1)									; saisie paramètres et cumuls interdits
@@ -6676,7 +6684,7 @@ beginp	; Champ_FisBas_1_Ap
 	if not Harmony.DataModif	|	preturn	|	endif
 
 	if	Calcul_Possible
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_FisBas_1_Ap
@@ -6734,7 +6742,7 @@ beginp	; Champ_FisTyp_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
 	and IMMOBILISATION.FisBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 	if Harmony.Key = K_TAB \													; Tabulation
@@ -6806,7 +6814,7 @@ beginp	; Champ_FisDur_1_Ap
 
 	if	Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt) \
 	and IMMOBILISATION.FisBas and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 endp		; Champ_FisDur_1_Ap
@@ -7508,7 +7516,7 @@ Beginp	; Champ_NatImmo_1_Ap
 	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
 	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
 	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
-		Dotations_Cumuls
+		Dotations_Cumuls_RSQL
 	endif
 
 Endp		; Champ_NatImmo_1_Ap

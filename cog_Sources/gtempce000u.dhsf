@@ -1,32 +1,34 @@
-;>xwin4obj                              7.0       20151106114510      
+;>xwin4obj                              7.0       20161207110834      
 [masque]
  utilisateur="UGIE"
- date_modification="06/11/2015"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  noms_boutons="zoom"
  dernier_id=1000003
  surcharge=oui
- date_modif_base="20140226104834"
+ date_modif_base="20160512073609"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
  [aide_page]
   aide=0
 [enregistrements]
- "gtfdd.dhsd",,g1t1,g1t1,4700,0
+ "gtfdd.dhsd",,g1t1,g1t1,5500,0
  "qufdd.dhsd",,qusoc,qusoc,1000,0
  "gtfdd.dhsd",,gtpce,gtpce,500,0
- "gtfdd.dhsd",,gtsel,gtsel_debut,1500,0
- "gtfdd.dhsd",,gtsel,gtsel_fin,1500,0
- "gtfdd.dhsd",,gtsel,gtsel_msk,1500,0
- "gtfdd.dhsd",,soc,soc,2800,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "gtfdd.dhsd",,gtsel,gtsel_debut,2000,0
+ "gtfdd.dhsd",,gtsel,gtsel_fin,2000,0
+ "gtfdd.dhsd",,gtsel,gtsel_msk,2000,0
+ "gtfdd.dhsd",,soc,soc,3500,0
+ "ccfdd.dhsd",,ca,ca,1700,0
  "gtfdd.dhsd",,gtent,gtent,4000,0
- "gtfdd.dhsd",,cli,tiersori,2450,0
- "gtfdd.dhsd",,ent,ent,1800,0
- "gtfdd.dhsd",,mouv,mouv,1900,0
- "gtfdd.dhsd",,mvtl,mvtl,1000,0
- "gtfdd.dhsd",,cli,tiers,2450,0
+ "gtfdd.dhsd",,cli,tiersori,3000,0
+ "gtfdd.dhsd",,ent,ent,2500,0
+ "gtfdd.dhsd",,mouv,mouv,2700,0
+ "gtfdd.dhsd",,mvtl,mvtl,1350,0
+ "gtfdd.dhsd",,cli,tiers,3000,0
+ "ddsys.dhsd",,rowinfo,rigtem,120,0
+ "gtfdd.dhsd",,pcespe,pcespe,300,0
  "gtfdd.dhsd",,t1,t1,750,0
 [onglet]
  [presentation]
@@ -549,6 +551,7 @@
    f7=8000
   [traitements]
    microbol_click=8002
+   diva_apres="Champ_PiNo_1_Ap"
  [case_a_cocher]
   [presentation]
    position=48,12
@@ -1066,7 +1069,6 @@
    shift_f1=1
   [traitements]
    microbol_click=8002
-   diva_avant="Champ_Choix_4_Av"
  [case_a_cocher]
   [presentation]
    position=146,10
@@ -1086,7 +1088,6 @@
    shift_f1=1
   [traitements]
    microbol_click=8002
-   diva_avant="Champ_Choix_4_Av"
  [case_a_cocher]
   [presentation]
    position=156,10
@@ -1551,7 +1552,7 @@
  [obj_texte]
   [presentation]
    position=36,200
-   taille=9,73
+   taille=9,123
    noms="f_status"
    id=572
    wstyle="STD"
@@ -1568,19 +1569,12 @@
  [obj_texte]
   [presentation]
    position=46,200
-   taille=9,73
-   id=97
+   taille=9,123
+   noms="f_status"
+   id=806
    wstyle="STD"
   [texte]
-   texte="Période du"
- [obj_texte]
-  [presentation]
-   position=46,319
-   taille=9,19
-   id=98
-   wstyle="STD"
-  [texte]
-   texte="au"
+   texte="Affichage des commandes programmes"
  [obj_texte]
   [presentation]
    position=56,10
@@ -1589,6 +1583,31 @@
    wstyle="STD"
   [texte]
    texte="Etat de la pièce"
+ [obj_texte]
+  [presentation]
+   position=56,200
+   taille=9,123
+   noms="f_status"
+   id=807
+   wstyle="STD"
+  [texte]
+   texte="Affichage des pièces en contremarque"
+ [obj_texte]
+  [presentation]
+   position=70,10
+   taille=9,80
+   id=97
+   wstyle="STD"
+  [texte]
+   texte="Période du"
+ [obj_texte]
+  [presentation]
+   position=70,200
+   taille=9,19
+   id=98
+   wstyle="STD"
+  [texte]
+   texte="au"
  [obj_texte]
   [presentation]
    position=80,10
@@ -1691,46 +1710,19 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Choix_1_Ap"
- [groupe_radio]
+ [multi_choix]
   [presentation]
-   position=36,378
-   taille=42,92
-   id=770
-   wstyle="STD"
+   position=46,325
+   taille=9,106
+   noms="f_cdeouv"
+   id=804
+   wstyle="CHAMP_SAISI"
   [description]
    donnee=gtpce,choix2,gtpce,1
-  [param_groupe]
-   titre="Affichage des pièces programmes"
-  [radio_bouton]
-   [presentation]
-    position=45,383
-    taille=9,86
-    id=771
-    wstyle="STD"
-   [param_radio]
-    texte="Uniquement les programmes"
-    cadrage=droite
-    valeur="2"
-  [radio_bouton]
-   [presentation]
-    position=55,383
-    taille=9,86
-    id=772
-    wstyle="STD"
-   [param_radio]
-    texte="Ne pas les afficher"
-    cadrage=droite
-    valeur="1"
-  [radio_bouton]
-   [presentation]
-    position=65,383
-    taille=9,86
-    id=773
-    wstyle="STD"
-   [param_radio]
-    texte="Toutes les pièces"
-    cadrage=droite
-    valeur="3"
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","AFFPIECE"
   [traitements]
    microbol_click=8002
  [multi_choix]
@@ -1767,8 +1759,8 @@
    diva_apres="Champ_AffCe4_1_Ap"
  [multi_choix]
   [presentation]
-   position=36,275
-   taille=9,96
+   position=36,325
+   taille=9,106
    noms="f_status"
    id=571
    wstyle="CHAMP_SAISI"
@@ -1780,10 +1772,25 @@
    choix="gtfdmc.dhfi","STATUSENT"
   [traitements]
    microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=56,325
+   taille=9,106
+   noms="contremarque"
+   id=805
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=gtpce,choix2,gtpce,5
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","AFFPIECE"
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
-   position=46,275
-   taille=9,32
+   position=70,92
+   taille=9,57
    noms="f_date"
    id=103
    colonnes_saisie=10
@@ -1799,8 +1806,8 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=46,339
-   taille=9,32
+   position=70,219
+   taille=9,57
    noms="f_date"
    id=104
    colonnes_saisie=10
@@ -1817,8 +1824,8 @@
    diva_apres="Champ_DatF_1_Ap"
  [case_a_cocher]
   [presentation]
-   position=56,200
-   taille=9,176
+   position=70,325
+   taille=9,149
    id=570
    wstyle="STD"
   [description]
@@ -2009,7 +2016,7 @@
  [onglet_page]
   [param_onglet_page]
    nom="FILTRE"
-   libelle="EN-TETE DE PIECE (1)"
+   libelle="Entête de pièce (1)"
    couleur_fond="STD"
  [aide_page]
   aide=4210
@@ -2796,7 +2803,7 @@
  [onglet_page]
   [param_onglet_page]
    nom="FILTRE"
-   libelle="EN-TETE DE PIECE (2)"
+   libelle="Entête de pièce (2)"
    couleur_fond="STD"
  [aide_page]
   aide=4210
@@ -3018,7 +3025,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19012
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -3043,7 +3050,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19012
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -3093,7 +3100,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19013
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -3118,7 +3125,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19013
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -3168,7 +3175,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19014
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -3193,7 +3200,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19014
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -3429,9 +3436,9 @@
    choix="gtfdmc.dhfi",""
  [groupe_radio]
   [presentation]
-   position=120,5
+   position=130,5
    taille=52,210
-   noms="f_facture"
+   noms="f_intfac"
    id=774
    wstyle="STD"
   [description]
@@ -3440,7 +3447,7 @@
    titre="Intégration pièce"
   [radio_bouton]
    [presentation]
-    position=129,10
+    position=139,10
     taille=9,204
     noms="f_facture"
     id=778
@@ -3451,7 +3458,7 @@
     valeur="4"
   [radio_bouton]
    [presentation]
-    position=139,10
+    position=149,10
     taille=9,204
     noms="f_facture"
     id=775
@@ -3462,7 +3469,7 @@
     valeur="3"
   [radio_bouton]
    [presentation]
-    position=149,10
+    position=159,10
     taille=9,204
     noms="f_facture"
     id=776
@@ -3473,7 +3480,7 @@
     valeur="1"
   [radio_bouton]
    [presentation]
-    position=159,10
+    position=169,10
     taille=9,204
     noms="f_facture"
     id=777
@@ -3482,6 +3489,20 @@
     texte="Facture intégrée et traite non imprimée"
     cadrage=droite
     valeur="2"
+ [case_a_cocher]
+  [presentation]
+   position=118,5
+   taille=9,470
+   noms="cle_gen;cles;f_strt"
+   id=834
+   wstyle="STD"
+  [description]
+   donnee=gtsel,choix,gtsel_debut,5
+  [param_case]
+   texte="Pièces inter-compagnies"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
 [page]
  numero=10
  libelle="Filtre tiers"
@@ -3502,7 +3523,7 @@
  [onglet_page]
   [param_onglet_page]
    nom="FILTRE"
-   libelle="TIERS"
+   libelle="Tiers"
    couleur_fond="STD"
  [aide_page]
   aide=4210
@@ -4165,7 +4186,7 @@
  [onglet_page]
   [param_onglet_page]
    nom="FILTRE"
-   libelle="LIGNE DE PIECE"
+   libelle="Ligne de pièce"
    couleur_fond="STD"
  [aide_page]
   aide=4210
@@ -4950,7 +4971,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19012
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -4975,7 +4996,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19012
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -5023,7 +5044,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19013
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -5048,7 +5069,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19013
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -5096,7 +5117,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19014
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -5121,7 +5142,7 @@
   [touches]
    f1=127
    f7=8000
-   f8=19011
+   f8=19014
   [traitements]
    microbol_click=8002
    diva_avant="Champ_Axe_1_Av"
@@ -5312,7 +5333,7 @@
  [onglet_page]
   [param_onglet_page]
    nom="FILTRE"
-   libelle="VENTILATION"
+   libelle="Ventilation"
    couleur_fond="STD"
  [aide_page]
   aide=4210
@@ -5884,7 +5905,7 @@
  [onglet_page]
   [param_onglet_page]
    nom="FILTRE"
-   libelle="ARTICLE"
+   libelle="Article"
    couleur_fond="STD"
  [aide_page]
   aide=4210
@@ -6671,7 +6692,7 @@
  [onglet_page]
   [param_onglet_page]
    nom="FILTRE"
-   libelle="ADRESSE"
+   libelle="Adresse"
    couleur_fond="STD"
  [aide_page]
   aide=4210
@@ -8702,6 +8723,8 @@
   [traitements]
    diva_avant="Champ_PiNoD_1_Av"
    diva_apres="Champ_PiNoF_2_Ap"
+  [boutons]
+   "zoom"
  [multi_choix]
   [presentation]
    position=75,10
@@ -10607,6 +10630,357 @@
   [touches]
    f7=135
    shift_f6=10000
+[page]
+ numero=20
+ libelle="Filtres spécifiques"
+ fond="STD"
+ type=fenetre
+ titre="Filtres spécifiques"
+ efface=partiel
+ nb_lig=25
+ nb_col=90
+ offset_lig=6
+ offset_col=15
+ ident_unique=21
+ [aide_page]
+  aide=4210
+  fichier="gtfaide"
+ [tableau]
+  [presentation]
+   position=0,0
+   taille=225,360
+   attache_lgx=oui
+   attache_lgy=oui
+   id=791
+   wstyle="TABLEAU_AFF"
+  [param_tableau]
+   nom="GTEMPCE_PCESPE"
+   point_arret=3005
+   fl_trait_lig=non
+   fl_move_depl=non
+   hauteur_lig=10
+   hauteur_entete=10
+   largeur_controle=10
+   var_controle=oui
+   col_fixes=4
+   separation=120
+  [description]
+   donnee=rowinfo,rowinfo,rigtem
+   saisie=non
+  [boutons]
+   "zoom"
+  [champ_tableau]
+   [presentation]
+    position=39,52
+    taille=9,212
+    id=793
+    colonnes_saisie=60
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=pcespe,champodbc,pcespe
+   [param_saisie]
+    obligatoire=oui
+    type_date=jj/mm/aaaa
+   [traitements]
+    microbol_click=5601
+    diva_apres="Champ_ChampODBC_1_Ap"
+   [info_bulle]
+   texte="Nom du champ"
+   [param_colonne]
+    titre="Nom du champ"
+    largeur_col=95
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=75,266
+    taille=9,85
+    id=795
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=pcespe,operation,pcespe
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="grfdmc.dhfi","FILTRE"
+   [info_bulle]
+   texte="Opération"
+   [param_colonne]
+    titre="Opération"
+    largeur_col=60
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,250
+    taille=9,177
+    id=796
+    colonnes_saisie=50
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=pcespe,debutsel,pcespe
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="Début sélection"
+   [param_colonne]
+    titre="Valeur min."
+    largeur_col=90
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=99,370
+    taille=9,177
+    id=797
+    colonnes_saisie=50
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=pcespe,finsel,pcespe
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [traitements]
+    diva_avant="Champ_FinSel_1_Av"
+   [info_bulle]
+   texte="Fin sélection"
+   [param_colonne]
+    titre="Valeur max."
+    largeur_col=90
+    wstyle="ENTETE_COLONNE"
+[page]
+ numero=21
+ libelle="Légende"
+ fond="STD"
+ nature=double
+ type=fenetre
+ titre="Légende"
+ efface=complet
+ nb_lig=15
+ nb_col=45
+ offset_lig=10
+ offset_col=35
+ ident_unique=22
+ [cadre]
+  [presentation]
+   position=20,17
+   taille=10,11
+   id=825
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRANS"
+   wnom_couleurfond="STD2D"
+ [cadre]
+  [presentation]
+   position=32,17
+   taille=10,11
+   id=826
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRANS"
+   wnom_couleurfond="STD2D"
+ [cadre]
+  [presentation]
+   position=44,17
+   taille=10,11
+   id=827
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRANS"
+   wnom_couleurfond="STD2D"
+ [cadre]
+  [presentation]
+   position=56,17
+   taille=10,11
+   id=828
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRANS"
+   wnom_couleurfond="STD2D"
+ [cadre]
+  [presentation]
+   position=84,17
+   taille=10,11
+   id=829
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRANS"
+   wnom_couleurfond="STD2D"
+ [cadre]
+  [presentation]
+   position=96,17
+   taille=10,11
+   id=830
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRANS"
+   wnom_couleurfond="STD2D"
+ [cadre]
+  [presentation]
+   position=108,17
+   taille=10,11
+   id=831
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRANS"
+   wnom_couleurfond="STD2D"
+ [cadre]
+  [presentation]
+   position=120,17
+   taille=10,11
+   id=832
+   wstyle="STD"
+  [param_cadre]
+   nature=plein
+   wnom_couleurcadre="TRANS"
+   wnom_couleurfond="STD2D"
+ [bitmap_constante]
+  [presentation]
+   position=32,18
+   taille=9,10
+   id=808
+   wstyle="STD"
+  [param_bitmapc]
+   wnom="TBLCTMRR"
+ [bitmap_constante]
+  [presentation]
+   position=44,17
+   taille=9,10
+   id=809
+   wstyle="STD"
+  [param_bitmapc]
+   wnom="TBLCTMRO"
+ [bitmap_constante]
+  [presentation]
+   position=56,17
+   taille=9,10
+   id=810
+   wstyle="STD"
+  [param_bitmapc]
+   wnom="TBLCTMRV"
+ [bitmap_constante]
+  [presentation]
+   position=20,17
+   taille=9,10
+   id=811
+   wstyle="STD"
+  [param_bitmapc]
+   wnom="TBLCTMR"
+ [bitmap_constante]
+  [presentation]
+   position=96,17
+   taille=9,10
+   id=817
+   wstyle="STD"
+  [param_bitmapc]
+   wnom="TBLCTMDR"
+ [bitmap_constante]
+  [presentation]
+   position=108,17
+   taille=9,10
+   id=818
+   wstyle="STD"
+  [param_bitmapc]
+   wnom="TBLCTMDO"
+ [bitmap_constante]
+  [presentation]
+   position=120,17
+   taille=9,10
+   id=819
+   wstyle="STD"
+  [param_bitmapc]
+   wnom="TBLCTMDV"
+ [bitmap_constante]
+  [presentation]
+   position=84,17
+   taille=9,10
+   id=820
+   wstyle="STD"
+  [param_bitmapc]
+   wnom="TBLCTMD"
+ [obj_texte]
+  [presentation]
+   position=8,5
+   taille=9,170
+   id=812
+   wstyle="STD"
+  [texte]
+   texte="Indicateur de contre-marque réceptionnée"
+ [obj_texte]
+  [presentation]
+   position=20,40
+   taille=9,135
+   id=813
+   wstyle="STD"
+  [texte]
+   texte="Géré en contre-marque réceptionnée"
+ [obj_texte]
+  [presentation]
+   position=32,40
+   taille=9,135
+   id=814
+   wstyle="STD"
+  [texte]
+   texte="Sans lien (sans réservation)"
+ [obj_texte]
+  [presentation]
+   position=44,40
+   taille=9,135
+   id=815
+   wstyle="STD"
+  [texte]
+   texte="Lien incomplet (réservation partielle)"
+ [obj_texte]
+  [presentation]
+   position=56,40
+   taille=9,135
+   id=816
+   wstyle="STD"
+  [texte]
+   texte="Lien complet (réservation totale)"
+ [obj_texte]
+  [presentation]
+   position=70,5
+   taille=9,170
+   id=833
+   wstyle="STD"
+  [texte]
+   texte="Indicateur de contre-marque directe"
+ [obj_texte]
+  [presentation]
+   position=84,40
+   taille=9,135
+   id=821
+   wstyle="STD"
+  [texte]
+   texte="Géré en contre-marque directe"
+ [obj_texte]
+  [presentation]
+   position=96,40
+   taille=9,135
+   id=822
+   wstyle="STD"
+  [texte]
+   texte="Sans lien (sans réservation)"
+ [obj_texte]
+  [presentation]
+   position=108,40
+   taille=9,135
+   id=823
+   wstyle="STD"
+  [texte]
+   texte="Lien incomplet (réservation partielle)"
+ [obj_texte]
+  [presentation]
+   position=120,40
+   taille=9,135
+   id=824
+   wstyle="STD"
+  [texte]
+   texte="Lien complet (réservation totale)"
 [ressources]
  [menu]
   ident="POPUP_ZOOMTIERS"
@@ -10938,6 +11312,207 @@
    dessin=vide
    [param_bouton]
     wnom=""
+ [menu]
+  ident="POPUP_CHAMPS"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Init"
+    wid_ressource="INIT"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Champs entête"
+    wid_ressource="CHOIX_ENT"
+    wetype_trait=arret
+    warret=5690
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Champs mouvements"
+    wid_ressource="CHOIX_MOUV"
+    wetype_trait=arret
+    warret=5691
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Champs ventilation"
+    wid_ressource="CHOIX_MVTL"
+    wetype_trait=arret
+    warret=5692
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Champs article"
+    wid_ressource="CHOIX_ART"
+    wetype_trait=arret
+    warret=5693
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Champs prospect"
+    wid_ressource="CHOIX_PRO"
+    wetype_trait=arret
+    warret=5694
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Champs client"
+    wid_ressource="CHOIX_CLI"
+    wetype_trait=arret
+    warret=5695
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Champs fournisseur"
+    wid_ressource="CHOIX_FOU"
+    wetype_trait=arret
+    warret=5696
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Champs autre tiers"
+    wid_ressource="CHOIX_TIA"
+    wetype_trait=arret
+    warret=5697
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [menu]
+  ident="CRI_SPE"
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Fichier"
+    wid_ressource="FICHIER"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="OK"
+    wtexte="Validation\tEntrée"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="ABANDON"
+    wtexte="Quitter\tEchap"
+    wid_ressource="QUITTER"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Edition"
+    wid_ressource="EDITION"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="CREATION"
+    wtexte="Créer\tInser"
+    wid_ressource="CREER"
+    wtrait_chaine="#Insert"
+   [info_bulle]
+   texte="Créer un tiers"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom="MODIF"
+    wtexte="Modifier\tF4"
+    wid_ressource="MODIFIER"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Outils"
+    wid_ressource="OUTILS"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Zoom généralisé"
+    wid_ressource="ZOOM"
+    wtrait_chaine="#f7"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="O_ptions"
+    wid_ressource="OPTIONS"
+  [item]
+   nature=case
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Rester en _Modification"
+    wid_ressource="MODIF"
+    wetype_trait=arret
+    warret=5115
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=""
+    wtexte="_Aide"
+    wid_ressource="AIDE"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Aide contextuelle\tShift+F1"
+    wid_ressource="AIDECONT"
+    wtrait_chaine="#shift_f1"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
  [toolbar]
   ident="FENETRE"
   [item]
@@ -11054,6 +11629,22 @@
    type=sep
    dessin=sep
    [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Générique"
+    wid_ressource="SEP1"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=4004
+    wtrait_chaine="#f11"
+   [info_bulle]
+   texte="Afficher les filtres spécifiques <F4>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
     wnom=""
     wid_ressource="SEPARATEUR"
   [item]
@@ -11091,6 +11682,22 @@
     wtrait_chaine="#f7"
    [info_bulle]
    texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Générique"
+    wid_ressource="SEP1"
+  [item]
+   [param_bouton]
+    wnom="FILTRE"
+    wid_ressource="FILTRE"
+    wetype_trait=arret
+    warret=4004
+    wtrait_chaine="#f11"
+   [info_bulle]
+   texte="Afficher les filtres spécifiques <F4>"
   [item]
    type=sep
    dessin=sep
@@ -11142,6 +11749,92 @@
    dessin=vide
    [param_bouton]
     wnom=""
+ [toolbar]
+  ident="CRI_SPE"
+  [item]
+   [param_bouton]
+    wnom="CREATION"
+    wid_ressource="CREATION"
+    wtrait_chaine="#Insert"
+   [info_bulle]
+   texte="Créer une fiche <Inser>"
+  [item]
+   [param_bouton]
+    wnom="MODIF"
+    wid_ressource="MODIF"
+    wtrait_chaine="#f4"
+   [info_bulle]
+   texte="Modifier"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR3__1"
+  [item]
+   [param_bouton]
+    wnom="ZOOMG"
+    wid_ressource="ZOOMG"
+    wtrait_chaine="#f7"
+   [info_bulle]
+   texte="Zoom généralisé <F7>"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPARATEUR3__2"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider"
+  [item]
+   type=sep
+   dessin=sep
+   [param_bouton]
+    wnom=""
+    wid_ressource="SEPFICHEINDEX"
+  [item]
+   [param_bouton]
+    wnom="AIDE"
+    wid_ressource="AIDE"
+    wtrait_chaine="#shift_f1"
+   [info_bulle]
+   texte="Aide"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
+ [toolbar]
+  ident="FENETRE_LEGENDE"
+  [item]
+   [param_bouton]
+    wnom="ABANDON"
+    wid_ressource="ABANDON"
+    wtrait_chaine="#escape"
+   [info_bulle]
+   texte="Abandonner <Echap>"
+  [item]
+   [param_bouton]
+    wnom="OK"
+    wid_ressource="OK"
+    wtrait_chaine="#return"
+   [info_bulle]
+   texte="Valider <Entrée>"
+  [item]
+   dessin=vide
+   [param_bouton]
+    wnom=""
 [diva]
 Module "COG_GTEEPCE000.DHOP"
 
@@ -11178,7 +11871,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtempce000.dhsf 37938 2014-03-10 10:28:03Z lk $')
+SetModuleInfo('$Id: gtempce000.dhsf 57145 2016-05-12 07:40:35Z sn $')
 
 ;*
 ;*		Masque de gestion de pièces
@@ -11230,6 +11923,8 @@ Public Record	GTFDD.dhsd 	CLI							; Client
 Public Record	GTFDD.dhsd 	FOU							; Fournisseur
 Public Record	GTFDD.dhsd 	PRO							; Prospect
 Public Record	GTFDD.dhsd 	TIA							; Autres tiers
+Public Record "ddsys.dhsd" rowinfo rigtem
+Public Record 'gtfdd.dhsd' PCESPE	PCESPE			; Ligne de filtres spécifiques
 
 Define IdMenuPopZoomTiers = G3XT.IdMenu(24)
 
@@ -11510,10 +12205,22 @@ Endp
 
 
 ;*
+Public Procedure Champ_ChampODBC_1_Ap	; Contrôle après sélection/saisie d'un champ
+1		pos			L					; Position
+Beginp
+	If PCESPE.NomChamp = ' '													; Cas de saisie d'un champ
+		If ( pos := String('.', PCESPE.ChampODBC) ) <> 0
+			PCESPE.NomChamp = Left( Mid(PCESPE.ChampODBC, pos + 1) )
+		EndIf
+	EndIf
+Endp
+
+
+;*
 Public Procedure Champ_Choix_1_Ap		; Après sélection d'un type de tiers
 Beginp
 	ValiderChoixMenu
-	If GTPCE.TiCodOri in ('O', 'P')		; Que des devis pour les offres et prospects
+	If GTPCE.TiCodOri in ('O', 'P')													; Que des devis pour les offres et prospects
 		GTPCE.PicodOri = 1
 	EndIf
 
@@ -11523,6 +12230,12 @@ Beginp
 		XmeSetAttribut('F_CDEOUV', AN_VISIBILITE, AV_GRISE)
 	EndIf
 
+	If GTPCE.PicodOri = 1 Or GTPCE.TiCodOri not in ('C', 'F')				; Affichage contremarque
+		XmeSetAttribut('CONTREMARQUE', AN_VISIBILITE, AV_GRISE)				;		Pas de contremarque pour les devis
+	Else
+		XmeSetAttribut('CONTREMARQUE', AN_VISIBILITE, AV_VISIBLE)			;		Traçage des autres pièces
+	EndIf
+	
 	If GTPCE.TiCodOri = 'C' Or \														; Pièces client
 		( GTPCE.TiCodOri = 'F' And GTPCE.PiCodOri <> 1 )						; Pièces fournisseur sauf devis
 		GTPCE.Status = Charger_StatusPiece(GTPCE.TiCodOri, GTPCE.PiCodOri)
@@ -11530,6 +12243,7 @@ Beginp
 	Else
 		XmeSetAttribut('F_STATUS', AN_VISIBILITE, AV_GRISE)
 	EndIf
+	GTPCE.TiCodDst = GTPCE.TiCodOri
 Endp												 
 
 
@@ -11613,11 +12327,11 @@ Beginp
 	G3XZ = ' '
 
 	If GTSEL_Fin.Cpostal(Harmony.Dataind1) <> [ ! DataSize(GTSEL_Fin.Cpostal(Harmony.Dataind1)) 'z']
-		If Lectab(57, GTSEL_Debut.Cpostal(Harmony.Dataind1)) <> 0
-			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
-			PReturn
+		If Lectab(57, GTSEL_Debut.Cpostal(Harmony.Dataind1)) = 0
+			GTSEL_Debut.Vil(Harmony.Dataind1) = T057.Vil
+		Else
+			GTSEL_Debut.Vil(Harmony.Dataind1) = ' '
 		EndIf
-		GTSEL_Debut.Vil(Harmony.Dataind1) = T057.Vil
 	EndIf
 Endp
 
@@ -11637,13 +12351,12 @@ Beginp
 	G3XZ = ' '
 
 	If GTSEL_Fin.Cpostal(Harmony.Dataind1) <> [ ! DataSize(GTSEL_Fin.Cpostal(Harmony.Dataind1)) 'z']
-		If Lectab(57, GTSEL_Fin.Cpostal(Harmony.Dataind1)) <> 0
-			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
-			PReturn
+		If Lectab(57, GTSEL_Fin.Cpostal(Harmony.Dataind1)) = 0
+			GTSEL_Fin.Vil(Harmony.Dataind1) = T057.Vil
+		Else
+			GTSEL_Fin.Vil(Harmony.Dataind1) = [ ! DataSize(GTSEL_Fin.Vil(Harmony.Dataind1)) 'z']
 		EndIf
-		GTSEL_Debut.Vil(Harmony.Dataind1) = T057.Vil
 	EndIf
-	
 	Controle_DonneeFin(GTSEL_Debut.Cpostal(Harmony.Dataind1), GTSEL_Fin.Cpostal(Harmony.Dataind1), 1, 7932, 1)
 Endp
 
@@ -11880,6 +12593,14 @@ Beginp
 Endp
 
 ;*
+Public Procedure Champ_FinSel_1_Av		; Avant saisie de la fin de la sélection
+Beginp
+	If PCESPE.Operation <> 8
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp
+
+;*
 Public Procedure Champ_HtMt_1_Ap			; Contrôle fourchette montant HT
 Beginp
 	Controle_DonneeFin(GTSEL_Debut.HtMt, GTSEL_Fin.HtMt, 2, 7952)
@@ -11974,6 +12695,8 @@ Beginp
 			T020_Ent = T020_Menu
 		ElsIf Recherche_OP(GTPCE.OP, 1120,,GTPCE.TiCodDst, GTPCE.PiCodDst) = 0		
 			T020_Ent = T020
+		else
+			preturn
 		EndIf
 		GTENT.Sens = T020.Sens
 	EndIf
@@ -12027,6 +12750,12 @@ Beginp
 		XmeSetAttribut('F_CDEOUV', AN_VISIBILITE, AV_GRISE)
 	EndIf
 
+	If GTPCE.PicodOri = 1 Or GTPCE.TiCodOri not in ('C', 'F')				; Affichage contremarque
+		XmeSetAttribut('CONTREMARQUE', AN_VISIBILITE, AV_GRISE)				;		Pas de contremarque pour les devis
+	Else
+		XmeSetAttribut('CONTREMARQUE', AN_VISIBILITE, AV_VISIBLE)			;		Traçage des autres pièces
+	EndIf
+	
 	If GTPCE.TiCodOri = 'C' Or \														; Pièces client
 		( GTPCE.TiCodOri = 'F' And GTPCE.PiCodOri <> 1 )						; Pièces fournisseur sauf devis
 		GTPCE.Status = Charger_StatusPiece(GTPCE.TiCodOri, GTPCE.PiCodOri)
@@ -12085,6 +12814,9 @@ Beginp
 	Case GTPCE.PiNoD <> 0 and Seek_ENT(GTPCE.TiCodOri, GTPCE.PiCodOri, GTPCE.PiNoD) <> 0	; Pièce d'origine inexistante
 		Mes_Alert(2249, GTPCE.PiNoD) 
 		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
+	Case ENT.AsCod = 2 																; Pièce associée
+		Mes_Alert(2274) 
+		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 	
 	Case MZ.PrgCdeFlg = 2 and ENT.PrgCdeFlg <> 2 							; Commande programme non ouverte
 		Mes_Alert(1343, GTPCE.PiNoD) 
@@ -12126,6 +12858,8 @@ Beginp
 	endswitch
 	if LireProgrammeFonction = C_Fonction_Validation		
 		GTPCE.TiCodDst = GTPCE.TiCodOri
+		GTPCE.Depo		= Ent.Depo
+		GTPCE.BLAsDepo	= Ent.BlAsDepo
 		TIERS = TIERSORI
 		if ENT.Pino<> 0 and (ENT.Ce4<> 1)
 			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
@@ -12156,6 +12890,7 @@ Public Procedure Champ_PiNoF_1_Av				; Appel zoom pièce validation
 Beginp
 	G3XZ.TiCod			= GTPCE.TiCodOri
 	G3XZ.PiCod			= GTPCE.PiCodDst
+	G3XZ.TIERS			= GTPCE.TiersD
 	G3XZ.Ce4				= '1'
 	G3XZ.Etb				= MZ.Etb
 	G3XZ.PrgInterro	= GTPCE.Choix(20)
@@ -12184,6 +12919,7 @@ Beginp
 	endif
    
 Endp
+																	
 
 
 ;*
@@ -12191,7 +12927,7 @@ Public Procedure Champ_PiNoTiers_1_Ap			; Contrôle pièce du tiers fin et fourche
 Beginp
 	Controle_DonneeFin(GTSEL_Debut.PiNoTiers, GTSEL_Fin.PiNoTiers, 1, 7969, 1)
 Endp																						  
-
+																														   
 ;*
 Public Procedure Champ_PiNo_1_Ap						; après no pièce en création
 1		indicePiece		2,0
@@ -12213,6 +12949,7 @@ Beginp
 			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT		
 		EndIf
 	EndIf
+	G3XZ.TIERS = ' '
 Endp																
 
 ;*
@@ -12562,7 +13299,7 @@ Endp
 Public Procedure Champ_TiersF_2_Av
 ;
 Beginp
-	if GTPCE.TiCodOri = 'I' and (OP_TrtType_TransfertDepot(T020) = Oui or OP_TrtType_CessionInterEtb(T020_ENT) = Oui)
+	if GTPCE.TiCodOri = 'I' and (OP_TrtType_TransfertDepot(T020) or OP_TrtType_CessionInterEtb(T020_ENT) )
 		
 	endif
 Endp

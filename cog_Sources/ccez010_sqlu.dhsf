@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20140425145004      
+;>xwin4obj                              7.0       20161207110825      
 [masque]
  libelle="axes"
  utilisateur="UGIE"
- date_modification="25/04/2014"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=24
  type_masque=2
  dernier_id=1000004
  surcharge=oui
- date_modif_base="20130213090335"
+ date_modif_base="20140620073305"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -21,7 +21,7 @@
   shift_f6=10000
 [enregistrements]
  "ccfdd.dhsd",,x1,x1,1752,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1500,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "ccrsjca.dhoq",,axe,axe,1024,1
  "ccrsjca.dhoq",,axe,axe_sel,1024,1
@@ -136,7 +136,7 @@
  [groupbox]
   [presentation]
    position=0,0
-   taille=59,200
+   taille=60,200
    attache_lgx=oui
    id=380
    wstyle="GROUPE"
@@ -194,7 +194,7 @@
     id=397
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=x1,choix,x1,2
+    donnee=axe,cehsdt,axe
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -221,7 +221,7 @@
     id=396
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=x1,choix,x1,6
+    donnee=axe,cepere,axe
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -401,6 +401,30 @@
     wstyle="ENTETE_COLONNE"
    [boutons]
     "zoom"
+  [multi_choix_tableau]
+   [presentation]
+    position=116,150
+    taille=7,36
+    id=400
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=axe,dvanflg,axe
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","NONOUI"
+    obligatoire=non
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [info_bulle]
+   texte="Indicateur si section analytique à redéverser"
+   [param_colonne]
+    titre="A redéverser"
+    fl_aff=non
+    largeur_col=36
+    wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
     position=89,27
@@ -1339,7 +1363,7 @@
  [obj_texte]
   [presentation]
    position=28,5
-   taille=9,63
+   taille=9,59
    id=378
    wstyle="STD"
   [texte]
@@ -1409,7 +1433,7 @@
    diva_apres="Champ_Lib_1_Ap"
  [case_a_cocher]
   [presentation]
-   position=44,5
+   position=40,5
    taille=9,132
    id=372
    wstyle="STD"
@@ -1422,6 +1446,23 @@
   [aide_page]
    aide=154
    fichier="CCFAID"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=50,5
+   taille=9,132
+   noms="version_izy"
+   id=401
+   wstyle="STD"
+  [description]
+   donnee=x1,choix,x1,7
+  [param_case]
+   texte="Uniquement les axes à redéverser"
+   cadrage=droite
+   valeur="2","1"
   [touches]
    f1=1
    f7=8000
@@ -2693,10 +2734,9 @@
    libelle="PARAMETRES"
    ordre=2
    couleur_fond="STD"
-   noms="etbc3;version_izy"
  [groupbox]
   [presentation]
-   position=26,5
+   position=64,5
    taille=62,270
    noms="etbc3;version_izy"
    id=300
@@ -2704,9 +2744,19 @@
   [param_groupbox]
    texte="Gestion des établissements"
    couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=30,270
+   noms="version_izy"
+   id=399
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Déversement analytique"
+   couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=51,115
+   position=89,115
    taille=9,60
    noms="etbc3;version_izy"
    id=297
@@ -2715,7 +2765,7 @@
    texte="Etablissement autorisé"
  [champ]
   [presentation]
-   position=63,177
+   position=101,177
    taille=9,95
    noms="etbc3;version_izy"
    id=301
@@ -2732,7 +2782,7 @@
    shift_f6=10000
  [groupe_radio]
   [presentation]
-   position=42,10
+   position=80,10
    taille=42,102
    noms="etbc3;version_izy"
    id=256
@@ -2745,7 +2795,7 @@
    notifier=oui
   [radio_bouton]
    [presentation]
-    position=51,15
+    position=89,15
     taille=9,94
     noms="etb_axetyp2vgrise;etbc3;version_izy"
     id=257
@@ -2756,7 +2806,7 @@
     valeur="1"
   [radio_bouton]
    [presentation]
-    position=61,15
+    position=99,15
     taille=9,94
     noms="etb_axetyp2vgrise;etbc3;version_izy"
     id=258
@@ -2767,7 +2817,7 @@
     valeur="2"
   [radio_bouton]
    [presentation]
-    position=71,15
+    position=109,15
     taille=9,94
     noms="etb_axetyp2vgrise;etbc3;version_izy"
     id=259
@@ -2789,7 +2839,7 @@
    diva_apres="Champ_EtbSais_1_Ap"
  [champ]
   [presentation]
-   position=51,177
+   position=89,177
    taille=9,15
    noms="etbc3;etbunique;version_izy"
    id=255
@@ -2816,6 +2866,24 @@
    diva_apres="Champ_Etb_1_Ap"
   [boutons]
    "zoom"
+ [case_a_cocher]
+  [presentation]
+   position=42,10
+   taille=9,256
+   noms="version_izy"
+   id=398
+   wstyle="STD"
+  [description]
+   donnee=axe,dvanflg,axe
+  [param_case]
+   texte="Section à redéverser"
+   cadrage=droite
+   valeur="2","1"
+   choix="ccfdmc.dhfi",""
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
 [page]
  numero=14
  fond="STD"
@@ -3220,7 +3288,7 @@ Public RecordSql "ccrsjca.dhoq" axe axe
 Public RecordSql "ccrsjca.dhoq" axe axe_sel
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: ccez010_sql.dhsf 35434 2013-11-15 11:53:57Z jf $')
+SetModuleInfo('$Id: ccez010_sql.dhsf 51519 2015-11-19 12:35:45Z als $')
 ;>xdiva
 ;*
 ;*		Module écran du zoom sur les intitulés d'axe																						scctz010

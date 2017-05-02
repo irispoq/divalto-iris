@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_scrut.dhsp 8350 2015-07-08 08:27:13Z admin $')
+SetModuleInfo('$Id: cogpp_proservia_scrut.dhsp 10572 2016-12-08 08:25:54Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : 	 Interface Proservia 
@@ -51,7 +51,7 @@ Public Record	"a5dd.dhsd"				MChemin
 Function int Cog_InitialiserVariables
 ;
 
-RecordSql	a5rsuser.dhoq		Utilisateur										;Utilisateurs
+RecordSql	a5rsdos.dhoq		Utilisateur										;Utilisateurs
 
 BeginF
 

@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20150309174149      
+;>xwin4obj                              7.0       20161207110825      
 [masque]
  libelle="ZOOM DES ZOOMS"
  utilisateur="UGIE"
- date_modification="09/03/2015"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=20
  type_masque=2
  dernier_id=1000022
  surcharge=oui
- date_modif_base="20130213090335"
+ date_modif_base="20140612080400"
  dernier_id_page=100003
  niveau_surcharge=1
 [defaut]
@@ -277,22 +277,6 @@
    saisie=non
   [param_saisie]
    esp_si_zero=oui
- [champ]
-  [presentation]
-   position=83,111
-   taille=9,133
-   id=1000006
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=dosimmo,libelle_cesjnl,dos_immo
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=8000
-   f8=19032
-   shift_f6=10000
  [case_a_cocher]
   [presentation]
    position=26,268
@@ -334,6 +318,24 @@
    diva_apres="Champ_Jnl_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=58,112
+   taille=9,131
+   id=94
+   wstyle="STD"
+  [description]
+   donnee=x1,lib,x1,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=70,94
@@ -378,6 +380,24 @@
    diva_apres="Champ_Cog_CesJnl_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=70,112
+   taille=9,131
+   id=95
+   wstyle="STD"
+  [description]
+   donnee=x1,lib,x1,2
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=8000
+   f8=19030
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [groupe_radio]
   [presentation]
    position=56,268
@@ -435,42 +455,6 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=58,112
-   taille=9,131
-   id=94
-   wstyle="STD"
-  [description]
-   donnee=x1,lib,x1,1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=70,112
-   taille=9,131
-   id=95
-   wstyle="STD"
-  [description]
-   donnee=x1,lib,x1,2
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [touches]
-   f7=8000
-   f8=19030
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
    position=147,94
    taille=9,41
    id=21
@@ -518,6 +502,22 @@
    diva_apres="Champ_ExoFDt_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=83,111
+   taille=9,133
+   id=1000006
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=dosimmo,libelle_cesjnl,dos_immo
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=8000
+   f8=19032
+   shift_f6=10000
  [champ]
   [presentation]
    position=180,167
@@ -1793,7 +1793,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: ccez002_sql.dhsf 35434 2013-11-15 11:53:57Z jf $')
+SetModuleInfo('$Id: ccez002_sql.dhsf 51519 2015-11-19 12:35:45Z als $')
 ;*
 ;*		Module écran du zoom sur le dossier Immobilisation															scctz000
 ;*

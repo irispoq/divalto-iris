@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20130528154215      
+;>xwin4obj     imprimante               6.0       20140521113819      
 [masque]
- utilisateur="SN"
- date_modification="28/05/2013"
+ utilisateur="ROOT"
+ date_modification="21/05/2014"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -2087,7 +2087,7 @@
   [param_saisie]
    type_date=jj/mm/aaaa
 [diva]
-SetModuleInfo('$Id: gtii200a.dhsi 31865 2013-05-28 14:05:36Z sn $')
+SetModuleInfo('$Id: gtii200a.dhsi 39564 2014-05-21 09:43:16Z lk $')
 
 Module	'GTPM000.dhop'
 Module	'GTTMPCE.dhop'
@@ -2118,7 +2118,9 @@ Beginp
 	; G4.VTLEDITTYP = 3	; toutes les ventilations sont imprimées par le bloc 5 avec bloc début 4 et bloc de fin 6
 	
 	 G4.RELEDITTYP = False	; on n'imprime pas les lignes non livrées en pied de bl =true pour imprimer
+	G4.DTFlg = False
 Endp
+
 
 Public Procedure BLOC_LIGNEARTICLE_1_AV
 Beginp

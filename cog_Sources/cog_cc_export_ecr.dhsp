@@ -31,7 +31,7 @@ Public RecordSQL	"COG_CCRSECR.DHOQ"	CogRs_C8					; Non utilisation du STD car BI
 Public RecordSQL	"CCRSVTL.DHOQ"	 		VTLAXE			CogRs_CX				; ventilations analytiques
 Public RecordSQL	"CCRSVTL.DHOQ"	 		VTLPIECE			CogRs_CP				; ventilations échéances
 Public RecordSQL	"CCRSJCA.DHOQ"			Journal			CogRs_JNL
-Public RecordSQL	"GTRSPPPROJ.DHOQ"		Affaire			CogRs_PrjAp
+Public RecordSQL	"GTRSPROJ.DHOQ"		Affaire			CogRs_PrjAp
 
 ; Enregistrements
 Public Record	GTFDD.DHSD	SOC		SOC_DEV01					; Société
@@ -68,6 +68,7 @@ Public Record	* HTDF		TDF_02							; table définition fichier
 1	list_EcrVtl	L
 1	fonc_EcrVtl	16
 1	lig_VTL_Mt	>CCFDD.dhsd	mt
+1	lId_EcrLg	L
 
 structure Ventilation
 	1	Axe1		>	gtfdd.dhsd	axe
@@ -91,6 +92,21 @@ RecordDiva	Ventilation	Vtl_Rec
 ;*
 ;*
 ;*
+
+;*
+Function Long Tri_EcrLg(&A,&B)
+;
+Record	"CCFDD.DHSD"	C8		A
+Record	"CCFDD.DHSD"	C8		B
+1	_cleA		20
+1	_cleB		20
+BeginF
+
+	_cleA = [ A.EcrNo A.EcrLg ]
+	_cleB = [ B.EcrNo B.EcrLg ]
+
+	FReturn(SortCompare(_cleA, _cleB))
+EndF
 
 ;*
 Function Long CompareEcrVtl(&elem1,&elem2)
@@ -175,6 +191,54 @@ BeginF
 	FReturn(TRUE)
 EndF
 
+;*
+Function int CogF_CP_Attribuer_EcrLg_Export(&_C8)
+;  les échéances (CP) sont traitées comme des écritures (C8) par Anaël, il faut donc un numéro unique à l'export 
+RecordSQL	"COG_CCRSECR.DHOQ"	CogRs_C8	_RS_C8
+Record		"ccfdd.dhsd"			C8			_C8
+Record		"ccfdd.dhsd"			C8			_C8_Seek
+1		_adrF		16
+1		_OK		1,0 = FALSE
+BeginF
+
+	; liste mémoire
+	lId_EcrLg = ListGetId("COG_LISTE_ECRLG")
+	GetAdressFunction(' ', "Tri_EcrLg", _adrF)
+	ListMode(lId_EcrLg, 1, _adrF)
+
+	; Utilisation de EcrLg de l'écriture pour la première échéance
+	If ListSeek(lId_EcrLg, _C8, _C8_Seek) = 0
+		ListInsert(lId_EcrLg, _C8) 
+		FReturn(0)
+	EndIf
+
+	;
+	Do While not _OK 
+
+		_C8.EcrLg++
+		_Rs_C8.Init()
+		_RS_C8.Column.DeActivate("$All")
+		_RS_C8.Where.RemoveCondition("")
+		_RS_C8.Where.Equal_EcrNo(_C8.EcrNo)
+		_RS_C8.Where.AddCondition("Equal_EcrNo")
+		_RS_C8.Where.Equal_EcrLg(_C8.EcrLg)
+		_RS_C8.Where.AddCondition("Equal_EcrLg")
+
+		If _RS_C8.GetCount() = 0 AND ListSeek(lId_EcrLg, _C8, _C8_Seek) = 0
+			ListInsert(lId_EcrLg, _C8)
+			_OK = TRUE
+		EndIf
+
+		If _c8.EcrLg = 9999 AND not _OK
+			Cog_EcritureLivreDeBord("Ecriture: " & _C8.EcrNo & " --> impossible de trouver un numéro de ligne pour exporter les échéances vers Anaël")
+			FReturn(1)
+		EndIf
+
+	WEnd
+
+	FReturn(0)
+EndF
+
 ;*	01
 Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export, t_ChronoD, t_ChronoF, t_SeparateurC, t_SeparateurL, t_Jnl, t_CX, t_OA, t_Trace)
 ;
@@ -210,6 +274,7 @@ Public Function char COGF_ExportationEcritures(t_CheminFichier, t_Dos, t_Export,
 
 1	a_numfic				1
 1	_cptCP				>ccfdd.dhsd		MaskLg
+1	_ecrLg				>ccfdd.dhsd		EcrLg					; sauvegarde du n° de ligne
 
 BeginF
 
@@ -371,7 +436,7 @@ BeginF
 		;endif
 		If CogRs_JNL.Jnl <> CogRs_C8.Jnl OR CogRs_JNL.Dos <> CogRs_C8.Dos
 			CogRs_JNL.Init()
-			CogRs_JNL.Where.Zoom_PK(CogRs_C8.Jnl)
+			CogRs_JNL.Where.PK(CogRs_C8.Jnl)
 			CogRs_JNL.Select()
 		EndIf
 
@@ -448,15 +513,16 @@ BeginF
 			CogRs_CP.Init()
 			CogRs_CP.Where.RemoveCondition("")
 			CogRs_CP.Join.Deactivate("$All")
-			CogRs_CP.Where.Zoom_EcrNo(CogRs_C8.EcrNo)
-			CogRs_CP.Where.AddCondition("Zoom_EcrNo")
-			CogRs_CP.Where.Zoom_EcrLg(CogRs_C8.EcrLg)
-			CogRs_CP.Where.AddCondition("Zoom_EcrLg")
+			CogRs_CP.Where.Equal_EcrNo(CogRs_C8.EcrNo)
+			CogRs_CP.Where.AddCondition("Equal_EcrNo")
+			CogRs_CP.Where.Equal_EcrLg(CogRs_C8.EcrLg)
+			CogRs_CP.Where.AddCondition("Equal_EcrLg")
 			CogRs_CP.OrderBy.Par_NumeroEcriture()
 			_cptCP = CogRs_CP.GetCount()
 
 			; Ecriture dans le fichier
 			If _cptCP > 0
+				_ecrLg = CogRs_C8.EcrLg
 				readCP = CogRs_CP.ReaderOpen()
 				CogRs_CP.ReaderSelect(readCP)
 				Do While CogRs_CP.ReaderNext(readCP) > 0
@@ -464,11 +530,14 @@ BeginF
 					CogRs_C8.Mt 	= CogRs_CP.Mt
 					CogRs_C8.EchDt	= CogRs_CP.EchDt
 
+					CogF_CP_Attribuer_EcrLg_Export(CogRs_C8.C8) ; --> ecrlg <>
+
 					Cog_GenererLigne(t_ligne,t_SeparateurC,t_SeparateurL,condition(xq.Choix(4)=2,true,false), CogRs_C8.C8,"", Condition(t_OA > 0, t_OA, 4))
 					x_st_02 = FWritSt(TDF_01, Left(t_ligne))
 
 				WEnd
 				CogRs_CP.ReaderClose(readCP)
+				CogRs_C8.EcrLg	= _ecrLg
 
 			Else
 
@@ -481,10 +550,10 @@ BeginF
 			CogRs_CX.Init()
 			CogRs_CX.Where.RemoveCondition("")
 			readCX = CogRs_CX.ReaderOpen()
-			CogRs_CX.Where.Zoom_EcrNo(CogRs_C8.EcrNo)
-			CogRs_CX.Where.AddCondition("Zoom_EcrNo")
-			CogRs_CX.Where.Zoom_EcrLg(CogRs_C8.EcrLg)
-			CogRs_CX.Where.AddCondition("Zoom_EcrLg")
+			CogRs_CX.Where.Equal_EcrNo(CogRs_C8.EcrNo)
+			CogRs_CX.Where.AddCondition("Equal_EcrNo")
+			CogRs_CX.Where.Equal_EcrLg(CogRs_C8.EcrLg)
+			CogRs_CX.Where.AddCondition("Equal_EcrLg")
 			CogRs_CX.ReaderSelect(readCX)
 			
 			Do while CogRs_CX.ReaderNext(readCX) > 0

@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 8256 2015-06-30 08:28:37Z admin $')
+SetModuleInfo('$Id: cogtm_moteurprjspec.dhsp 10572 2016-12-08 08:25:54Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Module de fonctions communes à la facturation des projets spécifiques UT125
@@ -130,7 +130,7 @@ EndF
 ;*
 Public Function int Cog_Affaire_Facturable(wUT125, wLoadPrj)
 ; TRUE --> conditions remplies pour facturer wUT125 passé en paramètre
-RecordSQL	"GTRSPPPROJ.DHOQ"	Affaire				wRs_Aff
+RecordSQL	"GTRSPROJ.DHOQ"	Affaire				wRs_Aff
 RecordSQL	"COGRS_PROJ.DHOQ"	CogRs_PrjComp		wRs_AffComp
 RecordSQL	"COGRS_UTTAB.DHOQ"CogRs_UT125			wRs_UT125
 Record		"cogfdd.dhsd"		COG_UT125			wUT125

@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20140417170857      
+;>xwin4obj                              7.0       20161207110832      
 [masque]
  libelle="Evénement"
  utilisateur="UGIE"
- date_modification="17/04/2014"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=1516
  type_masque=2
  dernier_id=1000000
  surcharge=oui
- date_modif_base="20130213093755"
+ date_modif_base="20140612085432"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -50668,16 +50668,11 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: grez003.dhsf 35442 2013-11-15 12:02:16Z jf $')
+SetModuleInfo('$Id: grez003.dhsf 51528 2015-11-19 12:39:26Z als $')
 ;>xdiva
 ;*
 ;*      Zoom sur Table événements des tiers  Enregistrement EVTTIERS de GRFEVT
 ;*
-
-;*		Log	 Version	  N°modif		Date		Modifications
-;*
-;*		rr			5.2						11.2002	Version initiale en Diva
-					
 
 Include "GRTC000.dhsp"
 
@@ -51065,7 +51060,7 @@ Beginp
 
 	; calculer la date de fin et l'heure de fin si on gère un calendrier
 	If GR1.EvtCalcDuree = 2	
-		Calculer_Date_heure_Fin_Cal
+		Calculer_DateHeureFinCal(EVTTIERS.EvtDh, EVTTIERS.EvtFinDh, EVTTIERS.EvtUser, EVTTIERS.Duree)
 	EndIf
 
 Endp	
@@ -51233,7 +51228,7 @@ Beginp
 	If GR1.EvtCalcDuree = 2
 		; On calcule automatiquement la durée si on gère un calendrier
 		If EVTTIERS.EvtDh <> ' ' and EVTTIERS.EvtFinDh <> ' '
-			Calculer_Duree_Cal
+			Calculer_DureeCal(EVTTIERS.EvtDh, EVTTIERS.EvtFinDh, EVTTIERS.Duree, EVTTIERS.EvtUser)
 		Else
 			EVTTIERS.Duree = 0
 		EndIf
@@ -51275,7 +51270,7 @@ Beginp
 		GR1.EvtCalcHeuresSup	= MUSER.EvtCalcHeuresSup
 		; calculer la date de fin et l'heure de fin si on gère un calendrier
 		If GR1.EvtCalcDuree = 2	
-			Calculer_Date_heure_Fin_Cal
+			Calculer_DateHeureFinCal(EVTTIERS.EvtDh, EVTTIERS.EvtFinDh, EVTTIERS.EvtUser, EVTTIERS.Duree)
 		EndIf
 	EndIf
 	MUSER = MUSER_SAVE

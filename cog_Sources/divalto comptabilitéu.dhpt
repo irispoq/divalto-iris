@@ -2,11 +2,11 @@ xwin-s-projet      2.0
 [general]
 nom="divalto comptabilité"
 progexec="divalto.dhop"
-date="20160824237311372299"
+date="20161226361111141199"
 util="UGIE"
 filtres="??pp*;??pc*;??pm*;??pz*;??p9*"
 flagrelatif=1
-cheminbases="/../../../&div72a_cd205c/sources"
+cheminbases="/../../../&div75a_cd210a/sources"
 modeweb=3
 f5compile=1
 typetransport=3
@@ -20,22 +20,23 @@ implicites="implicitesdivsirs3.txt"
 options="qa"
 repobjetsurcharge="//u3recw98/divalto/custou/cog_objets"
 [profil]
-nom="ugie_205"
-repobjet="/cd205c/objets"
+nom="ugie_210a"
+repobjet="/cd210a/objets"
 browse=0
 implicites="ugie.txt"
-repbrowse="/cd205c/objets"
+repbrowse="/cd210a/objets"
 repobjetsurcharge="/ugie/cog_objets"
 repbrowsesurcharge="/ugie/cog_browse"
-versioncible="7.2a"
+versioncible="7.5"
 repcouverture="/ugie/cog_ccode"
 [profil]
 nom="yohann_local"
-repobjet="/pack/p205c/objets"
+repobjet="/pack/p210a/objets"
+debug=0
 browse=0
 implicites="ugie.txt"
 repobjetsurcharge="/ugie/cog_objets"
-versioncible="7.2a"
+versioncible="7.5"
 [communs]
 nom="cog_cc_recordsql"
 fic="ccrsdosu.dhsq"," "
@@ -52,11 +53,20 @@ fic="cog_ccrsjca.dhsq"," "
 nom="cog_dico"
 fic="cogfdd.dhsd"," "
 [communs]
+nom="cog_gt_rsql"
+fic="gtrspppceu.dhsq"," "
+fic="gtrsppproju.dhsq"," "
+fic="gtrspptabu.dhsq"," "
+fic="gtrstabu.dhsq"," "
+[communs]
 nom="cog_module"
 fic="cogpm_ole.dhsp"," "
+fic="cogtm_000.dhsp"," "
 [communs]
 nom="cog_recordsql"
+fic="cogrs_000.dhsq"," "
 fic="cogrs_immo.dhsq"," "
+fic="cogrs_tab.dhsq"," "
 [sousprojets]
 fic="cog - fe120 - facturation cen export.dhps"," "
 fic="cog - fe120 - facturation cen génération.dhps"," "

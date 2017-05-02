@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20151106121102      
+;>xwin4obj     imprimante               6.0       20170420165845      
 [masque]
- utilisateur="UGIE"
- date_modification="06/11/2015"
+ utilisateur="ROOT"
+ date_modification="20/04/2017"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -11,7 +11,7 @@
  nombre_lignes=70
  etat=0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
  diva_init="Masque_1_Init"
- dernier_id=1000082
+ dernier_id=1000105
  surcharge=oui
  date_modif_base="20130528154524"
  dernier_id_page=100000
@@ -29,16 +29,16 @@
   donnee=g4,email,g4
 [defaut]
 [enregistrements]
- "gtfdd.dhsd",gtfat,art,g4art,1700,0
- "gtfdd.dhsd",gtfent,ent,ent,1800,0
- "gtfdd.dhsd",,mouv,g4mouv,1900,0
- "gtfdd.dhsd",,g4,g4,8000,0
- "gtfdd.dhsd",gtfdos,soc,soc,2800,0
+ "gtfdd.dhsd",gtfat,art,g4art,2500,0
+ "gtfdd.dhsd",gtfent,ent,ent,2500,0
+ "gtfdd.dhsd",,mouv,g4mouv,2700,0
+ "gtfdd.dhsd",,g4,g4,8300,0
+ "gtfdd.dhsd",gtfdos,soc,soc,3500,0
  "a5dd.dhsd",,mw,mw,3000,0
  "gtfdd.dhsd",,g4t1,g4t1,100,0
- "gtfdd.dhsd",,t013,t013,300,0
- "gtfdd.dhsd",,t037,t037,450,0
- "gtfdd.dhsd",,t2,t2,1000,0
+ "gtfdd.dhsd",,t013,t013,400,0
+ "gtfdd.dhsd",,t037,t037,500,0
+ "gtfdd.dhsd",,t2,t2,1200,0
 [bloc]
  numero=1
  libelle="En-tête"
@@ -598,6 +598,32 @@
    wstyle="STD"
   [description]
    donnee=ent,piref,ent
+ [code_barre]
+  [presentation]
+   position=5,200
+   taille=30,60
+   id=1000092
+   wstyle="STD"
+  [description]
+   donnee=ent,pino,ent
+  [param_code_barre]
+   wtype=code93
+   exemple=" "
+   wnom_couleurtraitcb="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfondcb="TRANS"
+ [code_barre]
+  [presentation]
+   position=512,245
+   taille=32,60
+   id=1000102
+   wstyle="STD"
+  [description]
+   donnee=ent,pino,ent
+  [param_code_barre]
+   wtype=ybarcode
+   exemple=" "
+   wnom_couleurtraitcb="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfondcb="TRANS"
  [champ]
   [presentation]
    position=570,55

@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20140428171234      
+;>xwin4obj                              7.0       20161207162637      
 [masque]
  libelle="Adresse adresse"
  utilisateur="UGIE"
- date_modification="28/04/2014"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=151
  type_masque=2
  dernier_id=1000032
  surcharge=oui
- date_modif_base="20130213094839"
+ date_modif_base="20151007174452"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -21,9 +21,9 @@
   shift_f6=10000
 [enregistrements]
  "gtrstiers.dhoq",,adresse,adresse,1024,1
- "gtfdd.dhsd",,g7,g7,4510,0
+ "gtfdd.dhsd",,g7,g7,4800,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "gtfdd.dhsd",,t1,adr_sel,750,0
+ "gtfdd.dhsd",,t1,adr_sel,1000,0
 [onglet]
  [presentation]
   position=0,0
@@ -143,6 +143,36 @@
    donnee=rowinfo,rowinfo,zoomselection
    minmaj=majuscules
    saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=86,4
+    taille=18,36
+    noms="icpfl"
+    id=102
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=adresse,icpfl,adresse
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#tblicp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
     position=81,120
@@ -1158,7 +1188,7 @@
    texte="Code adresse"
  [obj_texte]
   [presentation]
-   position=26,108
+   position=26,122
    taille=9,35
    noms="Adr_cli"
    id=1000006
@@ -1760,6 +1790,25 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=26,96
+   taille=9,18
+   id=103
+   wstyle="STD"
+  [description]
+   donnee=adresse,icpfl,adresse
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
  [champ]
   [presentation]
    position=207,36
@@ -1803,7 +1852,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=26,162
+   position=26,176
    taille=9,73
    noms="Adr_cli"
    id=1000007
@@ -1820,7 +1869,7 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=26,125
+   position=26,139
    taille=9,33
    noms="Adr_cli"
    id=1000008
@@ -2535,7 +2584,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtez027_sql.dhsf 35431 2013-11-15 11:50:30Z jf $')
+SetModuleInfo('$Id: gtez027_sql.dhsf 50314 2015-10-07 15:44:37Z lk $')
 ;*
 ;*      Zoom sur Adresse	Enregistrement Adresse de GTRSTIERS
 ;*

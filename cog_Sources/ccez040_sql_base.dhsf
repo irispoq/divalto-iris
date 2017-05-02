@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20130213090335      
+;>xwin4obj                              7.0       20160425165856      
 [masque]
  libelle="journaux"
  utilisateur="MS"
- date_modification="16/04/2012"
+ date_modification="25/04/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=108
  type_masque=2
- dernier_id=309
+ dernier_id=315
  dernier_id_page=20
 [defaut]
  [aide_page]
@@ -184,6 +184,8 @@
     shift_f6=10000
    [traitements]
     microbol_click=8002
+    diva_avant="Champ_Lib_1_Av"
+    diva_apres="Champ_Lib_1_Ap"
    [info_bulle]
    texte="intitulé du journal"
    [param_colonne]
@@ -273,6 +275,33 @@
     titre="Fin"
     fl_aff=non
     largeur_col=40
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=28,83
+    taille=9,42
+    noms="jnltretyp"
+    id=314
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=journal,jnltretyp,journal
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="ccfdmc.dhfi","JNLTRETYP"
+   [touches]
+    f1=1
+    f7=8000
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_avant="Champ_JnlTreTyp_1_Av"
+   [info_bulle]
+   texte="Type de journal de trésorerie"
+   [param_colonne]
+    titre="Type tréso."
+    fl_aff=oui
+    largeur_col=42
     wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
@@ -1343,7 +1372,7 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=186,5
+   position=189,5
    taille=60,310
    id=9
    wstyle="GROUPE"
@@ -1352,7 +1381,7 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=254,5
+   position=256,5
    taille=38,310
    id=11
    wstyle="GROUPE"
@@ -1385,7 +1414,7 @@
    texte="Intitulé"
  [obj_texte]
   [presentation]
-   position=133,189
+   position=138,189
    taille=9,84
    id=208
    wstyle="STD"
@@ -1393,7 +1422,7 @@
    texte="Nombre d'écritures pré-chargées"
  [obj_texte]
   [presentation]
-   position=151,5
+   position=155,5
    taille=9,103
    id=17
    wstyle="STD"
@@ -1401,7 +1430,7 @@
    texte="Période de saisie autorisée du"
  [obj_texte]
   [presentation]
-   position=151,148
+   position=155,148
    taille=9,29
    cadrage=centre
    id=18
@@ -1410,7 +1439,7 @@
    texte="au"
  [obj_texte]
   [presentation]
-   position=161,5
+   position=165,5
    taille=9,103
    id=19
    wstyle="STD"
@@ -1418,7 +1447,7 @@
    texte="Modèle de saisie des écritures"
  [obj_texte]
   [presentation]
-   position=171,5
+   position=175,5
    taille=9,103
    id=20
    wstyle="STD"
@@ -1426,7 +1455,7 @@
    texte="Libellé par défaut des lignes d'écriture"
  [obj_texte]
   [presentation]
-   position=221,103
+   position=224,103
    taille=9,99
    id=24
    wstyle="STD"
@@ -1434,7 +1463,7 @@
    texte="Compte de génération"
  [obj_texte]
   [presentation]
-   position=231,103
+   position=234,103
    taille=9,99
    id=26
    wstyle="STD"
@@ -1495,7 +1524,7 @@
  [groupe_radio]
   [presentation]
    position=59,5
-   taille=87,80
+   taille=92,80
    id=29
    wstyle="STD"
   [description]
@@ -1575,6 +1604,16 @@
     texte="Réservé centralisation"
     cadrage=droite
     valeur="6"
+  [radio_bouton]
+   [presentation]
+    position=138,10
+    taille=9,72
+    id=315
+    wstyle="STD"
+   [param_radio]
+    texte="A nouveau"
+    cadrage=droite
+    valeur="7"
   [aide_page]
    aide=132
    fichier="CCFAID"
@@ -1636,7 +1675,45 @@
    microbol_click=8002
  [groupe_radio]
   [presentation]
-   position=104,95
+   position=59,195
+   taille=42,90
+   id=311
+   wstyle="STD"
+  [description]
+   donnee=journal,jnltretyp,journal
+  [param_groupe]
+   titre="Type de journal de trésorerie"
+  [radio_bouton]
+   [presentation]
+    position=68,200
+    taille=9,84
+    noms="jnltretyp"
+    id=312
+    wstyle="STD"
+   [param_radio]
+    texte="Portefeuille"
+    cadrage=droite
+    valeur="1"
+  [radio_bouton]
+   [presentation]
+    position=78,200
+    taille=9,84
+    noms="jnltretyp"
+    id=313
+    wstyle="STD"
+   [param_radio]
+    texte="Banque"
+    cadrage=droite
+    valeur="2"
+  [touches]
+   f1=1
+   f7=8000
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [groupe_radio]
+  [presentation]
+   position=109,95
    taille=42,90
    id=46
    wstyle="STD"
@@ -1648,7 +1725,7 @@
    notifier=oui
   [radio_bouton]
    [presentation]
-    position=113,99
+    position=118,99
     taille=9,84
     noms="maskeffcod"
     id=47
@@ -1659,7 +1736,7 @@
     valeur="1"
   [radio_bouton]
    [presentation]
-    position=123,99
+    position=128,99
     taille=9,84
     noms="maskeffcod"
     id=48
@@ -1670,7 +1747,7 @@
     valeur="2"
   [radio_bouton]
    [presentation]
-    position=133,99
+    position=138,99
     taille=9,84
     noms="maskeffcod"
     id=49
@@ -1692,7 +1769,7 @@
    diva_apres="Champ_PreLoad_1_Ap"
  [champ]
   [presentation]
-   position=133,278
+   position=138,278
    taille=9,23
    noms="maskeffcod;preload"
    id=50
@@ -1715,7 +1792,7 @@
    diva_apres="Champ_PreLoadNb_1_Ap"
  [champ]
   [presentation]
-   position=151,110
+   position=155,110
    taille=9,36
    id=38
    wstyle="CHAMP_SAISI"
@@ -1733,7 +1810,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=151,179
+   position=155,179
    taille=9,36
    id=39
    wstyle="CHAMP_SAISI"
@@ -1753,7 +1830,7 @@
    diva_apres="Champ_ProtFDt_1_Ap"
  [champ]
   [presentation]
-   position=161,110
+   position=165,110
    taille=9,36
    id=40
    wstyle="CHAMP_SAISI"
@@ -1776,7 +1853,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=171,110
+   position=175,110
    taille=9,152
    id=41
    wstyle="CHAMP_SAISI"
@@ -1791,7 +1868,7 @@
    microbol_click=8002
  [groupe_radio]
   [presentation]
-   position=202,10
+   position=205,10
    taille=42,88
    id=54
    wstyle="STD"
@@ -1803,7 +1880,7 @@
    notifier=oui
   [radio_bouton]
    [presentation]
-    position=211,16
+    position=214,16
     taille=9,81
     id=55
     wstyle="STD"
@@ -1813,7 +1890,7 @@
     valeur="1"
   [radio_bouton]
    [presentation]
-    position=221,16
+    position=224,16
     taille=9,81
     id=56
     wstyle="STD"
@@ -1823,7 +1900,7 @@
     valeur="2"
   [radio_bouton]
    [presentation]
-    position=231,16
+    position=234,16
     taille=9,81
     id=57
     wstyle="STD"
@@ -1842,7 +1919,7 @@
    diva_apres="Champ_CpGenCod_1_Ap"
  [champ]
   [presentation]
-   position=221,204
+   position=224,204
    taille=9,36
    noms="cpgencod"
    id=58
@@ -1867,7 +1944,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=231,204
+   position=234,204
    taille=9,105
    noms="cpgencod"
    id=59
@@ -1887,8 +1964,8 @@
    diva_avant="Champ_LibGen_1_Av"
  [case_a_cocher]
   [presentation]
-   position=270,10
-   taille=9,302
+   position=271,10
+   taille=9,129
    id=51
    wstyle="STD"
   [description]
@@ -1908,7 +1985,24 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=280,10
+   position=271,152
+   taille=9,129
+   noms="tvadcpt"
+   id=310
+   wstyle="STD"
+  [description]
+   donnee=journal,gentvacod,journal
+  [param_case]
+   texte="Génération automatique de la tva"
+   cadrage=droite
+   valeur="2","1"
+   choix="ccfdmc.dhfi",""
+  [touches]
+   f1=1
+   f7=8000
+ [case_a_cocher]
+  [presentation]
+   position=281,10
    taille=9,302
    noms="r3cod"
    id=52
@@ -3110,7 +3204,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: ccez040_sql.dhsf 35434 2013-11-15 11:53:57Z jf $')
+SetModuleInfo('$Id: ccez040_sql.dhsf 56481 2016-04-25 16:33:24Z ms $')
 ;>xdiva
 ;*
 ;*		Zoom journaux																															cctez040.dhsp
@@ -3157,7 +3251,7 @@ function int Existe_Ecriture
 
 beginf	; existe_ecriture
 
-	if hread(CCFECR, C8, [ 'C' MZ.Dos Journal.Jnl ], 'F') = 0 and C8.Dos = Journal.Dos and C8.Jnl = Journal.Jnl		;2361
+	if hread(CCFECR, C8, [ 'C' MZ.Dos Journal.Jnl ], 'F') = 0 and C8.Dos = Journal.Dos and C8.Jnl = Journal.Jnl
 		freturn(true)
 	endif
 
@@ -3180,8 +3274,8 @@ beginp	; Champ_CpGenCod_1_Ap
 
 	if Harmony.DataModif or Harmony.DataNotif
 		if Journal.CpGenCod = 1	|	XmeSetAttribut("cpgencod", AN_VISIBILITE, AV_GRISE)
-										XmeSetAttribut("cpgencod", AN_STYLE, "Champ_Non_Saisi")
-		else						|	XmeResetAttribut("cpgencod", AN_TOUS_ATTRIBUTS)
+											XmeSetAttribut("cpgencod", AN_STYLE, "Champ_Non_Saisi")
+		else							|	XmeResetAttribut("cpgencod", AN_TOUS_ATTRIBUTS)
 		endif
 
 		if Harmony.DataNotif
@@ -3194,7 +3288,7 @@ beginp	; Champ_CpGenCod_1_Ap
 		Journal.CptGen = ' '									; pas de compte de génération
 		Journal.LibGen = ' '									; pas de libellé de la ligne générée
 	elsif Journal.CptGen = ' '								; génération automatique mais pas de compte de génération précisé
-		Journal.CpSais = 2										; il faut saisir la contrepartie
+		Journal.CpSais = 2									; il faut saisir la contrepartie
 	endif
 
 endp		; Champ_CpGenCod_1_Ap
@@ -3265,12 +3359,10 @@ beginp	; Champ_JnlTyp_1_Ap
 
 	if Harmony.DataModif or Harmony.DataNotif
 		if ZOOM.Action <> ZOOM_CREATION and ZOOM.Action <> ZOOM_DUPLICATION
-			if (Journal_sav.JnlTyp < 5 and Journal.JnlTyp >=5)		\			; passage comptable à extra, budget interdit
-				or (Journal_sav.JnlTyp >= 5 and Journal.JnlTyp < 5)	\			; passage extra/budget à comptable
-				or (Journal_sav.JnlTyp = 8 and Journal.JnlTyp = 6)	\			; passage budget à extra
-				or (Journal_sav.JnlTyp = 6 and Journal.JnlTyp = 8)				; passage extra à budget
-				if Existe_Ecriture										; s'il y a des écritures
-					Mes_Alert(19042)										; 	passage de comptable à extracomptable (ou inversement) interdit
+			if (Journal_sav.JnlTyp  < 5 and Journal.JnlTyp >= 5)	\								; passage comptable à extra, budget interdit
+			or (Journal_sav.JnlTyp >= 5 and Journal.JnlTyp <> Journal_sav.JnlTyp)			; passage extra/budget à autre type (quel qu'il soit) interdit
+				if Existe_Ecriture																			; s'il y a des écritures
+					Mes_Alert(19042)																			; 	passage de comptable à extracomptable (ou inversement) interdit
 					Journal.JnlTyp = Journal_sav.JnlTyp
 					Harmony.Retour = XmeNext_Traitement_Avant
 					preturn
@@ -3280,10 +3372,9 @@ beginp	; Champ_JnlTyp_1_Ap
 	endif
 
 	if Journal.JnlTyp > 2										; pas un journal d'achat ni un journal de vente
-;		Journal.R3Cod = 1										; pas de lien avec r3
-		if Journal.PieceSais = 4	\							; si numérotation automatique
+		if  Journal.PieceSais = 4	\							; si numérotation automatique
 		and Journal.PieceCod < 2								; et pas d'instruction de numérotation ou numérotation à partir de g3
-			Journal.PieceCod = 2								; numérotation à partir du dossier
+			Journal.PieceCod = 2									; numérotation à partir du dossier
 		endif
 	endif
 
@@ -3291,9 +3382,11 @@ beginp	; Champ_JnlTyp_1_Ap
 
 	if Harmony.DataModif or Harmony.DataNotif
 		if Journal.JnlTyp not in (1, 2, 4)	|	XmeSetAttribut("r3cod", AN_VISIBILITE, AV_GRISE)
-													XmeSetAttribut("r3cod", AN_STYLE, C_Champ_NSaisi)
-		else									|	XmeResetAttribut("r3cod", AN_TOUS_ATTRIBUTS)
+															XmeSetAttribut("r3cod", AN_STYLE, C_Champ_NSaisi)
+		else											|	XmeResetAttribut("r3cod", AN_TOUS_ATTRIBUTS)
 		endif
+		
+		XmeSetAttribut('JNLTRETYP', AN_VISIBILITE, Condition(Journal.JnlTyp = 3, AV_VISIBLE, AV_GRISE))
 
 	endif
 
@@ -3576,6 +3669,16 @@ beginp 	;Champ_Conf_1_Ap
 	Controler_Confidentialite(Journal.Conf, 4000)		
 
 endp		;Champ_Conf_1_Ap
+
+
+;*
+Public Procedure Champ_JnlTreTyp_1_Av
+;
+Beginp
+	If Journal.JnlTyp <> 3
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+	EndIf
+Endp
 
 
 ;*

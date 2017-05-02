@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20151106120709      
+;>xwin4obj                              7.0       20161207110836      
 [masque]
  libelle="table service"
  utilisateur="UGIE"
- date_modification="06/11/2015"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=48
  type_masque=2
  dernier_id=1000011
  surcharge=oui
- date_modif_base="20111028074252"
+ date_modif_base="20140612074313"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -405,21 +405,6 @@
    saisie=non
  [champ]
   [presentation]
-   position=67,136
-   taille=9,132
-   id=1000008
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=xq,lib,xq_cog,1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
- [champ]
-  [presentation]
    position=40,56
    taille=9,144
    id=10
@@ -487,6 +472,21 @@
   texte="Groupe de collaborateurs responsables"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=67,136
+   taille=9,132
+   id=1000008
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=xq,lib,xq_cog,1
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
  [champ]
   [presentation]
    position=52,131
@@ -860,7 +860,7 @@ Endp
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez091.dhsf 18698 2011-10-28 07:42:52Z lk $')
+SetModuleInfo('$Id: gtez091_sql.dhsf 51516 2015-11-19 12:34:13Z als $')
 
 
 include 'GTTC000.dhsp'
@@ -876,10 +876,10 @@ Public Record "ddsys.dhsd" rowinfo zoomselection
 ;*
 public procedure Champ_Salcod_1_Ap ; 	après code responsable
 beginp
-	if	Lectab(37,Service.SALCOD,1137) = 0
-		Service.Collaborateur_Lib = T037.LIB
+	if	Lectab(37, Service.SalCod, 1137) = 0
+		Service.Collaborateur_Nom = T037.Nom
 	else
-		Service.Collaborateur_Lib = ' '
+		Service.Collaborateur_Nom = ' '
 	endif
 endp
 

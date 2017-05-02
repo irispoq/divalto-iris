@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20140728115754      
+;>xwin4obj                              7.0       20161207110837      
 [masque]
  libelle="Taux de T.V.A."
  utilisateur="UGIE"
- date_modification="28/07/2014"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=86
  type_masque=2
  dernier_id=1000004
  surcharge=oui
- date_modif_base="20130513142034"
+ date_modif_base="20141009111416"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -810,6 +810,20 @@
    microbol_click=8002
  [champ]
   [presentation]
+   position=36,133
+   taille=9,144
+   id=27
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,regtvatiers_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=70,81
    taille=9,50
    id=29
@@ -944,6 +958,38 @@
    "zoom"
  [champ]
   [presentation]
+   position=90,133
+   taille=9,144
+   id=149
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cpttvarecup_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=100,133
+   taille=9,144
+   id=147
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=tauxtvan,cpttvaimrec_lib,tauxtvan
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
    position=157,81
    taille=9,50
    id=97
@@ -1003,68 +1049,6 @@
    diva_apres="Champ_CptAL_Ap"
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=199,81
-   taille=9,11
-   id=1000002
-   colonnes_saisie=2
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=tauxtvan,cog_anael_corr,tauxtvan
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=36,133
-   taille=9,144
-   id=27
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=tauxtvan,regtvatiers_lib,tauxtvan
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=90,133
-   taille=9,144
-   id=149
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=tauxtvan,cpttvarecup_lib,tauxtvan
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=100,133
-   taille=9,144
-   id=147
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=tauxtvan,cpttvaimrec_lib,tauxtvan
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
    position=80,133
@@ -1153,6 +1137,22 @@
   [touches]
    f7=135
    shift_f6=10000
+ [champ]
+  [presentation]
+   position=199,81
+   taille=9,11
+   id=1000002
+   colonnes_saisie=2
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=tauxtvan,cog_anael_corr,tauxtvan
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=210,81
@@ -1378,6 +1378,14 @@
    [info_bulle]
    texte="Supprimer <Suppr>"
   [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Details"
+    wid_ressource="DETAILS"
+    wtrait_chaine="#F6"
+   [info_bulle]
+   texte="Détails de TVA"
+  [item]
    type=sep
    dessin=sep
    [param_bouton]
@@ -1510,7 +1518,7 @@ Public RecordSql "gtrstab.dhoq" tauxtvan tauxtvan
 Public RecordSql "gtrstab.dhoq" tauxtvan tt_sel
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtez125_sql.dhsf 31549 2013-05-13 12:23:19Z sn $')
+SetModuleInfo('$Id: gtez125_sql.dhsf 42067 2014-10-09 09:35:21Z lk $')
 ;*
 ;*      Zoom sur la table des taux de TVA
 ;*

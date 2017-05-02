@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20130213094839      
+;>xwin4obj                              7.0       20150127114208      
 [masque]
  libelle="table mode de règlement"
  utilisateur="SN"
- date_modification="23/03/2012"
+ date_modification="27/01/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=104
  type_masque=2
@@ -1801,7 +1801,7 @@
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez046_sql.dhsf 35431 2013-11-15 11:50:30Z jf $')
+SetModuleInfo('$Id: gtez046_sql.dhsf 44338 2015-01-27 14:53:43Z sn $')
 
 
 include 'GTTC000.dhsp'
@@ -1900,7 +1900,7 @@ endp
 public procedure Champ_Regtyp_1_Ap		; controle type de reglement
 beginp
   	ModeReglement.TYPE_REG_Lib = ' '
-	if (SOC.ENTCOD(18) = Oui or SOC.ENTCOD(20) = Oui ) and ModeReglement.REGTYP <> ' ' 
+	if (SOC.ENTCODN(18) = Oui or SOC.ENTCODN(20) = Oui ) and ModeReglement.REGTYP <> ' ' 
 		if Lectab_H8(ModeReglement.REGTYP) = 0
 			ModeReglement.TYPE_REG_Lib = H8.LIB
 		else
@@ -1915,7 +1915,7 @@ endp
 public procedure Champ_ETAT_1_Ap		; controle état porteuille client
 beginp
 	ModeReglement.RA_RegEtatC_LibEtat(1) = ' '
-	if SOC.ENTCOD(18) = Oui and Lectab_RA(ModeReglement.REGETATC,2200) = 0
+	if SOC.ENTCODN(18) = Oui and Lectab_RA(ModeReglement.REGETATC,2200) = 0
 		ModeReglement.RA_RegEtatC_LibEtat(1) = RA.LIBETAT(1)
 	endif
 endp
@@ -1925,7 +1925,7 @@ endp
 public procedure Champ_ETAT_2_Ap		; controle état porteuille fournisseur
 beginp
 	ModeReglement.RA_RegEtatF_LibEtat(2) = ' '
-	if SOC.ENTCOD(18) = Oui and Lectab_RA(ModeReglement.REGETATF,2200) = 0
+	if SOC.ENTCODN(18) = Oui and Lectab_RA(ModeReglement.REGETATF,2200) = 0
 		ModeReglement.RA_RegEtatF_LibEtat(2) = RA.LIBETAT(2)
 	endif
 endp

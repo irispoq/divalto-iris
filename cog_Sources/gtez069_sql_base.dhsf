@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20130213094839      
+;>xwin4obj                              7.0       20150209112018      
 [masque]
  libelle="code statistique tiers"
- utilisateur="SN"
- date_modification="23/01/2012"
+ utilisateur="DEMO"
+ date_modification="09/02/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=55
  type_masque=2
@@ -16,7 +16,7 @@
   f7=135
   shift_f6=10000
 [enregistrements]
- "gtfdd.dhsd",,soc,soc,2800,0
+ "gtfdd.dhsd",,soc,soc,3500,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "gtrstab.dhoq",,codestatistiquetiers,codestattiers,1024,1
  "gtrstab.dhoq",,codestatistiquetiers,codestattiers_sel,1024,1
@@ -425,7 +425,7 @@
 [page]
  numero=12
  fond="STD"
- efface=complet
+ efface=partiel
  nb_lig=25
  nb_col=70
  offset_lig=1
@@ -747,7 +747,7 @@
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez069_sql.dhsf 35431 2013-11-15 11:50:30Z jf $')
+SetModuleInfo('$Id: gtez069_sql.dhsf 44641 2015-02-09 10:19:43Z bel $')
 
 
 include 'GTTC000.dhsp'

@@ -37,12 +37,12 @@ Htmpfile	"ccfdd.dhsd"  						CCFM	 			CCFM			openonuse	deleteonexit
 ;
 Public RecordSQL	"CCRSIMMO.DHOQ"		IMMO				CogRs_I1				; Immobilisations
 Public RecordSQL	"CCRSJCA.DHOQ"			JOURNAL			CogRs_Jnl			; Journaux
-Public RecordSQL	"CCRSPPJCA.DHOQ"		COMPTE			CogRs_C3Ces
-Public RecordSQL	"CCRSPPJCA.DHOQ"		COMPTE			CogRs_C3CesVal
-Public RecordSQL	"CCRSPPJCA.DHOQ"		COMPTE			CogRs_C3CesAmo
+Public RecordSQL	"CCRSJCA.DHOQ"			COMPTE			CogRs_C3Ces
+Public RecordSQL	"CCRSJCA.DHOQ"			COMPTE			CogRs_C3CesVal
+Public RecordSQL	"CCRSJCA.DHOQ"			COMPTE			CogRs_C3CesAmo
 Public RecordSQL	"CCRSDOS.DHOQ"			DOSNUM			CogRs_CN				; Numérotation dossier cpt
 Public RecordSQL	"CCRSDOS.DHOQ"			ETBCPT			CogRs_CETS			; Etablissement comptable
-Public RecordSQL	"GTRSPPPCE.DHOQ"		MOUVEMENT		CogRs_MOUV			; Mouvement
+Public RecordSQL	"GTRSPCE.DHOQ"			MOUVEMENT		CogRs_MOUV			; Mouvement
 
 ;
 Public Record 	"Ccfdd.dhsd"				CA
@@ -80,7 +80,7 @@ Const		C_SENS_CREDIT			= 2
 ;* Initialisation des variables
 function int Cog_InitialiserVariables
 ;
-RecordSQL	"a5rsuser.dhoq"	utilisateur						;Utilisateurs
+RecordSQL	"a5rsdos.dhoq"	utilisateur						;Utilisateurs
 1		wCpt		>ccfdd.dhsd		Cpt
 BeginF
 
@@ -129,7 +129,7 @@ BeginF
 
 	; journal de cession
 	CogRs_Jnl.Init()
-	CogRs_Jnl.Where.Zoom_PK(CD.Cog_CesJnl)	
+	CogRs_Jnl.Where.PK(CD.Cog_CesJnl)	
 	If CogRs_Jnl.Select() = 0 OR CD.Cog_CesJnl = ' '
 		Cog_EcritureLivreDeBord("Erreur de paramétrage du journal pour les écritures de cession.", applic='DCPT')
 		FReturn(0)
@@ -239,7 +239,7 @@ BeginF
 			; NUMEROTATION SUR CN
 			Case 2
 			 	CogRs_CN.Init()
-				CogRs_CN.Where.Zoom_PK(CA.Dos)
+				CogRs_CN.Where.PK(CA.Dos)
 				If CogRs_CN.Select() = 0
 				 	Cog_EcritureLivreDeBord("Dossier numérotation comptable " & MZ.Dos & " non trouvé.", applic='DCPT')
 					FReturn(0)
@@ -263,7 +263,7 @@ BeginF
 					FReturn(0)
 				EndIf
 				CogRs_CETS.Init()
-				CogRs_CETS.Where.Zoom_PK(CogRs_I1.Etb)
+				CogRs_CETS.Where.PK(CogRs_I1.Etb)
 				If CogRs_CETS.Select() = 0
 					Cog_EcritureLivreDeBord("Etablissement comptable " & CogRs_I1.Etb & " non trouvé.", applic='DCPT')
 					FReturn(0)
@@ -283,7 +283,7 @@ BeginF
 			; numérotation du journal	(on le recharge en cas de modif entre temps par un autre prog
 			Default	
 				CogRs_Jnl.Init()
-				CogRs_Jnl.Where.Zoom_PK(CD.Cog_CesJnl)
+				CogRs_Jnl.Where.PK(CD.Cog_CesJnl)
 				If CogRs_Jnl.Select() = 0
 					Cog_EcritureLivreDeBord("Journal " & CogRs_Jnl.Jnl & " non trouvé.", applic='DCPT')
 					FReturn(0)

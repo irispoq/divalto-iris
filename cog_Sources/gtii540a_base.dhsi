@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20090721084615      
+;>xwin4obj     imprimante               6.0       20130513115541      
 [masque]
- utilisateur="LK"
- date_modification="21/07/2009"
+ utilisateur="SN"
+ date_modification="13/05/2013"
  feuille_style="fstyleimp.dhfi"
  taille_ligne=9
  orientation=paysage
@@ -17,15 +17,15 @@
   type_ad3=rien
 [defaut]
 [enregistrements]
- "gtfdd.dhsd",,bpent,bpent,500
- "gtfdd.dhsd",,bpdet,bpdet,1000
- "gtfdd.dhsd",,t1,t1,850
- "gtfdd.dhsd",,xq,g3xq,6700
- "gtfdd.dhsd",,art,art,1700
- "gtfdd.dhsd",,mvtl,mvtl,1200
- "ddsys.dhsd",,system,system,4160
- "gtfdd.dhsd",gtfdos,soc,soc,3300
- "gtfdd.dhsd",,t026,t026,400
+ "gtfdd.dhsd",,bpent,bpent,700,0
+ "gtfdd.dhsd",,bpdet,bpdet,900,0
+ "gtfdd.dhsd",,t1,t1,750,0
+ "gtfdd.dhsd",,xq,g3xq,8000,0
+ "gtfdd.dhsd",,art,art,1700,0
+ "gtfdd.dhsd",,mvtl,mvtl,1000,0
+ "ddsys.dhsd",,system,system,4160,0
+ "gtfdd.dhsd",gtfdos,soc,soc,2800,0
+ "gtfdd.dhsd",,t026,t026,400,0
 [bloc]
  numero=1
  taille=1
@@ -454,8 +454,6 @@
    donnee=xq,dos,g3xq
   [param_saisie]
    esp_si_zero=oui
-  [reaffichage]
-   #tous
  [champ]
   [presentation]
    position=98,42
@@ -464,8 +462,6 @@
    wstyle="STD"
   [description]
    donnee=soc,nom,soc
-  [param_saisie]
-   esp_si_zero=oui
  [champ]
   [presentation]
    position=28,330
@@ -803,8 +799,8 @@
    texte="Mode de transport"
  [champ]
   [presentation]
-   position=13,386
-   taille=12,128
+   position=13,401
+   taille=12,113
    id=237
    wstyle="GRAND"
   [description]
@@ -814,7 +810,7 @@
  [champ]
   [presentation]
    position=13,368
-   taille=12,19
+   taille=12,33
    id=236
    wstyle="GRAND"
   [description]
@@ -1226,8 +1222,6 @@
    donnee=xq,dos,g3xq
   [param_saisie]
    esp_si_zero=oui
-  [reaffichage]
-   #tous
  [champ]
   [presentation]
    position=98,45
@@ -1238,8 +1232,6 @@
    donnee=soc,nom,soc
   [param_saisie]
    esp_si_zero=oui
-  [reaffichage]
-   #tous
  [champ]
   [presentation]
    position=42,336
@@ -2385,7 +2377,7 @@
   [param_saisie]
    type_date=jj/mm/aaaa
 [diva]
-SetModuleInfo('$Id: gtii540a.dhsi 4076 2009-07-21 13:18:35Z lk $')
+SetModuleInfo('$Id: gtii540a.dhsi 31550 2013-05-13 12:34:30Z sn $')
 Public Record "gtfdd.dhsd" bpent bpent
 Public Record "gtfdd.dhsd" bpdet bpdet
 Public Record "gtfdd.dhsd" t1 t1

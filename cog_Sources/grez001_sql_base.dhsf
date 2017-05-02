@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20121224164146      
+;>xwin4obj                              7.0       20140612085432      
 [masque]
  libelle="Rubrique"
- utilisateur="ROOT"
- date_modification="24/12/2012"
+ utilisateur="SN"
+ date_modification="20/12/2013"
  feuille_style="fstylewpf.dhfi"
  id_traitements=67
  type_masque=2
@@ -373,7 +373,7 @@
    [presentation]
     position=64,57
     taille=9,55
-    noms="couleurfond"
+    noms="tabcouleurfond"
     id=90
     wstyle="TABLEAU_SAISI"
    [description]
@@ -970,7 +970,7 @@
   [presentation]
    position=64,5
    taille=9,50
-   noms="couleuraff"
+   noms="couleurfondaff"
    id=87
    wstyle="STD"
   [texte]
@@ -1172,6 +1172,7 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+   diva_apres="Champ_CouleurFond_1_Ap"
  [multi_choix]
   [presentation]
    position=76,57
@@ -1797,7 +1798,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: grez001_sql.dhsf 28066 2012-12-24 16:24:12Z als $')
+SetModuleInfo('$Id: grez001_sql.dhsf 51528 2015-11-19 12:39:26Z als $')
 ;*
 ;*      Zoom sur Table événement  Enregistrement CodeEvt de GRRSTAB.dhoq
 ;*
@@ -1905,6 +1906,19 @@ Beginp
 	Controler_Confidentialite(CodeEvt.Conf, 4000)
 Endp
 
+
+;*
+Public Procedure Champ_CouleurFond_1_Ap
+;
+1		style			32
+Beginp
+	If CodeEvt.CouleurFond <> 0
+		style = Left([ 'DATA_SAISI_' ToString(CodeEvt.CouleurFond) ])
+		XmeSetAttribut('COULEURFOND', AN_STYLE, style)
+	Else
+		XmeResetAttribut('COULEURFOND', AN_STYLE)
+	EndIf
+Endp
 
 ;*
 Public Procedure Champ_NatureJointCod_1_Ap

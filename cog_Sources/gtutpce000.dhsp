@@ -490,3 +490,15 @@ BeginP
 	Cog_MVTL_Rewrite_Av
 
 EndP
+
+;*
+;*		Traitements sur BL associés
+;*
+
+;*
+Procedure BLAssocie_ENT_Init_Ap
+;
+BeginP
+	Standard.BLAssocie_ENT_Init_Ap
+	Cog_BLAssocie_ENT_Init_Ap	
+EndP

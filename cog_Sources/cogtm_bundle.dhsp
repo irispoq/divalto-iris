@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogtm_bundle.dhsp 8474 2015-08-21 06:46:02Z admin $')
+SetModuleInfo('$Id: cogtm_bundle.dhsp 10673 2016-12-26 11:25:10Z admin $')
 ;*
 ;*      Fonctions communes aux traitements sur les bundles
 ;*
@@ -30,7 +30,7 @@ Public Function int Cog_Bundle_RefGen(wRef, wSref1, wSref2, wCtrl)
 ; 0 -->pas un composé ou pas de composant générique
 ; 1 --> présence de composant générique
 ; 2 --> présence de composant générique sans accessoire (retour possible si wCtrl = TRUE)
-RecordSQL	"gtRsppArt.dhoq"		Decomposition				wRs_Dar
+RecordSQL	"gtRsArt.dhoq"			Decomposition				wRs_Dar
 RecordSQL	"cogRs_Art.dhoq"		CogRs_ArtAcc				wRs_ArtAcc
 1		wRef		>gtfdd.dhsd			Ref
 1		wSref1	>gtfdd.dhsd			SRef1
@@ -42,6 +42,7 @@ BeginF
  
 	wRs_Dar.Init()
 	wRs_Dar.Where.RemoveCondition("")
+	wRs_Dar.Join.Activate("COG_ART")
 	wRs_Dar.Where.Equal_Ref(wRef)
 	wRs_Dar.Where.AddCondition("Equal_Ref")
 	wRs_Dar.Where.Equal_SRef1(wSref1)

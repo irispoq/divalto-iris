@@ -1,0 +1,42 @@
+;*
+;*		Inventaire comptable ce jour
+;*
+
+;*
+;*      Déclarations
+;*  
+OverWrite gttq720_sql.dhop
+;*
+;* Module & Include
+;*
+module	'xhql.dhop'
+module  	'A5PMPAR.dhop'
+
+include	'GTQC000.dhsp'
+
+;*
+;* Record & RecordSQL
+;*
+Public RecordSql  GTRSHQINV.dhoq		InvVtl		_MVTL
+
+Public record		gtfdd.dhsd		MOUV
+Public record		gtfdd.dhsd		MVTL
+Public record		gtfdd.dhsd		PRJAP
+
+;*
+procedure Positionner_Filtre
+; Positionne les filtres et tri sur l'enregistrement principal
+1		vCondition			S		; Condition Sql
+1		cpt					3,0	; Compteur
+BeginP
+
+	standard.Positionner_Filtre()	
+	If G3XQ.ProjetD <> ' '
+		_MVTL.Where.COG_Between_Affaire(G3XQ.ProjetD, G3XQ.ProjetF)
+		_MVTL.Where.AddCondition('COG_Between_Affaire')
+	Elsif G3XQ.ProjetD = G3XQ.ProjetF
+		_MVTL.Where.COG_Equal_Affaire(G3XQ.ProjetD)
+		_MVTL.Where.AddCondition('COG_Equal_Affaire')
+	Endif
+
+EndP

@@ -66,7 +66,7 @@ BeginF
 	; Chargement dossier IMMO (CD)
 	If DOSIMMO.Dos <> MZ.Dos
 		DOSIMMO.Init()
-		DOSIMMO.Where.Zoom_PK(MZ.Dos)
+		DOSIMMO.Where.PK(MZ.Dos)
 		If DOSIMMO.Select() = 0
 			MessageBox("Dossier immo " & MZ.Dos & " non trouvé.", "Alerte", MB_ICONEXCLAMATION)
 			ProgramExit
@@ -268,10 +268,12 @@ BeginP
 				wRs_IMMO.UserMo		= ' '
 				wRs_IMMO.UserMoDh		= ' '
 				wRs_IMMO.UserMoOri	= ' '
+				wRs_IMMO.Cog_isilogref	= ' '
 
 				wRs_IMMO_new.UserMo		= ' '
 				wRs_IMMO_new.UserMoDh		= ' '
 				wRs_IMMO_new.UserMoOri	= ' '
+				wRs_IMMO_new.Cog_isilogref	= ' '
 
 				;
 				If wRs_IMMO.I1 <> wRs_IMMO_new.I1
@@ -308,7 +310,7 @@ Public Procedure Cog_ZoomDebut
 BeginP
 	Seek_Soc(MZ.Dos)		; T000 nécessaire aux jointures
 	DOSIMMO.Init()
-	DOSIMMO.Where.Zoom_PK(MZ.Dos)
+	DOSIMMO.Where.PK(MZ.Dos)
 	If DOSIMMO.Select() = 0
 		MessageBox("Dossier immo " & MZ.Dos & " non trouvé.", "Alerte", MB_ICONEXCLAMATION)
 		ProgramExit

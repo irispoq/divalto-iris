@@ -60,6 +60,8 @@ Public Record	GTFDD.dhsd 	SART
 Public Record	GTFDD.dhsd	ENT								; En-tête
 Public Record	GTFDD.dhsd	ENT	ENTOri					; En-tête origine en duplication
 Public Record	GTFDD.dhsd	ENT	W1ENT						; En-tête
+Public Record	GTFDD.dhsd	MOUV	WAMOUV					; Mouvement associé
+Public Record	GTFDD.dhsd	ENT	WAENT						; Mouvement associé
 Public Record  GTFDD.dhsd 	T020								; table des codes opération
 Public Record  GTFDD.dhsd 	T037								; table des salariés
 Public Record  GTFDD.dhsd 	T051
@@ -371,7 +373,7 @@ EndF
 Procedure Cog_Generer_I1(wPicod, wPino)
 ; Génération des fiches de bien
 
-RecordSQL	"GTRSPPPCE.DHOQ"	Ventilation		wRs_MVTL
+RecordSQL	"GTRSPCE.DHOQ"	Ventilation		wRs_MVTL
 Record		"gtfdd.dhsd"		G1t1				G1t1_Loc
 Record		"gtfdd.dhsd"		G1t2				G1t2_Loc
 1		wPicod		1,0
@@ -1015,6 +1017,60 @@ EndF
 ;*
 
 ;*
+Public Procedure Cog_BLAssocie_MAj_Projet(_ticod, _picod, _pino, _projet)
+;
+RecordSQL	"gtRsPce.dhoq"		EntetePiece		_RS_ENT
+RecordSQL	"gtRsPce.dhoq"		Mouvement		_Rs_MOUV
+1		_ticod	>gtfdd.dhsd		Ticod
+1		_picod	>gtfdd.dhsd		Picod
+1		_pino		>gtfdd.dhsd		PiNo
+1		_projet	>gtfdd.dhsd		Projet
+BeginP	
+
+	If Res_ENT(_ticod, 3, _pino, err=0) <> 0
+		PReturn
+	EndIf
+
+	;	chargement entête du BL associé
+	_RS_ENT.Init()
+	_RS_ENT.Where.RemoveCondition("")
+	_RS_ENT.Join.Deactivate("$All")
+	_RS_ENT.Where.Equal_Ce1('A')
+	_RS_ENT.Where.AddCondition("Equal_Ce1")
+	_RS_ENT.Where.Equal_TiCod(_TiCod)
+	_RS_ENT.Where.AddCondition("Equal_TiCod")
+	_RS_ENT.Where.Equal_PiCod(_picod)
+	_RS_ENT.Where.AddCondition("Equal_PiCod")
+	_RS_ENT.Where.equal_PiNo(_PiNo)
+	_RS_ENT.Where.AddCondition("equal_PiNo")
+	If _RS_ENT.Select() > 0
+
+		_RS_ENT.Projet = _Projet 
+		_RS_ENT.Update()
+
+		; maj des mouvements
+		_Rs_MOUV.Init()
+		_Rs_MOUV.Where.RemoveCondition("")
+		_Rs_MOUV.Join.Deactivate("$All")
+		_Rs_MOUV.Where.Equal_Ce2('1')
+		_Rs_MOUV.Where.AddCondition("Equal_Ce2")
+		_Rs_MOUV.Where.Equal_TiCod(_RS_ENT.TiCod)
+		_Rs_MOUV.Where.AddCondition("Equal_TiCod")
+		_Rs_MOUV.Where.Equal_BlNo(_RS_ENT.PiNo)
+		_Rs_MOUV.Where.AddCondition("Equal_BlNo")	 
+		_Rs_MOUV.InitForUpdateWhere()
+		_Rs_MOUV.Ce3 = '1'
+		_Rs_MOUV.Projet = _projet
+		_Rs_MOUV.UpdateWhere()
+
+	EndIf
+
+	;
+	Lib_ENT(_ticod, 3, _pino)
+
+EndP
+
+;*
 Public Procedure COG_ENT_CREATION_INIT
 ;
 1		i		3,0
@@ -1405,6 +1461,11 @@ BeginP
 			Cog_Maj_Journal_Comptable
 
 	EndSwitch
+
+	;
+	If ENT.BlAsNo > 0 AND ENT.Projet <> ' '
+		Cog_BlAssocie_Maj_Projet(ENT.TiCod, ENT.PiCod, ENT.BlAsNo, ENT.Projet)
+	EndIf
 
 	;
 	Cog_Serie_Liste_Vider(lId_Serie)
@@ -2063,6 +2124,18 @@ BeginP
 	EndSwitch
 
 EndP
+
+;*
+;*		Traitements sur BL associés
+;*
+
+;*
+Public Procedure Cog_BLAssocie_ENT_Init_Ap
+;
+BeginP
+	WAENT.Projet	= ENT.Projet			
+EndP
+
 
 ;*
 ;*

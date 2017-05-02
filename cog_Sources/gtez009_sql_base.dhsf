@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20130213094839      
+;>xwin4obj                              7.0       20151007173948      
 [masque]
  libelle="Décomposition"
- utilisateur="SN"
- date_modification="23/03/2012"
+ utilisateur="LK"
+ date_modification="07/10/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=230
  type_masque=2
- dernier_id=73
+ dernier_id=75
  dernier_id_page=20
 [defaut]
  [aide_page]
@@ -219,6 +219,36 @@
    donnee=rowinfo,rowinfo,zoomselection
    minmaj=majuscules
    saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=86,4
+    taille=18,36
+    noms="icpfl"
+    id=74
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=decomposition,icpfl,decomposition
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#tblicp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
     position=87,252
@@ -824,7 +854,7 @@
  [champ]
   [presentation]
    position=26,132
-   taille=9,143
+   taille=9,122
    noms="sref"
    id=23
    wstyle="CHAMP_AFF"
@@ -1101,6 +1131,30 @@
    diva_apres="Champ_Op_1_Ap"
   [boutons]
    "zoom"
+ [multi_choix]
+  [presentation]
+   position=26,257
+   taille=9,18
+   noms="icpfl"
+   id=75
+   wstyle="STD"
+  [description]
+   donnee=decomposition,icpfl,decomposition
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+   obligatoire=non
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [info_bulle]
+  texte="Synchronisé en inter-compagnies"
 [page]
  numero=12
  fond="STD"
@@ -1458,7 +1512,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: gtez009_sql_base.dhsf 8426 2015-07-31 13:32:31Z admin $')
+SetModuleInfo('$Id: gtez009_sql_base.dhsf 10566 2016-12-07 10:24:36Z admin $')
 ;*
 ;*      Zoom sur décompositions article			  Enregistrement Decomposition de GTRSART
 ;*
@@ -1489,13 +1543,9 @@ Public Procedure Champ_Edcod_1_Ap			; après code impression
 1	i	1,0
 Beginp
 	If Decomposition.EDCOD <> ' '
-		for i = 1 to length(Decomposition.EDCOD)
-			If mid(Decomposition.EDCOD,i,1) not in ('C','F','I',1..5,'*',' ' )
-				Mes_Alert(2115)
-				Harmony.retour = 3
-				preturn
-			EndIf
-		next			 
+		if Controler_EdCod(Decomposition.EDCOD,2115)<> 0
+			preturn
+		endif
 	EndIf
 Endp
 

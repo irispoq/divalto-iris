@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20151106121018      
+;>xwin4obj     imprimante               6.0       20161207160356      
 [masque]
  utilisateur="UGIE"
- date_modification="06/11/2015"
+ date_modification="07/12/2016"
  feuille_style="fstyleimp.dhfi"
  id_traitements=8
  taille_ligne=9
@@ -29,17 +29,17 @@
   donnee=g4,email,g4
 [defaut]
 [enregistrements]
- "gtfdd.dhsd",gtfat,art,g4art,1700,0
- "gtfdd.dhsd",gtfent,ent,ent,1800,0
- "gtfdd.dhsd",,mouv,g4mouv,1900,0
- "gtfdd.dhsd",,g4,g4,8000,0
+ "gtfdd.dhsd",gtfat,art,g4art,2500,0
+ "gtfdd.dhsd",gtfent,ent,ent,2500,0
+ "gtfdd.dhsd",,mouv,g4mouv,2700,0
+ "gtfdd.dhsd",,g4,g4,8300,0
  "a5dd.dhsd",,mw,mw,3000,0
  "gtfdd.dhsd",,g4t1,g4t1,100,0
- "gtfdd.dhsd",,mvtl,g4mvtl,1000,0
- "gtfdd.dhsd",,mouv,g4cdmouv,1900,0
- "gtfdd.dhsd",,art,buart,1700,0
+ "gtfdd.dhsd",,mvtl,g4mvtl,1350,0
+ "gtfdd.dhsd",,mouv,g4cdmouv,2700,0
+ "gtfdd.dhsd",,art,buart,2500,0
  "gtfdd.dhsd",,bu,bu,250,0
- "gtfdd.dhsd",,t037,t037,450,0
+ "gtfdd.dhsd",,t037,t037,500,0
 [bloc]
  numero=1
  libelle="En-tête"
@@ -1163,8 +1163,13 @@
 [diva]
 setmoduleinfo("$Id$")
 
+;
 include gttc000.dhsp
 
+;
+Module	'GTTMPCE.dhop'
+
+;
 Public Record "gtfdd.dhsd" art g4art
 Public Record "gtfdd.dhsd" ent ent
 Public Record "gtfdd.dhsd" mouv g4mouv
@@ -1234,9 +1239,21 @@ Beginp
 	endif
 
 Endp
+
+;*
+Public Procedure BLOC_COMPLEMENTLIGNE_1_AP
+Beginp
+	Piece_Imp_Ligne_CplSousRef
+Endp
+
+;*
+Public Procedure BLOC_FACTUREFINBL_1_AP
+Beginp
+	Piece_Imp_Bl_Fin
+Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtii220e.dhsi 28489 2013-01-15 10:51:58Z sn $')
+SetModuleInfo('$Id: gtii220d.dhsi 29711 2013-02-15 13:34:27Z bel $')
 
 Module	'GTPM000.dhop'
 Module	'GTTMPCE.dhop'
@@ -1244,16 +1261,12 @@ Public Record "gtfdd.dhsd" art g4art
 Public Record "gtfdd.dhsd" ent ent
 Public Record "gtfdd.dhsd" mouv g4mouv
 Public Record "gtfdd.dhsd" g4 g4
-Public Record "gtfdd.dhsd" soc soc
 Public Record "gtfdd.dhsd" vrp vrp
 Public Record "gtfdd.dhsd" t020 w2t020
 Public Record "a5dd.dhsd" mw mw
 Public Record "gtfdd.dhsd" g4t1 g4t1
 Public Record "gtfdd.dhsd" mvtl g4mvtl
 Public Record "gtfdd.dhsd" t013 t013
-Public Record "gtfdd.dhsd" mouv g4cdmouv
-Public Record "gtfdd.dhsd" art buart
-Public Record "gtfdd.dhsd" bu bu
 
 ;*
 Public Procedure Bloc_ArticleComposant_Ap		; Après une ligne de composant
@@ -1261,12 +1274,13 @@ Beginp
 	Piece_Imp_Ligne_Cpl
 Endp														
 
+
 Public Procedure Masque_1_Init
 Beginp
 	; G4.VTLEDITTYP = 0	; pas d'impressions des ventilations (bloc 2 uiquement)
-	 G4.VTLEDITTYP = 1	; 1ere ventilation avec le mouvement (bloc 2) ventilations suivantes (bloc 5)
+	; G4.VTLEDITTYP = 1	; 1ere ventilation avec le mouvement (bloc 2) ventilations suivantes (bloc 5)
 	; G4.VTLEDITTYP = 2	; si une seule ventilation impression bloc 2 si plusieurs ventilations impression blocs 4-5-6
-	; G4.VTLEDITTYP = 3	; toutes les ventilations sont imprimées par le bloc 5 avec bloc début 4 et bloc de fin 6
+	 G4.VTLEDITTYP = 3	; toutes les ventilations sont imprimées par le bloc 5 avec bloc début 4 et bloc de fin 6
 	
 	 G4.RELEDITTYP = False	; on n'imprime pas les lignes non livrées en pied de bl =true pour imprimer
 Endp
@@ -1282,16 +1296,16 @@ Endp
 
 Public Procedure BLOC_LIGNEARTICLE_1_AP
 Beginp
-	;Piece_Imp_Ligne_Ap
+	;Piece_Imp_Ligne__Ap
 	Piece_Imp_Ligne_Cpl
 Endp
 
-Public Procedure BLOC_COMPLEMENTLIGNE_1_AP
+Public Procedure BLOC_SOUSREFERENCES_1_AP
 Beginp
 	Piece_Imp_Ligne_CplSousRef
 Endp
 
-Public Procedure BLOC_FACTUREFINBL_1_AP
+Public Procedure BLOC_FACTUREFINDEBL_1_AP
 Beginp
 	Piece_Imp_Bl_Fin
 Endp

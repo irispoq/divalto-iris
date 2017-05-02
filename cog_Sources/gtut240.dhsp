@@ -172,7 +172,7 @@ EndF
 ;*
 Function int Cog_NombrePages_TraiterListe
 ; affecte le nombre de pages aux entetes de factures
-RecordSQL	"gtRsppPce.dhoq"		EntetePiece		_RS_ENT
+RecordSQL	"gtRsPce.dhoq"		EntetePiece		_RS_ENT
 Record	"gtfdd.dhsd"				ENT				_ENT
 1	_Ret		1,0 = 0
 1	_NbPages	2,0
@@ -195,7 +195,7 @@ BeginF
 		
 		; génération du dhvw
 		MZ.Micle6 = '*09230'
-		G3_Xmi_Preparation(Condition(ent.ETANO = ' ',SOC.ENTCOD(2),ent.ETANO))
+		G3_Xmi_Preparation(Condition(ent.ETANO = ' ',SOC.ENTCODA(2),ent.ETANO))
 		PingLocal("COG_NBPAGES", TRUE)
 		_imp = Piece_Imprimer(ent.ticod,ent.picod,ent.pino,0, Choixpresentation=FALSE,Reimpression=FALSE,Archivage=FALSE)
 		

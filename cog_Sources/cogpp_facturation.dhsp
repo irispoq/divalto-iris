@@ -115,7 +115,7 @@ EndF
 ;*
 Function int Cog_InitialiserVariables
 ;
-Recordsql	"a5rsuser.dhoq"	Utilisateur						;Utilisateurs
+Recordsql	"a5rsdos.dhoq"	Utilisateur						;Utilisateurs
 
 BeginF
 
@@ -398,7 +398,7 @@ EndP
 ;*
 Procedure Genere_Ligne_BL(wRef, wQte, wPub, wPcod, wAxe, wDes, wNumero, _dtD, _dtF)	  
 ; valable pour tous les cas de facturation
-RecordSQL	"gtRsppArt.dhoq"	Article	_RS_ART
+RecordSQL	"gtRsArt.dhoq"	Article	_RS_ART
 Record		"gtfdd.dhsd"		MOUV		_iMOUV
 1		wRef			>gtfdd.dhsd Ref
 1		wQte			>gtfdd.dhsd	blQte 	

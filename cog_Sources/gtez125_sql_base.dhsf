@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20130513142034      
+;>xwin4obj                              7.0       20141009111416      
 [masque]
  libelle="Taux de T.V.A."
- utilisateur="SN"
- date_modification="13/05/2013"
+ utilisateur="LK"
+ date_modification="09/10/2014"
  feuille_style="fstylewpf.dhfi"
  id_traitements=86
  type_masque=2
@@ -1328,6 +1328,14 @@
    [info_bulle]
    texte="Supprimer <Suppr>"
   [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Details"
+    wid_ressource="DETAILS"
+    wtrait_chaine="#F6"
+   [info_bulle]
+   texte="Détails de TVA"
+  [item]
    type=sep
    dessin=sep
    [param_bouton]
@@ -1455,7 +1463,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: gtez125_sql.dhsf 31549 2013-05-13 12:23:19Z sn $')
+SetModuleInfo('$Id: gtez125_sql.dhsf 42067 2014-10-09 09:35:21Z lk $')
 ;*
 ;*      Zoom sur la table des taux de TVA
 ;*

@@ -27,7 +27,7 @@ Module 	"CogGt_Controle_Fichier.dhop"
 
 ;
 public RecordSQL 	"gtrsproj.dhoq" 	Affaire 				Affaire		; Affaire (Enregistrement principal)
-public RecordSQL 	"gtrsppproj.dhoq" Affaire 				su_sel		; Affaire (Enregistrement principal)
+public RecordSQL 	"gtrsproj.dhoq" Affaire 				su_sel		; Affaire (Enregistrement principal)
 Public RecordSQL	"COGRS_PROJ.DHOQ"	CogRs_PrjComp
 Public recordSQL  "cogrs_tab.dhoq"	TableParametre
 
@@ -93,8 +93,8 @@ Beginp
 
 	if prjap_sel.etb <> ' '
 		Param = banaliser_condition(prjap_sel.etb)
-		Affaire.where.Zoom_Pour_Etb(Param)
-		Ajouter_condition(Valeur_Condition,'Zoom_Pour_Etb')
+		Affaire.where.Equal_Etb(Param)
+		Ajouter_condition(Valeur_Condition,'Equal_Etb')
 	endif
 
 	;Surcharge SU
@@ -133,20 +133,20 @@ Beginp
 
 	if prjap_sel.LibAbr <> ' '
 		Param = banaliser_condition(prjap_sel.LibAbr, true)	 		
-		Affaire.where.Zoom_Like_LibAbr(Param)
-		Ajouter_condition(Valeur_Condition,'Zoom_Like_LibAbr')
+		Affaire.where.Like_LibAbr(Param)
+		Ajouter_condition(Valeur_Condition,'Like_LibAbr')
 	endif
 	
 	if t064_sel.AfrClas <> ' '
 		Param = banaliser_condition(T064_sel.AfrClas)
-		Affaire.where.Zoom_Like_AfrClas(Param)
-		Ajouter_condition(Valeur_Condition,'Zoom_Like_AfrClas')
+		Affaire.where.Like_AfrClas(Param)
+		Ajouter_condition(Valeur_Condition,'Like_AfrClas')
 	endif
 
 	if cli_sel.tiers <> ' '
 		Param = banaliser_condition(cli_sel.Tiers)
-		Affaire.where.Zoom_Like_Tiers(Param)
-		Ajouter_condition(Valeur_Condition,'Zoom_Like_Tiers')
+		Affaire.where.Like_Tiers(Param)
+		Ajouter_condition(Valeur_Condition,'Like_Tiers')
 	endif
 	
 	if Valeur_Condition <> ' '

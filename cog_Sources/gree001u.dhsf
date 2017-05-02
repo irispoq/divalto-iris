@@ -1,27 +1,27 @@
-;>xwin4obj                              7.0       20140417163901      
+;>xwin4obj                              7.0       20161207145854      
 [masque]
  utilisateur="UGIE"
- date_modification="17/04/2014"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  dernier_id=1000005
  surcharge=oui
- date_modif_base="20130221160903"
+ date_modif_base="20150610141331"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
  [aide_page]
   aide=0
 [enregistrements]
- "gtrsppdos.dhoq",,dossier,dossier,1024,1
+ "gtrsdos.dhoq",,dossier,dossier,1024,1
  "gtrspptiers.dhoq",,vuetiers,vuetiers,1024,1
- "grrsppscenario.dhoq",,scenarioentetes,sceent,1024,1
- "grrsppscenario.dhoq",,scenarioetape_1,sceetape_1,1024,1
- "gtfdd.dhsd",,gr001v1,gr001v1,3300,0
+ "grrsscenario.dhoq",,scenarioentetes,sceent,1024,1
+ "grrsscenario.dhoq",,scenarioetape_1,sceetape_1,1024,1
+ "gtfdd.dhsd",,gr001v1,gr001v1,3500,0
  "grfdd.dhsd",,gr001,gr001,36000,0
- "gtfdd.dhsd",,gr001t2,gr001t2,1200,0
+ "gtfdd.dhsd",,gr001t2,gr001t2,1400,0
  "grfdd.dhsd",,gr001t3,gr001t3,4000,0
  "gtfdd.dhsd",,gr001t4,gr001t4,1500,0
- "gtfdd.dhsd",,gr001t5,gr001t5,3000,0
+ "gtfdd.dhsd",,gr001t5,gr001t5,1200,0
  "grfdd.dhsd",,gr1,gr1,12000,0
  "ddsys.dhsd",,rowinfo,selection_evt,120,0
  "ddsys.dhsd",,rowinfo,selection_tiers,120,0
@@ -31,7 +31,7 @@
  "grfdd.dhsd",,gr1,gr1_param_entete,12000,0
  "a5dd.dhsd",,a2,a2,2000,0
  "ddsys.dhsd",,rowinfo,selection_rubrique_implicite,120,0
- "grfdd.dhsd",,gr001t7,gr001t7,150,0
+ "grfdd.dhsd",,gr001t7,gr001t7,200,0
  "grfdd.dhsd",,gr001,gr001_rub,36000,0
  "a5dd.dhsd",,a2,a2_rub,2000,0
  "ddsys.dhsd",,rowinfo,selection_rubrique,120,0
@@ -1144,9 +1144,12 @@
   [touches]
    f1=1
    f7=135
+   f8=30002
   [traitements]
    microbol_apres=4101
    microbol_click=4102
+   diva_avant="Champ_TiersGrpD_1_Av"
+   diva_apres="Champ_TiersGrpD_1_Ap"
   [boutons]
    "zoom"
  [champ]
@@ -1166,9 +1169,11 @@
   [touches]
    f1=1
    f7=135
+   f8=30002
   [traitements]
    microbol_apres=4101
    microbol_click=4102
+   diva_avant="Champ_TiersGrpD_1_Av"
    diva_apres="Champ_TiersGrpF_1_Ap"
   [boutons]
    "zoom"
@@ -2135,9 +2140,12 @@
   [touches]
    f1=1
    f7=135
+   f8=30002
   [traitements]
    microbol_apres=4101
    microbol_click=4102
+   diva_avant="Champ_TiersGrpD_1_Av"
+   diva_apres="Champ_TiersGrpD_1_Ap"
   [boutons]
    "zoom"
  [champ]
@@ -2157,9 +2165,11 @@
   [touches]
    f1=1
    f7=135
+   f8=30002
   [traitements]
    microbol_apres=4101
    microbol_click=4102
+   diva_avant="Champ_TiersGrpD_1_Av"
    diva_apres="Champ_TiersGrpF_1_Ap"
   [boutons]
    "zoom"
@@ -2570,7 +2580,7 @@
     colonnes_saisie=38
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [traitements]
@@ -3830,7 +3840,7 @@
     id=880
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -5286,7 +5296,7 @@
     id=4288
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -6777,7 +6787,7 @@
     diva_apres="Champ_NomAbr_1_Ap"
    [param_colonne]
     titre="Nom abrégé"
-    fl_aff=non
+    fl_aff=oui
     largeur_col=95
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
@@ -6787,7 +6797,7 @@
     id=951
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -8142,7 +8152,7 @@
     id=1002
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -9374,7 +9384,7 @@
     id=1054
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -10666,7 +10676,7 @@
     id=1107
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -12000,7 +12010,7 @@
     id=1161
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -13228,7 +13238,7 @@
     id=1211
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -14576,7 +14586,7 @@
     id=1265
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -15804,7 +15814,7 @@
     id=1315
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -17034,7 +17044,7 @@
     id=1366
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -18315,7 +18325,7 @@
     id=1419
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -19593,7 +19603,7 @@
     id=1471
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -20824,7 +20834,7 @@
     id=1522
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -22195,7 +22205,7 @@
     id=1578
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -23555,7 +23565,7 @@
     id=1632
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -24804,7 +24814,7 @@
     id=1682
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -26165,7 +26175,7 @@
     id=1736
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -27414,7 +27424,7 @@
     id=1786
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -28775,7 +28785,7 @@
     id=1840
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -30022,7 +30032,7 @@
     id=1890
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -31269,7 +31279,7 @@
     id=1940
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -32548,7 +32558,7 @@
     id=1992
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -33827,7 +33837,7 @@
     id=2044
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -35162,7 +35172,7 @@
     id=2098
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -36385,7 +36395,7 @@
     id=2148
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=gr001v1,nom,gr001v1
+    donnee=gr001v1,nomusage,gr001v1
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -38731,7 +38741,7 @@
    id=79
    wstyle="STD"
   [texte]
-   texte="Code prospect"
+   texte="Prospect"
  [obj_texte]
   [presentation]
    position=21,80
@@ -40190,7 +40200,7 @@
    id=330
    wstyle="STD"
   [texte]
-   texte="Code client"
+   texte="Client"
  [obj_texte]
   [presentation]
    position=21,80
@@ -45009,7 +45019,7 @@
    id=3923
    wstyle="STD"
   [texte]
-   texte="Nom"
+   texte="Nom d'usage"
  [obj_texte]
   [presentation]
    position=45,228
@@ -45025,7 +45035,7 @@
    id=3839
    wstyle="STD"
   [texte]
-   texte="Nom de jeune fille"
+   texte="Nom de famille"
  [obj_texte]
   [presentation]
    position=57,228
@@ -45161,12 +45171,12 @@
   [presentation]
    position=45,60
    taille=9,164
-   noms="rh"
+   noms="nomusage;rh"
    id=3854
    colonnes_saisie=38
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=gr001v1,nom,gr001v1
+   donnee=gr001v1,nomusage,gr001v1
    sequence=20
   [param_saisie]
    obligatoire=oui
@@ -45176,13 +45186,13 @@
    f7=135
   [traitements]
    microbol_click=8002
-   diva_avant="Champ_Nom_1_Av"
-   diva_apres="Champ_Nom_1_Ap"
+   diva_avant="Champ_NomUsage_1_Av"
+   diva_apres="Champ_NomUsage_1_Ap"
  [champ]
   [presentation]
    position=45,264
    taille=9,164
-   noms="rh"
+   noms="prenom;rh"
    id=3856
    colonnes_saisie=20
    wstyle="CHAMP_SAISI"
@@ -45197,18 +45207,18 @@
    f7=135
   [traitements]
    microbol_click=8002
-   diva_avant="Champ_Nom_1_Av"
-   diva_apres="Champ_Nom_1_Ap"
+   diva_avant="Champ_NomUsage_1_Av"
+   diva_apres="Champ_NomUsage_1_Ap"
  [champ]
   [presentation]
    position=57,60
    taille=9,164
-   noms="NomPat;rh"
+   noms="NomFamille;rh"
    id=3925
    colonnes_saisie=30
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=gr001v1,nompat,gr001v1
+   donnee=gr001v1,nomfamille,gr001v1
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
@@ -45216,7 +45226,8 @@
    f7=135
   [traitements]
    microbol_click=8002
-   diva_avant="Champ_NomPat_1_Av"
+   diva_avant="Champ_NomFamille_1_Av"
+   diva_apres="Champ_NomFamille_1_Ap"
  [champ]
   [presentation]
    position=57,264
@@ -70432,6 +70443,21 @@
    niveau=2
    [param_bouton]
     wnom=""
+    wid_ressource="SEP__8"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Événement qualité"
+    wid_ressource="EVTQUALTIERS"
+    wetype_trait=arret
+    warret=5767
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
     wid_ressource="SEP__7"
   [item]
    niveau=2
@@ -70725,6 +70751,21 @@
    niveau=2
    [param_bouton]
     wnom=""
+    wid_ressource="SEP__1"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Événement qualité"
+    wid_ressource="EVTQUAL"
+    wetype_trait=arret
+    warret=5766
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
     wid_ressource="SEP"
   [item]
    niveau=2
@@ -70935,7 +70976,22 @@
    niveau=2
    [param_bouton]
     wnom=""
+    wid_ressource="SEP__5"
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=""
     wid_ressource="SEP__4"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Événement qualité"
+    wid_ressource="EVTQUALTIERS"
+    wetype_trait=arret
+    warret=5767
   [item]
    niveau=2
    [param_bouton]
@@ -73468,10 +73524,10 @@
    [param_bouton]
     wnom=""
 [diva]
-Public RecordSql "gtrsppdos.dhoq" dossier dossier
+Public RecordSql "gtrsdos.dhoq" dossier dossier
 Public RecordSql "gtrspptiers.dhoq" vuetiers vuetiers
-Public RecordSql "grrsppscenario.dhoq" scenarioentetes sceent
-Public RecordSql "grrsppscenario.dhoq" scenarioetape_1 sceetape_1
+Public RecordSql "grrsscenario.dhoq" scenarioentetes sceent
+Public RecordSql "grrsscenario.dhoq" scenarioetape_1 sceetape_1
 Public Record "gtfdd.dhsd" gr001v1 gr001v1
 Public Record "grfdd.dhsd" gr001 gr001
 Public Record "gtfdd.dhsd" gr001t2 gr001t2
@@ -73496,7 +73552,7 @@ Public Record "grfdd.dhsd" manif manif
 Public Record "grfdd.dhsd" manifetape manifetape
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gree001.dhsf 35442 2013-11-15 12:02:16Z jf $')
+SetModuleInfo('$Id: gree001.dhsf 55943 2016-04-11 15:29:19Z sn $')
 ;>xdiva
 ;*
 ;*      Maintenance des tiers
@@ -73526,17 +73582,17 @@ Public HFile A5DD.dhsd A5FRUB	A5FRUB
 
 ;*
 
-Public 	RecordSql					'GTRSPPDOS.dhoq'			Dossier
-Public 	RecordSql					'GTRSPPDOS.dhoq'			DossierCrm
-Public 	RecordSql					'GTRSPPDOS.dhoq'			Etablissement
-Public 	RecordSql					'A5RSPPDOS.dhoq'			Util									; Utilisateur
+Public 	RecordSql					'gtrsdos.dhoq'			Dossier
+Public 	RecordSql					'gtrsdos.dhoq'			DossierCrm
+Public 	RecordSql					'gtrsdos.dhoq'			Etablissement
+Public 	RecordSql					'A5RSDOS.dhoq'				Utilisateur			Util			; Utilisateur
 Public 	RecordSql KeepDataNames	'GTRSPPTIERS.dhoq'		VueTiers
-Public	RecordSql					'GRRSPPSCENARIO.dhoq'	ScenarioEntetes	SceEnt		; En-têtes de scénario
-Public	RecordSql					'GRRSPPSCENARIO.dhoq'	ScenarioEtape_1	SceEtape_1	; Etape de scénario
-Public	RecordSql					'GRRSPPSCENARIO.dhoq'	ScenarioEtape_2	SceEtape_2	; Etape de scénario
-Public	RecordSql					'GRRSPPSCENARIO.dhoq'	ScenarioEtape_3	SceEtape_3	; Etape de scénario
-Public	RecordSql					'GRRSPPSCENARIO.dhoq'	ScenarioEtape_4	SceEtape_4	; Etape de scénario
-Public	RecordSql					'GRRSPPSCENARIO.dhoq'	ScenarioEtape_5	SceEtape_5	; Etape de scénario
+Public	RecordSql					'GRRSSCENARIO.dhoq'		ScenarioEntetes	SceEnt		; En-têtes de scénario
+Public	RecordSql					'GRRSSCENARIO.dhoq'		ScenarioEtape_1	SceEtape_1	; Etape de scénario
+Public	RecordSql					'GRRSSCENARIO.dhoq'		ScenarioEtape_2	SceEtape_2	; Etape de scénario
+Public	RecordSql					'GRRSSCENARIO.dhoq'		ScenarioEtape_3	SceEtape_3	; Etape de scénario
+Public	RecordSql					'GRRSSCENARIO.dhoq'		ScenarioEtape_4	SceEtape_4	; Etape de scénario
+Public	RecordSql					'GRRSSCENARIO.dhoq'		ScenarioEtape_5	SceEtape_5	; Etape de scénario
 
 			RecordSql					'GTRSPPTAB.dhoq'			Service								; Service (contact)
 			RecordSql					'GTRSPPTAB.dhoq'			Pays									; Pays
@@ -73887,10 +73943,10 @@ Endp
 Public Procedure Champ_Civilite_1_Ap
 Beginp
 	If GR001V1.Civilite = '02'
-		XmeSetAttribut('NomPat', AN_STYLE, 'CHAMP_SAISI')
+		XmeSetAttribut('NomFamille', AN_STYLE, 'CHAMP_SAISI')
 	Else
-		GR001V1.NomPat = ' '
-		XmeSetAttribut('NomPat', AN_STYLE, 'CHAMP_NON_SAISI')
+		GR001V1.NomFamille = ' '
+		XmeSetAttribut('NomFamille', AN_STYLE, 'CHAMP_NON_SAISI')
 	EndIf
 Endp
 
@@ -74018,11 +74074,11 @@ Endp
 Public Procedure Champ_Duree_1_Ap		; Calculer la date de fin et l'heure de fin si on gère un calendrier
 1		CldCod			>A5DD.dhsd CldCod
 1		IdListe			L = 0
-RecordSql 'A5RSPPDOS.dhoq'	Util	Utilisateur_Loc
+RecordSql 'A5RSDOS.dhoq'	Utilisateur	Utilisateur_Loc
 
 Beginp
 	Seek_Util(Utilisateur_Loc, GR001T3.EvtUser)
-	If Utilisateur_Loc.EvtCalcDuree = 2 And Rechercher_Calendrier_Collaborateur(GR001T3.EvtUser, CldCod) = 0	; Recherche du code calendrier
+	If Utilisateur_Loc.EvtCalcDuree = 2 And Rechercher_CalendrierCollaborateur(GR001T3.EvtUser, CldCod) = 0	; Recherche du code calendrier
 		Calendrier_Calculer_Date_Fin(CldCod, GR001T3.EvtDh, TRUE, GR001T3.Duree, 4, GR001T3.EvtFinDh, IdListe, Generer=FALSE, MajDateDebut=TRUE)
 	EndIf
 Endp
@@ -74149,7 +74205,7 @@ Public Procedure Champ_EvtFinHe_1_Ap
 1		CldCod		>A5DD.dhsd CldCod
 1		IdListe		L = 0
 1		Duree			>GRFDD.dhsd Duree = 0
-RecordSql 'A5RSPPDOS.dhoq' Util	Utilisateur_Loc
+RecordSql 'A5RSDOS.dhoq' Utilisateur	Utilisateur_Loc
 
 Beginp
 	DHSECOND(GR001T3.EvtFinDh) = '00'
@@ -74157,7 +74213,7 @@ Beginp
 	Seek_Util(Utilisateur_Loc, GR001T3.EvtUser)
 	If Utilisateur_Loc.EvtCalcDuree = 2
 		If GR001T3.EvtDh <> ' ' And GR001T3.EvtFinDh <> ' '	; On calcule automatiquement la durée si on gère un calendrier
-			If Rechercher_Calendrier_Collaborateur(GR001T3.EvtUser, CldCod) = 0
+			If Rechercher_CalendrierCollaborateur(GR001T3.EvtUser, CldCod) = 0
 				Calendrier_Calculer_Duree(CldCod, GR001T3.EvtDh, TRUE, GR001T3.EvtFinDh, 4, Duree, IdListe, 4, FALSE, Condition(Utilisateur_Loc.EvtCalcHeuresSup = 2, FALSE, TRUE))
 			EndIf
 		EndIf
@@ -74737,7 +74793,7 @@ Beginp
 Endp			
 
 ;*
-Public Procedure Champ_NomPat_1_Av
+Public Procedure Champ_NomFamille_1_Av
 Beginp
 	If GR001V1.Civilite <> '02' Or RH_2_Av <> 0
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
@@ -74749,13 +74805,11 @@ Public Procedure Champ_Nom_1_Av			; MAJ du nom abrégé / nom
 1		nomAbr		>GTFDD.dhsd	NomAbr
 
 Beginp
-	If ( GR001V1.Ce2 <> '7' And Coord_2_Av <> 0 ) Or ( GR001V1.Ce2 = '7' And RH_2_Av <> 0 )
+	If Coord_2_Av <> 0
 		PReturn
 	EndIf
 	
-	nomabr = Condition(GR001V1.Ce2 = '7', Convertir_Nom_Nomabr([ GR001V1.Nom GR001V1.Prenom ]), Convertir_Nom_Nomabr(GR001V1.Nom))
-	
-	If nomabr = GR001V1.NomAbr
+	If ( nomabr := Convertir_Nom_Nomabr(GR001V1.Nom) ) = GR001V1.NomAbr
 		GR001V1.NomAbr = ' '
 	EndIf
 Endp		
@@ -74763,8 +74817,32 @@ Endp
 ;*
 Public Procedure Champ_Nom_1_Ap			; MAJ du nom abrégé / nom
 Beginp
+	GR001V1.NomUsage = GR001V1.Nom
 	If GR001V1.NomAbr = ' '
-		GR001V1.NomAbr = Condition(GR001V1.Ce2 = '7', Convertir_Nom_Nomabr([ GR001V1.Nom GR001V1.Prenom ]), Convertir_Nom_Nomabr(GR001V1.Nom))
+		GR001V1.NomAbr = Convertir_Nom_Nomabr(GR001V1.Nom)
+	EndIf	
+Endp	
+
+;*
+Public Procedure Champ_NomUsage_1_Av	; MAJ du nom abrégé / nom
+1		nomAbr		>GTFDD.dhsd	NomAbr
+
+Beginp
+	If RH_2_Av <> 0
+		PReturn
+	EndIf
+	
+	If ( nomAbr := Convertir_Nom_Nomabr([ GR001V1.NomUsage GR001V1.Prenom ]) ) = GR001V1.NomAbr
+		GR001V1.NomAbr = ' '
+	EndIf
+Endp		
+
+;*
+Public Procedure Champ_NomUsage_1_Ap	; MAJ du nom abrégé / nom
+Beginp
+	GR001V1.Nom = GR001V1.NomUsage
+	If GR001V1.NomAbr = ' '
+		GR001V1.NomAbr = Convertir_Nom_Nomabr([ GR001V1.NomUsage GR001V1.Prenom ])
 	EndIf	
 Endp	
 
@@ -74785,7 +74863,7 @@ Endp
 Public Procedure Champ_NomAbr_1_Ap		; Après nom abrégé si non renseigné
 Beginp
 	If GR001V1.NomAbr = ' '
-		GR001V1.NomAbr = Condition(GR001V1.Ce2 = '7', Convertir_Nom_Nomabr([ GR001V1.Nom GR001V1.Prenom ]), Convertir_Nom_Nomabr(GR001V1.Nom))
+		GR001V1.NomAbr = Condition(GR001V1.Ce2 = '7', Convertir_Nom_Nomabr([ GR001V1.NomUsage GR001V1.Prenom ]), Convertir_Nom_Nomabr(GR001V1.Nom))
 	ElsIf GR001V1.Ce2 <> '7' And Length(GR001V1.NomAbr) > DataSize(GR001V1.NomAbr)
 		Mes_Alert(2050, ToString(DataSize(GR001V1.NomAbr)))
 		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
@@ -74950,6 +75028,15 @@ Beginp
 Endp
 
 ;*
+Public Procedure Champ_NomFamille_1_Ap		; Après nom famille (uniquement individu)
+Beginp
+	If GR001V1.NomUsage = ' '
+		GR001V1.NomUsage = GR001V1.NomFamille
+		Champ_NomUsage_1_Ap
+	EndIf
+Endp
+
+;*
 Public Procedure Champ_Nom_2_Av				; MAJ du nom abrégé / nom
 1	nomabr	>GTFDD.dhsd	NomAbr
 Beginp
@@ -75035,7 +75122,7 @@ Endp
 
 ;*
 Public Procedure Champ_ScenarioCod_2_Ap
-RecordSql	'GRRSPPSCENARIO.dhoq'	ScenarioEntetes	SE_LOC
+RecordSql	'GRRSSCENARIO.dhoq'	ScenarioEntetes	SE_LOC
 
 Beginp
 	SE_LOC = SceEnt
@@ -75169,6 +75256,33 @@ Endp
 Public Procedure Champ_TiersF_1_Ap	; Après saisie du code tiers fin
 Beginp	
 	Controler_DonneeFin(GR001.TiersIndividuD, GR001.TiersIndividuF, 1, 7903, 0)
+Endp
+
+;*
+Public Procedure Champ_TiersGrpD_1_Ap		; Après saisie du code groupement début
+RecordSql 'GTRSPPTIERS.dhoq' VueTiers Tiers
+Beginp
+	IF GR001.TiersD <> ' ' And GR001.TiersTyp(6) <> 2
+		Controle_Syntaxe_Tiers (GR001.TiersD)
+	EndIf
+	SQLControler_Tiers(Tiers, GR001.TiersIndividuD)
+Endp
+
+;*
+Public Procedure Champ_TiersGrpD_1_Av		; Avant appel zoom tiers
+Beginp
+	If GR001.TiersTyp(1) = 1 And GR001.TiersTyp(2) = 1 And GR001.TiersTyp(3) = 1
+		Harmony.Retour = XMENEXT_SAUT_DONNEE
+		PReturn
+	EndIf
+
+	GRXZ.TiersTypTb(*) = GR001.TiersTypTb(*)	; Groupement uniquement pour les prospects, clients, fournisseurs
+	GRXZ.TiersTypTb(4) = 0
+	GRXZ.TiersTypTb(5) = 0
+	GRXZ.TiersTypTb(6) = 0
+	If GR001.TiersTypTb(1) = 2						; Un groupement prospect peut être soit un prospect soit un client.
+		GR001.TiersTypTb(2) = 2
+	EndIf
 Endp
 
 ;*

@@ -1,8 +1,8 @@
-;>xwin4obj                              7.0       20130213094839      
+;>xwin4obj                              7.0       20150127111936      
 [masque]
  libelle="Interro tiers"
- utilisateur="LK"
- date_modification="08/02/2013"
+ utilisateur="SN"
+ date_modification="27/01/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=543
  dernier_id=1101
@@ -16,19 +16,19 @@
   f7=8000
   f8=8000
 [enregistrements]
- "ccfdd.dhsd",,ca,ca,1300,0
- "gtfdd.dhsd",,soc,soc,2800,0
+ "ccfdd.dhsd",,ca,ca,1500,0
+ "gtfdd.dhsd",,soc,soc,3500,0
  "gtfdd.dhsd",,g8t1,g8t1,4100,0
  "gtfdd.dhsd",,gtpce,gtpce,500,0
  "gtfdd.dhsd",,mvtl,mvtl,1000,0
  "ddsys.dhsd",,rowinfo,rowinfo,120,0
- "gtfdd.dhsd",,ent,ent,1600,0
+ "gtfdd.dhsd",,ent,ent,1800,0
  "gtfdd.dhsd",,g5t1,g5t1,2000,0
  "gtfdd.dhsd",,g5,g5,5000,0
  "gtfdd.dhsd",,stc,stc,250,0
  "ddsys.dhsd",,rowinfo,g5t3_row,120,0
  "gtfdd.dhsd",,g5t3,g5t3,1000,0
- "gtfdd.dhsd",,mouv,mouv,1700,0
+ "gtfdd.dhsd",,mouv,mouv,1900,0
  "ddsys.dhsd",,rowinfo,g8t1row,120,0
  "gtfdd.dhsd",,g5t2,g5t2,200,0
  "gtfdd.dhsd",,g1t2,g1t2,2200,0
@@ -2108,7 +2108,7 @@
    [param_colonne]
     titre="Transport"
     fl_aff=non
-    largeur_col=31
+    largeur_col=33
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -2119,8 +2119,6 @@
    [description]
     donnee=g5t1,regl,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -2141,8 +2139,6 @@
    [description]
     donnee=g5t1,tour,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -4017,7 +4013,7 @@
    [param_colonne]
     titre="Transport"
     fl_aff=non
-    largeur_col=31
+    largeur_col=32
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -4028,8 +4024,6 @@
    [description]
     donnee=g5t1,regl,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -5926,7 +5920,7 @@
    [param_colonne]
     titre="Transport"
     fl_aff=non
-    largeur_col=31
+    largeur_col=32
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -5937,8 +5931,6 @@
    [description]
     donnee=g5t1,regl,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -7835,7 +7827,7 @@
    [param_colonne]
     titre="Transport"
     fl_aff=non
-    largeur_col=31
+    largeur_col=33
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -7846,8 +7838,6 @@
    [description]
     donnee=g5t1,regl,g5t1
     saisie=non
-   [param_saisie]
-    type_date=jj/mm/aaaa
    [touches]
     f1=129
     f7=8000
@@ -14445,9 +14435,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Tiers_1_Ap"
-  [reaffichage]
-   g5,tiers,g5
-   g5,nom,g5,1
   [boutons]
    "zoom"
 [page]
@@ -14793,8 +14780,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Datf_1_Ap"
-  [reaffichage]
-   g5,datf,g5
  [champ]
   [presentation]
    position=54,87
@@ -14834,8 +14819,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Datf2_1_Ap"
-  [reaffichage]
-   g5,datf2,g5
  [champ]
   [presentation]
    position=66,87
@@ -14879,8 +14862,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_OpF_1_Ap"
-  [reaffichage]
-   g5,opf,g5
   [boutons]
    "zoom"
  [champ]
@@ -14904,8 +14885,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Opmsk_1_Ap"
-  [reaffichage]
-   g5,opmsk,g5
  [champ]
   [presentation]
    position=78,87
@@ -14949,8 +14928,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_ReprF_1_Ap"
-  [reaffichage]
-   g5,reprf,g5
   [boutons]
    "zoom"
  [champ]
@@ -14974,8 +14951,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Reprmsk_1_Ap"
-  [reaffichage]
-   g5,reprmsk,g5
   [boutons]
    "zoom"
  [champ]
@@ -15025,8 +15000,6 @@
    microbol_click=8002
    diva_avant="Champ_Axef_1_Av"
    diva_apres="Champ_Axef_1_Ap"
-  [reaffichage]
-   g5,axef,g5,1
   [boutons]
    "zoom"
  [champ]
@@ -15052,8 +15025,6 @@
    microbol_click=8002
    diva_avant="Champ_Axemsk_1_Av"
    diva_apres="Champ_Axemsk_1_Ap"
-  [reaffichage]
-   g5,axemsk,g5,1
  [champ]
   [presentation]
    position=102,87
@@ -15101,8 +15072,6 @@
    microbol_click=8002
    diva_avant="Champ_Axef_1_Av"
    diva_apres="Champ_Axef_1_Ap"
-  [reaffichage]
-   g5,axef,g5,2
  [champ]
   [presentation]
    position=102,240
@@ -15126,8 +15095,6 @@
    microbol_click=8002
    diva_avant="Champ_Axemsk_1_Av"
    diva_apres="Champ_Axemsk_1_Ap"
-  [reaffichage]
-   g5,axemsk,g5,2
  [champ]
   [presentation]
    position=114,87
@@ -15175,8 +15142,6 @@
    microbol_click=8002
    diva_avant="Champ_Axef_1_Av"
    diva_apres="Champ_Axef_1_Ap"
-  [reaffichage]
-   g5,axef,g5,3
   [boutons]
    "zoom"
  [champ]
@@ -15202,8 +15167,6 @@
    microbol_click=8002
    diva_avant="Champ_Axemsk_1_Av"
    diva_apres="Champ_Axemsk_1_Ap"
-  [reaffichage]
-   g5,axemsk,g5,3
  [champ]
   [presentation]
    position=126,87
@@ -15251,8 +15214,6 @@
    microbol_click=8002
    diva_avant="Champ_Axef_1_Av"
    diva_apres="Champ_Axef_1_Ap"
-  [reaffichage]
-   g5,axef,g5,4
   [boutons]
    "zoom"
  [champ]
@@ -15278,8 +15239,6 @@
    microbol_click=8002
    diva_avant="Champ_Axemsk_1_Av"
    diva_apres="Champ_Axemsk_1_Ap"
-  [reaffichage]
-   g5,axemsk,g5,4
  [champ]
   [presentation]
    position=138,87
@@ -15327,8 +15286,6 @@
    microbol_click=8002
    diva_avant="Champ_Etbd_1_Av"
    diva_apres="Champ_Etbf_1_Ap"
-  [reaffichage]
-   g5,etbf,g5
   [boutons]
    "zoom"
  [champ]
@@ -15378,8 +15335,6 @@
    microbol_click=8002
    diva_avant="Champ_DepoMsk_2_Av"
    diva_apres="Champ_DepoF_1_Ap"
-  [reaffichage]
-   g5,depof,g5
   [boutons]
    "zoom"
  [champ]
@@ -15404,8 +15359,6 @@
    microbol_click=8002
    diva_avant="Champ_DepoMsk_2_Av"
    diva_apres="Champ_DepoMsk_1_Ap"
-  [reaffichage]
-   g5,depomsk,g5
   [boutons]
    "zoom"
  [champ]
@@ -15449,8 +15402,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Marchef_1_Ap"
-  [reaffichage]
-   g5,marchef,g5
   [boutons]
    "zoom"
  [champ]
@@ -15473,9 +15424,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Marchemsk_1_Ap"
-  [reaffichage]
-   g5,marchemsk,g5
-   g5,projetmsk,g5
  [champ]
   [presentation]
    position=174,87
@@ -15496,8 +15444,6 @@
    f8=9500
   [traitements]
    microbol_click=8002
-  [reaffichage]
-   g5,projetd,g5
   [boutons]
    "zoom"
  [champ]
@@ -15520,8 +15466,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_ProjetF_1_Ap"
-  [reaffichage]
-   g5,projetf,g5
   [boutons]
    "zoom"
  [champ]
@@ -15544,8 +15488,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Projetmsk_1_Ap"
-  [reaffichage]
-   g5,projetmsk,g5
  [champ]
   [presentation]
    position=186,87
@@ -15566,8 +15508,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Tiersgrpd_1_Ap"
-  [reaffichage]
-   g5,tiersgrpd,g5
   [boutons]
    "zoom"
  [champ]
@@ -15590,8 +15530,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Tiersgrpf_1_Ap"
-  [reaffichage]
-   g5,tiersgrpf,g5
   [boutons]
    "zoom"
  [champ]
@@ -15613,8 +15551,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Tiersgrpmsk_1_Ap"
-  [reaffichage]
-   g5,tiersgrpmsk,g5
   [boutons]
    "zoom"
  [champ]
@@ -16129,16 +16065,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Adr_1_Ap"
-  [reaffichage]
-   g5,adrtiers,g5,1
-   g5,adrcod,g5,1
-   g5,nom,g5,1
-   g5,adrcpl1,g5,1
-   g5,adrcpl2,g5,1
-   g5,rue,g5,1
-   g5,loc,g5,1
-   g5,vil,g5,1
-   g5,pay,g5,1
   [info_bulle]
   texte="Code tiers"
   [boutons]
@@ -16165,15 +16091,6 @@
    microbol_click=8002
    diva_avant="Champ_Adrcod_1_Av"
    diva_apres="Champ_Adrcod_1_Ap"
-  [reaffichage]
-   g5,adrcod,g5,1
-   g5,nom,g5,1
-   g5,adrcpl1,g5,1
-   g5,adrcpl2,g5,1
-   g5,rue,g5,1
-   g5,loc,g5,1
-   g5,vil,g5,1
-   g5,pay,g5,1
   [info_bulle]
   texte="Code adresse"
   [boutons]
@@ -16198,16 +16115,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Adr_1_Ap"
-  [reaffichage]
-   g5,adrtiers,g5,2
-   g5,adrcod,g5,2
-   g5,nom,g5,2
-   g5,adrcpl1,g5,2
-   g5,adrcpl2,g5,2
-   g5,rue,g5,2
-   g5,loc,g5,2
-   g5,vil,g5,2
-   g5,pay,g5,2
   [info_bulle]
   texte="Code tiers"
   [boutons]
@@ -16437,15 +16344,6 @@
    microbol_click=8002
    diva_avant="Champ_Adrcod_1_Av"
    diva_apres="Champ_Adrcod_1_Ap"
-  [reaffichage]
-   g5,adrcod,g5,2
-   g5,nom,g5,2
-   g5,adrcpl1,g5,2
-   g5,adrcpl2,g5,2
-   g5,rue,g5,2
-   g5,loc,g5,2
-   g5,vil,g5,2
-   g5,pay,g5,2
   [info_bulle]
   texte="Code adresse"
   [boutons]
@@ -16560,16 +16458,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Adr_1_Ap"
-  [reaffichage]
-   g5,adrtiers,g5,3
-   g5,adrcod,g5,3
-   g5,nom,g5,3
-   g5,adrcpl1,g5,3
-   g5,adrcpl2,g5,3
-   g5,loc,g5,3
-   g5,rue,g5,3
-   g5,vil,g5,3
-   g5,pay,g5,3
   [info_bulle]
   texte="Code tiers"
   [boutons]
@@ -16596,15 +16484,6 @@
    microbol_click=8002
    diva_avant="Champ_Adrcod_1_Av"
    diva_apres="Champ_Adrcod_1_Ap"
-  [reaffichage]
-   g5,adrcod,g5,3
-   g5,nom,g5,3
-   g5,adrcpl1,g5,3
-   g5,adrcpl2,g5,3
-   g5,rue,g5,3
-   g5,loc,g5,3
-   g5,vil,g5,3
-   g5,pay,g5,3
   [info_bulle]
   texte="Code adresse"
   [boutons]
@@ -16719,16 +16598,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Adr_1_Ap"
-  [reaffichage]
-   g5,adrtiers,g5,4
-   g5,adrcod,g5,4
-   g5,nom,g5,4
-   g5,adrcpl1,g5,4
-   g5,adrcpl2,g5,4
-   g5,loc,g5,4
-   g5,rue,g5,4
-   g5,vil,g5,4
-   g5,pay,g5,4
   [info_bulle]
   texte="Code tiers"
   [boutons]
@@ -16860,15 +16729,6 @@
    microbol_click=8002
    diva_avant="Champ_Adrcod_1_Av"
    diva_apres="Champ_Adrcod_1_Ap"
-  [reaffichage]
-   g5,adrcod,g5,4
-   g5,nom,g5,4
-   g5,adrcpl1,g5,4
-   g5,adrcpl2,g5,4
-   g5,rue,g5,4
-   g5,loc,g5,4
-   g5,vil,g5,4
-   g5,pay,g5,4
   [info_bulle]
   texte="Code adresse"
   [boutons]
@@ -16983,16 +16843,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Adr_1_Ap"
-  [reaffichage]
-   g5,adrtiers,g5,5
-   g5,adrcod,g5,5
-   g5,nom,g5,5
-   g5,adrcpl1,g5,5
-   g5,adrcpl2,g5,5
-   g5,rue,g5,5
-   g5,loc,g5,5
-   g5,vil,g5,5
-   g5,pay,g5,5
   [info_bulle]
   texte="Code tiers"
   [boutons]
@@ -17141,15 +16991,6 @@
    microbol_click=8002
    diva_avant="Champ_Adrcod_1_Av"
    diva_apres="Champ_Adrcod_1_Ap"
-  [reaffichage]
-   g5,adrcod,g5,5
-   g5,nom,g5,5
-   g5,adrcpl1,g5,5
-   g5,adrcpl2,g5,5
-   g5,rue,g5,5
-   g5,loc,g5,5
-   g5,vil,g5,5
-   g5,pay,g5,5
   [info_bulle]
   texte="Code adresse"
   [boutons]
@@ -17466,8 +17307,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Datf_1_Ap"
-  [reaffichage]
-   g5,datf,g5
  [champ]
   [presentation]
    position=54,87
@@ -17511,8 +17350,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_OpF_1_Ap"
-  [reaffichage]
-   g5,opf,g5
   [boutons]
    "zoom"
  [champ]
@@ -17536,8 +17373,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Opmsk_1_Ap"
-  [reaffichage]
-   g5,opmsk,g5
  [champ]
   [presentation]
    position=66,87
@@ -17581,8 +17416,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_ReprF_1_Ap"
-  [reaffichage]
-   g5,reprf,g5
   [boutons]
    "zoom"
  [champ]
@@ -17606,8 +17439,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Reprmsk_1_Ap"
-  [reaffichage]
-   g5,reprmsk,g5
   [boutons]
    "zoom"
  [champ]
@@ -17657,8 +17488,6 @@
    microbol_click=8002
    diva_avant="Champ_Axef_1_Av"
    diva_apres="Champ_Axef_1_Ap"
-  [reaffichage]
-   g5,axef,g5,1
   [boutons]
    "zoom"
  [champ]
@@ -17684,8 +17513,6 @@
    microbol_click=8002
    diva_avant="Champ_Axemsk_1_Av"
    diva_apres="Champ_Axemsk_1_Ap"
-  [reaffichage]
-   g5,axemsk,g5,1
  [champ]
   [presentation]
    position=90,87
@@ -17733,8 +17560,6 @@
    microbol_click=8002
    diva_avant="Champ_Axef_1_Av"
    diva_apres="Champ_Axef_1_Ap"
-  [reaffichage]
-   g5,axef,g5,2
   [boutons]
    "zoom"
  [champ]
@@ -17760,8 +17585,6 @@
    microbol_click=8002
    diva_avant="Champ_Axemsk_1_Av"
    diva_apres="Champ_Axemsk_1_Ap"
-  [reaffichage]
-   g5,axemsk,g5,2
  [champ]
   [presentation]
    position=102,87
@@ -17809,8 +17632,6 @@
    microbol_click=8002
    diva_avant="Champ_Axef_1_Av"
    diva_apres="Champ_Axef_1_Ap"
-  [reaffichage]
-   g5,axef,g5,3
   [boutons]
    "zoom"
  [champ]
@@ -17836,8 +17657,6 @@
    microbol_click=8002
    diva_avant="Champ_Axemsk_1_Av"
    diva_apres="Champ_Axemsk_1_Ap"
-  [reaffichage]
-   g5,axemsk,g5,3
  [champ]
   [presentation]
    position=114,87
@@ -17885,8 +17704,6 @@
    microbol_click=8002
    diva_avant="Champ_Axef_1_Av"
    diva_apres="Champ_Axef_1_Ap"
-  [reaffichage]
-   g5,axef,g5,4
   [boutons]
    "zoom"
  [champ]
@@ -17912,8 +17729,6 @@
    microbol_click=8002
    diva_avant="Champ_Axemsk_1_Av"
    diva_apres="Champ_Axemsk_1_Ap"
-  [reaffichage]
-   g5,axemsk,g5,4
  [champ]
   [presentation]
    position=126,87
@@ -17961,8 +17776,6 @@
    microbol_click=8002
    diva_avant="Champ_Etbd_1_Av"
    diva_apres="Champ_Etbf_1_Ap"
-  [reaffichage]
-   g5,etbf,g5
   [boutons]
    "zoom"
  [champ]
@@ -18012,8 +17825,6 @@
    microbol_click=8002
    diva_avant="Champ_DepoMsk_2_Av"
    diva_apres="Champ_DepoF_1_Ap"
-  [reaffichage]
-   g5,depof,g5
   [boutons]
    "zoom"
  [champ]
@@ -18038,8 +17849,6 @@
    microbol_click=8002
    diva_avant="Champ_DepoMsk_2_Av"
    diva_apres="Champ_DepoMsk_1_Ap"
-  [reaffichage]
-   g5,depomsk,g5
   [boutons]
    "zoom"
  [champ]
@@ -18083,8 +17892,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Marchef_1_Ap"
-  [reaffichage]
-   g5,marchef,g5
   [boutons]
    "zoom"
  [champ]
@@ -18107,9 +17914,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Marchemsk_1_Ap"
-  [reaffichage]
-   g5,marchemsk,g5
-   g5,projetmsk,g5
  [champ]
   [presentation]
    position=162,87
@@ -18130,8 +17934,6 @@
    f8=9500
   [traitements]
    microbol_click=8002
-  [reaffichage]
-   g5,projetd,g5
   [boutons]
    "zoom"
  [champ]
@@ -18154,8 +17956,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_ProjetF_1_Ap"
-  [reaffichage]
-   g5,projetf,g5
   [boutons]
    "zoom"
  [champ]
@@ -18178,8 +17978,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Projetmsk_1_Ap"
-  [reaffichage]
-   g5,projetmsk,g5
  [champ]
   [presentation]
    position=174,87
@@ -18614,8 +18412,6 @@
    f8=9000
   [traitements]
    microbol_click=8002
-  [reaffichage]
-   g5,refd,g5
   [boutons]
    "zoom"
  [champ]
@@ -18640,8 +18436,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_RefF_1_Ap"
-  [reaffichage]
-   g5,reff,g5
   [boutons]
    "zoom"
  [champ]
@@ -18666,8 +18460,6 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_Refmsk_1_Ap"
-  [reaffichage]
-   g5,refmsk,g5
   [boutons]
    "zoom"
  [champ]
@@ -18717,8 +18509,6 @@
    microbol_click=8002
    diva_avant="Champ_Sreff_1_Av"
    diva_apres="Champ_Sreff_1_Ap"
-  [reaffichage]
-   g5,sref1f,g5
   [boutons]
    "zoom"
  [champ]
@@ -18744,8 +18534,6 @@
    microbol_click=8002
    diva_avant="Champ_SrefMsk_1_Av"
    diva_apres="Champ_SrefMsk_1_Ap"
-  [reaffichage]
-   g5,sref1msk,g5
   [boutons]
    "zoom"
  [champ]
@@ -18827,8 +18615,6 @@
    microbol_click=8002
    diva_avant="Champ_Sreff_2_Av"
    diva_apres="Champ_Sreff_2_Ap"
-  [reaffichage]
-   g5,sref2f,g5
   [boutons]
    "zoom"
  [champ]
@@ -18854,8 +18640,6 @@
    microbol_click=8002
    diva_avant="Champ_SrefMsk_2_Av"
    diva_apres="Champ_SrefMsk_2_Ap"
-  [reaffichage]
-   g5,sref2msk,g5
   [boutons]
    "zoom"
  [champ]
@@ -18920,8 +18704,6 @@
    microbol_click=8002
    diva_avant="Champ_FamF_1_Av"
    diva_apres="Champ_FamF_1_Ap"
-  [reaffichage]
-   g5,famf,g5,1
   [boutons]
    "zoom"
  [champ]
@@ -18947,8 +18729,6 @@
    microbol_click=8002
    diva_avant="Champ_FamtbMsk_1_Av"
    diva_apres="Champ_FamtbMsk_1_Ap"
-  [reaffichage]
-   g5,famtbmsk,g5,1
   [boutons]
    "zoom"
  [champ]
@@ -18997,8 +18777,6 @@
    microbol_click=8002
    diva_avant="Champ_FamF_1_Av"
    diva_apres="Champ_FamF_1_Ap"
-  [reaffichage]
-   g5,famf,g5,2
   [boutons]
    "zoom"
  [champ]
@@ -19024,8 +18802,6 @@
    microbol_click=8002
    diva_avant="Champ_FamtbMsk_1_Av"
    diva_apres="Champ_FamtbMsk_1_Ap"
-  [reaffichage]
-   g5,famtbmsk,g5,2
   [boutons]
    "zoom"
  [champ]
@@ -19074,8 +18850,6 @@
    microbol_click=8002
    diva_avant="Champ_FamF_1_Av"
    diva_apres="Champ_FamF_1_Ap"
-  [reaffichage]
-   g5,famf,g5,3
   [boutons]
    "zoom"
  [champ]
@@ -19101,8 +18875,6 @@
    microbol_click=8002
    diva_avant="Champ_FamtbMsk_1_Av"
    diva_apres="Champ_FamtbMsk_1_Ap"
-  [reaffichage]
-   g5,famtbmsk,g5,3
   [boutons]
    "zoom"
 [page]
@@ -19269,11 +19041,9 @@
   [presentation]
    position=12,4
    taille=16,16
-   adapterfond=oui
    id=1063
   [param_bitmapc]
    wnom="INFOG"
-   wnom_couleur="TRANS"
  [obj_texte]
   [presentation]
    position=9,28
@@ -20542,7 +20312,7 @@
 ;*		LM			5.2						01.2003	version initiale en diva
 
 
-SetModuleInfo('$Id: gtee300.dhsf 35431 2013-11-15 11:50:30Z jf $')
+SetModuleInfo('$Id: gtee300.dhsf 44338 2015-01-27 14:53:43Z sn $')
 
 Include		"GTTC000.dhsp"																					
 
@@ -21163,13 +20933,13 @@ BeginP																											; Page_4_Av
 		XmeReSetAttribut('SERIE',AN_VISIBILITE)
 	EndIf
 	
-	If SOC.ENTCOD(28) = Oui And T017.LIEUCOD = Oui
+	If SOC.ENTCODN(28) = Oui And T017.LIEUCOD = Oui
 		XmeReSetAttribut('LIEU',AN_VISIBILITE)
 	Else
 		XmeSetAttribut('LIEU',AN_VISIBILITE,AV_CACHE)
 	EndIf
 
-	If G8T1.SENS = 1 And ((SOC.ENTCOD(29) = 3 And G8T1.STSORCOD = 9) Or G8T1.STSORCOD = 3)
+	If G8T1.SENS = 1 And ((SOC.ENTCODN(29) = 3 And G8T1.STSORCOD = 9) Or G8T1.STSORCOD = 3)
 		XmeResetAttribut('DATEPERIME',AN_VISIBILITE)
 	Else
 		XmeSetAttribut('DATEPERIME',AN_VISIBILITE,AV_CACHE)

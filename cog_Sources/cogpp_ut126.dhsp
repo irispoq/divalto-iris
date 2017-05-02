@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_ut126.dhsp 8143 2015-06-12 07:52:35Z admin $')
+SetModuleInfo('$Id: cogpp_ut126.dhsp 10572 2016-12-08 08:25:54Z admin $')
 ;>xdiva
 ;*
 ;*		Objet : Consultation des amortissements
@@ -224,7 +224,7 @@ EndP
 
 ;* Initialisation des variables
 function int Cog_InitialiserVariables
-recordsql	a5rsuser.dhoq	utilisateur						;Utilisateurs
+recordsql	a5rsdos.dhoq	utilisateur						;Utilisateurs
 
 beginf
 

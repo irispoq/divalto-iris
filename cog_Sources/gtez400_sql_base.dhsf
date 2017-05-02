@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20130213094839      
+;>xwin4obj                              7.0       20150929144026      
 [masque]
  libelle="zoom entreprise"
- utilisateur="DEMO"
- date_modification="08/02/2013"
+ utilisateur="LK"
+ date_modification="29/09/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=346
  type_masque=2
- dernier_id=1600
+ dernier_id=1606
  dernier_id_page=29
 [defaut]
  [aide_page]
@@ -15,12 +15,13 @@
  [touches]
   f7=135
 [enregistrements]
- "gtfdd.dhsd",,g7,g7,4510,0
+ "gtfdd.dhsd",,g7,g7,4550,0
  "gtfdd.dhsd",,eec,eec,1000,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1700,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "gtfdd.dhsd",,ent,piece_sel,1800,0
- "gtrspce.dhoq",,piece_entete,piece_entete,1024,1
+ "gtrspce.dhoq",,entetepiece,piece_entete,1024,1
+ "gtfdd.dhsd",,ent,ent,1800,0
 [onglet]
  [presentation]
   position=0,0
@@ -80,7 +81,7 @@
  [groupbox]
   [presentation]
    position=0,0
-   taille=88,200
+   taille=99,200
    attache_lgx=oui
    id=1553
    wstyle="GROUPE"
@@ -89,8 +90,8 @@
    couleur_fond="ZOOM"
  [tableau]
   [presentation]
-   position=90,0
-   taille=225,200
+   position=103,0
+   taille=212,200
    attache_lgx=oui
    attache_lgy=oui
    id=1534
@@ -111,12 +112,41 @@
    saisie=non
   [multi_choix_tableau]
    [presentation]
+    position=115,101
+    taille=9,11
+    noms="icpfl"
+    id=1606
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=ent,icpfl,ent
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG_G"
+    obligatoire=non
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#tblechan"
+    fl_aff=oui
+    largeur_col=11
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
     position=96,0
     taille=22,30
     id=1429
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=piece_entete,cenote,piece_entete
+    donnee=entetepiece,cenote,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -139,7 +169,7 @@
     id=1430
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=piece_entete,cejoint,piece_entete
+    donnee=entetepiece,cejoint,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -162,7 +192,7 @@
     id=1431
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=piece_entete,txtcodd,piece_entete
+    donnee=entetepiece,txtcodd,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -185,7 +215,7 @@
     id=1432
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=piece_entete,txtcodf,piece_entete
+    donnee=entetepiece,txtcodf,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -208,7 +238,7 @@
     id=1433
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,pidt,piece_entete
+    donnee=entetepiece,pidt,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -228,7 +258,7 @@
     id=1434
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,pino,piece_entete
+    donnee=entetepiece,pino,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -272,7 +302,7 @@
     id=1436
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tiers,piece_entete
+    donnee=entetepiece,tiers,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -294,7 +324,7 @@
     colonnes_saisie=38
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tiers_nom,piece_entete
+    donnee=entetepiece,tiers_nom,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -314,7 +344,7 @@
     id=1438
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,htpdtmt,piece_entete
+    donnee=entetepiece,htpdtmt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -335,7 +365,7 @@
     id=1439
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,htmt,piece_entete
+    donnee=entetepiece,htmt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -356,7 +386,7 @@
     id=1440
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,ttcmt,piece_entete
+    donnee=entetepiece,ttcmt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -377,7 +407,7 @@
     id=1441
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,dev,piece_entete
+    donnee=entetepiece,dev,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -407,7 +437,7 @@
     id=1442
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,devp,piece_entete
+    donnee=entetepiece,devp,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -432,7 +462,7 @@
     id=1443
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,pinotiers,piece_entete
+    donnee=entetepiece,pinotiers,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -457,7 +487,7 @@
     id=1444
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,piref,piece_entete
+    donnee=entetepiece,piref,piece_entete
     sequence=1
     saisie=non
    [param_saisie]
@@ -482,7 +512,7 @@
     id=1445
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,op,piece_entete
+    donnee=entetepiece,op,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -512,7 +542,7 @@
     id=1446
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,salcod,piece_entete
+    donnee=entetepiece,salcod,piece_entete
     format="1"
     sequence=1
     saisie=non
@@ -543,7 +573,7 @@
     id=1447
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,marche,piece_entete
+    donnee=entetepiece,marche,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -570,10 +600,11 @@
    [presentation]
     position=129,44
     taille=10,37
+    noms="afr_col"
     id=1448
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,projet,piece_entete
+    donnee=entetepiece,projet,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -603,7 +634,7 @@
     id=1449
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tiersgrp,piece_entete
+    donnee=entetepiece,tiersgrp,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -634,7 +665,7 @@
     id=1450
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,axe,piece_entete,1
+    donnee=entetepiece,axe,piece_entete,1
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -665,7 +696,7 @@
     id=1451
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,axe,piece_entete,2
+    donnee=entetepiece,axe,piece_entete,2
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -696,7 +727,7 @@
     id=1452
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,axe,piece_entete,3
+    donnee=entetepiece,axe,piece_entete,3
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -727,7 +758,7 @@
     id=1453
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,axe,piece_entete,4
+    donnee=entetepiece,axe,piece_entete,4
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -757,7 +788,7 @@
     id=1454
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,etb,piece_entete
+    donnee=entetepiece,etb,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -778,7 +809,7 @@
     id=1455
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,depo,piece_entete
+    donnee=entetepiece,depo,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -807,7 +838,7 @@
     id=1456
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,regl,piece_entete
+    donnee=entetepiece,regl,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -837,7 +868,7 @@
     id=1457
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,echdt,piece_entete
+    donnee=entetepiece,echdt,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -862,7 +893,7 @@
     id=1458
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,ribcod,piece_entete
+    donnee=entetepiece,ribcod,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -892,7 +923,7 @@
     id=1459
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,acmt,piece_entete
+    donnee=entetepiece,acmt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -918,7 +949,7 @@
     id=1460
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,soacmt,piece_entete
+    donnee=entetepiece,soacmt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -947,7 +978,7 @@
     id=1461
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,remmt,piece_entete
+    donnee=entetepiece,remmt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -973,7 +1004,7 @@
     id=1462
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,rem1,piece_entete
+    donnee=entetepiece,rem1,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -998,7 +1029,7 @@
     id=1463
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,remtyp1,piece_entete
+    donnee=entetepiece,remtyp1,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1026,7 +1057,7 @@
     id=1464
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,escp,piece_entete
+    donnee=entetepiece,escp,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1055,7 +1086,7 @@
     id=1465
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,piedmt,piece_entete,1
+    donnee=entetepiece,piedmt,piece_entete,1
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -1082,7 +1113,7 @@
     id=1466
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,piedmt,piece_entete,2
+    donnee=entetepiece,piedmt,piece_entete,2
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -1109,7 +1140,7 @@
     id=1467
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,piedmt,piece_entete,3
+    donnee=entetepiece,piedmt,piece_entete,3
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -1135,7 +1166,7 @@
     id=1468
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,poitot,piece_entete
+    donnee=entetepiece,poitot,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -1161,7 +1192,7 @@
     id=1469
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,voltot,piece_entete
+    donnee=entetepiece,voltot,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -1187,7 +1218,7 @@
     id=1470
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,refnb,piece_entete
+    donnee=entetepiece,refnb,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -1210,7 +1241,7 @@
     id=1471
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,colinb,piece_entete
+    donnee=entetepiece,colinb,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1235,7 +1266,7 @@
     id=1472
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,deldemdt,piece_entete
+    donnee=entetepiece,deldemdt,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1263,7 +1294,7 @@
     id=1473
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,delaccdt,piece_entete
+    donnee=entetepiece,delaccdt,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1291,7 +1322,7 @@
     id=1474
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,delrepdt,piece_entete
+    donnee=entetepiece,delrepdt,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1319,7 +1350,7 @@
     id=1475
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,priocod,piece_entete
+    donnee=entetepiece,priocod,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1347,7 +1378,7 @@
     id=1476
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,relcod,piece_entete
+    donnee=entetepiece,relcod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1378,7 +1409,7 @@
     id=1477
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,stres,piece_entete
+    donnee=entetepiece,stres,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1403,7 +1434,7 @@
     id=1478
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,blmod,piece_entete
+    donnee=entetepiece,blmod,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1434,7 +1465,7 @@
     id=1479
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tour,piece_entete
+    donnee=entetepiece,tour,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1462,7 +1493,7 @@
     id=1480
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tourrg,piece_entete
+    donnee=entetepiece,tourrg,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1490,7 +1521,7 @@
     id=1481
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,porcod,piece_entete
+    donnee=entetepiece,porcod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1521,7 +1552,7 @@
     id=1482
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,famod,piece_entete
+    donnee=entetepiece,famod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1555,7 +1586,7 @@
     id=1483
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,period,piece_entete
+    donnee=entetepiece,period,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1589,7 +1620,7 @@
     id=1484
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,encasscod,piece_entete
+    donnee=entetepiece,encasscod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1620,7 +1651,7 @@
     id=1485
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,rlvno,piece_entete
+    donnee=entetepiece,rlvno,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1642,7 +1673,7 @@
     id=1486
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,rlvdt,piece_entete
+    donnee=entetepiece,rlvdt,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1664,7 +1695,7 @@
     id=1487
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tafam,piece_entete
+    donnee=entetepiece,tafam,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1695,7 +1726,7 @@
     id=1488
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tafamx,piece_entete
+    donnee=entetepiece,tafamx,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1727,7 +1758,7 @@
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,promotacod,piece_entete
+    donnee=entetepiece,promotacod,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1747,7 +1778,7 @@
     id=1490
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tacod,piece_entete
+    donnee=entetepiece,tacod,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1778,7 +1809,7 @@
     id=1491
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,htcod,piece_entete
+    donnee=entetepiece,htcod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1809,7 +1840,7 @@
     id=1492
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,refam,piece_entete
+    donnee=entetepiece,refam,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1840,7 +1871,7 @@
     id=1493
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,refamx,piece_entete
+    donnee=entetepiece,refamx,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1872,7 +1903,7 @@
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,promoremcod,piece_entete
+    donnee=entetepiece,promoremcod,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1892,7 +1923,7 @@
     id=1495
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,remcod,piece_entete
+    donnee=entetepiece,remcod,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1923,7 +1954,7 @@
     id=1496
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,rem,piece_entete,1
+    donnee=entetepiece,rem,piece_entete,1
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -1951,7 +1982,7 @@
     id=1497
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,remtyp,piece_entete,1
+    donnee=entetepiece,remtyp,piece_entete,1
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1983,7 +2014,7 @@
     id=1498
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,rem,piece_entete,2
+    donnee=entetepiece,rem,piece_entete,2
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2011,7 +2042,7 @@
     id=1499
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,remtyp,piece_entete,2
+    donnee=entetepiece,remtyp,piece_entete,2
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -2043,7 +2074,7 @@
     id=1500
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,rem,piece_entete,3
+    donnee=entetepiece,rem,piece_entete,3
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2071,7 +2102,7 @@
     id=1501
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,remtyp,piece_entete,3
+    donnee=entetepiece,remtyp,piece_entete,3
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -2103,7 +2134,7 @@
     id=1502
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,cofam,piece_entete
+    donnee=entetepiece,cofam,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2133,7 +2164,7 @@
     id=1503
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,repr,piece_entete,1
+    donnee=entetepiece,repr,piece_entete,1
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2164,7 +2195,7 @@
     id=1504
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,cofamv,piece_entete,1
+    donnee=entetepiece,cofamv,piece_entete,1
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2195,7 +2226,7 @@
     id=1505
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,comp,piece_entete,1
+    donnee=entetepiece,comp,piece_entete,1
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2223,7 +2254,7 @@
     id=1506
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,repr,piece_entete,2
+    donnee=entetepiece,repr,piece_entete,2
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2254,7 +2285,7 @@
     id=1507
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,cofamv,piece_entete,2
+    donnee=entetepiece,cofamv,piece_entete,2
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2285,7 +2316,7 @@
     id=1508
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,comp,piece_entete,2
+    donnee=entetepiece,comp,piece_entete,2
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2314,7 +2345,7 @@
     id=1509
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,repr,piece_entete,3
+    donnee=entetepiece,repr,piece_entete,3
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2345,7 +2376,7 @@
     id=1510
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,cofamv,piece_entete,3
+    donnee=entetepiece,cofamv,piece_entete,3
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2376,7 +2407,7 @@
     id=1511
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,comp,piece_entete,3
+    donnee=entetepiece,comp,piece_entete,3
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2404,7 +2435,7 @@
     id=1599
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tvatie,piece_entete
+    donnee=entetepiece,tvatie,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2434,7 +2465,7 @@
     id=1513
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tpft,piece_entete
+    donnee=entetepiece,tpft,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2462,7 +2493,7 @@
     id=1514
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,etano,piece_entete
+    donnee=entetepiece,etano,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2490,7 +2521,7 @@
     id=1515
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,nbex,piece_entete
+    donnee=entetepiece,nbex,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2518,7 +2549,7 @@
     id=1516
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,txtedcodd,piece_entete
+    donnee=entetepiece,txtedcodd,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2543,7 +2574,7 @@
     id=1517
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,txtedcodf,piece_entete
+    donnee=entetepiece,txtedcodf,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2568,7 +2599,7 @@
     id=1518
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,trcod,piece_entete
+    donnee=entetepiece,trcod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -2593,7 +2624,7 @@
     id=1519
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,boredicod,piece_entete
+    donnee=entetepiece,boredicod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -2618,7 +2649,7 @@
     id=1520
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,editcod,piece_entete
+    donnee=entetepiece,editcod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -2643,7 +2674,7 @@
     id=1521
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,fouhtmt,piece_entete
+    donnee=entetepiece,fouhtmt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -2664,7 +2695,7 @@
     id=1522
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,fouescmt,piece_entete
+    donnee=entetepiece,fouescmt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -2685,7 +2716,7 @@
     id=1523
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,foutvamt,piece_entete
+    donnee=entetepiece,foutvamt,piece_entete
     format="\FormatMille"
     saisie=non
    [param_saisie]
@@ -2706,7 +2737,7 @@
     id=1524
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,tierspayer,piece_entete
+    donnee=entetepiece,tierspayer,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2726,7 +2757,7 @@
     id=1525
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,bapsalcod,piece_entete
+    donnee=entetepiece,bapsalcod,piece_entete
     format="1"
     saisie=non
    [param_saisie]
@@ -2747,7 +2778,7 @@
     id=1526
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,origine,piece_entete
+    donnee=entetepiece,origine,piece_entete
     minmaj=majuscules
    [param_saisie]
     esp_si_zero=oui
@@ -2769,7 +2800,7 @@
     id=1527
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,status,piece_entete
+    donnee=entetepiece,status,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -2794,7 +2825,7 @@
     id=1528
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,final,piece_entete
+    donnee=entetepiece,final,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa
@@ -2814,7 +2845,7 @@
     id=1529
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=piece_entete,ascod,piece_entete
+    donnee=entetepiece,ascod,piece_entete
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -2840,9 +2871,8 @@
     colonnes_saisie=4
     wstyle="TABLEAU_SAISI"
    [description]
-    donnee=piece_entete,stlgtgamcod,piece_entete
+    donnee=entetepiece,stlgtgamcod,piece_entete
     saisie=non
-   [param_saisie]
    [touches]
     f1=1
     f7=135
@@ -2862,7 +2892,7 @@
     id=1530
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,usercrdh,piece_entete
+    donnee=entetepiece,usercrdh,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa+hh:mm:ss
@@ -2882,7 +2912,7 @@
     id=1531
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,usercr,piece_entete
+    donnee=entetepiece,usercr,piece_entete
     format="1"
     saisie=non
    [param_saisie]
@@ -2903,7 +2933,7 @@
     id=1532
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,usermodh,piece_entete
+    donnee=entetepiece,usermodh,piece_entete
     saisie=non
    [param_saisie]
     type_date=jj/mm/aaaa+hh:mm:ss
@@ -2923,7 +2953,7 @@
     id=1533
     wstyle="TABLEAU_AFF"
    [description]
-    donnee=piece_entete,usermo,piece_entete
+    donnee=entetepiece,usermo,piece_entete
     format="1"
     saisie=non
    [param_saisie]
@@ -2979,13 +3009,33 @@
    texte="Pour la commande de sous-traitance"
  [obj_texte]
   [presentation]
-   position=77,5
+   position=87,5
    taille=9,130
    noms="etb"
    id=1537
    wstyle="STD_AFF"
   [texte]
    texte="Etablissement"
+ [multi_choix]
+  [presentation]
+   position=17,137
+   taille=9,55
+   noms="piece"
+   id=1542
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,picod,piece_sel
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","PICOD"
+  [touches]
+   f7=135
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_Ticod_1_Av"
+   diva_apres="Champ_PiCod_1_Ap"
  [champ]
   [presentation]
    position=27,137
@@ -3020,25 +3070,6 @@
    microbol_click=8002
    diva_avant="Champ_Ticod_1_Av"
    diva_apres="Champ_Ticod_1_Ap"
- [multi_choix]
-  [presentation]
-   position=17,137
-   taille=9,55
-   noms="piece"
-   id=1542
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=ent,picod,piece_sel
-   minmaj=majuscules
-  [param_saisie]
-   esp_si_zero=oui
-  [param_multi]
-   choix="gtfdmc.dhfi","PICOD"
-  [touches]
-   f7=135
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_Ticod_1_Av"
  [champ]
   [presentation]
    position=37,115
@@ -3090,20 +3121,18 @@
    diva_avant="Champ_CE4_1_Av"
  [champ]
   [presentation]
-   position=77,137
-   taille=9,15
-   noms="etb;piece"
-   id=1544
-   wstyle="CHAMP_SAISI"
+   position=77,6
+   taille=9,128
+   id=1602
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
   [description]
-   donnee=ent,etb,piece_sel
+   donnee=g7,lib,g7,1
+   saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
    f7=135
-  [traitements]
-   diva_avant="Champ_Etb_1_Av"
-   diva_apres="Champ_Etb_1_Ap"
  [champ]
   [presentation]
    position=57,137
@@ -3139,6 +3168,42 @@
    microbol_click=8002
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=77,137
+   taille=9,55
+   noms="AFR_sel"
+   id=1603
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,projet,piece_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [touches]
+   f7=135
+   f8=9500
+  [traitements]
+   diva_apres="Champ_Projet_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=87,137
+   taille=9,15
+   noms="etb;piece"
+   id=1544
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=ent,etb,piece_sel
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+  [traitements]
+   diva_avant="Champ_Etb_1_Av"
+   diva_apres="Champ_Etb_1_Ap"
 [page]
  numero=4
  fond="STD"
@@ -3381,7 +3446,7 @@
    colonnes_saisie=80
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,projetlib,piece_entete
+   donnee=entetepiece,projetlib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3395,7 +3460,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiers_nom,piece_entete
+   donnee=entetepiece,tiers_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3409,7 +3474,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiers_adrcpl1,piece_entete
+   donnee=entetepiece,tiers_adrcpl1,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3423,7 +3488,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiers_adrcpl2,piece_entete
+   donnee=entetepiece,tiers_adrcpl2,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3437,7 +3502,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiers_rue,piece_entete
+   donnee=entetepiece,tiers_rue,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3451,7 +3516,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiers_loc,piece_entete
+   donnee=entetepiece,tiers_loc,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3465,7 +3530,7 @@
    colonnes_saisie=8
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiers_cpostal,piece_entete
+   donnee=entetepiece,tiers_cpostal,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3479,7 +3544,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiers_vil,piece_entete
+   donnee=entetepiece,tiers_vil,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3493,7 +3558,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiersgrp_nom,piece_entete
+   donnee=entetepiece,tiersgrp_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3511,7 +3576,7 @@
    colonnes_saisie=80
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,prjavenant_lib80,piece_entete
+   donnee=entetepiece,prjavenant_lib80,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3529,7 +3594,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,marchepiece_lib,piece_entete
+   donnee=entetepiece,marchepiece_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3547,7 +3612,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,collaborateuradv_nom,piece_entete
+   donnee=entetepiece,collaborateuradv_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3566,7 +3631,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,etb_nom,piece_entete
+   donnee=entetepiece,etb_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3583,7 +3648,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,depot_lib,piece_entete
+   donnee=entetepiece,depot_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3599,7 +3664,7 @@
    id=1268
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,avenant,piece_entete
+   donnee=entetepiece,avenant,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3619,7 +3684,7 @@
    id=38
    wstyle="ETAT_SIMPLE"
   [description]
-   donnee=piece_entete,ofascod,piece_entete
+   donnee=entetepiece,ofascod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -3635,7 +3700,7 @@
    id=42
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,salcod,piece_entete
+   donnee=entetepiece,salcod,piece_entete
    format="1"
    sequence=1
    saisie=non
@@ -3660,7 +3725,7 @@
    id=43
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,marche,piece_entete
+   donnee=entetepiece,marche,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3683,7 +3748,7 @@
    id=44
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,projet,piece_entete
+   donnee=entetepiece,projet,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3706,7 +3771,7 @@
    id=45
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tiersgrp,piece_entete
+   donnee=entetepiece,tiersgrp,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3729,7 +3794,7 @@
    id=48
    wstyle="ETAT_SIMPLE"
   [description]
-   donnee=piece_entete,status,piece_entete
+   donnee=entetepiece,status,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -3747,7 +3812,7 @@
    id=49
    wstyle="ETAT_SIMPLE"
   [description]
-   donnee=piece_entete,pirelcod,piece_entete
+   donnee=entetepiece,pirelcod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -3761,7 +3826,7 @@
    id=50
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,op,piece_entete
+   donnee=entetepiece,op,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3784,7 +3849,7 @@
    id=51
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,picod,piece_entete
+   donnee=entetepiece,picod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -3801,7 +3866,7 @@
    id=52
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,pino,piece_entete
+   donnee=entetepiece,pino,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3815,7 +3880,7 @@
    id=53
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,pidt,piece_entete
+   donnee=entetepiece,pidt,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3829,7 +3894,7 @@
    id=54
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,ticod,piece_entete
+   donnee=entetepiece,ticod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -3846,7 +3911,7 @@
    id=55
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tiers,piece_entete
+   donnee=entetepiece,tiers,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3860,7 +3925,7 @@
    id=56
    wstyle="ETAT_SIMPLE"
   [description]
-   donnee=piece_entete,ascod,piece_entete
+   donnee=entetepiece,ascod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -3878,7 +3943,7 @@
    id=58
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,htpdtmt,piece_entete
+   donnee=entetepiece,htpdtmt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -3892,7 +3957,7 @@
    id=59
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,htmt,piece_entete
+   donnee=entetepiece,htmt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -3906,7 +3971,7 @@
    id=60
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ttcmt,piece_entete
+   donnee=entetepiece,ttcmt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -3921,7 +3986,7 @@
    id=75
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,etb,piece_entete
+   donnee=entetepiece,etb,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3935,7 +4000,7 @@
    id=76
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,pinotiers,piece_entete
+   donnee=entetepiece,pinotiers,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -3953,7 +4018,7 @@
    id=77
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,piref,piece_entete
+   donnee=entetepiece,piref,piece_entete
    sequence=1
    saisie=non
   [param_saisie]
@@ -3972,7 +4037,7 @@
    id=82
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,dev,piece_entete
+   donnee=entetepiece,dev,piece_entete
    saisie=non
   [param_saisie]
    table_associee=oui
@@ -3994,7 +4059,7 @@
    id=83
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,depo,piece_entete
+   donnee=entetepiece,depo,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4033,7 +4098,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,codeoperation_lib,piece_entete
+   donnee=entetepiece,codeoperation_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4042,6 +4107,30 @@
    f7=135
   [traitements]
    microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=22,299
+   taille=9,11
+   noms="icpfl"
+   id=1604
+   wstyle="STD"
+  [description]
+   donnee=ent,icpfl,ent
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+   obligatoire=non
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [info_bulle]
+  texte="Synchronisé en inter-compagnies"
 [page]
  numero=12
  fond="STD"
@@ -4182,7 +4271,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,axe2_lib,piece_entete
+   donnee=entetepiece,axe2_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4196,7 +4285,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,axe3_lib,piece_entete
+   donnee=entetepiece,axe3_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4210,7 +4299,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,axe4_lib,piece_entete
+   donnee=entetepiece,axe4_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4224,7 +4313,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,axe1_lib,piece_entete
+   donnee=entetepiece,axe1_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4238,7 +4327,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,modereglement_lib,piece_entete
+   donnee=entetepiece,modereglement_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4252,7 +4341,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,RegTvaTiers_lib,piece_entete
+   donnee=entetepiece,regtvatiers_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4269,7 +4358,7 @@
    id=216
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,famod,piece_entete
+   donnee=entetepiece,famod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -4296,7 +4385,7 @@
    id=217
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,period,piece_entete
+   donnee=entetepiece,period,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -4323,7 +4412,7 @@
    id=218
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,escp,piece_entete
+   donnee=entetepiece,escp,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4344,7 +4433,7 @@
    id=219
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ribcod,piece_entete
+   donnee=entetepiece,ribcod,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4367,7 +4456,7 @@
    id=1598
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tvatie,piece_entete
+   donnee=entetepiece,tvatie,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4390,7 +4479,7 @@
    id=221
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tpft,piece_entete
+   donnee=entetepiece,tpft,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4411,7 +4500,7 @@
    id=222
    wstyle="STD"
   [description]
-   donnee=piece_entete,encasscod,piece_entete
+   donnee=entetepiece,encasscod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_case]
@@ -4435,7 +4524,7 @@
    id=227
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,devp,piece_entete
+   donnee=entetepiece,devp,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4453,7 +4542,7 @@
    id=78
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,regl,piece_entete
+   donnee=entetepiece,regl,piece_entete
    saisie=non
   [param_saisie]
    table_associee=oui
@@ -4475,7 +4564,7 @@
    id=79
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,echdt,piece_entete
+   donnee=entetepiece,echdt,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4493,7 +4582,7 @@
    id=80
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,acmt,piece_entete
+   donnee=entetepiece,acmt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -4512,7 +4601,7 @@
    id=81
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,soacmt,piece_entete
+   donnee=entetepiece,soacmt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -4532,7 +4621,7 @@
    id=67
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,axe,piece_entete,1
+   donnee=entetepiece,axe,piece_entete,1
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4556,7 +4645,7 @@
    id=68
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,axe,piece_entete,2
+   donnee=entetepiece,axe,piece_entete,2
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4580,7 +4669,7 @@
    id=69
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,axe,piece_entete,3
+   donnee=entetepiece,axe,piece_entete,3
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4604,7 +4693,7 @@
    id=70
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,axe,piece_entete,4
+   donnee=entetepiece,axe,piece_entete,4
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4909,7 +4998,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,commercial2_nom,piece_entete
+   donnee=entetepiece,commercial2_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4925,7 +5014,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,commercial3_nom,piece_entete
+   donnee=entetepiece,commercial3_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4941,7 +5030,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,commercial1_nom,piece_entete
+   donnee=entetepiece,commercial1_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4957,7 +5046,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,libremise_lib,piece_entete
+   donnee=entetepiece,libremise_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4971,7 +5060,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,libremisepromo_lib,piece_entete
+   donnee=entetepiece,libremisepromo_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4985,7 +5074,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,libclasremiseexc_lib,piece_entete
+   donnee=entetepiece,libclasremiseexc_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -4999,7 +5088,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,libclasremise_lib,piece_entete
+   donnee=entetepiece,libclasremise_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5013,7 +5102,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,libtarif_lib,piece_entete
+   donnee=entetepiece,libtarif_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5031,7 +5120,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,libtarifpromo_lib,piece_entete
+   donnee=entetepiece,libtarifpromo_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5049,7 +5138,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,libfamtarifexc_lib,piece_entete
+   donnee=entetepiece,libfamtarifexc_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5067,7 +5156,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,libfamtarif_lib,piece_entete
+   donnee=entetepiece,libfamtarif_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5084,7 +5173,7 @@
    id=116
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tafam,piece_entete
+   donnee=entetepiece,tafam,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5108,7 +5197,7 @@
    id=119
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tafamx,piece_entete
+   donnee=entetepiece,tafamx,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5132,7 +5221,7 @@
    id=122
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tacod,piece_entete
+   donnee=entetepiece,tacod,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5156,7 +5245,7 @@
    id=125
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,htcod,piece_entete
+   donnee=entetepiece,htcod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -5180,7 +5269,7 @@
    id=126
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,refam,piece_entete
+   donnee=entetepiece,refam,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5204,7 +5293,7 @@
    id=127
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,refamx,piece_entete
+   donnee=entetepiece,refamx,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5228,7 +5317,7 @@
    id=128
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,remcod,piece_entete
+   donnee=entetepiece,remcod,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5252,7 +5341,7 @@
    id=129
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,rem,piece_entete,1
+   donnee=entetepiece,rem,piece_entete,1
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5273,7 +5362,7 @@
    id=130
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,remtyp,piece_entete,1
+   donnee=entetepiece,remtyp,piece_entete,1
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -5298,7 +5387,7 @@
    id=131
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,rem,piece_entete,2
+   donnee=entetepiece,rem,piece_entete,2
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5319,7 +5408,7 @@
    id=132
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,remtyp,piece_entete,2
+   donnee=entetepiece,remtyp,piece_entete,2
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -5344,7 +5433,7 @@
    id=133
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,rem,piece_entete,3
+   donnee=entetepiece,rem,piece_entete,3
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5365,7 +5454,7 @@
    id=134
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,remtyp,piece_entete,3
+   donnee=entetepiece,remtyp,piece_entete,3
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -5390,7 +5479,7 @@
    id=135
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cofam,piece_entete
+   donnee=entetepiece,cofam,piece_entete
    saisie=non
   [param_saisie]
    table_associee=oui
@@ -5412,7 +5501,7 @@
    id=136
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,repr,piece_entete,1
+   donnee=entetepiece,repr,piece_entete,1
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5436,7 +5525,7 @@
    id=138
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cofamv,piece_entete,1
+   donnee=entetepiece,cofamv,piece_entete,1
    saisie=non
   [param_saisie]
    table_associee=oui
@@ -5459,7 +5548,7 @@
    id=139
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,comp,piece_entete,1
+   donnee=entetepiece,comp,piece_entete,1
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5480,7 +5569,7 @@
    id=140
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,repr,piece_entete,2
+   donnee=entetepiece,repr,piece_entete,2
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5504,7 +5593,7 @@
    id=142
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cofamv,piece_entete,2
+   donnee=entetepiece,cofamv,piece_entete,2
    saisie=non
   [param_saisie]
    table_associee=oui
@@ -5527,7 +5616,7 @@
    id=144
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,comp,piece_entete,2
+   donnee=entetepiece,comp,piece_entete,2
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5549,7 +5638,7 @@
    id=145
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,repr,piece_entete,3
+   donnee=entetepiece,repr,piece_entete,3
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5573,7 +5662,7 @@
    id=146
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cofamv,piece_entete,3
+   donnee=entetepiece,cofamv,piece_entete,3
    saisie=non
   [param_saisie]
    table_associee=oui
@@ -5596,7 +5685,7 @@
    id=147
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,comp,piece_entete,3
+   donnee=entetepiece,comp,piece_entete,3
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5618,7 +5707,7 @@
    colonnes_saisie=8
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,promotacod,piece_entete
+   donnee=entetepiece,promotacod,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5632,7 +5721,7 @@
    colonnes_saisie=8
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,promoremcod,piece_entete
+   donnee=entetepiece,promoremcod,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5884,7 +5973,7 @@
    colonnes_saisie=80
    wstyle="STD"
   [description]
-   donnee=piece_entete,artpied1_des,piece_entete
+   donnee=entetepiece,artpied1_des,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5898,7 +5987,7 @@
    colonnes_saisie=80
    wstyle="STD"
   [description]
-   donnee=piece_entete,artpied2_des,piece_entete
+   donnee=entetepiece,artpied2_des,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5912,7 +6001,7 @@
    colonnes_saisie=80
    wstyle="STD"
   [description]
-   donnee=piece_entete,artpied3_des,piece_entete
+   donnee=entetepiece,artpied3_des,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5926,7 +6015,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiersapayer_nom,piece_entete
+   donnee=entetepiece,tiersapayer_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5942,7 +6031,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,collaborateurbap_nom,piece_entete
+   donnee=entetepiece,collaborateurbap_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5956,7 +6045,7 @@
    colonnes_saisie=40
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,modetransport_lib,piece_entete
+   donnee=entetepiece,modetransport_lib,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5969,7 +6058,7 @@
    id=193
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tierspayer,piece_entete
+   donnee=entetepiece,tierspayer,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5982,7 +6071,7 @@
    id=194
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,bapsalcod,piece_entete
+   donnee=entetepiece,bapsalcod,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -5995,7 +6084,7 @@
    id=196
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,fouhtmt,piece_entete
+   donnee=entetepiece,fouhtmt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6009,7 +6098,7 @@
    id=197
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,fouescmt,piece_entete
+   donnee=entetepiece,fouescmt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6023,7 +6112,7 @@
    id=198
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,foutvamt,piece_entete
+   donnee=entetepiece,foutvamt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6037,7 +6126,7 @@
    id=199
    wstyle="STD"
   [description]
-   donnee=piece_entete,quacod,piece_entete
+   donnee=entetepiece,quacod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_case]
@@ -6053,7 +6142,7 @@
    id=200
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,blasno,piece_entete
+   donnee=entetepiece,blasno,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6066,7 +6155,7 @@
    id=202
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,poitot,piece_entete
+   donnee=entetepiece,poitot,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6085,7 +6174,7 @@
    id=203
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,voltot,piece_entete
+   donnee=entetepiece,voltot,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6104,7 +6193,7 @@
    id=205
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,blasdepo,piece_entete
+   donnee=entetepiece,blasdepo,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6119,7 +6208,7 @@
    id=207
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,colinb,piece_entete
+   donnee=entetepiece,colinb,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6137,7 +6226,7 @@
    id=208
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,remmt,piece_entete
+   donnee=entetepiece,remmt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6156,7 +6245,7 @@
    id=209
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,rem1,piece_entete
+   donnee=entetepiece,rem1,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6174,7 +6263,7 @@
    id=210
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,remtyp1,piece_entete
+   donnee=entetepiece,remtyp1,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -6196,7 +6285,7 @@
    id=211
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,piedmt,piece_entete,1
+   donnee=entetepiece,piedmt,piece_entete,1
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6216,7 +6305,7 @@
    id=212
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,piedmt,piece_entete,2
+   donnee=entetepiece,piedmt,piece_entete,2
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6235,7 +6324,7 @@
    id=213
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,refnb,piece_entete
+   donnee=entetepiece,refnb,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6252,7 +6341,7 @@
    id=214
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,piedmt,piece_entete,3
+   donnee=entetepiece,piedmt,piece_entete,3
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6271,7 +6360,7 @@
    id=229
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,portheomt,piece_entete
+   donnee=entetepiece,portheomt,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6285,7 +6374,7 @@
    id=231
    wstyle="STD"
   [description]
-   donnee=piece_entete,stres,piece_entete
+   donnee=entetepiece,stres,piece_entete
    minmaj=majuscules
    saisie=non
   [param_case]
@@ -6303,7 +6392,7 @@
    id=233
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,deldemdt,piece_entete
+   donnee=entetepiece,deldemdt,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6324,7 +6413,7 @@
    id=234
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,delaccdt,piece_entete
+   donnee=entetepiece,delaccdt,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6345,7 +6434,7 @@
    id=235
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,delrepdt,piece_entete
+   donnee=entetepiece,delrepdt,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6366,7 +6455,7 @@
    id=236
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,priocod,piece_entete
+   donnee=entetepiece,priocod,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6387,7 +6476,7 @@
    id=237
    wstyle="STD"
   [description]
-   donnee=piece_entete,relcod,piece_entete
+   donnee=entetepiece,relcod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_case]
@@ -6411,7 +6500,7 @@
    id=238
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,blmod,piece_entete
+   donnee=entetepiece,blmod,piece_entete
    saisie=non
   [param_saisie]
    table_associee=oui
@@ -6434,7 +6523,7 @@
    id=239
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tour,piece_entete
+   donnee=entetepiece,tour,piece_entete
    saisie=non
   [aide_page]
    aide=3149
@@ -6453,7 +6542,7 @@
    id=240
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tourrg,piece_entete
+   donnee=entetepiece,tourrg,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6474,7 +6563,7 @@
    id=241
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,porcod,piece_entete
+   donnee=entetepiece,porcod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -6498,7 +6587,7 @@
    id=243
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,rempietot,piece_entete
+   donnee=entetepiece,rempietot,piece_entete
    format="\FormatMille"
    saisie=non
   [param_saisie]
@@ -6513,7 +6602,7 @@
    colonnes_saisie=4
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,stlgtgamcod,piece_entete
+   donnee=entetepiece,stlgtgamcod,piece_entete
    saisie=non
   [touches]
    f1=1
@@ -6708,7 +6797,7 @@
    colonnes_saisie=38
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,tiersrlv_nom,piece_entete
+   donnee=entetepiece,tiersrlv_nom,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6721,7 +6810,7 @@
    id=351
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,tiersrlv,piece_entete
+   donnee=entetepiece,tiersrlv,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6739,7 +6828,7 @@
    id=352
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,rlvno,piece_entete
+   donnee=entetepiece,rlvno,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6754,7 +6843,7 @@
    id=353
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,rlvdt,piece_entete
+   donnee=entetepiece,rlvdt,piece_entete
    format="JJ/MM/AAAA"
    saisie=non
   [param_saisie]
@@ -6770,7 +6859,7 @@
    id=354
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtyp,piece_entete,5
+   donnee=entetepiece,adrtyp,piece_entete,5
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -6791,7 +6880,7 @@
    id=355
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtiers,piece_entete,5
+   donnee=entetepiece,adrtiers,piece_entete,5
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6813,7 +6902,7 @@
    id=356
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrcod,piece_entete,5
+   donnee=entetepiece,adrcod,piece_entete,5
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6978,7 +7067,7 @@
    id=223
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,etano,piece_entete
+   donnee=entetepiece,etano,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -6999,7 +7088,7 @@
    id=224
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,nbex,piece_entete
+   donnee=entetepiece,nbex,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7020,7 +7109,7 @@
    id=225
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,txtedcodd,piece_entete
+   donnee=entetepiece,txtedcodd,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7038,7 +7127,7 @@
    id=226
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,txtedcodf,piece_entete
+   donnee=entetepiece,txtedcodf,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7056,7 +7145,7 @@
    id=228
    wstyle="ETAT"
   [description]
-   donnee=piece_entete,trcod,piece_entete
+   donnee=entetepiece,trcod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -7074,7 +7163,7 @@
    id=230
    wstyle="ETAT"
   [description]
-   donnee=piece_entete,boredicod,piece_entete
+   donnee=entetepiece,boredicod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -7092,7 +7181,7 @@
    id=242
    wstyle="ETAT"
   [description]
-   donnee=piece_entete,editcod,piece_entete
+   donnee=entetepiece,editcod,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -7307,7 +7396,7 @@
    id=292
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtyp,piece_entete,1
+   donnee=entetepiece,adrtyp,piece_entete,1
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -7332,7 +7421,7 @@
    id=293
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtiers,piece_entete,1
+   donnee=entetepiece,adrtiers,piece_entete,1
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7356,7 +7445,7 @@
    id=294
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrcod,piece_entete,1
+   donnee=entetepiece,adrcod,piece_entete,1
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7535,7 +7624,7 @@
    id=302
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtyp,piece_entete,2
+   donnee=entetepiece,adrtyp,piece_entete,2
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -7560,7 +7649,7 @@
    id=303
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtiers,piece_entete,2
+   donnee=entetepiece,adrtiers,piece_entete,2
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7584,7 +7673,7 @@
    id=304
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrcod,piece_entete,2
+   donnee=entetepiece,adrcod,piece_entete,2
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7986,7 +8075,7 @@
    id=312
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtyp,piece_entete,3
+   donnee=entetepiece,adrtyp,piece_entete,3
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -8011,7 +8100,7 @@
    id=313
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtiers,piece_entete,3
+   donnee=entetepiece,adrtiers,piece_entete,3
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -8035,7 +8124,7 @@
    id=314
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrcod,piece_entete,3
+   donnee=entetepiece,adrcod,piece_entete,3
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -8240,7 +8329,7 @@
    id=326
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtyp,piece_entete,4
+   donnee=entetepiece,adrtyp,piece_entete,4
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -8265,7 +8354,7 @@
    id=327
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrtiers,piece_entete,4
+   donnee=entetepiece,adrtiers,piece_entete,4
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -8289,7 +8378,7 @@
    id=328
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,adrcod,piece_entete,4
+   donnee=entetepiece,adrcod,piece_entete,4
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -9891,7 +9980,7 @@
    id=457
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,txtcodd,piece_entete
+   donnee=entetepiece,txtcodd,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -9905,7 +9994,7 @@
    id=458
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,txtnoted,piece_entete
+   donnee=entetepiece,txtnoted,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -9919,7 +10008,7 @@
    id=459
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cenote,piece_entete
+   donnee=entetepiece,cenote,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -9933,7 +10022,7 @@
    id=460
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,note,piece_entete
+   donnee=entetepiece,note,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -9947,7 +10036,7 @@
    id=461
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce1,piece_entete
+   donnee=entetepiece,ce1,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -9961,7 +10050,7 @@
    id=462
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce2,piece_entete
+   donnee=entetepiece,ce2,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -9975,7 +10064,7 @@
    id=463
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce3,piece_entete
+   donnee=entetepiece,ce3,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -9989,7 +10078,7 @@
    id=464
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce4,piece_entete
+   donnee=entetepiece,ce4,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10003,7 +10092,7 @@
    id=465
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce5,piece_entete
+   donnee=entetepiece,ce5,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10017,7 +10106,7 @@
    id=466
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce6,piece_entete
+   donnee=entetepiece,ce6,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10031,7 +10120,7 @@
    id=467
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce7,piece_entete
+   donnee=entetepiece,ce7,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10045,7 +10134,7 @@
    id=468
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce8,piece_entete
+   donnee=entetepiece,ce8,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10059,7 +10148,7 @@
    id=469
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ce9,piece_entete
+   donnee=entetepiece,ce9,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10073,7 +10162,7 @@
    id=470
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cea,piece_entete
+   donnee=entetepiece,cea,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10087,7 +10176,7 @@
    id=471
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ceb,piece_entete
+   donnee=entetepiece,ceb,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10101,7 +10190,7 @@
    id=472
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cec,piece_entete
+   donnee=entetepiece,cec,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10115,7 +10204,7 @@
    id=473
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,ced,piece_entete
+   donnee=entetepiece,ced,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10129,7 +10218,7 @@
    id=474
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cee,piece_entete
+   donnee=entetepiece,cee,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10143,7 +10232,7 @@
    id=475
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cef,piece_entete
+   donnee=entetepiece,cef,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10157,7 +10246,7 @@
    id=476
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,txtcodf,piece_entete
+   donnee=entetepiece,txtcodf,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10171,7 +10260,7 @@
    id=477
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,txtnotef,piece_entete
+   donnee=entetepiece,txtnotef,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10185,7 +10274,7 @@
    id=478
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cejoint,piece_entete
+   donnee=entetepiece,cejoint,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10198,7 +10287,7 @@
    id=479
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,joint,piece_entete
+   donnee=entetepiece,joint,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10211,7 +10300,7 @@
    id=480
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,status,piece_entete
+   donnee=entetepiece,status,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10224,7 +10313,7 @@
    id=481
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,final,piece_entete
+   donnee=entetepiece,final,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10237,7 +10326,7 @@
    id=482
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,usercr,piece_entete
+   donnee=entetepiece,usercr,piece_entete
    format="1"
    saisie=non
   [param_saisie]
@@ -10251,7 +10340,7 @@
    id=483
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,usermo,piece_entete
+   donnee=entetepiece,usermo,piece_entete
    format="1"
    saisie=non
   [param_saisie]
@@ -10265,7 +10354,7 @@
    id=484
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,usercrdh,piece_entete
+   donnee=entetepiece,usercrdh,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa+hh:mm:ss
@@ -10278,7 +10367,7 @@
    id=485
    wstyle="CHAMP_AFF"
   [description]
-   donnee=piece_entete,usermodh,piece_entete
+   donnee=entetepiece,usermodh,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa+hh:mm:ss
@@ -10291,7 +10380,7 @@
    id=486
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,origine,piece_entete
+   donnee=entetepiece,origine,piece_entete
    minmaj=majuscules
    saisie=non
   [param_saisie]
@@ -10308,7 +10397,7 @@
    colonnes_saisie=8
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,cdnopere,piece_entete
+   donnee=entetepiece,cdnopere,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10323,7 +10412,7 @@
    colonnes_saisie=8
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,blasno,piece_entete
+   donnee=entetepiece,blasno,piece_entete
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10338,7 +10427,7 @@
    colonnes_saisie=20
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,configurateurformulaire,piece_entete
+   donnee=entetepiece,configurateurformulaire,piece_entete
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
@@ -10351,7 +10440,7 @@
    colonnes_saisie=8
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,configurateurpino,piece_entete
+   donnee=entetepiece,configurateurpino,piece_entete
   [param_saisie]
    type_date=jj/mm/aaaa
    esp_si_zero=oui
@@ -10364,7 +10453,7 @@
    id=1417
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,configurateurmonostatus,piece_entete
+   donnee=entetepiece,configurateurmonostatus,piece_entete
   [param_saisie]
    esp_si_zero=oui
   [param_multi]
@@ -10378,7 +10467,7 @@
    id=1418
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=piece_entete,configurateurmultistatus,piece_entete
+   donnee=entetepiece,configurateurmultistatus,piece_entete
   [param_saisie]
    esp_si_zero=oui
   [param_multi]
@@ -10633,10 +10722,10 @@
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez400_sql.dhsf 35431 2013-11-15 11:50:30Z jf $')
-
+SetModuleInfo('$Id: gtez400_sql.dhsf 50066 2015-09-29 13:54:49Z lk $')
 
 include 'GTTC000.dhsp'
+module "gttz400_sql.dhop"
 
 public hfile	gtfdd.dhsd	GTFTAB	GTFTAB
 public hfile	gtfdd.dhsd	GTFPCF	GTFPCF	
@@ -10655,11 +10744,13 @@ Public Record "ccfdd.dhsd" ca ca
 Public Record "gtfdd.dhsd" ets ets
 Public Record "ddsys.dhsd" rowinfo zoomselection
 Public Record "gtfdd.dhsd" ent piece_sel
-Public RecordSql "gtrspce.dhoq" piece_entete piece_entete
+Public RecordSql 'GTRSPCE.dhoq' EntetePiece Piece_Entete
+Public Record "gtfdd.dhsd" ent ent
 
 Const	C_Pilote_ParPiece			= 1
 Const	C_Pilote_ParPieceEtat	= 2
 Const	C_Pilote_ParTiers			= 3
+Const	C_Pilote_ParAffaire		= 4
 
 ;*
 ;* séquences liées au masque
@@ -10667,7 +10758,7 @@ Const	C_Pilote_ParTiers			= 3
 
 public procedure Champ_Ticod_1_Av	; avant donnée sélection clé paramètre = ' ' ou 3 saisie autorisée
 beginp
-	if G7.Zoompar in (C_Pilote_ParPiece,C_Pilote_ParPieceEtat,C_Pilote_ParTiers)
+	if G7.Zoompar in (C_Pilote_ParPiece,C_Pilote_ParPieceEtat,C_Pilote_ParTiers, C_Pilote_ParAffaire)
 		Harmony.Retour = Xmenext_Saut_Donnee
 	endif
 endp
@@ -10710,6 +10801,49 @@ beginp
 		endif
 	endif
 endp
+
+;*
+Public Procedure Champ_PiCod_1_Ap
+;
+Beginp
+	Maj_Interface_Variable
+Endp
+
+
+;*
+Public Procedure Champ_Projet_1_Ap
+;
+1		i						2,0
+1		Tiers					>gtfdd.dhsd Tiers
+1		rz						L						; Résultat zoom
+1		TypeProjetAffaire	1,0		; retour de fonction pour identifier code projet ou affaire
+Beginp
+	If Harmony.Key = K_F8
+			Switch Piece_sel.PiCod
+				case Piece_sel.Ticod = 'F'    |	rz = Zoom_Call(9500)
+				Case 1								|	rz = Zoom_Call(9843)
+				Default								|	rz = Zoom_Call(9868)
+	 		EndSwitch
+			If rz <> E_ZOOM_OK	|	PReturn	|	EndIf
+	EndIf
+	If Harmony.Key = K_SF8 and Piece_sel.PiCod = 1
+		rz = Zoom_Call(9868)
+		If rz <> E_ZOOM_OK	|	PReturn	|	EndIf
+	endif
+
+	if piece_sel.TiCod in ('P','C')
+		tiers = piece_sel.Tiers
+	else
+		tiers=  ' '
+	endif
+	TypeProjetAffaire = 2
+	if ((piece_sel.PiCod = 1) and (Controle_Projet_Ou_Affaire(piece_sel.Projet,5005,tiers,conf=false,niv=1,TypeTable=TypeProjetAffaire) = 0))	 \
+		or ((piece_sel.PiCod <> 1) and (Controle_Affaire(piece_sel.Projet, 5000, tiers, conf=false,niv=1) = 0))
+	else 
+		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
+	endif
+Endp
+
 
 ;*
 Public Procedure Champ_Tiers_2_Ap

@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20161011151411      
+;>xwin4obj                              7.0       20161207162004      
 [masque]
  libelle="Article"
  utilisateur="UGIE"
- date_modification="11/10/2016"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=882
  type_masque=2
  dernier_id=1000026
  surcharge=oui
- date_modif_base="20131126145259"
+ date_modif_base="20151007172851"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -24,11 +24,13 @@
   shift_f6=10000
 [enregistrements]
  "gtrsart.dhoq",,article,article,1024,1
- "gtfdd.dhsd",,art,art_sel,1700,0
- "gtfdd.dhsd",,g7,g7,4510,0
- "gtfdd.dhsd",,soc,soc,2800,0
- "ccfdd.dhsd",,ca,ca,1350,0
+ "gtrsdos.dhoq",,dossier,dossier,1024,1
+ "gtfdd.dhsd",,soc,soc,3500,0
+ "gtfdd.dhsd",,art,art_sel,2500,0
+ "gtfdd.dhsd",,g7,g7,4800,0
+ "ccfdd.dhsd",,ca,ca,1700,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
+ "gtrsart.dhoq",,artreappro,artreappro,1024,1
 [onglet]
  [presentation]
   position=0,0
@@ -142,6 +144,36 @@
    donnee=rowinfo,rowinfo,zoomselection
    minmaj=majuscules
    saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=86,4
+    taille=18,36
+    noms="icpfl"
+    id=1359
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=article,icpfl,article
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#TBLICP"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
     position=117,184
@@ -608,7 +640,6 @@
    [description]
     donnee=article,gricod,article
    [param_saisie]
-    type_date=jj/mm/aaaa
     table_associee=oui
    [touches]
     f5=5003
@@ -979,7 +1010,6 @@
    [description]
     donnee=article,poiun,article
    [param_saisie]
-    type_date=jj/mm/aaaa
     table_associee=oui
    [touches]
     f5=5003
@@ -2063,6 +2093,7 @@
    [description]
     donnee=article,cptv,article
    [param_saisie]
+    obligatoire=oui
     table_associee=oui
    [touches]
     f1=1
@@ -2081,7 +2112,6 @@
    texte="Compte de vente"
    [param_colonne]
     titre="Compte vente"
-    fl_aff=non
     largeur_col=43
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -2095,6 +2125,7 @@
    [description]
     donnee=article,cpta,article
    [param_saisie]
+    obligatoire=oui
     table_associee=oui
    [touches]
     f1=1
@@ -2113,7 +2144,6 @@
    texte="Compte d'achat"
    [param_colonne]
     titre="Compte achat"
-    fl_aff=non
     largeur_col=48
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -2122,6 +2152,7 @@
    [presentation]
     position=51,108
     taille=10,36
+    noms="izy"
     id=1184
     colonnes_saisie=8
     wstyle="TABLEAU_SAISI"
@@ -2155,6 +2186,7 @@
    [presentation]
     position=60,108
     taille=10,36
+    noms="izy"
     id=1185
     colonnes_saisie=8
     wstyle="TABLEAU_SAISI"
@@ -2193,6 +2225,7 @@
    [description]
     donnee=article,cpts,article
    [param_saisie]
+    obligatoire=oui
     table_associee=oui
    [touches]
     f1=1
@@ -2211,7 +2244,6 @@
    texte="Compte de stock"
    [param_colonne]
     titre="Compte stock"
-    fl_aff=non
     largeur_col=42
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -2509,6 +2541,33 @@
     titre="#refzonn"
     fl_aff=non
     largeur_col=62
+    wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=68,10
+    taille=9,155
+    id=1351
+    wstyle="TABLEAU_SAISI"
+   [description]
+    donnee=article,revuart,article
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","NONOUI"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+    diva_apres="Champ_RevuArt_1_Ap"
+   [param_colonne]
+    titre="Article en revue"
+    fl_aff=non
+    largeur_col=56
     wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
@@ -2993,6 +3052,7 @@
    [presentation]
     position=92,161
     taille=9,6
+    noms="izy"
     id=1290
     colonnes_saisie=1
     wstyle="TABLEAU_SAISI"
@@ -3022,6 +3082,7 @@
    [presentation]
     position=100,171
     taille=9,30
+    noms="izy"
     id=1291
     colonnes_saisie=8
     wstyle="TABLEAU_SAISI"
@@ -3051,6 +3112,7 @@
    [presentation]
     position=84,119
     taille=9,16
+    noms="izy"
     id=1292
     colonnes_saisie=4
     wstyle="TABLEAU_SAISI"
@@ -3104,6 +3166,7 @@
    [presentation]
     position=99,139
     taille=9,19
+    noms="izy"
     id=1294
     colonnes_saisie=6
     wstyle="TABLEAU_SAISI"
@@ -3132,6 +3195,7 @@
    [presentation]
     position=91,154
     taille=9,30
+    noms="izy"
     id=1295
     wstyle="TABLEAU_SAISI"
    [description]
@@ -3160,6 +3224,7 @@
    [presentation]
     position=94,161
     taille=9,19
+    noms="izy"
     id=1296
     colonnes_saisie=6
     wstyle="TABLEAU_SAISI"
@@ -3216,6 +3281,7 @@
    [presentation]
     position=134,10
     taille=9,157
+    noms="izy"
     id=1321
     wstyle="TABLEAU_AFF"
    [description]
@@ -3245,6 +3311,7 @@
    [presentation]
     position=144,75
     taille=9,46
+    noms="izy"
     id=1322
     wstyle="TABLEAU_AFF"
    [description]
@@ -3271,6 +3338,7 @@
    [presentation]
     position=159,75
     taille=9,46
+    noms="izy"
     id=1323
     colonnes_saisie=13
     wstyle="TABLEAU_AFF"
@@ -3297,6 +3365,7 @@
    [presentation]
     position=134,265
     taille=9,20
+    noms="izy"
     id=1324
     colonnes_saisie=3
     wstyle="TABLEAU_AFF"
@@ -3323,6 +3392,7 @@
    [presentation]
     position=146,265
     taille=9,20
+    noms="izy"
     id=1325
     colonnes_saisie=3
     wstyle="TABLEAU_AFF"
@@ -3349,6 +3419,7 @@
    [presentation]
     position=158,265
     taille=9,20
+    noms="izy"
     id=1326
     colonnes_saisie=3
     wstyle="TABLEAU_AFF"
@@ -3375,6 +3446,7 @@
    [presentation]
     position=170,265
     taille=9,20
+    noms="izy"
     id=1327
     colonnes_saisie=3
     wstyle="TABLEAU_AFF"
@@ -3401,6 +3473,7 @@
    [presentation]
     position=278,136
     taille=9,25
+    noms="izy"
     id=1346
     colonnes_saisie=9
     wstyle="TABLEAU_SAISI"
@@ -3967,6 +4040,31 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=36,109
+   taille=9,89
+   noms="pilotage;validite"
+   id=1354
+   wstyle="STD"
+  [description]
+   donnee=g7,choix2,g7,2
+   minmaj=majuscules
+  [param_case]
+   texte="Uniquement les articles en revue"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=1458
+   fichier="gtfaide"
+  [touches]
+   f3=1
+   f7=135
+   insert=1
+   ctrl_f=31
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
 [page]
  numero=4
  fond="STD"
@@ -4325,18 +4423,21 @@
    shift_ctrl_f5=1
   [traitements]
    microbol_click=8002
- [champ]
+ [multi_choix]
   [presentation]
-   position=98,168
-   taille=9,144
-   id=1000008
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
+   position=26,168
+   taille=9,18
+   noms="icpfl"
+   id=1358
+   wstyle="STD"
   [description]
-   donnee=article,nati_lib,article
+   donnee=article,icpfl,article
    saisie=non
   [param_saisie]
-   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+   obligatoire=non
   [touches]
    f1=1
    f5=5003
@@ -4344,6 +4445,8 @@
    f7=135
    shift_f5=5005
    shift_f6=10000
+  [info_bulle]
+  texte="Synchronisé en inter-compagnies"
  [champ]
   [presentation]
    position=37,70
@@ -4674,138 +4777,6 @@
    diva_avant="Champ_GriSais_1_Av"
  [champ]
   [presentation]
-   position=108,213
-   taille=9,18
-   noms="sref"
-   id=66
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=article,gricod,article
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=1325
-   fichier="GTFAIDE"
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   f8=9071
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
-   diva_avant="Champ_GriCod_1_Av"
-   diva_apres="Champ_GriCod_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=118,70
-   taille=9,96
-   id=64
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=article,prodnat,article
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=1407
-   fichier="GTFAIDE"
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   f8=9076
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_ProdNat_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=128,70
-   taille=9,96
-   id=849
-   colonnes_saisie=8
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=article,competcod,article
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
-  [aide_page]
-   aide=1504
-   fichier="gtfaide"
-  [touches]
-   f1=1
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   f8=9113
-   ctrl_f3=9921
-   ctrl_f5=1
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_CompetCod_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
-   position=138,70
-   taille=9,96
-   id=61
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=article,refrpl,article
-  [param_saisie]
-   table_associee=oui
-  [aide_page]
-   aide=1304
-   fichier="GTFAIDE"
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   f8=9000
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
-   diva_apres="Champ_REF_1_Ap"
-  [boutons]
-   "zoom"
- [champ]
-  [presentation]
    position=177,100
    taille=9,144
    id=59
@@ -4986,6 +4957,138 @@
    shift_ctrl_f5=1
   [traitements]
    microbol_click=8002
+ [champ]
+  [presentation]
+   position=108,213
+   taille=9,18
+   noms="sref"
+   id=66
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=article,gricod,article
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=1325
+   fichier="GTFAIDE"
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   f8=9071
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_GriCod_1_Av"
+   diva_apres="Champ_GriCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=118,70
+   taille=9,96
+   id=64
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=article,prodnat,article
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=1407
+   fichier="GTFAIDE"
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   f8=9076
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_ProdNat_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=128,70
+   taille=9,96
+   id=849
+   colonnes_saisie=8
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=article,competcod,article
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1504
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   f8=9113
+   ctrl_f3=9921
+   ctrl_f5=1
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_CompetCod_1_Ap"
+  [boutons]
+   "zoom"
+ [champ]
+  [presentation]
+   position=138,70
+   taille=9,96
+   id=61
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=article,refrpl,article
+  [param_saisie]
+   table_associee=oui
+  [aide_page]
+   aide=1304
+   fichier="GTFAIDE"
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   f8=9000
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_REF_1_Ap"
+  [boutons]
+   "zoom"
  [champ]
   [presentation]
    position=167,70
@@ -5183,6 +5286,110 @@
    microbol_click=8002
  [champ]
   [presentation]
+   position=262,144
+   taille=9,144
+   id=863
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,libelle_unitesurface,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=282,223
+   taille=9,87
+   id=86
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,libelle_unitedimension,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=272,144
+   taille=9,144
+   id=87
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,libelle_unitevolume,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=138,168
+   taille=9,142
+   id=89
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,articleremplacement_des,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
    position=242,114
    taille=9,28
    id=85
@@ -5305,110 +5512,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=262,144
-   taille=9,144
-   id=863
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,libelle_unitesurface,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=282,223
-   taille=9,87
-   id=86
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,libelle_unitedimension,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=272,144
-   taille=9,144
-   id=87
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,libelle_unitevolume,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=138,168
-   taille=9,142
-   id=89
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,articleremplacement_des,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
    position=272,70
    taille=9,28
    id=90
@@ -5420,6 +5523,30 @@
   [aide_page]
    aide=1490
    fichier="GTFAIDE"
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=167,100
+   taille=9,144
+   id=96
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,libelle_unitereference,article
+   saisie=non
   [touches]
    f3=9881
    f5=5003
@@ -5526,6 +5653,25 @@
    microbol_click=8002
  [champ]
   [presentation]
+   position=98,168
+   taille=9,144
+   id=1000008
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
+  [description]
+   donnee=article,nati_lib,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=282,158
    taille=9,28
    id=94
@@ -5537,30 +5683,6 @@
   [aide_page]
    aide=1369
    fichier="GTFAIDE"
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=167,100
-   taille=9,144
-   id=96
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,libelle_unitereference,article
-   saisie=non
   [touches]
    f3=9881
    f5=5003
@@ -5910,8 +6032,9 @@
    id=73
    wstyle="CHAMP_AFF"
   [description]
-   donnee=soc,famlib,soc,1
+   donnee=dossier,famlib,dossier,1
    saisie=non
+   multilingue=oui
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
@@ -5937,8 +6060,9 @@
    id=75
    wstyle="CHAMP_AFF"
   [description]
-   donnee=soc,famlib,soc,2
+   donnee=dossier,famlib,dossier,2
    saisie=non
+   multilingue=oui
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
@@ -5964,8 +6088,9 @@
    id=77
    wstyle="CHAMP_AFF"
   [description]
-   donnee=soc,famlib,soc,3
+   donnee=dossier,famlib,dossier,3
    saisie=non
+   multilingue=oui
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
@@ -6073,7 +6198,7 @@
    colonnes_saisie=4
    wstyle="CHAMP_AFF_GRAS"
   [description]
-   donnee=soc,dev,soc
+   donnee=dossier,dev,dossier
    saisie=non
   [touches]
    f1=1
@@ -6091,7 +6216,7 @@
    colonnes_saisie=4
    wstyle="CHAMP_AFF_GRAS"
   [description]
-   donnee=soc,dev,soc
+   donnee=dossier,dev,dossier
    saisie=non
   [touches]
    f1=1
@@ -6979,7 +7104,7 @@
   [presentation]
    position=280,166
    taille=9,66
-   id=1347
+   id=1353
    wstyle="STD"
   [texte]
    texte="Par en"
@@ -7024,7 +7149,7 @@
    colonnes_saisie=4
    wstyle="CHAMP_AFF_TITREGROUPE"
   [description]
-   donnee=soc,dev,soc
+   donnee=dossier,dev,dossier
    saisie=non
   [touches]
    f1=1
@@ -7665,6 +7790,7 @@
    shift_ctrl_f3=1
    shift_ctrl_f5=1
   [traitements]
+   microbol_apres=5037
    microbol_click=8002
    diva_apres="Champ_Tiers_1_Ap"
   [boutons]
@@ -7780,7 +7906,7 @@
  [champ]
   [presentation]
    position=260,88
-   taille=9,55
+   taille=9,56
    id=1275
    colonnes_saisie=13
    wstyle="CHAMP_NON_SAISI"
@@ -7863,7 +7989,7 @@
   [presentation]
    position=281,254
    taille=9,56
-   id=1348
+   id=1352
    colonnes_saisie=12
    wstyle="CHAMP_NON_SAISI"
   [description]
@@ -7936,8 +8062,9 @@
   fichier="gtfaide"
  [groupbox]
   [presentation]
-   position=231,5
+   position=230,5
    taille=59,310
+   noms="izy"
    id=1280
    wstyle="GROUPE"
   [param_groupbox]
@@ -7945,21 +8072,12 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=99,5
+   position=102,5
    taille=84,151
    id=158
    wstyle="GROUPE"
   [param_groupbox]
    texte="Inventaire"
-   couleur_fond="GROUPE_FOND"
- [groupbox]
-  [presentation]
-   position=188,5
-   taille=38,310
-   id=1030
-   wstyle="GROUPE"
-  [param_groupbox]
-   texte="Configurateur"
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
@@ -7981,7 +8099,17 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=99,164
+   position=194,5
+   taille=28,310
+   noms="titre_rso"
+   id=1355
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Règles de réapprovisionnement"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=102,164
    taille=57,151
    id=157
    wstyle="GROUPE"
@@ -8072,7 +8200,7 @@
    texte="Rang ABC"
  [obj_texte]
   [presentation]
-   position=144,169
+   position=145,169
    taille=9,99
    id=175
    wstyle="STD"
@@ -8080,7 +8208,7 @@
    texte="Code impression"
  [obj_texte]
   [presentation]
-   position=171,10
+   position=174,10
    taille=9,43
    id=173
    wstyle="STD"
@@ -8096,56 +8224,53 @@
    texte="Coef. diviseur points fidélité"
  [obj_texte]
   [presentation]
-   position=204,10
-   taille=9,77
-   id=1028
+   position=210,10
+   taille=9,125
+   id=1356
    wstyle="STD"
   [texte]
-   texte="Chemin du configurateur"
+   texte="Réapprovisionnement"
  [obj_texte]
   [presentation]
-   position=214,10
-   taille=9,77
-   id=1034
-   wstyle="STD"
-  [texte]
-   texte="Formulaire"
- [obj_texte]
-  [presentation]
-   position=248,10
+   position=247,10
    taille=9,124
+   noms="izy"
    id=1286
    wstyle="STD"
   [texte]
    texte="Unité de manutention"
  [obj_texte]
   [presentation]
-   position=258,169
+   position=257,169
    taille=9,99
+   noms="izy"
    id=1281
    wstyle="STD"
   [texte]
    texte="Coefficient de foisonnement"
  [obj_texte]
   [presentation]
-   position=268,10
+   position=267,10
    taille=9,124
+   noms="izy"
    id=1283
    wstyle="STD"
   [texte]
    texte="Nombre de colis nécessaire hors gabarit"
  [obj_texte]
   [presentation]
-   position=268,169
+   position=267,169
    taille=9,99
+   noms="izy"
    id=1278
    wstyle="STD"
   [texte]
    texte="Type ABC"
  [obj_texte]
   [presentation]
-   position=278,10
+   position=277,10
    taille=9,124
+   noms="izy"
    id=1343
    wstyle="STD"
   [texte]
@@ -8281,33 +8406,7 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=204,166
-   taille=9,144
-   id=1033
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,cheminconfigurateur,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=9881
-   f5=5003
-   f6=5000
-   f7=135
-   ctrl_f3=9921
-   ctrl_f5=1
-   ctrl_f6=10300
-   shift_f3=9919
-   shift_f5=5005
-   shift_f6=10000
-   shift_ctrl_f3=9923
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=171,55
+   position=174,55
    taille=9,35
    id=181
    wstyle="CHAMP_NON_SAISI"
@@ -8466,7 +8565,7 @@
    microbol_click=8002
  [groupe_radio]
   [presentation]
-   position=115,10
+   position=118,10
    taille=52,80
    id=187
    wstyle="STD"
@@ -8477,7 +8576,7 @@
    titre="Valorisation de l'inventaire"
   [radio_bouton]
    [presentation]
-    position=124,15
+    position=127,15
     taille=9,74
     id=188
     wstyle="STD"
@@ -8487,7 +8586,7 @@
     valeur="1"
   [radio_bouton]
    [presentation]
-    position=134,15
+    position=137,15
     taille=9,74
     id=189
     wstyle="STD"
@@ -8497,7 +8596,7 @@
     valeur="2"
   [radio_bouton]
    [presentation]
-    position=144,15
+    position=147,15
     taille=9,74
     id=190
     wstyle="STD"
@@ -8507,7 +8606,7 @@
     valeur="3"
   [radio_bouton]
    [presentation]
-    position=154,15
+    position=157,15
     taille=9,74
     id=191
     wstyle="STD"
@@ -8535,7 +8634,7 @@
    microbol_click=8002
  [groupe_radio]
   [presentation]
-   position=115,98
+   position=118,98
    taille=52,51
    id=192
    wstyle="STD"
@@ -8546,7 +8645,7 @@
    titre="Sortie de stock"
   [radio_bouton]
    [presentation]
-    position=124,103
+    position=127,103
     taille=9,45
     id=193
     wstyle="STD"
@@ -8556,7 +8655,7 @@
     valeur="1"
   [radio_bouton]
    [presentation]
-    position=134,103
+    position=137,103
     taille=9,45
     id=194
     wstyle="STD"
@@ -8566,7 +8665,7 @@
     valeur="2"
   [radio_bouton]
    [presentation]
-    position=144,103
+    position=147,103
     taille=9,45
     id=195
     wstyle="STD"
@@ -8576,7 +8675,7 @@
     valeur="3"
   [radio_bouton]
    [presentation]
-    position=154,103
+    position=157,103
     taille=9,45
     id=196
     wstyle="STD"
@@ -8604,7 +8703,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=114,169
+   position=115,169
    taille=9,63
    id=1000018
    wstyle="COG_CHAMP_SAISI"
@@ -8626,7 +8725,7 @@
    diva_avant="Champ_Cog_Generique_1_Av"
  [case_a_cocher]
   [presentation]
-   position=124,169
+   position=125,169
    taille=9,145
    id=197
    wstyle="STD"
@@ -8657,7 +8756,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=134,169
+   position=135,169
    taille=9,145
    id=198
    wstyle="STD"
@@ -8688,7 +8787,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=144,270
+   position=145,270
    taille=9,32
    id=199
    wstyle="CHAMP_SAISI"
@@ -8739,56 +8838,35 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
- [champ]
+ [multi_choix]
   [presentation]
-   position=204,87
-   taille=9,75
-   id=1029
-   colonnes_saisie=20
+   position=210,136
+   taille=9,166
+   noms="reappro_ctm"
+   id=1357
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=article,configurateurchemincod,article
+   donnee=artreappro,reacod,artreappro
+   minmaj=majuscules
   [param_saisie]
-   type_date=jj/mm/aaaa
-   table_associee=oui
+   esp_si_zero=oui
+  [param_multi]
+   ouverture=oui
+   choix="gtfdmc.dhfi","REACOD"
   [aide_page]
-   aide=1509
-   fichier="gtfaide"
+   aide=1403
+   fichier="GTFAIDE"
   [touches]
-   f1=1
-   f5=5003
-   f6=5000
    f7=135
-   f8=11102
-   shift_f5=5005
    shift_f6=10000
   [traitements]
-   diva_apres="Champ_CheminCod_1_Ap"
+   microbol_click=8002
+   diva_apres="Champ_Reacod_1_Ap"
  [champ]
   [presentation]
-   position=214,87
-   taille=9,75
-   id=1035
-   colonnes_saisie=20
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=article,configurateurformulaire,article
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [aide_page]
-   aide=1509
-   fichier="gtfaide"
-  [touches]
-   f1=1
-   f5=5003
-   f6=5000
-   f7=135
-   shift_f5=5005
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=248,136
+   position=247,136
    taille=9,25
+   noms="izy"
    id=1287
    colonnes_saisie=4
    wstyle="CHAMP_SAISI"
@@ -8811,8 +8889,9 @@
    "zoom"
  [case_a_cocher]
   [presentation]
-   position=258,10
+   position=257,10
    taille=9,124
+   noms="izy"
    id=1284
    wstyle="STD"
   [description]
@@ -8832,8 +8911,9 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=268,136
+   position=267,136
    taille=9,25
+   noms="izy"
    id=1285
    colonnes_saisie=6
    wstyle="CHAMP_SAISI"
@@ -8854,8 +8934,9 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=278,136
+   position=277,136
    taille=9,25
+   noms="izy"
    id=1344
    colonnes_saisie=9
    wstyle="CHAMP_SAISI"
@@ -8873,10 +8954,54 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=277,169
+   taille=9,144
+   noms="izy"
+   id=1347
+   wstyle="STD"
+  [description]
+   donnee=article,wmreapfroidfl,article
+  [param_case]
+   texte="Eligible au réapprovisionnement à froid"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
-   position=258,270
+   position=247,166
+   taille=9,147
+   noms="izy"
+   id=1289
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,libelle_unitemanutention,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=257,270
    taille=9,32
+   noms="izy"
    id=1282
    colonnes_saisie=6
    wstyle="CHAMP_SAISI"
@@ -8896,8 +9021,9 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=268,270
+   position=267,270
    taille=9,32
+   noms="izy"
    id=1279
    colonnes_saisie=8
    wstyle="CHAMP_SAISI"
@@ -8919,25 +9045,6 @@
    diva_apres="Champ_StLgtAbcCod_1_Ap"
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=248,166
-   taille=9,147
-   id=1289
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,libelle_unitemanutention,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=5003
-   f6=5000
-   f7=135
-   shift_f5=5005
-   shift_f6=10000
 [page]
  numero=15
  fond="STD"
@@ -8961,12 +9068,22 @@
   fichier="gtfaide"
  [groupbox]
   [presentation]
-   position=117,5
+   position=164,5
    taille=92,310
+   noms="izy"
    id=1298
    wstyle="GROUPE"
   [param_groupbox]
    texte="Plan directeur de production"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=118,5
+   taille=38,310
+   id=1030
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Configurateur"
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
@@ -8979,8 +9096,8 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=40,164
-   taille=70,151
+   position=40,166
+   taille=70,149
    id=1036
    wstyle="GROUPE"
   [param_groupbox]
@@ -8988,8 +9105,9 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=134,164
+   position=181,164
    taille=70,147
+   noms="izy"
    id=1330
    wstyle="GROUPE"
   [param_groupbox]
@@ -9053,72 +9171,97 @@
    texte="jours"
  [obj_texte]
   [presentation]
-   position=146,10
-   taille=9,63
+   position=134,10
+   taille=9,77
+   id=1028
+   wstyle="STD"
+  [texte]
+   texte="Chemin du configurateur"
+ [obj_texte]
+  [presentation]
+   position=144,10
+   taille=9,77
+   id=1034
+   wstyle="STD"
+  [texte]
+   texte="Formulaire"
+ [obj_texte]
+  [presentation]
+   position=193,10
+   taille=9,75
+   noms="izy"
    id=1302
    wstyle="STD"
   [texte]
    texte="Période"
  [obj_texte]
   [presentation]
-   position=152,169
+   position=199,169
    taille=9,94
+   noms="izy"
    id=1305
    wstyle="STD"
   [texte]
    texte="Délai d'obtention"
  [obj_texte]
   [presentation]
-   position=158,10
-   taille=9,63
+   position=205,10
+   taille=9,75
+   noms="izy"
    id=1312
    wstyle="STD"
   [texte]
    texte="Taille de lot"
  [obj_texte]
   [presentation]
-   position=164,169
+   position=211,169
    taille=9,94
+   noms="izy"
    id=1310
    wstyle="STD"
   [texte]
    texte="Horizon ferme"
  [obj_texte]
   [presentation]
-   position=170,10
+   position=217,10
    taille=9,151
+   noms="izy"
    id=1331
    wstyle="STD"
   [texte]
    texte="Ecart maximum entre commande ferme et"
  [obj_texte]
   [presentation]
-   position=176,169
+   position=223,169
    taille=9,94
+   noms="izy"
    id=1311
    wstyle="STD"
   [texte]
    texte="Horizon négociable"
  [obj_texte]
   [presentation]
-   position=180,10
-   taille=9,63
+   position=227,10
+   taille=9,75
+   noms="izy"
    id=1332
    wstyle="STD"
   [texte]
    texte="prévision de vente"
  [obj_texte]
   [presentation]
-   position=180,95
-   taille=9,65
+   position=227,106
+   taille=9,16
+   noms="izy"
    id=1333
    wstyle="STD"
   [texte]
    texte="%"
  [obj_texte]
   [presentation]
-   position=188,169
+   position=235,169
    taille=9,94
+   noms="izy"
    id=1313
    wstyle="STD"
   [texte]
@@ -9203,18 +9346,19 @@
    shift_f6=10000
    shift_ctrl_f3=1
    shift_ctrl_f5=1
- [champ]
+ [case_a_cocher]
   [presentation]
-   position=86,112
-   taille=9,20
-   id=790
-   colonnes_saisie=3
-   wstyle="CHAMP_SAISI"
+   position=96,15
+   taille=9,71
+   id=789
+   wstyle="STD"
   [description]
-   donnee=article,rejalofjrnb,article
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
+   donnee=article,rejalcde,article
+  [param_case]
+   texte="d'une commande"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
   [aide_page]
    aide=1118
    fichier="GGFAIDE"
@@ -9231,19 +9375,18 @@
    shift_f6=10000
    shift_ctrl_f3=1
    shift_ctrl_f5=1
- [case_a_cocher]
+ [champ]
   [presentation]
-   position=96,15
-   taille=9,71
-   id=789
-   wstyle="STD"
+   position=86,112
+   taille=9,20
+   id=790
+   colonnes_saisie=3
+   wstyle="CHAMP_SAISI"
   [description]
-   donnee=article,rejalcde,article
-  [param_case]
-   texte="d'une commande"
-   cadrage=droite
-   valeur="2","1"
-   choix="gtfdmc.dhfi",""
+   donnee=article,rejalofjrnb,article
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
   [aide_page]
    aide=1118
    fichier="GGFAIDE"
@@ -9290,8 +9433,8 @@
    shift_ctrl_f5=1
  [case_a_cocher]
   [presentation]
-   position=56,169
-   taille=9,145
+   position=56,171
+   taille=9,144
    id=1038
    wstyle="STD"
   [description]
@@ -9316,8 +9459,8 @@
    diva_avant="Champ_SMCFl_1_Av"
  [case_a_cocher]
   [presentation]
-   position=66,169
-   taille=9,145
+   position=66,171
+   taille=9,144
    id=1039
    wstyle="STD"
   [description]
@@ -9340,10 +9483,57 @@
   [traitements]
    microbol_click=8002
    diva_avant="Champ_SMCVisuFl_1_Av"
+ [champ]
+  [presentation]
+   position=134,87
+   taille=9,75
+   id=1029
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=article,configurateurchemincod,article
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   table_associee=oui
+  [aide_page]
+   aide=1509
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   f8=11102
+   shift_f5=5005
+   shift_f6=10000
+  [traitements]
+   diva_apres="Champ_CheminCod_1_Ap"
+ [champ]
+  [presentation]
+   position=144,87
+   taille=9,75
+   id=1035
+   colonnes_saisie=20
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=article,configurateurformulaire,article
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [aide_page]
+   aide=1509
+   fichier="gtfaide"
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=134,10
-   taille=9,145
+   position=181,10
+   taille=9,151
+   noms="izy"
    id=1299
    wstyle="STD"
   [description]
@@ -9365,8 +9555,9 @@
    shift_f6=10000
  [multi_choix]
   [presentation]
-   position=146,75
+   position=193,86
    taille=9,46
+   noms="izy"
    id=1300
    wstyle="CHAMP_SAISI"
   [description]
@@ -9387,46 +9578,9 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=158,75
-   taille=9,46
-   id=1308
-   colonnes_saisie=13
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=article,pdplotqte,article
-  [param_saisie]
-   type_date=jj/mm/aaaa
-   esp_si_zero=oui
-  [aide_page]
-   aide=1400
-   fichier="GGFAIDE"
-  [touches]
-   f1=1
-   f5=5003
-   f6=5000
-   f7=135
-   shift_f5=5005
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=180,75
-   taille=9,18
-   id=1334
-   colonnes_saisie=4
-   wstyle="CHAMP_SAISI"
-  [description]
-   donnee=article,pdpecartmax,article
-  [param_saisie]
-   esp_si_zero=oui
-  [aide_page]
-   aide=1400
-   fichier="GGFAIDE"
-  [touches]
-   f7=135
- [champ]
-  [presentation]
-   position=152,265
+   position=199,265
    taille=9,20
+   noms="izy"
    id=1304
    colonnes_saisie=3
    wstyle="CHAMP_SAISI"
@@ -9447,8 +9601,32 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=164,265
+   position=205,86
+   taille=9,46
+   noms="izy"
+   id=1308
+   colonnes_saisie=13
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=article,pdplotqte,article
+  [param_saisie]
+   type_date=jj/mm/aaaa
+   esp_si_zero=oui
+  [aide_page]
+   aide=1400
+   fichier="GGFAIDE"
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+ [champ]
+  [presentation]
+   position=211,265
    taille=9,20
+   noms="izy"
    id=1306
    colonnes_saisie=3
    wstyle="CHAMP_SAISI"
@@ -9469,8 +9647,9 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=176,265
+   position=223,265
    taille=9,20
+   noms="izy"
    id=1307
    colonnes_saisie=3
    wstyle="CHAMP_SAISI"
@@ -9491,8 +9670,52 @@
    shift_f6=10000
  [champ]
   [presentation]
-   position=188,265
+   position=134,163
+   taille=9,151
+   id=1033
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,cheminconfigurateur,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=9881
+   f5=5003
+   f6=5000
+   f7=135
+   ctrl_f3=9921
+   ctrl_f5=1
+   ctrl_f6=10300
+   shift_f3=9919
+   shift_f5=5005
+   shift_f6=10000
+   shift_ctrl_f3=9923
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=227,86
+   taille=9,18
+   noms="izy"
+   id=1334
+   colonnes_saisie=4
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=article,pdpecartmax,article
+  [param_saisie]
+   esp_si_zero=oui
+  [aide_page]
+   aide=1400
+   fichier="GGFAIDE"
+  [touches]
+   f7=135
+ [champ]
+  [presentation]
+   position=235,265
    taille=9,20
+   noms="izy"
    id=1309
    colonnes_saisie=3
    wstyle="CHAMP_SAISI"
@@ -9700,44 +9923,6 @@
    texte="Echange intracommunautaire"
  [champ]
   [presentation]
-   position=102,146
-   taille=9,144
-   id=1000016
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=article,compteimmost_lib,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=5003
-   f6=5000
-   f7=135
-   shift_f5=5005
-   shift_f6=10000
- [champ]
-  [presentation]
-   position=92,146
-   taille=9,144
-   id=1000015
-   colonnes_saisie=40
-   wstyle="COG_CHAMP_AFF"
-  [description]
-   donnee=article,compteimmoach_lib,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f1=1
-   f5=5003
-   f6=5000
-   f7=135
-   shift_f5=5005
-   shift_f6=10000
- [champ]
-  [presentation]
    position=42,108
    taille=9,36
    id=220
@@ -9770,6 +9955,31 @@
    diva_apres="Champ_CPT_1_Ap"
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=52,146
+   taille=9,144
+   id=221
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,compteachat_lib,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f3=1
+   ctrl_f5=1
+   shift_f3=1
+   shift_f5=5001
+   shift_f6=10000
+   shift_ctrl_f3=1
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=52,108
@@ -9836,6 +10046,58 @@
    diva_apres="Champ_CPT_6_Ap"
  [champ]
   [presentation]
+   position=72,146
+   taille=9,144
+   noms="etb"
+   id=806
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,compteachatinteretb_lib,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f3=1
+   ctrl_f5=1
+   shift_f3=1
+   shift_f5=5001
+   shift_f6=10000
+   shift_ctrl_f3=1
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=62,146
+   taille=9,144
+   noms="etb"
+   id=805
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,compteventeinteretb_lib,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f3=1
+   ctrl_f5=1
+   shift_f3=1
+   shift_f5=5001
+   shift_f6=10000
+   shift_ctrl_f3=1
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
    position=72,108
    taille=9,36
    noms="etb"
@@ -9864,6 +10126,31 @@
    shift_ctrl_f5=1
   [traitements]
    diva_apres="Champ_CPT_7_Ap"
+ [champ]
+  [presentation]
+   position=82,146
+   taille=9,144
+   id=223
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,comptestock_lib,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f3=1
+   ctrl_f5=1
+   shift_f3=1
+   shift_f5=5001
+   shift_f6=10000
+   shift_ctrl_f3=1
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=82,108
@@ -9948,108 +10235,6 @@
    diva_apres="Champ_Cog_CptIS_1_Ap"
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=52,146
-   taille=9,144
-   id=221
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,compteachat_lib,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=1
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f3=1
-   ctrl_f5=1
-   shift_f3=1
-   shift_f5=5001
-   shift_f6=10000
-   shift_ctrl_f3=1
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=72,146
-   taille=9,144
-   noms="etb"
-   id=806
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,compteachatinteretb_lib,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=1
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f3=1
-   ctrl_f5=1
-   shift_f3=1
-   shift_f5=5001
-   shift_f6=10000
-   shift_ctrl_f3=1
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=62,146
-   taille=9,144
-   noms="etb"
-   id=805
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,compteventeinteretb_lib,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=1
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f3=1
-   ctrl_f5=1
-   shift_f3=1
-   shift_f5=5001
-   shift_f6=10000
-   shift_ctrl_f3=1
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=82,146
-   taille=9,144
-   id=223
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,comptestock_lib,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=1
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f3=1
-   ctrl_f5=1
-   shift_f3=1
-   shift_f5=5001
-   shift_f6=10000
-   shift_ctrl_f3=1
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
  [multi_choix]
   [presentation]
    position=115,44
@@ -10110,6 +10295,31 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_MSK_1_Ap"
+ [champ]
+  [presentation]
+   position=193,146
+   taille=9,144
+   id=609
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,compteventedeee_lib,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f3=1
+   ctrl_f5=1
+   shift_f3=1
+   shift_f5=5001
+   shift_f6=10000
+   shift_ctrl_f3=1
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=125,108
@@ -10176,31 +10386,6 @@
    "zoom"
  [champ]
   [presentation]
-   position=193,146
-   taille=9,144
-   id=609
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,compteventedeee_lib,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=1
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f3=1
-   ctrl_f5=1
-   shift_f3=1
-   shift_f5=5001
-   shift_f6=10000
-   shift_ctrl_f3=1
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
    position=145,108
    taille=9,12
    noms="tpf"
@@ -10232,6 +10417,31 @@
    microbol_click=8002
   [boutons]
    "zoom"
+ [champ]
+  [presentation]
+   position=42,146
+   taille=9,144
+   id=232
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,comptevente_lib,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f3=1
+   ctrl_f5=1
+   shift_f3=1
+   shift_f5=5001
+   shift_f6=10000
+   shift_ctrl_f3=1
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
  [champ]
   [presentation]
    position=145,120
@@ -10298,31 +10508,6 @@
    microbol_click=8002
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=42,146
-   taille=9,144
-   id=232
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=article,comptevente_lib,article
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f3=1
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f3=1
-   ctrl_f5=1
-   shift_f3=1
-   shift_f5=5001
-   shift_f6=10000
-   shift_ctrl_f3=1
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
    position=173,108
@@ -10451,6 +10636,73 @@
    "zoom"
  [champ]
   [presentation]
+   position=183,146
+   taille=9,144
+   id=610
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,libelle_unitedeee,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f3=1
+   ctrl_f5=1
+   shift_f3=1
+   shift_f5=5001
+   shift_f6=10000
+   shift_ctrl_f3=1
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=203,146
+   taille=9,144
+   id=612
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=article,compteachatdeee_lib,article
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f3=1
+   f5=5000
+   f6=5002
+   f7=135
+   ctrl_f3=1
+   ctrl_f5=1
+   shift_f3=1
+   shift_f5=5001
+   shift_f6=10000
+   shift_ctrl_f3=1
+   shift_ctrl_f5=1
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=173,146
+   taille=9,20
+   id=1273
+   colonnes_saisie=4
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=dossier,dev,dossier
+   saisie=non
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+ [champ]
+  [presentation]
    position=240,108
    taille=9,55
    id=233
@@ -10512,64 +10764,35 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=183,146
+   position=92,146
    taille=9,144
-   id=610
-   wstyle="CHAMP_AFF"
+   id=1000015
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
   [description]
-   donnee=article,libelle_unitedeee,article
+   donnee=article,compteimmoach_lib,article
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
   [touches]
-   f3=1
-   f5=5000
-   f6=5002
+   f1=1
+   f5=5003
+   f6=5000
    f7=135
-   ctrl_f3=1
-   ctrl_f5=1
-   shift_f3=1
-   shift_f5=5001
+   shift_f5=5005
    shift_f6=10000
-   shift_ctrl_f3=1
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
-   position=203,146
+   position=102,146
    taille=9,144
-   id=612
-   wstyle="CHAMP_AFF"
+   id=1000016
+   colonnes_saisie=40
+   wstyle="COG_CHAMP_AFF"
   [description]
-   donnee=article,compteachatdeee_lib,article
+   donnee=article,compteimmost_lib,article
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
-  [touches]
-   f3=1
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f3=1
-   ctrl_f5=1
-   shift_f3=1
-   shift_f5=5001
-   shift_f6=10000
-   shift_ctrl_f3=1
-   shift_ctrl_f5=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=173,146
-   taille=9,20
-   id=1273
-   colonnes_saisie=4
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=soc,dev,soc
-   saisie=non
   [touches]
    f1=1
    f5=5003
@@ -10586,6 +10809,7 @@
  offset_lig=1
  offset_col=1
  prec=16
+ suiv=18
  attache_x=oui
  attache_lgy=oui
  ident_unique=7
@@ -10599,21 +10823,21 @@
   fichier="gtfaide"
  [groupbox]
   [presentation]
+   position=52,5
+   taille=60,310
+   id=203
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Protection"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
    position=244,5
    taille=48,310
    id=200
    wstyle="GROUPE"
   [param_groupbox]
    texte="Données libres"
-   couleur_fond="GROUPE_FOND"
- [groupbox]
-  [presentation]
-   position=53,5
-   taille=48,310
-   id=203
-   wstyle="GROUPE"
-  [param_groupbox]
-   texte="Protection"
    couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
@@ -10625,7 +10849,7 @@
    texte="Descriptif HTML"
  [obj_texte]
   [presentation]
-   position=68,169
+   position=78,169
    taille=9,93
    id=216
    wstyle="STD_AFF"
@@ -10633,7 +10857,7 @@
    texte="Confidentialité"
  [obj_texte]
   [presentation]
-   position=78,169
+   position=88,169
    taille=9,93
    id=217
    wstyle="STD_AFF"
@@ -10708,7 +10932,31 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=69,12
+   position=68,10
+   taille=9,155
+   id=1348
+   wstyle="STD"
+  [description]
+   donnee=article,revuart,article
+  [param_case]
+   texte="Article en revue"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+   notifier=oui
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [traitements]
+   microbol_click=8002
+   diva_apres="Champ_RevuArt_1_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=78,10
    taille=9,155
    id=235
    wstyle="STD"
@@ -10739,7 +10987,7 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=79,12
+   position=88,10
    taille=9,155
    id=236
    wstyle="STD"
@@ -10770,8 +11018,8 @@
    microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=89,12
-   taille=9,302
+   position=98,10
+   taille=9,155
    id=237
    wstyle="STD"
   [description]
@@ -10801,7 +11049,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=68,264
+   position=78,264
    taille=9,32
    id=238
    wstyle="CHAMP_SAISI"
@@ -10833,7 +11081,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=78,264
+   position=88,264
    taille=9,32
    id=239
    wstyle="CHAMP_SAISI"
@@ -10897,7 +11145,7 @@
    id=241
    wstyle="CHAMP_AFF"
   [description]
-   donnee=soc,refzonalib,soc
+   donnee=dossier,refzonalib,dossier
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10946,7 +11194,7 @@
    id=243
    wstyle="CHAMP_AFF"
   [description]
-   donnee=soc,refzonnlib,soc
+   donnee=dossier,refzonnlib,dossier
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -10996,6 +11244,7 @@
  nb_col=80
  offset_lig=1
  offset_col=1
+ prec=17
  attache_x=oui
  attache_lgy=oui
  ident_unique=9
@@ -11399,10 +11648,12 @@
  numero=19
  fond="STD"
  efface=complet
- nb_lig=35
- nb_col=120
+ nb_lig=33
+ nb_col=80
  offset_lig=1
  offset_col=1
+ attache_x=oui
+ attache_lgy=oui
  ident_unique=24
 [page]
  numero=20
@@ -12877,7 +13128,7 @@ Module "CCTM000.DHOP"
 
 ;
 Public RecordSql 	"gtrsart.dhoq" 	article 				ARTICLE
-Public RecordSQL	"gtRSppArt.dhoq"	Decomposition		CogRs_DAR
+Public RecordSQL	"gtRSArt.dhoq"		Decomposition		CogRs_DAR
 
 ;
 Public Record "gtfdd.dhsd" art 		ART_sel
@@ -12973,18 +13224,19 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtez000_sql.dhsf 35816 2013-11-26 14:33:24Z lk $')
+SetModuleInfo('$Id: gtez000_sql.dhsf 50314 2015-10-07 15:44:37Z lk $')
 ;*
 ;*      Zoom sur Article	  Enregistrement ART de GTFAT
 ;*
 
-Module CCTM000.dhop
-Module GTPMSTOC.dhop
-Module A5TM000.dhop
-Module A5PMWIN.dhop
+Module	'CCTM000.dhop'
+Module	'GTPMSTOC.dhop'
+Module	'A5TM000.dhop'
+Module	'A5PMWIN.dhop'
 
-Include 'GTTC000.dhsp'
-Module  'WMTM000.dhop'
+Include	'GTTC000.dhsp'
+Module	'WMTM000.dhop'
+Module	'GTPMFICSQL.dhop'
  
 ; TDF
 Public HFile	GTFDD.dhsd	GTFTAB	GTFTAB
@@ -12992,28 +13244,19 @@ Public HFile	GTFDD.dhsd	GTFAT		GTFAT
 Public HFile 	GTFDD.dhsd	GTFPCF	GTFPCF
 
 ; Record SQL
-Public RecordSql 'GTRSART.dhoq'		ARTICLE
+Public RecordSql 'GTRSART.dhoq'		Article
+Public RecordSql 'gtrsdos.dhoq'	Dossier
+Public RecordSql "gtrsart.dhoq" 		ArtReappro 			; Fiche annexe RSO pour la saisie et pour la synchro
 
 ; Enregistrement
 Public Record  A5DD.dhsd	MZ
 Public Record  A5DD.dhsd	XZ			A5XZ
-Public Record	A5DD.dhsd	mChemin							; Enregistrement Chemin
 
-Public Record  GTFDD.dhsd 	SOC								; Société
 Public Record 	GTFDD.dhsd 	ART 								; Article
 Public Record 	GTFDD.dhsd 	ART 		ART_Sel				; Article (sélection)
-Public Record  GTFDD.dhsd	FOU								; Fournisseur
 Public Record	GTFDD.dhsd	STB								; Statistiques article
 Public Record  GTFDD.dhsd 	G7
 Public Record  GTFDD.dhsd	XZ			G3XZ
-
-Public Record 	GTFDD.dhsd	T001								; Libellé famille de tarification
-Public Record 	GTFDD.dhsd	T002								; Libelle classe de remise
-Public Record 	GTFDD.dhsd	T012								; Libellé famille statistique
-Public Record 	GTFDD.dhsd	T023								; Unité
-Public Record 	GTFDD.dhsd	T036								; Nature de produit
-Public Record	GTFDD.dhsd	T061								; Règle de gestion CBN
-Public Record 	GTFDD.dhsd	T073								; Compétence
 
 Public Record	CCFDD.dhsd	C3
 Public Record	CCFDD.dhsd	CA
@@ -13032,8 +13275,8 @@ Public Function Int Article_Utilisation_Unite
 Beginf
 	If Zoom.Action = ZOOM_MODIFICATION
 
-		If G3_Controle_Utilisation_Gamme(ARTICLE.Ref, err=FALSE) = TRUE Or \
-			G3_Controle_Utilisation_Article(ARTICLE.Ref, err=FALSE) <> 0
+		If G3_Controle_Utilisation_Gamme(Article.Ref, err=FALSE) = TRUE Or \
+			G3_Controle_Utilisation_Article(Article.Ref, err=FALSE) <> 0
 			FReturn(0)
 		EndIf
 
@@ -13050,152 +13293,147 @@ Endf
 Public Procedure Champ_AbcCod_1_Ap
 ;
 Beginp
-	Controler_WMS_CategorieAbc(article.AbcCod,1183)
+	Controler_WMS_CategorieAbc(Article.AbcCod,1183)
 Endp
 
 
 ;*
 Public Procedure Champ_AchReFamRX_1_Ap			; Contrôle classe de remise achat exceptionnelle
+RecordSql 'GTRSPPTAB.dhoq'		LibelleClasseRemise	LCR
 Beginp
-	ARTICLE.ClasRemiseExcAchat_Lib = Condition(Lectab(2, [ 'F' ARTICLE.AchReFamRX ], 1102) = 0, T002.Lib, ' ')
+	Article.ClasRemiseExcAchat_Lib = Condition(Lectab_(LCR, 'F', Article.AchReFamRX, err=1102) = 0, LCR.Lib, ' ')
 Endp	 
 
 ;*
 Public Procedure Champ_AchReFamR_1_Ap			; Contrôle classe de remise achat
+RecordSql 'GTRSPPTAB.dhoq'		LibelleClasseRemise	LCR
 Beginp
-	ARTICLE.ClasRemiseGenAchat_Lib = Condition(Lectab(2, [ 'F' ARTICLE.AchReFamR ], 1102) = 0, T002.Lib, ' ')
+	Article.ClasRemiseGenAchat_Lib = Condition(Lectab_(LCR, 'F', Article.AchReFamR, err=1102) = 0, LCR.Lib, ' ')
 Endp						  
 
 ;*
 Public Procedure Champ_AchTaFamRX_1_Ap			; Contrôle famille de tarification achat exceptionnelle
+RecordSql 'GTRSPPTAB.dhoq'		LibelleFamilleTarif	LFT
 Beginp
-	ARTICLE.FamTarifExcAchat_Lib = Condition(Lectab(1, [ 'F' ARTICLE.AchTaFamRX ], 1101) = 0, T001.Lib, ' ')
+	Article.FamTarifExcAchat_Lib = Condition(Lectab_(LFT, 'F', Article.AchTaFamRX, err=1101) = 0, LFT.Lib, ' ')
 Endp	
 
 ;*
 Public Procedure Champ_AchTaFamR_1_Ap			; Contrôle famille de tarification achat
+RecordSql 'GTRSPPTAB.dhoq'		LibelleFamilleTarif	LFT
 Beginp
-	ARTICLE.FamTarifGenAchat_Lib = Condition(Lectab(1, [ 'F' ARTICLE.AchTaFamR ], 1101) = 0, T001.Lib, ' ')
+	Article.FamTarifGenAchat_Lib = Condition(Lectab_(LFT, 'F', Article.AchTaFamR, err=1101) = 0, LFT.Lib, ' ')
 Endp
 
 ;*
 Public Procedure Champ_CbnGesCod_1_Ap			; Contrôle règle de gestion du CBN
+RecordSql 'GTRSPPTAB.dhoq'		LibelleRegleGestionCBN	LRG
 Beginp
-	ARTICLE.RegleCBN_Lib = Condition(Lectab(61, ARTICLE.CbnGesCod, 1161) = 0, T061.Lib, ' ')
+	Article.RegleCBN_Lib = Condition(Lectab_(LRG, Article.CbnGesCod, err=1161) = 0, LRG.Lib, ' ')
 Endp
 
 ;*
 Public Procedure Champ_CheminCod_1_Ap			; Chemin du configurateur
+RecordSql 'A5RSTAB.dhoq'	CheminNomFic	Chemin
 Beginp
-	Controler_Chemin(SOC.Dos, ' ', ARTICLE.ConfigurateurCheminCod, 3501)
-	ARTICLE.CheminConfigurateur = mChemin.Chemin
+	Controler_Chemin_Sql(Chemin, Dossier.Dos, ' ', Article.ConfigurateurCheminCod, 3501)
+	Article.CheminConfigurateur = Chemin.Chemin
 Endp
 
 ;*
 Public Procedure Champ_CompetCod_1_Ap			; Compétence
+RecordSql 'GTRSPPTAB.dhoq'		Competence
 Beginp
-	ARTICLE.Competence_Lib = Condition(Lectab(73, ARTICLE.CompetCod, 1173) = 0, T073.Lib, ' ')
+	Article.Competence_Lib = Condition(Lectab_(Competence, Article.CompetCod, err=1173) = 0, Competence.Lib, ' ')
 Endp
 
 ;*
 Public Procedure Champ_Conf_1_Ap					; Contrôle code de confidentialité
 Beginp
-	Controler_Confidentialite(ARTICLE.Conf, 4000)
+	Controler_Confidentialite(Article.Conf, 4000)
 Endp
 
 ;*
 Public Procedure Champ_CPT_1_Ap					; Contrôle compte comptable vente
 Beginp
-	if ARTICLE.CptV =' '
-		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT	
-		preturn
-	endif
-	If SOC.EntCodN(20) = 2 
-		If ARTICLE.CptV <> ' ' And Controle_Compte(ARTICLE.CptV, conf=FALSE) <= 1
-			ARTICLE.CompteVente_Lib = C3.Lib
+	If Dossier.EntCodN(20) = 2 
+		If Article.CptV <> ' ' And Controle_Compte(Article.CptV, conf=FALSE) <= 1
+			Article.CompteVente_Lib = C3.Lib
 		EndIf
 	Else
-		Controle_Compte(ARTICLE.CptV, FALSE, existence=FALSE)
+		Controle_Compte(Article.CptV, FALSE, existence=FALSE)
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_CPT_2_Ap					; Contrôle compte comptable achat
 Beginp
-	if ARTICLE.CptA =' '
-		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT	
-		preturn
-	endif
-	If SOC.EntCodN(20) = 2 
-		If ARTICLE.CptA <> ' ' And Controle_Compte(ARTICLE.CptA, conf=FALSE) <= 1
-			ARTICLE.CompteAchat_Lib = C3.Lib
+	If Dossier.EntCodN(20) = 2 
+		If Article.CptA <> ' ' And Controle_Compte(Article.CptA, conf=FALSE) <= 1
+			Article.CompteAchat_Lib = C3.Lib
 		EndIf
 	Else
-		Controle_Compte(ARTICLE.CptA, FALSE, existence=FALSE)
+		Controle_Compte(Article.CptA, FALSE, existence=FALSE)
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_CPT_3_Ap					; Contrôle compte comptable stock
 Beginp
-	if ARTICLE.CPTS =' '
-		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT	
-		preturn
-	endif
-	If SOC.EntCodN(20) = 2 
-		If ARTICLE.CPTS <> ' ' And Controle_Compte(ARTICLE.CptS, conf=FALSE) <= 1
-			ARTICLE.CompteStock_Lib = C3.Lib
+	If Dossier.EntCodN(20) = 2 
+		If Article.CPTS <> ' ' And Controle_Compte(Article.CptS, conf=FALSE) <= 1
+			Article.CompteStock_Lib = C3.Lib
 		EndIf
 	Else
-		Controle_Compte(ARTICLE.CptS, FALSE, existence=FALSE)
+		Controle_Compte(Article.CptS, FALSE, existence=FALSE)
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_CPT_4_Ap					; Contrôle compte comptable vente éco-contribution
 Beginp
-	If SOC.EntCodN(20) = 2 
-		If ARTICLE.DeeeCptV <> ' ' And Controle_Compte(ARTICLE.DeeeCptV, conf=FALSE) <= 1
-			ARTICLE.CompteVenteDeee_Lib = C3.Lib
+	If Dossier.EntCodN(20) = 2 
+		If Article.DeeeCptV <> ' ' And Controle_Compte(Article.DeeeCptV, conf=FALSE) <= 1
+			Article.CompteVenteDeee_Lib = C3.Lib
 		EndIf
 	Else
-		Controle_Compte(ARTICLE.DeeeCptV, FALSE, existence=FALSE)
+		Controle_Compte(Article.DeeeCptV, FALSE, existence=FALSE)
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_CPT_5_Ap					; Contrôle compte comptable achat éco-contribution
 Beginp
-	If SOC.EntCodN(20) = 2 
-		If ARTICLE.DeeeCptA <> ' ' And Controle_Compte(ARTICLE.DeeeCptA, conf=FALSE) <= 1
-			ARTICLE.CompteAchatDeee_Lib = C3.Lib
+	If Dossier.EntCodN(20) = 2 
+		If Article.DeeeCptA <> ' ' And Controle_Compte(Article.DeeeCptA, conf=FALSE) <= 1
+			Article.CompteAchatDeee_Lib = C3.Lib
 		EndIf
 	Else
-		Controle_Compte(ARTICLE.DeeeCptA, FALSE, existence=FALSE)
+		Controle_Compte(Article.DeeeCptA, FALSE, existence=FALSE)
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_CPT_6_Ap					; Contrôle compte comptable vente inter-établissement
 Beginp
-	If SOC.EntCodN(20) = 2
-		If ARTICLE.CptVCes <> ' ' And Controle_Compte(ARTICLE.CptVCes, conf=FALSE) <= 1
-			ARTICLE.CompteVenteInterEtb_Lib = C3.Lib
+	If Dossier.EntCodN(20) = 2
+		If Article.CptVCes <> ' ' And Controle_Compte(Article.CptVCes, conf=FALSE) <= 1
+			Article.CompteVenteInterEtb_Lib = C3.Lib
 		EndIf
 	Else
-		Controle_Compte(ARTICLE.CptVCes, FALSE, existence=FALSE)
+		Controle_Compte(Article.CptVCes, FALSE, existence=FALSE)
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_CPT_7_Ap		; controle compte comptable achat inter-établissement
 Beginp
-	If SOC.EntCodN(20) = 2 
-		If ARTICLE.CptACes <> ' ' And Controle_Compte(ARTICLE.CptACes, conf=FALSE) <= 1
-			ARTICLE.CompteAchatInterEtb_Lib = C3.Lib
+	If Dossier.EntCodN(20) = 2 
+		If Article.CptACes <> ' ' And Controle_Compte(Article.CptACes, conf=FALSE) <= 1
+			Article.CompteAchatInterEtb_Lib = C3.Lib
 		EndIf
 	Else
-		Controle_Compte(ARTICLE.CptACes, FALSE, existence=FALSE)
+		Controle_Compte(Article.CptACes, FALSE, existence=FALSE)
 	EndIf
 Endp
 
@@ -13203,17 +13441,17 @@ Endp
 Public Procedure Champ_Des_1_Av		; MAJ de la désignation abrégée / DES
 1		desabr		>GTFDD.dhsd	DesAbr
 Beginp
-	desabr = Convertir_Nom_Nomabr(ARTICLE.Des)
-	If desabr = ARTICLE.DesAbr
-		ARTICLE.DesAbr = ' '
+	desabr = Convertir_Nom_Nomabr(Article.Des)
+	If desabr = Article.DesAbr
+		Article.DesAbr = ' '
 	EndIf 
 Endp
 
 ;*
 Public Procedure Champ_Des_1_Ap		; MAJ de le désignation abrégé / DES
 Beginp
-	If ARTICLE.DesAbr = ' '
-		ARTICLE.DesAbr = Convertir_Nom_Nomabr(ARTICLE.Des)
+	If Article.DesAbr = ' '
+		Article.DesAbr = Convertir_Nom_Nomabr(Article.Des)
 	EndIf	
 Endp
 
@@ -13229,35 +13467,27 @@ Endp
 ;*
 Public Procedure Champ_DES_2_Ap			;après désignation abrégée si non renseignée
 Beginp
-	If ARTICLE.DesAbr = ' ' 
-		ARTICLE.DesAbr = Convertir_Nom_Nomabr(ARTICLE.Des)
+	If Article.DesAbr = ' ' 
+		Article.DesAbr = Convertir_Nom_Nomabr(Article.Des)
 	EndIf	
-	ARTICLE.DesAbr = Convertir_Nom_Nomabr(ARTICLE.DesAbr)
+	Article.DesAbr = Convertir_Nom_Nomabr(Article.DesAbr)
 Endp
 
 ;*
 Public Procedure Champ_EdCod_1_Ap			; après code impression
 1		cpt		1,0
 Beginp
-	If ARTICLE.EdCod <> ' '
-		
-		For cpt = 1 to Length(ARTICLE.EdCod)
-			
-			If Mid(ARTICLE.EdCod, cpt, 1) not in ('C', 'F', 'I', 1..5, '*', ' ')
-				Mes_Alert(2115)
-				Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
-				PReturn
-			EndIf
-
-		Next			 
-
+	If Article.EdCod <> ' '
+		If Controler_EdCod(Article.EdCod, 2115) <> 0
+			PReturn
+		EndIf
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_Fam_1_Av			; avant famille statistique
 Beginp
-	If SOC.FamLib(Harmony.Dataind1) = ' '
+	If Dossier.FamLib(Harmony.Dataind1) = ' '
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	EndIf
 Endp
@@ -13265,19 +13495,19 @@ Endp
 ;*
 Public Procedure Champ_Fam_1_Ap			; controle famille statistique
 1		famno		>GTFDD.dhsd FamNo
+RecordSql 'GTRSPPTAB.dhoq'		FamilleStatistiqueArticle	FSA
 Beginp
 	famno = Harmony.Dataind1
 
 	Switch famno
-	Case 1	|	ARTICLE.FamStat1_Lib = Condition(Lectab(12, [ famno ARTICLE.Fam(1) ], 1112) = 0, T012.Lib, ' ')
-	Case 2	|	ARTICLE.FamStat2_Lib = Condition(Lectab(12, [ famno ARTICLE.Fam(2) ], 1112) = 0, T012.Lib, ' ')
-	Case 3	|	ARTICLE.FamStat3_Lib = Condition(Lectab(12, [ famno ARTICLE.Fam(3) ], 1112) = 0, T012.Lib, ' ')
+	Case 1	|	Article.FamStat1_Lib = Condition(Lectab_(FSA, famno, Article.Fam(1), err=1112) = 0, FSA.Lib, ' ')
+	Case 2	|	Article.FamStat2_Lib = Condition(Lectab_(FSA, famno, Article.Fam(2), err=1112) = 0, FSA.Lib, ' ')
+	Case 3	|	Article.FamStat3_Lib = Condition(Lectab_(FSA, famno, Article.Fam(3), err=1112) = 0, FSA.Lib, ' ')
 	EndSwitch
 Endp
 
 ;*
 Public Procedure Champ_Fam_2_Ap				; Appel zoom sur famille stat
-1		famno		>GTFDD.dhsd	FamNo
 Beginp
 	If Harmony.Key = K_F8
 		Switch G7.FamNo
@@ -13296,7 +13526,7 @@ Endp
 ;*
 Public Procedure Champ_GriCod_1_Av			; Avant code grille
 Beginp
-	If ARTICLE.SrefCod = 1
+	If Article.SrefCod = 1
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	EndIf												
 Endp
@@ -13304,45 +13534,48 @@ Endp
 ;*
 Public Procedure Champ_GriCod_1_Ap			; Contrôle du code grille
 Beginp
-	Lectab(31, ARTICLE.GriCod, 1131)
+	Lectab(31, Article.GriCod, 1131)
 Endp
 
 ;*
 Public Procedure Champ_GriSais_1_Av			; avant saisie en grille
 Beginp
-	If ARTICLE.SrefCod = 1 Or ARTICLE.StCod = 3
+	If Article.SrefCod = 1 Or Article.StCod = 3
 		Harmony.Retour = XMENEXT_SAUT_DONNEE
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_ManUn_1_Ap
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.ManUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteManutention = ARTICLE.Libelle_UniteReference
+	If Article.ManUn = Article.RefUn
+		Article.Libelle_UniteManutention = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteManutention = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.ManUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteManutention = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.ManUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 
 ;*
 Public Procedure Champ_Media_1_Ap			; Complète le chemin	du logo
+RecordSql 'A5RSTAB.dhoq'	CheminNomFic	Chemin
 Beginp
-	Rechercher_Chemin(MZ.Dos, MZ.Etb, SOC.CheminCod)
-	G7.WINCHNC = Win_Chemin(mChemin.Chemin, ARTICLE.Media)
+	Rechercher_Chemin_Sql(Chemin, MZ.Dos, MZ.Etb, Dossier.CheminCod)
+	G7.WINCHNC = Win_Chemin(Chemin.Chemin, Article.Media)
 Endp
 
 ;*
 Public Procedure Champ_MSK_1_Ap				; Complète masque axe
 Beginp
-	Controle_Masquage(ARTICLE.AxeMsk, 8003, 1)
+	Controle_Masquage(Article.AxeMsk, 8003, 1)
 Endp
 
 ;*
 Public Procedure Champ_ProdNat_1_Ap
+RecordSql 'GTRSPPTAB.dhoq'		NatureProduit
 Beginp
-	ARTICLE.NatureProduit_Lib = Condition(Lectab(36, ARTICLE.ProdNat, 1136) = 0, T036.Lib, ' ')
+	Article.NatureProduit_Lib = Condition(Lectab_(NatureProduit, Article.ProdNat, err=1136) = 0, NatureProduit.Lib, ' ')
 Endp
 
 ;*
@@ -13353,94 +13586,93 @@ Endp
 
 ;*
 Public Procedure Champ_Question_1_Ap		; Contrôle le code questionnaire s'il est renseigné
+RecordSql 'A5RSRUB.dhoq'	Qst
 Beginp
-	Controler_Questionnaire(ARTICLE.Question, 3000, entite=C_Entite_Art) 
+	Controler_Questionnaire_Sql(Qst, Article.Question, 3000, entite=C_Entite_Art) 
 Endp
 
 ;*
 Public Procedure Champ_REF_1_Ap				; Après référence de remplacement
-1		ref		>GTFDD.dhsd Ref
+RecordSql 'GTRSART.dhoq'	Article	Art_Loc
 Beginp
-	ARTICLE.ArticleRemplacement_Des = ' '
-	ref = ARTICLE.RefRpl
-	PingLocal('ZOOM_ART', ART)
-	If Controle_Article(ref, 2100, conf=FALSE) = 0	|	ARTICLE.ArticleRemplacement_Des = ARTICLE.Des	|	EndIf
-	PingLocalReceive('ZOOM_ART', ART)
-	ARTICLE.RefRpl = ref
+	Article.ArticleRemplacement_Des = ' '
+	If Controler_Article_Sql(Art_Loc, Article.RefRpl, 2100, conf=FALSE) = 0
+		Article.ArticleRemplacement_Des = Art_Loc.Des
+	EndIf
 Endp
 
 ;*
 Public Procedure Champ_REF_2_Ap				; Après référence de tarification
-1		ref		>GTFDD.dhsd Ref
+RecordSql 'GTRSART.dhoq'	Article	Art_Loc
 Beginp
-	ARTICLE.ArticleMemeTarif_Des = ' '
-	ref = ARTICLE.TaRef
-	PingLocal('ZOOM_ART', ART)
-	If Controle_Article(ref, 2100, conf=FALSE) = 0	|	ARTICLE.ArticleMemeTarif_Des = ARTICLE.Des	|	EndIf
-	PingLocalReceive('ZOOM_ART', ART)
-	ARTICLE.TaRef = ref
+	Article.ArticleMemeTarif_Des = ' '
+	If Controler_Article_Sql(Art_Loc, Article.TaRef, 2100, conf=FALSE) = 0
+		Article.ArticleMemeTarif_Des = Art_Loc.Des
+	EndIf
 Endp
 
 ;*
 Public Procedure Champ_Ref_3_Ap				; référence en création
 Beginp
-	If ARTICLE.Ref = ' ' And Mes_Alert(2109, bouton=MB_OKCANCEL+MB_ICONQUESTION) <> IDOK
+	If Article.Ref = ' ' And Mes_Alert(2109, bouton=MB_OKCANCEL+MB_ICONQUESTION) <> IDOK
 		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 	EndIf 
 Endp
 
 ;*
-Public Procedure Champ_Ref_4_Ap			; controle référence si création automatique a échouée
+Public Procedure Champ_Ref_4_Ap				
+; Contrôle la référence si la création automatique a échoué
+RecordSql 'GTRSART.dhoq'	Article	Art_Loc
+
 Beginp
-	If Res_ART(ARTICLE.Ref, 0, NoWait)  <> 0
-		Mes_Alert(2101, ARTICLE.Ref)
+	If Res_Article(Article.Ref, 0, NoWait)  <> 0
+		Mes_Alert(2101, Article.Ref)
 		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT 
 		PReturn
 	EndIf
 
-	PingLocal('ZOOM_ART', ART)
-	if Seek_ART(ARTICLE.Ref) = 0 	; recherche article existe ?
-		PingLocalReceive('ZOOM_ART', ART)
-		Lib_ART(ARTICLE.Ref)
-		Mes_Alert(2111, ARTICLE.Ref)
+	If Seek_Article(Art_Loc, Article.Ref) = 0 	; recherche article existe ?
+		Lib_Article(Article.Ref)
+		Mes_Alert(2111, Article.Ref)
 		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 	EndIf
-	PingLocalReceive('ZOOM_ART', ART)
 Endp
 
 ;*
 Public Procedure Champ_REFAM_1_Ap			; Contrôle classe remise
+RecordSql 'GTRSPPTAB.dhoq'		LibelleClasseRemise	LCR
 Beginp
-	ARTICLE.ClasRemiseGenVente_Lib = Condition(Lectab(2, [ 'C' ARTICLE.ReFamR ], 1102) = 0, T002.Lib, ' ')
+	Article.ClasRemiseGenVente_Lib = Condition(Lectab_(LCR, 'C', Article.ReFamR, err=1102) = 0, LCR.Lib, ' ')
 Endp
 
 ;*
 Public Procedure Champ_REFAM_2_Ap			; Contrôle classe remise exceptionnelle
+RecordSql 'GTRSPPTAB.dhoq'		LibelleClasseRemise	LCR
 Beginp
-	ARTICLE.ClasRemiseExcVente_Lib = Condition(Lectab(2, [ 'C' ARTICLE.ReFamRX ], 1102) = 0, T002.Lib, ' ')
+	Article.ClasRemiseExcVente_Lib = Condition(Lectab_(LCR, 'C', Article.ReFamRX, err=1102) = 0, LCR.Lib, ' ')
 Endp
 
 ;*
 Public Procedure Champ_SrefCod_1_Av			; Avant gestion des sous-références
 Beginp
-	If SOC.EntCodN(17) = 1	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
+	If not Soc_Gerer_SousReferences	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
 Endp
 
 ;*
 Public Procedure Champ_SrefCod_1_Ap			; Après gestion des sous-références
 Beginp
-	If ARTICLE.SrefCod = 1
-		ARTICLE.GriCod		= ' '
-		ARTICLE.GriSais	= 1
+	If Article.SrefCod = 1
+		Article.GriCod		= ' '
+		Article.GriSais	= 1
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_StCod_1_Ap			; Après suivi stock
 Beginp
-	If Zoom.Action = ZOOM_MODIFICATION And Harmony.DataModif And ARTICLE.StCod <> 2
+	If Zoom.Action = ZOOM_MODIFICATION And Harmony.DataModif And Article.StCod <> 2
 		
-		If Controler_NiStock_NiReservation(ARTICLE.Ref) <> 0
+		If Controler_NiStock_NiReservation(Article.Ref) <> 0
 			Mes_Alert(2131)
 			Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 			PReturn
@@ -13448,31 +13680,34 @@ Beginp
 
 	EndIf
 
-	If ARTICLE.StCod = 3	|	ARTICLE.GriSais = 1	|	EndIf
+	If Article.StCod = 3	|	Article.GriSais = 1	|	EndIf
 Endp
 
 ;*
 Public Procedure Champ_StRes_1_Av ; avant gérer les réservations
 Beginp
-	If SOC.EntCodN(10) = 1	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
+	If not Soc_Gerer_Reservation	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
 Endp
 
 ;*
 Public Procedure Champ_TAFAM_1_Ap			;controle famille tarif
+RecordSql 'GTRSPPTAB.dhoq'		LibelleFamilleTarif	LFT
 Beginp
-	ARTICLE.FamTarifGenVente_Lib = Condition(Lectab(1, [ 'C' ARTICLE.TaFamR ], 1101) = 0, T001.Lib, ' ')
+	Article.FamTarifGenVente_Lib = Condition(Lectab_(LFT, 'C', Article.TaFamR, err=1101) = 0, LFT.Lib, ' ')
 Endp
 ;*
 Public Procedure Champ_TAFAM_2_Ap			;controle famille tarif exceptionnelle
+RecordSql 'GTRSPPTAB.dhoq'		LibelleFamilleTarif	LFT
 Beginp
-	ARTICLE.FamTarifExcVente_Lib = Condition(Lectab(1, [ 'C' ARTICLE.TaFamRX ], 1101) = 0, T001.Lib, ' ')
+	Article.FamTarifExcVente_Lib = Condition(Lectab_(LFT, 'C', Article.TaFamRX, err=1101) = 0, LFT.Lib, ' ')
 Endp
 
 ;*
 Public Procedure Champ_Tiers_1_Ap			; controle code fournisseur
-1	tiers	>GTFDD.dhsd tiers
+1		tiers			>GTFDD.dhsd tiers
+RecordSql 'GTRSPPTIERS.dhoq'	Fournisseur Fou_Loc
 Beginp
-	ARTICLE.FournisseurHabituel_Nom = Condition(Controle_Fournisseur(ARTICLE.Tiers, 1500, 0, ctretb=FALSE)  = 0, FOU.Nom, ' ')
+	Article.FournisseurHabituel_Nom = Condition(Controler_Fournisseur_Sql(Fou_Loc, Article.Tiers, err=1500, conf=0, ctretb=FALSE)  = 0, Fou_Loc.Nom, ' ')
 Endp
 
 ;*
@@ -13483,97 +13718,107 @@ Endp
 
 ;*
 Public Procedure Champ_UN_1_Ap				; Contrôle unité de référence
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	ARTICLE.Libelle_UniteReference = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.RefUn, 1123) = 0, T023.Lib, ' ')
+	Article.Libelle_UniteReference = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.RefUn, 1123) = 0, LibUnite.Lib, ' ')
 Endp
 
 ;*
 Public Procedure Champ_UN_2_Ap				; Contrôle unité d'achat
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.AchUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteAchat = ARTICLE.Libelle_UniteReference
+	If Article.AchUn = Article.RefUn
+		Article.Libelle_UniteAchat = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteAchat = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.AchUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteAchat = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.AchUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_UN_3_Ap				; Contrôle unité stockage
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.StUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteStockage = ARTICLE.Libelle_UniteReference
+	If Article.StUn = Article.RefUn
+		Article.Libelle_UniteStockage = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteStockage = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.StUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteStockage = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.StUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_UN_4_Ap				; Contrôle unité vente
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.VenUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteVente = ARTICLE.Libelle_UniteReference
+	If Article.VenUn = Article.RefUn
+		Article.Libelle_UniteVente = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteVente = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.VenUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteVente = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.VenUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_UN_5_Ap				; Contrôle unité tva douanière
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.TvaUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteDEB = ARTICLE.Libelle_UniteReference
+	If Article.TvaUn = Article.RefUn
+		Article.Libelle_UniteDEB = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteDEB = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.TvaUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteDEB = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.TvaUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_UN_6_Ap				; Contrôle unité poids
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.PoiUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UnitePoids = ARTICLE.Libelle_UniteReference
+	If Article.PoiUn = Article.RefUn
+		Article.Libelle_UnitePoids = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UnitePoids = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.PoiUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UnitePoids = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.PoiUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_UN_7_Ap				; Contrôle unité volume
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.VolUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteVolume = ARTICLE.Libelle_UniteReference
+	If Article.VolUn = Article.RefUn
+		Article.Libelle_UniteVolume = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteVolume = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.VolUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteVolume = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.VolUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_UN_8_Ap				; Contrôle unité dimension
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.DimUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteDimension = ARTICLE.Libelle_UniteReference
+	If Article.DimUn = Article.RefUn
+		Article.Libelle_UniteDimension = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteDimension = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.DimUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteDimension = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.DimUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_UN_9_Ap				; Contrôle unité éco-contribution
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.DeeeUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteDeee = ARTICLE.Libelle_UniteReference
+	If Article.DeeeUn = Article.RefUn
+		Article.Libelle_UniteDeee = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteDeee = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.DeeeUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteDeee = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.DeeeUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
 ;*
 Public Procedure Champ_UN_10_Ap				; Contrôle unité de surface
+RecordSql 'GTRSPPTAB.dhoq'	LibelleUnite	LibUnite
 Beginp
-	If ARTICLE.SurfUn = ARTICLE.RefUn
-		ARTICLE.Libelle_UniteSurface = ARTICLE.Libelle_UniteReference
+	If Article.SurfUn = Article.RefUn
+		Article.Libelle_UniteSurface = Article.Libelle_UniteReference
 	Else
-		ARTICLE.Libelle_UniteSurface = Condition(Lectab_Unite(ARTICLE.Ref, ' ', ' ', ARTICLE.SurfUn, 1123) = 0, T023.Lib, ' ')
+		Article.Libelle_UniteSurface = Condition(Lire_LibelleUnite(LibUnite, Article.Ref, ' ', ' ', Article.SurfUn, 1123) = 0, LibUnite.Lib, ' ')
 	EndIf
 Endp
 
@@ -13596,28 +13841,47 @@ Beginp
 Endp
 
 ;*
+Public Procedure Champ_Reacod_1_Ap		; teste cohérence mode de réappro et nature produit
+Beginp
+	If Artreappro.ReaCod in (5..6) And Article.ProdNat1 = 2
+		Mes_Alert(2137)
+	EndIf
+Endp
+
+
+;*
+Public Procedure Champ_RevuArt_1_Ap
+;
+Beginp
+	if Article.RevuArt = OUI
+		Article.OpSais(1) = NON
+		Article.OpSais(2) = NON
+		Article.OpSais(3) = NON
+	endif
+Endp
+
+;*
 Public Procedure Champ_SMCFl_1_Av		; Avant saisie du flag de contrainte de planification
 Beginp
-	If ARTICLE.SMCVisuFl	= 2	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
+	If Article.SMCVisuFl	= 2	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
 Endp
 
 ;*
 Public Procedure Champ_SMCVisuFl_1_Av	; Avant saisie du flag de visualisation des contraintes de planification
 Beginp
-	If ARTICLE.SMCFl		= 2	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
+	If Article.SMCFl		= 2	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
 Endp																							  
 
 ;*
 Public Procedure Champ_StLgtAbcCod_1_Ap
 Beginp
-	Controler_WMS_TypeABC(article.StLgtAbcCod,20001)
+	Controler_WMS_TypeABC(Article.StLgtAbcCod,20001)
 Endp
-
 
 ;*
 Public Procedure Champ_ToleranceTx_1_Ap
 Beginp
-	If ARTICLE.ToleranceTx not in (0..100)
+	If Article.ToleranceTx not in (0..100)
 		Mes_Alert(2297)
 		Harmony.Retour = XMENEXT_TRAITEMENT_AVANT
 	EndIf
@@ -13626,14 +13890,12 @@ Endp
 ;*
 Public Procedure Champ_Zona_1_Av			; avant zone libre si non paramétrée
 Beginp
-	If SOC.RefZonaLib = ' '	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
+	If Dossier.RefZonaLib = ' '	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
 Endp
 
 ;*
 Public Procedure Champ_Zonn_1_Av			; avant zone libre si non paramétrée
 Beginp
-	If SOC.RefZonnLib = ' '	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
+	If Dossier.RefZonnLib = ' '	|	Harmony.Retour = XMENEXT_SAUT_DONNEE	|	EndIf
 Endp
-
-
 [/diva]

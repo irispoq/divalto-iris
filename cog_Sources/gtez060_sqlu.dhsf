@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20150120113228      
+;>xwin4obj                              7.0       20161207163208      
 [masque]
  libelle="table code opération"
  utilisateur="UGIE"
- date_modification="20/01/2015"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=78
  type_masque=2
  dernier_id=1000006
  surcharge=oui
- date_modif_base="20121017105548"
+ date_modif_base="20140325143749"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -1388,6 +1388,8 @@
    microbol_click=8002
    diva_avant="Champ_Pitit_1_Av"
    diva_apres="Champ_Pitit_1_Ap"
+  [boutons]
+   "zoom"
  [champ]
   [presentation]
    position=81,154
@@ -1411,6 +1413,8 @@
    microbol_click=8002
    diva_avant="Champ_Pitit_1_Av"
    diva_apres="Champ_Pitit_1_Ap"
+  [boutons]
+   "zoom"
  [champ]
   [presentation]
    position=91,154
@@ -1434,6 +1438,8 @@
    microbol_click=8002
    diva_avant="Champ_Pitit_1_Av"
    diva_apres="Champ_Pitit_1_Ap"
+  [boutons]
+   "zoom"
  [champ]
   [presentation]
    position=101,154
@@ -1457,6 +1463,8 @@
    microbol_click=8002
    diva_avant="Champ_Pitit_1_Av"
    diva_apres="Champ_Pitit_1_Ap"
+  [boutons]
+   "zoom"
  [champ]
   [presentation]
    position=147,86
@@ -1479,6 +1487,8 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_NST_1_Ap"
+  [boutons]
+   "zoom"
  [groupe_radio]
   [presentation]
    position=162,10
@@ -1600,6 +1610,8 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_NST_2_Ap"
+  [boutons]
+   "zoom"
  [case_a_cocher]
   [presentation]
    position=67,180
@@ -1831,8 +1843,8 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=22,5
-   taille=139,310
+   position=20,5
+   taille=142,310
    id=65
    wstyle="GROUPE"
   [param_groupbox]
@@ -1849,8 +1861,8 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=162,5
-   taille=28,310
+   position=164,5
+   taille=25,310
    id=1000003
    wstyle="GROUPE"
   [param_groupbox]
@@ -1858,7 +1870,7 @@
    couleur_fond="GROUPE_FOND"
  [obj_texte]
   [presentation]
-   position=38,10
+   position=34,10
    taille=9,64
    id=69
    wstyle="STD"
@@ -1866,7 +1878,7 @@
    texte="OP associé si lettrage"
  [obj_texte]
   [presentation]
-   position=48,10
+   position=44,10
    taille=9,64
    id=192
    wstyle="STD"
@@ -1890,7 +1902,7 @@
    texte="Confidentialité"
  [champ]
   [presentation]
-   position=38,96
+   position=34,96
    taille=9,149
    id=72
    wstyle="CHAMP_AFF"
@@ -1907,7 +1919,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=38,76
+   position=34,76
    taille=9,20
    id=74
    wstyle="CHAMP_SAISI"
@@ -1929,24 +1941,7 @@
    diva_apres="Champ_OP_1_Ap"
  [champ]
   [presentation]
-   position=48,96
-   taille=9,149
-   id=191
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=codeoperation,codeopavoir_lib,codeoperation,3
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=165
-   shift_f6=10000
-   shift_f7=1
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=48,76
+   position=44,76
    taille=9,20
    id=190
    colonnes_saisie=3
@@ -1969,7 +1964,7 @@
    diva_apres="Champ_OP_2_Ap"
  [case_a_cocher]
   [presentation]
-   position=68,10
+   position=55,10
    taille=9,188
    id=76
    wstyle="STD"
@@ -1988,7 +1983,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=78,10
+   position=64,10
    taille=9,188
    id=77
    wstyle="STD"
@@ -2007,7 +2002,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=88,10
+   position=73,10
    taille=9,188
    id=78
    wstyle="STD"
@@ -2026,7 +2021,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=98,10
+   position=82,10
    taille=9,188
    id=79
    wstyle="STD"
@@ -2045,7 +2040,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=108,10
+   position=91,10
    taille=9,188
    id=80
    wstyle="STD"
@@ -2064,7 +2059,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=118,10
+   position=100,10
    taille=9,188
    id=81
    wstyle="STD"
@@ -2081,9 +2076,26 @@
   [touches]
    f7=135
    shift_f6=10000
+ [champ]
+  [presentation]
+   position=44,96
+   taille=9,149
+   id=191
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=codeoperation,codeopavoir_lib,codeoperation,3
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=165
+   shift_f6=10000
+   shift_f7=1
+  [traitements]
+   microbol_click=8002
  [case_a_cocher]
   [presentation]
-   position=128,10
+   position=109,10
    taille=9,188
    id=82
    wstyle="STD"
@@ -2102,7 +2114,64 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=138,10
+   position=118,10
+   taille=9,188
+   id=201
+   wstyle="STD"
+  [description]
+   donnee=codeoperation,prgtrttyp,codeoperation,16
+   minmaj=majuscules
+  [param_case]
+   texte="Opération de mise en litige"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=2880
+   fichier="GTFAIDe"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=127,10
+   taille=9,188
+   id=203
+   wstyle="STD"
+  [description]
+   donnee=codeoperation,prgtrttyp,codeoperation,17
+   minmaj=majuscules
+  [param_case]
+   texte="Opération de levée de litige"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=2880
+   fichier="GTFAIDe"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=136,10
+   taille=9,188
+   id=204
+   wstyle="STD"
+  [description]
+   donnee=codeoperation,prgtrttyp,codeoperation,19
+   minmaj=majuscules
+  [param_case]
+   texte="Génération de commandes WMS"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=2880
+   fichier="GTFAIDe"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=145,10
    taille=9,95
    id=1000001
    wstyle="COG_CHAMP_SAISI"
@@ -2120,7 +2189,7 @@
    diva_avant="Champ_Cog_FnpFlag_1_Av"
  [case_a_cocher]
   [presentation]
-   position=148,10
+   position=154,10
    taille=9,95
    id=1000002
    wstyle="COG_CHAMP_SAISI"
@@ -2138,7 +2207,7 @@
    diva_avant="Champ_Cog_FaeFlag_1_Av"
  [case_a_cocher]
   [presentation]
-   position=68,200
+   position=55,200
    taille=9,114
    id=83
    wstyle="STD"
@@ -2157,7 +2226,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=78,200
+   position=64,200
    taille=9,114
    id=84
    wstyle="STD"
@@ -2176,7 +2245,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=88,200
+   position=73,200
    taille=9,114
    id=126
    wstyle="STD"
@@ -2195,7 +2264,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=98,200
+   position=82,200
    taille=9,114
    id=128
    wstyle="STD"
@@ -2214,7 +2283,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=108,200
+   position=91,200
    taille=9,114
    id=129
    wstyle="STD"
@@ -2233,7 +2302,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=118,200
+   position=100,200
    taille=9,114
    id=130
    wstyle="STD"
@@ -2252,7 +2321,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=128,200
+   position=109,200
    taille=9,114
    id=198
    wstyle="STD"
@@ -2271,7 +2340,7 @@
    shift_f6=10000
  [case_a_cocher]
   [presentation]
-   position=138,200
+   position=118,200
    taille=9,114
    id=196
    wstyle="STD"
@@ -2280,6 +2349,25 @@
    minmaj=majuscules
   [param_case]
    texte="Transfert WMS"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=2880
+   fichier="GTFAIDe"
+  [touches]
+   f7=135
+   shift_f6=10000
+ [case_a_cocher]
+  [presentation]
+   position=127,200
+   taille=9,114
+   id=202
+   wstyle="STD"
+  [description]
+   donnee=codeoperation,prgtrttyp,codeoperation,18
+   minmaj=majuscules
+  [param_case]
+   texte="Opération de rebut"
    cadrage=droite
    valeur="2","1"
   [aide_page]
@@ -2739,7 +2827,7 @@ Endp
 ;*		mjv		4.1						01.1999	Version initiale en Diva 
 
 
-SetModuleInfo('$Id: gtez060_sql.dhsf 26291 2012-10-17 09:04:33Z sc $')
+SetModuleInfo('$Id: gtez060_sql.dhsf 38284 2014-03-25 13:38:36Z sc $')
 
 include 'GTTC000.dhsp'
 

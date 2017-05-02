@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20130213094839      
+;>xwin4obj                              7.0       20151007174452      
 [masque]
  libelle="Adresse adresse"
- utilisateur="DEMO"
- date_modification="02/08/2012"
+ utilisateur="LK"
+ date_modification="07/10/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=151
  type_masque=2
- dernier_id=101
+ dernier_id=103
  dernier_id_page=20
 [defaut]
  [aide_page]
@@ -18,7 +18,7 @@
   shift_f6=10000
 [enregistrements]
  "gtrstiers.dhoq",,adresse,adresse,1024,1
- "gtfdd.dhsd",,g7,g7,4500,0
+ "gtfdd.dhsd",,g7,g7,4550,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
 [onglet]
  [presentation]
@@ -128,6 +128,36 @@
    donnee=rowinfo,rowinfo,zoomselection
    minmaj=majuscules
    saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=86,4
+    taille=18,36
+    noms="icpfl"
+    id=102
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=adresse,icpfl,adresse
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#tblicp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
     position=81,120
@@ -1517,6 +1547,25 @@
    shift_f6=10000
   [traitements]
    microbol_click=8002
+ [multi_choix]
+  [presentation]
+   position=26,96
+   taille=9,18
+   id=103
+   wstyle="STD"
+  [description]
+   donnee=adresse,icpfl,adresse
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+  [touches]
+   f5=5000
+   f6=5002
+   f7=135
+   shift_f5=5001
+   shift_f6=10000
 [page]
  numero=12
  fond="STD"
@@ -2106,7 +2155,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: gtez027_sql.dhsf 35431 2013-11-15 11:50:30Z jf $')
+SetModuleInfo('$Id: gtez027_sql.dhsf 50314 2015-10-07 15:44:37Z lk $')
 ;*
 ;*      Zoom sur Adresse	Enregistrement Adresse de GTRSTIERS
 ;*

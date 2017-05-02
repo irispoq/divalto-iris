@@ -43,7 +43,7 @@ Public 	RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3				CogRs_C3Dst				; Compte	FNP ou
 Public 	RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3				CogRs_C3Tva				; Compte TVA FNP ou FAE
 Public 	RecordSQL	"CCRSJCA.DHOQ"				Journal				CogRs_JnlDst			; Journal FNP ou FAE
 Public 	RecordSQL	"GTRSPPTAB.DHOQ"			CodeOperation		CogRs_OP					; Code opération
-Public 	RecordSQL	"GTRSPPPCE.DHOQ"			Mouvement			CogRs_MOUV
+Public 	RecordSQL	"GTRSPCE.DHOQ"				Mouvement			CogRs_MOUV
 Public 	RecordSQL	"GTRSPPTAB.DHOQ"			TauxTvaN				CogRs_TVA
 
 ;
@@ -51,7 +51,7 @@ Public 	Record	gtfdd.dhsd	xq			XQ_Cog	;enregistrement de travail
 
 Public 	Record	gtfdd.dhsd	SOC
 ;Public 	Record	gtfdd.dhsd	T020					;Code OP
-Public 	Record	gtfdd.dhsd	T030					;Regime TVA tiers
+Public 	Record	gtfdd.dhsd	T086					;Regime TVA tiers
 Public 	Record	gtfdd.dhsd	ENT
 Public 	Record	gtfdd.dhsd	ENT		ENT_SEEK
 Public 	Record	gtfdd.dhsd	ART
@@ -265,10 +265,6 @@ BeginP
 	CogRs_MOUV.Where.Equal_Op(CogRs_OP.Op)
 	CogRs_MOUV.Where.AddCondition("Equal_Op")
 	
-	; DEBUG
-	CogRs_MOUV.Where.Between_BlNo(10076027, 10076028)
-	CogRs_MOUV.Where.AddCondition("Between_BlNo")
-
 	CogRs_MOUV.OrderBy.Ordre_FNP_FAE()
 
 EndP
@@ -277,7 +273,7 @@ EndP
 ;* Initialisation des variables
 function int Cog_InitialiserVariables
 ;
-recordsql	'a5rsuser.dhoq'	utilisateur						;Utilisateurs
+recordsql	'a5rsdos.dhoq'	utilisateur						;Utilisateurs
 
 beginf
 
@@ -365,7 +361,7 @@ beginf
 	EndIf
 
  	CogRs_JnlDst.Init()
-	CogRs_JnlDst.Where.Zoom_PK(Condition(XQ_Cog.TiCod = 'C', CA.Cog_FaeJnl, CA.Cog_FnpJnl))
+	CogRs_JnlDst.Where.PK(Condition(XQ_Cog.TiCod = 'C', CA.Cog_FaeJnl, CA.Cog_FnpJnl))
 	If CogRs_JnlDst.Select() = 0
 		if tunnel=false 
 			messagebox("Le journal FNP ou FAE n'est pas paramétré dans le dossier","Erreur",mb_iconstop)
@@ -507,7 +503,6 @@ Procedure Cog_Insert_List_Impression(iIdList, iBlocNo, iCpt, iDev, iEtb, iLib, i
 1	iAxe2		>ccfdd.dhsd			Axe	= ' '
 1	iAxe3		>ccfdd.dhsd			Axe	= ' '
 1	iAxe4		>ccfdd.dhsd			Axe	= ' '
-1	iTvaMt	>ccfdd.dhsd			TvaMt
 BeginP
 
 	Init COG_IMP_FNPFAE = ' '
@@ -696,14 +691,14 @@ BeginF
 ;		Lectab(20,CogRs_MOUV.Op)
 ;	endif
 
-	if (T030.Dos<>999 and T030.Dos <> CogRs_MOUV.Dos) or T030.TvaT <> ENT.TvaTie
-		Lectab(30, ENT.TvaTie)
+	if (T086.Dos<>999 and T086.Dos <> CogRs_MOUV.Dos) or T086.TvaTie <> ENT.TvaTie
+		Lectab(86, ENT.TvaTie)
 	endif
 
 	Init Decr=' '
 
 	Decr.Cpt		= Condition(wTrait = C_TRAITEMENT_FNP, ART.CptA, ART.CptV)
-	Cog_Masquage_compte(Decr.Cpt, CogRs_OP.CptMsk, T030.CptMsk, CLI.CptMsk)
+	Cog_Masquage_compte(Decr.Cpt, CogRs_OP.CptMsk, T086.CptMsk, CLI.CptMsk)
 
 	Decr.Sens		= Condition(CogRs_MOUV.Sens=C_entree,C_debit,C_credit)
 	
@@ -874,7 +869,7 @@ BeginP
 
 		If flag_Loc
 			Hwrite(CCFM,CX)	| Wnb_CX++
-			Cog_Insert_List_Impression(lId_IMP_Ana, C_BLOC_CX, C8.Cpt, CX.Dev, CX.Etb, C8.Lib, CX.Mt, C8.Sens, CX.Axe(1), CX.Axe(2),CX.Axe(3),CX.Axe(4),0)
+			Cog_Insert_List_Impression(lId_IMP_Ana, C_BLOC_CX, C8.Cpt, CX.Dev, CX.Etb, C8.Lib, CX.Mt, C8.Sens, CX.Axe(1), CX.Axe(2),CX.Axe(3),CX.Axe(4))
 		EndIf
 	endif
 	
@@ -947,7 +942,7 @@ BeginP
 	
 	If flag_Loc
 		Hwrite(CCFM,CX)	| Wnb_CX++
-		Cog_Insert_List_Impression(lId_IMP_Ana, C_BLOC_CX, C8.Cpt, CX.Dev, CX.Etb, ' ', CX.Mt, C8.Sens, CX.Axe(1), CX.Axe(2),CX.Axe(3),CX.Axe(4), iTvaMt=0)
+		Cog_Insert_List_Impression(lId_IMP_Ana, C_BLOC_CX, C8.Cpt, CX.Dev, CX.Etb, ' ', CX.Mt, C8.Sens, CX.Axe(1), CX.Axe(2),CX.Axe(3),CX.Axe(4))
 	EndIF
 
 EndP
@@ -991,19 +986,19 @@ BeginP
 		Wdev = Decr.dev
 		wEtb = DEcr.Etb
 
-		Cog_Insert_List_Impression(lId_IMP, C_BLOC_ETB, DEcr.Cpt, DEcr.Dev, DEcr.Etb, "", 0, 0, iTvaMt=0) 
+		Cog_Insert_List_Impression(lId_IMP, C_BLOC_ETB, DEcr.Cpt, DEcr.Dev, DEcr.Etb, "", 0, 0) 
 
 		Do While stl_Decr not in (0,-1) and DEcr.Etb = wEtb AND Decr.dev = Wdev
 			P_Ecrit_Decr_Ccfm
-			Cog_Insert_List_Impression(lId_IMP,C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens, iTvaMt=Decr.TvaMtD) 
+			Cog_Insert_List_Impression(lId_IMP,C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens) 
 			stl_Decr=ListNext(idl_EcrDet,Decr)
 		Wend
 		P_Ecrit_C8_Tva_CCFM(wDev, wEtb)
-		Cog_Insert_List_Impression(lId_IMP, C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens, iTvaMt=0) 	
+		Cog_Insert_List_Impression(lId_IMP, C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens) 	
 		P_Calcul_Solde_Avec_Tva
 		if WmtSld<>0
 			P_Contre_partie_Ccfm(Wdev, wEtb)
-			Cog_Insert_List_Impression(lId_IMP, C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens, iTvaMt=0) 	
+			Cog_Insert_List_Impression(lId_IMP, C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens) 	
 			Wmtdeb=0 | Wmtdevdeb=0 | Wmtcre=0 | Wmtdevcre=0  
 			WmtSld=0 | WmtdevSld=0
 		endif
@@ -1023,7 +1018,7 @@ BeginP
 		Wecrvalno++	
 		Wdev = Cecr.dev
 		Wetb = Cecr.Etb
-		Cog_Insert_List_Impression(lId_IMP, C_BLOC_ETB, "", Cecr.Dev, Cecr.Etb, "", 0, 0, iTvaMt=0) 
+		Cog_Insert_List_Impression(lId_IMP, C_BLOC_ETB, "", Cecr.Dev, Cecr.Etb, "", 0, 0) 
 		Do While stl_Cecr not in (0,-1) and Cecr.Etb = Wetb AND Cecr.dev=Wdev
 			
 			;--------reperage si analytique
@@ -1046,7 +1041,7 @@ BeginP
 			Do WHile ListNext(idl_EcrDet, DEcr) not IN (-1, 0)
 
 				If DEcr.Etb & DEcr.Dev & decr.Cpt & DEcr.Sens = Cecr.Etb & Cecr.Dev & Cecr.Cpt & Cecr.Sens
-					Cog_Insert_List_Impression(lId_IMP, C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens, iTvaMt=Decr.TvaMtD) 
+					Cog_Insert_List_Impression(lId_IMP, C_BLOC_C8, DEcr.Cpt, DEcr.Dev, DEcr.Etb, DEcr.Lib, DEcr.MtDev, DEcr.Sens) 
 					ListDeleteAndPrevious(idl_EcrDet)
 				EndIf
 
@@ -1070,12 +1065,12 @@ BeginP
 		Wend
 
 		P_Ecrit_C8_Tva_CCFM(Wdev, Wetb)
-		Cog_Insert_List_Impression(lId_IMP, C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens, iTvaMt=0) 	
+		Cog_Insert_List_Impression(lId_IMP, C_BLOC_TVA, "", C8_Tva.Dev, C8_Tva.Etb, "", C8_Tva.MtDev, C8_Tva.Sens) 	
 		P_Calcul_Solde_Avec_Tva
 
 		if WmtSld<>0
 			P_Contre_partie_Ccfm(Wdev, Wetb)
-			Cog_Insert_List_Impression(lId_IMP, C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens, iTvaMt=0) 	
+			Cog_Insert_List_Impression(lId_IMP, C_BLOC_CP, "", C8_CP.Dev, C8_CP.Etb, "", C8_CP.MtDev, C8_CP.Sens) 	
 			Wmtdeb=0 | Wmtdevdeb=0 | Wmtcre=0 | Wmtdevcre=0  
 			WmtSld=0 | WmtdevSld=0
 		endif
@@ -1237,9 +1232,9 @@ Beginp
 		Else
 			Wret = TRUE
 			CogRs_Mouv_Init_Selection
-			CogRs_MOUV.InitForUpdateWhere()	
+			CogRs_MOUV.InitForUpdateWhere()
 			CogRs_MOUV.Cog_EcrDt = Today
-			CogRs_MOUV.UpdateWhere()			; RAPPEL: les entêtes sont réservées donc les mouvements aussi ce qui autorise le updatewhere
+			CogRs_MOUV.UpdateWhere()
 		EndIf
 
 		Hopen(CCFM,"R")

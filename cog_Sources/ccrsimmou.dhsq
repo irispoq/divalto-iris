@@ -22,7 +22,13 @@ Public Record	"gtfdd.dhsd"	T000
 	FamStat1.LIB,
 	FamStat1.Fam,
 	AxeAnael.LIB,
+	ART.DES 
+<MandatoryColumns>
 	ART.DES
+
+<LEFTJOIN>
+	GTFDD.DHSD ART
+	ON ART.DOS = I1.DOS AND ART.REF = I1.LIB
 <LEFTJOIN Name='Zoom'>
 	C3 as CptCes
 	on CptCes.Dos = I1.Dos and CptCes.Cpt = I1.Cog_CptCes and CptCes.Ce1 = '3'
@@ -35,9 +41,6 @@ Public Record	"gtfdd.dhsd"	T000
 <LEFTJOIN Name='Zoom'>
 	GTFDD.DHSD MOUV
 	ON MOUV.DOS = I1.DOS AND MOUV.ENRNO = I1.COG_ENRNO
-<LEFTJOIN Name='Zoom'>
-	GTFDD.DHSD ART
-	ON ART.DOS = I1.DOS AND ART.REF = I1.LIB
 <LEFTJOIN Name='Zoom'>
 	GTFDD.DHSD T012 as FamStat1	  	
 	ON (  FamStat1.Dos = CASE WHEN T000.TabTyp(12) = 2 THEN 999 ELSE MZ.Dos END )

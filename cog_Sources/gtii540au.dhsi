@@ -1,7 +1,7 @@
-;>xwin4obj     imprimante               6.0       20141104143939      
+;>xwin4obj     imprimante               6.0       20161207110916      
 [masque]
- utilisateur="ROOT"
- date_modification="04/11/2014"
+ utilisateur="UGIE"
+ date_modification="07/12/2016"
  feuille_style="fstyleimp.dhfi"
  taille_ligne=9
  orientation=paysage
@@ -11,7 +11,7 @@
  etat=0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1
  dernier_id=1000002
  surcharge=oui
- date_modif_base="20090721084615"
+ date_modif_base="20130513115541"
  dernier_id_page=100000
  niveau_surcharge=1
  [adresses]
@@ -48,65 +48,6 @@
    arrondi=10
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
- [obj_texte]
-  [presentation]
-   position=3,6
-   taille=10,42
-   id=227
-   wstyle="STD"
-  [texte]
-   texte="Etat GTII540"
- [obj_texte]
-  [presentation]
-   position=80,8
-   taille=13,39
-   noms="duplicata"
-   id=238
-   wstyle="GRAND_GRAS"
-  [texte]
-   texte="DUPLICATA"
- [obj_texte]
-  [presentation]
-   position=98,457
-   taille=9,10
-   id=221
-   wstyle="STD"
-  [texte]
-   texte="Le"
- [obj_texte]
-  [presentation]
-   position=98,7
-   taille=12,26
-   id=222
-   wstyle="STD"
-  [texte]
-   texte="Dossier"
- [obj_texte]
-  [presentation]
-   position=63,149
-   taille=13,14
-   id=2
-   wstyle="GRAND"
-  [texte]
-   texte="Etat"
- [obj_texte]
-  [presentation]
-   position=117,194
-   taille=13,37
-   cadrage=centre
-   id=3
-   wstyle="GRAND_GRAS"
-  [texte]
-   texte="Numéro de"
- [obj_texte]
-  [presentation]
-   position=126,399
-   taille=13,23
-   cadrage=centre
-   id=4
-   wstyle="GRAND_GRAS"
-  [texte]
-   texte="Unité"
  [cadre]
   [presentation]
    position=111,24
@@ -208,6 +149,65 @@
    arrondi=10
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=3,6
+   taille=10,42
+   id=227
+   wstyle="STD"
+  [texte]
+   texte="Etat GTII540"
+ [obj_texte]
+  [presentation]
+   position=80,8
+   taille=13,39
+   noms="duplicata"
+   id=238
+   wstyle="GRAND_GRAS"
+  [texte]
+   texte="DUPLICATA"
+ [obj_texte]
+  [presentation]
+   position=98,457
+   taille=9,10
+   id=221
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=98,7
+   taille=12,26
+   id=222
+   wstyle="STD"
+  [texte]
+   texte="Dossier"
+ [obj_texte]
+  [presentation]
+   position=63,149
+   taille=13,14
+   id=2
+   wstyle="GRAND"
+  [texte]
+   texte="Etat"
+ [obj_texte]
+  [presentation]
+   position=117,194
+   taille=13,37
+   cadrage=centre
+   id=3
+   wstyle="GRAND_GRAS"
+  [texte]
+   texte="Numéro de"
+ [obj_texte]
+  [presentation]
+   position=126,399
+   taille=13,23
+   cadrage=centre
+   id=4
+   wstyle="GRAND_GRAS"
+  [texte]
+   texte="Unité"
  [obj_texte]
   [presentation]
    position=117,425
@@ -465,8 +465,6 @@
    wstyle="STD"
   [description]
    donnee=soc,nom,soc
-  [param_saisie]
-   esp_si_zero=oui
  [champ]
   [presentation]
    position=28,330
@@ -580,15 +578,6 @@
  debordement=3
  diva_avantgestion="Bloc_EnTete_AvGestion"
  ident_unique=2
- [obj_texte]
-  [presentation]
-   position=4,269
-   taille=20,50
-   noms="arenseigner"
-   id=1000001
-   wstyle="GRAND"
-  [texte]
-   texte="A renseigner"
  [cadre]
   [presentation]
    position=51,2
@@ -598,6 +587,15 @@
    nature=horizontal
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=4,269
+   taille=20,50
+   noms="arenseigner"
+   id=1000001
+   wstyle="GRAND"
+  [texte]
+   texte="A renseigner"
  [champ]
   [presentation]
    position=4,84
@@ -815,8 +813,8 @@
    texte="Mode de transport"
  [champ]
   [presentation]
-   position=13,386
-   taille=12,128
+   position=13,401
+   taille=12,113
    id=237
    wstyle="GRAND"
   [description]
@@ -826,7 +824,7 @@
  [champ]
   [presentation]
    position=13,368
-   taille=12,19
+   taille=12,33
    id=236
    wstyle="GRAND"
   [description]
@@ -888,39 +886,6 @@
    arrondi=10
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
- [obj_texte]
-  [presentation]
-   position=34,12
-   taille=12,13
-   id=72
-   wstyle="GRAND"
-  [texte]
-   texte="Etat"
- [obj_texte]
-  [presentation]
-   position=55,4
-   taille=16,521
-   cadrage=centre
-   id=234
-   wstyle="TRES_TRES_GRAND_GRAS"
-  [texte]
-   texte="des BONS de PREPARATION"
- [obj_texte]
-  [presentation]
-   position=98,422
-   taille=9,10
-   id=228
-   wstyle="STD"
-  [texte]
-   texte="Le"
- [obj_texte]
-  [presentation]
-   position=98,7
-   taille=12,26
-   id=229
-   wstyle="STD"
-  [texte]
-   texte="Dossier"
  [cadre]
   [presentation]
    position=0,2
@@ -1013,6 +978,39 @@
    nature=vertical
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=34,12
+   taille=12,13
+   id=72
+   wstyle="GRAND"
+  [texte]
+   texte="Etat"
+ [obj_texte]
+  [presentation]
+   position=55,4
+   taille=16,521
+   cadrage=centre
+   id=234
+   wstyle="TRES_TRES_GRAND_GRAS"
+  [texte]
+   texte="des BONS de PREPARATION"
+ [obj_texte]
+  [presentation]
+   position=98,422
+   taille=9,10
+   id=228
+   wstyle="STD"
+  [texte]
+   texte="Le"
+ [obj_texte]
+  [presentation]
+   position=98,7
+   taille=12,26
+   id=229
+   wstyle="STD"
+  [texte]
+   texte="Dossier"
  [obj_texte]
   [presentation]
    position=3,8
@@ -1350,14 +1348,6 @@
    nature=horizontal
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
- [obj_texte]
-  [presentation]
-   position=19,148
-   taille=11,21
-   id=113
-   wstyle="STD"
-  [texte]
-   texte="Repères :"
  [cadre]
   [presentation]
    position=0,2
@@ -1368,6 +1358,14 @@
    nature=horizontal
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=19,148
+   taille=11,21
+   id=113
+   wstyle="STD"
+  [texte]
+   texte="Repères :"
  [champ]
   [presentation]
    position=6,73
@@ -1683,14 +1681,6 @@
    arrondi=10
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TITRE_ENCADRE_FOND"
- [obj_texte]
-  [presentation]
-   position=44,12
-   taille=12,13
-   id=143
-   wstyle="GRAND"
-  [texte]
-   texte="Etat"
  [cadre]
   [presentation]
    position=0,2
@@ -1702,6 +1692,97 @@
    arrondi=10
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,81
+   taille=470,1
+   id=161
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,471
+   taille=470,1
+   id=162
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,430
+   taille=470,1
+   id=163
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,364
+   taille=470,1
+   id=164
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,340
+   taille=470,1
+   id=165
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,301
+   taille=470,1
+   id=166
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,142
+   taille=470,1
+   id=167
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,100
+   taille=470,1
+   id=168
+  [param_cadre]
+   nature=vertical
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [cadre]
+  [presentation]
+   position=112,2
+   taille=471,525
+   id=169
+  [param_cadre]
+   nature=vide_arrondi
+   epaisseur=2
+   arrondi=10
+   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
+   wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=44,12
+   taille=12,13
+   id=143
+   wstyle="GRAND"
+  [texte]
+   texte="Etat"
  [obj_texte]
   [presentation]
    position=3,8
@@ -1843,89 +1924,6 @@
    wstyle="GRAND_GRAS"
   [texte]
    texte="à préparer"
- [cadre]
-  [presentation]
-   position=112,81
-   taille=470,1
-   id=161
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=112,471
-   taille=470,1
-   id=162
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=112,430
-   taille=470,1
-   id=163
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=112,364
-   taille=470,1
-   id=164
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=112,340
-   taille=470,1
-   id=165
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=112,301
-   taille=470,1
-   id=166
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=112,142
-   taille=470,1
-   id=167
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=112,100
-   taille=470,1
-   id=168
-  [param_cadre]
-   nature=vertical
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
- [cadre]
-  [presentation]
-   position=112,2
-   taille=471,525
-   id=169
-  [param_cadre]
-   nature=vide_arrondi
-   epaisseur=2
-   arrondi=10
-   wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
-   wnom_couleurfond="TRANS"
  [champ]
   [presentation]
    position=3,20
@@ -2068,14 +2066,6 @@
    nature=horizontal
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
- [obj_texte]
-  [presentation]
-   position=19,148
-   taille=11,21
-   id=183
-   wstyle="STD"
-  [texte]
-   texte="Repères :"
  [cadre]
   [presentation]
    position=0,81
@@ -2096,6 +2086,14 @@
    nature=horizontal
    wnom_couleurcadre="TRAIT_SIMPLE_NOIR"
    wnom_couleurfond="TRANS"
+ [obj_texte]
+  [presentation]
+   position=19,148
+   taille=11,21
+   id=183
+   wstyle="STD"
+  [texte]
+   texte="Repères :"
  [champ]
   [presentation]
    position=6,5
@@ -2417,7 +2415,7 @@ Beginp
 Endp
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtii540a.dhsi 4076 2009-07-21 13:18:35Z lk $')
+SetModuleInfo('$Id: gtii540a.dhsi 31550 2013-05-13 12:34:30Z sn $')
 Public Record "gtfdd.dhsd" bpent bpent
 Public Record "gtfdd.dhsd" bpdet bpdet
 Public Record "gtfdd.dhsd" t1 t1
@@ -2426,7 +2424,4 @@ Public Record "gtfdd.dhsd" art art
 Public Record "gtfdd.dhsd" mvtl mvtl
 Public Record "gtfdd.dhsd" soc soc
 Public Record "gtfdd.dhsd" t026 t026
-
-
-
 [/diva]

@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20160825141308      
+;>xwin4obj                              7.0       20161207162247      
 [masque]
  libelle="zoom entreprise"
  utilisateur="UGIE"
- date_modification="25/08/2016"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=358
  type_masque=2
  dernier_id=1000067
  surcharge=oui
- date_modif_base="20140423090133"
+ date_modif_base="20151116172529"
  dernier_id_page=100001
  niveau_surcharge=1
 [defaut]
@@ -19,16 +19,16 @@
   f7=135
   shift_f7=9040
 [enregistrements]
- "gtfdd.dhsd",,g7,g7,4510,0
- "gtfdd.dhsd",,socno,socno,700,0
+ "gtfdd.dhsd",,g7,g7,4800,0
+ "gtfdd.dhsd",,socno,socno,800,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
- "gtfdd.dhsd",,g7,g7bis,4510,0
- "rcfebcdd.dhsd",,d2,d2a,508,0
- "rcfebcdd.dhsd",,d2,d2v,508,0
- "gtfdd.dhsd",,t037,t037,450,0
+ "gtfdd.dhsd",,g7,g7bis,4800,0
+ "rcfebcdd.dhsd",,d2,d2a,608,0
+ "rcfebcdd.dhsd",,d2,d2v,608,0
+ "gtfdd.dhsd",,t037,t037,500,0
  "gtrsdos.dhoq",,dossier,dossier,1024,1
  "gtrsdos.dhoq",,dossier,dossier_sel,1024,1
- "gtfdd.dhsd",,soc,soc,2800,0
+ "gtfdd.dhsd",,soc,soc,3500,0
  "cogrs_dos.dhoq",,cogrs_soccomp,cogrs_soccomp,1024,1
 [onglet]
  [presentation]
@@ -1395,7 +1395,7 @@
    shift_f7=9040
  [case_a_cocher]
   [presentation]
-   position=42,181
+   position=52,10
    taille=9,146
    noms="izy"
    id=88
@@ -1419,7 +1419,7 @@
    diva_apres="Champ_ETB_1_Ap"
  [case_a_cocher]
   [presentation]
-   position=52,181
+   position=42,181
    taille=9,146
    noms="izy"
    id=89
@@ -1443,7 +1443,7 @@
  [case_a_cocher]
   [presentation]
    position=62,181
-   taille=9,293
+   taille=9,145
    noms="izy"
    id=90
    wstyle="STD"
@@ -1465,7 +1465,7 @@
    diva_avant="Champ_ETB_1_Av"
  [case_a_cocher]
   [presentation]
-   position=82,181
+   position=72,181
    taille=9,146
    noms="izy"
    id=663
@@ -1490,7 +1490,7 @@
    diva_apres="Champ_ETB_3_Ap"
  [case_a_cocher]
   [presentation]
-   position=72,181
+   position=52,181
    taille=9,146
    noms="izy"
    id=662
@@ -1513,8 +1513,8 @@
    diva_avant="Champ_ETB_1_Av"
  [case_a_cocher]
   [presentation]
-   position=92,181
-   taille=9,293
+   position=82,181
+   taille=9,146
    noms="izy"
    id=91
    wstyle="STD"
@@ -1538,7 +1538,57 @@
    diva_apres="Champ_ETB_2_Ap"
  [case_a_cocher]
   [presentation]
+   position=92,181
+   taille=9,146
+   noms="izy"
+   id=842
+   wstyle="STD"
+  [description]
+   donnee=dossier,entcodn,dossier,62
+   minmaj=majuscules
+  [param_case]
+   texte="Gérer les sites par établissement"
+   cadrage=droite
+   valeur="2","1"
+   notifier=oui
+  [aide_page]
+   aide=2618
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_ETB_1_Av"
+   diva_apres="Champ_ETB_3_Ap"
+ [case_a_cocher]
+  [presentation]
    position=102,181
+   taille=9,146
+   noms="izy"
+   id=843
+   wstyle="STD"
+  [description]
+   donnee=dossier,entcodn,dossier,63
+   minmaj=majuscules
+  [param_case]
+   texte="Gérer les contrats par établissement"
+   cadrage=droite
+   valeur="2","1"
+   notifier=oui
+  [aide_page]
+   aide=2546
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+   diva_avant="Champ_ETB_1_Av"
+   diva_apres="Champ_ETB_2_Ap"
+ [case_a_cocher]
+  [presentation]
+   position=62,10
    taille=9,146
    noms="izy"
    id=644
@@ -2763,7 +2813,7 @@
  [groupe_radio]
   [presentation]
    position=82,207
-   taille=42,112
+   taille=42,104
    id=146
    wstyle="STD"
   [description]
@@ -2774,7 +2824,7 @@
   [radio_bouton]
    [presentation]
     position=91,212
-    taille=9,106
+    taille=9,93
     id=147
     wstyle="STD"
    [param_radio]
@@ -2784,7 +2834,7 @@
   [radio_bouton]
    [presentation]
     position=101,212
-    taille=9,106
+    taille=9,93
     id=148
     wstyle="STD"
    [param_radio]
@@ -2794,7 +2844,7 @@
   [radio_bouton]
    [presentation]
     position=111,212
-    taille=9,106
+    taille=9,93
     id=149
     wstyle="STD"
    [param_radio]
@@ -3187,6 +3237,27 @@
    shift_f7=9040
   [traitements]
    microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=263,318
+   taille=9,156
+   id=829
+   wstyle="STD"
+  [description]
+   donnee=dossier,entcodn,dossier,59
+   minmaj=majuscules
+  [param_case]
+   texte="Interdire la validation si des entrées forcées existent"
+   cadrage=droite
+   valeur="2","1"
+  [aide_page]
+   aide=1118
+   fichier="GGFAIDE"
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
 [page]
  numero=14
  fond="STD"
@@ -3445,7 +3516,7 @@
    id=188
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,33
+   donnee=dossier,entcodn,dossier,33
    minmaj=majuscules
   [param_case]
    texte="Gérer les tarifs de vente par dépôt"
@@ -3466,7 +3537,7 @@
    id=189
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,38
+   donnee=dossier,entcodn,dossier,38
    minmaj=majuscules
   [param_case]
    texte="Gérer les tarifs de vente quantitatifs"
@@ -3488,7 +3559,7 @@
    id=190
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,36
+   donnee=dossier,entcodn,dossier,36
    minmaj=majuscules
   [param_case]
    texte="Gérer le colisage en saisie de pièces"
@@ -3549,7 +3620,7 @@
    id=198
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,35
+   donnee=dossier,entcodn,dossier,35
    minmaj=majuscules
   [param_groupe]
    titre="Valorisation ventes au coût de revient"
@@ -3588,7 +3659,7 @@
    id=194
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,12
+   donnee=dossier,entcodn,dossier,12
    minmaj=majuscules
   [param_groupe]
    titre="Calcul du prix unitaire net"
@@ -3637,7 +3708,7 @@
    id=614
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,39
+   donnee=dossier,entcodn,dossier,39
    minmaj=majuscules
   [param_groupe]
    titre="Calcul du prix unitaire net fournisseur"
@@ -3686,7 +3757,7 @@
    id=803
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,50
+   donnee=dossier,entcodn,dossier,50
    minmaj=majuscules
   [param_case]
    texte="Gérer les commandes programme"
@@ -3707,7 +3778,7 @@
    id=804
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,51
+   donnee=dossier,entcodn,dossier,51
    minmaj=majuscules
   [param_case]
    texte="Valoriser les commandes programmes en tenant compte des ventilations prévisionnelles"
@@ -3728,7 +3799,7 @@
    id=805
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,52
+   donnee=dossier,entcodn,dossier,52
    minmaj=majuscules
   [param_case]
    texte="Gérer la préparation pour le magasinier en saisie des livraisons"
@@ -3749,7 +3820,7 @@
    id=816
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,58
+   donnee=dossier,entcodn,dossier,58
    minmaj=majuscules
   [param_case]
    texte="Réactiver l'état précédent en suppression de pièce"
@@ -3786,7 +3857,7 @@
    id=806
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,53
+   donnee=dossier,entcodn,dossier,53
    minmaj=majuscules
   [param_case]
    texte="Notes tiers en création de pièces"
@@ -3807,7 +3878,7 @@
    id=808
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,54
+   donnee=dossier,entcodn,dossier,54
    minmaj=majuscules
   [param_case]
    texte="Notes article en création de ligne"
@@ -3828,7 +3899,7 @@
    id=809
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,56
+   donnee=dossier,entcodn,dossier,56
    minmaj=majuscules
   [param_case]
    texte="Rubriques article en création de ligne"
@@ -3894,7 +3965,7 @@
    id=810
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,55
+   donnee=dossier,entcodn,dossier,55
    minmaj=majuscules
   [param_case]
    texte="Rubriques tiers en création de pièce"
@@ -4467,7 +4538,7 @@
    id=658
    wstyle="STD"
   [description]
-   donnee=dossier,entcod,dossier,46
+   donnee=dossier,entcodn,dossier,46
    minmaj=majuscules
   [param_case]
    texte="Masquer les lignes validées"
@@ -5029,6 +5100,116 @@
  suiv=17
  attache_lgx=oui
  attache_lgy=oui
+ ident_unique=26
+ [onglet_page]
+  [param_onglet_page]
+   nom="FICHE"
+   libelle="CONTRE-MARQUE"
+   couleur_fond="STD"
+ [groupbox]
+  [presentation]
+   position=26,5
+   taille=55,470
+   id=836
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Assistance à la saisie"
+   couleur_fond="GROUPE_FOND"
+ [groupbox]
+  [presentation]
+   position=89,5
+   taille=30,470
+   id=837
+   wstyle="GROUPE"
+  [param_groupbox]
+   texte="Actions contremarque"
+   couleur_fond="GROUPE_FOND"
+ [case_a_cocher]
+  [presentation]
+   position=42,10
+   taille=9,464
+   id=838
+   wstyle="STD"
+  [description]
+   donnee=dossier,cdegenctmfl,dossier
+  [param_case]
+   texte="Lancer automatiquement à la création de commande client"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=54,10
+   taille=9,464
+   id=839
+   wstyle="STD"
+  [description]
+   donnee=dossier,postrecepctmfl,dossier
+  [param_case]
+   texte="Lancer automatiquement à la validation de BL fournisseur"
+   cadrage=droite
+   valeur="2","1"
+   choix="gtfdmc.dhfi",""
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=66,10
+   taille=9,462
+   id=840
+   wstyle="STD"
+  [description]
+   donnee=dossier,entcodn,dossier,61
+   minmaj=majuscules
+  [param_case]
+   texte="Gérer la fiche 'Conditions de réapprovisionnement' directement dans la fiche article"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+ [case_a_cocher]
+  [presentation]
+   position=105,10
+   taille=9,462
+   id=841
+   wstyle="STD"
+  [description]
+   donnee=dossier,entcodn,dossier,62
+   minmaj=majuscules
+  [param_case]
+   texte="Traiter aussi les actions sur les pièces symétriques au lien de contremarque"
+   cadrage=droite
+   valeur="2","1"
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+  [info_bulle]
+  texte="Exemple : en pièce client l'action est traitée sur la pièce fournisseur liée par la contremarque"
+[page]
+ numero=17
+ fond="STD"
+ efface=partiel
+ nb_lig=35
+ nb_col=120
+ offset_lig=1
+ offset_col=1
+ prec=16
+ suiv=18
+ attache_lgx=oui
+ attache_lgy=oui
  ident_unique=8
  [onglet_page]
   [param_onglet_page]
@@ -5276,7 +5457,7 @@
    id=308
    wstyle="CHAMP_SAISI"
   [description]
-   donnee=dossier,entcod,dossier,2
+   donnee=dossier,entcoda,dossier,2
   [aide_page]
    aide=2579
    fichier="GTFAIDE"
@@ -6095,15 +6276,15 @@
    f7=135
    shift_f7=9040
 [page]
- numero=17
+ numero=18
  fond="STD"
  efface=partiel
  nb_lig=35
  nb_col=120
  offset_lig=1
  offset_col=1
- prec=16
- suiv=18
+ prec=17
+ suiv=19
  attache_lgx=oui
  attache_lgy=oui
  ident_unique=9
@@ -7440,15 +7621,15 @@
   [traitements]
    microbol_click=8002
 [page]
- numero=18
+ numero=19
  fond="STD"
  efface=partiel
  nb_lig=35
  nb_col=120
  offset_lig=1
  offset_col=1
- prec=17
- suiv=19
+ prec=18
+ suiv=20
  attache_lgx=oui
  attache_lgy=oui
  ident_unique=10
@@ -7459,7 +7640,7 @@
    couleur_fond="STD"
  [groupbox]
   [presentation]
-   position=132,5
+   position=149,5
    taille=72,470
    id=448
    wstyle="GROUPE"
@@ -7560,13 +7741,21 @@
   [presentation]
    position=106,5
    taille=9,180
+   id=834
+   wstyle="STD"
+  [texte]
+   texte="Gérer des sous fiches pour les taxes de ventes"
+ [obj_texte]
+  [presentation]
+   position=116,5
+   taille=9,180
    id=459
    wstyle="STD"
   [texte]
    texte="Différence tolérée entre TTC facturé calculé et TTC fournisseur"
  [obj_texte]
   [presentation]
-   position=116,5
+   position=126,5
    taille=9,180
    id=468
    wstyle="STD"
@@ -7574,7 +7763,7 @@
    texte="L'encours comptable a été réajusté par Divalto Comptabilité le"
  [obj_texte]
   [presentation]
-   position=148,80
+   position=165,80
    taille=9,60
    cadrage=centre
    id=779
@@ -7583,7 +7772,7 @@
    texte="Axe 1"
  [obj_texte]
   [presentation]
-   position=148,160
+   position=165,160
    taille=9,60
    cadrage=centre
    id=780
@@ -7592,7 +7781,7 @@
    texte="Axe 2"
  [obj_texte]
   [presentation]
-   position=148,240
+   position=165,240
    taille=9,60
    cadrage=centre
    id=781
@@ -7601,7 +7790,7 @@
    texte="Axe 3"
  [obj_texte]
   [presentation]
-   position=148,320
+   position=165,320
    taille=9,60
    cadrage=centre
    id=782
@@ -7610,7 +7799,7 @@
    texte="Axe 4"
  [obj_texte]
   [presentation]
-   position=162,10
+   position=179,10
    taille=9,68
    id=464
    wstyle="STD"
@@ -7618,7 +7807,7 @@
    texte="Valeur par défaut"
  [obj_texte]
   [presentation]
-   position=172,10
+   position=189,10
    taille=9,68
    id=465
    wstyle="STD"
@@ -7626,7 +7815,7 @@
    texte="A saisir client"
  [obj_texte]
   [presentation]
-   position=182,10
+   position=199,10
    taille=9,68
    id=466
    wstyle="STD"
@@ -7634,7 +7823,7 @@
    texte="A saisir fournisseur"
  [obj_texte]
   [presentation]
-   position=192,10
+   position=209,10
    taille=9,68
    id=467
    wstyle="STD"
@@ -7684,51 +7873,6 @@
    shift_f7=9040
   [traitements]
    microbol_click=8002
- [champ]
-  [presentation]
-   position=42,316
-   taille=9,32
-   id=795
-   colonnes_saisie=8
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=d2,cpt,d2a
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
- [champ]
-  [presentation]
-   position=42,349
-   taille=9,88
-   id=799
-   colonnes_saisie=24
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=d2,ribdom,d2a
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
- [champ]
-  [presentation]
-   position=52,349
-   taille=9,88
-   id=798
-   colonnes_saisie=24
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=d2,ribdom,d2v
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
  [multi_choix]
   [presentation]
    position=46,187
@@ -7840,6 +7984,51 @@
    shift_f7=9040
   [traitements]
    microbol_click=8002
+ [champ]
+  [presentation]
+   position=42,316
+   taille=9,32
+   id=795
+   colonnes_saisie=8
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=d2,cpt,d2a
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
+ [champ]
+  [presentation]
+   position=42,349
+   taille=9,88
+   id=799
+   colonnes_saisie=24
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=d2,ribdom,d2a
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
+ [champ]
+  [presentation]
+   position=52,349
+   taille=9,88
+   id=798
+   colonnes_saisie=24
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=d2,ribdom,d2v
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
  [multi_choix]
   [presentation]
    position=96,187
@@ -7855,9 +8044,31 @@
   [touches]
    f7=135
    shift_f7=9040
- [champ]
+ [multi_choix]
   [presentation]
    position=106,187
+   taille=9,44
+   id=835
+   wstyle="CHAMP_SAISI"
+  [description]
+   donnee=dossier,entcodn,dossier,60
+   minmaj=majuscules
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   ouverture=oui
+   choix="gtfdmc.dhfi","NONOUI"
+  [aide_page]
+   aide=2600
+   fichier="GTFAIDE"
+  [touches]
+   f7=135
+   shift_f7=9040
+  [traitements]
+   microbol_click=8002
+ [champ]
+  [presentation]
+   position=116,187
    taille=9,44
    id=475
    wstyle="CHAMP_SAISI"
@@ -7932,7 +8143,7 @@
    shift_f7=9040
  [champ]
   [presentation]
-   position=116,187
+   position=126,187
    taille=9,44
    id=492
    wstyle="CHAMP_NON_SAISI"
@@ -7948,7 +8159,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=162,80
+   position=179,80
    taille=9,60
    id=476
    wstyle="CHAMP_SAISI"
@@ -7970,7 +8181,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=172,80
+   position=189,80
    taille=9,60
    id=477
    wstyle="CHAMP_SAISI"
@@ -7992,7 +8203,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=182,80
+   position=199,80
    taille=9,60
    id=478
    wstyle="CHAMP_SAISI"
@@ -8014,7 +8225,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=192,80
+   position=209,80
    taille=9,60
    id=479
    wstyle="CHAMP_SAISI"
@@ -8036,7 +8247,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=162,160
+   position=179,160
    taille=9,60
    id=480
    wstyle="CHAMP_SAISI"
@@ -8058,7 +8269,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=172,160
+   position=189,160
    taille=9,60
    id=481
    wstyle="CHAMP_SAISI"
@@ -8080,7 +8291,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=182,160
+   position=199,160
    taille=9,60
    id=482
    wstyle="CHAMP_SAISI"
@@ -8102,7 +8313,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=192,160
+   position=209,160
    taille=9,60
    id=483
    wstyle="CHAMP_SAISI"
@@ -8124,7 +8335,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=162,240
+   position=179,240
    taille=9,60
    id=484
    wstyle="CHAMP_SAISI"
@@ -8146,7 +8357,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=172,240
+   position=189,240
    taille=9,60
    id=485
    wstyle="CHAMP_SAISI"
@@ -8168,7 +8379,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=182,240
+   position=199,240
    taille=9,60
    id=486
    wstyle="CHAMP_SAISI"
@@ -8190,7 +8401,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=192,240
+   position=209,240
    taille=9,60
    id=487
    wstyle="CHAMP_SAISI"
@@ -8212,7 +8423,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=162,320
+   position=179,320
    taille=9,60
    id=488
    wstyle="CHAMP_SAISI"
@@ -8234,7 +8445,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=172,320
+   position=189,320
    taille=9,60
    id=489
    wstyle="CHAMP_SAISI"
@@ -8256,7 +8467,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=182,320
+   position=199,320
    taille=9,60
    id=490
    wstyle="CHAMP_SAISI"
@@ -8278,7 +8489,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=192,320
+   position=209,320
    taille=9,60
    id=491
    wstyle="CHAMP_SAISI"
@@ -8299,15 +8510,15 @@
   [traitements]
    microbol_click=8002
 [page]
- numero=19
+ numero=20
  fond="STD"
  efface=partiel
  nb_lig=35
  nb_col=120
  offset_lig=1
  offset_col=1
- prec=18
- suiv=20
+ prec=19
+ suiv=21
  attache_lgx=oui
  attache_lgy=oui
  ident_unique=13
@@ -8567,15 +8778,15 @@
   [traitements]
    microbol_click=8002
 [page]
- numero=20
+ numero=21
  fond="STD"
  efface=partiel
  nb_lig=35
  nb_col=120
  offset_lig=1
  offset_col=1
- prec=19
- suiv=21
+ prec=20
+ suiv=22
  attache_lgx=oui
  attache_lgy=oui
  ident_unique=14
@@ -8792,15 +9003,15 @@
   [traitements]
    microbol_click=8002
 [page]
- numero=21
+ numero=22
  fond="STD"
  efface=partiel
  nb_lig=35
  nb_col=120
  offset_lig=1
  offset_col=1
- prec=20
- suiv=22
+ prec=21
+ suiv=23
  attache_lgx=oui
  attache_lgy=oui
  ident_unique=15
@@ -9602,15 +9813,15 @@
   [boutons]
    "zoom"
 [page]
- numero=22
+ numero=23
  fond="STD"
  efface=partiel
  nb_lig=35
  nb_col=120
  offset_lig=1
  offset_col=1
- prec=21
- suiv=23
+ prec=22
+ suiv=24
  attache_lgx=oui
  attache_lgy=oui
  ident_unique=17
@@ -9692,15 +9903,15 @@
    microbol_click=6503
    diva_apres="Champ_Media_3_Ap"
 [page]
- numero=23
+ numero=24
  fond="STD"
  efface=partiel
  nb_lig=35
  nb_col=120
  offset_lig=1
  offset_col=1
- prec=22
- suiv=24
+ prec=23
+ suiv=25
  attache_lgx=oui
  attache_lgy=oui
  ident_unique=16
@@ -9889,21 +10100,6 @@
    wstyle="STD"
   [texte]
    texte="Code opération par défaut"
- [champ]
-  [presentation]
-   position=239,309
-   taille=9,147
-   id=1000061
-   colonnes_saisie=40
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_soccomp,op_pdv_lib,cogrs_soccomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
  [case_a_cocher]
   [presentation]
    position=21,10
@@ -10165,6 +10361,21 @@
    "zoom"
  [champ]
   [presentation]
+   position=116,285
+   taille=9,188
+   id=1000039
+   colonnes_saisie=80
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_soccomp,art_des,cogrs_soccomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
+ [champ]
+  [presentation]
    position=144,292
    taille=9,76
    id=1000046
@@ -10323,6 +10534,21 @@
    diva_apres="Champ_Cog_PDVseuil_1_Ap"
  [champ]
   [presentation]
+   position=239,309
+   taille=9,147
+   id=1000061
+   colonnes_saisie=40
+   wstyle="CHAMP_AFF"
+  [description]
+   donnee=cogrs_soccomp,op_pdv_lib,cogrs_soccomp
+   saisie=non
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f7=9040
+ [champ]
+  [presentation]
    position=239,280
    taille=9,29
    id=1000060
@@ -10342,30 +10568,17 @@
    diva_apres="Champ_Cog_PDVOp_1_Ap"
   [boutons]
    "zoom"
- [champ]
-  [presentation]
-   position=116,285
-   taille=9,188
-   id=1000039
-   colonnes_saisie=80
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=cogrs_soccomp,art_des,cogrs_soccomp
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f7=135
-   shift_f7=9040
 [page]
- numero=24
+ numero=25
  fond="STD"
  efface=partiel
  nb_lig=35
  nb_col=120
  offset_lig=1
  offset_col=1
- prec=23
+ prec=24
+ attache_lgx=oui
+ attache_lgy=oui
  ident_unique=100001
  [onglet_page]
   [param_onglet_page]
@@ -10608,8 +10821,24 @@
    [param_bouton]
     wnom=".MENU"
     wtexte="_Production \TShift+F5"
-    wid_ressource="GP__1"
+    wid_ressource="GP"
     wtrait_chaine="#shift_f5"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Devis technique \TShift+F6"
+    wid_ressource="DT"
+    wtrait_chaine="#shift_f6"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="_Contrats et abonnements"
+    wid_ressource="CEA"
+    wetype_trait=arret
+    warret=5002
+    wtrait_chaine="#shift_f6"
   [item]
    niveau=2
    [param_bouton]
@@ -10618,6 +10847,15 @@
     wid_ressource="NO"
     wetype_trait=arret
     warret=5001
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Demandes achat"
+    wid_ressource="DAO"
+    wetype_trait=arret
+    warret=5003
+    wtrait_chaine="#shift_f6"
   [item]
    dessin=vide
    niveau=2
@@ -10761,6 +10999,34 @@
     wtrait_chaine="#shift_f5"
    [info_bulle]
    texte="Paramétrage du Dossier Production <shift+F5>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Devis technique"
+    wid_ressource="DT"
+    wtrait_chaine="#shift_F6"
+   [info_bulle]
+   texte="Paramétrage du Dossier Devis Technique <shift+F6>"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Contrats et abonnements"
+    wid_ressource="CEA"
+    wetype_trait=arret
+    warret=5002
+    wtrait_chaine="#shift_F6"
+   [info_bulle]
+   texte="Paramétrage du Dossier Contrats et abonnements"
+  [item]
+   [param_bouton]
+    wnom=".TOOLBAR"
+    wtexte="Demandes achats"
+    wid_ressource="DAO"
+    wetype_trait=arret
+    warret=5003
+    wtrait_chaine="#shift_F6"
+   [info_bulle]
+   texte="Paramétrage des demandes achats et appels offres"
   [item]
    type=sep
    dessin=sep
@@ -11092,7 +11358,7 @@ Endp
 [/diva]
 [diva_base]
 ;>xdiva
-SetModuleInfo('$Id: gtez020_sql.dhsf 38908 2014-04-23 07:26:49Z lk $')
+SetModuleInfo('$Id: gtez020_sql.dhsf 51398 2015-11-16 16:25:11Z mcd $')
 ;*
 ;*      Zoom sur Société  Record SQL Dossier de GTRSDOS                    
 ;*
@@ -11292,8 +11558,8 @@ endp
 ;*
 public procedure Champ_ETANO_1_Ap			; controle no etat
 beginp
-   if not (Dossier.ENTCOD(2) in ('0'..'9') or Dossier.ENTCOD(2) in ('A'..'Z'))
-      Dossier.ENTCOD(2) = '1'
+   if not (Dossier.ENTCODA(2) in ('0'..'9') or Dossier.ENTCODA(2) in ('A'..'Z'))
+      Dossier.ENTCODA(2) = '1'
 		Mes_Alert (1001)
       Harmony.Retour = 3
    endif

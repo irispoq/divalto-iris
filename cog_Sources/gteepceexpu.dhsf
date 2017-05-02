@@ -1,13 +1,13 @@
-;>xwin4obj                              7.0       20161014101326      
+;>xwin4obj                              7.0       20161207153821      
 [masque]
  libelle="Explorateur de pièces"
  utilisateur="UGIE"
- date_modification="14/10/2016"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  noms_boutons="zoom"
  dernier_id=1000020
  surcharge=oui
- date_modif_base="20131008112025"
+ date_modif_base="20151006095515"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -16,22 +16,21 @@
   fichier="GTFAIDE"
 [enregistrements]
  "ddsys.dhsd",,rowinfo,rientite,120,0
- "gtfdd.dhsd",,gtpceexp,gtpceexp,3000,0
+ "gtfdd.dhsd",,gtpceexp,gtpceexp,3800,0
  "gtfdd.dhsd",,gtpce,gtpce,500,0
  "gtfdd.dhsd",,xq,g3xq,8000,0
- "gtfdd.dhsd",,cli,cli,2450,0
+ "gtfdd.dhsd",,cli,cli,3000,0
  "gtfdd.dhsd",,gtent,gtent,4000,0
- "ccfdd.dhsd",,ca,ca,1350,0
- "gtfdd.dhsd",,ets,ets,1500,0
- "gtfdd.dhsd",,soc,soc,2800,0
+ "ccfdd.dhsd",,ca,ca,1700,0
+ "gtfdd.dhsd",,ets,ets,1700,0
+ "gtfdd.dhsd",,soc,soc,3500,0
  "gtfdd.dhsd",,prjavt,prjavt,500,0
  "gtfdd.dhsd",,prjap,prjap,1000,0
- "gtfdd.dhsd",,ent,ent,1800,0
- "gtfdd.dhsd",,gtsel,gtsel_debut,1500,0
- "gtfdd.dhsd",,gtsel,gtsel_fin,1500,0
- "gtfdd.dhsd",,gtsel,gtsel_msk,1500,0
+ "gtfdd.dhsd",,gtsel,gtsel_debut,2000,0
+ "gtfdd.dhsd",,gtsel,gtsel_fin,2000,0
+ "gtfdd.dhsd",,gtsel,gtsel_msk,2000,0
  "gtfdd.dhsd",,rfo,rfo,650,0
- "gtfdd.dhsd",,gtpceprod,gtpceprod,400,0
+ "gtfdd.dhsd",,gtpceprod,gtpceprod,500,0
 [onglet]
  [presentation]
   position=0,0
@@ -478,7 +477,7 @@ TOTO
    hauteur_entete=18
    largeur_controle=8
    var_controle=oui
-   col_fixes=13
+   col_fixes=14
    separation=160
    zonagecolonne=12345
    zonageauto=non
@@ -652,6 +651,26 @@ TOTO
     fl_trait_col=non
     largeur_col=12
     wstyle="ENTETE_COLONNE"
+  [multi_choix_tableau]
+   [presentation]
+    position=59,120
+    taille=18,36
+    id=1349
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=gtpceexp,choix,gtpceexp,3
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","AFFETAT_11"
+   [info_bulle]
+   texte="État de la contremarque"
+   [param_colonne]
+    titre="#tblctmr"
+    fl_trait_col=non
+    largeur_col=14
+    wstyle="ENTETE_COLONNE"
   [arbre]
    [presentation]
     position=93,48
@@ -745,9 +764,9 @@ TOTO
    [param_multi]
     choix="gtfdmc.dhfi","STATUSENT"
    [info_bulle]
-   texte="Status de la pièce"
+   texte="Statut de la pièce"
    [param_colonne]
-    titre="Status de la pièce"
+    titre="Statut de la pièce"
     largeur_col=70
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
@@ -834,7 +853,7 @@ TOTO
    [presentation]
     position=66,308
     taille=10,92
-    noms="ligne"
+    noms="ligne;tabligne"
     id=588
     colonnes_saisie=25
     wstyle="TABLEAU_AFF"
@@ -854,7 +873,7 @@ TOTO
    [presentation]
     position=102,392
     taille=10,33
-    noms="ligne;sref"
+    noms="ligne;sref;tabligne"
     id=590
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
@@ -874,7 +893,7 @@ TOTO
    [presentation]
     position=45,452
     taille=10,33
-    noms="ligne;sref"
+    noms="ligne;sref;tabligne"
     id=591
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
@@ -935,7 +954,7 @@ TOTO
    [presentation]
     position=69,180
     taille=10,285
-    noms="ligne"
+    noms="ligne;tabligne"
     id=592
     colonnes_saisie=80
     wstyle="TABLEAU_AFF"
@@ -955,7 +974,7 @@ TOTO
    [presentation]
     position=138,392
     taille=10,41
-    noms="ligne;prix"
+    noms="ligne;prix;tabligne"
     id=599
     colonnes_saisie=12
     wstyle="TABLEAU_AFF"
@@ -977,6 +996,7 @@ TOTO
    [presentation]
     position=139,374
     taille=9,16
+    noms="tabligne"
     id=1319
     colonnes_saisie=4
     wstyle="TABLEAU_AFF"
@@ -1014,7 +1034,7 @@ TOTO
    [presentation]
     position=141,312
     taille=10,40
-    noms="ligne;prix"
+    noms="ligne;prix;tabligne"
     id=598
     colonnes_saisie=12
     wstyle="TABLEAU_AFF"
@@ -1379,7 +1399,7 @@ TOTO
    [presentation]
     position=132,387
     taille=9,47
-    noms="cdeprg"
+    noms="cdeprg;tabvtl"
     id=1341
     wstyle="TABLEAU_AFF"
    [description]
@@ -1401,7 +1421,7 @@ TOTO
    [presentation]
     position=93,328
     taille=10,33
-    noms="ligne;vtl;tiersstock"
+    noms="ligne;vtl;tiersstock;tabvtl"
     id=1164
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
@@ -1421,7 +1441,7 @@ TOTO
    [presentation]
     position=81,384
     taille=10,12
-    noms="ligne;vtl;nst"
+    noms="ligne;vtl;nst;tabvtl"
     id=1165
     colonnes_saisie=2
     wstyle="TABLEAU_AFF"
@@ -1441,7 +1461,7 @@ TOTO
    [presentation]
     position=90,332
     taille=10,47
-    noms="ligne;vtl;emplacement"
+    noms="ligne;vtl;emplacement;tabvtl"
     id=1168
     colonnes_saisie=12
     wstyle="TABLEAU_AFF"
@@ -1461,7 +1481,7 @@ TOTO
    [presentation]
     position=78,372
     taille=10,75
-    noms="ligne;vtl;serie"
+    noms="ligne;vtl;serie;tabvtl"
     id=1219
     colonnes_saisie=20
     wstyle="TABLEAU_AFF"
@@ -1481,7 +1501,7 @@ TOTO
    [presentation]
     position=36,404
     taille=10,33
-    noms="ligne;vtl;deldt"
+    noms="ligne;vtl;deldt;tabvtl"
     id=1220
     colonnes_saisie=10
     wstyle="TABLEAU_AFF"
@@ -1641,7 +1661,7 @@ TOTO
    [presentation]
     position=60,368
     taille=10,92
-    noms="ligne;art"
+    noms="ligne;art;tabligne"
     id=1244
     colonnes_saisie=25
     wstyle="TABLEAU_AFF"
@@ -1661,7 +1681,7 @@ TOTO
    [presentation]
     position=132,344
     taille=10,33
-    noms="ligne;art;fam1"
+    noms="ligne;art;fam1;tabligne"
     id=1247
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
@@ -1681,7 +1701,7 @@ TOTO
    [presentation]
     position=132,344
     taille=10,33
-    noms="ligne;art;fam2"
+    noms="ligne;art;fam2;tabligne"
     id=1246
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
@@ -1701,7 +1721,7 @@ TOTO
    [presentation]
     position=132,344
     taille=10,33
-    noms="ligne;art;fam3"
+    noms="ligne;art;fam3;tabligne"
     id=1245
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
@@ -1721,7 +1741,7 @@ TOTO
    [presentation]
     position=87,444
     taille=10,19
-    noms="ligne;art"
+    noms="ligne;art;tabligne"
     id=1248
     colonnes_saisie=4
     wstyle="TABLEAU_AFF"
@@ -1731,15 +1751,15 @@ TOTO
    [info_bulle]
    texte="Nature du produit"
    [param_colonne]
-    titre="<HOG>Nature|produit"
+    titre="Nature|produit"
     fl_aff=non
-    largeur_col=24
+    largeur_col=27
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
     position=72,388
     taille=10,33
-    noms="ligne;art"
+    noms="ligne;art;tabligne"
     id=1249
     colonnes_saisie=8
     wstyle="TABLEAU_AFF"
@@ -1807,26 +1827,7 @@ TOTO
    [param_colonne]
     titre="Adresse complément 1"
     fl_aff=non
-    largeur_col=135
-    wstyle="ENTETE_COLONNE"
-  [champ_tableau]
-   [presentation]
-    position=52,159
-    taille=9,5
-    id=1000013
-    colonnes_saisie=1
-    wstyle="STD"
-   [description]
-    donnee=ent,cog_facturation_compte,ent
-   [param_saisie]
-    type_date=jj/mm/aaaa
-    esp_si_zero=oui
-   [info_bulle]
-   texte="Facturation Compte"
-   [param_colonne]
-    titre="Facturation Compte"
-    fl_aff=non
-    largeur_col=5
+    largeur_col=82
     wstyle="ENTETE_COLONNE"
   [champ_tableau]
    [presentation]
@@ -1836,7 +1837,7 @@ TOTO
     colonnes_saisie=1
     wstyle="STD"
    [description]
-    donnee=ent,cog_impdetail,ent
+    donnee=gtpceexp,cog_impdetail,gtpceexp
    [param_saisie]
     type_date=jj/mm/aaaa
     esp_si_zero=oui
@@ -1845,7 +1846,25 @@ TOTO
    [param_colonne]
     titre="Impression du détail"
     fl_aff=non
-    largeur_col=5
+    largeur_col=10
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=52,159
+    taille=9,5
+    id=1000013
+    colonnes_saisie=1
+    wstyle="STD"
+   [description]
+    donnee=gtpceexp,cog_facturation_compte,gtpceexp
+   [param_saisie]
+    esp_si_zero=oui
+   [info_bulle]
+   texte="Facturation Compte"
+   [param_colonne]
+    titre="Facturation Compte"
+    fl_aff=non
+    largeur_col=9
     wstyle="ENTETE_COLONNE"
 [page]
  numero=4
@@ -3115,6 +3134,20 @@ TOTO
   [param_multi]
    choix="gtfdmc.dhfi","AFFOUV"
    obligatoire=non
+ [multi_choix]
+  [presentation]
+   position=8,316
+   taille=9,11
+   noms="ctmfl"
+   id=1347
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=gtpceexp,ctmfl,gtpceexp
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","AFFETAT_10"
  [champ]
   [presentation]
    position=252,349
@@ -3972,6 +4005,20 @@ TOTO
    esp_si_zero=oui
   [param_multi]
    choix="gtfdmc.dhfi","STATUSENT_1"
+ [multi_choix]
+  [presentation]
+   position=8,403
+   taille=9,11
+   noms="ctmfl"
+   id=1348
+   wstyle="CHAMP_NON_SAISI"
+  [description]
+   donnee=gtpceexp,ctmfl,gtpceexp
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","AFFETAT_10"
 [page]
  numero=10
  fond="STD"
@@ -6997,7 +7044,7 @@ TOTO
    colonnes_saisie=8
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=ent,pino,ent
+   donnee=gtpceexp,pino,gtpceexp
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7010,7 +7057,7 @@ TOTO
    colonnes_saisie=10
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=ent,pidt,ent
+   donnee=gtpceexp,pidt,gtpceexp
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7022,7 +7069,7 @@ TOTO
    colonnes_saisie=8
    wstyle="CHAMP_NON_SAISI"
   [description]
-   donnee=ent,tiers,ent
+   donnee=gtpceexp,tiers,gtpceexp
    saisie=non
   [param_saisie]
    type_date=jj/mm/aaaa
@@ -7299,6 +7346,45 @@ TOTO
     wetype_trait=arret
     warret=5216
   [item]
+   type=ssmenu
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Niveau d'affichage"
+    wid_ressource="NIVEAUAFICHAGE"
+  [item]
+   nature=radio
+   niveau=3
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Entête"
+    wid_ressource="NIVAFF_ENT"
+    wetype_trait=arret
+    warret=5217
+  [item]
+   nature=radio
+   niveau=3
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Ligne"
+    wid_ressource="NIVAFF_MOUV"
+    wetype_trait=arret
+    warret=5218
+  [item]
+   nature=radio
+   niveau=3
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Ventilation"
+    wid_ressource="NIVAFF_MVTL"
+    wetype_trait=arret
+    warret=5219
+  [item]
+   dessin=vide
+   niveau=3
+   [param_bouton]
+    wnom=""
+  [item]
    dessin=vide
    niveau=2
    [param_bouton]
@@ -7494,6 +7580,26 @@ TOTO
   [item]
    type=ssmenu
    [param_bouton]
+    wnom=".MENU"
+    wtexte="Contremarque"
+    wid_ressource="CTM"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Arbitrer la _contremarque"
+    wid_ressource="ARBCTM"
+    wetype_trait=arret
+    warret=5536
+    wtrait_chaine="5536"
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
     wnom=""
     wtexte="_Aide"
     wid_ressource="AIDE"
@@ -7626,6 +7732,23 @@ TOTO
     wid_ressource="POP_VALFACT"
     wetype_trait=arret
     warret=5532
+  [item]
+   type=sep
+   dessin=sep
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Générique"
+    wid_ressource="SEPCTM"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Arbitrer la contremarque"
+    wid_ressource="ARBCTM"
+    wetype_trait=arret
+    warret=5536
+    wtrait_chaine="5536"
   [item]
    dessin=vide
    niveau=2
@@ -7964,6 +8087,26 @@ TOTO
     wid_ressource="VALFAC"
     wetype_trait=arret
     warret=5532
+  [item]
+   dessin=vide
+   niveau=2
+   [param_bouton]
+    wnom=""
+  [item]
+   type=ssmenu
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Contremarque"
+    wid_ressource="CTM"
+  [item]
+   niveau=2
+   [param_bouton]
+    wnom=".MENU"
+    wtexte="Arbitrer la _contremarque"
+    wid_ressource="ARBCTM"
+    wetype_trait=arret
+    warret=5536
+    wtrait_chaine="5536"
   [item]
    dessin=vide
    niveau=2
@@ -8549,7 +8692,7 @@ Public Record "gtfdd.dhsd" rfo rfo
 Public Record "gtfdd.dhsd" gtpceprod gtpceprod
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gteepceexp.dhsf 34209 2013-10-08 12:16:59Z sn $')
+SetModuleInfo('$Id: gteepceexp.dhsf 51516 2015-11-19 12:34:13Z als $')
 ;*
 ;*		Explorateur de pièces																GTEEPCEEXP.dhsp
 ;*
@@ -8675,7 +8818,7 @@ Beginp
 	G3XZ.PiCod			= GTPCE.PiCodOri							; Type de pièce
 	G3XZ.Etb    		= MZ.Etb										; Etablissement du dossier
 	G3XZ.PrgInterro 	= 1											; Interrogation
-	G3XZ.Ce4				= Convertir_Etat_Ce4(GTPCE.AffCe4)	; Filtre sur status de la pièce
+	G3XZ.Ce4				= Convertir_Etat_Ce4(GTPCE.AffCe4)	; Filtre sur statut de la pièce
 Endp
 
 ;*

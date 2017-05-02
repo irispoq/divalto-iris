@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_import_invent.dhsp 7128 2014-11-27 10:49:09Z admin $')
+SetModuleInfo('$Id: cogpp_import_invent.dhsp 10572 2016-12-08 08:25:54Z admin $')
 ;*
 ;*		Objet : Import inventaire Excel
 ;*
@@ -124,7 +124,7 @@ endf
 ;* Initialisation des variables
 Function int Cog_InitialiserVariables
 ;
-Recordsql	'a5rsuser.dhoq'	utilisateur						;Utilisateurs
+Recordsql	'a5rsdos.dhoq'	utilisateur						;Utilisateurs
 
 beginf
 

@@ -1,14 +1,14 @@
-;>xwin4obj                              7.0       20160209172916      
+;>xwin4obj                              7.0       20161207110835      
 [masque]
  libelle="Tarif de vente"
- utilisateur="ROOT"
- date_modification="09/02/2016"
+ utilisateur="UGIE"
+ date_modification="07/12/2016"
  feuille_style="fstylewpf.dhfi"
  id_traitements=196
  type_masque=2
  dernier_id=1000001
  surcharge=oui
- date_modif_base="20130603143650"
+ date_modif_base="20151007173858"
  dernier_id_page=100000
  niveau_surcharge=1
 [defaut]
@@ -20,7 +20,7 @@
   shift_f6=10000
 [enregistrements]
  "gtrstarif.dhoq",,tarifvente,tarifvente,1024,1
- "gtfdd.dhsd",,g7,g7,4510,0
+ "gtfdd.dhsd",,g7,g7,4550,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
 [onglet]
  [presentation]
@@ -583,6 +583,36 @@
    donnee=rowinfo,rowinfo,zoomselection
    minmaj=majuscules
    saisie=non
+  [multi_choix_tableau]
+   [presentation]
+    position=86,4
+    taille=18,36
+    noms="icpfl"
+    id=309
+    wstyle="TABLEAU_AFF_ETAT"
+   [description]
+    donnee=tarifvente,icpfl,tarifvente
+    saisie=non
+   [param_saisie]
+    esp_si_zero=oui
+   [param_multi]
+    choix="gtfdmc.dhfi","ICP_FLAG"
+   [touches]
+    f1=1
+    f5=5003
+    f6=5000
+    f7=135
+    shift_f5=5005
+    shift_f6=10000
+   [traitements]
+    microbol_click=8002
+   [info_bulle]
+   texte="Synchronisé en inter-compagnies"
+   [param_colonne]
+    titre="#tblicp"
+    fl_trait_col=non
+    largeur_col=12
+    wstyle="ENTETE_COLONNE"
   [multi_choix_tableau]
    [presentation]
     position=99,280
@@ -2031,6 +2061,30 @@
   [traitements]
    microbol_click=8002
    diva_apres="Champ_HsDt_1_Ap"
+ [multi_choix]
+  [presentation]
+   position=26,257
+   taille=9,18
+   noms="icpfl"
+   id=310
+   wstyle="STD"
+  [description]
+   donnee=tarifvente,icpfl,tarifvente
+   saisie=non
+  [param_saisie]
+   esp_si_zero=oui
+  [param_multi]
+   choix="gtfdmc.dhfi","ICP_FLAG_G"
+   obligatoire=non
+  [touches]
+   f1=1
+   f5=5003
+   f6=5000
+   f7=135
+   shift_f5=5005
+   shift_f6=10000
+  [info_bulle]
+  texte="Synchronisé en inter-compagnies"
 [page]
  numero=12
  fond="STD"
@@ -2474,7 +2528,7 @@ Public Record "gtfdd.dhsd" g7 g7
 Public Record "ddsys.dhsd" rowinfo zoomselection
 [/diva]
 [diva_base]
-SetModuleInfo('$Id: gtez005_sql.dhsf 31975 2013-06-03 12:46:26Z sn $')
+SetModuleInfo('$Id: gtez005_sql.dhsf 50314 2015-10-07 15:44:37Z lk $')
 ;*
 ;*      Zoom sur Tarif de vente		  Enregistrement TarifVente de GTRSTARIF
 ;*
@@ -2506,6 +2560,7 @@ Public Record  	'GTFDD.dhsd' 		T017
 Public Record 		'GTFDD.dhsd'		T019
 Public Record 		'GTFDD.dhsd'		T023
 Public Record 		'GTFDD.dhsd'		T034
+
 
 ; Constantes
 Const	C_Pilote_ParArticle_Client	= 1
@@ -2599,7 +2654,8 @@ Endp
 ;*
 Public Procedure Champ_Ref_1_Ap					; Contrôle de la référence
 Beginp
-	Controle_Article(TarifVente.Ref, 2100, 0, 1) 
+	Controle_Article(TarifVente.Ref, 2100, 0, 1)
+	TarifVente.Article_Des = ART.Des
 	If Soc.EntCodN(17) = Non Or ART.SrefCod = Non
 		TarifVente.Sref			= ' '
 		TarifVente.SousRef1_Lib	= ' '

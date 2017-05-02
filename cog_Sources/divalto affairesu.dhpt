@@ -2,11 +2,11 @@ xwin-s-projet      2.0
 [general]
 nom="divalto gestion des affaires"
 progexec="divalto.dhop"
-date="20151106310512011599"
+date="20161207342312422499"
 util="UGIE"
 filtres="??pp*;??pc*;??pm*;??pz*;??p9*"
 flagrelatif=1
-cheminbases="/../../../&div72a_cd205a/sources"
+cheminbases="/../../../&div75a_cd210a/sources"
 zoommenu="Divalto"
 zoomfichiersmodele="modelezoom.dhsf"
 zoomfichiersmodele="modelezoom1.dhsf"
@@ -33,12 +33,23 @@ zoomparametres="DAFF"
 typetransport=3
 [profildefaut]
 [profil]
-nom="ugie"
-repobjet="/cd205c/objets"
+nom="ugie_210a"
+repobjet="/cd210a/objets"
 browse=0
 implicites="ugie.txt"
 repobjetsurcharge="/ugie/cog_objets"
-versioncible="7.2a"
+versioncible="7.5"
+[profil]
+nom="yohann_loc"
+repobjet="/pack/p210a/objets"
+browse=0
+implicites="ugie.txt"
+repobjetsurcharge="/ugie/cog_objets"
+versioncible="7.5"
+[communs]
+nom="cog_rsql"
+fic="cogrs_proj.dhsq"," "
+fic="cogrs_uttab.dhsq"," "
 [sousprojets]
 [projetsfusion]
 [fabricationmere]

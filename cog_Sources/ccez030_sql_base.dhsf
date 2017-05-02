@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20130213123018      
+;>xwin4obj                              7.0       20150219163054      
 [masque]
  libelle="plan comptable"
- utilisateur="VJ"
- date_modification="13/02/2013"
+ utilisateur="MS"
+ date_modification="19/02/2015"
  feuille_style="fstylewpf.dhfi"
  id_traitements=323
  type_masque=2
- dernier_id=858
+ dernier_id=859
  dernier_id_page=34
 [defaut]
  [aide_page]
@@ -17,7 +17,7 @@
   f7=8000
   shift_f6=10000
 [enregistrements]
- "ccfdd.dhsd",,ca,ca,1350,0
+ "ccfdd.dhsd",,ca,ca,1500,0
  "ccfdd.dhsd",,x1,x1,1752,0
  "ddsys.dhsd",,rowinfo,zoomselection,120,0
  "ccrsjca.dhoq",,compte,compte,1024,1
@@ -168,7 +168,7 @@
     id=758
     wstyle="TABLEAU_AFF_ETAT"
    [description]
-    donnee=x1,choix,x1,2
+    donnee=compte,cehsdt,compte
     minmaj=majuscules
     saisie=non
    [param_saisie]
@@ -1093,6 +1093,7 @@
     wstyle="TABLEAU_SAISI"
    [description]
     donnee=compte,tvatie,compte
+    sequence=5
    [param_saisie]
     type_date=jj/mm/aaaa
    [aide_page]
@@ -1112,7 +1113,6 @@
    texte="Régime TVA Tiers"
    [param_colonne]
     titre="TVA Tiers"
-    fl_aff=oui
     largeur_col=36
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -1145,7 +1145,7 @@
    texte="Régime TVA Article"
    [param_colonne]
     titre="TVA Article"
-    fl_aff=oui
+    fl_aff=non
     largeur_col=36
     wstyle="ENTETE_COLONNE"
    [boutons]
@@ -1159,6 +1159,7 @@
     wstyle="TABLEAU_SAISI"
    [description]
     donnee=compte,mt2nat,compte
+    sequence=6
    [param_saisie]
     type_date=jj/mm/aaaa
     esp_si_zero=oui
@@ -3533,6 +3534,7 @@
    minmaj=majuscules
   [param_groupe]
    titre="Nature"
+   notifier=oui
   [radio_bouton]
    [presentation]
     position=67,62
@@ -4076,7 +4078,7 @@
   [presentation]
    position=129,79
    taille=9,37
-   noms="cpttyp2fstd;cpttyp3fstd"
+   noms="cpttyp2fstd;cpttyp3fstd;cptnataux"
    id=853
    colonnes_saisie=8
    wstyle="CHAMP_SAISI"
@@ -4105,7 +4107,7 @@
   [presentation]
    position=140,79
    taille=9,37
-   noms="cpttyp2fstd;cpttyp3fstd"
+   noms="cpttyp2fstd;cpttyp3fstd;cptnataux"
    id=854
    colonnes_saisie=8
    wstyle="CHAMP_SAISI"
@@ -5952,7 +5954,7 @@
    [param_bouton]
     wnom=""
 [diva]
-SetModuleInfo('$Id: ccez030_sql.dhsf 29576 2013-02-13 11:32:50Z vj $')
+SetModuleInfo('$Id: ccez030_sql.dhsf 44915 2015-02-19 15:30:53Z ms $')
 ;>xdiva
 ;*
 ;*		Zoom plan comptable																													cctez030.dhsp
@@ -5965,8 +5967,8 @@ SetModuleInfo('$Id: ccez030_sql.dhsf 29576 2013-02-13 11:32:50Z vj $')
 
 include	"cctc000.dhsp"
 
-public	hfile		CCFDD.dhsd		CCFJCA	CCFJCA		; intitulés
-public	hfile		CCFDD.dhsd		CCFECR	CCFECR		; écritures
+public	hfile		CCFDD.dhsd		CCFJCA	CCFJCA				; intitulés
+public	hfile		CCFDD.dhsd		CCFECR	CCFECR				; écritures
 
 public	RecordSQL	ccrsjca.dhoq	Compte						; intitulé de compte
 
@@ -5974,20 +5976,20 @@ public	record	CCFDD.dhsd		C3			Compte_Save			; intitulé de compte pour la duplic
 public	record	CCFDD.dhsd		C3			Compte_AvSaisie	; intitulé de compte pour la duplication
 public	record	CCFDD.dhsd		C3		  	Compte_sel			; pour la selection
 
-public	record	CCFDD.dhsd		C3							; intitulé de compte
-public	record	CCFDD.dhsd		C3			XXC3			; intitulé de compte pour recherches libellés
-public	record	CCFDD.dhsd		C5							; intitulé d'axe
-public	record	CCFDD.dhsd		C8							; ligne d'écriture
-public	record	CCFDD.dhsd		CA							; dossier, paramètres généraux
-public	record	CCFDD.dhsd		CEts						; Etablissement
-public	record	CCFDD.dhsd		X1							; work zoom
+public	record	CCFDD.dhsd		C3									; intitulé de compte
+public	record	CCFDD.dhsd		C3			XXC3					; intitulé de compte pour recherches libellés
+public	record	CCFDD.dhsd		C5									; intitulé d'axe
+public	record	CCFDD.dhsd		C8									; ligne d'écriture
+public	record	CCFDD.dhsd		CA									; dossier, paramètres généraux
+public	record	CCFDD.dhsd		CEts								; établissement
+public	record	CCFDD.dhsd		X1									; work zoom
 
 
-public	record	GTFDD.dhsd 		T006						; modes de règlement
-public	record	GTFDD.dhsd		T007						; libellés devises
+public	record	GTFDD.dhsd 		T006								; modes de règlement
+public	record	GTFDD.dhsd		T007								; libellés devises
 public	record	GTFDD.dhsd		XZ			G3XZ
 
-public	record	ddsys.dhsd		ZOOM						; variables de contrôle du zoom
+public	record	ddsys.dhsd		ZOOM								; variables de contrôle du zoom
 public 	record 	"ddsys.dhsd" 	rowinfo	zoomselection
 
 
@@ -6136,7 +6138,7 @@ public procedure Champ_Cpt_1_Av
 beginp	; Champ_Cpt_1_Av
 
 	if ZOOM.Action = ZOOM_DUPLICATION
-		Compte_AvSaisie = C3
+		Compte_AvSaisie = Compte.C3
 	endif
 
 endp		; Champ_Cpt_1_Av
@@ -6150,18 +6152,24 @@ public procedure Champ_Cpt_1_Ap
 beginp	; Champ_Cpt_1_Ap
 
 	if Controle_Compte(Compte.Cpt, nonvide = condition(ZOOM.Action = ZOOM_CREATION or ZOOM.Action = ZOOM_DUPLICATION, true, false), existence = false, etablissement = false) = 0	\
-	and ZOOM.Action = ZOOM_DUPLICATION	\
-;	and left(XXCompte.Cpt, 3) <> left(Compte.Cpt, 3)
-	and (left(Compte_AvSaisie.Cpt, 1) <> left(Compte.Cpt, 1) or (left(Compte_AvSaisie.Cpt, 1) in (1..9) and left(Compte_AvSaisie.Cpt, 3) <> left(Compte.Cpt, 3)))
+	and ZOOM.Action = ZOOM_DUPLICATION
 	
-		Mes_Alert(19035)									; la classe et le groupe doivent être identiques
-		Compte.Cpt = Compte_AvSaisie.Cpt
-		Harmony.Retour = XmeNext_Traitement_Avant
+		switch Compte_AvSaisie.CptNat
+		case vsw = 1 and left(Compte_AvSaisie.Cpt, condition(CA.BalRupt(1) <> 0, CA.BalRupt(1), 3))	 = left(Compte.Cpt, condition(CA.BalRupt(1) <> 0, CA.BalRupt(1), 3))
+		case vsw = 2 and left(Compte_AvSaisie.Cpt, condition(CA.BalRupt(2) <> 0, CA.BalRupt(2), 3))	 = left(Compte.Cpt, condition(CA.BalRupt(2) <> 0, CA.BalRupt(2), 3))
+		case vsw = 3 and left(Compte_AvSaisie.Cpt, condition(CA.BalRupt1(1) <> 0, CA.BalRupt1(1), 1)) = left(Compte.Cpt, condition(CA.BalRupt1(1) <> 0, CA.BalRupt1(1), 1))
+		case vsw = 4 and left(Compte_AvSaisie.Cpt, condition(CA.BalRupt1(2) <> 0, CA.BalRupt1(2), 1)) = left(Compte.Cpt, condition(CA.BalRupt1(2) <> 0, CA.BalRupt1(2), 1))
+		case vsw = 5 and left(Compte_AvSaisie.Cpt, condition(CA.BalRupt1(3) <> 0, CA.BalRupt1(3), 1)) = left(Compte.Cpt, condition(CA.BalRupt1(3) <> 0, CA.BalRupt1(3), 1))
+		default
+			Mes_Alert(19035)									; la classe et le groupe doivent être identiques
+			Compte.Cpt		= Compte_AvSaisie.Cpt
+			Harmony.Retour = XmeNext_Traitement_Avant
+		endswitch
 	
 	endif
 	
 	Compte_AvSaisie.Cpt = Compte.Cpt
-	C3 = Compte_AvSaisie
+	Compte.C3			  = Compte_AvSaisie
 
 endp		; Champ_Cpt_1_Ap
 
@@ -6197,17 +6205,15 @@ beginp	; Champ_CptCent_1_Ap
 
 		cpt		= Compte.Cpt
 		cptcent	= Compte.CptCent
-		PingLocal("CCTEZ030_Compte", C3)
 
-		if Controle_Compte(cptcent, creation = true, conf = false, cptnat = Compte.CptNat, etablissement = false) < 2
-			Compte.Cpt_Centraliseur_Lib = Compte.Lib
-			if Compte.CptNat < 3 and left(Compte.Cpt, 2) <> left(cpt, 2)
+		if Controle_Compte(cptcent, creation = true, conf = false, cptnat = Compte.CptNat, etablissement = false) < 2			; attention, Controle_Compte retourne un C3 et non un recordSQL "Compte"
+			Compte.Cpt_Centraliseur_Lib = C3.Lib
+			if C3.CptNat < 3 and left(C3.Cpt, 2) <> left(cpt, 2)
 				Mes_Alert(19036)							; compte pas de même groupe
 				Harmony.Retour = XmeNext_Traitement_Avant
 			endif
 		endif
 
-		PingLocalReceive("CCTEZ030_Compte", C3)
 		Compte.CptCent = cptcent
 
 	endif
@@ -6225,15 +6231,15 @@ beginp	; Champ_CptCol_1_Av
 	if Compte.CptNat < 3
 		Compte.CptCol = ' '
 		Harmony.Retour = XmeNext_Saut_Donnee
-		preturn																			;1794
+		preturn
 	endif
 
-;	if  Zoom.Action = ZOOM_MODIFICATION									\		;1794
-;	and hread(CCFECR, C8, [ 'L' MZ.Dos Compte.Cpt ], 'F') = 0			\		;1794
-;	and C8.Dos = MZ.Dos														\		;1794
-;	and C8.Cpt = Compte.Cpt																;1794
-;		Harmony.Retour = XmeNext_Saut_Donnee									;1794
-;	endif																					;1794
+;	if  Zoom.Action = ZOOM_MODIFICATION									\
+;	and hread(CCFECR, C8, [ 'L' MZ.Dos Compte.Cpt ], 'F') = 0	\
+;	and C8.Dos = MZ.Dos														\
+;	and C8.Cpt = Compte.Cpt
+;		Harmony.Retour = XmeNext_Saut_Donnee
+;	endif
 
 	OLD_CPTCOL = Compte.CptCol
 
@@ -6249,24 +6255,21 @@ public procedure Champ_CptCol_1_Ap
 
 beginp	; Champ_CptCol_1_Ap
 
-	PingLocal("CCTEZ030_Compte", C3)
-	cptcol 	 = Compte.CptCol
+	cptcol = Compte.CptCol
 	Compte.Cpt_Collectif_Lib = ' '
 
-	if Controle_Compte(cptcol, creation = true, conf = false, cptnat = 1, collectif = true, etablissement = false) < 2 and Compte.CptTyp <> 2
-		Mes_Alert(19034, cptcol)												; pas collectif
+	if Controle_Compte(cptcol, creation = true, conf = false, cptnat = 1, collectif = true, etablissement = false) < 2 and C3.CptTyp <> 2
+		Mes_Alert(19034, cptcol)														; pas collectif
 		Harmony.Retour = XmeNext_Traitement_Avant
 	endif
 
-	Compte.Cpt_Collectif_Lib = Compte.Lib
+	Compte.Cpt_Collectif_Lib = C3.Lib												; attention, Controle_Compte retourne un C3 et non un recordSQL "Compte"
 
-	PingLocalReceive("CCTEZ030_Compte", C3)
-
-	if  left(OLD_CPTCOL, 2) <> left(cptcol, 2)					\		; pas le même groupe (attention, on se limite volontairement à 2 caractères pour permettre le passage de "clients" à "clients douteux" par exemple)
+	if  left(OLD_CPTCOL, 2) <> left(cptcol, 2)							\		; pas le même groupe (attention, on se limite volontairement à 2 caractères pour permettre le passage de "clients" à "clients douteux" par exemple)
 	and hread(CCFECR, C8, [ 'L' MZ.Dos Compte.Cpt ], 'F') = 0		\		; il y a déjà au moins une écriture sur ce compte
-	and C8.Dos = MZ.Dos													\
+	and C8.Dos = MZ.Dos															\
 	and C8.Cpt = Compte.Cpt
-		Mes_Alert(19801, OLD_CPTCOL, cptcol)								; modification interdite
+		Mes_Alert(19801, OLD_CPTCOL, cptcol)										; modification interdite
 		Harmony.Retour = XmeNext_Traitement_Avant
 		Compte.CptCol = OLD_CPTCOL
 	else
@@ -6281,13 +6284,13 @@ public procedure Champ_CptCol_2_Ap
 
 ; avant collectif sur onglet "à partir de"
 
-1			cpt			>CCFDD.dhsd	CPT																						;2145
+1			cpt			>CCFDD.dhsd	CPT
 
 beginp	; Champ_CptCol_2_Ap
 
-	cpt = Compte_Sel.CptCol																											;2145
-	Controle_Compte(cpt, nonvide = false, syntaxe = false, existence = false, etablissement = false)						;2145
-	Compte_Sel.CptCol = cpt																											;2145
+	cpt = Compte_Sel.CptCol
+	Controle_Compte(cpt, nonvide = false, syntaxe = false, existence = false, etablissement = false)
+	Compte_Sel.CptCol = cpt
 
 endp		; Champ_CptCol_2_Ap
 
@@ -6299,14 +6302,14 @@ public procedure Champ_CptNat_1_Av
 
 beginp	; Champ_CptNat_1_Av
 
-	if string(left(Compte.Cpt, 1), "012345")																				;2343
+	if string(left(Compte.Cpt, 1), "012345")
 		Compte.CptNat = 1
 		Compte.CptCol = ' '
 		XmeSetAttribut("cptnat", AN_STYLE, C_Champ_NSaisi)
 		Harmony.Retour = XmeNext_Saut_Donnee
 		preturn
 
-	elsif string(left(Compte.Cpt, 1), "6789")																				;2343
+	elsif string(left(Compte.Cpt, 1), "6789")
 		Compte.CptNat = 2
 		Compte.CptCol = ' '
 		XmeSetAttribut("cptnat", AN_STYLE, C_Champ_NSaisi)
@@ -6326,6 +6329,21 @@ public procedure Champ_CptNat_1_Ap
 ; après nature de compte
 
 beginp	; Champ_CptNat_1_Ap
+
+	if Harmony.DataModif or Harmony.DataNotif
+
+		XmeResetAttribut("cptnataux",	 AN_TOUS_ATTRIBUTS)
+
+		if Compte.CptNat > 2
+			XmeSetAttribut("cptnataux", AN_STYLE, C_Champ_NSaisi)
+		endif
+
+		if Harmony.DataNotif
+			Harmony.Retour = XmeNext_Debut_Donnee
+			preturn
+		endif
+
+	endif
 
 	if Compte.CptNat < 3
 
@@ -6358,9 +6376,9 @@ beginp	; Champ_CptTyp_1_Av
 
 			Harmony.Retour = XmeNext_Saut_Donnee
 
-		elsif Compte.CptTyp <> 2														\	; autre compte
+		elsif Compte.CptTyp <> 2													\	; autre compte
 		and	hread(CCFECR, C8, [ 'L' MZ.Dos Compte.Cpt ], 'F') = 0		\	; il y a une écriture
-		and	C8.Dos = MZ.Dos													\
+		and	C8.Dos = MZ.Dos														\
 		and	C8.Cpt = Compte.Cpt
 
 			Harmony.Retour = XmeNext_Saut_Donnee
@@ -6915,7 +6933,7 @@ Public Procedure Champ_TvaArt_1_Av
 
 beginp	; Champ_TvaArt_1_Av
 
-	if Compte.CptTyp <> 1
+	if Compte.CptTyp <> 1 or Compte.CptNat > 2
 		Compte.TvaArt  = ' '
 		Harmony.Retour = XmeNext_Saut_Donnee
 	endif
@@ -6946,7 +6964,7 @@ Public Procedure Champ_TvaTie_1_Av
 
 beginp	; Champ_TvaTie_1_Av
 
-	if Compte.CptTyp <> 1
+	if Compte.CptTyp <> 1 or Compte.CptNat > 2
 		Compte.TvaTie  = ' '
 		Harmony.Retour = XmeNext_Saut_Donnee
 	endif
@@ -6956,8 +6974,8 @@ endp		; Champ_TvaTie_1_Av
 
 ;*
 Public Procedure Page_FicheCompte_Av
-;
-Beginp
+
+Beginp	; Page_FicheCompte_Av
 
 	if Compte.CptNat < 3
 		XmeSetAttribut('r3cod', AN_VISIBILITE, AV_GRISE)
@@ -6966,7 +6984,7 @@ Beginp
 		XmeResetAttribut("r3cod", AN_TOUS_ATTRIBUTS)
 	endif
 
-Endp
+Endp		; Page_FicheCompte_Av
 [/diva]
 [diva_base]
 [/diva]
