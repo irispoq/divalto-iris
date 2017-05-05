@@ -1,12 +1,12 @@
-;>xwin4obj                              7.0       20161207110836      
+;>xwin4obj                              7.0       20170505163225      
 [masque]
  libelle="fournisseur"
- utilisateur="UGIE"
- date_modification="07/12/2016"
+ utilisateur="ROOT"
+ date_modification="05/05/2017"
  feuille_style="fstylewpf.dhfi"
  id_traitements=848
  type_masque=2
- dernier_id=1000013
+ dernier_id=1000017
  surcharge=oui
  date_modif_base="20151109082912"
  dernier_id_page=100000
@@ -24,7 +24,7 @@
 [enregistrements]
  "gtrstiers.dhoq",,fournisseur,fournisseur,1024,1
  "gtfdd.dhsd",,fou,fou_sel,3000,0
- "gtfdd.dhsd",,g7,g7,4550,0
+ "gtfdd.dhsd",,g7,g7,4800,0
  "ccfdd.dhsd",,ca,ca,1700,0
  "gtfdd.dhsd",,soc,soc,3500,0
  "a5dd.dhsd",,mw,fou_mw,3000,0
@@ -4241,6 +4241,30 @@
    wnom_couleurfond="STD"
  [obj_texte]
   [presentation]
+   position=42,13
+   taille=9,32
+   id=1000015
+   wstyle="STD"
+  [texte]
+   texte="Type de tiers"
+ [obj_texte]
+  [presentation]
+   position=52,13
+   taille=9,49
+   id=1000016
+   wstyle="STD"
+  [texte]
+   texte="Type de distributeur"
+ [obj_texte]
+  [presentation]
+   position=62,13
+   taille=9,48
+   id=1000017
+   wstyle="STD"
+  [texte]
+   texte="Type de prestataire"
+ [obj_texte]
+  [presentation]
    position=99,56
    taille=9,58
    cadrage=centre
@@ -4371,69 +4395,6 @@
    wstyle="STD"
   [texte]
    texte="Nombre d'incidents"
- [champ]
-  [presentation]
-   position=42,10
-   taille=9,79
-   noms="stat1"
-   id=73
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=soc,statlib,soc,1
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f6=10300
-   shift_f5=5001
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=62,10
-   taille=9,79
-   noms="stat3"
-   id=74
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=soc,statlib,soc,3
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f6=10300
-   shift_f5=5001
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
- [champ]
-  [presentation]
-   position=52,10
-   taille=9,79
-   noms="stat2"
-   id=75
-   wstyle="CHAMP_AFF"
-  [description]
-   donnee=soc,statlib,soc,2
-   saisie=non
-  [param_saisie]
-   type_date=jj/mm/aaaa
-  [touches]
-   f5=5000
-   f6=5002
-   f7=135
-   ctrl_f6=10300
-   shift_f5=5001
-   shift_f6=10000
-  [traitements]
-   microbol_click=8002
  [champ]
   [presentation]
    position=42,127
