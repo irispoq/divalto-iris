@@ -1,6 +1,6 @@
 ;>xwinobj      dictionnaire
 [Dictionnaire]
-Version=6,,,20161012093731,UGIE                
+Version=6,,,20170510100028,UGIE_RR             
 Nom=gtfdd.dhsd,gtfdd1.dhsd,1
 [CHAMP]
 Version=1,20131006064734,SYSTEMNEW           ,20131006064734,SYSTEMNEW           
@@ -168,6 +168,12 @@ Nom=Cog_Dimanche,Afficher les dimanches dans le GANTT,1
 Gel=1
 Nature=1,0
 NomOdbc=Cog_Dimanche
+Flags=n,1,n,n,n,n,n,n
+[CHAMP]
+Version=1,20170509164547,UGIE_RR             ,20170509164547,UGIE_RR             
+Nom=Cog_DirCli,Direction cliente,1
+Gel=1
+Nature=25
 Flags=n,1,n,n,n,n,n,n
 [CHAMP]
 Version=1,20110816131359,ROOT                ,20110816131451,ROOT                
@@ -797,6 +803,7 @@ nom=UGtPceExp
 [CHAMPL]
 Nom=Cog_ImoFlag,1,0,0,N,1
 Nom=cog_TraitemtOp,2,0,0,N,1
+Nom=Cog_DirCli,3,0,0,N,1
 [/CHAMPL]
 nom=UMouv
 [CHAMPL]
@@ -809,6 +816,7 @@ Nom=Cog_Affaire,57,0,0,N,1
 Nom=Cog_ImoFlag,65,0,0,N,1
 Nom=Cog_EcrDt,66,0,0,N,1
 Nom=cog_TraitemtOp,74,0,0,N,1
+Nom=Cog_DirCli,75,0,0,N,1
 [/CHAMPL]
 nom=UPrjAp
 [CHAMPL]
@@ -895,15 +903,15 @@ Nom=Cog_ETLDateImport,6,0,0,N,1
 [/CHAMPL]
 [/CHAMPR]
 [TABLEU]
-Version=1,1989 1230000,MJV ,20120926162043,LK                  
+Version=1,1989 1230000,MJV ,20151006170954,AG                  
 Nom=Art,Article,1
 DateM=05F79F794FEECD01
 [TABLEU]
-Version=1,1989 1240000,MJV ,20100706100928,SN                  
+Version=1,1989 1240000,MJV ,20151006171716,AG                  
 Nom=Cli,Client,1
 DateM=E94A06DD86EACD01
 [TABLEU]
-Version=1,1989 1230000,MJV ,20120926162127,LK                  
+Version=1,1989 1230000,MJV ,20151006172017,AG                  
 Nom=Ent,En-tête de pièce,1
 DateM=86D1B25A5B24D201
 [CHAMPS]
@@ -911,15 +919,15 @@ DateM=86D1B25A5B24D201
 [/ZoneVirtuelle]
 [/CHAMPS]
 [TABLEU]
-Version=1,1989 1240000,MJV ,20121023114731,SN                  
+Version=1,1989 1240000,MJV ,20151006173008,AG                  
 Nom=Fou,Fournisseur,1
 DateM=E94A06DD86EACD01
 [TABLEU]
-Version=1,20100913114526,SN                  ,20100913142014,SN                  
+Version=1,20100913114526,SN                  ,20151006173949,AG                  
 Nom=GtPceExp,Explorateur de pièces,1
 DateM=86D1B25A5B24D201
 [TABLEU]
-Version=1,1989 1230000,MJV ,20120926162139,LK                  
+Version=1,1989 1230000,MJV ,20151006174509,AG                  
 Nom=Mouv,Mouvement,1
 DateM=E979D55C04FDCF01
 [CHAMPS]
@@ -927,7 +935,7 @@ DateM=E979D55C04FDCF01
 [/ZoneVirtuelle]
 [/CHAMPS]
 [TABLEU]
-Version=1,2000 1250000,MJV ,20100706104944,SN                  
+Version=1,2000 1250000,MJV ,20151006174728,AG                  
 Nom=Mvtl,Ventilation,1
 DateM=3A572C31E81CCB01
 [CHAMPS]
@@ -939,35 +947,35 @@ Version=1,2000 5130000,MJV ,20100706102757,SN
 Nom=PrjAp,Projet après-vente,1
 DateM=9E998A64253ECB01
 [TABLEU]
-Version=1,1989 1250000,MJV ,20100706084417,SN                  
+Version=1,1989 1250000,MJV ,20150127101242,SN                  
 Nom=Soc,Société,1
 DateM=529FBA10BA1BD101
 [TABLEU]
-Version=1,1999 4280000,MJV ,20050107085538,MARIE JO            
+Version=1,1999 4280000,MJV ,20151006180044,AG                  
 Nom=T006,Mode de règlement,1
 DateM=4D1C5FFBE61CCB01
 [TABLEU]
-Version=1,1999 4280000,MJV ,20050106171940,MARIE JO            
+Version=1,1999 4280000,MJV ,20151006181326,AG                  
 Nom=T020,Code opération,1
 DateM=28836AAE9B34D001
 [TABLEU]
-Version=1,1999 4280000,MJV ,20050106172036,MARIE JO            
+Version=1,1999 4280000,MJV ,20151012102850,AG                  
 Nom=T029,Code statistique tiers,1
 DateM=55AA2049E71CCB01
 [TABLEU]
-Version=1,1999 9 30000,MJV ,20050107085715,MARIE JO            
+Version=1,1999 9 30000,MJV ,20151012103258,AG                  
 Nom=T036,Nature produit,1
 DateM=93A4055DE71CCB01
 [TABLEU]
-Version=1,2000 6270000,MJV ,20050107085622,MARIE JO            
+Version=1,2000 6270000,MJV ,20151012104028,AG                  
 Nom=T051,Service,1
 DateM=F6BAE794E71CCB01
 [TABLEU]
-Version=1,20121212095349,SN                  ,20121212095418,SN                  
+Version=1,20121212095349,SN                  ,20151012114529,AG                  
 Nom=T085,Table des taux de TVA,1
 DateM=7596E2684FD8CD01
 [TABLEU]
-Version=1,1999 8 60000,MJV ,20100706102553,SN                  
+Version=1,1999 8 60000,MJV ,20151012115820,AG                  
 Nom=T1,Adresse,1
 DateM=C261D55BE61CCB01
 [TABLE]
@@ -984,7 +992,7 @@ Nom=n8d1,641,2,N,0,0,N,1
 Nom=n1d0,801,2,N,0,0,N,1
 [/CHAMPS]
 [BASEU]
-Version=1,1989 1240000,PB  ,20120312162613,DEMO                
+Version=1,1989 1240000,PB  ,20150903152852,LK                  
 Nom=GtfPcf,Tiers,1
 DateM=3736A2756400CD01
 DateMIndex=4E2D5367EA62CF01
