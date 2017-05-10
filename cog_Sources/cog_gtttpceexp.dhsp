@@ -28,6 +28,8 @@ Public Record 'GTFDD.dhsd' 	GTSEL 	GTSEL_Debut			; Critères début
 Public Record 'GTFDD.dhsd' 	GTSEL 	GTSEL_Fin			;     "    fin
 Public Record 'GTFDD.dhsd'	 	GTSEL 	GTSEL_Msk			;     "    masque
 
+Public RecordSql 'GTRSPCE.dhoq' ExploLigVtl			LigneVentil				; Ligne et ventilation de pièces
+
 ; Menu
 Define IdMenuPrincipal			= G3XT.IdMenu(1)				; Identifiant menu principal
 Define IdMenuImpression			= G3XT.IdMenu(2)				; Identifiant menu impression
@@ -134,6 +136,7 @@ Public Procedure Cog_GTPCEEXP_MOUV_Chargement_Av
 Beginp
 	GTPCEEXP.Cog_ImoFlag = MOUV.Cog_ImoFlag
 	GTPCEEXP.cog_TraitemtOp = MOUV.cog_TraitemtOp
+	GTPCEEXP.Cog_DirCli = MOUV.Cog_DirCli
 Endp
 
 ;*
@@ -169,3 +172,13 @@ Public Procedure Cog_Popup_Execution_Av
 Beginp
 Endp
 	 
+;*
+Public Procedure Cog_GTPCEEXP_Ligne_Chargement_Av
+; Avant chargement d'une ligne de mouvement
+; LigneVentil est en ligne
+BeginP
+	GTPCEEXP.Cog_ImoFlag = LigneVentil.Cog_ImoFlag
+	GTPCEEXP.cog_TraitemtOp = LigneVentil.cog_TraitemtOp
+	GTPCEEXP.Cog_DirCli = LigneVentil.Cog_DirCli
+EndP
+

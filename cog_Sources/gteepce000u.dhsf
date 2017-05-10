@@ -1,10 +1,10 @@
-;>xwin4obj                              7.0       20161207161332      
+;>xwin4obj                              7.0       20170510094930      
 [masque]
- utilisateur="UGIE"
- date_modification="07/12/2016"
+ utilisateur="UGIE_RR"
+ date_modification="10/05/2017"
  feuille_style="fstylewpf.dhfi"
  id_traitements=622
- dernier_id=1000102
+ dernier_id=1000105
  surcharge=oui
  date_modif_base="20160122094110"
  dernier_id_page=100005
@@ -11357,6 +11357,29 @@
     fl_aff=non
     largeur_col=54
     wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=6,398
+    taille=9,90
+    noms="cog_f2;cog_f3;cog_f4"
+    id=1000105
+    colonnes_saisie=25
+    wstyle="COG_CHAMP_SAISI"
+    wnom_couleur="CHAMP_SAISI"
+   [description]
+    donnee=g1t1,cog_dircli,g1t1
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [touches]
+    f7=135
+    shift_f1=1
+   [info_bulle]
+   texte="Direction cliente"
+   [param_colonne]
+    titre="Direction cliente"
+    fl_aff=non
+    largeur_col=90
+    wstyle="ENTETE_COLONNE"
 [page]
  numero=11
  libelle="tableau des ventilations"
@@ -12469,8 +12492,8 @@
    couleur_fond="GROUPE_FOND"
  [groupbox]
   [presentation]
-   position=37,301
-   taille=74,175
+   position=40,301
+   taille=72,175
    noms="prix"
    id=1334
    wstyle="GROUPE"
@@ -12527,8 +12550,8 @@
   texte="Compte comptable achat"
  [obj_texte]
   [presentation]
-   position=30,158
-   taille=9,79
+   position=29,158
+   taille=9,65
    noms="cog_c2"
    id=1000099
    wstyle="STD"
@@ -12537,13 +12560,14 @@
    texte="Traitement opérationnel"
  [obj_texte]
   [presentation]
-   position=51,306
-   taille=9,58
-   noms="prix;tacodremcod"
-   id=1571
+   position=29,302
+   taille=9,42
+   noms="cog_f2;cog_f3;cog_f4"
+   id=1000103
    wstyle="STD"
+   wcouleur_fonte=0,0,255,0,0,0
   [texte]
-   texte="Code remise promotion"
+   texte="Direction cliente"
  [obj_texte]
   [presentation]
    position=53,109
@@ -12555,13 +12579,13 @@
    texte="Code tarif promotion"
  [obj_texte]
   [presentation]
-   position=61,306
+   position=53,306
    taille=9,58
    noms="prix;tacodremcod"
-   id=1572
+   id=1571
    wstyle="STD"
   [texte]
-   texte="Code remise"
+   texte="Code remise promotion"
  [obj_texte]
   [presentation]
    position=63,109
@@ -12573,13 +12597,13 @@
    texte="Code tarif"
  [obj_texte]
   [presentation]
-   position=71,306
-   taille=9,57
-   noms="prix"
-   id=490
+   position=63,306
+   taille=9,58
+   noms="prix;tacodremcod"
+   id=1572
    wstyle="STD"
   [texte]
-   texte="% de remise"
+   texte="Code remise"
  [obj_texte]
   [presentation]
    position=73,237
@@ -12589,6 +12613,15 @@
    wstyle="STD"
   [texte]
    texte="par"
+ [obj_texte]
+  [presentation]
+   position=73,306
+   taille=9,57
+   noms="prix"
+   id=490
+   wstyle="STD"
+  [texte]
+   texte="% de remise"
  [obj_texte]
   [presentation]
    position=85,109
@@ -12627,7 +12660,7 @@
    texte="Quantité livrée"
  [obj_texte]
   [presentation]
-   position=101,306
+   position=103,306
    taille=9,58
    noms="prix"
    id=494
@@ -12739,6 +12772,21 @@
    microbol_click=8002
  [champ]
   [presentation]
+   position=29,345
+   taille=9,92
+   noms="cog_f2;cog_f3;cog_f4"
+   id=1000104
+   colonnes_saisie=25
+   wstyle="COG_CHAMP_SAISI"
+  [description]
+   donnee=g1t1,cog_dircli,g1t1
+  [param_saisie]
+   type_date=jj/mm/aaaa
+  [touches]
+   f7=135
+   shift_f1=1
+ [champ]
+  [presentation]
    position=19,227
    taille=9,248
    id=1402
@@ -12810,7 +12858,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=101,402
+   position=103,402
    taille=9,18
    noms="prix"
    id=1997
@@ -13027,7 +13075,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=51,402
+   position=53,402
    taille=9,72
    noms="prix;tacodremcod"
    id=1573
@@ -13156,7 +13204,7 @@
    diva_apres="Champ_PubTyp_1_Ap"
  [champ]
   [presentation]
-   position=61,402
+   position=63,402
    taille=9,72
    noms="prix;tacodremcod"
    id=1575
@@ -13265,7 +13313,7 @@
    shift_f1=1
  [champ]
   [presentation]
-   position=51,366
+   position=53,366
    taille=9,34
    noms="promoremcod;prix;tacodremcod"
    id=1574
@@ -13294,7 +13342,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=61,366
+   position=63,366
    taille=9,34
    noms="remcod;prix;tacodremcod"
    id=1576
@@ -13322,7 +13370,7 @@
    "zoom"
  [champ]
   [presentation]
-   position=71,366
+   position=73,366
    taille=9,33
    noms="prix;remcod2"
    id=543
@@ -13345,7 +13393,7 @@
    diva_apres="Champ_Rem_1_Ap"
  [multi_choix]
   [presentation]
-   position=71,402
+   position=73,402
    taille=9,50
    noms="prix;remcod2"
    id=544
@@ -13371,7 +13419,7 @@
    diva_apres="Champ_Rem_1_Ap"
  [champ]
   [presentation]
-   position=81,366
+   position=83,366
    taille=9,33
    noms="prix;remcod2"
    id=545
@@ -13394,7 +13442,7 @@
    diva_apres="Champ_Rem_1_Ap"
  [multi_choix]
   [presentation]
-   position=81,402
+   position=83,402
    taille=9,50
    noms="prix;remcod2"
    id=546
@@ -13464,7 +13512,7 @@
    microbol_click=8002
  [champ]
   [presentation]
-   position=91,366
+   position=93,366
    taille=9,33
    noms="prix;remcod2"
    id=547
@@ -13524,7 +13572,7 @@
    microbol_click=8002
  [multi_choix]
   [presentation]
-   position=91,402
+   position=93,402
    taille=9,50
    noms="prix;remcod2"
    id=548
@@ -13569,7 +13617,7 @@
   texte="Compte comptable d'achat"
  [champ]
   [presentation]
-   position=101,366
+   position=103,366
    taille=9,34
    noms="prix;remcod2"
    id=549
@@ -13593,7 +13641,7 @@
    diva_apres="Champ_Rem_1_Ap"
  [multi_choix]
   [presentation]
-   position=30,253
+   position=29,227
    taille=9,45
    noms="cog_c2"
    id=1000100

@@ -1,11 +1,11 @@
-;>xwin4obj                              7.0       20161207153821      
+;>xwin4obj                              7.0       20170510100712      
 [masque]
  libelle="Explorateur de pièces"
- utilisateur="UGIE"
- date_modification="07/12/2016"
+ utilisateur="UGIE_RR"
+ date_modification="10/05/2017"
  feuille_style="fstylewpf.dhfi"
  noms_boutons="zoom"
- dernier_id=1000020
+ dernier_id=1000021
  surcharge=oui
  date_modif_base="20151006095515"
  dernier_id_page=100000
@@ -1865,6 +1865,26 @@ TOTO
     titre="Facturation Compte"
     fl_aff=non
     largeur_col=9
+    wstyle="ENTETE_COLONNE"
+  [champ_tableau]
+   [presentation]
+    position=17,392
+    taille=9,90
+    noms="cog_f2;cog_f3;cog_f4"
+    id=1000021
+    colonnes_saisie=25
+    wstyle="STD"
+    wcouleur_fonte=0,0,255,0,0,0
+   [description]
+    donnee=gtpceexp,cog_dircli,gtpceexp
+   [param_saisie]
+    type_date=jj/mm/aaaa
+   [info_bulle]
+   texte="Direction cliente"
+   [param_colonne]
+    titre="Direction cliente"
+    fl_aff=non
+    largeur_col=90
     wstyle="ENTETE_COLONNE"
 [page]
  numero=4
