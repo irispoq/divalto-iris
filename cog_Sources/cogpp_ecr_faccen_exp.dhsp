@@ -194,8 +194,8 @@ recorddiva	ventilation	elem2
 
 Beginf
 
-	cle1	=	elem1.Axe1 & elem1.Axe2 & elem1.Axe3 & elem1.Axe4
-	cle2	=	elem2.Axe1 & elem2.Axe2 & elem2.Axe3 & elem2.Axe4
+	cle1	=	elem1.Axe1 & elem1.Axe2 & elem1.Axe3 & elem1.Axe4 & elem1.Sens
+	cle2	=	elem2.Axe1 & elem2.Axe2 & elem2.Axe3 & elem2.Axe4 & elem2.Sens
 
    freturn(sortcompare(cle1,cle2))
 
@@ -263,37 +263,18 @@ beginp
 				Vtl_rec.Axe2	= cx.Axe(2)
 				Vtl_rec.Axe3	= cx.Axe(3)
 				Vtl_rec.Axe4	= cx.Axe(4)
+				Vtl_rec.Sens   = cx.Sens
 				Vtl_rec.Jnl		= cx.Jnl
 				Vtl_rec.Ecrno	= EcrNo
 				Vtl_rec.Ecrlg	= lilg
 				
 				if listseek(list_EcrVtl,Vtl_rec,Vtl)
-					;Vtl.Mt	+= condition(cx.Sens=2,cx.Mt,-cx.Mt)
-					cx.mtbis=abs(cx.mt)
-					Vtl.Mt	+= condition(cx.cog_sens=2,cx.Mtbis,-cx.Mtbis)
-					;fri 18/04/2013
-					if vtl.mt<0
-						vtl.sens=1
-					else
-						vtl.sens=2
-					endif
+					Vtl.Mt	+= cx.Mt
 					lig_vtl_mt=vtl.mt
 					listmodify(list_EcrVtl,Vtl)
 				else
 					Vtl		= Vtl_rec
-					;Vtl.Mt	= condition(cx.Sens=2,cx.Mt,-cx.Mt)
-					
-					cx.mtbis=abs(cx.mt)
-					Vtl.Mt	= condition(cx.cog_sens=2,cx.Mtbis,-cx.Mtbis)
-					
-					;Vtl.Sens	= cx.Sens
-					;Vtl.Sens	= cx.cog_sens
-					;fri 18/04/2013
-					if vtl.mt<0
-						vtl.sens=1
-					else
-						vtl.sens=2
-					endif
+					Vtl.Mt	= cx.Mt
 					lig_vtl_mt=vtl.mt
 					listinsert(list_EcrVtl,Vtl)
 					lilg++
@@ -308,30 +289,18 @@ beginp
 				Vtl_rec.Jnl		= cx.Jnl
 				Vtl_rec.Ecrno	= EcrNo
 				Vtl_rec.Ecrlg	= lilg
+				switch cx.Sens
+					case 1
+						Vtl_rec.Sens   = 2
+					case 2
+						Vtl_rec.Sens   = 1
+				endswitch
 				if listseek(list_EcrVtl,Vtl_rec,Vtl)
-					Vtl.Mt	+= condition(cx.Sens=2,cx.Mt,-cx.Mt)
-					;fri 28022013
-					;Vtl.Mt	+= condition(cx.cog_Sens=2,cx.Mt,-cx.Mt)
-					;fri 18/04/2013
-					if vtl.mt<0
-						vtl.sens=2
-					else
-						vtl.sens=1
-					endif
+					Vtl.Mt	+= cx.Mt
 					listmodify(list_EcrVtl,Vtl)
 				else
 					Vtl		= Vtl_rec
-					Vtl.Mt	= condition(cx.Sens=2,cx.Mt,-cx.Mt)
-					;Vtl.Mt	= condition(cx.cog_Sens=2,cx.Mt,-cx.Mt)
-					;fri 17/04/2013 
-					;Vtl.Sens	= 3 - cx.Sens
-					;Vtl.Sens	= 3 - cx.cog_Sens
-					;fri 18/04/2013
-					if vtl.mt<0
-						vtl.sens=2
-					else
-						vtl.sens=1
-					endif
+					Vtl.Mt	= cx.Mt
 					listinsert(list_EcrVtl,Vtl)
 					lilg++
 				endif

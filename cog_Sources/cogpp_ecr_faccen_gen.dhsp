@@ -61,6 +61,7 @@ structure EcritureCentrale
 	1	Mt			>	ccfdd.dhsd	mt
 	1	ecrno		>	ccfdd.dhsd	ecrno
 	1	piece		>	ccfdd.dhsd	piece
+	1	sens		> 	ccfdd.dhsd	sens
 endstructure
 
 1	list_EcrCen			L
@@ -71,6 +72,7 @@ endstructure
 1	fonc_EcrVtl			16
 
 1	EcrnoG	>	ccfdd.dhsd	ecrno	= 0
+1	St	X
 
 RecordDiva	EcritureCentrale	EcrCen
 
@@ -249,8 +251,8 @@ recorddiva	EcritureCentrale	elem2
 
 Beginf
 
-	cle1	=	elem1.TiersGrp & elem1.Cpt & elem1.Axe3 & elem1.Axe4
-	cle2	=	elem2.TiersGrp & elem2.Cpt & elem2.Axe3 & elem2.Axe4
+	cle1	=	elem1.TiersGrp & elem1.Cpt & elem1.Axe3 & elem1.Axe4 & elem1.sens
+	cle2	=	elem2.TiersGrp & elem2.Cpt & elem2.Axe3 & elem2.Axe4 & elem2.sens
 
    freturn(sortcompare(cle1,cle2))
 
@@ -266,8 +268,8 @@ record	ccfdd.dhsd	cx	elem2
 
 Beginf
 
-	cle1	=	elem1.EcrNo & elem1.Cpt
-	cle2	=	elem2.EcrNo & elem2.Cpt
+	cle1	=	elem1.EcrNo & elem1.Cpt &elem1.Sens
+	cle2	=	elem2.EcrNo & elem2.Cpt	&elem1.Sens
 
    freturn(sortcompare(cle1,cle2))
 
@@ -347,14 +349,15 @@ beginp
 		EcrCen_rec.Cpt			= c3.Cpt
 		EcrCen_rec.Axe3		= c3.Axe(3)
 		EcrCen_rec.Axe4		= c3.Axe(4)
+		EcrCen_rec.sens      = c8_loc.Sens
 		if listseek(list_EcrCen,EcrCen_rec,EcrCen)
-			EcrCen.Mt	+= condition(c8_loc.Sens=2,c8_loc.Mt,-c8_loc.Mt)
+			EcrCen.Mt	+= c8_loc.Mt
 			listmodify(list_EcrCen,EcrCen)
 		else
 			EcrCen			= EcrCen_rec
 			EcrCen.CptAux	= c3.Cog_CptAnael
 			EcrCen.ecrno	= ecrno
-			EcrCen.Mt		= condition(c8_loc.Sens=2,c8_loc.Mt,-c8_loc.Mt)
+			EcrCen.Mt		= c8_loc.Mt
 			EcrCen.piece	= piece
 			listinsert(list_EcrCen,EcrCen)
 		endif
@@ -398,8 +401,8 @@ beginp
 		c8.Cpt				= EcrCen.Cpt
 		c8.EcrDt				= xq_cog.DatD
 		c8.Lib				= "Fact. Centrale <"&left(EcrCen.TiersGrp)&">"
-		c8.Mt					= abs(EcrCen.Mt)
-		c8.Sens				= condition(EcrCen.Mt < 0,1,2)
+		c8.Mt					= EcrCen.Mt
+		c8.Sens				= EcrCen.sens
 		c8.EcrNo				= EcrnoG
 		c8.EcrValNo			= EcrCen.ecrno
 		c8.Piece				= EcrCen.piece
@@ -411,47 +414,33 @@ beginp
 		cx_rec			= ""
 		cx_rec.EcrNo	= EcrCen.ecrno
 		cx_rec.Cpt		= EcrCen.Cpt
-		if listsearch(list_EcrVtl,cx_rec,cx) and cx.EcrNo = EcrCen.ecrno and cx.Cpt = EcrCen.Cpt
+		cx_rec.Sens    = EcrCen.sens
+		if listsearch(list_EcrVtl,cx_rec,cx) and cx.EcrNo = EcrCen.ecrno and cx.Cpt = EcrCen.Cpt and cx.Sens = EcrCen.sens
 			cx_rec		= cx
 			cx				= ""
 			cx.Ce1		= 2
 			cx.Dos		= mz.Dos
 			cx.Etb		= ca.Etb
 			cx.EcrNo		= EcrnoG
-			if abs(cx_rec.mt)=0
-					;messagebox("gen2","")
-				endif
-				if cx_rec.mt=80
-			 		cx.Mt			= cx_rec.Mt
-				endif
-			;début FRI 10/10/2012
-			cx.Mt			= condition(cx_rec.Sens=c8.Sens,cx_rec.Mt,-cx_rec.Mt)
-			cx.MtDev		= condition(cx_rec.Sens=c8.Sens,cx_rec.MtDev,-cx_rec.MtDev)
-			;cx.Mt			= abs(cx_rec.Mt)
-			;cx.Mtdev		= abs(cx_rec.MtDev)
-			;cx.Sens		= condition(cx_rec.Mt < 0,1,2)
-			;fin FRI
+			cx.Sens     = cx_rec.Sens
+			cx.Mt			= cx_rec.Mt
+			cx.MtDev		= cx_rec.MtDev
 			cx.Axe(1)	= cx_rec.Axe(1)
 			cx.Axe(2)	= cx_rec.Axe(2)
 			cx.Axe(3)	= cx_rec.Axe(3)
 			cx.Axe(4)	= cx_rec.Axe(4)
 			cx.cog_Sens	= cx_rec.Sens
 			hwrite(ccfmcen,cx)
-			loop listnext(list_EcrVtl,cx) and cx.EcrNo = EcrCen.ecrno and cx.Cpt = EcrCen.Cpt
+			loop listnext(list_EcrVtl,cx) and cx.EcrNo = EcrCen.ecrno and cx.Cpt = EcrCen.Cpt and cx.Sens = EcrCen.sens
 				cx_rec		= cx
 				cx				= ""
 				cx.Ce1		= 2
 				cx.Dos		= mz.Dos
 				cx.Etb		= ca.Etb
 				cx.EcrNo		= EcrnoG
-				if abs(cx_rec.mt)=0
-					messagebox("gen2","")
-				endif
-				if cx_rec.mt=80
-			 		cx.Mt			= cx_rec.Mt
-				endif
-				cx.Mt			= condition(cx_rec.Sens=c8.Sens,cx_rec.Mt,-cx_rec.Mt)
-				cx.MtDev		= condition(cx_rec.Sens=c8.Sens,cx_rec.MtDev,-cx_rec.MtDev)
+				cx.Sens		= cx_rec.Sens
+				cx.Mt			= cx_rec.Mt
+				cx.MtDev		= cx_rec.MtDev
 				cx.Axe(1)	= cx_rec.Axe(1)
 				cx.Axe(2)	= cx_rec.Axe(2)
 				cx.Axe(3)	= cx_rec.Axe(3)
@@ -503,39 +492,34 @@ beginp
 
 		svcle	= isavekey(ccfjca)
 
-		if Cog_FiltresOk
-
+		if Cog_FiltresOk <> true
+			redoloop
+		else
 			ccfecr.Key	= "C" & mz.Dos & c4.Jnl & datd
-			loop not hread(ccfecr,c8) and ccfecr.Key <= "C" & mz.Dos & c4.Jnl & datf & $FF
-
-				xq_cog.Lib(2)	= sdate(c8.EcrDt) & " - " & c8.Cpt
-				Cog_AfficherTraitement
-
-				if ecrno <> c8.EcrNo
-					if ecrno <> 0
-						Cog_TraiterEcriture(ecrno)
-					endif
+			st = hread(ccfecr,c8) 
+			loop st = 0 and c8.Jnl = c4.Jnl
+				loop st = 0 and c8.EcrDt in (datd..datf)
+	
+					xq_cog.Lib(2)	= sdate(c8.EcrDt) & " - " & c8.Cpt
+					Cog_AfficherTraitement
+	
 					listerase(list_EcrC8)
 					ecrno	= c8.EcrNo
-					cli	= ""
-					c3		= ""
-				endif
-
-				if Seek_CLI(c8.Cpt) = 0
-					if cli.TiersGrp <> ""
-						Seek_CLI(cli.TiersGrp)
-					endif
-					c8.Cpt	= condition(cli.Cpt<>"",cli.Cpt,c8.Cpt)
-				endif
-				listinsert(list_EcrC8,c8)
-
+					loop st = 0 and ecrno = c8.EcrNo
+						cli	= ""
+						c3		= ""
+						if Seek_CLI(c8.Cpt) = 0
+							if cli.TiersGrp <> ""
+								Seek_CLI(cli.TiersGrp)
+							endif
+							c8.Cpt	= condition(cli.Cpt<>"",cli.Cpt,c8.Cpt)
+						endif
+						listinsert(list_EcrC8,c8)
+						st=hread(ccfecr,c8)
+					endloop
+					Cog_TraiterEcriture(ecrno)
+				endloop
 			endloop
-
-			if ecrno <> 0
-				Cog_TraiterEcriture(ecrno)
-				ecrno	= 0
-			endif
-
 		endif
 
 		irestorekey(ccfjca,svcle)
