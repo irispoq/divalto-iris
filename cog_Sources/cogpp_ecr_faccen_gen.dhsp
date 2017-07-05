@@ -268,8 +268,8 @@ record	ccfdd.dhsd	cx	elem2
 
 Beginf
 
-	cle1	=	elem1.EcrNo & elem1.Cpt &elem1.Sens
-	cle2	=	elem2.EcrNo & elem2.Cpt	&elem1.Sens
+	cle1	=	elem1.EcrNo & elem1.Cpt & elem1.Sens
+	cle2	=	elem2.EcrNo & elem2.Cpt	& elem2.Sens
 
    freturn(sortcompare(cle1,cle2))
 

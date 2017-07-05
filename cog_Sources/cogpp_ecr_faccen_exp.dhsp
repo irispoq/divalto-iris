@@ -332,14 +332,6 @@ beginp
 		cx.Axe(2)	= Vtl.Axe2
 		cx.Axe(3)	= Vtl.Axe3
 		cx.Axe(4)	= Vtl.Axe4
-		if vtl.mt<0
-		;	if vtl.sens=2
-		;		vtl.sens=1
-		;	else
-		;		vtl.sens=2
-		;	endif
-			vtl.mt=abs(vtl.mt)
-		endif
 		cx.Mt			= Vtl.Mt
 		cx.Sens		= Vtl.Sens
 		cx.Jnl		= Vtl.Jnl
