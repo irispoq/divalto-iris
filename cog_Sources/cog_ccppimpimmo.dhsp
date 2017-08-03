@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 8733 2015-10-20 12:33:55Z admin $')
+SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 11876 2017-08-03 15:34:18Z v.resplandy $')
 
 ;*
 ;* Programme qui permet d'intégrer des immos dans Divalto Compta
@@ -545,6 +545,34 @@ beginf
 endf
 
 ;*
+Function int CogRs_Immo_SeekByImmo(wI1)
+; recherche un enregistrement I1 par le champ n° immo + ce3
+; 0 --> OK	 CogRs_Immo est chargé
+Record	"ccfdd.dhsd"		I1			wI1					
+BeginF
+
+	If wI1.Immo = ' '
+		FReturn(1)
+	EndIf
+	wI1.Ce3 = Condition(wI1.Ce3 <> ' ', wI1.Ce3, '1')
+
+	CogRs_Immo.Init()
+	CogRs_Immo.Where.RemoveCondition("")
+	CogRs_Immo.Where.Zoom_Immo(wI1.Immo)
+	CogRs_Immo.Where.AddCondition("Zoom_Immo")
+	CogRs_Immo.Where.Zoom_IndicateurHistorique(wI1.Ce3)
+	CogRs_Immo.Where.AddCondition("Zoom_IndicateurHistorique")
+
+	If CogRs_Immo.Select() > 0
+		FReturn(0)
+	EndIf
+
+	FReturn(2)
+
+EndF
+
+
+;*
 Function int CogRs_Immo_SeekBySerie(wI1)
 ; recherche un enregistrement I1 par le champ n° de série + ce3
 ; 0 --> OK	 CogRs_Immo est chargé
@@ -602,11 +630,15 @@ BeginF
 	EndIf
 
 	;
+	Cogrs_Immo.Local			= Condition(wI1.Local  <> ' '	      , wI1.Local       , CogRs_Immo.Local)
 	CogRs_Immo.Axe(1)			= Condition(wI1.Axe(1) <> ' '			, wI1.Axe(1)		, CogRs_Immo.Axe(1))
 	CogRs_Immo.Axe(2)			= Condition(wI1.Axe(2) <> ' '			, wI1.Axe(2)		, CogRs_Immo.Axe(2))
+	CogRs_Immo.Axe(3)			= Condition(wI1.Axe(3) <> ' '			, wI1.Axe(3)		, CogRs_Immo.Axe(3))
+	CogRs_Immo.Axe(4)			= Condition(wI1.Axe(4) <> ' '			, wI1.Axe(4)		, CogRs_Immo.Axe(4))
 	CogRs_Immo.Cog_AxeAnael	= Condition(wI1.Cog_AxeAnael <> ' '	, wI1.Cog_AxeAnael, CogRs_Immo.Cog_AxeAnael)
 	CogRs_Immo.EcoAmDt		= Condition(wI1.EcoAmDt <> ' '		, wI1.EcoAmDt		, CogRs_Immo.EcoAmDt)
 	CogRs_Immo.Cog_AmoFlag	= Condition(wI1.Cog_AmoFlag <> 0		, wI1.Cog_AmoFlag	, CogRs_Immo.Cog_AmoFlag)
+	CogRs_Immo.Cog_IsilogRef= Condition(wI1.Cog_IsilogRef <> ' ', wI1.Cog_IsilogRef	, CogRs_Immo.Cog_IsilogRef)
 	CogRs_Immo.UserMo			= System.User
 	CogRs_Immo.UserMoDh		= Time(7)
 
@@ -617,6 +649,10 @@ BeginF
 	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(1)",wNL)		  				| wOK = FALSE | EndIf
 	PingLocal("dataind",2)
 	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(2)",wNL)		  				| wOK = FALSE | EndIf
+	PingLocal("dataind",3)
+	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(3)",wNL)		  				| wOK = FALSE | EndIf
+	PingLocal("dataind",4)
+	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(4)",wNL)		  				| wOK = FALSE | EndIf
 	If not Lancer_Traitement("Champ_Cog_AxeAnael_1_Ap", "COG_AXEANAEL", wNL)| wOK = FALSE | EndIf
 
 	; Mise à jour
@@ -846,6 +882,8 @@ Procedure	Cog_PImmos_Import
 1	nI		8,0
 1	nJ		8,0
 1	arret	B=false
+1	RetFcRech	1,0
+1	meserr 100
 Beginp
 	; On récupère la structure de I1 dans une liste mémoire
 	lIdCHAMPI1 = ListGetId("Cog_Lst_ZI1")
@@ -861,15 +899,27 @@ Beginp
 				Office_Read(nI, nJ, aVal)
 				Cog_PTrans_ValZone(I1, tTabCorColZone(nJ), aVAL)
 			Next
-
-			If CogRs_Immo_SeekBySerie(I1)	<>	0
-				Cog_AfficherTraitement("Lecture du bien  : " & Left(i1.Immo) & " - " & Left(i1.Lib), "Ligne n°" & NoSpaces(nI) & "--> création")
-				Cog_PWriteI1(nI)
-			Else
-				Cog_AfficherTraitement("Lecture du bien  : " & Left(i1.Immo) & " - " & Left(i1.Lib), "Ligne n°" & NoSpaces(nI) & "--> mise à jour")
-				CogRs_Immo_Update(I1, nI)
-			EndIf
-
+			RetFcRech = CogRs_Immo_SeekByImmo(I1)
+			Switch RetFcRech
+				case 0
+					Cog_AfficherTraitement("Lecture du bien  : " & Left(i1.Immo) & " - " & Left(i1.Lib), "Ligne n°" & NoSpaces(nI) & "--> Mise à jour")
+					CogRs_Immo_Update(I1, nI)
+				case 1
+					If CogRs_Immo_SeekBySerie(I1)	<>	0
+						Cog_AfficherTraitement("Lecture du bien  : " & Left(i1.Immo) & " - " & Left(i1.Lib), "Ligne n°" & NoSpaces(nI) & "--> création")
+						Cog_PWriteI1(nI)
+					Else
+						Cog_AfficherTraitement("Lecture du bien  : " & Left(i1.Immo) & " - " & Left(i1.Lib), "Ligne n°" & NoSpaces(nI) & "--> mise à jour")
+						CogRs_Immo_Update(I1, nI)
+					EndIf
+				case 2
+					;Cog_EcritureLivreDeBord("Erreur lors de la mise à jour de la fiche immo n°" & NoSpaces(I1.Immo) & ": ce bien n'existe pas.")
+					meserr = "Le bien n° " & I1.Immo & " n'existe pas"
+					Office_Write(nI,nColErr,meserr)
+					Office_FontColorIndex(nI,nColErr,30)		;rouge un peu foncé
+					nEspErr++
+					Cog_AfficherTraitement("Lecture du bien  : " & Left(i1.Immo) & " - " & Left(i1.Lib), "Ligne n°" & NoSpaces(nI) & "--> Mise à jour impossible")
+			Endswitch	
 		Next
 	EndIf
 Endp
