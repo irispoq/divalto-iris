@@ -93,6 +93,7 @@ Public Record a5dd.dhsd		mconfuser
 		 Record a5dd.dhsd		mconfdet				confdet
 
 Public Record cogfdd.dhsd 	Cog_DirCliente		Cog_DirCliente_01
+public record gtfdd.dhsd	T073
 
 ;	Var
 1		SavCE4			>gtfdd.dhsd		Ce4
@@ -297,10 +298,10 @@ BeginF
 	wRs_IMMO.Cpt			= ART.Cog_CptIA
 	wRs_IMMO.Cog_EnrNo	= G1T1.EnrNo
 	wRs_IMMO.Cog_AmoFlag = 1
+	if lectab(73,art.CompetCod) = 0
+		wRs_Immo.Cog_IsilogRef = T073.Lib
+	endif
 	wRs_IMMO.Cog_BwId		= ENT.Cog_BwId
-	; Ajout JCH 02/05/2017 => Récupération du champ "Compétence" de l'article dans le champ "Compétence" de la fiche de bien.
-	wRs_IMMO.Cog_IsilogRef = ART.CompetCod
-	;;;;
 	; onglet COMPTABILISATION
 	wRs_IMMO.CptAmo		= HD.CptAmo
 	wRs_IMMO.CptDotAmo	= HD.CptDotAmo
@@ -310,11 +311,6 @@ BeginF
 	wRs_IMMO.CptProDep	= HD.CptProDep
 	wRs_IMMO.CptDotDep	= HD.CptDotDep
 	wRs_IMMO.CptDotRep	= HD.CptDotRep
-	; Ajout JCH 03/05/2017 => Initialisation des comptes de Cessions
-	wRs_IMMO.Cog_CptCes  = CD.Cog_CptCes
-	wRs_IMMO.Cog_CptCesAmo  = CD.Cog_CptCesAmo
-	wRs_IMMO.Cog_CptCesVal  = CD.Cog_CptCesVal
-	;;;;
 	; onglet AMORTISSEMENT
 	wRs_IMMO.EcoTyp		= Condition(HD.EcoTyp <> 0, HD.EcoTyp, 1)	; mode économique = 1:linéaire par défaut
 	wRs_IMMO.EcoDur		= HD.EcoDur
@@ -688,10 +684,7 @@ BeginP
 			wRs_IMMO.Init()	
 			wRs_IMMO.Where.Equal_Enrno(wG1t1.EnrNo)
 			wRs_IMMO.InitForUpdateWhere()
-			wRs_IMMO.Cog_BwId = ENT.Cog_BwId
-			; Ajout JCH 02/05/2017 => Récupération du champ "Compétence" de l'article dans le champ "Compétence" de la fiche de bien.
-			wRs_IMMO.Cog_IsilogRef = ART.CompetCod
-			;;;;
+			wRs_IMMO.Cog_BwId = 	ENT.Cog_BwId
 			wRs_IMMO.UpdateWhere()	
 		EndIf
 
