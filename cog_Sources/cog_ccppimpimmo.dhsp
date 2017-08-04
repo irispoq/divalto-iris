@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 11876 2017-08-03 15:34:18Z v.resplandy $')
+SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 11877 2017-08-04 08:52:38Z v.resplandy $')
 
 ;*
 ;* Programme qui permet d'intégrer des immos dans Divalto Compta
@@ -631,6 +631,7 @@ BeginF
 
 	;
 	Cogrs_Immo.Local			= Condition(wI1.Local  <> ' '	      , wI1.Local       , CogRs_Immo.Local)
+	CogRs_Immo.Serie			= Condition(wI1.Serie <> ' '			, wI1.Serie			, CogRs_Immo.Serie)
 	CogRs_Immo.Axe(1)			= Condition(wI1.Axe(1) <> ' '			, wI1.Axe(1)		, CogRs_Immo.Axe(1))
 	CogRs_Immo.Axe(2)			= Condition(wI1.Axe(2) <> ' '			, wI1.Axe(2)		, CogRs_Immo.Axe(2))
 	CogRs_Immo.Axe(3)			= Condition(wI1.Axe(3) <> ' '			, wI1.Axe(3)		, CogRs_Immo.Axe(3))
