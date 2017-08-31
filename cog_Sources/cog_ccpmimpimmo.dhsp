@@ -1,5 +1,5 @@
 
-SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 10572 2016-12-08 08:25:54Z admin $')
+SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 11946 2017-08-31 15:09:47Z v.resplandy $')
 ;*
 ;* cog_ccpmimpimmo					Procedure de traitement des champs importés (avant ou aprés saisie)
 ;*
@@ -13,6 +13,9 @@ include  "cctc700.dhsp"
 module	ccpm700.dhop
 module	cctm700.dhop
 
+; record SQL
+public	recordSQL	'CCRSIMMO.dhoq'		IMMO			IMMOBILISATION
+
 hfile	ccfdd.dhsd		ccfimmo	ccfimmo
 
 public record	ccfdd.dhsd		cd
@@ -20,6 +23,7 @@ public record	ccfdd.dhsd		i1
 public record	ccfdd.dhsd		i2
 public record	ccfdd.dhsd		i3
 public record	ccfdd.dhsd		c3										; intitulé de compte
+public record  ccfdd.dhsd		X1
 
 ;*
 ;* fonction interne de contrôle repris de Divalto
@@ -76,6 +80,46 @@ beginf	; calcul_possible
 endf		; calcul_possible
 
 ;*
+procedure RAZ_Cumuls
+
+; initialise à ' ' (ou 0), les zones de cumuls
+
+beginp	; RAZ_Cumuls
+	
+	IMMOBILISATION.ExoDDt			= ' '
+	IMMOBILISATION.ExoFDt			= ' '
+	; zones cumuls economiques
+	IMMOBILISATION.EcoLinTau		= ' '
+	IMMOBILISATION.EcoDDt			= ' '
+	IMMOBILISATION.EcoFDt			= ' '
+	IMMOBILISATION.EcoJourNb		= ' '
+	IMMOBILISATION.EcoMoisNb		= ' '
+	IMMOBILISATION.EcoLinMt			= ' '
+	IMMOBILISATION.EcoDegMt			= ' '
+	IMMOBILISATION.EcoManMt			= ' '
+	IMMOBILISATION.EcoExcMt			= ' '
+	IMMOBILISATION.EcoPuoMt			= ' '
+	IMMOBILISATION.EcoTotMt			= ' '
+	IMMOBILISATION.CumReval			= ' '
+	IMMOBILISATION.CumDprec			= ' '
+	IMMOBILISATION.EcoResMt			= IMMOBILISATION.EcoBas
+	;zones cumuls fiscaux
+	IMMOBILISATION.FisLinTau		= ' '
+	IMMOBILISATION.FisDDt			= ' '
+	IMMOBILISATION.FisFDt			= ' '
+	IMMOBILISATION.FisJourNb		= ' '
+	IMMOBILISATION.FisMoisNb		= ' '
+	IMMOBILISATION.FisLinMt			= ' '
+	IMMOBILISATION.FisDegMt			= ' '
+	IMMOBILISATION.FisManMt			= ' '
+	IMMOBILISATION.FisExcMt			= ' '
+	IMMOBILISATION.FisTotMt			= ' '
+	IMMOBILISATION.FisResMt			= IMMOBILISATION.FisBas
+
+endp		; RAZ_Cumuls
+
+
+;*
 function int Reglage_Acces_Cumuls
 
 ; renvoie true ou false selon que l'on peut ou pas modifier les reports
@@ -106,6 +150,23 @@ beginf
 			freturn(false)
 		endif
 	endif
+	; le bien est-il un composé
+	if Controler_Bien_Structure(I1.Immo, I1.ImmoComp) = 1										
+		freturn(false)																				; dans ce cas on ne peut modifier les paramètre issus du cumul des composants
+	endif
+
+	; vérifie s'il existe plusieurs enregistrements i2
+
+	if hread(CCFIMMO, I2, [ 'A' I1.Dos I1.Immo I1.ImmoComp ], 'F') = 0			\	; première lecture
+	and I2.Dos = I1.Dos and I2.Immo = I1.Immo and I2.ImmoComp = I1.ImmoComp		\	; correspond au bien i1
+	and I2.Ce2 <> '1'																																	; ce n'est pas un cumul
+		freturn(false)
+	endif
+
+	if hread(CCFIMMO, I2,, 'F') = 0										\																		; seconde lecture
+	and I2.Dos = I1.Dos and I2.Immo = I1.Immo and I2.ImmoComp = I1.ImmoComp			; correspond également au bien i1
+		freturn(false)
+	endif
 
 	freturn(true)
 endf
@@ -119,9 +180,9 @@ public procedure Enregistrer_Cumuls
 
 beginp	; enregistrer_cumuls
 
-	if not Reglage_Acces_Cumuls  \
-			and (I1.ECOTYP <> 4 or I1.SVCDT >= CD.EXODDT)	\	; pas à cause de la méthode
-			and (I1.FISTYP <> 4 or I1.SVCDT >= CD.EXODDT)
+	if not Reglage_Acces_Cumuls  ;\
+;			and (I1.ECOTYP <> 4 or I1.SVCDT >= CD.EXODDT)	\	; pas à cause de la méthode
+;			and (I1.FISTYP <> 4 or I1.SVCDT >= CD.EXODDT)
 
 		preturn
 	endif
@@ -322,7 +383,22 @@ beginp	; Champ_SvcDt_1_Ap
 		I1.ECOAMDT = I1.SVCDT
 	endif
 
+	X1.Choix(1) = Reglage_Acces_Cumuls
+
+	IMMOBILISATION.I1 = I1
+	RAZ_Cumuls
+
+	if	(Reglage_Parametres(C_Plan_Eco, IMMOBILISATION.EcoTyp, IMMOBILISATION.EcoDur, IMMOBILISATION.EcoCoe, IMMOBILISATION.EcoTau, IMMOBILISATION.DotEco, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt)		\
+	or	 Reglage_Parametres(C_Plan_Fiscal, IMMOBILISATION.FisTyp, IMMOBILISATION.FisDur, IMMOBILISATION.FisCoe, IMMOBILISATION.FisTau, IMMOBILISATION.DotFis, IMMOBILISATION.UoCode, IMMOBILISATION.AcqDt, IMMOBILISATION.SvcDt))	\
+	and (IMMOBILISATION.EcoBas or IMMOBILISATION.FisBas) and X1.Choix(1) and IMMOBILISATION.EcoTyp <> 3 and IMMOBILISATION.FisTyp <> 3
+		Dotations_Cumuls_RSQL
+	endif
+
+	I1 = IMMOBILISATION.I1
+
 endp		; Champ_SvcDt_1_Ap
+
+
 
 ;*
 public procedure Champ_EcoAmDt_1_Ap
@@ -331,10 +407,18 @@ public procedure Champ_EcoAmDt_1_Ap
 
 beginp	; Champ_EcoAmDt_1_Ap
 
-	if I1.ECOAMDT < I1.SVCDT
+	If I1.EcoAmDt <> ' '
+		I1.SvcDt = I1.EcoAmDt
+		Champ_SvcDt_1_Ap
+	ElsIf	I1.EcoAmDt = ' '
+		I1.Cog_AmoFlag = 1
+	EndIf
+
+	if I1.EcoAmDt <> ' ' and I1.ECOAMDT < I1.SVCDT
 		pinglocal('RetErreur',"E;Le début d amortissement ne peut être inférieur à la mise en service")
 		preturn
 	endif
+
 
 endp		; Champ_EcoAmDt_1_Ap
 

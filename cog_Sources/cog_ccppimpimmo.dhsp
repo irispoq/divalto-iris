@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 11877 2017-08-04 08:52:38Z v.resplandy $')
+SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 11946 2017-08-31 15:09:47Z v.resplandy $')
 
 ;*
 ;* Programme qui permet d'intégrer des immos dans Divalto Compta
@@ -606,6 +606,7 @@ Function int CogRs_Immo_Update(wI1, wNL)
 Record	"ccfdd.dhsd"		I1			wI1
 1		wNL		8,0
 1		wOK		1,0 = TRUE
+1				dt			>CCFDD.dhsd	EXODDT			; date de travail
 BeginF
 
 	If CogRs_Immo.GetId() = 0
@@ -628,6 +629,42 @@ BeginF
 		nEspErr++
 		wOK = FALSE
 	EndIf
+	
+	dt = dtadd(CogRs_Immo.ExoFDt, 1)
+	if CogRs_Immo.SvcDt			<> WI1.SvcDt			\
+	or CogRs_Immo.EcoAmDt		<> WI1.EcoAmDt		\
+	or CogRs_Immo.Cr				<> WI1.Cr				\
+	or CogRs_Immo.DotEco		<> WI1.DotEco			\
+	or CogRs_Immo.DotFis		<> WI1.DotFis			\
+	or CogRs_Immo.Economique	<> WI1.Economique	\
+	or CogRs_Immo.UoCode		<>	WI1.UoCode			\
+	or CogRs_Immo.ResFinMt		<> WI1.ResFinMt		\
+	or CogRs_Immo.Fiscal		<> WI1.Fiscal			\
+	or CogRs_Immo.Derog			<> WI1.Derog
+
+		CogRs_Immo.Calcul = 2										; à recalculer
+
+	; Cas d'un bien amorti depuis longtemps que l'on passe au rebut
+
+	elsif CogRs_Immo.Etat <> WI1.Etat					\		; changement d'état
+	and	dt < CD.ExoDDt											\		; si pas d'amort. exercice précédent
+	and	WI1.Position = 2										\		; si bien entièrement amorti
+	and	WI1.Calcul = 1												; si ne nécessitait pas un recalcul
+		if CogRs_Immo.Etat > 1																					; passage de en service -> vendu
+			if CogRs_Immo.CesDt >= dt		|	CogRs_Immo.Calcul = 1	|	endif					; si cession après fin amortissement
+		else																												; on remet le bien en service
+			if WI1.CesDt >= dt					|	CogRs_Immo.Calcul = 1	|	endif					; si cession après fin amortissement
+		endif
+
+	; Autres cas
+
+	elsif CogRs_Immo.Etat  <> WI1.Etat				\		; changement d'état
+	or		CogRs_Immo.CesDt <> WI1.CesDt				\		; modification date de cession
+	or		CogRs_Immo.CesMt <> WI1.CesMt						; modification montant cession
+
+		CogRs_Immo.Calcul = 2										; à recalculer
+
+	endif
 
 	;
 	Cogrs_Immo.Local			= Condition(wI1.Local  <> ' '	      , wI1.Local       , CogRs_Immo.Local)
@@ -655,10 +692,12 @@ BeginF
 	PingLocal("dataind",4)
 	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(4)",wNL)		  				| wOK = FALSE | EndIf
 	If not Lancer_Traitement("Champ_Cog_AxeAnael_1_Ap", "COG_AXEANAEL", wNL)| wOK = FALSE | EndIf
-
+	CogRs_Immo.I1 = I1
 	; Mise à jour
 	If not ModeSimulation AND wOK
 		CogRs_Immo.Update()
+		I1 = CogRs_Immo.I1
+		Lancer_Traitement("Enregistrer_Cumuls","",wNL)
 		nMaj++
 	EndIf
 
@@ -987,7 +1026,7 @@ BeginP
 						
 						Cog_AfficherTraitement("Import immobilisations", Left(aFic))
 					
-						If Cog_FImmos_VerifTableur = 0
+						If Cog_FImmos_VerifTableur = 0							
 							Cog_PIMmos_Import
 						Else
 							aMess = "Certains mots clés n'ont pas été trouvés dans le fichier tableur sélectionné ou la feuille n'est pas paramétrée correctement.|"
