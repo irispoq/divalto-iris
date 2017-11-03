@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 11946 2017-08-31 15:09:47Z v.resplandy $')
+SetModuleInfo('$Id: cog_ccppimpimmo.dhsp 12119 2017-11-03 13:51:19Z v.resplandy $')
 
 ;*
 ;* Programme qui permet d'intégrer des immos dans Divalto Compta
@@ -607,6 +607,12 @@ Record	"ccfdd.dhsd"		I1			wI1
 1		wNL		8,0
 1		wOK		1,0 = TRUE
 1				dt			>CCFDD.dhsd	EXODDT			; date de travail
+1	f_axe1 B
+1	f_axe2 B
+1	f_axe3 B
+1	f_axe4 B
+1	f_cogaxeanel B
+1	f_ecoamdt B
 BeginF
 
 	If CogRs_Immo.GetId() = 0
@@ -631,22 +637,22 @@ BeginF
 	EndIf
 	
 	dt = dtadd(CogRs_Immo.ExoFDt, 1)
-	if CogRs_Immo.SvcDt			<> WI1.SvcDt			\
-	or CogRs_Immo.EcoAmDt		<> WI1.EcoAmDt		\
-	or CogRs_Immo.Cr				<> WI1.Cr				\
-	or CogRs_Immo.DotEco		<> WI1.DotEco			\
-	or CogRs_Immo.DotFis		<> WI1.DotFis			\
-	or CogRs_Immo.Economique	<> WI1.Economique	\
-	or CogRs_Immo.UoCode		<>	WI1.UoCode			\
-	or CogRs_Immo.ResFinMt		<> WI1.ResFinMt		\
-	or CogRs_Immo.Fiscal		<> WI1.Fiscal			\
-	or CogRs_Immo.Derog			<> WI1.Derog
+	if (CogRs_Immo.SvcDt			<> WI1.SvcDt and WI1.SvcDt<>' ')			\
+	or (CogRs_Immo.EcoAmDt		<> WI1.EcoAmDt	and WI1.EcoAmDt <>' ')	\
+	or (CogRs_Immo.Cr				<> WI1.Cr and WI1.Cr <> ' ')				\
+	or (CogRs_Immo.DotEco		<> WI1.DotEco and WI1.DotEco <> ' ')	\
+	or (CogRs_Immo.DotFis		<> WI1.DotFis and WI1.DotFis <> ' ')	\
+	or (CogRs_Immo.Economique	<> WI1.Economique	and WI1.Economique <> ' ')\
+	or (CogRs_Immo.UoCode		<>	WI1.UoCode and WI1.UoCode <> ' ')			\
+	or (CogRs_Immo.ResFinMt		<> WI1.ResFinMt and WI1.ResFinMt <> ' ')		\
+	or (CogRs_Immo.Fiscal		<> WI1.Fiscal and	WI1.Fiscal<> ' ')		\
+	or (CogRs_Immo.Derog			<> WI1.Derog and WI1.Derog <> ' ')
 
 		CogRs_Immo.Calcul = 2										; à recalculer
 
 	; Cas d'un bien amorti depuis longtemps que l'on passe au rebut
 
-	elsif CogRs_Immo.Etat <> WI1.Etat					\		; changement d'état
+	elsif (CogRs_Immo.Etat <> WI1.Etat and WI1.Etat <> ' ')				\		; changement d'état
 	and	dt < CD.ExoDDt											\		; si pas d'amort. exercice précédent
 	and	WI1.Position = 2										\		; si bien entièrement amorti
 	and	WI1.Calcul = 1												; si ne nécessitait pas un recalcul
@@ -658,15 +664,40 @@ BeginF
 
 	; Autres cas
 
-	elsif CogRs_Immo.Etat  <> WI1.Etat				\		; changement d'état
-	or		CogRs_Immo.CesDt <> WI1.CesDt				\		; modification date de cession
-	or		CogRs_Immo.CesMt <> WI1.CesMt						; modification montant cession
+	elsif (CogRs_Immo.Etat  <> WI1.Etat and WI1.Etat <> ' ')				\		; changement d'état
+	or		(CogRs_Immo.CesDt <> WI1.CesDt and WI1.CesDt <> ' ')			\		; modification date de cession
+	or		(CogRs_Immo.CesMt <> WI1.CesMt and WI1.CesMt <> ' ')						; modification montant cession
 
 		CogRs_Immo.Calcul = 2										; à recalculer
 
 	endif
 
 	;
+	;Gestion de flags par zones mises à jour et qui doivent exécuter des traitements si modifications
+	f_axe1 = false
+	f_axe2 = false
+	f_axe3 = false
+	f_axe4 = false
+	f_cogaxeanel = false
+	f_ecoamdt = false
+	if wI1.Axe(1) <> CogRs_Immo.Axe(1)	and wI1.Axe(1) <> ' '
+		f_axe1=true
+	endif
+	if wI1.Axe(2) <> CogRs_Immo.Axe(2)	and wI1.Axe(2) <> ' '
+		f_axe1=true
+	endif
+	if wI1.Axe(3) <> CogRs_Immo.Axe(3) and wI1.Axe(3) <> ' '
+		f_axe1=true
+	endif
+	if wI1.Axe(4) <> CogRs_Immo.Axe(4) and wI1.Axe(4) <> ' '
+		f_axe1=true
+	endif
+	if wI1.Cog_AxeAnael <> CogRs_Immo.Cog_AxeAnael and  wI1.Cog_AxeAnael <> ' '
+		f_cogaxeanel = true
+	endif
+	if wI1.EcoAmDt <> CogRs_Immo.EcoAmDt and wI1.EcoAmDt <> ' '
+		f_ecoamdt = true
+	endif
 	Cogrs_Immo.Local			= Condition(wI1.Local  <> ' '	      , wI1.Local       , CogRs_Immo.Local)
 	CogRs_Immo.Serie			= Condition(wI1.Serie <> ' '			, wI1.Serie			, CogRs_Immo.Serie)
 	CogRs_Immo.Axe(1)			= Condition(wI1.Axe(1) <> ' '			, wI1.Axe(1)		, CogRs_Immo.Axe(1))
@@ -682,16 +713,29 @@ BeginF
 
 	; contrôles des champs 
 	I1 = CogRs_Immo.I1
-	If not Lancer_Traitement("Champ_EcoAmDt_1_Ap","ECOAMDT", wNL) 				| wOK = FALSE | EndIf
-	PingLocal("dataind",1)
-	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(1)",wNL)		  				| wOK = FALSE | EndIf
-	PingLocal("dataind",2)
-	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(2)",wNL)		  				| wOK = FALSE | EndIf
-	PingLocal("dataind",3)
-	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(3)",wNL)		  				| wOK = FALSE | EndIf
-	PingLocal("dataind",4)
-	If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(4)",wNL)		  				| wOK = FALSE | EndIf
-	If not Lancer_Traitement("Champ_Cog_AxeAnael_1_Ap", "COG_AXEANAEL", wNL)| wOK = FALSE | EndIf
+	if f_ecoamdt = true
+		If not Lancer_Traitement("Champ_EcoAmDt_1_Ap","ECOAMDT", wNL) | wOK = FALSE | EndIf
+	endif
+	if f_axe1 = true
+		PingLocal("dataind",1)
+		If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(1)",wNL)		  				| wOK = FALSE | EndIf
+	endif
+	if f_axe2 = true
+		PingLocal("dataind",2)
+		If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(2)",wNL)		  				| wOK = FALSE | EndIf
+	endif
+	if f_axe3 = true
+		PingLocal("dataind",3)
+		If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(3)",wNL)		  				| wOK = FALSE | EndIf
+	endif
+	if f_axe4 = true
+		PingLocal("dataind",4)
+		If not Lancer_Traitement("Champ_Axe_1_Ap","AXE(4)",wNL)		  				| wOK = FALSE | EndIf
+	endif
+	if f_cogaxeanel = true
+		If not Lancer_Traitement("Champ_Cog_AxeAnael_1_Ap", "COG_AXEANAEL", wNL)| wOK = FALSE | EndIf
+	endif
+
 	CogRs_Immo.I1 = I1
 	; Mise à jour
 	If not ModeSimulation AND wOK
@@ -917,6 +961,7 @@ beginp
 
 endp
 
+
 ;*	Lance l'import suivant lecture du tableur
 Procedure	Cog_PImmos_Import
 1	nI		8,0
@@ -924,6 +969,11 @@ Procedure	Cog_PImmos_Import
 1	arret	B=false
 1	RetFcRech	1,0
 1	meserr 100
+
+RecordSQL	"COG_CCRSIMMO.DHOQ"		CogRs_IMMO		wRs_IMMO
+RecordSQL	"COG_CCRSIMMO.DHOQ"		CogRs_IMMO		wRs_IMMO_new
+1	i			1,0
+
 Beginp
 	; On récupère la structure de I1 dans une liste mémoire
 	lIdCHAMPI1 = ListGetId("Cog_Lst_ZI1")

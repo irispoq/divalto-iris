@@ -1,5 +1,5 @@
 
-SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 11946 2017-08-31 15:09:47Z v.resplandy $')
+SetModuleInfo('$Id: cog_ccpmimpimmo.dhsp 12119 2017-11-03 13:51:19Z v.resplandy $')
 ;*
 ;* cog_ccpmimpimmo					Procedure de traitement des champs importés (avant ou aprés saisie)
 ;*
@@ -172,75 +172,80 @@ beginf
 endf
 
 
-
 ;*
 public procedure Enregistrer_Cumuls
 
 ; après une création, met à jour l'enregistrement report s'il y a lieu
+record		CCFDD.dhsd		I2			ri2		; amortissement lu
 
 beginp	; enregistrer_cumuls
-
-	if not Reglage_Acces_Cumuls  ;\
-;			and (I1.ECOTYP <> 4 or I1.SVCDT >= CD.EXODDT)	\	; pas à cause de la méthode
-;			and (I1.FISTYP <> 4 or I1.SVCDT >= CD.EXODDT)
+	if not Reglage_Acces_Cumuls  \
+			and (I1.ECOTYP <> 4 or I1.SVCDT >= CD.EXODDT)	\	; pas à cause de la méthode
+			and (I1.FISTYP <> 4 or I1.SVCDT >= CD.EXODDT)
 
 		preturn
 	endif
-
 	; il faut créer un enregistrement i2 pour stocker les reports
-
 	I2					= ' '
-	I2.CE1			= '2'
-	I2.CE2			= '1'									; identifie un cumul
-	I2.DOS			= I1.DOS
+	I2.Ce1			= '2'
+	I2.Ce2			= '1'									; identifie un cumul
+	I2.Dos			= I1.Dos
 	I2.Etb			= I1.Etb
-	I2.IMMO			= I1.IMMO
-	I2.IMMOCOMP		= I1.IMMOCOMP
-	I2.EXODDT		= I1.EXODDT							; dates début et fin de l'exercice "report"
-	I2.EXOFDT		= I1.EXOFDT
+	I2.Immo			= I1.Immo
+	I2.ImmoComp		= I1.ImmoComp
+	I2.ExoDDt		= I1.ExoDDt			; dates début et fin de l'exercice "report"
+	I2.ExoFDt		= I1.ExoFDt
 	
-	I2.USERCR		= SYSTEM.USER
-	I2.USERCRDH		= I1.USERCRDH
-	I2.USERCRORI	= I1.USERCRORI
-	I2.USERMO		= SYSTEM.USER
-	I2.USERMODH		= I1.USERMODH
-	I2.USERMOORI	= I1.USERMOORI	
+	I2.UserCr		= SYSTEM.User
+	I2.UserCrDH		= I1.UserCrDH
+	I2.UserCrOri	= I1.UserCrOri
+	I2.UserMo		= SYSTEM.User
+	I2.UserMoDH		= I1.UserMoDH
+	I2.UserMoOri	= I1.UserMoOri	
 
-	I2.ECONOMIQUE	= I1.ECONOMIQUE
-	I2.ECOLINTAU	= ' '																										;2476
-	I2.RESFINMT 	= I1.RESFINMT
-	if I1.UOCODE <> ' ' 									; test uniquement s'il y a un plan UO
-		I2.UOCODE		= I1.UOCODE
-		if Rechercher_PlanUO(I1.UOCODE)=0					; recherche du plan UO 'valide' actuel
-			I2.EFFETDT	=  I3.EFFETDT						; recup de sa date d'effet pour identification (UOCODE+EFFETDT)
+	I2.Economique	= I1.Economique
+	I2.EcoLinTau	= ' '
+	I2.ResFinMt 	= I1.ResFinMt
+	if I1.UoCode <> ' ' 								; test uniquement s'il y a un plan UO
+		I2.UoCode	= I1.UoCode
+		if Rechercher_PlanUO(I1.UoCode) = 0		; recherche du plan UO 'valide' actuel
+			I2.EffetDt = I3.EffetDt									; recup de sa date d'effet pour identification (UOCODE+EFFETDT)
 		else
 			pinglocal('RetErreur', "E;Aucun plan UOCODE valide trouvé : incoherence" )
 			preturn
 		endif
 	endif
-	I2.FISCAL		= I1.FISCAL
-	I2.FISLINTAU	= ' '																										;2476
-	I2.DEROG			= I1.DEROG
+	I2.Fiscal		= I1.Fiscal
+	I2.FisLinTau	= ' '
+	I2.Derog			= I1.Derog
 
-	if I1.ECOTYP = 4
-		I2.EXODDT	= I1.EXOPDT
-		I2.EXOFDT	= hdate(CD.EXODDT, -1)
-		I2.ECODDT	= I2.EXODDT
-		I2.ECOFDT	= I2.EXOFDT
-	elsif I2.ECOTOTMT = ' '
-		I2.ECONOMIQUE = ' '
+	if I1.EcoTyp = 4
+		I2.ExoDDt	= I1.ExoPDt
+		I2.ExoFDt	= hdate(CD.ExoDDt, -1)
+		I2.EcoDDt	= I2.ExoDDt
+		I2.EcoFDt	= I2.ExoFDt
+	elsif I2.EcoTotMt = ' '
+		I2.Economique = ' '
 	endif
 
-	if I1.FISTYP = 4
-		I2.EXODDT	= I1.EXOPDT
-		I2.EXOFDT	= hdate(CD.EXODDT, -1)
-		I2.FISDDT	= I2.EXODDT
-		I2.FISFDT	= I2.EXOFDT
-	elsif I2.FISTOTMT = ' '
-		I2.FISCAL = ' '
+	if I1.FisTyp = 4
+		I2.ExoDDt	= I1.ExoPDt
+		I2.ExoFDt	= hdate(CD.ExoDDt, -1)
+		I2.FisDDt	= I2.ExoDDt
+		I2.FisFDt	= I2.ExoFDt
+	elsif I2.FisTotMt = ' '
+		I2.Fiscal = ' '
 	endif
 
-	if I1.ECOTYP = 4 or I2.ECOTOTMT or I1.FISTYP = 4 or I2.FISTOTMT
+	if hread(CCFIMMO, ri2, [ 'A' I1.Dos I1.Immo I1.ImmoComp ], 'F') = 0				\
+	and ri2.Dos = I1.Dos and ri2.Immo = I1.Immo and ri2.ImmoComp = I1.ImmoComp 	\
+	and ri2.Ce2 = '1'
+		if I2.EcoTotMt = 0 and I2.FisTotMt = 0
+			hdelete(CCFIMMO, ri2)
+		else
+			hrewrite(CCFIMMO, I2)
+		endif
+	elsif I1.EcoTyp = 4 or I2.EcoTotMt or I1.FisTyp = 4 or I2.FisTotMt
 		hwrite(CCFIMMO, I2)
 	endif
 
