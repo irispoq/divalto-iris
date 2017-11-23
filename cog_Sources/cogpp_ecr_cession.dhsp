@@ -472,30 +472,25 @@ BeginF
 	Cog_WriteC0_CCFM	
 
 	;
-	If CogRs_I1.Cog_EnrNo = 0  ; pas de mouvement lié
-		CogRs_MOUV.Axe(1) = Condition(CogRs_C3CesVal.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
-		CogRs_MOUV.Axe(2) = Condition(CogRs_C3CesVal.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
-		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3CesVal.AxeSais(3)=2,	CogRs_C3CesVal.Axe(3), '')
-		CogRs_MOUV.Axe(4)	= Condition(CogRs_C3CesVal.AxeSais(4)=2,	CogRs_C3CesVal.Axe(4), '')
-	EndIf
+	;11/2017 - VR - Initialisation des axes analytiques avec les informations des biens et des axe sur comptes comptables - Modif faite pour les 3 comptes
+	CogRs_MOUV.Axe(1) = Condition(CogRs_C3CesVal.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
+	CogRs_MOUV.Axe(2) = Condition(CogRs_C3CesVal.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
+	CogRs_MOUV.Axe(3)	= Condition(CogRs_C3CesVal.AxeSais(3)=2,	CogRs_C3CesVal.Axe(3), '')
+	CogRs_MOUV.Axe(4)	= Condition(CogRs_C3CesVal.AxeSais(4)=2,	CogRs_C3CesVal.Axe(4), '')
 	Cog_WriteC8_CCFM(CogRs_I1.Cog_CptCesVal, C_SENS_DEBIT, CogRs_I1.EcoResMt)	; Débit: Valeur cpt des éléments actifs cédés	 
 	
 	;
-	If CogRs_I1.Cog_EnrNo = 0  ; pas de mouvement lié
-		CogRs_MOUV.Axe(1) = Condition(CogRs_C3CesAmo.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
-		CogRs_MOUV.Axe(2) = Condition(CogRs_C3CesAmo.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
-		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3CesAmo.AxeSais(3)=2,	CogRs_C3CesAmo.Axe(3), '')
-		CogRs_MOUV.Axe(4)	= Condition(CogRs_C3CesAmo.AxeSais(4)=2,	CogRs_C3CesAmo.Axe(4), '')
-	EndIf
+	CogRs_MOUV.Axe(1) = Condition(CogRs_C3CesAmo.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
+	CogRs_MOUV.Axe(2) = Condition(CogRs_C3CesAmo.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
+	CogRs_MOUV.Axe(3)	= Condition(CogRs_C3CesAmo.AxeSais(3)=2,	CogRs_C3CesAmo.Axe(3), '')
+	CogRs_MOUV.Axe(4)	= Condition(CogRs_C3CesAmo.AxeSais(4)=2,	CogRs_C3CesAmo.Axe(4), '')
 	Cog_WriteC8_CCFM(CogRs_I1.Cog_CptCesAmo, C_SENS_DEBIT, CogRs_I1.EcoTotMt)	; Débit: Amortissement des immobilisations
 	
 	;
-	If CogRs_I1.Cog_EnrNo = 0  ; pas de mouvement lié
-		CogRs_MOUV.Axe(1) = Condition(CogRs_C3Ces.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
-		CogRs_MOUV.Axe(2) = Condition(CogRs_C3Ces.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
-		CogRs_MOUV.Axe(3)	= Condition(CogRs_C3Ces.AxeSais(3)=2,	CogRs_C3Ces.Axe(3), '')
-		CogRs_MOUV.Axe(4)	= Condition(CogRs_C3Ces.AxeSais(4)=2,	CogRs_C3Ces.Axe(4), '')
-	EndIf
+	CogRs_MOUV.Axe(1) = Condition(CogRs_C3Ces.AxeSais(1)=2,  CogRs_I1.Axe(1), '')
+	CogRs_MOUV.Axe(2) = Condition(CogRs_C3Ces.AxeSais(2)=2,  CogRs_I1.Axe(2), '')
+	CogRs_MOUV.Axe(3)	= Condition(CogRs_C3Ces.AxeSais(3)=2,	CogRs_C3Ces.Axe(3), '')
+	CogRs_MOUV.Axe(4)	= Condition(CogRs_C3Ces.AxeSais(4)=2,	CogRs_C3Ces.Axe(4), '')
 	Cog_WriteC8_CCFM(CogRs_I1.Cog_CptCes, C_SENS_CREDIT, CogRs_I1.EcoBas)		; Crédit: Base d'amortissement		 
 
 	;
