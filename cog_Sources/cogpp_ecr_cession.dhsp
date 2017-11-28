@@ -550,6 +550,8 @@ BeginP
 	CogRs_I1.Where.AddCondition("Ecr_Cession_Non_Generees")
 	CogRs_I1.Where.BetWeen_Immo(XQ.Immo1, XQ.Immo2)
 	CogRs_I1.Where.AddCondition("BetWeen_Immo")
+	Cogrs_I1.Where.IndicateurHistorique('1')
+	CogRs_I1.Where.AddCondition("IndicateurHistorique")
 	CogRs_I1.ReaderSelect(readerI1)
 
 	Do While CogRs_I1.ReaderNext(readerI1) > 0
