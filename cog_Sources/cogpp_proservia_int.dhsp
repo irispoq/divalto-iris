@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 10572 2016-12-08 08:25:54Z admin $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 12317 2018-01-29 10:34:40Z v.resplandy $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -1047,7 +1047,7 @@ BeginF
 				ListModify(lId_csvMVTL, MVTL_Seek)
 
 				; contrôle série --> le champ fait parti du tri, si le seek renvoit un résultat cela signifie que le numéro est déjà présent 
-				If MVTL_Seek.Serie <> ' '
+				If MVTL_Seek.Serie = csvMVTL.Serie
 					txtErr =	"Numéro de série %1 en doublon pour la référence %2."
 					txtErr = Modify("%1", MVTL_Seek.Serie, txtErr)
 					txtErr = Modify("%2", MVTL_Seek.Ref, txtErr)
