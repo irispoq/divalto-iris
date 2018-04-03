@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 12317 2018-01-29 10:34:40Z v.resplandy $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 12552 2018-04-03 13:57:48Z v.resplandy $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -111,8 +111,8 @@ Function Long	Tri_csvMVTL(&A, &B)
 ;
 Record	"gtfdd.dhsd"		MVTL			A
 Record	"gtfdd.dhsd"		MVTL			B
-1		cleA		75
-1		cleB		75
+1		cleA		77
+1		cleB		77
 BeginF
 
 	cleA = [A.Dos A.PiNo A.GrRef A.Depo A.Nst A.Serie]
