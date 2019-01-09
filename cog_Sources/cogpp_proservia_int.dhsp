@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 12552 2018-04-03 13:57:48Z v.resplandy $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13110 2019-01-09 11:19:50Z v.resplandy $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -91,7 +91,11 @@ Public Record  "gtfdd.dhsd"			T025										; Nature de stock
 1	valeur		256
 1	txtErr		500
 1	integ			1,0
-1	flux			1						; flux de l'intégrateur de pièce 
+1	flux			1						; flux de l'intégrateur de pièce
+
+;KBD 08.01.2019	//18499
+1	client_DEV	>gtfdd.dhsd	Tiers	
+Public Record	"cogfdd.dhsd"			Cog_ProserviaInd	Cog_ProserviaInd_CLI						; table mémoire
 
 ;*
 ;	Procédures / Fonctions générale
@@ -670,6 +674,7 @@ BeginF
 	wIndice = 0
 	wMotCle_P = ';'
 	Init Cog_ProserviaInd = ' '
+	init Cog_ProserviaInd_CLI = ''
 	Do While ListNext(wlId_tmp, wMotCle) not in (-1, 0)
 
 		If wMotCle <> ';'	 OR (wMotCle = ';' AND wMotCle_P = ';') ; colonne vide en entête --> erreur
@@ -717,8 +722,10 @@ BeginF
 					Cog_ProserviaInd.Cog_IndTrait = wIndice
 				Case 'IDTISILOG'
 					Cog_ProserviaInd.Cog_IndIsilog= wIndice
+				Case 'TIERS'						 ;KBD	 08.01.2019	//18499
+					Cog_ProserviaInd_CLI.Cog_IndTicod= wIndice
 				Default
-					txtErr = "Contôle entête fichier: mot clé non reconnu:" & wMotCle
+					txtErr = "Contrôle entête fichier: mot clé non reconnu:" & wMotCle
 					Cog_EcritureLivreDeBord(txtErr)
 					ListInsert(lId_ErrTxt, txtErr)
 					FReturn(1)
@@ -1029,6 +1036,11 @@ BeginF
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndSref2, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Sref2	= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndLieu, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Lieu		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
 		;ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_Ind, csvMVTL.	)
+		;KBD	08.01.2019	//18499
+		if client_DEV = "" and Cog_ProserviaInd_CLI.Cog_IndTicod <> ""
+			if Listseek(lId_Valeurs, Cog_ProserviaInd_CLI.Cog_IndTicod, Cog_ProserviaVal) not in (-,1,0)							| client_DEV		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+ 		endif
+		;
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndTrait, Cog_ProserviaVal) not in (-,1,0)
 			If	flux <> ' ' AND flux <> Left(Cog_ProserviaVal.Cog_Val256)
 				txtErr =	"Flux différents dans le fichier, intégration refusée."
@@ -1120,6 +1132,12 @@ BeginF
 		iENT.Ce1		= 'A'
 		iENT.Ce4		= '1'
 		iENT.Tiers 	= ENT_Seek.Tiers
+		;KBD	08.01.2019	//18499
+		if ipar.TiCod = 'C' and ipar.PiCod = 1 and flux = 'C'	and client_DEV <> ""
+			iENT.Tiers = client_DEV
+		endif
+		client_DEV = ""
+		;
 		iENT.Op		= ENT_Seek.Op
 		iENT.PiDt	= ENT_Seek.PiDt
 		iENT.Depo	= ENT_Seek.Depo
@@ -1133,7 +1151,7 @@ BeginF
 		ListBegin(lId_iMOUV)
 		Do While ListNext(lId_iMOUV, iMOUV) not in (-1, 0)
 	
-			If iMOUV.CdNo = iPAR.PiNo AND iMOUV.Tiers = iENT.Tiers
+			If (iMOUV.CdNo = iPAR.PiNo AND iMOUV.Tiers = iENT.Tiers) or (ipar.TiCod = 'C' and ipar.PiCod = 1 and flux = 'C') ;KBD	//Ajout de la deuxièmme condition pour integration DEVIS CLI
 
 				; iMOUV
 				iMOUV.Ce1	= 'C'
