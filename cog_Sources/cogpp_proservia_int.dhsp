@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13110 2019-01-09 11:19:50Z v.resplandy $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13126 2019-01-21 16:45:20Z k.bdera $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -30,7 +30,7 @@ Module	"A5Tm000.dhop"
 Module	"A5PmWin.dhop"
 Module	"A5PmFlash.dhop"
 Module	"Cogtm_000.dhop"						;module de fonctions communes
-
+Module	"gtpmficsql.dhop"
 ;
 			HTmpFile	"gtfdd.dhsd"	gtfi		GTFI		DeleteOnExit
 
@@ -1106,7 +1106,11 @@ EndF
 ;*
 Function int Proservia_EcrireGTFI
 ; Constitution du GTFI avec les listes lId_iMOUV et lId_iMVTL
-1		txtDebug		S	= ' '	 
+1		txtDebug		S	= ' '	
+recordsql	gtrsart.dhoq	Decomposition	Decomposition_Loc 
+RecordSQL	"COG_CCRSJCA.DHOQ"		CogRs_C3
+1	readerCompo	L	
+1	qteCompo	>gtfdd.dhsd	CDQTE
 BeginF
 
 	AfficherTraitement("Ecriture du GTFI", "")
@@ -1152,38 +1156,158 @@ BeginF
 		Do While ListNext(lId_iMOUV, iMOUV) not in (-1, 0)
 	
 			If (iMOUV.CdNo = iPAR.PiNo AND iMOUV.Tiers = iENT.Tiers) or (ipar.TiCod = 'C' and ipar.PiCod = 1 and flux = 'C') ;KBD	//Ajout de la deuxièmme condition pour integration DEVIS CLI
+				Seek_ART(imouv.Ref)
+				if ipar.TiCod = 'C'  and flux = 'C'			 ;Si on est en création on cherche les composant pour chaque article
+					qteCompo = 0
+					if ipar.PiCod = 1
+						qteCompo = imouv.DvQte
+					elsif ipar.PiCod = 2
+						qteCompo = imouv.CdQte
+					endif
 
-				; iMOUV
-				iMOUV.Ce1	= 'C'
-				iMOUV.Ce2	= '1'
-				iMOUV.CdNo 	= 0
-				HWrite(GTFI, iMOUV)
+					;
+					CogRs_C3.Init()
+					CogRs_C3.Where.Equal_Cpt(ART.CptV)
+					CogRs_C3.Select()
+					;
+					G3_ClearAllCondition(Decomposition_Loc,true)
+					readerCompo = Decomposition_Loc.ReaderOpen()
+					Decomposition_Loc.Where.Equal_GrRef(imouv.Ref,imouv.Sref1,imouv.Sref2)
+					Decomposition_Loc.Where.AddCondition('','Equal_GrRef')
+					Decomposition_Loc.ReaderSelect(readerCompo)
+					if Decomposition_Loc.GetCount() > 1					  ;Article composé
+						
+						iMOUV.Ce1	= 'C'
+						iMOUV.Ce2	= '1'
+						iMOUV.CdNo 	= 0
+						iMOUV.Axe(3) =	 CogRs_C3.Axe(3)
+						iMOUV.Axe(4) =	 CogRs_C3.Axe(4)
+						if art.LgTyp <> 2										  ;composants non liés
+							IMOUV.PvCod = 2
+						endif
+						HWrite(GTFI, iMOUV)
+						; iMVTL
+						If CogRs_OP.Op <> iMOUV.Op
+							CogRs_OP.Init()
+							CogRs_OP.Where.PK(iMOUV.Op)
+							CogRs_OP.Select()
+						EndIf
 				
-		
-				; iMVTL
-				If CogRs_OP.Op <> iMOUV.Op
-					CogRs_OP.Init()
-					CogRs_OP.Where.PK(iMOUV.Op)
-					CogRs_OP.Select()
-				EndIf
-		
-				ListBegin(lId_iMVTL)
-				Do While ListNext(lId_iMVTL, iMVTL) not in (-1, 0)
-		
-					If iMVTL.EnrNo = iMOUV.EnrNo AND iMVTL.GrRef = iMOUV.GrRef AND iMVTL.PiNo = iPAR.PiNo	AND iMVTL.Depo = iMOUV.Depo AND CogRs_OP.NstO = iMVTL.Nst
-		
-						iMVTL.Ce1	= 'V'
-						iMVTL.PiNo 	= 0
-						iMVTL.EnrNo	= 0
-						HWrite(GTFI, iMVTL)
-		
-						ListDeleteAndPrevious(lId_iMVTL)
-		
-					EndIf
-		
-				WEnd
+						ListBegin(lId_iMVTL)
+						Do While ListNext(lId_iMVTL, iMVTL) not in (-1, 0)
+				
+							If iMVTL.EnrNo = iMOUV.EnrNo AND iMVTL.GrRef = iMOUV.GrRef AND iMVTL.PiNo = iPAR.PiNo	AND iMVTL.Depo = iMOUV.Depo AND CogRs_OP.NstO = iMVTL.Nst
+				
+								iMVTL.Ce1	= 'V'
+								iMVTL.PiNo 	= 0
+								iMVTL.EnrNo	= 0
+								HWrite(GTFI, iMVTL)
+								ListDeleteAndPrevious(lId_iMVTL)
+							EndIf
+						WEnd
+						ListDeleteAndPrevious(lId_iMOUV)
+						;
+						loop Decomposition_Loc.ReaderNext(readerCompo) not in (-1,0)
+							CogRs_C3.Init()
+							CogRs_C3.Where.Equal_Cpt(ART.CptV)
+							CogRs_C3.Select()
+							init Imouv = ''
+							iMOUV.Ce1	= 'C'
+							iMOUV.Ce2	= '1'
+							imouv.GrRef =  Decomposition_Loc.GrRefCo
+							iMOUV.Axe(3) =	 CogRs_C3.Axe(3)
+							iMOUV.Axe(4) =	 CogRs_C3.Axe(4)
+							if art.LgTyp = 2		;Lier les composant
+								if ipar.PiCod = 1
+									imouv.DvSlg = Decomposition_Loc.LiLg
+								elsif ipar.PiCod = 2
+									imouv.CdSlg = Decomposition_Loc.LiLg
+								endif
+							endif
+							switch Decomposition_Loc.QteTyp
+								case 1 ;QTE proportionelle
+									if ipar.PiCod = 1
+										imouv.DvQte = qteCompo * Decomposition_Loc.Qte
+									elsif ipar.PiCod = 2
+										imouv.CdQte = qteCompo * Decomposition_Loc.Qte
+									endif
+								case 2 ;QTE FIxe
+									if ipar.PiCod = 1
+										imouv.DvQte =  Decomposition_Loc.Qte
+									elsif ipar.PiCod = 2
+										imouv.CdQte =  Decomposition_Loc.Qte
+									endif
+							endswitch
+							HWrite(GTFI, iMOUV)
+						endloop
+						Decomposition_Loc.ReaderClose(readerCompo)
+					else
+						; iMOUV
+						CogRs_C3.Init()
+						CogRs_C3.Where.Equal_Cpt(ART.CptV)
+						CogRs_C3.Select()
+						iMOUV.Axe(3) =	 CogRs_C3.Axe(3)
+						iMOUV.Axe(4) =	 CogRs_C3.Axe(4)
 
-				ListDeleteAndPrevious(lId_iMOUV)
+						iMOUV.Ce1	= 'C'
+						iMOUV.Ce2	= '1'
+						iMOUV.CdNo 	= 0
+						HWrite(GTFI, iMOUV)
+						; iMVTL
+						If CogRs_OP.Op <> iMOUV.Op
+							CogRs_OP.Init()
+							CogRs_OP.Where.PK(iMOUV.Op)
+							CogRs_OP.Select()
+						EndIf
+				
+						ListBegin(lId_iMVTL)
+						Do While ListNext(lId_iMVTL, iMVTL) not in (-1, 0)
+				
+							If iMVTL.EnrNo = iMOUV.EnrNo AND iMVTL.GrRef = iMOUV.GrRef AND iMVTL.PiNo = iPAR.PiNo	AND iMVTL.Depo = iMOUV.Depo AND CogRs_OP.NstO = iMVTL.Nst
+				
+								iMVTL.Ce1	= 'V'
+								iMVTL.PiNo 	= 0
+								iMVTL.EnrNo	= 0
+								HWrite(GTFI, iMVTL)
+				
+								ListDeleteAndPrevious(lId_iMVTL)
+				
+							EndIf
+				
+						WEnd
+						ListDeleteAndPrevious(lId_iMOUV)
+						;
+					endif
+				else
+					; iMOUV
+					iMOUV.Ce1	= 'C'
+					iMOUV.Ce2	= '1'
+					iMOUV.CdNo 	= 0
+					HWrite(GTFI, iMOUV)
+					; iMVTL
+					If CogRs_OP.Op <> iMOUV.Op
+						CogRs_OP.Init()
+						CogRs_OP.Where.PK(iMOUV.Op)
+						CogRs_OP.Select()
+					EndIf
+			
+					ListBegin(lId_iMVTL)
+					Do While ListNext(lId_iMVTL, iMVTL) not in (-1, 0)
+			
+						If iMVTL.EnrNo = iMOUV.EnrNo AND iMVTL.GrRef = iMOUV.GrRef AND iMVTL.PiNo = iPAR.PiNo	AND iMVTL.Depo = iMOUV.Depo AND CogRs_OP.NstO = iMVTL.Nst
+			
+							iMVTL.Ce1	= 'V'
+							iMVTL.PiNo 	= 0
+							iMVTL.EnrNo	= 0
+							HWrite(GTFI, iMVTL)
+			
+							ListDeleteAndPrevious(lId_iMVTL)
+			
+						EndIf
+			
+					WEnd
+					ListDeleteAndPrevious(lId_iMOUV)
+				endif
 
 			EndIf		; test si le mouvement correspond à l'entête
 	
