@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13126 2019-01-21 16:45:20Z k.bdera $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13192 2019-03-05 14:53:51Z k.bdera $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -1175,14 +1175,14 @@ BeginF
 					Decomposition_Loc.Where.Equal_GrRef(imouv.Ref,imouv.Sref1,imouv.Sref2)
 					Decomposition_Loc.Where.AddCondition('','Equal_GrRef')
 					Decomposition_Loc.ReaderSelect(readerCompo)
-					if Decomposition_Loc.GetCount() > 1					  ;Article composé
+					if Decomposition_Loc.GetCount() >= 1					  ;Article composé
 						
 						iMOUV.Ce1	= 'C'
 						iMOUV.Ce2	= '1'
 						iMOUV.CdNo 	= 0
 						iMOUV.Axe(3) =	 CogRs_C3.Axe(3)
 						iMOUV.Axe(4) =	 CogRs_C3.Axe(4)
-						if art.LgTyp <> 2										  ;composants non liés
+						if art.LgTyp = 2										  ;composants  liés
 							IMOUV.PvCod = 2
 						endif
 						HWrite(GTFI, iMOUV)
@@ -1209,7 +1209,7 @@ BeginF
 						;
 						loop Decomposition_Loc.ReaderNext(readerCompo) not in (-1,0)
 							CogRs_C3.Init()
-							CogRs_C3.Where.Equal_Cpt(ART.CptV)
+							CogRs_C3.Where.Equal_Cpt(ART.CptV)							
 							CogRs_C3.Select()
 							init Imouv = ''
 							iMOUV.Ce1	= 'C'
@@ -1217,6 +1217,9 @@ BeginF
 							imouv.GrRef =  Decomposition_Loc.GrRefCo
 							iMOUV.Axe(3) =	 CogRs_C3.Axe(3)
 							iMOUV.Axe(4) =	 CogRs_C3.Axe(4)
+							if art.LgTyp <> 2										  ;composants  liés
+								IMOUV.PvCod = 2
+							endif
 							if art.LgTyp = 2		;Lier les composant
 								if ipar.PiCod = 1
 									imouv.DvSlg = Decomposition_Loc.LiLg
