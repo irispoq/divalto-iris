@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13226 2019-04-26 12:51:10Z v.resplandy $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13470 2020-01-28 12:58:43Z k.bdera $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -464,12 +464,12 @@ BeginF
 	Do While ListNext(lId_csvMVTL, csvMVTL) not in (-1, 0)
 
 		Init MOUV = ' '
-		MOUV.Dos		= csvMVTL.Dos
-		MOUV.GrRef	= csvMVTL.GrRef
-		MOUV.Depo	= csvMVTL.Depo
-		MOUV.Op		= csvMVTL.Op
-		MOUV.Tiers	= csvMVTL.Tiers
-
+		MOUV.Dos			= csvMVTL.Dos
+		MOUV.GrRef		= csvMVTL.GrRef
+		MOUV.Depo		= csvMVTL.Depo
+		MOUV.Op			= csvMVTL.Op
+		MOUV.Tiers		= csvMVTL.Tiers
+		mouv.cog_ritm 	= csvMVTL.UserCr 
 		If ListSeek(lId_iMOUV, MOUV, MOUV_Seek) not in (-1, 0)
 			Switch csvMVTL.PiCod
 				Case 1
@@ -724,6 +724,9 @@ BeginF
 					Cog_ProserviaInd.Cog_IndIsilog= wIndice
 				Case 'TIERS'						 ;KBD	 08.01.2019	//18499
 					Cog_ProserviaInd_CLI.Cog_IndTicod= wIndice
+				Case 'RITM'
+					Cog_ProserviaInd.Cog_indRITM = wIndice	;KBD	28.01.2020
+
 				Default
 					txtErr = "Contrôle entête fichier: mot clé non reconnu:" & wMotCle
 					Cog_EcritureLivreDeBord(txtErr)
@@ -1035,6 +1038,8 @@ BeginF
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndSref1, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Sref1	= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndSref2, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Sref2	= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
 		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndLieu, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.Lieu		= Left(Cog_ProserviaVal.Cog_Val256) | EndIf
+		If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_indRITM, Cog_ProserviaVal) not in (-,1,0)	| csvMVTL.UserCr	= Left(Cog_ProserviaVal.Cog_Val256) | EndIf	 ;	N° RITM article
+		
 		;ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_Ind, csvMVTL.	)
 		;KBD	08.01.2019	//18499
 		if client_DEV = "" and Cog_ProserviaInd_CLI.Cog_IndTicod <> ""
@@ -1084,6 +1089,9 @@ BeginF
 				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndLog, Cog_ProserviaVal) not in (-,1,0) | ENT.Cog_LogBlNo= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
 				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndPiDt, Cog_ProserviaVal) not in (-,1,0)| ENT.PiDt= NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
 				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndIsilog, Cog_ProserviaVal) not in (-,1,0)| ENT.SU_IDT_REQ_IWS = NoSpaces(Cog_ProserviaVal.Cog_Val256) | EndIf
+				;KBD 28.01.2020
+				If ListSeek(lId_Valeurs, Cog_ProserviaInd.Cog_IndPiRef, Cog_ProserviaVal) not in (-,1,0)| if ent.piref = ''|ENT.PiRef = NoSpaces(Cog_ProserviaVal.Cog_Val256)|endif | EndIf
+				
 				If ListSeek(lId_ENT, ENT, ENT_Seek) = 0
 					ListInsert(lId_ENT, ENT)
 				EndIf
@@ -1137,7 +1145,7 @@ BeginF
 		iENT.Ce4		= '1'
 		iENT.Tiers 	= ENT_Seek.Tiers
 		;KBD	08.01.2019	//18499
-		if ipar.TiCod = 'C' and ipar.PiCod = 1 and flux = 'C'
+		if ipar.TiCod = 'C' and ipar.PiCod in(1,2) and flux = 'C'
 			iENT.Cog_Validite  = Dtadd(Today,SOC.Cog_Delai_Validite)
 			if client_DEV <> ""
 				iENT.Tiers = client_DEV
@@ -1148,6 +1156,7 @@ BeginF
 		iENT.Op		= ENT_Seek.Op
 		iENT.PiDt	= ENT_Seek.PiDt
 		iENT.Depo	= ENT_Seek.Depo
+		iENT.PiRef 	= ENT_Seek.PiRef	;KBD 28.01.2020
 		iENT.SU_IDT_REQ_IWS = ENT_Seek.SU_IDT_REQ_IWS
 		Ping("LOGBLNO" & ENT_Seek.TiCod & ENT_Seek.PiCod & ENT_Seek.PiNo, ENT_Seek.Cog_LogBlNo)
 		ListDeleteAndPrevious(lId_ENT)
@@ -1158,7 +1167,7 @@ BeginF
 		ListBegin(lId_iMOUV)
 		Do While ListNext(lId_iMOUV, iMOUV) not in (-1, 0)
 	
-			If (iMOUV.CdNo = iPAR.PiNo AND iMOUV.Tiers = iENT.Tiers) or (ipar.TiCod = 'C' and ipar.PiCod = 1 and flux = 'C') ;KBD	//Ajout de la deuxièmme condition pour integration DEVIS CLI
+			If (iMOUV.CdNo = iPAR.PiNo AND iMOUV.Tiers = iENT.Tiers) or (ipar.TiCod = 'C' and ipar.PiCod in(1,2) and flux = 'C') ;KBD	//Ajout de la deuxièmme condition pour integration DEVIS CLI
 				Seek_ART(imouv.Ref)
 				if ipar.TiCod = 'C'  and flux = 'C'			 ;Si on est en création on cherche les composant pour chaque article
 					qteCompo = 0
@@ -1258,6 +1267,7 @@ BeginF
 						iMOUV.Ce1	= 'C'
 						iMOUV.Ce2	= '1'
 						iMOUV.CdNo 	= 0
+						
 						HWrite(GTFI, iMOUV)
 						; iMVTL
 						If CogRs_OP.Op <> iMOUV.Op
