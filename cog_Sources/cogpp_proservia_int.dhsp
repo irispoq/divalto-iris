@@ -1,4 +1,4 @@
-SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13470 2020-01-28 12:58:43Z k.bdera $')
+SetModuleInfo('$Id: cogpp_proservia_int.dhsp 13516 2020-03-05 14:54:35Z v.resplandy $')
 ;>xdiva
 ;*
 ;*		Objet : Nom du programme / module - Programme Cogpp_std.dhsp 
@@ -1142,7 +1142,11 @@ BeginF
 		;
 		Init iENT 	= ' '
 		iENT.Ce1		= 'A'
-		iENT.Ce4		= '1'
+		if ipar.picod = 2
+			iENT.Ce4		= '7'
+		else
+			iENT.Ce4		= '1'
+		endif
 		iENT.Tiers 	= ENT_Seek.Tiers
 		;KBD	08.01.2019	//18499
 		if ipar.TiCod = 'C' and ipar.PiCod in(1,2) and flux = 'C'
